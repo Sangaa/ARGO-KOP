@@ -42,26 +42,28 @@ Repository First / Evidence Based
 
 # Audit Finding
 
-The previous status declared `COMPLETED` and `Approved` while the repository-wide relationship audit is still in progress.
+The previous status declared `COMPLETED` and `Approved` while the repository-wide relationship audit was still in progress.
 
-`MOD-001` contains active references to `Specifications/01-Knowledge-Organization.md`, `Specs/`, `Governance/GOV-001`, and other contracts whose current authority and existence must be validated from the repository before the Models domain can be certified.
+During the current audit, `MOD-001` was inspected and its stale active references to `Specifications/01-Knowledge-Organization.md` and `Specs/` were removed because those paths were not established as current canonical authorities in the active repository graph.
 
-The previous `REP-001` synchronization claim is therefore not treated as proof of current repository integrity.
+This resolves the local stale-reference finding; it does **not** certify the Models folder globally.
 
 # Verified Scope
 
 The current Models folder contains the declared model artifact `MOD-001_KNOWLEDGE_MODEL.md` and this status file.
 
-`MOD-001` establishes an important relationship contract for Knowledge Objects, lifecycle state, traceability and cross-domain links.
+`MOD-001` now aligns its active relationship model with the current repository map and evidence-gated validation approach.
+
+The current model references `Repository/REP-002_REPOSITORY_MAP.md`, `Governance/GOV-001_GOVERNANCE_FRAMEWORK.md`, and `Services/SRV-009_UPDATE_SERVICE.md`; downstream service and governance validation remains open until those layers are consolidated.
 
 # Integrity Decision
 
-Models are **not globally certified**.
+Models remain **INTEGRITY HOLD**.
 
-The folder remains on `INTEGRITY HOLD` until:
+The folder remains on hold until:
 
-- every active model reference is resolved;
-- referenced Governance, Specifications and Services authorities are verified;
+- active model references are resolved across their dependency chain;
+- referenced Governance and Services authorities are verified in their own content;
 - Repository indexing reflects the current model contract;
 - Engine/Services dependencies on the model are reconciled;
 - repository-wide cross-layer validation is complete.
@@ -70,10 +72,11 @@ The folder remains on `INTEGRITY HOLD` until:
 
 1. Status files are evidence, not proof of completion.
 2. A referenced path must be located, read and authority-checked before it is accepted as an active dependency.
-3. Missing or historical references remain unresolved.
+3. Historical or unresolved references must not be silently promoted to active authority.
 4. Folder classification does not prove architecture ownership.
 5. Successful local validation does not prove global repository integrity.
 6. Conversation memory and historical snapshots are non-authoritative.
+7. Resolving a local stale reference does not automatically close the domain.
 
 # Next Audit Boundary
 
