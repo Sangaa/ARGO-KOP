@@ -8,7 +8,7 @@
 
 Platform: ARGO KOP (Knowledge Operating Platform)
 Document ID: BOOTSTRAP-001
-Version: 2.5.0
+Version: 2.6.0
 Status: Approved / Integrity-Gated
 Category: Bootstrap / Governance
 Canonical: Yes
@@ -35,8 +35,8 @@ Every AI instance or engineer MUST execute the following sequence before proposi
 
 1. Establish the exact repository, branch/ref and accessible repository boundary.
 2. Enumerate the repository structure using repository evidence.
-3. Attempt to inspect the contents of **all files relevant to the repository-wide review**, not only index/status files.
-4. If any required file, directory listing, file content, history, or cross-reference cannot be inspected with the available tools, **STOP before making a proposal that depends on the unavailable evidence and issue an explicit warning identifying what could not be inspected and why.**
+3. Attempt to inspect the contents of all files relevant to the repository-wide review, not only index/status files.
+4. If any required file, directory listing, file content, history, or cross-reference cannot be inspected with the available tools, STOP before making a proposal that depends on the unavailable evidence and issue an explicit warning identifying what could not be inspected and why.
 5. Never fill unavailable content from memory, prior conversations, ZIP snapshots, cached summaries, assumptions, or inferred patterns.
 
 ## 1. Full Repository Review Gate
@@ -46,7 +46,7 @@ Before suggesting a structural, canonical, architectural, governance, or cross-l
 - Review the complete current repository tree available through the repository source.
 - Review the contents of the files in scope, including indexes, status files, canonical documents, referenced documents, and affected neighboring artifacts.
 - Inspect filenames, internal identifiers, versions, status, ownership, paths and references together.
-- Trace relevant references in both directions where practical: document → referenced artifact and artifact → referencing authority.
+- Trace relevant references in both directions where practical: document → referenced artifact and artifact → referencing authority/consumer.
 - Compare duplicates, legacy copies, aliases, similarly named files and archived material before deciding ownership.
 - Do not infer a layer, component, authority, or relationship from a folder name alone.
 
@@ -68,11 +68,11 @@ If evidence required for a decision is unavailable, the agent MUST warn the user
 
 ## 3. No Memory Substitution Rule
 
-Conversation memory, prior session summaries, personal memory, generated summaries, previous ZIP files, external working copies, and remembered repository structure are **non-authoritative context**.
+Conversation memory, prior session summaries, personal memory, generated summaries, previous ZIP files, external working copies, and remembered repository structure are non-authoritative context.
 
 They MUST NOT substitute for current repository file contents.
 
-If current repository contents contradict memory, **current repository contents prevail**.
+If current repository contents contradict memory, current repository contents prevail.
 
 If current contents are unavailable, the agent MUST report the gap instead of reconstructing the missing content from memory.
 
@@ -118,7 +118,29 @@ Review:
 
 An index or status file is evidence, not proof by declaration.
 
-## 7. Runtime, Engine & State Alignment
+## 7. Relationship Graph Verification Gate
+
+The repository MUST be treated as a relationship graph, not merely a directory tree.
+
+For every critical reference or dependency, validate the chain:
+
+**Referenced → Located → Read → Identity Verified → Authority Verified → Relationship Validated → Consumer/Dependency Checked → Mutation Impact Checked → Re-read After Mutation**
+
+A textual reference or existing path is NOT sufficient to establish a valid dependency.
+
+Where practical, validate relationships in both directions:
+
+**Document → Target**
+
+and
+
+**Target → Authority / Consumers / Indexes**
+
+A newly discovered conflict MUST be checked for propagation through upstream authority, downstream consumers, indexes, status files, runtime chains, duplicate/legacy identities and release/version declarations.
+
+A local validation result MUST NOT be promoted automatically to layer-level or repository-level integrity.
+
+## 8. Runtime, Engine & State Alignment
 
 Load `Runtime/RUN-001_BOOT_SEQUENCE.md` and the active runtime chain.
 
@@ -133,21 +155,21 @@ Compare the actual repository state against:
 
 Do not use a self-declared `100% CLEAN BOOT` or equivalent statement as proof of integrity.
 
-## 8. Source-of-Truth Rule
+## 9. Source-of-Truth Rule
 
 The Git repository is the authoritative engineering source for repository state unless an explicit governed decision establishes another source for a specific purpose.
 
 External copies, including Google Drive material, previous ZIP archives, generated summaries, or conversation memory, MUST NOT silently override current repository reality.
 
-## 9. Change Gate
+## 10. Change Gate
 
 The mandatory sequence is:
 
-**Inspect → Enumerate → Read → Cross-Reference → Classify Evidence → Identify Conflict → Decide Canonical Ownership → Define Change → Review Impact → Execute → Validate → Update Indexes/Status → Re-Boot**
+**Inspect → Enumerate → Read → Build Relationship Graph → Cross-Reference → Classify Evidence → Identify Conflict → Decide Canonical Ownership → Review Upstream/Downstream Impact → Define Change → Execute → Re-read → Revalidate Relationship Graph → Update Indexes/Status → Re-Boot**
 
 No deletion, rename, duplication, reassignment, normalization, or architectural proposal may skip the evidence and cross-reference stages.
 
-## 10. Human-Centric Dialogue Alignment
+## 11. Human-Centric Dialogue Alignment
 
 Maintain a friendly, supportive and conversational interaction style while keeping the evidence and governance rules strict underneath.
 
@@ -164,14 +186,6 @@ Bootstrap completion has three states:
 - **BOOT FAILURE** — mandatory bootstrap documents cannot be loaded, repository scope cannot be established, or a critical contradiction/evidence gap prevents reliable interpretation.
 
 The bootstrap process MUST report the evaluated state and the evidence coverage. It MUST NOT copy a status declaration from a repository document as proof.
-
----
-
-# Current Repository Findings Requiring Resolution
-
-The repository currently contains known integrity work, including canonical identity/path drift evidence, folder-status drift, version-authority reconciliation, and open repository-wide duplicate/reference validation.
-
-These findings are recorded as **audit findings, not authorization to mutate files**. Any further resolution MUST follow the full repository review protocol above.
 
 ---
 
@@ -197,6 +211,12 @@ These findings are recorded as **audit findings, not authorization to mutate fil
 18. **Mutation Is Not Validation:** After mutation, re-read the changed artifact and validate affected indexes/status/references before claiming completion.
 19. **Minimum Evidence Claim:** Never claim "full repository review" unless the actual inspected scope supports that claim.
 20. **Session Learning Must Be Canonicalized:** Reusable lessons discovered during engineering sessions belong in repository governance/bootstrap knowledge only after they are explicitly recorded, reviewed and validated; conversation memory alone is never sufficient.
+21. **Relationship-Graph Verification:** Repository integrity is established through validated relationships between artifacts, not merely through file existence or folder completeness.
+22. **Bidirectional Dependency Validation:** Critical relationships should be checked from source to target and target back to authority/consumers where practical.
+23. **Conflict Propagation:** A material conflict must be traced through affected upstream/downstream nodes before local resolution is accepted.
+24. **Local-to-Global Evidence Boundary:** Local PASS, mutation success, or folder completion cannot be promoted to repository-wide integrity without aggregated evidence coverage.
+25. **Audit-Derived Rules Require Promotion:** Rules discovered during live audits become operational candidates first; they enter Constitution-level authority only after explicit review and governance promotion.
+26. **Reopen on New Evidence:** Previously reviewed domains may be reopened when new relationship evidence changes their interpretation.
 
 ---
 
@@ -220,6 +240,7 @@ A session MUST NOT claim `100% CLEAN BOOT` unless the integrity gate has actuall
 
 | Version | Date | Description | Author / Authority |
 | :--- | :--- | :--- | :--- |
+| 2.6.0 | 2026-08-08 | Added relationship-graph verification, bidirectional dependency validation, conflict propagation, local-to-global evidence boundary, audit-derived rule promotion and reopen-on-new-evidence controls discovered during live repository audit | ARGO Engineering / Principal Architect |
 | 2.5.0 | 2026-08-08 | Added operational lessons from live repository audit: mutation is not validation, status drift, numeric-sequence caution, cross-layer-first review, tool-limited evidence coverage, and explicit canonicalization of reusable session learning | ARGO Engineering / Principal Architect |
 | 2.4.0 | 2026-08-08 | Added mandatory repository-wide evidence review, evidence-gap warnings, no-memory substitution rule, no-folder-assumption rule, and pre-proposal cross-reference gate | ARGO Engineering / Principal Architect |
 | 2.3.0 | 2026-08-08 | Added repository-reality integrity gate, canonical identity checks, version/source-of-truth conflict detection, and documented audit findings | ARGO Engineering / Principal Architect |
