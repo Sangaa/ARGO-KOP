@@ -8,9 +8,9 @@
 
 Platform: ARGO KOP (Knowledge Operating Platform)
 Document ID: GOV-004
-Version: 1.1.0
-Status: Approved
-Category: Governance / Standards
+Version: 1.2.0
+Status: Validated / Governance Re-audit
+Category: Governance
 Canonical: Yes
 Priority: Critical
 Last Audit Date: Aug 08, 2026
@@ -19,71 +19,71 @@ Last Audit Date: Aug 08, 2026
 
 # Purpose
 
-This standard defines the mandatory metadata headers and classification blocks required for every canonical document within ARGO KOP.
+Defines the mandatory metadata and identity rules for canonical ARGO KOP documents.
 
----
+# Mandatory Metadata
 
-# Mandatory Header Format
+Canonical documents should identify, where applicable:
 
-Every canonical Markdown document inside this repository MUST begin with the exact structural metadata block defined below.
+- Platform
+- Document ID
+- Version
+- Status
+- Category
+- Canonical status
+- Priority
+- Last audit date
 
-```text
-# [DOCUMENT_ID]
+Additional ownership, authority and release metadata may be required by the applicable layer.
 
----
+# Status Model
 
-# [EXACT_DOCUMENT_TITLE]
+Status describes the current evidence-backed lifecycle state of the artifact.
 
----
+Supported states include:
 
-Platform: ARGO KOP (Knowledge Operating Platform)
-Document ID: [CORE-XXX / GOV-XXX / ARC-XXX / RUN-XXX / ENG-XXX / SRV-XXX / MOD-XXX / INT-XXX / INTF-XXX / PLG-XXX / QLT-XXX]
-Version: [X.Y.Z]
-Status: [Draft / Review / Approved]
-Category: [Core / Governance / Architecture / Runtime / Engine / Service / Model / Intelligence / Interface / Plugin / Quality]
-Canonical: [Yes / No]
-Priority: [Critical / High / Medium / Low]
-Last Audit Date: [MMM DD, YYYY]
-```
+- Draft
+- Review
+- Validated
+- Approved
+- Released
+- Deprecated
+- Archived
+- HOLD
 
----
+`Approved` and `Released` are authority/lifecycle states and MUST NOT be used merely to mean that a file was inspected.
 
 # Validation Criteria
 
-1. **ID Uniqueness:** No two active canonical documents shall share an identical logical Document ID.
-2. **Identity Alignment:** The filename prefix and internal `Document ID` MUST represent the same logical identity.
-3. **Path Alignment:** The active canonical path MUST match the allocation defined by `REP-001` and `REP-002`.
-4. **Canonical Uniqueness:** A logical document may have only one active canonical artifact. Legacy evidence MUST be archived rather than retained as a competing active document.
-5. **Temporal Alignment:** `Last Audit Date` MUST use the `MMM DD, YYYY` notation and reflect the latest verified repository audit.
-6. **Completeness:** Canonical files missing the required metadata block or guiding statement MUST fail validation.
-7. **Reference Integrity:** Related-document references MUST resolve to active repository paths or explicitly identified archived evidence.
+1. ID uniqueness among active canonical artifacts.
+2. Filename prefix and internal Document ID alignment.
+3. Canonical path alignment with repository allocation.
+4. One active canonical artifact per logical document identity.
+5. Audit date reflects the latest verified audit of the stated scope.
+6. Required metadata is present for the artifact's classification.
+7. Related-document references resolve to active repository paths or explicitly identified archived evidence.
+8. Status claims do not exceed the evidence supporting them.
 
----
+# Identity Rule
+
+Document identity is determined by the canonical Document ID and repository allocation. Filename similarity alone does not establish authority.
+
+# Canonicalization
+
+If competing active artifacts represent the same logical document, the conflict must enter `HOLD` until authority and canonical ownership are resolved. Legacy evidence should be archived through the applicable repository policy rather than silently deleted.
 
 # Related Documents
 
 - `Governance/GOV-001_GOVERNANCE_FRAMEWORK.md`
+- `Governance/GOV-005_REVIEW_STANDARD.md`
 - `Governance/GOV-006_NAMING_CONVENTION_STANDARD.md`
 - `Repository/REP-001_MASTER_INDEX.md`
 - `Repository/REP-002_REPOSITORY_MAP.md`
 - `Services/SRV-005_VALIDATION_SERVICE.md`
 
----
-
 # Guiding Statement
 
-Structural standardization enables deterministic platform automation.
-
----
-
-# Canonicalization Note
-
-This canonical version supersedes the conflicting active artifacts previously stored at:
-
-- `Governance/GOV-003_DOCUMENT_METADATA.md`
-- `Standards/GOV-004_DOCUMENT_METADATA.md`
-
-Those artifacts are preserved as archived evidence and are no longer active canonical documents.
+Metadata establishes identity and evidence-backed status; it does not create authority by itself.
 
 ---
 
