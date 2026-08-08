@@ -4,113 +4,112 @@
 
 # ARGO KOP - CANONICAL REPOSITORY STORAGE MAP
 
----
-
 Platform: ARGO KOP (Knowledge Operating Platform)
 Document ID: REP-002
-Version: 1.4.0
-Status: Approved
-Category: Root Baseline / Repository Index
+Version: 1.5.0
+Status: Integrity Hold
+Category: Root Baseline / Repository Map
 Canonical: Yes
 Priority: Absolute / Mandatory
 Last Audit Date: Aug 08, 2026
 
 ---
 
-## 1. System Framework Boundary & Mapping Spec
+## 1. Purpose
 
-This document establishes the physical directory boundary maps and mandatory routing paths for the ARGO KOP platform storage environment. It serves as the structural guide for aligning physical paths with the definitions registered in the Master Index (`REP-001`).
+This document defines the active physical repository paths used by ARGO KOP. It must remain synchronized with `REP-001_MASTER_INDEX.md` and the actual repository state.
 
-All active canonical paths listed below are subject to repository integrity validation.
+A path is canonical only when its logical document identity is unique and verified.
 
----
+## 2. Root Baseline
 
-## 2. Canonical Directory Tree & Allocation Mapping
+Path: `ARGO-KOP/`
 
-### 2.1 Root Baseline Allocation
-* **Path Target:** `ARGO-KOP/` (Global Isolated Storage Root Fence)
-* **Primary Manifest Files:**
-  * `PROJECT_BOOTSTRAP.md`
-  * `PROJECT_STATUS.md`
-  * `README.md`
-  * `VISION.md`
-  * `CONTRIBUTING.md`
-  * `CODE_OF_CONDUCT.md`
+Active root artifacts:
 
-### 2.2 Repository Index Layer Location
-* **Path Target:** `Repository/`
-* **Mandatory Prefix Rule:** `REP-`
-* **Active Canonical Artifacts:**
-  * `Repository/REP-001_MASTER_INDEX.md`
-  * `Repository/REP-002_REPOSITORY_MAP.md`
+- `PROJECT_BOOTSTRAP.md`
+- `PROJECT_STATUS.md`
+- `README.md`
+- `VISION.md`
+- `CONTRIBUTING.md`
+- `CODE_OF_CONDUCT.md`
 
-### 2.3 Governance & Standards Layer Location
-* **Path Target:** `Governance/`
-* **Mandatory Prefix Rule:** `GOV-`
-* **Active Canonical Artifacts:**
-  * `Governance/GOV-001_GOVERNANCE_FRAMEWORK.md`
-  * `Governance/GOV-004_DOCUMENT_METADATA.md`
-  * `Governance/GOV-006_NAMING_CONVENTION_STANDARD.md`
-  * `Governance/GOV-010_GOVERNANCE_MODEL.md`
-  * `Governance/_FOLDER_STATUS.md`
+## 3. Repository Layer
 
-Legacy Governance artifacts are preserved under `Archive/Governance-Legacy/` and are not active canonical paths.
+Path: `Repository/`
 
-### 2.4 Runtime & State Life-cycle Layer Location
-* **Path Target:** `Runtime/`
-* **Mandatory Prefix Rule:** `RUN-`
-* **Active Canonical Artifacts:**
-  * `Runtime/README.md`
-  * `Runtime/RUN-001_BOOT_SEQUENCE.md`
-  * `Runtime/RUN-002_INITIALIZATION.md`
-  * `Runtime/RUN-003_CONFIGURATION.md`
-  * `Runtime/RUN-004_CONTEXT_LOADING.md`
-  * `Runtime/RUN-005_RUNTIME_WORKFLOW.md`
-  * `Runtime/RUN-006_AI_PROTOCOL.md`
-  * `Runtime/RUN-009_RECOVERY.md`
-  * `Runtime/_FOLDER_STATUS.md`
+Active canonical artifacts:
 
-### 2.5 Cognitive Core Layer Location
-* **Path Target:** `Architecture/`
-* **Mandatory Prefix Rule:** `CORE-` / `ARC-`
-* **Active Canonical Artifacts:**
-  * `Architecture/CORE-000_PLATFORM_ARCHITECTURE.md`
-  * `Architecture/CORE-002_ARGO_IDENTITY.md`
-  * `Architecture/CORE-003_CONSTITUTION.md`
-  * `Architecture/ARC-004_LAYER_MODEL.md`
-  * `Architecture/ARC-006_DEPENDENCY_MODEL.md`
-  * `Architecture/_FOLDER_STATUS.md`
+- `Repository/REP-001_MASTER_INDEX.md`
+- `Repository/REP-002_REPOSITORY_MAP.md`
 
----
+## 4. Governance Layer
 
-## 3. Physical Boundary Enforcement Rules
+Path: `Governance/`
 
-1. **Isolation Fence Rule:** Any directory structure outside designated ARGO-KOP canonical storage targets shall be rejected from active memory context loops.
-2. **Strict Extension Lock:** Canonical platform artifacts MUST use lowercase `.md` extensions.
-3. **Audit Parity Sync:** Modification of directory architecture requires synchronized updates across `PROJECT_STATUS.md`, `REP-001`, and `REP-002` before validation can pass.
-4. **Canonical Uniqueness:** Each logical document ID MUST have one active canonical path. Historical alternatives belong under `Archive/` and are not active.
+Active canonical artifacts currently verified:
 
----
+- `Governance/GOV-001_GOVERNANCE_FRAMEWORK.md`
+- `Governance/GOV-004_DOCUMENT_METADATA.md`
+- `Governance/GOV-005_REVIEW_STANDARD.md`
+- `Governance/GOV-006_NAMING_CONVENTION_STANDARD.md`
+- `Governance/GOV-009_REPOSITORY_POLICY.md`
+- `Governance/GOV-010_GOVERNANCE_MODEL.md`
+- `Governance/_FOLDER_STATUS.md`
 
-## 4. Canonicalization Record
+`GOV-011` is not mapped as an active canonical artifact because no verified canonical document currently exists for that identity.
 
-On Aug 08, 2026, `GOV-004` was canonicalized to `Governance/GOV-004_DOCUMENT_METADATA.md`. The previous conflicting artifacts were preserved under `Archive/Governance-Legacy/`.
+Superseded Governance artifacts are historical evidence under `Archive/Governance-Legacy/` and are not active canonical paths.
 
----
+## 5. Runtime Layer
 
-## 5. Related Documents
+Path: `Runtime/`
 
-* `PROJECT_BOOTSTRAP.md`
-* `Repository/REP-001_MASTER_INDEX.md`
-* `Governance/GOV-001_GOVERNANCE_FRAMEWORK.md`
-* `Governance/GOV-004_DOCUMENT_METADATA.md`
-* `Governance/GOV-006_NAMING_CONVENTION_STANDARD.md`
+Active mapped artifacts:
 
----
+- `Runtime/README.md`
+- `Runtime/RUN-001_BOOT_SEQUENCE.md`
+- `Runtime/RUN-002_INITIALIZATION.md`
+- `Runtime/RUN-003_CONFIGURATION.md`
+- `Runtime/RUN-004_CONTEXT_LOADING.md`
+- `Runtime/RUN-005_RUNTIME_WORKFLOW.md`
+- `Runtime/RUN-006_AI_PROTOCOL.md`
+- `Runtime/RUN-009_RECOVERY.md`
+- `Runtime/_FOLDER_STATUS.md`
 
-## 6. Guiding Statement
+## 6. Architecture Layer
 
-Absolute physical mapping layout clarity guarantees deterministic file tracking and blocks execution latency.
+Path: `Architecture/`
+
+Active mapped artifacts:
+
+- `Architecture/CORE-000_PLATFORM_ARCHITECTURE.md`
+- `Architecture/CORE-002_ARGO_IDENTITY.md`
+- `Architecture/CORE-003_CONSTITUTION.md`
+- `Architecture/ARC-004_LAYER_MODEL.md`
+- `Architecture/ARC-006_DEPENDENCY_MODEL.md`
+- `Architecture/_FOLDER_STATUS.md`
+
+## 7. Mapping Rules
+
+1. Every active canonical document MUST have exactly one canonical path.
+2. Filename identity MUST match internal Document ID where an ID is assigned.
+3. `REP-001` and `REP-002` MUST agree on active canonical Governance paths.
+4. Historical alternatives MUST remain outside active canonical paths.
+5. A missing or unverified dependency MUST remain explicitly unresolved; it MUST NOT be represented as an active canonical artifact.
+6. Architecture changes require synchronized updates to repository status and integrity records before a clean validation can pass.
+
+## 8. Canonicalization Record
+
+On Aug 08, 2026, Governance identity conflicts involving GOV-004, GOV-005, and GOV-006 were reconciled. Superseded evidence is preserved under `Archive/Governance-Legacy/`.
+
+GOV-010 was aligned with the verified dependency set. No active GOV-011 artifact is mapped.
+
+## 9. Integrity State
+
+Current repository state: **INTEGRITY HOLD**.
+
+This map is synchronized with the current Governance baseline but does not declare the entire repository clean until the consolidated repository audit passes.
 
 ---
 
