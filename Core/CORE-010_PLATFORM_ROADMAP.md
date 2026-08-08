@@ -1,57 +1,60 @@
 # PLATFORM ROADMAP
 
---------------------------------------------------
 Document ID
 CORE-010
+Version
+1.2.0
+Status
+Validated / Integrity Hold
+Category
+Core
+Canonical
+Yes
+Last Audit
+2026-08-08
 
---------------------------------------------------
+---
 
-Phase 1
+# Roadmap
 
-Foundation
+## Phase 1 — Foundation
 
---------------------------------------------------
+Constitution, repository structure, governance and canonical identity.
 
-Phase 2
+## Phase 2 — Cognitive Core
 
-Cognitive Core
+Cognitive model, evidence classification, reasoning and decision discipline.
 
---------------------------------------------------
+## Phase 3 — Knowledge Platform
 
-Phase 3
+Validated knowledge, memory, traceability and repository-backed learning.
 
-Knowledge Platform
+## Phase 4 — Decision Platform
 
---------------------------------------------------
+Decision lifecycle, evidence evaluation, decision records and outcome learning.
 
-Phase 4
+## Phase 5 — Runtime Integration
 
-Decision Platform
+Governed boot, context loading, execution, state management, recovery and security.
 
---------------------------------------------------
+## Phase 6 — External Interfaces
 
-Phase 5
+Controlled interfaces to models, services and external systems without transferring platform authority to them.
 
-Runtime Integration
+## Phase 7 — Enterprise Deployment
 
---------------------------------------------------
+Operationalization, observability, integration and controlled organizational adoption.
 
-Phase 6
+## Phase 8 — Continuous Evolution
 
-External Interfaces
+Evidence-driven improvement through validated learning and governed versioning.
 
---------------------------------------------------
+# Roadmap Rule
 
-Phase 7
+The roadmap describes intended capability progression. It is not evidence that a phase is implemented or complete.
 
-Enterprise Deployment
+Phase status must be established from repository evidence, project/release records and validation results.
 
---------------------------------------------------
+---
 
-Phase 8
-
-Continuous Evolution
-
---------------------------------------------------
-
-End
+End of Document
