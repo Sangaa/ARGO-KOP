@@ -1,37 +1,56 @@
 # DESIGN PRINCIPLES
 
---------------------------------------------------
 Document ID
 CORE-007
+Version
+1.2.0
+Status
+Validated / Integrity Hold
+Category
+Core
+Canonical
+Yes
+Last Audit
+2026-08-08
 
---------------------------------------------------
+---
 
-Single Responsibility
+# Principles
 
-Loose Coupling
+1. Single Responsibility
+2. Loose Coupling
+3. High Cohesion
+4. Modular Components
+5. Reusable Knowledge
+6. Separation of Concerns
+7. Version Controlled
+8. Traceable Changes
+9. Technology Independence
+10. Scalable Architecture
+11. Minimal Complexity
+12. Human Readable
+13. Machine Readable
+14. Explicit Authority Boundaries
+15. Evidence Before Conclusion
+16. Validation Before Execution
+17. Preserve Unrelated Content
 
-High Cohesion
+# Application
 
-Modular Components
+These principles guide design decisions. They do not override Constitution, Governance or Canonical Architecture.
 
-Reusable Knowledge
+A design principle cannot itself authorize a repository change.
 
-Separation of Concerns
+# Decision Rule
 
-Version Controlled
+When principles compete, prefer the smallest solution that satisfies the actual requirement while preserving:
 
-Traceable Changes
+- authority boundaries;
+- architectural consistency;
+- repository integrity;
+- traceability;
+- maintainability.
 
-Technology Independence
+---
 
-Scalable Architecture
-
-Minimal Complexity
-
-Human Readable
-
-Machine Readable
-
---------------------------------------------------
-
-End
+End of Document
