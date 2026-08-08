@@ -20,7 +20,7 @@ ENG-010
 
 Version
 
-1.1.1
+1.2.0
 
 Status
 
@@ -42,39 +42,25 @@ This document is a legacy Engineering Journal record. The ENG namespace is reser
 
 # Purpose
 
-This document defines the Engineering Baseline used throughout ARGO KOP.
+This historical record defines the engineering-baseline concept used during earlier ARGO KOP development and preserves the distinction between repository state and implementation state.
 
-The Engineering Baseline represents the approved engineering state from which all future implementation activities begin.
+It is retained as engineering history and must not be treated as the current source of truth for the platform baseline.
 
-It ensures engineering consistency while preserving repository integrity.
+# Current Audit Learning
 
----
+A baseline is meaningful only when its scope, authority, evidence, and commit or release reference are explicit.
 
-# Objectives
+A document named "baseline" does not automatically constitute the current baseline.
 
-Engineering Baseline shall:
+Repository Baseline, Architecture Baseline, Governance Baseline, Knowledge Baseline, Memory Baseline, and Engineering Baseline may have different authorities and must not be collapsed into one unverified status statement.
 
-- Establish an approved engineering reference.
-- Support repeatable implementation.
-- Preserve repository stability.
-- Prevent engineering drift.
-- Enable controlled platform evolution.
+The current repository review also established that a baseline must be revalidated after material changes rather than assumed to remain valid because a previous document said "Approved".
 
----
+# Core Principle
 
-# Engineering Philosophy
+**Identify → Scope → Evidence → Validate → Freeze → Change by Control → Revalidate**
 
-Engineering always begins from an approved baseline.
-
-Repository Baseline defines repository state.
-
-Engineering Baseline defines implementation state.
-
-Every engineering activity shall reference the current baseline.
-
----
-
-# Engineering Baseline Components
+# Historical Baseline Model
 
 Repository Baseline
 
@@ -92,113 +78,55 @@ Approved Releases
 
 Approved Build History
 
----
+These categories are useful classification concepts, but their current authority must be established from the active canonical documents and current repository state.
 
-# Baseline Authority
+# Authority Boundary
 
-Engineering authority follows:
+This historical document does not define the current authority order.
 
-Core
+Current authority must be resolved from the active Core, Governance, Architecture, Repository, Knowledge, and Memory authorities applicable to the requested operation.
 
-↓
+No historical Engineering Journal record may silently override a current governed document.
 
-Governance
+# Baseline Validation Rules
 
-↓
+Before treating any baseline as current, verify:
 
-Architecture
+- exact repository commit or release;
+- applicable authority document;
+- scope of the baseline;
+- relevant architecture and governance constraints;
+- identity and naming integrity;
+- cross-reference integrity;
+- version consistency;
+- known exceptions and unresolved findings;
+- whether subsequent mutations invalidate the baseline.
 
-↓
+# Baseline Change Control
 
-Repository
+A material baseline change should preserve:
 
-↓
+Source Baseline
 
-Knowledge
+Reason for Change
 
-↓
+Evidence Inspected
 
-Memory
+Affected Components
 
-↓
+Authority / Governance Impact
 
-Engineering Baseline
+Migration or Change Record
 
-Engineering shall never bypass higher authority.
+Validation Evidence
 
----
+Target Baseline
 
-# Baseline Rules
-
-Every engineering activity shall:
-
-Start from the approved Engineering Baseline.
-
-Validate repository integrity.
-
-Maintain architectural consistency.
-
-Preserve governance compliance.
-
-Remain fully traceable.
-
----
-
-# Baseline Validation
-
-Engineering Baseline verification shall include:
-
-Repository Integrity
-
-Architecture Alignment
-
-Governance Compliance
-
-Knowledge Consistency
-
-Memory Consistency
-
-Canonical References
-
-Cross References
-
-Version Consistency
-
-Traceability
-
----
-
-# Baseline Updates
-
-Engineering Baseline may change only after:
-
-Repository Review
-
-↓
-
-Architecture Validation
-
-↓
-
-Governance Validation
-
-↓
-
-Repository Approval
-
-↓
-
-Release Approval
-
-↓
-
-Engineering Baseline Update
-
----
+Remaining Uncertainty
 
 # Repository Integrity
 
-Engineering Baseline preserves:
+Engineering baseline work shall preserve:
 
 Engineering Consistency
 
@@ -212,15 +140,23 @@ Knowledge Relationships
 
 Memory Relationships
 
----
+Identity and Provenance
+
+# Historical Preservation
+
+This document records an earlier engineering model and remains useful for understanding repository evolution.
+
+It must not be promoted to current authority merely because its wording appears more complete than another document.
+
+A later verified baseline supersedes this historical model for current operational decisions while preserving this record as evidence.
 
 # Related Documents
 
-ENG-001_ENGINEERING_MODEL
-
 ENG-004_BUILD_HISTORY
 
-ENG-009_RELEASE_HISTORY
+ENG-007_ENGINEERING_RISKS
+
+ENG-008_MIGRATION_HISTORY
 
 REP-008_REPOSITORY_BASELINE
 
@@ -230,11 +166,9 @@ MEM-007_MEMORY_BASELINE
 
 CORE-003_CONSTITUTION
 
----
-
 # Guiding Statement
 
-Engineering excellence begins from a stable baseline and evolves through disciplined implementation.
+**A baseline is not a label; it is a verified state with an explicit scope, authority, evidence trail, and point in repository history.**
 
 ---
 
