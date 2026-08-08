@@ -8,11 +8,7 @@
 
 Platform
 
-ARGO KOP
-
-Knowledge Operating Platform
-
----
+ARGO KOP (Knowledge Operating Platform)
 
 Document ID
 
@@ -20,202 +16,175 @@ ARC-005
 
 Version
 
-1.1.0
+1.2.0
 
 Status
 
-Approved
+Validated / Integrity Hold
 
 Category
 
 Architecture
 
+Repository Development Baseline
+
+3.2.1
+
+Latest Official Release
+
+1.0.0
+
+Last Audit
+
+2026-08-08
+
 ---
 
 # Purpose
 
-This document defines the mandatory architectural rules governing the design, evolution and maintenance of ARGO KOP.
+This document defines architectural control rules for the design, evolution and maintenance of ARGO KOP.
 
-These rules ensure consistency across the entire platform.
+These rules govern architectural relationships without pretending that every historical rule remains permanently correct. Existing rules remain reviewable when current evidence shows a simpler, safer or more accurate control.
 
----
+# Rules
 
-# Rule 1
+## Rule 1 — Architecture and Implementation
 
-Architecture precedes implementation.
+Architecture defines intended structure and boundaries. Implementation must conform to governed architecture, but implementation evidence may reveal that the architecture itself requires review.
 
-Implementation shall never redefine architecture.
+An implementation finding does not silently redefine architecture; it triggers architectural review when the boundary or dependency model is materially affected.
 
----
+## Rule 2 — Repository Reality
 
-# Rule 2
+The current repository is the authoritative engineering source for current repository state, subject to higher Constitution, Governance and applicable Release authority.
 
-The Repository is the Single Source of Truth.
+Conversation memory, historical ZIPs and generated summaries do not override current repository evidence.
 
-Conversation memory shall never override repository content.
+## Rule 3 — Ownership and Identity
 
----
+Every active canonical logical identity must have one clearly established owner and one canonical active path.
 
-# Rule 3
+Historical, archived and legacy artifacts may preserve older identities when required for traceability, but must not silently compete with active authority.
 
-Every document shall have one primary owner.
+## Rule 4 — Physical Placement
 
-Duplicate ownership is prohibited.
+A physical folder does not by itself establish architectural ownership, authority or layer membership.
 
----
+Placement must be interpreted together with filename, internal identity, content, references, indexes, governance and dependency relationships.
 
-# Rule 4
+## Rule 5 — Dependency Direction
 
-Every document shall belong to exactly one architectural component.
+Canonical architectural dependencies follow the active Architecture Model and must not introduce reverse dependencies without governed authorization.
 
-Cross references are allowed.
+A dependency is not valid merely because a path is named; its target, authority, relationship and affected consumers must be verified.
 
-Duplicate documents are prohibited.
+## Rule 6 — Responsibility Boundaries
 
----
+Each logical component should have a primary responsibility and explicit interfaces, but legitimate cross-domain collaboration is allowed when ownership and dependency semantics remain clear.
 
-# Rule 5
+Responsibility overlap is a finding requiring review, not an automatic deletion rule.
 
-Dependencies shall always point downward.
+## Rule 7 — Knowledge Duplication
 
-Higher layers never depend on lower implementation details.
+Avoid unnecessary duplication of authoritative knowledge.
 
----
+When duplication is required for usability, preserve provenance and identify the authoritative source rather than silently creating competing truth.
 
-# Rule 6
+## Rule 8 — Architectural Decisions
 
-Each architectural component shall have one clearly defined responsibility.
+Material architectural decisions must be documented with reason, evidence, impact, authority and traceability.
 
-Responsibility overlap is prohibited.
+A historical decision remains evidence of what was decided at the time; it does not automatically override newer governed decisions.
 
----
+## Rule 9 — Architectural Modification
 
-# Rule 7
-
-Knowledge duplication is prohibited.
-
-Reference.
-
-Do not copy.
-
----
-
-# Rule 8
-
-Every architectural decision shall be documented.
-
-Undocumented architectural decisions are invalid.
-
----
-
-# Rule 9
-
-Every architectural modification shall preserve:
+Material architectural changes must preserve, or explicitly migrate:
 
 - Repository Integrity
-- Knowledge Integrity
 - Traceability
 - Version History
+- Authority Boundaries
+- Affected Dependency Contracts
 
----
+Post-change re-read and relationship validation are mandatory for affected artifacts.
 
-# Rule 10
+## Rule 10 — Deletion and Archival
 
-Deletion is prohibited.
+Deletion is not prohibited in every circumstance, but irreversible deletion must not be used to erase historical evidence or bypass migration traceability.
 
-Archive replaces deletion.
+Archive, deprecation or controlled removal should be preferred when historical continuity or recovery matters.
 
-Repository history shall remain recoverable.
+## Rule 11 — Controlled Evolution
 
----
+Architecture evolves through evidence-backed review.
 
-# Rule 11
+Structural modifications require architectural review when they affect layer boundaries, dependency direction, ownership, canonical identity or cross-layer contracts.
 
-Architecture evolves through controlled change.
+## Rule 12 — Review Evidence
 
-Structural modifications require architectural review before implementation.
-
----
-
-# Rule 12
-
-Every repository review shall include:
+Every significant architectural review should identify:
 
 - Inspection Scope
 - Repository Coverage
-- Confidence Level
+- Evidence State
+- Confidence / Limitations
 - Assessment Type
-- Repository Version
+- Repository Version / Commit
+- Affected Relationships
+- Post-Change Validation
 
----
+## Rule 13 — Folder Governance
 
-# Rule 13
+Major repository folders should maintain an evidence-backed status artifact when the repository structure requires one.
 
-Folder governance is mandatory.
+A `_FOLDER_STATUS.md` file is evidence about reviewed scope; it is not proof of completeness by itself.
 
-Each major repository folder shall maintain:
+## Rule 14 — Technology Independence
 
-_FOLDER_STATUS.md
+Platform architecture should remain technology-independent unless a technology is explicitly elevated by a governed architectural decision.
 
-containing:
+## Rule 15 — Architectural Quality
 
-- Review Status
-- Current Version
-- Outstanding Work
-- Next Action
-- Folder Approval
+Architectural artifacts should be understandable, traceable, reviewable, maintainable and version controlled.
 
----
+## Rule 16 — Evidence Before Normalization
 
-# Rule 14
+Do not rename, move, merge, duplicate, archive or promote an artifact solely because its filename sequence or folder placement appears inconsistent.
 
-Platform knowledge shall remain technology independent.
+Inspect content, identity, authority and relationships first.
 
-Technologies may change.
+## Rule 17 — Reopen on New Evidence
 
-Architecture remains stable.
-
----
-
-# Rule 15
-
-Every architectural artifact shall be:
-
-- Understandable
-- Traceable
-- Reviewable
-- Maintainable
-- Version Controlled
+A previously reviewed architectural domain may be reopened when new repository evidence changes the interpretation of its identity, authority, dependency or status.
 
 ---
 
 # Related Documents
 
-CORE-003_CONSTITUTION
+- `Core/CORE-003_CONSTITUTION.md`
+- `Core/CORE-011_PLATFORM_CHARTER.md`
+- `Governance/GOV-005_REVIEW_STANDARD.md`
+- `Governance/GOV-006_NAMING_CONVENTION_STANDARD.md`
+- `Governance/GOV-009_REPOSITORY_POLICY.md`
+- `Governance/GOV-010_GOVERNANCE_MODEL.md`
+- `Architecture/ARC-001_PLATFORM_ARCHITECTURE.md`
+- `Architecture/ARC-002_COMPONENT_ARCHITECTURE.md`
+- `Architecture/ARC-004_LAYER_MODEL.md`
+- `Architecture/ARC-006_DEPENDENCY_MODEL.md`
+- `Repository/REP-001_MASTER_INDEX.md`
+- `Repository/REP-002_REPOSITORY_MAP.md`
 
-CORE-011_PLATFORM_CHARTER
+---
 
-GOV-006_REVIEW_STANDARD
+# Integrity State
 
-GOV-009_REPOSITORY_POLICY
-
-GOV-010_GOVERNANCE_MODEL
-
-ARC-001_PLATFORM_ARCHITECTURE
-
-ARC-002_COMPONENT_ARCHITECTURE
-
-ARC-004_LAYER_MODEL
+This document is aligned to the current audit model, but Architecture remains under consolidated validation until the active architectural inventory and cross-layer relationships are verified.
 
 ---
 
 # Guiding Statement
 
-Architecture governs change.
-
-Governance protects architecture.
-
-Repository preserves both.
+**Architecture governs structural intent; evidence, governance and review govern how that intent evolves.**
 
 ---
 
