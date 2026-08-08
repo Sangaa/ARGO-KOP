@@ -2,21 +2,26 @@
 
 ---
 
+Platform
+
+ARGO KOP
+Knowledge Operating Platform
+
 Folder
 
 Core
 
 Status
 
-✅ APPROVED
+🟡 INTEGRITY HOLD — RE-AUDIT IN PROGRESS
 
 Version
 
-1.0
+1.2.0
 
-Last Review
+Last Audit
 
-2026-08-02
+2026-08-08
 
 Reviewer
 
@@ -24,11 +29,11 @@ ARGO Architecture
 
 Review Method
 
-Repository First
+Repository First / Evidence Based
 
 Review Scope
 
-Complete Folder Structure
+Core authority, identity, constitution and cross-layer consistency
 
 Repository Baseline
 
@@ -36,121 +41,93 @@ Current Working Repository
 
 ---
 
-# Review Progress
+# Audit Progress
 
 Inventory
 
-✅ Completed
+🟢 Completed for known canonical Core artifacts
 
-Architecture Review
+Identity Review
 
-✅ Completed
+🟢 Completed
 
-Content Review
+Manifest Review
 
-✅ Completed
+🟢 Completed
 
-Refactoring Review
+Constitution Review
 
-✅ Completed
+🟢 Reconciled with current Runtime authority model
 
-Engineering Rewrite
+Principles Review
 
-✅ Completed
+🟢 Completed
 
-Folder Approval
+Cross-Layer Review
 
-✅ Approved
+🟡 In Progress
 
----
+Folder Certification
 
-# Engineering Decisions
-
-## Keep
-
-- ARGO_KERNEL.md
-- CORE-000_PLATFORM_IDENTITY.md
-- CORE-000A_PLATFORM_GLOSSARY.md
-- CORE-004_CORE_PRINCIPLES.md
-- CORE-005_COGNITIVE_MODEL.md
-- CORE-006_SYSTEM_PHILOSOPHY.md
-- CORE-007_DESIGN_PRINCIPLES.md
-- CORE-008_ARCHITECTURAL_LAWS.md
-- CORE-009_PLATFORM_LIFECYCLE.md
-- CORE-010_PLATFORM_ROADMAP.md
-
-## Updated
-
-- CORE-001_ARGO_MANIFEST.md
-- CORE-002_ARGO_IDENTITY.md
-- CORE-003_CONSTITUTION.md
-- CORE-011_PLATFORM_CHARTER.md
-
-## Renamed
-
-CORE-005_PLATFORM_CHARTER.md
-
-↓
-
-CORE-011_PLATFORM_CHARTER.md
+⏳ Pending
 
 ---
 
-# Outstanding Items
+# Key Finding Resolved
 
-Platform Architecture ownership will be reviewed during Architecture folder review.
+## CORE-AUDIT-001 — Constitutional Write Rule Drift
 
-No additional Core changes are currently pending.
+The previous Constitution prohibited partial repository updates unconditionally, while the current governed Runtime model permits a partial update when its content, target state, scope and resulting integrity are verified.
 
----
+The Constitution has been revised so that complete-file replacement remains preferred when practical and safe, while controlled partial updates are permitted under explicit validation and authority gates.
 
-# Repository Health
-
-Duplicate IDs
-
-✅ Resolved
-
-Repository Consistency
-
-✅ Verified
+This restores the required hierarchy:
 
 Constitution
 
-✅ Single Governing Document
+↓
 
-Platform Identity
+Architecture / Governance
 
-✅ Verified
+↓
 
-Manifest
+Runtime
 
-✅ Updated
+without leaving Runtime behavior in conflict with Core authority.
 
-Charter
+# Current Core Baseline
 
-✅ Updated
+Known canonical Core artifacts include:
+
+- `CORE-000_PLATFORM_IDENTITY.md`
+- `CORE-000A_PLATFORM_GLOSSARY.md`
+- `CORE-001_ARGO_MANIFEST.md`
+- `CORE-002_ARGO_IDENTITY.md`
+- `CORE-003_CONSTITUTION.md`
+- `CORE-004_CORE_PRINCIPLES.md`
+- `CORE-005_COGNITIVE_MODEL.md`
+- `CORE-006_SYSTEM_PHILOSOPHY.md`
+- `CORE-007_DESIGN_PRINCIPLES.md`
+- `CORE-008_ARCHITECTURAL_LAWS.md`
+- `CORE-009_PLATFORM_LIFECYCLE.md`
+- `CORE-010_PLATFORM_ROADMAP.md`
+- `CORE-011_PLATFORM_CHARTER.md`
+- `ARGO_KERNEL.md`
+
+# Certification Rule
+
+Core MUST NOT be marked clean until the remaining canonical Core artifacts and their cross-layer references have been revalidated against the current Constitution and repository baseline.
+
+# Next Action
+
+`Audit remaining Core canonical artifacts → validate cross-layer references → Core Re-Audit → Certification`
 
 ---
 
-# Next Folder
+# Engineering Rule
 
-Governance
-
----
-
-# Folder Approval
-
-Approved for Repository Baseline 1.0
-
-Future modifications shall only occur through:
-
-- Feature Requests
-- Governance Changes
-- Architectural Decisions
-- Repository Evolution
-
-Routine editing is prohibited.
+Repository Reality > Previous Status Claims > Conversation Memory
 
 ---
 
-End
+End of Document
