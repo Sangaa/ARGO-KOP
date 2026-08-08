@@ -20,7 +20,7 @@ ARC-006
 
 Version
 
-1.2.0
+1.3.0
 
 Status
 
@@ -46,11 +46,7 @@ Last Audit
 
 # Purpose
 
-This document defines the dependency model of ARGO KOP and is aligned with `Architecture/ARC_MAP.md` and `Architecture/ARC-004_LAYER_MODEL.md`.
-
-It governs dependency direction, not physical folder layout.
-
----
+Defines the dependency model of ARGO KOP. It governs logical dependency direction, ownership and qualification rather than physical folder layout.
 
 # Canonical Dependency Direction
 
@@ -88,15 +84,13 @@ Runtime / Services / AI
 
 Projects / Applied Artifacts
 
-Dependencies must not reverse this direction unless explicitly approved by an architectural decision.
-
----
+Dependencies must not reverse this direction unless explicitly authorized by a governed architectural decision.
 
 # Allowed Dependencies
 
 ## Core
 
-Depends on: None.
+Depends on: None at the architectural layer level.
 
 ## Governance
 
@@ -112,74 +106,68 @@ May depend on: Core, Governance, Architecture.
 
 ## Knowledge / Specifications / Standards
 
-May depend on: Repository, Architecture, applicable Governance rules.
+May depend on: Repository, Architecture and applicable Governance rules.
 
 ## Memory
 
-May depend on: Knowledge, Repository, applicable Governance rules.
+May depend on: Knowledge, Repository and applicable Governance rules.
 
 ## Cognition / Engine
 
-May depend on: Knowledge, Memory, Repository, Architecture interfaces.
+May depend on: Knowledge, Memory, Repository and approved Architecture interfaces.
 
 ## Runtime / Services / AI
 
-May depend on: Core, Repository, Memory, Cognition / Engine, and approved service interfaces.
+May depend on: approved lower-level platform interfaces and the applicable runtime contracts. AI providers do not acquire platform authority through integration.
 
 ## Projects / Applied Artifacts
 
 May depend on approved platform capabilities and documented interfaces. Projects MUST NOT redefine platform architecture or governance.
 
----
-
 # Dependency Qualification
 
-Every dependency MUST be:
+Every claimed architectural dependency MUST be:
 
-- Necessary
-- Explicitly documented
-- Traceable to a current repository artifact or interface
-- Owned
-- Architecturally justified
-- Free of circular dependency
+- necessary;
+- explicitly documented;
+- traceable to a current canonical artifact or interface;
+- owned;
+- architecturally justified;
+- free of circular dependency;
+- compatible with the current layer model.
 
-A reference to a file path alone does not prove an architectural dependency.
+A textual reference to a file path does not by itself establish an architectural dependency.
 
----
+# Authority Rule
+
+A dependency does not transfer authority.
+
+A lower layer may consume an approved contract from a higher layer but cannot use that dependency to rewrite or redefine the higher layer.
 
 # Prohibited Dependencies
 
-The following are prohibited:
-
 - Lower layers rewriting higher-layer authority.
-- Projects redefining Core, Governance, or Architecture.
-- Repository artifacts silently overriding Governance or Constitution.
+- Projects redefining Core, Governance or Architecture.
+- Repository artifacts silently overriding Constitution or Governance.
 - Memory rewriting Architecture without a governed decision.
 - Undocumented cross-component dependencies.
 - Circular dependencies.
 - Using folder placement as implicit authority.
 
----
-
-# Repository Principle
-
-The repository is the canonical storage source. Repository documents may reference one another, but references MUST respect architectural ownership and authority boundaries.
-
----
-
 # Validation
 
-A new dependency requires review of:
+A new or materially changed dependency requires review of:
 
-1. Layer Direction
-2. Ownership
-3. Traceability
-4. Canonicality of referenced artifact
-5. Circularity
-6. Compatibility with `ARC-004_LAYER_MODEL.md`
-7. Compatibility with `ARC_MAP.md`
+1. Layer direction.
+2. Ownership.
+3. Traceability.
+4. Canonicality of referenced artifact.
+5. Circularity.
+6. Compatibility with `ARC-004_LAYER_MODEL.md`.
+7. Compatibility with `ARC_MAP.md`.
+8. Compatibility with Repository and Governance authority.
 
----
+Validation failure blocks acceptance until corrected or explicitly dispositioned by the applicable authority.
 
 # Related Documents
 
