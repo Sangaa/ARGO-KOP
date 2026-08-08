@@ -6,7 +6,7 @@
 
 Platform: ARGO KOP (Knowledge Operating Platform)
 Document ID: REP-001
-Version: 1.7.0
+Version: 1.7.1
 Status: Integrity Hold
 Category: Repository
 Canonical: Yes
@@ -23,6 +23,8 @@ This index does not certify repository-wide cleanliness merely because a previou
 
 The repository is currently being validated as a **relationship graph**. Index membership therefore records inventory; it does not by itself certify the relationships between inventory nodes.
 
+---
+
 ## 2. Root Baseline
 
 - `PROJECT_BOOTSTRAP.md`
@@ -31,6 +33,8 @@ The repository is currently being validated as a **relationship graph**. Index m
 - `VISION.md`
 - `CONTRIBUTING.md`
 - `CODE_OF_CONDUCT.md`
+
+The historical root naming-convention artifact is not active canonical inventory. It is preserved under `Archive/Governance-Legacy/` for migration traceability.
 
 ## 3. Core Layer
 
@@ -92,6 +96,7 @@ The Architecture inventory remains governed by `REP-002_REPOSITORY_MAP.md` and t
 7. A reference is not an accepted dependency until its target is located, read, identity-checked, authority-checked and relationship-validated.
 8. Critical relationships should be validated in both directions where practical.
 9. A material conflict must be traced through affected consumers, indexes, status files and release/version declarations before local resolution is considered complete.
+10. An archive operation must preserve enough migration evidence to identify the former active path and canonical successor.
 
 ## 9. Integrity State
 
