@@ -16,7 +16,7 @@ Engineering Journal
 
 Status
 
-INTEGRITY WARNING / Namespace Migration Boundary Recorded
+INTEGRITY WARNING / Namespace Migration & Reference Audit
 
 Category
 
@@ -68,16 +68,16 @@ Engineering Self-Assessments and Calibration Records
 
 Engineering_Journal/
 
-├── ENG-001_ENGINEERING_MODEL.md  *(legacy journal identity — reclassified non-canonical)*
-├── ENG-002_ENGINEERING_SESSIONS.md  *(legacy journal identity — reclassified non-canonical)*
-├── ENG-003_ENGINEERING_DECISIONS.md  *(legacy journal identity — reclassified non-canonical)*
-├── ENG-004_BUILD_HISTORY.md  *(legacy journal identity — reclassification pending)*
-├── ENG-005_REFACTORING_HISTORY.md  *(legacy journal identity — reclassification pending)*
-├── ENG-006_ENGINEERING_LESSONS.md  *(legacy journal identity — reclassification pending)*
-├── ENG-007_ENGINEERING_RISKS.md  *(legacy journal identity — reclassification pending)*
-├── ENG-008_MIGRATION_HISTORY.md  *(legacy journal identity — reclassification pending)*
-├── ENG-009_RELEASE_HISTORY.md  *(legacy journal identity — existence/identity verification pending)*
-├── ENG-010_ENGINEERING_BASELINE.md  *(legacy journal identity — reclassification pending)*
+├── ENG-001_ENGINEERING_MODEL.md  *(legacy journal identity — non-canonical)*
+├── ENG-002_ENGINEERING_SESSIONS.md  *(legacy journal identity — non-canonical)*
+├── ENG-003_ENGINEERING_DECISIONS.md  *(legacy journal identity — non-canonical)*
+├── ENG-004_BUILD_HISTORY.md  *(legacy journal identity — non-canonical)*
+├── ENG-005_REFACTORING_HISTORY.md  *(legacy journal identity — non-canonical)*
+├── ENG-006_ENGINEERING_LESSONS.md  *(legacy journal identity — non-canonical)*
+├── ENG-007_ENGINEERING_RISKS.md  *(legacy journal identity — non-canonical)*
+├── ENG-008_MIGRATION_HISTORY.md  *(legacy journal identity — non-canonical)*
+├── ENG-009_RELEASE_HISTORY.md  *(legacy journal identity — non-canonical; existence verified)*
+├── ENG-010_ENGINEERING_BASELINE.md  *(legacy journal identity — non-canonical)*
 ├── EJR-001_SELF_ASSESSMENT_AND_MARKET_FEEDBACK.md  *(new journal namespace; Proposed / Audit-Derived)*
 └── _FOLDER_STATUS.md
 
@@ -97,13 +97,31 @@ A legacy record must not remain marked as an active canonical artifact merely be
 
 ---
 
+# Content and Placement Rule
+
+File-name correctness is not sufficient for Journal integrity.
+
+Each Journal artifact must be evaluated by:
+
+**Content → Function → Placement → Identity → Naming → References → Authority**
+
+A legacy file may be preserved when its historical content is valid evidence, while its active canonical status is retired. Historical age alone is not a defect; stale meaning, incorrect authority, broken references or misleading claims are defects.
+
+Older records may use earlier engineering language and assumptions. During audit they may be clarified or corrected when required for present-day accuracy, but their historical identity and original evolution must remain traceable.
+
+---
+
 # Current Audit State
 
-`ENG-001`, `ENG-002` and `ENG-003` have been directly reclassified as legacy/non-canonical and re-read after mutation.
+`ENG-001` through `ENG-010` have been directly inspected or existence-verified as current repository artifacts and classified as legacy/non-canonical Journal identities.
 
-`ENG-004` through `ENG-010` remain under evidence-based review. They will not be renamed or reclassified by assumption. `ENG-009` additionally requires direct existence/content verification before any status claim is made.
+`ENG-004` through `ENG-010` were reviewed for content and upgraded where the current audit identified obsolete engineering assumptions or missing validation concepts. Their historical filenames and identities remain preserved.
 
-This folder therefore remains under **INTEGRITY WARNING** until the remaining legacy records and their references are reconciled.
+`ENG-009_RELEASE_HISTORY.md` existence and content are now directly verified on the current `main` branch.
+
+`EJR-001_SELF_ASSESSMENT_AND_MARKET_FEEDBACK.md` is the new Journal namespace for the current audit-derived self-assessment record and remains non-canonical pending governance review.
+
+The folder remains under **INTEGRITY WARNING** because namespace classification is resolved, but cross-reference integrity and full folder completion are still open.
 
 ---
 
