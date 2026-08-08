@@ -8,19 +8,20 @@
 
 Platform: ARGO KOP (Knowledge Operating Platform)  
 Document ID: INTF-001  
-Version: 1.0.0  
-Status: Approved  
+Version: 1.1.0  
+Status: Approved / Revalidated  
 Category: Interfaces  
 Canonical: Yes  
 Priority: Critical  
+Last Audit: 2026-08-08
 
 ---
 
 # Purpose
 
-This document defines the interface standards, API protocols, context ingestion schemas, and integration boundaries for ARGO KOP.
+This document defines interface standards, API protocols, context ingestion schemas, multimodal/environmental input boundaries, and integration boundaries for ARGO KOP.
 
-It provides deterministic contracts for internal communication between runtime components and external interaction with human engineers, tools, and external platforms.
+It provides deterministic contracts for internal communication between runtime components and external interaction with human engineers, tools, models, devices, data sources, and external platforms.
 
 ---
 
@@ -28,47 +29,77 @@ It provides deterministic contracts for internal communication between runtime c
 
 +-----------------------------------------------------------------------+
 |                         EXTERNAL BOUNDARY                             |
-|       (CLI Tools / AI Prompting / Workspace Integrations)            |
+| CLI / AI MODELS / WORKSPACE / FILES / DATABASES / DEVICES / SENSORS |
 +-----------------------------------------------------------------------+
 |
-v
++-------------------------+-------------------------+
+|                         |                         |
+v                         v                         v
++--------------------+ +---------------------+ +----------------------+
+| CONTEXT / DATA     | | ENVIRONMENT SENSING | | OPERATIONAL / API    |
+| INGESTION           | | INTF-006            | | INTERFACES           |
++--------------------+ +---------------------+ +----------------------+
+|                         |                         |
++-------------------------+-------------------------+
+                          |
+                          v
 +-----------------------------------------------------------------------+
-|                        INTERFACES LAYER (INTF)                        |
-|  - INTF-IN: Context Ingestion Router    - INTF-OUT: Response Formatter|
-|  - INTF-API: Service Dispatch Contract  - INTF-HOOK: Event Listeners |
+|                        INTERFACES LAYER                              |
+| Context | Sensing | API | Hooks | Output | Portable Exchange        |
 +-----------------------------------------------------------------------+
-|
-+----------------------+----------------------+
-|                      |                      |
-v                      v                      v
-+-----------------------+ +------------------+ +------------------------+
-|   RUNTIME ENVIRONMENT | | OPERATIONAL SERV. | | INTELLIGENCE ENGINE    |
-| RUN-001_BOOT_SEQUENCE | | SRV-001..SRV-010 | | INT-001_INTELLIGENCE   |
-+-----------------------+ +------------------+ +------------------------+
-
+                          |
+                          v
++-----------------------------------------------------------------------+
+|                        ARGO RUNTIME                                  |
+| Memory / Knowledge / Intelligence / Decision / Learning / Services  |
++-----------------------------------------------------------------------+
 
 ---
 
 # Core Interface Categories
 
 ### 1. Context Ingestion Interfaces (`INTF-IN`)
-* **Standard Markdown Protocol:** Accepts context formatted strictly according to metadata guidelines (`GOV-004`).
-* **Repository Hook Contracts:** Parses structural events triggered by repository updates and sync operations.
 
-### 2. Operational Service Dispatch (`INTF-API`)
-* **Deterministic Dispatch:** Maps incoming operational requests directly to corresponding services defined in `Services/SRV-010_SERVICE_REFERENCE.md`.
-* **Payload Validation:** Enforces payload schema checking prior to executing updates via `Services/SRV-009_UPDATE_SERVICE.md`.
+- Standard Markdown Protocol
+- Repository Hook Contracts
+- Portable Session Exchange
+- External Knowledge Source ingestion
 
-### 3. Output & Artifact Generation (`INTF-OUT`)
-* **Canonical Formatting:** Ensures all generated knowledge responses and files strictly match `Templates/TEMPLATE-001` through `TEMPLATE-010`.
+### 2. Environment Sensing (`INTF-006`)
+
+Supports authorized acquisition from cameras, microphones, Bluetooth, sensors, connected devices, local telemetry, and other information-producing sources.
+
+Raw observations remain distinct from interpretation and verified knowledge.
+
+### 3. Operational Service Dispatch (`INTF-API`)
+
+- Deterministic Dispatch
+- Payload Validation
+- Evidence and authority validation where applicable
+- Traceable execution through operational services
+
+### 4. Output & Artifact Generation (`INTF-OUT`)
+
+- Canonical Formatting
+- Portable exchange packages
+- Human-readable and machine-readable outputs where practical
 
 ---
 
 # Interoperability & Compliance Rules
 
-1. **Strict Protocol Contract:** No module within ARGO KOP shall communicate outside defined interface parameters.
-2. **Error Translation:** Exception events captured at interface boundaries must be normalized and logged directly into `Logs/`.
-3. **Traceability:** Every interaction processed through `INTF-001` must preserve context line ID and author metadata.
+1. No module shall communicate outside defined interface parameters without an applicable extension contract.
+2. Exception events captured at interface boundaries must be normalized and logged.
+3. Every material interaction must preserve source identity and traceability appropriate to its scope.
+4. Sensor and environmental observations must preserve provenance and acquisition context when materially used.
+5. Availability of a device does not imply authorization to acquire or retain its data.
+6. Transport mechanisms are replaceable; semantic contracts and authority boundaries are not silently changed by transport.
+
+---
+
+# Future Standalone Runtime
+
+The interface layer must remain independent of any single model provider, API, operating system, device vendor, or transport mechanism so that ARGO may eventually operate as an independent platform with native perception, memory, knowledge, learning, decision, and integration capabilities.
 
 ---
 
@@ -77,3 +108,4 @@ v                      v                      v
 | Version | Date | Description | Author / Authority |
 | :--- | :--- | :--- | :--- |
 | 1.0.0 | 2026-08-06 | Initial Canonical Interface Specification | ARGO Engineering |
+| 1.1.0 | 2026-08-08 | Added multimodal/environment sensing and standalone-runtime boundary | ARGO Engineering |
