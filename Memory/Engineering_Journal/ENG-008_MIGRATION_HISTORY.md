@@ -20,7 +20,7 @@ ENG-008
 
 Version
 
-1.1.1
+1.2.0
 
 Status
 
@@ -42,35 +42,23 @@ This document is a legacy Engineering Journal record. The ENG namespace is reser
 
 # Purpose
 
-This document records every repository migration performed throughout the evolution of ARGO KOP.
+This document records repository migrations and preserves the reasoning, evidence, impact, validation, and historical continuity of structural change.
 
-Migration History preserves structural continuity and documents how the repository evolved from one baseline to another.
+Migration history is not merely a list of renamed files or changed folders. It is the evidence chain that explains how one verified repository state became another.
 
----
+# Current Audit Learning
 
-# Objectives
+A migration must not be designed from a folder name, remembered snapshot, or assumed structure alone.
 
-Migration History shall:
+Before migration, inspect the actual repository state, read affected artifacts, trace references, identify authority boundaries, and classify the change.
 
-- Preserve repository evolution.
-- Record structural migrations.
-- Support rollback analysis.
-- Maintain repository traceability.
-- Protect historical continuity.
+A migration that changes identity, namespace, authority, architecture, or dependency contracts may require governance or architecture review rather than being treated as ordinary cleanup.
 
----
+# Core Principle
 
-# Migration Philosophy
+**Baseline → Inspect → Trace → Classify → Migrate → Re-read → Validate → Record**
 
-Migration changes repository implementation.
-
-Migration shall preserve repository identity.
-
-Migration shall never violate architecture.
-
-Every migration shall remain traceable.
-
----
+Migration success is the verified resulting state, not merely a successful write or commit.
 
 # Migration Lifecycle
 
@@ -78,15 +66,23 @@ Migration Proposal
 
 ↓
 
+Baseline Identification
+
+↓
+
+Content and Relationship Inspection
+
+↓
+
 Impact Analysis
 
 ↓
 
-Repository Review
+Authority / Architecture Review
 
 ↓
 
-Architecture Validation
+Migration Design
 
 ↓
 
@@ -94,47 +90,47 @@ Migration Execution
 
 ↓
 
+Post-Migration Re-read
+
+↓
+
+Cross-Reference Validation
+
+↓
+
 Repository Validation
 
 ↓
 
-Approval
+Approval or Escalation
 
 ↓
 
 Historical Recording
 
----
-
 # Migration Record
 
-Every migration shall include:
+Every material migration should include:
 
-Migration Identifier
-
-Date
-
-Engineer
-
-Repository Version
-
-Source Baseline
-
-Target Baseline
-
-Migration Scope
-
-Affected Components
-
-Affected Documents
-
-Repository Impact
-
-Validation Status
-
-Approval Status
-
----
+- Migration Identifier
+- Date
+- Actor / Model
+- Source Commit or Baseline
+- Target Commit or Baseline
+- Source Identity / Path
+- Target Identity / Path
+- Scope
+- Evidence Inspected
+- Assumptions, if any
+- Affected Components
+- Affected Documents
+- Relationship Impact
+- Authority Impact
+- Validation Method
+- Result
+- Remaining Uncertainty
+- Rollback / Recovery Considerations
+- Approval Status
 
 # Migration Categories
 
@@ -146,6 +142,8 @@ Document Renaming
 
 Repository Refactoring
 
+Identity / Namespace Migration
+
 Architecture Synchronization
 
 Knowledge Migration
@@ -156,17 +154,28 @@ Template Migration
 
 Release Migration
 
----
+Authority Migration
+
+# Migration Safety Rules
+
+1. Preserve provenance unless a governed decision explicitly changes it.
+2. Do not rename historical artifacts merely to make current naming look cleaner.
+3. Do not create a replacement artifact before checking whether its target identity is already occupied.
+4. Do not assume sequential identifiers imply complete files or complete history.
+5. Do not close a migration until references and status documents have been revalidated.
+6. Preserve unresolved uncertainty instead of manufacturing completion.
 
 # Repository Validation
 
-Every migration shall verify:
+Every migration shall verify, as applicable:
 
 Repository Integrity
 
 Architecture Alignment
 
 Governance Compliance
+
+Identity and Provenance
 
 Canonical References
 
@@ -176,11 +185,11 @@ Version Consistency
 
 Traceability
 
----
+Post-Migration State
 
 # Repository Authority
 
-Migration History documents repository transitions.
+Migration History documents repository transitions and their evidence.
 
 It does not replace:
 
@@ -192,25 +201,13 @@ Governance Policies
 
 Canonical repository documentation remains authoritative.
 
----
-
 # Historical Preservation
 
-Approved migration records shall:
+Historical migration records remain immutable as evidence of what occurred.
 
-Remain Immutable
+A later correction may add a new verified state, but shall not erase the earlier migration history merely to make the repository appear cleaner.
 
-Remain Traceable
-
-Remain Searchable
-
-Remain Historically Recoverable
-
-Deletion is prohibited.
-
-Archive replaces deletion.
-
----
+Archive replaces deletion when historical retention is required.
 
 # Related Documents
 
@@ -220,17 +217,17 @@ ENG-004_BUILD_HISTORY
 
 ENG-005_REFACTORING_HISTORY
 
+ENG-007_ENGINEERING_RISKS
+
 REP-008_REPOSITORY_BASELINE
 
 REP-009_REPOSITORY_TRACEABILITY
 
 CORE-003_CONSTITUTION
 
----
-
 # Guiding Statement
 
-Migration preserves evolution without losing identity.
+**A good migration changes the repository without losing the evidence needed to understand where it came from and why it changed.**
 
 ---
 
