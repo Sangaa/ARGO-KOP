@@ -3,87 +3,65 @@
 ---
 
 Folder
-
 Memory
 
 Status
-
-✅ APPROVED
+🟡 INTEGRITY HOLD
 
 Version
-
-1.1.0
+1.2.0
 
 Last Review
-
-2026-08-05
-
-Reviewer
-
-ARGO Architecture Team
+2026-08-08
 
 Review Method
-
 Repository First
 
 Repository Baseline
-
-ARGO-KOP(5).zip
+Current main branch repository state
 
 ---
 
 # Review Summary
 
 Inventory
-
-✅ Completed
+🟡 Verified for reviewed scope
 
 Memory Model
-
-✅ Completed
+🟢 Completed for reviewed artifacts
 
 Memory Governance
-
-✅ Completed
+🟢 Completed for reviewed artifacts
 
 Engineering Journal
-
-✅ Completed
+🟢 Reviewed
 
 Repository Alignment
-
-✅ Completed
+🟡 Cross-layer synchronization pending
 
 Architecture Alignment
-
-✅ Completed
+🟡 Pending consolidated validation
 
 Folder Approval
-
-✅ Approved
+HOLD — approval is limited until remaining Memory scope is reviewed
 
 ---
 
 # Subfolders Reviewed
 
 Engineering_Journal
-
-✅ Approved
+🟢 Reviewed
 
 Operational_Memory
-
 ⏳ Pending
 
 Decision_Memory
-
 ⏳ Pending
 
 Historical_Memory
-
 ⏳ Pending
 
 Project_Memory
-
 ⏳ Pending
 
 ---
@@ -93,95 +71,35 @@ Project_Memory
 README.md
 
 MEM-001_MEMORY_MODEL.md
-
 MEM-002_MEMORY_CLASSIFICATION.md
-
 MEM-003_MEMORY_RELATIONSHIPS.md
-
 MEM-004_MEMORY_LIFECYCLE.md
-
 MEM-005_MEMORY_GOVERNANCE.md
-
 MEM-006_MEMORY_QUALITY.md
-
 MEM-007_MEMORY_BASELINE.md
-
 MEM-008_MEMORY_TRACEABILITY.md
-
 MEM-009_MEMORY_EVOLUTION.md
-
 MEM-010_MEMORY_MAINTENANCE.md
 
----
+# Integrity Rules
 
-# Files Updated
-
-MEM-001_MEMORY_MODEL.md
-
-MEM-002_MEMORY_CLASSIFICATION.md
-
-MEM-003_MEMORY_RELATIONSHIPS.md
-
-MEM-004_MEMORY_LIFECYCLE.md
-
-MEM-005_MEMORY_GOVERNANCE.md
-
-MEM-006_MEMORY_QUALITY.md
-
-MEM-007_MEMORY_BASELINE.md
-
-MEM-008_MEMORY_TRACEABILITY.md
-
-MEM-009_MEMORY_EVOLUTION.md
-
-MEM-010_MEMORY_MAINTENANCE.md
-
----
-
-# Repository Health
-
-Memory Integrity
-
-✅ Verified
-
-Architecture Alignment
-
-✅ Verified
-
-Governance Compliance
-
-✅ Verified
-
-Canonical References
-
-✅ Verified
-
-Traceability
-
-✅ Verified
-
-Duplicate Documents
-
-✅ None
-
-Duplicate Ownership
-
-✅ None
-
----
+1. This status file reflects the current repository evidence, not a historical ZIP snapshot.
+2. Folder approval cannot exceed the verified review scope.
+3. Pending Memory subfolders prevent final Memory approval.
+4. Status claims must remain evidence-backed.
+5. Repository Memory remains authoritative over temporary conversational context.
+6. Historical review records do not override current repository reality.
 
 # Outstanding Work
 
-Complete remaining Memory subfolders:
+Complete and validate:
 
-- Operational_Memory
-- Decision_Memory
-- Historical_Memory
-- Project_Memory
+- `Memory/Operational_Memory`
+- `Memory/Decision_Memory`
+- `Memory/Historical_Memory`
+- `Memory/Project_Memory`
 
-After completion, perform a full Memory validation review.
-
----
+Then perform consolidated Memory validation and cross-reference synchronization.
 
 # Next Folder
 
@@ -189,29 +107,9 @@ Memory/Operational_Memory
 
 ---
 
-# Folder Approval
-
-Memory
-
-APPROVED (Core Memory Layer)
-
-Subfolder completion remains in progress.
-
-Future modifications require:
-
-Repository Review
-
-Architecture Validation
-
-Governance Approval
-
----
-
 # Notes
 
-The Memory layer is responsible for preserving organizational continuity.
-
-Repository Memory remains authoritative over temporary conversational context.
+The Memory layer preserves organizational continuity while remaining subordinate to Constitution, Governance, Architecture and Repository authority.
 
 ---
 
