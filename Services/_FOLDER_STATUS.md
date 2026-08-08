@@ -16,256 +16,71 @@ Services
 
 Version
 
-1.1.0
+1.2.0
 
 Status
 
-COMPLETED
+🟡 INTEGRITY HOLD
 
 Canonical
 
-Yes
+Pending consolidated validation
 
 Priority
 
 Critical
 
----
+Last Audit
 
-# Folder Purpose
+2026-08-08
 
-The Services layer provides reusable operational capabilities for ARGO KOP.
+Review Method
 
-It standardizes repository interaction, validation, search, indexing, updating, logging, knowledge access and memory access while remaining independent from repository authority.
-
----
-
-# Repository Baseline
-
-Repository
-
-ARGO-KOP
-
-Engineering Mode
-
-Canonical
-
-Repository Reality
-
-Validated
+Repository First / Evidence Based
 
 ---
 
-# Folder Contents
+# Audit Finding
 
-README.md
+The previous Services status declared `COMPLETED` and `APPROVED` while the repository-wide audit is still in progress.
 
-SRV-001_SERVICE_ARCHITECTURE.md
+The previous status also asserted complete cross-references and service dependency integrity without current consolidated evidence.
 
-SRV-002_REPOSITORY_SERVICE.md
+Therefore those claims are withdrawn until the affected service contracts and their cross-layer dependencies are revalidated against the current repository.
 
-SRV-003_MEMORY_SERVICE.md
+# Verified Scope
 
-SRV-004_KNOWLEDGE_SERVICE.md
+The Services folder contains the declared service artifacts `SRV-001` through `SRV-010`, plus `README.md` and this status file.
 
-SRV-005_VALIDATION_SERVICE.md
+`SRV-005_VALIDATION_SERVICE.md` explicitly identifies Core, Governance, Architecture, Repository and Runtime as dependencies and requires validation before repository modification.
 
-SRV-006_SEARCH_SERVICE.md
+The active `Engine/ENG-004_VALIDATION_ENGINE.md` now defines evidence-gated validation, including repository synchronization, content inspection, cross-reference resolution, authority checks and post-mutation re-read.
 
-SRV-007_LOGGING_SERVICE.md
+# Integrity Decision
 
-SRV-008_INDEX_SERVICE.md
+Services are **not globally certified**.
 
-SRV-009_UPDATE_SERVICE.md
+The folder remains on `INTEGRITY HOLD` until:
 
-SRV-010_SERVICE_REFERENCE.md
+- all service-to-Core/Governance/Architecture/Repository/Runtime references are resolved;
+- service contracts are reconciled with the active Validation Engine;
+- stale completion claims are removed from dependent indexes/status files;
+- cross-layer dependency integrity is validated;
+- repository-wide audit coverage is complete.
 
-_FOLDER_STATUS.md
+# Rules
 
----
+1. `_FOLDER_STATUS.md` is status evidence, not proof of completion.
+2. A service contract is not considered valid solely because its referenced path is named.
+3. Service dependencies require target existence, content inspection and authority validation.
+4. `WARNING` does not automatically mean engineering may continue when the warning affects repository integrity or canonical identity.
+5. Successful file mutation does not prove service or repository integrity.
+6. Historical snapshots and conversation memory are non-authoritative.
 
-# Engineering Completion
+# Next Audit Boundary
 
-README
-
-✅
-
-SRV-001
-
-✅
-
-SRV-002
-
-✅
-
-SRV-003
-
-✅
-
-SRV-004
-
-✅
-
-SRV-005
-
-✅
-
-SRV-006
-
-✅
-
-SRV-007
-
-✅
-
-SRV-008
-
-✅
-
-SRV-009
-
-✅
-
-SRV-010
-
-✅
+`Services → Runtime → Models / Lifecycle / Blueprints → Projects → Release → Global Cross-Layer Validation`
 
 ---
 
-# Validation
-
-Repository Synchronization
-
-✅
-
-Architecture Alignment
-
-✅
-
-Governance Alignment
-
-✅
-
-Canonical Naming
-
-✅
-
-Cross References
-
-✅
-
-Repository Consistency
-
-✅
-
-Service Dependency Integrity
-
-✅
-
-Traceability
-
-✅
-
----
-
-# Service Coverage
-
-Repository Service
-
-Completed
-
-Memory Service
-
-Completed
-
-Knowledge Service
-
-Completed
-
-Validation Service
-
-Completed
-
-Search Service
-
-Completed
-
-Logging Service
-
-Completed
-
-Index Service
-
-Completed
-
-Update Service
-
-Completed
-
-Service Reference
-
-Completed
-
----
-
-# Engineering Rules Applied
-
-Repository Reality First
-
-Complete Canonical Replacement Only
-
-No Partial Updates
-
-Repository Synchronization Before Engineering
-
-Architecture Before Services
-
-Governance Before Services
-
-Automatic Engineering Continuation
-
-Folder Completion Before Next Folder
-
----
-
-# Folder Completion Rule
-
-The Services folder is officially completed.
-
-Future modifications are permitted only when:
-
-Architecture changes.
-
-Governance changes.
-
-Repository structure changes.
-
-New platform services are introduced.
-
----
-
-# Next Engineering Target
-
-Proceed according to PROJECT_BOOTSTRAP priority:
-
-1. Models
-2. Lifecycle
-3. Blueprints
-
----
-
-Last Review
-
-2026-08-06
-
-Repository Status
-
-APPROVED
-
-Services Status
-
-ONLINE
-
----
-
-End
+End of Document
