@@ -4,8 +4,7 @@
 
 Platform
 
-ARGO KOP
-Knowledge Operating Platform
+ARGO KOP (Knowledge Operating Platform)
 
 Folder
 
@@ -13,15 +12,15 @@ Architecture
 
 Status
 
-🟢 VALIDATED / ARCHITECTURE BASELINE CLEAN
+🟡 INTEGRITY HOLD — RE-AUDIT IN PROGRESS
 
 Version
 
-1.3.0
+1.4.0
 
 Canonical
 
-Yes
+Yes — evidence record only
 
 Last Audit
 
@@ -41,27 +40,27 @@ Repository Baseline
 
 Inventory
 
-🟢 Completed for the active Architecture set.
+🟡 Partially verified. Current search confirms active Architecture artifacts beyond the previously listed set, including `ARC-005_ARCHITECTURE_RULES.md` and `ARC-008_REPOSITORY_LAYOUT.md`.
 
 Identity / Path Alignment
 
-🟢 Passed for the audited canonical Architecture documents.
+🟡 Re-audit required. `ARC_MAP.md` previously declared `Document ID ARC-001`, conflicting with `ARC-001_PLATFORM_ARCHITECTURE.md`. The map identity collision has now been removed by treating `ARC_MAP.md` as a map artifact without an `ARC-NNN` Document ID.
 
 Architecture Consistency
 
-🟢 ARC_MAP, ARC-001, ARC-002, ARC-003, ARC-004 and ARC-006 are aligned.
+🟡 Re-audit required after the ARC-005 and ARC-008 modernization and identity correction.
 
 Evolution / Canonical Model
 
-🟢 ARC-010 and ARC-011 are aligned with the current baseline and dependency model.
+🟡 Existing artifacts require consolidated cross-layer validation.
 
 Repository Alignment
 
-🟢 Architecture baseline agrees with the current repository authority model.
+🟡 REP-001 / REP-002 Architecture inventory must be synchronized with the verified active set.
 
 Cross-Reference Review
 
-🟢 Previously identified invalid Governance references were corrected in the audited Architecture set.
+🟡 Open. New evidence must be checked for stale Governance, Repository and architectural references.
 
 ---
 
@@ -69,62 +68,60 @@ Cross-Reference Review
 
 ## ARCH-001 — Stale Architecture Status
 
-Resolved by replacing the historical ZIP-based status with a repository-first evidence record.
+Historical completion claims are no longer treated as current certification.
 
-## ARCH-002 — Invalid Review Standard Reference
+## ARCH-002 — Invalid Review Standard References
 
-Resolved by replacing stale `GOV-006_REVIEW_STANDARD` references with the current canonical `Governance/GOV-005_REVIEW_STANDARD.md`.
+Previously identified stale Governance references were corrected in the audited Architecture set.
 
 ## ARCH-003 — Historical Layer Model Drift
 
-Resolved by distinguishing architectural boundaries from physical repository domains and implementation groupings.
+Architectural boundaries are distinguished from physical repository domains and implementation groupings.
 
 ## ARCH-004 — Layer / Dependency Model Divergence
 
-Resolved by aligning `ARC-004` and `ARC-006` with `ARC_MAP` and the canonical Architecture Model.
+The active architecture model is being reconciled with the current dependency model.
 
-## ARCH-005 — Stale Information Flow Model
+## ARCH-005 — ARC_MAP Identity Collision
 
-Resolved by updating `ARC-003` to the current repository authority, classification, ownership and traceability model.
+`Architecture/ARC_MAP.md` previously declared `Document ID ARC-001`, while `Architecture/ARC-001_PLATFORM_ARCHITECTURE.md` legitimately owns `ARC-001`. The map is now explicitly a navigation/map artifact without a numeric `ARC-NNN` identity.
 
-## ARCH-006 — Canonical Architecture Model Drift
+## ARCH-006 — Outdated ARC-005 Rules
 
-Resolved by updating `ARC-011` to the current development baseline, canonical boundaries and verified references.
+`ARC-005_ARCHITECTURE_RULES.md` was updated to reflect evidence-gated review, physical-placement boundaries, migration traceability, controlled deletion/archival, and reopening on new evidence.
 
-## ARCH-007 — Evolution Model Drift
+## ARCH-007 — Outdated ARC-008 Layout Model
 
-Resolved by updating `ARC-010` to the current governance, dependency, repository and release boundaries.
+`ARC-008_REPOSITORY_LAYOUT.md` was updated to distinguish physical storage from logical authority and to align with the current relationship-graph audit model.
 
 ---
 
-# Validation Gate
+# Current Validation Gate
 
-The active Architecture baseline passes the following checks:
+1. Known active Architecture identities — PARTIAL / RE-AUDIT
+2. Filename / internal ID alignment — PARTIAL / MAP COLLISION CORRECTED
+3. Canonical path uniqueness — OPEN
+4. Repository-first status — PASS FOR INSPECTED SCOPE
+5. Layer boundary consistency — OPEN
+6. Dependency direction consistency — OPEN
+7. Canonical Architecture Model alignment — OPEN
+8. Information Flow alignment — OPEN
+9. Evolution Model alignment — OPEN
+10. Known stale references — OPEN / RE-AUDIT
 
-1. Unique active Architecture identities — PASS
-2. Filename / internal ID alignment — PASS
-3. Canonical path uniqueness — PASS
-4. Repository-first status — PASS
-5. Layer boundary consistency — PASS
-6. Dependency direction consistency — PASS
-7. Canonical Architecture Model alignment — PASS
-8. Information Flow alignment — PASS
-9. Evolution Model alignment — PASS
-10. Known invalid Governance references corrected — PASS
-
-Architecture is validated clean for the current repository baseline.
+Architecture is **not globally certified**. The previous `VALIDATED / ARCHITECTURE BASELINE CLEAN` claim is withdrawn until the expanded inventory and cross-layer relationships are revalidated.
 
 ---
 
 # Scope Boundary
 
-This status certifies the Architecture layer only. It does not certify Runtime, Core, AI, Services, Knowledge, Memory, Projects, Release or the entire repository as globally clean.
+This status certifies only the evidence inspected so far. It does not certify Runtime, Core, AI, Services, Knowledge, Memory, Projects, Release or the entire repository.
 
 ---
 
 # Required Next Action
 
-`Repository-wide Integrity Audit → Runtime/Core/Knowledge/Memory/AI/Services/Projects validation → Global Boot Validation`
+`Synchronize Architecture inventory → validate active ARC artifacts → validate cross-layer references → update REP-001/REP-002 → Architecture Re-Audit`
 
 No `100% CLEAN` repository claim is authorized from this document alone.
 
@@ -140,13 +137,8 @@ No `100% CLEAN` repository claim is authorized from this document alone.
 - `Repository/REP-002_REPOSITORY_MAP.md`
 - `Architecture/ARC_MAP.md`
 - `Architecture/ARC-001_PLATFORM_ARCHITECTURE.md`
-- `Architecture/ARC-002_COMPONENT_ARCHITECTURE.md`
-- `Architecture/ARC-003_INFORMATION_FLOW.md`
-- `Architecture/ARC-004_LAYER_MODEL.md`
-- `Architecture/ARC-006_DEPENDENCY_MODEL.md`
-- `Architecture/ARC-007_INTEGRATION_MODEL.md`
-- `Architecture/ARC-009_ARCHITECTURE_DECISIONS.md`
-- `Architecture/ARC-010_EVOLUTION_MODEL.md`
+- `Architecture/ARC-005_ARCHITECTURE_RULES.md`
+- `Architecture/ARC-008_REPOSITORY_LAYOUT.md`
 - `Architecture/ARC-011_CANONICAL_ARCHITECTURE_MODEL.md`
 
 ---
