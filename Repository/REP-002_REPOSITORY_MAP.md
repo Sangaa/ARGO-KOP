@@ -6,7 +6,7 @@
 
 Platform: ARGO KOP (Knowledge Operating Platform)
 Document ID: REP-002
-Version: 1.6.2
+Version: 1.6.3
 Status: Integrity Hold
 Category: Repository
 Canonical: Yes
@@ -32,7 +32,7 @@ Path: `ARGO-KOP/`
 - `CONTRIBUTING.md`
 - `CODE_OF_CONDUCT.md`
 
-Historical root naming-convention material is excluded from active inventory and is preserved under `Archive/Governance-Legacy/`.
+Historical root naming-convention material is excluded from active inventory and preserved under `Archive/Governance-Legacy/`.
 
 ## 3. Core Layer
 
@@ -87,9 +87,27 @@ Path: `Runtime/`
 - `Runtime/RUN-010_RUNTIME_REFERENCE.md`
 - `Runtime/_FOLDER_STATUS.md`
 
-## 7. Architecture Layer
+## 7. Architecture Domain
 
-Architecture authority remains governed by the actual active artifacts and their folder status. This map does not infer completeness from numeric ranges.
+Path: `Architecture/`
+
+The Architecture domain is under re-audit. Current repository evidence identifies:
+
+- `Architecture/ARC_MAP.md` — map/navigation artifact; no numeric `ARC-NNN` identity
+- `Architecture/ARC-001_PLATFORM_ARCHITECTURE.md`
+- `Architecture/ARC-002_COMPONENT_ARCHITECTURE.md`
+- `Architecture/ARC-003_INFORMATION_FLOW.md`
+- `Architecture/ARC-004_LAYER_MODEL.md`
+- `Architecture/ARC-005_ARCHITECTURE_RULES.md`
+- `Architecture/ARC-006_DEPENDENCY_MODEL.md`
+- `Architecture/ARC-007_INTEGRATION_MODEL.md`
+- `Architecture/ARC-008_REPOSITORY_LAYOUT.md`
+- `Architecture/ARC-009_ARCHITECTURE_DECISIONS.md`
+- `Architecture/ARC-010_EVOLUTION_MODEL.md`
+- `Architecture/ARC-011_CANONICAL_ARCHITECTURE_MODEL.md`
+- `Architecture/_FOLDER_STATUS.md`
+
+`ARC_MAP.md` previously declared `ARC-001`, conflicting with `ARC-001_PLATFORM_ARCHITECTURE.md`; the map identity collision has been corrected.
 
 ## 8. Interfaces Layer
 
@@ -114,7 +132,13 @@ Path: `Models/`
 
 Declared model artifacts not directly located remain unresolved and are not promoted to active authority.
 
-## 10. Mapping Rules
+## 10. Other Repository Domains
+
+Current `SYSTEM_MAP.md` also identifies Knowledge, Memory, Decision, AI, Services, Intelligence, Quality, Projects, Release, Logs, Examples and Future as physical repository domains/groupings.
+
+These domains are not assumed complete or architecturally authoritative from folder names alone. Their active inventories and relationships remain under connected-baseline validation.
+
+## 11. Mapping Rules
 
 1. Every active canonical document has exactly one canonical path.
 2. Filename identity must match internal Document ID where one exists.
@@ -124,12 +148,13 @@ Declared model artifacts not directly located remain unresolved and are not prom
 6. Any canonical inventory change requires synchronized index/map updates and validation.
 7. Archive operations must preserve enough evidence to identify the former active path and its canonical successor.
 8. A new interface, model, runtime component or service must not be considered globally integrated until its consumers and dependencies are validated.
+9. Map artifacts and status artifacts must not reuse the identity of canonical content documents.
 
-## 11. Integrity State
+## 12. Integrity State
 
 Current repository state: **INTEGRITY HOLD**.
 
-The map has been synchronized with the currently verified Core, Runtime, Governance, Interfaces and Models baseline. Cross-layer relationship validation remains open.
+The map is synchronized with the current declared Core, Governance, Repository, Runtime, Architecture, Interfaces and Models inventory within the inspected scope. Cross-layer relationship validation remains open.
 
 ---
 
