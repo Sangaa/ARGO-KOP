@@ -1,22 +1,19 @@
+# GOV-005
+
+---
+
 # REVIEW STANDARD
 
 ---
 
-Document ID
-
-GOV-006
-
-Version
-
-1.1
-
-Status
-
-Approved
-
-Owner
-
-ARGO Governance
+Platform: ARGO KOP (Knowledge Operating Platform)
+Document ID: GOV-005
+Version: 1.2.0
+Status: Approved
+Category: Governance
+Canonical: Yes
+Priority: Critical
+Last Audit Date: Aug 08, 2026
 
 ---
 
@@ -70,6 +67,7 @@ Every review shall include:
 - Assessment Type
 - Repository Version
 - Review Date
+- Commit ID when available
 
 ---
 
@@ -136,8 +134,7 @@ Every review shall identify:
 - Repository Version
 - Repository State
 - Inspection Date
-
-Commit ID when available.
+- Commit ID when available
 
 ---
 
@@ -163,4 +160,20 @@ Deprecated
 
 ---
 
-End
+# Related Documents
+
+- `Governance/GOV-001_GOVERNANCE_FRAMEWORK.md`
+- `Governance/GOV-004_DOCUMENT_METADATA.md`
+- `Governance/GOV-006_NAMING_CONVENTION_STANDARD.md`
+- `Repository/REP-001_MASTER_INDEX.md`
+- `Repository/REP-002_REPOSITORY_MAP.md`
+
+---
+
+# Guiding Statement
+
+Evidence precedes approval; complete repository verification precedes claims of audit completeness.
+
+---
+
+End of Document
