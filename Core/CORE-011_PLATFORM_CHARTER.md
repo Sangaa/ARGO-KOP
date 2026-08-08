@@ -1,26 +1,19 @@
 # PLATFORM CHARTER
 
----
-
 Document ID
-
 CORE-011
-
 Version
-
-1.1
-
+1.2.0
 Status
-
-Approved
-
+Validated / Integrity Hold
 Owner
-
 ARGO Architecture
-
 Category
-
 Core
+Canonical
+Yes
+Last Audit
+2026-08-08
 
 ---
 
@@ -28,17 +21,11 @@ Core
 
 The Platform Charter defines the official scope, responsibilities and commitments of the ARGO Platform.
 
-It establishes what the platform is responsible for and what is intentionally outside its responsibility.
-
-The Charter defines platform boundaries.
-
-It does not define governance rules, architectural implementation or operational procedures.
-
----
+It establishes platform boundaries without redefining Governance, Architecture implementation or Runtime procedures.
 
 # Platform Role
 
-ARGO is the governing platform responsible for maintaining:
+ARGO is a governed cognitive engineering platform responsible for maintaining:
 
 - Knowledge Integrity
 - Repository Integrity
@@ -47,118 +34,99 @@ ARGO is the governing platform responsible for maintaining:
 - Organizational Memory
 - Engineering Standards
 
----
-
 # Platform Responsibilities
 
 ARGO shall:
 
-- Govern repository structure.
-- Preserve architectural consistency.
-- Maintain institutional knowledge.
-- Organize engineering documentation.
-- Record engineering decisions.
-- Preserve project history.
-- Support continuous improvement.
-- Enable collaboration between humans and AI systems.
-
----
+- govern repository structure within approved authority;
+- preserve architectural consistency;
+- maintain institutional knowledge;
+- organize engineering documentation;
+- record engineering decisions;
+- preserve project history;
+- support continuous improvement;
+- enable collaboration between humans and AI systems.
 
 # Platform Boundaries
 
 ARGO does not replace:
 
 - ERP systems
-- Operational systems
-- Database engines
-- Programming languages
-- Business applications
+- operational systems
+- database engines
+- programming languages
+- business applications
 - AI models
 
-ARGO governs how knowledge about those systems is organized.
+ARGO governs the knowledge, decisions and engineering context around those systems.
 
----
+# Authority Boundary
+
+The Charter does not override the Constitution, Governance or Canonical Architecture.
+
+Runtime execution remains subject to the applicable validation and security controls.
 
 # Repository Commitment
 
-The repository shall remain:
+The repository remains:
 
-- Structured
-- Traceable
-- Maintainable
-- Versioned
-- Reviewable
+- structured;
+- traceable;
+- maintainable;
+- versioned;
+- reviewable.
 
 The repository is the permanent engineering memory of the platform.
 
----
-
 # Engineering Commitment
 
-ARGO engineering shall always prioritize:
+ARGO engineering prioritizes:
 
-- Clarity
-- Simplicity
-- Consistency
-- Maintainability
-- Evidence
-- Traceability
-
----
+- clarity;
+- simplicity;
+- consistency;
+- maintainability;
+- evidence;
+- traceability.
 
 # Governance Commitment
 
-Every engineering decision shall be:
+Material engineering decisions shall be documented, reviewable, reproducible and attributable according to applicable Governance.
 
-- documented
-- reviewable
-- reproducible
-- attributable
-
-No undocumented architectural decision shall become permanent.
-
----
+No undocumented architectural decision becomes canonical merely through implementation.
 
 # AI Collaboration
 
-ARGO is AI-independent.
+ARGO is AI-independent. Multiple AI systems may participate in repository engineering.
 
-Multiple AI systems may participate in repository engineering.
+All participating systems operate under the same repository governance and constitutional boundaries.
 
-All participating systems shall follow the same repository governance and constitutional rules.
-
-The repository—not the AI model—is the permanent authority.
-
----
+The repository is the permanent engineering authority; an AI model is an execution participant, not the source of platform authority.
 
 # Operational Commitment
 
-ARGO supports operational environments by promoting:
+ARGO supports operational environments through:
 
-- verified communication
-- evidence-based reporting
-- conservative operational messaging
-- controlled repository evolution
+- verified communication;
+- evidence-based reporting;
+- conservative operational messaging;
+- controlled repository evolution.
 
-Operational expectations shall never be presented as verified facts.
-
----
+Operational expectations are not verified facts unless supported by evidence.
 
 # Long-Term Commitment
 
-ARGO exists to preserve organizational knowledge beyond:
+ARGO preserves organizational knowledge across:
 
-- software generations
-- AI vendors
-- individual contributors
-- organizational restructuring
-
----
+- software generations;
+- AI vendors;
+- individual contributors;
+- organizational restructuring.
 
 # Charter Statement
 
-ARGO is committed to preserving knowledge, architecture and engineering quality through governed repositories, transparent decisions and continuous improvement.
+ARGO preserves knowledge, architecture and engineering quality through governed repositories, transparent decisions, evidence and continuous validated improvement.
 
 ---
 
-End
+End of Document
