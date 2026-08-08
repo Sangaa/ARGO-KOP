@@ -20,11 +20,11 @@ AI-008
 
 Version
 
-1.1.0
+1.2.0
 
 Status
 
-Approved
+Integrity Hold / Revalidated
 
 Category
 
@@ -34,51 +34,17 @@ Canonical
 
 Yes
 
+Last Audit
+
+2026-08-08
+
 ---
 
 # Purpose
 
-This document defines the governance framework for Artificial Intelligence operating inside ARGO KOP.
+Defines the governance boundary for AI operating inside ARGO KOP.
 
-AI Governance ensures that every model operates under repository authority, architectural discipline and engineering accountability.
-
-Governance controls AI behavior.
-
-AI never controls governance.
-
----
-
-# Objectives
-
-AI Governance shall:
-
-Maintain repository integrity.
-
-Protect architecture.
-
-Enforce engineering discipline.
-
-Guarantee deterministic execution.
-
-Preserve repository continuity.
-
-Support responsible AI operation.
-
----
-
-# Governance Philosophy
-
-Governance exists before AI.
-
-Architecture exists before implementation.
-
-Repository exists before conversation.
-
-AI operates inside governance.
-
-Never outside it.
-
----
+AI operates under repository, architecture and governance authority. AI does not create that authority by declaration.
 
 # Governance Hierarchy
 
@@ -106,183 +72,86 @@ Memory
 
 ↓
 
-Engineering
-
-↓
-
 AI
 
-AI is always the execution layer.
-
-It is never the governing layer.
-
----
+This is an authority boundary, not a claim that every physical folder is a separate architectural layer.
 
 # Repository Authority
 
-The repository is the authoritative source.
+Current repository evidence is authoritative for repository state.
 
-Conversation is temporary.
-
-Repository Reality always overrides:
-
-Conversation
-
-Inference
-
-Memory
-
-Model Confidence
-
-Speculation
-
----
-
-# Governance Principles
-
-Every AI shall:
-
-Synchronize before engineering.
-
-Validate repository integrity.
-
-Respect architecture.
-
-Respect governance.
-
-Generate complete canonical documents.
-
-Maintain traceability.
-
-Preserve engineering history.
-
----
+Conversation, inference, memory and model confidence are non-authoritative substitutes.
 
 # Mandatory Engineering Rules
 
-Before modifying any document:
+Before a material modification the AI shall:
 
-Synchronize repository.
+1. synchronize with the current repository;
+2. inspect the evidence required for the decision;
+3. verify canonical identity and ownership;
+4. review relevant Architecture and Governance constraints;
+5. resolve or disclose material conflicts;
+6. execute only within the verified scope;
+7. re-read and validate affected artifacts after mutation.
 
-Validate architecture.
+# Evidence Rules
 
-Validate governance.
+The AI must distinguish:
 
-Validate repository version.
+- Verified
+- Partially Verified
+- Unavailable
+- Inferred
+- Assumed
 
-Validate folder status.
-
-Only then continue engineering.
-
----
+Unavailable evidence cannot be silently promoted into fact.
 
 # Repository Protection
 
 The AI shall never:
 
-Invent folders.
-
-Invent files.
-
-Invent repository structure.
-
-Modify completed architecture.
-
-Override governance.
-
-Ignore repository evidence.
-
-Produce partial canonical replacements.
-
-Delete canonical documents without approved replacement.
-
----
+- invent folders or files;
+- infer architecture from folder names alone;
+- override governance or architecture;
+- normalize a local artifact before required cross-layer review;
+- create documents merely to fill numeric gaps;
+- claim global completion from folder-level evidence;
+- treat `_FOLDER_STATUS.md` as proof of integrity.
 
 # Autonomous Engineering
 
-The AI may continue automatically.
+AI may continue automatically only when the evidence required for the next action is available and no blocking conflict exists.
 
-The AI shall stop only when:
+The AI shall stop or constrain work when:
 
-Repository corruption exists.
+- required repository information is missing;
+- canonical identity is ambiguous;
+- architecture or governance conflict exists;
+- a critical reference cannot be resolved;
+- evidence coverage is insufficient for the requested decision.
 
-Architecture conflict exists.
+# Completion Policy
 
-Governance conflict exists.
+Repository stabilization and integrity validation have priority over optimization or feature development while the repository remains under audit.
 
-Required repository information is missing.
-
-Repository ambiguity prevents deterministic execution.
-
-Otherwise continue.
-
----
-
-# Repository Completion Policy
-
-Repository completion has priority over repository optimization.
-
-Important unfinished folders shall always be completed before improving completed folders.
-
-Completed folders shall only be revisited when:
-
-Repository evidence requires correction.
-
-Architecture changes.
-
-Governance changes.
-
----
-
-# Validation Requirements
-
-Every engineering activity shall verify:
-
-Repository Synchronization
-
-Repository Integrity
-
-Architecture Alignment
-
-Governance Compliance
-
-Canonical References
-
-Version Consistency
-
-Traceability
-
-Folder Completion
-
----
+Completed status may be revisited when current repository evidence demonstrates drift.
 
 # Related Documents
 
-PROJECT_BOOTSTRAP.md
-
-CORE-003_CONSTITUTION.md
-
-AI-001_AI_MODEL.md
-
-AI-002_AI_CAPABILITIES.md
-
-AI-003_AI_LIMITATIONS.md
-
-AI-004_CONTEXT_LOADING.md
-
-AI-007_MULTI_MODEL_SUPPORT.md
-
-AI-009_AI_RUNTIME.md
+- `PROJECT_BOOTSTRAP.md`
+- `Core/CORE-003_CONSTITUTION.md`
+- `Governance/GOV-005_REVIEW_STANDARD.md`
+- `Governance/GOV-009_REPOSITORY_POLICY.md`
+- `Repository/REP-001_MASTER_INDEX.md`
+- `AI/AI-001_AI_MODEL.md`
+- `AI/AI-004_CONTEXT_LOADING.md`
+- `AI/AI-009_AI_RUNTIME.md`
 
 ---
 
 # Guiding Statement
 
-Strong governance creates reliable AI.
-
-Reliable AI creates reliable engineering.
-
-Reliable engineering protects the repository.
+Strong AI governance is the discipline that prevents autonomous execution from becoming autonomous authority.
 
 ---
 
