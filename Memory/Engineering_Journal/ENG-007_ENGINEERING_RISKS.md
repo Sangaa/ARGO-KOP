@@ -20,7 +20,7 @@ ENG-007
 
 Version
 
-1.1.1
+1.2.0
 
 Status
 
@@ -42,37 +42,41 @@ This document is a legacy Engineering Journal record. The ENG namespace is reser
 
 # Purpose
 
-This document defines how engineering risks are identified, assessed, monitored and mitigated throughout ARGO KOP.
+This document records the engineering-risk discipline used throughout ARGO KOP.
 
-Engineering Risks preserve repository stability by making implementation uncertainty visible before it becomes failure.
+A risk is not merely a possible failure. It is an identified uncertainty or exposure whose evidence, impact, boundary, and response can be examined and tracked.
 
----
+# Current Audit Learning
 
-# Objectives
+The current repository review established that risk analysis must distinguish:
 
-Engineering Risks shall:
+- observed repository facts;
+- inferred risks;
+- confirmed defects;
+- tool or evidence limitations;
+- unresolved uncertainty.
 
-- Identify engineering uncertainty.
-- Protect repository integrity.
-- Improve implementation quality.
-- Support engineering planning.
-- Reduce long-term technical debt.
+A missing search result is not automatically a missing artifact.
 
----
+A successful commit is not proof that the resulting repository state is safe.
 
-# Engineering Philosophy
+A naming anomaly may be a historical compatibility issue rather than an immediate defect.
 
-Every engineering activity contains risk.
+Risk records must preserve these distinctions instead of collapsing them into a single severity label.
 
-Undocumented risks become future failures.
+# Core Principle
 
-Documented risks become manageable engineering work.
+**Observe → Evidence → Assess → Classify → Mitigate → Verify → Reassess**
 
----
+Risk closure requires evidence that the stated mitigation addressed the actual risk condition. A written plan alone does not close a risk.
 
 # Risk Lifecycle
 
 Risk Identification
+
+↓
+
+Evidence Capture
 
 ↓
 
@@ -96,47 +100,42 @@ Implementation
 
 ↓
 
-Review
+Post-Mitigation Verification
 
 ↓
 
-Closure
+Residual-Risk Assessment
 
 ↓
 
-Archive
+Closure or Continued Monitoring
 
----
+↓
 
-# Risk Record
+Historical Recording
 
-Every engineering risk shall contain:
+# Mandatory Risk Record
 
-Risk Identifier
+Every material engineering risk should contain:
 
-Date
-
-Engineer
-
-Related Session
-
-Risk Description
-
-Cause
-
-Probability
-
-Impact
-
-Affected Components
-
-Mitigation Plan
-
-Current Status
-
-Related Documents
-
----
+- Risk Identifier
+- Date
+- Actor / Model
+- Repository Commit or Baseline
+- Situation
+- Evidence
+- Risk Description
+- Initial Hypothesis
+- Cause, if established
+- Probability / Confidence
+- Impact
+- Affected Components
+- Mitigation Plan
+- Verification Method
+- Residual Risk
+- Current Status
+- Related Documents
+- Remaining Uncertainty
 
 # Risk Categories
 
@@ -147,6 +146,10 @@ Repository
 Documentation
 
 Governance
+
+Identity / Provenance
+
+Cross-Reference Integrity
 
 Implementation
 
@@ -162,33 +165,33 @@ Maintainability
 
 Technical Debt
 
----
+Tool / Verification Failure
+
+Human-Model Interaction
 
 # Risk Levels
 
 Low
 
-Minor engineering impact.
+Limited impact and controlled exposure.
 
 Medium
 
-Requires engineering attention.
+Requires engineering attention and monitoring.
 
 High
 
-Threatens repository stability.
+May materially affect repository stability, architecture, or delivery.
 
 Critical
 
-Threatens platform integrity.
-
-Immediate mitigation required.
-
----
+Threatens platform integrity, authority, security, or recoverability. Immediate mitigation and explicit escalation are required.
 
 # Repository Validation
 
-Every engineering risk review shall verify:
+Where a risk concerns repository state, validation shall use the strongest available direct evidence.
+
+The review shall consider:
 
 Repository Integrity
 
@@ -196,17 +199,31 @@ Architecture Alignment
 
 Governance Compliance
 
-Repository Traceability
+Identity and Provenance
 
-Mitigation Status
+Cross-Reference Integrity
 
 Version Consistency
 
----
+Mitigation Status
+
+Residual Risk
+
+Where direct evidence is unavailable, the record shall state the limitation rather than silently filling the gap with assumptions.
+
+# Risk Closure Rule
+
+A risk may be marked closed only when:
+
+1. the affected condition has been re-examined;
+2. the mitigation has been applied or explicitly rejected with authority;
+3. the outcome has been verified;
+4. any residual risk is recorded;
+5. required references and status records are synchronized.
 
 # Repository Authority
 
-Engineering Risks support engineering planning.
+Engineering Risks support engineering planning and decision-making.
 
 They do not replace:
 
@@ -216,45 +233,31 @@ Governance Policies
 
 Canonical Repository Documentation
 
-Repository documentation remains authoritative.
-
----
+Repository documentation remains authoritative unless a formally governed change promotes a risk-derived rule into a higher authority.
 
 # Historical Preservation
 
-Approved engineering risks shall:
+Historical risk records remain traceable and recoverable.
 
-Remain Traceable
+A later correction must not erase the original risk or the reasoning that led to it when that history is useful evidence.
 
-Remain Searchable
-
-Remain Historically Recoverable
-
-Record Resolution History
-
-Deletion is prohibited.
-
-Archive replaces deletion.
-
----
+Closure records the new verified state; it does not rewrite the original observation.
 
 # Related Documents
 
 ENG-001_ENGINEERING_MODEL
 
-ENG-002_ENGINEERING_SESSIONS
-
 ENG-006_ENGINEERING_LESSONS
+
+ENG-008_MIGRATION_HISTORY
 
 REP-009_REPOSITORY_TRACEABILITY
 
 CORE-003_CONSTITUTION
 
----
-
 # Guiding Statement
 
-Engineering excellence is achieved not by eliminating risk, but by identifying, understanding and managing it before it becomes failure.
+**Engineering maturity is not the absence of risk; it is the ability to see risk clearly, verify it, manage it, and learn from what remains.**
 
 ---
 
