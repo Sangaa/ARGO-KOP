@@ -1,106 +1,106 @@
-Markdown
 # REP-002
 
 ---
 
-# REPOSITORY MAP
+# ARGO KOP - CANONICAL REPOSITORY STORAGE MAP
 
 ---
 
-Platform: ARGO KOP (Knowledge Operating Platform)  
-Document ID: REP-002  
-Version: 1.2.0  
-Status: Approved  
-Category: Repository  
-Canonical: Yes  
-Priority: Critical  
+Platform: ARGO KOP (Knowledge Operating Platform) 
+Document ID: REP-002 
+Version: 1.3.0 
+Status: Approved 
+Category: Root Baseline / Repository Index 
+Canonical: Yes 
+Priority: Absolute / Mandatory 
+Last Audit Date: Aug 08, 2026 
 
 ---
 
-# Purpose
+## 1. System Framework Boundary & Mapping Spec
 
-This document defines the systemic dependency graph, data flows, and inter-component cross-references across all architectural layers of the ARGO KOP platform.
+This document establishes the physical directory boundary maps and mandatory routing paths for the ARGO KOP platform storage environment. It enforces isolation constraints mapped by the Context Engine (`ENG-009`) and serves as the structural guide to align physical paths with the definitions registered in the Master Index (`REP-001`).
 
-It ensures deterministic cross-referencing between Governance, Engine, Services, Runtime, Models, and Quality layers, preventing structural fragmentation and guaranteeing absolute repository integrity.
-
----
-
-# System Architecture & Layer Relationships
-
-+-----------------------------------------------------------------------+
-|                        GOVERNANCE & STANDARDS                         |
-|   Governance/  |  Standards/  |  Lifecycle/  |  Quality/             |
-+-----------------------------------------------------------------------+
-|
-v
-+-----------------------------------------------------------------------+
-|                     SYSTEM CORE & SPECIFICATIONS                      |
-|   Specs/  |  Docs/  |  Models/  |  Architecture/                      |
-+-----------------------------------------------------------------------+
-|
-v
-+-----------------------------------------------------------------------+
-|                       INTELLIGENCE & COGNITION                        |
-|   Engine/  |  Intelligence/  |  Cognition/  |  Memory/                |
-+-----------------------------------------------------------------------+
-|
-v
-+-----------------------------------------------------------------------+
-|                    EXECUTION & SERVICE OPERATIONS                     |
-|   Services/  |  Runtime/  |  Interfaces/  |  Plugins/                 |
-+-----------------------------------------------------------------------+
-|
-v
-+-----------------------------------------------------------------------+
-|                      REPOSITORY & RELEASE CORE                        |
-|   Repository/  |  Templates/  |  Projects/  |  Release/               |
-+-----------------------------------------------------------------------+
-
+All paths, extensions, and directory allocations listed below are structurally locked and evaluated dynamically by the Validation Service (`SRV-005`).
 
 ---
 
-# Cross-Layer Matrix & Functional Dependencies
+## 2. Canonical Directory Tree & Allocation Mapping
 
-### 1. Governance & Quality Baseline
-* **Governance (`Governance/`, `Standards/`, `Lifecycle/`)** enforces rules and policies across all platform artifacts.
-* **`Quality/`** verifies compliance with metadata (`GOV-004`) and lifecycle (`GOV-005`) standards for every document and component before integration.
+### 2.1 Root Baseline Allocation
+*   **Path Target:** `ARGO-KOP/` (Global Isolated Storage Root Fence)
+*   **Primary Manifest Files:**
+    *   `PROJECT_BOOTSTRAP.md` (BOOTSTRAP-001)
+    *   `PROJECT_STATUS.md` (PROJECT_STATUS)
+    *   `README.md`
+    *   `VISION.md`
+    *   `CONTRIBUTING.md`
+    *   `CODE_OF_CONDUCT.md`
 
-### 2. Core Specification to Execution Pipeline
-* **`Specs/` & `Models/`** define structural knowledge representations consumed by **`Engine/`** and **`Intelligence/`**.
-* **`Engine/` (`ENG-001`, `ENG-003`, `ENG-007`)** executes reasoning, analysis, and learning processes over data governed by **`Cognition/`** and stored in **`Memory/`**.
-* **`Runtime/` (`RNT-001`)** orchestrates execution loops powered by **`Services/` (`SRV-001` to `SRV-010`)** and accessed through **`Interfaces/`**.
+### 2.2 Repository Index Layer Location
+*   **Path Target:** `Repository/`
+*   **Mandatory Prefix Rule:** `REP-`
+*   **Active Canonical Artifacts:**
+    *   `Repository/REP-001_MASTER_INDEX.md`
+    *   `Repository/REP-002_REPOSITORY_MAP.md`
 
-### 3. Repository Maintenance & Mutation Controls
-* **`Services/SRV-009_UPDATE_SERVICE.md`** controls all repository write operations, requiring verification against **`Repository/REP-001`** and **`Repository/REP-002`**.
-* **`Templates/`** provides validated markdown structural schemas (`TEMPLATE-001` through `TEMPLATE-010`) for all platform creation workflows.
+### 2.3 Governance & Standards Layer Location
+*   **Path Target:** `Governance/`
+*   **Mandatory Prefix Rule:** `GOV-`
+*   **Active Canonical Artifacts:**
+    *   `Governance/GOV-001_GOVERNANCE_FRAMEWORK.md`
+    *   `Governance/GOV-004_DOCUMENT_METADATA.md`
+    *   `Governance/GOV-006_NAMING_CONVENTION_STANDARD.md`
+    *   `Governance/GOV-010_GOVERNANCE_MODEL.md`
+    *   `Governance/_FOLDER_STATUS.md`
+
+### 2.4 Runtime & State Life-cycle Layer Location
+*   **Path Target:** `Runtime/`
+*   **Mandatory Prefix Rule:** `RUN-`
+*   **Active Canonical Artifacts:**
+    *   `Runtime/README.md`
+    *   `Runtime/RUN-001_BOOT_SEQUENCE.md`
+    *   `Runtime/RUN-002_INITIALIZATION.md`
+    *   `Runtime/RUN-003_CONFIGURATION.md`
+    *   `Runtime/RUN-004_CONTEXT_LOADING.md`
+    *   `Runtime/RUN-005_RUNTIME_WORKFLOW.md`
+    *   `Runtime/RUN-006_AI_PROTOCOL.md`
+    *   `Runtime/RUN-009_RECOVERY.md`
+    *   `Runtime/_FOLDER_STATUS.md`
+
+### 2.5 Cognitive Core Layer Location
+*   **Path Target:** `Architecture/`
+*   **Mandatory Prefix Rule:** `CORE-` / `ARC-`
+*   **Active Canonical Artifacts:**
+    *   `Architecture/CORE-000_PLATFORM_ARCHITECTURE.md`
+    *   `Architecture/CORE-002_ARGO_IDENTITY.md`
+    *   `Architecture/CORE-003_CONSTITUTION.md`
+    *   `Architecture/ARC-004_LAYER_MODEL.md`
+    *   `Architecture/ARC-006_DEPENDENCY_MODEL.md`
+    *   `Architecture/_FOLDER_STATUS.md`
 
 ---
 
-# Component Traceability Matrix
+## 3. Physical Boundary Enforcement Rules
 
-| Component Layer | Upstream Dependency | Downstream Target | Verification Authority |
-| :--- | :--- | :--- | :--- |
-| **`Governance/`** | Foundation Principles (`VISION.md`) | All Platform Directories | `GOV-001_GOVERNANCE_FRAMEWORK.md` |
-| **`Specs/` & `Models/`** | `Governance/`, `Standards/` | `Engine/`, `Intelligence/` | `GOV-004_DOCUMENT_METADATA.md` |
-| **`Engine/`** | `Specs/`, `Cognition/` | `Services/`, `Runtime/` | `ENG-001_REASONING_ENGINE.md` |
-| **`Services/`** | `Engine/`, `Memory/` | `Runtime/`, `Interfaces/` | `SRV-001_SERVICE_ARCHITECTURE.md` |
-| **`Runtime/`** | `Services/`, `Interfaces/` | `Plugins/`, Repository Execution | `RNT-001_RUNTIME_ENVIRONMENT.md` |
-| **`Quality/`** | `Standards/`, `Lifecycle/` | Repository Integration | `QLT-001_QUALITY_ASSURANCE.md` |
+1.  **Isolation Fence Rule:** Any directory structure or temporary location outside of the designated `ARGO-KOP/` canonical storage targets shall be rejected from entering active memory context loops.
+2.  **Strict Extension Lock:** All canonical platform artifacts MUST utilize lowercase `.md` extensions. Double extensions or system metadata logs (e.g., historical `Logs/` dumps) are prohibited within these tracks.
+3.  **Audit Parity Sync:** Modification of directory architecture layouts requires simultaneous version updates across `PROJECT_STATUS.md`, `REP-001`, and `REP-002` to clear validation gates.
 
 ---
 
-# Cross-Reference System Rules
+## 4. Related Documents
 
-1. **Bi-Directional References:** Any canonical document introducing an architectural dependency on another component MUST explicitly declare the target document ID in its metadata cross-reference section.
-2. **Deterministic Resolution:** No document shall link to external or non-indexed paths outside the `ARGO-KOP` repository structure.
-3. **Change Impact Propagation:** A modification to a canonical document in `Governance/` or `Specs/` automatically flags downstream components in `Engine/`, `Services/`, and `Runtime/` for compatibility re-verification.
+*   `PROJECT_BOOTSTRAP.md`
+*   `Repository/REP-001_MASTER_INDEX.md`
+*   `Governance/GOV-006_NAMING_CONVENTION_STANDARD.md`
 
 ---
 
-# Revision History
+## 5. Guiding Statement
 
-| Version | Date | Description | Author / Authority |
-| :--- | :--- | :--- | :--- |
-| 1.0.0 | 2026-08-01 | Initial Repository Map Baseline | ARGO Foundation |
-| 1.1.0 | 2026-08-04 | Expanded Engine and Service layer dependencies | ARGO Foundation |
-| 1.2.0 | 2026-08-06 | Full dependency graph integration including Runtime, Models, Quality, Interfaces, and Intelligence | ARGO Engineering |
+Absolute physical mapping layout clarity guarantees deterministic file tracking and blocks execution latency.
+
+---
+
+End of Document
