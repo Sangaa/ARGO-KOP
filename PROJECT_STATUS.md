@@ -8,7 +8,7 @@
 
 Platform: ARGO KOP (Knowledge Operating Platform)
 Document ID: PROJECT_STATUS
-Version: 3.2.4
+Version: 3.2.5
 Status: INTEGRITY WARNING / AUDIT IN PROGRESS
 Category: Root Baseline
 Canonical: Yes
@@ -21,7 +21,9 @@ Last Audit Date: Aug 08, 2026
 
 ARGO KOP is operating from the current GitHub repository baseline while the repository-wide integrity audit is in progress.
 
-The repository MUST NOT be declared globally clean until the required repository-wide evidence review, identity checks, reference checks, version checks, folder-status checks, and cross-layer validation have been completed.
+The current audit treats the repository as a **relationship graph**, not merely a directory tree. The objective of the present phase is to establish stable, evidence-backed relationships before optimization, feature development, or architectural expansion.
+
+The repository MUST NOT be declared globally clean until the required repository-wide evidence review, identity checks, reference checks, version checks, folder-status checks, bidirectional relationship checks, conflict-propagation checks, and cross-layer validation have been completed.
 
 * **Active Development Baseline:** v3.2.1
 * **Latest Official Release:** v1.0.0 Foundation
@@ -47,6 +49,8 @@ Before any structural or canonical change is proposed, the reviewing agent MUST:
 5. Inspect duplicate, legacy, archived and similarly named artifacts before deciding ownership.
 6. Explicitly report any content that cannot be inspected.
 7. Re-read every mutated artifact after writing and validate its affected references/status/index entries.
+8. Treat a reference as unresolved until its target is located, read, identity-checked, authority-checked and relationship-validated.
+9. Trace material conflicts through affected upstream/downstream consumers before accepting local resolution.
 
 **Memory, previous session summaries, ZIP snapshots, folder names, and status declarations MUST NOT substitute for current repository file contents.**
 
@@ -81,6 +85,8 @@ Historical Governance evidence remains preserved where present and must not be t
 | Repository-wide version authority audit | OPEN |
 | Repository-wide folder status audit | OPEN |
 | Repository-wide reference resolution | OPEN |
+| Bidirectional relationship validation | ACTIVE / OPEN |
+| Conflict propagation analysis | ACTIVE / OPEN |
 | Architecture cross-layer validation | OPEN |
 | Knowledge cross-layer validation | OPEN / INTEGRITY HOLD |
 | Memory cross-layer validation | OPEN / INTEGRITY HOLD |
@@ -94,13 +100,15 @@ Historical Governance evidence remains preserved where present and must not be t
 
 # 5. Current Engineering Queue
 
-**Current Target:** Complete repository-wide evidence review before proposing further structural or canonical changes.
+**Current Target:** Establish a connected, evidence-backed repository baseline before proposing further structural or canonical changes.
 
 Required sequence:
 
-**Enumerate → Read → Cross-Reference → Classify → Identify Conflicts → Decide → Change → Re-Read → Validate → Re-Boot**
+**Enumerate → Read → Build Relationship Graph → Cross-Reference → Classify → Identify Conflicts → Trace Propagation → Decide Canonical Ownership → Change → Re-Read → Revalidate Graph → Update Indexes/Status → Re-Boot**
 
 No folder is assumed to be a complete layer or canonical collection until its filenames, internal identities, contents and relationships have been inspected.
+
+A previously reviewed domain may be reopened whenever new evidence changes the interpretation of one of its relationships.
 
 ---
 
@@ -127,6 +135,12 @@ The following are reusable engineering observations captured from the current re
 6. Tool output may be truncated or partial; the correct response is to mark evidence coverage partial and disclose the limitation, not reconstruct omitted content.
 7. Any mutation that changes a canonical or status artifact requires a post-write read/validation cycle.
 8. Session knowledge becomes reusable platform knowledge only after explicit repository recording and validation.
+9. A textual reference is not a validated dependency until its target and relationship are verified.
+10. Critical relationships should be checked bidirectionally where practical.
+11. Material conflicts must be traced for propagation before local resolution is accepted.
+12. Local validation success must remain bounded to its inspected scope.
+13. New audit rules should be treated as operational candidates until formally promoted.
+14. New evidence may reopen a previously reviewed domain.
 
 ---
 
@@ -142,12 +156,18 @@ The following are reusable engineering observations captured from the current re
 8. A complete repository review claim requires evidence coverage sufficient to support the claim.
 9. When evidence coverage is partial, all dependent conclusions must be bounded to the inspected scope.
 10. Operational lessons must be traceable to observed repository-management behavior and must not be presented as unverified historical fact.
+11. Repository integrity is evaluated through validated relationships, not file existence alone.
+12. A relationship remains unresolved until the required evidence chain is complete.
+13. A local PASS cannot certify the repository globally.
+14. A conflict may invalidate assumptions outside the file where it was first discovered.
+15. A previously stable domain can be reopened by new relationship evidence.
 
 ---
 
 # Related Documents
 
 - `PROJECT_BOOTSTRAP.md`
+- `Memory/Engineering_Journal/ENG-004_BUILD_HISTORY.md`
 - `Repository/REP-001_MASTER_INDEX.md`
 - `Repository/REP-002_REPOSITORY_MAP.md`
 - `Release/VERSION.md`
@@ -159,7 +179,7 @@ The following are reusable engineering observations captured from the current re
 
 # Guiding Statement
 
-**Repository reality must be examined to the required evidence scope before a change is proposed; when evidence is unavailable, the gap must be reported rather than filled by memory, assumption, or pattern inference.**
+**ARGO is currently in the house-ordering phase: establish evidence-backed relationships across the whole repository first, preserve useful accumulated knowledge, expose unresolved gaps, and only then optimize or expand the platform.**
 
 ---
 
