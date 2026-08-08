@@ -2,21 +2,29 @@
 
 ---
 
+Platform
+
+ARGO KOP
+
+Knowledge Operating Platform
+
+---
+
 Folder
 
 Architecture
 
 Status
 
-✅ APPROVED
+🟡 INTEGRITY HOLD — RE-AUDIT IN PROGRESS
 
 Version
 
-1.1.0
+1.2.0
 
-Last Review
+Last Audit
 
-2026-08-04
+2026-08-08
 
 Reviewer
 
@@ -24,11 +32,11 @@ ARGO Architecture
 
 Review Method
 
-Repository First
+Repository First / Evidence Based
 
 Repository Baseline
 
-ARGO-KOP(4).zip
+3.2.1 development / 1.0.0 official release
 
 ---
 
@@ -36,166 +44,98 @@ ARGO-KOP(4).zip
 
 Inventory
 
-✅ Completed
+🟡 In progress
 
 Architecture Review
 
-✅ Completed
+🟢 ARC-001 and ARC_MAP re-aligned
 
 Content Review
 
-✅ Completed
+🟡 In progress
 
 Repository Alignment
 
-✅ Completed
+🟢 Baseline metadata synchronized
 
 Canonical Validation
 
-✅ Completed
+🟡 In progress
 
 Folder Approval
 
-✅ Approved
+⏸ Not yet approved
 
 ---
 
-# Files Reviewed
+# Verified Changes
 
-README.md
-
-01-System-Overview.md
-
-ARC_MAP.md
-
-ARC-001_PLATFORM_ARCHITECTURE.md
-
-ARC-002_COMPONENT_ARCHITECTURE.md
-
-ARC-003_INFORMATION_FLOW.md
-
-ARC-004_LAYER_MODEL.md
-
-ARC-005_ARCHITECTURE_RULES.md
-
-ARC-006_DEPENDENCY_MODEL.md
-
-ARC-007_INTEGRATION_MODEL.md
-
-ARC-008_REPOSITORY_LAYOUT.md
-
-ARC-009_ARCHITECTURE_DECISIONS.md
-
-ARC-010_EVOLUTION_MODEL.md
-
-ARC-011_CANONICAL_ARCHITECTURE_MODEL.md
+- `Architecture/ARC_MAP.md` — re-aligned with current repository layers and baseline.
+- `Architecture/ARC-001_PLATFORM_ARCHITECTURE.md` — re-aligned with current repository layers, version authority, and verified Governance references.
 
 ---
 
-# Files Updated
+# Findings
 
-ARC-001_PLATFORM_ARCHITECTURE.md
+## ARCH-001 — Stale Architecture Status
 
-ARC-002_COMPONENT_ARCHITECTURE.md
+The previous status referenced `ARGO-KOP(4).zip` as the repository baseline and declared the folder approved while `ARC_MAP.md` was still pending. This was not consistent with the current GitHub repository baseline.
 
-ARC-003_INFORMATION_FLOW.md
+Resolved by replacing the stale status with this evidence-based record.
 
-ARC-004_LAYER_MODEL.md
+## ARCH-002 — Stale / Invalid Governance Reference
 
-ARC-005_ARCHITECTURE_RULES.md
+The previous ARC-001 referenced `GOV-006_REVIEW_STANDARD`, but the current canonical Review Standard is `Governance/GOV-005_REVIEW_STANDARD.md` and GOV-006 is the Naming Convention Standard.
 
-ARC-006_DEPENDENCY_MODEL.md
+Resolved in ARC-001 v1.2.0.
 
-ARC-007_INTEGRATION_MODEL.md
+## ARCH-003 — Historical Layer Model Drift
 
-ARC-008_REPOSITORY_LAYOUT.md
+The previous ARC-001 represented only the original eight logical layers while the current repository contains additional implementation/specification domains. These are now described as implementation or specification domains within the approved architectural boundaries rather than being promoted automatically to new top-level layers.
 
-ARC-009_ARCHITECTURE_DECISIONS.md
-
-ARC-010_EVOLUTION_MODEL.md
-
-ARC-011_CANONICAL_ARCHITECTURE_MODEL.md
+Resolved in ARC-001 v1.2.0 and ARC_MAP v1.1.0.
 
 ---
 
-# Pending Files
+# Current Validation Gate
 
-README.md
+The Architecture folder MUST NOT be marked globally clean until:
 
-01-System-Overview.md
-
-ARC_MAP.md
-
-Reason
-
-Final synchronization after repository freeze.
-
----
-
-# Repository Health
-
-Architecture Consistency
-
-✅ Verified
-
-Dependency Direction
-
-✅ Verified
-
-Repository Alignment
-
-✅ Verified
-
-Canonical References
-
-✅ Verified
-
-Duplicate Ownership
-
-✅ None
-
-Duplicate Documents
-
-✅ None
+1. All active Architecture document IDs are unique.
+2. Filename / internal ID alignment passes.
+3. Canonical paths are unique.
+4. Folder status matches repository reality.
+5. All Architecture cross-references resolve or are explicitly marked unknown.
+6. ARC-001, ARC-002, ARC-004, ARC-006, ARC-007, ARC-008, ARC-009, ARC-010, and ARC-011 agree on dependency direction and layer boundaries.
+7. Repository Index and Map agree with active Architecture paths.
 
 ---
 
-# Outstanding Work
+# Required Next Action
 
-Finalize:
+`Audit ARC-002 → ARC-004 → ARC-006 → ARC-007 → ARC-008 → ARC-009 → ARC-010 → ARC-011 → validate references → update REP-001/REP-002 if required → Architecture Re-Audit`
 
-ARC_MAP.md
-
-Synchronize:
-
-README.md
-
-Validate:
-
-01-System-Overview.md
-
-After Build Freeze.
+No global clean claim is authorized from this status document.
 
 ---
 
-# Next Folder
+# Related Authority
 
-Repository
-
----
-
-# Folder Approval
-
-Architecture is approved.
-
-Future modifications require:
-
-Architecture Decision
-
-Repository Review
-
-Governance Approval
+- `PROJECT_BOOTSTRAP.md`
+- `Core/CORE-003_CONSTITUTION.md`
+- `Governance/GOV-001_GOVERNANCE_FRAMEWORK.md`
+- `Governance/GOV-006_NAMING_CONVENTION_STANDARD.md`
+- `Repository/REP-001_MASTER_INDEX.md`
+- `Repository/REP-002_REPOSITORY_MAP.md`
+- `Architecture/ARC_MAP.md`
+- `Architecture/ARC-001_PLATFORM_ARCHITECTURE.md`
 
 ---
 
-End
+# Engineering Rule
+
+Repository Reality > Previous Status Claims > Conversation Memory
+
+---
+
+End of Document
