@@ -8,7 +8,7 @@
 
 Platform: ARGO KOP (Knowledge Operating Platform)
 Document ID: BOOTSTRAP-001
-Version: 2.4.0
+Version: 2.5.0
 Status: Approved / Integrity-Gated
 Category: Bootstrap / Governance
 Canonical: Yes
@@ -189,6 +189,14 @@ These findings are recorded as **audit findings, not authorization to mutate fil
 10. **Atomic Markdown Delivery:** Updates must be complete, non-truncated and valid Markdown.
 11. **Evidence Gap Disclosure:** Missing or unreadable content MUST be explicitly reported.
 12. **ARGO GEM:** ARGO GEM remains part of the platform only when registered and validated by the active repository architecture and runtime chain.
+13. **Operational Evidence Before Action:** A successful file update proves only that that specific mutation succeeded; it does not prove that the surrounding layer, index, references or repository are clean.
+14. **Status Drift Is a Finding:** When `_FOLDER_STATUS.md` or project status conflicts with inspected content, record the conflict and constrain approval instead of normalizing the status blindly.
+15. **No Sequential-Number Assumption:** Gaps or duplicates in numeric document sequences are findings to investigate, not evidence of missing documents or permission to create them.
+16. **Cross-Layer Before Local:** A local document should not be normalized until its upstream authority, downstream consumers and neighboring identities have been checked.
+17. **Tool-Limited Review:** If a connector truncates results, hides content, or cannot enumerate a required scope, the review coverage must be marked partial and the limitation reported.
+18. **Mutation Is Not Validation:** After mutation, re-read the changed artifact and validate affected indexes/status/references before claiming completion.
+19. **Minimum Evidence Claim:** Never claim "full repository review" unless the actual inspected scope supports that claim.
+20. **Session Learning Must Be Canonicalized:** Reusable lessons discovered during engineering sessions belong in repository governance/bootstrap knowledge only after they are explicitly recorded, reviewed and validated; conversation memory alone is never sufficient.
 
 ---
 
@@ -212,6 +220,11 @@ A session MUST NOT claim `100% CLEAN BOOT` unless the integrity gate has actuall
 
 | Version | Date | Description | Author / Authority |
 | :--- | :--- | :--- | :--- |
+| 2.5.0 | 2026-08-08 | Added operational lessons from live repository audit: mutation is not validation, status drift, numeric-sequence caution, cross-layer-first review, tool-limited evidence coverage, and explicit canonicalization of reusable session learning | ARGO Engineering / Principal Architect |
 | 2.4.0 | 2026-08-08 | Added mandatory repository-wide evidence review, evidence-gap warnings, no-memory substitution rule, no-folder-assumption rule, and pre-proposal cross-reference gate | ARGO Engineering / Principal Architect |
 | 2.3.0 | 2026-08-08 | Added repository-reality integrity gate, canonical identity checks, version/source-of-truth conflict detection, and documented audit findings | ARGO Engineering / Principal Architect |
 | 2.2.0 | 2026-08-08 | Re-aligned exact canonical paths with Governance/ directory reality | ARGO Engineering / Principal Architect |
+
+---
+
+End of Document
