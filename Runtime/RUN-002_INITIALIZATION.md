@@ -4,71 +4,26 @@
 
 # INITIALIZATION
 
----
-
-Platform
-
-ARGO KOP
-
+Platform: ARGO KOP
 Knowledge Operating Platform
 
----
-
-Document ID
-
-RUN-002
-
-Version
-
-1.1.0
-
-Status
-
-Approved
-
-Category
-
-Runtime
-
-Canonical
-
-Yes
-
-Priority
-
-Critical
+Document ID: RUN-002
+Version: 1.2.0
+Status: Validated / Integrity Hold
+Category: Runtime
+Canonical: Yes
+Priority: Critical
+Development Baseline: 3.2.1
+Latest Official Release: 1.0.0
+Last Audit: 2026-08-08
 
 ---
 
 # Purpose
 
-This document defines the Runtime Initialization process executed immediately after the Boot Sequence.
+Defines the Runtime Initialization process executed after the canonical Boot Sequence.
 
-Initialization prepares every runtime component before engineering execution begins.
-
-No engineering task may execute before initialization completes successfully.
-
----
-
-# Objectives
-
-Initialization shall:
-
-Initialize Runtime Services.
-
-Load Repository Context.
-
-Initialize Repository Cache.
-
-Initialize Engineering State.
-
-Initialize Session Context.
-
-Initialize Runtime Monitoring.
-
-Verify Runtime Readiness.
-
----
+Initialization prepares only the components required for the current operation and MUST complete validation before execution begins.
 
 # Initialization Order
 
@@ -80,171 +35,92 @@ Repository Synchronization
 
 ↓
 
-Repository Scan
+Integrity Validation
 
 ↓
 
-Repository Validation
+Required Context Loading
 
 ↓
 
-Repository Cache
+Required Runtime Services
 
 ↓
 
-Runtime Services
+Session / State Initialization
 
 ↓
 
-Context Manager
-
-↓
-
-State Manager
-
-↓
-
-Session Manager
-
-↓
-
-Execution Engine
-
-↓
-
-Runtime Ready
-
----
-
-# Runtime Components
-
-Repository Cache
-
-Context Manager
-
-Execution Engine
-
-State Manager
-
-Session Manager
-
-Recovery Manager
-
-Security Manager
-
-Monitoring Manager
-
-Engineering Queue
-
----
+Runtime Readiness
 
 # Initialization Rules
 
-Initialize every component only once.
-
-Each component shall verify its dependencies.
-
-Initialization failure shall stop Runtime.
-
-Initialization success shall continue automatically.
-
----
+1. Initialize each required component once per runtime session.
+2. Each component MUST verify its declared dependencies.
+3. Missing or invalid dependencies MUST stop initialization.
+4. Initialization MUST NOT assume a fixed component inventory without repository verification.
+5. Initialization MUST NOT mark Runtime `READY` while the required integrity gate is failed or held.
 
 # Repository Initialization
 
-Load latest repository.
+The runtime records the current:
 
-Register repository version.
+- Repository baseline
+- Repository tree / relevant paths
+- Governance validation state
+- Architecture validation state
+- Runtime validation state
+- Required folder status records
 
-Register repository tree.
-
-Register folder states.
-
-Register completed folders.
-
-Register unfinished folders.
-
-Build internal engineering queue.
-
----
+Historical `completed` claims are evidence only and MUST NOT be treated as current runtime state without verification.
 
 # Session Initialization
 
-Create Runtime Session.
+A runtime session SHOULD register:
 
-Assign Session ID.
+- Session identifier
+- Boot timestamp
+- Repository revision
+- Development baseline
+- Runtime state
+- Engineering mode
 
-Register Repository Baseline.
+# Readiness Gate
 
-Register Boot Timestamp.
-
-Register Runtime Version.
-
-Register Engineering Mode.
-
----
-
-# Runtime Validation
-
-Initialization succeeds only when:
-
-Repository synchronized.
-
-Repository validated.
-
-Architecture validated.
-
-Governance validated.
-
-Runtime components initialized.
-
-Engineering queue created.
-
----
+Initialization succeeds only when the required repository, Governance, Architecture, context and runtime dependencies pass validation for the requested operation.
 
 # Failure Handling
 
-Initialization shall stop immediately if:
+Initialization MUST stop or enter a governed `FAULT` / `HOLD` state if:
 
-Repository missing.
-
-Repository corrupted.
-
-Architecture invalid.
-
-Governance invalid.
-
-Critical runtime component failed.
-
----
+- repository state is unavailable or invalid;
+- required authority cannot be resolved;
+- required architecture/dependency validation fails;
+- a critical runtime dependency fails;
+- required context cannot be loaded safely.
 
 # Output
 
-After successful initialization Runtime State becomes:
+After successful initialization, Runtime may transition to `IDLE` / ready state as defined by `RUN-001`.
 
-READY
-
-Engineering begins automatically.
-
----
+It MUST NOT imply that the entire repository is globally clean.
 
 # Related Documents
 
-RUN-001_BOOT_SEQUENCE.md
-
-RUN-003_CONFIGURATION.md
-
-RUN-004_CONTEXT_LOADING.md
-
-PROJECT_BOOTSTRAP.md
-
-AI-009_AI_RUNTIME.md
+- `Runtime/RUN-001_BOOT_SEQUENCE.md`
+- `Runtime/RUN-003_CONFIGURATION.md`
+- `Runtime/RUN-004_CONTEXT_LOADING.md`
+- `Runtime/RUN-009_RECOVERY.md`
+- `PROJECT_BOOTSTRAP.md`
+- `Core/CORE-003_CONSTITUTION.md`
+- `Architecture/ARC-006_DEPENDENCY_MODEL.md`
+- `Governance/GOV-009_REPOSITORY_POLICY.md`
 
 ---
 
 # Guiding Statement
 
-A correctly initialized runtime produces predictable engineering.
+A correctly initialized runtime establishes only the state it has actually validated.
 
 ---
 
