@@ -4,289 +4,130 @@
 
 # EVOLUTION MODEL
 
----
-
-Platform
-
-ARGO KOP
-
+Platform: ARGO KOP
 Knowledge Operating Platform
 
----
-
-Document ID
-
-ARC-010
-
-Version
-
-1.1.0
-
-Status
-
-Approved
-
-Category
-
-Architecture
+Document ID: ARC-010
+Version: 1.2.0
+Status: Validated / Integrity Hold
+Category: Architecture
+Development Baseline: 3.2.1
+Latest Official Release: 1.0.0
+Last Audit: 2026-08-08
 
 ---
 
 # Purpose
 
-This document defines how ARGO KOP evolves while preserving architectural integrity, repository consistency and long-term maintainability.
+Defines how ARGO KOP evolves while preserving architectural integrity, repository consistency and long-term maintainability.
 
-Evolution is controlled.
-
-Architecture is preserved.
-
-Knowledge continuously improves.
-
----
-
-# Objectives
-
-The Evolution Model shall:
-
-- Preserve platform stability.
-- Support continuous improvement.
-- Prevent uncontrolled architectural drift.
-- Maintain repository integrity.
-- Protect backward compatibility whenever practical.
-
----
-
-# Evolution Philosophy
-
-ARGO KOP evolves through controlled engineering.
-
-Evolution shall improve the platform without breaking its architectural foundations.
-
-Architecture is stable.
-
-Implementation evolves.
-
-Knowledge grows.
-
----
+Evolution is controlled. Architecture is preserved. Knowledge continuously improves.
 
 # Evolution Lifecycle
 
-Observation
+Observation → Analysis → Evidence Collection → Architecture Review → Decision → Repository Update → Validation → Approval → Release
 
-↓
-
-Analysis
-
-↓
-
-Evidence Collection
-
-↓
-
-Architecture Review
-
-↓
-
-Decision
-
-↓
-
-Repository Update
-
-↓
-
-Validation
-
-↓
-
-Approval
-
-↓
-
-Release
-
----
+Approval does not substitute for evidence or validation.
 
 # Evolution Sources
 
-Platform evolution may originate from:
-
-Repository Review
-
-Governance Updates
-
-Architecture Improvements
-
-Knowledge Growth
-
-Project Experience
-
-Operational Feedback
-
-Verified External Requirements
-
----
+- Repository Review
+- Governance Updates
+- Architecture Improvements
+- Knowledge Growth
+- Project Experience
+- Operational Feedback
+- Verified External Requirements
 
 # Evolution Categories
 
-Architectural Evolution
-
-Governance Evolution
-
-Repository Evolution
-
-Knowledge Evolution
-
-Documentation Evolution
-
-Project Evolution
-
-Runtime Evolution
-
----
+- Architectural Evolution
+- Governance Evolution
+- Repository Evolution
+- Knowledge Evolution
+- Documentation Evolution
+- Project Evolution
+- Runtime Evolution
 
 # Architectural Constraints
 
-Evolution shall never violate:
+Evolution MUST NOT violate:
 
-Core Principles
-
-Platform Constitution
-
-Governance Standards
-
-Repository Policies
-
-Dependency Rules
-
-Architecture Rules
-
----
+- Core Constitution
+- Governance Standards and Policies
+- Repository Policies
+- Dependency Rules
+- Architecture Rules
+- Canonical identity and traceability rules
 
 # Repository Rule
 
-Every approved evolution shall update:
+Every approved evolution MUST update affected artifacts, related references, repository traceability, version history and relevant folder status.
 
-Affected Documents
-
-Related Documents
-
-Repository Traceability
-
-Version History
-
-Folder Status
-
-Repository remains the Single Source of Truth.
-
----
+The Repository remains the canonical storage source.
 
 # Change Classification
 
-Minor Change
+## Minor
 
-Documentation improvements.
+Documentation or knowledge improvements with no architectural impact.
 
-No architectural impact.
+## Moderate
 
----
+Repository restructuring, knowledge expansion or limited architectural impact.
 
-Moderate Change
+## Major
 
-Repository restructuring.
+Architecture modification, component redesign, dependency changes or governance extension.
 
-Knowledge expansion.
-
-Limited architectural impact.
-
----
-
-Major Change
-
-Architecture modification.
-
-Component redesign.
-
-Dependency changes.
-
-Governance extension.
-
----
+Major changes require explicit architectural review and traceable decision evidence.
 
 # Compatibility
 
-Evolution shall preserve compatibility whenever practical.
+Compatibility should be preserved whenever practical.
 
 Breaking changes require:
 
-Architecture Review
-
-Migration Plan
-
-Repository Update
-
-Version Increment
-
----
+- Architecture Review
+- Migration Plan
+- Repository Update
+- Version Increment
+- Validation
 
 # Validation
 
-Every evolution shall verify:
+Every evolution MUST verify:
 
-Repository Integrity
+- Repository Integrity
+- Architecture Consistency
+- Governance Compliance
+- Knowledge Consistency
+- Traceability
+- Version Alignment
 
-Architecture Consistency
+# Authority Boundary
 
-Governance Compliance
-
-Knowledge Consistency
-
-Traceability
-
-Version Alignment
-
----
-
-# Success Criteria
-
-Evolution is successful when:
-
-Architecture remains stable.
-
-Knowledge becomes richer.
-
-Repository becomes clearer.
-
-Maintenance becomes easier.
-
-Platform complexity does not increase unnecessarily.
-
----
+This document governs evolution process. It does not override the Constitution, Governance authority, canonical Architecture Model, Repository authority or Release authority.
 
 # Related Documents
 
-ARC-001_PLATFORM_ARCHITECTURE
-
-ARC-005_ARCHITECTURE_RULES
-
-ARC-009_ARCHITECTURE_DECISIONS
-
-ARC-011_CANONICAL_ARCHITECTURE_MODEL
-
-CORE-003_CONSTITUTION
-
-GOV-006_REVIEW_STANDARD
-
-GOV-009_REPOSITORY_POLICY
+- `Architecture/ARC_MAP.md`
+- `Architecture/ARC-001_PLATFORM_ARCHITECTURE.md`
+- `Architecture/ARC-004_LAYER_MODEL.md`
+- `Architecture/ARC-006_DEPENDENCY_MODEL.md`
+- `Architecture/ARC-009_ARCHITECTURE_DECISIONS.md`
+- `Architecture/ARC-011_CANONICAL_ARCHITECTURE_MODEL.md`
+- `Core/CORE-003_CONSTITUTION.md`
+- `Governance/GOV-005_REVIEW_STANDARD.md`
+- `Governance/GOV-009_REPOSITORY_POLICY.md`
+- `Governance/GOV-010_GOVERNANCE_MODEL.md`
+- `Repository/REP-001_MASTER_INDEX.md`
 
 ---
 
 # Guiding Statement
 
-Architecture should evolve deliberately.
-
-Repository should remember every justified evolution.
+Architecture should evolve deliberately; the Repository should preserve every justified evolution.
 
 ---
 
