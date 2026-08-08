@@ -4,67 +4,85 @@
 
 Platform
 
-ARGO KOP
-
-Knowledge Operating Platform
+ARGO KOP (Knowledge Operating Platform)
 
 ---
 
 Purpose
 
-Master index for all repository builds and releases.
+Master index for official releases and significant development-baseline changes.
 
-Detailed information for each build is maintained in its corresponding Build Report.
-
----
-
-| Build | Title                 | Repository Version | Platform Version | Status   |
-| ----- | --------------------- | ------------------ | ---------------- | -------- |
-| 001   | Repository Foundation | 1.0.0              | 3.0.0            | Released |
+Detailed implementation history remains in the applicable build reports, engineering journal and repository commits.
 
 ---
 
-Current Repository Status
+# Official Releases
 
-Foundation Baseline Established
-
----
-
-Current Stable Release
-
-Repository Version : 1.0.0
-
-Platform Version : 3.0.0
+| Version | Title | Status | Notes |
+|---|---|---|---|
+| 1.0.0 | Foundation | Latest Official Release | Initial governed foundation snapshot. |
 
 ---
 
-Latest Build
+# Current Development Baseline
 
-BUILD-001
+**3.2.1 — Active / Under Connected-Baseline Integrity Validation**
 
----
+This development baseline is not an official release.
 
-Next Planned Build
-
-BUILD-002
-
-Core Cognitive Platform
+Current repository state is being validated as a connected relationship graph before capability or architecture upgrade.
 
 ---
 
-Repository Policy
+# Current Audit-Era Changes
 
-* Every Build has its own Build Report.
-* CHANGELOG.md contains only the release index.
-* Build Reports contain detailed changes.
-* Repository history is permanent.
-* Previous builds are never modified.
+The current development baseline includes ongoing corrections and improvements such as:
+
+- repository-first bootstrap and evidence gates;
+- relationship-graph validation and bidirectional dependency checks;
+- canonical identity and legacy-identity separation;
+- Engineering Journal namespace clarification (`EJR-*` vs historical `ENG-*` Journal identities);
+- stale status detection and post-mutation re-read requirements;
+- AI evidence-gated execution and multi-model interaction rules;
+- Architecture map identity correction and modernization of ARC-005 / ARC-008;
+- expanded repository integrity and cross-layer validation rules.
+
+These entries describe development-state evolution. They do not constitute a new official release.
 
 ---
 
-Related Documents
+# Release Policy
 
-Logs/Builds/BUILD-001_REPOSITORY_FOUNDATION.md
+- Official releases receive a unique governed version number.
+- Development-baseline changes may advance without creating an official release.
+- Historical release records are preserved.
+- `Release/VERSION.md` remains authoritative for official-release versus development-baseline distinction.
+- `Release/RELEASE_MANIFEST.md` defines the scope of the latest official release and does not promote current development state.
+
+---
+
+# Traceability Rule
+
+Every significant development change should be traceable through the relevant repository file, engineering journal/session record, governed decision where required, and Git history.
+
+A changelog entry is a navigation record, not proof that the underlying repository state is complete or validated.
+
+---
+
+# Related Documents
+
+- `Release/VERSION.md`
+- `Release/RELEASE_MANIFEST.md`
+- `PROJECT_STATUS.md`
+- `PROJECT_BOOTSTRAP.md`
+- `Memory/Engineering_Journal/SESSION_INDEX.md`
+- `Memory/Engineering_Journal/SESSION_TEMPLATE.md`
+
+---
+
+# Guiding Statement
+
+**Release history records approved snapshots; development history records current evolution without confusing either with repository-wide integrity certification.**
 
 ---
 
