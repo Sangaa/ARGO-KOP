@@ -4,252 +4,90 @@
 
 # INTEGRATION MODEL
 
----
-
-Platform
-
-ARGO KOP
-
+Platform: ARGO KOP
 Knowledge Operating Platform
 
----
-
-Document ID
-
-ARC-007
-
-Version
-
-1.1.0
-
-Status
-
-Approved
-
-Category
-
-Architecture
+Document ID: ARC-007
+Version: 1.2.0
+Status: Validated / Integrity Hold
+Category: Architecture
+Development Baseline: 3.2.1
+Latest Official Release: 1.0.0
+Last Audit: 2026-08-08
 
 ---
 
 # Purpose
 
-This document defines how architectural components integrate within ARGO KOP.
-
-It specifies the integration boundaries, communication principles and interaction rules required to maintain architectural consistency.
-
----
-
-# Objectives
-
-The Integration Model shall:
-
-- Preserve modularity.
-- Minimize coupling.
-- Maximize interoperability.
-- Protect repository integrity.
-- Support future platform evolution.
-
----
+Defines how architectural components integrate while preserving ownership, dependency direction, governance and repository authority.
 
 # Integration Philosophy
 
-Integration shall occur through architecture.
+Integration occurs through documented interfaces and governed references. Components must not bypass Core, Governance, Architecture or Repository authority.
 
-Components exchange knowledge through documented interfaces.
+# Canonical Integration Flow
 
-No component may bypass governance or repository rules.
+Identity / Core → Governance → Architecture → Repository → Knowledge / Specifications → Memory → Cognition / Engine → Runtime / Services / AI → Projects
 
----
-
-# Integration Flow
-
-Identity
-
-↓
-
-Governance
-
-↓
-
-Architecture
-
-↓
-
-Repository
-
-↓
-
-Knowledge
-
-↓
-
-Memory
-
-↓
-
-Cognition
-
-↓
-
-Runtime
-
-↓
-
-Projects
-
----
+This is a dependency and responsibility model, not a claim that every runtime interaction is strictly linear.
 
 # Integration Principles
 
-All integrations shall be:
+All integrations MUST be:
 
 - Documented
 - Traceable
-- Versioned
+- Versioned where applicable
 - Reviewable
 - Maintainable
+- Consistent with `ARC-006_DEPENDENCY_MODEL.md`
 
-Undocumented integration is prohibited.
-
----
+Undocumented architectural integration is prohibited.
 
 # Integration Boundaries
 
-Each component owns its internal implementation.
+Each component owns its internal implementation and exposes only documented interfaces or governed references.
 
-Components expose only documented interfaces.
-
-Internal implementation shall remain isolated.
-
----
+A repository path alone is not an interface.
 
 # Repository Integration
 
-The Repository is the integration hub.
-
-All permanent knowledge shall enter the platform through repository-controlled documents.
-
-Conversation context shall never become permanent knowledge without repository integration.
-
----
+Permanent platform knowledge enters canonical storage through repository-controlled artifacts. Runtime or conversation context must not silently become repository authority.
 
 # Governance Integration
 
-Governance applies to every integration.
-
-All integrations shall comply with:
-
-- Naming Standards
-- Metadata Standards
-- Review Standards
-- Repository Policies
-- Versioning Standards
-
----
-
-# Knowledge Integration
-
-Knowledge shall integrate through:
-
-Repository
-
-↓
-
-Validation
-
-↓
-
-Classification
-
-↓
-
-Knowledge Storage
-
-↓
-
-Memory
-
-↓
-
-Reasoning
-
-↓
-
-Decision
-
----
+Integrations must comply with the current Governance baseline, including naming, metadata, review and repository policy.
 
 # Runtime Integration
 
-Runtime loads only approved repository knowledge.
-
-Runtime shall never modify repository authority.
-
-Repository updates require documented review.
-
----
+Runtime may consume approved repository knowledge and approved service interfaces. Runtime execution must not silently modify architectural or governance authority.
 
 # Project Integration
 
-Projects extend the platform.
-
-Projects shall never modify platform architecture.
-
-Projects consume platform services through approved interfaces.
-
----
+Projects consume approved platform capabilities and interfaces. Projects MUST NOT redefine Core, Governance or Architecture.
 
 # Integration Validation
 
-Every integration shall verify:
+Every new integration must verify:
 
-- Component Ownership
-- Dependency Direction
-- Repository Integrity
-- Governance Compliance
-- Traceability
-
----
-
-# Evolution Rules
-
-New integrations shall:
-
-- Extend existing architecture.
-- Preserve compatibility.
-- Avoid duplicate responsibilities.
-- Maintain architectural stability.
-
----
+1. Component ownership
+2. Dependency direction
+3. Canonicality of referenced artifacts
+4. Governance compliance
+5. Traceability
+6. Circular dependency risk
 
 # Related Documents
 
-ARC-001_PLATFORM_ARCHITECTURE
-
-ARC-002_COMPONENT_ARCHITECTURE
-
-ARC-004_LAYER_MODEL
-
-ARC-006_DEPENDENCY_MODEL
-
-ARC-009_ARCHITECTURE_DECISIONS
-
-CORE-003_CONSTITUTION
-
-GOV-010_GOVERNANCE_MODEL
-
-REP-001_MASTER_INDEX
-
----
-
-# Guiding Statement
-
-Architecture defines integration.
-
-Governance controls integration.
-
-Repository preserves integration.
+- `Architecture/ARC_MAP.md`
+- `Architecture/ARC-001_PLATFORM_ARCHITECTURE.md`
+- `Architecture/ARC-002_COMPONENT_ARCHITECTURE.md`
+- `Architecture/ARC-004_LAYER_MODEL.md`
+- `Architecture/ARC-006_DEPENDENCY_MODEL.md`
+- `Architecture/ARC-009_ARCHITECTURE_DECISIONS.md`
+- `Core/CORE-003_CONSTITUTION.md`
+- `Governance/GOV-010_GOVERNANCE_MODEL.md`
+- `Repository/REP-001_MASTER_INDEX.md`
 
 ---
 
