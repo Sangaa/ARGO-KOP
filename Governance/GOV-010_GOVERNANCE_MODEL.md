@@ -4,7 +4,7 @@
 
 Platform: ARGO KOP (Knowledge Operating Platform)
 Document ID: GOV-010
-Version: 1.2.0
+Version: 1.3.0
 Status: Approved
 Category: Governance
 Canonical: Yes
@@ -58,19 +58,21 @@ Governance shall enforce:
 - Review Standard
 - Traceability
 - Versioning
+- Evidence-based assessment
 
 ---
 
 # Integrated Governance Rules
 
-Mandatory governance includes:
+Mandatory governance documents currently verified in the repository include:
 
 - `Governance/GOV-005_REVIEW_STANDARD.md` — Review Standard
 - `Governance/GOV-006_NAMING_CONVENTION_STANDARD.md` — Naming Convention Standard
-- `GOV-009` Repository Policy — only when an active canonical artifact exists
-- `GOV-011` Verified Assessment Principle — only when an active canonical artifact exists
+- `Governance/GOV-009_REPOSITORY_POLICY.md` — Repository Policy
 
-The repository MUST NOT treat a referenced Governance document as active or canonical until its path and identity are verified in the repository baseline.
+`GOV-011 Verified Assessment Principle` is not currently present as a verified canonical Governance document. It is therefore classified as **Unknown / Unresolved Dependency** and is not treated as an active governance control.
+
+The repository MUST NOT treat a referenced Governance document as active or canonical until its path, identity, and canonical status are verified in the repository baseline.
 
 Operational communication governance shall follow the Operational Conservatism Principle when added to the repository.
 
@@ -78,7 +80,7 @@ Operational communication governance shall follow the Operational Conservatism P
 
 # Governance Integrity Rule
 
-Every governance reference must resolve to a current canonical repository path or be explicitly classified as an unresolved dependency. Unverified references shall not be presented as active governance controls.
+Every Governance reference must resolve to a current canonical repository path or be explicitly classified as an unresolved dependency. Unverified references shall not be presented as active governance controls.
 
 ---
 
