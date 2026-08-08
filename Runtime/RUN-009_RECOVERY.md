@@ -4,275 +4,165 @@
 
 # RECOVERY
 
----
-
-Platform
-
-ARGO KOP
-
+Platform: ARGO KOP
 Knowledge Operating Platform
 
----
-
-Document ID
-
-RUN-009
-
-Version
-
-1.1.0
-
-Status
-
-Approved
-
-Category
-
-Runtime
-
-Canonical
-
-Yes
-
-Priority
-
-Critical
+Document ID: RUN-009
+Version: 1.2.0
+Status: Validated / Integrity Hold
+Category: Runtime
+Canonical: Yes
+Priority: Critical
+Development Baseline: 3.2.1
+Latest Official Release: 1.0.0
+Last Audit: 2026-08-08
 
 ---
 
 # Purpose
 
-This document defines the Runtime Recovery mechanism of ARGO KOP.
+Defines the Runtime Recovery mechanism of ARGO KOP.
 
-Recovery restores deterministic execution after an interruption without compromising repository integrity.
+Recovery restores safe execution after interruption without changing repository reality or silently repeating unsafe operations.
 
-Recovery never changes repository reality.
+# Recovery Principle
 
-It restores execution from the latest validated state.
-
----
-
-# Objectives
-
-The Recovery system shall:
-
-Recover interrupted execution.
-
-Protect repository consistency.
-
-Restore Runtime State.
-
-Restore Engineering Queue.
-
-Resume automatically.
-
-Prevent duplicated engineering.
-
-Preserve traceability.
-
----
-
-# Recovery Philosophy
-
-Repository Reality is never rebuilt.
-
-Repository Reality is restored.
-
-Execution resumes from the latest validated checkpoint.
-
----
+The Repository remains the source of truth. Recovery reconstructs executable context from the latest validated evidence; it does not invent or rewrite repository reality.
 
 # Recovery Triggers
 
-Recovery begins when:
+Recovery may be required after:
 
-Runtime stops unexpectedly.
-
-AI session terminates.
-
-Execution is interrupted.
-
-Repository synchronization is lost.
-
-Context becomes invalid.
-
-Engineering session expires.
-
----
+- runtime interruption;
+- AI/session termination;
+- lost repository synchronization;
+- invalidated context;
+- security or integrity failure;
+- session expiration.
 
 # Recovery Workflow
 
-Recover Runtime
+Enter `FAULT` / `HOLD`
 
 ↓
 
-Repository Synchronization
+Preserve Evidence
 
 ↓
 
-Repository Validation
+Synchronize Current Repository
 
 ↓
 
-Repository Scan
+Validate Repository / Authority / Dependencies
 
 ↓
 
-Restore Runtime State
+Identify Latest Validated Checkpoint
 
 ↓
 
-Restore Engineering Queue
+Reconstruct Required Runtime Context
 
 ↓
 
-Locate Last Completed Folder
+Determine Current Safe Target
 
 ↓
 
-Locate Current Engineering Target
-
-↓
-
-Resume Engineering
-
----
+Resume only after validation gates pass
 
 # Recovery Sources
 
-Recovery information shall be loaded from:
+Recovery evidence may be loaded from:
 
-Repository
+- Repository
+- `PROJECT_BOOTSTRAP.md`
+- Canonical indexes / maps
+- Relevant `README.md`
+- `_FOLDER_STATUS.md`
+- Validated runtime state / checkpoint records
+- Applicable repository memory
 
-↓
-
-PROJECT_BOOTSTRAP.md
-
-↓
-
-README.md
-
-↓
-
-_FOLDER_STATUS.md
-
-↓
-
-Repository Memory
-
-Conversation shall never be used as a recovery source.
-
----
+Conversation may help identify user intent, but it is not authoritative recovery evidence.
 
 # Recovery Rules
 
 Recovery shall:
 
-Synchronize the latest repository.
+- synchronize the latest repository;
+- discard obsolete runtime assumptions;
+- restore only validated execution state;
+- verify the target before writing;
+- prevent duplicated engineering through evidence, not filename assumptions;
+- preserve traceability;
+- stop when deterministic safe continuation cannot be established.
 
-Discard obsolete runtime context.
-
-Restore only validated execution state.
-
-Never repeat completed folders.
-
-Never modify completed canonical documents.
-
-Continue automatically.
-
----
+Recovery MUST NOT automatically skip an artifact solely because an older folder status says `COMPLETED` when current dependencies or evidence require revalidation.
 
 # Resume Rules
 
-If a folder contains a valid `_FOLDER_STATUS.md` newer than the active engineering baseline:
+Resume only when:
 
-Skip immediately.
+1. Repository is synchronized.
+2. Integrity and authority checks pass.
+3. The current target is identifiable.
+4. Required dependencies resolve.
+5. No material ambiguity remains.
 
-If no valid `_FOLDER_STATUS.md` exists:
-
-Treat the folder as unfinished.
-
-Resume construction.
-
----
+Otherwise remain in `HOLD` / `FAULT`.
 
 # Recovery Validation
 
-Before resuming verify:
+Before resuming verify, as applicable:
 
-Repository synchronized.
-
-Repository integrity.
-
-Architecture integrity.
-
-Governance integrity.
-
-Repository version.
-
-Folder status.
-
-Engineering queue.
-
----
+- repository synchronization;
+- repository integrity;
+- architecture integrity;
+- governance integrity;
+- repository baseline/version;
+- relevant folder status;
+- engineering checkpoint;
+- dependency readiness.
 
 # Recovery Failure
 
 Recovery shall stop when:
 
-Repository corruption exists.
-
-Architecture conflict exists.
-
-Governance conflict exists.
-
-Required repository information is unavailable.
-
-Repository ambiguity prevents deterministic execution.
-
----
+- repository corruption exists;
+- architecture conflict exists;
+- governance conflict exists;
+- required information is unavailable;
+- target identity is ambiguous;
+- safe continuation cannot be demonstrated.
 
 # Runtime Continuity
 
-Recovery preserves:
+Recovery preserves validated evidence including:
 
-Repository Baseline
+- repository baseline/revision;
+- current runtime state;
+- validated checkpoint;
+- current folder/file when verified;
+- session traceability.
 
-Engineering Queue
-
-Current Folder
-
-Current File
-
-Repository Version
-
-Session Context
-
-Engineering Traceability
-
----
+It does not promise preservation of an unvalidated in-progress change.
 
 # Related Documents
 
-RUN-001_BOOT_SEQUENCE.md
-
-RUN-004_CONTEXT_LOADING.md
-
-RUN-005_RUNTIME_WORKFLOW.md
-
-RUN-008_RUNTIME_STATE.md
-
-RUN-010_RUNTIME_REFERENCE.md
-
-PROJECT_BOOTSTRAP.md
+- `Runtime/RUN-001_BOOT_SEQUENCE.md`
+- `Runtime/RUN-004_CONTEXT_LOADING.md`
+- `Runtime/RUN-005_RUNTIME_WORKFLOW.md`
+- `Runtime/RUN-007_RUNTIME_SECURITY.md`
+- `Runtime/RUN-008_RUNTIME_STATE.md`
+- `Runtime/RUN-010_RUNTIME_REFERENCE.md`
+- `PROJECT_BOOTSTRAP.md`
 
 ---
 
 # Guiding Statement
 
-Recovery restores execution.
-
-The repository remains the single source of truth.
+Recovery restores the last safe validated execution context; it never bypasses repository reality or validation.
 
 ---
 
