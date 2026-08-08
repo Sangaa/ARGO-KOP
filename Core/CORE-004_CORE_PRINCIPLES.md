@@ -5,7 +5,7 @@
 Document ID
 CORE-004
 Version
-1.2.0
+1.3.0
 Status
 Validated / Integrity Hold
 Category
@@ -19,7 +19,9 @@ Last Audit
 
 # Purpose
 
-Defines the permanent operating principles of ARGO KOP beneath the Constitution.
+Defines the durable operating principles of ARGO KOP beneath the Constitution.
+
+These principles guide interpretation and engineering behavior; they are not execution permissions and are not beyond review.
 
 # Principles
 
@@ -41,7 +43,15 @@ Defines the permanent operating principles of ARGO KOP beneath the Constitution.
 
 These principles support the Constitution and MUST NOT override it.
 
-When a principle conflicts with a higher-authority constitutional, governance or architectural rule, the higher authority prevails.
+When a principle conflicts with a higher-authority constitutional, governance or architectural rule, the higher authority prevails within its defined scope.
+
+# Reviewability
+
+A principle may be revised when evidence shows that its wording, scope or application is incomplete, unnecessarily complex, contradictory or less effective than a simpler alternative.
+
+Any material revision shall preserve traceability and be evaluated against the Constitution and applicable architecture/governance.
+
+No principle becomes permanently binding merely because it has existed for a long time or appeared in a previous release.
 
 # Engineering Rule
 
