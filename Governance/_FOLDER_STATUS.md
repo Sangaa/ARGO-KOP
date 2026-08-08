@@ -2,168 +2,135 @@
 
 ---
 
+Platform
+
+ARGO KOP
+
+Knowledge Operating Platform
+
+---
+
 Folder
 
 Governance
 
 Status
 
-✅ APPROVED
+⚠️ INTEGRITY HOLD
 
 Version
 
-1.0
+1.1.0
 
-Last Review
+Canonical
 
-2026-08-04
+Yes
 
-Reviewer
+Last Audit
 
-ARGO Architecture
+2026-08-08
 
 Review Method
 
-Repository First
+Repository First / Evidence Based
 
 Repository Baseline
 
-Current Working Repository
+Current working repository (`main`)
 
 ---
 
-# Review Summary
+# Purpose
 
-Inventory
+This document records the verified state of the Governance folder.
 
-✅ Completed
-
-Architecture Review
-
-✅ Completed
-
-Content Review
-
-✅ Completed
-
-Refactoring
-
-✅ Completed
-
-Folder Approval
-
-✅ Approved
+It is an evidence record, not an authority to declare the folder complete. Folder completion may only be declared after the canonical identity, path, version, cross-reference, and duplicate-document checks pass.
 
 ---
 
-# Files Reviewed
+# Verified Governance Documents
 
-README.md
+The following documents were verified in the current repository:
 
-GOV-001_DOCUMENT_STANDARD.md
+- `Governance/GOV-001_GOVERNANCE_FRAMEWORK.md` — Document ID `GOV-001` — Canonical `Yes`
+- `Governance/GOV-003_DOCUMENT_METADATA.md` — filename `GOV-003...`, internal Document ID `GOV-004` — **identity/path mismatch**
+- `Governance/GOV-005_REVIEW_STANDARD.md` — present in current Governance layer
+- `Governance/GOV-006_NAMING_CONVENTION_STANDARD.md` — Document ID `GOV-006` — Canonical `Yes`
+- `Governance/GOV-010_GOVERNANCE_MODEL.md` — present in current Governance layer
 
-GOV-002_METADATA_STANDARD.md
+A separate legacy/alternate document was also verified:
 
-GOV-003_NAMING_STANDARD.md
-
-GOV-004_VERSIONING_STANDARD.md
-
-GOV-005_TRACEABILITY_STANDARD.md
-
-GOV-006_REVIEW_STANDARD.md
-
-GOV-007_RELEASE_STANDARD.md
-
-GOV-008_CHANGE_MANAGEMENT.md
-
-GOV-009_REPOSITORY_POLICY.md
-
-GOV-010_GOVERNANCE_MODEL.md
-
-GOV-011_VERIFIED_ASSESSMENT_PRINCIPLE.md
+- `Standards/GOV-004_DOCUMENT_METADATA.md` — Document ID `GOV-004`
 
 ---
 
-# Updated Files
+# Integrity Findings
 
-GOV-006_REVIEW_STANDARD.md
+## Finding GOV-004-01 — Identity / Path Drift
 
-GOV-009_REPOSITORY_POLICY.md
+`Governance/GOV-003_DOCUMENT_METADATA.md` declares `Document ID: GOV-004` and `Canonical: Yes`, while its filename contains `GOV-003`.
 
-GOV-010_GOVERNANCE_MODEL.md
+This violates the naming and identity consistency requirement.
 
----
+## Finding GOV-004-02 — Duplicate Logical Identity
 
-# New Governance Rules Integrated
+`Standards/GOV-004_DOCUMENT_METADATA.md` also declares `Document ID: GOV-004`.
 
-Repository First
+Therefore the repository currently contains more than one artifact representing the same logical document identity.
 
-Verified Assessment
+## Finding GOV-006-01 — Cross-Reference Drift
 
-Inspection Scope
+`Governance/GOV-006_NAMING_CONVENTION_STANDARD.md` is canonical, but its related-document references must be validated against the actual repository paths before Governance can be declared clean.
 
-Repository Coverage
+## Finding GOV-FS-01 — Previous Status Was Stale
 
-Confidence Level
+The previous folder status listed a legacy Governance structure that does not match the current repository paths and incorrectly declared duplicate IDs and repository consistency as resolved.
 
-Assessment Classification
-
-Repository Version
-
-Evidence Classification
+This status document replaces that unsupported completion claim with an evidence-based hold.
 
 ---
 
-# Folder Health
+# Governance Completion Gate
 
-Duplicate IDs
+Governance MUST NOT be marked `APPROVED` or `COMPLETED` until all of the following pass:
 
-✅ None
-
-Duplicate Documents
-
-✅ None
-
-Repository Consistency
-
-✅ Verified
-
-Architecture Alignment
-
-✅ Verified
+1. One canonical path exists for every Governance document ID.
+2. No duplicate logical document IDs exist.
+3. Filename identity matches internal `Document ID`.
+4. Canonical flags match the repository index and map.
+5. All related-document references resolve to current paths.
+6. `REP-001_MASTER_INDEX.md` and `REP-002_REPOSITORY_MAP.md` agree with repository reality.
+7. The folder status is regenerated from the verified repository state.
 
 ---
 
-# Outstanding Items
+# Required Next Modification
 
-Future governance additions:
+The next engineering action is **Governance canonicalization**, beginning with the `GOV-004` identity conflict.
 
-Operational Conservatism Principle
+Required sequence:
 
-Engineering Workflow Standard
+`Inspect → Decide Canonical Owner → Preserve Legacy Evidence → Canonical Rewrite/Move → Update References → Update REP-001 → Update REP-002 → Validate → Re-Audit`
 
-Repository Lifecycle Standard
-
----
-
-# Next Folder
-
-Architecture
+No deletion is authorized by this status document.
 
 ---
 
-# Folder Approval
+# Related Authority
 
-Governance is approved.
-
-Future modifications require:
-
-Architecture Decision
-
-Governance Extension
-
-Repository Evolution
+- `PROJECT_BOOTSTRAP.md`
+- `Governance/GOV-001_GOVERNANCE_FRAMEWORK.md`
+- `Governance/GOV-006_NAMING_CONVENTION_STANDARD.md`
+- `Repository/REP-001_MASTER_INDEX.md`
+- `Repository/REP-002_REPOSITORY_MAP.md`
+- `Core/CORE-003_CONSTITUTION.md`
 
 ---
 
-End
+# Engineering Rule
+
+Repository Reality > Previous Status Claims > Conversation Memory
+
+---
+
+End of Document
