@@ -5,10 +5,7 @@
 Platform
 
 ARGO KOP
-
 Knowledge Operating Platform
-
----
 
 Folder
 
@@ -16,306 +13,93 @@ Runtime
 
 Version
 
-1.1.0
+1.3.0
 
 Status
 
-COMPLETED
+🟡 INTEGRITY HOLD — RE-AUDIT IN PROGRESS
 
 Canonical
 
 Yes
 
-Priority
+Last Audit
 
-Critical
+2026-08-08
 
----
+Review Method
 
-# Folder Purpose
+Repository First / Evidence Based
 
-The Runtime layer provides the execution engine of ARGO KOP.
+Development Baseline
 
-It defines how the platform starts, synchronizes, validates, executes, monitors, recovers and terminates engineering operations while preserving repository integrity.
+3.2.1
 
----
+Latest Official Release
 
-# Repository Baseline
-
-Repository
-
-ARGO-KOP
-
-Engineering Mode
-
-Canonical
-
-Repository Reality
-
-Validated
+1.0.0
 
 ---
 
-# Folder Contents
+# Purpose
 
-README.md
+This document records the current evidence state of the Runtime folder. It does not declare Runtime clean until its active documents, references, metadata and dependencies have been validated against the current repository baseline.
 
-RUN-001_BOOT_SEQUENCE.md
+# Inventory Confirmed
 
-RUN-002_INITIALIZATION.md
+- `Runtime/README.md`
+- `Runtime/RUN-001_BOOT_SEQUENCE.md`
+- `Runtime/RUN-002_INITIALIZATION.md`
+- `Runtime/RUN-003_CONFIGURATION.md`
+- `Runtime/RUN-004_CONTEXT_LOADING.md`
+- `Runtime/RUN-005_RUNTIME_WORKFLOW.md`
+- `Runtime/RUN-006_AI_PROTOCOL.md`
+- `Runtime/RUN-007_RUNTIME_SECURITY.md`
+- `Runtime/RUN-008_RUNTIME_STATE.md`
+- `Runtime/RUN-009_RECOVERY.md`
+- `Runtime/RUN-010_RUNTIME_REFERENCE.md`
 
-RUN-003_CONFIGURATION.md
+# Initial Findings
 
-RUN-004_CONTEXT_LOADING.md
+## RUN-001 — Stale Embedded Status Material
 
-RUN-005_RUNTIME_WORKFLOW.md
+`RUN-001` contains duplicated historical material and references a previous `REP-001` version. This must be removed or reconciled before Runtime can be certified clean.
 
-RUN-006_AI_PROTOCOL.md
+## RUN-002 — Stale Governance Naming Reference
 
-RUN-007_RUNTIME_SECURITY.md
+The Runtime status contains a legacy reference to `GOV-006` as the metadata/review authority. Current Governance distinguishes `GOV-004` metadata, `GOV-005` review and `GOV-006` naming. Runtime references must be reconciled accordingly.
 
-RUN-008_RUNTIME_STATE.md
+## RUN-003 — Completion Claim Drift
 
-RUN-009_RECOVERY.md
+The previous folder status declared Runtime `COMPLETED / APPROVED` without a current repository-wide evidence audit. That claim is withdrawn pending validation.
 
-RUN-010_RUNTIME_REFERENCE.md
+# Validation Gate
 
-_FOLDER_STATUS.md
+Runtime cannot be marked clean until:
 
----
+1. Active RUN identities are unique.
+2. Filename and internal IDs align.
+3. Canonical paths are unique.
+4. Development/release version authority is consistent.
+5. Cross-references resolve to current canonical artifacts.
+6. Boot sequence dependencies match current Core, Repository, Architecture, Engine and Services boundaries.
+7. No embedded historical status text remains in active canonical documents.
+8. Runtime security and recovery boundaries remain compatible with the current Governance and Architecture models.
 
-# Engineering Completion
+# Scope
 
-README
+This record does not certify Engine, Services, AI, Core, Memory or the entire repository.
 
-✅
+# Required Next Action
 
-RUN-001
-
-✅
-
-RUN-002
-
-✅
-
-RUN-003
-
-✅
-
-RUN-004
-
-✅
-
-RUN-005
-
-✅
-
-RUN-006
-
-✅
-
-RUN-007
-
-✅
-
-RUN-008
-
-✅
-
-RUN-009
-
-✅
-
-RUN-010
-
-✅
+`Audit RUN-001 → RUN-010 → reconcile references and metadata → Runtime Re-Audit`
 
 ---
 
-# Validation
+# Engineering Rule
 
-Repository Synchronization
-
-✅
-
-Architecture Alignment
-
-✅
-
-Governance Alignment
-
-✅
-
-Canonical Naming
-
-✅
-
-Cross References
-
-✅
-
-Repository Consistency
-
-✅
-
-Execution Flow
-
-✅
-
-Recovery Flow
-
-✅
-
-Runtime State Model
-
-✅
+Repository Reality > Previous Status Claims > Conversation Memory
 
 ---
 
-# Runtime Capabilities
-
-Boot Sequence
-
-Completed
-
-Repository Synchronization
-
-Completed
-
-Initialization
-
-Completed
-
-Configuration
-
-Completed
-
-Context Loading
-
-Completed
-
-Execution Workflow
-
-Completed
-
-AI Protocol
-
-Completed
-
-Runtime Security
-
-Completed
-
-Runtime State Machine
-
-Completed
-
-Recovery
-
-Completed
-
-Runtime Reference
-
-Completed
-
----
-
-# Engineering Rules Applied
-
-Repository Reality First
-
-Complete Canonical Replacement Only
-
-No Partial Updates
-
-Architecture Before Engineering
-
-Governance Before Runtime
-
-Automatic Engineering Continuation
-
-Folder Completion Before Next Folder
-
-Repository Synchronization Before Execution
-
----
-
-# Folder Completion Rule
-
-The Runtime folder is considered complete.
-
-Future modifications shall occur only when:
-
-Architecture changes.
-
-Governance changes.
-
-Repository structure changes.
-
-Critical runtime redesign is approved.
-
----
-
-# Next Engineering Target
-
-Proceed to the next unfinished high-priority folder according to PROJECT_BOOTSTRAP.md.
-
-Priority:
-
-1. Services
-2. Models
-3. Lifecycle
-4. Blueprints
-
----
-
-Last Review
-
-2026-08-06
-
-Repository Status
-
-APPROVED
-
-Runtime Status
-
-ONLINE
-
----
-Markdown
-# RUNTIME FOLDER STATUS
-
----
-
-Platform: ARGO KOP (Knowledge Operating Platform)  
-Folder: Runtime/  
-Version: 1.2.0  
-Status: COMPLETED  
-Canonical: Yes  
-Priority: Critical  
-Last Audit Date: 2026-08-06  
-
----
-
-# Folder Purpose
-
-The Runtime layer governs initialization flows, runtime execution states, system bootstrapping, and execution fault management across the ARGO KOP platform.
-
----
-
-# Directory Inventory
-
-| File Name | Document ID | Status | Canonical | Last Updated |
-| :--- | :--- | :--- | :--- | :--- |
-| `RUN-001_BOOT_SEQUENCE.md` | `RUN-001` | Approved | Yes | 2026-08-06 |
-| `_FOLDER_STATUS.md` | N/A | Approved | Yes | 2026-08-06 |
-
----
-
-# Compliance Check
-
-* **Naming Standard (`GOV-006`):** Verified (Prefix: `RUN-`)
-* **Metadata Standard (`GOV-004`):** Verified
-* **Master Index Cross-Reference (`REP-001`):** Synchronized
-
-End
+End of Document
