@@ -20,7 +20,7 @@ Status
 
 Version
 
-1.1.0
+1.2.0
 
 Canonical
 
@@ -44,49 +44,57 @@ Current working repository (`main`)
 
 This document records the verified state of the Governance folder.
 
-It is an evidence record, not an authority to declare the folder complete. Folder completion may only be declared after the canonical identity, path, version, cross-reference, and duplicate-document checks pass.
+It is an evidence record, not an authority to declare the folder complete. Folder completion may only be declared after canonical identity, path, version, cross-reference, and duplicate-document checks pass.
 
 ---
 
-# Verified Governance Documents
-
-The following documents were verified in the current repository:
+# Current Canonical Governance Documents
 
 - `Governance/GOV-001_GOVERNANCE_FRAMEWORK.md` — Document ID `GOV-001` — Canonical `Yes`
-- `Governance/GOV-003_DOCUMENT_METADATA.md` — filename `GOV-003...`, internal Document ID `GOV-004` — **identity/path mismatch**
-- `Governance/GOV-005_REVIEW_STANDARD.md` — present in current Governance layer
+- `Governance/GOV-004_DOCUMENT_METADATA.md` — Document ID `GOV-004` — Canonical `Yes`
 - `Governance/GOV-006_NAMING_CONVENTION_STANDARD.md` — Document ID `GOV-006` — Canonical `Yes`
 - `Governance/GOV-010_GOVERNANCE_MODEL.md` — present in current Governance layer
+- `Governance/_FOLDER_STATUS.md` — this evidence record
 
-A separate legacy/alternate document was also verified:
-
-- `Standards/GOV-004_DOCUMENT_METADATA.md` — Document ID `GOV-004`
+Superseded Governance artifacts are preserved under `Archive/Governance-Legacy/` and are not active canonical documents.
 
 ---
 
-# Integrity Findings
+# Resolved Findings
 
-## Finding GOV-004-01 — Identity / Path Drift
+## GOV-004 — RESOLVED
 
-`Governance/GOV-003_DOCUMENT_METADATA.md` declares `Document ID: GOV-004` and `Canonical: Yes`, while its filename contains `GOV-003`.
+The active canonical metadata standard is:
 
-This violates the naming and identity consistency requirement.
+`Governance/GOV-004_DOCUMENT_METADATA.md`
 
-## Finding GOV-004-02 — Duplicate Logical Identity
+Conflicting active artifacts were preserved under `Archive/Governance-Legacy/` and removed from active canonical paths.
 
-`Standards/GOV-004_DOCUMENT_METADATA.md` also declares `Document ID: GOV-004`.
+## GOV-006 — CANONICAL PATH RESOLVED
 
-Therefore the repository currently contains more than one artifact representing the same logical document identity.
+The active canonical naming standard is:
 
-## Finding GOV-006-01 — Cross-Reference Drift
+`Governance/GOV-006_NAMING_CONVENTION_STANDARD.md`
 
-`Governance/GOV-006_NAMING_CONVENTION_STANDARD.md` is canonical, but its related-document references must be validated against the actual repository paths before Governance can be declared clean.
+The former `Standards/GOV-006_NAMING_CONVENTION_STANDARD.md` Version `1.0.0` was preserved under `Archive/Governance-Legacy/` as historical evidence and removed from the active Standards path.
 
-## Finding GOV-FS-01 — Previous Status Was Stale
+---
 
-The previous folder status listed a legacy Governance structure that does not match the current repository paths and incorrectly declared duplicate IDs and repository consistency as resolved.
+# Remaining Integrity Checks
 
-This status document replaces that unsupported completion claim with an evidence-based hold.
+## GOV-006-REF-01 — RESOLVED
+
+The canonical GOV-006 document no longer depends on the nonexistent active path `Governance/GOV-007_DOCUMENT_CLASSIFICATION.md`.
+
+Its related-document references now point only to verified current repository paths.
+
+## GOV-FS-01 — STATUS REGENERATED
+
+This folder status replaces the previous stale inventory and records the repository state after GOV-004 and GOV-006 canonicalization.
+
+## GOV-FS-02 — FULL GOVERNANCE RE-AUDIT REQUIRED
+
+Governance remains on `INTEGRITY HOLD` until the full active Governance set, all references, REP-001, REP-002, and repository paths are revalidated together.
 
 ---
 
@@ -95,24 +103,20 @@ This status document replaces that unsupported completion claim with an evidence
 Governance MUST NOT be marked `APPROVED` or `COMPLETED` until all of the following pass:
 
 1. One canonical path exists for every Governance document ID.
-2. No duplicate logical document IDs exist.
+2. No duplicate logical document IDs exist among active artifacts.
 3. Filename identity matches internal `Document ID`.
 4. Canonical flags match the repository index and map.
-5. All related-document references resolve to current paths.
+5. All related-document references resolve to current active paths.
 6. `REP-001_MASTER_INDEX.md` and `REP-002_REPOSITORY_MAP.md` agree with repository reality.
-7. The folder status is regenerated from the verified repository state.
+7. This folder status is regenerated from the verified repository state.
 
 ---
 
-# Required Next Modification
+# Required Next Action
 
-The next engineering action is **Governance canonicalization**, beginning with the `GOV-004` identity conflict.
+`Governance Re-Audit → Cross-Reference Validation → Integrity Decision → Boot Validation`
 
-Required sequence:
-
-`Inspect → Decide Canonical Owner → Preserve Legacy Evidence → Canonical Rewrite/Move → Update References → Update REP-001 → Update REP-002 → Validate → Re-Audit`
-
-No deletion is authorized by this status document.
+No further canonical move or deletion should occur until the re-audit confirms the remaining Governance set.
 
 ---
 
@@ -120,10 +124,11 @@ No deletion is authorized by this status document.
 
 - `PROJECT_BOOTSTRAP.md`
 - `Governance/GOV-001_GOVERNANCE_FRAMEWORK.md`
+- `Governance/GOV-004_DOCUMENT_METADATA.md`
 - `Governance/GOV-006_NAMING_CONVENTION_STANDARD.md`
 - `Repository/REP-001_MASTER_INDEX.md`
 - `Repository/REP-002_REPOSITORY_MAP.md`
-- `Core/CORE-003_CONSTITUTION.md`
+- `Architecture/CORE-003_CONSTITUTION.md`
 
 ---
 
