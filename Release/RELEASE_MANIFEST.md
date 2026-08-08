@@ -16,11 +16,11 @@ REL-001
 
 Version
 
-1.0.0
+1.1.0
 
 Status
 
-Approved
+Approved — Historical Official Release Manifest
 
 Category
 
@@ -30,13 +30,13 @@ Release
 
 # Purpose
 
-The Release Manifest defines the official contents of an ARGO KOP release.
+This Release Manifest defines the contents and validation scope of the **latest official release** represented by this manifest.
 
-It provides a complete inventory of the platform components included in a specific version and serves as the authoritative reference for release validation.
+It does not declare the current development repository baseline to be an official release.
 
 ---
 
-# Current Release
+# Current Official Release
 
 Platform
 
@@ -52,231 +52,101 @@ Foundation
 
 Release Status
 
-Official
+Latest Official Release
+
+Development Baseline
+
+3.2.1
+
+Development Baseline Status
+
+Active / Under Repository Integrity Validation
 
 ---
 
-# Release Objectives
+# Release Scope
 
-This release establishes:
+The Foundation Release established:
 
-Platform Identity
-
-Governance Framework
-
-Repository Structure
-
-Architecture Foundation
-
-Core Standards
-
-Documentation Framework
-
-Release Management
+- Platform Identity
+- Governance Framework
+- Repository Structure
+- Architecture Foundation
+- Core Standards
+- Documentation Framework
+- Release Management
 
 ---
 
-# Included Components
+# Included Foundation Components
 
-The Foundation Release includes:
+The Foundation Release includes the approved foundation layers represented at the time of release:
 
-Core
+- Core
+- Governance
+- Repository
+- Architecture
+- Release
+- Documentation
+- Examples
 
-Governance
-
-Repository
-
-Architecture
-
-Release
-
-Documentation
-
-Examples
+This manifest is historical release scope. Current repository contents may contain post-release development artifacts.
 
 ---
 
-# Core Documents
+# Repository Validation Requirement
 
-README.md
+Before any future release is declared official, the following shall be verified against the current repository baseline:
 
-START_HERE.md
-
-VISION.md
-
-ROADMAP.md
-
-LICENSE
-
-NOTICE.md
-
-CHANGELOG.md
+- Repository Structure
+- Document Identity
+- Document Integrity
+- Cross References
+- Version Consistency
+- Naming Standards
+- Architecture Consistency
+- Governance Compliance
+- Release Compatibility
 
 ---
 
-# Repository Components
+# Release Authority
 
-Core/
+`Release/VERSION.md` is authoritative for the distinction between:
 
-Governance/
+- latest official release
+- current development baseline
 
-Repository/
-
-Architecture/
-
-Release/
-
-Docs/
-
-Examples/
-
-Templates/
+`PROJECT_STATUS.md` may report development state but cannot promote a development baseline to an official release.
 
 ---
 
-# Foundation Capabilities
+# Future Release Rule
 
-Repository Governance
+A future release MUST NOT reuse `1.0.0`.
 
-Knowledge Organization
-
-Architecture Documentation
-
-Repository Navigation
-
-Document Standards
-
-Version Management
-
-Cross Reference Framework
-
----
-
-# Excluded Components
-
-The following components are planned for future releases:
-
-Knowledge Engine
-
-Memory Engine
-
-Decision Engine
-
-Runtime Engine
-
-Service Layer
-
-Plugin Framework
-
-AI Integration
-
-Quality Framework
-
-Automation Services
-
----
-
-# Repository Validation
-
-Before a release is considered complete, the following shall be verified:
-
-Repository Structure
-
-Document Integrity
-
-Cross References
-
-Version Consistency
-
-Naming Standards
-
-Architecture Consistency
-
----
-
-# Release Requirements
-
-An official release shall include:
-
-Approved documentation
-
-Validated repository structure
-
-Updated CHANGELOG
-
-Current VERSION document
-
-Repository review
-
----
-
-# Release Deliverables
-
-Each official release provides:
-
-Repository Source
-
-Documentation
-
-Architecture Specification
-
-Governance Documents
-
-Release Notes
-
-Version Information
-
----
-
-# Release Approval
-
-A release becomes official after:
-
-Repository Review
-
-Architecture Validation
-
-Governance Compliance
-
-Documentation Verification
-
-Version Registration
-
----
-
-# Future Releases
-
-Future releases will expand the platform while preserving:
-
-Repository Stability
-
-Architectural Integrity
-
-Knowledge Continuity
-
-Backward Compatibility
+The next official release number shall be selected through the governed release process after repository-wide validation and approval.
 
 ---
 
 # Related Documents
 
-VERSION.md
-
-CHANGELOG.md
-
-COMPATIBILITY_MATRIX.md
-
-INSTALLATION.md
-
-ROADMAP.md
+- `Release/VERSION.md`
+- `Logs/CHANGELOG.md`
+- `Release/COMPATIBILITY_MATRIX.md`
+- `Release/INSTALLATION.md`
+- `ROADMAP.md`
+- `PROJECT_STATUS.md`
 
 ---
 
 # Guiding Statement
 
-A release is more than a version.
+A release is a verified snapshot of the platform.
 
-It is a verified snapshot of the platform's knowledge and architecture.
+A development baseline is current reality under construction and validation.
+
+They must not be conflated.
 
 ---
 
