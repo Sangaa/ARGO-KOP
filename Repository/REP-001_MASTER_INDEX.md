@@ -6,7 +6,7 @@
 
 Platform: ARGO KOP (Knowledge Operating Platform)
 Document ID: REP-001
-Version: 1.7.2
+Version: 1.7.3
 Status: Integrity Hold
 Category: Repository
 Canonical: Yes
@@ -17,7 +17,7 @@ Last Audit Date: Aug 08, 2026
 
 ## 1. Purpose
 
-Canonical index of active, verified repository artifacts. An artifact is active only when identity, path, authority, version and references are consistent with the current repository baseline.
+Canonical index of active, verified repository artifacts within the inspected scope. An artifact is active only when identity, path, authority, version and references are consistent with the current repository baseline.
 
 This index does not certify repository-wide cleanliness merely because a previous status record did.
 
@@ -32,7 +32,7 @@ The repository is currently being validated as a **relationship graph**. Index m
 - `CONTRIBUTING.md`
 - `CODE_OF_CONDUCT.md`
 
-The historical root naming-convention artifact is not active canonical inventory. It is preserved under `Archive/Governance-Legacy/` for migration traceability.
+Historical root naming-convention material is not active canonical inventory and is preserved under `Archive/Governance-Legacy/` for migration traceability.
 
 ## 3. Core Layer
 
@@ -79,9 +79,25 @@ No GOV-011 artifact is treated as active canonical authority without verified re
 - `Runtime/RUN-010_RUNTIME_REFERENCE.md`
 - `Runtime/_FOLDER_STATUS.md`
 
-## 7. Architecture Layer
+## 7. Architecture Domain
 
-The Architecture inventory remains governed by `REP-002_REPOSITORY_MAP.md` and the active Architecture folder status. Numeric naming is not assumed to represent complete inventory.
+The Architecture domain is **under re-audit**. Current repository evidence establishes the following candidate active artifacts, but their consolidated canonical status and cross-layer relationships remain subject to verification:
+
+- `Architecture/ARC_MAP.md` — map/navigation artifact; no numeric `ARC-NNN` identity
+- `Architecture/ARC-001_PLATFORM_ARCHITECTURE.md`
+- `Architecture/ARC-002_COMPONENT_ARCHITECTURE.md`
+- `Architecture/ARC-003_INFORMATION_FLOW.md`
+- `Architecture/ARC-004_LAYER_MODEL.md`
+- `Architecture/ARC-005_ARCHITECTURE_RULES.md`
+- `Architecture/ARC-006_DEPENDENCY_MODEL.md`
+- `Architecture/ARC-007_INTEGRATION_MODEL.md`
+- `Architecture/ARC-008_REPOSITORY_LAYOUT.md`
+- `Architecture/ARC-009_ARCHITECTURE_DECISIONS.md`
+- `Architecture/ARC-010_EVOLUTION_MODEL.md`
+- `Architecture/ARC-011_CANONICAL_ARCHITECTURE_MODEL.md`
+- `Architecture/_FOLDER_STATUS.md`
+
+`ARC_MAP.md` previously declared `ARC-001` internally, conflicting with `ARC-001_PLATFORM_ARCHITECTURE.md`. That identity collision has been corrected; the map is now explicitly a non-numeric map artifact.
 
 ## 8. Interfaces Layer
 
@@ -106,11 +122,17 @@ The following model artifacts were directly verified during the current audit:
 
 Declared model artifacts not directly located remain unresolved and are not promoted to active authority.
 
-## 10. Canonicalization Rules
+## 10. Other Active Repository Domains
+
+The repository contains additional physical domains shown by the current `SYSTEM_MAP.md`, including Knowledge, Memory, Decision, AI, Services, Intelligence, Quality, Projects, Release, Logs, Examples and Future.
+
+Their presence in the physical repository does not by itself certify their architectural role or completeness. Their inventories are being validated through the connected-baseline audit and will be promoted into this index only with sufficient evidence.
+
+## 11. Canonicalization Rules
 
 1. One active canonical artifact per logical identity.
 2. Filename identity and internal Document ID must agree where a Document ID exists.
-3. Canonical paths are established by the repository map, not by historical references.
+3. Canonical paths are established by repository evidence and applicable governance, not historical references.
 4. Historical alternatives remain archived and are not active authority.
 5. Missing or unverified dependencies remain unresolved; they are not invented.
 6. Repository indexes must be updated when canonical paths or active inventories change.
@@ -119,13 +141,13 @@ Declared model artifacts not directly located remain unresolved and are not prom
 9. A material conflict must be traced through affected consumers, indexes, status files and release/version declarations before local resolution is considered complete.
 10. An archive operation must preserve enough migration evidence to identify the former active path and canonical successor.
 
-## 11. Integrity State
+## 12. Integrity State
 
 Current repository state: **INTEGRITY HOLD**.
 
-The index is synchronized with the currently verified inventory within the inspected scope. Cross-layer relationship validation remains open.
+The index is synchronized with the currently verified inventory within the inspected scope. Architecture inventory and cross-layer relationship validation remain open.
 
-## 12. Verification Model
+## 13. Verification Model
 
 Current audit model:
 
@@ -133,7 +155,7 @@ Current audit model:
 
 Local validation results remain bounded to their inspected scope. `100%` repository integrity requires aggregated evidence across the affected repository graph and absence of unresolved blocking relationships.
 
-## 13. Governing Rule
+## 14. Governing Rule
 
 Repository Reality > Previous Status Claims > Conversation Memory
 
