@@ -1,35 +1,59 @@
-Markdown
 # INTERFACES FOLDER STATUS
 
 ---
 
-Platform: ARGO KOP (Knowledge Operating Platform)  
-Folder: Interfaces/  
-Version: 1.0.0  
-Status: COMPLETED  
-Canonical: Yes  
-Priority: Critical  
-Last Audit Date: 2026-08-06  
+Platform: ARGO KOP (Knowledge Operating Platform)
+Folder: Interfaces/
+Version: 1.1.0
+Status: INTEGRITY HOLD
+Canonical: Yes
+Priority: Critical
+Last Audit Date: 2026-08-08
+Review Method: Repository First / Evidence Based
 
 ---
 
 # Folder Purpose
 
-The Interfaces layer defines communication protocols, context ingestion routines, API boundaries, and integration contracts for ARGO KOP.
+The Interfaces layer defines communication protocols, context ingestion routines, API boundaries, environmental sensing boundaries, and integration contracts for ARGO KOP.
 
----
+# Verified Directory Inventory
 
-# Directory Inventory
+| File Name | Document ID | Status | Canonical |
+| :--- | :--- | :--- | :--- |
+| `INTF-001_INTERFACE_SPEC.md` | `INTF-001` | Approved / Revalidated | Yes |
+| `INTF-004_API.md` | `INT-004` | Integrity Hold / Revalidated | Yes |
+| `INTF-006_ENVIRONMENT_SENSING.md` | `INTF-006` | Proposed / Integrity Hold | Yes |
+| `_FOLDER_STATUS.md` | N/A | Audit Record | Yes |
 
-| File Name | Document ID | Status | Canonical | Last Updated |
-| :--- | :--- | :--- | :--- | :--- |
-| `INTF-001_INTERFACE_SPEC.md` | `INTF-001` | Approved | Yes | 2026-08-06 |
-| `_FOLDER_STATUS.md` | N/A | Approved | Yes | 2026-08-06 |
+# Audit Findings
 
----
+The previous folder status declared the folder completed while only `INTF-001` was inventoried.
+
+The current audit directly verified additional interface artifacts. Therefore the previous completion claim is no longer accepted as repository truth.
+
+The new environment-sensing interface is intentionally marked `Proposed / Integrity Hold` until its cross-layer relationships and runtime integration are validated.
 
 # Compliance Check
 
-* **Naming Standard (`GOV-006`):** Verified (Prefix: `INTF-`)
-* **Metadata Standard (`GOV-004`):** Verified
-* **Master Index Cross-Reference (`REP-001`):** Synchronized
+- Naming and identity must be verified against current repository evidence.
+- Metadata must remain consistent with Governance.
+- `REP-001` and `REP-002` must be synchronized after canonical inventory changes.
+- Interface semantics must remain independent of transport implementation.
+- Device availability does not imply permission to acquire or retain data.
+
+# Integrity Rules
+
+1. Folder status is an evidence record, not proof of completion.
+2. A file is active only after identity, authority and relationships are verified.
+3. New interface contracts require cross-layer validation before completion.
+4. Local interface validation does not prove global repository integrity.
+5. Historical status claims do not override current repository evidence.
+
+# Current State
+
+**INTEGRITY HOLD** pending synchronization and cross-layer relationship validation.
+
+---
+
+End of Document
