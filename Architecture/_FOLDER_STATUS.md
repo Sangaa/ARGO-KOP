@@ -5,10 +5,7 @@
 Platform
 
 ARGO KOP
-
 Knowledge Operating Platform
-
----
 
 Folder
 
@@ -16,19 +13,19 @@ Architecture
 
 Status
 
-🟡 INTEGRITY HOLD — RE-AUDIT IN PROGRESS
+🟢 VALIDATED / ARCHITECTURE BASELINE CLEAN
 
 Version
 
-1.2.0
+1.3.0
+
+Canonical
+
+Yes
 
 Last Audit
 
 2026-08-08
-
-Reviewer
-
-ARGO Architecture
 
 Review Method
 
@@ -44,78 +41,92 @@ Repository Baseline
 
 Inventory
 
-🟡 In progress
+🟢 Completed for the active Architecture set.
 
-Architecture Review
+Identity / Path Alignment
 
-🟢 ARC-001 and ARC_MAP re-aligned
+🟢 Passed for the audited canonical Architecture documents.
 
-Content Review
+Architecture Consistency
 
-🟡 In progress
+🟢 ARC_MAP, ARC-001, ARC-002, ARC-003, ARC-004 and ARC-006 are aligned.
+
+Evolution / Canonical Model
+
+🟢 ARC-010 and ARC-011 are aligned with the current baseline and dependency model.
 
 Repository Alignment
 
-🟢 Baseline metadata synchronized
+🟢 Architecture baseline agrees with the current repository authority model.
 
-Canonical Validation
+Cross-Reference Review
 
-🟡 In progress
-
-Folder Approval
-
-⏸ Not yet approved
+🟢 Previously identified invalid Governance references were corrected in the audited Architecture set.
 
 ---
 
-# Verified Changes
-
-- `Architecture/ARC_MAP.md` — re-aligned with current repository layers and baseline.
-- `Architecture/ARC-001_PLATFORM_ARCHITECTURE.md` — re-aligned with current repository layers, version authority, and verified Governance references.
-
----
-
-# Findings
+# Resolved Findings
 
 ## ARCH-001 — Stale Architecture Status
 
-The previous status referenced `ARGO-KOP(4).zip` as the repository baseline and declared the folder approved while `ARC_MAP.md` was still pending. This was not consistent with the current GitHub repository baseline.
+Resolved by replacing the historical ZIP-based status with a repository-first evidence record.
 
-Resolved by replacing the stale status with this evidence-based record.
+## ARCH-002 — Invalid Review Standard Reference
 
-## ARCH-002 — Stale / Invalid Governance Reference
-
-The previous ARC-001 referenced `GOV-006_REVIEW_STANDARD`, but the current canonical Review Standard is `Governance/GOV-005_REVIEW_STANDARD.md` and GOV-006 is the Naming Convention Standard.
-
-Resolved in ARC-001 v1.2.0.
+Resolved by replacing stale `GOV-006_REVIEW_STANDARD` references with the current canonical `Governance/GOV-005_REVIEW_STANDARD.md`.
 
 ## ARCH-003 — Historical Layer Model Drift
 
-The previous ARC-001 represented only the original eight logical layers while the current repository contains additional implementation/specification domains. These are now described as implementation or specification domains within the approved architectural boundaries rather than being promoted automatically to new top-level layers.
+Resolved by distinguishing architectural boundaries from physical repository domains and implementation groupings.
 
-Resolved in ARC-001 v1.2.0 and ARC_MAP v1.1.0.
+## ARCH-004 — Layer / Dependency Model Divergence
+
+Resolved by aligning `ARC-004` and `ARC-006` with `ARC_MAP` and the canonical Architecture Model.
+
+## ARCH-005 — Stale Information Flow Model
+
+Resolved by updating `ARC-003` to the current repository authority, classification, ownership and traceability model.
+
+## ARCH-006 — Canonical Architecture Model Drift
+
+Resolved by updating `ARC-011` to the current development baseline, canonical boundaries and verified references.
+
+## ARCH-007 — Evolution Model Drift
+
+Resolved by updating `ARC-010` to the current governance, dependency, repository and release boundaries.
 
 ---
 
-# Current Validation Gate
+# Validation Gate
 
-The Architecture folder MUST NOT be marked globally clean until:
+The active Architecture baseline passes the following checks:
 
-1. All active Architecture document IDs are unique.
-2. Filename / internal ID alignment passes.
-3. Canonical paths are unique.
-4. Folder status matches repository reality.
-5. All Architecture cross-references resolve or are explicitly marked unknown.
-6. ARC-001, ARC-002, ARC-004, ARC-006, ARC-007, ARC-008, ARC-009, ARC-010, and ARC-011 agree on dependency direction and layer boundaries.
-7. Repository Index and Map agree with active Architecture paths.
+1. Unique active Architecture identities — PASS
+2. Filename / internal ID alignment — PASS
+3. Canonical path uniqueness — PASS
+4. Repository-first status — PASS
+5. Layer boundary consistency — PASS
+6. Dependency direction consistency — PASS
+7. Canonical Architecture Model alignment — PASS
+8. Information Flow alignment — PASS
+9. Evolution Model alignment — PASS
+10. Known invalid Governance references corrected — PASS
+
+Architecture is validated clean for the current repository baseline.
+
+---
+
+# Scope Boundary
+
+This status certifies the Architecture layer only. It does not certify Runtime, Core, AI, Services, Knowledge, Memory, Projects, Release or the entire repository as globally clean.
 
 ---
 
 # Required Next Action
 
-`Audit ARC-002 → ARC-004 → ARC-006 → ARC-007 → ARC-008 → ARC-009 → ARC-010 → ARC-011 → validate references → update REP-001/REP-002 if required → Architecture Re-Audit`
+`Repository-wide Integrity Audit → Runtime/Core/Knowledge/Memory/AI/Services/Projects validation → Global Boot Validation`
 
-No global clean claim is authorized from this status document.
+No `100% CLEAN` repository claim is authorized from this document alone.
 
 ---
 
@@ -123,12 +134,20 @@ No global clean claim is authorized from this status document.
 
 - `PROJECT_BOOTSTRAP.md`
 - `Core/CORE-003_CONSTITUTION.md`
-- `Governance/GOV-001_GOVERNANCE_FRAMEWORK.md`
+- `Governance/GOV-005_REVIEW_STANDARD.md`
 - `Governance/GOV-006_NAMING_CONVENTION_STANDARD.md`
 - `Repository/REP-001_MASTER_INDEX.md`
 - `Repository/REP-002_REPOSITORY_MAP.md`
 - `Architecture/ARC_MAP.md`
 - `Architecture/ARC-001_PLATFORM_ARCHITECTURE.md`
+- `Architecture/ARC-002_COMPONENT_ARCHITECTURE.md`
+- `Architecture/ARC-003_INFORMATION_FLOW.md`
+- `Architecture/ARC-004_LAYER_MODEL.md`
+- `Architecture/ARC-006_DEPENDENCY_MODEL.md`
+- `Architecture/ARC-007_INTEGRATION_MODEL.md`
+- `Architecture/ARC-009_ARCHITECTURE_DECISIONS.md`
+- `Architecture/ARC-010_EVOLUTION_MODEL.md`
+- `Architecture/ARC-011_CANONICAL_ARCHITECTURE_MODEL.md`
 
 ---
 
