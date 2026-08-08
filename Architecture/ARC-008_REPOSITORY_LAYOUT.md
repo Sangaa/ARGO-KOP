@@ -8,11 +8,7 @@
 
 Platform
 
-ARGO KOP
-
-Knowledge Operating Platform
-
----
+ARGO KOP (Knowledge Operating Platform)
 
 Document ID
 
@@ -20,54 +16,65 @@ ARC-008
 
 Version
 
-1.1.0
+1.2.0
 
 Status
 
-Approved
+Validated / Integrity Hold
 
 Category
 
-Architecture
+Architecture / Repository Layout
+
+Repository Development Baseline
+
+3.2.1
+
+Latest Official Release
+
+1.0.0
+
+Last Audit
+
+2026-08-08
 
 ---
 
 # Purpose
 
-This document defines the canonical repository layout of ARGO KOP.
-
-It establishes how information is physically organized inside the repository and how repository structure reflects platform architecture.
-
----
-
-# Objectives
-
-The repository layout shall:
-
-- Organize knowledge logically.
-- Preserve architectural boundaries.
-- Simplify navigation.
-- Support scalability.
-- Prevent duplication.
-- Improve maintainability.
-
----
+Defines the architectural principles for physical repository organization without treating physical placement as automatic proof of logical architecture or authority.
 
 # Repository Philosophy
 
-The repository is organized by responsibility.
+The repository is organized to preserve responsibility, traceability and navigation.
 
-It is not organized by technology.
+Physical structure supports architecture, but physical folder placement does not by itself create architectural authority.
 
-It is not organized by implementation.
+The repository must therefore be read as a relationship graph as well as a storage tree.
 
-Architecture determines repository structure.
+# Canonical Relationship
 
----
+The active architecture is represented by:
 
-# Repository Structure
+`Architecture/ARC-001_PLATFORM_ARCHITECTURE.md`
 
-Core
+and navigated through:
+
+`Architecture/ARC_MAP.md`
+
+Repository storage authority is represented by:
+
+`Repository/REP-001_MASTER_INDEX.md`
+
+`Repository/REP-002_REPOSITORY_MAP.md`
+
+The map/index documents must agree with current repository evidence.
+
+# Repository Structure Model
+
+The current architectural model is:
+
+Core / Identity
 
 ↓
 
@@ -83,7 +90,7 @@ Repository
 
 ↓
 
-Knowledge
+Knowledge / Specifications / Standards
 
 ↓
 
@@ -91,177 +98,102 @@ Memory
 
 ↓
 
-Runtime
+Cognition / Engine
 
 ↓
 
-Projects
+Runtime / Services / AI
 
 ↓
 
-Templates
+Projects / Applied Artifacts
 
-↓
+Other physical domains such as Models, Interfaces, Quality, Intelligence, Decision, Release, Logs, Examples and Future are repository domains/groupings whose architectural role must be established by their contents and relationships rather than by folder name alone.
 
-AI
-
-↓
-
-Docs
-
-↓
-
-Release
-
-↓
-
-Archive
-
----
-
-# Repository Rules
-
-Each document shall have:
-
-- One Owner
-- One Folder
-- One Document ID
-- One Canonical Version
-
-Duplicate ownership is prohibited.
-
----
+Archive is a preservation domain and is not an active dependency layer.
 
 # Folder Responsibilities
 
-Every folder shall have one clearly defined responsibility.
+Folders should have understandable purposes and evidence-backed ownership.
 
-Folder responsibilities shall not overlap.
+A folder is not required to contain a particular filename pattern merely because another folder does.
 
-Every folder shall maintain:
-
-- README.md
-- _FOLDER_STATUS.md
-
----
-
-# Navigation Principles
-
-Repository navigation shall be:
-
-- Predictable
-- Stable
-- Hierarchical
-- Documented
-
-Repository navigation shall begin from:
-
-REP-001_MASTER_INDEX
-
----
+Where a `_FOLDER_STATUS.md` exists, it records reviewed scope and known state; it does not create authority or certify uninspected content.
 
 # Document Organization
 
-Documents are organized by:
+For artifacts with assigned Document IDs, the expected relationship is:
 
-Component
+`Filename Identity ↔ Internal Document ID ↔ Canonical Path ↔ Repository Registration`
 
-↓
-
-Category
-
-↓
-
-Identifier
-
-↓
-
-Version
-
-↓
-
-Lifecycle
-
----
+Exceptions such as navigation maps or README/status artifacts must be explicitly identifiable as such and must not reuse another document's identity.
 
 # Naming Rules
 
-Every document shall follow:
+Assigned canonical documents should follow the applicable Governance naming standard.
 
-PREFIX-NNN_NAME.md
+Numeric sequence gaps are findings, not permission to invent missing artifacts.
 
-Example
-
-CORE-001_ARGO_MANIFEST.md
-
-ARC-006_DEPENDENCY_MODEL.md
-
-GOV-009_REPOSITORY_POLICY.md
-
----
+Legacy and historical identities may be preserved when needed for traceability, but they must not silently compete with active canonical identities.
 
 # Repository Integrity
 
-Repository integrity requires:
+Repository layout integrity requires evidence for:
 
-- No duplicated documents.
-- No duplicated ownership.
-- No undocumented folders.
-- No orphan documents.
-- No hidden architecture.
+- identity uniqueness;
+- canonical path uniqueness;
+- content/placement consistency;
+- navigation coverage;
+- reference resolution;
+- authority alignment;
+- status/index consistency;
+- preservation of required historical traceability.
 
----
+A directory listing alone cannot establish these conditions.
 
 # Repository Evolution
 
-The repository may evolve through:
+The repository may evolve through governed changes, new domains, migrations, archival transitions and capability additions.
 
-- New Components
-- New Standards
-- New Projects
-- Governance Decisions
-
-Repository evolution shall preserve backward compatibility whenever practical.
-
----
+When physical layout changes affect architectural boundaries, dependencies, ownership or canonical identity, the change requires architectural review and synchronized index/status updates.
 
 # Repository Validation
 
-Repository reviews shall verify:
+Reviews should verify together:
 
-- Folder Structure
-- Naming
-- Ownership
-- Navigation
-- Traceability
-- Version Consistency
-- Folder Status
-
----
+- physical paths;
+- filenames;
+- internal identities;
+- content and purpose;
+- ownership and authority;
+- indexes and maps;
+- cross-references;
+- affected consumers and dependencies;
+- post-change state.
 
 # Related Documents
 
-REP-001_MASTER_INDEX
+- `Repository/REP-001_MASTER_INDEX.md`
+- `Repository/REP-002_REPOSITORY_MAP.md`
+- `Architecture/ARC-001_PLATFORM_ARCHITECTURE.md`
+- `Architecture/ARC_MAP.md`
+- `Architecture/ARC-004_LAYER_MODEL.md`
+- `Architecture/ARC-006_DEPENDENCY_MODEL.md`
+- `Governance/GOV-006_NAMING_CONVENTION_STANDARD.md`
+- `Governance/GOV-009_REPOSITORY_POLICY.md`
+- `Core/CORE-003_CONSTITUTION.md`
 
-ARC-001_PLATFORM_ARCHITECTURE
+---
 
-ARC-002_COMPONENT_ARCHITECTURE
+# Integrity State
 
-ARC-004_LAYER_MODEL
-
-GOV-003_NAMING_STANDARD
-
-GOV-009_REPOSITORY_POLICY
-
-CORE-003_CONSTITUTION
+This layout model is aligned with the current repository-first audit method. The complete repository remains under connected-baseline validation until active domains and their relationships are verified.
 
 ---
 
 # Guiding Statement
 
-A repository is not a storage location.
-
-It is the physical representation of platform architecture.
+**The repository is a physical home for ARGO's knowledge; its architecture is established by verified relationships, not by the walls alone.**
 
 ---
 
