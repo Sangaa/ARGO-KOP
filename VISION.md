@@ -10,9 +10,9 @@ Knowledge Operating Platform
 
 ## Vision Statement
 
-ARGO KOP is a cognitive engineering platform designed to transform knowledge from scattered information into a structured, governed, reusable, and continuously evolving organizational asset.
+ARGO KOP is a cognitive engineering platform designed to transform scattered information and experience into a structured, governed, reusable, traceable, and continuously evolving organizational asset.
 
-The platform is built to preserve knowledge, maintain architectural consistency, and support human decision-making through disciplined engineering principles rather than isolated conversations.
+The platform is built to preserve knowledge, maintain architectural consistency, support disciplined decision-making, and enable human-AI collaboration without making any single AI model the source of truth.
 
 ARGO KOP is not defined by a specific technology, programming language, database, or artificial intelligence model.
 
@@ -20,19 +20,19 @@ Its foundation is knowledge.
 
 Its architecture is governance.
 
-Its purpose is continuity.
+Its operating discipline is evidence.
+
+Its purpose is continuity and controlled evolution.
 
 ---
 
 ## Why ARGO KOP Exists
 
-Modern organizations generate an enormous amount of knowledge.
+Modern organizations generate enormous amounts of knowledge.
 
-Most of that knowledge is eventually lost because it is stored as disconnected documents, temporary conversations, personal experience, or isolated systems.
+Much of that knowledge is lost because it remains distributed across disconnected documents, temporary conversations, personal experience, isolated systems, and undocumented decisions.
 
-ARGO KOP exists to solve this problem.
-
-Its mission is to organize knowledge into a permanent engineering asset that remains understandable, traceable, reusable, and continuously expandable.
+ARGO KOP exists to turn that fragmented knowledge into a durable engineering asset that remains understandable, traceable, reusable, reviewable, and expandable.
 
 ---
 
@@ -40,21 +40,16 @@ Its mission is to organize knowledge into a permanent engineering asset that rem
 
 The long-term objective of ARGO KOP is to become a universal knowledge operating platform capable of supporting:
 
-• Organizations
+- Organizations
+- Engineering Projects
+- Technical Documentation
+- Operational Procedures
+- Decision Support
+- Knowledge Preservation
+- Human-AI Collaboration
+- Governed autonomous knowledge systems
 
-• Engineering Projects
-
-• Technical Documentation
-
-• Operational Procedures
-
-• Decision Support
-
-• Knowledge Preservation
-
-• Human-AI Collaboration
-
-The platform shall continuously evolve while preserving its architectural integrity and historical traceability.
+The platform shall evolve while preserving architectural integrity, provenance, historical traceability, and the ability to review its own assumptions.
 
 ---
 
@@ -62,31 +57,30 @@ The platform shall continuously evolve while preserving its architectural integr
 
 ARGO KOP follows a simple principle:
 
-Knowledge must survive people.
+**Knowledge must survive people.**
 
-Projects must survive teams.
+**Projects must survive teams.**
 
-Architecture must survive technology.
+**Architecture must survive technology.**
+
+And:
+
+**Evidence must be stronger than assumption.**
 
 ---
 
 ## Core Principles
 
-Reality Before Theory
-
-Keep It Simple
-
-Data Serves People
-
-Knowledge Before Code
-
-Architecture Before Implementation
-
-Consistency Before Convenience
-
-Traceability Before Speed
-
-Repository is the Single Source of Truth
+- Reality Before Theory
+- Keep It Simple
+- Data Serves People
+- Knowledge Before Code
+- Architecture Before Implementation
+- Consistency Before Convenience
+- Traceability Before Speed
+- Evidence Before Assumption
+- Repository is the Single Source of Truth
+- New knowledge remains reviewable until properly governed
 
 ---
 
@@ -94,65 +88,79 @@ Repository is the Single Source of Truth
 
 ARGO KOP aims to:
 
-• Preserve organizational knowledge.
-
-• Reduce information fragmentation.
-
-• Standardize documentation.
-
-• Improve engineering consistency.
-
-• Enable structured decision support.
-
-• Maintain project continuity.
-
-• Support continuous learning.
-
-• Provide a stable cognitive foundation for future intelligent systems.
+- Preserve organizational knowledge.
+- Reduce information fragmentation.
+- Standardize documentation.
+- Improve engineering consistency.
+- Enable structured decision support.
+- Maintain project continuity.
+- Support continuous learning from evidence and error.
+- Preserve the distinction between facts, assumptions, decisions, and proposals.
+- Provide a stable cognitive foundation for future intelligent systems.
 
 ---
 
-## Future Direction
+## Evolution Path
 
-The platform is designed to evolve in multiple stages.
+ARGO KOP is designed to evolve through progressively stronger evidence and capability rather than through assumptions about future completeness.
 
-Foundation
+A conceptual path is:
 
-↓
-
-Knowledge Management
+**Foundation**
 
 ↓
 
-Cognitive Engineering
+**Knowledge Management**
 
 ↓
 
-Repository Intelligence
+**Cognitive Engineering**
 
 ↓
 
-Decision Support
+**Repository Intelligence**
 
 ↓
 
-Human-AI Collaboration
+**Decision Support**
 
 ↓
 
-Autonomous Knowledge Systems
+**Human-AI Collaboration**
 
-Each stage extends the previous one without breaking the architectural foundation.
+↓
+
+**Autonomous Knowledge Systems**
+
+These are directional stages, not claims that every stage has already been implemented or validated.
+
+Each future stage must preserve the architectural foundation and remain subject to repository evidence, governance, safety, and validation.
+
+---
+
+## Self-Evolution Principle
+
+ARGO KOP should learn from both successful and unsuccessful engineering outcomes.
+
+A failure is not automatically a rule.
+
+A useful lesson should be:
+
+**Observed → Recorded → Re-examined → Tested → Governed → Reused**
+
+Historical mistakes must remain visible enough to prevent their silent repetition.
 
 ---
 
 ## Guiding Statement
 
-Knowledge should never disappear.
+**Knowledge should remain connected.**
 
-Knowledge should never be duplicated.
+**Decisions should remain traceable.**
 
-Knowledge should always remain connected.
+**Assumptions should remain challengeable.**
+
+**Improvements should become reusable knowledge only after validation.**
 
 ---
 
@@ -160,13 +168,13 @@ Knowledge should always remain connected.
 
 ARGO KOP is more than a repository.
 
-It is an engineering framework for organizing knowledge, preserving decisions, and enabling continuous evolution.
+It is an engineering framework for organizing knowledge, preserving decisions, validating relationships, and enabling controlled continuous evolution.
 
-Every document contributes to the platform.
+Every document contributes evidence.
 
-Every decision strengthens the architecture.
+Every decision should preserve its reasoning.
 
-Every improvement becomes permanent knowledge.
+Every improvement should leave behind reusable knowledge.
 
 ---
 
