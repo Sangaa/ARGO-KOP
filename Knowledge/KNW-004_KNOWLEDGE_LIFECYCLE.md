@@ -20,11 +20,11 @@ KNW-004
 
 Version
 
-1.1.0
+1.2.0
 
 Status
 
-Approved
+Validated / Integrity Hold
 
 Category
 
@@ -34,41 +34,21 @@ Canonical
 
 Yes
 
+Last Audit
+
+2026-08-08
+
 ---
 
 # Purpose
 
-This document defines the complete lifecycle of knowledge within ARGO KOP.
+This document defines the lifecycle of knowledge objects within ARGO KOP.
 
-It ensures that every knowledge object progresses through a controlled and traceable process from creation to archival.
-
----
-
-# Objectives
-
-The Knowledge Lifecycle shall:
-
-- Preserve knowledge quality.
-- Maintain repository integrity.
-- Support continuous improvement.
-- Prevent uncontrolled knowledge growth.
-- Enable long-term organizational learning.
+It does not define the lifecycle of the platform itself, repository documents as artifacts, projects or decisions.
 
 ---
 
-# Lifecycle Philosophy
-
-Knowledge is never static.
-
-Knowledge continuously evolves through validation, refinement and operational experience.
-
-Repository knowledge is authoritative.
-
-Temporary information shall not become permanent knowledge without validation.
-
----
-
-# Knowledge Lifecycle
+# Lifecycle
 
 Observation
 
@@ -118,109 +98,78 @@ Information is discovered.
 
 No repository authority.
 
----
-
 ## Capture
 
-Knowledge candidate is documented.
+A knowledge candidate is documented.
 
 Awaiting validation.
-
----
 
 ## Validation
 
 Evidence is reviewed.
 
-Governance and architecture are verified.
-
-Repository alignment is confirmed.
-
----
+Governance, architecture and repository alignment are checked.
 
 ## Classification
 
-Knowledge receives:
-
-Category
-
-Owner
-
-Relationships
-
-Repository Location
-
----
+The knowledge object receives its category, owner, relationships and repository location.
 
 ## Repository Integration
 
-Knowledge becomes an official repository artifact.
+The knowledge object becomes an official repository artifact after the applicable authority accepts it.
 
-Repository becomes authoritative.
+## Knowledge Relationships
 
----
+The object is connected to relevant authorities, evidence, consumers and related knowledge.
+
+Relationship existence must be validated; a path or textual reference alone is insufficient.
 
 ## Operational Use
 
-Knowledge is consumed by:
-
-Projects
-
-Runtime
-
-Reasoning
-
-Documentation
-
-Operational Processes
-
----
+Knowledge may be consumed by projects, runtime, reasoning, documentation and operational processes within their applicable authority boundaries.
 
 ## Review
 
-Knowledge quality is periodically reviewed.
-
-Accuracy
-
-Completeness
-
-Relevance
-
-Consistency
-
----
+Accuracy, completeness, relevance and consistency are periodically checked.
 
 ## Revision
 
-Approved improvements are incorporated.
-
-Every revision remains traceable.
-
----
+Approved improvements are incorporated and remain traceable.
 
 ## Archive
 
-Knowledge becomes historical.
-
-No deletion.
-
-Historical context remains preserved.
+Knowledge becomes historical and is preserved for traceability.
 
 ---
 
 # Knowledge Validation
 
-Knowledge shall be approved only after:
+Knowledge shall be approved only after applicable:
 
-Evidence Verification
+- Evidence Verification
+- Architecture Alignment
+- Governance Compliance
+- Repository Review
+- Relationship Validation
+- Approval
 
-Architecture Alignment
+---
 
-Governance Compliance
+# Cross-Lifecycle Boundary
 
-Repository Review
+`KNW-004` is the **knowledge-object lifecycle**.
 
-Approval
+It interacts with:
+
+- `CORE-009` — platform evolution lifecycle.
+- `REP-006` — repository artifact lifecycle.
+- `GOV-005` — document artifact lifecycle.
+
+These lifecycles are complementary.
+
+A knowledge object can be in a knowledge lifecycle stage while the file representing it has a separate document lifecycle state and the repository is in another lifecycle stage.
+
+No one of these states automatically proves the others.
 
 ---
 
@@ -260,29 +209,26 @@ Revise
 
 Archive
 
-Every event shall be recorded.
+Every event shall be recorded where the applicable traceability authority requires it.
 
 ---
 
 # Related Documents
 
-KNW-001_KNOWLEDGE_MODEL
-
-KNW-002_KNOWLEDGE_CLASSIFICATION
-
-KNW-003_KNOWLEDGE_RELATIONSHIPS
-
-REP-006_REPOSITORY_LIFECYCLE
-
-REP-009_REPOSITORY_TRACEABILITY
-
-CORE-003_CONSTITUTION
+- `Models/MOD-001_KNOWLEDGE_MODEL.md`
+- `Knowledge/KNW-001_KNOWLEDGE_MODEL.md`
+- `Knowledge/KNW-002_KNOWLEDGE_CLASSIFICATION.md`
+- `Knowledge/KNW-003_KNOWLEDGE_RELATIONSHIPS.md`
+- `Repository/REP-006_REPOSITORY_LIFECYCLE.md`
+- `Repository/REP-009_REPOSITORY_TRACEABILITY.md`
+- `Lifecycle/GOV-005_DOCUMENT_LIFECYCLE.md`
+- `Core/CORE-003_CONSTITUTION.md`
 
 ---
 
 # Guiding Statement
 
-Knowledge becomes organizational intelligence only when its lifecycle is controlled.
+**Knowledge lifecycle governs knowledge objects. Document, repository and platform lifecycles remain distinct authorities connected through explicit relationships.**
 
 ---
 
