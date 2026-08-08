@@ -30,7 +30,11 @@ Engineer / Reviewer
 
 Status
 
-Draft / Approved / Handoff Pending / Handoff Complete / Blocked
+Draft / Handoff Pending / Handoff Complete / Blocked / Verified / Closed
+
+Evidence State
+
+Indexed / Located / Read / Verified / Approved
 
 ---
 
@@ -46,7 +50,7 @@ Draft / Approved / Handoff Pending / Handoff Complete / Blocked
 
 # Work Completed
 
-Describe completed engineering tasks.
+Describe completed engineering tasks using observable repository evidence.
 
 ---
 
@@ -70,6 +74,23 @@ Describe completed engineering tasks.
 
 -
 
+# Identity / Naming Changes
+
+Record any document ID, filename, namespace, or folder-placement changes.
+
+Before
+
+
+After
+
+
+Reason
+
+
+Migration Required
+
+YES / NO
+
 ---
 
 # Architectural Decisions
@@ -78,7 +99,11 @@ Decision
 
 Reason
 
+Evidence
+
 Impact
+
+Authority / Approval
 
 ---
 
@@ -92,27 +117,33 @@ Repository Integrity
 
 Cross References Updated
 
+Potential Orphans / Stale References
+
 ---
 
 # Experience and Evidence
 
-Verified Findings
+## Verified Findings
 
 -
 
-Errors Encountered
+## Errors Encountered
 
 -
 
-Errors Corrected
+## Errors Corrected
 
 -
 
-Assumptions / Hypotheses
+## Assumptions / Hypotheses
 
 -
 
-Unresolved Questions
+## Unresolved Questions
+
+-
+
+## Evidence Limitations
 
 -
 
@@ -124,6 +155,12 @@ Unresolved Questions
 
 -
 
+For each important lesson distinguish:
+
+Observed → Interpreted → Validated → Reusable → Governed
+
+Do not promote a lesson to a governed rule solely because it appeared in one session.
+
 ---
 
 # Improvement Candidates
@@ -132,7 +169,7 @@ Unresolved Questions
 
 -
 
-For each candidate identify required authority and affected repository scope.
+For each candidate identify required authority, affected repository scope, evidence required, and whether implementation is safe now.
 
 ---
 
@@ -170,27 +207,41 @@ NOT STARTED / UNDER REVIEW / ACCEPTED / REJECTED / DEFERRED / APPLIED
 
 Repository Review
 
-✅ / ❌ / N/A
+PASS / FAIL / PARTIAL / N/A
 
 Architecture Review
 
-✅ / ❌ / N/A
+PASS / FAIL / PARTIAL / N/A
 
 Governance Compliance
 
-✅ / ❌ / N/A
+PASS / FAIL / PARTIAL / N/A
 
 Canonical References
 
-✅ / ❌ / N/A
+PASS / FAIL / PARTIAL / N/A
+
+Cross-Reference Validation
+
+PASS / FAIL / PARTIAL / N/A
 
 Post-Change Re-read
 
-✅ / ❌ / N/A
+PASS / FAIL / N/A
+
+Current-Repository Verification
+
+PASS / FAIL / PARTIAL / N/A
 
 ---
 
 # Risks Identified
+
+-
+
+-
+
+# Residual Risks
 
 -
 
@@ -210,15 +261,17 @@ Post-Change Re-read
 
 # Related Documents
 
-`ENG-002_ENGINEERING_SESSIONS.md`
+`SESSION_INDEX.md`
 
-`ENG-003_ENGINEERING_DECISIONS.md`
+`ENG-002_ENGINEERING_SESSIONS.md` — legacy historical identity
 
-`ENG-006_ENGINEERING_LESSONS.md`
+`ENG-003_ENGINEERING_DECISIONS.md` — legacy historical identity
 
-`ENG-007_LEARNING_ENGINE.md`
+`ENG-006_ENGINEERING_LESSONS.md` — legacy historical identity
 
-`COG-009_COGNITIVE_SESSION.md`
+`ENG-007_ENGINEERING_RISKS.md` — legacy historical identity
+
+`EJR-001_SELF_ASSESSMENT_AND_MARKET_FEEDBACK.md`
 
 `REP-009_REPOSITORY_TRACEABILITY.md`
 
@@ -226,7 +279,7 @@ Post-Change Re-read
 
 # Guiding Statement
 
-**Every engineering session should leave a complete, traceable learning handoff so the parent ARGO system and responsible reviewer can turn experience into validated repository improvement.**
+**Every engineering session should leave a complete, evidence-backed, traceable learning handoff so the parent ARGO system and responsible reviewer can turn experience into validated repository improvement without confusing historical claims with current repository truth.**
 
 ---
 
