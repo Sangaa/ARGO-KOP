@@ -6,7 +6,7 @@
 
 Platform: ARGO KOP (Knowledge Operating Platform)
 Document ID: REP-001
-Version: 1.7.1
+Version: 1.7.2
 Status: Integrity Hold
 Category: Repository
 Canonical: Yes
@@ -22,8 +22,6 @@ Canonical index of active, verified repository artifacts. An artifact is active 
 This index does not certify repository-wide cleanliness merely because a previous status record did.
 
 The repository is currently being validated as a **relationship graph**. Index membership therefore records inventory; it does not by itself certify the relationships between inventory nodes.
-
----
 
 ## 2. Root Baseline
 
@@ -85,7 +83,30 @@ No GOV-011 artifact is treated as active canonical authority without verified re
 
 The Architecture inventory remains governed by `REP-002_REPOSITORY_MAP.md` and the active Architecture folder status. Numeric naming is not assumed to represent complete inventory.
 
-## 8. Canonicalization Rules
+## 8. Interfaces Layer
+
+The following interface artifacts were directly verified during the current audit:
+
+- `Interfaces/INTF-001_INTERFACE_SPEC.md`
+- `Interfaces/INTF-004_API.md`
+- `Interfaces/INTF-006_ENVIRONMENT_SENSING.md`
+- `Interfaces/_FOLDER_STATUS.md`
+
+`INTF-006` remains `Proposed / Integrity Hold` pending cross-layer validation.
+
+## 9. Models Layer
+
+The following model artifacts were directly verified during the current audit:
+
+- `Models/MOD-002_ENTITY_MODEL.md`
+- `Models/MOD-003_DOCUMENT_MODEL.md`
+- `Models/MOD-004_MEMORY_MODEL.md`
+- `Models/MOD-011_KNOWLEDGE_SOURCE_MODEL.md`
+- `Models/_FOLDER_STATUS.md`
+
+Declared model artifacts not directly located remain unresolved and are not promoted to active authority.
+
+## 10. Canonicalization Rules
 
 1. One active canonical artifact per logical identity.
 2. Filename identity and internal Document ID must agree where a Document ID exists.
@@ -98,13 +119,13 @@ The Architecture inventory remains governed by `REP-002_REPOSITORY_MAP.md` and t
 9. A material conflict must be traced through affected consumers, indexes, status files and release/version declarations before local resolution is considered complete.
 10. An archive operation must preserve enough migration evidence to identify the former active path and canonical successor.
 
-## 9. Integrity State
+## 11. Integrity State
 
 Current repository state: **INTEGRITY HOLD**.
 
 The index is synchronized with the currently verified inventory within the inspected scope. Cross-layer relationship validation remains open.
 
-## 10. Verification Model
+## 12. Verification Model
 
 Current audit model:
 
@@ -112,7 +133,7 @@ Current audit model:
 
 Local validation results remain bounded to their inspected scope. `100%` repository integrity requires aggregated evidence across the affected repository graph and absence of unresolved blocking relationships.
 
-## 11. Governing Rule
+## 13. Governing Rule
 
 Repository Reality > Previous Status Claims > Conversation Memory
 
