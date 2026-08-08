@@ -4,69 +4,26 @@
 
 # RUNTIME STATE
 
----
-
-Platform
-
-ARGO KOP
-
+Platform: ARGO KOP
 Knowledge Operating Platform
 
----
-
-Document ID
-
-RUN-008
-
-Version
-
-1.1.0
-
-Status
-
-Approved
-
-Category
-
-Runtime
-
-Canonical
-
-Yes
-
-Priority
-
-Critical
+Document ID: RUN-008
+Version: 1.2.0
+Status: Validated / Integrity Hold
+Category: Runtime
+Canonical: Yes
+Priority: Critical
+Development Baseline: 3.2.1
+Latest Official Release: 1.0.0
+Last Audit: 2026-08-08
 
 ---
 
 # Purpose
 
-This document defines the Runtime State Machine of ARGO KOP.
+Defines the Runtime State Machine of ARGO KOP.
 
-Runtime State controls execution flow from repository synchronization until repository completion.
-
-Only one Runtime State may be active at any time.
-
----
-
-# Objectives
-
-The Runtime State shall:
-
-Maintain deterministic execution.
-
-Track engineering progress.
-
-Control execution transitions.
-
-Support recovery.
-
-Preserve repository consistency.
-
-Provide execution traceability.
-
----
+Only one primary Runtime State may be active at a time. A validation failure or security issue must be represented explicitly rather than hidden inside another state.
 
 # Runtime State Lifecycle
 
@@ -74,283 +31,137 @@ OFFLINE
 
 ↓
 
-BOOTING
+BOOT
 
 ↓
 
-SYNCHRONIZING
+INIT
 
 ↓
 
-SCANNING
+IDLE
 
 ↓
 
-INITIALIZING
+PROCESSING
 
 ↓
 
-READY
+COMMITTING
 
 ↓
 
-EXECUTING
+IDLE
 
-↓
-
-VALIDATING
-
-↓
-
-COMPLETED
-
-↓
-
-OFFLINE
-
----
+`FAULT` / `HOLD` may be entered from any state where a required validation or authority gate fails.
 
 # State Definitions
 
 ## OFFLINE
 
-Runtime inactive.
+Runtime inactive. No engineering execution permitted.
 
-No engineering permitted.
+## BOOT
 
----
+Repository and authority validation begins according to `RUN-001`.
 
-## BOOTING
+## INIT
 
-Boot Sequence begins.
+Required current context and runtime dependencies are initialized according to `RUN-002`.
 
-Repository not yet synchronized.
+## IDLE
 
----
+Runtime is ready for a validated operation.
 
-## SYNCHRONIZING
+## PROCESSING
 
-Repository synchronization in progress.
+An approved operation is executing. Unsafe or unauthorized writes are prohibited.
 
-Repository becomes engineering baseline.
+## COMMITTING
 
----
+A validated change is being persisted through an approved repository mechanism.
 
-## SCANNING
+## HOLD
 
-Complete repository tree analysis.
+Execution is paused because evidence, authority, dependency or ambiguity requires resolution. No unsafe continuation is permitted.
 
-Folder discovery.
+## FAULT
 
-Status discovery.
+A material integrity, security or runtime failure prevents safe continuation. Recovery follows `RUN-009`.
 
-Repository indexing.
+# Valid Transitions
 
----
+OFFLINE → BOOT
 
-## INITIALIZING
+BOOT → INIT or FAULT/HOLD
 
-Runtime services initialized.
+INIT → IDLE or FAULT/HOLD
 
-Repository cache built.
+IDLE → PROCESSING
 
-Engineering queue generated.
+PROCESSING → COMMITTING or FAULT/HOLD
 
----
+COMMITTING → IDLE or FAULT/HOLD
 
-## READY
+HOLD → BOOT after the underlying condition is corrected and revalidated
 
-Runtime prepared.
+FAULT → BOOT after governed recovery and successful validation
 
-Waiting only for execution.
-
----
-
-## EXECUTING
-
-Canonical engineering in progress.
-
-Folder updates.
-
-Document replacement.
-
-Repository construction.
-
----
-
-## VALIDATING
-
-Repository validation.
-
-Architecture validation.
-
-Governance validation.
-
-Cross-reference validation.
-
----
-
-## COMPLETED
-
-Current engineering cycle finished.
-
-Repository state preserved.
-
-Ready for next repository session.
-
----
-
-# State Transitions
-
-OFFLINE
-
-→
-
-BOOTING
-
-BOOTING
-
-→
-
-SYNCHRONIZING
-
-SYNCHRONIZING
-
-→
-
-SCANNING
-
-SCANNING
-
-→
-
-INITIALIZING
-
-INITIALIZING
-
-→
-
-READY
-
-READY
-
-→
-
-EXECUTING
-
-EXECUTING
-
-→
-
-VALIDATING
-
-VALIDATING
-
-→
-
-READY
-
-VALIDATING
-
-→
-
-COMPLETED
-
-COMPLETED
-
-→
-
-OFFLINE
-
----
+IDLE → OFFLINE when the runtime session is deliberately terminated
 
 # Invalid Transitions
 
 Runtime shall never:
 
-Jump directly to EXECUTING.
-
-Skip SYNCHRONIZATION.
-
-Skip SCANNING.
-
-Skip VALIDATION.
-
-Skip INITIALIZATION.
-
----
+- bypass required repository synchronization;
+- execute directly from OFFLINE;
+- commit while required validation is failed;
+- convert `HOLD` or `FAULT` into normal execution without revalidation;
+- claim `COMPLETED` as a permanent repository-wide state merely because one operation finished.
 
 # Runtime Status Information
 
-Each Runtime State records:
+Where applicable, state records should include:
 
-Repository Version
-
-Repository Baseline
-
-Session ID
-
-Current Folder
-
-Current File
-
-Current Engineering Task
-
-Execution Timestamp
-
-Validation Status
-
----
+- Repository revision / baseline
+- Session ID
+- Current folder
+- Current file
+- Current engineering task
+- Execution timestamp
+- Validation status
+- State transition reason
 
 # Recovery
 
-If Runtime stops unexpectedly:
+Unexpected interruption enters governed recovery. The runtime restores only the latest validated execution context after repository synchronization and validation.
 
-Restore Repository Baseline.
-
-Restore Runtime State.
-
-Restore Engineering Queue.
-
-Continue from last validated document.
-
-Never restart the repository from the beginning.
-
----
+See `RUN-009_RECOVERY.md`.
 
 # Validation Rules
 
-Every state transition requires:
+Required state transitions must verify:
 
-Repository Integrity
-
-Architecture Integrity
-
-Governance Integrity
-
-Repository Synchronization
-
-Current Runtime State Valid
-
----
+- Repository integrity
+- Applicable Architecture integrity
+- Applicable Governance integrity
+- Current repository synchronization
+- Dependency readiness
+- Current Runtime state validity
 
 # Related Documents
 
-RUN-001_BOOT_SEQUENCE.md
-
-RUN-002_INITIALIZATION.md
-
-RUN-005_RUNTIME_WORKFLOW.md
-
-RUN-007_RUNTIME_SECURITY.md
-
-RUN-009_RECOVERY.md
+- `Runtime/RUN-001_BOOT_SEQUENCE.md`
+- `Runtime/RUN-002_INITIALIZATION.md`
+- `Runtime/RUN-005_RUNTIME_WORKFLOW.md`
+- `Runtime/RUN-007_RUNTIME_SECURITY.md`
+- `Runtime/RUN-009_RECOVERY.md`
 
 ---
 
 # Guiding Statement
 
-A deterministic Runtime always knows its current state before performing the next engineering action.
+A deterministic runtime exposes its state and its failure conditions instead of hiding them behind automatic continuation.
 
 ---
 
