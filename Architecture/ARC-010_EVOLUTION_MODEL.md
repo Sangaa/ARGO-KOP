@@ -8,7 +8,7 @@ Platform: ARGO KOP
 Knowledge Operating Platform
 
 Document ID: ARC-010
-Version: 1.2.0
+Version: 1.3.0
 Status: Validated / Integrity Hold
 Category: Architecture
 Development Baseline: 3.2.1
@@ -25,7 +25,7 @@ Evolution is controlled. Architecture is preserved. Knowledge continuously impro
 
 # Evolution Lifecycle
 
-Observation → Analysis → Evidence Collection → Architecture Review → Decision → Repository Update → Validation → Approval → Release
+Observation → Scope → Analysis → Evidence Collection → Architecture Review → Decision → Authorized Repository Update → Validation → Approval / Disposition → Release where applicable
 
 Approval does not substitute for evidence or validation.
 
@@ -38,6 +38,7 @@ Approval does not substitute for evidence or validation.
 - Project Experience
 - Operational Feedback
 - Verified External Requirements
+- Validated Runtime Results
 
 # Evolution Categories
 
@@ -59,12 +60,13 @@ Evolution MUST NOT violate:
 - Dependency Rules
 - Architecture Rules
 - Canonical identity and traceability rules
+- Applicable Release authority
 
 # Repository Rule
 
-Every approved evolution MUST update affected artifacts, related references, repository traceability, version history and relevant folder status.
+Every accepted evolution MUST update affected artifacts, related references, repository traceability, version history and relevant folder status where applicable.
 
-The Repository remains the canonical storage source.
+The Repository remains the canonical storage source for persisted engineering state, subject to higher authority.
 
 # Change Classification
 
@@ -93,10 +95,11 @@ Breaking changes require:
 - Repository Update
 - Version Increment
 - Validation
+- Explicit disposition of compatibility impact
 
 # Validation
 
-Every evolution MUST verify:
+Every accepted evolution MUST verify the applicable scope for:
 
 - Repository Integrity
 - Architecture Consistency
@@ -104,10 +107,13 @@ Every evolution MUST verify:
 - Knowledge Consistency
 - Traceability
 - Version Alignment
+- Dependency Compatibility
+
+If evidence is incomplete or contradictory, the evolution remains `HOLD` or receives an explicit disposition.
 
 # Authority Boundary
 
-This document governs evolution process. It does not override the Constitution, Governance authority, canonical Architecture Model, Repository authority or Release authority.
+This document governs evolution process. It does not override the Constitution, Governance authority, Canonical Architecture Model, Repository authority or Release authority.
 
 # Related Documents
 
@@ -127,7 +133,7 @@ This document governs evolution process. It does not override the Constitution, 
 
 # Guiding Statement
 
-Architecture should evolve deliberately; the Repository should preserve every justified evolution.
+Architecture should evolve deliberately; the Repository should preserve every justified evolution and every unresolved constraint.
 
 ---
 
