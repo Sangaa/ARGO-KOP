@@ -20,11 +20,11 @@ MEM-009
 
 Version
 
-1.1.0
+1.2.0
 
 Status
 
-Approved
+Validated / Integrity Hold
 
 Category
 
@@ -34,11 +34,15 @@ Canonical
 
 Yes
 
+Last Audit
+
+2026-08-08
+
 ---
 
 # Purpose
 
-This document defines how repository memory evolves while preserving contextual continuity, repository integrity and governance compliance.
+This document defines how repository memory evolves while preserving contextual continuity, repository integrity, governance compliance and the authority boundary of the designated Principal Human Owner.
 
 Memory evolution is controlled, traceable and evidence-driven.
 
@@ -53,6 +57,7 @@ Memory Evolution shall:
 - Support organizational learning.
 - Protect historical continuity.
 - Prevent uncontrolled memory drift.
+- Preserve the distinction between learning and authorization.
 
 ---
 
@@ -62,9 +67,11 @@ Memory evolves.
 
 History remains.
 
-Repository memory represents the best validated contextual understanding available.
+Repository memory represents the best validated contextual understanding available at a given governed point in time.
 
-Every evolution shall preserve historical context.
+A newer memory state may supersede an older state, but the reason, evidence and authority for the change must remain traceable.
+
+No memory version is permanently beyond review.
 
 ---
 
@@ -78,11 +85,15 @@ Evidence
 
 ↓
 
+Lesson / Candidate
+
+↓
+
 Validation
 
 ↓
 
-Repository Review
+Authority Check
 
 ↓
 
@@ -91,10 +102,6 @@ Memory Update
 ↓
 
 Relationship Review
-
-↓
-
-Approval
 
 ↓
 
@@ -120,81 +127,93 @@ Approved Decisions
 
 Knowledge Evolution
 
+Detected Errors
+
+Superseded Assumptions
+
+---
+
+# Controlled Self-Improvement
+
+ARGO KOP may autonomously:
+
+- detect recurring failures;
+- extract lessons;
+- identify obsolete assumptions;
+- propose memory improvements;
+- test consistency;
+- preserve rejected alternatives.
+
+ARGO KOP may not autonomously grant a learning result canonical authority merely because the result appears useful or internally consistent.
+
+Changes affecting protected governance, constitutional principles, authority ownership, security boundaries or other Principal-Owner controlled areas require explicit approval from the designated Principal Human Owner.
+
+No other person, model, engine or automated process may substitute for that approval where the change is classified as Principal-Owner controlled.
+
 ---
 
 # Evolution Rules
 
 Memory evolution shall:
 
-Preserve Repository Authority
-
-Preserve Traceability
-
-Maintain Historical Continuity
-
-Maintain Architecture Alignment
-
-Maintain Governance Compliance
-
-Avoid Duplicate Memory
+- Preserve Repository Authority.
+- Preserve Traceability.
+- Maintain Historical Continuity.
+- Maintain Architecture Alignment.
+- Maintain Governance Compliance.
+- Avoid Duplicate Memory.
+- Record why the previous state was changed.
+- Record whether the change was autonomous preparation or authorized publication.
+- Prefer the simplest sufficient memory structure.
 
 ---
 
-# Controlled Evolution
+# Error-to-Learning Record
 
-Repository memory updates require:
+When memory changes because of an error or contradiction, preserve at minimum:
 
-Evidence
+1. Previous belief or stored interpretation.
+2. Evidence that contradicted it.
+3. Root cause of the mismatch.
+4. Corrected interpretation or candidate.
+5. Affected relationships.
+6. Validation performed.
+7. Required authority.
+8. Final disposition: accepted, rejected, deferred or superseded.
 
-Architecture Validation
-
-Repository Review
-
-Governance Compliance
-
-Approval
-
-Version Update
+This turns failure into reusable learning rather than silent memory replacement.
 
 ---
 
 # Repository Authority
 
-Only repository-approved memory may replace previous authoritative memory.
+Working Memory, Session Memory and Conversation Context may generate learning candidates.
 
-Working Memory
+They do not replace Repository Memory directly.
 
-Session Memory
+Only the applicable governed authority may publish a canonical memory change.
 
-Conversation Context
-
-shall never replace Repository Memory directly.
+Where Principal-Owner approval is required, repository publication must remain blocked until that approval is explicit.
 
 ---
 
 # Historical Preservation
 
-Every previous memory version shall remain:
+Previous authoritative memory states shall remain traceable through repository history or governed archive mechanisms.
 
-Accessible
+Archive is preferred to destructive deletion when historical context is needed.
 
-Traceable
-
-Recoverable
-
-Referenced
-
-Repository history shall never be deleted.
-
-Archive replaces deletion.
+Historical preservation does not require keeping every transient working state forever; retention should be proportional to traceability needs.
 
 ---
 
 # Evolution Validation
 
-Every memory evolution shall verify:
+Before canonical publication, verify as applicable:
 
 Memory Quality
+
+Evidence Quality
 
 Memory Relationships
 
@@ -204,49 +223,32 @@ Architecture Alignment
 
 Governance Compliance
 
+Authority Requirement
+
 Version Consistency
 
 Historical Continuity
 
----
-
-# Repository Integrity
-
-Memory evolution strengthens:
-
-Reasoning
-
-Knowledge Reuse
-
-Operational Continuity
-
-Decision Quality
-
-Platform Stability
+Downstream Impact
 
 ---
 
 # Related Documents
 
-MEM-001_MEMORY_MODEL
-
-MEM-004_MEMORY_LIFECYCLE
-
-MEM-005_MEMORY_GOVERNANCE
-
-MEM-008_MEMORY_TRACEABILITY
-
-KNW-009_KNOWLEDGE_EVOLUTION
-
-REP-008_REPOSITORY_BASELINE
-
-CORE-003_CONSTITUTION
+- `Memory/MEM-001_MEMORY_MODEL.md`
+- `Memory/MEM-004_MEMORY_LIFECYCLE.md`
+- `Memory/MEM-005_MEMORY_GOVERNANCE.md`
+- `Memory/MEM-008_MEMORY_TRACEABILITY.md`
+- `Knowledge/KNW-009_KNOWLEDGE_EVOLUTION.md`
+- `Engine/ENG-007_LEARNING_ENGINE.md`
+- `Decision/DEC-009_DECISION_GOVERNANCE.md`
+- `Core/CORE-003_CONSTITUTION.md`
 
 ---
 
 # Guiding Statement
 
-Memory should continuously improve without ever losing its historical continuity.
+**Memory should continuously improve from experience without silently acquiring authority. Learning may be autonomous; protected canonical evolution remains governed and, where required, explicitly owner-authorized.**
 
 ---
 
