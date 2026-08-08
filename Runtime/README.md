@@ -1,77 +1,142 @@
-# RUNTIME_README
+# RUNTIME READ ME
 
 ---
 
-# ARGO KOP - RUNTIME LAYER & OPERATIONS HANDBOOK
+# ARGO KOP — RUNTIME LAYER
 
----
-
-Platform: ARGO KOP (Knowledge Operating Platform) 
-Document ID: RUNTIME_README 
-Version: 3.2.0 
-Status: Approved 
-Category: Execution & Service Operations 
-Canonical: Yes 
-Priority: High 
-Last Audit Date: Aug 08, 2026 
+Platform: ARGO KOP (Knowledge Operating Platform)
+Document ID: RUNTIME_README
+Version: 3.3.0
+Status: Validated / Integrity Hold
+Category: Runtime
+Canonical: Yes
+Priority: High
+Development Baseline: 3.2.1
+Latest Official Release: 1.0.0
+Last Audit: 2026-08-08
 
 ---
 
 ## 1. Purpose & Scope
 
-The Runtime layer defines how ARGO KOP initializes, manages configuration baselines, hydrates system context, and executes deterministic cognitive workflows. It ensures absolute structural continuity and controls the strict execution sequencing of the multi-engine pipeline.
+The Runtime layer defines how ARGO KOP synchronizes repository state, initializes required context, validates dependencies, executes approved operations, persists validated changes and recovers safely from interruption.
 
-All actions inside this folder adhere to the naming conventions established in `Governance/GOV-006_NAMING_CONVENTION_STANDARD.md`.
+Runtime executes the approved architecture. It does not redefine Constitution, Governance, Repository or Canonical Architecture authority.
+
+All actions inside this folder follow the applicable Governance standards, including:
+
+- `Governance/GOV-004_DOCUMENT_METADATA.md`
+- `Governance/GOV-005_REVIEW_STANDARD.md`
+- `Governance/GOV-006_NAMING_CONVENTION_STANDARD.md`
+- `Governance/GOV-009_REPOSITORY_POLICY.md`
+
+## 2. Canonical Runtime Structure
+
+- `RUN-001_BOOT_SEQUENCE.md` — Boot and baseline validation
+- `RUN-002_INITIALIZATION.md` — Runtime initialization
+- `RUN-003_CONFIGURATION.md` — Runtime configuration
+- `RUN-004_CONTEXT_LOADING.md` — Current context loading
+- `RUN-005_RUNTIME_WORKFLOW.md` — Governed execution workflow
+- `RUN-006_AI_PROTOCOL.md` — AI runtime protocol
+- `RUN-007_RUNTIME_SECURITY.md` — Runtime security controls
+- `RUN-008_RUNTIME_STATE.md` — Runtime state machine
+- `RUN-009_RECOVERY.md` — Governed recovery
+- `RUN-010_RUNTIME_REFERENCE.md` — Runtime navigation/reference
+- `_FOLDER_STATUS.md` — Runtime validation status
+
+The `RUN-` prefix is canonical for current Runtime documents. File presence and inventory are determined from the repository, not from assumed numeric ranges.
+
+## 3. Canonical Execution Lifecycle
+
+Repository Synchronization
+
+↓
+
+Integrity / Authority Validation
+
+↓
+
+Context Loading
+
+↓
+
+Initialization
+
+↓
+
+Validated Operation Selection
+
+↓
+
+Processing
+
+↓
+
+Result Validation
+
+↓
+
+Committing
+
+↓
+
+Re-read / Trace
+
+↓
+
+IDLE or governed HOLD / FAULT
+
+Continuation is conditional. A validation failure, authority conflict, missing dependency or material ambiguity prevents unsafe continuation.
+
+## 4. Runtime State Model
+
+`OFFLINE → BOOT → INIT → IDLE → PROCESSING → COMMITTING → IDLE`
+
+`HOLD` / `FAULT` may be entered whenever a required gate fails. Resume requires correction and revalidation.
+
+## 5. Runtime Authority
+
+Repository Reality is the engineering baseline.
+
+Conversation supplies current task intent and context but does not override repository authority.
+
+Historical completion claims are evidence only until current validation confirms them.
+
+## 6. Runtime Engineering Rules
+
+- Repository first.
+- Validate before write.
+- Preserve unrelated content.
+- Do not invent repository structure.
+- Do not assume numeric component ranges are complete inventory.
+- Do not continue unsafely after failed validation.
+- Recovery is governed and evidence-preserving.
+- Runtime status must reflect current evidence.
+
+## 7. Related Authority
+
+- `PROJECT_BOOTSTRAP.md`
+- `Core/CORE-003_CONSTITUTION.md`
+- `Governance/GOV-004_DOCUMENT_METADATA.md`
+- `Governance/GOV-005_REVIEW_STANDARD.md`
+- `Governance/GOV-006_NAMING_CONVENTION_STANDARD.md`
+- `Governance/GOV-009_REPOSITORY_POLICY.md`
+- `Repository/REP-001_MASTER_INDEX.md`
+- `Repository/REP-002_REPOSITORY_MAP.md`
+- `Architecture/ARC_MAP.md`
+- `Architecture/ARC-004_LAYER_MODEL.md`
+- `Architecture/ARC-006_DEPENDENCY_MODEL.md`
+
+## 8. Integrity Scope
+
+This README describes the Runtime layer only. It does not certify the entire ARGO KOP repository as globally clean.
 
 ---
 
-## 2. Canonical File Structure & Navigation
+# Guiding Statement
 
-The `Runtime/` directory is structured sequentially to prevent runtime deviation. The historical prefix `RT-` has been deprecated and permanently replaced by the canonical uppercase alphanumeric prefix `RUN-`:
-
-*   **Runtime Boot Sequence:** [`Runtime/RUN-001_BOOT_SEQUENCE.md`](RUN-001_BOOT_SEQUENCE.md)
-    The master operational trace mapping the execution path from baseline synchronization to readiness state.
-*   **Initialization Framework:** [`Runtime/RUN-002_INITIALIZATION.md`](RUN-002_INITIALIZATION.md)
-    Orchestrates session setup, queue building, and component readiness states.
-*   **Configuration Model:** [`Runtime/RUN-003_CONFIGURATION.md`](RUN-003_CONFIGURATION.md)
-    The deterministic parameters setting system constraints and environment isolation limits.
-*   **Context Loading System:** [`Runtime/RUN-004_CONTEXT_LOADING.md`](RUN-004_CONTEXT_LOADING.md)
-    Controls window parsing, context isolation, and temporal node synchronization filters.
-*   **Runtime Workflow Engine:** [`Runtime/RUN-005_RUNTIME_WORKFLOW.md`](RUN-005_RUNTIME_WORKFLOW.md)
-    The operational scheduler managing dependencies and processing task priority matrices.
-*   **AI Compliance Protocol:** [`Runtime/RUN-006_AI_PROTOCOL.md`](RUN-006_AI_PROTOCOL.md)
-    Enforces atomic generation rules upon language models, completely blocking partial patches or descriptive filler text.
-*   **System Recovery Spec:** [`Runtime/RUN-009_RECOVERY.md`](RUN-009_RECOVERY.md)
-    Handles crash resilience, state restoration, and rollbacks to the last certified baseline checkpoint.
-*   **Runtime Folder Status:** [`Runtime/_FOLDER_STATUS.md`](_FOLDER_STATUS.md)
-    The living log documenting directory approvals, version tracking, and active verification gates.
+Deterministic runtime sequencing is achieved through validated repository evidence, explicit state transitions and governed execution.
 
 ---
 
-## 3. Core Execution Lifecycle
-
-The platform execution loop follows a immutable 4-phase sequence enforced by the Validation Service (`SRV-005`):
-
-```text
-Baseline Audit (RUN-003)
-          ↓
-Context Hydration (RUN-004)
-          ↓
-Engine Orchestration (RUN-005)
-          ↓
-State Commitment (RUN-009)
-Baseline Audit: Verify that the platform version aligns perfectly across PROJECT_BOOTSTRAP.md and repository map schemas.
-Context Hydration: Isolating temporary session conversations from the permanent repository storage.
-Engine Orchestration: Coordinating execution blocks across the cognitive engine bus (ENG-001 through ENG-011).
-State Commitment: Committing completed transactions onto the repository file tree.
-4. Related Documents
-PROJECT_BOOTSTRAP.md
-Architecture/CORE-000_PLATFORM_ARCHITECTURE.md
-Governance/GOV-006_NAMING_CONVENTION_STANDARD.md
-Services/SRV-005_VALIDATION_SERVICE.md
-5. Guiding Statement
-Deterministic runtime sequencing guarantees predictable cognitive execution.
 End of Document
-
----
-
