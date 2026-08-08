@@ -20,11 +20,11 @@ ENG-006
 
 Version
 
-1.1.0
+1.1.1
 
 Status
 
-Approved
+Legacy / Historical Record
 
 Category
 
@@ -32,7 +32,11 @@ Engineering Journal
 
 Canonical
 
-Yes
+No
+
+Identity Note
+
+This document is a legacy Engineering Journal record. The ENG namespace is reserved for active Cognitive Engine identities. This historical record is retained for traceability and is not an active canonical Engine identity. New Journal records use the EJR namespace.
 
 ---
 
