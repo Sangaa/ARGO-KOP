@@ -8,7 +8,7 @@
 
 Platform: ARGO KOP (Knowledge Operating Platform)
 Document ID: PROJECT_STATUS
-Version: 3.2.8
+Version: 3.2.9
 Status: INTEGRITY WARNING / CONNECTED-BASELINE AUDIT
 Category: Root Baseline
 Canonical: Yes
@@ -34,6 +34,19 @@ The repository MUST NOT be declared globally clean until critical identities, re
 
 The development baseline and official release version are intentionally distinct. `Release/VERSION.md` is authoritative for that distinction.
 
+## Current Audit Snapshot
+
+The latest bounded audit has completed and revalidated the following changes:
+
+- `Repository/REP-001_MASTER_INDEX.md` synchronized with the current verified inventory scope.
+- `Repository/REP-002_REPOSITORY_MAP.md` synchronized with the same scope.
+- `Lifecycle/GOV-005_DOCUMENT_LIFECYCLE.md` migrated to `Lifecycle/LIF-001_DOCUMENT_LIFECYCLE.md` to remove the active `GOV-005` identity collision.
+- `Architecture/ARC_MAP.md` treated as a map artifact rather than a competing `ARC-001` canonical identity.
+- `Engine/ENG-010_ENGINE_COORDINATION.md` updated to `3.1.1 / Integrity Hold / Revalidated` with explicit route-verification and authority boundaries.
+- `Engine/ENG-011_MARITIME_GAME_ENGINE.md` updated to `1.0.1 / Integrity Hold` with explicit dependency and learning-feedback boundaries.
+
+These are **verified bounded mutations**, not repository-wide certification.
+
 ---
 
 # 2. Current Operating Objective
@@ -58,9 +71,9 @@ but:
 
 This status file is a summary of evaluated repository evidence. It MUST NOT be treated as proof of repository integrity by itself.
 
-Before any structural or canonical change is proposed, the reviewing agent MUST:
+For material changes, the reviewing agent MUST:
 
-1. Enumerate the current repository structure.
+1. Enumerate the current repository scope.
 2. Inspect the contents of relevant files and required referenced artifacts.
 3. Check filenames against internal Document IDs and canonical registrations.
 4. Trace critical cross-references in both directions where practical.
@@ -72,15 +85,13 @@ Before any structural or canonical change is proposed, the reviewing agent MUST:
 
 **Memory, previous session summaries, ZIP snapshots, folder names, and status declarations MUST NOT substitute for current repository file contents.**
 
-If required evidence is unavailable, the status is an evidence warning and the agent MUST notify the user before making a dependent proposal.
-
 ---
 
 # 4. Relationship Verification Model
 
 For each critical relationship, use:
 
-**Referenced → Located → Read → Identity Verified → Authority Verified → Relationship Validated → Consumer/Dependency Checked → Mutation Impact Checked → Re-read**
+**Referenced → Located → Read → Identity Verified → Authority Verified → Relationship Validated → Consumer/Dependency Checked → Mutation Impact Checked → Re-read → Revalidate**
 
 A reference is not a validated dependency merely because its path exists.
 
@@ -122,6 +133,7 @@ Only after this gate passes may the project move from **Connected Baseline Stabi
 | Finding | Status |
 | :--- | :--- |
 | Root Bootstrap / Status alignment | UPDATED / VERIFIED FOR CURRENT SCOPE |
+| Root README / START_HERE alignment | UPDATED / VERIFIED FOR CURRENT SCOPE |
 | Repository index/map synchronization | UPDATED / CROSS-LAYER VALIDATION OPEN |
 | Repository-wide duplicate ID audit | OPEN |
 | Repository-wide version authority audit | OPEN |
@@ -131,10 +143,12 @@ Only after this gate passes may the project move from **Connected Baseline Stabi
 | Conflict propagation analysis | ACTIVE / OPEN |
 | Architecture cross-layer validation | OPEN / RE-AUDIT AFTER IDENTITY CORRECTION |
 | Architecture map identity collision | RESOLVED / POST-CHANGE VALIDATION REQUIRED |
-| Standards cross-reference identity collision | RESOLVED BY MIGRATION TO `STD-003`; CONSUMER VALIDATION OPEN |
+| Lifecycle identity collision | RESOLVED BY MIGRATION TO `LIF-001`; CONSUMER VALIDATION OPEN |
 | Knowledge cross-layer validation | OPEN / INTEGRITY HOLD |
 | Memory cross-layer validation | OPEN / INTEGRITY HOLD |
 | Runtime/Engine/AI/Services validation | OPEN / PARTIALLY REVALIDATED |
+| ENG-010 coordination authority | REVALIDATED / INTEGRITY HOLD |
+| ENG-011 GEM dependency and authority boundaries | REVALIDATED / INTEGRITY HOLD |
 | Models/Lifecycle/Blueprints validation | OPEN / INTEGRITY HOLD |
 | Projects/Release validation | OPEN |
 | Changelog / Version authority alignment | UPDATED / REVALIDATION REQUIRED |
@@ -171,25 +185,7 @@ A development baseline is not an official release.
 
 ---
 
-# 9. Provisional Asset Valuation Baseline
-
-A current external assessment may describe ARGO's potential market position, but no valuation estimate is repository authority and no market estimate shall be treated as evidence of technical completion, product readiness, revenue, traction, or release status.
-
-For continuity of future assessment, the current provisional reference point discussed during the connected-baseline phase is:
-
-- **Current conceptual/IP assessment:** approximately USD 150K–500K.
-- **Illustrative pre-seed range if a convincing prototype exists:** approximately USD 0.5M–2M.
-- **Illustrative prototype-stage range after independent technical proof:** approximately USD 3M–10M+.
-
-These are **non-canonical external estimates**, not claims about the present market value of ARGO.
-
-The next formal valuation should be performed only after the Connected-Baseline Completion Gate and should be based on verified evidence including reproducibility, runtime capability, benchmarks, defensible IP, competitive position, use cases, traction and commercial readiness.
-
-The purpose of recording this baseline is to allow future ARGO assessments to measure actual change rather than unconsciously rewriting history.
-
----
-
-# 10. Operational Lessons From Current Audit
+# 9. Operational Lessons From Current Audit
 
 1. A successful GitHub write proves only that one requested mutation was accepted; it does not prove surrounding repository integrity.
 2. A status file can be stale or over-claiming; status must be checked against actual file content and relationships.
@@ -206,15 +202,18 @@ The purpose of recording this baseline is to allow future ARGO assessments to me
 13. New audit rules should be treated as operational candidates until formally promoted.
 14. New evidence may reopen a previously reviewed domain.
 15. Connected-baseline completion is a separate gate from feature readiness or release readiness.
-16. Valuation estimates must remain separate from repository authority and technical completion claims.
-17. A duplicate identity can exist in an apparently unrelated physical domain; identity audits must therefore cross folder boundaries.
-18. A file that exists may still be historically misplaced or semantically obsolete; existence is not sufficient evidence of active authority.
-19. A map/index artifact must not reuse the identity of the canonical content artifact it maps.
-20. Migration of an old artifact should preserve provenance while preventing the obsolete identity from competing with active authority.
+16. A duplicate identity can exist in an apparently unrelated physical domain; identity audits must cross folder boundaries.
+17. A file that exists may still be historically misplaced or semantically obsolete; existence is not sufficient evidence of active authority.
+18. A map/index artifact must not reuse the identity of the canonical content artifact it maps.
+19. Migration of an old artifact should preserve provenance while preventing the obsolete identity from competing with active authority.
+20. A route declaration is not a verified integration contract.
+21. An engine cannot certify its own external dependencies merely by declaring them.
+22. A failed or ambiguous write must not be bypassed with destructive or forceful mutation; obtain a verified current write target first.
+23. Search/index output may be incomplete; direct repository evidence takes precedence when a known path can be read and verified.
 
 ---
 
-# 11. Root Status Rules
+# 10. Root Status Rules
 
 1. `PROJECT_STATUS.md` summarizes evidence; it does not create authority.
 2. `PROJECT_BOOTSTRAP.md` defines the mandatory repository-first review gate.
@@ -232,25 +231,31 @@ The purpose of recording this baseline is to allow future ARGO assessments to me
 14. A conflict may invalidate assumptions outside the file where it was first discovered.
 15. A previously stable domain can be reopened by new relationship evidence.
 16. Connected-baseline completion must precede capability or architecture upgrade.
-17. External valuation estimates are informational only and cannot promote repository status, release status, or technical readiness.
-18. Cross-folder identity collisions must be resolved through evidence-backed classification, not filename renaming alone.
-19. Historical artifacts may be migrated to a clearer namespace when their old identity conflicts with active authority, provided provenance is preserved.
+17. Cross-folder identity collisions must be resolved through evidence-backed classification, not filename renaming alone.
+18. Historical artifacts may be migrated to a clearer namespace when their old identity conflicts with active authority, provided provenance is preserved.
+19. A route is not verified merely because its source and target paths exist.
+20. Engine status must remain bounded by verified dependencies and consumers.
+21. Mutation completion requires post-write read evidence.
 
 ---
 
 # Related Documents
 
 - `PROJECT_BOOTSTRAP.md`
-- `Memory/Engineering_Journal/ENG-004_BUILD_HISTORY.md`
+- `README.md`
+- `START_HERE.md`
+- `SYSTEM_MAP.md`
 - `Repository/REP-001_MASTER_INDEX.md`
 - `Repository/REP-002_REPOSITORY_MAP.md`
 - `Release/VERSION.md`
 - `Logs/CHANGELOG.md`
 - `Architecture/ARC_MAP.md`
 - `Architecture/ARC-001_PLATFORM_ARCHITECTURE.md`
+- `Lifecycle/LIF-001_DOCUMENT_LIFECYCLE.md`
+- `Engine/ENG-010_ENGINE_COORDINATION.md`
+- `Engine/ENG-011_MARITIME_GAME_ENGINE.md`
 - `Core/CORE-003_CONSTITUTION.md`
 - `Governance/GOV-001_GOVERNANCE_FRAMEWORK.md`
-- `Standards/STD-003_CROSS_REFERENCE_STANDARD.md`
 
 ---
 
