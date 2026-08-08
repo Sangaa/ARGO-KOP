@@ -8,7 +8,7 @@ Platform: ARGO KOP
 Knowledge Operating Platform
 
 Document ID: ARC-011
-Version: 1.2.0
+Version: 1.3.0
 Status: Validated / Integrity Hold
 Category: Architecture
 Canonical: Yes
@@ -66,12 +66,12 @@ Repository folders are physical storage locations and MUST NOT silently redefine
 
 # Canonical Principles
 
-- Repository is the canonical storage source.
-- Architecture precedes implementation.
+- Repository is the canonical storage source for persisted engineering state.
+- Architecture precedes implementation where architectural impact exists.
 - Governance governs according to its defined authority.
 - Knowledge is preserved and traceable.
 - Memory supports reasoning without silently overriding canonical knowledge.
-- Runtime executes approved architecture.
+- Runtime executes approved architecture and contracts.
 - Projects extend the platform without redefining its foundations.
 - Conversation or runtime context MUST NOT silently override repository authority.
 
@@ -81,13 +81,14 @@ Components and domains are responsibility boundaries. Their dependency direction
 
 # Canonical Repository Model
 
-Every active canonical artifact SHOULD have:
+Every active canonical artifact SHOULD have, where applicable:
 
 - One primary owner
 - One canonical active path
-- One primary identifier where applicable
+- One primary identifier
 - A traceable version/revision
 - Resolvable references
+- Evidence-backed status
 
 Historical artifacts may be preserved under governed Archive paths and are not active canonical artifacts.
 
@@ -97,7 +98,7 @@ Evolution extends the architecture through governed evidence and decisions. It d
 
 # Canonical Validation
 
-Every architectural review MUST verify:
+Every architectural review MUST verify the applicable scope for:
 
 1. Repository baseline
 2. Governance compliance
@@ -106,21 +107,7 @@ Every architectural review MUST verify:
 5. Canonical identity/path
 6. Traceability
 7. Relevant folder status
-
-# Canonical References
-
-- `Core/CORE-003_CONSTITUTION.md`
-- `Governance/GOV-005_REVIEW_STANDARD.md`
-- `Governance/GOV-009_REPOSITORY_POLICY.md`
-- `Governance/GOV-010_GOVERNANCE_MODEL.md`
-- `Architecture/ARC_MAP.md`
-- `Architecture/ARC-001_PLATFORM_ARCHITECTURE.md`
-- `Architecture/ARC-002_COMPONENT_ARCHITECTURE.md`
-- `Architecture/ARC-004_LAYER_MODEL.md`
-- `Architecture/ARC-006_DEPENDENCY_MODEL.md`
-- `Architecture/ARC-009_ARCHITECTURE_DECISIONS.md`
-- `Architecture/ARC-010_EVOLUTION_MODEL.md`
-- `Repository/REP-001_MASTER_INDEX.md`
+8. Version compatibility
 
 # Canonical Authority Boundary
 
@@ -142,6 +129,8 @@ Repository and Project Artifacts
 
 The higher applicable authority prevails.
 
+ARC-011 does not create authority merely by declaring itself canonical; its canonical status depends on the repository/governance authority that allocates and validates it.
+
 # Integrity State
 
 The Canonical Architecture Model is aligned with the current development baseline, but the Architecture layer remains under repository-wide audit until all active architecture references and folder status records pass validation.
@@ -150,7 +139,7 @@ The Canonical Architecture Model is aligned with the current development baselin
 
 # Guiding Statement
 
-Architecture defines stable boundaries; Governance protects them; the Repository preserves their history and current canonical state.
+Architecture defines stable boundaries; Governance protects them; the Repository preserves their history and current evidence-backed canonical state.
 
 ---
 
