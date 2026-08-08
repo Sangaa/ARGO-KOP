@@ -8,7 +8,7 @@
 
 Platform: ARGO KOP (Knowledge Operating Platform)
 Document ID: BOOTSTRAP-001
-Version: 2.7.0
+Version: 2.8.0
 Status: Validated / Integrity Warning
 Category: Bootstrap / Governance
 Canonical: Yes
@@ -23,7 +23,7 @@ This document is the mandatory initialization entry point for any AI agent, LLM 
 
 **No repository mutation may begin without enough current repository evidence to justify the specific mutation. The required evidence scope is proportional to the impact of the change.**
 
-A successful bootstrap MUST NOT be inferred from `PROJECT_STATUS.md`, release metadata, memory, conversation history, folder names, or another self-declared status file alone.
+A successful bootstrap MUST NOT be inferred from `PROJECT_STATUS.md`, release metadata, memory, conversation history, folder names, ZIP snapshots, or another self-declared status file alone.
 
 ---
 
@@ -129,6 +129,12 @@ Verify every candidate canonical document by the combined evidence of:
 
 If two files claim the same logical identity, resolve ownership before changing either identity.
 
+A duplicate-ID finding MUST be evaluated by at least:
+
+**Document ID + Namespace/Domain + Artifact Class + Canonical Path + Authority**
+
+A repeated numeric identifier in different semantic namespaces is not automatically a collision.
+
 ---
 
 # 8. Mandatory Index and Reference Review
@@ -151,7 +157,7 @@ The repository MUST be treated as a relationship graph, not merely a directory t
 
 For every critical reference or dependency, validate the chain:
 
-**Referenced → Located → Read → Identity Verified → Authority Verified → Relationship Validated → Consumer/Dependency Checked → Mutation Impact Checked → Re-read After Mutation**
+**Referenced → Located → Read → Identity Verified → Authority Verified → Relationship Validated → Consumer/Dependency Checked → Mutation Impact Checked → Re-read After Mutation → Revalidate**
 
 A textual reference or existing path is NOT sufficient to establish a valid dependency.
 
@@ -179,6 +185,9 @@ For repository-wide claims, compare the actual repository state against:
 - Repository indexes
 - Runtime declarations
 - relevant Architecture and Governance authorities
+- current Engine coordination and dependency declarations
+
+Engine routing declarations are not verified integration contracts until their source, target, authority, compatibility and failure behavior are evidenced.
 
 Do not use a self-declared `100% CLEAN BOOT` statement as proof of integrity.
 
@@ -189,6 +198,8 @@ Do not use a self-declared `100% CLEAN BOOT` statement as proof of integrity.
 The Git repository is the authoritative engineering source for repository state unless an explicit governed decision establishes another source for a specific purpose.
 
 External copies, previous ZIP archives, generated summaries and conversation memory MUST NOT silently override current repository reality.
+
+When a repository search/index result conflicts with direct inspection of a known current path, the discrepancy must be treated as an evidence-coverage issue and investigated; the search result must not automatically override the directly readable artifact.
 
 ---
 
@@ -209,6 +220,8 @@ Use the smallest sufficient evidence scope for the requested change:
 Use the structural sequence above across the repository scope required to support the claim. Do not claim 100% without corresponding evidence coverage.
 
 No deletion, rename, duplication, reassignment, normalization, or architectural proposal may skip the evidence required by its impact.
+
+A mutation is not complete until the write target was verified, the write succeeded, the changed artifact was re-read, and the affected relationship/status/index evidence was revalidated.
 
 ---
 
@@ -270,6 +283,10 @@ The bootstrap process MUST report the evaluated state and evidence coverage. It 
 24. Audit-derived rules are candidates until explicitly promoted.
 25. New evidence may reopen a previously reviewed domain.
 26. Simpler valid solutions should replace unnecessarily complex controls when traceability and safety are preserved.
+27. Search/index evidence can be incomplete; direct readable repository evidence must be preserved and the discrepancy investigated.
+28. Engine status must remain bounded by verified dependencies and consumers.
+29. A route declaration is not a verified integration contract.
+30. Failed or ambiguous mutations must not be bypassed with destructive or forceful operations.
 
 ---
 
@@ -281,9 +298,10 @@ After repository mutation:
 2. Update `Repository/REP-001_MASTER_INDEX.md` when active inventory changes.
 3. Update `Repository/REP-002_REPOSITORY_MAP.md` when structure or canonical paths change.
 4. Update `PROJECT_STATUS.md` when project state materially changes.
-5. Record the decision and reason in the appropriate governance/logging artifact when required.
-6. Re-run the applicable bootstrap/integrity gate.
-7. Report unresolved warnings and evidence gaps explicitly.
+5. Update root navigation documents when a material canonical path, phase, authority or integrity rule changes.
+6. Record the decision and reason in the appropriate governance/logging artifact when required.
+7. Re-run the applicable bootstrap/integrity gate.
+8. Report unresolved warnings and evidence gaps explicitly.
 
 A session MUST NOT claim `100% CLEAN BOOT` unless the claimed scope has actually passed its integrity gate.
 
@@ -293,6 +311,7 @@ A session MUST NOT claim `100% CLEAN BOOT` unless the claimed scope has actually
 
 | Version | Date | Description | Author / Authority |
 | :--- | :--- | :--- | :--- |
+| 2.8.0 | 2026-08-08 | Added namespace-aware identity auditing, direct-evidence precedence over incomplete search/index results, engine route verification boundaries, and explicit verified-write/post-write validation requirements; synchronized the live audit method | ARGO Engineering / Repository Audit |
 | 2.7.0 | 2026-08-08 | Replaced blanket full-review-before-any-work rule with proportional evidence gates; added minimum-sufficient-control principle and explicit rule-replacement pathway | ARGO Engineering / Principal Architect |
 | 2.6.0 | 2026-08-08 | Added relationship-graph verification, bidirectional dependency validation, conflict propagation, local-to-global evidence boundary, audit-derived rule promotion and reopen-on-new-evidence controls discovered during live repository audit | ARGO Engineering / Principal Architect |
 | 2.5.0 | 2026-08-08 | Added operational lessons from live repository audit: mutation is not validation, status drift, numeric-sequence caution, cross-layer-first review, tool-limited evidence coverage, and explicit canonicalization of reusable session learning | ARGO Engineering / Principal Architect |
