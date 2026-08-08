@@ -52,6 +52,8 @@ The Models layer shall:
 - Support AI.
 - Support future database implementation.
 - Support API implementation.
+- Support future cross-source knowledge aggregation.
+- Preserve provenance independently of storage technology.
 
 ---
 
@@ -97,6 +99,10 @@ MOD-010
 
 ↓
 
+MOD-011
+
+↓
+
 _FOLDER_STATUS
 
 ---
@@ -123,6 +129,8 @@ MOD-009_VERSION_MODEL.md
 
 MOD-010_MODEL_REFERENCE.md
 
+MOD-011_KNOWLEDGE_SOURCE_MODEL.md
+
 _FOLDER_STATUS.md
 
 ---
@@ -142,6 +150,10 @@ Implementation Independent
 Architecture Compliant
 
 Governance Compliant
+
+Provenance Aware
+
+Source Neutral
 
 ---
 
@@ -193,11 +205,17 @@ RUN-010_RUNTIME_REFERENCE.md
 
 SRV-010_SERVICE_REFERENCE.md
 
+AI/AI-006_MODEL_ADAPTER.md
+
+AI/AI-007_MULTI_MODEL_SUPPORT.md
+
 ---
 
 # Guiding Statement
 
 Models define repository structure.
+
+Source data may come from anywhere, but provenance, classification, validation and authority remain explicit.
 
 Implementation comes later.
 
