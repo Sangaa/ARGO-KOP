@@ -20,11 +20,11 @@ KNW-009
 
 Version
 
-1.1.0
+1.2.0
 
 Status
 
-Approved
+Validated / Integrity Hold
 
 Category
 
@@ -34,13 +34,17 @@ Canonical
 
 Yes
 
+Last Audit
+
+2026-08-08
+
 ---
 
 # Purpose
 
-This document defines how knowledge evolves within ARGO KOP while preserving repository integrity, architectural consistency and governance compliance.
+Defines how knowledge evolves within ARGO KOP while preserving evidence, traceability, architectural consistency and applicable governance authority.
 
-Knowledge evolution is continuous, controlled and fully traceable.
+Knowledge evolution is continuous and reviewable.
 
 ---
 
@@ -51,8 +55,9 @@ Knowledge Evolution shall:
 - Improve knowledge quality.
 - Preserve repository authority.
 - Support continuous learning.
-- Prevent uncontrolled modifications.
-- Maintain long-term consistency.
+- Prevent uncontrolled canonical modification.
+- Maintain useful historical continuity.
+- Prefer the simplest sufficient structure.
 
 ---
 
@@ -60,11 +65,11 @@ Knowledge Evolution shall:
 
 Knowledge evolves.
 
-Truth does not.
+A repository state represents the best validated understanding available at a governed point in time; it is not declared permanently immune to revision.
 
-The repository reflects the best verified understanding available at a given time.
+A later state may supersede an earlier interpretation when stronger evidence, better reasoning or corrected context supports the change.
 
-Every improvement shall preserve history.
+Every material improvement should preserve enough history and reasoning to understand what changed and why.
 
 ---
 
@@ -82,7 +87,15 @@ Validation
 
 ↓
 
+Candidate / Proposed Interpretation
+
+↓
+
 Repository Review
+
+↓
+
+Authority Check
 
 ↓
 
@@ -94,11 +107,7 @@ Relationship Review
 
 ↓
 
-Approval
-
-↓
-
-Repository Publication
+Authorized Publication
 
 ---
 
@@ -120,75 +129,68 @@ Approved Decisions
 
 Validated External Information
 
----
+Detected Errors
 
-# Evolution Rules
-
-Knowledge evolution shall:
-
-Preserve Traceability
-
-Preserve Repository Integrity
-
-Maintain Architecture Alignment
-
-Maintain Governance Compliance
-
-Avoid Knowledge Duplication
-
-Preserve Historical Context
+Superseded Assumptions
 
 ---
 
 # Controlled Evolution
 
-Knowledge updates require:
+Knowledge updates require evidence appropriate to their scope.
 
-Evidence
+For bounded changes, the required evidence may remain local to the affected knowledge and relationships.
 
-Architecture Validation
+For cross-layer or authority-affecting changes, broader validation and the applicable governance approval are required.
 
-Repository Review
+Principal-Owner controlled changes cannot become canonical without the required explicit authorization.
 
-Governance Compliance
+---
 
-Approval
+# Learning vs Authority
 
-Version Update
+ARGO KOP may autonomously:
+
+- detect knowledge gaps;
+- identify contradictions;
+- extract lessons;
+- formulate candidate interpretations;
+- test consistency;
+- propose simpler or stronger knowledge structures.
+
+A learning result or plausible interpretation does not become canonical merely because it is internally consistent or produced by a trusted engine.
+
+Technical write access is not authorization.
 
 ---
 
 # Repository Authority
 
-Only repository-approved knowledge may replace previous authoritative knowledge.
+Only the applicable governed authority may publish a canonical knowledge change.
 
-Conversation context shall never modify repository knowledge directly.
+Conversation context, working memory and transient reasoning may generate candidates but do not directly replace canonical repository knowledge.
 
 ---
 
 # Historical Preservation
 
-Previous knowledge versions shall remain:
+Previous authoritative knowledge states should remain traceable when their history is materially useful.
 
-Accessible
+Archive, repository history or another governed retention mechanism may be used.
 
-Traceable
+Destructive deletion is not automatically prohibited; retention should be proportional to traceability, legal, security and operational requirements.
 
-Recoverable
-
-Referenced
-
-Deletion is prohibited.
-
-Archive replaces deletion.
+Removing an artifact must not be used to erase contradictory evidence or conceal the reason for a material change.
 
 ---
 
 # Evolution Validation
 
-Every knowledge evolution shall verify:
+For each material evolution, verify as applicable:
 
 Knowledge Quality
+
+Evidence Quality
 
 Knowledge Relationships
 
@@ -198,49 +200,42 @@ Architecture Alignment
 
 Governance Compliance
 
+Authority Requirement
+
 Version Consistency
 
 Historical Continuity
 
+Downstream Impact
+
 ---
 
-# Repository Integrity
+# Reviewability
 
-Knowledge evolution shall strengthen:
+This document and its rules are themselves reviewable.
 
-Reasoning
-
-Decision Quality
-
-Knowledge Reuse
-
-Platform Stability
-
-Future Engineering
+If a rule is shown to be incorrect, contradictory, unnecessarily complex, or replaceable by a simpler control with equal or better protection, the rule may be revised through the applicable governance process.
 
 ---
 
 # Related Documents
 
-KNW-001_KNOWLEDGE_MODEL
-
-KNW-004_KNOWLEDGE_LIFECYCLE
-
-KNW-005_KNOWLEDGE_GOVERNANCE
-
-KNW-008_KNOWLEDGE_TRACEABILITY
-
-REP-008_REPOSITORY_BASELINE
-
-ARC-010_EVOLUTION_MODEL
-
-CORE-003_CONSTITUTION
+- `Knowledge/KNW-001_KNOWLEDGE_MODEL.md`
+- `Knowledge/KNW-004_KNOWLEDGE_LIFECYCLE.md`
+- `Knowledge/KNW-005_KNOWLEDGE_GOVERNANCE.md`
+- `Knowledge/KNW-008_KNOWLEDGE_TRACEABILITY.md`
+- `Repository/REP-001_MASTER_INDEX.md`
+- `Repository/REP-002_REPOSITORY_MAP.md`
+- `Engine/ENG-007_LEARNING_ENGINE.md`
+- `Memory/MEM-009_MEMORY_EVOLUTION.md`
+- `Decision/DEC-009_DECISION_GOVERNANCE.md`
+- `Core/CORE-003_CONSTITUTION.md`
 
 ---
 
 # Guiding Statement
 
-Knowledge should continuously improve without ever losing its history.
+**Knowledge should improve from evidence and experience while remaining traceable, reviewable and governed.**
 
 ---
 
