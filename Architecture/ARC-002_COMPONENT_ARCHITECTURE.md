@@ -20,296 +20,109 @@ ARC-002
 
 Version
 
-1.1.0
+1.2.0
 
 Status
 
-Approved
+Validated / Integrity Hold
 
 Category
 
 Architecture
 
+Development Baseline
+
+3.2.1
+
+Latest Official Release
+
+1.0.0
+
+Last Audit
+
+2026-08-08
+
 ---
 
 # Purpose
 
-This document defines the internal component architecture of ARGO KOP.
-
-It describes the major platform components, their responsibilities, ownership boundaries, and interaction rules.
-
-Every repository artifact shall belong to exactly one architectural component.
-
----
-
-# Objectives
-
-The component architecture shall:
-
-- Separate responsibilities.
-- Prevent duplicated ownership.
-- Support independent evolution.
-- Simplify maintenance.
-- Preserve architectural consistency.
-
----
+Defines component responsibilities and ownership boundaries. Components are logical responsibility domains and MUST NOT be inferred solely from repository folders.
 
 # Component Model
 
-ARGO KOP is composed of the following primary components.
-
----
-
 ## Core
+Identity, constitution, permanent foundations.
 
-Purpose
-
-Defines platform identity and permanent foundations.
-
-Responsibilities
-
-- Manifest
-- Identity
-- Constitution
-- Core Principles
-- Cognitive Model
-- Platform Charter
-- Platform Philosophy
-
-Dependencies
-
-None
-
----
+Depends on: None.
 
 ## Governance
+Rules, policies, metadata, naming, review, traceability.
 
-Purpose
-
-Defines repository governance and engineering standards.
-
-Responsibilities
-
-- Repository Policies
-- Naming Standards
-- Metadata Standards
-- Review Standards
-- Versioning
-- Traceability
-
-Depends On
-
-Core
-
----
+Depends on: Core.
 
 ## Architecture
+Structural design, component boundaries, layer model, integration, dependency and architecture decisions.
 
-Purpose
-
-Defines the platform architecture.
-
-Responsibilities
-
-- Platform Architecture
-- Component Architecture
-- Layer Model
-- Integration Model
-- Dependency Model
-- Architecture Decisions
-
-Depends On
-
-Core
-
-Governance
-
----
+Depends on: Core, Governance.
 
 ## Repository
+Canonical storage, index, map and navigation.
 
-Purpose
+Depends on: Core, Governance, Architecture.
 
-Provides repository organization and navigation.
+## Knowledge / Specifications / Standards
+Structured reusable knowledge and specifications.
 
-Responsibilities
-
-- Repository Index
-- Repository Layout
-- Repository Map
-- Component Catalog
-- Navigation
-
-Depends On
-
-Core
-
-Governance
-
-Architecture
-
----
-
-## Knowledge
-
-Purpose
-
-Stores structured organizational knowledge.
-
-Responsibilities
-
-- Knowledge Models
-- Knowledge Domains
-- Knowledge Relationships
-- Knowledge Evolution
-
-Depends On
-
-Repository
-
-Architecture
-
----
+Depends on: Repository, Architecture, applicable Governance rules.
 
 ## Memory
+Working, decision, project and historical memory.
 
-Purpose
+Depends on: Knowledge, Repository, applicable Governance rules.
 
-Preserves organizational memory.
+## Cognition / Engine
+Analysis, reasoning and decision support.
 
-Responsibilities
+Depends on: Knowledge, Memory, Repository, approved Architecture interfaces.
 
-- Working Memory
-- Project Memory
-- Decision Memory
-- Historical Context
+## Runtime / Services / AI
+Execution, boot, configuration, context loading, services and AI integration.
 
-Depends On
+Depends on: Core, Repository, Memory, Cognition / Engine and approved interfaces.
 
-Knowledge
+## Projects / Applied Artifacts
+Project-specific implementation and applied knowledge.
 
-Repository
+Depends on: approved platform capabilities and documented interfaces.
 
----
+Projects MUST NOT redefine Core, Governance or Architecture.
 
-## Runtime
+# Ownership Rule
 
-Purpose
-
-Controls platform execution.
-
-Responsibilities
-
-- Boot Sequence
-- Runtime Configuration
-- Session Initialization
-- Context Loading
-
-Depends On
-
-Core
-
-Repository
-
-Memory
-
----
-
-## Projects
-
-Purpose
-
-Hosts independent projects implemented on top of ARGO KOP.
-
-Responsibilities
-
-- Project Structure
-- Project Metadata
-- Project Knowledge
-- Project Memory
-
-Depends On
-
-All platform services.
-
----
-
-# Component Ownership
-
-Each repository artifact shall have:
-
-- One primary owner.
-- One architectural location.
-- One document identifier.
-
-Duplicate ownership is prohibited.
-
----
+Every active canonical artifact MUST have one primary responsibility and one authoritative owner. A repository file may reference multiple components, but reference does not transfer ownership.
 
 # Communication Rules
 
-Components communicate only through documented interfaces.
+Components communicate through documented interfaces and governed references. Undocumented dependencies are prohibited.
 
-Cross-component dependencies shall remain minimal.
+# Dependency Rule
 
-Undocumented dependencies are prohibited.
+The component dependency direction MUST remain compatible with `ARC-004_LAYER_MODEL.md` and `ARC-006_DEPENDENCY_MODEL.md`.
 
----
-
-# Dependency Rules
-
-Dependencies shall always flow from higher abstraction to lower implementation.
-
-Lower components shall never redefine higher-level responsibilities.
-
----
-
-# Component Evolution
-
-Components may evolve independently.
-
-Evolution shall preserve:
-
-- Compatibility
-- Repository Integrity
-- Traceability
-- Architectural Consistency
-
----
-
-# Repository Principle
-
-Components are organized by responsibility rather than implementation technology.
-
-The repository defines ownership.
-
-Technology follows architecture.
-
----
+Physical folder placement is not sufficient evidence of a component dependency.
 
 # Related Documents
 
-ARC-001_PLATFORM_ARCHITECTURE
-
-ARC-003_INFORMATION_FLOW
-
-ARC-004_LAYER_MODEL
-
-ARC-006_DEPENDENCY_MODEL
-
-ARC-007_INTEGRATION_MODEL
-
-CORE-003_CONSTITUTION
-
-GOV-010_GOVERNANCE_MODEL
-
-REP-001_MASTER_INDEX
-
----
-
-# Guiding Statement
-
-Clear component boundaries produce maintainable systems.
+- `Architecture/ARC_MAP.md`
+- `Architecture/ARC-001_PLATFORM_ARCHITECTURE.md`
+- `Architecture/ARC-003_INFORMATION_FLOW.md`
+- `Architecture/ARC-004_LAYER_MODEL.md`
+- `Architecture/ARC-006_DEPENDENCY_MODEL.md`
+- `Architecture/ARC-007_INTEGRATION_MODEL.md`
+- `Architecture/ARC-009_ARCHITECTURE_DECISIONS.md`
+- `Core/CORE-003_CONSTITUTION.md`
+- `Governance/GOV-010_GOVERNANCE_MODEL.md`
+- `Repository/REP-001_MASTER_INDEX.md`
 
 ---
 
