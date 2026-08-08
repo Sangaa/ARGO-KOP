@@ -2,133 +2,76 @@
 
 ---
 
-# MASTER INDEX
+# ARGO KOP - MASTER REPOSITORY INDEX
 
 ---
 
-Platform: ARGO KOP (Knowledge Operating Platform)  
-Document ID: REP-001  
-Version: 1.2.0  
-Status: Approved  
-Category: Repository  
-Canonical: Yes  
-Priority: Critical  
+Platform: ARGO KOP (Knowledge Operating Platform) 
+Document ID: REP-001 
+Version: 1.3.0 
+Status: Approved 
+Category: Root Baseline / Repository Index 
+Canonical: Yes 
+Priority: Absolute / Mandatory 
+Last Audit Date: Aug 08, 2026 
 
 ---
 
-# Purpose
+## 1. System Framework Overview
 
-This document is the canonical navigation entry point for the entire ARGO KOP repository.
-
-Every folder, specification, engine, service, model, and runtime artifact inside the repository shall be reachable directly or indirectly through this Master Index. It guarantees strict repository integrity, deterministic traceability, and continuous knowledge continuity across all operational components.
+This document serves as the absolute canonical source of truth for all registered and verified file paths within the ARGO KOP platform. Any artifact, directory, or reference not explicitly cataloged in this matrix is treated as non-existent by the Context Engine (`ENG-009`) and shall be automatically blocked by the Validation Service (`SRV-005`).
 
 ---
 
-# Core Repository Structure
+## 2. Certified Repository File Tree Matrix
 
-ARGO-KOP/
-├── Root Baseline
-│   ├── PROJECT_BOOTSTRAP.md
-│   ├── START_HERE.md
-│   ├── README.md
-│   ├── VISION.md
-│   ├── ROADMAP.md
-│   ├── SECURITY.md
-│   ├── PROJECT_STATUS.md
-│   ├── CONTRIBUTE.md
-│   ├── CODE_OF_CONDUCT.md
-│   ├── LICENSE.md
-│   └── NOTICE.md
-├── Governance & Standards
-│   ├── Governance/
-│   ├── Standards/
-│   └── Lifecycle/
-├── System Core & Specifications
-│   ├── Specs/
-│   ├── Docs/
-│   ├── Models/
-│   └── Architecture/
-├── Intelligence & Processing
-│   ├── Engine/
-│   ├── Intelligence/
-│   ├── Cognition/
-│   └── Memory/
-├── Execution & Operational Services
-│   ├── Services/
-│   ├── Runtime/
-│   ├── Interfaces/
-│   └── Plugins/
-└── Quality, Integration & Maintenance
-├── Quality/
-├── Repository/
-├── Templates/
-├── Projects/
-├── Release/
-└── Future/
+### 2.1 Root Baseline Layers
+*   `PROJECT_BOOTSTRAP.md` (BOOTSTRAP-001) - Master initialization entry point for AI instances and runners.
+*   `PROJECT_STATUS.md` (PROJECT_STATUS) - Tracks active platform milestones and version evolution metrics.
+*   `README.md` - High-level system entry point and core tier architectural overview.
+*   `VISION.md` - Core platform philosophy and long-term knowledge retention roadmap.
+*   `CONTRIBUTING.md` - Onboarding pipeline and operational guidelines for human contributors.
+*   `CODE_OF_CONDUCT.md` - Establishes empirical engineering standard mechanisms and dispute resolution culture.
 
+### 2.2 Governance & Policy Tier (Path: Governance/)
+*   `Governance/GOV-001_GOVERNANCE_FRAMEWORK.md` - Framework governing chain of authority and structural gates.
+*   `Governance/GOV-004_DOCUMENT_METADATA.md` - Enforces structural block validation criteria and notation formatting rules.
+*   `Governance/GOV-006_NAMING_CONVENTION_STANDARD.md` - Alphanumeric standard notation and prefix matrix assignment boundaries.
+*   `Governance/GOV-010_GOVERNANCE_MODEL.md` - Controls structural delegation and architectural verification loops.
+*   `Governance/_FOLDER_STATUS.md` - Audit metrics log evaluating folder approval tiers.
+
+### 2.3 Runtime & Execution Tier (Path: Runtime/)
+*   `Runtime/README.md` - Runtime Handbook tracking deployment execution cycles and pipeline filters.
+*   `Runtime/RUN-001_BOOT_SEQUENCE.md` - Maps the mandatory transactional baseline state commitment routing sequence.
+*   `Runtime/RUN-002_INITIALIZATION.md` - Session orchestration parameters and engineer engineering queue construction blocks.
+*   `Runtime/RUN-003_CONFIGURATION.md` - Deterministic configuration matrix and isolation boundaries.
+*   `Runtime/RUN-004_CONTEXT_LOADING.md` - Manages parsing context loading criteria and temporal node synchronization filters.
+*   `Runtime/RUN-005_RUNTIME_WORKFLOW.md` - Task execution scheduler prioritizing operations according to structural directed graph models.
+*   `Runtime/RUN-006_AI_PROTOCOL.md` - Imposes strict formatting rules ensuring atomic complete generations.
+*   `Runtime/RUN-009_RECOVERY.md` - System disaster recovery specification handling state rollbacks.
+*   `Runtime/_FOLDER_STATUS.md` - Folder verification metrics checkpoint log.
+
+### 2.4 Core Layer Models & Specifications (Path: Architecture/)
+*   `Architecture/CORE-000_PLATFORM_ARCHITECTURE.md` - Ultimate guide specifying the platform components.
+*   `Architecture/CORE-002_ARGO_IDENTITY.md` - Conceptual definition anchoring ARGO as an empirical cognitive engine stack.
+*   `Architecture/CORE-003_CONSTITUTION.md` - Immutable repository laws dictating structural operations.
+*   `Architecture/ARC-004_LAYER_MODEL.md` - Hierarchical tier specification charting downward dependency execution flows.
+*   `Architecture/ARC-006_DEPENDENCY_MODEL.md` - Architectural barrier rule protocols preventing recursive layout dependencies.
 
 ---
 
-# Complete Directory Map & Status Index
+## 3. Related Documents
 
-| Directory | Primary Domain & Responsibility | Status | Primary Canonical Spec |
-| :--- | :--- | :--- | :--- |
-| **`Root`** | Root initialization, bootstrap rules, core status & security baseline | ACTIVE | `PROJECT_BOOTSTRAP.md` |
-| **`Governance/`** | Repository governance rules, approval flows, and authority policies | ACTIVE | `GOV-001_GOVERNANCE_FRAMEWORK.md` |
-| **`Standards/`** | Standards for naming, metadata, lifecycle, and document classification | ACTIVE | `GOV-004_DOCUMENT_METADATA.md` |
-| **`Lifecycle/`** | Lifecycle definitions for documents, repository artifacts, and knowledge | ACTIVE | `GOV-005_DOCUMENT_LIFECYCLE.md` |
-| **`Specs/`** | Functional, structural, and technical definitions and specifications | ACTIVE | `01-Knowledge-Organization.md` |
-| **`Docs/`** | High-level system descriptions, architecture overviews, and glossaries | ACTIVE | `DOC-001_PROJECT_OVERVIEW.md` |
-| **`Models/`** | Conceptual, logical, and structural knowledge domain models | ACTIVE | `MOD-001_KNOWLEDGE_MODEL.md` |
-| **`Engine/`** | Core cognitive execution engines (Reasoning, Analysis, Learning) | ACTIVE | `ENG-001_REASONING_ENGINE.md` |
-| **`Intelligence/`** | Specialized intelligence modules, pattern extraction, and synthesis | ACTIVE | `INT-001_INTELLIGENCE_LAYER.md` |
-| **`Cognition/`** | Contextual awareness, cognitive navigation, and semantic routing | ACTIVE | `COG-001_COGNITIVE_NAVIGATION.md` |
-| **`Memory/`** | Context retention, engineering journal, and historical continuity | ACTIVE | `MEM-004_MEMORY_LIFECYCLE.md` |
-| **`Services/`** | Operational capabilities, orchestration, update services, and APIs | ACTIVE | `SRV-001_SERVICE_ARCHITECTURE.md` |
-| **`Runtime/`** | Execution flows, state management, and real-time process execution | ACTIVE | `RNT-001_RUNTIME_ENVIRONMENT.md` |
-| **`Interfaces/`** | External and internal communication contracts, protocols, and APIs | ACTIVE | `INTF-001_INTERFACE_SPEC.md` |
-| **`Plugins/`** | Modular extensions, external integrations, and tool adapters | ACTIVE | `PLG-001_PLUGIN_ARCHITECTURE.md` |
-| **`Quality/`** | Quality assurance, verification standards, and validation suites | ACTIVE | `QLT-001_QUALITY_ASSURANCE.md` |
-| **`Repository/`** | Repository structure, master indexes, maps, and integrity checks | ACTIVE | `REP-001_MASTER_INDEX.md` |
-| **`Templates/`** | Standardized markdown templates for document creation and updates | ACTIVE | `TEMPLATE-001_DOCUMENT.md` |
-| **`Projects/`** | Active engineering project plans, work packages, and sprints | ACTIVE | `PRJ-001_PROJECT_INDEX.md` |
-| **`Release/`** | Release notes, deployment instructions, and quick start guides | ACTIVE | `REL-004_QUICK_START.md` |
-| **`Future/`** | Strategic roadmap expansion, future research, and architectural vision | ACTIVE | `FUT-001_FUTURE_ARCHITECTURE.md` |
+*   `PROJECT_BOOTSTRAP.md`
+*   `Repository/REP-002_REPOSITORY_MAP.md`
+*   `Governance/GOV-006_NAMING_CONVENTION_STANDARD.md`
 
 ---
 
-# Verification & Compliance Rules
+## 4. Guiding Statement
 
-1. **Mandatory Indexing:** Every newly added directory or canonical file MUST be registered inside `REP-001_MASTER_INDEX.md` and linked in `REP-002_REPOSITORY_MAP.md`.
-2. **Metadata Standard:** Every document in any directory MUST contain the metadata header as defined in `GOV-004`.
-3. **Immutability of Canonical Baseline:** Canonical specifications registered here cannot be altered or removed without triggering the formal update workflow defined in `SRV-009_UPDATE_SERVICE.md`.
+A structurally coherent index eliminates index fragmentation and ensures total runtime determinism.
 
 ---
 
-# Revision History
-
-| Version | Date | Description | Author / Authority |
-| :--- | :--- | :--- | :--- |
-| 1.0.0 | 2026-08-01 | Initial Master Index Baseline | ARGO Foundation |
-| 1.1.0 | 2026-08-04 | Added Engine, Services, and Memory cross-references | ARGO Foundation |
-| 1.2.0 | 2026-08-06 | Full repository synchronization incorporating Runtime, Intelligence, Models, Plugins, Interfaces, and Quality domains | ARGO Engineering |
-| `Intelligence/INT-001_INTELLIGENCE_LAYER.md` | `INT-001` | Approved | Pattern extraction & synthesis architecture |
-| `Intelligence/INT-002_PATTERN_EXTRACTION.md` | `INT-002` | Approved | Specialized pattern extraction pipeline |
-| `Intelligence/INT-003_ANOMALY_DETECTOR.md` | `INT-003` | Approved | Structural drift & anomaly detection |
-
-### Engine Layer (`Engine/`)
-
-| Path / File Name | Document ID | Status | Description |
-| :--- | :--- | :--- | :--- |
-| `Engine/ENG-001_REASONING_ENGINE.md` | `ENG-001` | Approved | Primary Cognitive & Deduction Engine (v3.1.0) |
-| `Engine/ENG-002_DECISION_ENGINE.md` | `ENG-002` | Approved | Deterministic & Risk-Evaluated Decision Engine |
-| `Engine/ENG-003_ANALYSIS_ENGINE.md` | `ENG-003` | Approved | Structural & Pattern Decomposition Engine |
-| `Engine/ENG-004_VALIDATION_ENGINE.md` | `ENG-004` | Approved | Real-Time Schema & Integrity Gatekeeper |
-| `Engine/ENG-005_PLANNING_ENGINE.md` | `ENG-005` | Approved | Sequential Execution Plan & Task Graph Engine |
-| `Engine/ENG-006_EXECUTION_ENGINE.md` | `ENG-006` | Approved | Transactional Task & Runtime Execution Engine |
-| `Engine/ENG-007_LEARNING_ENGINE.md` | `ENG-007` | Approved | Continuous Lesson Capture & Evolution Engine |
-| `Engine/ENG-008_MEMORY_ENGINE.md` | `ENG-008` | Approved | Session, Working & Canonical Memory Manager |
-| `Engine/ENG-009_CONTEXT_ENGINE.md` | `ENG-009` | Approved | Context Hydration & Isolation Fence Engine |
-| `Engine/ENG-010_ENGINE_COORDINATION.md` | `ENG-010` | Approved | Central Neural Dispatcher & Multi-Engine Router |
-| `Engine/ENG-011_MARITIME_GAME_ENGINE.md` | `ENG-011` | Approved | ARGO GEM Gamified Experiential Mentor Engine |
-| `Engine/_FOLDER_STATUS.md` | N/A | Approved | Directory Audit & Inventory Log (v2.0.0) |
+End of Document
