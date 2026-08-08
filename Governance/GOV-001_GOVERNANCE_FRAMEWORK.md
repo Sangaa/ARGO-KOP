@@ -4,77 +4,110 @@
 
 # GOVERNANCE FRAMEWORK
 
----
-
-Platform: ARGO KOP (Knowledge Operating Platform) 
-Document ID: GOV-001 
-Version: 1.1.0 
-Status: Approved 
-Category: Governance 
-Canonical: Yes 
-Priority: Critical 
-Last Audit Date: Aug 08, 2026 
+Platform: ARGO KOP (Knowledge Operating Platform)
+Document ID: GOV-001
+Version: 1.2.0
+Status: Validated / Governance Re-audit
+Category: Governance
+Canonical: Yes
+Priority: Critical
+Last Audit Date: Aug 08, 2026
 
 ---
 
 # Purpose
 
-This document defines the core governance framework, chain of authority, and verification gates for the ARGO KOP platform. 
+Defines the governance framework, chain of authority and verification gates for ARGO KOP.
 
-It establishes absolute repository discipline, preventing systemic drift and ensuring that no structural changes occur without full deterministic verification.
-
----
+Governance prevents systemic drift while allowing safe, evidence-based engineering changes.
 
 # Authority Chain
 
-Governance Layer
+Constitution / applicable higher authority
+
 ↓
-Architecture Layer
+
+Governance
+
 ↓
-Component Architecture
+
+Canonical Architecture
+
 ↓
+
+Runtime / Components
+
+↓
+
 Operational Projects
+
 ↓
+
 Artifact Mutation
 
-Higher architectural authority always prevails over implementation context.
-
----
+Higher authority prevails when layers conflict.
 
 # Core Governance Policies
 
-1. **The Repository Reality Principle:**
-Repository reality always overrides model assumptions, conversation history, and external reasoning vectors.
+## 1. Repository Reality Principle
 
-2. **The Change Control Gate:**
-All repository modifications require structured implementation:
-Review → Decision Vector → Complete Canonical Rewrite → Validation Check → Verification Approval.
+Repository reality overrides unsupported model assumptions and historical claims. Current user intent remains relevant as task input but cannot override repository authority.
 
-3. **Folder Integrity Rule:**
-Every major directory layer MUST contain a synchronized `_FOLDER_STATUS.md` document tracking approval history, pending milestones, and open tasks.
+## 2. Change Control Gate
 
----
+Repository modifications require, as applicable:
+
+Review
+
+↓
+
+Evidence / Scope
+
+↓
+
+Decision
+
+↓
+
+Authorized Change
+
+↓
+
+Validation
+
+↓
+
+Verification / Traceability
+
+Complete-file rewrite is preferred when it is the safest and clearest method, but it is not an unconditional governance requirement.
+
+## 3. Folder Integrity Rule
+
+Every governed major directory should contain a synchronized `_FOLDER_STATUS.md` where the repository structure designates one. Status must reflect current evidence and must not certify work that was not validated.
+
+## 4. Authority Boundary
+
+Governance defines constraints. It does not silently redefine constitutional authority or canonical architecture.
 
 # Validation Framework
 
-The Validation Service (`SRV-005`) and Validation Engine (`ENG-004`) shall enforce real-time blocks upon detection of any governance or architecture violation.
+Applicable validation mechanisms shall block acceptance when a governance, architecture or integrity violation is detected.
 
-* **Level 1 Violation:** Structural Integrity Mismatch -> Termination of Process Flow.
-* **Level 2 Violation:** Broken Cross-Reference Matrix -> Execution Block.
-
----
+- Structural integrity failure → HOLD / blocked acceptance.
+- Broken required cross-reference → HOLD / blocked acceptance.
+- Authority conflict → HOLD / blocked acceptance.
+- Material ambiguity → HOLD until resolved.
 
 # Related Documents
 
-* `CORE-003_CONSTITUTION.md`
-* `Governance/GOV-010_GOVERNANCE_MODEL.md`
-* `Services/SRV-005_VALIDATION_SERVICE.md`
-
----
+- `Core/CORE-003_CONSTITUTION.md`
+- `Governance/GOV-005_REVIEW_STANDARD.md`
+- `Governance/GOV-010_GOVERNANCE_MODEL.md`
+- `Services/SRV-005_VALIDATION_SERVICE.md`
 
 # Guiding Statement
 
-Governance exists before intelligence. Architecture controls behavior.
+Governance protects intelligent evolution through authority boundaries, evidence and validation.
 
 ---
 
