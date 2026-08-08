@@ -8,7 +8,7 @@
 
 Platform: ARGO KOP (Knowledge Operating Platform)
 Document ID: PROJECT_STATUS
-Version: 3.2.7
+Version: 3.2.8
 Status: INTEGRITY WARNING / CONNECTED-BASELINE AUDIT
 Category: Root Baseline
 Canonical: Yes
@@ -129,12 +129,15 @@ Only after this gate passes may the project move from **Connected Baseline Stabi
 | Repository-wide reference resolution | OPEN |
 | Bidirectional relationship validation | ACTIVE / OPEN |
 | Conflict propagation analysis | ACTIVE / OPEN |
-| Architecture cross-layer validation | OPEN |
+| Architecture cross-layer validation | OPEN / RE-AUDIT AFTER IDENTITY CORRECTION |
+| Architecture map identity collision | RESOLVED / POST-CHANGE VALIDATION REQUIRED |
+| Standards cross-reference identity collision | RESOLVED BY MIGRATION TO `STD-003`; CONSUMER VALIDATION OPEN |
 | Knowledge cross-layer validation | OPEN / INTEGRITY HOLD |
 | Memory cross-layer validation | OPEN / INTEGRITY HOLD |
 | Runtime/Engine/AI/Services validation | OPEN / PARTIALLY REVALIDATED |
 | Models/Lifecycle/Blueprints validation | OPEN / INTEGRITY HOLD |
 | Projects/Release validation | OPEN |
+| Changelog / Version authority alignment | UPDATED / REVALIDATION REQUIRED |
 | Evidence coverage for complete repository | NOT YET CERTIFIED |
 | Tool-limited evidence coverage | ACTIVE CONSTRAINT WHEN RESULTS ARE TRUNCATED OR INCOMPLETE |
 | Post-mutation validation | MANDATORY BEFORE COMPLETION CLAIM |
@@ -163,6 +166,8 @@ A previously reviewed domain may be reopened whenever new evidence changes the i
 - **Current Development Baseline:** `3.2.1`
 
 A development baseline is not an official release.
+
+`Logs/CHANGELOG.md` records release history and significant development evolution but does not create release authority.
 
 ---
 
@@ -202,6 +207,10 @@ The purpose of recording this baseline is to allow future ARGO assessments to me
 14. New evidence may reopen a previously reviewed domain.
 15. Connected-baseline completion is a separate gate from feature readiness or release readiness.
 16. Valuation estimates must remain separate from repository authority and technical completion claims.
+17. A duplicate identity can exist in an apparently unrelated physical domain; identity audits must therefore cross folder boundaries.
+18. A file that exists may still be historically misplaced or semantically obsolete; existence is not sufficient evidence of active authority.
+19. A map/index artifact must not reuse the identity of the canonical content artifact it maps.
+20. Migration of an old artifact should preserve provenance while preventing the obsolete identity from competing with active authority.
 
 ---
 
@@ -224,6 +233,8 @@ The purpose of recording this baseline is to allow future ARGO assessments to me
 15. A previously stable domain can be reopened by new relationship evidence.
 16. Connected-baseline completion must precede capability or architecture upgrade.
 17. External valuation estimates are informational only and cannot promote repository status, release status, or technical readiness.
+18. Cross-folder identity collisions must be resolved through evidence-backed classification, not filename renaming alone.
+19. Historical artifacts may be migrated to a clearer namespace when their old identity conflicts with active authority, provided provenance is preserved.
 
 ---
 
@@ -234,9 +245,12 @@ The purpose of recording this baseline is to allow future ARGO assessments to me
 - `Repository/REP-001_MASTER_INDEX.md`
 - `Repository/REP-002_REPOSITORY_MAP.md`
 - `Release/VERSION.md`
+- `Logs/CHANGELOG.md`
 - `Architecture/ARC_MAP.md`
+- `Architecture/ARC-001_PLATFORM_ARCHITECTURE.md`
 - `Core/CORE-003_CONSTITUTION.md`
 - `Governance/GOV-001_GOVERNANCE_FRAMEWORK.md`
+- `Standards/STD-003_CROSS_REFERENCE_STANDARD.md`
 
 ---
 
