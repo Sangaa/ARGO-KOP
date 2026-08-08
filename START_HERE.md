@@ -22,15 +22,15 @@ Do not begin by assuming that folder names, previous sessions, ZIP snapshots, or
 
 ↓
 
+**PROJECT STATUS**
+
+↓
+
 **SYSTEM MAP**
 
 ↓
 
-**PLATFORM IDENTITY**
-
-↓
-
-**PLATFORM MANIFEST**
+**PLATFORM IDENTITY / MANIFEST**
 
 ↓
 
@@ -42,7 +42,7 @@ Do not begin by assuming that folder names, previous sessions, ZIP snapshots, or
 
 ↓
 
-**ARCHITECTURE / COGNITION / RUNTIME**
+**ARCHITECTURE / LIFECYCLE / COGNITION / MODELS / INTERFACES / RUNTIME / ENGINE**
 
 ↓
 
@@ -58,33 +58,13 @@ The repository is the current evidence source. Session memory, historical snapsh
 
 If required content is unavailable, record the evidence gap rather than filling it by assumption.
 
----
-
 ## Current Phase
 
 ARGO KOP is currently under **Connected-Baseline Integrity Validation**.
 
-The current objective is to establish verified relationships between critical files, identities, authorities, indexes, status claims, and cross-layer dependencies before capability expansion.
+Recent work has corrected and revalidated selected identity and authority boundaries, including the repository index/map synchronization, Lifecycle identity migration to `LIF-001`, and Engine coordination/learning specifications `ENG-010` and `ENG-011`.
 
-Therefore:
-
-**Do not interpret the existence of this file as proof that the repository is complete.**
-
----
-
-## Core Entry Points
-
-- [`README.md`](README.md) — repository overview
-- [`VISION.md`](VISION.md) — long-term vision and principles
-- [`PROJECT_BOOTSTRAP.md`](PROJECT_BOOTSTRAP.md) — mandatory repository-first boot protocol
-- [`SYSTEM_MAP.md`](SYSTEM_MAP.md) — high-level system relationship model
-- [`Core/CORE-000_PLATFORM_IDENTITY.md`](Core/CORE-000_PLATFORM_IDENTITY.md) — platform identity
-- [`Core/CORE-001_ARGO_MANIFEST.md`](Core/CORE-001_ARGO_MANIFEST.md) — platform manifest
-- [`Repository/REP-001_MASTER_INDEX.md`](Repository/REP-001_MASTER_INDEX.md) — master navigation layer
-- [`Repository/REP-002_REPOSITORY_MAP.md`](Repository/REP-002_REPOSITORY_MAP.md) — repository relationship map
-- [`Release/VERSION.md`](Release/VERSION.md) — release/development version authority
-
----
+These are bounded audit results. They do not establish global repository PASS.
 
 ## Before You Modify Anything
 
@@ -93,11 +73,19 @@ Therefore:
 3. Read the files involved in the proposed change.
 4. Verify identities and authority ownership.
 5. Trace affected references and consumers.
-6. Make the smallest justified change.
-7. Re-read the changed artifacts.
-8. Revalidate affected indexes, status claims, and relationships.
+6. Distinguish verified evidence from inferred or unavailable evidence.
+7. Make the smallest justified change.
+8. Re-read every changed artifact after writing.
+9. Revalidate affected indexes, status claims, and relationships.
+10. Check whether the change propagates into upstream or downstream consumers.
 
----
+## Review Loop
+
+Use the following operational loop during repository review:
+
+**Read Reality → Detect Contradiction → Prove the Contradiction → Correct → Review Impact → Re-read → Verify No New Contradiction → Continue**
+
+Do not mark a change complete merely because the write succeeded.
 
 ## Ready State
 
