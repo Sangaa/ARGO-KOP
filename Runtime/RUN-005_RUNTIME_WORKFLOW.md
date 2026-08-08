@@ -4,319 +4,158 @@
 
 # RUNTIME WORKFLOW
 
----
-
-Platform
-
-ARGO KOP
-
+Platform: ARGO KOP
 Knowledge Operating Platform
 
----
-
-Document ID
-
-RUN-005
-
-Version
-
-1.1.0
-
-Status
-
-Approved
-
-Category
-
-Runtime
-
-Canonical
-
-Yes
-
-Priority
-
-Critical
+Document ID: RUN-005
+Version: 1.2.0
+Status: Validated / Integrity Hold
+Category: Runtime
+Canonical: Yes
+Priority: Critical
+Development Baseline: 3.2.1
+Latest Official Release: 1.0.0
+Last Audit: 2026-08-08
 
 ---
 
 # Purpose
 
-This document defines the complete Runtime Workflow executed by ARGO KOP.
-
-The workflow guarantees deterministic repository engineering from repository synchronization until engineering completion.
-
----
-
-# Objectives
-
-The Runtime Workflow shall:
-
-Synchronize the repository.
-
-Load runtime context.
-
-Determine engineering priority.
-
-Execute engineering.
-
-Validate results.
-
-Continue automatically.
-
-Maintain repository consistency.
-
----
+Defines the governed Runtime Workflow executed by ARGO KOP from repository synchronization through an approved engineering operation.
 
 # Workflow Overview
 
-Receive Repository
+Receive / Select Repository State
 
 ↓
 
-Repository Synchronization
+Synchronize and Validate
 
 ↓
 
-Repository Scan
+Load Current Context
 
 ↓
 
-Internal Knowledge Update
+Determine Valid Engineering Target
 
 ↓
 
-Repository Validation
+Execute Approved Operation
 
 ↓
 
-Priority Analysis
+Validate Result
 
 ↓
 
-Engineering Queue
+Persist Validated Change
 
 ↓
 
-Folder Execution
+Re-read Affected State
 
 ↓
 
-Validation
+Continue only if the next operation is deterministically safe
 
-↓
+# Repository Intake
 
-Folder Completion
+The current repository state becomes the active evidence source after synchronization.
 
-↓
+Historical context may explain prior decisions but cannot override current repository reality.
 
-Next Folder
+# Repository Scan
 
-↓
+The workflow loads the repository structures and canonical artifacts required for the current operation. It MUST NOT claim that every file was scanned when only a relevant subset was inspected.
 
-Repository Complete
+# Engineering Priority
 
----
+Priority is determined from current repository evidence, folder status, dependencies, architecture, governance and the active engineering objective.
 
-# Phase 1 — Repository Intake
+Hard-coded priority lists are advisory only and MUST NOT override explicit repository authority or current dependencies.
 
-Receive latest repository.
-
-Replace previous repository baseline.
-
-Discard obsolete engineering context.
-
-Repository becomes the active execution source.
-
----
-
-# Phase 2 — Repository Synchronization
-
-Synchronize every repository file.
-
-Synchronize repository structure.
-
-Synchronize folder status.
-
-Synchronize engineering baseline.
-
-No engineering begins before synchronization completes.
-
----
-
-# Phase 3 — Repository Scan
-
-Read:
-
-Every Folder
-
-Every File
-
-README.md
-
-_FOLDER_STATUS.md
-
-Canonical Documents
-
-Store the repository tree internally.
-
----
-
-# Phase 4 — Internal Knowledge Refresh
-
-Update runtime knowledge from the synchronized repository.
-
-Discard previous repository assumptions.
-
-Repository Reality becomes the only engineering reference.
-
----
-
-# Phase 5 — Engineering Priority
-
-Determine folder status.
-
-Priority order:
-
-1. Runtime
-
-2. Services
-
-3. Models
-
-4. Lifecycle
-
-5. Blueprints
-
-6. Remaining unfinished folders
-
-Completed folders are skipped automatically.
-
----
-
-# Phase 6 — Folder Execution
+# Folder Execution
 
 For each selected folder:
 
-Load README.md
+1. Load applicable README / canonical documents / folder status.
+2. Resolve dependencies and authority.
+3. Identify the exact required change.
+4. Preserve unrelated content.
+5. Apply the smallest safe complete-file update when replacement is required.
+6. Validate references, metadata and consistency.
+7. Re-read the resulting artifact.
+8. Record the commit / revision.
 
-↓
+# Validation
 
-Load Canonical Documents
+Validate as applicable:
 
-↓
+- Repository integrity
+- Architecture consistency
+- Governance compliance
+- Cross-references
+- Folder completion state
+- Version alignment
+- Dependency integrity
+- Resulting file content
 
-Load _FOLDER_STATUS.md
+# Continuation Rule
 
-↓
+Continuation is conditional, not unconditional.
 
-Execute Engineering
+The runtime MAY continue automatically when:
 
-↓
+- the previous operation passed required validation;
+- the next target is known;
+- dependencies are resolvable;
+- no authority conflict exists;
+- no material ambiguity exists.
 
-Validate
-
-↓
-
-Update Folder
-
-↓
-
-Generate _FOLDER_STATUS.md
-
-↓
-
-Continue Automatically
-
----
-
-# Phase 7 — Validation
-
-Validate:
-
-Repository Integrity
-
-Architecture
-
-Governance
-
-Cross References
-
-Folder Completion
-
-Repository Consistency
-
-Version Alignment
-
----
-
-# Phase 8 — Automatic Continuation
-
-Immediately continue to the next unfinished folder.
-
-No explanations.
-
-No summaries.
-
-No confirmation requests.
-
-Engineering has execution priority.
-
----
+The runtime MUST stop or enter `HOLD` / `FAULT` when any required gate fails.
 
 # Stop Conditions
 
-Stop only when:
+Stop when:
 
-Repository corruption exists.
-
-Architecture conflict exists.
-
-Governance conflict exists.
-
-Repository dependency missing.
-
-Repository ambiguity prevents deterministic execution.
-
-Otherwise continue automatically.
-
----
+- repository corruption exists;
+- architecture conflict exists;
+- governance conflict exists;
+- required dependency is missing;
+- canonical identity is ambiguous;
+- validation fails;
+- the requested operation cannot be executed safely.
 
 # Runtime Rules
 
-Repository Reality > Conversation
+Repository Reality > Historical Claims
 
-Repository Reality > AI Memory
+Repository Authority > Runtime Assumptions
 
-Repository Reality > Assumptions
+Validation > Automatic Continuation
 
-Complete Canonical File Replacement Only
+Preserve unrelated content
 
-No Partial Updates
+No undocumented dependency
 
-Automatic Folder Continuation
-
----
+No unsafe write after failed validation
 
 # Related Documents
 
-RUN-001_BOOT_SEQUENCE.md
-
-RUN-002_INITIALIZATION.md
-
-RUN-003_CONFIGURATION.md
-
-RUN-004_CONTEXT_LOADING.md
-
-RUN-006_AI_PROTOCOL.md
-
-PROJECT_BOOTSTRAP.md
+- `Runtime/RUN-001_BOOT_SEQUENCE.md`
+- `Runtime/RUN-002_INITIALIZATION.md`
+- `Runtime/RUN-003_CONFIGURATION.md`
+- `Runtime/RUN-004_CONTEXT_LOADING.md`
+- `Runtime/RUN-006_AI_PROTOCOL.md`
+- `Runtime/RUN-009_RECOVERY.md`
+- `PROJECT_BOOTSTRAP.md`
 
 ---
 
 # Guiding Statement
 
-The Runtime Workflow transforms repository reality into deterministic engineering through continuous, uninterrupted execution.
+Deterministic engineering requires governed continuation, not unconditional automation.
 
 ---
 
