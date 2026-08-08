@@ -4,98 +4,108 @@
 
 Platform: ARGO KOP
 Module: Decision
-Document ID: DEC-001
-Version: 1.0
-Status: Approved
-Owner: ARGO Architecture
-Last Updated: YYYY-MM-DD
---------------------------------------------------
-
-Document ID
-
-DEC-009
-
+Document ID: DEC-009
+Version: 1.1.0
+Status: Validated / Integrity Hold
+Owner: ARGO Governance under Principal Human Owner authority
+Last Updated: 2026-08-08
 --------------------------------------------------
 
 Purpose
 
-Defines governance rules controlling the decision process.
-
---------------------------------------------------
-
-Governance Objectives
-
-Ensure consistency.
-
-Protect repository integrity.
-
-Prevent unauthorized decisions.
-
-Maintain traceability.
+Defines governance rules controlling the decision process and the boundary between autonomous reasoning and protected authority.
 
 --------------------------------------------------
 
 Authority Levels
 
-Human Owner
+Principal Human Owner
 
 Governance Rules
 
 Decision Engine
 
-AI Assistant
+AI / Cognitive Engines
 
 Automation
 
+The lower levels may reason, analyze, propose, validate and execute within delegated scope. They may not elevate their own authority.
+
 --------------------------------------------------
 
-Approval Rules
+Decision Classes
 
 Low Impact
 
-Automatic if governance allows.
+May be automated when explicitly delegated and when no protected authority is affected.
 
 Medium Impact
 
-Review recommended.
+Requires the applicable review and evidence defined by governance.
 
 High Impact
 
-Human approval required.
+Requires explicit Principal Human Owner approval when the decision changes protected architecture, governance, authority, security or canonical behavior.
 
 Critical Impact
 
-Formal architectural review required.
+Requires formal architectural/governance review plus explicit Principal Human Owner approval where protected authority is affected.
 
 --------------------------------------------------
 
-Governance Principles
+Self-Improvement Rule
 
-Transparency
+ARGO KOP may autonomously discover errors, extract lessons, generate improvement candidates and perform bounded validation.
+
+It may not autonomously convert those results into protected canonical authority.
+
+No engine, model, connector, collaborator or automated workflow may substitute for the Principal Human Owner on Principal-Owner controlled decisions.
+
+--------------------------------------------------
+
+Decision Integrity
+
+Every material decision should preserve:
 
 Evidence
 
-Accountability
+Reasoning
 
-Documentation
+Alternatives considered where material
+
+Scope
+
+Authority
+
+Impact
+
+Outcome
 
 Traceability
 
 --------------------------------------------------
 
+Reconsideration
+
+A decision remains open to review when new evidence, contradictions, failures or materially simpler solutions appear.
+
+Reconsideration does not invalidate the previous decision retroactively; it creates a new governed decision state with traceable reasons.
+
+--------------------------------------------------
+
 Related Documents
 
-Governance
-
-Runtime
-
-DEC-001
+- `Decision/DEC-001_DECISION_MODEL.md`
+- `Decision/DEC-002_DECISION_LIFECYCLE.md`
+- `Engine/ENG-007_LEARNING_ENGINE.md`
+- `Memory/MEM-009_MEMORY_EVOLUTION.md`
+- `Core/CORE-003_CONSTITUTION.md`
 
 --------------------------------------------------
 
 Guiding Statement
 
-Authority without governance creates instability.
+**Intelligence may propose. Evidence may challenge. Governance may constrain. The Principal Human Owner retains protected authority over self-redefinition.**
 
 --------------------------------------------------
 
