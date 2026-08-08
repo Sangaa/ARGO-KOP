@@ -20,7 +20,7 @@ ENG-005
 
 Version
 
-1.1.1
+1.2.0
 
 Status
 
@@ -42,51 +42,53 @@ This document is a legacy Engineering Journal record. The ENG namespace is reser
 
 # Purpose
 
-This document records every approved refactoring activity performed within ARGO KOP.
+This document records refactoring activities and the reasoning used to change existing repository structures, documents, identities, references, or implementation boundaries without losing historical traceability.
 
-Refactoring History preserves implementation evolution while maintaining architectural integrity and repository continuity.
+It preserves not only what changed, but why the change was justified, what evidence was inspected, what dependencies were affected, and what remained intentionally unchanged.
 
----
+# Current Audit Learning
 
-# Objectives
+Refactoring is not automatically safe merely because the target change appears local.
 
-Refactoring History shall:
+A filename, identifier, folder, or document may participate in relationships elsewhere in the repository. Therefore refactoring begins with relationship inspection, not editing.
 
-- Preserve engineering history.
-- Document structural improvements.
-- Support repository traceability.
-- Prevent undocumented architectural drift.
-- Enable future engineering reviews.
+Historical material may be retained under a legacy identity when changing its name would damage provenance or create unnecessary migration risk. Legacy status must not be confused with active canonical status.
 
----
+# Core Principle
 
-# Refactoring Philosophy
+**Inspect → Understand → Trace → Change → Re-read → Revalidate**
 
-Refactoring improves implementation.
+A successful write or commit proves that a mutation was accepted by the repository. It does not prove that the repository remains correct after the mutation.
 
-Refactoring shall never redefine architecture.
+# Refactoring Boundary
 
-Architecture changes are documented separately in Architecture Decisions.
+A refactoring may change implementation or organization without changing intended architecture.
 
-Every refactoring activity shall remain traceable.
-
----
+If the evidence shows that the proposed change alters an architectural boundary, authority, identity namespace, dependency contract, or governed behavior, it is no longer treated as an ordinary refactoring. It requires the applicable architecture or governance review before being promoted.
 
 # Refactoring Lifecycle
 
-Issue Identification
+Observation / Problem
 
 ↓
 
-Analysis
+Repository Inspection
 
 ↓
 
-Repository Review
+Relationship and Dependency Trace
 
 ↓
 
-Architecture Validation
+Content Review
+
+↓
+
+Impact Classification
+
+↓
+
+Change Design
 
 ↓
 
@@ -94,45 +96,53 @@ Implementation
 
 ↓
 
-Validation
+Post-Change Re-read
 
 ↓
 
-Approval
+Cross-Reference Validation
 
 ↓
 
 Historical Recording
 
----
+# Mandatory Inspection
+
+Before changing a file identity, location, or content, inspect:
+
+- current path;
+- current filename and identifier;
+- complete content when practical;
+- authority/status fields;
+- related README or folder status;
+- references to and from the artifact;
+- naming and identity rules;
+- downstream dependencies;
+- historical/provenance requirements.
+
+Never infer repository structure from a folder name alone.
+
+Never treat a search result, missing search result, ZIP snapshot, or remembered state as sufficient proof of repository state when direct repository evidence is available.
 
 # Refactoring Record
 
-Every refactoring entry shall include:
+Every material refactoring entry should preserve:
 
-Refactoring Identifier
-
-Date
-
-Engineer
-
-Repository Version
-
-Reason
-
-Scope
-
-Affected Components
-
-Modified Documents
-
-Repository Impact
-
-Validation Status
-
-Approval Status
-
----
+- Refactoring Identifier
+- Date
+- Actor / Model
+- Repository Commit or Baseline
+- Problem Observed
+- Evidence Inspected
+- Assumptions, if any
+- Scope
+- Affected Components
+- Modified Documents
+- Relationship Impact
+- Validation Method
+- Result
+- Remaining Uncertainty
+- Follow-up Required
 
 # Refactoring Categories
 
@@ -140,7 +150,7 @@ Repository Structure
 
 Documentation
 
-Naming
+Naming and Identity
 
 Navigation
 
@@ -154,63 +164,33 @@ Knowledge Organization
 
 Memory Organization
 
+Architecture-Adjacent Change
+
 Engineering Improvements
-
----
-
-# Repository Validation
-
-Every refactoring activity shall verify:
-
-Repository Integrity
-
-Architecture Alignment
-
-Governance Compliance
-
-Canonical References
-
-Cross References
-
-Version Consistency
-
-Traceability
-
----
-
-# Repository Authority
-
-Refactoring History documents implementation improvements.
-
-It does not replace:
-
-Architecture Documentation
-
-Repository Documentation
-
-Governance Documentation
-
-Canonical repository documents remain authoritative.
-
----
 
 # Historical Preservation
 
-Approved refactoring records shall:
+Approved historical records remain traceable.
 
-Remain Immutable
+Legacy identity may be preserved when migration would create disproportionate risk, but its status must clearly distinguish it from active canonical artifacts.
 
-Remain Traceable
+Do not silently rewrite history to make the repository appear cleaner than it was.
 
-Remain Searchable
+# Authority Boundary
 
-Remain Historically Recoverable
+Refactoring History records engineering activity and reasoning.
 
-Deletion is prohibited.
+It does not replace:
 
-Archive replaces deletion.
+Architecture authority
 
----
+Governance authority
+
+Repository authority
+
+Canonical operational documents
+
+When this record conflicts with a current governed document, the applicable current authority wins; the historical record remains evidence of what was previously believed or done.
 
 # Related Documents
 
@@ -224,13 +204,13 @@ ARC-009_ARCHITECTURE_DECISIONS
 
 REP-009_REPOSITORY_TRACEABILITY
 
-CORE-003_CONSTITUTION
+GOV-006_NAMING_CONVENTION_STANDARD
 
----
+CORE-003_CONSTITUTION
 
 # Guiding Statement
 
-Refactoring preserves the health of the platform without changing its identity.
+**Good refactoring improves the present without destroying the evidence needed to understand the past.**
 
 ---
 
