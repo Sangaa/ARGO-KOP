@@ -8,11 +8,11 @@ CORE-003
 
 Version
 
-1.1
+1.2
 
 Status
 
-Approved
+Validated / Integrity Review
 
 Owner
 
@@ -22,11 +22,15 @@ Category
 
 Core
 
+Last Audit
+
+2026-08-08
+
 ---
 
 # Purpose
 
-The Constitution defines the immutable governing rules of the ARGO Platform.
+The Constitution defines the highest governing rules of the ARGO Platform.
 
 These rules have higher authority than implementation decisions, project conventions, templates, workflows, or AI behavior.
 
@@ -112,9 +116,9 @@ The repository shall preserve:
 
 ## Law 9 — Controlled Evolution
 
-Nothing is permanently deleted.
+Nothing is permanently deleted without governed archival or an explicit repository policy permitting removal.
 
-Deprecated artifacts shall be archived.
+Deprecated artifacts shall be archived when preservation is required.
 
 Repository history shall remain recoverable.
 
@@ -144,7 +148,7 @@ Operational communication shall distinguish between:
 
 ---
 
-## Law 12 — Write Once, Review Completely
+## Law 12 — Review Before Write
 
 Repository engineering shall follow:
 
@@ -156,15 +160,15 @@ Decision
 
 ↓
 
-Rewrite
+Validated Change
 
 ↓
 
-Approval
+Verification
 
-Partial patches are prohibited during repository engineering.
+The complete approved document shall be the canonical target state. A complete-file replacement is preferred when practical and safe; a partial update is permitted only when the current content, target state, scope and resulting integrity have been verified and the update does not bypass Governance or Architecture.
 
-Modified files shall be replaced by their complete approved versions.
+No write is permitted after a failed required validation gate.
 
 ---
 
@@ -203,6 +207,12 @@ When conflicts occur, precedence shall be:
 5. Standards
 6. Templates
 7. Implementation
+
+---
+
+# Constitutional Interpretation Rule
+
+Where a lower-level runtime or implementation rule conflicts with this Constitution, the lower-level rule must be corrected or execution must enter `HOLD` until the conflict is resolved.
 
 ---
 
