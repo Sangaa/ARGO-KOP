@@ -8,7 +8,7 @@
 
 Platform: ARGO KOP (Knowledge Operating Platform)
 Document ID: ENG-007
-Version: 3.2.0
+Version: 3.3.0
 Status: Validated / Integrity Hold
 Category: Engine
 Canonical: Yes
@@ -31,11 +31,30 @@ Its purpose is to turn experience into validated improvement candidates while pr
 
 ARGO KOP may learn from experience without granting itself authority to redefine its own governing identity.
 
-Learning, proposal, validation and authorization are distinct stages.
+Learning, proposal, validation, authorization and execution are distinct concerns.
 
 The system may discover and formulate improvements autonomously. Canonical self-modification of governance, constitution, architecture, authority boundaries, security controls or other protected system behavior requires explicit approval from the designated Principal Human Owner.
 
 No other person, model, engine, connector or automated process may substitute for that approval where the change is classified as Principal-Owner controlled.
+
+---
+
+# Capability / Authority Separation
+
+The engine distinguishes four different capabilities:
+
+1. **Learning** — discovering patterns, errors and lessons.
+2. **Proposal** — formulating candidate improvements.
+3. **Execution** — technically applying a permitted change.
+4. **Authorization** — granting permission for a protected change.
+
+Possessing one capability does not imply possession of the others.
+
+In particular:
+
+**Technical write access ≠ authorization.**
+
+A GitHub connector, AI model, automation, service or collaborator may be technically able to modify the repository while remaining unauthorized to make a protected change effective.
 
 ---
 
@@ -75,9 +94,18 @@ No other person, model, engine, connector or automated process may substitute fo
 |
 ▼
 +-----------------------------------------------------------------------+
-| STAGE 5: KNOWLEDGE / REPOSITORY COMMIT                                |
+| STAGE 5: EXECUTION / REPOSITORY COMMIT                                |
+| - Executes only within authorized scope                                |
 | - Publishes only authorized changes                                    |
 | - Updates affected indexes and traceability records                    |
++-----------------------------------------------------------------------+
+|
+▼
++-----------------------------------------------------------------------+
+| STAGE 6: POST-CHANGE VALIDATION                                        |
+| - Re-reads changed artifacts                                           |
+| - Checks relationship and consumer impact                              |
+| - Records the final disposition                                       |
 +-----------------------------------------------------------------------+
 
 ---
@@ -106,6 +134,10 @@ Awaiting authorization where required.
 
 A change accepted by the applicable authority and committed through the governed repository process.
 
+## Class E — Rejected / Deferred Learning
+
+A candidate that was rejected, deferred or superseded remains a learning result when traceability requires it. Rejection is not failure of the learning process; it is part of learning.
+
 ---
 
 # Self-Improvement Boundary
@@ -118,7 +150,8 @@ Self-improvement means the ability to:
 - propose simpler or stronger rules;
 - identify obsolete assumptions;
 - test candidate improvements;
-- preserve rejected alternatives and historical context.
+- preserve rejected alternatives and historical context;
+- execute bounded, already-authorized improvements.
 
 Self-improvement does **not** mean:
 
@@ -126,6 +159,7 @@ Self-improvement does **not** mean:
 - changing authority ownership;
 - bypassing the Principal Human Owner;
 - promoting a hypothesis to canonical truth without validation;
+- treating technical write access as authorization;
 - deleting inconvenient historical evidence;
 - changing security or governance boundaries without authorization.
 
@@ -142,8 +176,9 @@ When an error is detected, record:
 5. What rule, assumption or relationship caused or enabled it.
 6. What simpler or stronger alternative is proposed.
 7. What evidence supports the proposal.
-8. Whether the proposal requires Principal Human Owner approval.
-9. Whether the proposal was accepted, rejected, deferred or superseded.
+8. What authority is required.
+9. What execution scope, if any, is authorized.
+10. Whether the proposal was accepted, rejected, deferred or superseded.
 
 An error becomes a learning asset only after this distinction is preserved.
 
@@ -159,6 +194,8 @@ An error becomes a learning asset only after this distinction is preserved.
 6. Do not treat previous status claims as stronger evidence than current repository reality.
 7. Do not optimize a process merely by adding controls; test whether a simpler control is sufficient.
 8. Preserve rejected and superseded learning when required for traceability.
+9. Do not infer authorization from technical access.
+10. Do not infer permanent validity from prior authorization; material changes remain reviewable.
 
 ---
 
@@ -170,12 +207,13 @@ An error becomes a learning asset only after this distinction is preserved.
 - `Knowledge/KNW-009_KNOWLEDGE_EVOLUTION.md`
 - `Core/CORE-003_CONSTITUTION.md`
 - `PROJECT_BOOTSTRAP.md`
+- `AI/AI-008_AI_GOVERNANCE.md`
 
 ---
 
 # Guiding Statement
 
-**ARGO KOP should be capable of learning continuously, but authority to redefine its protected identity remains outside the learning engine.**
+**ARGO KOP should learn continuously, act when authorized, and never confuse the ability to change itself with the authority to redefine itself.**
 
 ---
 
