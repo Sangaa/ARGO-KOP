@@ -4,259 +4,122 @@
 
 # ARCHITECTURE DECISIONS
 
----
-
-Platform
-
-ARGO KOP
-
+Platform: ARGO KOP
 Knowledge Operating Platform
 
----
-
-Document ID
-
-ARC-009
-
-Version
-
-1.1.0
-
-Status
-
-Approved
-
-Category
-
-Architecture
+Document ID: ARC-009
+Version: 1.2.0
+Status: Validated / Integrity Hold
+Category: Architecture
+Development Baseline: 3.2.1
+Latest Official Release: 1.0.0
+Last Audit: 2026-08-08
 
 ---
 
 # Purpose
 
-This document defines how architectural decisions are created, evaluated, approved, documented and preserved throughout the lifecycle of ARGO KOP.
+Defines how architectural decisions are proposed, evaluated, approved, documented and preserved.
 
-Every architectural decision shall be traceable and reproducible.
-
----
-
-# Objectives
-
-Architecture Decisions shall:
-
-- Preserve consistency.
-- Prevent undocumented changes.
-- Record architectural reasoning.
-- Maintain repository integrity.
-- Support future evolution.
-
----
+Every architectural decision must be traceable and reproducible.
 
 # Decision Lifecycle
 
-Proposal
+Proposal → Analysis → Evidence Collection → Architecture Review → Decision → Repository Update → Approval → Future Review
 
-↓
-
-Analysis
-
-↓
-
-Evidence Collection
-
-↓
-
-Architecture Review
-
-↓
-
-Decision
-
-↓
-
-Repository Update
-
-↓
-
-Approval
-
-↓
-
-Future Review
-
----
-
-# Decision Categories
-
-Platform Decision
-
-Architecture Decision
-
-Governance Decision
-
-Repository Decision
-
-Knowledge Decision
-
-Project Decision
-
-Operational Decision
-
----
+No architectural change becomes authoritative solely through conversation or implementation.
 
 # Decision Principles
 
-Every decision shall be:
+Every decision must be:
 
-- Evidence Based
-- Repository Verified
-- Architecturally Consistent
+- Evidence based
+- Repository verified
+- Architecturally consistent
 - Traceable
 - Reviewable
 
-Opinion alone shall never become an architectural decision.
-
----
+Opinion alone must never become an architectural decision.
 
 # Mandatory Decision Record
 
-Each architectural decision shall record:
+Each decision record must identify:
 
-Decision ID
-
-Title
-
-Owner
-
-Date
-
-Reason
-
-Evidence
-
-Alternatives Considered
-
-Expected Impact
-
-Affected Components
-
-Related Documents
-
-Approval Status
-
----
+- Decision ID
+- Title
+- Owner
+- Date
+- Reason
+- Evidence
+- Alternatives considered
+- Expected impact
+- Affected components
+- Related documents
+- Approval status
 
 # Evidence Policy
 
-Evidence shall be classified as:
+Evidence may be classified as:
 
-Verified Fact
+- Verified Fact
+- Verified Repository Content
+- Observed Behavior
+- Validated Requirement
+- Assumption
+- Unknown
 
-Verified Repository Content
-
-Observed Behavior
-
-Validated Requirement
-
-Assumption
-
-Unknown
-
-Architectural decisions shall never rely solely on assumptions.
-
----
+Architectural approval must not rely solely on assumptions.
 
 # Repository Verification
 
-Before approval every decision shall verify:
+Before approval, verify:
 
-Repository Baseline
+- Current repository baseline
+- Relevant components
+- Dependencies
+- Related standards
+- Current version authority
+- Affected canonical paths
 
-Relevant Components
-
-Dependencies
-
-Related Standards
-
-Repository Version
-
-Conversation memory shall never replace repository verification.
-
----
+Conversation memory must never replace repository verification.
 
 # Decision Authority
 
-Architecture decisions shall comply with:
+Architecture decisions operate within the authority chain of:
 
-CORE-003_CONSTITUTION
+- `Core/CORE-003_CONSTITUTION.md`
+- `Governance/GOV-005_REVIEW_STANDARD.md`
+- `Governance/GOV-009_REPOSITORY_POLICY.md`
+- `Governance/GOV-010_GOVERNANCE_MODEL.md`
+- `Repository/REP-001_MASTER_INDEX.md`
 
-GOV-006_REVIEW_STANDARD
-
-GOV-009_REPOSITORY_POLICY
-
-GOV-010_GOVERNANCE_MODEL
-
----
+The previous reference to `GOV-006_REVIEW_STANDARD` was invalid and has been corrected to the current canonical Review Standard, `GOV-005`.
 
 # Decision Impact
 
-Every approved decision shall identify:
+Every approved decision must identify affected layers, components, documents, migration requirements, compatibility impact and repository impact.
 
-Affected Layers
+# Revision
 
-Affected Components
-
-Affected Documents
-
-Migration Requirements
-
-Compatibility Impact
-
-Repository Impact
-
----
-
-# Decision Revision
-
-Approved decisions may only change through:
-
-New Evidence
-
-Governance Update
-
-Architectural Evolution
-
-Repository Refactoring
-
-Every revision shall preserve historical traceability.
-
----
+Approved decisions may be revised only through new evidence, governed change, architectural evolution or repository refactoring. Historical traceability must be preserved.
 
 # Related Documents
 
-ARC-001_PLATFORM_ARCHITECTURE
-
-ARC-002_COMPONENT_ARCHITECTURE
-
-ARC-006_DEPENDENCY_MODEL
-
-ARC-007_INTEGRATION_MODEL
-
-ARC-010_EVOLUTION_MODEL
-
-CORE-003_CONSTITUTION
-
-GOV-006_REVIEW_STANDARD
-
-GOV-009_REPOSITORY_POLICY
+- `Architecture/ARC_MAP.md`
+- `Architecture/ARC-001_PLATFORM_ARCHITECTURE.md`
+- `Architecture/ARC-002_COMPONENT_ARCHITECTURE.md`
+- `Architecture/ARC-006_DEPENDENCY_MODEL.md`
+- `Architecture/ARC-007_INTEGRATION_MODEL.md`
+- `Architecture/ARC-010_EVOLUTION_MODEL.md`
+- `Core/CORE-003_CONSTITUTION.md`
+- `Governance/GOV-005_REVIEW_STANDARD.md`
+- `Governance/GOV-009_REPOSITORY_POLICY.md`
 
 ---
 
 # Guiding Statement
 
-Good architecture is built from documented decisions.
-
-Great architecture preserves the reasons behind them.
+Good architecture is built from documented decisions; strong architecture preserves the evidence and reasons behind them.
 
 ---
 
