@@ -1,19 +1,21 @@
-Markdown
 # RUN-001
 
 ---
 
 # BOOT SEQUENCE & RUNTIME ENVIRONMENT
 
----
+Platform: ARGO KOP
+Knowledge Operating Platform
 
-Platform: ARGO KOP (Knowledge Operating Platform)  
-Document ID: RUN-001  
-Version: 1.2.0  
-Status: Approved  
-Category: Runtime  
-Canonical: Yes  
-Priority: Critical  
+Document ID: RUN-001
+Version: 1.3.0
+Status: Validated / Integrity Hold
+Category: Runtime
+Canonical: Yes
+Priority: Critical
+Development Baseline: 3.2.1
+Latest Official Release: 1.0.0
+Last Audit: 2026-08-08
 
 ---
 
@@ -21,100 +23,97 @@ Priority: Critical
 
 This document defines the canonical initialization sequence, runtime execution lifecycle, and operational state transitions for ARGO KOP.
 
-It guarantees that every boot cycle of the platform validates repository baseline integrity, establishes context boundaries, and initializes core engines and services deterministically.
+Every boot cycle MUST validate repository baseline integrity, establish context boundaries, and initialize approved components deterministically.
 
 ---
 
-# Mandatory Boot Sequence Workflow
+# Mandatory Boot Sequence
 
-[BOOT TRIGGER]
-│
-▼
-┌────────────────────────────────────────────────────────┐
-│ STEP 1: Repository Baseline Synchronization            │
-│ Verify Root Specs: PROJECT_BOOTSTRAP.md & REP-001      │
-└─────────────────────────┬──────────────────────────────┘
-│
-▼
-┌────────────────────────────────────────────────────────┐
-│ STEP 2: Structural Integrity Audit                     │
-│ Validate cross-references (REP-002) & Metadata (GOV-004)│
-└─────────────────────────┬──────────────────────────────┘
-│
-▼
-┌────────────────────────────────────────────────────────┐
-│ STEP 3: Subsystem Hydration                            │
-│ Load Core Engines (ENG-001..007) & Services (SRV-001..) │
-└─────────────────────────┬──────────────────────────────┘
-│
-▼
-┌────────────────────────────────────────────────────────┐
-│ STEP 4: State Commitment                               │
-│ Transition State to ACTIVE IDLE & Log Event to Logs/   │
-└────────────────────────────────────────────────────────┘
+## Step 1 — Repository Baseline Synchronization
 
+Verify:
 
----
+- `PROJECT_BOOTSTRAP.md`
+- `Repository/REP-001_MASTER_INDEX.md`
+- `Repository/REP-002_REPOSITORY_MAP.md`
+- current branch / repository state
 
-# Execution Lifecycle & States
+The boot process MUST use current repository reality rather than historical status claims.
 
-The runtime operates across five explicit state phases:
+## Step 2 — Structural Integrity Validation
 
-| State ID | Phase | Operational Rule | Next Transition |
-| :--- | :--- | :--- | :--- |
-| **ST-01** | `BOOT` | Read repository tree, check `_FOLDER_STATUS.md` across all paths. | `INIT` |
-| **ST-02** | `INIT` | Hydrate cognitive context from `Cognition/` and `Memory/`. | `IDLE` |
-| **ST-03** | `IDLE` | Ready for command ingestion and engine reasoning tasks. | `PROCESSING` |
-| **ST-04** | `PROCESSING` | Execute analysis (`ENG-003`) and service dispatches (`SRV-004`). | `COMMITTING` / `FAULT` |
-| **ST-05** | `COMMITTING` | Write changes via `SRV-009_UPDATE_SERVICE.md` and update index. | `IDLE` |
-| **ST-06** | `FAULT` | Trigger rollback, halt writes, and report trace to `Logs/`. | `BOOT` |
+Validate:
+
+- canonical paths
+- document identity
+- applicable metadata
+- cross-references
+- Governance and Architecture authority
+
+A failed integrity check MUST prevent normal activation.
+
+## Step 3 — Context and Subsystem Hydration
+
+Load only approved, current components required for the requested runtime operation, including applicable Core, Knowledge, Memory, Engine and Services artifacts.
+
+The boot process MUST NOT assume that a numeric range such as `ENG-001..007` or `SRV-001..009` represents the complete current repository inventory without verification.
+
+## Step 4 — State Commitment
+
+After successful validation and hydration, transition to the appropriate operational state and record the event through the applicable runtime logging mechanism.
 
 ---
 
-# Revision History
+# Execution Lifecycle
 
-| Version | Date | Description | Author / Authority |
-| :--- | :--- | :--- | :--- |
-| 1.0.0 | 2026-08-01 | Initial Boot Sequence Baseline | ARGO Foundation |
-| 1.1.0 | 2026-08-04 | Added Engine and Memory runtime boundaries | ARGO Foundation |
-| 1.2.0 | 2026-08-06 | Full integration with updated Master Index (REP-001 v1.2.0) | ARGO Engineering |
-2. ملف حالة المجلد المحدث (تاريخ الجلسة الحالية)
-اسم الملف ومكانه:
-
-
-
-Markdown
-# RUNTIME FOLDER STATUS
+| State | Rule | Allowed Transition |
+| :--- | :--- | :--- |
+| `BOOT` | Validate repository and authorities. | `INIT` or `FAULT` |
+| `INIT` | Load required current context and components. | `IDLE` or `FAULT` |
+| `IDLE` | Ready for command ingestion. | `PROCESSING` |
+| `PROCESSING` | Execute approved analysis and service operations. | `COMMITTING` or `FAULT` |
+| `COMMITTING` | Persist only validated changes through approved mechanisms. | `IDLE` or `FAULT` |
+| `FAULT` | Halt unsafe writes, preserve trace and recover through governed recovery flow. | `BOOT` or terminal state |
 
 ---
 
-Platform: ARGO KOP (Knowledge Operating Platform)  
-Folder: Runtime/  
-Version: 1.2.0  
-Status: COMPLETED  
-Canonical: Yes  
-Priority: Critical  
-Last Audit Date: 2026-08-06  
+# Authority Boundaries
+
+Runtime executes approved architecture. It does not redefine:
+
+- Constitution
+- Governance
+- Repository authority
+- Canonical Architecture
+- Release authority
+
+Runtime context MUST NOT silently override canonical repository artifacts.
+
+# Failure Rule
+
+If repository integrity, authority, dependency, or required context validation fails, Runtime MUST enter `FAULT` or hold state rather than claiming successful boot.
+
+# Related Authority
+
+- `PROJECT_BOOTSTRAP.md`
+- `Core/CORE-003_CONSTITUTION.md`
+- `Governance/GOV-004_DOCUMENT_METADATA.md`
+- `Governance/GOV-005_REVIEW_STANDARD.md`
+- `Governance/GOV-009_REPOSITORY_POLICY.md`
+- `Governance/GOV-010_GOVERNANCE_MODEL.md`
+- `Repository/REP-001_MASTER_INDEX.md`
+- `Repository/REP-002_REPOSITORY_MAP.md`
+- `Architecture/ARC_MAP.md`
+- `Architecture/ARC-004_LAYER_MODEL.md`
+- `Architecture/ARC-006_DEPENDENCY_MODEL.md`
+- `Runtime/RUN-009_RECOVERY.md`
 
 ---
 
-# Folder Purpose
+# Guiding Statement
 
-The Runtime layer governs initialization flows, runtime execution states, system bootstrapping, and execution fault management across the ARGO KOP platform.
-
----
-
-# Directory Inventory
-
-| File Name | Document ID | Status | Canonical | Last Updated |
-| :--- | :--- | :--- | :--- | :--- |
-| `RUN-001_BOOT_SEQUENCE.md` | `RUN-001` | Approved | Yes | 2026-08-06 |
-| `_FOLDER_STATUS.md` | N/A | Approved | Yes | 2026-08-06 |
+A successful boot is a validated state transition, not merely the execution of a startup sequence.
 
 ---
 
-# Compliance Check
-
-* **Naming Standard (`GOV-006`):** Verified (Prefix: `RUN-`)
-* **Metadata Standard (`GOV-004`):** Verified
-* **Master Index Cross-Reference (`REP-001`):** Synchronized
+End of Document
