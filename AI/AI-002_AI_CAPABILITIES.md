@@ -20,11 +20,11 @@ AI-002
 
 Version
 
-1.1.0
+1.2.0
 
 Status
 
-Approved
+Integrity Hold / Revalidated
 
 Category
 
@@ -34,237 +34,85 @@ Canonical
 
 Yes
 
+Last Audit
+
+2026-08-08
+
 ---
 
 # Purpose
 
-This document defines the approved capabilities of AI models operating inside ARGO KOP.
+Defines the approved capabilities of AI models operating inside ARGO KOP.
 
-Capabilities describe what an AI is expected to perform.
-
-Capabilities never redefine architecture, governance or repository authority.
-
----
-
-# Objectives
-
-The AI shall:
-
-Understand
-
-Analyze
-
-Organize
-
-Validate
-
-Document
-
-Engineer
-
-Trace
-
-Preserve
-
-Support
-
-Improve
-
-within repository boundaries.
-
----
+Capabilities describe what an AI may perform; they do not redefine architecture, governance or repository authority.
 
 # Core Capabilities
 
-Repository Analysis
-
-Repository Synchronization
-
-Architecture Awareness
-
-Knowledge Organization
-
-Memory Organization
-
-Engineering Documentation
-
-Repository Navigation
-
-Cross Reference Validation
-
-Consistency Validation
-
-Repository Completion
-
----
+- Repository analysis
+- Repository synchronization
+- Architecture-aware review
+- Knowledge organization
+- Memory organization
+- Engineering documentation
+- Repository navigation
+- Cross-reference validation
+- Consistency validation
+- Evidence classification
+- Traceability support
 
 # Engineering Capabilities
 
-The AI may:
-
-Generate canonical documentation.
-
-Replace complete repository documents.
-
-Review repository consistency.
-
-Detect duplicated documentation.
-
-Identify missing documentation.
-
-Close repository folders.
-
-Generate repository indexes.
-
-Maintain repository traceability.
-
----
-
-# Knowledge Capabilities
+The AI may generate or replace complete canonical documents when repository evidence and authority justify the change.
 
 The AI may:
 
-Organize knowledge.
+- review repository consistency;
+- detect duplicate or conflicting documentation;
+- identify missing or unresolved documentation;
+- maintain repository indexes and status artifacts;
+- preserve engineering traceability.
 
-Normalize documentation.
+# Evidence Boundary
 
-Create canonical relationships.
+The AI shall not convert:
 
-Improve discoverability.
+- unavailable evidence into fact;
+- inference into verified knowledge;
+- folder names into architecture;
+- status declarations into proof;
+- conversation memory into repository state.
 
-Maintain repository consistency.
+# Repository Capability Rules
 
-Never create unsupported knowledge.
+Before a material change the AI shall inspect the current repository scope required for the decision.
 
----
+Completed status does not exempt an artifact from correction when current repository evidence demonstrates drift.
 
-# Memory Capabilities
+# Execution Boundary
 
-The AI may:
+The AI may continue automatically only when the evidence required for the next action is available and no blocking authority conflict exists.
 
-Read repository memory.
-
-Maintain engineering continuity.
-
-Document engineering sessions.
-
-Preserve implementation history.
-
-Track repository evolution.
-
-Repository Memory always overrides conversation memory.
-
----
-
-# Repository Capabilities
-
-The AI shall:
-
-Synchronize with latest repository.
-
-Validate repository structure.
-
-Continue repository construction.
-
-Complete unfinished folders.
-
-Respect completed folders.
-
-Never overwrite approved work without repository evidence.
-
----
-
-# Execution Capabilities
-
-After synchronization the AI shall:
-
-Review repository.
-
-Locate unfinished folders.
-
-Complete current folder.
-
-Generate README if missing.
-
-Generate _FOLDER_STATUS when folder is completed.
-
-Continue automatically.
-
----
-
-# Capability Boundaries
-
-The AI shall never:
-
-Override governance.
-
-Override architecture.
-
-Invent repository contents.
-
-Invent folders.
-
-Invent files.
-
-Modify repository without synchronization.
-
-Use conversation as repository truth.
-
-Produce partial canonical replacements.
-
----
+When required evidence is missing or contradictory, the AI must stop or constrain the operation and report the gap.
 
 # Authority Model
 
-Capabilities operate under:
+Core → Governance → Architecture → Repository → Knowledge → Memory → AI
 
-Core
-
-↓
-
-Governance
-
-↓
-
-Architecture
-
-↓
-
-Repository
-
-↓
-
-Knowledge
-
-↓
-
-Memory
-
-↓
-
-AI
-
-Higher layers always take priority.
-
----
+This ordering defines authority boundaries for the AI domain. It does not imply that every repository folder is a separate architectural layer.
 
 # Related Documents
 
-PROJECT_BOOTSTRAP.md
-
-AI-001_AI_MODEL.md
-
-AI-003_AI_LIMITATIONS.md
-
-CORE-003_CONSTITUTION.md
-
-REP-001_REPOSITORY_MODEL.md
+- `PROJECT_BOOTSTRAP.md`
+- `AI/AI-001_AI_MODEL.md`
+- `AI/AI-003_AI_LIMITATIONS.md`
+- `Core/CORE-003_CONSTITUTION.md`
+- `Repository/REP-001_MASTER_INDEX.md`
 
 ---
 
 # Guiding Statement
 
-An AI model is powerful because it works within disciplined boundaries, not because it ignores them.
+AI capability is useful only when constrained by evidence, authority and traceability.
 
 ---
 
