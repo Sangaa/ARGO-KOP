@@ -1,158 +1,114 @@
 # ARCHITECTURE MAP
 
---------------------------------------------------
+---
+
 Document ID
+
 ARC-001
 
 Version
-1.0.0
+
+1.1.0
 
 Status
-Approved
+
+Validated / Integrity Hold
 
 Category
+
 Architecture
 
 Owner
+
 ARGO Foundation
 
-Repository Version
-3.0.0
---------------------------------------------------
+Repository Development Baseline
+
+3.2.1
+
+Latest Official Release
+
+1.0.0
+
+Last Audit
+
+2026-08-08
+
+---
 
 # Purpose
 
-This document defines the logical architecture of the ARGO Repository.
+This document defines the current logical architecture of the ARGO KOP repository and its dependency boundaries.
 
-It explains how every component relates to every other component.
+It is an architectural authority for structure only. It does not override the Constitution, Governance, Repository Index, or release authority.
 
-The Architecture Map is the highest-level technical view of the repository.
-
---------------------------------------------------
+---
 
 # Design Principles
 
-1. Separation of Concerns
+1. **Separation of Concerns** — each document has one primary responsibility.
+2. **Single Source of Truth** — authoritative information has one canonical active location.
+3. **Layered Knowledge** — dependencies flow from governing foundations toward implementation and project artifacts.
+4. **Repository Reality First** — the map must describe the actual repository, not a historical structure.
+5. **No Reverse Dependency** — lower layers must not require higher-layer implementation details.
 
-Each document has a single responsibility.
+---
 
---------------------------------------------------
+# Current Repository Layers
 
-2. Single Source of Truth
+The repository currently contains more operational layers than the original Foundation architecture. The active baseline is therefore represented as follows:
 
-Information exists in only one official location.
+**Governance**
 
-Other documents reference it.
+Defines rules, authority, identity, review, naming, and repository policy.
 
---------------------------------------------------
+↓
 
-3. Layered Knowledge
+**Repository / Core**
 
-Knowledge is organized in logical layers.
+Defines canonical storage, platform identity, constitution, and foundational constraints.
 
-Higher layers depend on lower layers.
+↓
 
-Lower layers never depend on higher layers.
+**Architecture**
 
---------------------------------------------------
+Defines structural relationships, component boundaries, and dependency models.
 
-Repository Layers
+↓
 
-Layer 0
+**Standards / Specifications / Models**
+
+Define reusable rules, expected behavior, document models, and structured specifications.
+
+↓
+
+**Engine / Runtime / Services / AI**
+
+Define cognitive processing, runtime behavior, validation, service boundaries, and AI integration.
+
+↓
+
+**Projects / Decision / Knowledge / Docs**
+
+Contain applied work, decisions, reusable knowledge, and explanatory documentation.
+
+↓
+
+**Archive**
+
+Preserves superseded or historical evidence and is not an active dependency layer.
+
+---
+
+# Dependency Rule
+
+The intended dependency direction is:
+
 Governance
 
 ↓
 
-Layer 1
-Architecture
-
-↓
-
-Layer 2
-Standards
-
-↓
-
-Layer 3
-Specifications
-
-↓
-
-Layer 4
-Blueprints
-
-↓
-
-Layer 5
-Projects
-
-↓
-
-Layer 6
-Knowledge Base
-
-↓
-
-Layer 7
-Archive
-
---------------------------------------------------
-
-Governance
-
-Defines rules.
-
-Never contains implementation.
-
---------------------------------------------------
-
-Architecture
-
-Defines structure.
-
-Never contains business logic.
-
---------------------------------------------------
-
-Standards
-
-Define reusable rules.
-
---------------------------------------------------
-
-Specifications
-
-Describe expected behavior.
-
---------------------------------------------------
-
-Blueprints
-
-Describe implementation concepts.
-
---------------------------------------------------
-
-Projects
-
-Contain executable work.
-
---------------------------------------------------
-
-Knowledge
-
-Stores reusable experience.
-
---------------------------------------------------
-
-Archive
-
-Stores historical information.
-
---------------------------------------------------
-
-Dependency Rule
-
-Governance
+Core / Repository
 
 ↓
 
@@ -160,24 +116,48 @@ Architecture
 
 ↓
 
-Standards
+Standards / Specifications / Models
 
 ↓
 
-Specifications
+Engine / Runtime / Services / AI
 
 ↓
 
-Blueprints
+Projects / Applied Knowledge
 
-↓
+Reverse dependency is forbidden unless explicitly authorized by a higher-level architectural decision.
 
-Projects
+---
 
---------------------------------------------------
+# Canonicality Rule
 
-Reverse dependency is forbidden.
+A document is architecturally canonical only when:
 
---------------------------------------------------
+- its path exists in the current repository;
+- its filename and internal identity agree where an ID is assigned;
+- its canonical status is verified;
+- its version is compatible with the active development baseline;
+- its references resolve to current repository artifacts.
+
+---
+
+# Integrity State
+
+Architecture has been partially re-aligned with the current repository baseline.
+
+The repository remains under **INTEGRITY HOLD** until the Architecture layer, its folder statuses, component maps, and cross-layer references complete the repository-wide audit.
+
+---
+
+# Related Authority
+
+- `PROJECT_BOOTSTRAP.md`
+- `Core/CORE-003_CONSTITUTION.md`
+- `Repository/REP-001_MASTER_INDEX.md`
+- `Repository/REP-002_REPOSITORY_MAP.md`
+- `Release/VERSION.md`
+
+---
 
 End of Document
