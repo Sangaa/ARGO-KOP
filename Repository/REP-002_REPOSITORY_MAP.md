@@ -6,7 +6,7 @@
 
 Platform: ARGO KOP (Knowledge Operating Platform)
 Document ID: REP-002
-Version: 1.6.1
+Version: 1.6.2
 Status: Integrity Hold
 Category: Repository
 Canonical: Yes
@@ -20,8 +20,6 @@ Last Audit Date: Aug 08, 2026
 Defines active physical repository paths used by ARGO KOP. It remains synchronized with `REP-001_MASTER_INDEX.md` and current repository evidence.
 
 A path is canonical only when its logical identity is unique and verified.
-
----
 
 ## 2. Root Baseline
 
@@ -91,11 +89,32 @@ Path: `Runtime/`
 
 ## 7. Architecture Layer
 
-Path: `Architecture/`
-
 Architecture authority remains governed by the actual active artifacts and their folder status. This map does not infer completeness from numeric ranges.
 
-## 8. Mapping Rules
+## 8. Interfaces Layer
+
+Path: `Interfaces/`
+
+- `Interfaces/INTF-001_INTERFACE_SPEC.md`
+- `Interfaces/INTF-004_API.md`
+- `Interfaces/INTF-006_ENVIRONMENT_SENSING.md`
+- `Interfaces/_FOLDER_STATUS.md`
+
+`INTF-006` remains Proposed / Integrity Hold pending cross-layer validation.
+
+## 9. Models Layer
+
+Path: `Models/`
+
+- `Models/MOD-002_ENTITY_MODEL.md`
+- `Models/MOD-003_DOCUMENT_MODEL.md`
+- `Models/MOD-004_MEMORY_MODEL.md`
+- `Models/MOD-011_KNOWLEDGE_SOURCE_MODEL.md`
+- `Models/_FOLDER_STATUS.md`
+
+Declared model artifacts not directly located remain unresolved and are not promoted to active authority.
+
+## 10. Mapping Rules
 
 1. Every active canonical document has exactly one canonical path.
 2. Filename identity must match internal Document ID where one exists.
@@ -104,12 +123,13 @@ Architecture authority remains governed by the actual active artifacts and their
 5. Missing or unverified dependencies remain explicitly unresolved.
 6. Any canonical inventory change requires synchronized index/map updates and validation.
 7. Archive operations must preserve enough evidence to identify the former active path and its canonical successor.
+8. A new interface, model, runtime component or service must not be considered globally integrated until its consumers and dependencies are validated.
 
-## 9. Integrity State
+## 11. Integrity State
 
 Current repository state: **INTEGRITY HOLD**.
 
-The map has been synchronized with the current Core, Runtime and verified Governance baseline. Cross-layer relationship validation remains open.
+The map has been synchronized with the currently verified Core, Runtime, Governance, Interfaces and Models baseline. Cross-layer relationship validation remains open.
 
 ---
 
