@@ -20,7 +20,7 @@ ARC-004
 
 Version
 
-1.2.0
+1.3.0
 
 Status
 
@@ -46,63 +46,55 @@ Last Audit
 
 # Purpose
 
-This document defines the logical layer model of ARGO KOP. It is subordinate to the Constitution and aligned with the current canonical Architecture Map.
+Defines the logical layer model of ARGO KOP. It is subordinate to the Constitution and aligned with the canonical Architecture Map and Repository authority.
 
-The layer model describes responsibility and dependency boundaries. Repository folders are physical storage locations and MUST NOT be interpreted as architectural layers automatically.
-
----
+Repository folders are physical storage locations and MUST NOT be interpreted as architectural layers automatically.
 
 # Canonical Layer Model
 
 ## Layer 1 — Identity / Core
 
-Permanent platform identity, constitution, and foundational constraints.
+Permanent platform identity, constitution and foundational constraints.
 
 ## Layer 2 — Governance
 
-Rules, policies, standards, review, naming, metadata, and traceability.
+Rules, policies, review, naming, metadata and traceability.
 
 ## Layer 3 — Architecture
 
-Structural design, component boundaries, integration, and dependency rules.
+Structural design, component boundaries, integration and dependency rules.
 
 ## Layer 4 — Repository
 
-Canonical storage, indexing, mapping, and navigation.
+Canonical storage, indexing, mapping and navigation.
 
 ## Layer 5 — Knowledge / Specifications / Standards
 
-Structured knowledge and reusable specifications. Standards may exist as governed artifacts without becoming an architectural layer of their own.
+Structured knowledge and reusable specifications. These are logical domains, not automatically separate physical architecture layers.
 
 ## Layer 6 — Memory
 
-Working, decision, project, and historical memory.
+Working, decision, project and historical memory.
 
 ## Layer 7 — Cognition / Engine
 
-Reasoning, analysis, decision support, and cognitive processing.
+Reasoning, analysis, decision support and cognitive processing.
 
 ## Layer 8 — Runtime / Services / AI
 
-Execution, boot, configuration, context loading, service boundaries, and AI integration.
+Execution, boot, configuration, context loading, service boundaries and AI integration.
 
 ## Layer 9 — Projects / Applied Artifacts
 
 Project-specific implementation and applied knowledge built on approved platform capabilities.
 
----
+# Boundary Rule
 
-# Important Boundary Rule
+`Engine`, `Services`, `AI`, `Models`, `Specifications` and `Standards` are repository domains or implementation groupings unless an explicit Architecture Decision establishes a distinct architectural layer.
 
-`Engine`, `Services`, `AI`, `Models`, `Specifications`, and `Standards` are repository domains or implementation groupings unless an explicit Architecture Decision promotes one to a distinct architectural layer.
-
-This prevents folder structure from silently changing the architecture.
-
----
+Physical folder placement cannot silently change this model.
 
 # Dependency Direction
-
-The intended dependency direction is:
 
 Identity / Core
 
@@ -140,39 +132,30 @@ Projects / Applied Artifacts
 
 Reverse dependency is prohibited unless explicitly authorized by a governed architectural decision.
 
----
-
 # Layer Responsibilities
 
-Each layer MUST have:
+Each logical layer MUST have:
 
-- Defined responsibility
-- Defined inputs
-- Defined outputs
-- Defined dependencies
-- One clear ownership boundary
+- defined responsibility;
+- defined inputs;
+- defined outputs;
+- defined dependencies;
+- one clear ownership boundary.
 
-A document MUST NOT use a layer label to claim authority that belongs to Governance, Constitution, Repository, or Release authority.
-
----
+A layer label MUST NOT be used to claim authority belonging to Constitution, Governance, Repository or Release authority.
 
 # Cross-Layer Communication
 
-Layers communicate through documented references and interfaces. Undocumented dependencies are prohibited.
-
-Repository paths are not interfaces by themselves.
-
----
+Layers communicate through documented contracts, interfaces and references. A repository path alone is not an interface.
 
 # Integrity Rules
 
-1. The layer model MUST remain aligned with `Architecture/ARC_MAP.md`.
+1. This model MUST remain aligned with `Architecture/ARC_MAP.md`.
 2. Changes to layer boundaries require architectural review.
-3. Folder creation or renaming MUST NOT redefine a layer implicitly.
-4. Dependency claims MUST be traceable to current repository artifacts.
+3. Folder creation or renaming MUST NOT redefine architecture implicitly.
+4. Dependency claims MUST be traceable to current repository artifacts or interfaces.
 5. Circular dependencies are prohibited.
-
----
+6. Repository and Governance authority remain controlling for canonical identity and change acceptance.
 
 # Related Documents
 
@@ -185,6 +168,8 @@ Repository paths are not interfaces by themselves.
 - `Architecture/ARC-009_ARCHITECTURE_DECISIONS.md`
 - `Core/CORE-003_CONSTITUTION.md`
 - `Governance/GOV-010_GOVERNANCE_MODEL.md`
+- `Repository/REP-001_MASTER_INDEX.md`
+- `Repository/REP-002_REPOSITORY_MAP.md`
 
 ---
 
