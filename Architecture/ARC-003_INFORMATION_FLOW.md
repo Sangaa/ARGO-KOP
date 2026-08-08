@@ -4,144 +4,47 @@
 
 # INFORMATION FLOW
 
----
-
-Platform
-
-ARGO KOP
-
+Platform: ARGO KOP
 Knowledge Operating Platform
 
----
-
-Document ID
-
-ARC-003
-
-Version
-
-1.1.0
-
-Status
-
-Approved
-
-Category
-
-Architecture
+Document ID: ARC-003
+Version: 1.2.0
+Status: Validated / Integrity Hold
+Category: Architecture
+Development Baseline: 3.2.1
+Latest Official Release: 1.0.0
+Last Audit: 2026-08-08
 
 ---
 
 # Purpose
 
-This document defines how information flows throughout the ARGO KOP platform.
-
-It establishes the direction, ownership, validation and lifecycle of information exchanged between architectural components.
-
----
-
-# Objectives
-
-The Information Flow model ensures:
-
-- Consistent knowledge movement.
-- Controlled decision making.
-- Repository integrity.
-- Traceable information lifecycle.
-- Elimination of duplicated knowledge.
-
----
-
-# Information Sources
-
-Information may originate from:
-
-- Repository Documents
-- Project Documents
-- Governance Decisions
-- User Input
-- Runtime Context
-- External References
-
-Every information source shall be identifiable.
-
----
+Defines how information moves between platform components while preserving validation, ownership, traceability and repository authority.
 
 # Validation Rule
 
-Information shall never become platform knowledge until verified.
+Information does not become permanent platform knowledge merely because it was received or discussed.
 
-Classification:
+Unverified information remains temporary context until validated.
 
-Verified Information
+Validated flow:
 
-↓
+Input → Validation → Classification → Repository Integration → Knowledge / Memory → Reasoning → Decision → Output
 
-Repository Integration
+# Primary Information Sources
 
-↓
+- Repository documents
+- Project documents
+- Governance decisions
+- User input
+- Runtime context
+- External references
 
-Knowledge
-
-↓
-
-Reasoning
-
-↓
-
-Decision
-
-Unverified information remains temporary context.
-
----
-
-# Primary Information Flow
-
-External Input
-
-↓
-
-Validation
-
-↓
-
-Repository
-
-↓
-
-Knowledge
-
-↓
-
-Memory
-
-↓
-
-Reasoning
-
-↓
-
-Decision
-
-↓
-
-Output
-
----
-
-# Repository Rule
-
-The Repository is the Single Source of Truth.
-
-Conversation memory shall never replace repository knowledge.
-
-Repository content has priority over runtime context.
-
----
+Every source must be identifiable and its trust state explicit.
 
 # Information Classification
 
-Every information item shall belong to one category:
+Information MUST be classified appropriately, including:
 
 - Fact
 - Verified Fact
@@ -152,132 +55,67 @@ Every information item shall belong to one category:
 - Architecture
 - Knowledge
 - History
+- Unknown
 
----
+Unknown information must not be promoted to verified knowledge by implication.
+
+# Repository Authority
+
+The Repository is the canonical storage source for permanent platform knowledge.
+
+Conversation or runtime memory may provide context but MUST NOT silently override repository authority.
 
 # Ownership
 
-Each information object shall have:
+Each canonical information artifact MUST have one primary owner, one authoritative repository location, and one primary identifier where applicable.
 
-- One Owner
-- One Repository Location
-- One Primary Identifier
-
-Duplicate ownership is prohibited.
-
----
+Reference to another artifact does not transfer ownership.
 
 # Information Lifecycle
 
-Creation
+Creation → Validation → Repository Storage → Knowledge Integration → Operational Use → Revision → Archive
 
-↓
-
-Validation
-
-↓
-
-Repository Storage
-
-↓
-
-Knowledge Integration
-
-↓
-
-Operational Use
-
-↓
-
-Revision
-
-↓
-
-Archive
-
-Deletion is prohibited.
-
-Archive replaces deletion.
-
----
+Historical information is preserved through governed archival. Deletion is not the default mechanism for resolving superseded knowledge.
 
 # Decision Flow
 
-Knowledge
+Knowledge → Analysis → Evidence → Decision → Repository Update → Future Reference
 
-↓
-
-Analysis
-
-↓
-
-Evidence
-
-↓
-
-Decision
-
-↓
-
-Repository Update
-
-↓
-
-Future Reference
-
-Every decision shall be traceable.
-
----
+Every architectural decision must be traceable to its evidence and affected artifacts.
 
 # Traceability
 
-Every information flow shall preserve:
+Information flow records should preserve:
 
 - Source
-- Version
+- Version or revision where available
 - Date
 - Owner
-- Related Decision
+- Validation state
+- Related decision where applicable
 
----
+# Architectural Boundary
 
-# Architecture Principles
-
-Information always flows downward.
-
-Authority always flows upward.
-
-Repository remains authoritative.
-
-Knowledge remains reusable.
-
-Architecture remains stable.
-
----
+Information flow does not change authority. Governance, Constitution, Architecture, Repository and Release authorities retain their defined ownership.
 
 # Related Documents
 
-ARC-001_PLATFORM_ARCHITECTURE
-
-ARC-002_COMPONENT_ARCHITECTURE
-
-ARC-006_DEPENDENCY_MODEL
-
-CORE-003_CONSTITUTION
-
-GOV-005_TRACEABILITY_STANDARD
-
-GOV-009_REPOSITORY_POLICY
-
-REP-001_MASTER_INDEX
+- `Architecture/ARC_MAP.md`
+- `Architecture/ARC-001_PLATFORM_ARCHITECTURE.md`
+- `Architecture/ARC-002_COMPONENT_ARCHITECTURE.md`
+- `Architecture/ARC-004_LAYER_MODEL.md`
+- `Architecture/ARC-006_DEPENDENCY_MODEL.md`
+- `Architecture/ARC-007_INTEGRATION_MODEL.md`
+- `Core/CORE-003_CONSTITUTION.md`
+- `Governance/GOV-005_REVIEW_STANDARD.md`
+- `Governance/GOV-009_REPOSITORY_POLICY.md`
+- `Repository/REP-001_MASTER_INDEX.md`
 
 ---
 
 # Guiding Statement
 
-Reliable decisions require reliable information.
-
-Reliable information requires governed flow.
+Reliable decisions require reliable information, and reliable information requires governed flow.
 
 ---
 
