@@ -8,8 +8,8 @@
 
 Platform: ARGO KOP (Knowledge Operating Platform)  
 Document ID: GOV-006  
-Version: 1.2.0  
-Status: Approved  
+Version: 1.3.0  
+Status: Proposed / Audit-Derived Update  
 Category: Governance / Standards  
 Canonical: Yes  
 Priority: Critical  
@@ -36,6 +36,19 @@ The repository is the operational source of truth for active paths. Historical o
 | **`ENG`** | Cognitive Engines | `Engine/` | `Engine/ENG-004_VALIDATION_ENGINE.md` |
 | **`SRV`** | Service Operations | `Services/` | `Services/SRV-005_VALIDATION_SERVICE.md` |
 | **`MOD`** | Data & Knowledge Models | `Models/` | `Models/MOD-002_ENTITY_MODEL.md` |
+| **`EJR`** | Engineering Journal Records | `Memory/Engineering_Journal/` | `Memory/Engineering_Journal/EJR-001_SELF_ASSESSMENT_AND_MARKET_FEEDBACK.md` |
+
+---
+
+# Legacy Namespace Boundary
+
+The Engineering Journal historically used `ENG-001` through `ENG-010` before the current canonical prefix matrix was formalized. Those records are retained as **legacy journal identities** during the Connected-Baseline Stabilization Phase.
+
+They MUST NOT be treated as evidence that `ENG` is valid for new Engineering Journal artifacts.
+
+New Engineering Journal records MUST use the `EJR-*` namespace after this standard is formally approved.
+
+Historical journal records are not silently renamed during the current audit because renaming them would create broad path, index, and historical-reference mutations that require a separate migration decision.
 
 ---
 
@@ -49,6 +62,8 @@ The repository is the operational source of truth for active paths. Historical o
 6. **Path changes require synchronized index updates.** Any canonical path change MUST be reflected in `REP-001` and `REP-002` before the repository can pass Integrity.
 7. **Case sensitivity is mandatory.** Document IDs and canonical filenames MUST preserve the uppercase identifier format.
 8. **No silent deletion.** Superseded artifacts must be preserved in `Archive/` before removal from an active path.
+9. **Namespace ownership is global unless explicitly bounded.** A prefix cannot be reused for a different active domain without an explicit governance decision.
+10. **Legacy identifiers must be classified, not silently normalized.** Historical numbering conflicts are resolved through an explicit migration decision, not by renaming files during unrelated audits.
 
 ---
 
@@ -67,12 +82,13 @@ The previous `Standards/GOV-006_NAMING_CONVENTION_STANDARD.md` Version `1.0.0` h
 * `Governance/GOV-004_DOCUMENT_METADATA.md`
 * `Governance/GOV-001_GOVERNANCE_FRAMEWORK.md`
 * `Services/SRV-005_VALIDATION_SERVICE.md`
+* `Memory/Engineering_Journal/README.md`
 
 ---
 
 # Guiding Statement
 
-A canonical identity must have one active path, one authoritative definition, and resolvable references.
+A canonical identity must have one active path, one authoritative definition, and resolvable references. Historical identity conflicts must be preserved as evidence and resolved through explicit migration decisions.
 
 ---
 
