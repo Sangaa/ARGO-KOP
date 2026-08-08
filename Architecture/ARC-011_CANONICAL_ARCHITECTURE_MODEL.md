@@ -4,315 +4,129 @@
 
 # CANONICAL ARCHITECTURE MODEL
 
----
-
-Platform
-
-ARGO KOP
-
+Platform: ARGO KOP
 Knowledge Operating Platform
 
----
-
-Document ID
-
-ARC-011
-
-Version
-
-1.1.0
-
-Status
-
-Approved
-
-Category
-
-Architecture
-
-Canonical
-
-Yes
+Document ID: ARC-011
+Version: 1.2.0
+Status: Validated / Integrity Hold
+Category: Architecture
+Canonical: Yes
+Development Baseline: 3.2.1
+Latest Official Release: 1.0.0
+Last Audit: 2026-08-08
 
 ---
 
 # Purpose
 
-This document defines the Canonical Architecture Model of ARGO KOP.
+This document defines the current canonical Architecture Model of ARGO KOP.
 
-It serves as the definitive architectural reference for every repository component, governance decision and future platform evolution.
+It is the authoritative architectural reference for structural boundaries and dependency direction, subordinate only to the Constitution and applicable Governance authority.
 
-Whenever architectural conflicts occur, this document is authoritative.
+# Canonical Boundary Model
 
----
+The platform is represented by stable architectural boundaries rather than by repository folders alone:
 
-# Objectives
-
-The Canonical Architecture Model shall:
-
-- Define the permanent architectural structure.
-- Preserve platform identity.
-- Eliminate architectural ambiguity.
-- Standardize component relationships.
-- Guide long-term evolution.
-
----
-
-# Canonical Architecture
-
-ARGO KOP consists of nine architectural domains.
-
-Identity
+**Identity / Core**
 
 ↓
 
-Governance
+**Governance**
 
 ↓
 
-Architecture
+**Architecture**
 
 ↓
 
-Repository
+**Repository**
 
 ↓
 
-Knowledge
+**Knowledge / Specifications / Standards**
 
 ↓
 
-Memory
+**Memory**
 
 ↓
 
-Cognition
+**Cognition / Engine**
 
 ↓
 
-Runtime
+**Runtime / Services / AI**
 
 ↓
 
-Projects
+**Projects / Applied Artifacts**
 
-Every architectural artifact belongs to exactly one domain.
-
----
+Repository folders are physical storage locations and MUST NOT silently redefine these boundaries.
 
 # Canonical Principles
 
-The following principles are permanent.
-
-Repository is the Single Source of Truth.
-
-Architecture precedes implementation.
-
-Governance governs every component.
-
-Knowledge is preserved.
-
-Memory supports reasoning.
-
-Runtime executes architecture.
-
-Projects extend the platform.
-
-Conversation never overrides repository knowledge.
-
----
+- Repository is the canonical storage source.
+- Architecture precedes implementation.
+- Governance governs according to its defined authority.
+- Knowledge is preserved and traceable.
+- Memory supports reasoning without silently overriding canonical knowledge.
+- Runtime executes approved architecture.
+- Projects extend the platform without redefining its foundations.
+- Conversation or runtime context MUST NOT silently override repository authority.
 
 # Canonical Component Model
 
-Identity
-
-Defines who ARGO KOP is.
-
----
-
-Governance
-
-Defines platform rules.
-
----
-
-Architecture
-
-Defines platform structure.
-
----
-
-Repository
-
-Defines knowledge organization.
-
----
-
-Knowledge
-
-Defines reusable organizational intelligence.
-
----
-
-Memory
-
-Preserves historical context.
-
----
-
-Cognition
-
-Transforms knowledge into reasoning.
-
----
-
-Runtime
-
-Executes platform behavior.
-
----
-
-Projects
-
-Implements practical solutions.
-
----
-
-# Canonical Dependency Model
-
-Identity
-
-↓
-
-Governance
-
-↓
-
-Architecture
-
-↓
-
-Repository
-
-↓
-
-Knowledge
-
-↓
-
-Memory
-
-↓
-
-Cognition
-
-↓
-
-Runtime
-
-↓
-
-Projects
-
-Dependencies shall always move downward.
-
-Reverse dependencies are prohibited.
-
-Circular dependencies are prohibited.
-
----
+Components and domains are responsibility boundaries. Their dependency direction MUST remain compatible with `ARC-004_LAYER_MODEL.md` and `ARC-006_DEPENDENCY_MODEL.md`.
 
 # Canonical Repository Model
 
-Every repository artifact shall have:
+Every active canonical artifact SHOULD have:
 
-One Owner
+- One primary owner
+- One canonical active path
+- One primary identifier where applicable
+- A traceable version/revision
+- Resolvable references
 
-One Folder
-
-One Identifier
-
-One Canonical Version
-
-Repository duplication is prohibited.
-
----
+Historical artifacts may be preserved under governed Archive paths and are not active canonical artifacts.
 
 # Canonical Evolution
 
-Platform evolution shall preserve:
-
-Architecture
-
-Governance
-
-Repository Integrity
-
-Knowledge Integrity
-
-Traceability
-
-Version History
-
-Evolution extends architecture.
-
-Evolution never replaces architectural foundations.
-
----
+Evolution extends the architecture through governed evidence and decisions. It does not silently replace architectural foundations.
 
 # Canonical Validation
 
-Every architectural review shall verify:
+Every architectural review MUST verify:
 
-Repository Baseline
-
-Governance Compliance
-
-Dependency Direction
-
-Architectural Consistency
-
-Knowledge Integrity
-
-Folder Status
-
-Traceability
-
----
+1. Repository baseline
+2. Governance compliance
+3. Dependency direction
+4. Architectural consistency
+5. Canonical identity/path
+6. Traceability
+7. Relevant folder status
 
 # Canonical References
 
-CORE-003_CONSTITUTION
+- `Core/CORE-003_CONSTITUTION.md`
+- `Governance/GOV-005_REVIEW_STANDARD.md`
+- `Governance/GOV-009_REPOSITORY_POLICY.md`
+- `Governance/GOV-010_GOVERNANCE_MODEL.md`
+- `Architecture/ARC_MAP.md`
+- `Architecture/ARC-001_PLATFORM_ARCHITECTURE.md`
+- `Architecture/ARC-002_COMPONENT_ARCHITECTURE.md`
+- `Architecture/ARC-004_LAYER_MODEL.md`
+- `Architecture/ARC-006_DEPENDENCY_MODEL.md`
+- `Architecture/ARC-009_ARCHITECTURE_DECISIONS.md`
+- `Architecture/ARC-010_EVOLUTION_MODEL.md`
+- `Repository/REP-001_MASTER_INDEX.md`
 
-CORE-011_PLATFORM_CHARTER
+# Canonical Authority Boundary
 
-GOV-006_REVIEW_STANDARD
+If architectural documents conflict:
 
-GOV-009_REPOSITORY_POLICY
-
-GOV-010_GOVERNANCE_MODEL
-
-ARC-001_PLATFORM_ARCHITECTURE
-
-ARC-004_LAYER_MODEL
-
-ARC-006_DEPENDENCY_MODEL
-
-ARC-009_ARCHITECTURE_DECISIONS
-
-REP-001_MASTER_INDEX
-
----
-
-# Canonical Authority
-
-If multiple architectural documents appear to conflict:
-
-Core Constitution
-
-↓
-
-Governance
+Constitution / applicable Governance authority
 
 ↓
 
@@ -320,29 +134,23 @@ Canonical Architecture Model
 
 ↓
 
-Architecture Documents
+Other Architecture Documents
 
 ↓
 
-Repository Documents
+Repository and Project Artifacts
 
-↓
+The higher applicable authority prevails.
 
-Projects
+# Integrity State
 
-The higher authority prevails.
+The Canonical Architecture Model is aligned with the current development baseline, but the Architecture layer remains under repository-wide audit until all active architecture references and folder status records pass validation.
 
 ---
 
 # Guiding Statement
 
-Architecture defines the platform.
-
-Governance protects the architecture.
-
-The Repository preserves both.
-
-ARGO KOP evolves without losing its identity.
+Architecture defines stable boundaries; Governance protects them; the Repository preserves their history and current canonical state.
 
 ---
 
