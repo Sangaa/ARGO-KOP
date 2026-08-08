@@ -2,24 +2,51 @@
 
 ---
 
-Document ID
-ARC-001
+Platform
+
+ARGO KOP (Knowledge Operating Platform)
+
+Artifact Type
+
+Architecture Map / Navigation Artifact
 
 Version
-1.2.0
+
+1.3.0
 
 Status
+
 Validated / Integrity Hold
+
 Category
-Architecture
-Owner
-ARGO Foundation
+
+Architecture / Repository Navigation
+
+Canonical
+
+Yes — as the Architecture Map artifact
+
 Repository Development Baseline
+
 3.2.1
+
 Latest Official Release
+
 1.0.0
+
 Last Audit
+
 2026-08-08
+
+---
+
+# Identity Boundary
+
+This file is a **map artifact**, not `ARC-001`.
+
+`ARC-001` is reserved for `Architecture/ARC-001_PLATFORM_ARCHITECTURE.md`.
+
+The map intentionally has no numeric `ARC-NNN` Document ID so that it cannot create a duplicate architectural identity with the canonical platform architecture document.
 
 ---
 
@@ -27,7 +54,7 @@ Last Audit
 
 Defines the current logical architecture of ARGO KOP and its dependency boundaries.
 
-This document is an architectural authority for structure and dependency semantics only. It does not override the Constitution, Governance, Repository Index, or Release authority.
+This map is an architectural navigation and relationship artifact. It does not override the Constitution, Governance, Repository Index, or Release authority.
 
 # Design Principles
 
@@ -37,6 +64,7 @@ This document is an architectural authority for structure and dependency semanti
 4. Repository Reality First.
 5. No Reverse Dependency without governed architectural authorization.
 6. Physical folder placement does not create architectural authority.
+7. A map describes relationships; it does not create authority merely by listing a node.
 
 # Canonical Architectural Layers
 
@@ -52,7 +80,7 @@ This document is an architectural authority for structure and dependency semanti
 
 `Archive` is a repository preservation domain, not an active dependency layer.
 
-`Standards`, `Specifications`, `Models`, `Engine`, `Services`, and `AI` are domains/groupings unless an explicit architectural decision establishes a distinct layer.
+`Standards`, `Specifications`, `Models`, `Engine`, `Services`, and `AI` are domains/groupings unless an explicit architectural decision establishes a distinct architectural layer.
 
 # Dependency Direction
 
@@ -102,7 +130,7 @@ A document is architecturally canonical only when:
 - its version is compatible with the active development baseline;
 - its required references resolve or are explicitly recorded as unresolved.
 
-A status file alone cannot create architectural authority.
+A status file or map alone cannot create architectural authority.
 
 # Change Rule
 
@@ -110,7 +138,9 @@ Any material change to layer boundaries, dependency direction, ownership or cano
 
 # Integrity State
 
-Architecture remains **INTEGRITY HOLD** until component maps, folder status, dependency references and cross-layer identity validation are completed.
+Architecture remains **INTEGRITY HOLD** until active architectural artifacts, folder status, dependency references and cross-layer identity validation are completed.
+
+---
 
 # Related Authority
 
@@ -120,6 +150,7 @@ Architecture remains **INTEGRITY HOLD** until component maps, folder status, dep
 - `Governance/GOV-005_REVIEW_STANDARD.md`
 - `Repository/REP-001_MASTER_INDEX.md`
 - `Repository/REP-002_REPOSITORY_MAP.md`
+- `Architecture/ARC-001_PLATFORM_ARCHITECTURE.md`
 - `Architecture/ARC-004_LAYER_MODEL.md`
 - `Architecture/ARC-006_DEPENDENCY_MODEL.md`
 - `Release/VERSION.md`
