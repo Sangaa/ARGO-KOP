@@ -6,7 +6,7 @@
 
 Platform: ARGO KOP (Knowledge Operating Platform)
 Document ID: REP-002
-Version: 1.6.0
+Version: 1.6.1
 Status: Integrity Hold
 Category: Repository
 Canonical: Yes
@@ -21,6 +21,8 @@ Defines active physical repository paths used by ARGO KOP. It remains synchroniz
 
 A path is canonical only when its logical identity is unique and verified.
 
+---
+
 ## 2. Root Baseline
 
 Path: `ARGO-KOP/`
@@ -31,6 +33,8 @@ Path: `ARGO-KOP/`
 - `VISION.md`
 - `CONTRIBUTING.md`
 - `CODE_OF_CONDUCT.md`
+
+Historical root naming-convention material is excluded from active inventory and is preserved under `Archive/Governance-Legacy/`.
 
 ## 3. Core Layer
 
@@ -96,15 +100,16 @@ Architecture authority remains governed by the actual active artifacts and their
 1. Every active canonical document has exactly one canonical path.
 2. Filename identity must match internal Document ID where one exists.
 3. `REP-001` and `REP-002` must agree on active canonical paths.
-4. Historical alternatives remain outside active canonical paths.
+4. Historical alternatives remain outside active canonical paths and preserve migration traceability.
 5. Missing or unverified dependencies remain explicitly unresolved.
 6. Any canonical inventory change requires synchronized index/map updates and validation.
+7. Archive operations must preserve enough evidence to identify the former active path and its canonical successor.
 
 ## 9. Integrity State
 
 Current repository state: **INTEGRITY HOLD**.
 
-The map has been synchronized with the current Core and Runtime baseline. Governance and Architecture remain under consolidated validation.
+The map has been synchronized with the current Core, Runtime and verified Governance baseline. Cross-layer relationship validation remains open.
 
 ---
 
