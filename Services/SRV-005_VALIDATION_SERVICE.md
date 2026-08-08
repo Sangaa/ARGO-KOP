@@ -20,11 +20,11 @@ SRV-005
 
 Version
 
-1.1.0
+1.2.0
 
 Status
 
-Approved
+Integrity Hold / Revalidated
 
 Category
 
@@ -38,221 +38,111 @@ Priority
 
 Critical
 
+Last Audit
+
+2026-08-08
+
 ---
 
 # Purpose
 
-The Validation Service provides centralized validation for every operation performed inside ARGO KOP.
+The Validation Service provides centralized validation for operations performed inside ARGO KOP.
 
-No repository modification shall occur without successful validation.
+No repository modification may be accepted as valid without the applicable evidence-gated validation sequence.
 
-Validation protects repository integrity before, during and after engineering execution.
+# Core Principle
 
----
-
-# Objectives
-
-The Validation Service shall:
-
-Validate repository integrity.
-
-Validate architecture compliance.
-
-Validate governance compliance.
-
-Validate engineering consistency.
-
-Validate canonical documents.
-
-Prevent invalid repository modifications.
-
----
+Validation is an evidence-backed determination against the current repository state, not a status label.
 
 # Responsibilities
 
-Repository Validation
-
-Architecture Validation
-
-Governance Validation
-
-Engineering Validation
-
-Document Validation
-
-Reference Validation
-
-Dependency Validation
-
-Version Validation
-
----
-
-# Validation Scope
-
-Repository Structure
-
-Repository Tree
-
-Folder Structure
-
-Canonical Documents
-
-Cross References
-
-Dependencies
-
-Version Consistency
-
-Repository Reality
-
----
+- Repository validation
+- Architecture validation
+- Governance validation
+- Engineering consistency validation
+- Canonical identity validation
+- Reference validation
+- Dependency validation
+- Version validation
+- Post-mutation validation
 
 # Validation Workflow
 
-Receive Request
+Repository Synchronization
 
 ↓
 
-Repository Validation
+Required Artifact Enumeration
 
 ↓
 
-Architecture Validation
+Content Inspection
 
 ↓
 
-Governance Validation
+Cross-Reference Resolution
 
 ↓
 
-Document Validation
+Authority / Canonical Check
 
 ↓
 
-Dependency Validation
+Constraint Validation
 
 ↓
 
-Result Generation
+Mutation Gate
 
 ↓
 
-Approve or Reject
+Post-Mutation Re-read
 
----
+↓
 
-# Validation Rules
+Validation Result
 
-Every validation shall verify:
+# Evidence States
 
-Repository synchronized.
+- `VERIFIED`
+- `PARTIALLY_VERIFIED`
+- `UNAVAILABLE`
+- `INFERRED`
+- `ASSUMED`
+- `UNRESOLVED`
 
-Repository exists.
-
-Repository version current.
-
-Architecture unchanged.
-
-Governance respected.
-
-Canonical naming valid.
-
-Document references valid.
-
-Dependencies satisfied.
-
----
-
-# Validation Levels
-
-Level 1
-
-Repository Integrity
-
----
-
-Level 2
-
-Architecture Compliance
-
----
-
-Level 3
-
-Governance Compliance
-
----
-
-Level 4
-
-Engineering Compliance
-
----
-
-Level 5
-
-Canonical Compliance
-
----
+Unavailable, assumed or materially unresolved evidence cannot be silently promoted to verified state.
 
 # Validation Results
 
-PASS
+`PASS`
 
-Engineering may continue.
+Engineering may continue within the verified scope.
 
----
+`WARNING`
 
-WARNING
+Engineering may continue only when the warning is non-blocking and does not affect repository integrity, canonical identity, authority or a required dependency.
 
-Engineering may continue after logging.
+`HOLD`
 
----
+Required evidence is missing or materially ambiguous. Engineering must stop or be constrained to safe inspection.
 
-FAIL
+`FAIL`
 
-Engineering shall stop immediately.
+A material integrity, architecture, governance or dependency violation exists. The affected mutation is prohibited.
 
-Repository modification is prohibited.
+# Failure / Hold Conditions
 
----
+Validation shall hold or fail when:
 
-# Failure Conditions
-
-Validation fails when:
-
-Repository corruption detected.
-
-Architecture conflict detected.
-
-Governance conflict detected.
-
-Missing canonical dependency.
-
-Invalid repository version.
-
-Broken cross-reference.
-
-Unknown repository object.
-
----
-
-# Service Outputs
-
-Validation Report
-
-Validation Status
-
-Validation Errors
-
-Validation Warnings
-
-Repository Status
-
-Approval Decision
-
----
+- repository corruption is detected;
+- required evidence is unavailable;
+- architecture conflict exists;
+- governance conflict exists;
+- canonical identity is ambiguous;
+- a required dependency is missing or unresolved;
+- a cross-reference points only to historical/archived material without active authority;
+- evidence coverage is insufficient for the requested decision.
 
 # Dependencies
 
@@ -266,27 +156,24 @@ Repository
 
 Runtime
 
----
+Engine / Validation Engine
+
+Dependency validation requires target existence, content inspection and applicable authority verification.
 
 # Related Documents
 
-SRV-001_SERVICE_ARCHITECTURE.md
-
-SRV-002_REPOSITORY_SERVICE.md
-
-SRV-004_KNOWLEDGE_SERVICE.md
-
-SRV-006_SEARCH_SERVICE.md
-
-RUN-007_RUNTIME_SECURITY.md
-
-PROJECT_BOOTSTRAP.md
+- `Engine/ENG-004_VALIDATION_ENGINE.md`
+- `PROJECT_BOOTSTRAP.md`
+- `Core/CORE-003_CONSTITUTION.md`
+- `Repository/REP-001_MASTER_INDEX.md`
+- `Repository/REP-002_REPOSITORY_MAP.md`
+- `Runtime/RUN-007_RUNTIME_SECURITY.md`
 
 ---
 
 # Guiding Statement
 
-Every engineering action shall be validated before becoming repository reality.
+Every engineering action shall be validated against sufficient current evidence before becoming accepted repository reality.
 
 ---
 
