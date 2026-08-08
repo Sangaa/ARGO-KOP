@@ -2,7 +2,7 @@
 
 ---
 
-# BUILD HISTORY
+# BUILD HISTORY & AUDIT LEARNING
 
 ---
 
@@ -15,21 +15,27 @@ Knowledge Operating Platform
 ---
 
 Document ID
+
 ENG-004
 
 Version
-1.2.0
+
+1.3.0
 
 Status
-Approved / Historical Record Updated
+
+Approved / Historical Record Updated / Audit Learning Active
 
 Category
+
 Engineering Journal
 
 Canonical
+
 Yes
 
 Last Updated
+
 2026-08-08
 
 ---
@@ -42,149 +48,237 @@ Build History is historical evidence. It does not override current repository co
 
 ---
 
-# Objectives
-
-Build History shall:
-
-- Preserve repository evolution.
-- Record engineering milestones.
-- Support repository traceability.
-- Enable historical reconstruction.
-- Maintain release continuity.
-- Preserve lessons about how repository structure was produced.
-- Distinguish verified repository evidence from historical accounts supplied by participants.
-
----
-
-# Build Philosophy
-
-Every approved repository state represents a build.
-
-Every build should be reproducible.
-
-Every build should remain historically traceable.
-
-Historical reconstruction must not be mistaken for current repository evidence.
-
----
-
 # Repository Construction History
 
 ## Phase 0 — Initial Unstructured Artifacts
 
 Historical account supplied by the project owner:
 
-The project began as a collection of separate, weakly connected files developed through ChatGPT sessions. At this stage there was not yet a complete repository architecture with verified relationships across the files.
+The project began as separate, weakly connected files developed through ChatGPT sessions before a complete repository architecture with verified relationships existed.
 
 Evidence classification:
 
 **Owner-supplied historical account — not independently reconstructed from every original session/file.**
 
-This distinction is intentional. Future agents MUST NOT present this phase as directly repository-verified unless the original evidence is available and inspected.
-
 ## Phase 1 — Copilot Structural Construction
 
 Historical account supplied by the project owner:
 
-Copilot subsequently created a repository/file structure using approximately one or two primary documents as the main basis and inferred much of the remaining structure.
-
-The resulting structure provided useful organization but introduced a methodological risk: repository structure could become more complete-looking than the evidence supporting the relationships between its files.
+Copilot created a repository/file structure using approximately one or two primary documents as the main basis and inferred much of the remaining structure.
 
 Evidence classification:
 
-**Owner-supplied historical account — current repository artifacts may provide supporting evidence, but the original Copilot construction process has not been independently reconstructed in full.**
+**Owner-supplied historical account — current repository artifacts may provide supporting evidence, but the original construction process has not been independently reconstructed in full.**
 
 ## Phase 2 — ChatGPT Repository Correction
 
 Historical account supplied by the project owner:
 
-A later ChatGPT phase substantially corrected and developed the repository, improving structure and relationships. Some inherited assumptions from the earlier structural construction remained and could therefore propagate into later artifacts.
+A later ChatGPT phase substantially corrected and developed the repository. Some inherited assumptions from the earlier structural construction remained and could propagate into later artifacts.
 
 Evidence classification:
 
-**Owner-supplied historical account — current repository evidence can validate resulting artifacts, but not every historical action.**
+**Owner-supplied historical account — resulting artifacts can be validated; every historical action cannot.**
 
 ## Phase 3 — Gemini Build/Test Phase
 
 Historical account supplied by the project owner:
 
-The repository was subsequently tested and further developed with Gemini. Gemini continued from the repository state available at that time, improving the build while inheriting some of the assumptions and structural decisions already present.
+Gemini further developed and tested the repository from the state available at that time, inheriting some previous structural decisions and assumptions.
 
 Evidence classification:
 
-**Owner-supplied historical account — current repository evidence can validate resulting artifacts, but the complete Gemini session history is not currently treated as repository evidence.**
+**Owner-supplied historical account — current repository evidence can validate resulting artifacts, not the complete historical session sequence.**
 
 ## Phase 4 — Current Direct Repository Audit
 
 Current engineering evidence:
 
-The present audit operates directly against the GitHub repository rather than relying on uploaded ZIP snapshots or remembered repository state.
+The present audit operates directly against the GitHub repository instead of relying on uploaded ZIP snapshots or remembered repository state.
 
-This materially improves the review workflow because the agent can inspect current files, compare identities and references, modify individual files through repository operations, and validate the resulting repository state without requiring a complete round-trip ZIP exchange.
+Direct repository access improves evidence freshness and permits direct inspection, mutation and revalidation.
 
 However:
 
 **Direct repository access increases evidence availability; it does not prove complete repository inspection.**
 
-Tool limitations, truncated results, inaccessible content or incomplete enumeration MUST still be reported as evidence gaps.
+Tool limitations, truncated results, inaccessible content or incomplete enumeration remain evidence gaps.
 
 ---
 
-# Key Construction Lessons
+# Audit-Derived Verification Method
+
+The current review has exposed a stronger verification method than simple folder-by-folder inspection.
+
+The repository must be treated as a **relationship graph**, not merely a directory tree.
+
+## Verification Unit
+
+For every important artifact or dependency, verify the chain:
+
+**Referenced → Located → Read → Identity Verified → Authority Verified → Relationship Validated → Consumer/Dependency Checked → Mutation Impact Checked → Re-read After Mutation**
+
+A reference is not a validated dependency merely because the target path exists.
+
+## Bidirectional Relationship Rule
+
+Where practical, validate both directions:
+
+**Document → Target**
+
+and
+
+**Target → Authority / Consumers / Indexes**
+
+A relationship is considered stable only when the relevant sides agree.
+
+## Local-to-Global Rule
+
+A local `PASS` proves only the inspected local scope.
+
+It MUST NOT be promoted to:
+
+- layer PASS;
+- cross-layer PASS;
+- repository PASS;
+- 100% CLEAN.
+
+Global certification requires aggregation of validated relationships across the affected graph.
+
+## Revalidation Loop
+
+After every material mutation:
+
+**Write → Re-read → Compare Identity → Re-resolve References → Re-check Index/Status → Re-check Affected Consumers → Record Result**
+
+Mutation success is never equivalent to validation success.
+
+## Conflict Propagation Rule
+
+A discovered conflict is not isolated automatically to the file where it appears.
+
+The reviewer must determine whether the conflict propagates through:
+
+- upstream authority;
+- downstream consumers;
+- indexes;
+- status files;
+- runtime chains;
+- duplicate/legacy identities;
+- release/version declarations.
+
+## Closure Rule
+
+A domain may be considered internally stable only when its critical relationships are resolved and no unresolved blocking relationship remains inside the verified scope.
+
+Repository-wide `100%` requires the same condition across the repository graph, not merely across a list of folders.
+
+---
+
+# New Rules Discovered During Live Audit
+
+These rules are **audit-derived candidates**. They are operationally active for the current audit but are not yet promoted to Constitution-level authority.
+
+### Rule A — Reference Is Not Dependency
+
+A textual reference becomes an accepted dependency only after target existence, content, identity, authority and relationship compatibility are verified.
+
+### Rule B — Status Is a Claim, Not a Result
+
+Status files report a state; they do not establish that state.
+
+### Rule C — Local Success Is Not Global Integrity
+
+A successful file mutation or local validation cannot certify neighboring artifacts or the repository as a whole.
+
+### Rule D — Dependency Validation Must Be Content-Aware
+
+Path existence is insufficient. The target's actual content and authority must be inspected.
+
+### Rule E — Cross-Layer Review Is a Graph Operation
+
+The reviewer must follow relationships across folder boundaries and return to previously reviewed nodes when new evidence changes their context.
+
+### Rule F — Audit State Must Be Monotonic Toward Evidence
+
+A finding may move from `UNAVAILABLE` → `PARTIALLY VERIFIED` → `VERIFIED` as evidence increases, but it must not move backward or become `VERIFIED` without new evidence.
+
+### Rule G — 100% Is an Evidence Claim
+
+`100%` is not a confidence level or completion feeling. It is a claim about evidence coverage and unresolved critical relationships.
+
+### Rule H — New Evidence Can Reopen a Closed Domain
+
+A domain previously marked stable must be reopened when a downstream or upstream audit discovers a material relationship conflict affecting it.
+
+---
+
+# Lessons Confirmed During Current Audit
 
 ## Lesson 1 — Structure Must Follow Evidence
 
-A repository can have an impressive directory structure while its relationships remain partly inferred.
-
-Therefore:
-
-**No repository structure may be treated as authoritative merely because it is well organized.**
+A repository can have an impressive directory structure while relationships remain partly inferred.
 
 ## Lesson 2 — Partial Documentation Must Not Generate Complete Architecture
 
-Using one or two documents to infer an entire repository can produce naming, layer, dependency and ownership assumptions that later become difficult to distinguish from verified architecture.
-
-Future agents MUST inspect the available repository evidence before extending such a structure.
+One or two documents cannot safely establish an entire repository architecture.
 
 ## Lesson 3 — Inherited Assumptions Propagate
 
-Each later build may inherit not only improvements but also unresolved assumptions from earlier builds.
-
-Therefore, a new agent must audit inherited assumptions instead of treating the previous build as automatically authoritative.
+Every later build can inherit unresolved assumptions from earlier builds.
 
 ## Lesson 4 — Folder Names Are Weak Evidence
 
-Folder names describe storage. They do not by themselves establish architectural layer, authority, ownership or completeness.
+Physical storage does not establish logical architecture.
 
 ## Lesson 5 — Status Files Are Claims
 
-`_FOLDER_STATUS.md`, `PROJECT_STATUS.md` and similar declarations must be validated against actual file contents, identities and relationships.
+`_FOLDER_STATUS.md`, `PROJECT_STATUS.md` and similar declarations require validation against actual evidence.
 
 ## Lesson 6 — Direct Repository Access Changes the Cost, Not the Standard
 
-Direct access to GitHub reduces operational friction and improves freshness of evidence, but the same repository-first evidence standard remains mandatory.
+GitHub access reduces friction but does not reduce the evidence standard.
 
 ## Lesson 7 — Mutation Is Not Validation
 
-A successful file commit proves only that the requested mutation succeeded. It does not prove that neighboring files, indexes, references, architecture or the repository as a whole are correct.
+A successful commit proves only mutation success.
 
 ## Lesson 8 — Evidence Gaps Must Stay Visible
 
-If an agent cannot inspect required content, it must report the gap instead of reconstructing the missing material from memory or historical summaries.
+Missing evidence must remain explicitly classified.
 
 ## Lesson 9 — Cross-Layer Review Before Local Normalization
 
-A file should not be renamed, reassigned, canonicalized, deleted or promoted based only on its local folder. Upstream authority, downstream consumers, duplicate identities and cross-layer references must be examined first.
+Local normalization must wait for upstream/downstream and identity review.
+
+## Lesson 10 — Review Creates New Knowledge
+
+The audit itself is an engineering learning process. Newly discovered verification patterns must be recorded first as evidence-backed operational rules and evaluated for later promotion into ARGO governance.
 
 ---
 
-# Current Repository Review Method
+# Current Mandatory Engineering Sequence
 
-The current mandatory engineering sequence is:
-
-**Inspect → Enumerate → Read → Cross-Reference → Classify Evidence → Identify Conflict → Decide Canonical Ownership → Define Change → Review Impact → Execute → Validate → Update Indexes/Status → Re-Boot**
+**Inspect → Enumerate → Read → Build Relationship Graph → Cross-Reference → Classify Evidence → Identify Conflict → Decide Canonical Ownership → Review Upstream/Downstream Impact → Define Change → Execute → Re-read → Revalidate Relationship Graph → Update Indexes/Status → Re-Boot**
 
 No historical account, previous session, ZIP snapshot or memory record can bypass this sequence.
+
+---
+
+# Rule Promotion Gate
+
+Audit-derived rules must NOT be inserted directly into Constitution merely because they appeared useful during one session.
+
+Before promotion they must be:
+
+1. observed in more than one relevant case where practical;
+2. checked against existing Constitution and Governance;
+3. tested for unintended architectural consequences;
+4. documented with the evidence that produced them;
+5. reviewed as candidate platform rules;
+6. formally promoted only through the applicable governance authority.
+
+This keeps ARGO from overfitting its Constitution to a single audit.
 
 ---
 
@@ -205,29 +299,14 @@ Every future build record shall include, where applicable:
 - Evidence coverage
 - Known evidence gaps
 - Inherited assumptions requiring review
-
----
-
-# Repository Validation
-
-Every build shall verify the applicable scope for:
-
-- Repository Integrity
-- Architecture Alignment
-- Governance Compliance
-- Canonical References
-- Cross References
-- Version Consistency
-- Traceability
-- Evidence Coverage
-
-An incomplete evidence scope must be explicitly marked incomplete.
+- Material relationship changes
+- Audit-derived rules discovered
 
 ---
 
 # Repository Authority
 
-Build History records repository evolution.
+Build History records repository evolution and audit learning.
 
 It does not replace:
 
@@ -241,34 +320,21 @@ Canonical documents remain authoritative within their defined scope.
 
 ---
 
-# Historical Preservation
-
-Approved builds shall:
-
-- Remain traceable
-- Remain searchable
-- Remain recoverable
-- Preserve their reasons and evidence status
-
-Deletion is not the default mechanism for resolving historical inconsistency. Archive or governed supersession should be used where appropriate.
-
----
-
 # Related Documents
 
+- `PROJECT_BOOTSTRAP.md`
 - `Memory/Engineering_Journal/ENG-001_ENGINEERING_MODEL.md`
 - `Memory/Engineering_Journal/ENG-002_ENGINEERING_SESSIONS.md`
 - `Repository/REP-008_REPOSITORY_BASELINE.md`
 - `Repository/REP-009_REPOSITORY_TRACEABILITY.md`
 - `Core/CORE-003_CONSTITUTION.md`
-- `PROJECT_BOOTSTRAP.md`
 - `PROJECT_STATUS.md`
 
 ---
 
 # Guiding Statement
 
-Every build is a permanent milestone in the evolution of ARGO KOP, but historical milestones must never be mistaken for current repository evidence.
+**The repository is a graph of evidence-backed relationships. The audit is not merely checking files; it is discovering whether those relationships are actually true.**
 
 ---
 
