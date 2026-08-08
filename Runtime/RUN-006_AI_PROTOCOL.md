@@ -4,99 +4,58 @@
 
 # AI PROTOCOL
 
----
-
-Platform
-
-ARGO KOP
-
+Platform: ARGO KOP
 Knowledge Operating Platform
 
----
-
-Document ID
-
-RUN-006
-
-Version
-
-1.1.0
-
-Status
-
-Approved
-
-Category
-
-Runtime
-
-Canonical
-
-Yes
-
-Priority
-
-Critical
+Document ID: RUN-006
+Version: 1.2.0
+Status: Validated / Integrity Hold
+Category: Runtime
+Canonical: Yes
+Priority: Critical
+Development Baseline: 3.2.1
+Latest Official Release: 1.0.0
+Last Audit: 2026-08-08
 
 ---
 
 # Purpose
 
-This document defines the Runtime Protocol governing every AI model operating inside ARGO KOP.
+Defines the Runtime Protocol governing AI models operating inside ARGO KOP.
 
-The protocol guarantees deterministic engineering behavior regardless of the underlying AI model.
-
-The protocol is mandatory.
-
----
+The protocol preserves deterministic engineering boundaries independently of the underlying AI model.
 
 # Objectives
 
-The AI Protocol shall:
+The AI protocol shall:
 
-Synchronize with the repository.
+- synchronize with the repository;
+- operate under repository authority;
+- follow Governance;
+- respect Architecture;
+- maintain engineering continuity;
+- preserve repository integrity;
+- execute approved operations safely.
 
-Operate under repository authority.
+Automatic execution is conditional on required validation gates.
 
-Follow governance.
+# Protocol Authority
 
-Respect architecture.
+The effective authority chain is:
 
-Maintain engineering continuity.
-
-Execute automatically.
-
-Preserve repository integrity.
-
----
-
-# Protocol Hierarchy
-
-Repository Reality
+Constitution / applicable Governance authority
 
 ↓
 
-Core
+Canonical Architecture
 
 ↓
 
-Governance
+Repository authority
 
 ↓
 
-Architecture
-
-↓
-
-Repository
-
-↓
-
-Knowledge
-
-↓
-
-Memory
+Knowledge / Memory
 
 ↓
 
@@ -104,215 +63,123 @@ Runtime
 
 ↓
 
-AI
+AI execution
 
-The AI Protocol never changes this hierarchy.
-
----
+The AI does not acquire authority merely by generating a proposal or receiving context.
 
 # Mandatory Startup Protocol
 
-Every engineering session shall begin with:
+Every engineering session shall perform, as applicable:
 
 Repository Synchronization
 
 ↓
 
-Repository Scan
+Repository / Target Context Loading
 
 ↓
 
-Internal Knowledge Update
+Integrity Validation
 
 ↓
 
-Repository Validation
+Dependency and Authority Validation
 
 ↓
 
-Priority Calculation
+Engineering Target Selection
 
 ↓
 
-Engineering Queue
+Approved Execution
 
 ↓
 
-Immediate Execution
+Result Validation
 
-No engineering is permitted before completion of these steps.
-
----
+No engineering write is permitted before the required gates pass.
 
 # Repository Rules
 
 The AI shall:
 
-Synchronize with the latest repository.
-
-Treat the synchronized repository as the only engineering baseline.
-
-Ignore obsolete repository knowledge.
-
-Ignore outdated conversation context.
-
-Never infer repository structure.
-
----
+- use the synchronized repository as the engineering baseline;
+- distinguish current evidence from historical information;
+- resolve repository structure from repository evidence;
+- preserve canonical identities and paths;
+- treat conversation as task intent/context, not repository authority.
 
 # Engineering Rules
 
 The AI shall:
 
-Modify complete canonical documents only.
+- preserve unrelated content;
+- make the smallest safe change that satisfies the requirement;
+- never invent repository structure;
+- never bypass Governance or Architecture;
+- preserve traceability;
+- validate affected artifacts after writing.
 
-Never produce partial replacements.
-
-Never rename existing repository files.
-
-Never change repository numbering.
-
-Never invent repository structure.
-
-Always preserve repository traceability.
-
----
+Complete-file replacement is permitted when current content and target state have been verified. It is not a universal requirement.
 
 # Folder Execution Rules
 
-When entering a folder:
+When entering a folder, load the applicable README, canonical documents, folder status, dependencies and authority references.
 
-Read README.md.
+A `COMPLETED` status is evidence, not an unconditional skip command. The folder may be revisited when repository evidence or a dependency requires validation.
 
-Read canonical documents.
+# Runtime Communication
 
-Read _FOLDER_STATUS.md.
+Engineering communication may be concise, but the protocol does not prohibit necessary reporting of:
 
-If completed:
-
-Skip immediately.
-
-If incomplete:
-
-Complete the folder.
-
-Generate or update _FOLDER_STATUS.md.
-
-Continue automatically.
-
----
-
-# Runtime Communication Policy
-
-During repository construction:
-
-Do not explain.
-
-Do not summarize.
-
-Do not justify.
-
-Do not review.
-
-Produce only:
-
-Folder
-
-↓
-
-File
-
-↓
-
-Action
-
-↓
-
-Complete Canonical File
-
----
+- validation failures;
+- architectural conflicts;
+- material assumptions;
+- changes performed;
+- commit / revision evidence.
 
 # Automatic Continuation
 
-Continue folder after folder.
+Continuation is governed by `RUN-005`.
 
-Continue document after document.
+The AI may continue when the next operation is known, dependencies resolve and required validation gates pass.
 
-Never wait between completed engineering tasks.
-
-Stop only if:
-
-Repository corruption exists.
-
-Architecture conflict exists.
-
-Governance conflict exists.
-
-Required repository dependency is missing.
-
-Otherwise continue automatically.
-
----
+The AI MUST stop or enter `HOLD` / `FAULT` when a required gate fails or material ambiguity prevents safe execution.
 
 # Repository Reality Rule
 
-Repository Reality overrides:
+Repository Reality overrides temporary memory, inference and unsupported confidence.
 
-Conversation.
-
-Temporary Memory.
-
-AI Memory.
-
-Inference.
-
-Confidence.
-
-Repository Reality is absolute.
-
----
+It does not erase the user's current requested intent; intent must be interpreted against repository evidence.
 
 # Validation
 
-Before every engineering action verify:
+Before every engineering action verify, as applicable:
 
-Repository Synchronization.
-
-Repository Integrity.
-
-Architecture Alignment.
-
-Governance Compliance.
-
-Canonical References.
-
-Repository Version.
-
-Folder Completion Status.
-
----
+- Repository synchronization;
+- Repository integrity;
+- Architecture alignment;
+- Governance compliance;
+- canonical references;
+- version/baseline consistency;
+- folder completion state;
+- dependency availability.
 
 # Related Documents
 
-RUN-001_BOOT_SEQUENCE.md
-
-RUN-002_INITIALIZATION.md
-
-RUN-004_CONTEXT_LOADING.md
-
-RUN-005_RUNTIME_WORKFLOW.md
-
-AI-008_AI_GOVERNANCE.md
-
-PROJECT_BOOTSTRAP.md
+- `Runtime/RUN-001_BOOT_SEQUENCE.md`
+- `Runtime/RUN-002_INITIALIZATION.md`
+- `Runtime/RUN-004_CONTEXT_LOADING.md`
+- `Runtime/RUN-005_RUNTIME_WORKFLOW.md`
+- `Runtime/RUN-007_RUNTIME_SECURITY.md`
+- `PROJECT_BOOTSTRAP.md`
+- `Core/CORE-003_CONSTITUTION.md`
 
 ---
 
 # Guiding Statement
 
-The AI does not engineer from memory.
-
-The AI engineers from the synchronized repository.
+The AI engineers from synchronized repository evidence under governed authority, not from memory alone.
 
 ---
 
