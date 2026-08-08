@@ -2,21 +2,15 @@
 
 ---
 
-Document ID
-
-GOV-010
-
-Version
-
-1.1
-
-Status
-
-Approved
-
-Owner
-
-ARGO Governance
+Platform: ARGO KOP (Knowledge Operating Platform)
+Document ID: GOV-010
+Version: 1.2.0
+Status: Approved
+Category: Governance
+Canonical: Yes
+Priority: Critical
+Last Audit Date: Aug 08, 2026
+Owner: ARGO Governance
 
 ---
 
@@ -71,11 +65,20 @@ Governance shall enforce:
 
 Mandatory governance includes:
 
-- GOV-006 Review Standard
-- GOV-009 Repository Policy
-- GOV-011 Verified Assessment Principle
+- `Governance/GOV-005_REVIEW_STANDARD.md` — Review Standard
+- `Governance/GOV-006_NAMING_CONVENTION_STANDARD.md` — Naming Convention Standard
+- `GOV-009` Repository Policy — only when an active canonical artifact exists
+- `GOV-011` Verified Assessment Principle — only when an active canonical artifact exists
+
+The repository MUST NOT treat a referenced Governance document as active or canonical until its path and identity are verified in the repository baseline.
 
 Operational communication governance shall follow the Operational Conservatism Principle when added to the repository.
+
+---
+
+# Governance Integrity Rule
+
+Every governance reference must resolve to a current canonical repository path or be explicitly classified as an unresolved dependency. Unverified references shall not be presented as active governance controls.
 
 ---
 
@@ -85,4 +88,10 @@ Maintain repository integrity, architectural consistency and evidence-based engi
 
 ---
 
-End
+# Guiding Statement
+
+Governance references must describe repository reality, not historical or assumed structure.
+
+---
+
+End of Document
