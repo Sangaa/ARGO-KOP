@@ -20,11 +20,11 @@ AI-007
 
 Version
 
-1.1.0
+1.2.0
 
 Status
 
-Approved
+Integrity Hold / Revalidated
 
 Category
 
@@ -34,185 +34,80 @@ Canonical
 
 Yes
 
+Last Audit
+
+2026-08-08
+
 ---
 
 # Purpose
 
-This document defines how ARGO KOP supports multiple Artificial Intelligence models while maintaining a single engineering methodology.
+Defines how ARGO KOP can support multiple AI models while maintaining one governed engineering methodology and one repository reality.
 
-The repository remains independent from any individual AI provider.
+# Model Independence
 
----
-
-# Objectives
-
-Multi Model Support shall:
-
-Support different AI providers.
-
-Maintain repository consistency.
-
-Preserve engineering continuity.
-
-Prevent platform dependency.
-
-Guarantee deterministic repository behavior.
-
----
-
-# Philosophy
-
-ARGO is model independent.
-
-Models are interchangeable.
-
-Repository architecture remains unchanged regardless of the active model.
-
-The repository is permanent.
-
-The model is replaceable.
-
----
-
-# Supported Model Categories
-
-General Language Models
-
-Reasoning Models
-
-Coding Models
-
-Local AI Models
-
-Cloud AI Services
-
-Future AI Platforms
-
-The architecture shall remain open for future integration.
-
----
-
-# Supported Capabilities
-
-Repository Synchronization
-
-Architecture Analysis
-
-Governance Validation
-
-Engineering Documentation
-
-Knowledge Organization
-
-Memory Management
-
-Repository Navigation
-
-Canonical Document Generation
-
-Repository Completion
-
-Engineering Review
-
----
+Different models may execute engineering tasks. No model becomes repository authority merely by being active.
 
 # Common Engineering Standard
 
-Every supported AI model shall:
+Every supported model shall:
 
-Synchronize with the latest repository.
-
-Read PROJECT_BOOTSTRAP.md.
-
-Read README.md.
-
-Load repository context.
-
-Respect governance.
-
-Respect architecture.
-
-Generate complete canonical documents only.
-
-Never generate partial repository replacements.
-
----
+- synchronize with the current repository;
+- read the mandatory bootstrap protocol;
+- inspect the evidence required for the task;
+- respect Governance and Architecture;
+- distinguish evidence states;
+- avoid assumptions about unavailable content;
+- produce traceable complete document replacements where changes are authorized;
+- validate affected references after mutation.
 
 # Repository Independence
 
-Repository design shall never depend upon:
+Repository design must not depend on a specific vendor, model version, API or deployment environment.
 
-Model Vendor
-
-Model Version
-
-Model API
-
-Deployment Environment
-
-Execution Platform
-
-Infrastructure Provider
-
-Only the adapter layer may vary.
-
----
+The adapter/integration boundary may vary without changing repository authority.
 
 # Model Transition
 
-Changing from one AI model to another shall not require:
+Changing models must not require repository restructuring merely because the model changed.
 
-Repository restructuring.
-
-Knowledge migration.
-
-Document redesign.
-
-Architecture modification.
-
-Governance modification.
-
-Memory restructuring.
-
----
+Any actual architectural impact remains subject to Architecture and Governance review.
 
 # Repository Consistency
 
-All models shall produce engineering results that are:
+Results from all supported models must remain:
 
-Traceable
+- repository-first;
+- traceable;
+- evidence-bounded;
+- architecture compliant;
+- governance compliant.
 
-Deterministic
+# Evidence Boundary
 
-Canonical
+A model must not claim complete repository understanding when its accessible evidence is partial or truncated.
 
-Repository First
-
-Architecture Compliant
-
-Governance Compliant
-
----
+Tool limitations must be disclosed and the affected decision constrained.
 
 # Execution Workflow
 
-Repository Synchronization
+Repository Availability Gate
 
 ↓
 
-Repository Validation
+Repository Enumeration
 
 ↓
 
-Context Loading
+Required Artifact Inspection
 
 ↓
 
-Adapter Normalization
+Cross-Reference Validation
 
 ↓
 
-Engineering Execution
+Model Execution
 
 ↓
 
@@ -222,81 +117,27 @@ Validation
 
 Repository Update
 
-↓
-
-Next Engineering Task
-
----
-
-# Compatibility Requirements
-
-Every integrated AI shall support:
-
-Repository Reality
-
-Canonical Documents
-
-Repository Hierarchy
-
-Folder Completion Workflow
-
-Engineering Traceability
-
-Repository Continuity
-
----
-
 # Repository Priority
 
-Repository
+Core → Governance → Architecture → Repository → Knowledge → Memory → AI
 
-↓
-
-Architecture
-
-↓
-
-Governance
-
-↓
-
-Knowledge
-
-↓
-
-Memory
-
-↓
-
-AI Model
-
-The active model never changes repository authority.
-
----
+This expresses authority boundaries and does not imply that every physical folder is a distinct architecture layer.
 
 # Related Documents
 
-PROJECT_BOOTSTRAP.md
-
-AI-001_AI_MODEL.md
-
-AI-002_AI_CAPABILITIES.md
-
-AI-006_MODEL_ADAPTER.md
-
-AI-008_AI_GOVERNANCE.md
-
-CORE-003_CONSTITUTION.md
-
-REP-001_REPOSITORY_MODEL.md
+- `PROJECT_BOOTSTRAP.md`
+- `AI/AI-001_AI_MODEL.md`
+- `AI/AI-002_AI_CAPABILITIES.md`
+- `AI/AI-006_MODEL_ADAPTER.md`
+- `AI/AI-008_AI_GOVERNANCE.md`
+- `Core/CORE-003_CONSTITUTION.md`
+- `Repository/REP-001_MASTER_INDEX.md`
 
 ---
 
 # Guiding Statement
 
-Different AI models may execute the work.
-
-Only one repository reality exists.
+Models may change; evidence, governance and repository authority must remain stable.
 
 ---
 
