@@ -20,11 +20,11 @@ ENG-004
 
 Version
 
-1.3.0
+1.3.1
 
 Status
 
-Approved / Historical Record Updated / Audit Learning Active
+Legacy / Historical Record / Audit Learning Active
 
 Category
 
@@ -32,11 +32,25 @@ Engineering Journal
 
 Canonical
 
-Yes
+No — Legacy Journal Identity
+
+Namespace
+
+EJR migration pending governed path normalization
 
 Last Updated
 
 2026-08-08
+
+---
+
+# Identity Note
+
+This document historically used the `ENG-*` namespace inside `Memory/Engineering_Journal`.
+
+The current governance standard reserves `ENG-*` for Cognitive Engines under `Engine/`. This record is therefore preserved for historical traceability but is no longer an active canonical identity.
+
+New Engineering Journal records use the `EJR-*` namespace. Historical path migration remains a separate governed task and must preserve references and history.
 
 ---
 
@@ -323,8 +337,8 @@ Canonical documents remain authoritative within their defined scope.
 # Related Documents
 
 - `PROJECT_BOOTSTRAP.md`
-- `Memory/Engineering_Journal/ENG-001_ENGINEERING_MODEL.md`
-- `Memory/Engineering_Journal/ENG-002_ENGINEERING_SESSIONS.md`
+- `Memory/Engineering_Journal/ENG-001_ENGINEERING_MODEL.md` (legacy journal identity)
+- `Memory/Engineering_Journal/ENG-002_ENGINEERING_SESSIONS.md` (legacy journal identity)
 - `Repository/REP-008_REPOSITORY_BASELINE.md`
 - `Repository/REP-009_REPOSITORY_TRACEABILITY.md`
 - `Core/CORE-003_CONSTITUTION.md`
