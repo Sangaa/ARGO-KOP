@@ -1,94 +1,82 @@
 # ARGO KOP
 
-Knowledge Operating Platform
+---
 
-Version: 3.0.0
+# Knowledge Operating Platform
 
-Status:
-Foundation Build
+Platform: ARGO KOP  
+Version: 3.1.0  
+Status: Foundation Completed / Integration Phase  
+Canonical: Yes  
+Last Audit Date: 2026-08-06  
 
 ---
 
-## What is ARGO?
+## What is ARGO KOP?
 
-ARGO is a Cognitive Operating Platform.
+**ARGO KOP (Knowledge Operating Platform)** is a cognitive engineering platform designed to transform fragmented organizational knowledge into a structured, governed, deterministic, and continuously evolving enterprise asset.
 
-It is not an AI.
-
-It is not a chatbot.
-
-It is a structured cognitive framework designed to:
-
-- Understand reality
-- Preserve knowledge
-- Support reasoning
-- Build reusable organizational intelligence
-- Help both humans and AI systems make better decisions
+The platform preserves knowledge, maintains strict architectural consistency, and orchestrates seamless integration between human decision-makers, artificial intelligence reasoning engines, and operational execution services.
 
 ---
 
-## Core Philosophy
+## Architecture Overview
 
-Reality before Theory.
+ARGO KOP is structured into 5 unified architectural layers:
 
-Facts before Assumptions.
++-----------------------------------------------------------------------+
+|                        GOVERNANCE & STANDARDS                         |
+|  Governance/  |  Standards/  |  Lifecycle/  |  Quality/               |
++-----------------------------------------------------------------------+
+│
+▼
++-----------------------------------------------------------------------+
+|                     SYSTEM CORE & SPECIFICATIONS                      |
+|  Specs/  |  Docs/  |  Models/  |  Architecture/                       |
++-----------------------------------------------------------------------+
+│
+▼
++-----------------------------------------------------------------------+
+|                       INTELLIGENCE & COGNITION                        |
+|  Engine/  |  Intelligence/  |  Cognition/  |  Memory/                 |
++-----------------------------------------------------------------------+
+│
+▼
++-----------------------------------------------------------------------+
+|                    EXECUTION & SERVICE OPERATIONS                     |
+|  Services/  |  Runtime/  |  Interfaces/  |  Plugins/                  |
++-----------------------------------------------------------------------+
+│
+▼
++-----------------------------------------------------------------------+
+|                      REPOSITORY & RELEASE CORE                        |
+|  Repository/  |  Templates/  |  Projects/  |  Release/                |
++-----------------------------------------------------------------------+
 
-Understanding before Automation.
-
-Simple before Complex.
-
-Knowledge must remain independent from any AI model.
-
----
-
-## Repository Structure
-
-Repository/
-
-Governance/
-
-Architecture/
-
-Blueprints/
-
-Specifications/
-
-Templates/
-
-Knowledge/
-
-Projects/
-
-Archive/
-
-Logs/
 
 ---
 
-## Current Version
+## Mandatory Onboarding & Bootstrap Sequence
 
-ARGO OS 3.0
+Any engineer, contributor, or AI model interacting with this repository **MUST** follow the boot protocol defined in:
 
-Foundation Build
+👉 **`PROJECT_BOOTSTRAP.md`**
 
----
-
-## Repository Principles
-
-Single Source of Truth
-
-Modular Knowledge
-
-Version Controlled
-
-Traceable Decisions
-
-Continuous Evolution
+No engineering work or repository mutation shall begin without completing the mandatory 4-step synchronization sequence defined in `PROJECT_BOOTSTRAP.md`.
 
 ---
 
-## Status
+## Core Repository Navigation
 
-Build 001
+* **Master Repository Index:** [`Repository/REP-001_MASTER_INDEX.md`](Repository/REP-001_MASTER_INDEX.md)
+* **System Relationship Map:** [`Repository/REP-002_REPOSITORY_MAP.md`](Repository/REP-002_REPOSITORY_MAP.md)
+* **Knowledge Model:** [`Models/MOD-001_KNOWLEDGE_MODEL.md`](Models/MOD-001_KNOWLEDGE_MODEL.md)
+* **Runtime Sequence:** [`Runtime/RUN-001_BOOT_SEQUENCE.md`](Runtime/RUN-001_BOOT_SEQUENCE.md)
+* **Quality Assurance Gate:** [`Quality/QLT-001_QUALITY_ASSURANCE.md`](Quality/QLT-001_QUALITY_ASSURANCE.md)
 
-Repository Foundation
+---
+
+## License & Intellectual Property
+
+Copyright © 2026 ARGO Foundation. All Rights Reserved.  
+Refer to `LICENSE.md` and `NOTICE.md` for terms of ownership and governance.
