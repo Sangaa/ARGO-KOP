@@ -6,7 +6,7 @@
 
 Platform: ARGO KOP (Knowledge Operating Platform)
 Document ID: REP-001
-Version: 1.6.0
+Version: 1.7.0
 Status: Integrity Hold
 Category: Repository
 Canonical: Yes
@@ -20,6 +20,8 @@ Last Audit Date: Aug 08, 2026
 Canonical index of active, verified repository artifacts. An artifact is active only when identity, path, authority, version and references are consistent with the current repository baseline.
 
 This index does not certify repository-wide cleanliness merely because a previous status record did.
+
+The repository is currently being validated as a **relationship graph**. Index membership therefore records inventory; it does not by itself certify the relationships between inventory nodes.
 
 ## 2. Root Baseline
 
@@ -87,14 +89,25 @@ The Architecture inventory remains governed by `REP-002_REPOSITORY_MAP.md` and t
 4. Historical alternatives remain archived and are not active authority.
 5. Missing or unverified dependencies remain unresolved; they are not invented.
 6. Repository indexes must be updated when canonical paths or active inventories change.
+7. A reference is not an accepted dependency until its target is located, read, identity-checked, authority-checked and relationship-validated.
+8. Critical relationships should be validated in both directions where practical.
+9. A material conflict must be traced through affected consumers, indexes, status files and release/version declarations before local resolution is considered complete.
 
 ## 9. Integrity State
 
 Current repository state: **INTEGRITY HOLD**.
 
-Runtime and Core changes are reflected in this index. Governance and Architecture remain subject to consolidated cross-layer validation.
+The index is synchronized with the currently verified inventory within the inspected scope. Cross-layer relationship validation remains open.
 
-## 10. Governing Rule
+## 10. Verification Model
+
+Current audit model:
+
+**Referenced → Located → Read → Identity Verified → Authority Verified → Relationship Validated → Consumer/Dependency Checked → Mutation Impact Checked → Re-read After Mutation**
+
+Local validation results remain bounded to their inspected scope. `100%` repository integrity requires aggregated evidence across the affected repository graph and absence of unresolved blocking relationships.
+
+## 11. Governing Rule
 
 Repository Reality > Previous Status Claims > Conversation Memory
 
