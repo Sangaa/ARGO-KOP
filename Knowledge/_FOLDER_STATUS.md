@@ -3,60 +3,44 @@
 ---
 
 Folder
-
 Knowledge
 
 Status
-
-✅ APPROVED
+🟡 INTEGRITY HOLD
 
 Version
-
-1.1.0
+1.2.0
 
 Last Review
-
-2026-08-05
-
-Reviewer
-
-ARGO Architecture Team
+2026-08-08
 
 Review Method
-
 Repository First
 
 Repository Baseline
-
-ARGO-KOP(5).zip
+Current main branch repository state
 
 ---
 
 # Review Summary
 
 Inventory
-
-✅ Completed
+🟡 Verified for reviewed scope
 
 Knowledge Model Review
-
-✅ Completed
+🟢 Completed for reviewed artifacts
 
 Knowledge Governance Review
-
-✅ Completed
+🟢 Completed for reviewed artifacts
 
 Repository Alignment
-
-✅ Completed
+🟡 Cross-layer synchronization pending
 
 Canonical Validation
-
-✅ Completed
+🟡 Pending final repository-wide validation
 
 Folder Approval
-
-✅ Approved
+HOLD — approval is limited until synchronization is complete
 
 ---
 
@@ -65,102 +49,29 @@ Folder Approval
 README.md
 
 KNW-001_KNOWLEDGE_MODEL.md
-
 KNW-002_KNOWLEDGE_CLASSIFICATION.md
-
 KNW-003_KNOWLEDGE_RELATIONSHIPS.md
-
 KNW-004_KNOWLEDGE_LIFECYCLE.md
-
 KNW-005_KNOWLEDGE_GOVERNANCE.md
-
 KNW-006_KNOWLEDGE_QUALITY.md
-
 KNW-007_KNOWLEDGE_BASELINE.md
-
 KNW-008_KNOWLEDGE_TRACEABILITY.md
-
 KNW-009_KNOWLEDGE_EVOLUTION.md
-
 KNW-010_KNOWLEDGE_MAINTENANCE.md
 
----
+# Known Outstanding Work
 
-# Files Updated
+- Finalize and validate `Knowledge/README.md`.
+- Reconcile all Knowledge references with current Repository and Architecture authority.
+- Perform final cross-reference synchronization after the repository-wide audit.
 
-KNW-001_KNOWLEDGE_MODEL.md
+# Integrity Rules
 
-KNW-002_KNOWLEDGE_CLASSIFICATION.md
-
-KNW-003_KNOWLEDGE_RELATIONSHIPS.md
-
-KNW-004_KNOWLEDGE_LIFECYCLE.md
-
-KNW-005_KNOWLEDGE_GOVERNANCE.md
-
-KNW-006_KNOWLEDGE_QUALITY.md
-
-KNW-007_KNOWLEDGE_BASELINE.md
-
-KNW-008_KNOWLEDGE_TRACEABILITY.md
-
-KNW-009_KNOWLEDGE_EVOLUTION.md
-
-KNW-010_KNOWLEDGE_MAINTENANCE.md
-
----
-
-# Pending Files
-
-README.md
-
-Reason
-
-Final synchronization after global repository freeze.
-
----
-
-# Repository Health
-
-Knowledge Integrity
-
-✅ Verified
-
-Knowledge Relationships
-
-✅ Verified
-
-Governance Alignment
-
-✅ Verified
-
-Repository Alignment
-
-✅ Verified
-
-Canonical References
-
-✅ Verified
-
-Duplicate Knowledge
-
-✅ None
-
-Duplicate Ownership
-
-✅ None
-
----
-
-# Outstanding Work
-
-Finalize:
-
-README.md
-
-Perform final cross-reference synchronization after Build Freeze.
-
----
+1. This status file reflects the current repository evidence, not a historical ZIP snapshot.
+2. Folder approval cannot exceed the verified review scope.
+3. A pending README or unresolved cross-layer reference prevents final folder approval.
+4. Status claims must remain evidence-backed.
+5. Historical review records may be preserved, but they do not override current repository reality.
 
 # Next Folder
 
@@ -168,21 +79,9 @@ Memory
 
 ---
 
-# Folder Approval
+# Notes
 
-Knowledge Folder
-
-APPROVED
-
-Future modifications require:
-
-Knowledge Review
-
-Architecture Validation
-
-Governance Approval
-
-Repository Update
+The Knowledge layer preserves validated, traceable organizational knowledge. It does not independently create authority over Constitution, Governance, Architecture or Repository policy.
 
 ---
 
