@@ -6,7 +6,7 @@
 
 Platform: ARGO KOP (Knowledge Operating Platform)
 Document ID: REP-002
-Version: 1.6.3
+Version: 1.6.4
 Status: Integrity Hold
 Category: Repository
 Canonical: Yes
@@ -109,7 +109,20 @@ The Architecture domain is under re-audit. Current repository evidence identifie
 
 `ARC_MAP.md` previously declared `ARC-001`, conflicting with `ARC-001_PLATFORM_ARCHITECTURE.md`; the map identity collision has been corrected.
 
-## 8. Interfaces Layer
+## 8. Lifecycle Domain
+
+Path: `Lifecycle/`
+
+The Lifecycle domain is under re-audit and is limited to document-scoped lifecycle authority within the inspected scope:
+
+- `Lifecycle/LIF-001_DOCUMENT_LIFECYCLE.md`
+- `Lifecycle/_FOLDER_STATUS.md`
+
+`Lifecycle/GOV-005_DOCUMENT_LIFECYCLE.md` previously reused the active `GOV-005` identity owned by `Governance/GOV-005_REVIEW_STANDARD.md`. The lifecycle artifact has been migrated to `LIF-001` and the former active path has been retired; provenance remains in Git history.
+
+`LIF-001` does not establish authority over platform, repository, knowledge, decision, project or memory lifecycles.
+
+## 9. Interfaces Layer
 
 Path: `Interfaces/`
 
@@ -120,7 +133,7 @@ Path: `Interfaces/`
 
 `INTF-006` remains Proposed / Integrity Hold pending cross-layer validation.
 
-## 9. Models Layer
+## 10. Models Layer
 
 Path: `Models/`
 
@@ -132,13 +145,13 @@ Path: `Models/`
 
 Declared model artifacts not directly located remain unresolved and are not promoted to active authority.
 
-## 10. Other Repository Domains
+## 11. Other Repository Domains
 
 Current `SYSTEM_MAP.md` also identifies Knowledge, Memory, Decision, AI, Services, Intelligence, Quality, Projects, Release, Logs, Examples and Future as physical repository domains/groupings.
 
 These domains are not assumed complete or architecturally authoritative from folder names alone. Their active inventories and relationships remain under connected-baseline validation.
 
-## 11. Mapping Rules
+## 12. Mapping Rules
 
 1. Every active canonical document has exactly one canonical path.
 2. Filename identity must match internal Document ID where one exists.
@@ -149,12 +162,13 @@ These domains are not assumed complete or architecturally authoritative from fol
 7. Archive operations must preserve enough evidence to identify the former active path and its canonical successor.
 8. A new interface, model, runtime component or service must not be considered globally integrated until its consumers and dependencies are validated.
 9. Map artifacts and status artifacts must not reuse the identity of canonical content documents.
+10. Domain-specific lifecycle artifacts must remain scoped to their declared artifact class and must not silently acquire authority over another domain's lifecycle.
 
-## 12. Integrity State
+## 13. Integrity State
 
 Current repository state: **INTEGRITY HOLD**.
 
-The map is synchronized with the current declared Core, Governance, Repository, Runtime, Architecture, Interfaces and Models inventory within the inspected scope. Cross-layer relationship validation remains open.
+The map is synchronized with the current declared Core, Governance, Repository, Runtime, Architecture, Lifecycle, Interfaces and Models inventory within the inspected scope. Cross-layer relationship validation remains open.
 
 ---
 
