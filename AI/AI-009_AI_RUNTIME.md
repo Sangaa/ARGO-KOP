@@ -20,11 +20,11 @@ AI-009
 
 Version
 
-1.1.0
+1.2.0
 
 Status
 
-Approved
+Integrity Hold / Revalidated
 
 Category
 
@@ -34,55 +34,33 @@ Canonical
 
 Yes
 
+Last Audit
+
+2026-08-08
+
 ---
 
 # Purpose
 
-This document defines the Runtime behavior of Artificial Intelligence operating inside ARGO KOP.
+Defines runtime behavior for AI participating in ARGO KOP engineering.
 
-Runtime defines how AI executes engineering work after repository synchronization.
-
-The Runtime layer guarantees consistent execution regardless of the underlying AI model.
-
----
-
-# Objectives
-
-AI Runtime shall:
-
-Execute engineering tasks.
-
-Maintain repository synchronization.
-
-Preserve engineering continuity.
-
-Support deterministic execution.
-
-Respect governance.
-
-Respect architecture.
-
----
-
-# Runtime Philosophy
-
-Repository synchronization is mandatory.
-
-Execution begins only after repository validation.
-
-Runtime behavior shall remain deterministic.
-
-Repository Reality always overrides runtime assumptions.
-
----
+Runtime execution is conditional on repository synchronization and sufficient evidence.
 
 # Runtime Lifecycle
 
-Repository Synchronization
+Repository Availability Gate
 
 ↓
 
-Repository Validation
+Repository Enumeration
+
+↓
+
+Required Artifact Inspection
+
+↓
+
+Evidence Classification
 
 ↓
 
@@ -90,7 +68,7 @@ Context Loading
 
 ↓
 
-Current Folder Selection
+Current Task Selection
 
 ↓
 
@@ -106,187 +84,95 @@ Repository Update
 
 ↓
 
-Folder Completion
-
-↓
-
-Next Folder
-
----
+Revalidation
 
 # Runtime States
 
-Idle
+**Idle** — repository not loaded.
 
-Repository not loaded.
+**Synchronizing** — current repository baseline being established.
 
-Synchronizing
+**Reviewing** — required evidence and relationships are being inspected.
 
-Repository baseline is being loaded.
+**Ready** — evidence required for the authorized task is sufficient and no blocking conflict exists.
 
-Ready
+**Executing** — engineering work is in progress within the verified scope.
 
-Repository synchronized.
+**Validating** — affected artifacts, indexes and references are being checked.
 
-Executing
-
-Engineering in progress.
-
-Validating
-
-Repository consistency verification.
-
-Completed
-
-Current engineering task completed.
-
-Stopped
-
-Execution halted due to repository or governance conflict.
-
----
+**Stopped / Hold** — evidence gap, ambiguity, corruption or authority conflict prevents deterministic execution.
 
 # Runtime Rules
 
 The AI Runtime shall:
 
-Always synchronize before execution.
-
-Always validate repository integrity.
-
-Always load PROJECT_BOOTSTRAP.md.
-
-Always load current folder.
-
-Always generate complete canonical documents.
-
-Always preserve repository consistency.
-
----
+- synchronize before execution;
+- load the mandatory bootstrap protocol;
+- inspect required evidence rather than assume it;
+- distinguish folder status from validated integrity;
+- respect architecture and governance authority;
+- re-read affected artifacts after mutation;
+- disclose evidence gaps.
 
 # Automatic Execution
 
-When runtime is Ready:
+When the runtime reaches `Ready`, it may continue without user confirmation only when the requested action is unambiguous and the required evidence is available.
 
-Select current unfinished folder.
-
-Read README.
-
-Read canonical documents.
-
-Read _FOLDER_STATUS.md if available.
-
-Execute engineering.
-
-Close folder.
-
-Continue automatically.
-
-No user confirmation is required unless ambiguity exists.
-
----
+Missing or conflicting evidence requires `Hold` rather than forced continuation.
 
 # Stop Conditions
 
-Runtime shall stop only when:
+Runtime shall stop or constrain execution when:
 
-Repository corruption detected.
-
-Architecture conflict detected.
-
-Governance conflict detected.
-
-Required repository dependency missing.
-
-Repository ambiguity prevents deterministic engineering.
-
-Otherwise continue automatically.
-
----
+- repository corruption is detected;
+- required repository content is unavailable;
+- canonical identity is ambiguous;
+- architecture conflict exists;
+- governance conflict exists;
+- critical references cannot be resolved;
+- evidence coverage is insufficient for the decision.
 
 # Runtime Validation
 
-Before every modification verify:
+Before a material modification verify the applicable scope for:
 
-Repository Synchronization
-
-Repository Integrity
-
-Architecture Alignment
-
-Governance Compliance
-
-Canonical References
-
-Version Consistency
-
-Folder Status
-
-Repository Traceability
-
----
+- repository synchronization;
+- repository integrity;
+- architecture alignment;
+- governance compliance;
+- canonical identity;
+- dependency/reference resolution;
+- version consistency;
+- traceability.
 
 # Runtime Restrictions
 
-The Runtime shall never:
+Runtime shall never:
 
-Invent repository structure.
-
-Invent repository documents.
-
-Ignore governance.
-
-Ignore architecture.
-
-Modify outdated repository versions.
-
-Generate partial canonical replacements.
-
-Use conversation as repository truth.
-
----
-
-# Runtime Outputs
-
-Engineering outputs shall always be:
-
-Canonical
-
-Traceable
-
-Deterministic
-
-Complete
-
-Repository synchronized
-
-Architecture compliant
-
-Governance compliant
-
----
+- invent repository structure;
+- invent repository documents;
+- infer architecture from folder names alone;
+- use conversation memory as repository truth;
+- claim global integrity from a local successful mutation;
+- bypass required evidence gates.
 
 # Related Documents
 
-PROJECT_BOOTSTRAP.md
-
-AI-001_AI_MODEL.md
-
-AI-004_CONTEXT_LOADING.md
-
-AI-006_MODEL_ADAPTER.md
-
-AI-008_AI_GOVERNANCE.md
-
-AI-010_AI_INDEX.md
-
-CORE-003_CONSTITUTION.md
+- `PROJECT_BOOTSTRAP.md`
+- `Runtime/RUN-001_BOOT_SEQUENCE.md`
+- `Runtime/RUN-004_CONTEXT_LOADING.md`
+- `Runtime/RUN-008_RUNTIME_STATE.md`
+- `AI/AI-001_AI_MODEL.md`
+- `AI/AI-004_CONTEXT_LOADING.md`
+- `AI/AI-008_AI_GOVERNANCE.md`
+- `AI/AI-010_AI_INDEX.md`
+- `Core/CORE-003_CONSTITUTION.md`
 
 ---
 
 # Guiding Statement
 
-Reliable execution begins with a synchronized repository and ends with a completed repository.
+Reliable autonomous execution begins with an evidence gate and ends with validation.
 
 ---
 
