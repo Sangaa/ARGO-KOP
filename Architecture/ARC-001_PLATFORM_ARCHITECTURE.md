@@ -20,15 +20,27 @@ ARC-001
 
 Version
 
-1.1.0
+1.2.0
 
 Status
 
-Approved
+Validated / Integrity Hold
 
 Category
 
 Architecture
+
+Repository Development Baseline
+
+3.2.1
+
+Latest Official Release
+
+1.0.0
+
+Last Audit
+
+2026-08-08
 
 ---
 
@@ -38,29 +50,13 @@ This document defines the high-level architecture of ARGO KOP.
 
 It describes the primary architectural domains, their responsibilities, and the relationships between them.
 
-This document serves as the highest architectural reference for all platform components.
+This document is the highest architectural reference for platform structure. It does not override Governance, the Constitution, or repository authority.
 
 ---
 
 # Scope
 
-This architecture applies to the entire ARGO KOP platform, including:
-
-• Repository Structure
-
-• Governance
-
-• Knowledge Management
-
-• Memory Management
-
-• Cognitive Services
-
-• Runtime
-
-• Projects
-
-• Documentation
+This architecture applies to the entire ARGO KOP platform, including repository structure, governance, knowledge, memory, cognitive services, runtime, projects, and documentation.
 
 Every component within the repository shall conform to this architecture.
 
@@ -78,215 +74,60 @@ Knowledge defines value.
 
 Runtime defines behavior.
 
-Technology is only an implementation detail.
+Technology is an implementation detail.
 
 ---
 
 # Platform Layers
 
-ARGO KOP consists of the following architectural layers.
+## Layer 1 — Identity
 
----
+Defines platform identity, vision, roadmap, charter, and constitution.
 
-Layer 1
+## Layer 2 — Governance
 
-Identity Layer
+Defines policies, standards, rules, repository governance, naming, metadata, versioning, and traceability.
 
-Purpose
+## Layer 3 — Repository
 
-Defines the identity of the platform.
+Organizes canonical documents and defines repository navigation, indexes, maps, and relationships.
 
-Includes
+## Layer 4 — Knowledge
 
-Manifest
+Stores structured knowledge, relationships, classification, and evolution.
 
-Vision
+## Layer 5 — Memory
 
-Roadmap
+Preserves working, project, decision, and historical context.
 
-Platform Charter
+## Layer 6 — Cognitive
 
-Platform Constitution
+Transforms knowledge and context into reasoning through thinking, decision, context, and repository-intelligence functions.
 
----
+## Layer 7 — Runtime
 
-Layer 2
+Controls boot, initialization, context loading, session management, and runtime behavior.
 
-Governance Layer
+## Layer 8 — Projects
 
-Purpose
+Supports independent projects built on top of ARGO KOP.
 
-Defines policies, standards, rules, and repository governance.
-
-Responsibilities
-
-Naming
-
-Metadata
-
-Versioning
-
-Documentation Standards
-
-Repository Policies
-
-Traceability
-
----
-
-Layer 3
-
-Repository Layer
-
-Purpose
-
-Organizes every document and defines repository navigation.
-
-Responsibilities
-
-Master Index
-
-Repository Map
-
-Component Catalog
-
-Navigation
-
-Document Relationships
-
----
-
-Layer 4
-
-Knowledge Layer
-
-Purpose
-
-Stores structured knowledge.
-
-Responsibilities
-
-Knowledge Models
-
-Knowledge Relationships
-
-Knowledge Classification
-
-Knowledge Evolution
-
-Knowledge Indexes
-
----
-
-Layer 5
-
-Memory Layer
-
-Purpose
-
-Preserves historical context and organizational memory.
-
-Responsibilities
-
-Working Memory
-
-Project Memory
-
-Decision Memory
-
-Session History
-
-Knowledge Preservation
-
----
-
-Layer 6
-
-Cognitive Layer
-
-Purpose
-
-Transforms knowledge into reasoning.
-
-Responsibilities
-
-Thinking Engine
-
-Decision Engine
-
-Context Engine
-
-Knowledge Navigation
-
-Repository Intelligence
-
----
-
-Layer 7
-
-Runtime Layer
-
-Purpose
-
-Controls platform execution.
-
-Responsibilities
-
-Boot Sequence
-
-Context Loading
-
-Session Management
-
-Runtime Rules
-
-Operational Profile
-
----
-
-Layer 8
-
-Project Layer
-
-Purpose
-
-Supports projects built on top of ARGO KOP.
-
-Responsibilities
-
-Project Templates
-
-Project Metadata
-
-Project Lifecycle
-
-Project Knowledge
-
-Project Memory
+Additional implementation folders such as Engine, Services, AI, Models, Specifications, and Standards are implementation or specification domains within these architectural boundaries; they do not automatically constitute new top-level architectural layers.
 
 ---
 
 # Architectural Principles
 
-The platform shall remain modular.
-
-Every layer shall have a single responsibility.
-
-Dependencies shall always point downward.
-
-Knowledge shall never depend on implementation.
-
-Governance applies to every layer.
-
-Every architectural decision shall be documented.
-
-Every document shall belong to exactly one primary component.
-
-Repository is the Single Source of Truth.
-
-Conversation memory shall never override repository content.
-
-Architecture shall always be validated against the repository baseline before issuing engineering decisions.
+- The platform remains modular.
+- Every layer has a single primary responsibility.
+- Dependencies follow the approved architectural direction.
+- Knowledge does not depend on implementation details.
+- Governance applies to every layer.
+- Architectural decisions are documented.
+- Every document has one primary component.
+- The repository is the Single Source of Truth.
+- Conversation memory never overrides repository content.
+- Architecture is validated against repository reality before engineering decisions are issued.
 
 ---
 
@@ -300,27 +141,27 @@ Governance
 
 ↓
 
-Repository
+Repository / Core
 
 ↓
 
-Knowledge
+Architecture
 
 ↓
 
-Memory
+Knowledge / Memory
 
 ↓
 
-Cognition
+Cognitive / Engine
 
 ↓
 
-Runtime
+Runtime / Services / AI
 
 ↓
 
-Projects
+Projects / Applied Work
 
 No lower layer may redefine a higher layer.
 
@@ -328,91 +169,51 @@ No lower layer may redefine a higher layer.
 
 # Cross-Layer Communication
 
-Layers communicate only through documented interfaces.
+Layers communicate through documented interfaces and approved repository references.
 
 Direct undocumented dependencies are prohibited.
 
-Knowledge may be referenced.
-
-Architecture may not be bypassed.
+Architecture may not be bypassed by implementation convenience.
 
 ---
 
 # Architectural Integrity
 
-Architectural integrity is preserved by:
-
-Governance
-
-Standards
-
-Traceability
-
-Version Control
-
-Documentation Reviews
-
-Architecture Reviews
-
-Verified Repository Inspection
-
-Folder Status Tracking
+Architectural integrity is preserved by Governance, Standards, Traceability, Version Control, Documentation Reviews, Architecture Reviews, verified repository inspection, and folder-status evidence records.
 
 ---
 
 # Evolution Strategy
 
-ARGO KOP is designed for continuous evolution.
-
-New capabilities shall extend the architecture.
+New capabilities may extend the architecture only when their ownership, dependency direction, canonical location, and governance impact are documented.
 
 Existing architectural principles shall not be broken without formal architectural review.
-
-Architecture evolves.
-
-Foundations remain stable.
 
 ---
 
 # Success Criteria
 
-The architecture is considered successful when:
-
-Knowledge remains organized.
-
-Repository remains understandable.
-
-Projects remain independent.
-
-Architecture remains consistent.
-
-Platform evolution remains controlled.
+The architecture is successful when knowledge remains organized, the repository remains understandable, projects remain independent, architecture remains consistent, and platform evolution remains controlled.
 
 ---
 
 # Related Documents
 
-CORE-001_ARGO_MANIFEST
+- `Core/CORE-002_ARGO_IDENTITY.md`
+- `Core/CORE-003_CONSTITUTION.md`
+- `Governance/GOV-005_REVIEW_STANDARD.md`
+- `Governance/GOV-006_NAMING_CONVENTION_STANDARD.md`
+- `Governance/GOV-009_REPOSITORY_POLICY.md`
+- `Governance/GOV-010_GOVERNANCE_MODEL.md`
+- `Repository/REP-001_MASTER_INDEX.md`
+- `Architecture/ARC-002_COMPONENT_ARCHITECTURE.md`
+- `Architecture/ARC-004_LAYER_MODEL.md`
 
-CORE-002_ARGO_IDENTITY
+---
 
-CORE-003_CONSTITUTION
+# Integrity State
 
-CORE-004_CORE_PRINCIPLES
-
-CORE-011_PLATFORM_CHARTER
-
-GOV-006_REVIEW_STANDARD
-
-GOV-009_REPOSITORY_POLICY
-
-GOV-010_GOVERNANCE_MODEL
-
-REP-001_MASTER_INDEX
-
-ARC-002_COMPONENT_ARCHITECTURE
-
-ARC-004_LAYER_MODEL
+This document is re-aligned with the current repository baseline. The Architecture layer remains under repository-wide integrity audit until its folder status and remaining architectural artifacts are validated.
 
 ---
 
