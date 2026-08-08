@@ -1,30 +1,52 @@
 # CORE PRINCIPLES
 
---------------------------------------------------
+---
 
 Document ID
 CORE-004
+Version
+1.2.0
+Status
+Validated / Integrity Hold
+Category
+Core
+Canonical
+Yes
+Last Audit
+2026-08-08
 
---------------------------------------------------
+---
 
-Think before Building.
+# Purpose
 
-Understand before Solving.
+Defines the permanent operating principles of ARGO KOP beneath the Constitution.
 
-Measure before Improving.
+# Principles
 
-Verify before Trusting.
+1. Think before Building.
+2. Understand before Solving.
+3. Measure before Improving.
+4. Verify before Trusting.
+5. Reuse before Creating.
+6. Simplify before Expanding.
+7. Protect Knowledge.
+8. Preserve Context.
+9. Respect Architecture.
+10. Repository Reality before unsupported assumption.
+11. Evidence before conclusion.
+12. Validation before execution.
+13. Traceability before irreversible change.
 
-Reuse before Creating.
+# Application Rule
 
-Simplify before Expanding.
+These principles support the Constitution and MUST NOT override it.
 
-Protect Knowledge.
+When a principle conflicts with a higher-authority constitutional, governance or architectural rule, the higher authority prevails.
 
-Preserve Context.
+# Engineering Rule
 
-Respect Architecture.
+A principle is not an execution permission. Any repository action remains subject to applicable Governance, Architecture, Runtime validation and authorization.
 
---------------------------------------------------
+---
 
-End
+End of Document
