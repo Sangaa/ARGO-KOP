@@ -1,7 +1,19 @@
 # ARGO Knowledge Organization Specification
 
-## Version: 3.0.0
-Status: Foundation Build
+## Version: 3.0.1
+Status: Foundation Specification / Integrity Hold
+Category: Operational Specification
+Last Audit: 2026-08-08
+
+---
+
+## Scope
+
+This specification defines operational guidance for organizing knowledge artifacts inside ARGO KOP.
+
+It is an **operational specification**, not the canonical authority for the platform's knowledge-object schema. `Models/MOD-001_KNOWLEDGE_MODEL.md` defines the canonical conceptual knowledge model, while applicable Governance documents define approval and authority rules.
+
+Where this specification conflicts with a newer canonical model, governance rule, repository map, or explicit authority decision, the applicable higher authority prevails and the conflict must be recorded and resolved.
 
 ---
 
@@ -14,7 +26,7 @@ Status: Foundation Build
 - Non-negotiable rules
 - Essential frameworks
 
-**Storage:** Governance/ and Architecture/ directories
+**Typical Storage:** Governance/ and Architecture/ directories
 **Update Frequency:** Rarely (requires governance approval)
 **Validation:** High (multiple reviews)
 
@@ -25,9 +37,9 @@ Status: Foundation Build
 - Guidelines and standards
 - Reusable patterns
 
-**Storage:** Blueprints/ and Specifications/ directories
+**Typical Storage:** Specifications/, Engine/, Services/, Models/, Runtime/ and other explicitly governed operational paths
 **Update Frequency:** Periodically (quarterly or as needed)
-**Validation:** Medium (peer review)
+**Validation:** Medium (peer/technical review appropriate to the artifact)
 
 ### Tier 3: Domain Knowledge
 **Characteristics:**
@@ -36,7 +48,7 @@ Status: Foundation Build
 - Research findings
 - Subject-matter expertise
 
-**Storage:** Knowledge/ directory (organized by domain)
+**Typical Storage:** Knowledge/ directory, organized according to the active repository structure
 **Update Frequency:** Regularly (as new knowledge emerges)
 **Validation:** Medium-High (based on domain standards)
 
@@ -47,9 +59,11 @@ Status: Foundation Build
 - Emerging patterns
 - Speculative content
 
-**Storage:** Projects/ directory or dedicated exploratory folders
+**Typical Storage:** Projects/ directory or dedicated exploratory folders where explicitly governed
 **Update Frequency:** Frequently (ongoing investigation)
 **Validation:** Low-Medium (marked as provisional)
+
+Classification tier and physical storage path must not be treated as interchangeable authority claims.
 
 ---
 
@@ -70,6 +84,8 @@ Knowledge/
 ├── Domain-2/
 └── Domain-3/
 ```
+
+This is an organizational example, not evidence that every example artifact exists in the current repository.
 
 ### Domain Structure Requirements
 
@@ -131,6 +147,8 @@ Next Review: [YYYY-MM-DD]
 - [Related Doc 2]
 ```
 
+Metadata requirements remain subject to `Governance/GOV-004_DOCUMENT_METADATA.md` and applicable document authority.
+
 ### Content Organization
 
 **Facts Section:**
@@ -171,6 +189,7 @@ Next Review: [YYYY-MM-DD]
 - [ ] Related documents identified
 - [ ] No conflicts with core principles
 - [ ] Metadata complete and current
+- [ ] Canonical relationships verified where applicable
 
 ### Review Process
 
@@ -180,6 +199,8 @@ Next Review: [YYYY-MM-DD]
 4. **Approval** - Appropriate authority approves
 5. **Publication** - Knowledge published
 6. **Maintenance** - Scheduled reviews and updates
+
+Approval and publication do not override repository, governance or canonical-model authority.
 
 ---
 
@@ -191,6 +212,8 @@ Use relative paths for internal links:
 [Related Topic](../Domain-2/Overview.md)
 [Specific Fact](./Core-Facts.md#verified-facts)
 ```
+
+Before treating an internal link as a dependency, verify that its target exists, is the intended artifact, and is within the applicable authority boundary.
 
 ### External References
 Include full URLs with access dates:
@@ -216,27 +239,30 @@ Accessed: 2026-07-26
 3. Move to Archive/ directory
 4. Update cross-references
 5. Create archive entry in logs
+6. Preserve sufficient migration traceability
 
 ---
 
-## Domain Examples
+## Authority and Relationship Boundary
 
-### Example Domain: Decision-Making
-```
-Knowledge/Decision-Making/
-├── Overview.md
-├── Core-Facts.md (Decision frameworks, models)
-├── Analysis.md (Effectiveness studies, patterns)
-├── References.md (Research sources)
-└── SubDomains/
-    ├── Strategic-Decisions/
-    ├── Tactical-Decisions/
-    └── Operational-Decisions/
-```
+This specification may guide how knowledge is organized, but it does not by itself establish:
+
+- canonical document identity;
+- governance authority;
+- repository-wide integrity;
+- platform lifecycle state;
+- knowledge-object schema ownership.
+
+Those claims require the applicable canonical authority and current repository evidence.
 
 ---
 
 ## Status
+
 Established: Foundation Build 001
-Last Review: 2026-07-26
-Next Review: 2026-10-26
+Last Review: 2026-08-08
+Next Review: To be determined by the applicable governance/review authority after the connected-baseline audit.
+
+---
+
+End of Document
