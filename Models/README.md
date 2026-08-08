@@ -16,7 +16,7 @@ Models
 
 Status
 
-ACTIVE
+INTEGRITY HOLD
 
 Canonical
 
@@ -26,38 +26,57 @@ Priority
 
 VERY HIGH
 
+Last Audit
+
+2026-08-08
+
+Review Method
+
+Repository First / Evidence Based
+
 ---
 
 # Purpose
 
-The Models layer defines every canonical data model used throughout ARGO KOP.
+The Models layer defines canonical data-model artifacts used throughout ARGO KOP.
 
 Models establish the common language between Runtime, Services, Memory, Knowledge, AI and future implementations.
 
 Models describe structure.
 
-They never implement behavior.
-
----
+They do not implement behavior.
 
 # Objectives
 
 The Models layer shall:
 
-- Standardize platform data.
-- Define canonical entities.
-- Define relationships.
-- Support Runtime.
-- Support Services.
-- Support AI.
-- Support future database implementation.
-- Support API implementation.
-- Support future cross-source knowledge aggregation.
-- Preserve provenance independently of storage technology.
+- standardize platform data;
+- define canonical entities;
+- define relationships;
+- support Runtime;
+- support Services;
+- support AI;
+- support future database implementation;
+- support API implementation;
+- support cross-source knowledge aggregation;
+- preserve provenance independently of storage technology.
 
----
+# Verified Repository Contents
 
-# Reading Order
+The following model artifacts were directly located during the current audit:
+
+- `MOD-002_ENTITY_MODEL.md`
+- `MOD-003_DOCUMENT_MODEL.md`
+- `MOD-004_MEMORY_MODEL.md`
+- `MOD-011_KNOWLEDGE_SOURCE_MODEL.md`
+
+`MOD-001`, `MOD-005`, `MOD-006`, `MOD-007`, `MOD-008`, `MOD-009`, and `MOD-010` are referenced by historical or index material but were **not directly located under their declared paths during this audit**.
+
+They must not be treated as existing canonical artifacts until directly verified.
+
+# Historical / Declared Model Sequence
+
+The previous design declared the following sequence:
 
 MOD-001
 
@@ -101,39 +120,13 @@ MOD-010
 
 MOD-011
 
-↓
+This sequence is retained as a **design declaration**, not as proof that every artifact exists.
 
-_FOLDER_STATUS
+# Authority Rule
 
----
+A model becomes an active repository dependency only after its actual file content and authority have been inspected.
 
-# Folder Contents
-
-MOD-001_MODEL_ARCHITECTURE.md
-
-MOD-002_ENTITY_MODEL.md
-
-MOD-003_DOCUMENT_MODEL.md
-
-MOD-004_MEMORY_MODEL.md
-
-MOD-005_KNOWLEDGE_MODEL.md
-
-MOD-006_RUNTIME_MODEL.md
-
-MOD-007_SERVICE_MODEL.md
-
-MOD-008_RELATIONSHIP_MODEL.md
-
-MOD-009_VERSION_MODEL.md
-
-MOD-010_MODEL_REFERENCE.md
-
-MOD-011_KNOWLEDGE_SOURCE_MODEL.md
-
-_FOLDER_STATUS.md
-
----
+A filename in an index, historical reference, conversation memory, or generated plan does not prove that the artifact exists or is canonical.
 
 # Model Principles
 
@@ -155,7 +148,7 @@ Provenance Aware
 
 Source Neutral
 
----
+Evidence Bounded
 
 # Dependencies
 
@@ -193,23 +186,15 @@ Engineering
 
 AI
 
----
-
 # Related Documents
 
-PROJECT_BOOTSTRAP.md
-
-CORE-003_CONSTITUTION.md
-
-RUN-010_RUNTIME_REFERENCE.md
-
-SRV-010_SERVICE_REFERENCE.md
-
-AI/AI-006_MODEL_ADAPTER.md
-
-AI/AI-007_MULTI_MODEL_SUPPORT.md
-
----
+- `PROJECT_BOOTSTRAP.md`
+- `Core/CORE-003_CONSTITUTION.md`
+- `Repository/REP-001_MASTER_INDEX.md`
+- `Repository/REP-002_REPOSITORY_MAP.md`
+- `AI/AI-006_MODEL_ADAPTER.md`
+- `AI/AI-007_MULTI_MODEL_SUPPORT.md`
+- `Models/_FOLDER_STATUS.md`
 
 # Guiding Statement
 
@@ -218,6 +203,8 @@ Models define repository structure.
 Source data may come from anywhere, but provenance, classification, validation and authority remain explicit.
 
 Implementation comes later.
+
+Repository evidence comes first.
 
 ---
 
