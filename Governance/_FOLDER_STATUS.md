@@ -20,7 +20,7 @@ Status
 
 Version
 
-1.3.0
+1.4.0
 
 Canonical
 
@@ -54,8 +54,8 @@ It is an evidence record, not an authority to declare the folder complete. Folde
 - `Governance/GOV-004_DOCUMENT_METADATA.md` — Document ID `GOV-004` — Canonical `Yes`
 - `Governance/GOV-005_REVIEW_STANDARD.md` — Document ID `GOV-005` — Canonical `Yes`
 - `Governance/GOV-006_NAMING_CONVENTION_STANDARD.md` — Document ID `GOV-006` — Canonical `Yes`
-- `Governance/GOV-009_REPOSITORY_POLICY.md` — repository search confirms active path
-- `Governance/GOV-010_GOVERNANCE_MODEL.md` — Document ID `GOV-010` — Canonical governance model
+- `Governance/GOV-009_REPOSITORY_POLICY.md` — Document ID `GOV-009` — active repository policy
+- `Governance/GOV-010_GOVERNANCE_MODEL.md` — Document ID `GOV-010` — Canonical `Yes`
 - `Governance/_FOLDER_STATUS.md` — this evidence record
 
 Superseded Governance artifacts are preserved under `Archive/Governance-Legacy/` and are not active canonical documents.
@@ -86,21 +86,25 @@ The former `Standards/GOV-006_NAMING_CONVENTION_STANDARD.md` was preserved under
 
 `Governance/GOV-010_GOVERNANCE_MODEL.md` was updated to reference the verified `GOV-005` Review Standard rather than treating GOV-006 as the Review Standard.
 
----
+## GOV-011 — DEPENDENCY CONFLICT RESOLVED
 
-# Remaining Integrity Findings
+Repository search did not identify an active canonical `GOV-011` document. `GOV-010` has therefore been corrected so that `GOV-011` is explicitly classified as `Unknown / Unresolved Dependency` and is not treated as an active governance authority.
+
+This resolves the false dependency claim without inventing a new Governance document.
 
 ## GOV-009 — VERIFIED PATH
 
-`Governance/GOV-009_REPOSITORY_POLICY.md` is present in the repository and can be treated as an active dependency pending full metadata validation.
+`Governance/GOV-009_REPOSITORY_POLICY.md` is present in the repository and is now referenced by canonical Governance documentation using its verified path.
 
-## GOV-011 — UNRESOLVED REFERENCE
+---
 
-`Governance/GOV-010_GOVERNANCE_MODEL.md` references `GOV-011` Verified Assessment Principle, but repository search did not identify an active canonical `GOV-011` document. It remains an unresolved dependency and MUST NOT be treated as an active governance authority until verified.
+# Remaining Integrity Finding
 
-## GOV-FS-02 — FULL GOVERNANCE RE-AUDIT STILL OPEN
+## GOV-FS-02 — FULL GOVERNANCE RE-AUDIT OPEN
 
-The active Governance set and all referenced documents still require one consolidated identity/path/version/reference validation before the folder can be declared clean.
+Governance remains on `INTEGRITY HOLD` until `REP-001`, `REP-002`, and the complete active Governance set are validated together against repository reality.
+
+The current hold is no longer caused by the previously identified GOV-004, GOV-005, GOV-006, or GOV-011 identity/reference conflicts.
 
 ---
 
@@ -108,11 +112,11 @@ The active Governance set and all referenced documents still require one consoli
 
 Governance MUST NOT be marked `APPROVED` or `COMPLETED` until all of the following pass:
 
-1. One canonical path exists for every Governance document ID.
+1. One canonical path exists for every active Governance document ID.
 2. No duplicate logical document IDs exist among active artifacts.
 3. Filename identity matches internal `Document ID`.
 4. Canonical flags match the repository index and map.
-5. All related-document references resolve to current active paths.
+5. All related-document references resolve to current active paths or are explicitly classified as unresolved.
 6. `REP-001_MASTER_INDEX.md` and `REP-002_REPOSITORY_MAP.md` agree with repository reality.
 7. This folder status is regenerated from the verified repository state.
 8. No unverified Governance dependency is presented as active authority.
@@ -121,9 +125,9 @@ Governance MUST NOT be marked `APPROVED` or `COMPLETED` until all of the followi
 
 # Required Next Action
 
-`Verify GOV-009 metadata → Resolve GOV-011 reference → Synchronize REP-001 → Synchronize REP-002 → Governance Re-Audit → Boot Validation`
+`Synchronize REP-001 → Synchronize REP-002 → Full Governance Re-Audit → Boot Validation`
 
-No further canonical move or deletion should occur until the re-audit confirms the remaining Governance set.
+No further canonical move or deletion should occur until the re-audit confirms the complete Governance set.
 
 ---
 
