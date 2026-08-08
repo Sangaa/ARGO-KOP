@@ -6,7 +6,7 @@
 
 Platform: ARGO KOP (Knowledge Operating Platform)
 Document ID: REP-001
-Version: 1.7.3
+Version: 1.7.4
 Status: Integrity Hold
 Category: Repository
 Canonical: Yes
@@ -99,7 +99,18 @@ The Architecture domain is **under re-audit**. Current repository evidence estab
 
 `ARC_MAP.md` previously declared `ARC-001` internally, conflicting with `ARC-001_PLATFORM_ARCHITECTURE.md`. That identity collision has been corrected; the map is now explicitly a non-numeric map artifact.
 
-## 8. Interfaces Layer
+## 8. Lifecycle Domain
+
+The Lifecycle domain is **under re-audit** and is limited to document-scoped lifecycle authority within the inspected scope:
+
+- `Lifecycle/LIF-001_DOCUMENT_LIFECYCLE.md`
+- `Lifecycle/_FOLDER_STATUS.md`
+
+`Lifecycle/GOV-005_DOCUMENT_LIFECYCLE.md` previously reused the active `GOV-005` identity owned by `Governance/GOV-005_REVIEW_STANDARD.md`. The lifecycle artifact has been migrated to `LIF-001`; the former active path is retired and its provenance remains in Git history.
+
+The presence of `LIF-001` does not establish authority over platform, repository, knowledge, decision, project or memory lifecycles.
+
+## 9. Interfaces Layer
 
 The following interface artifacts were directly verified during the current audit:
 
@@ -110,7 +121,7 @@ The following interface artifacts were directly verified during the current audi
 
 `INTF-006` remains `Proposed / Integrity Hold` pending cross-layer validation.
 
-## 9. Models Layer
+## 10. Models Layer
 
 The following model artifacts were directly verified during the current audit:
 
@@ -122,13 +133,13 @@ The following model artifacts were directly verified during the current audit:
 
 Declared model artifacts not directly located remain unresolved and are not promoted to active authority.
 
-## 10. Other Active Repository Domains
+## 11. Other Active Repository Domains
 
 The repository contains additional physical domains shown by the current `SYSTEM_MAP.md`, including Knowledge, Memory, Decision, AI, Services, Intelligence, Quality, Projects, Release, Logs, Examples and Future.
 
 Their presence in the physical repository does not by itself certify their architectural role or completeness. Their inventories are being validated through the connected-baseline audit and will be promoted into this index only with sufficient evidence.
 
-## 11. Canonicalization Rules
+## 12. Canonicalization Rules
 
 1. One active canonical artifact per logical identity.
 2. Filename identity and internal Document ID must agree where a Document ID exists.
@@ -140,14 +151,16 @@ Their presence in the physical repository does not by itself certify their archi
 8. Critical relationships should be validated in both directions where practical.
 9. A material conflict must be traced through affected consumers, indexes, status files and release/version declarations before local resolution is considered complete.
 10. An archive operation must preserve enough migration evidence to identify the former active path and canonical successor.
+11. Map and status artifacts must not reuse the identity of canonical content documents.
+12. A domain-specific lifecycle artifact must not silently claim authority over another domain's lifecycle.
 
-## 12. Integrity State
+## 13. Integrity State
 
 Current repository state: **INTEGRITY HOLD**.
 
-The index is synchronized with the currently verified inventory within the inspected scope. Architecture inventory and cross-layer relationship validation remain open.
+The index is synchronized with the currently verified inventory within the inspected scope. Architecture, Lifecycle inventory and cross-layer relationship validation remain open.
 
-## 13. Verification Model
+## 14. Verification Model
 
 Current audit model:
 
@@ -155,7 +168,7 @@ Current audit model:
 
 Local validation results remain bounded to their inspected scope. `100%` repository integrity requires aggregated evidence across the affected repository graph and absence of unresolved blocking relationships.
 
-## 14. Governing Rule
+## 15. Governing Rule
 
 Repository Reality > Previous Status Claims > Conversation Memory
 
