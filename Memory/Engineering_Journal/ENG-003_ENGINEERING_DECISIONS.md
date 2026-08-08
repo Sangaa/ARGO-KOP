@@ -20,11 +20,11 @@ ENG-003
 
 Version
 
-1.1.0
+1.1.1
 
 Status
 
-Approved
+Approved / Legacy Historical Record
 
 Category
 
@@ -32,7 +32,11 @@ Engineering Journal
 
 Canonical
 
-Yes
+No — Legacy Journal Identity
+
+Identity Note
+
+This historical Engineering Journal record retains its original `ENG-003` identifier for traceability. New Engineering Journal records must use the `EJR-*` namespace. `ENG-*` is reserved for Cognitive Engine identities.
 
 ---
 
