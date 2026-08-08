@@ -8,7 +8,7 @@
 
 Platform: ARGO KOP (Knowledge Operating Platform)
 Document ID: PROJECT_STATUS
-Version: 3.2.3
+Version: 3.2.4
 Status: INTEGRITY WARNING / AUDIT IN PROGRESS
 Category: Root Baseline
 Canonical: Yes
@@ -46,6 +46,7 @@ Before any structural or canonical change is proposed, the reviewing agent MUST:
 4. Trace relevant cross-references in both directions.
 5. Inspect duplicate, legacy, archived and similarly named artifacts before deciding ownership.
 6. Explicitly report any content that cannot be inspected.
+7. Re-read every mutated artifact after writing and validate its affected references/status/index entries.
 
 **Memory, previous session summaries, ZIP snapshots, folder names, and status declarations MUST NOT substitute for current repository file contents.**
 
@@ -86,6 +87,8 @@ Historical Governance evidence remains preserved where present and must not be t
 | Runtime/Engine/AI/Services validation | OPEN |
 | Projects/Release validation | OPEN |
 | Evidence coverage for complete repository | NOT YET CERTIFIED |
+| Tool-limited evidence coverage | ACTIVE CONSTRAINT WHEN RESULTS ARE TRUNCATED OR INCOMPLETE |
+| Post-mutation validation | MANDATORY BEFORE COMPLETION CLAIM |
 
 ---
 
@@ -95,7 +98,7 @@ Historical Governance evidence remains preserved where present and must not be t
 
 Required sequence:
 
-**Enumerate → Read → Cross-Reference → Classify → Identify Conflicts → Decide → Change → Validate → Re-Boot**
+**Enumerate → Read → Cross-Reference → Classify → Identify Conflicts → Decide → Change → Re-Read → Validate → Re-Boot**
 
 No folder is assumed to be a complete layer or canonical collection until its filenames, internal identities, contents and relationships have been inspected.
 
@@ -112,7 +115,22 @@ A development baseline is not an official release.
 
 ---
 
-# 7. Root Status Rules
+# 7. Operational Lessons From Current Audit
+
+The following are reusable engineering observations captured from the current repository-management session:
+
+1. A successful GitHub write proves only that one requested mutation was accepted; it does not prove surrounding repository integrity.
+2. A status file can legitimately be stale or over-claiming; status must be checked against actual file content and relationships.
+3. Numeric document sequences cannot be used to infer missing artifacts or justify creating a document.
+4. A folder can contain documents whose internal identities belong to another authority/domain; physical location alone is insufficient for canonicalization.
+5. Cross-layer review must precede local normalization because a local change can create or conceal upstream/downstream conflicts.
+6. Tool output may be truncated or partial; the correct response is to mark evidence coverage partial and disclose the limitation, not reconstruct omitted content.
+7. Any mutation that changes a canonical or status artifact requires a post-write read/validation cycle.
+8. Session knowledge becomes reusable platform knowledge only after explicit repository recording and validation.
+
+---
+
+# 8. Root Status Rules
 
 1. `PROJECT_STATUS.md` summarizes evidence; it does not create authority.
 2. `PROJECT_BOOTSTRAP.md` defines the mandatory repository-first review gate.
@@ -121,6 +139,9 @@ A development baseline is not an official release.
 5. No structural assumption may be derived from folder names alone.
 6. Global `CLEAN` or `APPROVED` claims require actual evidence coverage.
 7. Any repository mutation requires re-validation of affected indexes and status files.
+8. A complete repository review claim requires evidence coverage sufficient to support the claim.
+9. When evidence coverage is partial, all dependent conclusions must be bounded to the inspected scope.
+10. Operational lessons must be traceable to observed repository-management behavior and must not be presented as unverified historical fact.
 
 ---
 
@@ -138,7 +159,7 @@ A development baseline is not an official release.
 
 # Guiding Statement
 
-**Repository reality must be fully examined to the required evidence scope before a change is proposed; when evidence is unavailable, the gap must be reported rather than filled by memory or assumption.**
+**Repository reality must be examined to the required evidence scope before a change is proposed; when evidence is unavailable, the gap must be reported rather than filled by memory, assumption, or pattern inference.**
 
 ---
 
