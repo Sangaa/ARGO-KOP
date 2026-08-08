@@ -13,11 +13,11 @@ Runtime
 
 Version
 
-1.3.0
+1.4.0
 
 Status
 
-🟡 INTEGRITY HOLD — RE-AUDIT IN PROGRESS
+🟢 VALIDATED / RUNTIME BASELINE CLEAN
 
 Canonical
 
@@ -41,11 +41,9 @@ Latest Official Release
 
 ---
 
-# Purpose
+# Audit Scope
 
-This document records the current evidence state of the Runtime folder. It does not declare Runtime clean until its active documents, references, metadata and dependencies have been validated against the current repository baseline.
-
-# Inventory Confirmed
+The active Runtime set was re-read and reconciled:
 
 - `Runtime/README.md`
 - `Runtime/RUN-001_BOOT_SEQUENCE.md`
@@ -59,40 +57,59 @@ This document records the current evidence state of the Runtime folder. It does 
 - `Runtime/RUN-009_RECOVERY.md`
 - `Runtime/RUN-010_RUNTIME_REFERENCE.md`
 
-# Initial Findings
+# Validation Results
 
-## RUN-001 — Stale Embedded Status Material
+1. Active Runtime identities — PASS
+2. Filename / internal ID alignment — PASS
+3. Canonical Runtime paths — PASS
+4. Development / official release metadata alignment — PASS
+5. Governance references — PASS
+6. Architecture references — PASS
+7. Repository references — PASS
+8. Boot / initialization / context flow consistency — PASS
+9. Conditional continuation and failure gates — PASS
+10. Runtime state machine consistency — PASS
+11. Governed recovery consistency — PASS
+12. Runtime security boundaries — PASS
+13. AI protocol authority boundaries — PASS
+14. README navigation and lifecycle consistency — PASS
+15. No known stale historical Runtime status embedded in active documents — PASS
 
-`RUN-001` contains duplicated historical material and references a previous `REP-001` version. This must be removed or reconciled before Runtime can be certified clean.
+# Resolved Findings
 
-## RUN-002 — Stale Governance Naming Reference
+## RUN-AUDIT-001 — Historical Status Drift
 
-The Runtime status contains a legacy reference to `GOV-006` as the metadata/review authority. Current Governance distinguishes `GOV-004` metadata, `GOV-005` review and `GOV-006` naming. Runtime references must be reconciled accordingly.
+Resolved by replacing the previous completion claim with evidence-based validation status.
 
-## RUN-003 — Completion Claim Drift
+## RUN-AUDIT-002 — Stale Governance References
 
-The previous folder status declared Runtime `COMPLETED / APPROVED` without a current repository-wide evidence audit. That claim is withdrawn pending validation.
+Resolved by aligning Runtime documents with the current Governance metadata, review, naming and repository policies.
 
-# Validation Gate
+## RUN-AUDIT-003 — Unconditional Continuation
 
-Runtime cannot be marked clean until:
+Resolved by making continuation conditional on validation, dependency and authority gates.
 
-1. Active RUN identities are unique.
-2. Filename and internal IDs align.
-3. Canonical paths are unique.
-4. Development/release version authority is consistent.
-5. Cross-references resolve to current canonical artifacts.
-6. Boot sequence dependencies match current Core, Repository, Architecture, Engine and Services boundaries.
-7. No embedded historical status text remains in active canonical documents.
-8. Runtime security and recovery boundaries remain compatible with the current Governance and Architecture models.
+## RUN-AUDIT-004 — Unconditional Recovery
 
-# Scope
+Resolved by implementing governed recovery using the latest validated checkpoint and repository synchronization.
 
-This record does not certify Engine, Services, AI, Core, Memory or the entire repository.
+## RUN-AUDIT-005 — Static Inventory Assumptions
 
-# Required Next Action
+Resolved by requiring current repository evidence rather than assuming numeric component ranges are complete inventory.
 
-`Audit RUN-001 → RUN-010 → reconcile references and metadata → Runtime Re-Audit`
+## RUN-AUDIT-006 — README Model Drift
+
+Resolved by reconciling Runtime README with the current Runtime state, authority and execution model.
+
+# Integrity Decision
+
+The active Runtime baseline is validated clean for the current repository baseline.
+
+This is a **folder-level certification only**. It is not a declaration that the entire ARGO KOP repository is globally clean.
+
+# Next Audit Boundary
+
+`Core → Knowledge / Memory → Engine / AI → Services → Projects → Release → Global Boot Validation`
 
 ---
 
