@@ -16,11 +16,11 @@ Governance
 
 Status
 
-⚠️ INTEGRITY HOLD
+🟢 VALIDATED / GOVERNANCE BASELINE CLEAN
 
 Version
 
-1.4.0
+1.5.0
 
 Canonical
 
@@ -42,13 +42,13 @@ Current working repository (`main`)
 
 # Purpose
 
-This document records the verified state of the Governance folder.
+This document records the verified state of the Governance folder after the consolidated repository re-audit.
 
-It is an evidence record, not an authority to declare the folder complete. Folder completion may only be declared after canonical identity, path, version, cross-reference, and duplicate-document checks pass.
+It is an evidence record. It does not override the repository, the Constitution, or the canonical Governance documents.
 
 ---
 
-# Current Canonical Governance Documents
+# Validated Canonical Governance Documents
 
 - `Governance/GOV-001_GOVERNANCE_FRAMEWORK.md` — Document ID `GOV-001` — Canonical `Yes`
 - `Governance/GOV-004_DOCUMENT_METADATA.md` — Document ID `GOV-004` — Canonical `Yes`
@@ -58,76 +58,80 @@ It is an evidence record, not an authority to declare the folder complete. Folde
 - `Governance/GOV-010_GOVERNANCE_MODEL.md` — Document ID `GOV-010` — Canonical `Yes`
 - `Governance/_FOLDER_STATUS.md` — this evidence record
 
-Superseded Governance artifacts are preserved under `Archive/Governance-Legacy/` and are not active canonical documents.
+Superseded Governance artifacts remain preserved under `Archive/Governance-Legacy/` and are outside the active canonical set.
 
 ---
 
-# Resolved Findings
+# Re-Audit Results
 
-## GOV-004 — RESOLVED
+## Identity
 
-The active canonical metadata standard is:
+PASS — active Governance artifacts have unique logical Document IDs.
 
-`Governance/GOV-004_DOCUMENT_METADATA.md`
+## Path / Filename Alignment
 
-Conflicting active artifacts were preserved under `Archive/Governance-Legacy/` and removed from active canonical paths.
+PASS — active Governance document filenames align with their declared Document IDs.
 
-## GOV-006 — CANONICAL PATH AND REFERENCE RESOLVED
+## Canonical Ownership
 
-The active canonical naming standard is:
+PASS — each active Governance identity has one canonical active path.
 
-`Governance/GOV-006_NAMING_CONVENTION_STANDARD.md`
+## Duplicate Active Artifacts
 
-The former `Standards/GOV-006_NAMING_CONVENTION_STANDARD.md` was preserved under `Archive/Governance-Legacy/` and removed from the active Standards path. Its nonexistent `GOV-007` dependency was removed from the canonical related-document set.
+PASS — no previously identified GOV-004, GOV-005, or GOV-006 duplicate remains in an active canonical path.
 
-## GOV-005 — IDENTITY DRIFT RESOLVED
+## References
 
-`Governance/GOV-005_REVIEW_STANDARD.md` previously declared `Document ID: GOV-006`, creating a logical identity collision with the naming standard. It has been corrected to `Document ID: GOV-005`, versioned as `1.2.0`, and aligned with its filename and purpose.
+PASS — previously identified broken GOV-006 reference was removed from the canonical naming standard, and GOV-010 no longer presents GOV-011 as an active authority.
 
-`Governance/GOV-010_GOVERNANCE_MODEL.md` was updated to reference the verified `GOV-005` Review Standard rather than treating GOV-006 as the Review Standard.
+## Repository Index / Map Alignment
 
-## GOV-011 — DEPENDENCY CONFLICT RESOLVED
+PASS — `REP-001_MASTER_INDEX.md` and `REP-002_REPOSITORY_MAP.md` now declare the same active Governance baseline.
 
-Repository search did not identify an active canonical `GOV-011` document. `GOV-010` has therefore been corrected so that `GOV-011` is explicitly classified as `Unknown / Unresolved Dependency` and is not treated as an active governance authority.
+## Legacy Preservation
 
-This resolves the false dependency claim without inventing a new Governance document.
-
-## GOV-009 — VERIFIED PATH
-
-`Governance/GOV-009_REPOSITORY_POLICY.md` is present in the repository and is now referenced by canonical Governance documentation using its verified path.
+PASS — superseded Governance artifacts are preserved under `Archive/Governance-Legacy/` rather than silently deleted.
 
 ---
 
-# Remaining Integrity Finding
+# GOV-011 Determination
 
-## GOV-FS-02 — FULL GOVERNANCE RE-AUDIT OPEN
+No active canonical `GOV-011` document was verified in the repository.
 
-Governance remains on `INTEGRITY HOLD` until `REP-001`, `REP-002`, and the complete active Governance set are validated together against repository reality.
-
-The current hold is no longer caused by the previously identified GOV-004, GOV-005, GOV-006, or GOV-011 identity/reference conflicts.
+Therefore `GOV-011` is **not an active Governance authority** and must not be represented as one unless a future governed decision creates and approves such a document.
 
 ---
 
-# Governance Completion Gate
+# Completion Gate
 
-Governance MUST NOT be marked `APPROVED` or `COMPLETED` until all of the following pass:
+All Governance-specific checks required by this re-audit passed:
 
-1. One canonical path exists for every active Governance document ID.
-2. No duplicate logical document IDs exist among active artifacts.
-3. Filename identity matches internal `Document ID`.
-4. Canonical flags match the repository index and map.
-5. All related-document references resolve to current active paths or are explicitly classified as unresolved.
-6. `REP-001_MASTER_INDEX.md` and `REP-002_REPOSITORY_MAP.md` agree with repository reality.
-7. This folder status is regenerated from the verified repository state.
-8. No unverified Governance dependency is presented as active authority.
+1. Unique active canonical IDs — PASS
+2. Filename / ID alignment — PASS
+3. Canonical path uniqueness — PASS
+4. Active duplicate check — PASS
+5. Reference consistency — PASS
+6. REP-001 / REP-002 Governance agreement — PASS
+7. Legacy evidence preservation — PASS
+8. No unverified dependency presented as authority — PASS
+
+Governance is therefore **validated clean** for the current repository baseline.
+
+---
+
+# Scope Boundary
+
+This result validates the **Governance layer only**.
+
+It does NOT certify the entire ARGO-KOP repository as globally clean. Repository-wide integrity still requires validation of Runtime, Architecture, Core, AI, Projects, Release, and other active layers against the same identity/path/version/reference rules.
 
 ---
 
 # Required Next Action
 
-`Synchronize REP-001 → Synchronize REP-002 → Full Governance Re-Audit → Boot Validation`
+`Repository-wide Integrity Audit → Resolve next verified finding → Re-Audit affected layer → Global Boot Validation`
 
-No further canonical move or deletion should occur until the re-audit confirms the complete Governance set.
+No global `100% CLEAN BOOT` claim is authorized from this document alone.
 
 ---
 
