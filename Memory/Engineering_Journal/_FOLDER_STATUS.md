@@ -12,7 +12,7 @@ Status
 
 Version
 
-1.2.0
+1.3.0
 
 Last Review
 
@@ -50,19 +50,21 @@ The historical Engineering Journal records `ENG-001` through `ENG-010` are retai
 
 New Engineering Journal records use `EJR-*`.
 
-## Identity Conflict
+## Identity Classification
 
-The historical Journal files still contain their original `ENG-*` Document IDs. Their active `Canonical: Yes` declarations require reconciliation because the same IDs are also used by active Cognitive Engine artifacts.
+`ENG-001` through `ENG-010` are now classified as legacy/non-canonical Engineering Journal identities. Their historical filenames and document IDs are preserved for traceability; they are not active Cognitive Engine identities.
 
-This is an active integrity finding. The historical files must not be silently renamed during this audit; their canonical status and migration treatment require controlled resolution.
+This classification resolves the previous canonical-identity conflict without performing an uncontrolled historical rename.
 
-## Missing / Unverified Artifact
+## Existence Verification
 
-`ENG-009_RELEASE_HISTORY.md` is listed by the Journal README and folder status, but the current direct file fetch did not resolve it at the expected path.
+`ENG-009_RELEASE_HISTORY.md` has now been directly fetched from the current `main` branch and its content confirms `Status: Legacy / Historical Record` and `Canonical: No`.
 
-It MUST remain classified as **UNVERIFIED / MISSING FROM CURRENTLY INSPECTED PATH** until its actual location and identity are established.
+No missing `ENG-009` replacement is required.
 
-No replacement document should be created merely to satisfy the sequence.
+## Content Review
+
+`ENG-004` through `ENG-010` were reviewed for content, not merely filenames. Where current audit experience exposed obsolete assumptions or missing validation concepts, the records were upgraded while preserving their historical identity and traceability.
 
 ## New Journal Namespace
 
@@ -75,14 +77,16 @@ No replacement document should be created merely to satisfy the sequence.
 | Area | Current State |
 | :--- | :--- |
 | README reviewed | VERIFIED |
-| Folder status reviewed | VERIFIED / STALE CLAIMS CORRECTED |
-| Legacy ENG-001..008 contents inspected | PARTIALLY VERIFIED |
-| Legacy ENG-009 existence | UNVERIFIED |
-| Legacy ENG-010 contents inspected | VERIFIED |
+| Folder status reviewed | VERIFIED / UPDATED |
+| Legacy ENG-001..010 identity classification | VERIFIED |
+| Legacy ENG-001..010 existence | VERIFIED / DIRECTLY INSPECTED OR RESOLVED |
+| Legacy ENG-004..010 content review | VERIFIED |
+| Legacy ENG-009 existence | VERIFIED |
 | EJR-001 existence | VERIFIED |
 | Namespace rule | VERIFIED AGAINST GOV-006 |
-| Active canonical identity uniqueness | NOT YET CERTIFIED |
+| Active canonical identity uniqueness | NOT YET CERTIFIED GLOBALLY |
 | Cross-reference integrity | OPEN |
+| Session index/template alignment | OPEN |
 | Full folder integrity | NOT YET CERTIFIED |
 
 ---
@@ -92,16 +96,16 @@ No replacement document should be created merely to satisfy the sequence.
 - `README.md`
 - `SESSION_INDEX.md`
 - `SESSION_TEMPLATE.md`
-- `ENG-001_ENGINEERING_MODEL.md` — legacy identity; canonical status requires reconciliation
-- `ENG-002_ENGINEERING_SESSIONS.md` — legacy identity; canonical status requires reconciliation
-- `ENG-003_ENGINEERING_DECISIONS.md` — legacy identity; canonical status requires reconciliation
-- `ENG-004_BUILD_HISTORY.md` — legacy identity; canonical status requires reconciliation
-- `ENG-005_REFACTORING_HISTORY.md` — legacy identity; canonical status requires reconciliation
-- `ENG-006_ENGINEERING_LESSONS.md` — legacy identity; canonical status requires reconciliation
-- `ENG-007_ENGINEERING_RISKS.md` — legacy identity; canonical status requires reconciliation
-- `ENG-008_MIGRATION_HISTORY.md` — legacy identity; canonical status requires reconciliation
-- `ENG-009_RELEASE_HISTORY.md` — expected by current documentation; existence currently unverified
-- `ENG-010_ENGINEERING_BASELINE.md` — legacy identity; canonical status requires reconciliation
+- `ENG-001_ENGINEERING_MODEL.md` — legacy identity; non-canonical
+- `ENG-002_ENGINEERING_SESSIONS.md` — legacy identity; non-canonical
+- `ENG-003_ENGINEERING_DECISIONS.md` — legacy identity; non-canonical
+- `ENG-004_BUILD_HISTORY.md` — legacy identity; non-canonical
+- `ENG-005_REFACTORING_HISTORY.md` — legacy identity; non-canonical
+- `ENG-006_ENGINEERING_LESSONS.md` — legacy identity; non-canonical
+- `ENG-007_ENGINEERING_RISKS.md` — legacy identity; non-canonical
+- `ENG-008_MIGRATION_HISTORY.md` — legacy identity; non-canonical
+- `ENG-009_RELEASE_HISTORY.md` — legacy identity; non-canonical; existence verified
+- `ENG-010_ENGINEERING_BASELINE.md` — legacy identity; non-canonical
 - `EJR-001_SELF_ASSESSMENT_AND_MARKET_FEEDBACK.md` — proposed audit-derived record
 - `_FOLDER_STATUS.md`
 
@@ -109,12 +113,11 @@ No replacement document should be created merely to satisfy the sequence.
 
 # Outstanding Work
 
-1. Establish the actual current location or absence of `ENG-009_RELEASE_HISTORY.md`.
-2. Reconcile the canonical-status declarations of historical `ENG-*` Journal records with the global namespace rule.
-3. Trace Journal references into `REP-001`, `REP-002`, Governance and dependent documents.
-4. Validate `SESSION_INDEX.md` and `SESSION_TEMPLATE.md` against current Journal identities.
-5. Re-read all mutated Journal artifacts after changes.
-6. Only then determine whether this folder can pass the Connected-Baseline Completion Gate.
+1. Trace Journal references into `REP-001`, `REP-002`, Governance and dependent documents.
+2. Validate `SESSION_INDEX.md` and `SESSION_TEMPLATE.md` against current Journal identities and the EJR namespace.
+3. Check for active documents that still incorrectly treat legacy `ENG-*` Journal records as canonical.
+4. Re-read all mutated Journal artifacts after changes.
+5. Only then determine whether this folder can pass the Connected-Baseline Completion Gate.
 
 ---
 
