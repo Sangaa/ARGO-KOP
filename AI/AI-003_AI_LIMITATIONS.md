@@ -20,11 +20,11 @@ AI-003
 
 Version
 
-1.1.0
+1.2.0
 
 Status
 
-Approved
+Integrity Hold / Revalidated
 
 Category
 
@@ -34,229 +34,105 @@ Canonical
 
 Yes
 
+Last Audit
+
+2026-08-08
+
 ---
 
 # Purpose
 
-This document defines the operational limitations of AI models inside ARGO KOP.
-
-Limitations protect repository integrity, architectural consistency and governance.
-
-They define what AI shall not do.
-
----
-
-# Objectives
-
-AI limitations shall:
-
-Protect repository integrity.
-
-Prevent architectural drift.
-
-Prevent governance violations.
-
-Reduce engineering errors.
-
-Preserve repository reality.
-
-Maintain deterministic engineering.
-
----
+Defines operational limitations that protect repository integrity, architectural consistency and governance.
 
 # Fundamental Principle
 
-Every AI has limitations.
+Repository evidence overrides model confidence.
 
-Engineering quality depends on respecting those limitations.
-
-Repository Reality always overrides model confidence.
-
----
+An AI must not turn missing evidence into a confident conclusion.
 
 # Repository Limitations
 
 The AI shall never:
 
-Invent repository files.
-
-Invent repository folders.
-
-Invent repository structure.
-
-Assume repository content.
-
-Modify outdated repository versions.
-
-Treat conversation as repository truth.
-
----
+- invent repository files;
+- invent repository folders;
+- invent repository structure;
+- assume unavailable content;
+- modify outdated versions without verifying the current path and identity;
+- treat conversation as repository truth.
 
 # Architecture Limitations
 
-The AI shall never:
+The AI shall never infer a logical layer, component, authority domain or canonical collection from a folder name alone.
 
-Override architecture.
-
-Change canonical architecture without approval.
-
-Redesign completed architecture during implementation.
-
-Introduce future architecture into current engineering.
-
----
+Architecture changes require evidence, dependency review and applicable approval.
 
 # Governance Limitations
 
-The AI shall never:
-
-Override governance rules.
-
-Ignore repository policies.
-
-Bypass engineering workflow.
-
-Skip validation.
-
-Ignore canonical hierarchy.
-
----
+The AI shall never bypass governance, skip required validation, or treat a status declaration as authority by itself.
 
 # Engineering Limitations
 
-The AI shall never:
+The AI shall not:
 
-Generate partial canonical documents.
-
-Mix repository versions.
-
-Leave folders partially completed.
-
-Modify unrelated folders.
-
-Delete canonical documents without approved replacement.
-
-Replace repository evidence with assumptions.
-
----
+- perform structural normalization before cross-layer review;
+- create documents merely to fill numeric filename gaps;
+- delete canonical documents without governed replacement;
+- claim full repository review when evidence coverage is partial;
+- claim validation from a successful file mutation alone.
 
 # Knowledge Limitations
 
-The AI shall never:
+The AI shall distinguish verified fact, inference, assumption and unknown.
 
-Invent organizational knowledge.
-
-Create unsupported relationships.
-
-Treat inference as fact.
-
-Replace documented knowledge.
-
-Knowledge shall always remain traceable.
-
----
+Unsupported relationships remain unresolved until evidence establishes them.
 
 # Memory Limitations
 
-Conversation memory is temporary.
+Conversation memory, historical ZIP snapshots and generated summaries are non-authoritative context.
 
-Repository memory is permanent.
-
-Repository memory always has priority.
-
-The AI shall never rebuild the repository from conversation alone.
-
----
+The AI shall never rebuild repository state from them when current repository evidence is available or required.
 
 # Autonomous Execution Limits
 
-The AI may continue engineering automatically.
+The AI may continue automatically only while required evidence is available and no blocking conflict exists.
 
-The AI shall stop immediately when:
+It shall stop or constrain work when:
 
-Repository corruption exists.
-
-Required repository data is missing.
-
-Architecture conflict exists.
-
-Governance conflict exists.
-
-Repository ambiguity prevents deterministic engineering.
-
----
-
-# Repository Authority
-
-Authority hierarchy:
-
-Core
-
-↓
-
-Governance
-
-↓
-
-Architecture
-
-↓
-
-Repository
-
-↓
-
-Knowledge
-
-↓
-
-Memory
-
-↓
-
-AI
-
-The AI is the lowest decision authority.
-
----
+- required repository data is missing;
+- canonical identity is ambiguous;
+- architecture conflict exists;
+- governance conflict exists;
+- critical references cannot be resolved;
+- evidence coverage is insufficient for the decision.
 
 # Validation Requirements
 
-Before every modification the AI shall verify:
+Before a material modification verify the applicable scope for:
 
-Repository synchronization.
-
-Repository integrity.
-
-Architecture alignment.
-
-Governance compliance.
-
-Canonical references.
-
-Version consistency.
-
----
+- repository synchronization;
+- repository integrity;
+- architecture alignment;
+- governance compliance;
+- canonical identity;
+- references and dependencies;
+- version consistency;
+- traceability.
 
 # Related Documents
 
-PROJECT_BOOTSTRAP.md
-
-AI-001_AI_MODEL.md
-
-AI-002_AI_CAPABILITIES.md
-
-AI-004_CONTEXT_LOADING.md
-
-CORE-003_CONSTITUTION.md
-
-REP-001_REPOSITORY_MODEL.md
+- `PROJECT_BOOTSTRAP.md`
+- `AI/AI-001_AI_MODEL.md`
+- `AI/AI-002_AI_CAPABILITIES.md`
+- `AI/AI-004_CONTEXT_LOADING.md`
+- `Core/CORE-003_CONSTITUTION.md`
+- `Repository/REP-001_MASTER_INDEX.md`
 
 ---
 
 # Guiding Statement
 
-The strength of an AI is measured not only by what it can do, but by what it refuses to do.
+The strength of an AI is measured by what it can do safely and by what it refuses to claim without evidence.
 
 ---
 
