@@ -8,8 +8,8 @@
 
 Platform: ARGO KOP (Knowledge Operating Platform)  
 Document ID: MOD-001  
-Version: 1.1.0  
-Status: Approved / Integrity-Revalidated  
+Version: 1.1.1  
+Status: Integrity Hold / Relationship-Revalidated  
 Category: Models  
 Canonical: Yes  
 Priority: Critical  
@@ -57,7 +57,7 @@ Knowledge tiers describe the role of the knowledge object. Storage location does
 | Tier Level | Name | Characteristics | Typical Active Paths | Approval Standard |
 | :--- | :--- | :--- | :--- | :--- |
 | **Tier 1** | Foundational | Core principles, architectural blueprints, non-negotiable governance rules. | `Core/`, `Architecture/`, `Governance/` | Applicable Governance authority |
-| **Tier 2** | Operational | Documented processes, proven practices, operational specifications, engines, services and models. | `Engine/`, `Services/`, `Models/`, `Runtime/` | Technical / Domain Review |
+| **Tier 2** | Operational | Documented processes, proven practices, operational specifications, engines, services and models. | `Engine/`, `Services/`, `Models/`, `Runtime/`, `Specifications/` | Technical / Domain Review |
 | **Tier 3** | Tactical | Execution notes, temporary artifacts, journal entries and project tracking material. | `Memory/`, `Projects/`, applicable logs | Standard validation appropriate to artifact type |
 
 These paths are representative active paths observed during the connected-baseline audit; they are not a permission to infer missing artifacts or architectural completeness.
@@ -79,16 +79,15 @@ These paths are representative active paths observed during the connected-baseli
 - `Repository/REP-002_REPOSITORY_MAP.md` — active repository mapping authority; relationship inspected.
 - `Governance/GOV-001_GOVERNANCE_FRAMEWORK.md` — active governance reference named by the model; target path is represented in the active repository map.
 - `Services/SRV-009_UPDATE_SERVICE.md` — update-service dependency named by the model; target must remain subject to content and authority validation when the service layer is audited.
+- `Specifications/01-Knowledge-Organization.md` — active operational specification located and read during the current audit. It provides knowledge-organization guidance but does not override the canonical knowledge model or governance authorities.
 
-Historical or unresolved references from the previous model revision to `Specifications/01-Knowledge-Organization.md` and `Specs/` are intentionally removed from the active model because those paths were not established as current canonical authorities during the connected-baseline audit.
-
-This is a relationship correction, not a claim that equivalent historical material never existed.
+The earlier revision incorrectly treated `Specifications/01-Knowledge-Organization.md` as an unestablished path. Direct repository inspection confirms that the artifact exists. Its exact authority relationship remains bounded until the Specifications layer is fully audited.
 
 ---
 
 # Evidence Boundary
 
-This model is revalidated only for the relationships explicitly inspected during the current audit. It does not certify the entire Models layer or repository.
+This model is revalidated only for the relationships explicitly inspected during the current audit. It does not certify the entire Models or Specifications layers or the repository as a whole.
 
 `Models/_FOLDER_STATUS.md` remains the controlling status declaration for the folder's overall integrity state.
 
@@ -98,7 +97,8 @@ This model is revalidated only for the relationships explicitly inspected during
 
 | Version | Date | Description | Author / Authority |
 | :--- | :--- | :--- | :--- |
-| 1.1.0 | 2026-08-08 | Removed unresolved active references to non-established Specifications/Specs paths; aligned tiers and relationship validation with the active repository graph; added evidence boundaries and revalidation rules. | ARGO Engineering / Principal Architect |
+| 1.1.1 | 2026-08-08 | Corrected the Specifications relationship after direct repository inspection; restored the existing artifact as a bounded operational reference rather than treating path absence as evidence. | ARGO Engineering / Principal Architect |
+| 1.1.0 | 2026-08-08 | Removed unresolved active references to non-established Specifications/Specs paths; aligned tiers and relationship validation with the active repository graph; added evidence boundaries and revalidation rules. | ARGO Engineering |
 | 1.0.0 | 2026-08-06 | Initial Canonical Knowledge Model Specification | ARGO Engineering |
 
 ---
