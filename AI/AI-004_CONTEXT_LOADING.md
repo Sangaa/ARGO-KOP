@@ -20,11 +20,11 @@ AI-004
 
 Version
 
-1.1.0
+1.2.0
 
 Status
 
-Approved
+Integrity Hold / Revalidated
 
 Category
 
@@ -34,243 +34,157 @@ Canonical
 
 Yes
 
+Last Audit
+
+2026-08-08
+
 ---
 
 # Purpose
 
-This document defines how AI models shall load, validate and maintain context while operating inside ARGO KOP.
+Defines how an AI instance loads, validates and maintains context while operating inside ARGO KOP.
 
-Context loading guarantees that engineering decisions are based on the latest repository state instead of temporary conversation history.
+Context loading must be based on current repository evidence. It must never silently reconstruct missing state from memory or historical copies.
 
----
+# Context Authority
 
-# Objectives
+Current repository content is the authoritative engineering context unless a governed rule establishes a different source for a specific purpose.
 
-Context Loading shall:
+Priority is determined by authority and evidence, not by document age alone.
 
-- Synchronize with the repository.
-- Load only authoritative information.
-- Preserve engineering continuity.
-- Reduce context drift.
-- Support deterministic engineering.
-
----
-
-# Context Philosophy
-
-Repository Reality is the primary context.
-
-Conversation provides temporary guidance.
-
-Repository Memory preserves permanent knowledge.
-
-AI shall always synchronize before engineering.
-
----
+`PROJECT_BOOTSTRAP.md` defines the mandatory bootstrap protocol. It does not replace inspection of the repository artifacts required for the task.
 
 # Context Sources
 
-Priority order:
+The following are context sources, not automatic proof of truth:
 
-Repository
+1. Current repository files and structure.
+2. Applicable Constitution and Governance authority.
+3. `PROJECT_BOOTSTRAP.md`.
+4. Repository indexes and maps.
+5. Canonical documents whose identity has been verified.
+6. `_FOLDER_STATUS.md` as status evidence.
+7. Repository Memory.
+8. Conversation and working notes as temporary context only.
 
-↓
+If sources conflict, the conflict must be recorded and resolved according to authority and evidence.
 
-PROJECT_BOOTSTRAP.md
+# Mandatory Loading Workflow
 
-↓
-
-README.md
-
-↓
-
-Canonical Documents
-
-↓
-
-_FOLDER_STATUS.md
+Repository Availability Gate
 
 ↓
 
-Repository Memory
+Repository Enumeration
 
 ↓
 
-Conversation
-
-Conversation is never the primary source.
-
----
-
-# Context Loading Workflow
-
-Repository Synchronization
+Required File Inspection
 
 ↓
 
-Repository Tree Scan
+Evidence Classification
 
 ↓
 
-PROJECT_BOOTSTRAP.md
+Cross-Reference Review
 
 ↓
 
-README.md
+Authority / Canonical Identity Check
 
 ↓
 
-Current Folder
+Context Assembly
 
 ↓
 
-Canonical Documents
+Engineering Decision
 
-↓
-
-_FOLDER_STATUS.md
-
-↓
-
-Engineering Execution
-
----
-
-# Repository Synchronization
-
-Before any engineering work the AI shall:
-
-Load the latest repository.
-
-Validate repository structure.
-
-Identify the current baseline.
-
-Locate completed folders.
-
-Locate unfinished folders.
-
-Continue from repository reality.
-
----
+No engineering proposal may depend on unavailable evidence.
 
 # Folder Loading
 
-When entering a folder:
+When entering a folder, the AI shall inspect:
 
-Read README.md.
+- folder contents;
+- filenames;
+- README/index files;
+- internal document IDs;
+- versions and status;
+- references and dependencies;
+- applicable Governance/Architecture authority;
+- `_FOLDER_STATUS.md`, if present.
 
-Review canonical documents.
+A folder name or status file alone cannot establish its logical role or completion.
 
-Read _FOLDER_STATUS.md if available.
+# Completion Rule
 
-Determine completion status.
+The AI MUST NOT infer folder completion from:
 
-Continue engineering.
+- status-file age;
+- numeric filename sequence;
+- README claims alone;
+- previous session state;
+- conversation memory.
 
----
+Completion requires evidence-gated validation of the applicable scope.
 
-# Resume Logic
+# Evidence States
 
-If _FOLDER_STATUS.md exists and is newer than PROJECT_BOOTSTRAP.md:
+- Verified — directly observed in the current repository.
+- Partially Verified — only a defined subset was inspected.
+- Unavailable — required evidence could not be inspected.
+- Inferred — derived from observed evidence but not directly stated.
+- Assumed — unsupported by repository evidence.
 
-Folder is considered completed.
+Unavailable evidence must remain disclosed and cannot be silently promoted.
 
-Skip.
+# Repository Synchronization
 
-Continue to the next unfinished folder.
+Before engineering the AI shall:
 
-If _FOLDER_STATUS.md does not exist:
-
-Treat the folder as unfinished.
-
-Begin canonical construction immediately.
-
----
-
-# Context Validation
-
-Before every modification verify:
-
-Repository synchronization.
-
-Repository integrity.
-
-Architecture alignment.
-
-Governance compliance.
-
-Version consistency.
-
-Canonical references.
-
----
-
-# Context Persistence
-
-Permanent Context
-
-Repository
-
-Repository Memory
-
-Knowledge
-
-Architecture
-
-Governance
-
-Temporary Context
-
-Conversation
-
-Engineering Session
-
-Working Notes
-
-Temporary context shall never replace repository knowledge.
-
----
+- establish the current branch/ref;
+- inspect the current repository state;
+- identify the applicable baseline;
+- inspect required artifacts;
+- resolve or disclose material conflicts;
+- validate the scope required for the intended change.
 
 # Failure Conditions
 
-Stop engineering when:
+Stop or constrain engineering when:
 
-Repository cannot be synchronized.
+- required repository content is unavailable;
+- canonical identity is ambiguous;
+- architecture or governance conflict exists;
+- a critical cross-reference cannot be resolved;
+- evidence coverage is insufficient for the requested decision;
+- repository corruption is detected.
 
-Architecture conflict exists.
+# Persistence Boundary
 
-Governance conflict exists.
+Permanent context includes validated repository artifacts and governed repository memory.
 
-Repository ambiguity prevents deterministic execution.
+Temporary context includes conversation, working notes and model state.
 
-Otherwise continue automatically.
-
----
+Temporary context never overrides current repository evidence.
 
 # Related Documents
 
-PROJECT_BOOTSTRAP.md
-
-AI-001_AI_MODEL.md
-
-AI-002_AI_CAPABILITIES.md
-
-AI-003_AI_LIMITATIONS.md
-
-AI-005_PROMPT_ENGINEERING.md
-
-REP-001_REPOSITORY_MODEL.md
-
-CORE-003_CONSTITUTION.md
+- `PROJECT_BOOTSTRAP.md`
+- `Repository/REP-001_MASTER_INDEX.md`
+- `Repository/REP-002_REPOSITORY_MAP.md`
+- `AI/AI-001_AI_MODEL.md`
+- `AI/AI-003_AI_LIMITATIONS.md`
+- `AI/AI-005_PROMPT_ENGINEERING.md`
+- `Core/CORE-003_CONSTITUTION.md`
 
 ---
 
 # Guiding Statement
 
-Correct engineering begins with correct context.
-
-The repository is always the first context loaded.
+Correct engineering begins with sufficient evidence, not with confidence about missing context.
 
 ---
 
