@@ -4,11 +4,7 @@
 
 Platform
 
-ARGO KOP
-
-Knowledge Operating Platform
-
----
+ARGO KOP (Knowledge Operating Platform)
 
 Folder
 
@@ -20,11 +16,11 @@ Status
 
 Version
 
-1.5.0
+1.5.1
 
 Canonical
 
-Yes
+Yes — evidence record only
 
 Last Audit
 
@@ -42,11 +38,9 @@ Current working repository (`main`)
 
 # Purpose
 
-This document records the verified state of the Governance folder after the consolidated repository re-audit.
+This document records the verified state of the Governance folder after the repository re-audit.
 
 It is an evidence record. It does not override the repository, the Constitution, or the canonical Governance documents.
-
----
 
 # Validated Canonical Governance Documents
 
@@ -59,8 +53,6 @@ It is an evidence record. It does not override the repository, the Constitution,
 - `Governance/_FOLDER_STATUS.md` — this evidence record
 
 Superseded Governance artifacts remain preserved under `Archive/Governance-Legacy/` and are outside the active canonical set.
-
----
 
 # Re-Audit Results
 
@@ -86,7 +78,7 @@ PASS — previously identified broken GOV-006 reference was removed from the can
 
 ## Repository Index / Map Alignment
 
-PASS — `REP-001_MASTER_INDEX.md` and `REP-002_REPOSITORY_MAP.md` now declare the same active Governance baseline.
+PASS for the Governance inventory currently declared in REP-001 / REP-002. Repository-wide synchronization remains subject to the connected-baseline audit.
 
 ## Legacy Preservation
 
@@ -100,8 +92,6 @@ No active canonical `GOV-011` document was verified in the repository.
 
 Therefore `GOV-011` is **not an active Governance authority** and must not be represented as one unless a future governed decision creates and approves such a document.
 
----
-
 # Completion Gate
 
 All Governance-specific checks required by this re-audit passed:
@@ -111,11 +101,11 @@ All Governance-specific checks required by this re-audit passed:
 3. Canonical path uniqueness — PASS
 4. Active duplicate check — PASS
 5. Reference consistency — PASS
-6. REP-001 / REP-002 Governance agreement — PASS
+6. Governance inventory agreement within the current inspected scope — PASS
 7. Legacy evidence preservation — PASS
 8. No unverified dependency presented as authority — PASS
 
-Governance is therefore **validated clean** for the current repository baseline.
+Governance is therefore **validated clean for the current repository baseline and inspected Governance scope**.
 
 ---
 
@@ -123,7 +113,7 @@ Governance is therefore **validated clean** for the current repository baseline.
 
 This result validates the **Governance layer only**.
 
-It does NOT certify the entire ARGO-KOP repository as globally clean. Repository-wide integrity still requires validation of Runtime, Architecture, Core, AI, Projects, Release, and other active layers against the same identity/path/version/reference rules.
+It does NOT certify the entire ARGO-KOP repository as globally clean. Repository-wide integrity still requires validation of Runtime, Architecture, Core, AI, Projects, Release, and other active domains against the same identity/path/version/reference rules.
 
 ---
 
@@ -146,7 +136,7 @@ No global `100% CLEAN BOOT` claim is authorized from this document alone.
 - `Governance/GOV-010_GOVERNANCE_MODEL.md`
 - `Repository/REP-001_MASTER_INDEX.md`
 - `Repository/REP-002_REPOSITORY_MAP.md`
-- `Architecture/CORE-003_CONSTITUTION.md`
+- `Core/CORE-003_CONSTITUTION.md`
 
 ---
 
