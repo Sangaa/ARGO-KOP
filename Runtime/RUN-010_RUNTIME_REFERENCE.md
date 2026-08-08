@@ -4,141 +4,47 @@
 
 # RUNTIME REFERENCE
 
----
-
-Platform
-
-ARGO KOP
-
+Platform: ARGO KOP
 Knowledge Operating Platform
 
----
-
-Document ID
-
-RUN-010
-
-Version
-
-1.1.0
-
-Status
-
-Approved
-
-Category
-
-Runtime
-
-Canonical
-
-Yes
-
-Priority
-
-Critical
+Document ID: RUN-010
+Version: 1.2.0
+Status: Validated / Integrity Hold
+Category: Runtime
+Canonical: Yes
+Priority: Critical
+Development Baseline: 3.2.1
+Latest Official Release: 1.0.0
+Last Audit: 2026-08-08
 
 ---
 
 # Purpose
 
-This document is the canonical reference for the Runtime layer.
+Canonical navigation reference for the Runtime layer. It summarizes current Runtime documents, execution flow, state model, dependencies and engineering rules.
 
-It summarizes every Runtime component, execution phase, state transition, dependency and engineering rule.
-
-It serves as the primary navigation entry for Runtime documentation.
-
----
+This reference does not override the authority of the Constitution, Governance, Architecture or Repository.
 
 # Runtime Documents
 
-RUN-001_BOOT_SEQUENCE.md
-
-Repository Boot Process
-
----
-
-RUN-002_INITIALIZATION.md
-
-Runtime Initialization
-
----
-
-RUN-003_CONFIGURATION.md
-
-Runtime Configuration
-
----
-
-RUN-004_CONTEXT_LOADING.md
-
-Repository Context Loading
-
----
-
-RUN-005_RUNTIME_WORKFLOW.md
-
-Engineering Execution Workflow
-
----
-
-RUN-006_AI_PROTOCOL.md
-
-AI Runtime Protocol
-
----
-
-RUN-007_RUNTIME_SECURITY.md
-
-Runtime Security
-
----
-
-RUN-008_RUNTIME_STATE.md
-
-Runtime State Machine
-
----
-
-RUN-009_RECOVERY.md
-
-Runtime Recovery
-
----
-
-RUN-010_RUNTIME_REFERENCE.md
-
-Runtime Master Reference
-
----
+- `RUN-001_BOOT_SEQUENCE.md` — Boot Sequence
+- `RUN-002_INITIALIZATION.md` — Initialization
+- `RUN-003_CONFIGURATION.md` — Configuration
+- `RUN-004_CONTEXT_LOADING.md` — Context Loading
+- `RUN-005_RUNTIME_WORKFLOW.md` — Runtime Workflow
+- `RUN-006_AI_PROTOCOL.md` — AI Protocol
+- `RUN-007_RUNTIME_SECURITY.md` — Runtime Security
+- `RUN-008_RUNTIME_STATE.md` — Runtime State
+- `RUN-009_RECOVERY.md` — Recovery
+- `RUN-010_RUNTIME_REFERENCE.md` — Runtime Reference
 
 # Runtime Execution Pipeline
 
-Receive Repository
+Repository Synchronization
 
 ↓
 
-Synchronize Repository
-
-↓
-
-Repository Scan
-
-↓
-
-Internal Knowledge Update
-
-↓
-
-Repository Validation
-
-↓
-
-Priority Analysis
-
-↓
-
-Runtime Initialization
+Integrity / Authority Validation
 
 ↓
 
@@ -146,7 +52,15 @@ Context Loading
 
 ↓
 
-Engineering Execution
+Initialization
+
+↓
+
+Validated Operation Selection
+
+↓
+
+Processing
 
 ↓
 
@@ -154,205 +68,95 @@ Validation
 
 ↓
 
-Folder Completion
+Committing
 
 ↓
 
-Automatic Continuation
+Re-read / Trace
 
 ↓
 
-Repository Completion
+IDLE or governed HOLD/FAULT
 
----
+Continuation is conditional and governed by `RUN-005`.
 
 # Runtime Components
 
-Boot Manager
+Logical runtime responsibilities include:
 
-Initialization Manager
+- Boot Manager
+- Initialization Manager
+- Configuration Manager
+- Context Manager
+- Execution / Workflow Manager
+- Runtime State Manager
+- Recovery Manager
+- Security Manager
+- Engineering Queue
+- Repository Context / Cache
 
-Configuration Manager
-
-Context Manager
-
-Execution Engine
-
-Runtime State Manager
-
-Recovery Manager
-
-Security Manager
-
-Engineering Queue
-
-Repository Cache
-
----
+These are responsibility domains, not a claim that each exists as a separate implementation module.
 
 # Runtime States
 
-OFFLINE
+- `OFFLINE`
+- `BOOT`
+- `INIT`
+- `IDLE`
+- `PROCESSING`
+- `COMMITTING`
+- `HOLD`
+- `FAULT`
 
-↓
-
-BOOTING
-
-↓
-
-SYNCHRONIZING
-
-↓
-
-SCANNING
-
-↓
-
-INITIALIZING
-
-↓
-
-READY
-
-↓
-
-EXECUTING
-
-↓
-
-VALIDATING
-
-↓
-
-COMPLETED
-
----
+See `RUN-008_RUNTIME_STATE.md` for transition authority.
 
 # Runtime Rules
 
-Repository Reality is authoritative.
-
-Repository Synchronization is mandatory.
-
-Architecture validation is mandatory.
-
-Governance validation is mandatory.
-
-Complete canonical replacement only.
-
-No repository assumptions.
-
-No partial engineering.
-
-Automatic continuation between folders.
-
----
+- Repository Reality is authoritative.
+- Repository synchronization is mandatory where current state matters.
+- Applicable Architecture and Governance validation is mandatory.
+- No repository assumptions.
+- Preserve unrelated content.
+- No unsafe write after failed validation.
+- Conditional continuation only.
+- Governed recovery only.
+- Runtime does not redefine higher authority.
 
 # Stop Conditions
 
-Runtime stops only when:
-
-Repository corruption exists.
-
-Architecture conflict exists.
-
-Governance conflict exists.
-
-Required repository dependency is missing.
-
-Repository ambiguity prevents deterministic execution.
-
-Otherwise Runtime continues automatically.
-
----
-
-# Repository Priority
-
-Core
-
-↓
-
-Governance
-
-↓
-
-Architecture
-
-↓
-
-Repository
-
-↓
-
-Knowledge
-
-↓
-
-Memory
-
-↓
-
-Runtime
-
-↓
-
-Engineering
-
-↓
-
-AI
-
----
+Runtime enters `HOLD` / `FAULT` when required evidence, authority, dependency or validation is unavailable or conflicting.
 
 # Runtime Dependencies
 
-PROJECT_BOOTSTRAP.md
+- `PROJECT_BOOTSTRAP.md`
+- `Core/CORE-003_CONSTITUTION.md`
+- `Governance/`
+- `Architecture/`
+- `Repository/`
+- applicable Knowledge / Memory context
+- applicable Engine / Services / AI interfaces
 
-CORE-003_CONSTITUTION.md
-
-Architecture
-
-Governance
-
-Repository
-
-Knowledge
-
-Memory
-
-Engineering
-
-AI
-
----
+Dependencies are resolved from current repository evidence, not assumed from numeric naming ranges.
 
 # Related Documents
 
-RUN-001_BOOT_SEQUENCE.md
-
-RUN-002_INITIALIZATION.md
-
-RUN-003_CONFIGURATION.md
-
-RUN-004_CONTEXT_LOADING.md
-
-RUN-005_RUNTIME_WORKFLOW.md
-
-RUN-006_AI_PROTOCOL.md
-
-RUN-007_RUNTIME_SECURITY.md
-
-RUN-008_RUNTIME_STATE.md
-
-RUN-009_RECOVERY.md
-
-PROJECT_BOOTSTRAP.md
+- `Runtime/RUN-001_BOOT_SEQUENCE.md`
+- `Runtime/RUN-002_INITIALIZATION.md`
+- `Runtime/RUN-003_CONFIGURATION.md`
+- `Runtime/RUN-004_CONTEXT_LOADING.md`
+- `Runtime/RUN-005_RUNTIME_WORKFLOW.md`
+- `Runtime/RUN-006_AI_PROTOCOL.md`
+- `Runtime/RUN-007_RUNTIME_SECURITY.md`
+- `Runtime/RUN-008_RUNTIME_STATE.md`
+- `Runtime/RUN-009_RECOVERY.md`
+- `Architecture/ARC-006_DEPENDENCY_MODEL.md`
+- `Repository/REP-001_MASTER_INDEX.md`
 
 ---
 
 # Guiding Statement
 
-Runtime transforms synchronized repository reality into deterministic engineering execution while preserving architecture, governance and repository integrity.
+Runtime transforms synchronized repository evidence into controlled execution while preserving architecture, governance and repository integrity.
 
 ---
 
