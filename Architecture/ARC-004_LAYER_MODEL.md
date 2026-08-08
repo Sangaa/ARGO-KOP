@@ -20,275 +20,177 @@ ARC-004
 
 Version
 
-1.1.0
+1.2.0
 
 Status
 
-Approved
+Validated / Integrity Hold
 
 Category
 
 Architecture
 
+Development Baseline
+
+3.2.1
+
+Latest Official Release
+
+1.0.0
+
+Last Audit
+
+2026-08-08
+
 ---
 
 # Purpose
 
-This document defines the architectural layer model of ARGO KOP.
+This document defines the logical layer model of ARGO KOP. It is subordinate to the Constitution and aligned with the current canonical Architecture Map.
 
-It establishes the logical separation of responsibilities across the platform and governs dependency direction between layers.
-
----
-
-# Objectives
-
-The Layer Model shall:
-
-- Separate responsibilities.
-- Eliminate architectural coupling.
-- Simplify maintenance.
-- Support independent evolution.
-- Preserve architectural integrity.
+The layer model describes responsibility and dependency boundaries. Repository folders are physical storage locations and MUST NOT be interpreted as architectural layers automatically.
 
 ---
 
-# Layer Hierarchy
+# Canonical Layer Model
 
-Layer 1
+## Layer 1 — Identity / Core
 
-Identity
+Permanent platform identity, constitution, and foundational constraints.
+
+## Layer 2 — Governance
+
+Rules, policies, standards, review, naming, metadata, and traceability.
+
+## Layer 3 — Architecture
+
+Structural design, component boundaries, integration, and dependency rules.
+
+## Layer 4 — Repository
+
+Canonical storage, indexing, mapping, and navigation.
+
+## Layer 5 — Knowledge / Specifications / Standards
+
+Structured knowledge and reusable specifications. Standards may exist as governed artifacts without becoming an architectural layer of their own.
+
+## Layer 6 — Memory
+
+Working, decision, project, and historical memory.
+
+## Layer 7 — Cognition / Engine
+
+Reasoning, analysis, decision support, and cognitive processing.
+
+## Layer 8 — Runtime / Services / AI
+
+Execution, boot, configuration, context loading, service boundaries, and AI integration.
+
+## Layer 9 — Projects / Applied Artifacts
+
+Project-specific implementation and applied knowledge built on approved platform capabilities.
+
+---
+
+# Important Boundary Rule
+
+`Engine`, `Services`, `AI`, `Models`, `Specifications`, and `Standards` are repository domains or implementation groupings unless an explicit Architecture Decision promotes one to a distinct architectural layer.
+
+This prevents folder structure from silently changing the architecture.
+
+---
+
+# Dependency Direction
+
+The intended dependency direction is:
+
+Identity / Core
 
 ↓
-
-Layer 2
 
 Governance
 
 ↓
 
-Layer 3
-
 Architecture
 
 ↓
-
-Layer 4
 
 Repository
 
 ↓
 
-Layer 5
-
-Knowledge
+Knowledge / Specifications / Standards
 
 ↓
-
-Layer 6
 
 Memory
 
 ↓
 
-Layer 7
-
-Cognition
+Cognition / Engine
 
 ↓
 
-Layer 8
-
-Runtime
+Runtime / Services / AI
 
 ↓
 
-Layer 9
+Projects / Applied Artifacts
 
-Projects
+Reverse dependency is prohibited unless explicitly authorized by a governed architectural decision.
 
 ---
 
 # Layer Responsibilities
 
-## Layer 1 — Identity
+Each layer MUST have:
 
-Defines the permanent identity of the platform.
+- Defined responsibility
+- Defined inputs
+- Defined outputs
+- Defined dependencies
+- One clear ownership boundary
 
-Includes:
-
-- Manifest
-- Identity
-- Constitution
-- Charter
-
----
-
-## Layer 2 — Governance
-
-Defines rules.
-
-Includes:
-
-- Standards
-- Policies
-- Versioning
-- Traceability
-- Reviews
-
----
-
-## Layer 3 — Architecture
-
-Defines structural design.
-
-Includes:
-
-- Platform Architecture
-- Component Architecture
-- Layer Model
-- Integration Model
-- Dependency Model
-
----
-
-## Layer 4 — Repository
-
-Defines organization.
-
-Includes:
-
-- Master Index
-- Repository Layout
-- Navigation
-- Repository Map
-
----
-
-## Layer 5 — Knowledge
-
-Defines structured organizational knowledge.
-
-Includes:
-
-- Knowledge Models
-- Knowledge Domains
-- Knowledge Relationships
-
----
-
-## Layer 6 — Memory
-
-Preserves historical context.
-
-Includes:
-
-- Working Memory
-- Decision Memory
-- Project Memory
-- Historical Records
-
----
-
-## Layer 7 — Cognition
-
-Transforms knowledge into reasoning.
-
-Includes:
-
-- Thinking
-- Analysis
-- Decision Support
-- Context Interpretation
-
----
-
-## Layer 8 — Runtime
-
-Executes platform behavior.
-
-Includes:
-
-- Boot Sequence
-- Runtime Configuration
-- Context Loading
-- Session Management
-
----
-
-## Layer 9 — Projects
-
-Contains all projects implemented on ARGO KOP.
-
----
-
-# Dependency Rules
-
-Dependencies shall always point downward.
-
-No lower layer shall redefine higher-layer responsibilities.
-
-Identity remains independent.
-
-Governance governs every layer.
-
-Repository remains the Single Source of Truth.
+A document MUST NOT use a layer label to claim authority that belongs to Governance, Constitution, Repository, or Release authority.
 
 ---
 
 # Cross-Layer Communication
 
-Layers communicate only through documented interfaces.
+Layers communicate through documented references and interfaces. Undocumented dependencies are prohibited.
 
-Direct undocumented communication is prohibited.
-
-Knowledge shall flow through the repository.
+Repository paths are not interfaces by themselves.
 
 ---
 
-# Layer Integrity
+# Integrity Rules
 
-Each layer shall have:
-
-- Defined Responsibility
-- Defined Inputs
-- Defined Outputs
-- Defined Dependencies
-
-Layer overlap is prohibited.
-
----
-
-# Evolution
-
-Layers may evolve independently.
-
-Layer boundaries shall remain stable.
-
-Structural changes require architectural review.
+1. The layer model MUST remain aligned with `Architecture/ARC_MAP.md`.
+2. Changes to layer boundaries require architectural review.
+3. Folder creation or renaming MUST NOT redefine a layer implicitly.
+4. Dependency claims MUST be traceable to current repository artifacts.
+5. Circular dependencies are prohibited.
 
 ---
 
 # Related Documents
 
-ARC-001_PLATFORM_ARCHITECTURE
-
-ARC-002_COMPONENT_ARCHITECTURE
-
-ARC-003_INFORMATION_FLOW
-
-ARC-006_DEPENDENCY_MODEL
-
-ARC-007_INTEGRATION_MODEL
-
-CORE-003_CONSTITUTION
-
-GOV-010_GOVERNANCE_MODEL
+- `Architecture/ARC_MAP.md`
+- `Architecture/ARC-001_PLATFORM_ARCHITECTURE.md`
+- `Architecture/ARC-002_COMPONENT_ARCHITECTURE.md`
+- `Architecture/ARC-003_INFORMATION_FLOW.md`
+- `Architecture/ARC-006_DEPENDENCY_MODEL.md`
+- `Architecture/ARC-007_INTEGRATION_MODEL.md`
+- `Architecture/ARC-009_ARCHITECTURE_DECISIONS.md`
+- `Core/CORE-003_CONSTITUTION.md`
+- `Governance/GOV-010_GOVERNANCE_MODEL.md`
 
 ---
 
 # Guiding Statement
 
-Stable layers create stable architecture.
+Stable architectural boundaries create stable evolution.
 
 ---
 
