@@ -12,11 +12,9 @@ Security Policy
 
 ## Purpose
 
-This document defines the security principles, reporting process, repository protection policies, and information handling practices for ARGO KOP.
+This document defines security principles, reporting expectations, repository protection practices, and information-handling requirements for ARGO KOP.
 
-Security within ARGO KOP extends beyond software vulnerabilities.
-
-It includes the protection of knowledge, architecture, governance, documentation, and repository integrity.
+Security within ARGO KOP extends beyond software vulnerabilities. It includes protection of knowledge, architecture, governance, documentation, identities, provenance, access, and repository integrity.
 
 ---
 
@@ -24,17 +22,14 @@ It includes the protection of knowledge, architecture, governance, documentation
 
 ARGO KOP is designed to protect:
 
-• Repository Integrity
-
-• Knowledge Integrity
-
-• Documentation Authenticity
-
-• Architectural Consistency
-
-• Decision Traceability
-
-• Historical Records
+- Repository Integrity
+- Knowledge Integrity
+- Documentation Authenticity
+- Architectural Consistency
+- Decision Traceability
+- Historical Records
+- Identity and Provenance Integrity
+- Confidential Information
 
 ---
 
@@ -44,47 +39,63 @@ Security shall support knowledge.
 
 Security shall preserve integrity.
 
-Security shall never compromise traceability.
+Security shall preserve traceability.
 
 Security shall be proportional to risk.
 
-Security is everyone's responsibility.
+Security controls shall not create false claims of safety or completeness.
+
+Security is everyone's responsibility within their authorized scope.
 
 ---
 
 ## Repository Protection
 
-The repository should always maintain:
+The repository should maintain:
 
-Version Control
+- Version Control
+- Change History
+- Document Ownership
+- Provenance
+- Backup Strategy
+- Release Validation
+- Repository Traceability
+- Access Control
 
-Change History
+No document should be modified without preserving its change history through the repository's version-control mechanism.
 
-Document Ownership
+A successful commit proves that a mutation was accepted. It does **not** by itself prove that the surrounding repository is secure, consistent, or fully validated.
 
-Backup Strategy
+---
 
-Release Validation
+## Evidence and Integrity Protection
 
-Repository Traceability
+Current repository content is the primary evidence source for repository state.
 
-No document shall be modified without preserving its historical evolution.
+Previous sessions, remembered content, ZIP snapshots, generated summaries, and status declarations may provide context but must not override current inspected evidence.
+
+If a required artifact cannot be inspected, the evidence gap must remain explicit.
+
+Critical relationships should be verified through the applicable chain:
+
+**Located → Read → Identity Verified → Authority Verified → Relationship Validated → Consumer/Dependency Checked → Re-read After Mutation**
+
+Material identity conflicts, stale status claims, broken references, and duplicate canonical identities shall be treated as integrity findings until resolved or explicitly bounded.
 
 ---
 
 ## Responsible Disclosure
 
-If a security issue is discovered:
+If a security vulnerability is discovered:
 
-Do not publish it publicly.
+- Do not publish sensitive exploit details publicly before appropriate coordination.
+- Report the issue privately to the repository owner or designated maintainer.
+- Provide sufficient technical evidence for reproduction and assessment.
+- Minimize exposure of secrets or personal information in the report.
+- Allow reasonable time for investigation and remediation.
+- Coordinate public disclosure after appropriate resolution.
 
-Report it privately to the repository owner.
-
-Provide sufficient technical details.
-
-Allow adequate time for investigation.
-
-Coordinate public disclosure only after the issue has been resolved.
+The repository currently does not define a dedicated security-reporting address in this policy; contributors should use the repository owner's approved private reporting channel until one is formally established.
 
 ---
 
@@ -92,21 +103,17 @@ Coordinate public disclosure only after the issue has been resolved.
 
 Examples include:
 
-Unauthorized repository modifications
-
-Document tampering
-
-Loss of traceability
-
-Broken governance rules
-
-Unauthorized architectural changes
-
-Exposure of confidential information
-
-Corrupted historical records
-
-Repository integrity violations
+- Unauthorized repository modifications
+- Credential or secret exposure
+- Document tampering
+- Loss of provenance or traceability
+- Broken governance controls
+- Unauthorized architectural changes
+- Exposure of confidential information
+- Corrupted historical records
+- Repository integrity violations
+- Malicious dependency or plugin introduction
+- Unsafe automation or execution paths
 
 ---
 
@@ -114,119 +121,118 @@ Repository integrity violations
 
 ARGO KOP documentation may be classified as:
 
-Public
+- Public
+- Internal
+- Confidential
+- Restricted
 
-Internal
+Documents should indicate their intended classification when required.
 
-Confidential
-
-Restricted
-
-Every document should clearly indicate its intended classification when required.
+Secrets, credentials, private keys, access tokens, personal data, or other sensitive material must not be committed to the repository unless an explicitly governed mechanism requires and protects them.
 
 ---
 
 ## Access Management
 
-Repository maintainers should apply the principle of least privilege.
+Repository maintainers should apply least privilege.
 
 Access permissions should reflect contributor responsibilities.
 
 Administrative access should be limited to authorized maintainers.
 
+Authentication material must never be shared through ordinary repository documentation or unprotected commits.
+
 ---
 
 ## Change Protection
 
-Critical repository components require careful review before modification.
+Critical repository components require careful review before modification, including:
 
-Examples include:
+- Platform Identity
+- Platform Constitution
+- Governance Documents
+- Architecture Documents
+- Repository Standards
+- Security Policy
+- Release Authority
+- Bootstrap / Root Control Documents
 
-Platform Charter
-
-Platform Constitution
-
-Governance Documents
-
-Architecture Documents
-
-Repository Standards
-
-Changes affecting these documents should be documented and traceable.
+Changes affecting these documents should be documented, traceable, and revalidated against affected references and consumers.
 
 ---
 
-## Backup Policy
+## Backup and Recovery
 
-The repository should be backed up regularly.
+The repository should be backed up or otherwise recoverable through version control and approved backup mechanisms.
 
-Release versions should be preserved permanently.
+Release versions should be preserved.
 
-Historical versions should never be overwritten.
+Historical versions should remain recoverable.
 
-Recovery procedures should be tested periodically.
+Recovery procedures should be tested periodically when the platform reaches an operational state requiring them.
 
 ---
 
 ## Dependency Security
 
-When external tools or technologies are introduced:
+When external tools, technologies, models, plugins, or services are introduced:
 
-Evaluate their reliability.
+- Evaluate their reliability.
+- Review licensing compatibility.
+- Assess security and privacy implications.
+- Assess long-term maintainability.
+- Document associated risks.
+- Restrict permissions to the minimum required scope.
+- Preserve provenance of externally supplied information.
 
-Review licensing compatibility.
+ARGO KOP should remain technology independent whenever practical.
 
-Assess long-term maintainability.
-
-Document associated risks.
-
-ARGO KOP shall remain technology independent whenever possible.
+External AI outputs are candidate information, not repository authority, unless independently verified and governed.
 
 ---
 
 ## Reporting Security Issues
 
-Security reports should include:
+Security reports should include, where applicable:
 
-Description
+- Description
+- Affected Components
+- Potential Impact
+- Reproduction Steps
+- Evidence
+- Scope and Preconditions
+- Suggested Mitigation
 
-Affected Components
-
-Potential Impact
-
-Reproduction Steps (if applicable)
-
-Suggested Mitigation
-
-Supporting Evidence
+Do not include unnecessary secrets or sensitive personal information in reports.
 
 ---
 
 ## Security Review
 
-Security should be reviewed periodically to ensure:
+Security should be reviewed periodically and after material architectural or operational changes to ensure:
 
-Repository integrity
-
-Governance compliance
-
-Architecture consistency
-
-Documentation protection
-
-Access control effectiveness
+- Repository integrity
+- Governance compliance
+- Architecture consistency
+- Documentation protection
+- Access-control effectiveness
+- Dependency and plugin safety
+- Secret-handling discipline
+- Recovery readiness
 
 ---
 
 ## Guiding Principle
 
-Protect the repository.
+**Protect the repository.**
 
-Protect the knowledge.
+**Protect the knowledge.**
 
-Protect the architecture.
+**Protect the evidence.**
 
-Protect the future.
+**Protect the people and systems that depend on it.**
+
+**Protect the future.**
 
 ---
 
@@ -234,7 +240,7 @@ Protect the future.
 
 Security is not only about preventing attacks.
 
-It is about preserving trust, protecting knowledge, and ensuring that ARGO KOP remains a reliable engineering platform for future generations.
+It is about preserving trust, protecting knowledge and evidence, controlling access, maintaining provenance, and ensuring that ARGO KOP remains a reliable engineering platform as it evolves.
 
 ---
 
