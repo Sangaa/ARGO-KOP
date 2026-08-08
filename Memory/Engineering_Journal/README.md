@@ -16,7 +16,7 @@ Engineering Journal
 
 Status
 
-Approved
+Approved / Namespace Migration Boundary Recorded
 
 Category
 
@@ -60,33 +60,38 @@ Engineering Milestones
 
 Engineering Risks
 
+Engineering Self-Assessments and Calibration Records
+
 ---
 
 # Folder Structure
 
 Engineering_Journal/
 
-├── ENG-001_ENGINEERING_MODEL.md
-
-├── ENG-002_ENGINEERING_SESSIONS.md
-
-├── ENG-003_ENGINEERING_DECISIONS.md
-
-├── ENG-004_BUILD_HISTORY.md
-
-├── ENG-005_REFACTORING_HISTORY.md
-
-├── ENG-006_ENGINEERING_LESSONS.md
-
-├── ENG-007_ENGINEERING_RISKS.md
-
-├── ENG-008_MIGRATION_HISTORY.md
-
-├── ENG-009_RELEASE_HISTORY.md
-
-├── ENG-010_ENGINEERING_BASELINE.md
-
+├── ENG-001_ENGINEERING_MODEL.md  *(legacy journal identity)*
+├── ENG-002_ENGINEERING_SESSIONS.md  *(legacy journal identity)*
+├── ENG-003_ENGINEERING_DECISIONS.md  *(legacy journal identity)*
+├── ENG-004_BUILD_HISTORY.md  *(legacy journal identity)*
+├── ENG-005_REFACTORING_HISTORY.md  *(legacy journal identity)*
+├── ENG-006_ENGINEERING_LESSONS.md  *(legacy journal identity)*
+├── ENG-007_ENGINEERING_RISKS.md  *(legacy journal identity)*
+├── ENG-008_MIGRATION_HISTORY.md  *(legacy journal identity)*
+├── ENG-009_RELEASE_HISTORY.md  *(legacy journal identity)*
+├── ENG-010_ENGINEERING_BASELINE.md  *(legacy journal identity)*
+├── EJR-001_SELF_ASSESSMENT_AND_MARKET_FEEDBACK.md  *(new journal namespace; Proposed / Audit-Derived)*
 └── _FOLDER_STATUS.md
+
+---
+
+# Namespace Rule
+
+The current governance standard reserves `ENG-*` for Cognitive Engines under `Engine/`.
+
+The Engineering Journal historically used `ENG-001` through `ENG-010` before that standard was formalized. Those records remain preserved as legacy identities during the Connected-Baseline Stabilization Phase.
+
+New Engineering Journal records use the dedicated `EJR-*` namespace.
+
+Historical records are not silently renamed during this audit because such migration would change paths and historical references across the repository. A future migration may normalize legacy records only through an explicit governed migration plan.
 
 ---
 
@@ -107,6 +112,8 @@ MEM-001_MEMORY_MODEL
 REP-001_MASTER_INDEX
 
 CORE-003_CONSTITUTION
+
+GOV-006_NAMING_CONVENTION_STANDARD
 
 ---
 
