@@ -20,11 +20,11 @@ AI-010
 
 Version
 
-1.1.0
+1.2.0
 
 Status
 
-Approved
+Integrity Hold / Revalidated
 
 Category
 
@@ -34,201 +34,92 @@ Canonical
 
 Yes
 
+Last Audit
+
+2026-08-08
+
 ---
 
 # Purpose
 
-This document serves as the canonical index for the AI layer.
-
-It provides a single navigation point for every AI document contained within the AI folder.
-
-The AI Index improves discoverability, navigation, engineering continuity and repository maintenance.
-
----
+Canonical navigation index for the AI domain. It identifies the current AI artifacts and their review state without asserting repository-wide completion.
 
 # Folder
 
-ARGO-KOP/AI
+`ARGO-KOP/AI`
 
----
+# Current Status
 
-# Folder Status
+Folder status: `INTEGRITY HOLD`
 
-Engineering
+Repository status: `INTEGRITY HOLD`
 
-In Progress
-
-Repository Status
-
-Canonical
-
----
+The previous `COMPLETED` claim is superseded by the current evidence-gated audit.
 
 # Reading Order
 
-AI-001_AI_MODEL.md
-
-↓
-
-AI-002_AI_CAPABILITIES.md
-
-↓
-
-AI-003_AI_LIMITATIONS.md
-
-↓
-
-AI-004_CONTEXT_LOADING.md
-
-↓
-
-AI-005_PROMPT_ENGINEERING.md
-
-↓
-
-AI-006_MODEL_ADAPTER.md
-
-↓
-
-AI-007_MULTI_MODEL_SUPPORT.md
-
-↓
-
-AI-008_AI_GOVERNANCE.md
-
-↓
-
-AI-009_AI_RUNTIME.md
-
-↓
-
-AI-010_AI_INDEX.md
-
-↓
-
-_FOLDER_STATUS.md
-
----
+1. `AI-001_AI_MODEL.md`
+2. `AI-002_AI_CAPABILITIES.md`
+3. `AI-003_AI_LIMITATIONS.md`
+4. `AI-004_CONTEXT_LOADING.md`
+5. `AI-005_PROMPT_ENGINEERING.md`
+6. `AI-006_MODEL_ADAPTER.md`
+7. `AI-007_MULTI_MODEL_SUPPORT.md`
+8. `AI-008_AI_GOVERNANCE.md`
+9. `AI-009_AI_RUNTIME.md`
+10. `AI-010_AI_INDEX.md`
+11. `_FOLDER_STATUS.md`
 
 # Document Map
 
-## AI-001
-
-AI Model
-
-Defines the role, responsibilities and operational philosophy of AI inside ARGO KOP.
-
----
-
-## AI-002
-
-AI Capabilities
-
-Defines the approved capabilities available to AI models.
-
----
-
-## AI-003
-
-AI Limitations
-
-Defines operational boundaries and prohibited behavior.
-
----
-
-## AI-004
-
-Context Loading
-
-Defines repository synchronization and context acquisition.
-
----
-
-## AI-005
-
-Prompt Engineering
-
-Defines canonical engineering prompt standards.
-
----
-
-## AI-006
-
-Model Adapter
-
-Defines abstraction between AI providers and ARGO KOP.
-
----
-
-## AI-007
-
-Multi Model Support
-
-Defines interoperability across different AI platforms.
-
----
-
-## AI-008
-
-AI Governance
-
-Defines governance, authority hierarchy and engineering compliance.
-
----
-
-## AI-009
-
-AI Runtime
-
-Defines execution lifecycle and runtime behavior.
-
----
-
-## AI-010
-
-AI Index
-
-Canonical navigation document for the AI folder.
-
----
+| ID | Artifact | Review State |
+| :--- | :--- | :--- |
+| AI-001 | AI Model | Revalidated / Hold at folder level |
+| AI-002 | AI Capabilities | Revalidated / Hold at folder level |
+| AI-003 | AI Limitations | Revalidated / Hold at folder level |
+| AI-004 | Context Loading | Updated / Evidence-Gated |
+| AI-005 | Prompt Engineering | Revalidated / Hold at folder level |
+| AI-006 | Model Adapter | Revalidated / Hold at folder level |
+| AI-007 | Multi Model Support | Revalidated / Hold at folder level |
+| AI-008 | AI Governance | Revalidated / Hold at folder level |
+| AI-009 | AI Runtime | Revalidated / Hold at folder level |
+| AI-010 | AI Index | Current |
 
 # Repository Relationships
 
-PROJECT_BOOTSTRAP.md
+- `PROJECT_BOOTSTRAP.md`
+- `Core/CORE-003_CONSTITUTION.md`
+- `Governance/`
+- `Architecture/`
+- `Repository/REP-001_MASTER_INDEX.md`
+- `Repository/REP-002_REPOSITORY_MAP.md`
+- `Knowledge/`
+- `Memory/`
+- `Runtime/`
+- `Engine/`
+- `Services/`
 
-CORE-003_CONSTITUTION.md
-
-Governance
-
-Architecture
-
-Repository
-
-Knowledge
-
-Memory
-
-Engineering
-
-AI
-
----
+These are relationship domains, not automatic proof of layer ownership. Their contents must be inspected when a decision depends on them.
 
 # Engineering Workflow
 
-Repository Synchronization
+Repository Availability Gate
 
 ↓
 
-Repository Validation
+Repository Enumeration
 
 ↓
 
-Read AI Index
+Required Artifact Inspection
 
 ↓
 
-Open Required Document
+Cross-Reference Validation
+
+↓
+
+Evidence Classification
 
 ↓
 
@@ -240,49 +131,19 @@ Validation
 
 ↓
 
-Update Repository
+Repository Update
 
-↓
+# Completion Rule
 
-Close Folder
+The AI domain may be marked complete only after the applicable repository evidence has been inspected, canonical references resolve, status/index claims agree, and cross-layer validation is complete for the claimed scope.
 
----
+# Authority Boundary
 
-# Folder Completion Rule
-
-The AI folder is considered complete only when:
-
-README.md exists.
-
-All canonical AI documents are completed.
-
-_FOLDER_STATUS.md exists.
-
-Repository validation succeeds.
-
----
-
-# Repository Notes
-
-The AI layer is an execution layer.
-
-It never overrides:
-
-Core
-
-Governance
-
-Architecture
-
-Repository
-
-The repository remains the Single Source of Truth.
-
----
+AI is an execution/integration domain. It does not override Core, Governance, Architecture or Repository authority.
 
 # Guiding Statement
 
-The AI Index provides one canonical entry point for understanding and maintaining the AI layer of ARGO KOP.
+An index navigates the repository; it does not create truth by declaration.
 
 ---
 
