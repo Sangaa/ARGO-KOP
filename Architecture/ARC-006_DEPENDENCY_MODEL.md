@@ -20,43 +20,41 @@ ARC-006
 
 Version
 
-1.1.0
+1.2.0
 
 Status
 
-Approved
+Validated / Integrity Hold
 
 Category
 
 Architecture
 
+Development Baseline
+
+3.2.1
+
+Latest Official Release
+
+1.0.0
+
+Last Audit
+
+2026-08-08
+
 ---
 
 # Purpose
 
-This document defines the dependency model of ARGO KOP.
+This document defines the dependency model of ARGO KOP and is aligned with `Architecture/ARC_MAP.md` and `Architecture/ARC-004_LAYER_MODEL.md`.
 
-It establishes how architectural components may depend on one another while preserving modularity, maintainability and repository integrity.
-
----
-
-# Objectives
-
-The dependency model shall:
-
-- Prevent circular dependencies.
-- Preserve architectural hierarchy.
-- Reduce coupling.
-- Increase maintainability.
-- Support independent component evolution.
+It governs dependency direction, not physical folder layout.
 
 ---
 
-# Dependency Direction
+# Canonical Dependency Direction
 
-Dependencies shall always flow from higher abstraction to lower implementation.
-
-Identity
+Identity / Core
 
 ↓
 
@@ -72,7 +70,7 @@ Repository
 
 ↓
 
-Knowledge
+Knowledge / Specifications / Standards
 
 ↓
 
@@ -80,17 +78,17 @@ Memory
 
 ↓
 
-Cognition
+Cognition / Engine
 
 ↓
 
-Runtime
+Runtime / Services / AI
 
 ↓
 
-Projects
+Projects / Applied Artifacts
 
-Reverse dependencies are prohibited.
+Dependencies must not reverse this direction unless explicitly approved by an architectural decision.
 
 ---
 
@@ -98,95 +96,54 @@ Reverse dependencies are prohibited.
 
 ## Core
 
-Depends On
-
-None
-
----
+Depends on: None.
 
 ## Governance
 
-Depends On
-
-Core
-
----
+May depend on: Core.
 
 ## Architecture
 
-Depends On
-
-Core
-
-Governance
-
----
+May depend on: Core, Governance.
 
 ## Repository
 
-Depends On
+May depend on: Core, Governance, Architecture.
 
-Core
+## Knowledge / Specifications / Standards
 
-Governance
-
-Architecture
-
----
-
-## Knowledge
-
-Depends On
-
-Repository
-
-Architecture
-
----
+May depend on: Repository, Architecture, applicable Governance rules.
 
 ## Memory
 
-Depends On
+May depend on: Knowledge, Repository, applicable Governance rules.
 
-Knowledge
+## Cognition / Engine
 
-Repository
+May depend on: Knowledge, Memory, Repository, Architecture interfaces.
 
----
+## Runtime / Services / AI
 
-## Cognition
+May depend on: Core, Repository, Memory, Cognition / Engine, and approved service interfaces.
 
-Depends On
+## Projects / Applied Artifacts
 
-Knowledge
-
-Memory
-
-Repository
+May depend on approved platform capabilities and documented interfaces. Projects MUST NOT redefine platform architecture or governance.
 
 ---
 
-## Runtime
+# Dependency Qualification
 
-Depends On
+Every dependency MUST be:
 
-Core
+- Necessary
+- Explicitly documented
+- Traceable to a current repository artifact or interface
+- Owned
+- Architecturally justified
+- Free of circular dependency
 
-Repository
-
-Memory
-
-Cognition
-
----
-
-## Projects
-
-Depends On
-
-All approved platform services.
-
-Projects shall never redefine platform architecture.
+A reference to a file path alone does not prove an architectural dependency.
 
 ---
 
@@ -194,105 +151,54 @@ Projects shall never redefine platform architecture.
 
 The following are prohibited:
 
-Projects
-
-↓
-
-Core
-
-Repository
-
-↓
-
-Governance Rewrite
-
-Memory
-
-↓
-
-Architecture Rewrite
-
-Lower Layer
-
-↓
-
-Higher Layer Control
-
-Circular Dependencies
-
-Any undocumented dependency
-
----
-
-# Dependency Principles
-
-Every dependency shall be:
-
-- Necessary
-- Documented
-- Traceable
-- Maintainable
-- Architecturally justified
+- Lower layers rewriting higher-layer authority.
+- Projects redefining Core, Governance, or Architecture.
+- Repository artifacts silently overriding Governance or Constitution.
+- Memory rewriting Architecture without a governed decision.
+- Undocumented cross-component dependencies.
+- Circular dependencies.
+- Using folder placement as implicit authority.
 
 ---
 
 # Repository Principle
 
-Repository documents may reference each other.
-
-Repository ownership shall remain unique.
-
-References are encouraged.
-
-Duplication is prohibited.
+The repository is the canonical storage source. Repository documents may reference one another, but references MUST respect architectural ownership and authority boundaries.
 
 ---
 
-# Architectural Validation
+# Validation
 
-Every new dependency shall be reviewed before approval.
+A new dependency requires review of:
 
-Dependency reviews shall verify:
-
-- Layer Direction
-- Ownership
-- Traceability
-- Repository Integrity
-- Future Maintainability
-
----
-
-# Evolution Rules
-
-New dependencies shall extend the model.
-
-Existing approved dependencies shall not be broken without architectural review.
+1. Layer Direction
+2. Ownership
+3. Traceability
+4. Canonicality of referenced artifact
+5. Circularity
+6. Compatibility with `ARC-004_LAYER_MODEL.md`
+7. Compatibility with `ARC_MAP.md`
 
 ---
 
 # Related Documents
 
-ARC-001_PLATFORM_ARCHITECTURE
-
-ARC-002_COMPONENT_ARCHITECTURE
-
-ARC-004_LAYER_MODEL
-
-ARC-007_INTEGRATION_MODEL
-
-ARC-009_ARCHITECTURE_DECISIONS
-
-CORE-003_CONSTITUTION
-
-GOV-009_REPOSITORY_POLICY
+- `Architecture/ARC_MAP.md`
+- `Architecture/ARC-001_PLATFORM_ARCHITECTURE.md`
+- `Architecture/ARC-002_COMPONENT_ARCHITECTURE.md`
+- `Architecture/ARC-004_LAYER_MODEL.md`
+- `Architecture/ARC-007_INTEGRATION_MODEL.md`
+- `Architecture/ARC-009_ARCHITECTURE_DECISIONS.md`
+- `Core/CORE-003_CONSTITUTION.md`
+- `Governance/GOV-009_REPOSITORY_POLICY.md`
+- `Repository/REP-001_MASTER_INDEX.md`
+- `Repository/REP-002_REPOSITORY_MAP.md`
 
 ---
 
 # Guiding Statement
 
-Clear dependencies produce stable architecture.
-
-Stable architecture produces sustainable evolution.
+Explicit, traceable dependencies produce stable architecture.
 
 ---
 
