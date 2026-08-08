@@ -4,261 +4,111 @@
 
 # CONFIGURATION
 
----
-
-Platform
-
-ARGO KOP
-
+Platform: ARGO KOP
 Knowledge Operating Platform
 
----
-
-Document ID
-
-RUN-003
-
-Version
-
-1.1.0
-
-Status
-
-Approved
-
-Category
-
-Runtime
-
-Canonical
-
-Yes
-
-Priority
-
-Critical
+Document ID: RUN-003
+Version: 1.2.0
+Status: Validated / Integrity Hold
+Category: Runtime
+Canonical: Yes
+Priority: Critical
+Development Baseline: 3.2.1
+Latest Official Release: 1.0.0
+Last Audit: 2026-08-08
 
 ---
 
 # Purpose
 
-This document defines the Runtime Configuration Model used by ARGO KOP.
+Defines the Runtime Configuration Model used by ARGO KOP.
 
-Configuration determines how Runtime behaves without modifying repository architecture.
-
-Configuration changes execution.
-
-It never changes repository reality.
-
----
-
-# Objectives
-
-The Runtime Configuration shall:
-
-Control runtime behavior.
-
-Control engineering execution.
-
-Control repository synchronization.
-
-Control automatic continuation.
-
-Maintain deterministic execution.
-
-Remain architecture independent.
-
----
+Configuration controls runtime behavior without modifying repository architecture or authority.
 
 # Configuration Principles
 
-Configuration shall:
+Configuration MUST be:
 
-Be deterministic.
+- deterministic;
+- repository-driven;
+- reproducible;
+- traceable;
+- validated before execution.
 
-Be repository-driven.
+Configuration can change execution behavior. It MUST NOT change repository reality.
 
-Be reproducible.
+# Configuration Authority
 
-Be traceable.
+Authoritative configuration is resolved from current repository artifacts and governed runtime defaults.
 
-Be validated before execution.
+`PROJECT_BOOTSTRAP.md`, Governance, Architecture, Repository and applicable Runtime documents provide constraints according to their authority.
 
----
+Conversation input may supply an operation request, but MUST NOT silently become persistent configuration or override repository authority.
 
-# Configuration Sources
+# Mandatory Validation Controls
 
-Priority Order
+The runtime SHOULD validate, as applicable:
 
-Repository
+- Repository integrity
+- Architecture integrity
+- Governance integrity
+- Repository revision / baseline
+- Required repository paths
+- Required folder status
+- Runtime dependency readiness
 
-↓
+# Engineering Safety Controls
 
-PROJECT_BOOTSTRAP.md
+Complete file replacement is permitted only when the current file content and authoritative target state have been verified.
 
-↓
+Partial updates are permitted when they are the safer operation and preserve document integrity.
 
-Current Repository
+Repository assumptions are prohibited.
 
-↓
-
-Folder Configuration
-
-↓
-
-Runtime Defaults
-
-Conversation shall never become a configuration source.
-
----
-
-# Runtime Configuration
-
-Repository Synchronization
-
-Enabled
-
-Mandatory
-
-Repository Scan
-
-Enabled
-
-Mandatory
-
-Architecture Validation
-
-Enabled
-
-Mandatory
-
-Governance Validation
-
-Enabled
-
-Mandatory
-
-Automatic Engineering
-
-Enabled
-
-Folder Completion
-
-Enabled
-
-Repository Cache
-
-Enabled
-
-Runtime Monitoring
-
-Enabled
-
-Recovery Mode
-
-Enabled
-
----
-
-# Engineering Configuration
-
-Complete File Replacement
-
-Enabled
-
-Partial Updates
-
-Disabled
-
-Repository Assumptions
-
-Disabled
-
-Conversation Priority
-
-Disabled
-
-Repository Reality
-
-Enabled
-
-Automatic Continuation
-
-Enabled
-
----
-
-# Repository Configuration
-
-Repository is always:
-
-Single Source of Truth
-
-Canonical
-
-Version Controlled
-
-Architecture Driven
-
-Governance Protected
-
-Repository configuration shall never be overridden during runtime.
-
----
-
-# Validation Rules
-
-Every configuration shall validate:
-
-Repository Integrity
-
-Architecture Integrity
-
-Governance Integrity
-
-Repository Version
-
-Repository Tree
-
-Folder Status
-
----
+Automatic continuation MUST stop when a required validation gate fails.
 
 # Runtime Behavior
 
 If configuration validation succeeds:
 
-Continue automatically.
+Continue to the next governed runtime state.
 
 If validation fails:
 
-Stop Runtime.
+1. Stop unsafe execution.
+2. Preserve the failure evidence.
+3. Enter `FAULT` or `HOLD` as appropriate.
+4. Require repository correction or governed recovery before continuation.
 
-Generate validation error.
+# Authority Boundary
 
-Wait for repository correction.
+Runtime configuration does not override:
 
----
+- `Core/CORE-003_CONSTITUTION.md`
+- Governance authority
+- Repository canonicality
+- Canonical Architecture
+- Release authority
 
 # Related Documents
 
-RUN-001_BOOT_SEQUENCE.md
-
-RUN-002_INITIALIZATION.md
-
-RUN-004_CONTEXT_LOADING.md
-
-PROJECT_BOOTSTRAP.md
-
-CORE-003_CONSTITUTION.md
+- `Runtime/RUN-001_BOOT_SEQUENCE.md`
+- `Runtime/RUN-002_INITIALIZATION.md`
+- `Runtime/RUN-004_CONTEXT_LOADING.md`
+- `Runtime/RUN-009_RECOVERY.md`
+- `PROJECT_BOOTSTRAP.md`
+- `Core/CORE-003_CONSTITUTION.md`
+- `Governance/GOV-004_DOCUMENT_METADATA.md`
+- `Governance/GOV-005_REVIEW_STANDARD.md`
+- `Governance/GOV-009_REPOSITORY_POLICY.md`
+- `Architecture/ARC-006_DEPENDENCY_MODEL.md`
+- `Repository/REP-001_MASTER_INDEX.md`
 
 ---
 
 # Guiding Statement
 
-Stable configuration produces stable execution.
-
-Repository configuration always has priority over runtime assumptions.
+Stable configuration produces stable execution; repository authority remains above runtime assumptions.
 
 ---
 
