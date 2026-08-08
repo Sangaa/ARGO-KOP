@@ -8,7 +8,7 @@
 
 Platform: ARGO KOP (Knowledge Operating Platform)
 Document ID: PROJECT_STATUS
-Version: 3.2.6
+Version: 3.2.7
 Status: INTEGRITY WARNING / CONNECTED-BASELINE AUDIT
 Category: Root Baseline
 Canonical: Yes
@@ -166,7 +166,25 @@ A development baseline is not an official release.
 
 ---
 
-# 9. Operational Lessons From Current Audit
+# 9. Provisional Asset Valuation Baseline
+
+A current external assessment may describe ARGO's potential market position, but no valuation estimate is repository authority and no market estimate shall be treated as evidence of technical completion, product readiness, revenue, traction, or release status.
+
+For continuity of future assessment, the current provisional reference point discussed during the connected-baseline phase is:
+
+- **Current conceptual/IP assessment:** approximately USD 150K–500K.
+- **Illustrative pre-seed range if a convincing prototype exists:** approximately USD 0.5M–2M.
+- **Illustrative prototype-stage range after independent technical proof:** approximately USD 3M–10M+.
+
+These are **non-canonical external estimates**, not claims about the present market value of ARGO.
+
+The next formal valuation should be performed only after the Connected-Baseline Completion Gate and should be based on verified evidence including reproducibility, runtime capability, benchmarks, defensible IP, competitive position, use cases, traction and commercial readiness.
+
+The purpose of recording this baseline is to allow future ARGO assessments to measure actual change rather than unconsciously rewriting history.
+
+---
+
+# 10. Operational Lessons From Current Audit
 
 1. A successful GitHub write proves only that one requested mutation was accepted; it does not prove surrounding repository integrity.
 2. A status file can be stale or over-claiming; status must be checked against actual file content and relationships.
@@ -183,10 +201,11 @@ A development baseline is not an official release.
 13. New audit rules should be treated as operational candidates until formally promoted.
 14. New evidence may reopen a previously reviewed domain.
 15. Connected-baseline completion is a separate gate from feature readiness or release readiness.
+16. Valuation estimates must remain separate from repository authority and technical completion claims.
 
 ---
 
-# 10. Root Status Rules
+# 11. Root Status Rules
 
 1. `PROJECT_STATUS.md` summarizes evidence; it does not create authority.
 2. `PROJECT_BOOTSTRAP.md` defines the mandatory repository-first review gate.
@@ -204,6 +223,7 @@ A development baseline is not an official release.
 14. A conflict may invalidate assumptions outside the file where it was first discovered.
 15. A previously stable domain can be reopened by new relationship evidence.
 16. Connected-baseline completion must precede capability or architecture upgrade.
+17. External valuation estimates are informational only and cannot promote repository status, release status, or technical readiness.
 
 ---
 
