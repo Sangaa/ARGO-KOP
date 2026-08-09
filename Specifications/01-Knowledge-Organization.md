@@ -1,267 +1,239 @@
 # ARGO Knowledge Organization Specification
 
-## Version: 3.0.1
+Document ID: SPEC-001-KNOWLEDGE-ORGANIZATION
+Version: 3.1.0
 Status: Foundation Specification / Integrity Hold
 Category: Operational Specification
-Last Audit: 2026-08-08
+Development Baseline: 3.3.0
+Last Audit: 2026-08-09
 
 ---
 
-## Scope
+## Purpose
 
-This specification defines operational guidance for organizing knowledge artifacts inside ARGO KOP.
+Defines how knowledge artifacts are organized, classified, validated, connected, maintained and archived inside ARGO KOP.
 
-It is an **operational specification**, not the canonical authority for the platform's knowledge-object schema. `Models/MOD-001_KNOWLEDGE_MODEL.md` defines the canonical conceptual knowledge model, while applicable Governance documents define approval and authority rules.
+This document specifies organization and operating requirements. It does not independently establish platform authority, canonical schema ownership, governance authority, or repository integrity.
 
-Where this specification conflicts with a newer canonical model, governance rule, repository map, or explicit authority decision, the applicable higher authority prevails and the conflict must be recorded and resolved.
+## Authority Boundary
 
----
+Higher authority prevails when a conflict exists:
+
+1. ARGO Constitution and applicable Governance authority
+2. Canonical Architecture / approved Architecture decisions
+3. Canonical Models applicable to the knowledge object
+4. This Specification
+5. Supporting standards, templates and examples
+6. Legacy or exploratory material
+
+A conflict MUST be recorded rather than silently resolved by interpretation.
+
+## Core Rules
+
+1. Knowledge MUST distinguish observed facts, repository facts, assumptions, analysis, decisions, lessons, proposals and unknowns where materially relevant.
+2. Evidence and interpretation MUST NOT be presented as the same thing.
+3. External model output is evidence input, not ARGO authority.
+4. Physical location and classification tier MUST NOT be treated as authority claims by themselves.
+5. A reference is not a verified dependency until its target, identity, authority and relationship are checked.
+6. Unknown or unavailable evidence MUST remain explicitly unknown/unavailable.
+7. A legacy artifact may be replaced rather than incrementally patched when its structure no longer reflects the current architecture.
+8. Material changes require impact review and re-read validation before promotion.
 
 ## Knowledge Classification
 
-### Tier 1: Foundational Knowledge
-**Characteristics:**
-- Core principles and values
-- Fundamental facts about ARGO
-- Non-negotiable rules
-- Essential frameworks
+### Tier 1 — Foundational
+Core principles, non-negotiable rules and foundational platform knowledge.
 
-**Typical Storage:** Governance/ and Architecture/ directories
-**Update Frequency:** Rarely (requires governance approval)
-**Validation:** High (multiple reviews)
+Typical locations: Core/, Governance/, Architecture/.
 
-### Tier 2: Operational Knowledge
-**Characteristics:**
-- Documented processes
-- Proven practices
-- Guidelines and standards
-- Reusable patterns
+Changes normally require the applicable governance/architecture authority.
 
-**Typical Storage:** Specifications/, Engine/, Services/, Models/, Runtime/ and other explicitly governed operational paths
-**Update Frequency:** Periodically (quarterly or as needed)
-**Validation:** Medium (peer/technical review appropriate to the artifact)
+### Tier 2 — Operational
+Validated processes, standards, reusable practices and operational definitions.
 
-### Tier 3: Domain Knowledge
-**Characteristics:**
-- Facts within specific domains
-- Analysis and insights
-- Research findings
-- Subject-matter expertise
+Typical locations: Specifications/, Runtime/, Services/, Models/ and other governed operational domains.
 
-**Typical Storage:** Knowledge/ directory, organized according to the active repository structure
-**Update Frequency:** Regularly (as new knowledge emerges)
-**Validation:** Medium-High (based on domain standards)
+### Tier 3 — Domain
+Verified domain facts, evidence-backed analysis and subject-matter knowledge.
 
-### Tier 4: Exploratory Knowledge
-**Characteristics:**
-- Preliminary research
-- Hypotheses and theories
-- Emerging patterns
-- Speculative content
+Typical location: Knowledge/ or an explicitly governed project/domain location.
 
-**Typical Storage:** Projects/ directory or dedicated exploratory folders where explicitly governed
-**Update Frequency:** Frequently (ongoing investigation)
-**Validation:** Low-Medium (marked as provisional)
+### Tier 4 — Exploratory
+Hypotheses, preliminary research, emerging patterns and provisional ideas.
 
-Classification tier and physical storage path must not be treated as interchangeable authority claims.
+Exploratory material MUST remain visibly provisional and MUST NOT silently promote itself into canonical knowledge.
 
----
+## Knowledge Object Minimum Structure
 
-## Knowledge Organization Structure
+A knowledge artifact SHOULD contain, where applicable:
 
-### Knowledge/ Directory Organization
-
-```
-Knowledge/
-├── Domain-1/
-│   ├── Overview.md
-│   ├── Core-Facts.md
-│   ├── Analysis.md
-│   ├── References.md
-│   └── SubDomains/
-│       ├── SubDomain-A/
-│       └── SubDomain-B/
-├── Domain-2/
-└── Domain-3/
-```
-
-This is an organizational example, not evidence that every example artifact exists in the current repository.
-
-### Domain Structure Requirements
-
-**1. Overview.md**
-- Domain name and purpose
-- Scope and boundaries
-- Key concepts
-- Related domains
-
-**2. Core-Facts.md**
-- Verified facts about the domain
-- Data and evidence
-- Established truths
-- Sources and citations
-
-**3. Analysis.md**
-- Interpretation of facts
-- Patterns and insights
-- Conclusions and recommendations
-- Limitations and uncertainties
-
-**4. References.md**
-- Source citations
+- Identity / Document ID
+- Title
+- Purpose
+- Scope
+- Status
+- Owner / source
+- Created / updated dates
+- Evidence / provenance
+- Facts
+- Analysis or interpretation
+- Assumptions
+- Uncertainties / limitations
 - Related documents
-- External resources
-- Methodology documentation
+- References
+- Validation state
+- Review state
 
----
+Required metadata remains subject to `Governance/GOV-004_DOCUMENT_METADATA.md` and the applicable canonical model.
 
-## Content Standards
+## Domain Organization
 
-### Metadata Requirements
+A domain MAY use structures such as:
 
-Every knowledge document must include:
-
-```markdown
-# Document Title
-
-## Domain: [Domain Name]
-Category: [Category]
-Status: [Verified | Provisional | Exploratory]
-Author: [Name]
-Date Created: [YYYY-MM-DD]
-Last Updated: [YYYY-MM-DD]
-Next Review: [YYYY-MM-DD]
-
----
-
-[Content]
-
----
-
-## Sources & References
-- [Citation 1]
-- [Citation 2]
-
-## Related Documents
-- [Related Doc 1]
-- [Related Doc 2]
+```text
+Knowledge/
+└── Domain/
+    ├── Overview.md
+    ├── Core-Facts.md
+    ├── Analysis.md
+    ├── References.md
+    └── SubDomains/
 ```
 
-Metadata requirements remain subject to `Governance/GOV-004_DOCUMENT_METADATA.md` and applicable document authority.
+This is a pattern, not a claim that these example files must exist everywhere.
 
-### Content Organization
+A domain structure MUST be adapted to its actual purpose. Templates MUST NOT force meaningless files into a domain.
 
-**Facts Section:**
-```markdown
-## Verified Facts
-- Fact 1 (Source: ...)
-- Fact 2 (Source: ...)
-- Fact 3 (Source: ...)
+## Evidence and Provenance
+
+For material claims, preserve enough provenance to answer:
+
+- What was observed?
+- From where?
+- When?
+- By whom/system?
+- Is the source primary, derived or external?
+- What could not be verified?
+
+External model reports MUST follow `Governance/GOV-011_EXTERNAL_FEEDBACK_REPORT_STANDARD.md` when that standard is applicable.
+
+## Facts vs Analysis
+
+### Verified Facts
+Facts MUST have identifiable evidence appropriate to their domain.
+
+### Analysis
+Analysis may infer patterns, implications and recommendations from available facts, but MUST remain distinguishable from facts.
+
+### Assumptions
+Assumptions MUST be labeled when they materially influence analysis or decisions.
+
+### Unknowns
+Insufficient evidence MUST produce an explicit unknown/hold state rather than invented certainty.
+
+## Quality and Validation
+
+Before promotion, validate as applicable:
+
+- Identity and metadata
+- Evidence/provenance
+- Fact support
+- Assumption labeling
+- Analysis separation
+- Status accuracy
+- Internal references
+- Authority relationships
+- Dependencies and consumers
+- Security/privacy constraints
+- Downstream impact
+- Re-read after material mutation
+
+Validation outcome MUST use an explicit state such as `PASS`, `PASS_WITH_WARNINGS`, `INTEGRITY_HOLD`, `FAIL`, or `INSUFFICIENT_EVIDENCE` where the applicable process requires it.
+
+## Lifecycle
+
+```text
+Capture
+  ↓
+Classify
+  ↓
+Evidence / Provenance
+  ↓
+Analyze
+  ↓
+Review
+  ↓
+Validate
+  ↓
+Connect
+  ↓
+Promote / Hold / Archive
+  ↓
+Re-read after material change
 ```
 
-**Analysis Section:**
-```markdown
-## Analysis & Interpretation
-- Pattern 1: [Description]
-- Pattern 2: [Description]
-- Insight 1: [Description]
-```
-
-**Uncertainty Section:**
-```markdown
-## Limitations & Uncertainties
-- Unknown aspect 1
-- Unverified assumption 1
-- Area needing further research
-```
-
----
-
-## Quality Assurance
-
-### Validation Checklist
-
-- [ ] All facts have supporting evidence
-- [ ] Sources are cited and accessible
-- [ ] Assumptions clearly marked
-- [ ] Analysis distinguishable from fact
-- [ ] Status accurately reflects content
-- [ ] Related documents identified
-- [ ] No conflicts with core principles
-- [ ] Metadata complete and current
-- [ ] Canonical relationships verified where applicable
-
-### Review Process
-
-1. **Initial Creation** - Author documents knowledge
-2. **Peer Review** - Subject matter expert reviews
-3. **Validation** - Sources verified, facts checked
-4. **Approval** - Appropriate authority approves
-5. **Publication** - Knowledge published
-6. **Maintenance** - Scheduled reviews and updates
-
-Approval and publication do not override repository, governance or canonical-model authority.
-
----
+Promotion does not erase provenance or prior states.
 
 ## Cross-Linking
 
-### Internal References
-Use relative paths for internal links:
-```markdown
-[Related Topic](../Domain-2/Overview.md)
-[Specific Fact](./Core-Facts.md#verified-facts)
-```
+Internal references SHOULD use relative paths where practical.
 
-Before treating an internal link as a dependency, verify that its target exists, is the intended artifact, and is within the applicable authority boundary.
+Before treating a link as a dependency, verify:
 
-### External References
-Include full URLs with access dates:
-```markdown
-[External Source](https://example.com/resource)
-Accessed: 2026-07-26
-```
+`Target Exists → Identity Correct → Authority Valid → Relationship Correct → Consumer/Impact Checked`
 
----
+Cross-reference behavior is governed additionally by `STD-003_CROSS_REFERENCE_STANDARD.md`.
 
-## Archival Process
+## Archival
 
-### When to Archive
-- Knowledge superseded by newer information
-- Domain no longer relevant
-- Content deprecated by policy changes
-- Projects completed
+Archive material when superseded, deprecated, obsolete, completed or otherwise no longer active.
 
-### Archival Steps
+Archival MUST preserve:
 
-1. Update status to "Archived"
-2. Record archival reason
-3. Move to Archive/ directory
-4. Update cross-references
-5. Create archive entry in logs
-6. Preserve sufficient migration traceability
+- original identity where known;
+- reason for archival;
+- successor/replacement where applicable;
+- migration/reference traceability;
+- relevant history.
 
----
+Archive status does not mean "false"; it means no longer active authority/current material.
 
-## Authority and Relationship Boundary
+## Legacy Reconstruction
 
-This specification may guide how knowledge is organized, but it does not by itself establish:
+Legacy content MUST be evaluated before reuse.
 
-- canonical document identity;
-- governance authority;
-- repository-wide integrity;
-- platform lifecycle state;
-- knowledge-object schema ownership.
+The reconstruction decision MAY be:
 
-Those claims require the applicable canonical authority and current repository evidence.
+- retain;
+- revise;
+- merge;
+- split;
+- relocate;
+- archive;
+- replace from scratch;
+- mark unavailable.
 
----
+`GOV-012_DOMAIN_RECONSTRUCTION_STANDARD.md` governs this process.
+
+## Review Rules
+
+A specification change MUST identify:
+
+- what changed;
+- why it changed;
+- evidence supporting the change;
+- affected artifacts/domains;
+- validation performed;
+- unresolved issues;
+- resulting status.
+
+Material changes MUST trigger downstream review where the specification is consumed.
 
 ## Status
 
-Established: Foundation Build 001
-Last Review: 2026-08-08
-Next Review: To be determined by the applicable governance/review authority after the connected-baseline audit.
+Current state: `INTEGRITY HOLD`
+
+This specification is not considered fully validated until its relationships with the current Models, Standards, Governance, Architecture and active Repository Map are verified.
 
 ---
 
