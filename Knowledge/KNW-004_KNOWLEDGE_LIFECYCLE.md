@@ -8,7 +8,7 @@
 
 Platform: ARGO KOP (Knowledge Operating Platform)  
 Document ID: KNW-004  
-Version: 1.3.0  
+Version: 1.3.1  
 Status: Integrity Hold / Revalidated  
 Category: Knowledge  
 Canonical: Yes  
@@ -95,6 +95,8 @@ A knowledge candidate is documented with available provenance and evidence state
 
 Awaiting validation.
 
+For external AI, tools, databases and other connected sources, source identity and provenance shall remain distinguishable from ARGO's interpretation.
+
 ## Scope Classification
 
 The candidate is assigned the narrowest applicable knowledge domain. Scope is not inferred from usefulness alone.
@@ -105,9 +107,13 @@ Evidence is reviewed.
 
 Governance, architecture, repository alignment and claim-specific sufficiency are checked.
 
+Source provenance and evidence state are validated where applicable.
+
 ## Classification & Ownership
 
 The knowledge object receives its category, owner, relationships and applicable repository location.
+
+Source ownership, ARGO ownership and authority are not conflated.
 
 ## Domain Storage
 
@@ -118,6 +124,8 @@ Validated knowledge is stored in the memory/knowledge domain appropriate to its 
 The object is connected to relevant authorities, evidence, consumers and related knowledge.
 
 Relationship existence must be validated; a path or textual reference alone is insufficient.
+
+For source-derived knowledge, provenance must remain traceable through the relationship chain.
 
 ## Operational Use
 
@@ -133,6 +141,8 @@ A knowledge object may remain local, be superseded, be reclassified, or be propo
 
 Promotion from `USER`, `PROJECT` or `DEPLOYMENT` toward `SHARED_CANDIDATE` or `PLATFORM` requires evidence, broader applicability assessment, contradiction review, impact analysis and the authority applicable to the target scope.
 
+Source reliability, model agreement or transport availability do not substitute for validation or authority.
+
 ## Authorized Update / Archive
 
 Approved improvements are incorporated with traceability. Superseded knowledge becomes historical where retention is required.
@@ -147,6 +157,7 @@ Knowledge shall be accepted for its declared scope only after applicable:
 - Repository Review
 - Relationship Validation
 - Ownership / Scope Check
+- Provenance Verification
 - Approval or Authorization appropriate to the target state
 
 `VALIDATED` does not automatically mean `CANONICAL`.
@@ -164,6 +175,7 @@ It interacts with:
 - `Memory/MEM-004_MEMORY_LIFECYCLE.md` — memory lifecycle.
 - `Memory/MEM-005_MEMORY_GOVERNANCE.md` — memory ownership and authority.
 - `Memory/MEM-009_MEMORY_EVOLUTION.md` — memory learning and promotion.
+- `Models/MOD-011_KNOWLEDGE_SOURCE_MODEL.md` — source identity, provenance and evidence semantics.
 
 These lifecycles are complementary.
 
@@ -188,6 +200,8 @@ Traceability
 Version History
 
 Scope and Ownership
+
+Source Provenance
 
 # Lifecycle Events
 
@@ -222,6 +236,7 @@ This lifecycle is itself reviewable. If a rule is shown to be incorrect, contrad
 # Related Documents
 
 - `Models/MOD-001_KNOWLEDGE_MODEL.md`
+- `Models/MOD-011_KNOWLEDGE_SOURCE_MODEL.md`
 - `Knowledge/KNW-001_KNOWLEDGE_MODEL.md`
 - `Knowledge/KNW-002_KNOWLEDGE_CLASSIFICATION.md`
 - `Knowledge/KNW-003_KNOWLEDGE_RELATIONSHIPS.md`
@@ -234,7 +249,7 @@ This lifecycle is itself reviewable. If a rule is shown to be incorrect, contrad
 
 # Guiding Statement
 
-**Knowledge evolves through evidence and experience, but its scope, ownership and authority must remain explicit throughout the lifecycle.**
+**Knowledge evolves through evidence and experience, but its scope, ownership, provenance and authority must remain explicit throughout the lifecycle.**
 
 ---
 
