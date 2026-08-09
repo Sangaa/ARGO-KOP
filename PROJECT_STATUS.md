@@ -8,12 +8,12 @@
 
 Platform: ARGO KOP (Knowledge Operating Platform)
 Document ID: PROJECT_STATUS
-Version: 3.2.9
+Version: 3.3.0
 Status: INTEGRITY WARNING / CONNECTED-BASELINE AUDIT
 Category: Root Baseline
 Canonical: Yes
 Priority: Critical
-Last Audit Date: Aug 08, 2026
+Last Audit Date: Aug 09, 2026
 
 ---
 
@@ -44,6 +44,8 @@ The latest bounded audit has completed and revalidated the following changes:
 - `Architecture/ARC_MAP.md` treated as a map artifact rather than a competing `ARC-001` canonical identity.
 - `Engine/ENG-010_ENGINE_COORDINATION.md` updated to `3.1.1 / Integrity Hold / Revalidated` with explicit route-verification and authority boundaries.
 - `Engine/ENG-011_MARITIME_GAME_ENGINE.md` updated to `1.0.1 / Integrity Hold` with explicit dependency and learning-feedback boundaries.
+- `Interfaces/INTF-010_INTEGRATIONS.md` rebuilt as the provider-neutral connector/integration boundary and linked to runtime, memory, learning and execution authority.
+- `Memory/Engineering_Journal/EJR-004_CURRENT_INTEGRATION_REVALIDATION.md` recorded the current integration, learning, memory and multimodal boundary revalidation.
 
 These are **verified bounded mutations**, not repository-wide certification.
 
@@ -147,8 +149,9 @@ Only after this gate passes may the project move from **Connected Baseline Stabi
 | Knowledge cross-layer validation | OPEN / INTEGRITY HOLD |
 | Memory cross-layer validation | OPEN / INTEGRITY HOLD |
 | Runtime/Engine/AI/Services validation | OPEN / PARTIALLY REVALIDATED |
-| ENG-010 coordination authority | REVALIDATED / INTEGRITY HOLD |
-| ENG-011 GEM dependency and authority boundaries | REVALIDATED / INTEGRITY HOLD |
+| Integration connector boundary | REVALIDATED / ARCHITECTURE PASS FOR CURRENT SCOPE |
+| Environment sensing boundary | PROPOSED / INTEGRITY HOLD / CROSS-LAYER VALIDATION OPEN |
+| Session learning handoff | REVALIDATED / PROMOTION REMAINS GOVERNED |
 | Models/Lifecycle/Blueprints validation | OPEN / INTEGRITY HOLD |
 | Projects/Release validation | OPEN |
 | Changelog / Version authority alignment | UPDATED / REVALIDATION REQUIRED |
@@ -169,6 +172,15 @@ Required sequence:
 No folder is assumed to be a complete layer or canonical collection until its filenames, internal identities, contents and relationships have been inspected.
 
 A previously reviewed domain may be reopened whenever new evidence changes the interpretation of one of its relationships.
+
+### Immediate next audit targets
+
+1. Cross-layer reference resolution for `INTF-010` and its declared consumers/dependencies.
+2. Runtime consumption of connector contracts, especially `RUN-005` / `RUN-006`.
+3. `INTF-006` environment-sensing boundary and its relationship to governance, memory and runtime.
+4. Synchronization of root status claims after the latest bounded mutations.
+5. REP-001 / REP-002 relationship consistency after subsequent integration changes.
+6. Revalidation of session-learning closure and promotion boundaries.
 
 ---
 
@@ -210,6 +222,9 @@ A development baseline is not an official release.
 21. An engine cannot certify its own external dependencies merely by declaring them.
 22. A failed or ambiguous write must not be bypassed with destructive or forceful mutation; obtain a verified current write target first.
 23. Search/index output may be incomplete; direct repository evidence takes precedence when a known path can be read and verified.
+24. An integration use case should expose missing architectural boundaries rather than automatically creating domain-specific core layers.
+25. External experience must remain scoped to its correct memory domain until evidence and authority justify promotion.
+26. A new interface boundary must be validated against its runtime consumers before it can be treated as globally integrated.
 
 ---
 
@@ -218,50 +233,8 @@ A development baseline is not an official release.
 1. `PROJECT_STATUS.md` summarizes evidence; it does not create authority.
 2. `PROJECT_BOOTSTRAP.md` defines the mandatory repository-first review gate.
 3. No AI/session memory can override current repository content.
-4. Missing or unreadable content MUST be reported explicitly.
-5. No structural assumption may be derived from folder names alone.
-6. Global `CLEAN` or `APPROVED` claims require actual evidence coverage.
-7. Any repository mutation requires re-validation of affected indexes and status files.
-8. A complete repository review claim requires evidence coverage sufficient to support the claim.
-9. When evidence coverage is partial, all dependent conclusions must be bounded to the inspected scope.
-10. Operational lessons must be traceable to observed repository-management behavior.
-11. Repository integrity is evaluated through validated relationships, not file existence alone.
-12. A relationship remains unresolved until the required evidence chain is complete.
-13. A local PASS cannot certify the repository globally.
-14. A conflict may invalidate assumptions outside the file where it was first discovered.
-15. A previously stable domain can be reopened by new relationship evidence.
-16. Connected-baseline completion must precede capability or architecture upgrade.
-17. Cross-folder identity collisions must be resolved through evidence-backed classification, not filename renaming alone.
-18. Historical artifacts may be migrated to a clearer namespace when their old identity conflicts with active authority, provided provenance is preserved.
-19. A route is not verified merely because its source and target paths exist.
-20. Engine status must remain bounded by verified dependencies and consumers.
-21. Mutation completion requires post-write read evidence.
-
----
-
-# Related Documents
-
-- `PROJECT_BOOTSTRAP.md`
-- `README.md`
-- `START_HERE.md`
-- `SYSTEM_MAP.md`
-- `Repository/REP-001_MASTER_INDEX.md`
-- `Repository/REP-002_REPOSITORY_MAP.md`
-- `Release/VERSION.md`
-- `Logs/CHANGELOG.md`
-- `Architecture/ARC_MAP.md`
-- `Architecture/ARC-001_PLATFORM_ARCHITECTURE.md`
-- `Lifecycle/LIF-001_DOCUMENT_LIFECYCLE.md`
-- `Engine/ENG-010_ENGINE_COORDINATION.md`
-- `Engine/ENG-011_MARITIME_GAME_ENGINE.md`
-- `Core/CORE-003_CONSTITUTION.md`
-- `Governance/GOV-001_GOVERNANCE_FRAMEWORK.md`
-
----
-
-# Guiding Statement
-
-**ARGO KOP is currently organizing its accumulated knowledge into a connected, evidence-backed baseline. Stability is achieved when the critical relationships are true, not merely when the files are present.**
+4. Root status must be re-read and synchronized after material canonical mutations.
+5. A bounded audit result must never be promoted to repository-wide certification without graph-level evidence.
 
 ---
 
