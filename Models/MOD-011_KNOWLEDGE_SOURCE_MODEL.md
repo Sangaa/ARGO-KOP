@@ -6,7 +6,7 @@
 
 Platform: ARGO KOP
 Document ID: MOD-011
-Version: 1.1.0
+Version: 1.1.1
 Status: Proposed / Future-Ready / Revalidation Required
 Category: Models
 Canonical: Yes
@@ -219,7 +219,12 @@ After mutation, the model and affected consumers must be re-read and revalidated
 - `AI/AI-007_MULTI_MODEL_SUPPORT.md`
 - `Memory/Engineering_Journal/SESSION_LEARNING_HANDOFF_TEMPLATE.md`
 - `Governance/GOV-011_EXTERNAL_FEEDBACK_REPORT_STANDARD.md`
-- `Governance/GOV-012_DOMAIN_RECONSTRUCTION_STANDARD.md`
+
+# Reconstruction Reference
+
+`Governance/GOV-012_DOMAIN_RECONSTRUCTION_STANDARD.md` is a proposed process reference for staged domain reconstruction. It is not an active Governance dependency of this model and does not override ratified Governance, Architecture, Model or Repository authority.
+
+Where reconstruction work affects the Knowledge Source Model, the proposed process may be used as guidance while the applicable active authorities remain controlling.
 
 # Guiding Statement
 
