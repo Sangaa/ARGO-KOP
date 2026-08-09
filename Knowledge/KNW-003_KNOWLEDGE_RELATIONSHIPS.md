@@ -20,7 +20,7 @@ KNW-003
 
 Version
 
-1.1.0
+1.1.1
 
 Status
 
@@ -33,6 +33,10 @@ Knowledge
 Canonical
 
 Yes
+
+Last Audit
+
+2026-08-09
 
 ---
 
@@ -65,6 +69,8 @@ Every knowledge object shall participate in one or more documented relationships
 Relationships provide meaning.
 
 Ownership provides authority.
+
+A source relationship does not by itself transfer authority from the source to ARGO knowledge.
 
 ---
 
@@ -114,7 +120,7 @@ Ownership remains explicit.
 
 Represents informational linkage.
 
-References do not transfer ownership.
+References do not transfer ownership or canonical authority.
 
 References improve discoverability.
 
@@ -127,6 +133,8 @@ Represents required knowledge.
 Dependent knowledge cannot be fully understood without its dependency.
 
 Dependencies shall remain traceable.
+
+A source/provenance reference is not automatically a dependency; relationship semantics must be verified rather than inferred from the existence of a path or citation.
 
 ---
 
@@ -144,6 +152,8 @@ Represents supporting evidence.
 
 Supporting knowledge strengthens understanding of another knowledge object.
 
+Source evidence may support a claim without becoming canonical knowledge itself.
+
 ---
 
 # Extension Relationship
@@ -160,7 +170,7 @@ Original knowledge remains authoritative.
 
 Represents transformed knowledge.
 
-Derived knowledge shall reference its originating source.
+Derived knowledge shall reference its originating source and preserve sufficient provenance to distinguish the source claim from the derived interpretation.
 
 ---
 
@@ -188,6 +198,8 @@ Maintained
 
 Repository Verified
 
+Where a relationship crosses a source, evidence or knowledge boundary, provenance and authority semantics shall remain explicit.
+
 ---
 
 # Repository Integrity
@@ -202,6 +214,8 @@ Break architectural boundaries.
 
 Contradict governance.
 
+Silently promote a source claim into canonical knowledge.
+
 ---
 
 # Validation
@@ -211,6 +225,10 @@ Relationship reviews shall verify:
 Relationship Accuracy
 
 Ownership
+
+Source / Provenance Boundary
+
+Evidence State
 
 Repository Alignment
 
@@ -228,6 +246,8 @@ KNW-001_KNOWLEDGE_MODEL
 
 KNW-002_KNOWLEDGE_CLASSIFICATION
 
+Models/MOD-011_KNOWLEDGE_SOURCE_MODEL.md
+
 REP-009_REPOSITORY_TRACEABILITY
 
 ARC-003_INFORMATION_FLOW
@@ -238,7 +258,7 @@ CORE-003_CONSTITUTION
 
 # Guiding Statement
 
-Knowledge becomes intelligence when relationships reveal meaning.
+Knowledge becomes intelligence when relationships reveal meaning, while provenance and authority remain explicit across every boundary.
 
 ---
 
