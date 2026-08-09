@@ -1,123 +1,117 @@
-# Templates
+# TEMPLATES
 
---------------------------------------------------
-
-Platform
-
-ARGO KOP
-
+Platform: ARGO KOP  
 Knowledge Operating Platform
 
---------------------------------------------------
+Document ID: TPL-README
+Version: 1.3.0
+Status: Validated / Reconstruction In Progress
+Category: Templates
+Canonical: Yes
+Development Baseline: 3.3.0
+Last Audit: 2026-08-09
 
-Purpose
+---
 
-This directory contains the official document templates used throughout ARGO KOP.
+# Purpose
 
-Templates provide a consistent structure for creating new documents while maintaining architectural consistency across the repository.
+This directory contains reusable document templates for ARGO KOP.
 
---------------------------------------------------
+Templates define **structure**, not authority. Copying a template does not make the resulting document canonical, approved or valid.
 
-Goals
+# Template Authority
 
-Maintain document consistency.
+Templates MUST conform to the current Constitution, Governance, Architecture, Repository and applicable domain standards.
 
-Reduce duplication.
+Legacy templates are source material only and may be replaced rather than incrementally repaired when their structure no longer matches the current ARGO model.
 
-Simplify documentation.
+# Required Metadata for Canonical Documents
 
-Improve readability.
+Where applicable, generated documents should preserve:
 
-Support repository governance.
+- Platform
+- Document ID
+- Title
+- Version
+- Status
+- Category
+- Canonical flag
+- Owner / Authority
+- Development Baseline
+- Creation / Audit date
+- Purpose
+- Scope
+- Evidence / Provenance
+- Dependencies
+- Related Documents
+- Validation / Review state
 
---------------------------------------------------
+The exact metadata depends on document type; templates MUST NOT force irrelevant fields into every artifact.
 
-Available Templates
+# Available Templates
 
-TEMPLATE-001_DOCUMENT.md
+- `TEMPLATE-001_DOCUMENT.md` — general document structure
+- `TEMPLATE-002_BLUEPRINT.md` — blueprint structure
+- `TEMPLATE-003_COMPONENT_SPEC.md` — component specification
+- `TEMPLATE-004_DECISION.md` — architecture / governance decision record
+- `TEMPLATE-005_PROJECT.md` — project record
+- `TEMPLATE-006_UPDATE_PACK.md` — repository update handoff
+- `TEMPLATE-007_BUILD_REPORT.md` — build completion / engineering report
+- `TEMPLATE-008_RELEASE.md` — release record
+- `TEMPLATE-009_COMPONENT.md` — component description
+- `TEMPLATE-010_KNOWLEDGE_ENTRY.md` — knowledge entry
 
-General documentation template.
+# Mandatory External Feedback
 
---------------------------------------------------
+External model / reviewer reports MUST use `Governance/GOV-011_EXTERNAL_FEEDBACK_REPORT_STANDARD.md` or preserve all of its required fields when another transport format is used.
 
-TEMPLATE-002_BLUEPRINT.md
+Template files do not replace the external feedback standard.
 
-Blueprint and architecture template.
+# Template Lifecycle
 
---------------------------------------------------
+Draft → Reviewed → Validated → Published → Superseded / Archived
 
-TEMPLATE-003_COMPONENT_SPEC.md
+Changes to canonical templates require governed review because downstream documents may depend on their structure.
 
-Component specification template.
+# Rules
 
---------------------------------------------------
+- Copy templates; do not edit a template for a single project.
+- Preserve the template's identity and version when using it as a source.
+- Do not infer canonical authority from template presence.
+- Do not use a legacy template as evidence that the current architecture still requires its structure.
+- When a template conflicts with current canonical architecture, prefer the current authority and rebuild the template.
+- Material template changes require downstream impact review.
 
-TEMPLATE-004_DECISION.md
+# Validation
 
-Decision documentation template.
+Before promoting a template, verify:
 
---------------------------------------------------
+- purpose and scope;
+- metadata relevance;
+- authority relationship;
+- naming and identity;
+- references;
+- compatibility with current architecture;
+- compatibility with repository policy;
+- downstream impact;
+- external feedback requirements where applicable.
 
-TEMPLATE-005_PROJECT.md
+# Related Documents
 
-Project documentation template.
+- `Core/CORE-003_CONSTITUTION.md`
+- `Governance/GOV-009_REPOSITORY_POLICY.md`
+- `Governance/GOV-010_GOVERNANCE_MODEL.md`
+- `Governance/GOV-011_EXTERNAL_FEEDBACK_REPORT_STANDARD.md`
+- `Governance/GOV-012_DOMAIN_RECONSTRUCTION_STANDARD.md`
+- `Architecture/ARC-011_CANONICAL_ARCHITECTURE_MODEL.md`
+- `Repository/REP-001_MASTER_INDEX.md`
 
---------------------------------------------------
+---
 
-TEMPLATE-006_UPDATE_PACK.md
+# Guiding Statement
 
-Repository update package template.
+**A template standardizes form; validation and authority determine whether the resulting artifact is correct.**
 
---------------------------------------------------
-
-TEMPLATE-007_BUILD_REPORT.md
-
-Build completion report template.
-
---------------------------------------------------
-
-TEMPLATE-008_RELEASE.md
-
-Release documentation template.
-
---------------------------------------------------
-
-TEMPLATE-009_COMPONENT.md
-
-Component description template.
-
---------------------------------------------------
-
-TEMPLATE-010_KNOWLEDGE_ENTRY.md
-
-Knowledge repository entry template.
-
---------------------------------------------------
-
-Rules
-
-Always copy an official template.
-
-Never modify templates directly for project-specific content.
-
-Templates evolve only through repository governance.
-
---------------------------------------------------
-
-Related Documents
-
-Governance/
-
-Repository/
-
-Core/
-
---------------------------------------------------
-
-Guiding Statement
-
-Consistency begins with templates.
-
---------------------------------------------------
+---
 
 End of Document
