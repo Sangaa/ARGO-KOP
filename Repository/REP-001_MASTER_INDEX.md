@@ -6,12 +6,12 @@
 
 Platform: ARGO KOP (Knowledge Operating Platform)
 Document ID: REP-001
-Version: 1.7.4
+Version: 1.7.5
 Status: Integrity Hold
 Category: Repository
 Canonical: Yes
 Priority: Critical
-Last Audit Date: Aug 08, 2026
+Last Audit Date: Aug 09, 2026
 
 ---
 
@@ -133,13 +133,24 @@ The following model artifacts were directly verified during the current audit:
 
 Declared model artifacts not directly located remain unresolved and are not promoted to active authority.
 
-## 11. Other Active Repository Domains
+## 11. Plugins Layer
+
+The current repository contains a directly verified canonical plugin architecture artifact:
+
+- `Plugins/PLG-001_PLUGIN_ARCHITECTURE.md` — Approved / Canonical / Critical
+- `Plugins/_FOLDER_STATUS.md`
+
+`PLG-001` establishes the plugin extension boundary and explicitly requires active plugin specifications to be registered under `Plugins/` and indexed in this master repository index. It therefore cannot remain only under the generic "other physical domains" description.
+
+The existence and approval of `PLG-001` do not certify that every future plugin is integrated; each plugin remains subject to manifest, sandbox, interface, security and quality validation.
+
+## 12. Other Active Repository Domains
 
 The repository contains additional physical domains shown by the current `SYSTEM_MAP.md`, including Knowledge, Memory, Decision, AI, Services, Intelligence, Quality, Projects, Release, Logs, Examples and Future.
 
 Their presence in the physical repository does not by itself certify their architectural role or completeness. Their inventories are being validated through the connected-baseline audit and will be promoted into this index only with sufficient evidence.
 
-## 12. Canonicalization Rules
+## 13. Canonicalization Rules
 
 1. One active canonical artifact per logical identity.
 2. Filename identity and internal Document ID must agree where a Document ID exists.
@@ -153,14 +164,15 @@ Their presence in the physical repository does not by itself certify their archi
 10. An archive operation must preserve enough migration evidence to identify the former active path and canonical successor.
 11. Map and status artifacts must not reuse the identity of canonical content documents.
 12. A domain-specific lifecycle artifact must not silently claim authority over another domain's lifecycle.
+13. Any approved canonical domain artifact that imposes an explicit indexing requirement must be represented in the applicable active inventory rather than hidden under an unqualified physical-domain summary.
 
-## 13. Integrity State
+## 14. Integrity State
 
 Current repository state: **INTEGRITY HOLD**.
 
-The index is synchronized with the currently verified inventory within the inspected scope. Architecture, Lifecycle inventory and cross-layer relationship validation remain open.
+The index is synchronized with the currently verified inventory within the inspected scope. Architecture, Lifecycle inventory, Plugin inventory and cross-layer relationship validation remain open.
 
-## 14. Verification Model
+## 15. Verification Model
 
 Current audit model:
 
@@ -168,7 +180,7 @@ Current audit model:
 
 Local validation results remain bounded to their inspected scope. `100%` repository integrity requires aggregated evidence across the affected repository graph and absence of unresolved blocking relationships.
 
-## 15. Governing Rule
+## 16. Governing Rule
 
 Repository Reality > Previous Status Claims > Conversation Memory
 
