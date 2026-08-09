@@ -4,75 +4,39 @@
 
 # DOCUMENT MODEL
 
----
-
-Platform
-
-ARGO KOP
-
+Platform: ARGO KOP
 Knowledge Operating Platform
 
----
-
-Document ID
-
-MOD-003
-
-Version
-
-1.1.0
-
-Status
-
-Approved
-
-Category
-
-Models
-
-Canonical
-
-Yes
-
-Priority
-
-Critical
+Document ID: MOD-003
+Version: 1.2.0
+Status: Approved / Revalidation Required
+Category: Models
+Canonical: Yes
+Priority: Critical
+Development Baseline: 3.3.0
+Last Audit: 2026-08-09
 
 ---
 
 # Purpose
 
-This document defines the canonical Document Model used throughout ARGO KOP.
+This document defines the canonical semantic Document Model used throughout ARGO KOP.
 
-Every repository document shall conform to a unified structural model to guarantee consistency, traceability and deterministic engineering.
-
-Documents are repository objects.
-
-Documents are never execution objects.
-
----
+A document is a repository knowledge object. The model defines its structure and metadata; it does not define execution behavior.
 
 # Objectives
 
 The Document Model shall:
 
-Standardize all repository documents.
-
-Provide a common document structure.
-
-Support repository indexing.
-
-Support engineering traceability.
-
-Support future automation.
-
-Remain implementation independent.
-
----
+- standardize canonical repository documents;
+- provide a common metadata structure;
+- support repository indexing and traceability;
+- support future automation without coupling the model to an implementation;
+- preserve authority, provenance and lifecycle state explicitly.
 
 # Document Structure
 
-Every canonical document shall contain:
+Every canonical document shall contain, as applicable:
 
 Platform
 
@@ -90,6 +54,8 @@ Canonical Flag
 
 Priority
 
+Owner / Owning Layer
+
 Purpose
 
 Objectives
@@ -100,9 +66,11 @@ Dependencies
 
 Related Documents
 
-Guiding Statement
+Evidence / Provenance where applicable
 
----
+Last Review / Audit
+
+Guiding Statement
 
 # Document Categories
 
@@ -130,51 +98,38 @@ AI Document
 
 Reference Document
 
----
-
 # Document Metadata
 
-Each document shall maintain:
+Each canonical document shall maintain:
 
-Unique Document ID
+- unique Document ID where the domain uses formal IDs;
+- canonical name;
+- version;
+- status;
+- category;
+- owning layer/domain;
+- repository reference;
+- last review/audit information;
+- provenance when content originates from an external source.
 
-Canonical Name
+# Document Identity Rule
 
-Version
+Filename, internal Document ID and indexed identity must agree where a formal Document ID exists.
 
-Status
+Map, README and status artifacts must not silently reuse the identity of canonical content documents.
 
-Owner Layer
-
-Creation Date
-
-Last Review
-
-Repository Reference
-
----
+A historical reference does not establish active authority.
 
 # Document Rules
 
 Documents shall:
 
-Remain canonical.
-
-Remain deterministic.
-
-Remain repository driven.
-
-Contain complete information.
-
-Use explicit references.
-
-Avoid duplicated definitions.
-
-Remain architecture compliant.
-
-Remain governance compliant.
-
----
+- remain deterministic and repository driven;
+- avoid duplicated definitions where a canonical source already exists;
+- use explicit references;
+- distinguish fact, assumption, proposal and unknown where applicable;
+- remain architecture and governance compliant;
+- preserve migration traceability when superseded.
 
 # Document Lifecycle
 
@@ -190,7 +145,7 @@ Approved
 
 ↓
 
-Published
+Published / Active
 
 ↓
 
@@ -198,17 +153,37 @@ Updated
 
 ↓
 
-Reviewed
+Revalidated
 
 ↓
 
-Archived
+Archived / Superseded
 
----
+Approval does not remove the need for revalidation after material change.
+
+# External and Model-Generated Content
+
+External model output may assist document drafting or review but does not become canonical merely because it is well written, repeated or agreed upon by multiple models.
+
+Material claims must be verified against repository evidence before they are promoted into canonical documents.
+
+# Revalidation and Ripple Rule
+
+A material change to the Document Model requires review of:
+
+- Governance metadata rules;
+- Repository indexes;
+- folder status conventions;
+- architecture references;
+- release/version authority;
+- runtime/document loading dependencies;
+- affected document templates and validators.
+
+After mutation, the changed document and affected references must be re-read.
 
 # Repository References
 
-Every document may reference:
+Documents may reference:
 
 Canonical Documents
 
@@ -218,67 +193,21 @@ _FOLDER_STATUS.md
 
 Repository Objects
 
-Knowledge Objects
+Architecture / Governance / Runtime / Model Artifacts
 
-Memory Objects
-
-Engineering Objects
-
----
-
-# Validation
-
-Every document shall validate:
-
-Document ID
-
-Canonical Naming
-
-Version
-
-Status
-
-Reference Integrity
-
-Repository Consistency
-
-Architecture Compliance
-
-Governance Compliance
-
----
-
-# Dependencies
-
-Core
-
-Governance
-
-Architecture
-
-Repository
-
-Models
-
----
+References become accepted dependencies only after target existence, identity, authority and relationship are validated.
 
 # Related Documents
 
-MOD-001_MODEL_ARCHITECTURE.md
-
-MOD-002_ENTITY_MODEL.md
-
-MOD-010_MODEL_REFERENCE.md
-
-PROJECT_BOOTSTRAP.md
-
----
-
-# Guiding Statement
-
-Every repository document follows one canonical model.
-
-Consistency enables automation.
+- `Models/MOD-002_ENTITY_MODEL.md`
+- `Models/MOD-004_MEMORY_MODEL.md`
+- `Models/MOD-011_KNOWLEDGE_SOURCE_MODEL.md`
+- `Governance/GOV-004_DOCUMENT_METADATA.md`
+- `Governance/GOV-012_DOMAIN_RECONSTRUCTION_STANDARD.md`
+- `Repository/REP-001_MASTER_INDEX.md`
+- `Repository/REP-002_REPOSITORY_MAP.md`
+- `Architecture/ARC-009_ARCHITECTURE_DECISIONS.md`
+- `Architecture/ARC-010_EVOLUTION_MODEL.md`
 
 ---
 
