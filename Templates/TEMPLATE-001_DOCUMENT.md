@@ -1,49 +1,85 @@
 # DOCUMENT TEMPLATE
 
---------------------------------------------------
+Platform: ARGO KOP  
+Document ID: TPL-001  
+Template Type: GENERAL_DOCUMENT  
+Template Version: 1.2.0  
+Development Baseline: 3.3.0
 
-Document ID
+---
 
-Template
+# Metadata
 
---------------------------------------------------
+Title:
 
-Metadata
+Document ID:
 
-Title
+Version:
 
-Version
+Status:
 
-Status
+Category:
 
-Classification
+Canonical: Yes / No
 
-Owner
+Owner / Authority:
 
-Created
+Created:
 
-Updated
+Last Audit:
 
---------------------------------------------------
+Development Baseline:
 
-Purpose
+---
 
---------------------------------------------------
+# Purpose
 
-Scope
+---
 
---------------------------------------------------
+# Scope
 
-Content
+---
 
---------------------------------------------------
+# Evidence / Provenance
 
-References
+Source(s):
 
---------------------------------------------------
+Evidence Coverage:
 
-Revision History
+Known Limitations:
 
---------------------------------------------------
+---
 
-End
+# Main Content
+
+---
+
+# Dependencies
+
+---
+
+# Related Documents
+
+---
+
+# Validation / Review
+
+Validation Performed:
+
+Review State:
+
+Unresolved Questions:
+
+---
+
+# Revision History
+
+- Date / Version / Change / Reason / Authority
+
+---
+
+# Guiding Statement
+
+---
+
+End of Template
