@@ -1,97 +1,119 @@
 # BUILD REPORT TEMPLATE
 
---------------------------------------------------
+Platform: ARGO KOP  
+Document ID: BUILD-XXX  
+Template Type: BUILD_REPORT  
+Template Version: 1.2.0  
+Development Baseline: 3.3.0
 
-Platform
+---
 
-ARGO KOP
+# Build Identity
 
---------------------------------------------------
+Build Number:
 
-Document ID
+Build Name:
 
-BUILD-XXX
+Version:
 
---------------------------------------------------
+Status:
 
-Build Number
+Date:
 
-Build Name
+Repository Commit:
 
-Version
+Scope:
 
-Status
+---
 
-Date
+# Purpose
 
---------------------------------------------------
+---
 
-Purpose
+# Objectives
 
-Describe the completed build.
+- 
+- 
+- 
 
---------------------------------------------------
+---
 
-Objectives
+# Completed Work
 
--
+- 
+- 
+- 
 
--
+---
 
--
+# Modified Components / Artifacts
 
---------------------------------------------------
+- Path / Old State / New State / Reason
 
-Completed Work
+---
 
--
+# Evidence and Validation
 
--
+Evidence Reviewed:
 
--
+Validation Performed:
 
---------------------------------------------------
+Re-read After Changes: Yes / No
 
-Modified Components
+Downstream Impact Reviewed: Yes / No / Partial
 
--
+---
 
--
+# Integrity / Risks
 
--
+Known Issues:
 
---------------------------------------------------
+Integrity Holds:
 
-Known Issues
+Security Concerns:
 
--
+Unresolved Questions:
 
--
+---
 
---------------------------------------------------
+# Decisions and Authority
 
-Lessons Learned
+Decisions Made:
 
--
+Authority / Approval:
 
--
+Superseded Decisions:
 
---------------------------------------------------
+---
 
-Next Build
+# Lessons Learned
 
--
+- 
+- 
 
--
+---
 
---------------------------------------------------
+# Next Build / Next Review
 
-Related Documents
+- 
+- 
 
-CHANGELOG
+---
 
-ROADMAP
+# Related Documents
 
---------------------------------------------------
+CHANGELOG:
+
+ROADMAP:
+
+Decision Records:
+
+---
+
+# Final Assessment
+
+PASS / PASS_WITH_WARNINGS / INTEGRITY_HOLD / FAIL / INSUFFICIENT_EVIDENCE
+
+---
 
 End of Template
