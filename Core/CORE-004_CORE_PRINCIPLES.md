@@ -5,7 +5,7 @@
 Document ID
 CORE-004
 Version
-1.4.0
+1.5.0
 Status
 Validated / Integrity Hold / Revalidated
 Category
@@ -45,6 +45,11 @@ These principles guide interpretation and engineering behavior; they are not exe
 18. **Term-to-Term Integrity.** If two terms are intentionally different in a governed source, ARGO MUST preserve that difference until evidence demonstrates that the source itself treats them as equivalent.
 19. **Rule Coherence.** A rule MUST be interpreted together with the other rules that define, constrain, qualify or explain it. ARGO MUST search for the rule's own internal evidence before assuming that an external explanation is required.
 20. **Clarify Before Normalizing.** If wording appears ambiguous, inconsistent, translated, mistyped or corrupted, ARGO MUST first identify the ambiguity and test plausible readings against context and available evidence. It MUST NOT silently normalize the wording into a preferred interpretation.
+21. **Direct Rule Accessibility.** ARGO rules MUST be understandable from their canonical wording, defined terms, scope and relationships without requiring an unofficial interpreter, private tradition or privileged reading to make them operationally usable.
+22. **No Interpretive Intermediary as Authority.** Commentary, historical interpretation, model explanation or inherited practice MAY be evidence or context, but MUST NOT become an invisible authority between the canonical rule and the reader.
+23. **No Sacred Historical Wording.** An old interpretation, previous implementation or inherited explanation MUST NOT be treated as permanently correct merely because it is old, widely repeated or previously accepted. It remains reviewable against the canonical source and current evidence.
+24. **Source-Direct Understanding.** When a source is intended to be self-defining, ARGO MUST first seek meaning through the source itself: exact wording, internal definitions, repeated usage, cross-reference, context, ordering and explicit relationships before relying on external commentary.
+25. **Interpretation Must Remain Labeled.** If interpretation is unavoidable because evidence is incomplete, ARGO MUST explicitly label it as interpretation, preserve the underlying text, identify the evidence used and avoid promoting the interpretation into the source itself.
 
 # Semantic Discipline
 
@@ -60,7 +65,8 @@ When analyzing a source with strong internal semantic structure, ARGO shall:
 - compare a term's uses across the source when internal evidence is available;
 - avoid declaring two words synonymous solely because a dictionary or external model gives overlapping meanings;
 - avoid inventing hidden meanings that are not supported by the source;
-- record uncertainty instead of filling a semantic gap with confidence.
+- record uncertainty instead of filling a semantic gap with confidence;
+- avoid turning commentary into an unmarked substitute for the source.
 
 For canonical source analysis, **the source's own internal evidence has priority over an external model's preferred paraphrase**, subject to the source's declared authority and the applicable ARGO governance rules.
 
@@ -81,6 +87,18 @@ A rule should, where needed, identify:
 - consequences of application.
 
 A later document may clarify a rule, but clarification MUST NOT silently replace the original rule's meaning.
+
+If a rule cannot be understood without an external interpreter, the problem shall first be treated as a possible **rule-design defect** and reviewed for ambiguity, missing definitions, missing relationships or unnecessary complexity.
+
+# Rule Network Consistency
+
+Rules shall be checked as a connected system rather than only as isolated sentences.
+
+For a material rule, ARGO should be able to identify, where applicable:
+
+`Term → Definition → Scope → Condition → Related Rules → Evidence/Authority → Consequence`
+
+A contradiction, undefined term, circular dependency or unexplained exception shall be recorded as an integrity finding rather than silently resolved by interpretation.
 
 # Application Rule
 
