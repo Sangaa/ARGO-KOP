@@ -1,43 +1,106 @@
 # ARGO Specifications
 
+Document ID: SPEC-000-SPECIFICATIONS_INDEX
+Version: 1.2.0
+Status: Active Domain / Integrity Hold
+Category: Repository Domain Guide
+Development Baseline: 3.3.0
+Last Audit: 2026-08-09
+
+---
+
 ## Purpose
 
-The Specifications directory contains detailed technical definitions:
-- Knowledge organization standards
-- Data formats and structures
-- Quality standards
-- Technical requirements
-- Operational specifications
+The Specifications domain contains operational definitions, technical requirements and testable behavioral/structural expectations used by ARGO KOP.
 
-## Directory Structure
+Specifications answer **what must be true or what behavior/structure is required**. They do not automatically grant authority over Governance, Architecture, Models or Repository integrity.
 
-```
+## Authority Boundary
+
+Specifications operate beneath applicable Constitution, Governance and Canonical Architecture authority.
+
+A specification MUST NOT silently redefine:
+
+- platform identity;
+- governance authority;
+- canonical architecture;
+- canonical model ownership;
+- release authority;
+- security authority.
+
+Conflicts MUST be recorded and resolved through the applicable authority path.
+
+## Current Domain Structure
+
+```text
 Specifications/
-├── 01-Knowledge-Organization.md [How knowledge is organized]
-├── Data-Standards/              [Format and structure specs]
-├── Quality-Standards/           [Quality requirements]
-├── Operations/                  [Operational specifications]
-└── README.md                    [This file]
+├── README.md
+├── 01-Knowledge-Organization.md
+├── Data-Standards/
+├── Quality-Standards/
+└── Operations/
 ```
 
-## Using Specifications
+The listed directories are intended domains, not proof that each contains a complete implementation.
 
-Specifications define the "how" for various aspects of ARGO:
-- What is the required format?
-- How should this be structured?
-- What standards must be met?
-- How is quality evaluated?
+## Specification Lifecycle
 
-## Creating Specifications
+```text
+Need Identified
+→ Evidence / Context
+→ Draft
+→ Review
+→ Validation / Examples / Tests
+→ Approval
+→ Active
+→ Maintenance
+→ Superseded / Archived
+```
 
-When defining how something should work:
-1. Identify what needs specification
-2. Research current practices
-3. Propose specification
-4. Test with examples
-5. Submit for approval
-6. Publish and maintain
+A specification without adequate evidence or validation remains provisional/hold as applicable.
+
+## Required Specification Properties
+
+A material specification SHOULD make clear:
+
+- purpose;
+- scope;
+- requirements;
+- constraints;
+- inputs/outputs where applicable;
+- dependencies;
+- evidence/provenance;
+- acceptance/validation criteria;
+- related authority;
+- consumers;
+- status;
+- version;
+- unresolved questions.
+
+## Relationship Rule
+
+Specifications MUST be connected to their consumers and dependencies where those relationships matter.
+
+Cross-reference validation follows `STD-003_CROSS_REFERENCE_STANDARD.md`.
+
+## Legacy Rule
+
+Older specifications are source material, not automatic authority.
+
+If a legacy specification conflicts with the current architecture or no longer expresses a useful requirement, it may be reconstructed or replaced from scratch under `GOV-012_DOMAIN_RECONSTRUCTION_STANDARD.md`.
+
+## External Feedback
+
+External model/reviewer feedback may identify specification gaps, ambiguities or risks. Such reports are evidence inputs and MUST follow `GOV-011_EXTERNAL_FEEDBACK_REPORT_STANDARD.md` when applicable.
+
+External feedback does not itself approve or modify a specification.
 
 ## Status
-Established: Foundation Build 001
-Created: 2026-07-26
+
+Current domain state: `INTEGRITY HOLD / STAGED RECONSTRUCTION`
+
+The domain is being rebuilt against Development Baseline 3.3.0. Completeness MUST be established from repository evidence rather than directory presence.
+
+---
+
+End of Document
