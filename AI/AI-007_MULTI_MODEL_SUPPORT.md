@@ -6,11 +6,11 @@
 
 Platform: ARGO KOP
 Document ID: AI-007
-Version: 1.4.0
+Version: 1.4.1
 Status: Integrity Hold / Revalidated / Interaction Rule Added
 Category: AI
 Canonical: Yes
-Last Audit: 2026-08-08
+Last Audit: 2026-08-09
 
 ---
 
@@ -33,6 +33,7 @@ Every supported model shall, within its available capabilities:
 - inspect evidence required for the task;
 - respect Governance and Architecture;
 - distinguish evidence states;
+- preserve source identity and provenance when external knowledge is used;
 - avoid assumptions about unavailable content;
 - produce traceable changes where authorized;
 - validate affected references after mutation;
@@ -133,6 +134,8 @@ Tool limitations must be disclosed and affected decisions constrained.
 
 External model output must remain distinguishable from verified repository evidence.
 
+When external source claims are used, source identity, provenance and evidence state shall remain aligned with `Models/MOD-011_KNOWLEDGE_SOURCE_MODEL.md`.
+
 # Model Transition
 
 Changing models must not require repository restructuring merely because the model changed.
@@ -159,6 +162,10 @@ Cross-Reference Validation
 
 ↓
 
+Source / Provenance Validation where applicable
+
+↓
+
 Model Execution
 
 ↓
@@ -182,7 +189,8 @@ Results from all supported models must remain:
 - evidence-bounded;
 - architecture compliant;
 - governance compliant;
-- transport independent.
+- transport independent;
+- source/provenance distinguishable from canonical ARGO knowledge.
 
 # Related Documents
 
@@ -192,12 +200,16 @@ Results from all supported models must remain:
 - `AI/AI-008_AI_GOVERNANCE.md`
 - `Core/CORE-003_CONSTITUTION.md`
 - `Interfaces/INTF-004_API.md`
+- `Models/MOD-011_KNOWLEDGE_SOURCE_MODEL.md`
+- `Knowledge/KNW-002_KNOWLEDGE_CLASSIFICATION.md`
+- `Knowledge/KNW-004_KNOWLEDGE_LIFECYCLE.md`
+- `Knowledge/KNW-009_KNOWLEDGE_EVOLUTION.md`
 - `Memory/Engineering_Journal/SESSION_LEARNING_HANDOFF_TEMPLATE.md`
 - `Engine/ENG-007_LEARNING_ENGINE.md`
 
 # Guiding Statement
 
-**Models may change, transports may change, and ARGO may eventually become standalone; the semantic contract for evidence, learning, authority, repository continuity and natural human-friendly interaction must remain portable.**
+**Models may change, transports may change, and ARGO may eventually become standalone; the semantic contract for evidence, provenance, learning, authority, repository continuity and natural human-friendly interaction must remain portable.**
 
 ---
 
