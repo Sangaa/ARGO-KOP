@@ -1,7 +1,7 @@
 # ARGO Specifications
 
-Document ID: SPEC-000-SPECIFICATIONS_INDEX
-Version: 1.2.0
+Document ID: SPEC-000-SPECIFICATIONS-INDEX
+Version: 1.2.1
 Status: Active Domain / Integrity Hold
 Category: Repository Domain Guide
 Development Baseline: 3.3.0
@@ -29,6 +29,8 @@ A specification MUST NOT silently redefine:
 - security authority.
 
 Conflicts MUST be recorded and resolved through the applicable authority path.
+
+The proposed `Governance/GOV-012_DOMAIN_RECONSTRUCTION_STANDARD.md` may be used as reconstruction guidance during staged rebuilding, but its proposed status does not grant it active Governance authority. Ratified Governance, Architecture and Repository authority remains controlling.
 
 ## Current Domain Structure
 
@@ -87,7 +89,7 @@ Cross-reference validation follows `STD-003_CROSS_REFERENCE_STANDARD.md`.
 
 Older specifications are source material, not automatic authority.
 
-If a legacy specification conflicts with the current architecture or no longer expresses a useful requirement, it may be reconstructed or replaced from scratch under `GOV-012_DOMAIN_RECONSTRUCTION_STANDARD.md`.
+If a legacy specification conflicts with the current architecture or no longer expresses a useful requirement, it may be reconstructed or replaced from scratch using the applicable reconstruction guidance, including proposed `GOV-012_DOMAIN_RECONSTRUCTION_STANDARD.md`, subject to active Governance and Architecture authority.
 
 ## External Feedback
 
