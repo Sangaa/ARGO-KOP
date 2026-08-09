@@ -6,72 +6,58 @@
 
 ---
 
-Platform
-
-ARGO KOP
-
-Knowledge Operating Platform
-
----
-
-Document ID
-
-KNW-009
-
-Version
-
-1.2.0
-
-Status
-
-Validated / Integrity Hold
-
-Category
-
-Knowledge
-
-Canonical
-
-Yes
-
-Last Audit
-
-2026-08-08
+Platform: ARGO KOP  
+Category: Knowledge  
+Document ID: KNW-009  
+Version: 1.3.0  
+Status: Integrity Hold / Revalidated  
+Canonical: Yes  
+Last Audit: 2026-08-09  
 
 ---
 
 # Purpose
 
-Defines how knowledge evolves within ARGO KOP while preserving evidence, traceability, architectural consistency and applicable governance authority.
+Defines how knowledge evolves within ARGO KOP while preserving evidence, attribution, scope, traceability, architectural consistency and applicable governance authority.
 
-Knowledge evolution is continuous and reviewable.
-
----
+Knowledge evolution is continuous, bounded by evidence and reviewable.
 
 # Objectives
 
 Knowledge Evolution shall:
 
-- Improve knowledge quality.
-- Preserve repository authority.
-- Support continuous learning.
-- Prevent uncontrolled canonical modification.
-- Maintain useful historical continuity.
-- Prefer the simplest sufficient structure.
-
----
+- improve knowledge quality;
+- preserve repository authority;
+- support continuous learning;
+- prevent uncontrolled canonical modification;
+- preserve useful historical continuity;
+- keep user/project/deployment knowledge attributable to its originating scope;
+- prefer the simplest sufficient structure.
 
 # Evolution Philosophy
 
 Knowledge evolves.
 
-A repository state represents the best validated understanding available at a governed point in time; it is not declared permanently immune to revision.
+A repository state represents the best validated understanding available at a governed point in time; it is not permanently immune to revision.
 
 A later state may supersede an earlier interpretation when stronger evidence, better reasoning or corrected context supports the change.
 
-Every material improvement should preserve enough history and reasoning to understand what changed and why.
+No knowledge is sacred merely because it is old, useful, internally consistent, or previously accepted.
 
----
+Every material improvement should preserve enough history and reasoning to understand what changed, why it changed and what scope was affected.
+
+# Evolution Scope
+
+Evolution must first identify the affected knowledge domain:
+
+- `SESSION`
+- `USER`
+- `PROJECT`
+- `DEPLOYMENT`
+- `SHARED_CANDIDATE`
+- `PLATFORM`
+
+A change within one scope does not automatically modify another scope.
 
 # Evolution Lifecycle
 
@@ -79,7 +65,11 @@ Observation
 
 ↓
 
-Evidence
+Evidence Capture
+
+↓
+
+Scope Classification
 
 ↓
 
@@ -91,7 +81,15 @@ Candidate / Proposed Interpretation
 
 ↓
 
-Repository Review
+Contradiction & Alternative Review
+
+↓
+
+Impact Analysis
+
+↓
+
+Repository / Domain Review
 
 ↓
 
@@ -99,7 +97,7 @@ Authority Check
 
 ↓
 
-Knowledge Update
+Knowledge Update or Reclassification
 
 ↓
 
@@ -107,9 +105,11 @@ Relationship Review
 
 ↓
 
-Authorized Publication
+Authorized Publication / Domain Application
 
----
+↓
+
+Post-Change Validation
 
 # Evolution Triggers
 
@@ -133,19 +133,9 @@ Detected Errors
 
 Superseded Assumptions
 
----
+Model-to-Model Comparison
 
-# Controlled Evolution
-
-Knowledge updates require evidence appropriate to their scope.
-
-For bounded changes, the required evidence may remain local to the affected knowledge and relationships.
-
-For cross-layer or authority-affecting changes, broader validation and the applicable governance approval are required.
-
-Principal-Owner controlled changes cannot become canonical without the required explicit authorization.
-
----
+User or Project Learning
 
 # Learning vs Authority
 
@@ -155,22 +145,60 @@ ARGO KOP may autonomously:
 - identify contradictions;
 - extract lessons;
 - formulate candidate interpretations;
+- compare alternative explanations;
 - test consistency;
-- propose simpler or stronger knowledge structures.
+- propose simpler or stronger knowledge structures;
+- identify possible errors in previously accepted knowledge.
 
 A learning result or plausible interpretation does not become canonical merely because it is internally consistent or produced by a trusted engine.
 
 Technical write access is not authorization.
 
----
+# External Model and Source Rule
+
+Information obtained from another AI model, external database, connected service or other source may be analyzed without granting that source automatic authority.
+
+External information shall be treated according to its evidence, provenance, scope and validation state.
+
+Restrictions imposed by an external model or platform do not become ARGO knowledge rules merely because they prevented or discouraged discussion of a subject.
+
+The applicable ARGO governance and safety boundaries remain authoritative for ARGO itself.
+
+# Cross-Scope Promotion
+
+Knowledge may move toward broader reuse only through an explicit promotion or reclassification decision.
+
+A useful or repeated user/project/deployment lesson does not automatically become platform knowledge.
+
+Promotion toward `SHARED_CANDIDATE` or `PLATFORM` requires, as applicable:
+
+Source and Scope Verification
+
+Evidence Review
+
+Generalizability Assessment
+
+Contradiction Review
+
+Alternative Explanation Review
+
+Impact Analysis
+
+Privacy / Confidentiality Review
+
+Authority Check
+
+Provenance Record
+
+Promotion Decision
 
 # Repository Authority
 
-Only the applicable governed authority may publish a canonical knowledge change.
+Only the applicable governed authority may publish a canonical platform knowledge change.
 
 Conversation context, working memory and transient reasoning may generate candidates but do not directly replace canonical repository knowledge.
 
----
+User-owned and project-owned knowledge shall not be silently overwritten by platform evolution.
 
 # Historical Preservation
 
@@ -182,7 +210,22 @@ Destructive deletion is not automatically prohibited; retention should be propor
 
 Removing an artifact must not be used to erase contradictory evidence or conceal the reason for a material change.
 
----
+# Error-Driven Evolution
+
+When an evolution is triggered by an error, preserve where available:
+
+- previous belief or interpretation;
+- observed reality;
+- contradicting evidence;
+- root cause or candidate cause;
+- correction;
+- validation result;
+- affected knowledge and relationships;
+- scope affected;
+- downstream impact;
+- final authority decision.
+
+Failure is a learning input, not merely a defect to erase.
 
 # Evolution Validation
 
@@ -191,6 +234,10 @@ For each material evolution, verify as applicable:
 Knowledge Quality
 
 Evidence Quality
+
+Scope Accuracy
+
+Ownership / Attribution
 
 Knowledge Relationships
 
@@ -208,7 +255,7 @@ Historical Continuity
 
 Downstream Impact
 
----
+Post-Change Integrity
 
 # Reviewability
 
@@ -216,26 +263,21 @@ This document and its rules are themselves reviewable.
 
 If a rule is shown to be incorrect, contradictory, unnecessarily complex, or replaceable by a simpler control with equal or better protection, the rule may be revised through the applicable governance process.
 
----
-
 # Related Documents
 
 - `Knowledge/KNW-001_KNOWLEDGE_MODEL.md`
+- `Knowledge/KNW-002_KNOWLEDGE_CLASSIFICATION.md`
 - `Knowledge/KNW-004_KNOWLEDGE_LIFECYCLE.md`
 - `Knowledge/KNW-005_KNOWLEDGE_GOVERNANCE.md`
-- `Knowledge/KNW-008_KNOWLEDGE_TRACEABILITY.md`
-- `Repository/REP-001_MASTER_INDEX.md`
-- `Repository/REP-002_REPOSITORY_MAP.md`
-- `Engine/ENG-007_LEARNING_ENGINE.md`
+- `Memory/MEM-001_MEMORY_MODEL.md`
+- `Memory/MEM-004_MEMORY_LIFECYCLE.md`
+- `Memory/MEM-005_MEMORY_GOVERNANCE.md`
 - `Memory/MEM-009_MEMORY_EVOLUTION.md`
-- `Decision/DEC-009_DECISION_GOVERNANCE.md`
-- `Core/CORE-003_CONSTITUTION.md`
-
----
+- `Engine/ENG-007_LEARNING_ENGINE.md`
 
 # Guiding Statement
 
-**Knowledge should improve from evidence and experience while remaining traceable, reviewable and governed.**
+**ARGO learns from evidence and experience, but learning remains attributable to its scope until validation, impact review and applicable authority justify broader promotion.**
 
 ---
 
