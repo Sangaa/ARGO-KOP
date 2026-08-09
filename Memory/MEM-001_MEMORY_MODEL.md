@@ -6,33 +6,13 @@
 
 ---
 
-Platform
-
-ARGO KOP
-
-Knowledge Operating Platform
-
----
-
-Document ID
-
-MEM-001
-
-Version
-
-1.1.0
-
-Status
-
-Approved
-
-Category
-
-Memory
-
-Canonical
-
-Yes
+Platform: ARGO KOP (Knowledge Operating Platform)  
+Document ID: MEM-001  
+Version: 1.2.0  
+Status: Integrity Hold / Revalidated  
+Category: Memory  
+Canonical: Yes  
+Last Audit: 2026-08-09  
 
 ---
 
@@ -40,161 +20,87 @@ Yes
 
 This document defines the canonical memory model of ARGO KOP.
 
-Memory preserves validated organizational context and provides continuity across projects, repository evolution and operational reasoning.
+A fundamental architectural separation applies:
 
----
+> **ARGO Platform Memory is the memory of the ARGO system; User, Session and Deployment Memory stores experience accumulated while ARGO is used.**
 
-# Objectives
+These domains may exchange learning candidates through governed promotion, but they are never treated as one undifferentiated memory pool.
 
-The Memory Model shall:
+# Memory Domains
 
-- Preserve organizational context.
-- Support reasoning.
-- Maintain continuity.
-- Protect historical knowledge.
-- Separate temporary context from permanent memory.
+## 1. Platform Memory
 
----
+Stores validated knowledge required to define and operate ARGO itself, including applicable constitutional, architectural, governance, cognitive and system-level learning.
 
-# Memory Philosophy
+Platform Memory is repository-controlled and may become canonical only through the applicable authority process.
 
-Memory preserves context.
+## 2. User Memory
 
-Knowledge preserves facts.
+Stores experience belonging to a specific user, including user-specific working patterns, preferences, project history and lessons.
 
-Repository preserves both.
+User Memory remains owned/scoped to that user or deployment and does not become platform memory merely because ARGO learned from it.
 
-Conversation memory is temporary.
+## 3. Project / Deployment Memory
 
-Repository memory is authoritative.
+Stores contextual experience belonging to a project, organization or deployment environment.
 
----
+It may be reusable locally without becoming a platform-wide rule.
+
+## 4. Session / Working Memory
+
+Temporary execution context. It may generate learning candidates but has no canonical authority.
+
+## 5. Shared Learning Candidates
+
+Potentially generalizable experience extracted from user, project, deployment or external-model feedback. It remains non-canonical until independently reviewed and promoted.
 
 # Memory Layers
 
 Working Memory
-
 ↓
-
 Session Memory
-
 ↓
-
-Project Memory
-
+User / Project / Deployment Memory
 ↓
-
-Operational Memory
-
+Shared Learning Candidate
 ↓
-
-Historical Memory
-
+Validation & Scope Review
 ↓
-
-Archived Memory
-
----
-
-# Working Memory
-
-Temporary reasoning context.
-
-Exists only during active execution.
-
-Never authoritative.
-
----
-
-# Session Memory
-
-Maintains continuity within one operational session.
-
-Expires after session completion unless promoted.
-
----
-
-# Project Memory
-
-Stores validated project context.
-
-Supports long-term project continuity.
-
-Repository controlled.
-
----
-
-# Operational Memory
-
-Stores reusable operational experience.
-
-Derived from validated practice.
-
-Supports future execution.
-
----
-
-# Historical Memory
-
-Preserves organizational history.
-
-Never deleted.
-
-Maintains complete traceability.
-
----
-
-# Archived Memory
-
-Historical memory no longer actively used.
-
-Still available for reference.
-
-Protected from modification.
-
----
-
-# Memory Lifecycle
-
-Capture
-
+Platform Memory (only when authorized)
 ↓
+Historical / Archived Memory
 
-Validation
+# Promotion Rule
 
-↓
+Experience must never move silently from a local memory domain into Platform Memory.
 
-Classification
+Promotion requires, as applicable:
 
-↓
+- evidence;
+- validation;
+- generalizability assessment;
+- contradiction and impact review;
+- provenance;
+- authority check;
+- explicit publication when protected authority is affected.
 
-Repository Integration
+# Demotion / Localisation Rule
 
-↓
-
-Operational Use
-
-↓
-
-Review
-
-↓
-
-Archive
-
----
+A platform rule must not be copied into every user's memory as if it were personal experience. Runtime implementations may expose platform knowledge to users, but provenance and scope remain distinguishable.
 
 # Memory Rules
 
-Memory shall never replace repository knowledge.
+- Repository authority remains authoritative for canonical platform memory.
+- User memory remains distinct from platform memory.
+- Project and deployment experience remains scoped to its owner/environment unless promoted.
+- Temporary context never bypasses governance.
+- Learning may be autonomous; canonical authority acquisition is not.
+- Historical states remain traceable.
+- Memory changes preserve provenance and affected relationships.
 
-Repository always remains authoritative.
+# Lifecycle
 
-Only validated memory becomes repository memory.
-
-Temporary context shall never bypass governance.
-
----
+Capture → Classify → Validate → Scope Review → Store in Correct Domain → Operational Use → Learn → Review → Promote if justified → Archive when inactive
 
 # Repository Integrity
 
@@ -204,6 +110,10 @@ Traceability
 
 Context
 
+Scope / Ownership
+
+Provenance
+
 History
 
 Relationships
@@ -212,27 +122,18 @@ Architecture Alignment
 
 Governance Compliance
 
----
-
 # Related Documents
 
-CORE-003_CONSTITUTION
-
-KNW-001_KNOWLEDGE_MODEL
-
-REP-001_MASTER_INDEX
-
-REP-009_REPOSITORY_TRACEABILITY
-
----
+- `Memory/MEM-004_MEMORY_LIFECYCLE.md`
+- `Memory/MEM-005_MEMORY_GOVERNANCE.md`
+- `Memory/MEM-008_MEMORY_TRACEABILITY.md`
+- `Memory/MEM-009_MEMORY_EVOLUTION.md`
+- `Engine/ENG-007_LEARNING_ENGINE.md`
+- `Core/CORE-003_CONSTITUTION.md`
 
 # Guiding Statement
 
-Memory preserves context.
-
-Knowledge preserves truth.
-
-The repository preserves both.
+**ARGO remembers what belongs to ARGO, users retain what belongs to their experience, and shared learning crosses that boundary only through evidence, scope review and governed promotion.**
 
 ---
 
