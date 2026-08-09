@@ -6,7 +6,7 @@
 
 Platform: ARGO KOP (Knowledge Operating Platform)
 Document ID: REP-002
-Version: 1.6.5
+Version: 1.6.6
 Status: Integrity Hold
 Category: Repository
 Canonical: Yes
@@ -129,9 +129,12 @@ Path: `Interfaces/`
 - `Interfaces/INTF-001_INTERFACE_SPEC.md`
 - `Interfaces/INTF-004_API.md`
 - `Interfaces/INTF-006_ENVIRONMENT_SENSING.md`
+- `Interfaces/INTF-010_INTEGRATIONS.md`
 - `Interfaces/_FOLDER_STATUS.md`
 
 `INTF-006` remains Proposed / Integrity Hold pending cross-layer validation.
+
+`INTF-010` is Validated / Integrity Hold and is the canonical provider-neutral integration and connector boundary. Its presence in the active map does not certify individual connector implementations.
 
 ## 10. Models Layer
 
