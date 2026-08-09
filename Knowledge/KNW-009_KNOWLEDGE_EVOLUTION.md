@@ -4,12 +4,10 @@
 
 # KNOWLEDGE EVOLUTION
 
----
-
 Platform: ARGO KOP  
 Category: Knowledge  
 Document ID: KNW-009  
-Version: 1.3.0  
+Version: 1.3.1  
 Status: Integrity Hold / Revalidated  
 Canonical: Yes  
 Last Audit: 2026-08-09  
@@ -137,6 +135,8 @@ Model-to-Model Comparison
 
 User or Project Learning
 
+Tool or transport failures that reveal a repository/process weakness
+
 # Learning vs Authority
 
 ARGO KOP may autonomously:
@@ -159,6 +159,8 @@ Technical write access is not authorization.
 Information obtained from another AI model, external database, connected service or other source may be analyzed without granting that source automatic authority.
 
 External information shall be treated according to its evidence, provenance, scope and validation state.
+
+`Models/MOD-011_KNOWLEDGE_SOURCE_MODEL.md` provides the semantic source/provenance boundary for source identity, evidence and source-versus-ARGO knowledge distinction. Knowledge evolution consumes those semantics and does not grant source authority through ingestion.
 
 Restrictions imposed by an external model or platform do not become ARGO knowledge rules merely because they prevented or discouraged discussion of a subject.
 
@@ -227,6 +229,8 @@ When an evolution is triggered by an error, preserve where available:
 
 Failure is a learning input, not merely a defect to erase.
 
+Tool or connector failures shall be treated similarly when they reveal stale-state, synchronization, evidence-coverage or process weaknesses. The system should diagnose, reconcile and retry when safely possible before deferring a material change.
+
 # Evolution Validation
 
 For each material evolution, verify as applicable:
@@ -257,6 +261,8 @@ Downstream Impact
 
 Post-Change Integrity
 
+Failure / Recovery Evidence where applicable
+
 # Reviewability
 
 This document and its rules are themselves reviewable.
@@ -269,6 +275,7 @@ If a rule is shown to be incorrect, contradictory, unnecessarily complex, or rep
 - `Knowledge/KNW-002_KNOWLEDGE_CLASSIFICATION.md`
 - `Knowledge/KNW-004_KNOWLEDGE_LIFECYCLE.md`
 - `Knowledge/KNW-005_KNOWLEDGE_GOVERNANCE.md`
+- `Models/MOD-011_KNOWLEDGE_SOURCE_MODEL.md`
 - `Memory/MEM-001_MEMORY_MODEL.md`
 - `Memory/MEM-004_MEMORY_LIFECYCLE.md`
 - `Memory/MEM-005_MEMORY_GOVERNANCE.md`
@@ -277,7 +284,7 @@ If a rule is shown to be incorrect, contradictory, unnecessarily complex, or rep
 
 # Guiding Statement
 
-**ARGO learns from evidence and experience, but learning remains attributable to its scope until validation, impact review and applicable authority justify broader promotion.**
+**ARGO learns from evidence, experience and even diagnosed failures, but learning remains attributable to its scope until validation, impact review and applicable authority justify broader promotion.**
 
 ---
 
