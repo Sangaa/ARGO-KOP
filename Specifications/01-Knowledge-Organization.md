@@ -1,7 +1,7 @@
 # ARGO Knowledge Organization Specification
 
 Document ID: SPEC-001-KNOWLEDGE-ORGANIZATION
-Version: 3.1.0
+Version: 3.1.1
 Status: Foundation Specification / Integrity Hold
 Category: Operational Specification
 Development Baseline: 3.3.0
@@ -27,6 +27,8 @@ Higher authority prevails when a conflict exists:
 6. Legacy or exploratory material
 
 A conflict MUST be recorded rather than silently resolved by interpretation.
+
+The proposed `Governance/GOV-012_DOMAIN_RECONSTRUCTION_STANDARD.md` may provide reconstruction guidance during the current staged rebuild, but its proposed status does not grant it active Governance authority. Any reconstruction decision remains subject to currently ratified Governance, Architecture and Repository authority.
 
 ## Core Rules
 
@@ -213,7 +215,7 @@ The reconstruction decision MAY be:
 - replace from scratch;
 - mark unavailable.
 
-`GOV-012_DOMAIN_RECONSTRUCTION_STANDARD.md` governs this process.
+`GOV-012_DOMAIN_RECONSTRUCTION_STANDARD.md` is currently a proposed process reference. Its reconstruction method may be used as guidance, but active Governance and Architecture authority remains controlling until GOV-012 is formally ratified.
 
 ## Review Rules
 
@@ -229,11 +231,11 @@ A specification change MUST identify:
 
 Material changes MUST trigger downstream review where the specification is consumed.
 
-## Status
+## Current Validation State
 
-Current state: `INTEGRITY HOLD`
+The specification has been rebuilt against Development Baseline 3.3.0 and directly cross-read against the current cross-reference, metadata and reconstruction standards within the inspected scope.
 
-This specification is not considered fully validated until its relationships with the current Models, Standards, Governance, Architecture and active Repository Map are verified.
+Current state remains `INTEGRITY HOLD` because repository-wide relationships with Models, Standards, Governance, Architecture, consumers and the active Repository Map have not yet been fully validated.
 
 ---
 
