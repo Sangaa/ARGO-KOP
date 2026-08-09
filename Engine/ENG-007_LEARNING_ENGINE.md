@@ -4,11 +4,9 @@
 
 # CONTINUOUS LEARNING ENGINE SPECIFICATION
 
----
-
 Platform: ARGO KOP (Knowledge Operating Platform)  
 Document ID: ENG-007  
-Version: 3.5.0  
+Version: 3.5.1  
 Status: Integrity Hold / Revalidated  
 Category: Engine  
 Canonical: Yes  
@@ -211,6 +209,9 @@ When an error is detected, record:
 12. Whether repository ingestion occurred.
 13. Which memory domain received the learning.
 14. Whether any cross-domain promotion was performed.
+15. Whether a technical/tool failure occurred and how it was diagnosed, reconciled and recovered.
+
+A recoverable execution failure is itself a learning candidate when it reveals stale state, synchronization weakness, evidence-coverage weakness or a process defect.
 
 ---
 
@@ -231,6 +232,7 @@ When an error is detected, record:
 13. Do not merge User/Session/Project memory into Platform Canonical Memory implicitly.
 14. Do not allow a platform update to overwrite or erase user-owned learning without the applicable authorization.
 15. Preserve provenance whenever learning crosses a memory boundary.
+16. Treat recoverable tool failures as evidence to diagnose and learn from, not as silent reasons to abandon an otherwise authorized bounded change.
 
 ---
 
@@ -252,16 +254,16 @@ Self-improvement does not include silently changing protected authority, bypassi
 - `Memory/MEM-005_MEMORY_GOVERNANCE.md`
 - `Memory/MEM-008_MEMORY_TRACEABILITY.md`
 - `Memory/MEM-009_MEMORY_EVOLUTION.md`
+- `Knowledge/KNW-002_KNOWLEDGE_CLASSIFICATION.md`
+- `Knowledge/KNW-004_KNOWLEDGE_LIFECYCLE.md`
 - `Knowledge/KNW-009_KNOWLEDGE_EVOLUTION.md`
-- `Core/CORE-003_CONSTITUTION.md`
+- `Models/MOD-011_KNOWLEDGE_SOURCE_MODEL.md`
 - `AI/AI-008_AI_GOVERNANCE.md`
 - `Services/SRV-009_UPDATE_SERVICE.md`
 
----
-
 # Guiding Statement
 
-**ARGO KOP should learn continuously, return experience to its source, keep system memory separate from user experience, promote only validated generalizable learning, act when authorized, and never confuse the ability to change itself with the authority to redefine itself.**
+**ARGO KOP should learn continuously, return experience to its source, keep system memory separate from user experience, preserve source provenance, promote only validated generalizable learning, recover from bounded technical failures when safe, act when authorized, and never confuse the ability to change itself with the authority to redefine itself.**
 
 ---
 
