@@ -4,91 +4,49 @@
 
 # ENTITY MODEL
 
----
-
-Platform
-
-ARGO KOP
-
+Platform: ARGO KOP
 Knowledge Operating Platform
 
----
-
-Document ID
-
-MOD-002
-
-Version
-
-1.1.0
-
-Status
-
-Approved
-
-Category
-
-Models
-
-Canonical
-
-Yes
-
-Priority
-
-Critical
+Document ID: MOD-002
+Version: 1.2.0
+Status: Approved / Revalidation Required
+Category: Models
+Canonical: Yes
+Priority: Critical
+Development Baseline: 3.3.0
+Last Audit: 2026-08-09
 
 ---
 
 # Purpose
 
-This document defines the canonical Entity Model of ARGO KOP.
+This document defines the canonical semantic Entity Model of ARGO KOP.
 
-Entities represent the primary objects managed by the platform.
-
-Entities define identity.
-
-They never define behavior.
-
----
+Entities represent primary objects managed or referenced by the platform. Entities define identity and structure; they do not define executable behavior.
 
 # Objectives
 
 The Entity Model shall:
 
-Standardize platform entities.
-
-Provide unique identification.
-
-Support repository consistency.
-
-Support relationships.
-
-Support future implementations.
-
-Remain implementation independent.
-
----
+- standardize platform entities;
+- provide stable identification;
+- support explicit relationships;
+- support repository consistency;
+- remain implementation independent;
+- preserve traceability and provenance;
+- support future Runtime, Services and AI implementations without embedding implementation behavior.
 
 # Entity Principles
 
-Every entity shall:
+Every canonical entity shall have:
 
-Have a unique identifier.
-
-Have a canonical name.
-
-Have a defined purpose.
-
-Have explicit relationships.
-
-Remain reusable.
-
-Remain deterministic.
-
-Remain traceable.
-
----
+- unique identifier;
+- canonical name;
+- defined type and purpose;
+- explicit lifecycle/status where applicable;
+- explicit relationships;
+- provenance/reference information;
+- version or effective revision where applicable.
 
 # Canonical Entity Structure
 
@@ -112,9 +70,9 @@ Version
 
 Status
 
-Metadata
+Provenance / Repository Reference
 
----
+Metadata
 
 # Entity Categories
 
@@ -138,8 +96,6 @@ AI Entity
 
 Project Entity
 
----
-
 # Entity Relationships
 
 Entities may define:
@@ -160,31 +116,23 @@ Dependency
 
 Composition
 
-Circular dependencies are prohibited.
-
----
+Circular dependencies are prohibited unless a future governed model explicitly defines a bounded graph relation that does not create an invalid dependency cycle.
 
 # Entity Rules
 
 Entities shall:
 
-Remain repository driven.
-
-Remain architecture compliant.
-
-Remain governance compliant.
-
-Contain no executable logic.
-
-Contain no runtime behavior.
-
-Contain no implementation details.
-
----
+- remain repository driven;
+- remain architecture and governance compliant;
+- contain no executable logic;
+- contain no runtime behavior;
+- avoid implementation-specific assumptions;
+- distinguish identity from behavior;
+- preserve source/provenance where the entity originates externally.
 
 # Identity Rules
 
-Every entity shall contain:
+Every entity shall contain, as applicable:
 
 Unique Identifier
 
@@ -200,59 +148,41 @@ Current Status
 
 Repository Reference
 
----
+Provenance
 
-# Validation
+# Authority and Validation Boundary
 
-Every entity shall validate:
+This model defines the semantic structure of entities. It does not, by itself, prove that every concrete entity instance is canonical.
 
-Unique Identifier
+Entity instances must be validated against the applicable repository, governance, architecture, provenance and lifecycle rules.
 
-Canonical Naming
+External model output may propose entities but cannot grant canonical entity authority.
 
-Relationship Integrity
+# Revalidation Rule
 
-Dependency Integrity
+Material changes to the Entity Model require downstream review of:
 
-Repository Consistency
+- Document Model;
+- Memory Model;
+- Knowledge Source Model;
+- repository indexes;
+- interfaces and services consuming entity identity;
+- runtime consumers;
+- affected architectural decisions.
 
-Architecture Compliance
-
-Governance Compliance
-
----
-
-# Dependencies
-
-Core
-
-Governance
-
-Architecture
-
-Repository
-
-Models
-
----
+After mutation, the changed document and affected references must be re-read before promotion.
 
 # Related Documents
 
-MOD-001_MODEL_ARCHITECTURE.md
-
-MOD-003_DOCUMENT_MODEL.md
-
-MOD-008_RELATIONSHIP_MODEL.md
-
-PROJECT_BOOTSTRAP.md
-
----
-
-# Guiding Statement
-
-Everything managed by ARGO KOP is represented by a canonical entity.
-
-Identity precedes implementation.
+- `Models/MOD-003_DOCUMENT_MODEL.md`
+- `Models/MOD-004_MEMORY_MODEL.md`
+- `Models/MOD-011_KNOWLEDGE_SOURCE_MODEL.md`
+- `Architecture/ARC-002_COMPONENT_ARCHITECTURE.md`
+- `Architecture/ARC-006_DEPENDENCY_MODEL.md`
+- `Architecture/ARC-009_ARCHITECTURE_DECISIONS.md`
+- `Architecture/ARC-010_EVOLUTION_MODEL.md`
+- `Governance/GOV-004_DOCUMENT_METADATA.md`
+- `Governance/GOV-012_DOMAIN_RECONSTRUCTION_STANDARD.md`
 
 ---
 
