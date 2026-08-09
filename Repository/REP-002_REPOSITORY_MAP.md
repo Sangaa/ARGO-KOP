@@ -6,12 +6,12 @@
 
 Platform: ARGO KOP (Knowledge Operating Platform)
 Document ID: REP-002
-Version: 1.6.4
+Version: 1.6.5
 Status: Integrity Hold
 Category: Repository
 Canonical: Yes
 Priority: Critical
-Last Audit Date: Aug 08, 2026
+Last Audit Date: Aug 09, 2026
 
 ---
 
@@ -145,13 +145,24 @@ Path: `Models/`
 
 Declared model artifacts not directly located remain unresolved and are not promoted to active authority.
 
-## 11. Other Repository Domains
+## 11. Plugins Layer
+
+Path: `Plugins/`
+
+- `Plugins/PLG-001_PLUGIN_ARCHITECTURE.md` — Approved / Canonical / Critical
+- `Plugins/_FOLDER_STATUS.md`
+
+`PLG-001` explicitly requires active plugin specifications to be registered under `Plugins/` and indexed in `REP-001`. This physical map therefore treats the Plugins domain as an active declared inventory rather than an unqualified additional folder.
+
+The approved plugin architecture does not imply that every plugin is globally integrated; each plugin remains subject to its own manifest, sandbox, interface, security and quality validation.
+
+## 12. Other Repository Domains
 
 Current `SYSTEM_MAP.md` also identifies Knowledge, Memory, Decision, AI, Services, Intelligence, Quality, Projects, Release, Logs, Examples and Future as physical repository domains/groupings.
 
 These domains are not assumed complete or architecturally authoritative from folder names alone. Their active inventories and relationships remain under connected-baseline validation.
 
-## 12. Mapping Rules
+## 13. Mapping Rules
 
 1. Every active canonical document has exactly one canonical path.
 2. Filename identity must match internal Document ID where one exists.
@@ -160,15 +171,16 @@ These domains are not assumed complete or architecturally authoritative from fol
 5. Missing or unverified dependencies remain explicitly unresolved.
 6. Any canonical inventory change requires synchronized index/map updates and validation.
 7. Archive operations must preserve enough evidence to identify the former active path and its canonical successor.
-8. A new interface, model, runtime component or service must not be considered globally integrated until its consumers and dependencies are validated.
+8. A new interface, model, runtime component, plugin or service must not be considered globally integrated until its consumers and dependencies are validated.
 9. Map artifacts and status artifacts must not reuse the identity of canonical content documents.
 10. Domain-specific lifecycle artifacts must remain scoped to their declared artifact class and must not silently acquire authority over another domain's lifecycle.
+11. An approved canonical domain artifact that explicitly requires repository indexing must appear in both the master index and physical storage map.
 
-## 13. Integrity State
+## 14. Integrity State
 
 Current repository state: **INTEGRITY HOLD**.
 
-The map is synchronized with the current declared Core, Governance, Repository, Runtime, Architecture, Lifecycle, Interfaces and Models inventory within the inspected scope. Cross-layer relationship validation remains open.
+The map is synchronized with the current declared Core, Governance, Repository, Runtime, Architecture, Lifecycle, Interfaces, Models and Plugins inventory within the inspected scope. Cross-layer relationship validation remains open.
 
 ---
 
