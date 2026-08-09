@@ -2,105 +2,68 @@
 
 ---
 
-Platform
-
-ARGO KOP
-
+Platform: ARGO KOP
 Knowledge Operating Platform
+Folder: Models
+Version: 1.3.0
+Status: INTEGRITY HOLD / STAGED RECONSTRUCTION
+Canonical: Pending consolidated validation
+Priority: Critical
+Development Baseline: 3.3.0
+Last Audit: 2026-08-09
+Review Method: Repository First / Evidence Based
 
 ---
 
-Folder
+# Current Audit Finding
 
-Models
-
-Version
-
-1.2.0
-
-Status
-
-🔴 INTEGRITY HOLD
-
-Canonical
-
-Pending consolidated validation
-
-Priority
-
-Critical
-
-Last Audit
-
-2026-08-08
-
-Review Method
-
-Repository First / Evidence Based
-
----
-
-# Audit Finding
-
-The Models index previously presented a complete MOD-001 through MOD-011 sequence as if all declared artifacts were present.
-
-Direct repository search during the current audit established the following model files under `Models/`:
+The Models domain contains four directly verified semantic model artifacts:
 
 - `MOD-002_ENTITY_MODEL.md`
 - `MOD-003_DOCUMENT_MODEL.md`
 - `MOD-004_MEMORY_MODEL.md`
 - `MOD-011_KNOWLEDGE_SOURCE_MODEL.md`
 
-The following declared artifacts were **not directly located at their declared paths** during this audit:
+These four artifacts have been revalidated against the current architectural baseline and now explicitly preserve authority, provenance, cross-layer impact and post-mutation revalidation rules.
 
-- `MOD-001_MODEL_ARCHITECTURE.md`
-- `MOD-005_KNOWLEDGE_MODEL.md`
-- `MOD-006_RUNTIME_MODEL.md`
-- `MOD-007_SERVICE_MODEL.md`
-- `MOD-008_RELATIONSHIP_MODEL.md`
-- `MOD-009_VERSION_MODEL.md`
-- `MOD-010_MODEL_REFERENCE.md`
+Historical declarations for MOD-001 and MOD-005 through MOD-010 remain unresolved at their historical paths. No missing artifact has been recreated merely to complete a numeric sequence.
 
-This is an evidence finding, not a claim that equivalent concepts do not exist elsewhere in the repository.
+# Reconstruction Decision
 
-Related material may exist under other domains and must be mapped by content and authority before any equivalence is accepted.
+The Models domain is not being restored as a historical sequence.
 
-# Integrity Decision
+It is being reconstructed according to the current ARGO architecture.
 
-Models remain **INTEGRITY HOLD**.
+Historical material may be used as source evidence, but it is not automatically canonical.
 
-No missing model artifact shall be reconstructed from memory or inferred solely from its filename.
+# Required Reconciliation
 
-Any future creation, replacement, merge or retirement of these model artifacts requires:
+Before Models can leave Integrity Hold, validate:
 
-1. direct inspection of related repository content;
-2. authority analysis;
-3. relationship analysis;
-4. duplicate / overlap analysis;
-5. explicit target-state decision;
-6. post-change repository validation.
+1. Entity ↔ Document identity semantics.
+2. Memory ↔ Knowledge provenance and lifecycle boundaries.
+3. Knowledge Source ↔ external feedback intake.
+4. Models ↔ Architecture ownership.
+5. Models ↔ Runtime consumers.
+6. Models ↔ Services and Interfaces.
+7. Models ↔ Repository indexes.
+8. Historical missing declarations ↔ equivalent current concepts.
+9. Duplicate/overlapping semantic definitions.
+10. Version and release authority.
 
-# Verified Local Scope
+# Integrity Rules
 
-The current audit directly verified the existence of `MOD-002`, `MOD-003`, `MOD-004`, and `MOD-011`.
-
-The status file and Models README have been updated to distinguish verified artifacts from historical or declared artifacts.
-
-# Rules
-
-1. Status files are evidence records, not proof of completion.
-2. A referenced path must be located, read and authority-checked before it is accepted as an active dependency.
-3. Historical or unresolved references must not be silently promoted to active authority.
-4. Folder classification does not prove architecture ownership.
-5. Successful local validation does not prove global repository integrity.
-6. Conversation memory and historical snapshots are non-authoritative.
-7. Resolving a local stale reference does not automatically close the domain.
-8. Equivalent content in another folder must be proven by content, authority and relationship analysis before replacing a missing canonical artifact.
-9. Missing evidence must remain explicitly missing until verified or deliberately resolved through governance.
+- Status files are evidence records, not completion certificates.
+- A referenced path must be located, read and authority-checked before acceptance.
+- Missing evidence remains missing until verified or deliberately resolved.
+- Historical drafts must not be promoted solely because they are old or previously referenced.
+- External model output is evidence, not canonical authority.
+- Material model changes require downstream review and post-change re-read.
+- User/project learning memory must remain separate from platform canonical model authority.
 
 # Next Audit Boundary
 
-`Models → Repository Index → Architecture → Governance → Runtime → Services → Knowledge → Memory → AI → Global Cross-Layer Validation`
+**Models → Knowledge → Memory → Runtime → Services → Interfaces → AI → Repository → Release → Global Cross-Layer Validation**
 
 ---
 
