@@ -6,37 +6,13 @@
 
 ---
 
-Platform
-
-ARGO KOP
-
-Knowledge Operating Platform
-
----
-
-Document ID
-
-KNW-004
-
-Version
-
-1.2.0
-
-Status
-
-Validated / Integrity Hold
-
-Category
-
-Knowledge
-
-Canonical
-
-Yes
-
-Last Audit
-
-2026-08-08
+Platform: ARGO KOP (Knowledge Operating Platform)  
+Document ID: KNW-004  
+Version: 1.3.0  
+Status: Integrity Hold / Revalidated  
+Category: Knowledge  
+Canonical: Yes  
+Last Audit: 2026-08-09  
 
 ---
 
@@ -46,7 +22,20 @@ This document defines the lifecycle of knowledge objects within ARGO KOP.
 
 It does not define the lifecycle of the platform itself, repository documents as artifacts, projects or decisions.
 
----
+The lifecycle explicitly separates knowledge belonging to the platform from knowledge belonging to a user, project or deployment.
+
+# Knowledge Scope Classification
+
+Before validation, every knowledge candidate should be assigned the narrowest applicable scope:
+
+- `SESSION` — temporary working context;
+- `USER` — experience, preferences or lessons belonging to a user;
+- `PROJECT` — knowledge specific to a project;
+- `DEPLOYMENT` — knowledge specific to an operating environment;
+- `SHARED_CANDIDATE` — proposed reusable knowledge supported across contexts;
+- `PLATFORM` — governed ARGO knowledge accepted as canonical.
+
+Scope may be changed only through an explicit promotion or reclassification event.
 
 # Lifecycle
 
@@ -58,19 +47,23 @@ Capture
 
 ↓
 
+Scope Classification
+
+↓
+
 Validation
 
 ↓
 
-Classification
+Classification & Ownership
 
 ↓
 
-Repository Integration
+Domain Storage
 
 ↓
 
-Knowledge Relationships
+Relationship Validation
 
 ↓
 
@@ -78,17 +71,15 @@ Operational Use
 
 ↓
 
-Review
+Review / Learning
 
 ↓
 
-Revision
+Promotion or Reclassification Decision
 
 ↓
 
-Archive
-
----
+Authorized Update / Archive
 
 # Stage Definitions
 
@@ -100,25 +91,29 @@ No repository authority.
 
 ## Capture
 
-A knowledge candidate is documented.
+A knowledge candidate is documented with available provenance and evidence state.
 
 Awaiting validation.
+
+## Scope Classification
+
+The candidate is assigned the narrowest applicable knowledge domain. Scope is not inferred from usefulness alone.
 
 ## Validation
 
 Evidence is reviewed.
 
-Governance, architecture and repository alignment are checked.
+Governance, architecture, repository alignment and claim-specific sufficiency are checked.
 
-## Classification
+## Classification & Ownership
 
-The knowledge object receives its category, owner, relationships and repository location.
+The knowledge object receives its category, owner, relationships and applicable repository location.
 
-## Repository Integration
+## Domain Storage
 
-The knowledge object becomes an official repository artifact after the applicable authority accepts it.
+Validated knowledge is stored in the memory/knowledge domain appropriate to its scope. User or project knowledge does not become platform knowledge merely because it is stored in the repository.
 
-## Knowledge Relationships
+## Relationship Validation
 
 The object is connected to relevant authorities, evidence, consumers and related knowledge.
 
@@ -126,34 +121,35 @@ Relationship existence must be validated; a path or textual reference alone is i
 
 ## Operational Use
 
-Knowledge may be consumed by projects, runtime, reasoning, documentation and operational processes within their applicable authority boundaries.
+Knowledge may be consumed by projects, runtime, reasoning, documentation and operational processes within its applicable scope and authority boundaries.
 
-## Review
+## Review / Learning
 
-Accuracy, completeness, relevance and consistency are periodically checked.
+Accuracy, completeness, relevance, consistency and practical outcomes are periodically checked. Errors and successful outcomes may produce new learning candidates.
 
-## Revision
+## Promotion or Reclassification Decision
 
-Approved improvements are incorporated and remain traceable.
+A knowledge object may remain local, be superseded, be reclassified, or be proposed for broader reuse.
 
-## Archive
+Promotion from `USER`, `PROJECT` or `DEPLOYMENT` toward `SHARED_CANDIDATE` or `PLATFORM` requires evidence, broader applicability assessment, contradiction review, impact analysis and the authority applicable to the target scope.
 
-Knowledge becomes historical and is preserved for traceability.
+## Authorized Update / Archive
 
----
+Approved improvements are incorporated with traceability. Superseded knowledge becomes historical where retention is required.
 
 # Knowledge Validation
 
-Knowledge shall be approved only after applicable:
+Knowledge shall be accepted for its declared scope only after applicable:
 
 - Evidence Verification
 - Architecture Alignment
 - Governance Compliance
 - Repository Review
 - Relationship Validation
-- Approval
+- Ownership / Scope Check
+- Approval or Authorization appropriate to the target state
 
----
+`VALIDATED` does not automatically mean `CANONICAL`.
 
 # Cross-Lifecycle Boundary
 
@@ -164,14 +160,16 @@ It interacts with:
 - `CORE-009` — platform evolution lifecycle.
 - `REP-006` — repository artifact lifecycle.
 - `GOV-005` — document artifact lifecycle.
+- `Memory/MEM-001_MEMORY_MODEL.md` — memory domains.
+- `Memory/MEM-004_MEMORY_LIFECYCLE.md` — memory lifecycle.
+- `Memory/MEM-005_MEMORY_GOVERNANCE.md` — memory ownership and authority.
+- `Memory/MEM-009_MEMORY_EVOLUTION.md` — memory learning and promotion.
 
 These lifecycles are complementary.
 
-A knowledge object can be in a knowledge lifecycle stage while the file representing it has a separate document lifecycle state and the repository is in another lifecycle stage.
+A knowledge object can be in a knowledge lifecycle stage while the file representing it has a separate document lifecycle state, the repository is in another lifecycle stage, and its source experience remains in a user/project memory domain.
 
 No one of these states automatically proves the others.
-
----
 
 # Repository Integrity
 
@@ -189,7 +187,7 @@ Traceability
 
 Version History
 
----
+Scope and Ownership
 
 # Lifecycle Events
 
@@ -197,7 +195,7 @@ Create
 
 Validate
 
-Approve
+Classify
 
 Integrate
 
@@ -205,13 +203,21 @@ Use
 
 Review
 
+Learn
+
+Promote
+
+Reclassify
+
 Revise
 
 Archive
 
-Every event shall be recorded where the applicable traceability authority requires it.
+Every material event shall be recorded where the applicable traceability authority requires it.
 
----
+# Reviewability
+
+This lifecycle is itself reviewable. If a rule is shown to be incorrect, contradictory or unnecessarily complex, it may be revised through the applicable governance process.
 
 # Related Documents
 
@@ -219,16 +225,16 @@ Every event shall be recorded where the applicable traceability authority requir
 - `Knowledge/KNW-001_KNOWLEDGE_MODEL.md`
 - `Knowledge/KNW-002_KNOWLEDGE_CLASSIFICATION.md`
 - `Knowledge/KNW-003_KNOWLEDGE_RELATIONSHIPS.md`
+- `Knowledge/KNW-005_KNOWLEDGE_GOVERNANCE.md`
+- `Knowledge/KNW-009_KNOWLEDGE_EVOLUTION.md`
 - `Repository/REP-006_REPOSITORY_LIFECYCLE.md`
 - `Repository/REP-009_REPOSITORY_TRACEABILITY.md`
 - `Lifecycle/GOV-005_DOCUMENT_LIFECYCLE.md`
 - `Core/CORE-003_CONSTITUTION.md`
 
----
-
 # Guiding Statement
 
-**Knowledge lifecycle governs knowledge objects. Document, repository and platform lifecycles remain distinct authorities connected through explicit relationships.**
+**Knowledge evolves through evidence and experience, but its scope, ownership and authority must remain explicit throughout the lifecycle.**
 
 ---
 
