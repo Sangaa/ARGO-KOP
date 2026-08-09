@@ -12,7 +12,7 @@ Architecture Map / Navigation Artifact
 
 Version
 
-1.3.0
+1.3.1
 
 Status
 
@@ -28,7 +28,7 @@ Yes — as the Architecture Map artifact
 
 Repository Development Baseline
 
-3.2.1
+3.3.0
 
 Latest Official Release
 
@@ -36,7 +36,7 @@ Latest Official Release
 
 Last Audit
 
-2026-08-08
+2026-08-09
 
 ---
 
@@ -65,6 +65,8 @@ This map is an architectural navigation and relationship artifact. It does not o
 5. No Reverse Dependency without governed architectural authorization.
 6. Physical folder placement does not create architectural authority.
 7. A map describes relationships; it does not create authority merely by listing a node.
+8. Legacy draft content does not become canonical merely because it occupies a mapped domain.
+9. Rebuilt domains must be connected to the canonical model only after their current content and relationships are validated.
 
 # Canonical Architectural Layers
 
@@ -132,6 +134,18 @@ A document is architecturally canonical only when:
 
 A status file or map alone cannot create architectural authority.
 
+# Legacy / Reconstruction Rule
+
+Existing draft, primitive, incomplete or historically speculative domain files may be retained for provenance but MUST NOT be treated as authoritative merely because they exist.
+
+When a domain is rebuilt after the foundation is stable, the preferred process is:
+
+**Read Existing Material → Extract Useful Evidence → Classify Facts / Assumptions / Draft Ideas → Discard Invalid Structure → Rebuild Canonical Content → Validate Identity / Authority / Relationships → Connect to Active Map**
+
+Rewriting from first principles is permitted and preferred when the previous domain was an early sketch whose structure no longer reflects current ARGO knowledge.
+
+The original material must remain recoverable through governed Archive/history when it has migration value.
+
 # Change Rule
 
 Any material change to layer boundaries, dependency direction, ownership or canonical architectural relationships requires architectural review and synchronized repository/index updates.
@@ -153,6 +167,9 @@ Architecture remains **INTEGRITY HOLD** until active architectural artifacts, fo
 - `Architecture/ARC-001_PLATFORM_ARCHITECTURE.md`
 - `Architecture/ARC-004_LAYER_MODEL.md`
 - `Architecture/ARC-006_DEPENDENCY_MODEL.md`
+- `Architecture/ARC-009_ARCHITECTURE_DECISIONS.md`
+- `Architecture/ARC-010_EVOLUTION_MODEL.md`
+- `Architecture/ARC-011_CANONICAL_ARCHITECTURE_MODEL.md`
 - `Release/VERSION.md`
 
 ---
