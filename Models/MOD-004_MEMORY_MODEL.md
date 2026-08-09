@@ -8,7 +8,7 @@ Platform: ARGO KOP
 Knowledge Operating Platform
 
 Document ID: MOD-004
-Version: 1.2.0
+Version: 1.2.1
 Status: Approved / Revalidation Required
 Category: Models
 Canonical: Yes
@@ -247,11 +247,16 @@ After mutation, the changed model and affected consumers must be re-read and rev
 - `Models/MOD-011_KNOWLEDGE_SOURCE_MODEL.md`
 - `Architecture/ARC-009_ARCHITECTURE_DECISIONS.md`
 - `Architecture/ARC-010_EVOLUTION_MODEL.md`
-- `Governance/GOV-012_DOMAIN_RECONSTRUCTION_STANDARD.md`
 - `Runtime/RUN-004_CONTEXT_LOADING.md`
 - `Runtime/RUN-008_RUNTIME_STATE.md`
 - `Runtime/RUN-009_RECOVERY.md`
 - `Engine/ENG-007_LEARNING_ENGINE.md`
+
+# Reconstruction Reference
+
+`Governance/GOV-012_DOMAIN_RECONSTRUCTION_STANDARD.md` is a proposed process reference for staged domain reconstruction. It is not an active Governance dependency of this model and does not override ratified Governance, Architecture, Model or Repository authority.
+
+Where reconstruction work affects the Memory Model, the proposed process may be used as guidance while the applicable active authorities remain controlling.
 
 ---
 
