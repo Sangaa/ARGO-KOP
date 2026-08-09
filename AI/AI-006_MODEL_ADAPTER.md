@@ -6,11 +6,11 @@
 
 Platform: ARGO KOP
 Document ID: AI-006
-Version: 1.2.0
+Version: 1.2.1
 Status: Integrity Hold / Revalidated
 Category: AI
 Canonical: Yes
-Last Audit: 2026-08-08
+Last Audit: 2026-08-09
 
 ---
 
@@ -103,6 +103,12 @@ A future implementation may replace file-based exchange with an API, or an API w
 - preserve traceability across transport boundaries;
 - report unavailable or incomplete evidence.
 
+# Knowledge Source Semantic Boundary
+
+`Models/MOD-011_KNOWLEDGE_SOURCE_MODEL.md` defines the semantic model for source identity, provenance, evidence states and source-versus-ARGO knowledge distinction used by model adapters.
+
+AI-006 consumes these semantics but does not redefine or grant authority through them. Transport success, adapter availability or model output remains evidence/input and does not by itself establish canonical knowledge.
+
 # Adapter Non-Responsibilities
 
 The adapter shall not:
@@ -142,6 +148,8 @@ Before an exchange is accepted, verify as applicable:
 - transport integrity;
 - post-ingestion validation.
 
+The semantic interpretation of source identity, provenance and evidence-state transitions shall remain aligned with `MOD-011`; this reference does not transfer canonical authority to the adapter.
+
 # Related Documents
 
 - `PROJECT_BOOTSTRAP.md`
@@ -149,6 +157,7 @@ Before an exchange is accepted, verify as applicable:
 - `AI/AI-007_MULTI_MODEL_SUPPORT.md`
 - `AI/AI-008_AI_GOVERNANCE.md`
 - `Interfaces/INTF-004_API.md`
+- `Models/MOD-011_KNOWLEDGE_SOURCE_MODEL.md`
 - `Memory/Engineering_Journal/SESSION_LEARNING_HANDOFF_TEMPLATE.md`
 - `Core/CORE-003_CONSTITUTION.md`
 
