@@ -6,19 +6,20 @@
 
 Platform: ARGO KOP
 Document ID: MOD-011
-Version: 1.0.0
-Status: Proposed / Future-Ready
+Version: 1.1.0
+Status: Proposed / Future-Ready / Revalidation Required
 Category: Models
 Canonical: Yes
-Last Audit: 2026-08-08
+Development Baseline: 3.3.0
+Last Audit: 2026-08-09
 
 ---
 
 # Purpose
 
-Define the canonical data model for knowledge received from external AI models, connected databases, documents, applications, tools and future ARGO-native sources.
+Define the canonical semantic model for knowledge received from external AI models, connected databases, documents, applications, tools and future ARGO-native sources.
 
-The model is designed to allow ARGO to become a source-independent knowledge system without making any source a privileged authority merely because it is connected.
+The model allows ARGO to become source-independent without making any connected source a privileged authority merely because it is available.
 
 # Core Principle
 
@@ -114,6 +115,16 @@ Agreement among models does not automatically constitute truth.
 
 Disagreement does not automatically invalidate a source.
 
+# External Feedback Reports
+
+External model and reviewer reports shall use the controlled intake format defined by:
+
+`Governance/GOV-011_EXTERNAL_FEEDBACK_REPORT_STANDARD.md`
+
+The report format is an evidence container, not an execution command and not a source of canonical authority.
+
+ARGO must independently verify material findings before changing repository authority.
+
 # Source Learning
 
 Each connected model or source may produce:
@@ -127,7 +138,7 @@ Each connected model or source may produce:
 - improvement candidates;
 - unresolved questions.
 
-These outputs enter the ARGO learning pipeline and are subject to evidence and authority controls.
+These outputs enter the ARGO learning pipeline and are subject to evidence, provenance and authority controls.
 
 # Database Evolution
 
@@ -163,7 +174,7 @@ All paths must converge on the same semantic provenance and validation model.
 
 The long-term architecture may maintain a dedicated ARGO knowledge store containing normalized, classified and provenance-aware information aggregated from many sources.
 
-External models may become temporary reasoning workers, specialized knowledge contributors, validators, or discovery engines rather than permanent knowledge stores.
+External models may become temporary reasoning workers, specialized knowledge contributors, validators or discovery engines rather than permanent knowledge stores.
 
 The ARGO knowledge store remains subject to its own governance and validation rules.
 
@@ -178,9 +189,26 @@ This model does not:
 - require every source to be continuously connected;
 - require retention of every received item forever.
 
+# Revalidation and Promotion Rule
+
+Material changes to source classification, provenance, authority or ingestion semantics require review of:
+
+- Knowledge classification and lifecycle;
+- Memory model;
+- AI model adapters;
+- external feedback intake;
+- security and retention controls;
+- Runtime ingestion/context loading;
+- repository authority boundaries.
+
+After mutation, the model and affected consumers must be re-read and revalidated.
+
 # Related Documents
 
 - `Models/README.md`
+- `Models/MOD-002_ENTITY_MODEL.md`
+- `Models/MOD-003_DOCUMENT_MODEL.md`
+- `Models/MOD-004_MEMORY_MODEL.md`
 - `Knowledge/KNW-002_KNOWLEDGE_CLASSIFICATION.md`
 - `Knowledge/KNW-003_KNOWLEDGE_RELATIONSHIPS.md`
 - `Knowledge/KNW-004_KNOWLEDGE_LIFECYCLE.md`
@@ -190,6 +218,8 @@ This model does not:
 - `AI/AI-006_MODEL_ADAPTER.md`
 - `AI/AI-007_MULTI_MODEL_SUPPORT.md`
 - `Memory/Engineering_Journal/SESSION_LEARNING_HANDOFF_TEMPLATE.md`
+- `Governance/GOV-011_EXTERNAL_FEEDBACK_REPORT_STANDARD.md`
+- `Governance/GOV-012_DOMAIN_RECONSTRUCTION_STANDARD.md`
 
 # Guiding Statement
 
