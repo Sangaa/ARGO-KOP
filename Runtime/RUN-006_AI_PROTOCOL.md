@@ -8,7 +8,7 @@ Platform: ARGO KOP
 Knowledge Operating Platform
 
 Document ID: RUN-006
-Version: 1.3.0
+Version: 1.3.1
 Status: Validated / Integrity Hold
 Category: Runtime
 Canonical: Yes
@@ -251,8 +251,9 @@ Before every engineering action verify, as applicable:
 - `Runtime/RUN-004_CONTEXT_LOADING.md`
 - `Runtime/RUN-005_RUNTIME_WORKFLOW.md`
 - `Runtime/RUN-007_RUNTIME_SECURITY.md`
-- `Interfaces/INTF-001_EXTERNAL_INTEGRATION.md`
+- `Interfaces/INTF-001_INTERFACE_SPEC.md`
 - `Interfaces/INTF-006_ENVIRONMENT_SENSING.md`
+- `Interfaces/INTF-010_INTEGRATIONS.md`
 - `PROJECT_BOOTSTRAP.md`
 - `Core/CORE-003_CONSTITUTION.md`
 
