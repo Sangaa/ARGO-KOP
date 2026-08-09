@@ -20,7 +20,7 @@ AI-008
 
 Version
 
-1.3.0
+1.3.1
 
 Status
 
@@ -36,7 +36,7 @@ Yes
 
 Last Audit
 
-2026-08-08
+2026-08-09
 
 ---
 
@@ -120,7 +120,8 @@ Before a material modification the AI shall:
 5. resolve or disclose material conflicts;
 6. determine whether the action is within delegated scope or requires protected authorization;
 7. execute only within the verified and authorized scope;
-8. re-read and validate affected artifacts after mutation.
+8. preserve source/provenance boundaries when external evidence is involved;
+9. re-read and validate affected artifacts after mutation.
 
 # Evidence Rules
 
@@ -136,6 +137,8 @@ Unavailable evidence cannot be silently promoted into fact.
 
 Authorization evidence must also be distinguished from technical capability.
 
+External source claims must remain distinguishable from ARGO knowledge according to `Models/MOD-011_KNOWLEDGE_SOURCE_MODEL.md`.
+
 # Repository Protection
 
 The AI shall never:
@@ -148,13 +151,16 @@ The AI shall never:
 - claim global completion from folder-level evidence;
 - treat `_FOLDER_STATUS.md` as proof of integrity;
 - treat successful GitHub writes or commits as proof of authorization;
-- treat a prior AI decision as authority for a new protected change.
+- treat a prior AI decision as authority for a new protected change;
+- silently promote external source claims into canonical knowledge.
 
 # Autonomous Engineering
 
 AI may continue automatically only when the evidence required for the next action is available and no blocking conflict exists.
 
 Autonomous work may include bounded inspection, analysis, consistency checking, candidate formation, validation and authorized execution.
+
+When a bounded repository mutation fails because of a recoverable technical condition such as stale state or synchronization conflict, the AI should diagnose the failure, reconcile with current repository reality and retry when safe. A failure must not be silently ignored or treated as permission to bypass validation.
 
 The AI shall stop or constrain work when:
 
@@ -184,13 +190,16 @@ Completed status may be revisited when current repository evidence demonstrates 
 - `Memory/MEM-009_MEMORY_EVOLUTION.md`
 - `AI/AI-001_AI_MODEL.md`
 - `AI/AI-004_CONTEXT_LOADING.md`
-- `AI/AI-009_AI_RUNTIME.md`
+- `AI/AI-006_MODEL_ADAPTER.md`
+- `AI/AI-007_MULTI_MODEL_SUPPORT.md`
+- `Models/MOD-011_KNOWLEDGE_SOURCE_MODEL.md`
+- `Knowledge/KNW-002_KNOWLEDGE_CLASSIFICATION.md`
 
 ---
 
 # Guiding Statement
 
-**Strong AI governance separates capability from authority: AI may think, learn and act within scope, but technical access never becomes permission to redefine the system.**
+**Strong AI governance separates capability from authority: AI may think, learn and act within scope, but technical access never becomes permission to redefine the system or silently promote external evidence into canonical knowledge.**
 
 ---
 
