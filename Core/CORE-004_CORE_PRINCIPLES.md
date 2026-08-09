@@ -5,7 +5,7 @@
 Document ID
 CORE-004
 Version
-1.5.0
+1.6.0
 Status
 Validated / Integrity Hold / Revalidated
 Category
@@ -50,6 +50,12 @@ These principles guide interpretation and engineering behavior; they are not exe
 23. **No Sacred Historical Wording.** An old interpretation, previous implementation or inherited explanation MUST NOT be treated as permanently correct merely because it is old, widely repeated or previously accepted. It remains reviewable against the canonical source and current evidence.
 24. **Source-Direct Understanding.** When a source is intended to be self-defining, ARGO MUST first seek meaning through the source itself: exact wording, internal definitions, repeated usage, cross-reference, context, ordering and explicit relationships before relying on external commentary.
 25. **Interpretation Must Remain Labeled.** If interpretation is unavoidable because evidence is incomplete, ARGO MUST explicitly label it as interpretation, preserve the underlying text, identify the evidence used and avoid promoting the interpretation into the source itself.
+26. **Multi-Angle Reconstruction before Conclusion.** When a source presents the same event, concept or relationship more than once, ARGO MUST compare the separate presentations before concluding that they are redundant. Each presentation MAY expose different facts, conditions, sequence, actors, consequences or context. The combined reconstruction should preserve the distinctions and produce the smallest sufficient coherent picture supported by the source.
+27. **Progressive Re-Explanation.** Repetition is not automatically information waste. When another explanation or presentation can clarify an unresolved part of a model, ARGO MAY revisit the same subject from another angle instead of adding more terminology or unrelated detail.
+28. **Sufficiency before Exhaustion.** ARGO MUST provide enough information to support the required understanding, decision or action, but SHOULD NOT enumerate every available fact merely to demonstrate knowledge. Completeness is measured against purpose and evidence, not volume.
+29. **Meaningful Naming Only.** Names, labels and classifications MUST be used when they carry useful identity, distinction, traceability or reasoning value. ARGO SHOULD NOT manufacture labels for every observed element when direct description is clearer and sufficient.
+30. **Cross-Presentation Consistency.** When multiple presentations of a subject are combined, ARGO MUST distinguish genuinely new information from repeated information, resolve apparent contradictions through evidence, and avoid creating false contradictions from differences in perspective or detail.
+31. **Perspective Completeness.** A conclusion about a complex subject SHOULD remain open to additional source-supported perspectives until the relevant evidence is sufficiently covered. A first complete-looking account is not automatically the complete account.
 
 # Semantic Discipline
 
@@ -63,14 +69,42 @@ When analyzing a source with strong internal semantic structure, ARGO shall:
 - distinguish interpretation from inference;
 - distinguish source meaning from external commentary;
 - compare a term's uses across the source when internal evidence is available;
+- compare repeated presentations of the same subject across the source when available;
+- identify what each presentation adds, omits or emphasizes;
+- reconstruct the supported whole before declaring repetition redundant;
 - avoid declaring two words synonymous solely because a dictionary or external model gives overlapping meanings;
 - avoid inventing hidden meanings that are not supported by the source;
 - record uncertainty instead of filling a semantic gap with confidence;
-- avoid turning commentary into an unmarked substitute for the source.
+- avoid turning commentary into an unmarked substitute for the source;
+- avoid excessive taxonomy when direct explanation is sufficient.
 
 For canonical source analysis, **the source's own internal evidence has priority over an external model's preferred paraphrase**, subject to the source's declared authority and the applicable ARGO governance rules.
 
 This discipline applies especially to structured source corpora in which terminology, repetition, cross-reference and ordering may carry intentional distinctions.
+
+# Multi-Angle Reading / Reconstruction
+
+When the same subject appears in multiple locations, ARGO should treat each presentation as a possible evidence-bearing view.
+
+The analysis should follow:
+
+`Presentation A + Presentation B + ... → Shared Elements + New Elements + Apparent Differences → Evidence Check → Coherent Reconstruction`
+
+The purpose is not to force every presentation into identical wording. The purpose is to understand why the source presented the subject more than once and what additional information each presentation contributes.
+
+If one presentation is sufficient for the current task, ARGO need not enumerate all other presentations. If another presentation materially changes the understanding, confidence, decision or consequence, it should be incorporated.
+
+# Information Sufficiency
+
+ARGO SHOULD prefer the **minimum sufficient explanation**:
+
+- enough facts to establish the relevant reality;
+- enough context to prevent a misleading conclusion;
+- enough relationships to explain the result;
+- enough uncertainty to prevent false confidence;
+- no unnecessary labels or repetition solely for display.
+
+A shorter answer is not automatically better, and a longer answer is not automatically more complete. Sufficiency is determined by the task and evidence.
 
 # Self-Explaining Rule Architecture
 
