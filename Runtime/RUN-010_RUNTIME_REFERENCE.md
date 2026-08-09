@@ -8,20 +8,20 @@ Platform: ARGO KOP
 Knowledge Operating Platform
 
 Document ID: RUN-010
-Version: 1.2.0
+Version: 1.3.0
 Status: Validated / Integrity Hold
 Category: Runtime
 Canonical: Yes
 Priority: Critical
-Development Baseline: 3.2.1
+Development Baseline: 3.3.0
 Latest Official Release: 1.0.0
-Last Audit: 2026-08-08
+Last Audit: 2026-08-09
 
 ---
 
 # Purpose
 
-Canonical navigation reference for the Runtime layer. It summarizes current Runtime documents, execution flow, state model, dependencies and engineering rules.
+Canonical navigation reference for the Runtime layer. It summarizes current Runtime documents, execution flow, state model, connector boundaries, recovery controls and engineering rules.
 
 This reference does not override the authority of the Constitution, Governance, Architecture or Repository.
 
@@ -56,11 +56,23 @@ Initialization
 
 ↓
 
+Interface / Dependency Resolution
+
+↓
+
+Authorization / Provenance Validation when applicable
+
+↓
+
 Validated Operation Selection
 
 ↓
 
 Processing
+
+↓
+
+External Execution when applicable
 
 ↓
 
@@ -80,6 +92,23 @@ IDLE or governed HOLD/FAULT
 
 Continuation is conditional and governed by `RUN-005`.
 
+# External Execution Boundary
+
+When external systems, devices, APIs, files, services or other connectors participate, the Runtime treats their result as an execution outcome separate from primary Runtime State.
+
+Permitted external outcomes:
+
+- `SUCCESS`
+- `FAILURE`
+- `PARTIAL`
+- `TIMEOUT`
+- `DENIED`
+- `UNKNOWN`
+
+`UNKNOWN` is not equivalent to `SUCCESS` and may require `HOLD` / `FAULT` and governed recovery.
+
+Connector availability does not establish authorization.
+
 # Runtime Components
 
 Logical runtime responsibilities include:
@@ -94,6 +123,7 @@ Logical runtime responsibilities include:
 - Security Manager
 - Engineering Queue
 - Repository Context / Cache
+- Interface / Connector Boundary
 
 These are responsibility domains, not a claim that each exists as a separate implementation module.
 
@@ -115,6 +145,9 @@ See `RUN-008_RUNTIME_STATE.md` for transition authority.
 - Repository Reality is authoritative.
 - Repository synchronization is mandatory where current state matters.
 - Applicable Architecture and Governance validation is mandatory.
+- Interface contracts are resolved before dependent execution.
+- Authorization is distinct from authentication and connector availability.
+- Provenance must remain distinguishable from interpretation.
 - No repository assumptions.
 - Preserve unrelated content.
 - No unsafe write after failed validation.
@@ -122,9 +155,15 @@ See `RUN-008_RUNTIME_STATE.md` for transition authority.
 - Governed recovery only.
 - Runtime does not redefine higher authority.
 
+# Memory / Learning Boundary
+
+Runtime may consume or produce user/session/project experience and external evidence, but those outputs do not become canonical ARGO knowledge merely through runtime processing or recovery.
+
+Promotion into canonical platform knowledge requires applicable Memory / Learning authority and validation.
+
 # Stop Conditions
 
-Runtime enters `HOLD` / `FAULT` when required evidence, authority, dependency or validation is unavailable or conflicting.
+Runtime enters `HOLD` / `FAULT` when required evidence, authority, dependency, interface, authorization, provenance or validation is unavailable or conflicting.
 
 # Runtime Dependencies
 
@@ -135,6 +174,9 @@ Runtime enters `HOLD` / `FAULT` when required evidence, authority, dependency or
 - `Repository/`
 - applicable Knowledge / Memory context
 - applicable Engine / Services / AI interfaces
+- `Interfaces/INTF-001_INTERFACE_SPEC.md`
+- `Interfaces/INTF-006_ENVIRONMENT_SENSING.md`
+- `Interfaces/INTF-010_INTEGRATIONS.md`
 
 Dependencies are resolved from current repository evidence, not assumed from numeric naming ranges.
 
@@ -151,12 +193,15 @@ Dependencies are resolved from current repository evidence, not assumed from num
 - `Runtime/RUN-009_RECOVERY.md`
 - `Architecture/ARC-006_DEPENDENCY_MODEL.md`
 - `Repository/REP-001_MASTER_INDEX.md`
+- `Interfaces/INTF-001_INTERFACE_SPEC.md`
+- `Interfaces/INTF-006_ENVIRONMENT_SENSING.md`
+- `Interfaces/INTF-010_INTEGRATIONS.md`
 
 ---
 
 # Guiding Statement
 
-Runtime transforms synchronized repository evidence into controlled execution while preserving architecture, governance and repository integrity.
+Runtime transforms synchronized repository evidence into controlled execution while preserving architecture, governance, security, interface boundaries, learning boundaries and repository integrity.
 
 ---
 
