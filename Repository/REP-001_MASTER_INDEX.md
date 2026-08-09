@@ -6,7 +6,7 @@
 
 Platform: ARGO KOP (Knowledge Operating Platform)
 Document ID: REP-001
-Version: 1.7.7
+Version: 1.7.8
 Status: Integrity Hold
 Category: Repository
 Canonical: Yes
@@ -64,6 +64,8 @@ Historical root naming-convention material is not active canonical inventory and
 - `Governance/_FOLDER_STATUS.md`
 
 `Governance/GOV-011_EXTERNAL_FEEDBACK_REPORT_STANDARD.md` exists as a proposed intake standard but is not active canonical authority until formally ratified.
+
+`Governance/GOV-012_DOMAIN_RECONSTRUCTION_STANDARD.md` exists as a proposed reconstruction standard. It governs rebuilding legacy or immature domains but is not active canonical authority until formally ratified.
 
 ## 6. Runtime Layer
 
@@ -137,6 +139,8 @@ The following model artifacts were directly verified during the current audit:
 
 Declared model artifacts not directly located remain unresolved and are not promoted to active authority.
 
+The Models domain is subject to the reconstruction process defined by proposed `GOV-012_DOMAIN_RECONSTRUCTION_STANDARD.md`; existing model files are not assumed to represent the final canonical model until relationship and consumer validation is complete.
+
 ## 11. Plugins Layer
 
 The current repository contains a directly verified canonical plugin architecture artifact:
@@ -152,7 +156,18 @@ The existence and approval of `PLG-001` do not certify that every future plugin 
 
 The repository contains additional physical domains shown by the current `SYSTEM_MAP.md`, including Knowledge, Memory, Decision, AI, Services, Intelligence, Quality, Projects, Release, Logs, Examples and Future.
 
-Their presence in the physical repository does not by itself certify their architectural role or completeness. Their inventories are being validated through the connected-baseline audit and will be promoted into this index only with sufficient evidence.
+The current audit also identifies physical domains requiring staged reconstruction or re-audit, including:
+
+- `Templates/`
+- `Standards/`
+- `Specifications/`
+- `Release/`
+- `Plugins/`
+- `Models/`
+- `Assets/`
+- `Blueprints/`
+
+Their presence in the physical repository does not by itself certify their architectural role or completeness. Their inventories are being validated through the connected-baseline audit and staged reconstruction process and will be promoted into this index only with sufficient evidence.
 
 ### Legacy / Reconstruction Policy
 
@@ -163,6 +178,8 @@ These artifacts are **source material, not automatic authority**.
 For a domain that is rebuilt, the preferred method is:
 
 **Read existing material → extract useful evidence → classify facts / assumptions / draft ideas → identify obsolete structure → rebuild from the current foundation → validate identity / authority / relationships → index the rebuilt domain**.
+
+The detailed reconstruction control is defined by proposed `Governance/GOV-012_DOMAIN_RECONSTRUCTION_STANDARD.md`.
 
 Where the old structure is fundamentally immature or misleading, ARGO may rewrite the domain from first principles rather than preserve its old organization.
 
@@ -187,6 +204,7 @@ A domain is not considered complete merely because its folder exists or because 
 13. Any approved canonical domain artifact that imposes an explicit indexing requirement must be represented in the applicable active inventory rather than hidden under an unqualified physical-domain summary.
 14. Legacy draft content must not be promoted solely because it is old, populated or previously referenced.
 15. Rebuilt domains must be revalidated as connected relationship graphs before active canonical promotion.
+16. Domains under reconstruction remain outside active canonical authority unless explicitly promoted after validation.
 
 ## 14. Integrity State
 
