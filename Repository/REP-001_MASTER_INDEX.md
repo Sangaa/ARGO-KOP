@@ -6,7 +6,7 @@
 
 Platform: ARGO KOP (Knowledge Operating Platform)
 Document ID: REP-001
-Version: 1.7.5
+Version: 1.7.6
 Status: Integrity Hold
 Category: Repository
 Canonical: Yes
@@ -117,9 +117,12 @@ The following interface artifacts were directly verified during the current audi
 - `Interfaces/INTF-001_INTERFACE_SPEC.md`
 - `Interfaces/INTF-004_API.md`
 - `Interfaces/INTF-006_ENVIRONMENT_SENSING.md`
+- `Interfaces/INTF-010_INTEGRATIONS.md`
 - `Interfaces/_FOLDER_STATUS.md`
 
 `INTF-006` remains `Proposed / Integrity Hold` pending cross-layer validation.
+
+`INTF-010` is `Validated / Integrity Hold` and establishes the provider-neutral connector/integration boundary. It is indexed here because it is a canonical domain artifact and its architecture explicitly requires active integration artifacts to be represented in repository inventories. Its validation does not certify every external connector implementation.
 
 ## 10. Models Layer
 
