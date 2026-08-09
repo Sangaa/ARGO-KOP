@@ -6,14 +6,14 @@
 
 ---
 
-Platform: ARGO KOP (Knowledge Operating Platform)
-Document ID: ENG-007
-Version: 3.4.0
-Status: Validated / Integrity Hold
-Category: Engine
-Canonical: Yes
-Priority: Critical
-Last Audit Date: 2026-08-08
+Platform: ARGO KOP (Knowledge Operating Platform)  
+Document ID: ENG-007  
+Version: 3.5.0  
+Status: Integrity Hold / Revalidated  
+Category: Engine  
+Canonical: Yes  
+Priority: Critical  
+Last Audit Date: 2026-08-09  
 
 ---
 
@@ -23,19 +23,33 @@ The Continuous Learning Engine (`ENG-007`) captures operational lessons, user fe
 
 The engine is a **learning mechanism, not an autonomous authority**.
 
-Its purpose is to turn experience into validated improvement candidates while preserving the authority boundary of the designated Principal Human Owner.
+A critical architectural distinction applies:
+
+> **ARGO KOP as a system and a user's learned experience are different memory domains.**
+
+The platform's canonical memory describes the governed ARGO system. User/session learning describes experience accumulated while a particular user, team, project or deployment interacts with ARGO. User learning must remain separately attributable and must not silently become part of the platform's canonical identity or knowledge.
 
 ---
 
-# Core Principle
+# Memory Domain Separation
 
-ARGO KOP may learn from experience without granting itself authority to redefine its own governing identity.
+## A. Platform / Canonical Memory
 
-Learning, proposal, validation, authorization, execution and knowledge ingestion are distinct concerns.
+Contains governed knowledge about ARGO KOP itself: constitution, architecture, rules, validated system lessons, canonical capabilities, protected authority boundaries and other repository-controlled knowledge.
 
-The system may discover and formulate improvements autonomously. Canonical self-modification of governance, constitution, architecture, authority boundaries, security controls or other protected system behavior requires explicit approval from the designated Principal Human Owner.
+This domain belongs to the ARGO KOP system and evolves only through the governed repository process.
 
-No other person, model, engine, connector or automated process may substitute for that approval where the change is classified as Principal-Owner controlled.
+## B. User / Session Learning Memory
+
+Contains experience belonging to a particular user, team, project, deployment or session, including preferences, workflow knowledge, local lessons, project-specific assumptions, operational history and user-approved learning.
+
+This domain belongs to its applicable user or deployment context and must remain separately identifiable, exportable, reviewable and removable according to the applicable retention and privacy controls.
+
+## C. Shared / Candidate Learning
+
+Some experiences may be useful to ARGO generally. They must first exist as learning candidates with provenance and evidence. Promotion from User/Session Learning to Platform/Canonical Memory requires validation and the applicable authorization.
+
+**User learning is not canonical ARGO learning by default.**
 
 ---
 
@@ -46,13 +60,28 @@ No other person, model, engine, connector or automated process may substitute fo
 3. **Execution** — technically applying a permitted change.
 4. **Authorization** — granting permission for a protected change.
 5. **Handoff** — returning validated experience to the parent ARGO context and responsible review engineer.
-6. **Ingestion** — incorporating reviewed learning into canonical repository knowledge.
+6. **Ingestion** — incorporating reviewed learning into the correct memory domain.
+7. **Promotion** — explicitly moving a proven learning candidate from a lower-scope memory domain to a broader canonical domain.
 
 Possessing one capability does not imply possession of the others.
 
-**Technical write access ≠ authorization.**
+**Technical write access ≠ authorization.**  
+**Session feedback ≠ automatic canonical knowledge.**  
+**User memory ≠ platform memory.**
 
-**Session feedback ≠ automatic canonical knowledge.**
+---
+
+# Learning Classification by Scope
+
+| Scope | Meaning | Default Authority |
+| :--- | :--- | :--- |
+| Session | Temporary experience from one interaction | Session context only |
+| User | Durable experience belonging to one user | User/deployment context |
+| Project | Learning specific to a project or operational domain | Project owner / governed project process |
+| Shared Candidate | Proposed learning useful beyond its source context | Validation + applicable authority |
+| Platform Canonical | Validated learning incorporated into ARGO itself | Governed repository authority |
+
+Promotion between scopes must be explicit and traceable.
 
 ---
 
@@ -66,37 +95,50 @@ Operational Experience / User Feedback / Gap Reports / Anomalies / Model Reports
 
 ↓
 
-2. Learning Candidate
+2. Scope Classification
+   - Session
+   - User
+   - Project
+   - Shared Candidate
+   - Platform Candidate
 
 ↓
 
-3. Validation
+3. Evidence & Provenance Capture
 
 ↓
 
-4. Session Learning Handoff
+4. Validation
 
 ↓
 
-5. Parent ARGO + Responsible Engineer Review
+5. Session Learning Handoff
 
 ↓
 
-6. Authorization
+6. Parent ARGO + Responsible Engineer Review
 
 ↓
 
-7. Repository Ingestion / Authorized Execution
+7. Authorization where required
 
 ↓
 
-8. Post-Change Validation
+8. Ingest into the **correct memory domain**
 
 ↓
 
-9. Learning Log / Future Retrieval
+9. Optional explicit Promotion to broader scope
 
-The handoff and review stages prevent a temporary model instance from becoming the sole judge of what should permanently change in ARGO.
+↓
+
+10. Post-Change Validation
+
+↓
+
+11. Learning Log / Future Retrieval
+
+A temporary model instance must never silently convert a user's experience into platform truth.
 
 ---
 
@@ -108,6 +150,7 @@ The handoff should contain, as applicable:
 
 - session ID and date;
 - model / instance identity;
+- user / project / deployment scope;
 - repository baseline or commit inspected;
 - verified findings;
 - assumptions and hypotheses;
@@ -121,7 +164,8 @@ The handoff should contain, as applicable:
 - unresolved questions;
 - changes already executed;
 - changes requiring authorization;
-- suggested repository destinations.
+- suggested repository or memory destination;
+- whether the learning is **local** or a candidate for **platform-wide promotion**.
 
 The handoff is sent to:
 
@@ -132,41 +176,20 @@ If either destination is unavailable, the handoff remains explicitly **PENDING**
 
 ---
 
-# Learning Classes
+# Cross-Domain Promotion Rules
 
-## Class A — Observation
+A user or project lesson may be promoted toward platform memory only when:
 
-Something happened.
+1. its source and scope are known;
+2. the lesson is reproducible or sufficiently evidenced for its class;
+3. personal, confidential and deployment-specific material has been removed or appropriately isolated;
+4. the broader applicability is demonstrated rather than assumed;
+5. contradictions and alternatives have been reviewed;
+6. the applicable validation gate passes;
+7. required authority approves publication;
+8. the promotion and its evidence are recorded.
 
-No change authority.
-
-## Class B — Lesson
-
-A validated pattern or failure mode has been identified.
-
-No automatic authority to modify canonical rules.
-
-## Class C — Improvement Candidate
-
-A proposed change supported by evidence.
-
-Awaiting authorization where required.
-
-## Class D — Authorized Improvement
-
-A change accepted by the applicable authority and committed through the governed repository process.
-
-## Class E — Rejected / Deferred Learning
-
-A candidate that was rejected, deferred or superseded remains a learning result when traceability requires it.
-
----
-
-# Self-Improvement Boundary
-
-Self-improvement includes detecting recurring errors, comparing outcomes with expectations, extracting lessons, proposing simpler or stronger rules, identifying obsolete assumptions, testing candidates, preserving relevant alternatives and executing bounded authorized improvements.
-
-Self-improvement does not include silently changing protected authority, bypassing the Principal Human Owner, promoting hypotheses to canonical truth without validation, treating technical write access as authorization, deleting inconvenient historical evidence, or changing security/governance boundaries without authorization.
+A useful lesson may remain permanently local. **Not every good user experience belongs in ARGO itself.**
 
 ---
 
@@ -175,7 +198,7 @@ Self-improvement does not include silently changing protected authority, bypassi
 When an error is detected, record:
 
 1. What was believed.
-2. What repository reality showed.
+2. What repository or operational reality showed.
 3. What failed.
 4. Why it failed.
 5. What rule, assumption or relationship caused or enabled it.
@@ -186,6 +209,8 @@ When an error is detected, record:
 10. Whether the proposal was accepted, rejected, deferred or superseded.
 11. Whether the lesson was handed back to the parent ARGO context and responsible reviewer.
 12. Whether repository ingestion occurred.
+13. Which memory domain received the learning.
+14. Whether any cross-domain promotion was performed.
 
 ---
 
@@ -203,6 +228,17 @@ When an error is detected, record:
 10. Do not infer permanent validity from prior authorization.
 11. Do not end a material learning session without a feedback handoff or an explicit failed/pending handoff record.
 12. Do not ingest a model report into canonical knowledge without review appropriate to its impact.
+13. Do not merge User/Session/Project memory into Platform Canonical Memory implicitly.
+14. Do not allow a platform update to overwrite or erase user-owned learning without the applicable authorization.
+15. Preserve provenance whenever learning crosses a memory boundary.
+
+---
+
+# Self-Improvement Boundary
+
+Self-improvement includes detecting recurring errors, comparing outcomes with expectations, extracting lessons, proposing simpler or stronger rules, identifying obsolete assumptions, testing candidates, preserving relevant alternatives and executing bounded authorized improvements.
+
+Self-improvement does not include silently changing protected authority, bypassing the Principal Human Owner, promoting hypotheses to canonical truth without validation, treating technical write access as authorization, deleting inconvenient historical evidence, changing security/governance boundaries without authorization, or absorbing user-specific experience into platform memory without explicit promotion.
 
 ---
 
@@ -211,6 +247,10 @@ When an error is detected, record:
 - `Cognition/COG-009_COGNITIVE_SESSION.md`
 - `Engine/ENG-004_VALIDATION_ENGINE.md`
 - `Decision/DEC-009_DECISION_GOVERNANCE.md`
+- `Memory/MEM-001_MEMORY_MODEL.md`
+- `Memory/MEM-004_MEMORY_LIFECYCLE.md`
+- `Memory/MEM-005_MEMORY_GOVERNANCE.md`
+- `Memory/MEM-008_MEMORY_TRACEABILITY.md`
 - `Memory/MEM-009_MEMORY_EVOLUTION.md`
 - `Knowledge/KNW-009_KNOWLEDGE_EVOLUTION.md`
 - `Core/CORE-003_CONSTITUTION.md`
@@ -221,7 +261,7 @@ When an error is detected, record:
 
 # Guiding Statement
 
-**ARGO KOP should learn continuously, return experience to its source, act when authorized, and never confuse the ability to change itself with the authority to redefine itself.**
+**ARGO KOP should learn continuously, return experience to its source, keep system memory separate from user experience, promote only validated generalizable learning, act when authorized, and never confuse the ability to change itself with the authority to redefine itself.**
 
 ---
 
