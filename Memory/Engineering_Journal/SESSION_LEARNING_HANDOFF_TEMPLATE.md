@@ -6,6 +6,8 @@ Platform: ARGO KOP
 Category: Engineering Memory / Learning Handoff
 Status: Template
 Canonical: Yes within session-learning workflow
+Version: 1.1.0
+Last Review: 2026-08-09
 
 ---
 
@@ -17,13 +19,14 @@ Date:
 
 Model / Instance:
 
+User / Project / Deployment Scope:
+
 Parent ARGO Source / Context:
 
 Responsible Review Engineer:
 
 Repository Baseline / Commit:
 
----
 
 # 2. Session Result
 
@@ -33,26 +36,28 @@ Outcome:
 
 Material Learning Produced: YES / NO
 
----
+Learning Domain: SESSION / USER / PROJECT / DEPLOYMENT / SHARED CANDIDATE / PLATFORM CANDIDATE
+
 
 # 3. Verified Findings
 
 - Finding:
   Evidence:
   Affected Artifact / Relationship:
+  Confidence:
+  Scope:
 
----
 
 # 4. Errors and Corrections
 
 - What was believed:
 - What reality showed:
 - What failed:
-- Root cause:
+- Root cause / Candidate Cause:
 - Correction:
 - Evidence:
+- Validation Result:
 
----
 
 # 5. Lessons Learned
 
@@ -60,8 +65,9 @@ Material Learning Produced: YES / NO
   Evidence:
   Confidence:
   Reusability:
+  Applicable Scope:
+  Generalization Candidate: YES / NO
 
----
 
 # 6. Rejected / Deferred / Superseded Learning
 
@@ -70,7 +76,6 @@ Material Learning Produced: YES / NO
   Reason:
   Traceability Required: YES / NO
 
----
 
 # 7. Improvement Candidates
 
@@ -81,8 +86,8 @@ Material Learning Produced: YES / NO
   Affected Layers:
   Required Authority:
   Validation Needed:
+  Execution Status:
 
----
 
 # 8. Unresolved Questions
 
@@ -90,7 +95,6 @@ Material Learning Produced: YES / NO
   Why unresolved:
   Next Evidence Needed:
 
----
 
 # 9. Repository Impact
 
@@ -104,7 +108,6 @@ References Affected:
 
 Cross-Layer Impact:
 
----
 
 # 10. Handoff
 
@@ -118,13 +121,16 @@ Handoff Evidence / Reference:
 
 Timestamp:
 
----
+If a destination is unavailable, record the failure explicitly. Do not claim transfer merely because a handoff was prepared.
 
-# 11. Repository Ingestion
+
+# 11. Repository / Memory Ingestion
 
 Status: NOT STARTED / UNDER REVIEW / ACCEPTED / REJECTED / DEFERRED / APPLIED
 
-Destination(s):
+Proposed Destination:
+
+Actual Destination:
 
 Reviewer Decision:
 
@@ -132,11 +138,14 @@ Resulting Commit(s):
 
 Post-Ingestion Validation:
 
----
+Promotion Beyond Original Scope: YES / NO
+
+Promotion Authority / Evidence:
+
 
 # 12. Final Principle
 
-**A model session is not merely a source of output; it is a source of experience. Experience becomes ARGO knowledge only after evidence, review, authority and traceability are preserved.**
+**A model session is a source of experience. Experience remains attributable to its originating scope until evidence, review, authority and traceability justify promotion. A handoff is not ingestion, and ingestion is not canonical promotion.**
 
 ---
 
