@@ -8,7 +8,7 @@
 
 Platform: ARGO KOP  
 Document ID: KNW-002  
-Version: 1.2.0  
+Version: 1.2.1  
 Status: Integrity Hold / Revalidated  
 Category: Knowledge  
 Canonical: Yes  
@@ -106,11 +106,11 @@ Project Records
 
 Validated External Sources
 
-Approved Decisions
-
 AI Model Outputs
 
 AI Model Outputs are candidate evidence or source material and do not receive canonical authority automatically.
+
+For connected AI, tools, databases and other external sources, `Models/MOD-011_KNOWLEDGE_SOURCE_MODEL.md` defines the semantic source/provenance boundary. Classification consumes those source and evidence semantics; it does not redefine source authority or provenance rules.
 
 # Primary Knowledge Classes
 
@@ -179,6 +179,8 @@ Every governed knowledge object should have, as applicable:
 
 Repository location is a storage fact, not a substitute for knowledge domain or authority.
 
+When source/provenance information is supplied by an external model or connector, the source claim must remain distinguishable from ARGO's resulting knowledge classification and interpretation.
+
 # Reclassification
 
 Knowledge may be reclassified when new evidence, ownership changes, project boundaries, deployment context or broader validation changes its appropriate scope.
@@ -190,6 +192,8 @@ Reclassification shall preserve traceability and shall not silently rewrite hist
 Knowledge that appears reusable beyond its original scope may be marked `SHARED_CANDIDATE`.
 
 Promotion toward `PLATFORM` requires evidence, validation, contradiction review, impact analysis, applicable privacy/confidentiality review, authority and provenance.
+
+Promotion shall not be inferred from source reliability, model agreement, transport success or connector availability alone.
 
 # Repository Validation
 
@@ -225,6 +229,7 @@ This classification system is itself reviewable. If a simpler classification pre
 - `Knowledge/KNW-004_KNOWLEDGE_LIFECYCLE.md`
 - `Knowledge/KNW-005_KNOWLEDGE_GOVERNANCE.md`
 - `Knowledge/KNW-009_KNOWLEDGE_EVOLUTION.md`
+- `Models/MOD-011_KNOWLEDGE_SOURCE_MODEL.md`
 - `Memory/MEM-001_MEMORY_MODEL.md`
 - `Memory/MEM-005_MEMORY_GOVERNANCE.md`
 - `Engine/ENG-007_LEARNING_ENGINE.md`
