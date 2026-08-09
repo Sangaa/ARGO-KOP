@@ -6,12 +6,13 @@
 
 Platform: ARGO KOP (Knowledge Operating Platform)
 Document ID: REP-001
-Version: 1.7.6
+Version: 1.7.7
 Status: Integrity Hold
 Category: Repository
 Canonical: Yes
 Priority: Critical
 Last Audit Date: Aug 09, 2026
+Development Baseline: 3.3.0
 
 ---
 
@@ -62,7 +63,7 @@ Historical root naming-convention material is not active canonical inventory and
 - `Governance/GOV-010_GOVERNANCE_MODEL.md`
 - `Governance/_FOLDER_STATUS.md`
 
-No GOV-011 artifact is treated as active canonical authority without verified repository evidence.
+`Governance/GOV-011_EXTERNAL_FEEDBACK_REPORT_STANDARD.md` exists as a proposed intake standard but is not active canonical authority until formally ratified.
 
 ## 6. Runtime Layer
 
@@ -153,6 +154,22 @@ The repository contains additional physical domains shown by the current `SYSTEM
 
 Their presence in the physical repository does not by itself certify their architectural role or completeness. Their inventories are being validated through the connected-baseline audit and will be promoted into this index only with sufficient evidence.
 
+### Legacy / Reconstruction Policy
+
+Some domains contain early drafts, primitive sketches, incomplete structures or documents produced before the current ARGO architectural model and governance discipline were mature.
+
+These artifacts are **source material, not automatic authority**.
+
+For a domain that is rebuilt, the preferred method is:
+
+**Read existing material → extract useful evidence → classify facts / assumptions / draft ideas → identify obsolete structure → rebuild from the current foundation → validate identity / authority / relationships → index the rebuilt domain**.
+
+Where the old structure is fundamentally immature or misleading, ARGO may rewrite the domain from first principles rather than preserve its old organization.
+
+Old material must remain recoverable when it has provenance or migration value, normally through governed Archive/history. It must not be reintroduced into the active index merely because it existed previously.
+
+A domain is not considered complete merely because its folder exists or because draft files have been populated.
+
 ## 13. Canonicalization Rules
 
 1. One active canonical artifact per logical identity.
@@ -168,12 +185,14 @@ Their presence in the physical repository does not by itself certify their archi
 11. Map and status artifacts must not reuse the identity of canonical content documents.
 12. A domain-specific lifecycle artifact must not silently claim authority over another domain's lifecycle.
 13. Any approved canonical domain artifact that imposes an explicit indexing requirement must be represented in the applicable active inventory rather than hidden under an unqualified physical-domain summary.
+14. Legacy draft content must not be promoted solely because it is old, populated or previously referenced.
+15. Rebuilt domains must be revalidated as connected relationship graphs before active canonical promotion.
 
 ## 14. Integrity State
 
 Current repository state: **INTEGRITY HOLD**.
 
-The index is synchronized with the currently verified inventory within the inspected scope. Architecture, Lifecycle inventory, Plugin inventory and cross-layer relationship validation remain open.
+The index is synchronized with the currently verified inventory within the inspected scope. Architecture, Lifecycle inventory, Plugin inventory and cross-layer relationship validation remain open. Other physical domains remain subject to staged reconstruction and validation.
 
 ## 15. Verification Model
 
