@@ -1,41 +1,99 @@
-# UPDATE PACK
+# UPDATE PACK TEMPLATE
 
---------------------------------------------------
+Platform: ARGO KOP  
+Document ID: TPL-006  
+Template Type: UPDATE_PACK  
+Template Version: 1.2.0  
+Development Baseline: 3.3.0
 
-Update Number
+---
 
-Date
+Update Pack ID:
 
-Repository Version
+Date:
 
---------------------------------------------------
+Repository Commit:
 
-Completed
+Development Baseline:
 
---------------------------------------------------
+Scope:
 
-Modified
+---
 
---------------------------------------------------
+# Completed
 
-Added
+- 
 
---------------------------------------------------
+---
 
-Removed
+# Modified
 
---------------------------------------------------
+- Path / Version / Reason
 
-Fixed
+---
 
---------------------------------------------------
+# Added
 
-Known Issues
+- Path / Purpose / Authority State
 
---------------------------------------------------
+---
 
-Next Build
+# Removed / Archived
 
---------------------------------------------------
+- Path / Reason / Replacement if any
 
-End
+---
+
+# Fixed
+
+- Finding / Evidence / Correction
+
+---
+
+# Validation Performed
+
+- Integrity:
+- References:
+- Version alignment:
+- Downstream impact:
+- Re-read after write:
+
+---
+
+# Known Issues / Integrity Holds
+
+- 
+
+---
+
+# Decisions / Authority Changes
+
+- 
+
+---
+
+# Lessons Learned
+
+- 
+
+---
+
+# Unresolved Questions
+
+- 
+
+---
+
+# Next Build / Next Review
+
+- 
+
+---
+
+# Related Documents
+
+- 
+
+---
+
+End of Template
