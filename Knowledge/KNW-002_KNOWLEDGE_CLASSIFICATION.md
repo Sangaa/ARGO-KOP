@@ -6,71 +6,29 @@
 
 ---
 
-Platform
-
-ARGO KOP
-
-Knowledge Operating Platform
-
----
-
-Document ID
-
-KNW-002
-
-Version
-
-1.1.0
-
-Status
-
-Approved
-
-Category
-
-Knowledge
-
-Canonical
-
-Yes
+Platform: ARGO KOP  
+Document ID: KNW-002  
+Version: 1.2.0  
+Status: Integrity Hold / Revalidated  
+Category: Knowledge  
+Canonical: Yes  
+Last Audit: 2026-08-09  
 
 ---
 
 # Purpose
 
-This document defines the official knowledge classification system used throughout ARGO KOP.
+This document defines the classification dimensions used throughout ARGO KOP so knowledge remains discoverable, attributable, correctly scoped and reusable without confusing subject matter with ownership or authority.
 
-Knowledge classification ensures that every knowledge asset is organized consistently, searchable and reusable.
+# Classification Dimensions
 
----
+Knowledge classification uses separate dimensions.
 
-# Objectives
+## Subject Classification
 
-Knowledge Classification shall:
+Describes **what the knowledge is about**.
 
-- Standardize knowledge organization.
-- Support repository navigation.
-- Improve reasoning quality.
-- Prevent duplicated knowledge.
-- Enable future knowledge expansion.
-
----
-
-# Classification Philosophy
-
-Knowledge is classified by meaning.
-
-Never by technology.
-
-Never by storage location.
-
-Architecture determines organization.
-
-Meaning determines classification.
-
----
-
-# Primary Knowledge Classes
+Primary classes may include:
 
 Architecture
 
@@ -96,185 +54,156 @@ Research
 
 Decision
 
----
+## Domain / Scope Classification
 
-# Architecture Knowledge
+Describes **where the knowledge belongs**.
 
-Knowledge describing:
+- `SESSION`
+- `USER`
+- `PROJECT`
+- `DEPLOYMENT`
+- `SHARED_CANDIDATE`
+- `PLATFORM`
 
-Platform Structure
+Subject classification and domain classification shall not be conflated.
 
-Layer Models
+Example: a `Technical` knowledge item may belong to a `USER` or `PROJECT` domain and does not become Platform knowledge merely because it is technically useful.
 
-Dependencies
+# Knowledge States
 
-Integration
+Classification does not determine authority.
 
-Architectural Decisions
+A classified item may be:
 
----
+- `CANDIDATE`
+- `VALIDATED`
+- `AUTHORIZED`
+- `CANONICAL`
+- `HOLD`
+- `REJECTED`
 
-# Governance Knowledge
+`VALIDATED` does not automatically mean `CANONICAL`.
 
-Knowledge describing:
+# Ownership
 
-Policies
+Every governed knowledge object shall identify its owner or owning scope.
 
-Standards
+User-owned, project-owned and deployment-specific knowledge remains attributable to that scope unless explicitly promoted.
 
-Naming
+# Source and Provenance
 
-Versioning
+Every material knowledge object shall preserve its source/provenance as applicable.
 
-Traceability
+Sources may include:
 
-Compliance
-
----
-
-# Repository Knowledge
-
-Knowledge describing:
-
-Repository Structure
-
-Navigation
-
-Ownership
-
-Repository Lifecycle
-
-Repository Standards
-
----
-
-# Business Knowledge
-
-Knowledge describing:
-
-Business Processes
-
-Business Rules
-
-Business Entities
-
-Business Relationships
-
-Business Concepts
-
----
-
-# Operational Knowledge
-
-Knowledge describing:
-
-Daily Operations
-
-Execution Procedures
-
-Operational Standards
+Repository Documents
 
 Operational Experience
 
-Operational Lessons
+User Experience
 
----
+Project Records
 
-# Project Knowledge
+Validated External Sources
 
-Knowledge specific to one project.
+Approved Decisions
 
-Projects never redefine platform knowledge.
+AI Model Outputs
 
----
+AI Model Outputs are candidate evidence or source material and do not receive canonical authority automatically.
 
-# Technical Knowledge
+# Primary Knowledge Classes
 
-Implementation guidance.
+## Architecture
 
-Technology references.
+Platform Structure, Layer Models, Dependencies, Integration and Architectural Decisions.
 
-Engineering practices.
+## Governance
 
-Platform integrations.
+Policies, Standards, Naming, Versioning, Traceability and Compliance.
 
----
+## Repository
 
-# Reference Knowledge
+Repository Structure, Navigation, Ownership, Lifecycle and Repository Standards.
 
-Reusable supporting information.
+## Platform
 
-Definitions
+Knowledge describing governed platform behavior, capabilities and canonical platform concepts.
 
-Indexes
+## Business
 
-Catalogs
+Business Processes, Rules, Entities, Relationships and Concepts.
 
-Mappings
+## Operational
 
-Reference Tables
+Daily Operations, Execution Procedures, Operational Standards, Experience and Lessons.
 
----
+## Project
 
-# Historical Knowledge
+Knowledge specific to a project. Project knowledge does not redefine platform knowledge without applicable governance and promotion.
 
-Archived knowledge.
+## Technical
 
-Past decisions.
+Implementation guidance, technology references, engineering practices and integrations.
 
-Repository history.
+## Reference
 
-Historical versions.
+Definitions, indexes, catalogs, mappings and reference tables.
 
----
+## Historical
 
-# Research Knowledge
+Archived knowledge, past decisions, repository history and historical versions.
 
-Validated external findings.
+## Research
 
-Comparative studies.
+Validated external findings, comparative studies, analysis and future opportunities.
 
-Analysis.
+## Decision
 
-Future opportunities.
-
----
-
-# Decision Knowledge
-
-Approved engineering decisions.
-
-Architectural decisions.
-
-Governance decisions.
-
-Repository decisions.
-
----
+Governed engineering, architectural, repository or policy decisions.
 
 # Classification Rules
 
-Every knowledge object shall have:
+Every governed knowledge object should have, as applicable:
 
-One Primary Classification
+- one primary subject classification;
+- optional secondary classifications;
+- one declared domain/scope;
+- owner;
+- source/provenance;
+- evidence state;
+- status;
+- version;
+- repository location;
+- relationships.
 
-Optional Secondary Classification
+Repository location is a storage fact, not a substitute for knowledge domain or authority.
 
-One Owner
+# Reclassification
 
-One Repository Location
+Knowledge may be reclassified when new evidence, ownership changes, project boundaries, deployment context or broader validation changes its appropriate scope.
 
-One Canonical Version
+Reclassification shall preserve traceability and shall not silently rewrite historical meaning.
 
----
+# Promotion Candidate
+
+Knowledge that appears reusable beyond its original scope may be marked `SHARED_CANDIDATE`.
+
+Promotion toward `PLATFORM` requires evidence, validation, contradiction review, impact analysis, applicable privacy/confidentiality review, authority and provenance.
 
 # Repository Validation
 
-Knowledge reviews shall verify:
+Knowledge reviews shall verify, as applicable:
 
 Classification Accuracy
 
+Domain / Scope Accuracy
+
 Ownership
+
+Provenance
+
+Evidence State
 
 Relationships
 
@@ -284,25 +213,26 @@ Architecture Alignment
 
 Governance Compliance
 
----
+Promotion Status
+
+# Reviewability
+
+This classification system is itself reviewable. If a simpler classification preserves the same or better clarity, traceability and governance protection, it may replace the current model through the applicable governance process.
 
 # Related Documents
 
-KNW-001_KNOWLEDGE_MODEL
-
-REP-001_MASTER_INDEX
-
-REP-003_REPOSITORY_STANDARDS
-
-ARC-011_CANONICAL_ARCHITECTURE_MODEL
-
-CORE-003_CONSTITUTION
-
----
+- `Knowledge/KNW-001_KNOWLEDGE_MODEL.md`
+- `Knowledge/KNW-004_KNOWLEDGE_LIFECYCLE.md`
+- `Knowledge/KNW-005_KNOWLEDGE_GOVERNANCE.md`
+- `Knowledge/KNW-009_KNOWLEDGE_EVOLUTION.md`
+- `Memory/MEM-001_MEMORY_MODEL.md`
+- `Memory/MEM-005_MEMORY_GOVERNANCE.md`
+- `Engine/ENG-007_LEARNING_ENGINE.md`
+- `Repository/REP-001_MASTER_INDEX.md`
 
 # Guiding Statement
 
-Correct classification transforms information into reusable knowledge.
+**Classify what the knowledge means, where it belongs, who owns it, what evidence supports it, and what authority it has. Never collapse these questions into one label.**
 
 ---
 
