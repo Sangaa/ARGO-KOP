@@ -4,11 +4,9 @@
 
 # MEMORY EVOLUTION
 
----
-
 Platform: ARGO KOP (Knowledge Operating Platform)  
 Document ID: MEM-009  
-Version: 1.3.0  
+Version: 1.3.1  
 Status: Integrity Hold / Revalidated  
 Category: Memory  
 Canonical: Yes  
@@ -121,6 +119,16 @@ The reverse direction must also be controlled: platform knowledge should not sil
 
 ---
 
+# Source and Provenance Boundary
+
+For connected AI models, tools, databases, documents and other external sources, `Models/MOD-011_KNOWLEDGE_SOURCE_MODEL.md` defines source identity, provenance and evidence-state semantics.
+
+Memory may receive validated learning from these sources, but source availability, model agreement, transport success or connector access does not itself grant canonical authority.
+
+Source claims must remain distinguishable from the resulting ARGO memory interpretation.
+
+---
+
 # Controlled Self-Improvement
 
 ARGO KOP may autonomously:
@@ -159,11 +167,11 @@ Memory evolution shall:
 
 # Error-to-Learning Record
 
-When memory changes because of an error or contradiction, preserve at minimum:
+When memory changes because of an error, contradiction or recoverable execution failure, preserve at minimum:
 
 1. Previous belief or stored interpretation.
-2. Evidence that contradicted it.
-3. Root cause of the mismatch.
+2. Evidence that contradicted it or exposed the failure.
+3. Root cause or candidate root cause.
 4. Corrected interpretation or candidate.
 5. Affected relationships.
 6. Validation performed.
@@ -171,6 +179,8 @@ When memory changes because of an error or contradiction, preserve at minimum:
 8. Final disposition: accepted, rejected, deferred or superseded.
 9. Memory domain affected.
 10. Any cross-domain promotion performed.
+11. Recovery action when a technical/tool failure was involved.
+12. Whether the recovery exposed a reusable process lesson.
 
 ---
 
@@ -224,6 +234,8 @@ Downstream Impact
 
 Promotion Justification
 
+Failure / Recovery Evidence where applicable
+
 ---
 
 # Related Documents
@@ -234,6 +246,7 @@ Promotion Justification
 - `Memory/MEM-008_MEMORY_TRACEABILITY.md`
 - `Engine/ENG-007_LEARNING_ENGINE.md`
 - `Knowledge/KNW-009_KNOWLEDGE_EVOLUTION.md`
+- `Models/MOD-011_KNOWLEDGE_SOURCE_MODEL.md`
 - `Decision/DEC-009_DECISION_GOVERNANCE.md`
 - `Core/CORE-003_CONSTITUTION.md`
 
@@ -241,7 +254,7 @@ Promotion Justification
 
 # Guiding Statement
 
-**Memory should continuously improve from experience without silently acquiring authority; ARGO's system memory and each user's learned experience remain distinct, attributable domains, with validated learning crossing between them only through explicit governed promotion.**
+**Memory should continuously improve from evidence and experience without silently acquiring authority; ARGO's system memory and each user's learned experience remain distinct, attributable domains, with source provenance preserved and validated learning crossing between them only through explicit governed promotion.**
 
 ---
 
