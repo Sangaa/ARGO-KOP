@@ -2,131 +2,62 @@
 
 ---
 
-Platform
-
-ARGO KOP
-
+Platform: ARGO KOP
 Knowledge Operating Platform
 
----
-
-Folder
-
-Models
-
-Status
-
-INTEGRITY HOLD
-
-Canonical
-
-Yes
-
-Priority
-
-VERY HIGH
-
-Last Audit
-
-2026-08-08
-
-Review Method
-
-Repository First / Evidence Based
+Folder: Models
+Version: 1.3.0
+Status: INTEGRITY HOLD / STAGED RECONSTRUCTION
+Canonical: Domain container; individual authority is defined by each model artifact
+Priority: VERY HIGH
+Development Baseline: 3.3.0
+Last Audit: 2026-08-09
+Review Method: Repository First / Evidence Based
 
 ---
 
 # Purpose
 
-The Models layer defines canonical data-model artifacts used throughout ARGO KOP.
+The Models domain defines canonical semantic models used throughout ARGO KOP.
 
-Models establish the common language between Runtime, Services, Memory, Knowledge, AI and future implementations.
+Models define structure, identity, relationships, provenance and semantic boundaries. They do not implement runtime behavior.
 
-Models describe structure.
+# Current Verified Artifacts
 
-They do not implement behavior.
-
-# Objectives
-
-The Models layer shall:
-
-- standardize platform data;
-- define canonical entities;
-- define relationships;
-- support Runtime;
-- support Services;
-- support AI;
-- support future database implementation;
-- support API implementation;
-- support cross-source knowledge aggregation;
-- preserve provenance independently of storage technology.
-
-# Verified Repository Contents
-
-The following model artifacts were directly located during the current audit:
+Directly verified and currently maintained:
 
 - `MOD-002_ENTITY_MODEL.md`
 - `MOD-003_DOCUMENT_MODEL.md`
 - `MOD-004_MEMORY_MODEL.md`
 - `MOD-011_KNOWLEDGE_SOURCE_MODEL.md`
 
-`MOD-001`, `MOD-005`, `MOD-006`, `MOD-007`, `MOD-008`, `MOD-009`, and `MOD-010` are referenced by historical or index material but were **not directly located under their declared paths during this audit**.
+These documents have been revalidated against the current 3.3.0 baseline, but the domain remains on HOLD until their consumers, dependencies and missing historical declarations are reconciled.
 
-They must not be treated as existing canonical artifacts until directly verified.
+# Unresolved Historical Declarations
 
-# Historical / Declared Model Sequence
+The following were previously declared but are not currently verified at their historical paths:
 
-The previous design declared the following sequence:
+- `MOD-001_MODEL_ARCHITECTURE.md`
+- `MOD-005_KNOWLEDGE_MODEL.md`
+- `MOD-006_RUNTIME_MODEL.md`
+- `MOD-007_SERVICE_MODEL.md`
+- `MOD-008_RELATIONSHIP_MODEL.md`
+- `MOD-009_VERSION_MODEL.md`
+- `MOD-010_MODEL_REFERENCE.md`
 
-MOD-001
+Their absence does not justify automatic recreation. Each must first be compared against current Architecture, Knowledge, Runtime, Services, Release and Repository evidence.
 
-↓
+# Reconstruction Rule
 
-MOD-002
+The Models domain is being rebuilt from current architectural understanding rather than completed mechanically from its historical MOD-001..011 sequence.
 
-↓
+Required process:
 
-MOD-003
+**Read existing material → locate equivalent concepts → classify evidence → detect overlap/conflict → define target semantic boundary → rebuild where necessary → validate consumers/dependencies → update indexes → re-read**
 
-↓
+A missing filename is not itself a missing concept.
 
-MOD-004
-
-↓
-
-MOD-005
-
-↓
-
-MOD-006
-
-↓
-
-MOD-007
-
-↓
-
-MOD-008
-
-↓
-
-MOD-009
-
-↓
-
-MOD-010
-
-↓
-
-MOD-011
-
-This sequence is retained as a **design declaration**, not as proof that every artifact exists.
-
-# Authority Rule
-
-A model becomes an active repository dependency only after its actual file content and authority have been inspected.
-
-A filename in an index, historical reference, conversation memory, or generated plan does not prove that the artifact exists or is canonical.
+An existing filename is not itself a canonical concept.
 
 # Model Principles
 
@@ -150,62 +81,44 @@ Source Neutral
 
 Evidence Bounded
 
-# Dependencies
+# Authority Boundary
 
-Core
+The Models domain does not override Constitution, Governance, Architecture, Repository or Release authority.
 
-↓
+External model output, historical drafts and conversation memory are evidence inputs only until validated and promoted through the applicable authority path.
 
-Governance
+# Cross-Layer Consumers
 
-↓
+Models are expected to support, as applicable:
 
-Architecture
+- Runtime
+- Services
+- Knowledge
+- Memory
+- AI
+- Interfaces
+- Projects
+- future implementation layers
 
-↓
+A model is not considered complete until material consumers and dependencies are known sufficiently for the target scope.
 
-Repository
+# Related Governance
 
-↓
-
-Models
-
-↓
-
-Runtime
-
-↓
-
-Services
-
-↓
-
-Engineering
-
-↓
-
-AI
-
-# Related Documents
-
-- `PROJECT_BOOTSTRAP.md`
-- `Core/CORE-003_CONSTITUTION.md`
+- `Governance/GOV-004_DOCUMENT_METADATA.md`
+- `Governance/GOV-011_EXTERNAL_FEEDBACK_REPORT_STANDARD.md`
+- `Governance/GOV-012_DOMAIN_RECONSTRUCTION_STANDARD.md`
+- `Architecture/ARC-009_ARCHITECTURE_DECISIONS.md`
+- `Architecture/ARC-010_EVOLUTION_MODEL.md`
+- `Architecture/ARC-011_CANONICAL_ARCHITECTURE_MODEL.md`
 - `Repository/REP-001_MASTER_INDEX.md`
 - `Repository/REP-002_REPOSITORY_MAP.md`
-- `AI/AI-006_MODEL_ADAPTER.md`
-- `AI/AI-007_MULTI_MODEL_SUPPORT.md`
-- `Models/_FOLDER_STATUS.md`
-
-# Guiding Statement
-
-Models define repository structure.
-
-Source data may come from anywhere, but provenance, classification, validation and authority remain explicit.
-
-Implementation comes later.
-
-Repository evidence comes first.
 
 ---
 
-End
+# Guiding Statement
+
+**Models define semantic structure; repository evidence defines what actually exists; governance defines how candidate structure becomes authoritative.**
+
+---
+
+End of Document
