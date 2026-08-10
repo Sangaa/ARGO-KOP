@@ -2,9 +2,9 @@
 
 Platform: ARGO KOP  
 Document ID: REP-014  
-Version: 1.0.3  
+Version: 1.0.4  
 Status: Active / Relationship Enumeration In Progress  
-Development Baseline: 3.2.1  
+Development Baseline: 3.3.0  
 Last Audit: 2026-08-10
 
 ## Purpose
