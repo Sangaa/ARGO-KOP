@@ -4,8 +4,6 @@
 
 # REPOSITORY SERVICE
 
----
-
 Platform
 
 ARGO KOP
@@ -20,11 +18,11 @@ SRV-002
 
 Version
 
-1.1.0
+1.1.1
 
 Status
 
-Approved
+Approved / Revalidation Required
 
 Category
 
@@ -38,17 +36,29 @@ Priority
 
 Critical
 
+Development Baseline
+
+3.2.1
+
+Official Release
+
+1.0.0
+
+Last Audit Date
+
+Aug 10, 2026
+
 ---
 
 # Purpose
 
-The Repository Service is responsible for all repository interactions inside ARGO KOP.
+The Repository Service is responsible for the repository interaction contract defined by ARGO KOP.
 
-It provides a single standardized interface for reading, validating and updating repository resources.
+It provides a standardized interface for reading, validating and updating repository resources.
 
 The Repository Service never owns repository data.
 
-It operates on behalf of the Runtime.
+It operates within the authority boundaries established by the Runtime, Governance, Architecture and Repository controls.
 
 ---
 
@@ -64,7 +74,7 @@ Validate repository structure.
 
 Load repository documents.
 
-Update canonical files.
+Update canonical files when authorized.
 
 Support repository synchronization.
 
@@ -152,23 +162,25 @@ Report
 
 The Repository Service shall:
 
-Never modify architecture.
+Never modify architecture by service-layer authority alone.
 
-Never modify governance.
+Never modify governance by service-layer authority alone.
 
 Never invent repository objects.
 
-Never create undocumented files.
+Never create undocumented files merely to satisfy unresolved references.
 
-Never bypass Runtime.
+Never bypass required Runtime, Governance, Architecture or Validation controls.
 
 Always preserve repository consistency.
+
+A technical write is not by itself a governed acceptance.
 
 ---
 
 # Repository Synchronization
 
-Synchronization includes:
+Synchronization includes, where applicable:
 
 Repository Tree
 
@@ -184,11 +196,13 @@ Repository Version
 
 Engineering State
 
+Affected indexes and status records must be re-read after material mutation.
+
 ---
 
 # Validation
 
-Before every repository operation verify:
+Before every repository operation, the applicable controls shall verify:
 
 Repository Exists
 
@@ -196,11 +210,15 @@ Repository Version Valid
 
 Repository Structure Valid
 
-Requested File Exists
+Requested File or Target Located
 
-Requested Folder Exists
+Requested Folder Exists where applicable
 
-Repository Integrity Valid
+Applicable Repository Integrity Checks
+
+For material changes, use the repository relationship verification chain:
+
+`Referenced → Located → Read → Identity Verified → Authority Verified → Relationship Validated → Consumer/Dependency Checked → Mutation Impact Checked → Re-read → Revalidate`
 
 ---
 
@@ -214,7 +232,7 @@ Return validation error.
 
 Do not modify repository.
 
-Wait for corrected repository state.
+Wait for corrected repository state or an explicit governed decision.
 
 ---
 
@@ -229,6 +247,8 @@ Architecture
 Repository
 
 Runtime
+
+Validation controls
 
 ---
 
@@ -246,9 +266,25 @@ PROJECT_BOOTSTRAP.md
 
 ---
 
+# Current Revalidation Boundary
+
+The Repository Service contract is treated as canonical architectural/service intent, while implementation, runtime consumption and repository-wide operational coverage remain subject to direct evidence.
+
+The statement that repository operations pass through this service is an architectural contract and must not be interpreted as proof that every current tool or integration path is already implemented through it.
+
+---
+
+# Integrity State
+
+Current state: **INTEGRITY HOLD / REVALIDATION REQUIRED**.
+
+This document has been revalidated for identity, baseline and authority-boundary consistency within the inspected scope. Repository-wide service implementation and consumer coverage remain open.
+
+---
+
 # Guiding Statement
 
-Every repository operation shall pass through the Repository Service.
+Repository operations must remain evidence-backed and authority-controlled.
 
 Repository integrity has absolute priority.
 
