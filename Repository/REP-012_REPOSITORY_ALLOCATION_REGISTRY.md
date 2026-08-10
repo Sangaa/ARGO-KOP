@@ -6,12 +6,12 @@
 
 Platform: ARGO KOP
 Document ID: REP-012
-Version: 1.0.3
+Version: 1.0.4
 Status: Active Control / Integrity Hold / Phase 1 Population In Progress
 Category: Repository Control
 Canonical: Yes
 Priority: Critical
-Development Baseline: 3.2.1
+Development Baseline: 3.3.0
 Last Audit Date: 2026-08-10
 
 ## 1. Purpose
@@ -255,6 +255,29 @@ Controlled reconciliation states are:
 `CLOSED`
 
 The current control-plane state is **PARTIALLY_RECONCILED / INTEGRITY HOLD**.
+
+### Reconciliation Evidence Recorded 2026-08-10
+
+The current control-plane review established the following evidence boundaries:
+
+| Check | Result | Meaning |
+|---|---|---|
+| REP-011 ↔ REP-012 | PARTIAL | Review/evidence and allocation/recovery concepts are linked, but full per-artifact state synchronization is not yet populated. |
+| REP-012 ↔ REP-013 | PARTIAL | Initial control-plane allocation exists, but repository-wide allocation/content reconciliation is incomplete. |
+| REP-013 ↔ REP-014 | PARTIAL | Control-plane artifacts are represented in the relationship graph, but full repository relationship validation remains open. |
+| REP-014 ↔ REP-015 | PARTIAL | Bootstrap/control-plane relationships are explicit; closure evidence remains open. |
+| REP-015 ↔ REP-016 | RECONCILED WITHIN CURRENT SCOPE | Bootstrap order and Phase-1 queue are explicitly linked; this does not close Phase 1. |
+| REP-016 ↔ REP-011..014 | PARTIAL | Queue state references the control-plane registries, while complete state-by-state reconciliation remains open. |
+
+**Important:** These results are scoped to the control-plane artifacts actually inspected. They are not a claim that the entire repository has been reconciled.
+
+### Baseline Reconciliation Note
+
+Earlier control-plane records carried Development Baseline `3.2.1`. The current reviewed control-plane sequence includes material changes through the `3.3.0` development baseline.
+
+This registry is therefore updated to `3.3.0` rather than preserving the older baseline value as if it represented the current construction state.
+
+The baseline change is a repository-state fact; it does **not** by itself mean Phase 1 is complete or that every artifact has been revalidated against 3.3.0.
 
 `RECONCILED` must mean the required views agree within the recorded scope. It does not mean the entire repository or Phase 1 is complete.
 
