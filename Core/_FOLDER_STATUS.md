@@ -17,7 +17,7 @@ Status
 
 Version
 
-1.3.0
+1.3.1
 
 Last Repository Re-Audit
 
@@ -70,6 +70,14 @@ Principles Review
 Cognitive Model Review
 
 🟢 Completed
+
+System Philosophy Review
+
+🟢 Explicitly revalidated on 2026-08-10
+
+Design Principles Review
+
+🟢 Explicitly revalidated on 2026-08-10
 
 Architectural Laws Review
 
@@ -156,8 +164,8 @@ Known canonical Core artifacts currently evidenced or listed by the repository i
 - `CORE-003_CONSTITUTION.md` — independently revalidated 2026-08-10
 - `CORE-004_CORE_PRINCIPLES.md` — current document already carries 2026-08-10 targeted review
 - `CORE-005_COGNITIVE_MODEL.md` — current document already carries 2026-08-10 targeted review
-- `CORE-006_SYSTEM_PHILOSOPHY.md` — listed by Core records; independent file location not yet established in the current evidence set
-- `CORE-007_DESIGN_PRINCIPLES.md` — listed by Core records; independent file location not yet established in the current evidence set
+- `CORE-006_SYSTEM_PHILOSOPHY.md` — independently located and revalidated 2026-08-10
+- `CORE-007_DESIGN_PRINCIPLES.md` — independently located and revalidated 2026-08-10
 - `CORE-008_ARCHITECTURAL_LAWS.md` — independently revalidated 2026-08-10
 - `CORE-009_PLATFORM_LIFECYCLE.md` — independently revalidated 2026-08-10
 - `CORE-010_PLATFORM_ROADMAP.md` — independently revalidated 2026-08-10
