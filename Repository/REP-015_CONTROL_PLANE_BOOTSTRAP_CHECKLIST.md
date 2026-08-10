@@ -2,9 +2,9 @@
 
 Platform: ARGO KOP  
 Document ID: REP-015  
-Version: 1.0.1  
+Version: 1.0.2  
 Status: Active / Phase 1 Open  
-Development Baseline: 3.2.1  
+Development Baseline: 3.3.0  
 Last Audit: 2026-08-10
 
 ## Purpose
@@ -29,6 +29,28 @@ This checklist prevents a model from relying on conversational memory when the r
 11. Open / unresolved scope
 12. Current work item
 ```
+
+## Baseline Verification Gate
+
+Before interpreting any registered state, compare the Development Baseline and audit date of the relevant control-plane artifacts.
+
+If control-plane artifacts carry different baselines:
+
+```text
+STOP PROMOTION
+    ↓
+IDENTIFY BASELINE MISMATCH
+    ↓
+COMPARE CURRENT CONTENT / COMMITS
+    ↓
+REVALIDATE AFFECTED REGISTRIES
+    ↓
+SYNCHRONIZE OR EXPLICITLY RETAIN DIFFERENCE
+    ↓
+RECORD EVIDENCE
+```
+
+A baseline number is a coordination marker, not proof that an artifact is correct or that Phase 1 is complete.
 
 ## Evidence Priority Rule
 
@@ -109,6 +131,8 @@ Registry synchronization means updating the affected records in:
 - `REP-012`
 - `REP-013`
 - `REP-014`
+- `REP-015`
+- `REP-016`
 
 where applicable.
 
@@ -152,6 +176,20 @@ If repeated review produces no new evidence:
 3. record the missing evidence;
 4. define the next concrete action;
 5. move to that action instead of repeating the same pass.
+
+## Control-Plane Reconciliation Rule
+
+The presence of all control-plane files does not establish that the control plane is reconciled.
+
+Current control-plane scope is:
+
+`REP-011 / REP-012 / REP-013 / REP-014 / REP-015 / REP-016`
+
+The current status remains:
+
+`PARTIALLY RECONCILED / INTEGRITY HOLD`
+
+until the registered states, identities, relationships and work-queue evidence are reconciled across the scope.
 
 ## Phase 1 Completion Gate
 
