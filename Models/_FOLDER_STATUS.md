@@ -5,34 +5,35 @@
 Platform: ARGO KOP
 Knowledge Operating Platform
 Folder: Models
-Version: 1.3.0
+Version: 1.3.1
 Status: INTEGRITY HOLD / STAGED RECONSTRUCTION
 Canonical: Pending consolidated validation
 Priority: Critical
-Development Baseline: 3.3.0
-Last Audit: 2026-08-09
+Development Baseline: 3.2.1
+Last Audit: 2026-08-10
 Review Method: Repository First / Evidence Based
 
 ---
 
 # Current Audit Finding
 
-The Models domain contains four directly verified semantic model artifacts:
+The Models domain contains directly verified semantic model artifacts, including:
 
+- `MOD-001_KNOWLEDGE_MODEL.md`
 - `MOD-002_ENTITY_MODEL.md`
 - `MOD-003_DOCUMENT_MODEL.md`
 - `MOD-004_MEMORY_MODEL.md`
 - `MOD-011_KNOWLEDGE_SOURCE_MODEL.md`
 
-These four artifacts have been revalidated against the current architectural baseline and now explicitly preserve authority, provenance, cross-layer impact and post-mutation revalidation rules.
+The inspected model artifacts are being treated as evidence-backed domain artifacts subject to relationship validation. Presence in the folder does not by itself establish complete domain validation or repository-wide canonical integrity.
 
-Historical declarations for MOD-001 and MOD-005 through MOD-010 remain unresolved at their historical paths. No missing artifact has been recreated merely to complete a numeric sequence.
+Historical declarations for other model identifiers remain unresolved where their current canonical artifacts have not been independently verified. No missing artifact is to be recreated merely to complete a numeric sequence.
 
 # Reconstruction Decision
 
 The Models domain is not being restored as a historical sequence.
 
-It is being reconstructed according to the current ARGO architecture.
+It is being reconstructed according to the current ARGO architecture and repository evidence.
 
 Historical material may be used as source evidence, but it is not automatically canonical.
 
@@ -50,6 +51,7 @@ Before Models can leave Integrity Hold, validate:
 8. Historical missing declarations ↔ equivalent current concepts.
 9. Duplicate/overlapping semantic definitions.
 10. Version and release authority.
+11. Specifications ↔ Model authority and consumer relationships.
 
 # Integrity Rules
 
@@ -60,6 +62,7 @@ Before Models can leave Integrity Hold, validate:
 - External model output is evidence, not canonical authority.
 - Material model changes require downstream review and post-change re-read.
 - User/project learning memory must remain separate from platform canonical model authority.
+- Development baseline follows the authoritative `Release/VERSION.md` until formally changed through the applicable authority path.
 
 # Next Audit Boundary
 
