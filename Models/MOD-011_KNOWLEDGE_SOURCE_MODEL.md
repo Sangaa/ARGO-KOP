@@ -6,14 +6,19 @@
 
 Platform: ARGO KOP
 Document ID: MOD-011
-Version: 1.1.1
+Version: 1.1.2
 Status: Proposed / Future-Ready / Revalidation Required
 Category: Models
 Canonical: Yes
-Development Baseline: 3.3.0
-Last Audit: 2026-08-09
+Development Baseline: 3.2.1
+Last Audit: 2026-08-10
+Audit Boundary: This audit revalidates metadata, authority boundaries, and selected relationships. It does not certify the full pre-failure semantic mutation.
 
 ---
+
+# Temporal / Provenance Boundary
+
+This model was materially mutated during the 2026-08-09 pre-failure session window identified by `EJR-015`. Therefore its current semantic content is retained provisionally and remains subject to independent revalidation. Current metadata correction does not retroactively validate the earlier semantic mutation.
 
 # Purpose
 
