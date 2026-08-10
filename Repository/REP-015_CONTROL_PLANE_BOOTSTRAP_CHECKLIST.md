@@ -2,8 +2,8 @@
 
 Platform: ARGO KOP  
 Document ID: REP-015  
-Version: 1.0.2  
-Status: Active / Phase 1 Open  
+Version: 1.0.3  
+Status: Active / Phase 1 Open / Integrity Hold  
 Development Baseline: 3.3.0  
 Last Audit: 2026-08-10
 
@@ -76,6 +76,28 @@ Conversation narrative
 
 A historical record can remain valuable evidence while being insufficient for current correctness.
 
+## Intent Interpretation Gate
+
+If the requested change depends on interpreting a human statement or design intention:
+
+```text
+Observed wording
+      ↓
+Literal meaning
+      ↓
+Model interpretation
+      ↓
+Assumption / hypothesis
+      ↓
+Repository + authority validation
+      ↓
+Explicit decision
+```
+
+A model interpretation must not silently become canonical meaning.
+
+This gate exists specifically to prevent a model from converting an intended meaning into an invented architectural rule without validating the repository evidence.
+
 ## Pre-Mutation Gate
 
 Before changing any file, answer:
@@ -99,26 +121,6 @@ Reason for Current Work:
 
 If identity or state cannot be resolved, stop promotion and perform repository reconciliation first.
 
-## Intent Interpretation Gate
-
-If the requested change depends on interpreting a human statement or design intention:
-
-```text
-Observed wording
-      ↓
-Literal meaning
-      ↓
-Model interpretation
-      ↓
-Assumption / hypothesis
-      ↓
-Repository + authority validation
-      ↓
-Explicit decision
-```
-
-A model interpretation must not silently become canonical meaning.
-
 ## Mutation Gate
 
 A material mutation requires:
@@ -135,6 +137,25 @@ Registry synchronization means updating the affected records in:
 - `REP-016`
 
 where applicable.
+
+## Visual Artifact Freshness Gate
+
+`DIAG-001` is a registered orientation/provenance artifact. It may accelerate repository orientation, but it cannot override canonical registry evidence.
+
+At bootstrap, if a visual artifact is used, compare its source-state identity against the current source artifact before relying on its status values:
+
+```text
+LOAD DIAG-001
+    ↓
+IDENTIFY SOURCE (REP-012)
+    ↓
+COMPARE SOURCE IDENTITY / DATE / CHECKPOINT
+    ↓
+MATCH → ORIENTATION ALLOWED
+MISMATCH → MARK STALE / REVALIDATION_REQUIRED
+```
+
+A stale visual artifact must not be used as current repository truth.
 
 ## Persistence Boundary Rule
 
@@ -158,6 +179,26 @@ After a commit:
 8. Decide whether the mutation is provisional or trusted.
 
 If any required post-mutation verification is unavailable, leave the affected item open rather than declaring completion.
+
+## Queue Synchronization Gate
+
+A material mutation or review completion must not advance `REP-016` solely from the worker's local conclusion.
+
+Before a queue item advances:
+
+```text
+REP-016 claimed state
+        ↓
+Compare affected REP-011..015 states
+        ↓
+Check current HEAD / content identity
+        ↓
+Check unresolved scope
+        ↓
+Advance / Hold / Revalidation Required
+```
+
+`READY_FOR_CLOSURE_REVIEW` is a gate for explicit closure review, not a declaration of closure.
 
 ## Failure Gate
 
