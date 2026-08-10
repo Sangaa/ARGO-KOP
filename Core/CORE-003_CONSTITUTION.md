@@ -5,7 +5,7 @@
 Document ID
 CORE-003
 Version
-1.4
+1.4.1
 Status
 Validated / Integrity Review
 Owner
@@ -13,7 +13,9 @@ Principal Human Owner
 Category
 Core
 Last Audit
-2026-08-08
+2026-08-10
+Review Type
+Repository Re-Audit / Targeted Constitutional Review
 
 ---
 
@@ -218,33 +220,88 @@ A constitutional rule may be proposed for revision when evidence shows that it i
 - too broad for its intended scope;
 - counterproductive to repository integrity;
 - incompatible with validated architecture; or
-- replaceable by a simpler control with equal or better protection.
+- materially ambiguous in a way that creates conflicting implementations.
 
-Revision requires explicit evidence, impact assessment, traceability and governed acceptance. Until accepted, the current Constitution remains authoritative.
-
----
-
-# Constitutional Priority
-
-When conflicts occur, precedence shall be:
-
-1. Constitution
-2. Core Principles
-3. Architecture
-4. Governance
-5. Standards
-6. Templates
-7. Implementation
-
-This precedence applies within the defined scope of each authority and does not prevent a higher-level rule from being formally reviewed and revised.
+A proposed revision does not alter the current Constitution until it passes the applicable review and approval process and is persisted as a new canonical version.
 
 ---
 
-# Constitutional Interpretation Rule
+# Evidence Freshness and Historical Audit Rule
 
-Where a lower-level runtime or implementation rule conflicts with this Constitution, the lower-level rule must be corrected or execution must enter `HOLD` until the conflict is resolved.
+A historical audit date records when a review actually occurred. It shall not be rewritten merely because the repository is being reviewed again.
 
-Where the Constitution itself appears defective, the conflict shall be recorded and escalated through Constitutional Review rather than silently bypassed.
+A current re-audit may establish a new review event without implying that every constitutional law has been revalidated.
+
+Therefore:
+
+```text
+Historical Audit
+      ↓
+Current Re-Audit
+      ↓
+Scoped Findings
+      ↓
+Explicit Revalidation
+      ↓
+New Canonical Version only when warranted
+```
+
+A document may retain its historical audit provenance while a folder or control-plane registry records a newer repository-level re-audit.
+
+The phrase `Last Audit` on a canonical document shall only advance when that document itself has undergone the applicable review.
+
+---
+
+# Interpretation and Intent Rule
+
+Human statements, model explanations and design discussions may contain intent, examples, hypotheses or ambiguous language.
+
+They shall not become constitutional rules through interpretation alone.
+
+When intent affects a material constitutional or architectural decision, preserve the distinction:
+
+`Observed Statement → Literal Meaning → Interpretation → Hypothesis → Repository/Authority Validation → Explicit Decision`
+
+If validation is unavailable, the interpretation remains non-canonical and the matter remains open or is escalated for clarification.
+
+---
+
+# Cross-Layer Consistency Rule
+
+The Constitution is the highest authority, but its rules must be interpreted within their declared scope and reconciled with validated Architecture and Governance.
+
+A lower layer may not silently override a constitutional law.
+
+If a lower layer appears incompatible with the Constitution, the discrepancy shall be classified as one of:
+
+- implementation defect;
+- architectural defect;
+- governance defect;
+- constitutional defect;
+- evidence ambiguity;
+- or unresolved conflict.
+
+The classification itself requires evidence and shall not be inferred solely from the existence of a conflicting implementation.
+
+---
+
+# Constitutional Integrity Status
+
+This document has undergone a **targeted repository re-audit on 2026-08-10**.
+
+The audit verified the constitutional text and the newly explicit evidence-freshness and interpretation controls in this revision.
+
+This does **not** certify the entire Core folder or the entire ARGO repository.
+
+Core remains under `INTEGRITY HOLD` until the remaining canonical Core artifacts and their cross-layer relationships are revalidated.
+
+---
+
+# Governing Principle
+
+**Reality → Evidence → Authority → Interpretation → Decision → Controlled Change → Verification**
+
+Conversation can provide context. It cannot manufacture repository evidence.
 
 ---
 
