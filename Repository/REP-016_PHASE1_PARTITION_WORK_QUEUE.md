@@ -2,9 +2,9 @@
 
 Platform: ARGO KOP  
 Document ID: REP-016  
-Version: 1.0.1  
+Version: 1.0.2  
 Status: Active / Phase 1 Open / Integrity Hold  
-Development Baseline: 3.2.1  
+Development Baseline: 3.3.0  
 Last Audit: 2026-08-10
 
 ## Purpose
@@ -64,6 +64,18 @@ or, when evidence conflicts:
 
 No reconciliation state may be promoted by assumption.
 
+### Visual Artifact Synchronization Gate
+
+`DIAG-001` is a registered orientation/provenance artifact and is not a canonical completion source.
+
+When the source state represented by `DIAG-001` materially changes:
+
+`DIAG-001 → REVALIDATION_REQUIRED`
+
+until the diagram and metadata are regenerated or explicitly superseded.
+
+The queue may use the diagram for orientation only. Canonical decisions must resolve to `REP-011` through `REP-016` and applicable domain authority.
+
 ## Partition Queue
 
 | Priority | Partition | Current State | Required Entry Point | Closure Authority |
@@ -86,8 +98,17 @@ No reconciliation state may be promoted by assumption.
 | 16 | Projects | NOT_STARTED | Exact physical enumeration | Project authority + REP-011/014 |
 | 17 | Docs | NOT_STARTED | Exact physical enumeration | Documentation authority + REP-011 |
 | 18 | Examples | NOT_STARTED | Exact physical enumeration | Example scope decision + REP-011 |
-| 19 | Assets | NOT_STARTED | Exact physical enumeration | Asset scope decision + REP-011 |
+| 19 | Assets | INVENTORYING | `Assets/Diagrams/` + exact physical enumeration | Asset scope decision + REP-011 |
 | 20 | Archive | NOT_STARTED | Exact physical enumeration + provenance | Archive policy + REP-011 |
+
+## DIAG-001 Queue Record
+
+| Artifact | Source | Inventory | Allocation | Relationship | Review | Queue Role |
+|---|---|---|---|---|---|---|
+| DIAG-001 SVG | REP-012-derived | REP-013 | REP-012 | REP-014 | REP-011 | Orientation |
+| DIAG-001 Metadata | REP-012-derived | REP-013 | REP-012 | REP-014 | REP-011 | Provenance / interpretation |
+
+The pair is not a Phase-1 closure artifact. Its purpose is to help a new session understand repository state quickly while preserving the canonical-source boundary.
 
 ## Execution Contract
 
