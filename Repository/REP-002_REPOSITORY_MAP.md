@@ -6,7 +6,7 @@
 
 Platform: ARGO KOP (Knowledge Operating Platform)
 Document ID: REP-002
-Version: 1.6.7
+Version: 1.6.8
 Status: Integrity Hold
 Category: Repository
 Canonical: Yes
@@ -20,6 +20,8 @@ Last Audit Date: Aug 10, 2026
 Defines active physical repository paths used by ARGO KOP. It remains synchronized with `REP-001_MASTER_INDEX.md` and current repository evidence.
 
 A path is canonical only when its logical identity is unique and verified.
+
+Review and completion evidence is tracked by `Repository/REP-011_REVIEW_TRACEABILITY_LEDGER.md`. REP-002 records physical mapping; REP-011 records whether the mapped content was actually reviewed, re-read and relationship-validated.
 
 ## 2. Root Baseline
 
@@ -55,8 +57,13 @@ Path: `Repository/`
 
 - `Repository/REP-001_MASTER_INDEX.md`
 - `Repository/REP-002_REPOSITORY_MAP.md`
+- `Repository/REP-003_REPOSITORY_STANDARDS.md`
 - `Repository/REP-006_REPOSITORY_LIFECYCLE.md`
 - `Repository/REP-009_REPOSITORY_TRACEABILITY.md`
+- `Repository/REP-010_RELEASE_BASELINE.md`
+- `Repository/REP-011_REVIEW_TRACEABILITY_LEDGER.md`
+
+`REP-011` is the technical control for review-state, mutation binding, post-mutation re-read and Phase 1 completion evidence. It does not grant domain semantic authority.
 
 ## 5. Governance Layer
 
@@ -167,7 +174,7 @@ The approved plugin architecture does not imply that every plugin is globally in
 
 Current `SYSTEM_MAP.md` also identifies Knowledge, Memory, Decision, AI, Services, Intelligence, Quality, Projects, Release, Logs, Examples and Future as physical repository domains/groupings.
 
-These domains are not assumed complete or architecturally authoritative from folder names alone. Their active inventories and relationships remain under connected-baseline validation.
+These domains are not assumed complete or architecturally authoritative from folder names alone. Their active inventories and relationships remain under connected-baseline validation and are tracked through REP-011 review evidence.
 
 ## 13. Mapping Rules
 
@@ -183,12 +190,17 @@ These domains are not assumed complete or architecturally authoritative from fol
 10. Domain-specific lifecycle artifacts must remain scoped to their declared artifact class and must not silently acquire authority over another domain's lifecycle.
 11. An approved canonical domain artifact that explicitly requires repository indexing must appear in both the master index and physical storage map.
 12. Proposed artifacts may be mapped as verified physical evidence without becoming canonical authority.
+13. A mapped file is not considered reviewed or complete solely because it appears in this map; review state must be taken from REP-011.
+14. A folder/domain remains open until its Phase 1 completion is explicitly recorded; reviewed subsets must not imply completion of the remaining contents.
+15. If a reviewed file changes, or a dependency/authority/consumer changes materially, its prior review state must be revalidated.
 
 ## 14. Integrity State
 
 Current repository state: **INTEGRITY HOLD**.
 
 The map is synchronized with the current declared Core, Governance, Repository, Runtime, Architecture, Lifecycle, Interfaces, Models and Plugins inventory within the inspected scope. Cross-layer relationship validation remains open.
+
+Completion of individual files or reviewed subsets must not be interpreted as Phase 1 repository completion. REP-011 is the binding review/completion evidence ledger until an explicit Phase 1 closure decision is recorded.
 
 ---
 
