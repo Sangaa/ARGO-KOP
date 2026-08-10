@@ -6,12 +6,12 @@
 
 Platform: ARGO KOP (Knowledge Operating Platform)
 Document ID: REP-002
-Version: 1.6.6
+Version: 1.6.7
 Status: Integrity Hold
 Category: Repository
 Canonical: Yes
 Priority: Critical
-Last Audit Date: Aug 09, 2026
+Last Audit Date: Aug 10, 2026
 
 ---
 
@@ -55,6 +55,8 @@ Path: `Repository/`
 
 - `Repository/REP-001_MASTER_INDEX.md`
 - `Repository/REP-002_REPOSITORY_MAP.md`
+- `Repository/REP-006_REPOSITORY_LIFECYCLE.md`
+- `Repository/REP-009_REPOSITORY_TRACEABILITY.md`
 
 ## 5. Governance Layer
 
@@ -68,7 +70,9 @@ Path: `Governance/`
 - `Governance/GOV-010_GOVERNANCE_MODEL.md`
 - `Governance/_FOLDER_STATUS.md`
 
-`GOV-011` is not mapped as active canonical authority because no verified artifact establishes it.
+`Governance/GOV-011_EXTERNAL_FEEDBACK_REPORT_STANDARD.md` exists and is verified as `Proposed / Integrity Hold`; it is not active canonical authority until formally ratified.
+
+`Governance/GOV-012_DOMAIN_RECONSTRUCTION_STANDARD.md` exists as a proposed reconstruction standard. It is not active canonical authority until formally ratified.
 
 ## 6. Runtime Layer
 
@@ -178,6 +182,7 @@ These domains are not assumed complete or architecturally authoritative from fol
 9. Map artifacts and status artifacts must not reuse the identity of canonical content documents.
 10. Domain-specific lifecycle artifacts must remain scoped to their declared artifact class and must not silently acquire authority over another domain's lifecycle.
 11. An approved canonical domain artifact that explicitly requires repository indexing must appear in both the master index and physical storage map.
+12. Proposed artifacts may be mapped as verified physical evidence without becoming canonical authority.
 
 ## 14. Integrity State
 
