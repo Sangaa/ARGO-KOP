@@ -20,7 +20,7 @@ SRV-005
 
 Version
 
-1.2.0
+1.2.1
 
 Status
 
@@ -38,9 +38,17 @@ Priority
 
 Critical
 
+Development Baseline
+
+3.2.1
+
+Official Release
+
+1.0.0
+
 Last Audit
 
-2026-08-08
+2026-08-10
 
 ---
 
@@ -143,6 +151,12 @@ Validation shall hold or fail when:
 - a required dependency is missing or unresolved;
 - a cross-reference points only to historical/archived material without active authority;
 - evidence coverage is insufficient for the requested decision.
+
+# Relationship Position
+
+`SRV-005` is the Service-layer consumer of `ENG-004` and exposes the validation gate to applicable runtime and engineering flows.
+
+`SRV-005` does not replace the Engine's evidence rules and does not create canonical authority independently; it applies the applicable validation result within its authorized service boundary.
 
 # Dependencies
 
