@@ -5,7 +5,7 @@
 Platform: ARGO KOP
 Document ID: INTF-006
 Version: 1.1.0
-Status: Validated / Integrity Hold
+Status: Proposed / Integrity Hold
 Category: Interfaces
 Canonical: Yes
 Priority: High
