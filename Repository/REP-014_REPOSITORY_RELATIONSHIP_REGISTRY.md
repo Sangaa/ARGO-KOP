@@ -2,7 +2,7 @@
 
 Platform: ARGO KOP  
 Document ID: REP-014  
-Version: 1.0.7  
+Version: 1.0.8  
 Status: Active / Relationship Enumeration In Progress  
 Development Baseline: 3.3.0  
 Last Audit: 2026-08-10
@@ -101,6 +101,28 @@ The following are deliberately limited to relationships established during repos
 | REL-034 | REP-016 | REP-015 | CONSUMES | Verified within current control-plane scope |
 | REL-035 | REP-012 | DIAG-001 | DOCUMENTS | Provenance linked within inspected scope |
 | REL-036 | DIAG-001 | REP-012 | DERIVED_FROM | Provenance linked within inspected scope |
+| REL-037 | CORE-003 | RUN-001 | GOVERNS | Revalidated within inspected scope |
+| REL-038 | RUN-001 | CORE-003 | REFERENCES | Revalidated within inspected scope |
+
+## Core-to-Runtime Reconciliation
+
+The current review established a material authority relationship between the Constitution and the canonical boot/runtime sequence.
+
+Evidence:
+
+- `Core/CORE-003_CONSTITUTION.md` explicitly states that its rules have higher authority than implementation decisions and that all repository components shall comply within applicable scope.
+- `Runtime/RUN-001_BOOT_SEQUENCE.md` explicitly lists `Core/CORE-003_CONSTITUTION.md` under Related Authority and states that Runtime executes approved architecture without redefining Constitution, Governance, Repository authority, Canonical Architecture or Release authority.
+
+Therefore the registry records the two independently evidenced directions:
+
+```text
+CORE-003 ──governs──> RUN-001
+RUN-001 ──references──> CORE-003
+```
+
+The reverse `REFERENCES` relationship is not inferred merely because a `GOVERNS` relationship exists; it is recorded because RUN-001 explicitly names CORE-003 as related authority.
+
+This reconciliation does not certify the complete Core-to-Runtime graph. Other Core, Governance, Architecture and Runtime relationships remain subject to scoped verification.
 
 ## Control-Plane Graph
 
