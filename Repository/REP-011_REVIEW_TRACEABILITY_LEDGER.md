@@ -6,7 +6,7 @@
 
 Platform: ARGO KOP
 Document ID: REP-011
-Version: 1.0.1
+Version: 1.0.2
 Status: Active / Integrity Hold
 Category: Repository Control
 Canonical: Yes
@@ -24,9 +24,19 @@ The ledger exists to prevent duplicated review effort, loss of completed work, a
 
 It also preserves unfinished scope until Phase 1 repository completion is explicitly declared.
 
----
+## 2. Control-Plane Relationship
 
-## 2. Core Rule
+REP-011 is one component of the repository control plane:
+
+- `REP-002` = structural/domain map;
+- `REP-013` = folder → file content inventory;
+- `REP-014` = artifact relationship registry;
+- `REP-012` = allocation/state/checkpoint/recovery;
+- `REP-011` = review/evidence/mutation traceability.
+
+These records are complementary and must remain synchronized.
+
+## 3. Core Rule
 
 **A file is not considered reviewed because it was mentioned, documented, committed, or claimed as reviewed.**
 
@@ -46,47 +56,13 @@ Minimum evidence for a completed review record:
 - post-mutation re-read result;
 - remaining unresolved scope.
 
----
+## 4. Review States
 
-## 3. Review States
+`NOT_REVIEWED`, `REVIEWED`, `MODIFIED`, `RE_READ`, `RELATIONSHIPS_REVALIDATED`, `PROVISIONALLY_ACCEPTED`, `CLOSED_FOR_PHASE_1`, `REVALIDATION_REQUIRED` are the controlled states.
 
-Use the following controlled states:
+`CLOSED_FOR_PHASE_1` must never be inferred from silence or registry presence.
 
-`NOT_REVIEWED`
-
-No current review evidence exists.
-
-`REVIEWED`
-
-The file was read and inspected at a specific repository state, but no claim of semantic or relationship closure is made.
-
-`MODIFIED`
-
-A repository mutation was performed, but post-mutation validation is not yet complete.
-
-`RE_READ`
-
-The modified/current file was read again after mutation.
-
-`RELATIONSHIPS_REVALIDATED`
-
-The declared relationships within the recorded scope were checked against source, target and relevant consumer evidence.
-
-`PROVISIONALLY_ACCEPTED`
-
-The current content may be retained, but an identified historical or semantic uncertainty remains.
-
-`CLOSED_FOR_PHASE_1`
-
-The file/domain has been explicitly reviewed to the agreed Phase 1 boundary, with remaining exclusions recorded. This state must not be inferred from silence.
-
-`REVALIDATION_REQUIRED`
-
-Existing evidence is insufficient, stale, contradicted, or derived from a pre-failure mutation and requires another review.
-
----
-
-## 4. Evidence Freshness
+## 5. Evidence Freshness
 
 Review evidence must be interpreted temporally.
 
@@ -101,44 +77,58 @@ Before accepting a review claim, determine:
 5. whether the reviewer had access to that newer evidence;
 6. whether the current file content is actually the content that was reviewed.
 
-A review performed before discovery of a material methodological failure is **not automatically invalid**, but its affected semantic conclusions require independent revalidation.
+A review performed before discovery of a material methodological failure is not automatically invalid, but affected semantic conclusions require independent revalidation.
 
----
-
-## 5. Repository Binding
+## 6. Repository Binding
 
 For every mutation or material review, the preferred binding is:
 
 `Path → Document ID → Commit SHA → Content/Blob SHA → Review Scope → Result`
 
-When a content/blob SHA is unavailable, the commit SHA plus exact path and post-read timestamp shall be retained.
-
 The commit proves that a repository state existed. It does not by itself prove that the reasoning or semantic interpretation behind the mutation was correct.
 
-`Repository/REP-012_REPOSITORY_ALLOCATION_REGISTRY.md` provides the complementary allocation/state/checkpoint layer. REP-011 records review evidence; REP-012 records where the artifact is allocated, what repository state is registered, and what recovery checkpoint is available.
+`REP-012` provides the complementary allocation/state/checkpoint layer.
 
----
+## 7. Cross-Registry Consistency Rule
 
-## 6. Folder Completion Control
+Before a review is marked `RELATIONSHIPS_REVALIDATED` or `CLOSED_FOR_PHASE_1`, reconcile within the applicable scope:
+
+1. physical path and document identity;
+2. `REP-013` content inventory entry;
+3. `REP-012` allocation/state/checkpoint entry;
+4. `REP-014` relationship entries, where applicable;
+5. current repository content/commit evidence.
+
+If any required registry view is missing or materially inconsistent, the review remains open or becomes `REVALIDATION_REQUIRED`.
+
+## 8. Relationship Verification Boundary
+
+A relationship may not be considered verified merely because a reference exists.
+
+Where material, verify:
+
+`Source Identity → Target Identity → Relationship Type → Evidence → Authority → Impact → Consumer Scope → Current State`
+
+An unresolved endpoint, identity conflict, quarantine state, or material unreviewed mutation prevents a closed relationship claim.
+
+## 9. Folder Completion Control
 
 A folder shall not be marked complete merely because selected files inside it were reviewed.
 
-For every active folder/domain, the ledger must distinguish:
+For every active folder/domain, distinguish:
 
 - files reviewed;
 - files modified;
 - files re-read;
 - relationships revalidated;
-- files intentionally excluded;
-- files not yet reviewed;
+- intentionally excluded files;
+- not-yet-reviewed files;
 - unresolved dependencies;
 - historical/pre-failure mutations awaiting revalidation.
 
-Until an explicit `CLOSED_FOR_PHASE_1` decision exists, remaining folder content must remain visibly open and must not be silently treated as complete.
+Until an explicit `CLOSED_FOR_PHASE_1` decision exists, remaining content stays open.
 
----
-
-## 7. Phase 1 Closure Rule
+## 10. Phase 1 Closure Rule
 
 Phase 1 repository completion requires an explicit closure decision supported by:
 
@@ -150,65 +140,34 @@ Phase 1 repository completion requires an explicit closure decision supported by
 - historical/pre-failure mutation disposition;
 - index/map synchronization;
 - allocation/state registry synchronization;
+- relationship registry synchronization where applicable;
 - final repository-wide integrity review.
 
-No individual folder may imply Phase 1 completion for the whole repository.
+## 11. Re-review Avoidance Rule
 
----
+Before starting a review, consult `REP-011`, `REP-012`, `REP-013`, and `REP-014` within the applicable scope and compare current repository state with the last recorded review/checkpoint state.
 
-## 8. Re-review Avoidance Rule
+If content identity is unchanged, material registry bindings remain consistent, and recorded scope is sufficient, do not re-review without a reason.
 
-Before starting a review of a file, the reviewer should consult both the review ledger (`REP-011`) and allocation/state registry (`REP-012`) and compare the current repository state with the last recorded review/checkpoint state.
+Re-review is justified when the file, dependency, authority, consumer, evidence, methodology, checkpoint, or required Phase 1 scope materially changes.
 
-If the current content identity is unchanged and the recorded scope is sufficient, the file should not be re-reviewed without a reason.
+## 12. Learning From Review Failures
 
-A re-review is justified when:
+Review failures or mistaken interpretations shall be preserved as reusable engineering knowledge when they change future review behavior.
 
-- the file changed;
-- a dependency changed;
-- a referenced authority changed;
-- a relevant consumer changed;
-- a new contradictory artifact appeared;
-- a methodological failure affects the prior review;
-- the prior review scope was incomplete;
-- the recovery checkpoint changed materially;
-- Phase 1 closure requires broader coverage.
+Examples include trusting conversation claims without repository evidence, using documentation date without temporal analysis, treating commit existence as semantic correctness, assuming selected-file review closes a folder, accepting references as relationships without authority/consumer checks, mutating without post-read, or losing the last trusted state because no checkpoint existed.
 
----
-
-## 9. Learning From Review Failures
-
-A review failure or mistaken interpretation shall be preserved as reusable engineering knowledge when it changes future review behavior.
-
-Examples include:
-
-- trusting a conversation claim without repository evidence;
-- using documentation date without temporal/causal analysis;
-- treating commit existence as semantic correctness;
-- assuming a folder is complete because selected files were reviewed;
-- accepting a relationship because a reference exists without checking authority and consumers;
-- performing a mutation without post-mutation re-read;
-- losing track of the last trusted repository state because no allocation/checkpoint record existed.
-
-The purpose is not to preserve blame. The purpose is to make future reconstruction and cross-model handoff safer.
-
----
-
-## 10. Current Known Audit Boundary — 2026-08-10
+## 13. Current Known Audit Boundary — 2026-08-10
 
 The current repository contains material reviewed and modified during the 2026-08-09 pre-failure window. `EJR-015` identifies those mutations as requiring independent audit.
 
 Current Phase 1 work therefore uses:
 
-`Historical Mutation Audit → Current Repository Review → Relationship Revalidation → Post-Mutation Re-read → Allocation/Checkpoint Update → Explicit Closure`
+`Historical Mutation Audit → Current Repository Review → Relationship Revalidation → Post-Mutation Re-read → Registry Reconciliation → Allocation/Checkpoint Update → Explicit Closure`
 
-The existence of `EJR-015` does not itself close any affected domain.
+The existence of `EJR-015` does not close any affected domain.
 
----
-
-## 11. Minimum Review Record Template
-
-For each material review, record at minimum:
+## 14. Minimum Review Record Template
 
 ```text
 Path:
@@ -222,27 +181,21 @@ Reason for Review/Re-review:
 Authority Checked:
 Relationships Checked:
 Consumers Checked:
+REP-013 Inventory State:
+REP-012 Allocation State:
+REP-014 Relationship State:
 Mutation:
 Post-Mutation Re-read:
-Allocation State:
 Recovery Checkpoint:
 Unresolved Scope:
 Next Review Trigger:
 ```
 
----
+## 15. Authority Boundary
 
-## 12. Authority Boundary
+This ledger controls review traceability and completion evidence only. Domain-specific canonical authorities remain controlling.
 
-This ledger controls review traceability and completion evidence only.
-
-It does not grant semantic authority over Core, Governance, Architecture, Models, Runtime, Knowledge or other domain content.
-
-Domain-specific canonical authorities remain controlling.
-
----
-
-## 13. Related Documents
+## 16. Related Documents
 
 - `Repository/REP-001_MASTER_INDEX.md`
 - `Repository/REP-002_REPOSITORY_MAP.md`
@@ -251,13 +204,13 @@ Domain-specific canonical authorities remain controlling.
 - `Repository/REP-009_REPOSITORY_TRACEABILITY.md`
 - `Repository/REP-010_RELEASE_BASELINE.md`
 - `Repository/REP-012_REPOSITORY_ALLOCATION_REGISTRY.md`
+- `Repository/REP-013_REPOSITORY_CONTENT_TREE.md`
+- `Repository/REP-014_REPOSITORY_RELATIONSHIP_REGISTRY.md`
 - `Memory/Engineering_Journal/EJR-015_2026-08-10_PRE_FAILURE_MUTATION_AUDIT.md`
 - `PROJECT_BOOTSTRAP.md`
 - `PROJECT_STATUS.md`
 
----
-
-## 14. Guiding Rule
+## 17. Guiding Rule
 
 **Never spend review effort twice because the repository forgot what was already proven; never declare unfinished work complete because the repository forgot what remains open.**
 
