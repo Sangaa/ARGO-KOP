@@ -1,9 +1,9 @@
-# LLM INTERFACE
+# INTF-005
 
 --------------------------------------------------
 
 Document ID
-INT-005
+INTF-005
 
 --------------------------------------------------
 
@@ -36,6 +36,14 @@ Protect context.
 Maintain traceability.
 
 Respect governance.
+
+--------------------------------------------------
+
+Identity Note
+
+The filename and internal Document ID are intentionally aligned as `INTF-005`.
+
+This interface is an integration/interface boundary only; it does not grant an LLM provider authority over ARGO Core, Governance, Architecture, Memory or canonical repository meaning.
 
 --------------------------------------------------
 
