@@ -20,11 +20,11 @@ SRV-004
 
 Version
 
-1.1.0
+1.1.1
 
 Status
 
-Approved
+Approved / Revalidation Required
 
 Category
 
@@ -37,6 +37,14 @@ Yes
 Priority
 
 Critical
+
+Development Baseline
+
+3.2.1
+
+Last Audit
+
+2026-08-10
 
 ---
 
@@ -218,6 +226,8 @@ Knowledge integrity valid.
 
 Canonical references valid.
 
+Validation must remain evidence-gated. A successful write or retrieval operation does not by itself prove semantic correctness or repository-wide integrity.
+
 ---
 
 # Error Handling
@@ -248,6 +258,10 @@ Knowledge
 
 Runtime
 
+Models / MOD-001 Knowledge Domain Model
+
+Specifications / SPEC-001 Knowledge Organization
+
 ---
 
 # Related Documents
@@ -261,6 +275,18 @@ SRV-003_MEMORY_SERVICE.md
 SRV-005_VALIDATION_SERVICE.md
 
 PROJECT_BOOTSTRAP.md
+
+Models/MOD-001_KNOWLEDGE_MODEL.md
+
+Specifications/01-Knowledge-Organization.md
+
+---
+
+# Evidence Boundary
+
+This service has been re-read during the 2026-08-10 audit and its baseline has been aligned to the authoritative `Release/VERSION.md` baseline `3.2.1`.
+
+The service remains `Approved / Revalidation Required` until its full downstream and upstream relationship graph is validated. Its `Canonical: Yes` designation identifies service ownership; it does not certify repository-wide integrity.
 
 ---
 
