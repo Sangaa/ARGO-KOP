@@ -2,10 +2,10 @@
 
 Platform: ARGO KOP  
 Document ID: REP-013  
-Version: 1.0.1  
+Version: 1.0.2  
 Status: Active / Phase 1 Population In Progress  
 Development Baseline: 3.2.1  
-Last Audit: 2026-08-10  
+Last Audit: 2026-08-10
 
 ## Purpose
 
@@ -15,10 +15,10 @@ This is a **content inventory**, not a claim that every listed file is reviewed,
 
 ## State Rule
 
-Each entry must eventually carry:
+Each inventory entry must eventually carry:
 
 - Path
-- Document ID
+- Document ID, where applicable
 - File type
 - Current repository state
 - Review state from `REP-011`
@@ -66,7 +66,7 @@ ARGO-KOP/
 
 ## Domain Content Inventory
 
-The inventory below is populated progressively from repository evidence. It must not be interpreted as exhaustive until the corresponding folder is explicitly reconciled.
+The inventory below is populated progressively from current repository evidence. It must not be interpreted as exhaustive until the corresponding folder is explicitly reconciled.
 
 ### Repository/
 
@@ -74,11 +74,18 @@ The inventory below is populated progressively from repository evidence. It must
 Repository/
 ├── REP-001_MASTER_INDEX.md
 ├── REP-002_REPOSITORY_MAP.md
+├── REP-003_REPOSITORY_STANDARDS.md
+├── REP-006_REPOSITORY_LIFECYCLE.md
+├── REP-009_REPOSITORY_TRACEABILITY.md
+├── REP-010_RELEASE_BASELINE.md
 ├── REP-011_REVIEW_TRACEABILITY_LEDGER.md
 ├── REP-012_REPOSITORY_ALLOCATION_REGISTRY.md
 ├── REP-013_REPOSITORY_CONTENT_TREE.md
-└── REP-014_REPOSITORY_RELATIONSHIP_REGISTRY.md
+├── REP-014_REPOSITORY_RELATIONSHIP_REGISTRY.md
+└── REP-015_CONTROL_PLANE_BOOTSTRAP_CHECKLIST.md
 ```
+
+The control-plane set `REP-011` through `REP-015` is now explicitly present in the content inventory. Their own allocation, review and relationship records remain subject to cross-registry reconciliation.
 
 ### Models/
 
@@ -88,6 +95,8 @@ Models/
 ├── MOD-001_KNOWLEDGE_MODEL.md
 └── MOD-011_KNOWLEDGE_SOURCE_MODEL.md
 ```
+
+This is a **partial evidence inventory**, not a claim that these are the only files in `Models/`.
 
 ### Knowledge/
 
@@ -127,14 +136,26 @@ Services/
 └── _FOLDER_STATUS.md
 ```
 
-The wildcard entries are intentionally unresolved until exact filenames are enumerated from the current repository. They are placeholders, not fabricated file identities.
+Wildcard entries are intentionally unresolved until exact filenames are enumerated from current repository evidence. They are placeholders, not fabricated file identities.
 
 ### Runtime/
 
+Known audited members include:
+
 ```text
 Runtime/
+├── README.md
 ├── RUN-001_BOOT_SEQUENCE.md
-└── RUN-010_RUNTIME_REFERENCE.md
+├── RUN-002_INITIALIZATION.md
+├── RUN-003_CONFIGURATION.md
+├── RUN-004_CONTEXT_LOADING.md
+├── RUN-005_RUNTIME_WORKFLOW.md
+├── RUN-006_AI_PROTOCOL.md
+├── RUN-007_RUNTIME_SECURITY.md
+├── RUN-008_RUNTIME_STATE.md
+├── RUN-009_RECOVERY.md
+├── RUN-010_RUNTIME_REFERENCE.md
+└── _FOLDER_STATUS.md
 ```
 
 ### AI/
@@ -148,27 +169,24 @@ AI/
 └── AI-008_EXTERNAL_FEEDBACK_INTEGRATION.md
 ```
 
+This remains a partial inventory until the folder is physically reconciled.
+
 ### Memory/Engineering_Journal/
+
+Known recorded members include:
 
 ```text
 Memory/Engineering_Journal/
 ├── EJR-002_HERMUZ_BUILD_REVIEW_IDENTITY.md
 ├── EJR-003_2026-08-09_HERMUZ_SESSION_HANDOFF_FAILURE_ANALYSIS.md
-├── EJR-007_2026-08-10_*.md
-├── EJR-008_2026-08-10_*.md
-├── EJR-009_2026-08-10_*.md
-├── EJR-010_2026-08-10_*.md
-├── EJR-011_2026-08-10_*.md
-├── EJR-012_2026-08-10_*.md
-├── EJR-013_2026-08-10_*.md
-├── EJR-014_2026-08-10_*.md
 ├── EJR-015_2026-08-10_PRE_FAILURE_MUTATION_AUDIT.md
 ├── EJR-016_2026-08-10_REVIEW_TRACEABILITY_AND_PHASE1_COMPLETION_CONTROL.md
 ├── EJR-017_2026-08-10_REPOSITORY_ALLOCATION_AND_RECOVERY_REGISTRY.md
-└── EJR-018_2026-08-10_REPOSITORY_CONTENT_AND_RELATIONSHIP_REGISTRIES.md
+├── EJR-018_2026-08-10_REPOSITORY_CONTENT_AND_RELATIONSHIP_REGISTRIES.md
+└── EJR-020_2026-08-10_CONTROL_PLANE_BOOTSTRAP_AND_ALLOCATION_BINDING.md
 ```
 
-Wildcard entries here mean exact inventory reconciliation is still required.
+Other journal entries remain subject to exact inventory reconciliation and are not represented by fabricated wildcard identities.
 
 ### Specifications/
 
@@ -182,14 +200,100 @@ Specifications/
 
 ```text
 Interfaces/
-└── INTF-010_INTEGRATIONS.md
+├── INTF-001_INTERFACE_SPEC.md
+├── INTF-004_API.md
+├── INTF-006_ENVIRONMENT_SENSING.md
+├── INTF-010_INTEGRATIONS.md
+└── _FOLDER_STATUS.md
 ```
 
-### Governance/, Architecture/, Core/, Templates/, Release/, Docs/, Examples/, Assets/, Archive/
+### Governance/
+
+Known mapped members include:
+
+```text
+Governance/
+├── GOV-001_GOVERNANCE_FRAMEWORK.md
+├── GOV-004_DOCUMENT_METADATA.md
+├── GOV-005_REVIEW_STANDARD.md
+├── GOV-006_NAMING_CONVENTION_STANDARD.md
+├── GOV-009_REPOSITORY_POLICY.md
+├── GOV-010_GOVERNANCE_MODEL.md
+├── GOV-011_EXTERNAL_FEEDBACK_REPORT_STANDARD.md
+├── GOV-012_DOMAIN_RECONSTRUCTION_STANDARD.md
+└── _FOLDER_STATUS.md
+```
+
+`GOV-011` and `GOV-012` are mapped as proposed artifacts and are not active canonical authority until ratified.
+
+### Architecture/
+
+Known mapped members include:
+
+```text
+Architecture/
+├── ARC_MAP.md
+├── ARC-001_PLATFORM_ARCHITECTURE.md
+├── ARC-002_COMPONENT_ARCHITECTURE.md
+├── ARC-003_INFORMATION_FLOW.md
+├── ARC-004_LAYER_MODEL.md
+├── ARC-005_ARCHITECTURE_RULES.md
+├── ARC-006_DEPENDENCY_MODEL.md
+├── ARC-007_INTEGRATION_MODEL.md
+├── ARC-008_REPOSITORY_LAYOUT.md
+├── ARC-009_ARCHITECTURE_DECISIONS.md
+├── ARC-010_EVOLUTION_MODEL.md
+├── ARC-011_CANONICAL_ARCHITECTURE_MODEL.md
+└── _FOLDER_STATUS.md
+```
+
+`ARC_MAP.md` is a map/navigation artifact and must not reuse the `ARC-001` identity.
+
+### Lifecycle/
+
+```text
+Lifecycle/
+├── LIF-001_DOCUMENT_LIFECYCLE.md
+└── _FOLDER_STATUS.md
+```
+
+### Plugins/
+
+```text
+Plugins/
+├── PLG-001_PLUGIN_ARCHITECTURE.md
+└── _FOLDER_STATUS.md
+```
+
+### Core/
+
+```text
+Core/
+├── CORE-003_CONSTITUTION.md
+├── CORE-004_CORE_PRINCIPLES.md
+├── CORE-005_COGNITIVE_MODEL.md
+├── CORE-006_SYSTEM_PHILOSOPHY.md
+├── CORE-007_DESIGN_PRINCIPLES.md
+├── CORE-008_ARCHITECTURAL_LAWS.md
+├── CORE-009_PLATFORM_LIFECYCLE.md
+├── CORE-010_PLATFORM_ROADMAP.md
+├── CORE-011_PLATFORM_CHARTER.md
+└── _FOLDER_STATUS.md
+```
+
+### Templates/, Release/, Docs/, Examples/, Assets/, Archive/
 
 These folders are **STRUCTURE-IDENTIFIED / CONTENT RECONCILIATION PENDING** unless their exact file inventory is separately recorded and linked to `REP-011` and `REP-012`.
 
 No closure is implied.
+
+## Inventory Confidence States
+
+Each folder should eventually be assigned one of:
+
+`UNKNOWN → STRUCTURE_IDENTIFIED → PARTIAL_INVENTORY → RECONCILED → REVIEWED → RELATIONSHIP_VALIDATED → CLOSED_FOR_PHASE_1`
+
+These states are controlled by evidence and explicit decisions. Listing content in this document cannot advance a folder directly to `CLOSED_FOR_PHASE_1`.
 
 ## Relationship to Other Repository Control Files
 
