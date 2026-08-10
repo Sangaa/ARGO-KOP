@@ -20,11 +20,11 @@ AI-008
 
 Version
 
-1.3.1
+1.3.2
 
 Status
 
-Validated / Integrity Hold
+Integrity Hold / Revalidation Required
 
 Category
 
@@ -36,9 +36,13 @@ Yes
 
 Last Audit
 
-2026-08-09
+2026-08-10
 
 ---
+
+# Audit Boundary
+
+The semantic changes introduced on 2026-08-09 were made before the adversarial session failure was documented and therefore require independent post-session verification. The current document is retained provisionally; this status does not certify the 2026-08-09 mutation as finally validated.
 
 # Purpose
 
