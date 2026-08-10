@@ -8,12 +8,13 @@
 
 Platform: ARGO KOP (Knowledge Operating Platform)  
 Document ID: MOD-001  
-Version: 1.1.1  
+Version: 1.1.2  
 Status: Integrity Hold / Relationship-Revalidated  
 Category: Models  
 Canonical: Yes  
 Priority: Critical  
-Last Audit Date: 2026-08-08
+Development Baseline: 3.2.1  
+Last Audit Date: 2026-08-10
 
 ---
 
@@ -78,12 +79,11 @@ These paths are representative active paths observed during the connected-baseli
 
 - `Repository/REP-002_REPOSITORY_MAP.md` — active repository mapping authority; relationship inspected.
 - `Governance/GOV-001_GOVERNANCE_FRAMEWORK.md` — active governance reference named by the model; target path is represented in the active repository map.
-- `Services/SRV-009_UPDATE_SERVICE.md` — update-service dependency named by the model; target must remain subject to content and authority validation when the service layer is audited.
+- `Services/SRV-009_UPDATE_SERVICE.md` — update-service dependency named by the model; target remains subject to content and authority validation when the service layer is audited.
+- `Services/SRV-004_KNOWLEDGE_SERVICE.md` — knowledge-service relationship inspected during the current Specifications/Models audit; the service remains subject to revalidation before repository-wide promotion.
 - `Specifications/01-Knowledge-Organization.md` — active operational specification located and read during the current audit. It provides knowledge-organization guidance but does not override the canonical knowledge model or governance authorities.
 
 The earlier revision incorrectly treated `Specifications/01-Knowledge-Organization.md` as an unestablished path. Direct repository inspection confirms that the artifact exists. Its exact authority relationship remains bounded until the Specifications layer is fully audited.
-
----
 
 # Evidence Boundary
 
@@ -97,6 +97,7 @@ This model is revalidated only for the relationships explicitly inspected during
 
 | Version | Date | Description | Author / Authority |
 | :--- | :--- | :--- | :--- |
+| 1.1.2 | 2026-08-10 | Aligned development baseline with authoritative Release/VERSION.md and extended the inspected relationship set to the Knowledge Service. | ARGO Engineering |
 | 1.1.1 | 2026-08-08 | Corrected the Specifications relationship after direct repository inspection; restored the existing artifact as a bounded operational reference rather than treating path absence as evidence. | ARGO Engineering / Principal Architect |
 | 1.1.0 | 2026-08-08 | Removed unresolved active references to non-established Specifications/Specs paths; aligned tiers and relationship validation with the active repository graph; added evidence boundaries and revalidation rules. | ARGO Engineering |
 | 1.0.0 | 2026-08-06 | Initial Canonical Knowledge Model Specification | ARGO Engineering |
