@@ -6,7 +6,7 @@
 
 Platform: ARGO KOP
 Document ID: REP-011
-Version: 1.0.5
+Version: 1.0.6
 Status: Active / Integrity Hold
 Category: Repository Control
 Canonical: Yes
@@ -114,6 +114,7 @@ The Phase-1 control-plane artifacts must be evaluated as one synchronized system
 | REP-014 | Required | Required | Required | Self | Required | OPEN / Integrity Hold |
 | REP-015 | Required | Required | Required | Required | Required | OPEN / Integrity Hold |
 | REP-016 | Required | Required | Required | Required | Self | OPEN / Integrity Hold |
+| DIAG-001 | Required | Provenance | Inventoried | Relationship-linked | Orientation only | PROVENANCE LINKED / OPEN |
 
 `Required` means the relationship/evidence must be reconciled before the corresponding claim can be promoted to closed. It does not mean the reconciliation has already succeeded.
 
@@ -200,7 +201,22 @@ The conversation may describe the operation, but it is not the persistence bound
 
 If a session ends after the commit but before registry synchronization, the next session must detect that incomplete synchronization from repository state and leave the affected review open until reconciliation is performed.
 
-## 15. Current Known Audit Boundary — 2026-08-10
+## 15. Visual Artifact Review Boundary
+
+Visual or derived artifacts are reviewable repository artifacts, but they do not become canonical merely because they are stored or referenced.
+
+For `DIAG-001`, the review ledger recognizes:
+
+- SVG: `Assets/Diagrams/DIAG-001_REPOSITORY_PHASE1_STATUS_2026-08-10.svg`
+- Metadata: `Assets/Diagrams/DIAG-001_REPOSITORY_PHASE1_STATUS_2026-08-10.md`
+- Source/provenance: `REP-012`
+- Relationship registration: `REP-014`
+
+The pair is an **orientation/provenance artifact**. Its numerical/status claims must be checked against current canonical registries before use as evidence.
+
+If its source registry changes materially, the diagram enters `REVALIDATION_REQUIRED` until regenerated or explicitly superseded.
+
+## 16. Current Known Audit Boundary — 2026-08-10
 
 The current repository contains material reviewed and modified during the 2026-08-09 pre-failure window. `EJR-015` identifies those mutations as requiring independent audit.
 
@@ -210,7 +226,7 @@ Current Phase 1 work therefore uses:
 
 The existence of `EJR-015` does not close any affected domain.
 
-## 16. Minimum Review Record Template
+## 17. Minimum Review Record Template
 
 ```text
 Path:
@@ -236,11 +252,11 @@ Unresolved Scope:
 Next Review Trigger:
 ```
 
-## 17. Authority Boundary
+## 18. Authority Boundary
 
 This ledger controls review traceability and completion evidence only. Domain-specific canonical authorities remain controlling.
 
-## 18. Related Documents
+## 19. Related Documents
 
 - `Repository/REP-001_MASTER_INDEX.md`
 - `Repository/REP-002_REPOSITORY_MAP.md`
@@ -255,10 +271,12 @@ This ledger controls review traceability and completion evidence only. Domain-sp
 - `Repository/REP-016_PHASE1_PARTITION_WORK_QUEUE.md`
 - `Memory/Engineering_Journal/EJR-015_2026-08-10_PRE_FAILURE_MUTATION_AUDIT.md`
 - `Memory/Engineering_Journal/EJR-022_2026-08-10_HERMUZ_BUILD_METHOD_LESSONS.md`
+- `Assets/Diagrams/DIAG-001_REPOSITORY_PHASE1_STATUS_2026-08-10.svg`
+- `Assets/Diagrams/DIAG-001_REPOSITORY_PHASE1_STATUS_2026-08-10.md`
 - `PROJECT_BOOTSTRAP.md`
 - `PROJECT_STATUS.md`
 
-## 19. Guiding Rule
+## 20. Guiding Rule
 
 **Never spend review effort twice because the repository forgot what was already proven; never declare unfinished work complete because the repository forgot what remains open.**
 
