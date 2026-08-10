@@ -6,7 +6,7 @@
 
 Platform: ARGO KOP
 Document ID: REP-011
-Version: 1.0.2
+Version: 1.0.3
 Status: Active / Integrity Hold
 Category: Repository Control
 Canonical: Yes
@@ -32,7 +32,8 @@ REP-011 is one component of the repository control plane:
 - `REP-013` = folder → file content inventory;
 - `REP-014` = artifact relationship registry;
 - `REP-012` = allocation/state/checkpoint/recovery;
-- `REP-011` = review/evidence/mutation traceability.
+- `REP-011` = review/evidence/mutation traceability;
+- `REP-016` = Phase 1 execution queue.
 
 These records are complementary and must remain synchronized.
 
@@ -157,7 +158,19 @@ Review failures or mistaken interpretations shall be preserved as reusable engin
 
 Examples include trusting conversation claims without repository evidence, using documentation date without temporal analysis, treating commit existence as semantic correctness, assuming selected-file review closes a folder, accepting references as relationships without authority/consumer checks, mutating without post-read, or losing the last trusted state because no checkpoint existed.
 
-## 13. Current Known Audit Boundary — 2026-08-10
+## 13. Persistence Boundary
+
+A material mutation is not considered safely persisted for cross-session continuation until the repository contains the mutation and it has been re-read successfully.
+
+Required persistence sequence:
+
+`MUTATE → COMMIT → RE-READ → RECORD EVIDENCE → CONTINUE`
+
+The conversation may describe the operation, but it is not the persistence boundary.
+
+If a session ends after the commit but before registry synchronization, the next session must detect that incomplete synchronization from repository state and leave the affected review open until reconciliation is performed.
+
+## 14. Current Known Audit Boundary — 2026-08-10
 
 The current repository contains material reviewed and modified during the 2026-08-09 pre-failure window. `EJR-015` identifies those mutations as requiring independent audit.
 
@@ -167,7 +180,7 @@ Current Phase 1 work therefore uses:
 
 The existence of `EJR-015` does not close any affected domain.
 
-## 14. Minimum Review Record Template
+## 15. Minimum Review Record Template
 
 ```text
 Path:
@@ -184,6 +197,7 @@ Consumers Checked:
 REP-013 Inventory State:
 REP-012 Allocation State:
 REP-014 Relationship State:
+REP-016 Work Item:
 Mutation:
 Post-Mutation Re-read:
 Recovery Checkpoint:
@@ -191,11 +205,11 @@ Unresolved Scope:
 Next Review Trigger:
 ```
 
-## 15. Authority Boundary
+## 16. Authority Boundary
 
 This ledger controls review traceability and completion evidence only. Domain-specific canonical authorities remain controlling.
 
-## 16. Related Documents
+## 17. Related Documents
 
 - `Repository/REP-001_MASTER_INDEX.md`
 - `Repository/REP-002_REPOSITORY_MAP.md`
@@ -206,11 +220,14 @@ This ledger controls review traceability and completion evidence only. Domain-sp
 - `Repository/REP-012_REPOSITORY_ALLOCATION_REGISTRY.md`
 - `Repository/REP-013_REPOSITORY_CONTENT_TREE.md`
 - `Repository/REP-014_REPOSITORY_RELATIONSHIP_REGISTRY.md`
+- `Repository/REP-015_CONTROL_PLANE_BOOTSTRAP_CHECKLIST.md`
+- `Repository/REP-016_PHASE1_PARTITION_WORK_QUEUE.md`
 - `Memory/Engineering_Journal/EJR-015_2026-08-10_PRE_FAILURE_MUTATION_AUDIT.md`
+- `Memory/Engineering_Journal/EJR-022_2026-08-10_HERMUZ_BUILD_METHOD_LESSONS.md`
 - `PROJECT_BOOTSTRAP.md`
 - `PROJECT_STATUS.md`
 
-## 17. Guiding Rule
+## 18. Guiding Rule
 
 **Never spend review effort twice because the repository forgot what was already proven; never declare unfinished work complete because the repository forgot what remains open.**
 
