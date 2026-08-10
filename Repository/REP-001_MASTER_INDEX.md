@@ -6,7 +6,7 @@
 
 Platform: ARGO KOP (Knowledge Operating Platform)
 Document ID: REP-001
-Version: 1.7.9
+Version: 1.8.0
 Status: Integrity Hold
 Category: Repository
 Canonical: Yes
@@ -52,6 +52,15 @@ Historical root naming-convention material is not active canonical inventory and
 
 - `Repository/REP-001_MASTER_INDEX.md`
 - `Repository/REP-002_REPOSITORY_MAP.md`
+- `Repository/REP-011_REVIEW_TRACEABILITY_LEDGER.md`
+- `Repository/REP-012_REPOSITORY_ALLOCATION_REGISTRY.md`
+- `Repository/REP-013_REPOSITORY_CONTENT_TREE.md`
+- `Repository/REP-014_REPOSITORY_RELATIONSHIP_REGISTRY.md`
+- `Repository/REP-015_CONTROL_PLANE_BOOTSTRAP_CHECKLIST.md`
+
+`REP-011` through `REP-015` form the current repository control plane. They are mutually discoverable here and through REP-002. They remain subject to cross-registry reconciliation and do not grant domain semantic authority.
+
+Other repository standards and lifecycle artifacts remain active according to their own identity and authority state; they are not promoted merely by this control-plane update.
 
 ## 5. Governance Layer
 
@@ -205,6 +214,8 @@ A domain is not considered complete merely because its folder exists or because 
 14. Legacy draft content must not be promoted solely because it is old, populated or previously referenced.
 15. Rebuilt domains must be revalidated as connected relationship graphs before active canonical promotion.
 16. Domains under reconstruction remain outside active canonical authority unless explicitly promoted after validation.
+17. Critical Repository Control artifacts (`REP-011` through `REP-015`) must remain mutually discoverable through both the master index and physical storage map while their cross-registry reconciliation remains open.
+18. Registry membership is evidence of inventory only; review, allocation and relationship states are controlled by the respective registries.
 
 ## 14. Integrity State
 
