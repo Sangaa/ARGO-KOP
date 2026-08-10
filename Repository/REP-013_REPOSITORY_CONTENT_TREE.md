@@ -2,9 +2,9 @@
 
 Platform: ARGO KOP  
 Document ID: REP-013  
-Version: 1.0.3  
+Version: 1.0.4  
 Status: Active / Phase 1 Population In Progress  
-Development Baseline: 3.2.1  
+Development Baseline: 3.3.0  
 Last Audit: 2026-08-10
 
 ## Purpose
@@ -300,6 +300,50 @@ Each folder should eventually be assigned one of:
 `UNKNOWN → STRUCTURE_IDENTIFIED → PARTIAL_INVENTORY → RECONCILED → REVIEWED → RELATIONSHIP_VALIDATED → CLOSED_FOR_PHASE_1`
 
 These states are controlled by evidence and explicit decisions. Listing content in this document cannot advance a folder directly to `CLOSED_FOR_PHASE_1`.
+
+## Repository Progress Measurement
+
+Progress percentages are **indicators, not canonical truth**. A percentage must never be presented as repository completion unless its denominator, scope, evidence source and calculation date are recorded.
+
+For Phase 1, progress should be measured against explicit work units rather than raw file count. Recommended weighted dimensions are:
+
+| Dimension | Required Evidence | Weight |
+|---|---|---:|
+| Structural inventory | Folder/content reconciliation | 20% |
+| Allocation | `REP-012` allocation/state records | 15% |
+| Review traceability | `REP-011` evidence | 15% |
+| Relationships | `REP-014` validated relationships | 15% |
+| Bootstrap/recovery | `REP-015` + checkpoint evidence | 10% |
+| Work-queue execution | `REP-016` disposition | 10% |
+| Consumer/impact validation | Applicable dependency/consumer evidence | 10% |
+| Explicit closure | Evidence-backed closure decisions | 5% |
+
+The weighted model is a **proposed measurement method** and must itself be validated before being used as an official project KPI.
+
+A future dashboard should publish at least:
+
+```text
+Scope
+Calculation Date
+Baseline
+Completed Work Units
+Open Work Units
+Blocked / Integrity Hold Units
+Weighted Progress
+Evidence Coverage
+Reconciliation State
+Last Checkpoint
+```
+
+### Current Measurement Status
+
+A historical session-level indicator of approximately **34.2%** was discussed as a directional estimate. It is **not promoted to canonical repository progress**, because the work-unit denominator and evidence-weighting procedure had not yet been formally frozen.
+
+Therefore the current canonical state remains:
+
+`PHASE 1 = OPEN / PARTIALLY RECONCILED / INTEGRITY HOLD`
+
+This preserves the useful directional signal without allowing an unsupported percentage to become project truth.
 
 ## Relationship to Other Repository Control Files
 
