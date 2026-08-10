@@ -2,7 +2,7 @@
 
 Platform: ARGO KOP  
 Document ID: REP-013  
-Version: 1.0.2  
+Version: 1.0.3  
 Status: Active / Phase 1 Population In Progress  
 Development Baseline: 3.2.1  
 Last Audit: 2026-08-10
@@ -56,8 +56,11 @@ ARGO-KOP/
 ├── Repository/
 ├── Specifications/
 ├── Interfaces/
+├── Lifecycle/
+├── Plugins/
 ├── Templates/
 ├── Release/
+├── Projects/
 ├── Docs/
 ├── Examples/
 ├── Assets/
@@ -82,10 +85,11 @@ Repository/
 ├── REP-012_REPOSITORY_ALLOCATION_REGISTRY.md
 ├── REP-013_REPOSITORY_CONTENT_TREE.md
 ├── REP-014_REPOSITORY_RELATIONSHIP_REGISTRY.md
-└── REP-015_CONTROL_PLANE_BOOTSTRAP_CHECKLIST.md
+├── REP-015_CONTROL_PLANE_BOOTSTRAP_CHECKLIST.md
+└── REP-016_PHASE1_PARTITION_WORK_QUEUE.md
 ```
 
-The control-plane set `REP-011` through `REP-015` is now explicitly present in the content inventory. Their own allocation, review and relationship records remain subject to cross-registry reconciliation.
+The control-plane set `REP-011` through `REP-016` is now explicitly present in the content inventory. Their own allocation, review and relationship records remain subject to cross-registry reconciliation.
 
 ### Models/
 
@@ -183,7 +187,9 @@ Memory/Engineering_Journal/
 ├── EJR-016_2026-08-10_REVIEW_TRACEABILITY_AND_PHASE1_COMPLETION_CONTROL.md
 ├── EJR-017_2026-08-10_REPOSITORY_ALLOCATION_AND_RECOVERY_REGISTRY.md
 ├── EJR-018_2026-08-10_REPOSITORY_CONTENT_AND_RELATIONSHIP_REGISTRIES.md
-└── EJR-020_2026-08-10_CONTROL_PLANE_BOOTSTRAP_AND_ALLOCATION_BINDING.md
+├── EJR-020_2026-08-10_CONTROL_PLANE_BOOTSTRAP_AND_ALLOCATION_BINDING.md
+├── EJR-021_2026-08-10_CONTROL_PLANE_OPERATIONALIZATION.md
+└── EJR-022_2026-08-10_HERMUZ_BUILD_METHOD_LESSONS.md
 ```
 
 Other journal entries remain subject to exact inventory reconciliation and are not represented by fabricated wildcard identities.
@@ -281,7 +287,7 @@ Core/
 └── _FOLDER_STATUS.md
 ```
 
-### Templates/, Release/, Docs/, Examples/, Assets/, Archive/
+### Templates/, Release/, Projects/, Docs/, Examples/, Assets/, Archive/
 
 These folders are **STRUCTURE-IDENTIFIED / CONTENT RECONCILIATION PENDING** unless their exact file inventory is separately recorded and linked to `REP-011` and `REP-012`.
 
