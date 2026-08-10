@@ -263,7 +263,48 @@ It should load:
 
 Only then should it choose the next mutation.
 
-## 18. Current Engineering Principle
+## 18. Sixteenth Lesson — Progress Must Become More Conservative as Understanding Grows
+
+A smaller percentage can represent a more mature and more truthful measurement when the denominator, evidence dimensions and closure criteria become stronger.
+
+Do not optimize the progress number.
+
+Optimize:
+
+- evidence coverage;
+- reconciliation quality;
+- explicit scope;
+- repeatability;
+- recovery capability.
+
+A progress indicator must therefore preserve its calculation basis and date. Historical indicators may remain useful directionally without being promoted to canonical truth.
+
+## 19. Seventeenth Lesson — The Control Plane Must Be Tested Against Itself
+
+When multiple registries describe the same repository from different perspectives, their mutual agreement is itself a review target.
+
+Therefore:
+
+`Structure ↔ Content ↔ Allocation ↔ Review ↔ Relationships ↔ Bootstrap ↔ Work Queue`
+
+must be reconciled explicitly.
+
+The fact that each registry is internally coherent does not prove that the control plane is collectively coherent.
+
+## 20. Eighteenth Lesson — Building ARGO Is Also a Test of the Builder
+
+The most valuable construction evidence is not that a model can generate documents. It is that the model can:
+
+- detect when its previous interpretation was wrong;
+- preserve the failed reasoning as evidence;
+- revise its method;
+- apply the revised method to the repository;
+- avoid repeating the same class of error;
+- and leave the improved method available to the next model.
+
+This is **repository-observable engineering learning**, not a claim that a model has permanent training or autonomous memory outside the repository.
+
+## 21. Current Engineering Principle
 
 The strongest lesson from the construction process is:
 
@@ -271,7 +312,7 @@ The strongest lesson from the construction process is:
 
 The model's job is to interpret, verify, connect, modify and document that evidence without silently substituting its own assumptions for reality.
 
-## 19. What This Entry Does Not Claim
+## 22. What This Entry Does Not Claim
 
 This journal entry does not claim that:
 
@@ -279,7 +320,8 @@ This journal entry does not claim that:
 - all repository files are inventoried;
 - all relationships are validated;
 - all historical artifacts are correct;
-- or all control-plane records are fully populated.
+- all control-plane records are fully populated;
+- or that the model itself has acquired permanent training outside the recorded repository knowledge.
 
 It records engineering method and lessons only.
 
