@@ -8,12 +8,12 @@
 
 Platform: ARGO KOP (Knowledge Operating Platform)
 Document ID: PROJECT_STATUS
-Version: 3.3.0
+Version: 3.3.1
 Status: INTEGRITY WARNING / CONNECTED-BASELINE AUDIT
 Category: Root Baseline
 Canonical: Yes
 Priority: Critical
-Last Audit Date: Aug 09, 2026
+Last Audit Date: Aug 10, 2026
 
 ---
 
@@ -46,6 +46,9 @@ The latest bounded audit has completed and revalidated the following changes:
 - `Engine/ENG-011_MARITIME_GAME_ENGINE.md` updated to `1.0.1 / Integrity Hold` with explicit dependency and learning-feedback boundaries.
 - `Interfaces/INTF-010_INTEGRATIONS.md` rebuilt as the provider-neutral connector/integration boundary and linked to runtime, memory, learning and execution authority.
 - `Memory/Engineering_Journal/EJR-004_CURRENT_INTEGRATION_REVALIDATION.md` recorded the current integration, learning, memory and multimodal boundary revalidation.
+- `Runtime/RUN-005_RUNTIME_WORKFLOW.md` and `Runtime/RUN-006_AI_PROTOCOL.md` revalidated against the authoritative development baseline `3.2.1`.
+- `Interfaces/INTF-006_ENVIRONMENT_SENSING.md` revalidated against the same runtime/integration boundary and baseline.
+- `Interfaces/INTF-005_LLM.md` identity was corrected so its internal `INTF-005` identity matches its filename.
 
 These are **verified bounded mutations**, not repository-wide certification.
 
@@ -149,6 +152,7 @@ Only after this gate passes may the project move from **Connected Baseline Stabi
 | Knowledge cross-layer validation | OPEN / INTEGRITY HOLD |
 | Memory cross-layer validation | OPEN / INTEGRITY HOLD |
 | Runtime/Engine/AI/Services validation | OPEN / PARTIALLY REVALIDATED |
+| Runtime baseline alignment | REVALIDATED FOR RUN-005 / RUN-006 |
 | Integration connector boundary | REVALIDATED / ARCHITECTURE PASS FOR CURRENT SCOPE |
 | Environment sensing boundary | PROPOSED / INTEGRITY HOLD / CROSS-LAYER VALIDATION OPEN |
 | Session learning handoff | REVALIDATED / PROMOTION REMAINS GOVERNED |
@@ -175,12 +179,13 @@ A previously reviewed domain may be reopened whenever new evidence changes the i
 
 ### Immediate next audit targets
 
-1. Cross-layer reference resolution for `INTF-010` and its declared consumers/dependencies.
-2. Runtime consumption of connector contracts, especially `RUN-005` / `RUN-006`.
+1. Complete cross-layer reference resolution for `INTF-010` and its declared consumers/dependencies.
+2. Reconcile remaining runtime/engine declarations against the authoritative baseline.
 3. `INTF-006` environment-sensing boundary and its relationship to governance, memory and runtime.
 4. Synchronization of root status claims after the latest bounded mutations.
 5. REP-001 / REP-002 relationship consistency after subsequent integration changes.
 6. Revalidation of session-learning closure and promotion boundaries.
+7. Continue into Specifications only after the connected-baseline gate for the affected scope is satisfied.
 
 ---
 
@@ -225,6 +230,7 @@ A development baseline is not an official release.
 24. An integration use case should expose missing architectural boundaries rather than automatically creating domain-specific core layers.
 25. External experience must remain scoped to its correct memory domain until evidence and authority justify promotion.
 26. A new interface boundary must be validated against its runtime consumers before it can be treated as globally integrated.
+27. A development baseline conflict must be resolved from the authoritative version source, not from the highest version number appearing in a mutated artifact.
 
 ---
 
