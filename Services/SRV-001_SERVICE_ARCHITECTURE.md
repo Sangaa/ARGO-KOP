@@ -4,8 +4,6 @@
 
 # SERVICE ARCHITECTURE
 
----
-
 Platform
 
 ARGO KOP
@@ -20,11 +18,11 @@ SRV-001
 
 Version
 
-1.1.0
+1.1.1
 
 Status
 
-Approved
+Approved / Revalidation Required
 
 Category
 
@@ -38,6 +36,18 @@ Priority
 
 Critical
 
+Development Baseline
+
+3.2.1
+
+Official Release
+
+1.0.0
+
+Last Audit Date
+
+Aug 10, 2026
+
 ---
 
 # Purpose
@@ -49,6 +59,8 @@ Services provide reusable operational capabilities for the platform while remain
 They implement functionality.
 
 They never define repository truth.
+
+The canonical architectural intent is retained, while its current cross-layer relationships remain subject to revalidation against repository evidence.
 
 ---
 
@@ -116,7 +128,7 @@ Engineering
 
 AI
 
-Services depend only on higher layers.
+This is a dependency/authority model, not evidence that every service has a direct dependency on every preceding layer.
 
 ---
 
@@ -186,6 +198,8 @@ Response
 
 Logging
 
+This is the declared service lifecycle model; it is not a claim that every service currently implements every stage operationally.
+
 ---
 
 # Repository Rules
@@ -238,6 +252,8 @@ Execution Result
 
 Traceability
 
+These are architectural requirements. Their implementation and current consumer coverage require direct service-by-service evidence.
+
 ---
 
 # Related Documents
@@ -249,6 +265,29 @@ RUN-010_RUNTIME_REFERENCE.md
 SRV-002_REPOSITORY_SERVICE.md
 
 CORE-003_CONSTITUTION.md
+
+---
+
+# Current Revalidation Boundary
+
+The following are established as architectural intent, not globally certified implementation:
+
+- Services remain subordinate to repository, architecture and governance authority.
+- Service-layer execution must not redefine repository truth.
+- Service-to-runtime and service-to-service relationships require direct verification before being treated as validated dependencies.
+- A successful technical service operation does not by itself establish governed acceptance.
+
+Verification chain for material relationships:
+
+`Referenced → Located → Read → Identity Verified → Authority Verified → Relationship Validated → Consumer/Dependency Checked → Mutation Impact Checked → Re-read → Revalidate`
+
+---
+
+# Integrity State
+
+Current state: **INTEGRITY HOLD / REVALIDATION REQUIRED**.
+
+This document remains the canonical architectural intent for the Service layer, but its current implementation, consumer coverage and cross-layer integration are not globally certified.
 
 ---
 
