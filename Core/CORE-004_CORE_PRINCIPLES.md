@@ -5,7 +5,7 @@
 Document ID
 CORE-004
 Version
-1.6.0
+1.6.1
 Status
 Validated / Integrity Hold / Revalidated
 Category
@@ -13,7 +13,9 @@ Core
 Canonical
 Yes
 Last Audit
-2026-08-09
+2026-08-10
+Review Type
+Repository Re-Audit / Targeted Principles Review
 
 ---
 
@@ -134,6 +136,28 @@ For a material rule, ARGO should be able to identify, where applicable:
 
 A contradiction, undefined term, circular dependency or unexplained exception shall be recorded as an integrity finding rather than silently resolved by interpretation.
 
+# Evidence Freshness and Review Provenance
+
+The `Last Audit` field records a review of this document itself. It shall not be advanced merely because the repository, a neighboring Core document or a control-plane registry was reviewed.
+
+A targeted re-audit shall distinguish:
+
+```text
+Historical Audit
+      ↓
+Current Document Review
+      ↓
+Scoped Findings
+      ↓
+Explicit Revalidation
+      ↓
+Version Change only when warranted
+```
+
+A newer repository-level review does not retroactively validate this document unless this document was actually inspected.
+
+When a material revision is made, the resulting version shall preserve the distinction between the evidence that justified the change and the broader repository state that remains under review.
+
 # Application Rule
 
 These principles support the Constitution and MUST NOT override it.
@@ -153,6 +177,14 @@ No principle becomes permanently binding merely because it has existed for a lon
 # Engineering Rule
 
 A principle is not an execution permission. Any repository action remains subject to applicable Governance, Architecture, Runtime validation and authorization.
+
+# Review Result — 2026-08-10
+
+This document underwent a targeted principles review against its current canonical content and the newly revalidated `CORE-003` constitutional controls.
+
+The review confirmed that the existing semantic-discipline principles remain consistent with the current constitutional direction. The principal change in this revision is explicit review provenance and evidence-freshness handling; no broader Core certification is implied.
+
+Core remains under `INTEGRITY HOLD` until the remaining canonical Core artifacts and their cross-layer relationships are revalidated.
 
 ---
 
