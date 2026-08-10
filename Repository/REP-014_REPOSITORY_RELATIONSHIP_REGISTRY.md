@@ -2,7 +2,7 @@
 
 Platform: ARGO KOP  
 Document ID: REP-014  
-Version: 1.0.8  
+Version: 1.0.9  
 Status: Active / Relationship Enumeration In Progress  
 Development Baseline: 3.3.0  
 Last Audit: 2026-08-10
@@ -103,6 +103,49 @@ The following are deliberately limited to relationships established during repos
 | REL-036 | DIAG-001 | REP-012 | DERIVED_FROM | Provenance linked within inspected scope |
 | REL-037 | CORE-003 | RUN-001 | GOVERNS | Revalidated within inspected scope |
 | REL-038 | RUN-001 | CORE-003 | REFERENCES | Revalidated within inspected scope |
+| REL-039 | MEM-008 | MEM-007 | DERIVED_FROM | Verified within current learning-method scope |
+| REL-040 | MEM-008 | MEM-006 | DEPENDS_ON | Verified within current learning-method scope |
+| REL-041 | MEM-008 | CORE-003 | REFERENCES | Verified within current learning-method scope |
+| REL-042 | MEM-008 | REP-014 | REFERENCES | Verified within current learning-method scope |
+
+## Learning-Method Reconciliation
+
+The repository now records `MEM-008_GUIDED_DISCOVERY_LEARNING_METHOD.md` as the canonical candidate for the observed Guided Discovery training method.
+
+The relationships are intentionally limited to independently evidenced directions:
+
+```text
+MEM-008 ──derived_from──> MEM-007
+MEM-008 ──depends_on────> MEM-006
+MEM-008 ──references────> CORE-003
+MEM-008 ──references────> REP-014
+```
+
+Rationale:
+
+- `MEM-007` establishes the authoritative Memory Baseline and the requirement that validated memory becomes baseline through evidence and repository review. MEM-008 operationalizes that learning evidence as a learning-method record.
+- `MEM-006` establishes Memory Quality dimensions including accuracy, context, consistency, completeness, traceability, continuity, maintainability, reusability, authority and timeliness. MEM-008 relies on these properties when preserving learning events and their evidence.
+- `CORE-003` remains the governing authority for repository changes; MEM-008 explicitly states that learning does not itself grant authority to mutate canonical documents.
+- `REP-014` is the relationship registry used to preserve independently evidenced links and therefore is referenced by MEM-008 when recording learning artifacts and their provenance.
+
+No reverse relationships are inferred merely because these documents reference one another conceptually. Reverse entries should be added only after direct source evidence is inspected.
+
+## Guided Discovery as a Learning Control
+
+The new learning method introduces a controlled distinction between:
+
+```text
+Instruction
+Hint
+Question
+Independent Discovery
+```
+
+and records the progression from:
+
+`Taught Rule → Applied Rule → Observed Outcome → Error Diagnosis → Rule Revision → Re-test → Experience`
+
+This is a learning method, not a new authority layer and not an automatic authorization for self-modification.
 
 ## Core-to-Runtime Reconciliation
 
