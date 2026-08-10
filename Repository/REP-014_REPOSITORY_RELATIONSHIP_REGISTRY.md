@@ -2,7 +2,7 @@
 
 Platform: ARGO KOP  
 Document ID: REP-014  
-Version: 1.0.2  
+Version: 1.0.3  
 Status: Active / Relationship Enumeration In Progress  
 Development Baseline: 3.2.1  
 Last Audit: 2026-08-10
@@ -93,10 +93,14 @@ The following are deliberately limited to relationships established during repos
 | REL-026 | REP-013 | REP-014 | DEPENDS_ON | Verified within control-plane scope |
 | REL-027 | REP-014 | REP-011 | DEPENDS_ON | Verified within control-plane scope |
 | REL-028 | REP-014 | REP-012 | DEPENDS_ON | Verified within control-plane scope |
+| REL-029 | REP-016 | REP-012 | DEPENDS_ON | Verified within control-plane scope |
+| REL-030 | REP-016 | REP-011 | DEPENDS_ON | Verified within control-plane scope |
+| REL-031 | REP-016 | REP-013 | DEPENDS_ON | Verified within control-plane scope |
+| REL-032 | REP-016 | REP-014 | DEPENDS_ON | Verified within control-plane scope |
 
 ## Control-Plane Graph
 
-The minimum repository control-plane graph is now explicitly represented:
+The minimum repository control-plane graph is now explicitly represented through the current Phase-1 work queue:
 
 ```text
 REP-001 ──references──> REP-002
@@ -117,7 +121,14 @@ REP-015 ──depends_on──> REP-011
          ├────────────> REP-012
          ├────────────> REP-013
          └────────────> REP-014
+
+REP-016 ──depends_on──> REP-011
+         ├────────────> REP-012
+         ├────────────> REP-013
+         └────────────> REP-014
 ```
+
+`REP-016` is the execution queue and therefore consumes the control-plane evidence rather than replacing it.
 
 This graph describes control-plane dependency only. It does not certify domain semantics.
 
@@ -162,6 +173,16 @@ When a file is renamed, moved, archived, merged, split, or materially changed, a
 `REVALIDATION_REQUIRED`
 
 until the source, target and known consumers are re-read.
+
+## Control-Plane Synchronization Rule
+
+A control-plane artifact that creates or changes execution state must be represented in the relationship graph before that relationship is treated as closed.
+
+For the current Phase-1 control plane, the minimum synchronized set is:
+
+`REP-011 ↔ REP-012 ↔ REP-013 ↔ REP-014 ↔ REP-015 ↔ REP-016`
+
+If a new control-plane artifact is added, moved or materially changed, its relationships must be reconciled before claiming control-plane completeness.
 
 ## Completion Rule
 
