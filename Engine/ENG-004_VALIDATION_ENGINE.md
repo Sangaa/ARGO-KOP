@@ -8,12 +8,14 @@
 
 Platform: ARGO KOP (Knowledge Operating Platform)
 Document ID: ENG-004
-Version: 3.2.0
+Version: 3.2.1
 Status: Integrity Hold / Revalidated
 Category: Engine
 Canonical: Yes
 Priority: Critical
-Last Audit Date: 2026-08-08
+Development Baseline: 3.2.1
+Official Release: 1.0.0
+Last Audit Date: 2026-08-10
 
 ---
 
@@ -100,6 +102,14 @@ The Validation Engine shall return `HOLD` when:
 - cross-layer contracts conflict;
 - evidence coverage is insufficient for the requested decision.
 
+# Relationship Position
+
+`ENG-004` is the validation authority at the Engine layer and is consumed by `SRV-005` at the Service layer.
+
+`ENG-004` operationalizes repository-first validation principles defined by `PROJECT_BOOTSTRAP.md`, and its repository/authority references are represented through `REP-001` and `REP-002`.
+
+`ENG-004` does not independently grant canonical authority to an artifact; canonical authority remains subject to the applicable Governance and Repository authority chain.
+
 # Related Documents
 
 - `PROJECT_BOOTSTRAP.md`
@@ -108,6 +118,7 @@ The Validation Engine shall return `HOLD` when:
 - `Governance/GOV-006_NAMING_CONVENTION_STANDARD.md`
 - `Repository/REP-001_MASTER_INDEX.md`
 - `Repository/REP-002_REPOSITORY_MAP.md`
+- `Services/SRV-005_VALIDATION_SERVICE.md`
 
 ---
 
