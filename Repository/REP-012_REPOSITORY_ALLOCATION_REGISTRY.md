@@ -6,7 +6,7 @@
 
 Platform: ARGO KOP
 Document ID: REP-012
-Version: 1.0.2
+Version: 1.0.3
 Status: Active Control / Integrity Hold / Phase 1 Population In Progress
 Category: Repository Control
 Canonical: Yes
@@ -208,6 +208,7 @@ Last Review Scope:
 Unresolved Scope:
 Last Mutation:
 Recovery Checkpoint:
+Reconciliation State:
 Next Review Trigger:
 ```
 
@@ -215,18 +216,49 @@ Next Review Trigger:
 
 The registry is now beginning population through explicit work items. The following records establish the first control-plane allocation set; they do **not** claim repository-wide allocation completeness.
 
-| Artifact | Domain | Allocation | Review | Relationship | Checkpoint |
-|---|---|---|---|---|---|
-| REP-011 | Repository | ALLOCATED | REVIEWED / Integrity Hold | ACTIVE | 2026-08-10 control-plane checkpoint |
-| REP-012 | Repository | ALLOCATED | REVIEWED / Integrity Hold | ACTIVE | 2026-08-10 control-plane checkpoint |
-| REP-013 | Repository | ALLOCATED | REVIEWED / Integrity Hold | ACTIVE | 2026-08-10 control-plane checkpoint |
-| REP-014 | Repository | ALLOCATED | REVIEWED / Integrity Hold | ACTIVE | 2026-08-10 control-plane checkpoint |
-| REP-015 | Repository | ALLOCATED | REVIEWED / Integrity Hold | ACTIVE | 2026-08-10 control-plane checkpoint |
-| REP-016 | Repository | ALLOCATED | REVIEWED / Integrity Hold | ACTIVE | 2026-08-10 control-plane checkpoint |
+| Artifact | Domain | Allocation | Review | Relationship | Reconciliation | Checkpoint |
+|---|---|---|---|---|---|---|
+| REP-011 | Repository | ALLOCATED | REVIEWED / Integrity Hold | ACTIVE | PARTIALLY_RECONCILED / Integrity Hold | 2026-08-10 control-plane checkpoint |
+| REP-012 | Repository | ALLOCATED | REVIEWED / Integrity Hold | ACTIVE | PARTIALLY_RECONCILED / Integrity Hold | 2026-08-10 control-plane checkpoint |
+| REP-013 | Repository | ALLOCATED | REVIEWED / Integrity Hold | ACTIVE | PARTIALLY_RECONCILED / Integrity Hold | 2026-08-10 control-plane checkpoint |
+| REP-014 | Repository | ALLOCATED | REVIEWED / Integrity Hold | ACTIVE | PARTIALLY_RECONCILED / Integrity Hold | 2026-08-10 control-plane checkpoint |
+| REP-015 | Repository | ALLOCATED | REVIEWED / Integrity Hold | ACTIVE | PARTIALLY_RECONCILED / Integrity Hold | 2026-08-10 control-plane checkpoint |
+| REP-016 | Repository | ALLOCATED | REVIEWED / Integrity Hold | ACTIVE | PARTIALLY_RECONCILED / Integrity Hold | 2026-08-10 control-plane checkpoint |
 
-These records represent the control-plane artifacts actually processed in the current build sequence. Their status remains bounded by the corresponding evidence in `REP-011`, `REP-013`, `REP-014`, `REP-015`, and the engineering journal.
+These records represent the control-plane artifacts actually processed in the current build sequence. Their status remains bounded by the corresponding evidence in `REP-011`, `REP-013`, `REP-014`, `REP-015`, `REP-016`, and the engineering journal.
 
-## 10. Recovery Model
+## 10. Control-Plane Reconciliation State
+
+The allocation registry must not report an artifact as fully trusted merely because its path is allocated.
+
+For the active control-plane set, reconcile:
+
+1. `REP-011` — review and mutation evidence;
+2. `REP-012` — allocation/state/recovery evidence;
+3. `REP-013` — physical content inventory;
+4. `REP-014` — relationship evidence;
+5. `REP-015` — bootstrap and execution gates;
+6. `REP-016` — current Phase 1 work state.
+
+Controlled reconciliation states are:
+
+`NOT_CHECKED`
+
+`PARTIALLY_RECONCILED`
+
+`RECONCILED`
+
+`CONFLICT`
+
+`REVALIDATION_REQUIRED`
+
+`CLOSED`
+
+The current control-plane state is **PARTIALLY_RECONCILED / INTEGRITY HOLD**.
+
+`RECONCILED` must mean the required views agree within the recorded scope. It does not mean the entire repository or Phase 1 is complete.
+
+## 11. Recovery Model
 
 Recovery shall operate at multiple levels:
 
@@ -248,7 +280,7 @@ Reconstruct the last known coherent repository state using commit history, alloc
 
 Recovery must preserve uncertainty. It must not silently promote recovered artifacts to canonical status.
 
-## 11. Checkpoint Rules
+## 12. Checkpoint Rules
 
 A checkpoint should record:
 
@@ -258,6 +290,7 @@ A checkpoint should record:
 - scope covered;
 - files/domains included;
 - review state;
+- reconciliation state;
 - known unresolved items;
 - known quarantined/pre-failure artifacts;
 - recovery instructions or reconstruction entry point.
@@ -276,7 +309,7 @@ Therefore a checkpoint may be classified as:
 
 `RECOVERY_ONLY_CHECKPOINT`
 
-## 12. Build Session Resume Protocol
+## 13. Build Session Resume Protocol
 
 A new model/session should begin with:
 
@@ -285,23 +318,25 @@ A new model/session should begin with:
 3. Load `REP-011` review evidence.
 4. Load `REP-013` content inventory for the working scope.
 5. Load `REP-014` relationship state for the working scope.
-6. Compare current content identities with registered identities.
-7. Identify dirty/revalidation-required artifacts.
-8. Load open/unresolved scope.
-9. Load relevant engineering journal entries.
-10. Resume from the highest-confidence unfinished work item.
+6. Load `REP-015` bootstrap gates.
+7. Load `REP-016` current work queue.
+8. Compare current content identities with registered identities.
+9. Identify dirty/revalidation-required/reconciliation-open artifacts.
+10. Load open/unresolved scope.
+11. Load relevant engineering journal entries.
+12. Resume from the highest-confidence unfinished work item.
 
 The session must not assume that an older handoff is current without checking repository state.
 
-## 13. Mutation Protocol
+## 14. Mutation Protocol
 
 For a material mutation:
 
-`ALLOCATE → READ → VERIFY IDENTITY → VERIFY AUTHORITY → CHECK DEPENDENCIES → CHECK CONSUMERS → MUTATE → COMMIT → RE-READ → UPDATE REP-013 → UPDATE REP-014 → UPDATE REP-011 → UPDATE REP-012 → CHECKPOINT IF WARRANTED`
+`ALLOCATE → READ → VERIFY IDENTITY → VERIFY AUTHORITY → CHECK DEPENDENCIES → CHECK CONSUMERS → MUTATE → COMMIT → RE-READ → UPDATE REP-013 → UPDATE REP-014 → UPDATE REP-011 → UPDATE REP-012 → RECONCILE → CHECKPOINT IF WARRANTED`
 
 If post-mutation re-read fails, the artifact remains `DIRTY` or `REVALIDATION_REQUIRED` and must not be marked complete.
 
-## 14. Session-Safe Mutation Rule
+## 15. Session-Safe Mutation Rule
 
 When session termination is possible, every material mutation must be treated as a final persisted unit.
 
@@ -315,7 +350,7 @@ If the session ends immediately after a commit, the repository remains the sourc
 
 A final response may summarize work, but the repository commit is the persistence boundary.
 
-## 15. Recovery vs Revert
+## 16. Recovery vs Revert
 
 Recovery is not equivalent to automatic revert.
 
@@ -330,7 +365,7 @@ When a mutation is suspicious:
 
 No destructive recovery action should occur solely because a file is marked uncertain.
 
-## 16. Phase 1 Completion Control
+## 17. Phase 1 Completion Control
 
 For each partition/domain, the registry shall preserve:
 
@@ -339,14 +374,15 @@ For each partition/domain, the registry shall preserve:
 - reviewed artifacts;
 - dirty artifacts;
 - revalidation-required artifacts;
+- reconciliation-open artifacts;
 - quarantined artifacts;
 - unresolved dependencies;
 - unresolved consumers;
 - recovery checkpoints.
 
-A partition can only become `CLOSED_FOR_PHASE_1` after an explicit decision supported by `REP-011`, `REP-013`, `REP-014`, relevant indexes/maps, and domain evidence.
+A partition can only become `CLOSED_FOR_PHASE_1` after an explicit decision supported by `REP-011`, `REP-013`, `REP-014`, `REP-015`, `REP-016`, relevant indexes/maps, and domain evidence.
 
-## 17. Machine-Readable Future
+## 18. Machine-Readable Future
 
 The current canonical specification is Markdown for human inspection and cross-model portability.
 
@@ -358,6 +394,7 @@ The future registry should support at minimum:
 - content identity comparison;
 - dependency/consumer impact detection;
 - stale-review detection;
+- reconciliation-state detection;
 - checkpoint lookup;
 - session resume;
 - recovery planning;
@@ -365,7 +402,7 @@ The future registry should support at minimum:
 
 Automation must report evidence; it must not silently decide semantic authority.
 
-## 18. Relationship to Control Plane
+## 19. Relationship to Control Plane
 
 `REP-012` answers:
 
@@ -383,7 +420,15 @@ Automation must report evidence; it must not silently decide semantic authority.
 
 **What relationships connect the registered artifacts?**
 
-The four systems are complementary:
+`REP-015` answers:
+
+**What evidence and execution gates must be passed before work resumes or mutates the repository?**
+
+`REP-016` answers:
+
+**What Phase 1 work remains explicitly open and in what execution state?**
+
+The six systems are complementary:
 
 `REP-012 = Allocation / State / Recovery`
 
@@ -393,15 +438,19 @@ The four systems are complementary:
 
 `REP-014 = Relationship Graph`
 
-## 19. Registry Integrity Rule
+`REP-015 = Bootstrap / Execution Gates`
+
+`REP-016 = Phase 1 Work State`
+
+## 20. Registry Integrity Rule
 
 The control-plane records themselves are repository artifacts and must be registered, reviewed and checkpointed like any other critical artifact.
 
 A registry entry cannot establish its own correctness merely by existing.
 
-Material changes to `REP-011`, `REP-012`, `REP-013` or `REP-014` require cross-registry reconciliation before their affected claims are treated as closed.
+Material changes to any active control-plane artifact (`REP-011` through `REP-016`) require cross-registry reconciliation before affected claims are treated as closed.
 
-## 20. Initial Deployment Rule
+## 21. Initial Deployment Rule
 
 Because the repository does not yet have a fully populated allocation registry, the initial deployment status is:
 
@@ -411,7 +460,7 @@ Existing repository files must not be marked `ALLOCATED + REVIEWED + CHECKPOINTE
 
 The registry shall be populated incrementally during Phase 1 review.
 
-## 21. Related Documents
+## 22. Related Documents
 
 - `Repository/REP-001_MASTER_INDEX.md`
 - `Repository/REP-002_REPOSITORY_MAP.md`
@@ -427,10 +476,11 @@ The registry shall be populated incrementally during Phase 1 review.
 - `Memory/Engineering_Journal/EJR-015_2026-08-10_PRE_FAILURE_MUTATION_AUDIT.md`
 - `Memory/Engineering_Journal/EJR-016_2026-08-10_REVIEW_TRACEABILITY_AND_PHASE1_COMPLETION_CONTROL.md`
 - `Memory/Engineering_Journal/EJR-021_2026-08-10_CONTROL_PLANE_OPERATIONALIZATION.md`
+- `Memory/Engineering_Journal/EJR-022_2026-08-10_HERMUZ_BUILD_METHOD_LESSONS.md`
 
-## 22. Guiding Rule
+## 23. Guiding Rule
 
-**Know where every artifact belongs, know which repository state was last trusted, know what changed, know how it connects, and know how to recover without pretending uncertainty is completion.**
+**Know where every artifact belongs, know which repository state was last trusted, know what changed, know how it connects, know whether the control views reconcile, and know how to recover without pretending uncertainty is completion.**
 
 ---
 
