@@ -29,6 +29,12 @@ Added explicit control-plane relationship records for:
 
 The registry now requires Consumer Scope in addition to Impact and explicitly treats relationship sublabels as evidence descriptions rather than uncontrolled relationship types.
 
+### REP-016
+
+Created `Repository/REP-016_PHASE1_PARTITION_WORK_QUEUE.md`.
+
+The queue turns the control plane into an ordered execution system with explicit states, recovery rules, anti-loop controls and anti-premature-closure controls.
+
 ## Important Finding
 
 The control plane is now sufficiently represented to begin actual partition-by-partition population, but it is not yet repository-complete.
@@ -37,7 +43,7 @@ The control plane is now sufficiently represented to begin actual partition-by-p
 
 ## Operational Rule
 
-The next build unit should be a real repository partition, not another abstract registry layer.
+The next build unit is a real repository partition, not another abstract registry layer.
 
 For the selected partition:
 
