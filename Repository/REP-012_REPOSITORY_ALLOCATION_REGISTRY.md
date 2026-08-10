@@ -6,7 +6,7 @@
 
 Platform: ARGO KOP
 Document ID: REP-012
-Version: 1.0.4
+Version: 1.0.5
 Status: Active Control / Integrity Hold / Phase 1 Population In Progress
 Category: Repository Control
 Canonical: Yes
@@ -224,8 +224,14 @@ The registry is now beginning population through explicit work items. The follow
 | REP-014 | Repository | ALLOCATED | REVIEWED / Integrity Hold | ACTIVE | PARTIALLY_RECONCILED / Integrity Hold | 2026-08-10 control-plane checkpoint |
 | REP-015 | Repository | ALLOCATED | REVIEWED / Integrity Hold | ACTIVE | PARTIALLY_RECONCILED / Integrity Hold | 2026-08-10 control-plane checkpoint |
 | REP-016 | Repository | ALLOCATED | REVIEWED / Integrity Hold | ACTIVE | PARTIALLY_RECONCILED / Integrity Hold | 2026-08-10 control-plane checkpoint |
+| DIAG-001 | Assets/Diagrams | ALLOCATED | REVIEWED / Orientation Artifact | ACTIVE | PARTIAL / PROVENANCE LINKED | 2026-08-10 diagram artifact |
 
-These records represent the control-plane artifacts actually processed in the current build sequence. Their status remains bounded by the corresponding evidence in `REP-011`, `REP-013`, `REP-014`, `REP-015`, `REP-016`, and the engineering journal.
+DIAG-001 consists of the paired artifacts:
+
+- `Assets/Diagrams/DIAG-001_REPOSITORY_PHASE1_STATUS_2026-08-10.svg`
+- `Assets/Diagrams/DIAG-001_REPOSITORY_PHASE1_STATUS_2026-08-10.md`
+
+The pair is an orientation/provenance artifact. It is not a source of canonical completion truth.
 
 ## 10. Control-Plane Reconciliation State
 
@@ -268,6 +274,7 @@ The current control-plane review established the following evidence boundaries:
 | REP-014 ↔ REP-015 | PARTIAL | Bootstrap/control-plane relationships are explicit; closure evidence remains open. |
 | REP-015 ↔ REP-016 | RECONCILED WITHIN CURRENT SCOPE | Bootstrap order and Phase-1 queue are explicitly linked; this does not close Phase 1. |
 | REP-016 ↔ REP-011..014 | PARTIAL | Queue state references the control-plane registries, while complete state-by-state reconciliation remains open. |
+| DIAG-001 ↔ REP-012 | PROVENANCE LINKED | The diagram pair is allocated and identified; its values remain directional and must not be promoted to canonical completion metrics. |
 
 **Important:** These results are scoped to the control-plane artifacts actually inspected. They are not a claim that the entire repository has been reconciled.
 
@@ -496,14 +503,13 @@ The registry shall be populated incrementally during Phase 1 review.
 - `Repository/REP-016_PHASE1_PARTITION_WORK_QUEUE.md`
 - `PROJECT_BOOTSTRAP.md`
 - `PROJECT_STATUS.md`
-- `Memory/Engineering_Journal/EJR-015_2026-08-10_PRE_FAILURE_MUTATION_AUDIT.md`
-- `Memory/Engineering_Journal/EJR-016_2026-08-10_REVIEW_TRACEABILITY_AND_PHASE1_COMPLETION_CONTROL.md`
-- `Memory/Engineering_Journal/EJR-021_2026-08-10_CONTROL_PLANE_OPERATIONALIZATION.md`
-- `Memory/Engineering_Journal/EJR-022_2026-08-10_HERMUZ_BUILD_METHOD_LESSONS.md`
+- `ROADMAP.md`
+- `Assets/Diagrams/DIAG-001_REPOSITORY_PHASE1_STATUS_2026-08-10.svg`
+- `Assets/Diagrams/DIAG-001_REPOSITORY_PHASE1_STATUS_2026-08-10.md`
 
-## 23. Guiding Rule
+## 23. Final Principle
 
-**Know where every artifact belongs, know which repository state was last trusted, know what changed, know how it connects, know whether the control views reconcile, and know how to recover without pretending uncertainty is completion.**
+**The registry is not the repository. It is the control layer that helps the repository remain discoverable, reviewable, traceable and recoverable.**
 
 ---
 
