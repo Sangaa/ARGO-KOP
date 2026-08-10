@@ -304,7 +304,33 @@ The most valuable construction evidence is not that a model can generate documen
 
 This is **repository-observable engineering learning**, not a claim that a model has permanent training or autonomous memory outside the repository.
 
-## 21. Current Engineering Principle
+## 21. Nineteenth Lesson — Checkpoint Drift Is Itself Evidence
+
+During continued construction, the control-plane artifacts may advance in separate commits. A previously recorded checkpoint can therefore remain historically valid while becoming incomplete as a description of the current control-plane state.
+
+The correct response is not to rewrite the historical checkpoint or assume synchronization. Instead:
+
+```text
+Historical Checkpoint
+        ↓
+Compare Current HEAD / Artifact Identities
+        ↓
+Detect Drift
+        ↓
+Classify Scope of Drift
+        ↓
+Synchronize Affected Registries
+        ↓
+Re-read
+        ↓
+Record New Checkpoint / Reconciliation State
+```
+
+A checkpoint is a bounded evidence claim, not a permanent declaration of current truth.
+
+This lesson is especially important for `REP-011` through `REP-016`: changing one control-plane artifact can make other registries stale even when their own files were not directly modified.
+
+## 22. Current Engineering Principle
 
 The strongest lesson from the construction process is:
 
@@ -312,7 +338,7 @@ The strongest lesson from the construction process is:
 
 The model's job is to interpret, verify, connect, modify and document that evidence without silently substituting its own assumptions for reality.
 
-## 22. What This Entry Does Not Claim
+## 23. What This Entry Does Not Claim
 
 This journal entry does not claim that:
 
