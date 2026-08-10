@@ -4,11 +4,9 @@
 
 # ARGO KOP - PLATFORM STATUS & EVOLUTION METRICS
 
----
-
 Platform: ARGO KOP (Knowledge Operating Platform)
 Document ID: PROJECT_STATUS
-Version: 3.3.1
+Version: 3.3.2
 Status: INTEGRITY WARNING / CONNECTED-BASELINE AUDIT
 Category: Root Baseline
 Canonical: Yes
@@ -42,13 +40,12 @@ The latest bounded audit has completed and revalidated the following changes:
 - `Repository/REP-002_REPOSITORY_MAP.md` synchronized with the same scope.
 - `Lifecycle/GOV-005_DOCUMENT_LIFECYCLE.md` migrated to `Lifecycle/LIF-001_DOCUMENT_LIFECYCLE.md` to remove the active `GOV-005` identity collision.
 - `Architecture/ARC_MAP.md` treated as a map artifact rather than a competing `ARC-001` canonical identity.
-- `Engine/ENG-010_ENGINE_COORDINATION.md` updated to `3.1.1 / Integrity Hold / Revalidated` with explicit route-verification and authority boundaries.
-- `Engine/ENG-011_MARITIME_GAME_ENGINE.md` updated to `1.0.1 / Integrity Hold` with explicit dependency and learning-feedback boundaries.
 - `Interfaces/INTF-010_INTEGRATIONS.md` rebuilt as the provider-neutral connector/integration boundary and linked to runtime, memory, learning and execution authority.
-- `Memory/Engineering_Journal/EJR-004_CURRENT_INTEGRATION_REVALIDATION.md` recorded the current integration, learning, memory and multimodal boundary revalidation.
-- `Runtime/RUN-005_RUNTIME_WORKFLOW.md` and `Runtime/RUN-006_AI_PROTOCOL.md` revalidated against the authoritative development baseline `3.2.1`.
+- `Runtime/RUN-005_RUNTIME_WORKFLOW.md`, `Runtime/RUN-006_AI_PROTOCOL.md` and `Runtime/RUN-010_RUNTIME_REFERENCE.md` revalidated against the authoritative development baseline `3.2.1`.
 - `Interfaces/INTF-006_ENVIRONMENT_SENSING.md` revalidated against the same runtime/integration boundary and baseline.
 - `Interfaces/INTF-005_LLM.md` identity was corrected so its internal `INTF-005` identity matches its filename.
+- `Services/SRV-010_SERVICE_REFERENCE.md` revalidated as an evidence-bounded service inventory/reference artifact rather than a claim that every listed service is implemented or operational.
+- `Services/_FOLDER_STATUS.md` revalidated to withdraw stale completion claims and record the current bounded service-validation scope.
 
 These are **verified bounded mutations**, not repository-wide certification.
 
@@ -152,9 +149,10 @@ Only after this gate passes may the project move from **Connected Baseline Stabi
 | Knowledge cross-layer validation | OPEN / INTEGRITY HOLD |
 | Memory cross-layer validation | OPEN / INTEGRITY HOLD |
 | Runtime/Engine/AI/Services validation | OPEN / PARTIALLY REVALIDATED |
-| Runtime baseline alignment | REVALIDATED FOR RUN-005 / RUN-006 |
+| Runtime baseline alignment | REVALIDATED FOR RUN-005 / RUN-006 / RUN-010 |
 | Integration connector boundary | REVALIDATED / ARCHITECTURE PASS FOR CURRENT SCOPE |
 | Environment sensing boundary | PROPOSED / INTEGRITY HOLD / CROSS-LAYER VALIDATION OPEN |
+| Services inventory/reference | REVALIDATED / GLOBAL SERVICE VALIDATION OPEN |
 | Session learning handoff | REVALIDATED / PROMOTION REMAINS GOVERNED |
 | Models/Lifecycle/Blueprints validation | OPEN / INTEGRITY HOLD |
 | Projects/Release validation | OPEN |
@@ -179,13 +177,13 @@ A previously reviewed domain may be reopened whenever new evidence changes the i
 
 ### Immediate next audit targets
 
-1. Complete cross-layer reference resolution for `INTF-010` and its declared consumers/dependencies.
-2. Reconcile remaining runtime/engine declarations against the authoritative baseline.
-3. `INTF-006` environment-sensing boundary and its relationship to governance, memory and runtime.
-4. Synchronization of root status claims after the latest bounded mutations.
-5. REP-001 / REP-002 relationship consistency after subsequent integration changes.
-6. Revalidation of session-learning closure and promotion boundaries.
-7. Continue into Specifications only after the connected-baseline gate for the affected scope is satisfied.
+1. Complete the bounded `Services → Runtime Consumers → Repository / Index Services` relationship enumeration.
+2. Reconcile `SRV-001` through `SRV-009` contracts against the current Validation Engine and their declared consumers/dependencies.
+3. Validate service-to-Repository/Index/Runtime relationships before any service-domain completion claim.
+4. Reconcile remaining runtime/engine/AI declarations against the authoritative baseline.
+5. Revisit `INTF-006` environment-sensing boundary and its relationship to governance, memory and runtime.
+6. Synchronize root/index status claims after subsequent bounded service mutations.
+7. Continue into Projects/Release and then Global Cross-Layer Validation only after affected relationship gates are satisfied.
 
 ---
 
@@ -231,6 +229,7 @@ A development baseline is not an official release.
 25. External experience must remain scoped to its correct memory domain until evidence and authority justify promotion.
 26. A new interface boundary must be validated against its runtime consumers before it can be treated as globally integrated.
 27. A development baseline conflict must be resolved from the authoritative version source, not from the highest version number appearing in a mutated artifact.
+28. A service inventory is not a service implementation claim; physical artifact presence and operational capability must remain separate evidence classes.
 
 ---
 
