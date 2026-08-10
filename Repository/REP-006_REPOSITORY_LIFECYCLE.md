@@ -96,8 +96,6 @@ Archive
 
 **Archive is the controlled historical state. Deletion is not an automatic substitute for archival.**
 
----
-
 # Stage Definitions
 
 ## Idea
@@ -144,8 +142,6 @@ The artifact becomes historical and is retained for traceability.
 
 Archived artifacts are not active authority unless a governed process explicitly restores or reactivates them.
 
----
-
 # Repository Rules
 
 Every lifecycle transition shall have appropriate evidence.
@@ -163,15 +159,11 @@ Every active canonical repository artifact shall have, as applicable:
 
 Folder status is supporting evidence, not proof of authority by itself.
 
----
-
 # Version Rules
 
 Version changes shall reflect the actual scope of change and remain consistent with the applicable version authority.
 
 A version number alone does not prove release or approval.
-
----
 
 # Review Requirements
 
@@ -184,23 +176,19 @@ Every approval of a canonical repository artifact requires, as applicable:
 - Repository Baseline Verification
 - Upstream/downstream impact review for material changes
 
----
-
 # Relationship to Other Lifecycles
 
 `REP-006` governs the **repository-artifact lifecycle**.
 
 It interacts with:
 
-- `Lifecycle/GOV-005_DOCUMENT_LIFECYCLE.md` — lifecycle state of a document artifact.
+- `Lifecycle/LIF-001_DOCUMENT_LIFECYCLE.md` — lifecycle state of a document artifact.
 - `Core/CORE-009_PLATFORM_LIFECYCLE.md` — platform-level evolution lifecycle.
 - `Knowledge/KNW-004_KNOWLEDGE_LIFECYCLE.md` — knowledge-object lifecycle.
 
 These lifecycles have different scopes.
 
 A repository artifact may represent a document, knowledge object, project record or other governed artifact. Its repository lifecycle state must not be used as proof of the state of the represented object.
-
----
 
 # Integrity & Mutation Rule
 
@@ -209,8 +197,6 @@ A successful repository write proves only that the requested mutation was accept
 After mutation, the changed artifact and affected indexes, status files and critical references must be re-read and validated before completion is claimed.
 
 A local repository lifecycle PASS does not establish repository-wide integrity.
-
----
 
 # Lifecycle Events
 
@@ -228,8 +214,6 @@ Archive
 
 Every event shall be traceable where the applicable authority requires it.
 
----
-
 # Related Documents
 
 - `Repository/REP-001_MASTER_INDEX.md`
@@ -237,15 +221,13 @@ Every event shall be traceable where the applicable authority requires it.
 - `Repository/REP-003_REPOSITORY_STANDARDS.md`
 - `Repository/REP-004_REPOSITORY_NAVIGATION.md`
 - `Repository/REP-007_REPOSITORY_GOVERNANCE.md`
-- `Repository/REP-009_REPOSITORY_CONSTITUTION.md`
+- `Repository/REP-009_REPOSITORY_TRACEABILITY.md`
 - `Governance/GOV-005_REVIEW_STANDARD.md`
 - `Governance/GOV-009_REPOSITORY_POLICY.md`
 - `Core/CORE-003_CONSTITUTION.md`
 - `PROJECT_BOOTSTRAP.md`
 
 All related-document paths above require current repository verification before being treated as active dependencies.
-
----
 
 # Guiding Statement
 
