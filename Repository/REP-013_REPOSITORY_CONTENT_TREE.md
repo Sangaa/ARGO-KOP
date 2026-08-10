@@ -2,7 +2,7 @@
 
 Platform: ARGO KOP  
 Document ID: REP-013  
-Version: 1.0.0  
+Version: 1.0.1  
 Status: Active / Phase 1 Population In Progress  
 Development Baseline: 3.2.1  
 Last Audit: 2026-08-10  
@@ -76,7 +76,8 @@ Repository/
 ├── REP-002_REPOSITORY_MAP.md
 ├── REP-011_REVIEW_TRACEABILITY_LEDGER.md
 ├── REP-012_REPOSITORY_ALLOCATION_REGISTRY.md
-└── REP-013_REPOSITORY_CONTENT_TREE.md
+├── REP-013_REPOSITORY_CONTENT_TREE.md
+└── REP-014_REPOSITORY_RELATIONSHIP_REGISTRY.md
 ```
 
 ### Models/
@@ -163,7 +164,8 @@ Memory/Engineering_Journal/
 ├── EJR-014_2026-08-10_*.md
 ├── EJR-015_2026-08-10_PRE_FAILURE_MUTATION_AUDIT.md
 ├── EJR-016_2026-08-10_REVIEW_TRACEABILITY_AND_PHASE1_COMPLETION_CONTROL.md
-└── EJR-017_2026-08-10_REPOSITORY_ALLOCATION_AND_RECOVERY_REGISTRY.md
+├── EJR-017_2026-08-10_REPOSITORY_ALLOCATION_AND_RECOVERY_REGISTRY.md
+└── EJR-018_2026-08-10_REPOSITORY_CONTENT_AND_RELATIONSHIP_REGISTRIES.md
 ```
 
 Wildcard entries here mean exact inventory reconciliation is still required.
@@ -199,6 +201,10 @@ No closure is implied.
 
 > **What is the repository's structural/domain map?**
 
+`REP-014` answers:
+
+> **How do the known artifacts relate, and which relationships remain unresolved?**
+
 `REP-011` answers:
 
 > **What has actually been reviewed, with what evidence?**
@@ -207,7 +213,7 @@ No closure is implied.
 
 > **What is the allocation/state/checkpoint/recovery status of each artifact?**
 
-A complete Phase-1 view requires all four perspectives.
+A complete Phase-1 view requires all five perspectives.
 
 ## Completion Rule
 
@@ -217,8 +223,9 @@ A folder can only be marked `CLOSED_FOR_PHASE_1` when:
 2. Every known file has an allocation record;
 3. Every required file has a review state;
 4. Dependencies and consumers have been assessed where applicable;
-5. unresolved items are explicitly recorded;
-6. an explicit closure decision is recorded.
+5. material relationships are represented or explicitly unresolved;
+6. unresolved items are explicitly recorded;
+7. an explicit closure decision is recorded.
 
 Until then the folder remains **OPEN**.
 
