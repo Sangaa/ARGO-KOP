@@ -8,12 +8,12 @@ Platform: ARGO KOP
 Knowledge Operating Platform
 
 Document ID: STD-003
-Version: 1.3.0
+Version: 1.3.1
 Status: Validated / Integrity Hold
 Category: Standard / Cross-Reference
-Repository Development Baseline: 3.3.0
+Repository Development Baseline: 3.2.1
 Latest Official Release: 1.0.0
-Last Audit: 2026-08-09
+Last Audit: 2026-08-10
 
 ---
 
