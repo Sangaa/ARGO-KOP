@@ -2,7 +2,7 @@
 
 Platform: ARGO KOP  
 Document ID: REP-013  
-Version: 1.0.4  
+Version: 1.0.5  
 Status: Active / Phase 1 Population In Progress  
 Development Baseline: 3.3.0  
 Last Audit: 2026-08-10
@@ -287,7 +287,20 @@ Core/
 └── _FOLDER_STATUS.md
 ```
 
-### Templates/, Release/, Projects/, Docs/, Examples/, Assets/, Archive/
+### Assets/Diagrams/
+
+The first explicitly registered visual artifact pair is now included in the content inventory:
+
+```text
+Assets/
+└── Diagrams/
+    ├── DIAG-001_REPOSITORY_PHASE1_STATUS_2026-08-10.svg
+    └── DIAG-001_REPOSITORY_PHASE1_STATUS_2026-08-10.md
+```
+
+`DIAG-001` is an orientation/provenance artifact. Its values are directional and must not be promoted to canonical repository completion without the evidence and calculation controls defined in this document and `REP-012`.
+
+### Templates/, Release/, Projects/, Docs/, Examples/, Archive/
 
 These folders are **STRUCTURE-IDENTIFIED / CONTENT RECONCILIATION PENDING** unless their exact file inventory is separately recorded and linked to `REP-011` and `REP-012`.
 
