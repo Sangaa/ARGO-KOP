@@ -2,7 +2,7 @@
 
 Platform: ARGO KOP  
 Document ID: REP-014  
-Version: 1.0.4  
+Version: 1.0.5  
 Status: Active / Relationship Enumeration In Progress  
 Development Baseline: 3.3.0  
 Last Audit: 2026-08-10
@@ -97,10 +97,16 @@ The following are deliberately limited to relationships established during repos
 | REL-030 | REP-016 | REP-011 | DEPENDS_ON | Verified within control-plane scope |
 | REL-031 | REP-016 | REP-013 | DEPENDS_ON | Verified within control-plane scope |
 | REL-032 | REP-016 | REP-014 | DEPENDS_ON | Verified within control-plane scope |
+| REL-033 | REP-015 | REP-016 | DEPENDS_ON | Verified within current control-plane scope |
+| REL-034 | REP-016 | REP-015 | CONSUMES | Verified within current control-plane scope |
+| REL-035 | REP-011 | REP-016 | DOCUMENTS | Verified within current control-plane scope |
+| REL-036 | REP-012 | REP-016 | DOCUMENTS | Verified within current control-plane scope |
+| REL-037 | REP-013 | REP-016 | DOCUMENTS | Verified within current control-plane scope |
+| REL-038 | REP-014 | REP-016 | DOCUMENTS | Verified within current control-plane scope |
 
 ## Control-Plane Graph
 
-The minimum repository control-plane graph is now explicitly represented through the current Phase-1 work queue:
+The minimum repository control-plane graph is now explicitly represented through the current Phase-1 work queue and bootstrap/review relationships:
 
 ```text
 REP-001 ──references──> REP-002
@@ -120,13 +126,17 @@ REP-014 ──depends_on──> REP-011
 REP-015 ──depends_on──> REP-011
          ├────────────> REP-012
          ├────────────> REP-013
-         └────────────> REP-014
+         ├────────────> REP-014
+         └────────────> REP-016
 
 REP-016 ──depends_on──> REP-011
          ├────────────> REP-012
          ├────────────> REP-013
-         └────────────> REP-014
+         ├────────────> REP-014
+         └──consumes──> REP-015
 ```
+
+The current graph also records that the core registries document the Phase-1 queue through `REL-035` to `REL-038`.
 
 `REP-016` is the execution queue and therefore consumes the control-plane evidence rather than replacing it.
 
@@ -182,7 +192,19 @@ For the current Phase-1 control plane, the minimum synchronized set is:
 
 `REP-011 ↔ REP-012 ↔ REP-013 ↔ REP-014 ↔ REP-015 ↔ REP-016`
 
+The current registry explicitly represents the previously missing `REP-015 ↔ REP-016` execution/bootstrap relationship and the reverse documentation links from the core registries to the queue.
+
 If a new control-plane artifact is added, moved or materially changed, its relationships must be reconciled before claiming control-plane completeness.
+
+## Reconciliation State
+
+The presence of a relationship record does not by itself mean the entire control plane is reconciled.
+
+Current control-plane relationship status:
+
+`PARTIALLY RECONCILED / INTEGRITY HOLD`
+
+The remaining open work includes broader endpoint identity verification, evidence/checkpoint completion, consumer impact validation, and enumeration beyond the inspected control-plane scope.
 
 ## Completion Rule
 
