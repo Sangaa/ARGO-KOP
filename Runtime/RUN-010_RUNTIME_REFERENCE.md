@@ -8,8 +8,8 @@ Platform: ARGO KOP
 Knowledge Operating Platform
 
 Document ID: RUN-010
-Version: 1.3.1
-Status: Validated / Integrity Hold
+Version: 1.3.2
+Status: Validated / Integrity Hold / Revalidated
 Category: Runtime
 Canonical: Yes
 Priority: Critical
@@ -68,6 +68,10 @@ Validated Operation Selection
 
 ↓
 
+Decision / Execution Candidate Processing when applicable
+
+↓
+
 Processing
 
 ↓
@@ -80,7 +84,7 @@ Validation
 
 ↓
 
-Committing
+Committing through applicable governed mutation services
 
 ↓
 
@@ -91,6 +95,16 @@ Re-read / Trace
 IDLE or governed HOLD/FAULT
 
 Continuation is conditional and governed by `RUN-005`.
+
+# Decision / Validation / Execution Boundary
+
+Where the operation requires decision and execution services, the runtime relationship is interpreted as:
+
+`Decision Candidate → Validation → Authorization → ENG-006 Execution → SRV-009 Controlled Mutation → Post-Write Validation / Re-read`
+
+This is a relationship description, not a claim that every runtime operation follows this exact path.
+
+`ENG-006` does not create authority; `SRV-009` does not create authority through technical write access. Applicable governance, repository and validation controls remain upstream constraints.
 
 # External Execution Boundary
 
@@ -191,6 +205,12 @@ Dependencies are resolved from current repository evidence, not assumed from num
 - `Runtime/RUN-007_RUNTIME_SECURITY.md`
 - `Runtime/RUN-008_RUNTIME_STATE.md`
 - `Runtime/RUN-009_RECOVERY.md`
+- `Runtime/RUN-010_RUNTIME_REFERENCE.md`
+- `Engine/ENG-002_DECISION_ENGINE.md`
+- `Engine/ENG-004_VALIDATION_ENGINE.md`
+- `Engine/ENG-006_EXECUTION_ENGINE.md`
+- `Services/SRV-005_VALIDATION_SERVICE.md`
+- `Services/SRV-009_UPDATE_SERVICE.md`
 - `Architecture/ARC-006_DEPENDENCY_MODEL.md`
 - `Repository/REP-001_MASTER_INDEX.md`
 - `Interfaces/INTF-001_INTERFACE_SPEC.md`
