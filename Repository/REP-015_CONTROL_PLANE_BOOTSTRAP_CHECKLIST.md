@@ -2,7 +2,7 @@
 
 Platform: ARGO KOP  
 Document ID: REP-015  
-Version: 1.0.3  
+Version: 1.0.4  
 Status: Active / Phase 1 Open / Integrity Hold  
 Development Baseline: 3.3.0  
 Last Audit: 2026-08-10
@@ -29,6 +29,105 @@ This checklist prevents a model from relying on conversational memory when the r
 11. Open / unresolved scope
 12. Current work item
 ```
+
+## Ring-Based Progression Rule
+
+Repository review and construction shall progress through controlled rings rather than unconstrained whole-repository mutation.
+
+A ring is a bounded review/build scope whose entry evidence, affected relationships and exit conditions are explicit.
+
+The practical progression is:
+
+```text
+RING 0 — CONTROL PLANE
+REP-011 / REP-012 / REP-013 / REP-014 / REP-015 / REP-016
+        ↓
+RING 1 — AUTHORITY CORE
+Core / Governance / Architecture authority
+        ↓
+RING 2 — EXECUTION FOUNDATION
+Runtime / Engine / Interfaces
+        ↓
+RING 3 — KNOWLEDGE & DOMAIN
+Knowledge / Models / Services / Specifications
+        ↓
+RING 4 — OPERATIONAL SURFACES
+Projects / Docs / Templates / Examples / Assets
+        ↓
+RING 5 — RELEASE & EVOLUTION
+Release / Archive / Future control-plane capabilities
+```
+
+The ring labels are an execution method, not a new architectural authority model. Existing canonical architecture and governance documents remain authoritative for their respective domains.
+
+### Ring Entry Rule
+
+Do not enter a ring merely because the previous ring has many files marked complete.
+
+Entry requires:
+
+- current repository baseline;
+- resolved entry artifacts;
+- known unresolved scope;
+- affected relationship scope;
+- applicable authority;
+- recovery checkpoint.
+
+### Ring Exit Rule
+
+A ring may be considered ready for closure review only when its applicable scope has:
+
+- physical inventory evidence;
+- identity verification;
+- authority verification;
+- current-content review;
+- relationship reconciliation;
+- consumer/impact review where applicable;
+- mutation/checkpoint evidence;
+- explicit unresolved items;
+- and a recorded closure decision.
+
+A ring can remain open without blocking work in an independent ring when the dependency/authority analysis explicitly permits it.
+
+### Ring Isolation Rule
+
+Work in one ring must not silently mutate another ring.
+
+If a change crosses a ring boundary:
+
+```text
+DETECT CROSS-RING IMPACT
+        ↓
+IDENTIFY AFFECTED ARTIFACTS
+        ↓
+VERIFY AUTHORITY
+        ↓
+REVIEW RELATIONSHIPS / CONSUMERS
+        ↓
+MUTATE ONLY WITHIN APPROVED SCOPE
+        ↓
+RECONCILE BOTH RINGS
+```
+
+### Ring Recovery Rule
+
+Every ring must be resumable from repository evidence without reconstructing progress from conversation history.
+
+At minimum record:
+
+`Ring → Work Item → Current State → Last Reviewed Identity → Commit/Checkpoint → Remaining Scope → Affected Relationships`
+
+### Ring Promotion Rule
+
+Completion of a lower ring does not automatically promote higher rings.
+
+Promotion is:
+
+`Evidence → Reconciliation → Explicit Decision → Next Ring`
+
+not:
+
+`Time / File Count / Model Confidence → Promotion`
 
 ## Baseline Verification Gate
 
@@ -116,6 +215,8 @@ Known Dependencies:
 Known Consumers:
 Open Scope:
 Recovery Checkpoint:
+Current Ring:
+Cross-Ring Impact:
 Reason for Current Work:
 ```
 
