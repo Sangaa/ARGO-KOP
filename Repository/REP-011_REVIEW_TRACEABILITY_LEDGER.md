@@ -6,7 +6,7 @@
 
 Platform: ARGO KOP
 Document ID: REP-011
-Version: 1.0.3
+Version: 1.0.4
 Status: Active / Integrity Hold
 Category: Repository Control
 Canonical: Yes
@@ -102,7 +102,37 @@ Before a review is marked `RELATIONSHIPS_REVALIDATED` or `CLOSED_FOR_PHASE_1`, r
 
 If any required registry view is missing or materially inconsistent, the review remains open or becomes `REVALIDATION_REQUIRED`.
 
-## 8. Relationship Verification Boundary
+## 8. Control-Plane Reconciliation Matrix
+
+The Phase-1 control-plane artifacts must be evaluated as one synchronized system, not as isolated documents.
+
+| Artifact | REP-011 Review | REP-012 Allocation | REP-013 Inventory | REP-014 Relationships | REP-016 Queue | Current Reconciliation |
+|---|---|---|---|---|---|---|
+| REP-011 | Self | Required | Required | Required | Required | OPEN / Integrity Hold |
+| REP-012 | Required | Self | Required | Required | Required | OPEN / Integrity Hold |
+| REP-013 | Required | Required | Self | Required | Required | OPEN / Integrity Hold |
+| REP-014 | Required | Required | Required | Self | Required | OPEN / Integrity Hold |
+| REP-015 | Required | Required | Required | Required | Required | OPEN / Integrity Hold |
+| REP-016 | Required | Required | Required | Required | Self | OPEN / Integrity Hold |
+
+`Required` means the relationship/evidence must be reconciled before the corresponding claim can be promoted to closed. It does not mean the reconciliation has already succeeded.
+
+### Reconciliation Decision States
+
+```text
+NOT_CHECKED
+PARTIALLY_RECONCILED
+RECONCILED
+CONFLICT
+REVALIDATION_REQUIRED
+CLOSED
+```
+
+The current control-plane state remains **PARTIALLY_RECONCILED / INTEGRITY HOLD** until all required cross-registry checks are supported by current repository evidence.
+
+This explicit state prevents a successful edit of one control-plane file from being mistaken for repository-wide consistency.
+
+## 9. Relationship Verification Boundary
 
 A relationship may not be considered verified merely because a reference exists.
 
@@ -112,7 +142,7 @@ Where material, verify:
 
 An unresolved endpoint, identity conflict, quarantine state, or material unreviewed mutation prevents a closed relationship claim.
 
-## 9. Folder Completion Control
+## 10. Folder Completion Control
 
 A folder shall not be marked complete merely because selected files inside it were reviewed.
 
@@ -129,7 +159,7 @@ For every active folder/domain, distinguish:
 
 Until an explicit `CLOSED_FOR_PHASE_1` decision exists, remaining content stays open.
 
-## 10. Phase 1 Closure Rule
+## 11. Phase 1 Closure Rule
 
 Phase 1 repository completion requires an explicit closure decision supported by:
 
@@ -144,7 +174,7 @@ Phase 1 repository completion requires an explicit closure decision supported by
 - relationship registry synchronization where applicable;
 - final repository-wide integrity review.
 
-## 11. Re-review Avoidance Rule
+## 12. Re-review Avoidance Rule
 
 Before starting a review, consult `REP-011`, `REP-012`, `REP-013`, and `REP-014` within the applicable scope and compare current repository state with the last recorded review/checkpoint state.
 
@@ -152,13 +182,13 @@ If content identity is unchanged, material registry bindings remain consistent, 
 
 Re-review is justified when the file, dependency, authority, consumer, evidence, methodology, checkpoint, or required Phase 1 scope materially changes.
 
-## 12. Learning From Review Failures
+## 13. Learning From Review Failures
 
 Review failures or mistaken interpretations shall be preserved as reusable engineering knowledge when they change future review behavior.
 
 Examples include trusting conversation claims without repository evidence, using documentation date without temporal analysis, treating commit existence as semantic correctness, assuming selected-file review closes a folder, accepting references as relationships without authority/consumer checks, mutating without post-read, or losing the last trusted state because no checkpoint existed.
 
-## 13. Persistence Boundary
+## 14. Persistence Boundary
 
 A material mutation is not considered safely persisted for cross-session continuation until the repository contains the mutation and it has been re-read successfully.
 
@@ -170,7 +200,7 @@ The conversation may describe the operation, but it is not the persistence bound
 
 If a session ends after the commit but before registry synchronization, the next session must detect that incomplete synchronization from repository state and leave the affected review open until reconciliation is performed.
 
-## 14. Current Known Audit Boundary — 2026-08-10
+## 15. Current Known Audit Boundary — 2026-08-10
 
 The current repository contains material reviewed and modified during the 2026-08-09 pre-failure window. `EJR-015` identifies those mutations as requiring independent audit.
 
@@ -180,7 +210,7 @@ Current Phase 1 work therefore uses:
 
 The existence of `EJR-015` does not close any affected domain.
 
-## 15. Minimum Review Record Template
+## 16. Minimum Review Record Template
 
 ```text
 Path:
@@ -201,15 +231,16 @@ REP-016 Work Item:
 Mutation:
 Post-Mutation Re-read:
 Recovery Checkpoint:
+Reconciliation State:
 Unresolved Scope:
 Next Review Trigger:
 ```
 
-## 16. Authority Boundary
+## 17. Authority Boundary
 
 This ledger controls review traceability and completion evidence only. Domain-specific canonical authorities remain controlling.
 
-## 17. Related Documents
+## 18. Related Documents
 
 - `Repository/REP-001_MASTER_INDEX.md`
 - `Repository/REP-002_REPOSITORY_MAP.md`
@@ -227,7 +258,7 @@ This ledger controls review traceability and completion evidence only. Domain-sp
 - `PROJECT_BOOTSTRAP.md`
 - `PROJECT_STATUS.md`
 
-## 18. Guiding Rule
+## 19. Guiding Rule
 
 **Never spend review effort twice because the repository forgot what was already proven; never declare unfinished work complete because the repository forgot what remains open.**
 
