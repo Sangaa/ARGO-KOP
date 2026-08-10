@@ -8,14 +8,14 @@ Platform: ARGO KOP
 Knowledge Operating Platform
 
 Document ID: RUN-005
-Version: 1.3.0
+Version: 1.3.1
 Status: Validated / Integrity Hold
 Category: Runtime
 Canonical: Yes
 Priority: Critical
-Development Baseline: 3.3.0
+Development Baseline: 3.2.1
 Latest Official Release: 1.0.0
-Last Audit: 2026-08-09
+Last Audit: 2026-08-10
 
 ---
 
