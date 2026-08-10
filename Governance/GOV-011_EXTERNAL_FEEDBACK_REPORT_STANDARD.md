@@ -8,13 +8,13 @@ Platform: ARGO KOP
 Knowledge Operating Platform
 
 Document ID: GOV-011
-Version: 1.0.0
+Version: 1.0.1
 Status: Proposed / Integrity Hold
 Category: Governance
 Canonical: No
-Development Baseline: 3.3.0
+Development Baseline: 3.2.1
 Latest Official Release: 1.0.0
-Last Audit: 2026-08-09
+Last Audit: 2026-08-10
 
 ---
 
