@@ -6,13 +6,17 @@
 
 Platform: ARGO KOP
 Document ID: AI-007
-Version: 1.4.1
-Status: Integrity Hold / Revalidated / Interaction Rule Added
+Version: 1.4.2
+Status: Integrity Hold / Revalidation Required
 Category: AI
 Canonical: Yes
-Last Audit: 2026-08-09
+Last Audit: 2026-08-10
 
 ---
+
+# Audit Boundary
+
+The semantic changes introduced on 2026-08-09 were made before the adversarial session failure was documented and therefore require independent post-session verification. The current document is retained provisionally; this status does not certify the 2026-08-09 mutation as finally validated.
 
 # Purpose
 
