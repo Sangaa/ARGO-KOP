@@ -2,7 +2,7 @@
 
 Platform: ARGO KOP  
 Document ID: REP-016  
-Version: 1.0.2  
+Version: 1.0.3  
 Status: Active / Phase 1 Open / Integrity Hold  
 Development Baseline: 3.3.0  
 Last Audit: 2026-08-10
@@ -33,6 +33,47 @@ QUARANTINED
 A queue state is an execution claim, not a semantic correctness claim.
 
 Every state change must be supported by current repository evidence and, where material, synchronized with the applicable control-plane registries.
+
+## Ring Alignment
+
+Phase-1 queue execution follows the ring-based progression defined by REP-015. Rings are bounded execution scopes, not new authority layers.
+
+```text
+RING 0 — CONTROL PLANE
+        ↓
+RING 1 — AUTHORITY CORE
+        ↓
+RING 2 — EXECUTION FOUNDATION
+        ↓
+RING 3 — KNOWLEDGE & DOMAIN
+        ↓
+RING 4 — OPERATIONAL SURFACES
+        ↓
+RING 5 — RELEASE & EVOLUTION
+```
+
+The queue must record the active ring for any material work item. A partition may not be promoted solely because its predecessor has many completed records.
+
+### Ring Entry Gate
+
+Before entering a new ring, verify:
+
+- predecessor exit evidence;
+- current repository HEAD;
+- affected authority artifacts;
+- cross-ring dependencies and consumers;
+- unresolved scope;
+- recovery checkpoint.
+
+If evidence is insufficient, retain the item in its current state or mark `REVALIDATION_REQUIRED` rather than promoting it.
+
+### Cross-Ring Impact Rule
+
+If a mutation crosses ring boundaries:
+
+`DETECT IMPACT → IDENTIFY AFFECTED ARTIFACTS → VERIFY AUTHORITY → REVIEW RELATIONSHIPS/CONSUMERS → MUTATE → RECONCILE BOTH RINGS`
+
+A queue item is not closed while a material cross-ring impact remains unresolved.
 
 ## Control-Plane Reconciliation Gate
 
@@ -175,6 +216,7 @@ At minimum the next session needs:
 
 - current HEAD;
 - queue state;
+- active ring;
 - affected partition;
 - completed work item;
 - remaining work item;
@@ -226,6 +268,8 @@ Promotion remains:
 ## Current Queue Decision
 
 The next executable unit is **Repository Control Plane reconciliation**, followed by the highest-impact canonical domain whose inventory and relationships can be resolved without inventing missing evidence.
+
+The current active execution ring is **RING 0 — CONTROL PLANE** until the control-plane reconciliation gate is explicitly satisfied.
 
 No broad repository completion claim is permitted from this queue alone.
 
