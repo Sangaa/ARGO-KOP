@@ -6,37 +6,17 @@
 
 ---
 
-Platform
-
-ARGO KOP
-
+Platform: ARGO KOP  
 Knowledge Operating Platform
 
 ---
 
-Document ID
-
-KNW-003
-
-Version
-
-1.1.1
-
-Status
-
-Approved
-
-Category
-
-Knowledge
-
-Canonical
-
-Yes
-
-Last Audit
-
-2026-08-09
+Document ID: KNW-003  
+Version: 1.1.1  
+Status: Approved / Revalidation Required  
+Category: Knowledge  
+Canonical: Yes  
+Last Audit: 2026-08-09
 
 ---
 
@@ -242,17 +222,16 @@ Version Consistency
 
 # Related Documents
 
-KNW-001_KNOWLEDGE_MODEL
+- `Knowledge/KNW-001_KNOWLEDGE_MODEL.md`
+- `Knowledge/KNW-002_KNOWLEDGE_CLASSIFICATION.md`
+- `Models/MOD-011_KNOWLEDGE_SOURCE_MODEL.md`
+- `Repository/REP-009_REPOSITORY_TRACEABILITY.md`
+- `Architecture/ARC-003_INFORMATION_FLOW.md`
+- `Core/CORE-003_CONSTITUTION.md`
 
-KNW-002_KNOWLEDGE_CLASSIFICATION
+# Revalidation Note
 
-Models/MOD-011_KNOWLEDGE_SOURCE_MODEL.md
-
-REP-009_REPOSITORY_TRACEABILITY
-
-ARC-003_INFORMATION_FLOW
-
-CORE-003_CONSTITUTION
+The document was materially modified during the 2026-08-09 session and is therefore retained under `Approved / Revalidation Required` until its upstream/downstream relationships and repository-control-plane references are revalidated.
 
 ---
 
