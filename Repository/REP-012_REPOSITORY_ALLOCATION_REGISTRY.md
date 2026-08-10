@@ -6,7 +6,7 @@
 
 Platform: ARGO KOP
 Document ID: REP-012
-Version: 1.0.5
+Version: 1.0.6
 Status: Active Control / Integrity Hold / Phase 1 Population In Progress
 Category: Repository Control
 Canonical: Yes
@@ -490,7 +490,28 @@ Existing repository files must not be marked `ALLOCATED + REVIEWED + CHECKPOINTE
 
 The registry shall be populated incrementally during Phase 1 review.
 
-## 22. Related Documents
+## 22. Control-Plane Checkpoint Synchronization — 2026-08-10
+
+The active control-plane has continued to mutate after the earlier 2026-08-10 allocation checkpoint. The registry therefore records the latest observed control-plane commits separately from the older checkpoint rather than silently treating the older checkpoint as current.
+
+| Artifact | Latest Observed Commit | Latest Observed Content Identity | Synchronization Meaning |
+|---|---|---|---|
+| REP-015 | `f30d89ee1fb60d831d11efc4db7dda3ab5e145fa` | `29d2dcce15d46d55ea1a1b688b4bb3609adc970e` | Bootstrap updated; re-read confirmed |
+| REP-016 | `9e609972ec607c59e1c17559f78c78b83d9b642f` | `1a7114d0a328180899230cf3049bce2312cc1356` | Queue updated; re-read confirmed |
+| REP-014 | `662071186fc40c8f30a0371d32773bcbe7476c62` | `baa68f2b617eb44073f23c8809b57db085ad51d8` | Relationship registry updated; re-read confirmed |
+| REP-013 | `37e6d52cead7f6ff9f767ed15a98e078ef48934f` | `9b081fbeaee088d4e8eb33d8324bdf13512b3cf3` | Content tree updated; re-read confirmed |
+
+These are evidence records for the observed commits, not semantic closure claims.
+
+### Synchronization Rule
+
+Because `REP-012` itself is now being changed after these observations, its resulting commit/content identity must become the next checkpoint for the control-plane reconciliation pass. Any subsequent mutation to a listed control-plane artifact invalidates a claim of full synchronization until the affected record is re-read and reconciled again.
+
+### Diagram Freshness
+
+`DIAG-001` remains valid only as an orientation/provenance artifact relative to the source state from which it was generated. If `REP-012` or another source affecting its displayed values changes materially, `DIAG-001` must be treated as `REVALIDATION_REQUIRED` until regenerated or explicitly superseded.
+
+## 23. Related Documents
 
 - `Repository/REP-001_MASTER_INDEX.md`
 - `Repository/REP-002_REPOSITORY_MAP.md`
@@ -507,7 +528,7 @@ The registry shall be populated incrementally during Phase 1 review.
 - `Assets/Diagrams/DIAG-001_REPOSITORY_PHASE1_STATUS_2026-08-10.svg`
 - `Assets/Diagrams/DIAG-001_REPOSITORY_PHASE1_STATUS_2026-08-10.md`
 
-## 23. Final Principle
+## 24. Final Principle
 
 **The registry is not the repository. It is the control layer that helps the repository remain discoverable, reviewable, traceable and recoverable.**
 
