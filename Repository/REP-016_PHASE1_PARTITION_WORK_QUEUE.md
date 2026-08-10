@@ -2,8 +2,8 @@
 
 Platform: ARGO KOP  
 Document ID: REP-016  
-Version: 1.0.0  
-Status: Active / Phase 1 Open  
+Version: 1.0.1  
+Status: Active / Phase 1 Open / Integrity Hold  
 Development Baseline: 3.2.1  
 Last Audit: 2026-08-10
 
@@ -11,7 +11,7 @@ Last Audit: 2026-08-10
 
 Convert the repository control plane into an ordered, recoverable Phase-1 execution queue.
 
-This file does not replace REP-011 through REP-015. It coordinates them.
+This file does not replace REP-011 through REP-015. It coordinates them and records the executable scope. Future control-plane candidates recorded in `ROADMAP.md` are not automatically queue items.
 
 ## Work-State Vocabulary
 
@@ -28,11 +28,47 @@ BLOCKED
 QUARANTINED
 ```
 
+## Queue State Semantics
+
+A queue state is an execution claim, not a semantic correctness claim.
+
+Every state change must be supported by current repository evidence and, where material, synchronized with the applicable control-plane registries.
+
+## Control-Plane Reconciliation Gate
+
+The first executable unit remains **Repository Control Plane reconciliation**.
+
+Before moving any control-plane item to `READY_FOR_CLOSURE_REVIEW`, reconcile within scope:
+
+```text
+REP-011 Review/Evidence
+        ↕
+REP-012 Allocation/State/Recovery
+        ↕
+REP-013 Content Inventory
+        ↕
+REP-014 Relationships
+        ↕
+REP-015 Bootstrap Rules
+        ↕
+REP-016 Execution State
+```
+
+Required reconciliation states are:
+
+`NOT_CHECKED → PARTIALLY_RECONCILED → RECONCILED`
+
+or, when evidence conflicts:
+
+`CONFLICT / REVALIDATION_REQUIRED`
+
+No reconciliation state may be promoted by assumption.
+
 ## Partition Queue
 
 | Priority | Partition | Current State | Required Entry Point | Closure Authority |
 |---:|---|---|---|---|
-| 1 | Repository Control Plane | RECONCILIATION | REP-011..015 | REP-011 + explicit closure decision |
+| 1 | Repository Control Plane | RECONCILIATION | REP-011..016 | REP-011 + explicit closure decision |
 | 2 | Core | INVENTORYING | Core/_FOLDER_STATUS.md + REP-013 | Domain authority + REP-011 |
 | 3 | Governance | INVENTORYING | Governance/_FOLDER_STATUS.md + REP-013 | Governance authority + REP-011 |
 | 4 | Architecture | RELATIONSHIP_VALIDATION | ARC_MAP + ARC-001..011 | Architecture authority + REP-011/014 |
@@ -85,6 +121,29 @@ RE-READ
 CLOSURE REVIEW OR KEEP OPEN
 ```
 
+## Material Mutation Contract
+
+A material mutation is one persistence unit:
+
+`ONE MATERIAL CHANGE → COMMIT → RE-READ → RECORD EVIDENCE → NEXT CHANGE`
+
+The conversation is not the persistence boundary.
+
+If a session ends after a commit but before all applicable registry synchronization is complete, the item remains open and the next session must detect and reconcile the partial state.
+
+## Evidence Freshness Gate
+
+Before resuming an existing queue item, compare:
+
+- current repository HEAD;
+- current content identity;
+- last reviewed identity;
+- latest mutation evidence;
+- relevant dependency/consumer changes;
+- new methodological or contradictory evidence.
+
+A historical queue state may be preserved as history while requiring current revalidation.
+
 ## Recovery Rule
 
 Every queue item must be resumable from repository evidence alone.
@@ -124,6 +183,24 @@ No queue item may be moved to `CLOSED_FOR_PHASE_1` because:
 - or the latest commit is technically valid.
 
 Closure requires evidence across the relevant control-plane registries.
+
+## Future Control-Plane Candidates
+
+The following remain **future candidates only** and are governed by `ROADMAP.md`:
+
+- `REP-017` Mutation Registry
+- `REP-018` Repository Reconciliation Register
+- `REP-019` Repository Checkpoint Registry
+- `REP-020` Dependency & Consumer Impact Matrix
+- `REP-021` Artifact Lifecycle State Machine
+- `REP-022` Evidence Confidence / Trust Classification
+- `REP-023` Unified Control-Plane Schema
+
+They must not be treated as implemented merely because they are named here.
+
+Promotion remains:
+
+`Proposal → Evidence → Design Review → Compatibility Check → Explicit Decision → Implementation → Re-read → Registry Synchronization`
 
 ## Current Queue Decision
 
