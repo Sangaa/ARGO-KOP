@@ -1,11 +1,11 @@
 # ARGO Knowledge Organization Specification
 
 Document ID: SPEC-001-KNOWLEDGE-ORGANIZATION
-Version: 3.1.1
+Version: 3.1.2
 Status: Foundation Specification / Integrity Hold
 Category: Operational Specification
-Development Baseline: 3.3.0
-Last Audit: 2026-08-09
+Development Baseline: 3.2.1
+Last Audit: 2026-08-10
 
 ---
 
@@ -233,7 +233,7 @@ Material changes MUST trigger downstream review where the specification is consu
 
 ## Current Validation State
 
-The specification has been rebuilt against Development Baseline 3.3.0 and directly cross-read against the current cross-reference, metadata and reconstruction standards within the inspected scope.
+The specification was re-read during the 2026-08-10 audit and its development baseline was aligned to the authoritative `Release/VERSION.md` baseline `3.2.1`.
 
 Current state remains `INTEGRITY HOLD` because repository-wide relationships with Models, Standards, Governance, Architecture, consumers and the active Repository Map have not yet been fully validated.
 
