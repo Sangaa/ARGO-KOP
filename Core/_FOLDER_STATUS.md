@@ -17,9 +17,13 @@ Status
 
 Version
 
-1.2.0
+1.2.1
 
-Last Audit
+Last Repository Re-Audit
+
+2026-08-10
+
+Historical Core Authority Audit
 
 2026-08-08
 
@@ -57,7 +61,7 @@ Manifest Review
 
 Constitution Review
 
-🟢 Reconciled with current Runtime authority model
+🟡 Revalidation required against current control-plane baseline
 
 Principles Review
 
@@ -70,6 +74,26 @@ Cross-Layer Review
 Folder Certification
 
 ⏳ Pending
+
+---
+
+# Temporal Evidence Rule
+
+The previous `2026-08-08` audit remains historical evidence. It must not be silently relabeled as a `2026-08-10` audit.
+
+The current `2026-08-10` repository re-audit records that Core is being revalidated against the newer control-plane state. It does **not** certify that every Core authority artifact has been re-audited.
+
+In particular, `CORE-003_CONSTITUTION.md` currently carries its own historical audit date of `2026-08-08` and therefore remains an authority artifact requiring explicit revalidation before Core certification.
+
+This distinction is intentional:
+
+```text
+Historical Audit
+      ≠
+Current Re-Audit
+      ≠
+Certification
+```
 
 ---
 
@@ -120,7 +144,7 @@ Core MUST NOT be marked clean until the remaining canonical Core artifacts and t
 
 # Next Action
 
-`Audit remaining Core canonical artifacts → validate cross-layer references → Core Re-Audit → Certification`
+`Revalidate CORE-003 against current control-plane baseline → Audit remaining Core canonical artifacts → validate cross-layer references → Core Re-Audit → Certification`
 
 ---
 
