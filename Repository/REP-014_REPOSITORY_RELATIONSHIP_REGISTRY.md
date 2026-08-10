@@ -2,7 +2,7 @@
 
 Platform: ARGO KOP  
 Document ID: REP-014  
-Version: 1.0.6  
+Version: 1.0.7  
 Status: Active / Relationship Enumeration In Progress  
 Development Baseline: 3.3.0  
 Last Audit: 2026-08-10
@@ -99,6 +99,8 @@ The following are deliberately limited to relationships established during repos
 | REL-032 | REP-016 | REP-014 | DEPENDS_ON | Verified within control-plane scope |
 | REL-033 | REP-015 | REP-016 | DEPENDS_ON | Verified within current control-plane scope |
 | REL-034 | REP-016 | REP-015 | CONSUMES | Verified within current control-plane scope |
+| REL-035 | REP-012 | DIAG-001 | DOCUMENTS | Provenance linked within inspected scope |
+| REL-036 | DIAG-001 | REP-012 | DERIVED_FROM | Provenance linked within inspected scope |
 
 ## Control-Plane Graph
 
@@ -130,9 +132,14 @@ REP-016 ──depends_on──> REP-011
          ├────────────> REP-013
          ├────────────> REP-014
          └──consumes──> REP-015
+
+REP-012 ──documents──> DIAG-001
+DIAG-001 ──derived_from──> REP-012
 ```
 
 `REP-016` is the execution queue and therefore consumes the control-plane evidence rather than replacing it.
+
+The DIAG-001 edge is provenance/navigation only. It does not make the diagram authoritative over REP-012 or any canonical registry.
 
 This graph describes control-plane dependency only. It does not certify domain semantics.
 
@@ -167,6 +174,24 @@ A relationship must not be marked `Verified` if either endpoint:
 - has unresolved identity conflict;
 - is marked `QUARANTINED` without explicit relationship review;
 - or has a material mutation requiring revalidation.
+
+## Visual Artifact Provenance Rule
+
+Visual or derived artifacts may summarize repository state, but they require an explicit provenance relationship to the source artifacts from which their content was derived.
+
+For `DIAG-001`:
+
+`REP-012 → DOCUMENTS → DIAG-001`
+
+`DIAG-001 → DERIVED_FROM → REP-012`
+
+The paired SVG/metadata files are orientation/provenance artifacts. Their numerical or status claims cannot override current registry evidence.
+
+If the source registry materially changes, DIAG-001 becomes stale and must enter:
+
+`REVALIDATION_REQUIRED`
+
+until regenerated or explicitly superseded.
 
 ## Change Impact Rule
 
