@@ -17,7 +17,7 @@ Status
 
 Version
 
-1.2.1
+1.3.0
 
 Last Repository Re-Audit
 
@@ -37,7 +37,7 @@ Repository First / Evidence Based
 
 Review Scope
 
-Core authority, identity, constitution and cross-layer consistency
+Core authority, identity and cross-layer consistency
 
 Repository Baseline
 
@@ -61,11 +61,35 @@ Manifest Review
 
 Constitution Review
 
-🟡 Revalidation required against current control-plane baseline
+🟢 Explicitly revalidated on 2026-08-10
 
 Principles Review
 
 🟢 Completed
+
+Cognitive Model Review
+
+🟢 Completed
+
+Architectural Laws Review
+
+🟢 Completed
+
+Platform Lifecycle Review
+
+🟢 Completed
+
+Platform Roadmap Review
+
+🟢 Completed
+
+Platform Charter Review
+
+🟢 Completed
+
+Core Index Review
+
+🟢 Completed / synchronized with repository evidence
 
 Cross-Layer Review
 
@@ -83,7 +107,7 @@ The previous `2026-08-08` audit remains historical evidence. It must not be sile
 
 The current `2026-08-10` repository re-audit records that Core is being revalidated against the newer control-plane state. It does **not** certify that every Core authority artifact has been re-audited.
 
-In particular, `CORE-003_CONSTITUTION.md` currently carries its own historical audit date of `2026-08-08` and therefore remains an authority artifact requiring explicit revalidation before Core certification.
+A document's `Last Audit` advances only when that document itself has undergone the applicable review.
 
 This distinction is intentional:
 
@@ -103,7 +127,7 @@ Certification
 
 The previous Constitution prohibited partial repository updates unconditionally, while the current governed Runtime model permits a partial update when its content, target state, scope and resulting integrity are verified.
 
-The Constitution has been revised so that complete-file replacement remains preferred when practical and safe, while controlled partial updates are permitted under explicit validation and authority gates.
+The Constitution was revised so that complete-file replacement remains preferred when practical and safe, while controlled partial updates are permitted under explicit validation and authority gates.
 
 This restores the required hierarchy:
 
@@ -119,32 +143,50 @@ Runtime
 
 without leaving Runtime behavior in conflict with Core authority.
 
+---
+
 # Current Core Baseline
 
-Known canonical Core artifacts include:
+Known canonical Core artifacts currently evidenced or listed by the repository include:
 
-- `CORE-000_PLATFORM_IDENTITY.md`
-- `CORE-000A_PLATFORM_GLOSSARY.md`
-- `CORE-001_ARGO_MANIFEST.md`
-- `CORE-002_ARGO_IDENTITY.md`
-- `CORE-003_CONSTITUTION.md`
-- `CORE-004_CORE_PRINCIPLES.md`
-- `CORE-005_COGNITIVE_MODEL.md`
-- `CORE-006_SYSTEM_PHILOSOPHY.md`
-- `CORE-007_DESIGN_PRINCIPLES.md`
-- `CORE-008_ARCHITECTURAL_LAWS.md`
-- `CORE-009_PLATFORM_LIFECYCLE.md`
-- `CORE-010_PLATFORM_ROADMAP.md`
-- `CORE-011_PLATFORM_CHARTER.md`
-- `ARGO_KERNEL.md`
+- `CORE-000_PLATFORM_ARCHITECTURE.md` — independently revalidated 2026-08-10
+- `CORE-000A_PLATFORM_GLOSSARY.md` — independently revalidated 2026-08-10
+- `CORE-001_ARGO_MANIFEST.md` — independently revalidated 2026-08-10
+- `CORE-002_ARGO_IDENTITY.md` — independently revalidated 2026-08-10
+- `CORE-003_CONSTITUTION.md` — independently revalidated 2026-08-10
+- `CORE-004_CORE_PRINCIPLES.md` — current document already carries 2026-08-10 targeted review
+- `CORE-005_COGNITIVE_MODEL.md` — current document already carries 2026-08-10 targeted review
+- `CORE-006_SYSTEM_PHILOSOPHY.md` — listed by Core records; independent file location not yet established in the current evidence set
+- `CORE-007_DESIGN_PRINCIPLES.md` — listed by Core records; independent file location not yet established in the current evidence set
+- `CORE-008_ARCHITECTURAL_LAWS.md` — independently revalidated 2026-08-10
+- `CORE-009_PLATFORM_LIFECYCLE.md` — independently revalidated 2026-08-10
+- `CORE-010_PLATFORM_ROADMAP.md` — independently revalidated 2026-08-10
+- `CORE-011_PLATFORM_CHARTER.md` — independently revalidated 2026-08-10
+- `ARGO_KERNEL.md` — independently revalidated 2026-08-10
+
+A listed artifact is not treated as physically present, canonical, current or validated until the relevant evidence is inspected.
+
+---
+
+# Registry / Index Integrity Rule
+
+Core indexes and folder-status documents are evidence summaries. They must reflect observed repository state but do not create authority for artifacts that they list.
+
+A discrepancy between an index and the actual repository shall be recorded and resolved through evidence rather than by changing the index to make the discrepancy disappear.
+
+Missing numeric entries shall not be filled by invention.
+
+---
 
 # Certification Rule
 
 Core MUST NOT be marked clean until the remaining canonical Core artifacts and their cross-layer references have been revalidated against the current Constitution and repository baseline.
 
+---
+
 # Next Action
 
-`Revalidate CORE-003 against current control-plane baseline → Audit remaining Core canonical artifacts → validate cross-layer references → Core Re-Audit → Certification`
+`Locate and revalidate remaining Core artifacts → validate cross-layer references → reconcile Core indexes/registries → Core Re-Audit → Certification`
 
 ---
 
