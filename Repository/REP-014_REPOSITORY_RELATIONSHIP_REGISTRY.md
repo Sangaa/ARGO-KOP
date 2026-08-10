@@ -2,7 +2,7 @@
 
 Platform: ARGO KOP  
 Document ID: REP-014  
-Version: 1.0.0  
+Version: 1.0.1  
 Status: Active / Relationship Enumeration In Progress  
 Development Baseline: 3.2.1  
 Last Audit: 2026-08-10  
@@ -11,20 +11,7 @@ Last Audit: 2026-08-10
 
 Provide a registry-style representation of relationships among ARGO repository artifacts.
 
-The registry is intended to become the authoritative navigation layer for:
-
-- depends_on;
-- references;
-- implements;
-- consumes;
-- produces;
-- validates;
-- governs;
-- owns;
-- documents;
-- supersedes;
-- derived_from;
-- affected_by.
+The registry is a navigation/control layer for dependencies, references, implementations, consumption, production, validation, governance, ownership, documentation, supersession, derivation and impact.
 
 ## Critical Rule
 
@@ -71,7 +58,7 @@ AFFECTED_BY
 
 ## Current Verified / Revalidated Relationships
 
-The following are deliberately limited to relationships already established during repository review. This list is not a complete graph.
+The following are deliberately limited to relationships established during repository review. This is **not a complete graph**.
 
 | ID | Source | Target | Type | State |
 |---|---|---|---|---|
@@ -111,6 +98,17 @@ Target → Source
 ```
 
 A one-sided reference is insufficient to declare the graph closed.
+
+## Relationship-to-Artifact Control
+
+Every registry relationship must be resolvable through `REP-013` and its artifact state through `REP-012`/`REP-011`.
+
+A relationship must not be marked `Verified` if either endpoint:
+
+- cannot be resolved to a current repository artifact;
+- has unresolved identity conflict;
+- is marked `QUARANTINED` without explicit relationship review;
+- or has a material mutation requiring revalidation.
 
 ## Change Impact Rule
 
