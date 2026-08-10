@@ -20,11 +20,11 @@ SRV-009
 
 Version
 
-1.2.0
+1.2.1
 
 Status
 
-Approved / Integrity Hold
+Approved / Integrity Hold / Revalidated
 
 Category
 
@@ -38,9 +38,17 @@ Priority
 
 Critical
 
+Development Baseline
+
+3.2.1
+
+Official Release
+
+1.0.0
+
 Last Audit
 
-2026-08-08
+2026-08-10
 
 ---
 
@@ -48,7 +56,7 @@ Last Audit
 
 The Update Service controls repository modifications and reviewed learning ingestion performed inside ARGO KOP.
 
-It guarantees that updates remain deterministic, traceable and synchronized with the repository.
+It guarantees that updates remain deterministic, traceable and synchronized with the repository within the limits of the applicable execution and validation controls.
 
 Updates modify the repository.
 
@@ -205,7 +213,9 @@ The Update Service shall:
 - never promote unreviewed model output directly into protected canonical knowledge;
 - preserve required historical traceability;
 - validate affected references and consumers after mutation;
-- preserve repository integrity.
+- preserve repository integrity;
+- require applicable validation and authorization before material mutation;
+- distinguish technical write success from governed update acceptance.
 
 ---
 
@@ -253,6 +263,16 @@ The Update Service shall stop or enter an explicit hold when:
 
 ---
 
+# Relationship Position
+
+`SRV-009` is the controlled mutation service consumed by `ENG-006` for repository state updates.
+
+`SRV-009` depends on applicable validation and authorization controls and does not independently create canonical authority.
+
+Technical write completion is not equivalent to governed acceptance; the post-write validation and traceability sequence remains mandatory.
+
+---
+
 # Dependencies
 
 - Core
@@ -269,8 +289,9 @@ The Update Service shall stop or enter an explicit hold when:
 
 # Related Documents
 
+- `Engine/ENG-006_EXECUTION_ENGINE.md`
+- `Services/SRV-005_VALIDATION_SERVICE.md`
 - `SRV-001_SERVICE_ARCHITECTURE.md`
-- `SRV-005_VALIDATION_SERVICE.md`
 - `SRV-007_LOGGING_SERVICE.md`
 - `SRV-008_INDEX_SERVICE.md`
 - `SRV-010_SERVICE_REFERENCE.md`
