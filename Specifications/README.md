@@ -1,11 +1,11 @@
 # ARGO Specifications
 
 Document ID: SPEC-000-SPECIFICATIONS-INDEX
-Version: 1.2.1
+Version: 1.2.2
 Status: Active Domain / Integrity Hold
 Category: Repository Domain Guide
-Development Baseline: 3.3.0
-Last Audit: 2026-08-09
+Development Baseline: 3.2.1
+Last Audit: 2026-08-10
 
 ---
 
@@ -101,7 +101,7 @@ External feedback does not itself approve or modify a specification.
 
 Current domain state: `INTEGRITY HOLD / STAGED RECONSTRUCTION`
 
-The domain is being rebuilt against Development Baseline 3.3.0. Completeness MUST be established from repository evidence rather than directory presence.
+The domain is being rebuilt against the authoritative Development Baseline `3.2.1`. Completeness MUST be established from repository evidence rather than directory presence.
 
 ---
 
