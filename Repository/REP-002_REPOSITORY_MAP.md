@@ -6,7 +6,7 @@
 
 Platform: ARGO KOP (Knowledge Operating Platform)
 Document ID: REP-002
-Version: 1.6.8
+Version: 1.6.9
 Status: Integrity Hold
 Category: Repository
 Canonical: Yes
@@ -62,8 +62,12 @@ Path: `Repository/`
 - `Repository/REP-009_REPOSITORY_TRACEABILITY.md`
 - `Repository/REP-010_RELEASE_BASELINE.md`
 - `Repository/REP-011_REVIEW_TRACEABILITY_LEDGER.md`
+- `Repository/REP-012_REPOSITORY_ALLOCATION_REGISTRY.md`
+- `Repository/REP-013_REPOSITORY_CONTENT_TREE.md`
+- `Repository/REP-014_REPOSITORY_RELATIONSHIP_REGISTRY.md`
+- `Repository/REP-015_CONTROL_PLANE_BOOTSTRAP_CHECKLIST.md`
 
-`REP-011` is the technical control for review-state, mutation binding, post-mutation re-read and Phase 1 completion evidence. It does not grant domain semantic authority.
+The REP-011–015 artifacts form the current repository control plane. They remain subject to cross-registry reconciliation and do not grant domain semantic authority.
 
 ## 5. Governance Layer
 
@@ -193,12 +197,13 @@ These domains are not assumed complete or architecturally authoritative from fol
 13. A mapped file is not considered reviewed or complete solely because it appears in this map; review state must be taken from REP-011.
 14. A folder/domain remains open until its Phase 1 completion is explicitly recorded; reviewed subsets must not imply completion of the remaining contents.
 15. If a reviewed file changes, or a dependency/authority/consumer changes materially, its prior review state must be revalidated.
+16. Critical Repository Control artifacts (`REP-011` through `REP-015`) must remain mutually discoverable through the active repository map while their cross-registry reconciliation remains open.
 
 ## 14. Integrity State
 
 Current repository state: **INTEGRITY HOLD**.
 
-The map is synchronized with the current declared Core, Governance, Repository, Runtime, Architecture, Lifecycle, Interfaces, Models and Plugins inventory within the inspected scope. Cross-layer relationship validation remains open.
+The map is synchronized with the current declared Core, Governance, Repository control-plane, Runtime, Architecture, Lifecycle, Interfaces, Models and Plugins inventory within the inspected scope. Cross-layer relationship validation remains open.
 
 Completion of individual files or reviewed subsets must not be interpreted as Phase 1 repository completion. REP-011 is the binding review/completion evidence ledger until an explicit Phase 1 closure decision is recorded.
 
