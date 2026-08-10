@@ -2,10 +2,10 @@
 
 Platform: ARGO KOP  
 Document ID: REP-014  
-Version: 1.0.1  
+Version: 1.0.2  
 Status: Active / Relationship Enumeration In Progress  
 Development Baseline: 3.2.1  
-Last Audit: 2026-08-10  
+Last Audit: 2026-08-10
 
 ## Purpose
 
@@ -19,7 +19,7 @@ The registry is a navigation/control layer for dependencies, references, impleme
 
 Every relationship should eventually be supported by:
 
-`Source Identity → Target Identity → Relationship Type → Evidence → Authority Check → Impact Scope → Review State`
+`Source Identity → Target Identity → Relationship Type → Evidence → Authority Check → Impact Scope → Consumer Scope → Review State → Checkpoint`
 
 ## Relationship Record
 
@@ -34,10 +34,11 @@ Each registry entry should contain:
 | Direction | Source → Target |
 | Evidence | Why the relationship exists |
 | Authority | Which document/rule authorizes it |
-| State | Proposed / Verified / Revalidation Required / Closed |
+| State | Proposed / Verified / Revalidation Required / Closed / Rejected |
 | Last Review | Review date |
 | Checkpoint | Commit/blob evidence where available |
 | Impact | Known affected consumers |
+| Consumer Scope | Downstream artifacts requiring re-read |
 
 ## Controlled Relationship Types
 
@@ -56,6 +57,8 @@ DERIVED_FROM
 AFFECTED_BY
 ```
 
+Relationship sublabels such as `DECISION INPUT`, `ORCHESTRATION`, `SERVICE INPUT` or `CONTROLLED MUTATION` are evidence descriptions, not new uncontrolled relationship types.
+
 ## Current Verified / Revalidated Relationships
 
 The following are deliberately limited to relationships established during repository review. This is **not a complete graph**.
@@ -63,22 +66,60 @@ The following are deliberately limited to relationships established during repos
 | ID | Source | Target | Type | State |
 |---|---|---|---|---|
 | REL-001 | SPEC-001 | MOD-001 | DEPENDS_ON | Revalidated within inspected scope |
-| REL-002 | MOD-001 | SRV-004 | CONSUMES / IMPLEMENTATION CONTEXT | Revalidated within inspected scope |
-| REL-003 | ENG-004 | SRV-005 | PRODUCES / SERVICE INPUT | Revalidated within inspected scope |
-| REL-004 | ENG-002 | ENG-006 | DECISION INPUT | Revalidation scope required |
-| REL-005 | ENG-006 | SRV-009 | IMPLEMENTS / CONTROLLED MUTATION | Revalidated within inspected scope |
-| REL-006 | RUN-010 | ENG-002 | CONSUMES / ORCHESTRATION | Revalidated within inspected scope |
-| REL-007 | RUN-010 | ENG-004 | CONSUMES / ORCHESTRATION | Revalidated within inspected scope |
-| REL-008 | RUN-010 | ENG-006 | CONSUMES / ORCHESTRATION | Revalidated within inspected scope |
-| REL-009 | RUN-010 | SRV-009 | CONSUMES / MUTATION PATH | Revalidated within inspected scope |
-| REL-010 | MOD-011 | KNW-002 | SEMANTIC DEPENDENCY | Revalidation Required |
-| REL-011 | MOD-011 | KNW-003 | SEMANTIC DEPENDENCY | Revalidation Required |
-| REL-012 | MOD-011 | KNW-004 | SEMANTIC DEPENDENCY | Revalidation Required |
-| REL-013 | MOD-011 | KNW-008 | TRACEABILITY DEPENDENCY | Revalidation Required |
-| REL-014 | MOD-011 | KNW-009 | EVOLUTION DEPENDENCY | Revalidation Required |
-| REL-015 | REP-011 | REP-012 | REVIEW / ALLOCATION CONTROL | Verified |
-| REL-016 | REP-013 | REP-011 | CONTENT → REVIEW STATE | Verified |
-| REL-017 | REP-013 | REP-012 | CONTENT → ALLOCATION STATE | Verified |
+| REL-002 | MOD-001 | SRV-004 | CONSUMES | Revalidated within inspected scope |
+| REL-003 | ENG-004 | SRV-005 | PRODUCES | Revalidated within inspected scope |
+| REL-004 | ENG-002 | ENG-006 | DEPENDS_ON | Revalidation Required |
+| REL-005 | ENG-006 | SRV-009 | IMPLEMENTS | Revalidated within inspected scope |
+| REL-006 | RUN-010 | ENG-002 | CONSUMES | Revalidated within inspected scope |
+| REL-007 | RUN-010 | ENG-004 | CONSUMES | Revalidated within inspected scope |
+| REL-008 | RUN-010 | ENG-006 | CONSUMES | Revalidated within inspected scope |
+| REL-009 | RUN-010 | SRV-009 | CONSUMES | Revalidated within inspected scope |
+| REL-010 | MOD-011 | KNW-002 | DEPENDS_ON | Revalidation Required |
+| REL-011 | MOD-011 | KNW-003 | DEPENDS_ON | Revalidation Required |
+| REL-012 | MOD-011 | KNW-004 | DEPENDS_ON | Revalidation Required |
+| REL-013 | MOD-011 | KNW-008 | DEPENDS_ON | Revalidation Required |
+| REL-014 | MOD-011 | KNW-009 | DEPENDS_ON | Revalidation Required |
+| REL-015 | REP-011 | REP-012 | DEPENDS_ON | Verified |
+| REL-016 | REP-013 | REP-011 | DEPENDS_ON | Verified |
+| REL-017 | REP-013 | REP-012 | DEPENDS_ON | Verified |
+| REL-018 | REP-015 | REP-011 | DEPENDS_ON | Verified |
+| REL-019 | REP-015 | REP-012 | DEPENDS_ON | Verified |
+| REL-020 | REP-015 | REP-013 | DEPENDS_ON | Verified |
+| REL-021 | REP-015 | REP-014 | DEPENDS_ON | Verified |
+| REL-022 | REP-001 | REP-002 | REFERENCES | Verified within control-plane scope |
+| REL-023 | REP-002 | REP-001 | REFERENCES | Verified within control-plane scope |
+| REL-024 | REP-001 | REP-013 | DEPENDS_ON | Verified within control-plane scope |
+| REL-025 | REP-002 | REP-013 | DEPENDS_ON | Verified within control-plane scope |
+| REL-026 | REP-013 | REP-014 | DEPENDS_ON | Verified within control-plane scope |
+| REL-027 | REP-014 | REP-011 | DEPENDS_ON | Verified within control-plane scope |
+| REL-028 | REP-014 | REP-012 | DEPENDS_ON | Verified within control-plane scope |
+
+## Control-Plane Graph
+
+The minimum repository control-plane graph is now explicitly represented:
+
+```text
+REP-001 ──references──> REP-002
+   │                      │
+   ├──depends_on────────> REP-013
+   │                      │
+   └──────────────────────┘
+
+REP-013 ──depends_on──> REP-011
+   │
+   └──depends_on──────> REP-012
+
+REP-014 ──depends_on──> REP-011
+   │
+   └──depends_on──────> REP-012
+
+REP-015 ──depends_on──> REP-011
+         ├────────────> REP-012
+         ├────────────> REP-013
+         └────────────> REP-014
+```
+
+This graph describes control-plane dependency only. It does not certify domain semantics.
 
 ## Registry Does Not Grant Authority
 
@@ -98,6 +139,8 @@ Target → Source
 ```
 
 A one-sided reference is insufficient to declare the graph closed.
+
+The control-plane relationships above are considered verified only within the inspected scope; broader repository graph closure remains open.
 
 ## Relationship-to-Artifact Control
 
@@ -120,7 +163,7 @@ When a file is renamed, moved, archived, merged, split, or materially changed, a
 
 until the source, target and known consumers are re-read.
 
-## Relationship Completion Rule
+## Completion Rule
 
 The registry is not complete until the applicable repository scope has been enumerated and all material relationships are either:
 
