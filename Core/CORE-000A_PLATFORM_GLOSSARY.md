@@ -4,15 +4,17 @@
 
 Document ID: CORE-000A
 
-Version: 1.1.0
+Version: 1.2.0
 
-Status: Official / Revalidated
+Status: Official / Revalidated / Integrity Hold
 
 Classification: Core Reference
 
 Owner: ARGO KOP
 
-Last Audit: 2026-08-09
+Last Audit: 2026-08-10
+
+Review Type: Repository Re-Audit / Targeted Platform Glossary Review
 
 ---
 
@@ -50,6 +52,44 @@ Where appropriate, a definition should also identify:
 - superseded definitions.
 
 An unresolved contradiction between definitions is an integrity finding, not an invitation to invent a hidden meaning.
+
+---
+
+# Interpretation and Provenance Boundary
+
+A glossary may normalize terminology for discoverability, but it shall not manufacture semantic equivalence.
+
+When a term is encountered in a source, preserve:
+
+```text
+Observed Term
+    ↓
+Source Wording
+    ↓
+Declared Scope
+    ↓
+Source Authority
+    ↓
+Glossary Mapping
+    ↓
+Confirmed / Distinct / Ambiguous
+```
+
+A glossary mapping remains provisional when the source authority or intended scope has not been verified.
+
+A glossary entry shall not be used as evidence that an implementation, architecture, process or capability exists merely because the entry names it.
+
+# Authority Conflict Rule
+
+If the glossary definition conflicts with a higher-authority canonical source, the conflict shall be recorded and escalated through the applicable governance path.
+
+The glossary shall not silently overwrite the higher-authority source, and the higher-authority source shall not be silently rewritten to match the glossary.
+
+# Terminology Change Rule
+
+Changing a material definition requires review of known consumers, related terms, indexes and dependent documents where applicable.
+
+A rename or terminology clarification is not automatically semantic equivalence. Where identity or meaning changes, revalidation is required.
 
 ---
 
@@ -220,6 +260,14 @@ ARGO should be understandable without a privileged interpreter.
 If a core term cannot be applied from its canonical definition, scope and relationships, the terminology system should be reviewed for ambiguity, missing definitions, conflicting authority or unnecessary complexity.
 
 The appropriate response to a terminology defect is clarification and validation, not an unmarked interpretive tradition.
+
+# Integrity Status
+
+This document underwent a targeted repository re-audit on 2026-08-10.
+
+The review applies specifically to the glossary and its terminology-governance boundaries. It does not certify the entire Core folder or repository.
+
+Core remains under `INTEGRITY HOLD` until the remaining canonical Core artifacts and relevant cross-layer relationships are revalidated.
 
 ---
 
