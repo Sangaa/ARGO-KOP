@@ -6,12 +6,12 @@
 
 Platform: ARGO KOP
 Document ID: REP-011
-Version: 1.0.4
+Version: 1.0.5
 Status: Active / Integrity Hold
 Category: Repository Control
 Canonical: Yes
 Priority: Critical
-Development Baseline: 3.2.1
+Development Baseline: 3.3.0
 Last Audit Date: 2026-08-10
 
 ---
