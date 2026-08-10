@@ -8,12 +8,14 @@
 
 Platform: ARGO KOP (Knowledge Operating Platform)  
 Document ID: INTF-010  
-Version: 1.1.0  
+Version: 1.1.1  
 Status: Validated / Revalidated / Integrity Hold  
 Category: Interfaces  
 Canonical: Yes  
 Priority: High  
-Last Audit: 2026-08-09
+Development Baseline: 3.2.1  
+Latest Official Release: 1.0.0  
+Last Audit: 2026-08-10
 
 ---
 
@@ -327,6 +329,7 @@ Do not solve an integration problem by weakening a higher-level platform boundar
 | :--- | :--- | :--- | :--- |
 | 1.0.0 | Prior baseline | Initial integration placeholder | ARGO Engineering |
 | 1.1.0 | 2026-08-09 | Rebuilt connector boundary; added provider-neutral portability, email/communication handling, memory/learning separation, semantic preservation, authorization and failure-state rules | ARGO Engineering |
+| 1.1.1 | 2026-08-10 | Revalidated against current runtime/interface baseline; aligned development baseline and audit state | ARGO Engineering |
 
 ---
 
