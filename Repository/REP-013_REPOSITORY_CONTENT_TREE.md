@@ -2,7 +2,7 @@
 
 Platform: ARGO KOP  
 Document ID: REP-013  
-Version: 1.0.6  
+Version: 1.0.7  
 Status: Active / Phase 1 Population In Progress  
 Development Baseline: 3.3.0  
 Last Audit: 2026-08-11
@@ -182,18 +182,27 @@ Known recorded members include:
 ```text
 Memory/
 ├── MEM-008_GUIDED_DISCOVERY_LEARNING_METHOD.md
-└── Engineering_Journal/
-    ├── EJR-002_HERMUZ_BUILD_REVIEW_IDENTITY.md
-    ├── EJR-003_2026-08-09_HERMUZ_SESSION_HANDOFF_FAILURE_ANALYSIS.md
-    ├── EJR-015_2026-08-10_PRE_FAILURE_MUTATION_AUDIT.md
-    ├── EJR-016_2026-08-10_REVIEW_TRACEABILITY_AND_PHASE1_COMPLETION_CONTROL.md
-    ├── EJR-017_2026-08-10_REPOSITORY_ALLOCATION_AND_RECOVERY_REGISTRY.md
-    ├── EJR-018_2026-08-10_REPOSITORY_CONTENT_AND_RELATIONSHIP_REGISTRIES.md
-    ├── EJR-020_2026-08-10_CONTROL_PLANE_BOOTSTRAP_AND_ALLOCATION_BINDING.md
-    ├── EJR-021_2026-08-10_CONTROL_PLANE_OPERATIONALIZATION.md
-    ├── EJR-022_2026-08-10_HERMUZ_BUILD_METHOD_LESSONS.md
-    └── EJR-023_2026-08-11_SESSION_RESUME_AND_PHASE1_CONTINUATION.md
+├── Engineering_Journal/
+│   ├── EJR-002_HERMUZ_BUILD_REVIEW_IDENTITY.md
+│   ├── EJR-003_2026-08-09_HERMUZ_SESSION_HANDOFF_FAILURE_ANALYSIS.md
+│   ├── EJR-015_2026-08-10_PRE_FAILURE_MUTATION_AUDIT.md
+│   ├── EJR-016_2026-08-10_REVIEW_TRACEABILITY_AND_PHASE1_COMPLETION_CONTROL.md
+│   ├── EJR-017_2026-08-10_REPOSITORY_ALLOCATION_AND_RECOVERY_REGISTRY.md
+│   ├── EJR-018_2026-08-10_REPOSITORY_CONTENT_AND_RELATIONSHIP_REGISTRIES.md
+│   ├── EJR-020_2026-08-10_CONTROL_PLANE_BOOTSTRAP_AND_ALLOCATION_BINDING.md
+│   ├── EJR-021_2026-08-10_CONTROL_PLANE_OPERATIONALIZATION.md
+│   ├── EJR-022_2026-08-10_HERMUZ_BUILD_METHOD_LESSONS.md
+│   ├── EJR-023_2026-08-11_SESSION_RESUME_AND_PHASE1_CONTINUATION.md
+│   └── EJR-025_2026-08-11_REP015_REVALIDATION_AND_SESSION_CLOSURE.md
+└── Operational_Memory/
+    ├── README.md
+    ├── OPM-001_OPERATIONAL_MEMORY_MODEL.md
+    ├── OPM-002_OPERATIONAL_EVENT_CAPTURE.md
+    ├── OPM-003_OPERATIONAL_RETRIEVAL.md
+    └── OPM-004_OPERATIONAL_LIFECYCLE.md
 ```
+
+`Operational_Memory/` is now a physically constructed Build-01 subdomain. Its artifacts remain bounded by `Memory/_FOLDER_STATUS.md` and consolidated validation is still open.
 
 This remains a known-evidence inventory and is not yet an exhaustive physical enumeration of `Memory/`.
 
@@ -409,6 +418,12 @@ Newly bound current-evidence members:
 
 - `Memory/MEM-008_GUIDED_DISCOVERY_LEARNING_METHOD.md`
 - `Memory/Engineering_Journal/EJR-023_2026-08-11_SESSION_RESUME_AND_PHASE1_CONTINUATION.md`
+- `Memory/Engineering_Journal/EJR-025_2026-08-11_REP015_REVALIDATION_AND_SESSION_CLOSURE.md`
+- `Memory/Operational_Memory/README.md`
+- `Memory/Operational_Memory/OPM-001_OPERATIONAL_MEMORY_MODEL.md`
+- `Memory/Operational_Memory/OPM-002_OPERATIONAL_EVENT_CAPTURE.md`
+- `Memory/Operational_Memory/OPM-003_OPERATIONAL_RETRIEVAL.md`
+- `Memory/Operational_Memory/OPM-004_OPERATIONAL_LIFECYCLE.md`
 
 This addendum does **not** imply that the entire `Memory/` partition is physically reconciled or closed. It records only the artifacts explicitly verified during this session.
 
