@@ -8,20 +8,20 @@ Platform: ARGO KOP
 Knowledge Operating Platform
 
 Document ID: RUN-010
-Version: 1.3.2
+Version: 1.4.0
 Status: Validated / Integrity Hold / Revalidated
 Category: Runtime
 Canonical: Yes
 Priority: Critical
 Development Baseline: 3.2.1
 Latest Official Release: 1.0.0
-Last Audit: 2026-08-10
+Last Audit: 2026-08-11
 
 ---
 
 # Purpose
 
-Canonical navigation reference for the Runtime layer. It summarizes current Runtime documents, execution flow, state model, connector boundaries, recovery controls and engineering rules.
+Canonical navigation reference for the Runtime layer. It summarizes current Runtime documents, execution flow, state model, connector boundaries, recovery controls and the current cognitive-loop prototype boundary.
 
 This reference does not override the authority of the Constitution, Governance, Architecture or Repository.
 
@@ -37,6 +37,8 @@ This reference does not override the authority of the Constitution, Governance, 
 - `RUN-008_RUNTIME_STATE.md` — Runtime State
 - `RUN-009_RECOVERY.md` — Recovery
 - `RUN-010_RUNTIME_REFERENCE.md` — Runtime Reference
+- `RUN-011_COGNITIVE_LOOP_PROTOTYPE.md` — Cognitive Loop Prototype
+- `RUN-012_COGNITIVE_LOOP_TEST_MATRIX.md` — Cognitive Loop Acceptance Matrix
 
 # Runtime Execution Pipeline
 
@@ -60,19 +62,23 @@ Interface / Dependency Resolution
 
 ↓
 
-Authorization / Provenance Validation when applicable
+Context Selection
 
 ↓
 
-Validated Operation Selection
+Cognitive / Decision Candidate Processing when applicable
 
 ↓
 
-Decision / Execution Candidate Processing when applicable
+Validation
 
 ↓
 
-Processing
+Authorization
+
+↓
+
+Processing / Execution when applicable
 
 ↓
 
@@ -80,7 +86,7 @@ External Execution when applicable
 
 ↓
 
-Validation
+Result Validation
 
 ↓
 
@@ -96,6 +102,16 @@ IDLE or governed HOLD/FAULT
 
 Continuation is conditional and governed by `RUN-005`.
 
+# Cognitive Loop Boundary
+
+For the first safe cognitive prototype, the Runtime consumes the integration contract defined by `Engine/ENG-013_COGNITIVE_EXECUTION_LOOP.md` and the acceptance boundary defined by `Engine/ENG-014_COGNITIVE_LOOP_INTEGRATION_VALIDATION.md`.
+
+The prototype target is:
+
+`Context → Cognition → Decision Candidate → Validation → Human Authorization → Non-destructive Action Proposal → Trace`
+
+This is a controlled prototype boundary, not a claim that the complete loop is already executable.
+
 # Decision / Validation / Execution Boundary
 
 Where the operation requires decision and execution services, the runtime relationship is interpreted as:
@@ -103,8 +119,6 @@ Where the operation requires decision and execution services, the runtime relati
 `Decision Candidate → Validation → Authorization → ENG-006 Execution → SRV-009 Controlled Mutation → Post-Write Validation / Re-read`
 
 This is a relationship description, not a claim that every runtime operation follows this exact path.
-
-`ENG-006` does not create authority; `SRV-009` does not create authority through technical write access. Applicable governance, repository and validation controls remain upstream constraints.
 
 # External Execution Boundary
 
@@ -138,6 +152,7 @@ Logical runtime responsibilities include:
 - Engineering Queue
 - Repository Context / Cache
 - Interface / Connector Boundary
+- Cognitive Loop Boundary
 
 These are responsibility domains, not a claim that each exists as a separate implementation module.
 
@@ -197,18 +212,19 @@ Dependencies are resolved from current repository evidence, not assumed from num
 # Related Documents
 
 - `Runtime/RUN-001_BOOT_SEQUENCE.md`
-- `Runtime/RUN-002_INITIALIZATION.md`
-- `Runtime/RUN-003_CONFIGURATION.md`
 - `Runtime/RUN-004_CONTEXT_LOADING.md`
 - `Runtime/RUN-005_RUNTIME_WORKFLOW.md`
 - `Runtime/RUN-006_AI_PROTOCOL.md`
 - `Runtime/RUN-007_RUNTIME_SECURITY.md`
 - `Runtime/RUN-008_RUNTIME_STATE.md`
 - `Runtime/RUN-009_RECOVERY.md`
-- `Runtime/RUN-010_RUNTIME_REFERENCE.md`
+- `Runtime/RUN-011_COGNITIVE_LOOP_PROTOTYPE.md`
+- `Runtime/RUN-012_COGNITIVE_LOOP_TEST_MATRIX.md`
 - `Engine/ENG-002_DECISION_ENGINE.md`
 - `Engine/ENG-004_VALIDATION_ENGINE.md`
 - `Engine/ENG-006_EXECUTION_ENGINE.md`
+- `Engine/ENG-013_COGNITIVE_EXECUTION_LOOP.md`
+- `Engine/ENG-014_COGNITIVE_LOOP_INTEGRATION_VALIDATION.md`
 - `Services/SRV-005_VALIDATION_SERVICE.md`
 - `Services/SRV-009_UPDATE_SERVICE.md`
 - `Architecture/ARC-006_DEPENDENCY_MODEL.md`
