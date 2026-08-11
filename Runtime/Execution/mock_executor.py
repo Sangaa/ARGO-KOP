@@ -1,4 +1,4 @@
-"""Side-effect-free executor used to validate the execution boundary."""
+"""Side-effect-free mock executor for controlled execution testing."""
 
 
 def execute(plan: dict) -> dict:
