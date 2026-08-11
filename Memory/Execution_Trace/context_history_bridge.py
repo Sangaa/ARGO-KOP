@@ -1,16 +1,16 @@
-"""Bridge historical traces into context as explicitly labeled evidence."""
+"""Build a safe context package from current facts plus historical evidence."""
 
 
-def load_historical(records: list[dict], *, task_id: str) -> dict:
-    selected = [
-        record for record in records
-        if record.get("record_type") == "EXECUTION_TRACE"
-        and record.get("task_id") == task_id
-    ]
+def build_context(*, current_facts: list[dict], historical_evidence: list[dict]) -> dict:
     return {
-        "status": "HISTORICAL_CONTEXT_READY" if selected else "NO_HISTORY",
-        "task_id": task_id,
-        "historical_evidence": selected,
-        "active_context": False,
-        "promotion_status": "NOT_PROMOTED",
+        "current_facts": current_facts,
+        "historical_evidence": historical_evidence,
+        "historical_is_active_context": False,
+        "promotion_required": bool(historical_evidence),
     }
+
+
+def promote_history(context: dict, *, approved: bool = False) -> dict:
+    if not approved:
+        return {**context, "historical_is_active_context": False, "status": "HISTORICAL_ONLY"}
+    return {**context, "historical_is_active_context": True, "status": "PROMOTED"}
