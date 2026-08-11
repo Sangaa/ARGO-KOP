@@ -2,10 +2,12 @@
 
 Platform: ARGO KOP  
 Document ID: REP-014  
-Version: 1.1.0  
+Version: 1.2.0  
 Status: Active / Relationship Enumeration In Progress  
 Development Baseline: 3.3.0  
 Last Audit: 2026-08-11
+
+---
 
 ## Purpose
 
@@ -109,6 +111,44 @@ The following are deliberately limited to relationships established during repos
 | REL-042 | MEM-008 | REP-014 | REFERENCES | Verified within current learning-method scope |
 | REL-043 | EJR-023 | REP-015 | REFERENCES | Verified within current session-checkpoint scope |
 | REL-044 | EJR-023 | REP-013 | REFERENCES | Verified within current session-checkpoint scope |
+| REL-045 | REP-001 | Memory/Operational_Memory | REFERENCES | Verified within current inventory scope |
+| REL-046 | REP-002 | Memory/Operational_Memory | REFERENCES | Verified within current inventory scope |
+| REL-047 | Memory/Operational_Memory | MEM-008 | REFERENCES | Verified within current learning-memory scope |
+| REL-048 | OPM-001 | MEM-004 | DEPENDS_ON | Verified within current Memory-model scope |
+| REL-049 | OPM-002 | OPM-001 | DEPENDS_ON | Verified within current Operational-Memory build scope |
+| REL-050 | OPM-003 | OPM-001 | DEPENDS_ON | Verified within current Operational-Memory build scope |
+| REL-051 | OPM-004 | OPM-001 | DEPENDS_ON | Verified within current Operational-Memory build scope |
+| REL-052 | OPM-002 | MEM-008 | REFERENCES | Verified within current Guided-Discovery scope |
+| REL-053 | OPM-003 | OPM-002 | DEPENDS_ON | Verified within current Operational-Memory build scope |
+| REL-054 | OPM-004 | OPM-003 | DEPENDS_ON | Verified within current Operational-Memory build scope |
+
+## Operational Memory Build-01 Reconciliation — 2026-08-11
+
+Build-01 constructs the first explicit `Memory/Operational_Memory` subdomain. The relationships above are intentionally scoped to the inspected artifacts and do not imply that the full Memory domain is complete.
+
+```text
+REP-001 ──references──> Operational_Memory
+REP-002 ──references──> Operational_Memory
+Operational_Memory ──references──> MEM-008
+
+OPM-001 ──depends_on──> MEM-004
+OPM-002 ──depends_on──> OPM-001
+OPM-003 ──depends_on──> OPM-001
+OPM-004 ──depends_on──> OPM-001
+OPM-002 ──references──> MEM-008
+OPM-003 ──depends_on──> OPM-002
+OPM-004 ──depends_on──> OPM-003
+```
+
+Rationale:
+
+- `REP-001` and `REP-002` were directly updated to enumerate the newly constructed physical subdomain.
+- `OPM-001` defines the operational memory item structure and therefore depends on the existing Memory lifecycle authority represented by `MEM-004` within the inspected scope.
+- `OPM-002`, `OPM-003`, and `OPM-004` depend on the model defined by `OPM-001`.
+- `OPM-002` references `MEM-008` because its capture model explicitly supports the Guided Discovery learning pattern already recorded there.
+- Retrieval and lifecycle operate on the capture/model chain rather than becoming independent memory authorities.
+
+These relationships are build-scope relationships. Consolidated Memory validation remains open.
 
 ## Learning-Method Reconciliation
 
