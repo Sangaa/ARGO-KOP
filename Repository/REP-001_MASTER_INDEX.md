@@ -6,7 +6,7 @@
 
 Platform: ARGO KOP (Knowledge Operating Platform)
 Document ID: REP-001
-Version: 1.9.0
+Version: 1.10.0
 Status: Integrity Hold
 Category: Repository
 Canonical: Yes
@@ -175,7 +175,19 @@ The current build adds a directly verified Operational Memory subdomain:
 
 Build-01 is physically constructed and re-read. These artifacts remain `Candidate / Integrity Hold` pending consolidated Memory and cross-layer validation. They do not independently create Memory authority.
 
-## 13. Other Active Repository Domains
+## 13. Memory — Decision Memory
+
+The current build adds a directly verified Decision Memory subdomain:
+
+- `Memory/Decision_Memory/README.md`
+- `Memory/Decision_Memory/DM-001_DECISION_RECORD_MODEL.md`
+- `Memory/Decision_Memory/DM-002_DECISION_LIFECYCLE_AND_REVIEW.md`
+- `Memory/Decision_Memory/DM-003_DECISION_EVIDENCE_AND_REVISION.md`
+- `Memory/Decision_Memory/DM-004_DECISION_TRACEABILITY_AND_CONSUMER_LINKS.md`
+
+Build-01 is physically constructed and re-read. These artifacts remain `Candidate / Integrity Hold` pending consolidated Memory and cross-layer validation. They define decision-memory structure and traceability; they do not independently create decision authority.
+
+## 14. Other Active Repository Domains
 
 The repository contains additional physical domains shown by the current `SYSTEM_MAP.md`, including Knowledge, Memory, Decision, AI, Services, Intelligence, Quality, Projects, Release, Logs, Examples and Future.
 
@@ -210,7 +222,7 @@ Old material must remain recoverable when it has provenance or migration value, 
 
 A domain is not considered complete merely because its folder exists or because draft files have been populated.
 
-## 14. Canonicalization Rules
+## 15. Canonicalization Rules
 
 1. One active canonical artifact per logical identity.
 2. Filename identity and internal Document ID must agree where a Document ID exists.
@@ -231,14 +243,15 @@ A domain is not considered complete merely because its folder exists or because 
 17. Critical Repository Control artifacts (`REP-011` through `REP-015`) must remain mutually discoverable through both the master index and physical storage map while their cross-registry reconciliation remains open.
 18. Registry membership is evidence of inventory only; review, allocation and relationship states are controlled by the respective registries.
 19. New Memory subdomains must be indexed when physically constructed and must remain capped by their verified scope until consolidated validation.
+20. New Decision Memory subdomains must be indexed when physically constructed and must remain capped by their verified scope until consolidated validation.
 
-## 15. Integrity State
+## 16. Integrity State
 
 Current repository state: **INTEGRITY HOLD**.
 
-The index is synchronized with the currently verified inventory within the inspected scope. Architecture, Lifecycle inventory, Plugin inventory, Operational Memory Build-01 and cross-layer relationship validation remain open. Other physical domains remain subject to staged reconstruction and validation.
+The index is synchronized with the currently verified inventory within the inspected scope. Architecture, Lifecycle inventory, Plugin inventory, Operational Memory Build-01, Decision Memory Build-01 and cross-layer relationship validation remain open. Other physical domains remain subject to staged reconstruction and validation.
 
-## 16. Verification Model
+## 17. Verification Model
 
 Current audit model:
 
@@ -246,7 +259,7 @@ Current audit model:
 
 Local validation results remain bounded to their inspected scope. `100%` repository integrity requires aggregated evidence across the affected repository graph and absence of unresolved blocking relationships.
 
-## 17. Governing Rule
+## 18. Governing Rule
 
 Repository Reality > Previous Status Claims > Conversation Memory
 
