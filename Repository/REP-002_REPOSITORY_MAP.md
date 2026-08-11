@@ -6,12 +6,12 @@
 
 Platform: ARGO KOP (Knowledge Operating Platform)
 Document ID: REP-002
-Version: 1.6.9
+Version: 1.7.0
 Status: Integrity Hold
 Category: Repository
 Canonical: Yes
 Priority: Critical
-Last Audit Date: Aug 10, 2026
+Last Audit Date: Aug 11, 2026
 
 ---
 
@@ -174,13 +174,25 @@ Path: `Plugins/`
 
 The approved plugin architecture does not imply that every plugin is globally integrated; each plugin remains subject to its own manifest, sandbox, interface, security and quality validation.
 
-## 12. Other Repository Domains
+## 12. Memory — Operational Memory
+
+Path: `Memory/Operational_Memory/`
+
+- `Memory/Operational_Memory/README.md`
+- `Memory/Operational_Memory/OPM-001_OPERATIONAL_MEMORY_MODEL.md`
+- `Memory/Operational_Memory/OPM-002_OPERATIONAL_EVENT_CAPTURE.md`
+- `Memory/Operational_Memory/OPM-003_OPERATIONAL_RETRIEVAL.md`
+- `Memory/Operational_Memory/OPM-004_OPERATIONAL_LIFECYCLE.md`
+
+Build-01 is physically constructed and verified. The artifacts remain `Candidate / Integrity Hold` pending consolidated Memory and cross-layer validation.
+
+## 13. Other Repository Domains
 
 Current `SYSTEM_MAP.md` also identifies Knowledge, Memory, Decision, AI, Services, Intelligence, Quality, Projects, Release, Logs, Examples and Future as physical repository domains/groupings.
 
 These domains are not assumed complete or architecturally authoritative from folder names alone. Their active inventories and relationships remain under connected-baseline validation and are tracked through REP-011 review evidence.
 
-## 13. Mapping Rules
+## 14. Mapping Rules
 
 1. Every active canonical document has exactly one canonical path.
 2. Filename identity must match internal Document ID where one exists.
@@ -198,12 +210,13 @@ These domains are not assumed complete or architecturally authoritative from fol
 14. A folder/domain remains open until its Phase 1 completion is explicitly recorded; reviewed subsets must not imply completion of the remaining contents.
 15. If a reviewed file changes, or a dependency/authority/consumer changes materially, its prior review state must be revalidated.
 16. Critical Repository Control artifacts (`REP-011` through `REP-015`) must remain mutually discoverable through the active repository map while their cross-registry reconciliation remains open.
+17. New Memory subdomains must be mapped when physically constructed and must remain capped by their verified scope until consolidated validation.
 
-## 14. Integrity State
+## 15. Integrity State
 
 Current repository state: **INTEGRITY HOLD**.
 
-The map is synchronized with the current declared Core, Governance, Repository control-plane, Runtime, Architecture, Lifecycle, Interfaces, Models and Plugins inventory within the inspected scope. Cross-layer relationship validation remains open.
+The map is synchronized with the current declared Core, Governance, Repository control-plane, Runtime, Architecture, Lifecycle, Interfaces, Models, Plugins and Build-01 Operational Memory inventory within the inspected scope. Cross-layer relationship validation remains open.
 
 Completion of individual files or reviewed subsets must not be interpreted as Phase 1 repository completion. REP-011 is the binding review/completion evidence ledger until an explicit Phase 1 closure decision is recorded.
 
