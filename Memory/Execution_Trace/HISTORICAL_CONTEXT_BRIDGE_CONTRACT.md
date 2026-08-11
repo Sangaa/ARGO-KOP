@@ -2,32 +2,26 @@
 
 ## Purpose
 
-Allow Cognition/Context loading to retrieve relevant historical execution evidence without silently converting history into active state.
+Combine current facts with historical execution evidence without silently promoting history into current truth.
 
 ## Contract
 
+- `current_facts` are current-session inputs.
+- `historical_evidence` is explicitly historical.
+- `historical_is_active_context` defaults to `false`.
+- Historical evidence requires explicit promotion before becoming active context.
+- Promotion does not grant authorization and does not execute an action.
+
+## Flow
+
 ```text
-Historical Trace
-      ↓
-Task/Session Filter
-      ↓
-Historical Evidence
-      ↓
-Context Loader
-      ↓
-ACTIVE_CONTEXT = false
+Current Facts ─────────┐
+                      ├→ Context Package → Cognition
+Historical Evidence ──┘
+          │
+          └→ remains HISTORICAL_ONLY unless explicitly promoted
 ```
-
-## Promotion Boundary
-
-Historical evidence may be promoted only by an explicit governed process. Retrieval alone never grants current-state authority, decision authority, or execution authorization.
-
-## Required Labels
-
-- `record_type = EXECUTION_TRACE`
-- `promotion_status = NOT_PROMOTED`
-- `active_context = false`
 
 ## Failure Behavior
 
-No matching trace returns `NO_HISTORY` rather than an inferred or fabricated result.
+No matching historical evidence must remain explicit rather than being inferred or fabricated.
