@@ -2,10 +2,10 @@
 
 Platform: ARGO KOP  
 Document ID: REP-014  
-Version: 1.0.9  
+Version: 1.1.0  
 Status: Active / Relationship Enumeration In Progress  
 Development Baseline: 3.3.0  
-Last Audit: 2026-08-10
+Last Audit: 2026-08-11
 
 ## Purpose
 
@@ -107,6 +107,8 @@ The following are deliberately limited to relationships established during repos
 | REL-040 | MEM-008 | MEM-006 | DEPENDS_ON | Verified within current learning-method scope |
 | REL-041 | MEM-008 | CORE-003 | REFERENCES | Verified within current learning-method scope |
 | REL-042 | MEM-008 | REP-014 | REFERENCES | Verified within current learning-method scope |
+| REL-043 | EJR-023 | REP-015 | REFERENCES | Verified within current session-checkpoint scope |
+| REL-044 | EJR-023 | REP-013 | REFERENCES | Verified within current session-checkpoint scope |
 
 ## Learning-Method Reconciliation
 
@@ -129,6 +131,19 @@ Rationale:
 - `REP-014` is the relationship registry used to preserve independently evidenced links and therefore is referenced by MEM-008 when recording learning artifacts and their provenance.
 
 No reverse relationships are inferred merely because these documents reference one another conceptually. Reverse entries should be added only after direct source evidence is inspected.
+
+## Session Checkpoint Reconciliation — 2026-08-11
+
+`EJR-023` records the current-session bootstrap inspection and explicitly identifies `REP-015` as the bootstrap/continuation authority and `REP-013` as the content-inventory artifact inspected during the checkpoint.
+
+Therefore the following relationships are registered:
+
+```text
+EJR-023 ──references──> REP-015
+EJR-023 ──references──> REP-013
+```
+
+These are checkpoint/documentation relationships only. They do not make the Engineering Journal authoritative over either control-plane artifact.
 
 ## Guided Discovery as a Learning Control
 
