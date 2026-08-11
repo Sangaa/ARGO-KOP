@@ -2,10 +2,10 @@
 
 Platform: ARGO KOP  
 Document ID: REP-015  
-Version: 1.0.4  
+Version: 1.0.5  
 Status: Active / Phase 1 Open / Integrity Hold  
 Development Baseline: 3.3.0  
-Last Audit: 2026-08-10
+Last Audit: 2026-08-11
 
 ## Purpose
 
@@ -359,6 +359,29 @@ A new model must be able to locate the current execution state through repositor
 Minimum control-plane load:
 
 `REP-001 → REP-002 → REP-013 → REP-011/012/014 → REP-015/016 → Journal`
+
+## Current Reconciliation Evidence — 2026-08-11
+
+The checklist was revalidated against the current repository state after the `EJR-024` control-plane reconciliation checkpoint.
+
+Verified facts:
+
+- `REP-013` received the inventory reconciliation mutation recorded by `EJR-024`.
+- `REP-014` received the relationship reconciliation mutation recorded by `EJR-024`.
+- `REP-016` remains `RECONCILIATION` in `RING 0 — CONTROL PLANE`.
+- `REP-011` continues to define the cross-registry reconciliation boundary.
+- `REP-015` itself remains open and authoritative only for bootstrap/control procedure; it does not declare Phase 1 closure.
+- The control-plane state remains `PARTIALLY RECONCILED / INTEGRITY HOLD`.
+
+This update changes the audit freshness of `REP-015`; it does not promote any queue item or ring.
+
+Latest reconciliation checkpoint:
+
+`EJR-024_2026-08-11_SESSION_CLOSURE_CONTROL_PLANE_RECONCILIATION.md`
+
+Latest checkpoint commit before this mutation:
+
+`48a45400902db2c60c692597ac2a6c18e741d631`
 
 ## Guiding Rule
 
