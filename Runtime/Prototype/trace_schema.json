@@ -1,0 +1,18 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ARGO Cognitive Loop Trace",
+  "type": "object",
+  "required": ["task_id", "state", "context", "reasoning", "decision", "validation", "authorization", "action", "result"],
+  "properties": {
+    "task_id": {"type": "string", "minLength": 1},
+    "state": {"type": "string", "enum": ["CANDIDATE", "UNDER_REVIEW", "VALIDATED", "AUTHORIZED", "PROPOSED", "HOLD", "REJECTED"]},
+    "context": {"type": "object", "required": ["task_id", "session_id", "active_state", "evidence", "knowledge", "requested_outcome"]},
+    "reasoning": {"type": "object", "required": ["status"]},
+    "decision": {"type": "object", "required": ["status"]},
+    "validation": {"type": "object", "required": ["status"]},
+    "authorization": {"type": "object", "required": ["status", "approved"]},
+    "action": {"type": "object", "required": ["status"]},
+    "result": {"type": "object", "required": ["executed", "external_side_effect"]}
+  },
+  "additionalProperties": false
+}
