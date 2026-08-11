@@ -6,12 +6,12 @@
 
 Platform: ARGO KOP (Knowledge Operating Platform)
 Document ID: REP-001
-Version: 1.8.0
+Version: 1.9.0
 Status: Integrity Hold
 Category: Repository
 Canonical: Yes
 Priority: Critical
-Last Audit Date: Aug 10, 2026
+Last Audit Date: Aug 11, 2026
 Development Baseline: 3.2.1
 
 ---
@@ -52,6 +52,10 @@ Historical root naming-convention material is not active canonical inventory and
 
 - `Repository/REP-001_MASTER_INDEX.md`
 - `Repository/REP-002_REPOSITORY_MAP.md`
+- `Repository/REP-003_REPOSITORY_STANDARDS.md`
+- `Repository/REP-006_REPOSITORY_LIFECYCLE.md`
+- `Repository/REP-009_REPOSITORY_TRACEABILITY.md`
+- `Repository/REP-010_RELEASE_BASELINE.md`
 - `Repository/REP-011_REVIEW_TRACEABILITY_LEDGER.md`
 - `Repository/REP-012_REPOSITORY_ALLOCATION_REGISTRY.md`
 - `Repository/REP-013_REPOSITORY_CONTENT_TREE.md`
@@ -59,8 +63,6 @@ Historical root naming-convention material is not active canonical inventory and
 - `Repository/REP-015_CONTROL_PLANE_BOOTSTRAP_CHECKLIST.md`
 
 `REP-011` through `REP-015` form the current repository control plane. They are mutually discoverable here and through REP-002. They remain subject to cross-registry reconciliation and do not grant domain semantic authority.
-
-Other repository standards and lifecycle artifacts remain active according to their own identity and authority state; they are not promoted merely by this control-plane update.
 
 ## 5. Governance Layer
 
@@ -161,7 +163,19 @@ The current repository contains a directly verified canonical plugin architectur
 
 The existence and approval of `PLG-001` do not certify that every future plugin is integrated; each plugin remains subject to manifest, sandbox, interface, security and quality validation.
 
-## 12. Other Active Repository Domains
+## 12. Memory — Operational Memory
+
+The current build adds a directly verified Operational Memory subdomain:
+
+- `Memory/Operational_Memory/README.md`
+- `Memory/Operational_Memory/OPM-001_OPERATIONAL_MEMORY_MODEL.md`
+- `Memory/Operational_Memory/OPM-002_OPERATIONAL_EVENT_CAPTURE.md`
+- `Memory/Operational_Memory/OPM-003_OPERATIONAL_RETRIEVAL.md`
+- `Memory/Operational_Memory/OPM-004_OPERATIONAL_LIFECYCLE.md`
+
+Build-01 is physically constructed and re-read. These artifacts remain `Candidate / Integrity Hold` pending consolidated Memory and cross-layer validation. They do not independently create Memory authority.
+
+## 13. Other Active Repository Domains
 
 The repository contains additional physical domains shown by the current `SYSTEM_MAP.md`, including Knowledge, Memory, Decision, AI, Services, Intelligence, Quality, Projects, Release, Logs, Examples and Future.
 
@@ -196,7 +210,7 @@ Old material must remain recoverable when it has provenance or migration value, 
 
 A domain is not considered complete merely because its folder exists or because draft files have been populated.
 
-## 13. Canonicalization Rules
+## 14. Canonicalization Rules
 
 1. One active canonical artifact per logical identity.
 2. Filename identity and internal Document ID must agree where a Document ID exists.
@@ -216,14 +230,15 @@ A domain is not considered complete merely because its folder exists or because 
 16. Domains under reconstruction remain outside active canonical authority unless explicitly promoted after validation.
 17. Critical Repository Control artifacts (`REP-011` through `REP-015`) must remain mutually discoverable through both the master index and physical storage map while their cross-registry reconciliation remains open.
 18. Registry membership is evidence of inventory only; review, allocation and relationship states are controlled by the respective registries.
+19. New Memory subdomains must be indexed when physically constructed and must remain capped by their verified scope until consolidated validation.
 
-## 14. Integrity State
+## 15. Integrity State
 
 Current repository state: **INTEGRITY HOLD**.
 
-The index is synchronized with the currently verified inventory within the inspected scope. Architecture, Lifecycle inventory, Plugin inventory and cross-layer relationship validation remain open. Other physical domains remain subject to staged reconstruction and validation.
+The index is synchronized with the currently verified inventory within the inspected scope. Architecture, Lifecycle inventory, Plugin inventory, Operational Memory Build-01 and cross-layer relationship validation remain open. Other physical domains remain subject to staged reconstruction and validation.
 
-## 15. Verification Model
+## 16. Verification Model
 
 Current audit model:
 
@@ -231,7 +246,7 @@ Current audit model:
 
 Local validation results remain bounded to their inspected scope. `100%` repository integrity requires aggregated evidence across the affected repository graph and absence of unresolved blocking relationships.
 
-## 16. Governing Rule
+## 17. Governing Rule
 
 Repository Reality > Previous Status Claims > Conversation Memory
 
