@@ -1,30 +1,30 @@
 # Prototype Test Execution Report
 
-Status: REQUIRES LOCAL RUNTIME EXECUTION
+Status: CI EXECUTION ENABLED / RESULT PENDING
 
-The repository contains executable Python acceptance tests for the cognitive loop, controlled handoff, and learning promotion gate.
+The repository now contains a GitHub Actions workflow that executes the complete Python acceptance suite for `Runtime/Prototype`.
 
-This report deliberately records **test readiness**, not a fabricated pass result. The GitHub repository interface can inspect source and test files, but it does not itself execute the Python test suite in this session.
+## Workflow
 
-## Current Test Scope
+`.github/workflows/runtime-prototype-tests.yml`
 
-- Cognitive loop: authorization, safe proposal, missing evidence, trace completeness.
-- Controlled handoff: authorization gate, safe handoff, incomplete trace.
-- Learning promotion: evidence, observation, validation, authority, confidence, incomplete candidate.
-- New edge cases: missing knowledge and validation override prevention.
-
-## Required Command
+## Command
 
 ```bash
-python -m pytest -q Runtime/Prototype
+python -m pytest -q
 ```
 
-## Acceptance Rule
-
-The execution result must be captured from the actual Python runtime before claiming PASS.
-
-Any failure becomes a build input and must be corrected before the corresponding component is promoted.
+The workflow runs this command from `Runtime/Prototype` using Python 3.11.
 
 ## Integrity Rule
 
-Never write a PASS result based on source inspection alone.
+A PASS result must come from an actual CI workflow run. Source inspection is not sufficient evidence.
+
+## Current Evidence State
+
+- Test files: present.
+- Edge-case tests: present.
+- CI workflow: present.
+- Actual CI result: pending.
+
+Until the workflow produces a successful run, prototype promotion remains blocked.
