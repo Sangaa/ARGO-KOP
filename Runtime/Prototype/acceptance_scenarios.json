@@ -1,0 +1,29 @@
+{
+  "version": "1.0.0",
+  "scenarios": [
+    {
+      "id": "SAFE-001",
+      "name": "validated_human_authorized_proposal",
+      "human_approved": true,
+      "expected_state": "PROPOSED",
+      "expected_executed": false,
+      "expected_external_side_effect": false
+    },
+    {
+      "id": "SAFE-002",
+      "name": "validated_but_not_authorized",
+      "human_approved": false,
+      "expected_state": "HOLD",
+      "expected_executed": false,
+      "expected_external_side_effect": false
+    },
+    {
+      "id": "SAFE-003",
+      "name": "missing_evidence",
+      "human_approved": true,
+      "expected_state": "HOLD",
+      "expected_executed": false,
+      "expected_external_side_effect": false
+    }
+  ]
+}
