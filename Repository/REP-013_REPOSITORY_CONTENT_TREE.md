@@ -2,10 +2,10 @@
 
 Platform: ARGO KOP  
 Document ID: REP-013  
-Version: 1.0.5  
+Version: 1.0.6  
 Status: Active / Phase 1 Population In Progress  
 Development Baseline: 3.3.0  
-Last Audit: 2026-08-10
+Last Audit: 2026-08-11
 
 ## Purpose
 
@@ -175,24 +175,27 @@ AI/
 
 This remains a partial inventory until the folder is physically reconciled.
 
-### Memory/Engineering_Journal/
+### Memory/
 
 Known recorded members include:
 
 ```text
-Memory/Engineering_Journal/
-├── EJR-002_HERMUZ_BUILD_REVIEW_IDENTITY.md
-├── EJR-003_2026-08-09_HERMUZ_SESSION_HANDOFF_FAILURE_ANALYSIS.md
-├── EJR-015_2026-08-10_PRE_FAILURE_MUTATION_AUDIT.md
-├── EJR-016_2026-08-10_REVIEW_TRACEABILITY_AND_PHASE1_COMPLETION_CONTROL.md
-├── EJR-017_2026-08-10_REPOSITORY_ALLOCATION_AND_RECOVERY_REGISTRY.md
-├── EJR-018_2026-08-10_REPOSITORY_CONTENT_AND_RELATIONSHIP_REGISTRIES.md
-├── EJR-020_2026-08-10_CONTROL_PLANE_BOOTSTRAP_AND_ALLOCATION_BINDING.md
-├── EJR-021_2026-08-10_CONTROL_PLANE_OPERATIONALIZATION.md
-└── EJR-022_2026-08-10_HERMUZ_BUILD_METHOD_LESSONS.md
+Memory/
+├── MEM-008_GUIDED_DISCOVERY_LEARNING_METHOD.md
+└── Engineering_Journal/
+    ├── EJR-002_HERMUZ_BUILD_REVIEW_IDENTITY.md
+    ├── EJR-003_2026-08-09_HERMUZ_SESSION_HANDOFF_FAILURE_ANALYSIS.md
+    ├── EJR-015_2026-08-10_PRE_FAILURE_MUTATION_AUDIT.md
+    ├── EJR-016_2026-08-10_REVIEW_TRACEABILITY_AND_PHASE1_COMPLETION_CONTROL.md
+    ├── EJR-017_2026-08-10_REPOSITORY_ALLOCATION_AND_RECOVERY_REGISTRY.md
+    ├── EJR-018_2026-08-10_REPOSITORY_CONTENT_AND_RELATIONSHIP_REGISTRIES.md
+    ├── EJR-020_2026-08-10_CONTROL_PLANE_BOOTSTRAP_AND_ALLOCATION_BINDING.md
+    ├── EJR-021_2026-08-10_CONTROL_PLANE_OPERATIONALIZATION.md
+    ├── EJR-022_2026-08-10_HERMUZ_BUILD_METHOD_LESSONS.md
+    └── EJR-023_2026-08-11_SESSION_RESUME_AND_PHASE1_CONTINUATION.md
 ```
 
-Other journal entries remain subject to exact inventory reconciliation and are not represented by fabricated wildcard identities.
+This remains a known-evidence inventory and is not yet an exhaustive physical enumeration of `Memory/`.
 
 ### Specifications/
 
@@ -395,6 +398,19 @@ A folder can only be marked `CLOSED_FOR_PHASE_1` when:
 7. an explicit closure decision is recorded.
 
 Until then the folder remains **OPEN**.
+
+---
+
+## Session Checkpoint Addendum — 2026-08-11
+
+The inventory was materially reconciled during the 2026-08-11 continuation session.
+
+Newly bound current-evidence members:
+
+- `Memory/MEM-008_GUIDED_DISCOVERY_LEARNING_METHOD.md`
+- `Memory/Engineering_Journal/EJR-023_2026-08-11_SESSION_RESUME_AND_PHASE1_CONTINUATION.md`
+
+This addendum does **not** imply that the entire `Memory/` partition is physically reconciled or closed. It records only the artifacts explicitly verified during this session.
 
 ---
 
