@@ -9,7 +9,7 @@ Status
 🟡 INTEGRITY HOLD
 
 Version
-1.3.0
+1.4.0
 
 Last Review
 2026-08-11
@@ -39,6 +39,9 @@ Engineering Journal
 Operational Memory
 🟡 Build-01 constructed / Integrity Hold
 
+Decision Memory
+🟡 Build-01 constructed / Integrity Hold
+
 Repository Alignment
 🟡 Cross-layer synchronization pending
 
@@ -59,7 +62,7 @@ Operational_Memory
 🟡 Build-01 constructed / pending consolidated validation
 
 Decision_Memory
-⏳ Pending
+🟡 Build-01 constructed / pending consolidated validation
 
 Historical_Memory
 ⏳ Pending
@@ -67,7 +70,17 @@ Historical_Memory
 Project_Memory
 ⏳ Pending
 
----
+# Decision Memory Build-01
+
+Verified artifacts:
+
+- `Decision_Memory/README.md`
+- `Decision_Memory/DM-001_DECISION_RECORD_MODEL.md`
+- `Decision_Memory/DM-002_DECISION_LIFECYCLE_AND_REVIEW.md`
+- `Decision_Memory/DM-003_DECISION_EVIDENCE_AND_REVISION.md`
+- `Decision_Memory/DM-004_DECISION_TRACEABILITY_AND_CONSUMER_LINKS.md`
+
+Build-01 establishes the domain contract, record model, lifecycle/review model, evidence/revision discipline and traceability expectations. It does not certify consolidated cross-layer validity or create authority above existing Governance and Repository controls.
 
 # Files Reviewed
 
@@ -90,6 +103,12 @@ Operational_Memory/OPM-002_OPERATIONAL_EVENT_CAPTURE.md
 Operational_Memory/OPM-003_OPERATIONAL_RETRIEVAL.md
 Operational_Memory/OPM-004_OPERATIONAL_LIFECYCLE.md
 
+Decision_Memory/README.md
+Decision_Memory/DM-001_DECISION_RECORD_MODEL.md
+Decision_Memory/DM-002_DECISION_LIFECYCLE_AND_REVIEW.md
+Decision_Memory/DM-003_DECISION_EVIDENCE_AND_REVISION.md
+Decision_Memory/DM-004_DECISION_TRACEABILITY_AND_CONSUMER_LINKS.md
+
 # Integrity Rules
 
 1. This status file reflects the current repository evidence, not a historical ZIP snapshot.
@@ -99,21 +118,24 @@ Operational_Memory/OPM-004_OPERATIONAL_LIFECYCLE.md
 5. Repository Memory remains authoritative over temporary conversational context.
 6. Historical review records do not override current repository reality.
 7. Build-01 Operational Memory artifacts remain candidate/capped by Integrity Hold until consolidated domain validation.
+8. Build-01 Decision Memory artifacts remain candidate/capped by Integrity Hold until consolidated domain validation.
+9. Decision Memory cannot override Governance, Architecture, Repository or current evidence.
 
 # Outstanding Work
 
 Complete and validate:
 
-- `Memory/Decision_Memory`
 - `Memory/Historical_Memory`
 - `Memory/Project_Memory`
 - consolidated Operational Memory cross-layer validation
+- consolidated Decision Memory cross-layer validation
+- final Memory cross-reference synchronization
 
 Then perform consolidated Memory validation and cross-reference synchronization.
 
 # Next Folder
 
-Memory/Decision_Memory
+Memory/Historical_Memory
 
 ---
 
