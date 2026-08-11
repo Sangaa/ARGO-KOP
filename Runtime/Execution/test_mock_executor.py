@@ -19,3 +19,11 @@ def test_mock_executor_simulates_without_side_effect():
     assert result["execution_status"] == "SIMULATED_ONLY"
     assert result["side_effect"] is False
     assert result["authorization_id"] == "AUTH-001"
+
+
+def test_mock_executor_rejects_already_started_plan():
+    result = execute({
+        "status": "PLAN_READY",
+        "execution_status": "SIMULATED_ONLY",
+    })
+    assert result["status"] == "BLOCKED"
