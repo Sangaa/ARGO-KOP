@@ -12,11 +12,11 @@ Engine/
 
 Version
 
-2.2.0
+2.3.0
 
 Status
 
-🟡 INTEGRITY HOLD / EXECUTION BOUNDARY ADDED
+🟡 INTEGRITY HOLD / COGNITIVE LOOP INTEGRATION ADDED
 
 Canonical
 
@@ -38,59 +38,49 @@ Repository First / Evidence Based
 
 # Folder Purpose
 
-The Engine domain contains the currently identified `ENG-001` through `ENG-012` artifacts. Their declared responsibilities and relationships are subject to repository-wide validation.
+The Engine domain contains the currently identified `ENG-001` through `ENG-014` artifacts and `_FOLDER_STATUS.md`. Their declared responsibilities and relationships remain subject to repository-wide validation.
 
-# Inventory Finding
+# Current Build Additions
 
-The current repository contains `ENG-001` through `ENG-012` and `_FOLDER_STATUS.md`. The document IDs align with filenames for the inspected scope.
+This build batch added:
 
-This inventory does not prove that all declared engines are architecturally required, implemented, mutually compatible, or correctly bound to other domains.
+- `ENG-013_COGNITIVE_EXECUTION_LOOP.md` — governed integration contract connecting Context → Cognition → Decision → Validation → Authorization → Execution → Result → Learning Candidate.
+- `ENG-014_COGNITIVE_LOOP_INTEGRATION_VALIDATION.md` — acceptance boundary for proving the connected path rather than merely documenting individual engines.
 
-# Current Build Addition
+Both are **Candidate / Integrity Hold** contracts and do not claim executable implementation.
 
-`ENG-012_ENGINE_AI_EXECUTION_BOUNDARY.md` was constructed on 2026-08-11 as a **Candidate / Integrity Hold** boundary contract.
+## Previous Build
 
-It defines the separation between:
-
-- governed Engine orchestration;
-- AI model reasoning/generation;
-- validation and decision gates;
-- Runtime execution;
-- Memory / Knowledge persistence and promotion.
-
-It explicitly separates generated output, validation, authorization, execution and learning/persistence. It does not claim implementation or authority.
+`ENG-012_ENGINE_AI_EXECUTION_BOUNDARY.md` remains the Engine ↔ AI boundary contract and is also under cross-layer validation.
 
 # Critical Findings
 
-1. The previous folder status declared `COMPLETED` and all engine artifacts `Approved`, but the current audit found unresolved cross-layer and canonical-reference issues. Completion remains revoked pending validation.
-2. `ENG-004` previously referenced a historical `Standards/` path. The referenced cross-reference artifact was located and found to use a duplicate `ARC-003` identity that conflicts with canonical Architecture `ARC-003`. The active standard has now been migrated to `Standards/STD-003_CROSS_REFERENCE_STANDARD.md`, and the duplicate historical path has been retired with Git history preserved.
-3. `ENG-002` references `Standards/` and `Quality/` as decision authorities. Their actual ownership and authority relationship still requires cross-layer validation before those bindings can be treated as canonical.
-4. `ENG-006` declares `Services/SRV-009_UPDATE_SERVICE.md` as mandatory, and `ENG-005` binds to `Runtime/RUN-001`; these dependencies require direct content validation before execution authority is certified.
-5. `ENG-010` declares orchestration across `ENG-001` through `ENG-011`, but its routing map is only a document claim until the referenced engines and downstream contracts are validated together.
-6. `ENG-009` declares an absolute repository scope fence and automatic metadata injection from `Standards/` and `Models/`; the repository evidence now establishes a current `STD-003` cross-reference standard, while the broader Standards/Models authority relationship remains under validation.
-7. Engine artifacts have audit dates earlier than current repository mutations in some cases. Prior `Approved` states are historical status, not current certification.
-8. `ENG-012` introduces an explicit Engine ↔ AI execution boundary, but this boundary is itself subject to cross-layer validation against AI governance, validation engines, Runtime, Interfaces, Memory and Knowledge.
-
-# Evidence Boundary
-
-The engine artifacts and relevant cross-reference evidence were read for the current audit. Cross-layer certification remains incomplete because the referenced Governance, Standards, Quality, Runtime, Services, Models, AI, Knowledge, Memory and Repository contracts must be validated as a connected system.
-
-No missing artifact is being invented merely to satisfy a numeric sequence.
+1. The previous folder status declared `COMPLETED` and all engine artifacts `Approved`, but current audits found unresolved cross-layer and canonical-reference issues. Completion remains revoked pending validation.
+2. `ENG-004` previously referenced a historical `Standards/` path. The referenced cross-reference artifact was found to use a duplicate `ARC-003` identity conflicting with canonical Architecture `ARC-003`. The active standard is now `Standards/STD-003_CROSS_REFERENCE_STANDARD.md`, while the duplicate historical path was retired with Git history preserved.
+3. `ENG-002` references `Standards/` and `Quality/` as decision authorities. Their actual ownership and authority relationship still requires cross-layer validation.
+4. `ENG-006` declares `Services/SRV-009_UPDATE_SERVICE.md` as mandatory, and `ENG-005` binds to `Runtime/RUN-001`; these dependencies require direct validation before execution authority is certified.
+5. `ENG-010` declares orchestration across the Engine domain, but its routing map is a document claim until referenced engines and downstream contracts are validated together.
+6. `ENG-009` declares repository scope and metadata behavior whose broader Standards/Models authority relationship remains under validation.
+7. Prior audit dates and `Approved` labels are historical evidence, not current certification.
+8. `ENG-012` establishes the Engine ↔ AI execution boundary and requires validation against AI, Runtime, Interfaces, Memory and Knowledge.
+9. `ENG-013` now establishes the cognitive execution loop, but the loop remains a contract until its connected runtime path is tested.
+10. `ENG-014` defines integration acceptance criteria; passing status requires evidence from the runtime/test layer.
 
 # Integrity Decision
 
 **INTEGRITY HOLD**
 
-No Engine artifact should be treated as globally certified merely because its local document is internally coherent or its status says `Approved`.
+No Engine artifact is globally certified merely because its local document is coherent or its status says `Approved`.
 
 # Required Next Actions
 
-1. Validate each external dependency named by `ENG-001` through `ENG-012`.
+1. Validate external dependencies named by `ENG-001` through `ENG-014`.
 2. Resolve active versus archived authority for `GOV-*`, `ARC-*`, `QLT-*`, `RUN-*`, `SRV-*`, `MOD-*`, `STD-*`, `AI-*`, `KNW-*` and `MEM-*` references.
 3. Validate engine-to-engine contracts and detect circular or contradictory responsibilities.
 4. Reconcile Engine status/index claims with current repository evidence.
-5. Validate `ENG-012` against `AI-001`, `ENG-004`, `ENG-007`, Runtime, Architecture, Knowledge and Memory contracts.
-6. Re-audit after cross-layer validation.
+5. Validate `ENG-012` against AI, Runtime, Interfaces, Knowledge and Memory.
+6. Validate `ENG-013` / `ENG-014` against the actual Runtime implementation or prototype.
+7. Re-audit after connected-path validation.
 
 # Rules
 
@@ -100,14 +90,14 @@ No Engine artifact should be treated as globally certified merely because its lo
 4. A declared dependency is unresolved until the target artifact and its authority are verified.
 5. Historical ZIPs and conversation memory are non-authoritative.
 6. Structural normalization must wait for cross-layer validation.
-7. A discovered historical duplicate must be classified before it is renamed, archived or retired.
-8. Candidate boundary contracts do not become canonical authority until their relationships are validated.
-9. AI output is not Engine authority merely because the model produced it.
-10. Execution success does not establish validation or learning promotion.
+7. Candidate boundary contracts do not become canonical authority until their relationships are validated.
+8. AI output is not Engine authority merely because the model produced it.
+9. Execution success does not establish validation or learning promotion.
+10. Integration contracts must be tested before implementation claims are promoted.
 
 # Next Audit Boundary
 
-`ENG-012 → AI / Validation / Runtime / Interfaces → Memory / Knowledge → Repository Control Plane → Global Cross-Layer Validation`
+`ENG-013 / ENG-014 → Runtime RUN-011 / RUN-012 → Interfaces / Services → Memory / Knowledge → Repository Control Plane`
 
 ---
 
