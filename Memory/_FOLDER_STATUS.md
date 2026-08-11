@@ -9,10 +9,10 @@ Status
 🟡 INTEGRITY HOLD
 
 Version
-1.2.0
+1.3.0
 
 Last Review
-2026-08-08
+2026-08-11
 
 Review Method
 Repository First
@@ -36,6 +36,9 @@ Memory Governance
 Engineering Journal
 🟢 Reviewed
 
+Operational Memory
+🟡 Build-01 constructed / Integrity Hold
+
 Repository Alignment
 🟡 Cross-layer synchronization pending
 
@@ -53,7 +56,7 @@ Engineering_Journal
 🟢 Reviewed
 
 Operational_Memory
-⏳ Pending
+🟡 Build-01 constructed / pending consolidated validation
 
 Decision_Memory
 ⏳ Pending
@@ -81,6 +84,12 @@ MEM-008_MEMORY_TRACEABILITY.md
 MEM-009_MEMORY_EVOLUTION.md
 MEM-010_MEMORY_MAINTENANCE.md
 
+Operational_Memory/README.md
+Operational_Memory/OPM-001_OPERATIONAL_MEMORY_MODEL.md
+Operational_Memory/OPM-002_OPERATIONAL_EVENT_CAPTURE.md
+Operational_Memory/OPM-003_OPERATIONAL_RETRIEVAL.md
+Operational_Memory/OPM-004_OPERATIONAL_LIFECYCLE.md
+
 # Integrity Rules
 
 1. This status file reflects the current repository evidence, not a historical ZIP snapshot.
@@ -89,21 +98,22 @@ MEM-010_MEMORY_MAINTENANCE.md
 4. Status claims must remain evidence-backed.
 5. Repository Memory remains authoritative over temporary conversational context.
 6. Historical review records do not override current repository reality.
+7. Build-01 Operational Memory artifacts remain candidate/capped by Integrity Hold until consolidated domain validation.
 
 # Outstanding Work
 
 Complete and validate:
 
-- `Memory/Operational_Memory`
 - `Memory/Decision_Memory`
 - `Memory/Historical_Memory`
 - `Memory/Project_Memory`
+- consolidated Operational Memory cross-layer validation
 
 Then perform consolidated Memory validation and cross-reference synchronization.
 
 # Next Folder
 
-Memory/Operational_Memory
+Memory/Decision_Memory
 
 ---
 
