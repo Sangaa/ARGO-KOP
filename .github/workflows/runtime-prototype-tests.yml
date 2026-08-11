@@ -26,3 +26,6 @@ jobs:
       - name: Run prototype acceptance suite
         working-directory: Runtime/Prototype
         run: python -m pytest -q
+      - name: Run canonical acceptance scenarios
+        working-directory: Runtime/Prototype
+        run: python run_acceptance_scenarios.py
