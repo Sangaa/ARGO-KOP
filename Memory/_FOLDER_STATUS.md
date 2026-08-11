@@ -9,7 +9,7 @@ Status
 🟡 INTEGRITY HOLD
 
 Version
-1.5.0
+1.6.0
 
 Last Review
 2026-08-11
@@ -46,7 +46,7 @@ Historical Memory
 🟡 Build-01 constructed / Integrity Hold
 
 Project Memory
-⏳ Pending
+🟡 Build-01 constructed / Integrity Hold
 
 Repository Alignment
 🟡 Cross-layer synchronization pending
@@ -55,7 +55,7 @@ Architecture Alignment
 🟡 Pending consolidated validation
 
 Folder Approval
-HOLD — approval is limited until remaining Memory scope is reviewed
+HOLD — approval is limited until consolidated Memory validation is complete
 
 ---
 
@@ -74,7 +74,19 @@ Historical_Memory
 🟡 Build-01 constructed / pending consolidated validation
 
 Project_Memory
-⏳ Pending
+🟡 Build-01 constructed / pending consolidated validation
+
+# Project Memory Build-01
+
+Verified artifacts:
+
+- `Project_Memory/README.md`
+- `Project_Memory/PM-001_PROJECT_RECORD_MODEL.md`
+- `Project_Memory/PM-002_PROJECT_LIFECYCLE_AND_STATE.md`
+- `Project_Memory/PM-003_PROJECT_TRACEABILITY_AND_CONTINUITY.md`
+- `Project_Memory/PM-004_PROJECT_KNOWLEDGE_AND_LESSONS.md`
+
+Build-01 establishes the project-memory contract, project record model, lifecycle/state discipline, session continuity and traceability, and controlled promotion of project lessons into reusable knowledge. It does not certify consolidated cross-layer validity or create platform-wide authority.
 
 # Historical Memory Build-01
 
@@ -85,8 +97,6 @@ Verified artifacts:
 - `Historical_Memory/HM-002_PROVENANCE_AND_TEMPORAL_CONTEXT.md`
 - `Historical_Memory/HM-003_HISTORICAL_RETRIEVAL_AND_RELEVANCE.md`
 - `Historical_Memory/HM-004_HISTORICAL_TO_CURRENT_TRANSITION.md`
-
-Build-01 establishes the historical-memory contract, record model, provenance and temporal context, retrieval discipline, and historical-to-current transition boundary. It does not certify consolidated cross-layer validity or create current authority.
 
 # Decision Memory Build-01
 
@@ -112,32 +122,31 @@ Verified artifacts:
 
 1. This status file reflects the current repository evidence, not a historical ZIP snapshot.
 2. Folder approval cannot exceed the verified review scope.
-3. Pending Memory subfolders prevent final Memory approval.
-4. Status claims must remain evidence-backed.
-5. Repository Memory remains authoritative over temporary conversational context.
-6. Historical review records do not override current repository reality.
-7. Build-01 Operational Memory artifacts remain candidate/capped by Integrity Hold until consolidated domain validation.
-8. Build-01 Decision Memory artifacts remain candidate/capped by Integrity Hold until consolidated domain validation.
-9. Build-01 Historical Memory artifacts remain candidate/capped by Integrity Hold until consolidated domain validation.
-10. Decision Memory cannot override Governance, Architecture, Repository or current evidence.
-11. Historical Memory cannot silently promote historical material into current authority.
-12. Historical records must preserve provenance and temporal context where available.
+3. Status claims must remain evidence-backed.
+4. Repository Memory remains authoritative over temporary conversational context.
+5. Historical review records do not override current repository reality.
+6. Build-01 artifacts remain candidate/capped by Integrity Hold until consolidated domain validation.
+7. Decision Memory cannot override Governance, Architecture, Repository or current evidence.
+8. Historical Memory cannot silently promote historical material into current authority.
+9. Project Memory cannot silently promote project-local information into platform-wide authority.
+10. Project Memory must preserve provenance, scope and temporal context.
+11. Project lessons require evidence and contextual validation before broader knowledge promotion.
 
 # Outstanding Work
 
 Complete and validate:
 
-- `Memory/Project_Memory`
 - consolidated Operational Memory cross-layer validation
 - consolidated Decision Memory cross-layer validation
 - consolidated Historical Memory cross-layer validation
+- consolidated Project Memory cross-layer validation
 - final Memory cross-reference synchronization
 
 Then perform consolidated Memory validation and cross-reference synchronization.
 
-# Next Folder
+# Next Direction
 
-Memory/Project_Memory
+Memory domains are now physically constructed through Build-01. Next work should balance Memory integration with construction of the next underbuilt platform domain rather than repeatedly expanding one Memory subdomain.
 
 ---
 
