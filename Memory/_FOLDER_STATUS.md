@@ -9,7 +9,7 @@ Status
 🟡 INTEGRITY HOLD
 
 Version
-1.4.0
+1.5.0
 
 Last Review
 2026-08-11
@@ -42,6 +42,12 @@ Operational Memory
 Decision Memory
 🟡 Build-01 constructed / Integrity Hold
 
+Historical Memory
+🟡 Build-01 constructed / Integrity Hold
+
+Project Memory
+⏳ Pending
+
 Repository Alignment
 🟡 Cross-layer synchronization pending
 
@@ -65,10 +71,22 @@ Decision_Memory
 🟡 Build-01 constructed / pending consolidated validation
 
 Historical_Memory
-⏳ Pending
+🟡 Build-01 constructed / pending consolidated validation
 
 Project_Memory
 ⏳ Pending
+
+# Historical Memory Build-01
+
+Verified artifacts:
+
+- `Historical_Memory/README.md`
+- `Historical_Memory/HM-001_HISTORICAL_RECORD_MODEL.md`
+- `Historical_Memory/HM-002_PROVENANCE_AND_TEMPORAL_CONTEXT.md`
+- `Historical_Memory/HM-003_HISTORICAL_RETRIEVAL_AND_RELEVANCE.md`
+- `Historical_Memory/HM-004_HISTORICAL_TO_CURRENT_TRANSITION.md`
+
+Build-01 establishes the historical-memory contract, record model, provenance and temporal context, retrieval discipline, and historical-to-current transition boundary. It does not certify consolidated cross-layer validity or create current authority.
 
 # Decision Memory Build-01
 
@@ -80,34 +98,15 @@ Verified artifacts:
 - `Decision_Memory/DM-003_DECISION_EVIDENCE_AND_REVISION.md`
 - `Decision_Memory/DM-004_DECISION_TRACEABILITY_AND_CONSUMER_LINKS.md`
 
-Build-01 establishes the domain contract, record model, lifecycle/review model, evidence/revision discipline and traceability expectations. It does not certify consolidated cross-layer validity or create authority above existing Governance and Repository controls.
+# Operational Memory Build-01
 
-# Files Reviewed
+Verified artifacts:
 
-README.md
-
-MEM-001_MEMORY_MODEL.md
-MEM-002_MEMORY_CLASSIFICATION.md
-MEM-003_MEMORY_RELATIONSHIPS.md
-MEM-004_MEMORY_LIFECYCLE.md
-MEM-005_MEMORY_GOVERNANCE.md
-MEM-006_MEMORY_QUALITY.md
-MEM-007_MEMORY_BASELINE.md
-MEM-008_MEMORY_TRACEABILITY.md
-MEM-009_MEMORY_EVOLUTION.md
-MEM-010_MEMORY_MAINTENANCE.md
-
-Operational_Memory/README.md
-Operational_Memory/OPM-001_OPERATIONAL_MEMORY_MODEL.md
-Operational_Memory/OPM-002_OPERATIONAL_EVENT_CAPTURE.md
-Operational_Memory/OPM-003_OPERATIONAL_RETRIEVAL.md
-Operational_Memory/OPM-004_OPERATIONAL_LIFECYCLE.md
-
-Decision_Memory/README.md
-Decision_Memory/DM-001_DECISION_RECORD_MODEL.md
-Decision_Memory/DM-002_DECISION_LIFECYCLE_AND_REVIEW.md
-Decision_Memory/DM-003_DECISION_EVIDENCE_AND_REVISION.md
-Decision_Memory/DM-004_DECISION_TRACEABILITY_AND_CONSUMER_LINKS.md
+- `Operational_Memory/README.md`
+- `Operational_Memory/OPM-001_OPERATIONAL_MEMORY_MODEL.md`
+- `Operational_Memory/OPM-002_OPERATIONAL_EVENT_CAPTURE.md`
+- `Operational_Memory/OPM-003_OPERATIONAL_RETRIEVAL.md`
+- `Operational_Memory/OPM-004_OPERATIONAL_LIFECYCLE.md`
 
 # Integrity Rules
 
@@ -119,23 +118,26 @@ Decision_Memory/DM-004_DECISION_TRACEABILITY_AND_CONSUMER_LINKS.md
 6. Historical review records do not override current repository reality.
 7. Build-01 Operational Memory artifacts remain candidate/capped by Integrity Hold until consolidated domain validation.
 8. Build-01 Decision Memory artifacts remain candidate/capped by Integrity Hold until consolidated domain validation.
-9. Decision Memory cannot override Governance, Architecture, Repository or current evidence.
+9. Build-01 Historical Memory artifacts remain candidate/capped by Integrity Hold until consolidated domain validation.
+10. Decision Memory cannot override Governance, Architecture, Repository or current evidence.
+11. Historical Memory cannot silently promote historical material into current authority.
+12. Historical records must preserve provenance and temporal context where available.
 
 # Outstanding Work
 
 Complete and validate:
 
-- `Memory/Historical_Memory`
 - `Memory/Project_Memory`
 - consolidated Operational Memory cross-layer validation
 - consolidated Decision Memory cross-layer validation
+- consolidated Historical Memory cross-layer validation
 - final Memory cross-reference synchronization
 
 Then perform consolidated Memory validation and cross-reference synchronization.
 
 # Next Folder
 
-Memory/Historical_Memory
+Memory/Project_Memory
 
 ---
 
