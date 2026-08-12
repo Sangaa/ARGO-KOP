@@ -62,11 +62,11 @@ If required content is unavailable, record the evidence gap rather than filling 
 
 ARGO KOP is currently under **Connected-Baseline Integrity Validation**, moving from bounded seam-evidence construction into repository-wide connectivity proof.
 
-The latest closed checkpoint is **EJR-109 — Execution / Outcome Contract Alignment and Producer Gap (2026-08-12)**.
+The latest closed checkpoint is **EJR-110 — Canonical Execution Trace Producer and Pipeline Wiring (2026-08-12)**.
 
 The canonical-spine scanner treats same-file endpoint co-occurrence as a candidate `PARTIAL` signal and returns bounded repository-relative candidate artifact locations. The gap-map layer preserves that provenance without changing the seam state. Verified seam promotion remains gated by complete, materialized contract/test/trace evidence through the registry and canonical audit.
 
-The current high-value finding is the **Execution → Execution Trace → Outcome** seam: provenance guards now exist at execution and outcome evaluation boundaries, but the concrete runtime producer-to-outcome path has not yet been evidenced end-to-end. This is an explicit `PARTIAL / UNPROVEN PRODUCER PATH`, not `CONNECTED`.
+The current high-value finding is the **Execution → Execution Trace → Outcome** seam. Provenance guards now exist at execution and outcome evaluation boundaries, and a bounded canonical execution-trace producer has now been materialized and proven capable of feeding the learning pipeline in an executable integration test. The live application-executor → producer invocation path remains unproven, so the broader seam is still **PARTIAL / UNPROVEN LIVE PRODUCER PATH**, not `CONNECTED`.
 
 ## Current Connectivity Chain
 
@@ -101,7 +101,9 @@ For the current Execution/Outcome path, the focused construction chain is:
 ```text
 Decision
    ↓
-Execution Producer
+Actual Execution Entrypoint
+   ↓
+Canonical Execution Trace Producer
    ↓
 Execution Trace (canonical trace_id)
    ↓
@@ -120,11 +122,13 @@ The governing question is no longer merely whether individual artifacts exist or
 
 ## Current Next Target
 
-**Locate or build the smallest real execution-producer → execution-trace → outcome path that satisfies the existing contracts without creating a parallel runtime architecture.**
+**Locate the actual execution entrypoint and wire it to the canonical execution-trace producer only if the existing architecture supports that connection. Then prove the resulting trace ID reaches the actual outcome path.**
 
 The required proof is:
 
-**Actual Execution Producer → Canonical Trace Creation → Trace ID Propagation → Actual Outcome Creation → Outcome Evaluation → Executable Integration Test → Trace/Evidence Artifact**
+**Actual Execution → Producer Invocation → Canonical Trace Creation → Trace ID Propagation → Actual Outcome Creation → Outcome Evaluation → Executable Integration Test → Trace/Evidence Artifact**
+
+The producer added in EJR-110 is deliberately bounded: it records a completed execution result; it is not an executor and it does not grant authorization.
 
 Candidate provenance is a navigation aid only. It is not verification evidence and must not be promoted by itself.
 
@@ -143,9 +147,10 @@ The connectivity audit must look for, at minimum:
 - paths that terminate without evidence;
 - components that exist but are unreachable;
 - learning paths that do not return correctly to Memory/State;
-- execution traces that are defined but are not actually propagated into downstream outcomes.
+- execution traces that are defined but are not actually propagated into downstream outcomes;
+- producers that exist only as test utilities without a real runtime caller.
 
-Do not expand features or architecture merely because the loader, registry, scanner or gap-map enhancement is implemented.
+Do not expand features or architecture merely because the loader, registry, scanner, gap-map or producer is implemented.
 
 ## Required Resumption Sequence
 
@@ -155,16 +160,17 @@ Do not expand features or architecture merely because the loader, registry, scan
 4. Enumerate actual seam candidates from repository artifacts.
 5. Use same-file scanner results and bounded candidate provenance only to prioritize inspection.
 6. Inspect contract + executable test + trace together.
-7. Locate the actual runtime producer/consumer path.
-8. Validate trace identity propagation from execution into outcome.
-9. Populate the registry only with complete evidence sets.
-10. Run the canonical spine integration audit.
-11. Generate the GAP MAP while preserving bounded candidate provenance.
-12. Expand to repository-wide connectivity / end-to-end audit.
-13. Fix the highest-value missing seams.
-14. Run regression tests.
-15. Re-run the audit.
-16. Close the checkpoint.
+7. Locate the actual runtime execution entrypoint.
+8. Determine whether it can invoke the canonical trace producer without creating a parallel runtime architecture.
+9. Validate trace identity propagation from execution into outcome.
+10. Populate the registry only with complete evidence sets.
+11. Run the canonical spine integration audit.
+12. Generate the GAP MAP while preserving bounded candidate provenance.
+13. Expand to repository-wide connectivity / end-to-end audit.
+14. Fix the highest-value missing seams.
+15. Run regression tests.
+16. Re-run the audit.
+17. Close the checkpoint.
 
 ## Future Engineering Capability Targets
 
