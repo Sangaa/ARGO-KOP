@@ -125,6 +125,44 @@ Do not expand features or architecture merely because the loader is implemented.
 9. Re-run the audit.
 10. Close the checkpoint.
 
+## Future Engineering Capability Targets
+
+These are **future capability targets, not current execution work**. They must not interrupt the connected-baseline audit.
+
+### Programming and Mathematics Learning Capability
+
+After the connectivity baseline is sufficiently proven, ARGO is expected to acquire implementation capability through a governed learning path:
+
+**Source / Book → Extract Knowledge → Verify Understanding → Practice → Test → Apply → Record Reusable Knowledge**
+
+The learning path should cover programming fundamentals, data structures and algorithms, relevant programming languages, software architecture and testing, followed by mathematics required by the target projects. Learning must be evidence-backed and application-driven rather than quantity-driven.
+
+### Future Project A — Android Applications
+
+Target capability path:
+
+**Programming Fundamentals → Kotlin → Android Development → Architecture → Testing → Real Application Project**
+
+The project begins only when the relevant learning and connectivity gates justify implementation.
+
+### Future Project B — Roblox Game Development + AI
+
+Target capability path:
+
+**Luau → Roblox Studio → Game Architecture → Gameplay Systems → State / Networking → AI Integration → Testing → Optimization**
+
+The intended outcome is to help develop Roblox games and later integrate AI into game experiences through explicit, testable paths between game state, AI input, inference/decision, game action and player feedback.
+
+These future projects are retained as governed capability targets so that current repository work does not lose the intended destination, while avoiding premature feature or architecture expansion.
+
+## Engineering Priority Rule
+
+**Priority is construction quality, connectivity, evidence and reusable learning—not file count.**
+
+A smaller set of correctly connected, tested and documented artifacts is higher-value than a larger set of superficially modified files.
+
+Every substantial session should be treated as potentially closable: preserve what was actually established, record evidence boundaries, identify unresolved work, and leave a deterministic resumption point.
+
 ## Before You Modify Anything
 
 1. Read the applicable bootstrap requirements.
@@ -150,7 +188,7 @@ Do not mark a change complete merely because the write succeeded.
 
 You are ready to work when you understand:
 
-**what the repository currently contains, what is authoritative, what is historical, what remains uncertain, and which relationships your work may affect.**
+**what the repository currently contains, what is authoritative, what is historical, what remains uncertain, which relationships your work may affect, and which future capabilities must not be allowed to distract from the current build gate.**
 
 ---
 
