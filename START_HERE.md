@@ -28,7 +28,7 @@ If an external test is needed and cannot be executed from the repository-side en
 
 ARGO KOP is currently under **Connected-Baseline Integrity Validation**, moving from bounded seam-evidence construction into repository-wide connectivity proof.
 
-The latest closed checkpoint is **EJR-123 — Canonical Audit Provenance Preservation (2026-08-12)**.
+The latest closed checkpoint is **EJR-125 — Canonical Trace Shape at Audit Boundary (2026-08-12)**.
 
 The controlled runtime path contains a real cross-stage runner, governed execution entrypoint, canonical execution-trace production, canonical outcome production, and a reusable explicit-target persistence adapter. A thin evidence-capture adapter reuses that persistence path to capture the exact runtime-produced trace without introducing another storage layer. Runtime-to-outcome lineage is explicitly verified and returns `HOLD` when identity cannot be established. The controlled path remains side-effect-free and must not be interpreted as autonomous production execution.
 
@@ -36,7 +36,9 @@ EJR-121 hardened the registry boundary: complete-looking evidence is not enough 
 
 EJR-122 applies the same explicit verification gate at the canonical audit boundary. The audit also requires the referenced contract, test and trace artifacts to be real repository-relative regular files.
 
-EJR-123 preserves bounded candidate provenance in the canonical GAP MAP so unresolved seams retain useful navigation context without allowing provenance to influence seam state.
+EJR-123/EJR-124 preserve bounded candidate provenance in the canonical GAP MAP and explicitly prevent candidate provenance from promoting a seam.
+
+EJR-125 adds one further guard at the promotion boundary: the trace reference must be a materialized repository-relative JSON execution-trace record matching the minimum canonical shape emitted by the runtime trace producer.
 
 ## Current Connectivity Chain
 
@@ -47,7 +49,7 @@ Candidate Seam Records + Bounded Provenance
         ↓
 Concrete Artifact Inspection
         ↓
-Contract + Executable Test + Trace
+Contract + Executable Test + Canonical Runtime Trace
         ↓
 Runtime Trace / Outcome Lineage Verification
         ↓
@@ -112,7 +114,7 @@ It is not yet a complete canonical-spine certification because the complete evid
 
 Do not create another persistence layer.
 
-The evidence loader requires the trace artifact itself to be a repository-relative JSON execution-trace record with minimum identity fields. This prevents an arbitrary existing file from being treated as trace evidence merely because a path exists.
+The evidence loader and canonical audit require the trace artifact itself to be a repository-relative JSON execution-trace record with minimum identity fields. This prevents an arbitrary existing file from being treated as trace evidence merely because a path exists.
 
 The registry and canonical audit additionally require an explicit `verification_status == VERIFIED`; neither may infer verification from path existence, candidate provenance, or record shape.
 
@@ -169,17 +171,18 @@ Do not expand features or architecture merely because a loader, registry, scanne
 11. Validate Outcome Evaluation and lineage.
 12. Reuse the existing explicit-target persistence adapter and the thin evidence-capture adapter; do not invent a second persistence path.
 13. Validate runtime trace/outcome lineage before preparing any registry record.
-14. Define the permanent evidence boundary before committing any runtime-generated artifact.
-15. Determine whether the complete evidence set justifies verified-registry promotion.
-16. Run the canonical spine integration audit.
-17. Generate the GAP MAP and preserve bounded candidate provenance for unresolved seams.
-18. Expand to repository-wide connectivity / end-to-end audit when the current seam set is mature enough.
-19. Inventory missing folders/files and orphaned or duplicate structures.
-20. Rank all gaps by dependency, seam value and construction impact—not file count.
-21. Fix the highest-value missing seams.
-22. Run regression tests.
-23. Re-run the audit.
-24. Close the checkpoint.
+14. Validate that any proposed trace evidence matches the canonical runtime execution-trace shape.
+15. Define the permanent evidence boundary before committing any runtime-generated artifact.
+16. Determine whether the complete evidence set justifies verified-registry promotion.
+17. Run the canonical spine integration audit.
+18. Generate the GAP MAP and preserve bounded candidate provenance for unresolved seams.
+19. Expand to repository-wide connectivity / end-to-end audit when the current seam set is mature enough.
+20. Inventory missing folders/files and orphaned or duplicate structures.
+21. Rank all gaps by dependency, seam value and construction impact—not file count.
+22. Fix the highest-value missing seams.
+23. Run regression tests.
+24. Re-run the audit.
+25. Close the checkpoint.
 
 ## Future Engineering Capability Targets
 
