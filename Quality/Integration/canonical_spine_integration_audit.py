@@ -29,6 +29,8 @@ def _state_from_verified_record(root: Path, seam, record):
     state = record.get("state")
     if state != "CONNECTED":
         raise ValueError(f"verified seam record is not CONNECTED: {seam}")
+    if record.get("verification_status") != "VERIFIED":
+        raise ValueError(f"verified seam record is not VERIFIED: {seam}")
     if not all(record.get(field) for field in REQUIRED_EVIDENCE):
         raise ValueError(f"incomplete verified seam evidence: {seam}")
     missing = [field for field in REQUIRED_EVIDENCE if not _local_file(root, record[field])]
