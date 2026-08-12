@@ -85,7 +85,9 @@ def validate(context: Context, decision: Dict[str, Any]) -> Dict[str, Any]:
 def authorize(validation: Dict[str, Any], approved: bool) -> Dict[str, Any]:
     if validation.get("status") != "VALIDATED":
         return {"status": "HOLD", "approved": False}
-    return {"status": "AUTHORIZED" if approved else "REJECTED", "approved": approved}
+    # Lack of human authorization is a reversible HOLD, not a rejection.
+    # REJECTED remains reserved for an explicit negative policy/decision path.
+    return {"status": "AUTHORIZED" if approved else "HOLD", "approved": approved}
 
 
 def propose(decision: Dict[str, Any], authorization: Dict[str, Any]) -> Dict[str, Any]:
