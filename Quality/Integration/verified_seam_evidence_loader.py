@@ -1,8 +1,8 @@
 """Load only evidence that exists as local contract/test/trace artifacts.
 
-The loader remains conservative: it may reject a candidate for malformed trace
-materialization, but it never upgrades a candidate because of names or keyword
-co-occurrence alone.
+The loader remains conservative: it rejects incomplete or unverified candidates
+instead of silently dropping them, so callers cannot mistake omission for
+successful verification.
 """
 
 import json
@@ -42,10 +42,21 @@ def load_records(root, candidates):
     records = []
     for candidate in candidates:
         if not isinstance(candidate, dict):
-            continue
+            raise ValueError("seam evidence must be a record")
+        seam = candidate.get("seam")
+        if candidate.get("verification_status") != "VERIFIED":
+            raise ValueError(f"evidence not verified: {seam}")
         contract = candidate.get("contract", "")
         test = candidate.get("test", "")
         trace = candidate.get("trace", "")
-        if _safe_path(root, contract) and _safe_path(root, test) and _valid_trace_artifact(root, trace):
-            records.append(candidate)
+        missing = [
+            field for field, valid in (
+                ("contract", _safe_path(root, contract)),
+                ("test", _safe_path(root, test)),
+                ("trace", _valid_trace_artifact(root, trace)),
+            ) if not valid
+        ]
+        if missing:
+            raise ValueError(f"verified seam evidence files missing or invalid: {seam}: {missing}")
+        records.append(candidate)
     return register(records)
