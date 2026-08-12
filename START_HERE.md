@@ -28,11 +28,11 @@ If an external test is needed and cannot be executed from the repository-side en
 
 ARGO KOP is currently under **Connected-Baseline Integrity Validation**, moving from bounded seam-evidence construction into repository-wide connectivity proof.
 
-The latest closed checkpoint is **EJR-120 — Runtime Test Boundary and Safe HOLD Repair (2026-08-12)**.
+The latest closed checkpoint is **EJR-121 — Verified Registry Promotion Guard (2026-08-12)**.
 
-The controlled runtime path contains a real cross-stage runner, governed execution entrypoint, canonical execution-trace production, canonical outcome production, and a reusable explicit-target persistence adapter. A thin evidence-capture adapter now reuses that persistence path to capture the exact runtime-produced trace without introducing another storage layer. The controlled path remains side-effect-free and must not be interpreted as autonomous production execution.
+The controlled runtime path contains a real cross-stage runner, governed execution entrypoint, canonical execution-trace production, canonical outcome production, and a reusable explicit-target persistence adapter. A thin evidence-capture adapter reuses that persistence path to capture the exact runtime-produced trace without introducing another storage layer. Runtime-to-outcome lineage is explicitly verified and returns `HOLD` when identity cannot be established. The controlled path remains side-effect-free and must not be interpreted as autonomous production execution.
 
-EJR-120 also repaired two concrete test/runtime contradictions revealed by GitHub Actions: the integration workflow now exposes the existing runtime module roots to its tests, and the prototype treats missing human authorization as a reversible `HOLD` rather than an explicit `REJECTED` state.
+EJR-121 hardened the final registry boundary: complete-looking evidence is not enough to become `CONNECTED`; a record must carry an explicit `verification_status == VERIFIED` from the upstream evidence/verifier chain.
 
 ## Current Connectivity Chain
 
@@ -44,6 +44,8 @@ Candidate Seam Records + Bounded Provenance
 Concrete Artifact Inspection
         ↓
 Contract + Executable Test + Trace
+        ↓
+Runtime Trace / Outcome Lineage Verification
         ↓
 Verified Seam Evidence Loader
         ↓
@@ -85,6 +87,8 @@ Execution Trace ID
    ↓
 Canonical Outcome Producer
    ↓
+Runtime Outcome Lineage Verification
+   ↓
 Outcome Evaluation
    ↓
 Feedback Quality
@@ -96,19 +100,21 @@ Existing Promotion Gate
 
 The exact controlled path from `connected_spine_runner.run()` through Outcome Evaluation is executable and test-proven. Its exact runtime-produced trace can also be captured through the thin evidence-capture adapter and persisted/re-read through the existing explicit-target persistence adapter without silently mutating canonical Memory.
 
-It is not yet a complete canonical-spine certification because the evidence still needs to be justified as one complete evidence set, materialized into the verified seam registry, and audited as one evidence set.
+It is not yet a complete canonical-spine certification because the complete evidence set still needs to be assembled from the actual runtime artifacts, passed through the loader/verifier boundaries, materialized into the verified seam registry, and audited as one evidence set.
 
 ## Current Next Target
 
-**First inspect the post-EJR-120 GitHub Actions result. If the repaired suite is green, use the existing runtime-to-registry integration proof to determine whether the complete contract + runtime consumer + executable test + exact runtime trace/outcome evidence set is sufficient for verified-registry promotion, then run the canonical audit before expanding to the next highest-value seam.**
+**Inspect the latest GitHub Actions result. Then assemble the complete contract + runtime consumer + executable test + exact runtime trace/outcome evidence set, pass it through the loader and runtime-outcome verifier, and determine whether it justifies verified-registry promotion. Run the canonical audit before expanding to the next highest-value seam.**
 
 Do not create another persistence layer.
 
 The evidence loader requires the trace artifact itself to be a repository-relative JSON execution-trace record with minimum identity fields. This prevents an arbitrary existing file from being treated as trace evidence merely because a path exists.
 
+The registry additionally requires an explicit `verification_status == VERIFIED`; it must never infer verification from path existence, candidate provenance, or record shape.
+
 Required proof:
 
-**connected_spine_runner.run() → execution_trace_id → Outcome Producer → execution_trace_ids → Outcome Evaluation → Feedback Quality → Learning Readiness → thin capture → explicit trace materialization → Verified Registry → Canonical Audit**
+**connected_spine_runner.run() → execution_trace_id → Outcome Producer → execution_trace_ids → Outcome Evaluation → Feedback Quality → Learning Readiness → runtime lineage verification → thin capture → explicit trace materialization → verified registry → Canonical Audit**
 
 Passing the loader is still not semantic certification. A synthetic trace fixture may test the loader boundary, but it cannot substitute for evidence that the trace was produced by the actual runtime path.
 
@@ -116,7 +122,7 @@ The current execution path is intentionally controlled/simulated. `side_effect=F
 
 The Outcome Producer maps controlled `SIMULATED` execution to `INCONCLUSIVE` with `UNKNOWN` confidence. It must never manufacture `SUCCESS` merely because the runner completed.
 
-Only complete contract + runtime consumer + executable test + actual trace/outcome evidence may support `CONNECTED` promotion.
+Only complete contract + runtime consumer + executable test + actual trace/outcome evidence, with explicit upstream verification, may support `CONNECTED` promotion.
 
 Candidate provenance is a navigation aid only. It is not verification evidence and must not be promoted by itself.
 
@@ -158,17 +164,18 @@ Do not expand features or architecture merely because a loader, registry, scanne
 10. Validate `execution_trace_id` → `execution_trace_ids` propagation.
 11. Validate Outcome Evaluation and lineage.
 12. Reuse the existing explicit-target persistence adapter and the thin evidence-capture adapter; do not invent a second persistence path.
-13. Define the permanent evidence boundary before committing any runtime-generated artifact.
-14. Determine whether the complete evidence set justifies verified-registry promotion.
-15. Run the canonical spine integration audit.
-16. Generate the GAP MAP.
-17. Expand to repository-wide connectivity / end-to-end audit when the current seam set is mature enough.
-18. Inventory missing folders/files and orphaned or duplicate structures.
-19. Rank all gaps by dependency, seam value and construction impact—not file count.
-20. Fix the highest-value missing seams.
-21. Run regression tests.
-22. Re-run the audit.
-23. Close the checkpoint.
+13. Validate runtime trace/outcome lineage before preparing any registry record.
+14. Define the permanent evidence boundary before committing any runtime-generated artifact.
+15. Determine whether the complete evidence set justifies verified-registry promotion.
+16. Run the canonical spine integration audit.
+17. Generate the GAP MAP.
+18. Expand to repository-wide connectivity / end-to-end audit when the current seam set is mature enough.
+19. Inventory missing folders/files and orphaned or duplicate structures.
+20. Rank all gaps by dependency, seam value and construction impact—not file count.
+21. Fix the highest-value missing seams.
+22. Run regression tests.
+23. Re-run the audit.
+24. Close the checkpoint.
 
 ## Future Engineering Capability Targets
 
