@@ -22,3 +22,35 @@ def test_explicit_verified_seam_can_be_promoted_to_connected(tmp_path):
     assert result["evidence"][seam] == "CONNECTED"
     assert result["verified_connection_count"] == 1
     assert all(g["seam"] != seam for g in result["gap_map"]["gaps"])
+
+
+def test_verified_registry_record_can_feed_audit(tmp_path):
+    seam = "Decision -> Authorization"
+    registry = {
+        seam: {
+            "state": "CONNECTED",
+            "contract": "Decision/contract.md",
+            "test": "Quality/Integration/test_decision_authorization.py",
+            "trace": "Quality/Integration/decision_authorization_trace.md",
+        }
+    }
+    result = audit(tmp_path, registry)
+    assert result["evidence"][seam] == "CONNECTED"
+    assert result["verified_connection_count"] == 1
+
+
+def test_incomplete_verified_registry_record_is_rejected(tmp_path):
+    seam = "Decision -> Authorization"
+    registry = {
+        seam: {
+            "state": "CONNECTED",
+            "contract": "Decision/contract.md",
+            "test": "Quality/Integration/test_decision_authorization.py",
+        }
+    }
+    try:
+        audit(tmp_path, registry)
+    except ValueError as exc:
+        assert "incomplete verified seam evidence" in str(exc)
+        return
+    assert False, "incomplete verified seam evidence must be rejected"
