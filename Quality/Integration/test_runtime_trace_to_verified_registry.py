@@ -61,3 +61,21 @@ def test_actual_runtime_trace_and_outcome_can_form_registry_evidence(tmp_path):
         (tmp_path / trace_relative).read_text(encoding="utf-8")
     )
     assert persisted_payload["trace_id"] == outcome["execution_trace_ids"][0]
+
+
+def test_governed_capture_rejects_absolute_target(tmp_path):
+    result = capture_repository_evidence(
+        {"execution": {"trace": {"record_type": "EXECUTION_TRACE"}}},
+        repository_root=str(tmp_path),
+        relative_name="/escape.json",
+    )
+    assert result == {"status": "HOLD", "reason": "INVALID_EVIDENCE_TARGET"}
+
+
+def test_governed_capture_rejects_parent_traversal(tmp_path):
+    result = capture_repository_evidence(
+        {"execution": {"trace": {"record_type": "EXECUTION_TRACE"}}},
+        repository_root=str(tmp_path),
+        relative_name="../escape.json",
+    )
+    assert result == {"status": "HOLD", "reason": "INVALID_EVIDENCE_TARGET"}
