@@ -1,8 +1,8 @@
 """Build a conservative canonical-spine integration audit.
 
-Structural scanning can establish PARTIAL/MISSING only. CONNECTED requires a
-verified seam record whose contract/test/trace artifacts are real repository files.
-This keeps direct audit callers subject to the same evidence boundary as the loader.
+Structural scanning establishes only PARTIAL/MISSING plus bounded candidate
+artifact provenance. CONNECTED requires a verified seam record whose
+contract/test/trace artifacts are real repository files.
 """
 
 from pathlib import Path, PurePosixPath
@@ -39,7 +39,9 @@ def _state_from_verified_record(root: Path, seam, record):
 
 def audit(root, verified_seams=None):
     root = Path(root)
-    evidence = scan(root)
+    scanned = scan(root)
+    evidence = scanned["evidence"]
+    candidate_files = scanned["candidate_files"]
     verified_seams = verified_seams or {}
 
     for seam, record in verified_seams.items():
@@ -52,6 +54,7 @@ def audit(root, verified_seams=None):
         "status": "INTEGRATION_AUDIT_COMPLETE",
         "seam_count": len(SEAMS),
         "evidence": evidence,
+        "candidate_files": candidate_files,
         "gap_map": report,
         "verified_connection_count": sum(
             1 for state in evidence.values() if state == "CONNECTED"
