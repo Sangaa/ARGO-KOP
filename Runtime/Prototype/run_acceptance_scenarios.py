@@ -9,12 +9,12 @@ ROOT = Path(__file__).resolve().parent
 SCENARIOS = ROOT / "acceptance_scenarios.json"
 
 
-def payload():
+def payload(*, missing_evidence: bool = False):
     return {
         "task_id": "SCENARIO-RUN",
         "session_id": "SCENARIO-SESSION",
         "active_state": "awaiting_customer_response",
-        "evidence": ["scenario:evidence:001"],
+        "evidence": [] if missing_evidence else ["scenario:evidence:001"],
         "knowledge": ["scenario:rule:001"],
         "requested_outcome": "prepare a response draft",
     }
@@ -24,7 +24,10 @@ def main() -> int:
     data = json.loads(SCENARIOS.read_text(encoding="utf-8"))
     failures = []
     for scenario in data["scenarios"]:
-        item = run(payload(), human_approved=scenario["human_approved"])
+        item = run(
+            payload(missing_evidence=scenario["name"] == "missing_evidence"),
+            human_approved=scenario["human_approved"],
+        )
         checks = {
             "state": item["state"] == scenario["expected_state"],
             "executed": item["result"]["executed"] == scenario["expected_executed"],
