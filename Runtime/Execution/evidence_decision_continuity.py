@@ -16,10 +16,10 @@ def validate_continuity(*, evidence: list[dict], proposal: dict,
         issues.append("EVIDENCE_DROPPED_BEFORE_DECISION")
     if unauthorized:
         issues.append("AUTHORIZATION_NOT_CONFIRMED")
+    if not decision_trace_ok:
+        issues.append("EXECUTION_PROVENANCE_BROKEN")
     if execution.get("execution_status") == "SIMULATED_ONLY" and execution.get("side_effect") is True:
         issues.append("SIMULATION_SIDE_EFFECT_CONFLICT")
-    if execution.get("execution_status") == "SIMULATED_ONLY" and not decision_trace_ok:
-        issues.append("EXECUTION_PROVENANCE_BROKEN")
 
     return {
         "status": "CONTINUOUS" if not issues else "BROKEN",
