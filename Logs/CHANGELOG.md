@@ -47,7 +47,9 @@ The current development baseline includes ongoing corrections and improvements s
 - Architecture map identity correction and modernization of ARC-005 / ARC-008;
 - expanded repository integrity and cross-layer validation rules;
 - repository-backed verified seam evidence loading that excludes incomplete candidates from the verified registry;
-- explicit separation between local evidence completeness and semantic integration certification.
+- explicit separation between local evidence completeness and semantic integration certification;
+- preservation of future programming, mathematics and implementation capability targets without allowing them to interrupt the current connectivity gate;
+- explicit priority of construction quality, connectivity, evidence and reusable learning over file-count throughput.
 
 ### 2026-08-12 — Verified Seam Evidence Loader
 
@@ -71,6 +73,20 @@ The post-EJR-099 continuation is explicitly defined as:
 The repository-wide audit must distinguish file existence from actual connectivity and look for unreachable components, unconsumed contracts, non-real tests, traces without outcomes, missing seams between otherwise complete layers, incomplete paths, terminal paths without evidence, and learning paths that fail to return to Memory/State.
 
 This clarification does not constitute repository-wide PASS and does not authorize feature expansion by itself.
+
+### 2026-08-12 — Future Capability Direction Preserved
+
+The current baseline now records two future implementation tracks without activating them prematurely:
+
+- **Programming + Mathematics Learning Capability:** governed source/book learning, verification, practice, testing, application and reusable knowledge capture.
+- **Future Project A — Android Applications:** programming fundamentals → Kotlin → Android → architecture/testing → real application.
+- **Future Project B — Roblox Game Development + AI:** Luau → Roblox Studio → game architecture/gameplay/state/networking → AI integration → testing/optimization.
+
+The intended Roblox AI path explicitly includes testable relationships between game state, AI input, inference/decision, game action and player feedback.
+
+These are future capability targets. They do not override the active connected-baseline audit.
+
+The engineering priority is explicitly **quality of construction, connectivity, evidence and reusable learning rather than file-count throughput**. Substantial sessions should preserve a deterministic closure point so work can resume without losing the established graph state.
 
 These entries describe development-state evolution. They do not constitute a new official release.
 
