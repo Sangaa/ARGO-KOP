@@ -62,9 +62,9 @@ If required content is unavailable, record the evidence gap rather than filling 
 
 ARGO KOP is currently under **Connected-Baseline Integrity Validation**, moving from bounded seam-evidence construction into repository-wide connectivity proof.
 
-The latest closed checkpoint is **EJR-101 — Seam Evidence Boundary Hardening and Promotion Guard (2026-08-12)**, following EJR-100.
+The latest closed checkpoint is **EJR-102 — Canonical Audit Evidence Materialization Guard (2026-08-12)**, following EJR-101.
 
-The seam-proof path now rejects direct `CONNECTED` injection outside the verified registry, rejects duplicate seam evidence, and accepts only repository-relative regular files as contract/test/trace evidence. These changes improve proof integrity; they do not establish global repository PASS.
+The seam-proof path now rejects direct `CONNECTED` injection outside the verified registry, rejects duplicate seam evidence, and requires every contract/test/trace path used by the canonical audit to resolve to a repository-relative regular file. These changes improve proof integrity; they do not establish global repository PASS.
 
 ## Current Connectivity Chain
 
@@ -98,7 +98,7 @@ The governing question is no longer merely whether individual artifacts exist or
 
 **Populate the verified seam registry from actual ARGO-KOP contracts, tests and trace artifacts, run the canonical spine audit, then expand into the Full Repository Connectivity / End-to-End Audit.**
 
-No seam should be promoted merely because a plausible contract name, test name or trace label exists. The three evidence artifacts must be inspected as a coherent set.
+No seam should be promoted merely because a plausible contract name, test name or trace label exists. The three evidence artifacts must be inspected as a coherent set and must be materialized repository files.
 
 The connectivity audit must look for, at minimum:
 
