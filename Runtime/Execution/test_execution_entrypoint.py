@@ -28,6 +28,7 @@ def test_execution_entrypoint_requires_authorization():
             source_trace_id="DECISION-TRACE-2",
             authorized=False,
             final_status="SUCCESS",
+            stages=[{"name": "execute", "status": "SUCCESS"}],
         )
 
 
@@ -40,4 +41,18 @@ def test_execution_entrypoint_requires_source_trace():
             source_trace_id="",
             authorized=True,
             final_status="SUCCESS",
+            stages=[{"name": "execute", "status": "SUCCESS"}],
+        )
+
+
+def test_execution_entrypoint_rejects_failed_trace_recording():
+    with pytest.raises(ValueError, match="TRACE_RECORDING_FAILED"):
+        execute(
+            execution_id="EXEC-4",
+            task_id="TASK-4",
+            session_id="SESSION-4",
+            source_trace_id="DECISION-TRACE-4",
+            authorized=True,
+            final_status="SUCCESS",
+            stages=[],
         )
