@@ -1,13 +1,16 @@
-"""Connect the experimental stage contracts with cognition-state gating."""
+"""Connect the governed execution seam with cognition-state gating."""
+
+from uuid import uuid4
 
 from authorization_gate import authorize
 from decision_pass import propose
 from reasoning_packet_classifier import classify
 from traceable_reasoning import reason
 from execution_plan import build_plan
-from mock_executor import execute
+from execution_entrypoint import execute
 from context_conflict_detector import detect
 from reasoning_hold import evaluate
+from decision_trace_producer import record_decision_trace
 
 
 def run(fixture: dict) -> dict:
@@ -28,9 +31,48 @@ def run(fixture: dict) -> dict:
     proposal = propose(reasoning, rules=fixture["rules"])
     authorization = authorize(proposal, fixture["authorization"])
     plan = build_plan(authorization, action="SIMULATED_REVIEW", target=fixture["task"]["task_id"])
-    execution = execute(plan)
+
+    decision_trace_result = record_decision_trace(
+        trace_id=f"DEC-{uuid4().hex[:12]}",
+        task_id=fixture["task"]["task_id"],
+        session_id=fixture["context"]["session_id"],
+        evidence_map=reasoning.get("evidence_map", []),
+        decision_status=proposal.get("status", "UNKNOWN"),
+    )
+    if decision_trace_result["status"] != "TRACE_RECORDED":
+        blocked = {
+            "status": "BLOCKED",
+            "reason": "DECISION_TRACE_RECORDING_FAILED",
+            "issues": decision_trace_result.get("issues", []),
+        }
+        return {
+            "task_id": fixture["task"]["task_id"],
+            "stages": [classified, reasoning, conflict, hold, proposal, authorization, plan, blocked],
+            "final_status": "BLOCKED",
+        }
+
+    decision_trace = decision_trace_result["trace"]
+    if plan.get("status") != "PLAN_READY":
+        execution = {"status": "BLOCKED", "reason": "PLAN_NOT_READY"}
+    else:
+        execution = execute(
+            execution_id=f"EXEC-{uuid4().hex[:12]}",
+            task_id=fixture["task"]["task_id"],
+            session_id=fixture["context"]["session_id"],
+            source_trace_id=decision_trace["trace_id"],
+            authorized=authorization.get("status") == "AUTHORIZED",
+            final_status="SIMULATED",
+            side_effect=False,
+            stages=[
+                {"name": "decision", "status": proposal.get("status", "UNKNOWN")},
+                {"name": "authorization", "status": authorization.get("status", "UNKNOWN")},
+                {"name": "execution", "status": "SIMULATED"},
+            ],
+        )
+
     return {
         "task_id": fixture["task"]["task_id"],
         "stages": [classified, reasoning, conflict, hold, proposal, authorization, plan, execution],
-        "final_status": execution["status"],
+        "decision_trace": decision_trace,
+        "final_status": "SIMULATED" if execution.get("execution_trace_id") else execution.get("status"),
     }
