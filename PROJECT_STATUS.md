@@ -6,20 +6,22 @@
 
 Platform: ARGO KOP (Knowledge Operating Platform)
 Document ID: PROJECT_STATUS
-Version: 3.3.2
+Version: 3.3.3
 Status: INTEGRITY WARNING / CONNECTED-BASELINE AUDIT
 Category: Root Baseline
 Canonical: Yes
 Priority: Critical
-Last Audit Date: Aug 10, 2026
+Last Audit Date: Aug 12, 2026
 
 ---
 
 # 1. Platform Executive Summary
 
-ARGO KOP is operating from the current GitHub repository baseline while the repository-wide connected-baseline audit is in progress.
+ARGO KOP is operating from the current GitHub repository baseline while the repository-wide connected-baseline audit continues.
 
-The immediate objective is **repository connectivity and evidence integrity**, not feature expansion.
+The immediate objective remains **repository connectivity and evidence integrity**, not feature expansion.
+
+The latest checkpoint added a repository-backed **verified seam evidence loader**. This closes the manual-candidate loading gap for the local evidence path, but it does **not** certify semantic correctness or establish repository-wide integrity.
 
 The repository MUST NOT be declared globally clean until critical identities, references, dependencies, authority paths, indexes, status claims and cross-layer relationships have been validated against current repository evidence.
 
@@ -46,6 +48,10 @@ The latest bounded audit has completed and revalidated the following changes:
 - `Interfaces/INTF-005_LLM.md` identity was corrected so its internal `INTF-005` identity matches its filename.
 - `Services/SRV-010_SERVICE_REFERENCE.md` revalidated as an evidence-bounded service inventory/reference artifact rather than a claim that every listed service is implemented or operational.
 - `Services/_FOLDER_STATUS.md` revalidated to withdraw stale completion claims and record the current bounded service-validation scope.
+- `Quality/Integration/verified_seam_evidence_loader.py` added to derive only complete local seam-evidence candidates from repository artifacts.
+- `Quality/Integration/test_verified_seam_evidence_loader.py` added and executed as the local loader test boundary.
+- `Quality/Integration/VERIFIED_SEAM_EVIDENCE_LOADER.md` added to define the loader contract and architectural boundary.
+- `Memory/Engineering_Journal/EJR-099_2026-08-12_VERIFIED_SEAM_EVIDENCE_LOADER_AND_SESSION_CLOSURE.md` records the closed checkpoint and its next-step handoff.
 
 These are **verified bounded mutations**, not repository-wide certification.
 
@@ -66,6 +72,12 @@ The target is not merely:
 but:
 
 `Critical artifacts + identities + authorities + references + consumers + indexes + status claims agree with current repository evidence.`
+
+The latest enabling mechanism is:
+
+`Repository → Candidate Seam Records → Local Artifact Existence Check → Contract + Test + Trace → Verified Seam Registry → CONNECTED`
+
+The loader only proves local artifact completeness. Semantic correctness remains the responsibility of the integration audit.
 
 ---
 
@@ -154,6 +166,9 @@ Only after this gate passes may the project move from **Connected Baseline Stabi
 | Environment sensing boundary | PROPOSED / INTEGRITY HOLD / CROSS-LAYER VALIDATION OPEN |
 | Services inventory/reference | REVALIDATED / GLOBAL SERVICE VALIDATION OPEN |
 | Session learning handoff | REVALIDATED / PROMOTION REMAINS GOVERNED |
+| Verified seam evidence loader | IMPLEMENTED / TESTED / LOCAL COMPLETENESS ONLY |
+| Verified seam registry semantic certification | OPEN / INTEGRATION AUDIT RESPONSIBILITY |
+| Candidate seam population from actual contracts/tests/traces | NEXT REQUIRED STEP |
 | Models/Lifecycle/Blueprints validation | OPEN / INTEGRITY HOLD |
 | Projects/Release validation | OPEN |
 | Changelog / Version authority alignment | UPDATED / REVALIDATION REQUIRED |
@@ -165,25 +180,28 @@ Only after this gate passes may the project move from **Connected Baseline Stabi
 
 # 7. Current Engineering Queue
 
-**Current Target:** Connect and validate the repository graph before proposing feature or architectural expansion.
+**Current Target:** Populate repository-backed verified seam candidates from actual ARGO-KOP contracts, tests and trace artifacts, then feed the resulting verified seam registry directly into the canonical spine integration audit.
 
 Required sequence:
 
-**Enumerate → Read → Build Relationship Graph → Cross-Reference → Classify Evidence → Identify Conflicts → Decide Canonical Ownership → Review Upstream/Downstream Impact → Change → Re-Read → Revalidate → Update Index/Status → Re-Boot**
+**Enumerate → Read → Build Relationship Graph → Cross-Reference → Classify Evidence → Identify Conflicts → Decide Canonical Ownership → Review Upstream/Downstream Impact → Load Complete Seam Candidates → Validate Registry → Feed Canonical Spine Audit → Change → Re-Read → Revalidate → Update Index/Status → Re-Boot**
 
-No folder is assumed to be a complete layer or canonical collection until its filenames, internal identities, contents and relationships have been inspected.
+The loader must remain evidence-bounded: missing contract, test or trace evidence excludes a candidate rather than promoting it.
 
-A previously reviewed domain may be reopened whenever new evidence changes the interpretation of one of its relationships.
+### Immediate next targets
 
-### Immediate next audit targets
+1. Enumerate actual candidate seam records from current ARGO-KOP contracts, tests and trace artifacts.
+2. Validate that each candidate is complete before registry admission.
+3. Feed the resulting registry into the canonical spine integration audit.
+4. Use the audit output to identify unresolved connected-baseline relationships, not to infer missing evidence.
+5. Continue the bounded `Services → Runtime Consumers → Repository / Index Services` relationship enumeration where it intersects the canonical spine.
+6. Reconcile `SRV-001` through `SRV-009` contracts against the current Validation Engine and their declared consumers/dependencies.
+7. Reconcile remaining runtime/engine/AI declarations against the authoritative baseline.
+8. Revisit `INTF-006` environment-sensing boundary and its relationship to governance, memory and runtime.
+9. Synchronize root/index status claims after subsequent bounded mutations.
+10. Continue into Projects/Release and then Global Cross-Layer Validation only after affected relationship gates are satisfied.
 
-1. Complete the bounded `Services → Runtime Consumers → Repository / Index Services` relationship enumeration.
-2. Reconcile `SRV-001` through `SRV-009` contracts against the current Validation Engine and their declared consumers/dependencies.
-3. Validate service-to-Repository/Index/Runtime relationships before any service-domain completion claim.
-4. Reconcile remaining runtime/engine/AI declarations against the authoritative baseline.
-5. Revisit `INTF-006` environment-sensing boundary and its relationship to governance, memory and runtime.
-6. Synchronize root/index status claims after subsequent bounded service mutations.
-7. Continue into Projects/Release and then Global Cross-Layer Validation only after affected relationship gates are satisfied.
+No feature expansion is justified merely because the seam loader is implemented.
 
 ---
 
@@ -230,6 +248,8 @@ A development baseline is not an official release.
 26. A new interface boundary must be validated against its runtime consumers before it can be treated as globally integrated.
 27. A development baseline conflict must be resolved from the authoritative version source, not from the highest version number appearing in a mutated artifact.
 28. A service inventory is not a service implementation claim; physical artifact presence and operational capability must remain separate evidence classes.
+29. A repository-backed evidence loader can reduce manual promotion, but local artifact completeness is not semantic integration certification.
+30. Incomplete seam evidence must be excluded from the verified registry rather than promoted by assumption.
 
 ---
 
@@ -240,6 +260,7 @@ A development baseline is not an official release.
 3. No AI/session memory can override current repository content.
 4. Root status must be re-read and synchronized after material canonical mutations.
 5. A bounded audit result must never be promoted to repository-wide certification without graph-level evidence.
+6. The verified seam evidence loader may supply candidates but cannot certify semantic correctness.
 
 ---
 
