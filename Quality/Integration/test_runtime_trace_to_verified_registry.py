@@ -1,10 +1,9 @@
 """End-to-end evidence proof from the actual controlled runner to registry promotion.
 
 This test intentionally uses the runtime-produced trace and outcome rather than a
-hand-authored trace fixture. It materializes the trace through the existing
-explicit-target persistence boundary, then asks the verified evidence loader to
-promote the same evidence set. The test does not grant semantic authority to the
-registry; it only proves the bounded evidence handoff.
+hand-authored trace fixture. It proves the bounded handoff only after runtime
+lineage verification and explicit evidence materialization. The registry remains
+an evidence gate, not a semantic authority.
 """
 
 import json
@@ -12,6 +11,7 @@ import json
 from connected_spine_runner import run
 from synthetic_task_fixture import make_fixture
 from runtime_evidence_capture import capture_execution_evidence
+from runtime_outcome_evidence_verifier import verify_runtime_outcome_evidence
 from verified_seam_evidence_loader import load_records
 
 
@@ -23,6 +23,10 @@ def test_actual_runtime_trace_and_outcome_can_form_registry_evidence(tmp_path):
     assert execution["execution_trace_id"] == execution["trace"]["trace_id"]
     assert outcome["execution_trace_ids"] == [execution["execution_trace_id"]]
     assert outcome["evidence_trace_ids"] == outcome["execution_trace_ids"]
+
+    lineage = verify_runtime_outcome_evidence(result)
+    assert lineage["status"] == "VERIFIED"
+    assert lineage["execution_trace_id"] == execution["execution_trace_id"]
 
     trace_relative = "evidence/runtime/execution_trace.json"
     captured = capture_execution_evidence(
@@ -44,6 +48,7 @@ def test_actual_runtime_trace_and_outcome_can_form_registry_evidence(tmp_path):
         "contract": "evidence/contracts/execution_outcome_contract.md",
         "test": "evidence/tests/execution_outcome_test.py",
         "trace": trace_relative,
+        "verification_status": lineage["status"],
     }
 
     registry = load_records(tmp_path, [candidate])
