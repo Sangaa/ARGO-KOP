@@ -2,7 +2,7 @@
 
 Platform: ARGO KOP (Knowledge Operating Platform)
 Document ID: PROJECT_STATUS
-Version: 3.3.6
+Version: 3.3.7
 Status: INTEGRITY WARNING / CONNECTED-BASELINE AUDIT
 Category: Root Baseline
 Canonical: Yes
@@ -17,7 +17,7 @@ ARGO KOP is operating from the current GitHub repository baseline while the repo
 
 The immediate objective remains **repository connectivity and evidence integrity**, not feature expansion.
 
-The latest checkpoint hardened the seam-proof boundary further: verified seams must now arrive at the canonical spine audit as evidence-backed registry records, duplicate seam records are rejected, and seam evidence paths are constrained to repository-relative files. Runtime connectivity test detection remains path-aware and the integration suite remains wired into CI. These changes improve proof integrity; they do **not** certify semantic correctness or establish repository-wide integrity.
+The latest checkpoint hardened the canonical-spine candidate scanner: endpoint concepts must co-occur within the same repository file before a seam can even be classified as `PARTIAL`. Repository-wide keyword co-occurrence is no longer sufficient for a candidate signal. Verified seams still require evidence-backed registry records and materialized repository-relative contract/test/trace files. These changes improve proof integrity; they do **not** certify semantic correctness or establish repository-wide integrity.
 
 The repository MUST NOT be declared globally clean until critical identities, references, dependencies, authority paths, indexes, status claims and cross-layer relationships have been validated against current repository evidence.
 
@@ -50,9 +50,9 @@ but:
 
 The current enabling path is:
 
-`Repository → Candidate Seam Records → Contract + Test + Trace → Verified Seam Registry → Canonical Spine Audit → Full Repository Connectivity / End-to-End Audit → GAP MAP`
+`Repository → Candidate Seam Discovery → Contract + Test + Trace → Verified Seam Registry → Canonical Spine Audit → Full Repository Connectivity / End-to-End Audit → GAP MAP`
 
-The loader only proves local artifact completeness. Semantic correctness remains the responsibility of the integration audit.
+The scanner is candidate discovery only. The loader/registry establish evidence boundaries. The canonical audit establishes whether a seam may be considered connected within the inspected scope. Semantic and architectural correctness remain subject to integration review.
 
 **Priority rule:** construction quality, connectivity, evidence and reusable learning take precedence over file count. A smaller set of correctly connected and validated artifacts is higher-value than a larger set of superficial modifications.
 
@@ -144,8 +144,9 @@ Only after this gate passes may the project move from **Connected Baseline Stabi
 | Services inventory/reference | REVALIDATED / GLOBAL SERVICE VALIDATION OPEN |
 | Session learning handoff | REVALIDATED / PROMOTION REMAINS GOVERNED |
 | Verified seam evidence loader | HARDENED / REPOSITORY-RELATIVE FILE BOUNDARY TESTED |
-| Verified seam registry | HARDENED / DUPLICATE EVIDENCE REJECTED |
+| Verified seam registry | HARDENED / DUPLICATE AND UNSAFE REFERENCES REJECTED |
 | Verified seam registry → canonical spine audit | WIRED / REGISTRY-ONLY CONNECTED PROMOTION ENFORCED |
+| Canonical spine evidence scanner | HARDENED / FILE-LOCAL CANDIDATE DETECTION |
 | Full-stack runtime test coverage detection | HARDENED / TESTS ADDED |
 | Integration CI execution path | WIRED / NO SUCCESSFUL RUN OBSERVED AT CHECKPOINT |
 | Actual candidate seam population | OPEN / NO SEAM PROMOTED WITHOUT COMPLETE EVIDENCE |
@@ -162,32 +163,33 @@ Only after this gate passes may the project move from **Connected Baseline Stabi
 
 # 7. Current Engineering Queue
 
-**Current Target:** Enumerate actual repository-backed seam candidates from contracts, tests and trace artifacts; load only complete local evidence; feed the verified registry into the canonical spine integration audit; then expand into the Full Repository Connectivity / End-to-End Audit.
+**Current Target:** Enumerate actual repository-backed seam candidates from contracts, tests and trace artifacts; use the hardened file-local scanner only as a candidate signal; load only complete local evidence; feed the verified registry into the canonical spine integration audit; then expand into the Full Repository Connectivity / End-to-End Audit.
 
 Required sequence:
 
 **Enumerate → Read → Build Relationship Graph → Cross-Reference → Classify Evidence → Identify Conflicts → Decide Canonical Ownership → Review Upstream/Downstream Impact → Load Complete Seam Candidates → Validate Registry → Feed Canonical Spine Audit → Full Connectivity Audit → GAP MAP → Fix Highest-Value Seams → Regression Test → Re-Audit → Re-Read → Revalidate → Update Index/Status → Re-Boot → Close Checkpoint**
 
-The loader must remain evidence-bounded: missing contract, test or trace evidence excludes a candidate rather than promoting it. Evidence paths must resolve to repository-relative files, not directories or parent-traversal paths.
+The scanner can establish only a `PARTIAL` candidate from same-file textual co-occurrence. The loader/registry require safe evidence references. The canonical audit requires the referenced contract, test and trace files to materialize inside the repository. None of these layers alone certifies semantic correctness.
 
 ### Immediate next targets
 
 1. Enumerate actual candidate seam records from current ARGO-KOP contracts, tests and trace artifacts.
-2. Validate that each candidate is complete before registry admission.
-3. Do not treat textual names, non-empty strings or historical documents as evidence paths.
-4. Feed the resulting registry into the canonical spine integration audit.
-5. Expand from the canonical spine into repository-wide connectivity / end-to-end proof.
-6. Produce a GAP MAP based only on verified evidence.
-7. Fix the highest-value missing or broken seams.
-8. Run regression tests and re-run the audit before closing the checkpoint.
-9. Continue the bounded `Services → Runtime Consumers → Repository / Index Services` relationship enumeration where it intersects the canonical spine.
-10. Reconcile `SRV-001` through `SRV-009` contracts against the current Validation Engine and their declared consumers/dependencies.
-11. Reconcile remaining runtime/engine/AI declarations against the authoritative baseline.
-12. Revisit `INTF-006` environment-sensing boundary and its relationship to governance, memory and runtime.
-13. Synchronize root/index status claims after subsequent bounded mutations.
-14. Continue into Projects/Release and then Global Cross-Layer Validation only after affected relationship gates are satisfied.
+2. Prioritize candidates surfaced by same-file co-occurrence, then inspect the actual relationship.
+3. Validate that each candidate is complete before registry admission.
+4. Do not treat textual names, non-empty strings, unrelated-file co-occurrence or historical documents as evidence paths.
+5. Feed the resulting registry into the canonical spine integration audit.
+6. Expand from the canonical spine into repository-wide connectivity / end-to-end proof.
+7. Produce a GAP MAP based only on verified evidence.
+8. Fix the highest-value missing or broken seams.
+9. Run regression tests and re-run the audit before closing the checkpoint.
+10. Continue the bounded `Services → Runtime Consumers → Repository / Index Services` relationship enumeration where it intersects the canonical spine.
+11. Reconcile `SRV-001` through `SRV-009` contracts against the current Validation Engine and their declared consumers/dependencies.
+12. Reconcile remaining runtime/engine/AI declarations against the authoritative baseline.
+13. Revisit `INTF-006` environment-sensing boundary and its relationship to governance, memory and runtime.
+14. Synchronize root/index status claims after subsequent bounded mutations.
+15. Continue into Projects/Release and then Global Cross-Layer Validation only after affected relationship gates are satisfied.
 
-No feature expansion is justified merely because the seam loader is implemented.
+No feature expansion is justified merely because the seam loader or scanner is implemented.
 
 ---
 
@@ -279,6 +281,8 @@ A development baseline is not an official release.
 37. A `CONNECTED` state must not be accepted through a legacy string shortcut; promotion must remain registry-shaped and evidence-backed.
 38. Duplicate seam records must be rejected rather than silently overwritten, because silent overwrite can conceal conflicting evidence.
 39. Evidence paths must be repository-relative files; parent traversal, absolute paths and directories are not valid proof artifacts.
+40. Repository-wide keyword co-occurrence is not sufficient seam evidence; candidate discovery must require source/destination concepts to co-occur within a concrete artifact before classifying a textual `PARTIAL`.
+41. Same-file textual co-occurrence remains only a candidate signal; it is not a substitute for contract, executable test, traceability and relationship validation.
 
 ---
 
@@ -297,6 +301,8 @@ A development baseline is not an official release.
 11. Direct `CONNECTED` state injection outside the verified registry is prohibited.
 12. Evidence records with duplicate seam identity are invalid.
 13. Evidence paths must be repository-relative regular files.
+14. The scanner may classify only same-file endpoint co-occurrence as `PARTIAL`; it may never certify `CONNECTED`.
+15. Candidate discovery and integration certification are separate evidence stages.
 
 ---
 
