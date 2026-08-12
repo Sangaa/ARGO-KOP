@@ -56,7 +56,8 @@ The current development baseline includes ongoing corrections and improvements s
 - rejection of direct `CONNECTED` injection outside the verified registry;
 - duplicate seam-evidence rejection;
 - repository-relative regular-file enforcement for contract/test/trace evidence paths;
-- file-local canonical-spine candidate discovery to prevent unrelated repository-wide keyword co-occurrence from inflating `PARTIAL` seam signals.
+- file-local canonical-spine candidate discovery to prevent unrelated repository-wide keyword co-occurrence from inflating `PARTIAL` seam signals;
+- bounded candidate-artifact provenance carried from the scanner into the integration audit without granting it verification authority.
 
 ### 2026-08-12 — Verified Seam Evidence Loader
 
@@ -105,3 +106,15 @@ Subsequent checkpoints strengthened the proof boundary further:
 - `PROJECT_STATUS.md` and `START_HERE.md` were synchronized to the EJR-104 resumption point.
 
 No canonical-spine seam was promoted to `CONNECTED` by keyword evidence alone. Repository-wide connectivity remains open.
+
+### 2026-08-12 — Candidate Provenance Wiring
+
+The next bounded checkpoint extends discovery without weakening certification:
+
+- `canonical_spine_evidence_scanner.py` now returns both seam state and repository-relative `candidate_files` provenance;
+- candidate provenance is collected only when both endpoint concepts occur in the same concrete artifact;
+- `canonical_spine_integration_audit.py` carries this provenance into its report;
+- scanner and integration-audit tests verify provenance, repository-relative paths and preservation of conservative `PARTIAL` behavior;
+- provenance remains a navigation aid for the next contract/test/trace inspection step and is **not** verification evidence by itself.
+
+No canonical-spine seam was promoted to `CONNECTED` by this change.
