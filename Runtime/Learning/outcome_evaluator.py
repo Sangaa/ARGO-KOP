@@ -15,6 +15,7 @@ def evaluate_outcome(*, decision_id: str, execution_id: str, outcome: dict) -> d
     result = outcome.get("result")
     evidence_ids = sorted(set(outcome.get("evidence_trace_ids", [])))
     execution_trace_ids = sorted(set(outcome.get("execution_trace_ids", [])))
+    confidence = outcome.get("confidence", "UNKNOWN")
 
     if not decision_id:
         issues.append("DECISION_ID_REQUIRED")
@@ -44,5 +45,6 @@ def evaluate_outcome(*, decision_id: str, execution_id: str, outcome: dict) -> d
         "result": result,
         "evidence_trace_ids": evidence_ids,
         "execution_trace_ids": execution_trace_ids,
+        "confidence": confidence,
         "learning_eligible": result in {"SUCCESS", "FAILURE", "PARTIAL"},
     }
