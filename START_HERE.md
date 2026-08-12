@@ -12,7 +12,7 @@ START HERE → README → VISION → PROJECT BOOTSTRAP → PROJECT STATUS → SY
 
 **Inspect the current repository before proposing structural changes.**
 
-The repository is the current evidence source. Session memory, historical snapshots, and prior claims may provide context but cannot override inspected repository content.
+The repository is the current evidence source. Session memory, historical snapshots, and prior claims cannot override inspected repository content.
 
 If required content is unavailable, record the evidence gap rather than filling it by assumption.
 
@@ -20,9 +20,9 @@ If required content is unavailable, record the evidence gap rather than filling 
 
 ARGO KOP is currently under **Connected-Baseline Integrity Validation**, moving from bounded seam-evidence construction into repository-wide connectivity proof.
 
-The latest closed checkpoint is **EJR-113 — Connected Spine Real Execution Handoff (2026-08-12)**.
+The latest closed checkpoint is **EJR-114 — Connected Spine Execution → Outcome Handoff (2026-08-12)**.
 
-The current high-value execution path advanced when repository inspection found the existing `Runtime/Execution/connected_spine_runner.py` as the cross-stage runtime orchestrator. It previously bypassed the governed execution entrypoint through `mock_executor`; it is now wired through a bounded decision-trace producer and the governed execution entrypoint, which produces the canonical execution trace ID. The path remains controlled/simulated and is **not** an autonomous side-effect executor.
+The current controlled runtime path now contains a real cross-stage runner, a governed execution entrypoint, canonical execution-trace production, and a canonical outcome producer. The exact runner output is now consumed by Outcome Evaluation and Feedback Quality. The controlled path remains side-effect-free and must not be interpreted as autonomous production execution.
 
 ## Current Connectivity Chain
 
@@ -73,7 +73,7 @@ Canonical Execution Trace Producer
    ↓
 Execution Trace ID
    ↓
-Outcome Producer                         ← NEXT TARGET
+Canonical Outcome Producer
    ↓
 Outcome Evaluation
    ↓
@@ -84,21 +84,21 @@ Learning Readiness
 Existing Promotion Gate
 ```
 
-The governing question is whether these artifacts behave as one connected system with evidence-backed seams, not whether each artifact exists independently.
+The exact controlled path from `connected_spine_runner.run()` through Outcome Evaluation is now executable and test-proven. It is not yet a complete canonical-spine certification because the evidence still needs to be materialized into the verified seam registry and audited as one evidence set.
 
 ## Current Next Target
 
-**Trace the exact `connected_spine_runner.run()` execution result into the actual Outcome Producer and Outcome Evaluation path.**
-
-Do not add another execution layer. The current runtime caller has been found and rewired.
+**Materialize the exact connected-spine Execution → Outcome → Evaluation → Quality evidence into the verified seam registry, then run the canonical audit before expanding to the next highest-value seam.**
 
 Required proof:
 
-**connected_spine_runner.run() → execution_trace_id → Outcome Producer → execution_trace_ids → Outcome Evaluation → Feedback Quality → Learning Readiness**
+**connected_spine_runner.run() → execution_trace_id → Outcome Producer → execution_trace_ids → Outcome Evaluation → Feedback Quality → Learning Readiness → Evidence Artifact → Verified Registry → Canonical Audit**
 
-The execution path is intentionally controlled/simulated. `side_effect=False` remains the boundary until a separate governed decision authorizes any future real side-effect capability.
+The current execution path is intentionally controlled/simulated. `side_effect=False` remains the boundary until a separate governed decision authorizes any future real side-effect capability.
 
-Only after the exact runner output is consumed by the canonical outcome path should the verified seam registry be considered for promotion.
+The Outcome Producer maps controlled `SIMULATED` execution to `INCONCLUSIVE` with `UNKNOWN` confidence. It must never manufacture `SUCCESS` merely because the runner completed.
+
+Only complete contract + runtime consumer + executable test + trace/outcome evidence may support `CONNECTED` promotion.
 
 Candidate provenance is a navigation aid only. It is not verification evidence and must not be promoted by itself.
 
@@ -117,7 +117,8 @@ The connectivity audit must look for:
 - learning paths that do not return correctly to Memory/State;
 - execution traces defined but not propagated into downstream outcomes;
 - producers or entrypoints that exist only as test utilities without a real runtime caller;
-- controlled execution results that bypass the canonical Outcome Producer.
+- controlled execution results that bypass the canonical Outcome Producer;
+- outcome evidence that is not tied to the exact execution trace that produced it.
 
 Do not expand features or architecture merely because a loader, registry, scanner, gap-map, producer or entrypoint exists.
 
@@ -130,10 +131,10 @@ Do not expand features or architecture merely because a loader, registry, scanne
 5. Use bounded candidate provenance only to prioritize inspection.
 6. Inspect contract + executable test + trace together.
 7. Inspect `connected_spine_runner.py` and its exact downstream consumers.
-8. Locate the actual Outcome Producer consumed by the runner path.
+8. Confirm the canonical Outcome Producer and its trace lineage.
 9. Validate `execution_trace_id` → `execution_trace_ids` propagation.
 10. Validate Outcome Evaluation and lineage.
-11. Populate the registry only with complete evidence sets.
+11. Materialize the complete evidence set into the verified registry only when justified.
 12. Run the canonical spine integration audit.
 13. Generate the GAP MAP.
 14. Expand to repository-wide connectivity / end-to-end audit.
