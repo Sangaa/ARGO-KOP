@@ -60,19 +60,70 @@ If required content is unavailable, record the evidence gap rather than filling 
 
 ## Current Phase
 
-ARGO KOP is currently under **Connected-Baseline Integrity Validation**.
+ARGO KOP is currently under **Connected-Baseline Integrity Validation**, moving from bounded seam-evidence construction into repository-wide connectivity proof.
 
-Recent work has corrected and revalidated selected identity and authority boundaries, synchronized repository index/map scope, and added a repository-backed **verified seam evidence loader** with its local test and contract documentation.
+The latest closed checkpoint is **EJR-099 — Verified Seam Evidence Loader and Session Closure (2026-08-12)**.
 
-The loader now excludes incomplete seam candidates instead of allowing manual promotion. It proves local artifact completeness only; semantic correctness remains the responsibility of the canonical spine integration audit.
+The loader excludes incomplete seam candidates instead of allowing manual promotion. It proves local artifact completeness only; semantic correctness remains the responsibility of the integration audit.
 
 These are bounded audit results. They do not establish global repository PASS.
 
+## Current Connectivity Chain
+
+```text
+Canonical Spine Evidence Scanner
+        ↓
+Canonical Spine Integration Audit
+        ↓
+Verified Seam Evidence Registry
+        ↓
+Verified Seam Evidence Loader
+        ↓
+Real Contract / Test / Trace Evidence
+        ↓
+Full Repository Connectivity / End-to-End Audit
+        ↓
+GAP MAP
+        ↓
+Highest-Value Seam Fixes
+        ↓
+Regression Test
+        ↓
+Re-Audit
+```
+
+The governing question is no longer merely whether individual artifacts exist or work independently. The current question is whether the repository behaves as one connected system, with evidence-backed seams from source through execution to outcome.
+
 ## Current Next Target
 
-**Populate complete seam candidates from actual ARGO-KOP contracts, tests and trace artifacts, validate the resulting verified seam registry, and feed that registry into the canonical spine integration audit.**
+**Populate the verified seam registry from actual ARGO-KOP contracts, tests and trace artifacts, run the canonical spine audit, then expand into the Full Repository Connectivity / End-to-End Audit.**
+
+The connectivity audit must look for, at minimum:
+
+- files that exist but are not connected;
+- contracts that have no real runtime consumer;
+- tests that do not exercise a real path;
+- traces that do not reach an outcome;
+- completed layers whose seams are missing;
+- paths that start but do not terminate;
+- paths that terminate without evidence;
+- components that exist but are unreachable;
+- learning paths that do not return correctly to Memory/State.
 
 Do not expand features or architecture merely because the loader is implemented.
+
+## Required Resumption Sequence
+
+1. Load current repository state.
+2. Load the verified seam registry.
+3. Populate the registry from real repository artifacts.
+4. Run the canonical spine integration audit.
+5. Expand to repository-wide connectivity / end-to-end audit.
+6. Produce the GAP MAP.
+7. Fix the highest-value missing seams.
+8. Run regression tests.
+9. Re-run the audit.
+10. Close the checkpoint.
 
 ## Before You Modify Anything
 
