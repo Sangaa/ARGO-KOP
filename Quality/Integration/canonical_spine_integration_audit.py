@@ -2,9 +2,11 @@
 
 Structural scanning establishes only PARTIAL/MISSING plus bounded candidate
 artifact provenance. CONNECTED requires a verified seam record whose
-contract/test/trace artifacts are real repository files.
+contract/test/trace artifacts are real repository files and whose trace is a
+materialized canonical execution-trace artifact.
 """
 
+import json
 from pathlib import Path, PurePosixPath
 
 from canonical_spine_evidence_scanner import scan
@@ -12,6 +14,7 @@ from canonical_spine_gap_map import SEAMS, build_gap_map
 
 SEAM_KEYS = {f"{source} -> {destination}" for source, destination in SEAMS}
 REQUIRED_EVIDENCE = ("contract", "test", "trace")
+REQUIRED_TRACE_FIELDS = ("record_type", "trace_id", "task_id", "session_id", "final_status")
 
 
 def _local_file(root: Path, relative: str) -> bool:
@@ -20,6 +23,25 @@ def _local_file(root: Path, relative: str) -> bool:
     if candidate.is_absolute() or ".." in candidate.parts or not candidate.parts:
         return False
     return (root / candidate).is_file()
+
+
+def _valid_trace_artifact(root: Path, relative: str) -> bool:
+    """Require the same canonical trace shape emitted by the runtime producer."""
+    candidate = PurePosixPath(relative)
+    if candidate.is_absolute() or ".." in candidate.parts or not candidate.parts:
+        return False
+    path = root / candidate
+    if not path.is_file() or path.suffix.lower() != ".json":
+        return False
+    try:
+        payload = json.loads(path.read_text(encoding="utf-8"))
+    except (OSError, UnicodeDecodeError, json.JSONDecodeError):
+        return False
+    return (
+        isinstance(payload, dict)
+        and payload.get("record_type") == "EXECUTION_TRACE"
+        and all(isinstance(payload.get(field), str) and payload[field] for field in REQUIRED_TRACE_FIELDS)
+    )
 
 
 def _state_from_verified_record(root: Path, seam, record):
@@ -36,6 +58,8 @@ def _state_from_verified_record(root: Path, seam, record):
     missing = [field for field in REQUIRED_EVIDENCE if not _local_file(root, record[field])]
     if missing:
         raise ValueError(f"verified seam evidence files missing or invalid: {seam}: {missing}")
+    if not _valid_trace_artifact(root, record["trace"]):
+        raise ValueError(f"verified seam trace is not a canonical execution trace: {seam}")
     return state
 
 
