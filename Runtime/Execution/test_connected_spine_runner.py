@@ -17,11 +17,17 @@ def test_real_data_contracts_flow_between_stages():
     assert result["decision_trace"]["record_type"] == "DECISION_TRACE"
     assert result["stages"][7]["source_trace_id"] == result["decision_trace"]["trace_id"]
 
+    assert result["execution"]["execution_trace_id"] == result["outcome"]["execution_trace_ids"][0]
+    assert result["outcome"]["evidence_trace_ids"] == result["outcome"]["execution_trace_ids"]
+    assert result["outcome"]["result"] == "INCONCLUSIVE"
+    assert result["outcome"]["confidence"] == "UNKNOWN"
 
-def test_missing_authorization_stops_before_execution():
+
+def test_missing_authorization_stops_before_execution_and_outcome():
     fixture = make_fixture()
     fixture["authorization"] = {"approved": False}
     result = run(fixture)
     assert result["stages"][5]["status"] == "BLOCKED"
     assert result["stages"][6]["status"] == "BLOCKED"
     assert result["stages"][7]["status"] == "BLOCKED"
+    assert result["outcome"] is None
