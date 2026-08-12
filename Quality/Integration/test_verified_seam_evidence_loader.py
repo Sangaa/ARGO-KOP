@@ -7,6 +7,7 @@ def _candidate():
         "contract": "contract.md",
         "test": "test.py",
         "trace": "trace.json",
+        "verification_status": "VERIFIED",
     }
 
 
