@@ -28,11 +28,13 @@ If an external test is needed and cannot be executed from the repository-side en
 
 ARGO KOP is currently under **Connected-Baseline Integrity Validation**, moving from bounded seam-evidence construction into repository-wide connectivity proof.
 
-The latest closed checkpoint is **EJR-121 — Verified Registry Promotion Guard (2026-08-12)**.
+The latest closed checkpoint is **EJR-122 — Canonical Audit Verified-Status Gate (2026-08-12)**.
 
 The controlled runtime path contains a real cross-stage runner, governed execution entrypoint, canonical execution-trace production, canonical outcome production, and a reusable explicit-target persistence adapter. A thin evidence-capture adapter reuses that persistence path to capture the exact runtime-produced trace without introducing another storage layer. Runtime-to-outcome lineage is explicitly verified and returns `HOLD` when identity cannot be established. The controlled path remains side-effect-free and must not be interpreted as autonomous production execution.
 
-EJR-121 hardened the final registry boundary: complete-looking evidence is not enough to become `CONNECTED`; a record must carry an explicit `verification_status == VERIFIED` from the upstream evidence/verifier chain.
+EJR-121 hardened the registry boundary: complete-looking evidence is not enough to become `CONNECTED`; a record must carry an explicit `verification_status == VERIFIED` from the upstream evidence/verifier chain.
+
+EJR-122 applies the same explicit verification gate at the canonical audit boundary. The audit also requires the referenced contract, test and trace artifacts to be real repository-relative regular files.
 
 ## Current Connectivity Chain
 
@@ -110,7 +112,7 @@ Do not create another persistence layer.
 
 The evidence loader requires the trace artifact itself to be a repository-relative JSON execution-trace record with minimum identity fields. This prevents an arbitrary existing file from being treated as trace evidence merely because a path exists.
 
-The registry additionally requires an explicit `verification_status == VERIFIED`; it must never infer verification from path existence, candidate provenance, or record shape.
+The registry and canonical audit additionally require an explicit `verification_status == VERIFIED`; neither may infer verification from path existence, candidate provenance, or record shape.
 
 Required proof:
 
