@@ -10,7 +10,7 @@ import json
 
 from connected_spine_runner import run
 from synthetic_task_fixture import make_fixture
-from runtime_evidence_capture import capture_execution_evidence
+from runtime_evidence_capture import capture_repository_evidence
 from runtime_outcome_evidence_verifier import verify_runtime_outcome_evidence
 from verified_seam_evidence_loader import load_records
 
@@ -28,13 +28,15 @@ def test_actual_runtime_trace_and_outcome_can_form_registry_evidence(tmp_path):
     assert lineage["status"] == "VERIFIED"
     assert lineage["execution_trace_id"] == execution["execution_trace_id"]
 
-    trace_relative = "evidence/runtime/execution_trace.json"
-    captured = capture_execution_evidence(
+    captured = capture_repository_evidence(
         result,
-        target=str(tmp_path / trace_relative),
+        repository_root=str(tmp_path),
+        relative_name="execution_trace.json",
     )
     assert captured["status"] == "CAPTURED"
     assert captured["trace_id"] == execution["execution_trace_id"]
+    trace_relative = captured["repository_relative_path"]
+    assert trace_relative == "Quality/Integration/evidence/runtime/execution_trace.json"
 
     contract = tmp_path / "evidence/contracts/execution_outcome_contract.md"
     test_artifact = tmp_path / "evidence/tests/execution_outcome_test.py"
