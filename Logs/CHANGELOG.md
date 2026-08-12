@@ -55,7 +55,8 @@ The current development baseline includes ongoing corrections and improvements s
 - explicit priority of construction quality, connectivity, evidence and reusable learning over file-count throughput;
 - rejection of direct `CONNECTED` injection outside the verified registry;
 - duplicate seam-evidence rejection;
-- repository-relative regular-file enforcement for contract/test/trace evidence paths.
+- repository-relative regular-file enforcement for contract/test/trace evidence paths;
+- file-local canonical-spine candidate discovery to prevent unrelated repository-wide keyword co-occurrence from inflating `PARTIAL` seam signals.
 
 ### 2026-08-12 — Verified Seam Evidence Loader
 
@@ -89,3 +90,18 @@ EJR-101 hardened the promotion boundary:
 - `Memory/Engineering_Journal/EJR-101_2026-08-12_SEAM_EVIDENCE_BOUNDARY_HARDENING_AND_PROMOTION_GUARD.md` closes the checkpoint.
 
 No new canonical seam was certified `CONNECTED` in this checkpoint because a complete contract + executable test + trace evidence set was not sufficiently established.
+
+### 2026-08-12 — Evidence Materialization and Scanner Hardening
+
+Subsequent checkpoints strengthened the proof boundary further:
+
+- canonical audit evidence paths are materialized and validated as repository files;
+- the verified registry rejects unsafe or duplicate evidence references;
+- the canonical-spine scanner no longer combines unrelated repository files to infer `PARTIAL` seam candidates;
+- same-file endpoint co-occurrence is retained only as a candidate-discovery signal;
+- `Memory/Engineering_Journal/EJR-102_2026-08-12_CANONICAL_AUDIT_EVIDENCE_MATERIALIZATION_GUARD.md` documents the materialization boundary;
+- `Memory/Engineering_Journal/EJR-103_2026-08-12_REGISTRY_REFERENCE_BOUNDARY_HARDENING.md` documents registry reference safety;
+- `Memory/Engineering_Journal/EJR-104_2026-08-12_CANONICAL_SPINE_SCANNER_FALSE_POSITIVE_HARDENING.md` closes the scanner checkpoint;
+- `PROJECT_STATUS.md` and `START_HERE.md` were synchronized to the EJR-104 resumption point.
+
+No canonical-spine seam was promoted to `CONNECTED` by keyword evidence alone. Repository-wide connectivity remains open.
