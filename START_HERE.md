@@ -28,7 +28,7 @@ If an external test is needed and cannot be executed from the repository-side en
 
 ARGO KOP is currently under **Connected-Baseline Integrity Validation**, moving from bounded seam-evidence construction into repository-wide connectivity proof.
 
-The latest closed checkpoint is **EJR-128 — Governed Repository Evidence Target Boundary (2026-08-12)**.
+The latest closed checkpoint is **EJR-129 — Governed Evidence Path Alignment (2026-08-12)**.
 
 The controlled runtime path contains a real cross-stage runner, governed execution entrypoint, canonical execution-trace production, canonical outcome production, and a reusable explicit-target persistence adapter. A thin evidence-capture adapter reuses that persistence path to capture the exact runtime-produced trace without introducing another storage layer. Runtime-to-outcome lineage is explicitly verified and returns `HOLD` when identity cannot be established. The controlled path remains side-effect-free and must not be interpreted as autonomous production execution.
 
@@ -45,6 +45,8 @@ EJR-126 proves that the actual `connected_spine_runner.run()` output can produce
 EJR-127 makes runtime/outcome lineage verification an explicit prerequisite for registry promotion; the registry must not receive a merely complete-looking record.
 
 EJR-128 establishes the smallest governed repository-backed evidence boundary: `capture_repository_evidence()` may write only beneath `Quality/Integration/evidence/runtime/`, using the existing explicit-target persistence adapter. Temporary test targets remain valid for tests, but permanent runtime evidence must use the governed boundary and must not silently mutate canonical Memory.
+
+EJR-129 corrected the integration proof to use the governed boundary's own path-composition contract: callers provide only a boundary-relative filename, and the returned canonical repository-relative path is used for downstream evidence loading. This prevents a false-positive proof caused by duplicating the governed root in the caller.
 
 ## Current Connectivity Chain
 
@@ -116,7 +118,7 @@ It is not yet a complete canonical-spine certification because the complete evid
 
 ## Current Next Target
 
-**Execute/verify the governed repository-backed evidence path using an actual runtime-produced trace, then pass the resulting contract + runtime consumer + executable test + exact trace/outcome evidence set through the loader and runtime-outcome verifier. Determine whether it justifies verified-registry promotion, and run the canonical audit before expanding to the next highest-value seam.**
+**Run CI on the corrected governed-evidence integration proof. If green, inspect the resulting evidence path and execute the canonical audit before promoting the first repository-backed Seam. If red, use the failure as the next evidence-driven correction.**
 
 Do not create another persistence layer.
 
@@ -179,16 +181,17 @@ Do not expand features or architecture merely because a loader, registry, scanne
 13. Validate runtime trace/outcome lineage before preparing any registry record.
 14. Validate that any proposed trace evidence matches the canonical runtime execution-trace shape.
 15. Use the governed repository evidence boundary for permanent runtime evidence; reject traversal or out-of-bound targets.
-16. Determine whether the complete evidence set justifies verified-registry promotion.
-17. Run the canonical spine integration audit.
-18. Generate the GAP MAP and preserve bounded candidate provenance for unresolved seams.
-19. Expand to repository-wide connectivity / end-to-end audit when the current seam set is mature enough.
-20. Inventory missing folders/files and orphaned or duplicate structures.
-21. Rank all gaps by dependency, seam value and construction impact—not file count.
-22. Fix the highest-value missing seams.
-23. Run regression tests.
-24. Re-run the audit.
-25. Close the checkpoint.
+16. Ensure callers pass only a boundary-relative filename and consume the returned canonical repository-relative evidence path.
+17. Determine whether the complete evidence set justifies verified-registry promotion.
+18. Run the canonical spine integration audit.
+19. Generate the GAP MAP and preserve bounded candidate provenance for unresolved seams.
+20. Expand to repository-wide connectivity / end-to-end audit when the current seam set is mature enough.
+21. Inventory missing folders/files and orphaned or duplicate structures.
+22. Rank all gaps by dependency, seam value and construction impact—not file count.
+23. Fix the highest-value missing seams.
+24. Run regression tests.
+25. Re-run the audit.
+26. Close the checkpoint.
 
 ## Future Engineering Capability Targets
 
