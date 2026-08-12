@@ -28,7 +28,7 @@ If an external test is needed and cannot be executed from the repository-side en
 
 ARGO KOP is currently under **Connected-Baseline Integrity Validation**, moving from bounded seam-evidence construction into repository-wide connectivity proof.
 
-The latest closed checkpoint is **EJR-126 — Runtime to Registry Evidence Set Proof (2026-08-12)**.
+The latest closed checkpoint is **EJR-128 — Governed Repository Evidence Target Boundary (2026-08-12)**.
 
 The controlled runtime path contains a real cross-stage runner, governed execution entrypoint, canonical execution-trace production, canonical outcome production, and a reusable explicit-target persistence adapter. A thin evidence-capture adapter reuses that persistence path to capture the exact runtime-produced trace without introducing another storage layer. Runtime-to-outcome lineage is explicitly verified and returns `HOLD` when identity cannot be established. The controlled path remains side-effect-free and must not be interpreted as autonomous production execution.
 
@@ -41,6 +41,10 @@ EJR-123/EJR-124 preserve bounded candidate provenance in the canonical GAP MAP a
 EJR-125 adds one further guard at the promotion boundary: the trace reference must be a materialized repository-relative JSON execution-trace record matching the minimum canonical shape emitted by the runtime trace producer.
 
 EJR-126 proves that the actual `connected_spine_runner.run()` output can produce a registry-ready evidence set through the existing thin capture path, but the temporary test target is **not** canonical repository evidence and does not itself certify a `CONNECTED` seam.
+
+EJR-127 makes runtime/outcome lineage verification an explicit prerequisite for registry promotion; the registry must not receive a merely complete-looking record.
+
+EJR-128 establishes the smallest governed repository-backed evidence boundary: `capture_repository_evidence()` may write only beneath `Quality/Integration/evidence/runtime/`, using the existing explicit-target persistence adapter. Temporary test targets remain valid for tests, but permanent runtime evidence must use the governed boundary and must not silently mutate canonical Memory.
 
 ## Current Connectivity Chain
 
@@ -112,7 +116,7 @@ It is not yet a complete canonical-spine certification because the complete evid
 
 ## Current Next Target
 
-**Inspect the latest GitHub Actions result. Then establish the governed permanent-evidence target for an actual runtime-produced trace, pass the resulting contract + runtime consumer + executable test + exact trace/outcome evidence set through the loader and runtime-outcome verifier, and determine whether it justifies verified-registry promotion. Run the canonical audit before expanding to the next highest-value seam.**
+**Execute/verify the governed repository-backed evidence path using an actual runtime-produced trace, then pass the resulting contract + runtime consumer + executable test + exact trace/outcome evidence set through the loader and runtime-outcome verifier. Determine whether it justifies verified-registry promotion, and run the canonical audit before expanding to the next highest-value seam.**
 
 Do not create another persistence layer.
 
@@ -122,7 +126,7 @@ The registry and canonical audit additionally require an explicit `verification_
 
 Required proof:
 
-**connected_spine_runner.run() → execution_trace_id → Outcome Producer → execution_trace_ids → Outcome Evaluation → Feedback Quality → Learning Readiness → runtime lineage verification → thin capture → explicit trace materialization → verified registry → Canonical Audit**
+**connected_spine_runner.run() → execution_trace_id → Outcome Producer → execution_trace_ids → Outcome Evaluation → Feedback Quality → Learning Readiness → runtime lineage verification → thin capture → governed repository evidence target → verified registry → Canonical Audit**
 
 Passing the loader is still not semantic certification. A synthetic trace fixture may test the loader boundary, but it cannot substitute for evidence that the trace was produced by the actual runtime path.
 
@@ -174,7 +178,7 @@ Do not expand features or architecture merely because a loader, registry, scanne
 12. Reuse the existing explicit-target persistence adapter and the thin evidence-capture adapter; do not invent a second persistence path.
 13. Validate runtime trace/outcome lineage before preparing any registry record.
 14. Validate that any proposed trace evidence matches the canonical runtime execution-trace shape.
-15. Define the permanent evidence boundary before committing any runtime-generated artifact.
+15. Use the governed repository evidence boundary for permanent runtime evidence; reject traversal or out-of-bound targets.
 16. Determine whether the complete evidence set justifies verified-registry promotion.
 17. Run the canonical spine integration audit.
 18. Generate the GAP MAP and preserve bounded candidate provenance for unresolved seams.
