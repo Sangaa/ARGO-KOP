@@ -91,7 +91,7 @@ EJR-102 through EJR-104 strengthened evidence materialization, registry referenc
 
 ### 2026-08-12 — Candidate Provenance Wiring
 
-EJR-105 extended scanner and audit reports with bounded repository-relative candidate provenance without granting verification authority.
+EJR-105 extended scanner and audit reports with bounded repository-relative candidate provenance without granting it verification authority.
 
 ### 2026-08-12 — Candidate Provenance Carried Into GAP MAPs
 
@@ -171,6 +171,17 @@ EJR-117 added the thin `runtime_evidence_capture.py` adapter and regression cove
 
 EJR-118 formalized that Gemini, Copilot and other external model reviews are advisory/test-only inputs. External findings must be analyzed against repository evidence and cannot directly alter architecture, priorities, governance, seam certification or build direction. The planned full repository audit retains version drift, baseline reconciliation and governance completeness as independent audit claims rather than automatic build instructions.
 
-The current checkpoint remains unpromoted until the complete contract + runtime consumer + executable test + exact runtime trace/outcome evidence set is justified as one verified seam and passed through the canonical audit.
+### 2026-08-12 — Runtime-to-Registry Evidence Integration Proof
+
+EJR-119 added the integration proof that uses the exact controlled runner output, captures its runtime trace through the thin evidence boundary, preserves the trace-to-outcome lineage, and presents the bounded evidence set to the verified loader. The first workflow attempts exposed test-environment and proof-harness issues; they were not treated as CI noise.
+
+### 2026-08-12 — Runtime Test Boundary and Safe HOLD Repair
+
+EJR-120 repaired the two concrete contradictions revealed by the EJR-119 workflow:
+
+- the integration workflow now exposes the existing runtime module roots through `PYTHONPATH` rather than requiring test-local import hacks;
+- the prototype authorization boundary now keeps missing human authorization in reversible `HOLD`, matching the canonical SAFE-002 scenario; `REJECTED` remains reserved for explicit negative policy/decision paths.
+
+The repair does not certify a seam. A post-repair GitHub Actions result must be inspected before claiming CI PASS.
 
 **Evidence boundary:** no CI PASS is recorded without an explicit GitHub status/workflow result.
