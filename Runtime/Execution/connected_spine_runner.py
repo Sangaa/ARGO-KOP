@@ -15,11 +15,18 @@ from outcome_producer import record_execution_outcome
 
 
 def run(fixture: dict) -> dict:
-    cognition_context = fixture["context"] | {"knowledge": fixture["knowledge"]}
-    classified = classify(cognition_context)
+    # The classifier contract consumes a reasoning packet with explicit
+    # `context` and `knowledge` roots. Keep the cognition context itself
+    # separate so downstream conflict detection receives the original
+    # governed context rather than the classifier envelope.
+    reasoning_packet = {
+        "context": fixture["context"],
+        "knowledge": fixture["knowledge"],
+    }
+    classified = classify(reasoning_packet)
     reasoning = reason(classified)
 
-    conflict = detect(cognition_context)
+    conflict = detect(fixture["context"])
     hold = evaluate(conflict)
     if hold["status"] == "HOLD":
         blocked = {"status": "BLOCKED", "reason": hold["reason"]}
