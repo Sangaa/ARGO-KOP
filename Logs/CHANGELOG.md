@@ -52,7 +52,10 @@ The current development baseline includes ongoing corrections and improvements s
 - hardened runtime test-coverage detection in the full-stack connectivity audit;
 - CI execution coverage for the integration-quality suite;
 - preservation of future programming, mathematics and implementation capability targets without allowing them to interrupt the current connectivity gate;
-- explicit priority of construction quality, connectivity, evidence and reusable learning over file-count throughput.
+- explicit priority of construction quality, connectivity, evidence and reusable learning over file-count throughput;
+- rejection of direct `CONNECTED` injection outside the verified registry;
+- duplicate seam-evidence rejection;
+- repository-relative regular-file enforcement for contract/test/trace evidence paths.
 
 ### 2026-08-12 — Verified Seam Evidence Loader
 
@@ -74,3 +77,15 @@ A follow-on checkpoint added:
 - `Memory/Engineering_Journal/EJR-100_2026-08-12_CANONICAL_AUDIT_REGISTRY_WIRING_AND_CONNECTIVITY_TEST_HARDENING.md` closes the checkpoint.
 
 **Evidence boundary:** GitHub accepted the mutations and the changed repository artifacts were re-read. No successful CI run was observed at checkpoint closure, so this change is not recorded as a test PASS.
+
+### 2026-08-12 — Seam Evidence Boundary Hardening
+
+EJR-101 hardened the promotion boundary:
+
+- `CONNECTED` is now registry-only at the canonical spine audit boundary;
+- duplicate seam identities are rejected rather than overwritten;
+- evidence paths must be repository-relative regular files;
+- path-traversal, absolute-path and directory candidates are excluded;
+- `Memory/Engineering_Journal/EJR-101_2026-08-12_SEAM_EVIDENCE_BOUNDARY_HARDENING_AND_PROMOTION_GUARD.md` closes the checkpoint.
+
+No new canonical seam was certified `CONNECTED` in this checkpoint because a complete contract + executable test + trace evidence set was not sufficiently established.
