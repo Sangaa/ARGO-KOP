@@ -8,6 +8,7 @@ on:
       - 'Runtime/Execution/**'
       - 'Runtime/Learning/**'
       - 'Decision/**'
+      - 'Cognition/**'
       - 'Memory/Execution/**'
       - 'Quality/Integration/**'
       - '.github/workflows/runtime-prototype-tests.yml'
@@ -17,12 +18,13 @@ on:
       - 'Runtime/Execution/**'
       - 'Runtime/Learning/**'
       - 'Decision/**'
+      - 'Cognition/**'
       - 'Memory/Execution/**'
       - 'Quality/Integration/**'
       - '.github/workflows/runtime-prototype-tests.yml'
 
 env:
-  PYTHONPATH: ${{ github.workspace }}/Runtime/Execution:${{ github.workspace }}/Runtime/Learning:${{ github.workspace }}/Decision:${{ github.workspace }}/Memory/Execution:${{ github.workspace }}/Quality/Integration:${{ github.workspace }}/Runtime/Prototype
+  PYTHONPATH: ${{ github.workspace }}/Runtime/Execution:${{ github.workspace }}/Runtime/Learning:${{ github.workspace }}/Decision:${{ github.workspace }}/Cognition:${{ github.workspace }}/Memory/Execution:${{ github.workspace }}/Quality/Integration:${{ github.workspace }}/Runtime/Prototype
 
 jobs:
   prototype-tests:
