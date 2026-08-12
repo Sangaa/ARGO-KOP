@@ -45,7 +45,22 @@ The current development baseline includes ongoing corrections and improvements s
 - stale status detection and post-mutation re-read requirements;
 - AI evidence-gated execution and multi-model interaction rules;
 - Architecture map identity correction and modernization of ARC-005 / ARC-008;
-- expanded repository integrity and cross-layer validation rules.
+- expanded repository integrity and cross-layer validation rules;
+- repository-backed verified seam evidence loading that excludes incomplete candidates from the verified registry;
+- explicit separation between local evidence completeness and semantic integration certification.
+
+### 2026-08-12 — Verified Seam Evidence Loader
+
+A bounded integration checkpoint added:
+
+- `Quality/Integration/verified_seam_evidence_loader.py`
+- `Quality/Integration/test_verified_seam_evidence_loader.py`
+- `Quality/Integration/VERIFIED_SEAM_EVIDENCE_LOADER.md`
+- `Memory/Engineering_Journal/EJR-099_2026-08-12_VERIFIED_SEAM_EVIDENCE_LOADER_AND_SESSION_CLOSURE.md`
+
+The loader establishes a repository-backed path from candidate seam records to local completeness checks and the verified seam registry. It does **not** certify semantic correctness.
+
+**Next target:** populate candidates from actual contracts, tests and trace artifacts, then feed the verified registry into the canonical spine integration audit.
 
 These entries describe development-state evolution. They do not constitute a new official release.
 
