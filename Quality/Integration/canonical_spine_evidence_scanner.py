@@ -1,9 +1,4 @@
-"""Conservatively discover candidate seam evidence from repository artifacts.
-
-This is a candidate-discovery layer only. It must never promote a seam to
-CONNECTED and must never infer a relationship from unrelated files merely
-because endpoint words occur somewhere in the repository.
-"""
+"""Conservatively discover candidate seam evidence from repository artifacts."""
 
 from pathlib import Path
 
@@ -25,24 +20,22 @@ KEYWORDS = {
 
 
 def _repository_files(root: Path):
-    return (
-        path
-        for path in root.rglob("*")
-        if path.is_file() and ".git" not in path.parts
-    )
+    return (path for path in root.rglob("*") if path.is_file() and ".git" not in path.parts)
 
 
 def _endpoint_seen(text: str, endpoint: str) -> bool:
-    return any(keyword in text for keyword in KEYWORDS[endpoint])
+    """Return False for unknown endpoints instead of crashing the audit."""
+    keywords = KEYWORDS.get(endpoint)
+    if not keywords:
+        return False
+    return any(keyword in text for keyword in keywords)
 
 
 def scan(root) -> dict:
     """Return seam states plus bounded candidate artifact locations.
 
-    A seam becomes PARTIAL only when both endpoint concepts co-occur in one
-    artifact. Candidate locations are provenance hints for the next evidence
-    inspection step; they are not evidence of integration and never create
-    CONNECTED.
+    Discovery remains conservative: co-occurrence only produces PARTIAL;
+    verification is required elsewhere before CONNECTED can be claimed.
     """
     root = Path(root)
     evidence = {f"{source} -> {destination}": "MISSING" for source, destination in SEAMS}
