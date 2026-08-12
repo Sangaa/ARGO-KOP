@@ -185,3 +185,29 @@ EJR-120 repaired the two concrete contradictions revealed by the EJR-119 workflo
 The repair does not certify a seam. A post-repair GitHub Actions result must be inspected before claiming CI PASS.
 
 **Evidence boundary:** no CI PASS is recorded without an explicit GitHub status/workflow result.
+
+### 2026-08-12 — Verified Registry Explicit Verification Gate
+
+EJR-121 hardened the registry so complete-looking evidence cannot become `CONNECTED` unless the upstream record explicitly carries `verification_status == VERIFIED`.
+
+### 2026-08-12 — Canonical Audit Verification Gate
+
+EJR-122 applied the same explicit verification requirement at the canonical audit boundary and preserved the requirement that contract, test and trace references resolve to real repository-relative files.
+
+### 2026-08-12 — Candidate Provenance Preservation
+
+EJR-123 preserved bounded `candidate_files` provenance through the canonical audit without allowing provenance to influence seam state.
+
+### 2026-08-12 — Candidate Non-Promotion Regression
+
+EJR-124 added explicit regression proving that candidate artifacts remain `PARTIAL`/gap evidence and cannot self-promote to `CONNECTED`.
+
+### 2026-08-12 — Canonical Trace Shape at Audit Boundary
+
+EJR-125 strengthened the audit boundary so a trace reference must be a materialized JSON `EXECUTION_TRACE` record carrying canonical identity fields. No new persistence architecture was introduced.
+
+### 2026-08-12 — Runtime to Registry Evidence Set Proof
+
+EJR-126 added a direct integration proof using the actual `connected_spine_runner.run()` output, the exact runtime trace/outcome lineage, and the existing thin evidence-capture adapter. The proof demonstrates that a registry-ready evidence set can be formed without another persistence layer.
+
+**Important evidence boundary:** the test materializes the trace in a temporary target. It is not canonical repository evidence and does not by itself certify a `CONNECTED` seam. The next decision is the governed permanent-evidence boundary.
