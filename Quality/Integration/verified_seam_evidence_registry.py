@@ -3,6 +3,10 @@
 The registry is intentionally evidence-shaped, not trust-shaped: it accepts only
 canonical seam keys and complete repository-relative evidence references.
 Actual file materialization is verified by the loader/audit boundary.
+
+Registry promotion remains conservative: an evidence record must explicitly
+carry a verified evidence status; the registry does not infer verification from
+file names or from candidate provenance.
 """
 
 from pathlib import PurePosixPath
@@ -30,6 +34,8 @@ def register(records):
             raise ValueError(f"unknown seam: {seam}")
         if seam in registry:
             raise ValueError(f"duplicate seam evidence: {seam}")
+        if record.get("verification_status") != "VERIFIED":
+            raise ValueError(f"evidence not verified: {seam}")
         if not all(_valid_reference(record.get(field)) for field in REQUIRED_EVIDENCE):
             raise ValueError(f"invalid or incomplete evidence: {seam}")
         registry[seam] = {
@@ -37,5 +43,6 @@ def register(records):
             "contract": record["contract"],
             "test": record["test"],
             "trace": record["trace"],
+            "verification_status": "VERIFIED",
         }
     return registry
