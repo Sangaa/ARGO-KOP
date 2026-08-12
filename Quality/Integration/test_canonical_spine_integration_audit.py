@@ -1,3 +1,5 @@
+import json
+
 import pytest
 
 from canonical_spine_integration_audit import audit
@@ -19,15 +21,23 @@ def test_audit_is_conservative_without_verified_seams(tmp_path):
     ]
 
 
-def _materialized_registry(tmp_path, verification_status="VERIFIED"):
-    for path in ("contract.md", "test.py", "trace.md"):
-        (tmp_path / path).write_text("verified evidence", encoding="utf-8")
+def _materialized_registry(tmp_path, verification_status="VERIFIED", trace_payload=None):
+    (tmp_path / "contract.md").write_text("verified evidence", encoding="utf-8")
+    (tmp_path / "test.py").write_text("verified evidence", encoding="utf-8")
+    payload = trace_payload or {
+        "record_type": "EXECUTION_TRACE",
+        "trace_id": "trace-001",
+        "task_id": "task-001",
+        "session_id": "session-001",
+        "final_status": "INCONCLUSIVE",
+    }
+    (tmp_path / "trace.json").write_text(json.dumps(payload), encoding="utf-8")
     return {
         "Decision -> Authorization": {
             "state": "CONNECTED",
             "contract": "contract.md",
             "test": "test.py",
-            "trace": "trace.md",
+            "trace": "trace.json",
             "verification_status": verification_status,
         }
     }
@@ -83,7 +93,7 @@ def test_nonexistent_registry_evidence_is_rejected(tmp_path):
             "state": "CONNECTED",
             "contract": "contract.md",
             "test": "test.py",
-            "trace": "trace.md",
+            "trace": "trace.json",
             "verification_status": "VERIFIED",
         }
     }
@@ -94,16 +104,40 @@ def test_nonexistent_registry_evidence_is_rejected(tmp_path):
 def test_registry_parent_traversal_is_rejected(tmp_path):
     for path in ("contract.md", "test.py"):
         (tmp_path / path).write_text("verified evidence", encoding="utf-8")
-    outside = tmp_path.parent / "trace.md"
-    outside.write_text("outside evidence", encoding="utf-8")
+    outside = tmp_path.parent / "trace.json"
+    outside.write_text(
+        json.dumps({
+            "record_type": "EXECUTION_TRACE",
+            "trace_id": "trace-outside",
+            "task_id": "task-001",
+            "session_id": "session-001",
+            "final_status": "INCONCLUSIVE",
+        }),
+        encoding="utf-8",
+    )
     registry = {
         "Decision -> Authorization": {
             "state": "CONNECTED",
             "contract": "contract.md",
             "test": "test.py",
-            "trace": "../trace.md",
+            "trace": "../trace.json",
             "verification_status": "VERIFIED",
         }
     }
     with pytest.raises(ValueError, match="files missing or invalid"):
+        audit(tmp_path, registry)
+
+
+def test_noncanonical_trace_shape_is_rejected(tmp_path):
+    registry = _materialized_registry(
+        tmp_path,
+        trace_payload={
+            "record_type": "OTHER_RECORD",
+            "trace_id": "trace-001",
+            "task_id": "task-001",
+            "session_id": "session-001",
+            "final_status": "INCONCLUSIVE",
+        },
+    )
+    with pytest.raises(ValueError, match="not a canonical execution trace"):
         audit(tmp_path, registry)
