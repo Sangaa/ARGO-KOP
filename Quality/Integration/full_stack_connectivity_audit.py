@@ -54,6 +54,17 @@ def build_reference_graph(root: Path) -> dict[str, set[str]]:
     return graph
 
 
+def _has_local_test(path: Path, test_files: set[str]) -> bool:
+    """Return whether a source file has a sibling test or a test referencing it."""
+    sibling_names = {
+        f"test_{path.stem}.py",
+        f"{path.stem}_test.py",
+    }
+    if any(path.parent.joinpath(name).as_posix() in test_files for name in sibling_names):
+        return True
+    return any(path.as_posix() in build_reference_graph(path.parents[1]).get(test, set()) for test in test_files)
+
+
 def audit(root: Path) -> dict:
     files = discover_files(root)
     graph = build_reference_graph(root)
@@ -62,18 +73,23 @@ def audit(root: Path) -> dict:
         for target in targets:
             incoming[target] += 1
 
-    docs = {".md"}
-    test_files = {p.as_posix() for p in files if p.name.startswith("test_") or p.name.endswith("_test.py")}
+    test_files = {
+        p.as_posix() for p in files
+        if p.name.startswith("test_") or p.name.endswith("_test.py")
+    }
     source_files = [p for p in files if p.suffix == ".py" and p.as_posix() not in test_files]
 
     orphan_candidates = [
         p.as_posix() for p in source_files
         if incoming[p.as_posix()] == 0 and p.parent.name not in {"Scripts", "Tools"}
     ]
+    runtime_sources = [
+        p for p in source_files
+        if p.is_relative_to(root / "Runtime")
+    ]
     untested_candidates = [
-        p.as_posix() for p in source_files
-        if p.parent.as_posix().startswith((root / "Runtime").as_posix())
-        and not any(p.parent.joinpath(t).exists() for t in test_files if Path(t).parent == p.parent)
+        p.as_posix() for p in runtime_sources
+        if not _has_local_test(p, test_files)
     ]
 
     return {
@@ -82,7 +98,7 @@ def audit(root: Path) -> dict:
         "reference_edge_count": sum(len(v) for v in graph.values()),
         "orphan_candidates": sorted(orphan_candidates),
         "untested_candidates": sorted(set(untested_candidates)),
-        "note": "Candidates require architectural review; zero incoming references alone does not prove a file is invalid.",
+        "note": "Candidates require architectural review; zero incoming references or missing local tests alone do not prove a file is invalid.",
     }
 
 
