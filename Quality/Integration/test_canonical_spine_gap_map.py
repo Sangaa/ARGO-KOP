@@ -24,3 +24,29 @@ def test_invalid_state_is_rejected():
     except ValueError:
         return
     assert False, "invalid seam state must be rejected"
+
+
+def test_candidate_provenance_is_preserved_without_promoting_state():
+    evidence = {f"{a} -> {b}": "MISSING" for a, b in SEAMS}
+    candidates = {f"{a} -> {b}": [] for a, b in SEAMS}
+    candidates["Decision -> Authorization"] = [
+        "Decision/AUTHORIZATION_STATE_BOUNDARY.md",
+        "Runtime/Execution/EVIDENCE_DECISION_CONTINUITY_CONTRACT.md",
+    ]
+
+    result = build_gap_map(evidence, candidates)
+    gap = next(item for item in result["gaps"] if item["seam"] == "Decision -> Authorization")
+    assert gap["state"] == "MISSING"
+    assert gap["candidate_files"] == candidates["Decision -> Authorization"]
+
+
+def test_candidate_paths_must_be_repository_relative():
+    evidence = {f"{a} -> {b}": "PARTIAL" for a, b in SEAMS}
+    candidates = {f"{a} -> {b}": [] for a, b in SEAMS}
+    candidates["Decision -> Authorization"] = ["../outside.md"]
+
+    try:
+        build_gap_map(evidence, candidates)
+    except ValueError:
+        return
+    assert False, "candidate provenance must remain repository-relative"
