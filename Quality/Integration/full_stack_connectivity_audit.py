@@ -21,6 +21,10 @@ def discover_files(root: Path) -> list[Path]:
     )
 
 
+def _relative(root: Path, path: Path) -> str:
+    return path.resolve().relative_to(root.resolve()).as_posix()
+
+
 def local_reference_candidates(text: str) -> set[str]:
     refs: set[str] = set()
     for match in REFERENCE_RE.findall(text):
@@ -33,10 +37,11 @@ def local_reference_candidates(text: str) -> set[str]:
 
 def build_reference_graph(root: Path) -> dict[str, set[str]]:
     files = discover_files(root)
-    known = {p.as_posix() for p in files}
-    graph = {p.as_posix(): set() for p in files}
+    known = {_relative(root, p) for p in files}
+    graph = {_relative(root, p): set() for p in files}
 
     for path in files:
+        source = _relative(root, path)
         if path.suffix not in {".md", ".py"}:
             continue
         try:
@@ -49,47 +54,50 @@ def build_reference_graph(root: Path) -> dict[str, set[str]]:
                 rel = normalized.relative_to(root.resolve()).as_posix()
             except ValueError:
                 continue
-            if rel in known and rel != path.as_posix():
-                graph[path.as_posix()].add(rel)
+            if rel in known and rel != source:
+                graph[source].add(rel)
     return graph
 
 
-def _has_local_test(path: Path, test_files: set[str]) -> bool:
+def _has_local_test(path: Path, root: Path, test_files: set[str], graph: dict[str, set[str]]) -> bool:
     """Return whether a source file has a sibling test or a test referencing it."""
     sibling_names = {
         f"test_{path.stem}.py",
         f"{path.stem}_test.py",
     }
-    if any(path.parent.joinpath(name).as_posix() in test_files for name in sibling_names):
+    if any(path.parent.joinpath(name).is_file() for name in sibling_names):
         return True
-    return any(path.as_posix() in build_reference_graph(path.parents[1]).get(test, set()) for test in test_files)
+    source = _relative(root, path)
+    return any(source in graph.get(test, set()) for test in test_files)
 
 
 def audit(root: Path) -> dict:
+    root = root.resolve()
     files = discover_files(root)
     graph = build_reference_graph(root)
-    incoming = {p.as_posix(): 0 for p in files}
+    relative_files = {_relative(root, p): p for p in files}
+    incoming = {name: 0 for name in relative_files}
     for targets in graph.values():
         for target in targets:
             incoming[target] += 1
 
     test_files = {
-        p.as_posix() for p in files
+        _relative(root, p) for p in files
         if p.name.startswith("test_") or p.name.endswith("_test.py")
     }
-    source_files = [p for p in files if p.suffix == ".py" and p.as_posix() not in test_files]
+    source_files = [p for p in files if p.suffix == ".py" and _relative(root, p) not in test_files]
 
     orphan_candidates = [
-        p.as_posix() for p in source_files
-        if incoming[p.as_posix()] == 0 and p.parent.name not in {"Scripts", "Tools"}
+        _relative(root, p) for p in source_files
+        if incoming[_relative(root, p)] == 0 and p.parent.name not in {"Scripts", "Tools"}
     ]
     runtime_sources = [
         p for p in source_files
         if p.is_relative_to(root / "Runtime")
     ]
     untested_candidates = [
-        p.as_posix() for p in runtime_sources
-        if not _has_local_test(p, test_files)
+        _relative(root, p) for p in runtime_sources
+        if not _has_local_test(p, root, test_files, graph)
     ]
 
     return {
