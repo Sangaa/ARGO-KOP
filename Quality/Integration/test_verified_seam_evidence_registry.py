@@ -9,6 +9,7 @@ def test_complete_evidence_promotes_seam():
         "contract": "Decision/contract.md",
         "test": "Quality/Integration/test_decision_authorization.py",
         "trace": "Quality/Integration/decision_authorization_trace.md",
+        "verification_status": "VERIFIED",
     }])
     assert result["Decision -> Authorization"]["state"] == "CONNECTED"
 
@@ -20,6 +21,7 @@ def test_missing_evidence_is_rejected():
             "contract": "Decision/contract.md",
             "test": "",
             "trace": "Quality/Integration/decision_authorization_trace.md",
+            "verification_status": "VERIFIED",
         }])
 
 
@@ -29,6 +31,7 @@ def test_duplicate_seam_evidence_is_rejected():
         "contract": "Decision/contract.md",
         "test": "Quality/Integration/test_decision_authorization.py",
         "trace": "Quality/Integration/decision_authorization_trace.md",
+        "verification_status": "VERIFIED",
     }
     with pytest.raises(ValueError, match="duplicate seam evidence"):
         register([record, record.copy()])
@@ -41,6 +44,7 @@ def test_absolute_evidence_reference_is_rejected():
             "contract": "/tmp/contract.md",
             "test": "Quality/Integration/test_decision_authorization.py",
             "trace": "Quality/Integration/decision_authorization_trace.md",
+            "verification_status": "VERIFIED",
         }])
 
 
@@ -51,4 +55,5 @@ def test_parent_traversal_evidence_reference_is_rejected():
             "contract": "Decision/../contract.md",
             "test": "Quality/Integration/test_decision_authorization.py",
             "trace": "Quality/Integration/decision_authorization_trace.md",
+            "verification_status": "VERIFIED",
         }])
