@@ -26,11 +26,11 @@ def test_actual_runtime_trace_and_outcome_can_form_registry_evidence(tmp_path):
 
     trace_relative = "evidence/runtime/execution_trace.json"
     captured = capture_execution_evidence(
-        execution["trace"],
-        target=tmp_path / trace_relative,
+        result,
+        target=str(tmp_path / trace_relative),
     )
     assert captured["status"] == "CAPTURED"
-    assert captured["trace"]["trace_id"] == execution["execution_trace_id"]
+    assert captured["trace_id"] == execution["execution_trace_id"]
 
     contract = tmp_path / "evidence/contracts/execution_outcome_contract.md"
     test_artifact = tmp_path / "evidence/tests/execution_outcome_test.py"
