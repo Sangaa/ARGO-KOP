@@ -62,9 +62,9 @@ If required content is unavailable, record the evidence gap rather than filling 
 
 ARGO KOP is currently under **Connected-Baseline Integrity Validation**, moving from bounded seam-evidence construction into repository-wide connectivity proof.
 
-The latest closed checkpoint is **EJR-100 — Canonical Audit Registry Wiring and Connectivity Test Hardening (2026-08-12)**, following EJR-099.
+The latest closed checkpoint is **EJR-101 — Seam Evidence Boundary Hardening and Promotion Guard (2026-08-12)**, following EJR-100.
 
-The verified seam loader excludes incomplete seam candidates instead of allowing manual promotion. The canonical spine audit now consumes registry-shaped evidence records while requiring contract/test/trace fields for `CONNECTED` records. The full-stack audit also has path-aware runtime test coverage detection, and the integration suite is wired into CI. These changes improve proof plumbing; they do not establish global repository PASS.
+The seam-proof path now rejects direct `CONNECTED` injection outside the verified registry, rejects duplicate seam evidence, and accepts only repository-relative regular files as contract/test/trace evidence. These changes improve proof integrity; they do not establish global repository PASS.
 
 ## Current Connectivity Chain
 
@@ -98,6 +98,8 @@ The governing question is no longer merely whether individual artifacts exist or
 
 **Populate the verified seam registry from actual ARGO-KOP contracts, tests and trace artifacts, run the canonical spine audit, then expand into the Full Repository Connectivity / End-to-End Audit.**
 
+No seam should be promoted merely because a plausible contract name, test name or trace label exists. The three evidence artifacts must be inspected as a coherent set.
+
 The connectivity audit must look for, at minimum:
 
 - files that exist but are not connected;
@@ -116,14 +118,16 @@ Do not expand features or architecture merely because the loader is implemented.
 
 1. Load current repository state.
 2. Load the verified seam registry.
-3. Populate the registry from real repository artifacts.
-4. Run the canonical spine integration audit.
-5. Expand to repository-wide connectivity / end-to-end audit.
-6. Produce the GAP MAP.
-7. Fix the highest-value missing seams.
-8. Run regression tests.
-9. Re-run the audit.
-10. Close the checkpoint.
+3. Enumerate actual seam candidates from repository artifacts.
+4. Inspect contract + executable test + trace together.
+5. Populate the registry only with complete evidence sets.
+6. Run the canonical spine integration audit.
+7. Expand to repository-wide connectivity / end-to-end audit.
+8. Produce the GAP MAP.
+9. Fix the highest-value missing seams.
+10. Run regression tests.
+11. Re-run the audit.
+12. Close the checkpoint.
 
 ## Future Engineering Capability Targets
 
