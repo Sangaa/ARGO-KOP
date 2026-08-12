@@ -48,6 +48,9 @@ The current development baseline includes ongoing corrections and improvements s
 - expanded repository integrity and cross-layer validation rules;
 - repository-backed verified seam evidence loading that excludes incomplete candidates from the verified registry;
 - explicit separation between local evidence completeness and semantic integration certification;
+- canonical spine audit wiring that accepts verified registry evidence records without weakening the evidence boundary;
+- hardened runtime test-coverage detection in the full-stack connectivity audit;
+- CI execution coverage for the integration-quality suite;
 - preservation of future programming, mathematics and implementation capability targets without allowing them to interrupt the current connectivity gate;
 - explicit priority of construction quality, connectivity, evidence and reusable learning over file-count throughput.
 
@@ -58,73 +61,16 @@ A bounded integration checkpoint added:
 - `Quality/Integration/verified_seam_evidence_loader.py`
 - `Quality/Integration/test_verified_seam_evidence_loader.py`
 - `Quality/Integration/VERIFIED_SEAM_EVIDENCE_LOADER.md`
-- `Memory/Engineering_Journal/EJR-099_2026-08-12_VERIFIED_SEAM_EVIDENCE_LOADER_AND_SESSION_CLOSURE.md`
 
-The loader establishes a repository-backed path from candidate seam records to local completeness checks and the verified seam registry. It does **not** certify semantic correctness.
+### 2026-08-12 — Canonical Audit Wiring & Connectivity Test Hardening
 
-**Immediate continuation:** populate complete candidates from actual contracts, tests and trace artifacts; run the canonical spine integration audit; then expand to the Full Repository Connectivity / End-to-End Audit.
+A follow-on checkpoint added:
 
-### 2026-08-12 — Connectivity Audit Target Clarification
+- registry-shaped verified seam records can now feed `canonical_spine_integration_audit.py`;
+- incomplete `CONNECTED` registry records are rejected at the audit boundary;
+- `full_stack_connectivity_audit.py` now performs path-aware runtime test coverage detection;
+- integration-quality tests cover the new registry and runtime-coverage behavior;
+- `.github/workflows/runtime-prototype-tests.yml` now includes the `Quality/Integration` pytest suite on relevant changes;
+- `Memory/Engineering_Journal/EJR-100_2026-08-12_CANONICAL_AUDIT_REGISTRY_WIRING_AND_CONNECTIVITY_TEST_HARDENING.md` closes the checkpoint.
 
-The post-EJR-099 continuation is explicitly defined as:
-
-**Populate → Verify → Canonical Spine Audit → Full Repository Connectivity / End-to-End Audit → GAP MAP → Highest-Value Seam Fixes → Regression Test → Re-Audit → Close Checkpoint**
-
-The repository-wide audit must distinguish file existence from actual connectivity and look for unreachable components, unconsumed contracts, non-real tests, traces without outcomes, missing seams between otherwise complete layers, incomplete paths, terminal paths without evidence, and learning paths that fail to return to Memory/State.
-
-This clarification does not constitute repository-wide PASS and does not authorize feature expansion by itself.
-
-### 2026-08-12 — Future Capability Direction Preserved
-
-The current baseline now records two future implementation tracks without activating them prematurely:
-
-- **Programming + Mathematics Learning Capability:** governed source/book learning, verification, practice, testing, application and reusable knowledge capture.
-- **Future Project A — Android Applications:** programming fundamentals → Kotlin → Android → architecture/testing → real application.
-- **Future Project B — Roblox Game Development + AI:** Luau → Roblox Studio → game architecture/gameplay/state/networking → AI integration → testing/optimization.
-
-The intended Roblox AI path explicitly includes testable relationships between game state, AI input, inference/decision, game action and player feedback.
-
-These are future capability targets. They do not override the active connected-baseline audit.
-
-The engineering priority is explicitly **quality of construction, connectivity, evidence and reusable learning rather than file-count throughput**. Substantial sessions should preserve a deterministic closure point so work can resume without losing the established graph state.
-
-These entries describe development-state evolution. They do not constitute a new official release.
-
----
-
-# Release Policy
-
-- Official releases receive a unique governed version number.
-- Development-baseline changes may advance without creating an official release.
-- Historical release records are preserved.
-- `Release/VERSION.md` remains authoritative for official-release versus development-baseline distinction.
-- `Release/RELEASE_MANIFEST.md` defines the scope of the latest official release and does not promote current development state.
-
----
-
-# Traceability Rule
-
-Every significant development change should be traceable through the relevant repository file, engineering journal/session record, governed decision where required, and Git history.
-
-A changelog entry is a navigation record, not proof that the underlying repository state is complete or validated.
-
----
-
-# Related Documents
-
-- `Release/VERSION.md`
-- `Release/RELEASE_MANIFEST.md`
-- `PROJECT_STATUS.md`
-- `PROJECT_BOOTSTRAP.md`
-- `Memory/Engineering_Journal/SESSION_INDEX.md`
-- `Memory/Engineering_Journal/SESSION_TEMPLATE.md`
-
----
-
-# Guiding Statement
-
-**Release history records approved snapshots; development history records current evolution without confusing either with repository-wide integrity certification.**
-
----
-
-End of Changelog
+**Evidence boundary:** GitHub accepted the mutations and the changed repository artifacts were re-read. No successful CI run was observed at checkpoint closure, so this change is not recorded as a test PASS.
