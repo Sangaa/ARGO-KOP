@@ -9,6 +9,7 @@ def test_pipeline_reaches_readiness_without_promotion():
             "outcome_id": "OUT-1",
             "result": "SUCCESS",
             "evidence_trace_ids": ["TR-1"],
+            "execution_trace_ids": ["TR-1"],
             "confidence": "HIGH",
         },
     )
@@ -24,6 +25,7 @@ def test_pipeline_stops_on_weak_quality():
             "outcome_id": "OUT-2",
             "result": "SUCCESS",
             "evidence_trace_ids": ["TR-2"],
+            "execution_trace_ids": ["TR-2"],
             "confidence": "LOW",
         },
     )
@@ -40,8 +42,26 @@ def test_pipeline_stops_on_invalid_outcome():
             "outcome_id": "OUT-3",
             "result": "GUESS",
             "evidence_trace_ids": ["TR-3"],
+            "execution_trace_ids": ["TR-3"],
             "confidence": "HIGH",
         },
     )
     assert result["status"] == "NOT_READY"
     assert result["stage"] == "EVALUATION"
+
+
+def test_pipeline_rejects_orphaned_outcome_evidence():
+    result = assess_for_promotion(
+        decision_id="DEC-1",
+        execution_id="EXEC-1",
+        outcome={
+            "outcome_id": "OUT-4",
+            "result": "SUCCESS",
+            "evidence_trace_ids": ["TR-4"],
+            "execution_trace_ids": ["TR-5"],
+            "confidence": "HIGH",
+        },
+    )
+    assert result["status"] == "NOT_READY"
+    assert result["stage"] == "EVALUATION"
+    assert "OUTCOME_PROVENANCE_BROKEN" in result["evaluation"]["issues"]
