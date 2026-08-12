@@ -1,12 +1,8 @@
-# PROJECT_STATUS
-
----
-
 # ARGO KOP - PLATFORM STATUS & EVOLUTION METRICS
 
 Platform: ARGO KOP (Knowledge Operating Platform)
 Document ID: PROJECT_STATUS
-Version: 3.3.3
+Version: 3.3.4
 Status: INTEGRITY WARNING / CONNECTED-BASELINE AUDIT
 Category: Root Baseline
 Canonical: Yes
@@ -34,27 +30,6 @@ The repository MUST NOT be declared globally clean until critical identities, re
 
 The development baseline and official release version are intentionally distinct. `Release/VERSION.md` is authoritative for that distinction.
 
-## Current Audit Snapshot
-
-The latest bounded audit has completed and revalidated the following changes:
-
-- `Repository/REP-001_MASTER_INDEX.md` synchronized with the current verified inventory scope.
-- `Repository/REP-002_REPOSITORY_MAP.md` synchronized with the same scope.
-- `Lifecycle/GOV-005_DOCUMENT_LIFECYCLE.md` migrated to `Lifecycle/LIF-001_DOCUMENT_LIFECYCLE.md` to remove the active `GOV-005` identity collision.
-- `Architecture/ARC_MAP.md` treated as a map artifact rather than a competing `ARC-001` canonical identity.
-- `Interfaces/INTF-010_INTEGRATIONS.md` rebuilt as the provider-neutral connector/integration boundary and linked to runtime, memory, learning and execution authority.
-- `Runtime/RUN-005_RUNTIME_WORKFLOW.md`, `Runtime/RUN-006_AI_PROTOCOL.md` and `Runtime/RUN-010_RUNTIME_REFERENCE.md` revalidated against the authoritative development baseline `3.2.1`.
-- `Interfaces/INTF-006_ENVIRONMENT_SENSING.md` revalidated against the same runtime/integration boundary and baseline.
-- `Interfaces/INTF-005_LLM.md` identity was corrected so its internal `INTF-005` identity matches its filename.
-- `Services/SRV-010_SERVICE_REFERENCE.md` revalidated as an evidence-bounded service inventory/reference artifact rather than a claim that every listed service is implemented or operational.
-- `Services/_FOLDER_STATUS.md` revalidated to withdraw stale completion claims and record the current bounded service-validation scope.
-- `Quality/Integration/verified_seam_evidence_loader.py` added to derive only complete local seam-evidence candidates from repository artifacts.
-- `Quality/Integration/test_verified_seam_evidence_loader.py` added and executed as the local loader test boundary.
-- `Quality/Integration/VERIFIED_SEAM_EVIDENCE_LOADER.md` added to define the loader contract and architectural boundary.
-- `Memory/Engineering_Journal/EJR-099_2026-08-12_VERIFIED_SEAM_EVIDENCE_LOADER_AND_SESSION_CLOSURE.md` records the closed checkpoint and its next-step handoff.
-
-These are **verified bounded mutations**, not repository-wide certification.
-
 ---
 
 # 2. Current Operating Objective
@@ -73,11 +48,13 @@ but:
 
 `Critical artifacts + identities + authorities + references + consumers + indexes + status claims agree with current repository evidence.`
 
-The latest enabling mechanism is:
+The current enabling path is:
 
-`Repository → Candidate Seam Records → Local Artifact Existence Check → Contract + Test + Trace → Verified Seam Registry → CONNECTED`
+`Repository → Candidate Seam Records → Contract + Test + Trace → Verified Seam Registry → Canonical Spine Audit → Full Repository Connectivity / End-to-End Audit → GAP MAP`
 
 The loader only proves local artifact completeness. Semantic correctness remains the responsibility of the integration audit.
+
+**Priority rule:** construction quality, connectivity, evidence and reusable learning take precedence over file count. A smaller set of correctly connected and validated artifacts is higher-value than a larger set of superficial modifications.
 
 ---
 
@@ -169,6 +146,8 @@ Only after this gate passes may the project move from **Connected Baseline Stabi
 | Verified seam evidence loader | IMPLEMENTED / TESTED / LOCAL COMPLETENESS ONLY |
 | Verified seam registry semantic certification | OPEN / INTEGRATION AUDIT RESPONSIBILITY |
 | Candidate seam population from actual contracts/tests/traces | NEXT REQUIRED STEP |
+| Full Repository Connectivity / End-to-End Audit | PENDING AFTER CANONICAL SPINE AUDIT |
+| GAP MAP | PENDING CONNECTIVITY AUDIT OUTPUT |
 | Models/Lifecycle/Blueprints validation | OPEN / INTEGRITY HOLD |
 | Projects/Release validation | OPEN |
 | Changelog / Version authority alignment | UPDATED / REVALIDATION REQUIRED |
@@ -180,11 +159,11 @@ Only after this gate passes may the project move from **Connected Baseline Stabi
 
 # 7. Current Engineering Queue
 
-**Current Target:** Populate repository-backed verified seam candidates from actual ARGO-KOP contracts, tests and trace artifacts, then feed the resulting verified seam registry directly into the canonical spine integration audit.
+**Current Target:** Populate repository-backed verified seam candidates from actual ARGO-KOP contracts, tests and trace artifacts, then feed the resulting verified seam registry directly into the canonical spine integration audit and expand into the Full Repository Connectivity / End-to-End Audit.
 
 Required sequence:
 
-**Enumerate → Read → Build Relationship Graph → Cross-Reference → Classify Evidence → Identify Conflicts → Decide Canonical Ownership → Review Upstream/Downstream Impact → Load Complete Seam Candidates → Validate Registry → Feed Canonical Spine Audit → Change → Re-Read → Revalidate → Update Index/Status → Re-Boot**
+**Enumerate → Read → Build Relationship Graph → Cross-Reference → Classify Evidence → Identify Conflicts → Decide Canonical Ownership → Review Upstream/Downstream Impact → Load Complete Seam Candidates → Validate Registry → Feed Canonical Spine Audit → Full Connectivity Audit → GAP MAP → Fix Highest-Value Seams → Regression Test → Re-Audit → Re-Read → Revalidate → Update Index/Status → Re-Boot → Close Checkpoint**
 
 The loader must remain evidence-bounded: missing contract, test or trace evidence excludes a candidate rather than promoting it.
 
@@ -193,19 +172,56 @@ The loader must remain evidence-bounded: missing contract, test or trace evidenc
 1. Enumerate actual candidate seam records from current ARGO-KOP contracts, tests and trace artifacts.
 2. Validate that each candidate is complete before registry admission.
 3. Feed the resulting registry into the canonical spine integration audit.
-4. Use the audit output to identify unresolved connected-baseline relationships, not to infer missing evidence.
-5. Continue the bounded `Services → Runtime Consumers → Repository / Index Services` relationship enumeration where it intersects the canonical spine.
-6. Reconcile `SRV-001` through `SRV-009` contracts against the current Validation Engine and their declared consumers/dependencies.
-7. Reconcile remaining runtime/engine/AI declarations against the authoritative baseline.
-8. Revisit `INTF-006` environment-sensing boundary and its relationship to governance, memory and runtime.
-9. Synchronize root/index status claims after subsequent bounded mutations.
-10. Continue into Projects/Release and then Global Cross-Layer Validation only after affected relationship gates are satisfied.
+4. Expand from the canonical spine into repository-wide connectivity / end-to-end proof.
+5. Produce a GAP MAP based only on verified evidence.
+6. Fix the highest-value missing or broken seams.
+7. Run regression tests and re-run the audit before closing the checkpoint.
+8. Continue the bounded `Services → Runtime Consumers → Repository / Index Services` relationship enumeration where it intersects the canonical spine.
+9. Reconcile `SRV-001` through `SRV-009` contracts against the current Validation Engine and their declared consumers/dependencies.
+10. Reconcile remaining runtime/engine/AI declarations against the authoritative baseline.
+11. Revisit `INTF-006` environment-sensing boundary and its relationship to governance, memory and runtime.
+12. Synchronize root/index status claims after subsequent bounded mutations.
+13. Continue into Projects/Release and then Global Cross-Layer Validation only after affected relationship gates are satisfied.
 
 No feature expansion is justified merely because the seam loader is implemented.
 
 ---
 
-# 8. Version Authority
+# 8. Future Capability Targets
+
+These targets preserve the intended destination without becoming current execution work. They must remain subordinate to the connected-baseline and connectivity gates.
+
+## 8.1 Programming + Mathematics Learning Capability
+
+After the connectivity baseline is sufficiently proven, ARGO should acquire implementation capability through a governed learning loop:
+
+**Source / Book → Extract → Verify Understanding → Practice → Test → Apply → Record Reusable Knowledge**
+
+The curriculum should be demand-driven and project-linked, including programming fundamentals, data structures and algorithms, relevant languages, software architecture, testing and the mathematics required by the target projects.
+
+Learning quality is measured by demonstrated understanding, tested application and reusable repository knowledge—not by number of books, pages or concepts consumed.
+
+## 8.2 Future Project A — Android Applications
+
+Target path:
+
+**Programming Fundamentals → Kotlin → Android Development → Architecture → Testing → Real Android Project**
+
+Implementation begins only when the relevant learning, evidence and connectivity gates justify it.
+
+## 8.3 Future Project B — Roblox Game Development + AI
+
+Target path:
+
+**Luau → Roblox Studio → Game Architecture → Gameplay Systems → State / Networking → AI Integration → Testing → Optimization**
+
+The intended capability is to support development of Roblox games and later integrate AI into game experiences through explicit, testable paths between game state, AI input, inference/decision, game action and player feedback.
+
+These projects are future governed capability targets, not permission for premature feature expansion during the current audit phase.
+
+---
+
+# 9. Version Authority
 
 `Release/VERSION.md` is authoritative for the distinction between:
 
@@ -218,7 +234,7 @@ A development baseline is not an official release.
 
 ---
 
-# 9. Operational Lessons From Current Audit
+# 10. Operational Lessons From Current Audit
 
 1. A successful GitHub write proves only that one requested mutation was accepted; it does not prove surrounding repository integrity.
 2. A status file can be stale or over-claiming; status must be checked against actual file content and relationships.
@@ -250,10 +266,13 @@ A development baseline is not an official release.
 28. A service inventory is not a service implementation claim; physical artifact presence and operational capability must remain separate evidence classes.
 29. A repository-backed evidence loader can reduce manual promotion, but local artifact completeness is not semantic integration certification.
 30. Incomplete seam evidence must be excluded from the verified registry rather than promoted by assumption.
+31. Engineering progress should be measured by connected, evidenced and reusable capability rather than file count.
+32. A learning path should produce demonstrated understanding and tested application, not merely accumulated material.
+33. Future capabilities must be recorded early enough to preserve direction but must not distract from the active integrity gate.
 
 ---
 
-# 10. Root Status Rules
+# 11. Root Status Rules
 
 1. `PROJECT_STATUS.md` summarizes evidence; it does not create authority.
 2. `PROJECT_BOOTSTRAP.md` defines the mandatory repository-first review gate.
@@ -261,6 +280,8 @@ A development baseline is not an official release.
 4. Root status must be re-read and synchronized after material canonical mutations.
 5. A bounded audit result must never be promoted to repository-wide certification without graph-level evidence.
 6. The verified seam evidence loader may supply candidates but cannot certify semantic correctness.
+7. Future capability targets do not override the current connected-baseline execution gate.
+8. Session closure should preserve a deterministic resumption point, evidence boundary, unresolved work and next target.
 
 ---
 
