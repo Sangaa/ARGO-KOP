@@ -9,6 +9,7 @@ SEAMS = [
     ("Decision", "Authorization"),
     ("Authorization", "Execution"),
     ("Execution", "Execution Trace"),
+    ("Execution", "Outcome"),
     ("Execution Trace", "Outcome Evaluation"),
     ("Outcome Evaluation", "Feedback Quality"),
     ("Feedback Quality", "Learning Readiness"),
