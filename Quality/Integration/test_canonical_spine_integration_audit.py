@@ -40,6 +40,20 @@ def test_registry_record_can_promote_only_materialized_verified_seam(tmp_path):
     assert all(g["seam"] != "Decision -> Authorization" for g in result["gap_map"]["gaps"])
 
 
+def test_candidate_provenance_never_promotes_a_seam(tmp_path):
+    (tmp_path / "candidate.md").write_text(
+        "decision authorization execution trace verified connected", encoding="utf-8"
+    )
+    result = audit(tmp_path)
+    assert result["verified_connection_count"] == 0
+    assert result["evidence"]["Decision -> Authorization"] == "PARTIAL"
+    assert "candidate.md" in result["candidate_files"]["Decision -> Authorization"]
+    assert any(
+        gap["seam"] == "Decision -> Authorization"
+        for gap in result["gap_map"]["gaps"]
+    )
+
+
 def test_unverified_registry_record_is_rejected(tmp_path):
     with pytest.raises(ValueError, match="not VERIFIED"):
         audit(tmp_path, _materialized_registry(tmp_path, "UNVERIFIED"))
