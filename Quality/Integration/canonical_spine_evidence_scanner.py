@@ -1,8 +1,8 @@
-"""Derive conservative seam evidence from repository text.
+"""Conservatively discover candidate seam evidence from repository artifacts.
 
-The scanner is a candidate-discovery layer only. It must never promote a seam
-to CONNECTED and must avoid declaring a relationship merely because unrelated
-files somewhere in the repository mention both endpoint concepts.
+This is a candidate-discovery layer only. It must never promote a seam to
+CONNECTED and must never infer a relationship from unrelated files merely
+because endpoint words occur somewhere in the repository.
 """
 
 from pathlib import Path
@@ -37,14 +37,16 @@ def _endpoint_seen(text: str, endpoint: str) -> bool:
 
 
 def scan(root) -> dict:
-    """Return PARTIAL only when both endpoint concepts co-occur in one file.
+    """Return seam states plus bounded candidate artifact locations.
 
-    Repository-wide co-occurrence is intentionally not treated as relationship
-    evidence because it produces false positives from unrelated documents.
-    CONNECTED remains impossible at this layer.
+    A seam becomes PARTIAL only when both endpoint concepts co-occur in one
+    artifact. Candidate locations are provenance hints for the next evidence
+    inspection step; they are not evidence of integration and never create
+    CONNECTED.
     """
     root = Path(root)
     evidence = {f"{source} -> {destination}": "MISSING" for source, destination in SEAMS}
+    candidate_files = {f"{source} -> {destination}": [] for source, destination in SEAMS}
 
     for path in _repository_files(root):
         try:
@@ -53,9 +55,11 @@ def scan(root) -> dict:
             continue
         for source, destination in SEAMS:
             key = f"{source} -> {destination}"
-            if evidence[key] == "PARTIAL":
-                continue
             if _endpoint_seen(text, source) and _endpoint_seen(text, destination):
-                evidence[key] = "PARTIAL"
+                if evidence[key] == "MISSING":
+                    evidence[key] = "PARTIAL"
+                relative = path.relative_to(root).as_posix()
+                if relative not in candidate_files[key]:
+                    candidate_files[key].append(relative)
 
-    return evidence
+    return {"evidence": evidence, "candidate_files": candidate_files}
