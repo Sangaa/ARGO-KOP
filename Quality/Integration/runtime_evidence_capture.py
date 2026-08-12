@@ -1,12 +1,15 @@
-"""Capture a controlled runtime result into an explicit audit-evidence target.
+"""Capture controlled runtime evidence into an explicit governed target.
 
-This is deliberately a thin adapter: it reuses the existing runtime result
-persistence adapter and never writes to canonical Memory implicitly.
+The adapter never mutates canonical Memory implicitly. Temporary targets remain
+valid for tests; repository-backed capture is available only through the
+explicit ``capture_repository_evidence`` boundary.
 """
 
-from pathlib import Path
+from pathlib import Path, PurePosixPath
 
 from runtime_result_persistence_adapter import persist_candidate, reread
+
+_REPOSITORY_EVIDENCE_ROOT = PurePosixPath("Quality/Integration/evidence/runtime")
 
 
 def capture_execution_evidence(runtime_result: dict, target: str) -> dict:
@@ -32,3 +35,19 @@ def capture_execution_evidence(runtime_result: dict, target: str) -> dict:
         "task_id": reread_result.get("task_id"),
         "session_id": reread_result.get("session_id"),
     }
+
+
+def capture_repository_evidence(runtime_result: dict, repository_root: str, relative_name: str) -> dict:
+    """Capture runtime evidence only beneath the governed repository evidence root."""
+    relative = PurePosixPath(relative_name)
+    if relative.is_absolute() or ".." in relative.parts or not relative.parts:
+        return {"status": "HOLD", "reason": "INVALID_EVIDENCE_TARGET"}
+
+    governed = _REPOSITORY_EVIDENCE_ROOT / relative
+    target = Path(repository_root) / Path(*governed.parts)
+    result = capture_execution_evidence(runtime_result, str(target))
+    if result.get("status") != "CAPTURED":
+        return result
+
+    result["repository_relative_path"] = governed.as_posix()
+    return result
