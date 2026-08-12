@@ -58,7 +58,14 @@ The current development baseline includes ongoing corrections and improvements s
 - repository-relative regular-file enforcement for contract/test/trace evidence paths;
 - file-local canonical-spine candidate discovery to prevent unrelated repository-wide keyword co-occurrence from inflating `PARTIAL` seam signals;
 - bounded candidate-artifact provenance carried from the scanner into the integration audit without granting it verification authority;
-- preservation of bounded candidate provenance in GAP MAP entries without allowing provenance to change seam state.
+- preservation of bounded candidate provenance in GAP MAP entries without allowing provenance to change seam state;
+- execution provenance enforcement from Decision → Authorization → Execution;
+- outcome provenance enforcement from Execution Trace → Outcome Evidence;
+- bounded canonical execution-trace production;
+- governed execution entrypoint with explicit authorization and trace requirements;
+- producer-failure handling that prevents false execution success;
+- discovery and rewiring of the existing connected-spine runtime orchestrator from `mock_executor` to the governed execution path;
+- bounded decision-trace materialization for execution lineage.
 
 ### 2026-08-12 — Verified Seam Evidence Loader
 
@@ -70,66 +77,76 @@ A bounded integration checkpoint added:
 
 ### 2026-08-12 — Canonical Audit Wiring & Connectivity Test Hardening
 
-A follow-on checkpoint added:
+A follow-on checkpoint added registry wiring, runtime coverage detection and Integration pytest coverage. `EJR-100` closed the checkpoint.
 
-- registry-shaped verified seam records can now feed `canonical_spine_integration_audit.py`;
-- incomplete `CONNECTED` registry records are rejected at the audit boundary;
-- `full_stack_connectivity_audit.py` now performs path-aware runtime test coverage detection;
-- integration-quality tests cover the new registry and runtime-coverage behavior;
-- `.github/workflows/runtime-prototype-tests.yml` now includes the `Quality/Integration` pytest suite on relevant changes;
-- `Memory/Engineering_Journal/EJR-100_2026-08-12_CANONICAL_AUDIT_REGISTRY_WIRING_AND_CONNECTIVITY_TEST_HARDENING.md` closes the checkpoint.
-
-**Evidence boundary:** GitHub accepted the mutations and the changed repository artifacts were re-read. No successful CI run was observed at checkpoint closure, so this change is not recorded as a test PASS.
+**Evidence boundary:** no successful CI run was observed at checkpoint closure.
 
 ### 2026-08-12 — Seam Evidence Boundary Hardening
 
-EJR-101 hardened the promotion boundary:
-
-- `CONNECTED` is now registry-only at the canonical spine audit boundary;
-- duplicate seam identities are rejected rather than overwritten;
-- evidence paths must be repository-relative regular files;
-- path-traversal, absolute-path and directory candidates are excluded;
-- `Memory/Engineering_Journal/EJR-101_2026-08-12_SEAM_EVIDENCE_BOUNDARY_HARDENING_AND_PROMOTION_GUARD.md` closes the checkpoint.
-
-No new canonical seam was certified `CONNECTED` in this checkpoint because a complete contract + executable test + trace evidence set was not sufficiently established.
+EJR-101 hardened the `CONNECTED` promotion boundary, duplicate rejection and repository-relative evidence-path validation.
 
 ### 2026-08-12 — Evidence Materialization and Scanner Hardening
 
-Subsequent checkpoints strengthened the proof boundary further:
-
-- canonical audit evidence paths are materialized and validated as repository files;
-- the verified registry rejects unsafe or duplicate evidence references;
-- the canonical-spine scanner no longer combines unrelated repository files to infer `PARTIAL` seam candidates;
-- same-file endpoint co-occurrence is retained only as a candidate-discovery signal;
-- `Memory/Engineering_Journal/EJR-102_2026-08-12_CANONICAL_AUDIT_EVIDENCE_MATERIALIZATION_GUARD.md` documents the materialization boundary;
-- `Memory/Engineering_Journal/EJR-103_2026-08-12_REGISTRY_REFERENCE_BOUNDARY_HARDENING.md` documents registry reference safety;
-- `Memory/Engineering_Journal/EJR-104_2026-08-12_CANONICAL_SPINE_SCANNER_FALSE_POSITIVE_HARDENING.md` closes the scanner checkpoint;
-- `PROJECT_STATUS.md` and `START_HERE.md` were synchronized to the EJR-104 resumption point.
-
-No canonical-spine seam was promoted to `CONNECTED` by keyword evidence alone. Repository-wide connectivity remains open.
+EJR-102 through EJR-104 strengthened evidence materialization, registry references and file-local candidate discovery. Root status/navigation was synchronized to the corresponding checkpoint.
 
 ### 2026-08-12 — Candidate Provenance Wiring
 
-EJR-105 extended discovery without weakening certification:
-
-- `canonical_spine_evidence_scanner.py` returns both seam state and repository-relative `candidate_files` provenance;
-- candidate provenance is collected only when both endpoint concepts occur in the same concrete artifact;
-- `canonical_spine_integration_audit.py` carries this provenance into its report;
-- scanner and integration-audit tests verify provenance, repository-relative paths and preservation of conservative `PARTIAL` behavior;
-- provenance remains a navigation aid for the next contract/test/trace inspection step and is not verification evidence by itself.
-
-No canonical-spine seam was promoted to `CONNECTED` by this change.
+EJR-105 extended scanner and audit reports with bounded repository-relative candidate provenance without granting verification authority.
 
 ### 2026-08-12 — Candidate Provenance Carried Into GAP MAPs
 
-EJR-106 extended the evidence-navigation path:
+EJR-106 extended the GAP MAP with bounded candidate provenance and path-safety validation. Provenance does not alter `MISSING` or `PARTIAL` state.
 
-- `canonical_spine_gap_map.py` now accepts optional `candidate_files` provenance;
-- non-connected gap entries can preserve the concrete repository-relative candidate files that led to discovery;
-- candidate paths are validated against absolute-path and `..` traversal escape;
-- GAP MAP provenance does not change `MISSING` or `PARTIAL` into `CONNECTED`;
-- regression tests cover provenance preservation and unsafe-path rejection;
-- `START_HERE.md` now resumes from EJR-106 and documents the new GAP MAP evidence-navigation path;
-- `Memory/Engineering_Journal/EJR-106_2026-08-12_CANDIDATE_PROVENANCE_CARRIED_INTO_GAP_MAPS.md` closes the checkpoint.
+### 2026-08-12 — Execution Provenance Continuity
 
-No canonical-spine seam was promoted to `CONNECTED` by this change. CI success was not observed at checkpoint closure.
+EJR-107 and EJR-108 hardened the runtime boundaries:
+
+- execution must carry a valid source trace from decision lineage;
+- outcomes must carry execution trace IDs;
+- outcome evidence must belong to the execution trace lineage;
+- learning integration tests preserve the provenance boundary.
+
+No seam was promoted to `CONNECTED` by these changes.
+
+### 2026-08-12 — Execution/Outcome Contract Alignment
+
+EJR-109 aligned the Outcome Evaluation contract with execution provenance and identified the missing Runtime Producer → Outcome path. The contract was strengthened without falsely claiming live runtime continuity.
+
+### 2026-08-12 — Canonical Execution Trace Producer
+
+EJR-110 added:
+
+- `Runtime/Execution/execution_trace_producer.py`
+- producer regression tests;
+- a Producer → Learning test handoff;
+- root resumption documentation.
+
+The producer remains a recorder, not an executor or authorization mechanism.
+
+### 2026-08-12 — Governed Execution Entrypoint
+
+EJR-111 and EJR-112 added and hardened:
+
+- `Runtime/Execution/execution_entrypoint.py`;
+- `Runtime/Execution/test_execution_entrypoint.py`;
+- explicit authorization and source-trace requirements;
+- producer-failure handling;
+- regression coverage for the governed handoff.
+
+Repository search initially found no independent application caller, so the production caller path remained unproven at EJR-112.
+
+### 2026-08-12 — Connected Spine Real Execution Handoff
+
+EJR-113 resolved the previous caller-discovery gap:
+
+- repository inspection identified `Runtime/Execution/connected_spine_runner.py` as the existing cross-stage runtime orchestrator;
+- the runner previously bypassed the governed path through `mock_executor`;
+- added `Decision/decision_trace_producer.py` and its regression test;
+- rewired `connected_spine_runner.py` to materialize a decision trace and invoke the governed execution entrypoint;
+- the runner now exposes both `source_trace_id` and canonical `execution_trace_id` lineage;
+- connected-spine tests now verify the decision-to-execution trace handoff and authorization blocking;
+- `START_HERE.md` now resumes from EJR-113.
+
+The path remains controlled/simulated with `side_effect=False`. The exact runner output has not yet been proven through the canonical Outcome Producer → Outcome Evaluation path, so the complete Execution → Outcome seam remains unpromoted.
+
+**Evidence boundary:** no CI PASS is recorded without an explicit GitHub status/workflow result.
