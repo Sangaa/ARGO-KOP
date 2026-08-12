@@ -62,9 +62,11 @@ If required content is unavailable, record the evidence gap rather than filling 
 
 ARGO KOP is currently under **Connected-Baseline Integrity Validation**, moving from bounded seam-evidence construction into repository-wide connectivity proof.
 
-The latest closed checkpoint is **EJR-106 — Candidate Provenance Carried Into Gap Maps (2026-08-12)**.
+The latest closed checkpoint is **EJR-109 — Execution / Outcome Contract Alignment and Producer Gap (2026-08-12)**.
 
-The canonical-spine scanner treats same-file endpoint co-occurrence as a candidate `PARTIAL` signal and returns bounded repository-relative candidate artifact locations. The gap-map layer now preserves that provenance without changing the seam state. Verified seam promotion remains gated by complete, materialized contract/test/trace evidence through the registry and canonical audit.
+The canonical-spine scanner treats same-file endpoint co-occurrence as a candidate `PARTIAL` signal and returns bounded repository-relative candidate artifact locations. The gap-map layer preserves that provenance without changing the seam state. Verified seam promotion remains gated by complete, materialized contract/test/trace evidence through the registry and canonical audit.
+
+The current high-value finding is the **Execution → Execution Trace → Outcome** seam: provenance guards now exist at execution and outcome evaluation boundaries, but the concrete runtime producer-to-outcome path has not yet been evidenced end-to-end. This is an explicit `PARTIAL / UNPROVEN PRODUCER PATH`, not `CONNECTED`.
 
 ## Current Connectivity Chain
 
@@ -94,11 +96,35 @@ Regression Test
 Re-Audit
 ```
 
+For the current Execution/Outcome path, the focused construction chain is:
+
+```text
+Decision
+   ↓
+Execution Producer
+   ↓
+Execution Trace (canonical trace_id)
+   ↓
+Outcome Producer
+   ↓
+Outcome Evaluation
+   ↓
+Feedback Quality
+   ↓
+Learning Readiness
+   ↓
+Existing Promotion Gate
+```
+
 The governing question is no longer merely whether individual artifacts exist or work independently. The current question is whether the repository behaves as one connected system, with evidence-backed seams from source through execution to outcome.
 
 ## Current Next Target
 
-**Use bounded candidate provenance to locate real seam artifacts, inspect contract + executable test + trace as one set, populate the verified registry only when the evidence is complete, then run the canonical spine audit and generate an evidence-bounded GAP MAP before expanding into the Full Repository Connectivity / End-to-End Audit.**
+**Locate or build the smallest real execution-producer → execution-trace → outcome path that satisfies the existing contracts without creating a parallel runtime architecture.**
+
+The required proof is:
+
+**Actual Execution Producer → Canonical Trace Creation → Trace ID Propagation → Actual Outcome Creation → Outcome Evaluation → Executable Integration Test → Trace/Evidence Artifact**
 
 Candidate provenance is a navigation aid only. It is not verification evidence and must not be promoted by itself.
 
@@ -116,7 +142,8 @@ The connectivity audit must look for, at minimum:
 - paths that start but do not terminate;
 - paths that terminate without evidence;
 - components that exist but are unreachable;
-- learning paths that do not return correctly to Memory/State.
+- learning paths that do not return correctly to Memory/State;
+- execution traces that are defined but are not actually propagated into downstream outcomes.
 
 Do not expand features or architecture merely because the loader, registry, scanner or gap-map enhancement is implemented.
 
@@ -124,18 +151,20 @@ Do not expand features or architecture merely because the loader, registry, scan
 
 1. Load current repository state.
 2. Load the verified seam registry.
-3. Enumerate actual seam candidates from repository artifacts.
-4. Use same-file scanner results and bounded candidate provenance only to prioritize inspection.
-5. Inspect contract + executable test + trace together.
-6. Validate the runtime consumer and outcome relationship.
-7. Populate the registry only with complete evidence sets.
-8. Run the canonical spine integration audit.
-9. Generate the GAP MAP while preserving bounded candidate provenance.
-10. Expand to repository-wide connectivity / end-to-end audit.
-11. Fix the highest-value missing seams.
-12. Run regression tests.
-13. Re-run the audit.
-14. Close the checkpoint.
+3. Confirm the latest checkpoint and inspect its changed artifacts.
+4. Enumerate actual seam candidates from repository artifacts.
+5. Use same-file scanner results and bounded candidate provenance only to prioritize inspection.
+6. Inspect contract + executable test + trace together.
+7. Locate the actual runtime producer/consumer path.
+8. Validate trace identity propagation from execution into outcome.
+9. Populate the registry only with complete evidence sets.
+10. Run the canonical spine integration audit.
+11. Generate the GAP MAP while preserving bounded candidate provenance.
+12. Expand to repository-wide connectivity / end-to-end audit.
+13. Fix the highest-value missing seams.
+14. Run regression tests.
+15. Re-run the audit.
+16. Close the checkpoint.
 
 ## Future Engineering Capability Targets
 
