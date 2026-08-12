@@ -19,7 +19,7 @@ def test_audit_is_conservative_without_verified_seams(tmp_path):
     ]
 
 
-def _materialized_registry(tmp_path):
+def _materialized_registry(tmp_path, verification_status="VERIFIED"):
     for path in ("contract.md", "test.py", "trace.md"):
         (tmp_path / path).write_text("verified evidence", encoding="utf-8")
     return {
@@ -28,6 +28,7 @@ def _materialized_registry(tmp_path):
             "contract": "contract.md",
             "test": "test.py",
             "trace": "trace.md",
+            "verification_status": verification_status,
         }
     }
 
@@ -37,6 +38,11 @@ def test_registry_record_can_promote_only_materialized_verified_seam(tmp_path):
     assert result["evidence"]["Decision -> Authorization"] == "CONNECTED"
     assert result["verified_connection_count"] == 1
     assert all(g["seam"] != "Decision -> Authorization" for g in result["gap_map"]["gaps"])
+
+
+def test_unverified_registry_record_is_rejected(tmp_path):
+    with pytest.raises(ValueError, match="not VERIFIED"):
+        audit(tmp_path, _materialized_registry(tmp_path, "UNVERIFIED"))
 
 
 def test_string_connected_state_is_rejected(tmp_path):
@@ -50,6 +56,7 @@ def test_incomplete_verified_registry_record_is_rejected(tmp_path):
             "state": "CONNECTED",
             "contract": "Decision/contract.md",
             "test": "Quality/Integration/test_decision_authorization.py",
+            "verification_status": "VERIFIED",
         }
     }
     with pytest.raises(ValueError, match="incomplete verified seam evidence"):
@@ -63,6 +70,7 @@ def test_nonexistent_registry_evidence_is_rejected(tmp_path):
             "contract": "contract.md",
             "test": "test.py",
             "trace": "trace.md",
+            "verification_status": "VERIFIED",
         }
     }
     with pytest.raises(ValueError, match="files missing or invalid"):
@@ -80,6 +88,7 @@ def test_registry_parent_traversal_is_rejected(tmp_path):
             "contract": "contract.md",
             "test": "test.py",
             "trace": "../trace.md",
+            "verification_status": "VERIFIED",
         }
     }
     with pytest.raises(ValueError, match="files missing or invalid"):
