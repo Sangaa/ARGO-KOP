@@ -62,22 +62,22 @@ If required content is unavailable, record the evidence gap rather than filling 
 
 ARGO KOP is currently under **Connected-Baseline Integrity Validation**, moving from bounded seam-evidence construction into repository-wide connectivity proof.
 
-The latest closed checkpoint is **EJR-099 — Verified Seam Evidence Loader and Session Closure (2026-08-12)**.
+The latest closed checkpoint is **EJR-100 — Canonical Audit Registry Wiring and Connectivity Test Hardening (2026-08-12)**, following EJR-099.
 
-The loader excludes incomplete seam candidates instead of allowing manual promotion. It proves local artifact completeness only; semantic correctness remains the responsibility of the integration audit.
-
-These are bounded audit results. They do not establish global repository PASS.
+The verified seam loader excludes incomplete seam candidates instead of allowing manual promotion. The canonical spine audit now consumes registry-shaped evidence records while requiring contract/test/trace fields for `CONNECTED` records. The full-stack audit also has path-aware runtime test coverage detection, and the integration suite is wired into CI. These changes improve proof plumbing; they do not establish global repository PASS.
 
 ## Current Connectivity Chain
 
 ```text
 Canonical Spine Evidence Scanner
         ↓
-Canonical Spine Integration Audit
+Candidate Seam Records
+        ↓
+Verified Seam Evidence Loader
         ↓
 Verified Seam Evidence Registry
         ↓
-Verified Seam Evidence Loader
+Canonical Spine Integration Audit
         ↓
 Real Contract / Test / Trace Evidence
         ↓
