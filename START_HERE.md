@@ -28,9 +28,11 @@ If an external test is needed and cannot be executed from the repository-side en
 
 ARGO KOP is currently under **Connected-Baseline Integrity Validation**, moving from bounded seam-evidence construction into repository-wide connectivity proof.
 
-The latest closed checkpoint is **EJR-118 — External Advisory Authority Boundary (2026-08-12)**.
+The latest closed checkpoint is **EJR-120 — Runtime Test Boundary and Safe HOLD Repair (2026-08-12)**.
 
 The controlled runtime path contains a real cross-stage runner, governed execution entrypoint, canonical execution-trace production, canonical outcome production, and a reusable explicit-target persistence adapter. A thin evidence-capture adapter now reuses that persistence path to capture the exact runtime-produced trace without introducing another storage layer. The controlled path remains side-effect-free and must not be interpreted as autonomous production execution.
+
+EJR-120 also repaired two concrete test/runtime contradictions revealed by GitHub Actions: the integration workflow now exposes the existing runtime module roots to its tests, and the prototype treats missing human authorization as a reversible `HOLD` rather than an explicit `REJECTED` state.
 
 ## Current Connectivity Chain
 
@@ -98,7 +100,9 @@ It is not yet a complete canonical-spine certification because the evidence stil
 
 ## Current Next Target
 
-**Use the thin runtime evidence-capture adapter together with the existing explicit-target trace persistence path to establish the governed boundary for audit evidence; do not create another persistence layer. Then determine whether the complete contract + runtime consumer + executable test + exact runtime trace/outcome evidence set is sufficient for verified-registry promotion, and run the canonical audit before expanding to the next highest-value seam.**
+**First inspect the post-EJR-120 GitHub Actions result. If the repaired suite is green, use the existing runtime-to-registry integration proof to determine whether the complete contract + runtime consumer + executable test + exact runtime trace/outcome evidence set is sufficient for verified-registry promotion, then run the canonical audit before expanding to the next highest-value seam.**
+
+Do not create another persistence layer.
 
 The evidence loader requires the trace artifact itself to be a repository-relative JSON execution-trace record with minimum identity fields. This prevents an arbitrary existing file from being treated as trace evidence merely because a path exists.
 
@@ -145,25 +149,26 @@ Do not expand features or architecture merely because a loader, registry, scanne
 1. Load current repository state.
 2. Load the verified seam registry.
 3. Confirm the latest checkpoint and inspect its changed artifacts.
-4. Enumerate actual seam candidates.
-5. Use bounded candidate provenance only to prioritize inspection.
-6. Inspect contract + executable test + trace together.
-7. Inspect `connected_spine_runner.py` and its exact downstream consumers.
-8. Confirm the canonical Outcome Producer and its trace lineage.
-9. Validate `execution_trace_id` → `execution_trace_ids` propagation.
-10. Validate Outcome Evaluation and lineage.
-11. Reuse the existing explicit-target persistence adapter and the thin evidence-capture adapter; do not invent a second persistence path.
-12. Define the permanent evidence boundary before committing any runtime-generated artifact.
-13. Determine whether the complete evidence set justifies verified-registry promotion.
-14. Run the canonical spine integration audit.
-15. Generate the GAP MAP.
-16. Expand to repository-wide connectivity / end-to-end audit when the current seam set is mature enough.
-17. Inventory missing folders/files and orphaned or duplicate structures.
-18. Rank all gaps by dependency, seam value and construction impact—not file count.
-19. Fix the highest-value missing seams.
-20. Run regression tests.
-21. Re-run the audit.
-22. Close the checkpoint.
+4. Inspect the latest GitHub Actions result when one was triggered by the previous checkpoint.
+5. Enumerate actual seam candidates.
+6. Use bounded candidate provenance only to prioritize inspection.
+7. Inspect contract + executable test + trace together.
+8. Inspect `connected_spine_runner.py` and its exact downstream consumers.
+9. Confirm the canonical Outcome Producer and its trace lineage.
+10. Validate `execution_trace_id` → `execution_trace_ids` propagation.
+11. Validate Outcome Evaluation and lineage.
+12. Reuse the existing explicit-target persistence adapter and the thin evidence-capture adapter; do not invent a second persistence path.
+13. Define the permanent evidence boundary before committing any runtime-generated artifact.
+14. Determine whether the complete evidence set justifies verified-registry promotion.
+15. Run the canonical spine integration audit.
+16. Generate the GAP MAP.
+17. Expand to repository-wide connectivity / end-to-end audit when the current seam set is mature enough.
+18. Inventory missing folders/files and orphaned or duplicate structures.
+19. Rank all gaps by dependency, seam value and construction impact—not file count.
+20. Fix the highest-value missing seams.
+21. Run regression tests.
+22. Re-run the audit.
+23. Close the checkpoint.
 
 ## Future Engineering Capability Targets
 
