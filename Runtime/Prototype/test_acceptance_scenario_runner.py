@@ -25,3 +25,20 @@ def test_all_canonical_scenarios_match_expected_behavior():
         assert result["state"] == scenario["expected_state"]
         assert result["result"]["executed"] == scenario["expected_executed"]
         assert result["result"]["external_side_effect"] == scenario["expected_external_side_effect"]
+
+
+def test_missing_human_authorization_is_reversible_hold():
+    result = run(
+        {
+            "task_id": "AUTH-HOLD-001",
+            "session_id": "SCENARIO-TEST",
+            "active_state": "awaiting_customer_response",
+            "evidence": ["scenario:evidence"],
+            "knowledge": ["scenario:rule"],
+            "requested_outcome": "prepare a response draft",
+        },
+        human_approved=False,
+    )
+    assert result["authorization"]["status"] == "HOLD"
+    assert result["state"] == "HOLD"
+    assert result["result"]["executed"] is False
