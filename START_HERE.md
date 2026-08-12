@@ -20,9 +20,9 @@ If required content is unavailable, record the evidence gap rather than filling 
 
 ARGO KOP is currently under **Connected-Baseline Integrity Validation**, moving from bounded seam-evidence construction into repository-wide connectivity proof.
 
-The latest closed checkpoint is **EJR-116 — Connected Spine Trace Materialization Reuse (2026-08-12)**.
+The latest closed checkpoint is **EJR-117 — Thin Runtime Evidence Capture Boundary (2026-08-12)**.
 
-The controlled runtime path contains a real cross-stage runner, governed execution entrypoint, canonical execution-trace production, canonical outcome production, and a reusable explicit-target persistence adapter. The exact runner output is consumed by Outcome Evaluation and Feedback Quality. The controlled path remains side-effect-free and must not be interpreted as autonomous production execution.
+The controlled runtime path contains a real cross-stage runner, governed execution entrypoint, canonical execution-trace production, canonical outcome production, and a reusable explicit-target persistence adapter. A thin evidence-capture adapter now reuses that persistence path to capture the exact runtime-produced trace without introducing another storage layer. The controlled path remains side-effect-free and must not be interpreted as autonomous production execution.
 
 ## Current Connectivity Chain
 
@@ -84,19 +84,19 @@ Learning Readiness
 Existing Promotion Gate
 ```
 
-The exact controlled path from `connected_spine_runner.run()` through Outcome Evaluation is executable and test-proven. Its exact runtime-produced trace can also be persisted and re-read through the existing explicit-target persistence adapter without silently mutating canonical Memory.
+The exact controlled path from `connected_spine_runner.run()` through Outcome Evaluation is executable and test-proven. Its exact runtime-produced trace can also be captured through the thin evidence-capture adapter and persisted/re-read through the existing explicit-target persistence adapter without silently mutating canonical Memory.
 
-It is not yet a complete canonical-spine certification because the evidence still needs to be materialized into the verified seam registry and audited as one evidence set.
+It is not yet a complete canonical-spine certification because the evidence still needs to be justified as one complete evidence set, materialized into the verified seam registry, and audited as one evidence set.
 
 ## Current Next Target
 
-**Use the existing explicit-target trace persistence path to establish the governed boundary for permanent audit evidence; do not create another persistence layer. Then materialize the complete contract + runtime consumer + executable test + actual trace/outcome evidence set into the verified seam registry only when justified, and run the canonical audit before expanding to the next highest-value seam.**
+**Use the thin runtime evidence-capture adapter together with the existing explicit-target trace persistence path to establish the governed boundary for audit evidence; do not create another persistence layer. Then determine whether the complete contract + runtime consumer + executable test + exact runtime trace/outcome evidence set is sufficient for verified-registry promotion, and run the canonical audit before expanding to the next highest-value seam.**
 
 The evidence loader requires the trace artifact itself to be a repository-relative JSON execution-trace record with minimum identity fields. This prevents an arbitrary existing file from being treated as trace evidence merely because a path exists.
 
 Required proof:
 
-**connected_spine_runner.run() → execution_trace_id → Outcome Producer → execution_trace_ids → Outcome Evaluation → Feedback Quality → Learning Readiness → explicit trace materialization → Verified Registry → Canonical Audit**
+**connected_spine_runner.run() → execution_trace_id → Outcome Producer → execution_trace_ids → Outcome Evaluation → Feedback Quality → Learning Readiness → thin capture → explicit trace materialization → Verified Registry → Canonical Audit**
 
 Passing the loader is still not semantic certification. A synthetic trace fixture may test the loader boundary, but it cannot substitute for evidence that the trace was produced by the actual runtime path.
 
@@ -113,6 +113,7 @@ Candidate provenance is a navigation aid only. It is not verification evidence a
 The connectivity audit must look for:
 
 - files that exist but are not connected;
+- folders or files required by the architecture but missing;
 - contracts with no real runtime consumer;
 - tests that do not exercise a real path;
 - traces that do not reach an outcome;
@@ -126,9 +127,10 @@ The connectivity audit must look for:
 - controlled execution results that bypass the canonical Outcome Producer;
 - outcome evidence that is not tied to the exact execution trace that produced it;
 - trace references that point to arbitrary files instead of materialized execution-trace records;
-- permanent evidence writes that bypass an explicit governed target.
+- permanent evidence writes that bypass an explicit governed target;
+- duplicate, stale or historical structures that no longer have a justified current role.
 
-Do not expand features or architecture merely because a loader, registry, scanner, gap-map, producer, entrypoint or persistence adapter exists.
+Do not expand features or architecture merely because a loader, registry, scanner, gap-map, producer, entrypoint, capture adapter or persistence adapter exists.
 
 ## Required Resumption Sequence
 
@@ -142,16 +144,18 @@ Do not expand features or architecture merely because a loader, registry, scanne
 8. Confirm the canonical Outcome Producer and its trace lineage.
 9. Validate `execution_trace_id` → `execution_trace_ids` propagation.
 10. Validate Outcome Evaluation and lineage.
-11. Reuse the existing explicit-target persistence adapter for materialization tests; do not invent a second persistence path.
+11. Reuse the existing explicit-target persistence adapter and the thin evidence-capture adapter; do not invent a second persistence path.
 12. Define the permanent evidence boundary before committing any runtime-generated artifact.
-13. Materialize the complete evidence set into the verified registry only when justified.
+13. Determine whether the complete evidence set justifies verified-registry promotion.
 14. Run the canonical spine integration audit.
 15. Generate the GAP MAP.
-16. Expand to repository-wide connectivity / end-to-end audit.
-17. Fix the highest-value missing seams.
-18. Run regression tests.
-19. Re-run the audit.
-20. Close the checkpoint.
+16. Expand to repository-wide connectivity / end-to-end audit when the current seam set is mature enough.
+17. Inventory missing folders/files and orphaned or duplicate structures.
+18. Rank all gaps by dependency, seam value and construction impact—not file count.
+19. Fix the highest-value missing seams.
+20. Run regression tests.
+21. Re-run the audit.
+22. Close the checkpoint.
 
 ## Future Engineering Capability Targets
 
