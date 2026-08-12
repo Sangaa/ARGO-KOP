@@ -11,6 +11,7 @@ from execution_entrypoint import execute
 from context_conflict_detector import detect
 from reasoning_hold import evaluate
 from decision_trace_producer import record_decision_trace
+from outcome_producer import record_execution_outcome
 
 
 def run(fixture: dict) -> dict:
@@ -70,9 +71,26 @@ def run(fixture: dict) -> dict:
             ],
         )
 
+    outcome = None
+    if execution.get("execution_trace_id"):
+        outcome_result = record_execution_outcome(
+            decision_id=decision_trace["trace_id"],
+            execution=execution,
+        )
+        if outcome_result["status"] == "OUTCOME_RECORDED":
+            outcome = outcome_result["outcome"]
+        else:
+            outcome = {
+                "status": "BLOCKED",
+                "reason": "OUTCOME_RECORDING_FAILED",
+                "issues": outcome_result.get("issues", []),
+            }
+
     return {
         "task_id": fixture["task"]["task_id"],
         "stages": [classified, reasoning, conflict, hold, proposal, authorization, plan, execution],
         "decision_trace": decision_trace,
+        "execution": execution,
+        "outcome": outcome,
         "final_status": "SIMULATED" if execution.get("execution_trace_id") else execution.get("status"),
     }
