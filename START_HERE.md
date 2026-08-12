@@ -62,9 +62,17 @@ If required content is unavailable, record the evidence gap rather than filling 
 
 ARGO KOP is currently under **Connected-Baseline Integrity Validation**.
 
-Recent work has corrected and revalidated selected identity and authority boundaries, including the repository index/map synchronization, Lifecycle identity migration to `LIF-001`, and Engine coordination/learning specifications `ENG-010` and `ENG-011`.
+Recent work has corrected and revalidated selected identity and authority boundaries, synchronized repository index/map scope, and added a repository-backed **verified seam evidence loader** with its local test and contract documentation.
+
+The loader now excludes incomplete seam candidates instead of allowing manual promotion. It proves local artifact completeness only; semantic correctness remains the responsibility of the canonical spine integration audit.
 
 These are bounded audit results. They do not establish global repository PASS.
+
+## Current Next Target
+
+**Populate complete seam candidates from actual ARGO-KOP contracts, tests and trace artifacts, validate the resulting verified seam registry, and feed that registry into the canonical spine integration audit.**
+
+Do not expand features or architecture merely because the loader is implemented.
 
 ## Before You Modify Anything
 
