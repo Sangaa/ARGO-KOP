@@ -21,3 +21,14 @@ def test_missing_evidence_is_rejected():
             "test": "",
             "trace": "synthetic-trace-001",
         }])
+
+
+def test_duplicate_seam_evidence_is_rejected():
+    record = {
+        "seam": "Decision -> Authorization",
+        "contract": "decision-authorization-contract",
+        "test": "test_decision_authorization",
+        "trace": "synthetic-trace-001",
+    }
+    with pytest.raises(ValueError, match="duplicate seam evidence"):
+        register([record, record.copy()])
