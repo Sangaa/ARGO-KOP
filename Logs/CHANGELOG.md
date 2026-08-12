@@ -60,7 +60,17 @@ A bounded integration checkpoint added:
 
 The loader establishes a repository-backed path from candidate seam records to local completeness checks and the verified seam registry. It does **not** certify semantic correctness.
 
-**Next target:** populate candidates from actual contracts, tests and trace artifacts, then feed the verified registry into the canonical spine integration audit.
+**Immediate continuation:** populate complete candidates from actual contracts, tests and trace artifacts; run the canonical spine integration audit; then expand to the Full Repository Connectivity / End-to-End Audit.
+
+### 2026-08-12 — Connectivity Audit Target Clarification
+
+The post-EJR-099 continuation is explicitly defined as:
+
+**Populate → Verify → Canonical Spine Audit → Full Repository Connectivity / End-to-End Audit → GAP MAP → Highest-Value Seam Fixes → Regression Test → Re-Audit → Close Checkpoint**
+
+The repository-wide audit must distinguish file existence from actual connectivity and look for unreachable components, unconsumed contracts, non-real tests, traces without outcomes, missing seams between otherwise complete layers, incomplete paths, terminal paths without evidence, and learning paths that fail to return to Memory/State.
+
+This clarification does not constitute repository-wide PASS and does not authorize feature expansion by itself.
 
 These entries describe development-state evolution. They do not constitute a new official release.
 
