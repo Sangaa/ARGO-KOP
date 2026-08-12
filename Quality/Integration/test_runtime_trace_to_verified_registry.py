@@ -1,0 +1,56 @@
+"""End-to-end evidence proof from the actual controlled runner to registry promotion.
+
+This test intentionally uses the runtime-produced trace and outcome rather than a
+hand-authored trace fixture. It materializes the trace through the existing
+explicit-target persistence boundary, then asks the verified evidence loader to
+promote the same evidence set. The test does not grant semantic authority to the
+registry; it only proves the bounded evidence handoff.
+"""
+
+import json
+
+from connected_spine_runner import run
+from synthetic_task_fixture import make_fixture
+from runtime_evidence_capture import capture_execution_evidence
+from verified_seam_evidence_loader import load_records
+
+
+def test_actual_runtime_trace_and_outcome_can_form_registry_evidence(tmp_path):
+    result = run(make_fixture())
+    execution = result["execution"]
+    outcome = result["outcome"]
+
+    assert execution["execution_trace_id"] == execution["trace"]["trace_id"]
+    assert outcome["execution_trace_ids"] == [execution["execution_trace_id"]]
+    assert outcome["evidence_trace_ids"] == outcome["execution_trace_ids"]
+
+    trace_relative = "evidence/runtime/execution_trace.json"
+    captured = capture_execution_evidence(
+        execution["trace"],
+        target=tmp_path / trace_relative,
+    )
+    assert captured["status"] == "CAPTURED"
+    assert captured["trace"]["trace_id"] == execution["execution_trace_id"]
+
+    contract = tmp_path / "evidence/contracts/execution_outcome_contract.md"
+    test_artifact = tmp_path / "evidence/tests/execution_outcome_test.py"
+    contract.parent.mkdir(parents=True)
+    test_artifact.parent.mkdir(parents=True)
+    contract.write_text("# bounded execution/outcome contract\n", encoding="utf-8")
+    test_artifact.write_text("# executable integration test artifact\n", encoding="utf-8")
+
+    candidate = {
+        "seam": "Execution -> Outcome",
+        "contract": "evidence/contracts/execution_outcome_contract.md",
+        "test": "evidence/tests/execution_outcome_test.py",
+        "trace": trace_relative,
+    }
+
+    registry = load_records(tmp_path, [candidate])
+    assert registry["Execution -> Outcome"]["state"] == "CONNECTED"
+    assert registry["Execution -> Outcome"]["trace"] == trace_relative
+
+    persisted_payload = json.loads(
+        (tmp_path / trace_relative).read_text(encoding="utf-8")
+    )
+    assert persisted_payload["trace_id"] == outcome["execution_trace_ids"][0]
