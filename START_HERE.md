@@ -62,9 +62,9 @@ If required content is unavailable, record the evidence gap rather than filling 
 
 ARGO KOP is currently under **Connected-Baseline Integrity Validation**, moving from bounded seam-evidence construction into repository-wide connectivity proof.
 
-The latest closed checkpoint is **EJR-102 — Canonical Audit Evidence Materialization Guard (2026-08-12)**, following EJR-101.
+The latest closed checkpoint is **EJR-104 — Canonical Spine Scanner False-Positive Hardening (2026-08-12)**.
 
-The seam-proof path now rejects direct `CONNECTED` injection outside the verified registry, rejects duplicate seam evidence, and requires every contract/test/trace path used by the canonical audit to resolve to a repository-relative regular file. These changes improve proof integrity; they do not establish global repository PASS.
+The canonical-spine scanner now treats same-file endpoint co-occurrence as a candidate `PARTIAL` signal instead of combining unrelated repository files. It still cannot emit `CONNECTED`. Verified seam promotion remains gated by complete, materialized contract/test/trace evidence through the registry and canonical audit.
 
 ## Current Connectivity Chain
 
@@ -96,9 +96,9 @@ The governing question is no longer merely whether individual artifacts exist or
 
 ## Current Next Target
 
-**Populate the verified seam registry from actual ARGO-KOP contracts, tests and trace artifacts, run the canonical spine audit, then expand into the Full Repository Connectivity / End-to-End Audit.**
+**Use candidate discovery to locate real seam evidence, inspect contract + executable test + trace as one set, populate the verified registry only when the evidence is complete, then run the canonical spine audit and expand into the Full Repository Connectivity / End-to-End Audit.**
 
-No seam should be promoted merely because a plausible contract name, test name or trace label exists. The three evidence artifacts must be inspected as a coherent set and must be materialized repository files.
+No seam should be promoted merely because a plausible contract name, test name, trace label or same-file keyword co-occurrence exists. Candidate evidence must be inspected as a coherent relationship and must be materialized repository files.
 
 The connectivity audit must look for, at minimum:
 
@@ -112,22 +112,23 @@ The connectivity audit must look for, at minimum:
 - components that exist but are unreachable;
 - learning paths that do not return correctly to Memory/State.
 
-Do not expand features or architecture merely because the loader is implemented.
+Do not expand features or architecture merely because the loader, registry or scanner is implemented.
 
 ## Required Resumption Sequence
 
 1. Load current repository state.
 2. Load the verified seam registry.
 3. Enumerate actual seam candidates from repository artifacts.
-4. Inspect contract + executable test + trace together.
-5. Populate the registry only with complete evidence sets.
-6. Run the canonical spine integration audit.
-7. Expand to repository-wide connectivity / end-to-end audit.
-8. Produce the GAP MAP.
-9. Fix the highest-value missing seams.
-10. Run regression tests.
-11. Re-run the audit.
-12. Close the checkpoint.
+4. Use same-file scanner results only to prioritize candidates.
+5. Inspect contract + executable test + trace together.
+6. Populate the registry only with complete evidence sets.
+7. Run the canonical spine integration audit.
+8. Expand to repository-wide connectivity / end-to-end audit.
+9. Produce the GAP MAP.
+10. Fix the highest-value missing seams.
+11. Run regression tests.
+12. Re-run the audit.
+13. Close the checkpoint.
 
 ## Future Engineering Capability Targets
 
