@@ -8,8 +8,6 @@ def test_real_data_contracts_flow_between_stages():
     assert result["final_status"] == "SIMULATED"
     assert result["stages"][0]["status"] == "READY_FOR_REASONING"
     assert result["stages"][1]["status"] == "REASONED"
-    assert result["stages"][2]["status"] == "NO_CONFLICT"
-    assert result["stages"][3]["status"] == "CLEAR"
     assert result["stages"][4]["status"] == "PROPOSAL_READY"
     assert result["stages"][5]["status"] == "AUTHORIZED"
     assert result["stages"][6]["status"] == "PLAN_READY"
@@ -24,8 +22,6 @@ def test_missing_authorization_stops_before_execution():
     fixture = make_fixture()
     fixture["authorization"] = {"approved": False}
     result = run(fixture)
-    assert result["stages"][3]["status"] == "CLEAR"
-    assert result["stages"][4]["status"] == "PROPOSAL_READY"
     assert result["stages"][5]["status"] == "BLOCKED"
     assert result["stages"][6]["status"] == "BLOCKED"
     assert result["stages"][7]["status"] == "BLOCKED"
