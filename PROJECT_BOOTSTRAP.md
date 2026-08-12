@@ -8,7 +8,7 @@
 
 Platform: ARGO KOP (Knowledge Operating Platform)
 Document ID: BOOTSTRAP-001
-Version: 2.9.0
+Version: 3.0.0
 Status: Validated / Integrity Warning
 Category: Bootstrap / Governance
 Canonical: Yes
@@ -223,7 +223,31 @@ When a repository search/index result conflicts with direct inspection of a know
 
 ---
 
-# 13. Change Gate
+# 13. Search & Error Recheck Gate
+
+**Absence from one search result is never sufficient evidence that an artifact, commit, workflow run, test result, reference, or directory is absent.**
+
+When a material finding depends on a negative result, the agent MUST perform an independent recheck before classifying it as a repository defect.
+
+Preferred independent recheck pairs include:
+
+- repository search → direct current-path read;
+- commit search → direct commit/API or branch-history lookup;
+- commit-associated workflow lookup → recent Actions-run listing → exact run/job lookup;
+- index/reference lookup → target read → reverse consumer/authority search;
+- test failure summary → job logs → affected source/test artifact inspection.
+
+If the second method confirms the first result, classify the finding as **Verified**.
+
+If the second method disproves it, classify the first result as an **Evidence Search Defect**, not a repository defect.
+
+If the methods remain inconsistent, classify the evidence as **Unavailable / Discrepancy** and do not make a destructive or architectural decision from it.
+
+Tool truncation, pagination, indexing delay and incomplete search coverage MUST be treated as evidence limitations rather than silent absence.
+
+---
+
+# 14. Change Gate
 
 Use the smallest sufficient evidence scope for the requested change, while examining the widest practical relevant scope when broader connectivity or architectural relationships may be affected:
 
@@ -247,7 +271,7 @@ A mutation is not complete until the write target was verified, the write succee
 
 ---
 
-# 14. Construction Priority & Review Quality Principle
+# 15. Construction Priority & Review Quality Principle
 
 The agent must **inspect as broadly as practical, but prioritize construction quality and relationship integrity over throughput**.
 
@@ -264,7 +288,7 @@ When reviewing or modifying multiple artifacts:
 
 ---
 
-# 15. Simplicity & Reviewability Principle
+# 16. Simplicity & Reviewability Principle
 
 **No ARGO rule is sacred merely because it already exists.**
 
@@ -282,7 +306,7 @@ The goal is not maximum procedure. The goal is **minimum sufficient control with
 
 ---
 
-# 16. Learning & Future Capability Gate
+# 17. Learning & Future Capability Gate
 
 Future capability acquisition must follow a governed learning loop rather than uncontrolled feature expansion.
 
@@ -312,7 +336,7 @@ These targets preserve direction and future learning requirements. They do not a
 
 ---
 
-# 17. Mandatory Integrity Gate
+# 18. Mandatory Integrity Gate
 
 Bootstrap completion has three states:
 
@@ -324,7 +348,7 @@ The bootstrap process MUST report the evaluated state and evidence coverage. It 
 
 ---
 
-# 18. Accumulated Platform Knowledge & Operating Principles
+# 19. Accumulated Platform Knowledge & Operating Principles
 
 1. Current repository evidence is the active engineering baseline.
 2. Canonical identity is composite: path, internal ID, version, status, canonical declaration, index registration and applicable authority must agree.
@@ -360,10 +384,14 @@ The bootstrap process MUST report the evaluated state and evidence coverage. It 
 32. A session may be broad in inspection but must remain selective in mutation; quantity of edits is not progress by itself.
 33. Every substantial session should leave a deterministic closure point: what was established, what evidence supports it, what remains unresolved, and the next target.
 34. Future capability targets should be preserved as governed direction without interrupting the active build gate.
+35. A negative search result is provisional until independently rechecked when it materially affects a decision.
+36. Tool truncation, pagination and index incompleteness are evidence limitations, not proof of absence.
+37. When independent evidence sources disagree, preserve the discrepancy and bound the decision instead of guessing.
+38. A first-search failure must never directly become a repository defect without a second retrieval method where practical.
 
 ---
 
-# 19. Mandatory Session Closure & Self-Update Protocol
+# 20. Mandatory Session Closure & Self-Update Protocol
 
 After repository mutation:
 
@@ -377,6 +405,8 @@ After repository mutation:
 8. Re-read every mutated artifact and validate affected references, indexes, status claims and relationship evidence.
 9. Record what was completed, what remains unresolved, evidence limitations, and the deterministic next target so the session can be safely closed and resumed at any point.
 10. Never use the number of modified files as the session-completion metric.
+11. If a material negative finding was used during the session, record whether it was independently rechecked and whether the second method confirmed, disproved, or left the finding unavailable.
+12. Close only after the current branch/ref and final commit have been re-read directly from the repository source.
 
 A session MUST NOT claim `100% CLEAN BOOT` unless the claimed scope has actually passed its integrity gate.
 
@@ -386,8 +416,9 @@ A session MUST NOT claim `100% CLEAN BOOT` unless the claimed scope has actually
 
 | Version | Date | Description | Author / Authority |
 | :--- | :--- | :--- | :--- |
+| 3.0.0 | 2026-08-12 | Added mandatory independent recheck for material negative findings, explicit search/index/truncation evidence boundaries, discrepancy classification, and closure verification of final branch/ref/commit | ARGO Engineering / Repository Audit |
 | 2.9.0 | 2026-08-12 | Added construction-quality-over-file-count priority, verified-seam evidence gate, full connectivity/E2E audit sequence, governed programming/mathematics learning path, future Android and Roblox+AI capability targets, and deterministic session-closure requirements | ARGO Engineering / Repository Audit |
-| 2.8.0 | 2026-08-08 | Added namespace-aware identity auditing, direct-evidence precedence over incomplete search/index results, engine route verification boundaries, and explicit verified-write/post-write validation requirements; synchronized the live audit method | ARGO Engineering / Repository Audit |
+| 2.8.0 | 2026-08-08 | Added namespace-aware identity auditing, direct-evidence precedence over incomplete search/index results, engine route verification boundaries, and explicit verified-write/post-write validation requirements; synchronized the live audit method | ARGO Engineering / Principal Architect |
 | 2.7.0 | 2026-08-08 | Replaced blanket full-review-before-any-work rule with proportional evidence gates; added minimum-sufficient-control principle and explicit rule-replacement pathway | ARGO Engineering / Principal Architect |
 | 2.6.0 | 2026-08-08 | Added relationship-graph verification, bidirectional dependency validation, conflict propagation, local-to-global evidence boundary, audit-derived rule promotion and reopen-on-new-evidence controls discovered during live repository audit | ARGO Engineering / Principal Architect |
 | 2.5.0 | 2026-08-08 | Added operational lessons from live repository audit: mutation is not validation, status drift, numeric-sequence caution, cross-layer-first review, tool-limited evidence coverage, and explicit canonicalization of reusable session learning | ARGO Engineering / Principal Architect |
