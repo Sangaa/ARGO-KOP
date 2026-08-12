@@ -12,6 +12,7 @@ KEYWORDS = {
     "Authorization": ("authorization", "authorize"),
     "Execution": ("execution", "executor"),
     "Execution Trace": ("trace", "traceability"),
+    "Outcome": ("outcome",),
     "Outcome Evaluation": ("outcome", "evaluation"),
     "Feedback Quality": ("feedback", "quality"),
     "Learning Readiness": ("readiness", "learning_ready"),
