@@ -62,24 +62,26 @@ If required content is unavailable, record the evidence gap rather than filling 
 
 ARGO KOP is currently under **Connected-Baseline Integrity Validation**, moving from bounded seam-evidence construction into repository-wide connectivity proof.
 
-The latest closed checkpoint is **EJR-104 — Canonical Spine Scanner False-Positive Hardening (2026-08-12)**.
+The latest closed checkpoint is **EJR-105 — Canonical Spine Candidate Provenance Wiring (2026-08-12)**.
 
-The canonical-spine scanner now treats same-file endpoint co-occurrence as a candidate `PARTIAL` signal instead of combining unrelated repository files. It still cannot emit `CONNECTED`. Verified seam promotion remains gated by complete, materialized contract/test/trace evidence through the registry and canonical audit.
+The canonical-spine scanner now treats same-file endpoint co-occurrence as a candidate `PARTIAL` signal and returns bounded repository-relative candidate artifact locations for the next inspection stage. It still cannot emit `CONNECTED`. Verified seam promotion remains gated by complete, materialized contract/test/trace evidence through the registry and canonical audit.
 
 ## Current Connectivity Chain
 
 ```text
 Canonical Spine Evidence Scanner
         ↓
-Candidate Seam Records
+Candidate Seam Records + Bounded Provenance
+        ↓
+Concrete Artifact Inspection
+        ↓
+Contract + Executable Test + Trace
         ↓
 Verified Seam Evidence Loader
         ↓
 Verified Seam Evidence Registry
         ↓
 Canonical Spine Integration Audit
-        ↓
-Real Contract / Test / Trace Evidence
         ↓
 Full Repository Connectivity / End-to-End Audit
         ↓
@@ -96,7 +98,9 @@ The governing question is no longer merely whether individual artifacts exist or
 
 ## Current Next Target
 
-**Use candidate discovery to locate real seam evidence, inspect contract + executable test + trace as one set, populate the verified registry only when the evidence is complete, then run the canonical spine audit and expand into the Full Repository Connectivity / End-to-End Audit.**
+**Use bounded candidate provenance to locate real seam artifacts, inspect contract + executable test + trace as one set, populate the verified registry only when the evidence is complete, then run the canonical spine audit and expand into the Full Repository Connectivity / End-to-End Audit.**
+
+Candidate provenance is a navigation aid only. It is not verification evidence and must not be promoted by itself.
 
 No seam should be promoted merely because a plausible contract name, test name, trace label or same-file keyword co-occurrence exists. Candidate evidence must be inspected as a coherent relationship and must be materialized repository files.
 
@@ -119,16 +123,17 @@ Do not expand features or architecture merely because the loader, registry or sc
 1. Load current repository state.
 2. Load the verified seam registry.
 3. Enumerate actual seam candidates from repository artifacts.
-4. Use same-file scanner results only to prioritize candidates.
+4. Use same-file scanner results and bounded candidate provenance only to prioritize inspection.
 5. Inspect contract + executable test + trace together.
-6. Populate the registry only with complete evidence sets.
-7. Run the canonical spine integration audit.
-8. Expand to repository-wide connectivity / end-to-end audit.
-9. Produce the GAP MAP.
-10. Fix the highest-value missing seams.
-11. Run regression tests.
-12. Re-run the audit.
-13. Close the checkpoint.
+6. Validate the runtime consumer and outcome relationship.
+7. Populate the registry only with complete evidence sets.
+8. Run the canonical spine integration audit.
+9. Expand to repository-wide connectivity / end-to-end audit.
+10. Produce the GAP MAP.
+11. Fix the highest-value missing seams.
+12. Run regression tests.
+13. Re-run the audit.
+14. Close the checkpoint.
 
 ## Future Engineering Capability Targets
 
