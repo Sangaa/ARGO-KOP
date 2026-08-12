@@ -28,7 +28,7 @@ If an external test is needed and cannot be executed from the repository-side en
 
 ARGO KOP is currently under **Connected-Baseline Integrity Validation**, moving from bounded seam-evidence construction into repository-wide connectivity proof.
 
-The latest closed checkpoint is **EJR-129 — Governed Evidence Path Alignment (2026-08-12)**.
+The latest closed checkpoint is **EJR-136 — Execution Trace → Outcome Evaluation Seam (2026-08-12)**.
 
 The controlled runtime path contains a real cross-stage runner, governed execution entrypoint, canonical execution-trace production, canonical outcome production, and a reusable explicit-target persistence adapter. A thin evidence-capture adapter reuses that persistence path to capture the exact runtime-produced trace without introducing another storage layer. Runtime-to-outcome lineage is explicitly verified and returns `HOLD` when identity cannot be established. The controlled path remains side-effect-free and must not be interpreted as autonomous production execution.
 
@@ -47,6 +47,8 @@ EJR-127 makes runtime/outcome lineage verification an explicit prerequisite for 
 EJR-128 establishes the smallest governed repository-backed evidence boundary: `capture_repository_evidence()` may write only beneath `Quality/Integration/evidence/runtime/`, using the existing explicit-target persistence adapter. Temporary test targets remain valid for tests, but permanent runtime evidence must use the governed boundary and must not silently mutate canonical Memory.
 
 EJR-129 corrected the integration proof to use the governed boundary's own path-composition contract: callers provide only a boundary-relative filename, and the returned canonical repository-relative path is used for downstream evidence loading. This prevents a false-positive proof caused by duplicating the governed root in the caller.
+
+EJR-136 adds an executable `Execution Trace → Outcome Evaluation` seam proof. The real `connected_spine_runner.run()` output is consumed by the existing Outcome Evaluator; exact `execution_trace_id` continuity is asserted, and an orphaned evidence trace is required to fail with `OUTCOME_PROVENANCE_BROKEN`. This proves the executable provenance relationship in the controlled integration environment but does not, by itself, certify the canonical seam as repository-wide `CONNECTED`.
 
 ## Current Connectivity Chain
 
@@ -118,7 +120,7 @@ It is not yet a complete canonical-spine certification because the complete evid
 
 ## Current Next Target
 
-**Run CI on the corrected governed-evidence integration proof. If green, inspect the resulting evidence path and execute the canonical audit before promoting the first repository-backed Seam. If red, use the failure as the next evidence-driven correction.**
+**Run CI on the new Execution Trace → Outcome Evaluation seam proof. Inspect the result and repair the smallest demonstrated gap. If the complete evidence chain is satisfied, perform the canonical audit before promoting the seam. Then move to the next highest-value seam rather than repeatedly polishing one seam.**
 
 Do not create another persistence layer.
 
