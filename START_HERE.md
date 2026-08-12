@@ -28,7 +28,7 @@ If an external test is needed and cannot be executed from the repository-side en
 
 ARGO KOP is currently under **Connected-Baseline Integrity Validation**, moving from bounded seam-evidence construction into repository-wide connectivity proof.
 
-The latest closed checkpoint is **EJR-125 — Canonical Trace Shape at Audit Boundary (2026-08-12)**.
+The latest closed checkpoint is **EJR-126 — Runtime to Registry Evidence Set Proof (2026-08-12)**.
 
 The controlled runtime path contains a real cross-stage runner, governed execution entrypoint, canonical execution-trace production, canonical outcome production, and a reusable explicit-target persistence adapter. A thin evidence-capture adapter reuses that persistence path to capture the exact runtime-produced trace without introducing another storage layer. Runtime-to-outcome lineage is explicitly verified and returns `HOLD` when identity cannot be established. The controlled path remains side-effect-free and must not be interpreted as autonomous production execution.
 
@@ -39,6 +39,8 @@ EJR-122 applies the same explicit verification gate at the canonical audit bound
 EJR-123/EJR-124 preserve bounded candidate provenance in the canonical GAP MAP and explicitly prevent candidate provenance from promoting a seam.
 
 EJR-125 adds one further guard at the promotion boundary: the trace reference must be a materialized repository-relative JSON execution-trace record matching the minimum canonical shape emitted by the runtime trace producer.
+
+EJR-126 proves that the actual `connected_spine_runner.run()` output can produce a registry-ready evidence set through the existing thin capture path, but the temporary test target is **not** canonical repository evidence and does not itself certify a `CONNECTED` seam.
 
 ## Current Connectivity Chain
 
@@ -110,7 +112,7 @@ It is not yet a complete canonical-spine certification because the complete evid
 
 ## Current Next Target
 
-**Inspect the latest GitHub Actions result. Then assemble the complete contract + runtime consumer + executable test + exact runtime trace/outcome evidence set, pass it through the loader and runtime-outcome verifier, and determine whether it justifies verified-registry promotion. Run the canonical audit before expanding to the next highest-value seam.**
+**Inspect the latest GitHub Actions result. Then establish the governed permanent-evidence target for an actual runtime-produced trace, pass the resulting contract + runtime consumer + executable test + exact trace/outcome evidence set through the loader and runtime-outcome verifier, and determine whether it justifies verified-registry promotion. Run the canonical audit before expanding to the next highest-value seam.**
 
 Do not create another persistence layer.
 
