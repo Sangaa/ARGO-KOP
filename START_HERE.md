@@ -28,7 +28,7 @@ If an external test is needed and cannot be executed from the repository-side en
 
 ARGO KOP is currently under **Connected-Baseline Integrity Validation**, moving from bounded seam-evidence construction into repository-wide connectivity proof.
 
-The latest closed checkpoint is **EJR-117 — Thin Runtime Evidence Capture Boundary (2026-08-12)**.
+The latest closed checkpoint is **EJR-118 — External Advisory Authority Boundary (2026-08-12)**.
 
 The controlled runtime path contains a real cross-stage runner, governed execution entrypoint, canonical execution-trace production, canonical outcome production, and a reusable explicit-target persistence adapter. A thin evidence-capture adapter now reuses that persistence path to capture the exact runtime-produced trace without introducing another storage layer. The controlled path remains side-effect-free and must not be interpreted as autonomous production execution.
 
