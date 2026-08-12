@@ -1,5 +1,7 @@
 """Represent and validate canonical-spine seam coverage."""
 
+from pathlib import Path
+
 SEAMS = [
     ("Memory / Context", "Cognition"),
     ("Cognition", "Reasoning"),
@@ -22,7 +24,33 @@ VALID_STATES = {
 }
 
 
-def build_gap_map(evidence: dict) -> dict:
+def _candidate_paths(candidate_files, key):
+    """Return bounded repository-relative candidate provenance for one seam."""
+    if candidate_files is None:
+        return []
+    values = candidate_files.get(key, [])
+    if not isinstance(values, list):
+        raise ValueError(f"candidate files must be a list: {key}")
+
+    normalized = []
+    for value in values:
+        if not isinstance(value, str) or not value:
+            raise ValueError(f"invalid candidate path: {value!r}")
+        path = Path(value)
+        if path.is_absolute() or ".." in path.parts:
+            raise ValueError(f"candidate path must be repository-relative: {value!r}")
+        normalized_path = path.as_posix()
+        if normalized_path not in normalized:
+            normalized.append(normalized_path)
+    return normalized
+
+
+def build_gap_map(evidence: dict, candidate_files: dict | None = None) -> dict:
+    """Build an evidence-bounded gap map with optional candidate provenance.
+
+    Candidate provenance is discovery context only. It never changes a seam
+    state and never promotes a seam to CONNECTED.
+    """
     gaps = []
     for source, destination in SEAMS:
         key = f"{source} -> {destination}"
@@ -30,7 +58,11 @@ def build_gap_map(evidence: dict) -> dict:
         if state not in VALID_STATES:
             raise ValueError(f"invalid seam state: {state}")
         if state != "CONNECTED":
-            gaps.append({"seam": key, "state": state})
+            gap = {"seam": key, "state": state}
+            candidates = _candidate_paths(candidate_files, key)
+            if candidates:
+                gap["candidate_files"] = candidates
+            gaps.append(gap)
     return {
         "status": "GAP_MAP_COMPLETE",
         "seam_count": len(SEAMS),
