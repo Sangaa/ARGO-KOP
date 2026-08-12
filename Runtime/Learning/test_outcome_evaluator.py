@@ -6,6 +6,7 @@ def base_outcome(result):
         "outcome_id": "OUT-1",
         "result": result,
         "evidence_trace_ids": ["TR-1"],
+        "execution_trace_ids": ["TR-1"],
     }
 
 
@@ -52,7 +53,37 @@ def test_missing_outcome_evidence_is_rejected():
     result = evaluate_outcome(
         decision_id="DEC-1",
         execution_id="EXEC-1",
-        outcome={"outcome_id": "OUT-1", "result": "SUCCESS", "evidence_trace_ids": []},
+        outcome={
+            "outcome_id": "OUT-1",
+            "result": "SUCCESS",
+            "evidence_trace_ids": [],
+            "execution_trace_ids": ["TR-1"],
+        },
     )
     assert result["status"] == "EVALUATION_REJECTED"
     assert "OUTCOME_EVIDENCE_REQUIRED" in result["issues"]
+
+
+def test_missing_execution_trace_is_rejected():
+    result = evaluate_outcome(
+        decision_id="DEC-1",
+        execution_id="EXEC-1",
+        outcome={"outcome_id": "OUT-1", "result": "SUCCESS", "evidence_trace_ids": ["TR-1"]},
+    )
+    assert result["status"] == "EVALUATION_REJECTED"
+    assert "EXECUTION_TRACE_REQUIRED" in result["issues"]
+
+
+def test_outcome_evidence_not_in_execution_trace_is_rejected():
+    result = evaluate_outcome(
+        decision_id="DEC-1",
+        execution_id="EXEC-1",
+        outcome={
+            "outcome_id": "OUT-1",
+            "result": "SUCCESS",
+            "evidence_trace_ids": ["TR-1"],
+            "execution_trace_ids": ["TR-2"],
+        },
+    )
+    assert result["status"] == "EVALUATION_REJECTED"
+    assert "OUTCOME_PROVENANCE_BROKEN" in result["issues"]
