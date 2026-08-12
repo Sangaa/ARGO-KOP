@@ -8,7 +8,7 @@ ARGO KOP (Knowledge Operating Platform)
 
 ---
 
-Purpose
+# Purpose
 
 Master index for official releases and significant development-baseline changes.
 
@@ -57,7 +57,8 @@ The current development baseline includes ongoing corrections and improvements s
 - duplicate seam-evidence rejection;
 - repository-relative regular-file enforcement for contract/test/trace evidence paths;
 - file-local canonical-spine candidate discovery to prevent unrelated repository-wide keyword co-occurrence from inflating `PARTIAL` seam signals;
-- bounded candidate-artifact provenance carried from the scanner into the integration audit without granting it verification authority.
+- bounded candidate-artifact provenance carried from the scanner into the integration audit without granting it verification authority;
+- preservation of bounded candidate provenance in GAP MAP entries without allowing provenance to change seam state.
 
 ### 2026-08-12 — Verified Seam Evidence Loader
 
@@ -109,12 +110,26 @@ No canonical-spine seam was promoted to `CONNECTED` by keyword evidence alone. R
 
 ### 2026-08-12 — Candidate Provenance Wiring
 
-The next bounded checkpoint extends discovery without weakening certification:
+EJR-105 extended discovery without weakening certification:
 
-- `canonical_spine_evidence_scanner.py` now returns both seam state and repository-relative `candidate_files` provenance;
+- `canonical_spine_evidence_scanner.py` returns both seam state and repository-relative `candidate_files` provenance;
 - candidate provenance is collected only when both endpoint concepts occur in the same concrete artifact;
 - `canonical_spine_integration_audit.py` carries this provenance into its report;
 - scanner and integration-audit tests verify provenance, repository-relative paths and preservation of conservative `PARTIAL` behavior;
-- provenance remains a navigation aid for the next contract/test/trace inspection step and is **not** verification evidence by itself.
+- provenance remains a navigation aid for the next contract/test/trace inspection step and is not verification evidence by itself.
 
 No canonical-spine seam was promoted to `CONNECTED` by this change.
+
+### 2026-08-12 — Candidate Provenance Carried Into GAP MAPs
+
+EJR-106 extended the evidence-navigation path:
+
+- `canonical_spine_gap_map.py` now accepts optional `candidate_files` provenance;
+- non-connected gap entries can preserve the concrete repository-relative candidate files that led to discovery;
+- candidate paths are validated against absolute-path and `..` traversal escape;
+- GAP MAP provenance does not change `MISSING` or `PARTIAL` into `CONNECTED`;
+- regression tests cover provenance preservation and unsafe-path rejection;
+- `START_HERE.md` now resumes from EJR-106 and documents the new GAP MAP evidence-navigation path;
+- `Memory/Engineering_Journal/EJR-106_2026-08-12_CANDIDATE_PROVENANCE_CARRIED_INTO_GAP_MAPS.md` closes the checkpoint.
+
+No canonical-spine seam was promoted to `CONNECTED` by this change. CI success was not observed at checkpoint closure.
