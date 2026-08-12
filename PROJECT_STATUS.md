@@ -2,7 +2,7 @@
 
 Platform: ARGO KOP (Knowledge Operating Platform)
 Document ID: PROJECT_STATUS
-Version: 3.3.4
+Version: 3.3.5
 Status: INTEGRITY WARNING / CONNECTED-BASELINE AUDIT
 Category: Root Baseline
 Canonical: Yes
@@ -17,7 +17,7 @@ ARGO KOP is operating from the current GitHub repository baseline while the repo
 
 The immediate objective remains **repository connectivity and evidence integrity**, not feature expansion.
 
-The latest checkpoint added a repository-backed **verified seam evidence loader**. This closes the manual-candidate loading gap for the local evidence path, but it does **not** certify semantic correctness or establish repository-wide integrity.
+The latest checkpoint extended the verified-seam path so the registry-shaped evidence records can feed the canonical spine integration audit, hardened runtime test-coverage detection in the full-stack connectivity audit, and wired the integration suite into CI. These changes improve proof plumbing; they do **not** certify semantic correctness or establish repository-wide integrity.
 
 The repository MUST NOT be declared globally clean until critical identities, references, dependencies, authority paths, indexes, status claims and cross-layer relationships have been validated against current repository evidence.
 
@@ -144,7 +144,9 @@ Only after this gate passes may the project move from **Connected Baseline Stabi
 | Services inventory/reference | REVALIDATED / GLOBAL SERVICE VALIDATION OPEN |
 | Session learning handoff | REVALIDATED / PROMOTION REMAINS GOVERNED |
 | Verified seam evidence loader | IMPLEMENTED / TESTED / LOCAL COMPLETENESS ONLY |
-| Verified seam registry semantic certification | OPEN / INTEGRATION AUDIT RESPONSIBILITY |
+| Verified seam registry → canonical spine audit | WIRED / EVIDENCE-SCHEMA VALIDATION ADDED |
+| Full-stack runtime test coverage detection | HARDENED / TESTS ADDED |
+| Integration CI execution path | WIRED / NO SUCCESSFUL RUN OBSERVED AT CHECKPOINT |
 | Candidate seam population from actual contracts/tests/traces | NEXT REQUIRED STEP |
 | Full Repository Connectivity / End-to-End Audit | PENDING AFTER CANONICAL SPINE AUDIT |
 | GAP MAP | PENDING CONNECTIVITY AUDIT OUTPUT |
@@ -269,6 +271,9 @@ A development baseline is not an official release.
 31. Engineering progress should be measured by connected, evidenced and reusable capability rather than file count.
 32. A learning path should produce demonstrated understanding and tested application, not merely accumulated material.
 33. Future capabilities must be recorded early enough to preserve direction but must not distract from the active integrity gate.
+34. A verified seam registry is useful only when its evidence schema is consumable by the integration audit without weakening the evidence boundary.
+35. Connectivity audit test detection must resolve repository-relative paths correctly; a false coverage signal is itself an audit defect.
+36. CI wiring increases observability of integration regressions, but a configured workflow is not evidence of a successful run until the run is observed.
 
 ---
 
@@ -282,6 +287,8 @@ A development baseline is not an official release.
 6. The verified seam evidence loader may supply candidates but cannot certify semantic correctness.
 7. Future capability targets do not override the current connected-baseline execution gate.
 8. Session closure should preserve a deterministic resumption point, evidence boundary, unresolved work and next target.
+9. A registry record may feed the canonical spine audit only when its required evidence fields are present.
+10. CI configuration is evidence of intended test execution, not proof of test success.
 
 ---
 
