@@ -4,47 +4,236 @@ ARGO KOP is a repository-first cognitive engineering platform.
 
 Do not begin by assuming that folder names, previous sessions, ZIP snapshots, or remembered structure represent current repository reality.
 
-## Current checkpoint
+## Recommended Entry Sequence
 
-**EJR-123 — Canonical Audit Provenance Preservation (2026-08-12)**
+START HERE → README → VISION → PROJECT BOOTSTRAP → PROJECT STATUS → SYSTEM MAP → PLATFORM IDENTITY / MANIFEST → MASTER INDEX → REPOSITORY RELATIONSHIP MAP → ARCHITECTURE / LIFECYCLE / COGNITION / MODELS / INTERFACES / RUNTIME / ENGINE → Relevant Project or Engineering Domain
 
-The canonical audit now preserves bounded candidate provenance in its GAP MAP without allowing candidate paths to change seam state. This is navigation context only, not verification evidence.
+## First Rule
 
-The current controlled runtime path remains:
+**Inspect the current repository before proposing structural changes.**
 
-```text
-connected_spine_runner
- → execution trace
- → canonical outcome
- → runtime lineage verification
- → thin evidence capture
- → existing explicit-target persistence
- → verified registry
- → canonical audit
-```
+The repository is the current evidence source. Session memory, historical snapshots, and prior claims cannot override inspected repository content.
 
-`CONNECTED` remains a strict claim. It requires an explicit upstream `verification_status == VERIFIED`, plus real repository-relative contract, executable test, and trace artifacts. No seam is certified by file existence, candidate provenance, or a string state alone.
+If required content is unavailable, record the evidence gap rather than filling it by assumption.
 
 ## External Advisory Boundary
 
-Gemini, Copilot, and all other external model reviews are advisory/test-only inputs. They cannot direct architecture, construction priority, governance, seam certification, or build direction. If a bounded external test is needed, request it explicitly and analyze its report against repository evidence before deciding.
+External model reviews (including Gemini, Copilot, or any other model) are **advisory and test-only inputs**. They have no authority to modify ARGO KOP architecture, construction priorities, governance decisions, seam certification, or build direction.
 
-## Current next target
+External findings must be treated as claims to analyze against repository evidence. They may reveal contradictions, suggest risks, or motivate a targeted external test, but they do not become engineering decisions automatically.
 
-1. Inspect the latest GitHub Actions result for the EJR-123 changes.
-2. Assemble one complete evidence set from the actual runtime path.
-3. Pass it through the loader and runtime-outcome lineage verifier.
-4. Register it only with explicit `verification_status == VERIFIED`.
-5. Run the canonical audit.
-6. If the evidence does not justify promotion, identify the exact missing proof rather than adding another layer.
-7. Once the current seam set is mature, expand to the Full Repository Connectivity / End-to-End Audit.
+If an external test is needed and cannot be executed from the repository-side environment, request a **specific bounded test** and analyze the returned report before deciding whether any repository change is justified.
 
-## Full Audit Commitment
+## Current Phase
 
-The later repository-wide audit will inventory missing folders/files, orphaned files, duplicate or stale structures, disconnected contracts/consumers/tests, broken trace/outcome paths, Memory/State gaps, documentation/runtime contradictions, and version/baseline inconsistencies. Findings will be ranked by dependency, seam value, and construction impact—not file count.
+ARGO KOP is currently under **Connected-Baseline Integrity Validation**, moving from bounded seam-evidence construction into repository-wide connectivity proof.
 
-## Engineering Rule
+The latest closed checkpoint is **EJR-123 — Canonical Audit Provenance Preservation (2026-08-12)**.
 
-**Read reality → prove → make the smallest justified change → regression → re-audit → document closure.**
+The controlled runtime path contains a real cross-stage runner, governed execution entrypoint, canonical execution-trace production, canonical outcome production, and a reusable explicit-target persistence adapter. A thin evidence-capture adapter reuses that persistence path to capture the exact runtime-produced trace without introducing another storage layer. Runtime-to-outcome lineage is explicitly verified and returns `HOLD` when identity cannot be established. The controlled path remains side-effect-free and must not be interpreted as autonomous production execution.
 
-Do not create another persistence layer merely to satisfy an evidence requirement. Reuse existing governed paths first.
+EJR-121 hardened the registry boundary: complete-looking evidence is not enough to become `CONNECTED`; a record must carry an explicit `verification_status == VERIFIED` from the upstream evidence/verifier chain.
+
+EJR-122 applies the same explicit verification gate at the canonical audit boundary. The audit also requires the referenced contract, test and trace artifacts to be real repository-relative regular files.
+
+EJR-123 preserves bounded candidate provenance in the canonical GAP MAP so unresolved seams retain useful navigation context without allowing provenance to influence seam state.
+
+## Current Connectivity Chain
+
+```text
+Canonical Spine Evidence Scanner
+        ↓
+Candidate Seam Records + Bounded Provenance
+        ↓
+Concrete Artifact Inspection
+        ↓
+Contract + Executable Test + Trace
+        ↓
+Runtime Trace / Outcome Lineage Verification
+        ↓
+Verified Seam Evidence Loader
+        ↓
+Verified Seam Evidence Registry
+        ↓
+Canonical Spine Integration Audit
+        ↓
+Full Repository Connectivity / End-to-End Audit
+        ↓
+GAP MAP + Candidate Provenance
+        ↓
+Highest-Value Seam Fixes
+        ↓
+Regression Test
+        ↓
+Re-Audit
+```
+
+## Current Execution / Outcome Target
+
+```text
+Cognition
+   ↓
+Reasoning
+   ↓
+Decision Proposal
+   ↓
+Authorization
+   ↓
+Execution Plan
+   ↓
+Decision Trace Producer
+   ↓
+Governed Execution Entrypoint
+   ↓
+Canonical Execution Trace Producer
+   ↓
+Execution Trace ID
+   ↓
+Canonical Outcome Producer
+   ↓
+Runtime Outcome Lineage Verification
+   ↓
+Outcome Evaluation
+   ↓
+Feedback Quality
+   ↓
+Learning Readiness
+   ↓
+Existing Promotion Gate
+```
+
+The exact controlled path from `connected_spine_runner.run()` through Outcome Evaluation is executable and test-proven. Its exact runtime-produced trace can also be captured through the thin evidence-capture adapter and persisted/re-read through the existing explicit-target persistence adapter without silently mutating canonical Memory.
+
+It is not yet a complete canonical-spine certification because the complete evidence set still needs to be assembled from the actual runtime artifacts, passed through the loader/verifier boundaries, materialized into the verified seam registry, and audited as one evidence set.
+
+## Current Next Target
+
+**Inspect the latest GitHub Actions result. Then assemble the complete contract + runtime consumer + executable test + exact runtime trace/outcome evidence set, pass it through the loader and runtime-outcome verifier, and determine whether it justifies verified-registry promotion. Run the canonical audit before expanding to the next highest-value seam.**
+
+Do not create another persistence layer.
+
+The evidence loader requires the trace artifact itself to be a repository-relative JSON execution-trace record with minimum identity fields. This prevents an arbitrary existing file from being treated as trace evidence merely because a path exists.
+
+The registry and canonical audit additionally require an explicit `verification_status == VERIFIED`; neither may infer verification from path existence, candidate provenance, or record shape.
+
+Required proof:
+
+**connected_spine_runner.run() → execution_trace_id → Outcome Producer → execution_trace_ids → Outcome Evaluation → Feedback Quality → Learning Readiness → runtime lineage verification → thin capture → explicit trace materialization → verified registry → Canonical Audit**
+
+Passing the loader is still not semantic certification. A synthetic trace fixture may test the loader boundary, but it cannot substitute for evidence that the trace was produced by the actual runtime path.
+
+The current execution path is intentionally controlled/simulated. `side_effect=False` remains the boundary until a separate governed decision authorizes any future real side-effect capability.
+
+The Outcome Producer maps controlled `SIMULATED` execution to `INCONCLUSIVE` with `UNKNOWN` confidence. It must never manufacture `SUCCESS` merely because the runner completed.
+
+Only complete contract + runtime consumer + executable test + actual trace/outcome evidence, with explicit upstream verification, may support `CONNECTED` promotion.
+
+Candidate provenance is a navigation aid only. It is not verification evidence and must not be promoted by itself.
+
+## Audit Requirements
+
+The connectivity audit must look for:
+
+- files that exist but are not connected;
+- folders or files required by the architecture but missing;
+- contracts with no real runtime consumer;
+- tests that do not exercise a real path;
+- traces that do not reach an outcome;
+- completed layers whose seams are missing;
+- paths that start but do not terminate;
+- paths that terminate without evidence;
+- unreachable components;
+- learning paths that do not return correctly to Memory/State;
+- execution traces defined but not propagated into downstream outcomes;
+- producers or entrypoints that exist only as test utilities without a real runtime caller;
+- controlled execution results that bypass the canonical Outcome Producer;
+- outcome evidence that is not tied to the exact execution trace that produced it;
+- trace references that point to arbitrary files instead of materialized execution-trace records;
+- permanent evidence writes that bypass an explicit governed target;
+- duplicate, stale or historical structures that no longer have a justified current role.
+
+Do not expand features or architecture merely because a loader, registry, scanner, gap-map, producer, entrypoint, capture adapter or persistence adapter exists.
+
+## Required Resumption Sequence
+
+1. Load current repository state.
+2. Load the verified seam registry.
+3. Confirm the latest checkpoint and inspect its changed artifacts.
+4. Inspect the latest GitHub Actions result when one was triggered by the previous checkpoint.
+5. Enumerate actual seam candidates.
+6. Use bounded candidate provenance only to prioritize inspection.
+7. Inspect contract + executable test + trace together.
+8. Inspect `connected_spine_runner.py` and its exact downstream consumers.
+9. Confirm the canonical Outcome Producer and its trace lineage.
+10. Validate `execution_trace_id` → `execution_trace_ids` propagation.
+11. Validate Outcome Evaluation and lineage.
+12. Reuse the existing explicit-target persistence adapter and the thin evidence-capture adapter; do not invent a second persistence path.
+13. Validate runtime trace/outcome lineage before preparing any registry record.
+14. Define the permanent evidence boundary before committing any runtime-generated artifact.
+15. Determine whether the complete evidence set justifies verified-registry promotion.
+16. Run the canonical spine integration audit.
+17. Generate the GAP MAP and preserve bounded candidate provenance for unresolved seams.
+18. Expand to repository-wide connectivity / end-to-end audit when the current seam set is mature enough.
+19. Inventory missing folders/files and orphaned or duplicate structures.
+20. Rank all gaps by dependency, seam value and construction impact—not file count.
+21. Fix the highest-value missing seams.
+22. Run regression tests.
+23. Re-run the audit.
+24. Close the checkpoint.
+
+## Future Engineering Capability Targets
+
+These are **future capability targets, not current execution work**. They must not interrupt the connected-baseline audit.
+
+### Programming and Mathematics Learning Capability
+
+After the connectivity baseline is sufficiently proven:
+
+**Source / Book → Extract Knowledge → Verify Understanding → Practice → Test → Apply → Record Reusable Knowledge**
+
+The learning path should cover programming fundamentals, data structures and algorithms, relevant programming languages, software architecture and testing, followed by mathematics required by the target projects. Learning must be evidence-backed and application-driven rather than quantity-driven.
+
+### Future Project A — Android Applications
+
+**Programming Fundamentals → Kotlin → Android Development → Architecture → Testing → Real Application Project**
+
+### Future Project B — Roblox Game Development + AI
+
+**Luau → Roblox Studio → Game Architecture → Gameplay Systems → State / Networking → AI Integration → Testing → Optimization**
+
+These future projects are retained as governed capability targets without allowing premature feature expansion to interrupt the current build gate.
+
+## Engineering Priority Rule
+
+**Priority is construction quality, connectivity, evidence and reusable learning—not file count.**
+
+A smaller set of correctly connected, tested and documented artifacts is higher-value than a larger set of superficially modified files.
+
+Every substantial session should be treated as potentially closable: preserve what was actually established, record evidence boundaries, identify unresolved work, and leave a deterministic resumption point.
+
+## Before You Modify Anything
+
+1. Read applicable bootstrap requirements.
+2. Enumerate the relevant repository scope.
+3. Read files involved in the proposed change.
+4. Verify identities and authority ownership.
+5. Trace affected references and consumers.
+6. Distinguish verified evidence from inferred/unavailable evidence.
+7. Make the smallest justified change.
+8. Re-read every changed artifact after writing.
+9. Revalidate affected indexes, status claims and relationships.
+10. Check upstream/downstream impact.
+
+## Review Loop
+
+**Read Reality → Detect Contradiction → Prove the Contradiction → Correct → Review Impact → Re-read → Verify No New Contradiction → Continue**
+
+Do not mark a change complete merely because the write succeeded.
+
+## Ready State
+
+You are ready to work when you understand what the repository currently contains, what is authoritative, what is historical, what remains uncertain, which relationships your work may affect, and which future capabilities must not distract from the current build gate.
+
+---
+
+End of Document
