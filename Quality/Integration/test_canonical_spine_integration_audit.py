@@ -14,6 +14,9 @@ def test_audit_is_conservative_without_verified_seams(tmp_path):
     assert result["status"] == "INTEGRATION_AUDIT_COMPLETE"
     assert result["verified_connection_count"] == 0
     assert result["gap_map"]["gap_count"] == len(SEAMS)
+    assert result["candidate_files"]["Decision -> Authorization"] == [
+        "Runtime/pipeline.py"
+    ]
 
 
 def _materialized_registry(tmp_path):
