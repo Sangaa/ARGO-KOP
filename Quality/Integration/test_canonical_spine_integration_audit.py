@@ -1,3 +1,5 @@
+import pytest
+
 from canonical_spine_integration_audit import audit
 from canonical_spine_gap_map import SEAMS
 
@@ -14,17 +16,7 @@ def test_audit_is_conservative_without_verified_seams(tmp_path):
     assert result["gap_map"]["gap_count"] == len(SEAMS)
 
 
-def test_explicit_verified_seam_can_be_promoted_to_connected(tmp_path):
-    (tmp_path / "Runtime").mkdir()
-    (tmp_path / "Runtime" / "pipeline.py").write_text("decision authorization", encoding="utf-8")
-    seam = "Decision -> Authorization"
-    result = audit(tmp_path, {seam: "CONNECTED"})
-    assert result["evidence"][seam] == "CONNECTED"
-    assert result["verified_connection_count"] == 1
-    assert all(g["seam"] != seam for g in result["gap_map"]["gaps"])
-
-
-def test_verified_registry_record_can_feed_audit(tmp_path):
+def test_registry_record_can_promote_a_verified_seam(tmp_path):
     seam = "Decision -> Authorization"
     registry = {
         seam: {
@@ -37,6 +29,12 @@ def test_verified_registry_record_can_feed_audit(tmp_path):
     result = audit(tmp_path, registry)
     assert result["evidence"][seam] == "CONNECTED"
     assert result["verified_connection_count"] == 1
+    assert all(g["seam"] != seam for g in result["gap_map"]["gaps"])
+
+
+def test_string_connected_state_is_rejected(tmp_path):
+    with pytest.raises(ValueError, match="must be a registry record"):
+        audit(tmp_path, {"Decision -> Authorization": "CONNECTED"})
 
 
 def test_incomplete_verified_registry_record_is_rejected(tmp_path):
@@ -48,9 +46,5 @@ def test_incomplete_verified_registry_record_is_rejected(tmp_path):
             "test": "Quality/Integration/test_decision_authorization.py",
         }
     }
-    try:
+    with pytest.raises(ValueError, match="incomplete verified seam evidence"):
         audit(tmp_path, registry)
-    except ValueError as exc:
-        assert "incomplete verified seam evidence" in str(exc)
-        return
-    assert False, "incomplete verified seam evidence must be rejected"
