@@ -20,9 +20,9 @@ If required content is unavailable, record the evidence gap rather than filling 
 
 ARGO KOP is currently under **Connected-Baseline Integrity Validation**, moving from bounded seam-evidence construction into repository-wide connectivity proof.
 
-The latest closed checkpoint is **EJR-114 — Connected Spine Execution → Outcome Handoff (2026-08-12)**.
+The latest closed checkpoint is **EJR-115 — Materialized Trace Evidence Boundary Hardening (2026-08-12)**.
 
-The current controlled runtime path now contains a real cross-stage runner, a governed execution entrypoint, canonical execution-trace production, and a canonical outcome producer. The exact runner output is now consumed by Outcome Evaluation and Feedback Quality. The controlled path remains side-effect-free and must not be interpreted as autonomous production execution.
+The controlled runtime path now contains a real cross-stage runner, governed execution entrypoint, canonical execution-trace production, and canonical outcome production. The exact runner output is consumed by Outcome Evaluation and Feedback Quality. The controlled path remains side-effect-free and must not be interpreted as autonomous production execution.
 
 ## Current Connectivity Chain
 
@@ -84,21 +84,25 @@ Learning Readiness
 Existing Promotion Gate
 ```
 
-The exact controlled path from `connected_spine_runner.run()` through Outcome Evaluation is now executable and test-proven. It is not yet a complete canonical-spine certification because the evidence still needs to be materialized into the verified seam registry and audited as one evidence set.
+The exact controlled path from `connected_spine_runner.run()` through Outcome Evaluation is executable and test-proven. It is not yet a complete canonical-spine certification because the evidence still needs to be materialized into the verified seam registry and audited as one evidence set.
 
 ## Current Next Target
 
 **Materialize the exact connected-spine Execution → Outcome → Evaluation → Quality evidence into the verified seam registry, then run the canonical audit before expanding to the next highest-value seam.**
 
+The evidence loader now requires the trace artifact itself to be a repository-relative JSON execution-trace record with minimum identity fields. This prevents an arbitrary existing file from being treated as trace evidence merely because a path exists.
+
 Required proof:
 
-**connected_spine_runner.run() → execution_trace_id → Outcome Producer → execution_trace_ids → Outcome Evaluation → Feedback Quality → Learning Readiness → Evidence Artifact → Verified Registry → Canonical Audit**
+**connected_spine_runner.run() → execution_trace_id → Outcome Producer → execution_trace_ids → Outcome Evaluation → Feedback Quality → Learning Readiness → Materialized Evidence Artifact → Verified Registry → Canonical Audit**
+
+Passing the loader is still not semantic certification. A synthetic trace fixture may test the loader boundary, but it cannot substitute for evidence that the trace was produced by the actual runtime path.
 
 The current execution path is intentionally controlled/simulated. `side_effect=False` remains the boundary until a separate governed decision authorizes any future real side-effect capability.
 
 The Outcome Producer maps controlled `SIMULATED` execution to `INCONCLUSIVE` with `UNKNOWN` confidence. It must never manufacture `SUCCESS` merely because the runner completed.
 
-Only complete contract + runtime consumer + executable test + trace/outcome evidence may support `CONNECTED` promotion.
+Only complete contract + runtime consumer + executable test + actual trace/outcome evidence may support `CONNECTED` promotion.
 
 Candidate provenance is a navigation aid only. It is not verification evidence and must not be promoted by itself.
 
@@ -118,7 +122,8 @@ The connectivity audit must look for:
 - execution traces defined but not propagated into downstream outcomes;
 - producers or entrypoints that exist only as test utilities without a real runtime caller;
 - controlled execution results that bypass the canonical Outcome Producer;
-- outcome evidence that is not tied to the exact execution trace that produced it.
+- outcome evidence that is not tied to the exact execution trace that produced it;
+- trace references that point to arbitrary files instead of materialized execution-trace records.
 
 Do not expand features or architecture merely because a loader, registry, scanner, gap-map, producer or entrypoint exists.
 
