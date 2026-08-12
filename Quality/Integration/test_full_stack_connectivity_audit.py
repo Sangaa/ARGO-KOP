@@ -29,3 +29,20 @@ def test_audit_does_not_treat_orphan_as_proven_failure(tmp_path: Path):
     (tmp_path / "module.py").write_text("def run(): pass", encoding="utf-8")
     result = audit(tmp_path)
     assert "require architectural review" in result["note"]
+
+
+def test_audit_reports_runtime_source_without_sibling_test(tmp_path: Path):
+    runtime = tmp_path / "Runtime"
+    runtime.mkdir()
+    (runtime / "worker.py").write_text("def run(): pass", encoding="utf-8")
+    result = audit(tmp_path)
+    assert "Runtime/worker.py" in result["untested_candidates"]
+
+
+def test_audit_accepts_sibling_runtime_test(tmp_path: Path):
+    runtime = tmp_path / "Runtime"
+    runtime.mkdir()
+    (runtime / "worker.py").write_text("def run(): pass", encoding="utf-8")
+    (runtime / "test_worker.py").write_text("def test_run(): pass", encoding="utf-8")
+    result = audit(tmp_path)
+    assert "Runtime/worker.py" not in result["untested_candidates"]
