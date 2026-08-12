@@ -8,12 +8,12 @@
 
 Platform: ARGO KOP (Knowledge Operating Platform)
 Document ID: BOOTSTRAP-001
-Version: 2.8.0
+Version: 2.9.0
 Status: Validated / Integrity Warning
 Category: Bootstrap / Governance
 Canonical: Yes
 Priority: Absolute / Mandatory
-Last Audit Date: 2026-08-08
+Last Audit Date: 2026-08-12
 
 ---
 
@@ -24,6 +24,8 @@ This document is the mandatory initialization entry point for any AI agent, LLM 
 **No repository mutation may begin without enough current repository evidence to justify the specific mutation. The required evidence scope is proportional to the impact of the change.**
 
 A successful bootstrap MUST NOT be inferred from `PROJECT_STATUS.md`, release metadata, memory, conversation history, folder names, ZIP snapshots, or another self-declared status file alone.
+
+The engineering objective is not file-count throughput. **Construction quality, connectivity, evidence, verified seams, and reusable learning take priority over the number of files reviewed or modified.**
 
 ---
 
@@ -41,6 +43,8 @@ A session may safely perform a **bounded, low-impact change** with scoped eviden
 A **repository-wide structural, canonical, architectural or integrity claim** requires repository-wide evidence coverage appropriate to that claim.
 
 Do not perform a larger review merely because a smaller review is sufficient for the requested change, but do not make a global claim from local evidence.
+
+When broad review is undertaken, **inspect the widest practical relevant scope while preserving evidence quality**. Broader inspection is valuable only when it improves relationship understanding and proof; it must not become a race to modify more files.
 
 ---
 
@@ -173,7 +177,23 @@ A newly discovered conflict MUST be checked for propagation before local resolut
 
 ---
 
-# 10. Runtime, Engine & State Alignment
+# 10. Verified Seam Evidence Gate
+
+For integration and connectivity work, a candidate seam MUST NOT be promoted merely because the participating files exist.
+
+Use the evidence path:
+
+**Candidate Seam → Contract Exists → Test Exists → Trace Evidence Exists → Verified Seam Registry → Semantic Integration Audit**
+
+The verified seam evidence loader may establish **local artifact completeness** only. It MUST NOT be treated as proof of semantic correctness, runtime reachability, or repository-wide connectivity.
+
+Incomplete seam evidence MUST be excluded from the verified registry rather than promoted by assumption.
+
+The active connectivity objective is to prove actual paths across the repository, including source, contract, consumer, execution, trace and outcome where applicable.
+
+---
+
+# 11. Runtime, Engine & State Alignment
 
 Load `Runtime/RUN-001_BOOT_SEQUENCE.md` when runtime or boot behavior is affected, or when performing a repository-wide integrity claim.
 
@@ -193,7 +213,7 @@ Do not use a self-declared `100% CLEAN BOOT` statement as proof of integrity.
 
 ---
 
-# 11. Source-of-Truth Rule
+# 12. Source-of-Truth Rule
 
 The Git repository is the authoritative engineering source for repository state unless an explicit governed decision establishes another source for a specific purpose.
 
@@ -203,9 +223,9 @@ When a repository search/index result conflicts with direct inspection of a know
 
 ---
 
-# 12. Change Gate
+# 13. Change Gate
 
-Use the smallest sufficient evidence scope for the requested change:
+Use the smallest sufficient evidence scope for the requested change, while examining the widest practical relevant scope when broader connectivity or architectural relationships may be affected:
 
 ### Bounded Change
 
@@ -215,17 +235,36 @@ Use the smallest sufficient evidence scope for the requested change:
 
 **Enumerate → Read affected domains → Build Relationship Graph → Cross-Reference → Classify Evidence → Identify Conflict → Decide Canonical Ownership → Review Impact → Change → Re-read → Revalidate → Update Indexes/Status → Re-Boot**
 
-### Repository-Wide Integrity Claim
+### Repository-Wide Connectivity / Integrity Work
 
-Use the structural sequence above across the repository scope required to support the claim. Do not claim 100% without corresponding evidence coverage.
+**Enumerate → Inspect Broadly → Build Relationship Graph → Populate Verified Seam Candidates → Validate Registry → Run Canonical Spine Audit → Expand to Full Repository Connectivity / End-to-End Audit → Produce GAP MAP → Fix Highest-Value Seams → Regression Test → Re-Audit → Close Checkpoint**
 
 No deletion, rename, duplication, reassignment, normalization, or architectural proposal may skip the evidence required by its impact.
 
 A mutation is not complete until the write target was verified, the write succeeded, the changed artifact was re-read, and the affected relationship/status/index evidence was revalidated.
 
+**File count is never a completion criterion.** If fewer changes produce stronger verified connectivity, prefer fewer changes.
+
 ---
 
-# 13. Simplicity & Reviewability Principle
+# 14. Construction Priority & Review Quality Principle
+
+The agent must **inspect as broadly as practical, but prioritize construction quality and relationship integrity over throughput**.
+
+When reviewing or modifying multiple artifacts:
+
+1. Understand the current construction and its intended relationships before adding more.
+2. Prioritize missing or broken seams over isolated file completion.
+3. Prefer fixing a high-value cross-layer relationship over producing a larger number of superficial edits.
+4. Do not modify a file merely to increase the apparent amount of progress.
+5. Test and revalidate the path affected by a change before declaring it complete.
+6. Preserve evidence boundaries and distinguish verified progress from inferred or planned work.
+
+**A smaller set of correctly connected, tested and documented artifacts is higher-value than a larger set of superficially reviewed or modified files.**
+
+---
+
+# 15. Simplicity & Reviewability Principle
 
 **No ARGO rule is sacred merely because it already exists.**
 
@@ -243,7 +282,37 @@ The goal is not maximum procedure. The goal is **minimum sufficient control with
 
 ---
 
-# 14. Mandatory Integrity Gate
+# 16. Learning & Future Capability Gate
+
+Future capability acquisition must follow a governed learning loop rather than uncontrolled feature expansion.
+
+The preferred learning path is:
+
+**Source / Book → Extract Knowledge → Verify Understanding → Practice → Test → Apply → Record Reusable Knowledge**
+
+Learning quality is measured by demonstrated understanding, tested application and reusable knowledge, not by number of books, pages or concepts consumed.
+
+The current repository connectivity gate takes precedence over future implementation work.
+
+Future governed capability targets include:
+
+### Android Applications
+
+**Programming Fundamentals → Kotlin → Android Development → Architecture → Testing → Real Application Project**
+
+### Roblox Game Development + AI
+
+**Luau → Roblox Studio → Game Architecture → Gameplay Systems → State / Networking → AI Integration → Testing → Optimization**
+
+For Roblox AI integration, the eventual implementation must expose testable relationships between:
+
+**Game State → AI Input → Inference / Decision → Game Action → Player Feedback**
+
+These targets preserve direction and future learning requirements. They do not authorize premature implementation while connected-baseline or connectivity gates remain open.
+
+---
+
+# 17. Mandatory Integrity Gate
 
 Bootstrap completion has three states:
 
@@ -255,7 +324,7 @@ The bootstrap process MUST report the evaluated state and evidence coverage. It 
 
 ---
 
-# 15. Accumulated Platform Knowledge & Operating Principles
+# 18. Accumulated Platform Knowledge & Operating Principles
 
 1. Current repository evidence is the active engineering baseline.
 2. Canonical identity is composite: path, internal ID, version, status, canonical declaration, index registration and applicable authority must agree.
@@ -287,10 +356,14 @@ The bootstrap process MUST report the evaluated state and evidence coverage. It 
 28. Engine status must remain bounded by verified dependencies and consumers.
 29. A route declaration is not a verified integration contract.
 30. Failed or ambiguous mutations must not be bypassed with destructive or forceful operations.
+31. Construction quality, connectivity, evidence and reusable learning outrank file-count throughput.
+32. A session may be broad in inspection but must remain selective in mutation; quantity of edits is not progress by itself.
+33. Every substantial session should leave a deterministic closure point: what was established, what evidence supports it, what remains unresolved, and the next target.
+34. Future capability targets should be preserved as governed direction without interrupting the active build gate.
 
 ---
 
-# 16. Mandatory Session Closure & Self-Update Protocol
+# 19. Mandatory Session Closure & Self-Update Protocol
 
 After repository mutation:
 
@@ -301,7 +374,9 @@ After repository mutation:
 5. Update root navigation documents when a material canonical path, phase, authority or integrity rule changes.
 6. Record the decision and reason in the appropriate governance/logging artifact when required.
 7. Re-run the applicable bootstrap/integrity gate.
-8. Report unresolved warnings and evidence gaps explicitly.
+8. Re-read every mutated artifact and validate affected references, indexes, status claims and relationship evidence.
+9. Record what was completed, what remains unresolved, evidence limitations, and the deterministic next target so the session can be safely closed and resumed at any point.
+10. Never use the number of modified files as the session-completion metric.
 
 A session MUST NOT claim `100% CLEAN BOOT` unless the claimed scope has actually passed its integrity gate.
 
@@ -311,6 +386,7 @@ A session MUST NOT claim `100% CLEAN BOOT` unless the claimed scope has actually
 
 | Version | Date | Description | Author / Authority |
 | :--- | :--- | :--- | :--- |
+| 2.9.0 | 2026-08-12 | Added construction-quality-over-file-count priority, verified-seam evidence gate, full connectivity/E2E audit sequence, governed programming/mathematics learning path, future Android and Roblox+AI capability targets, and deterministic session-closure requirements | ARGO Engineering / Repository Audit |
 | 2.8.0 | 2026-08-08 | Added namespace-aware identity auditing, direct-evidence precedence over incomplete search/index results, engine route verification boundaries, and explicit verified-write/post-write validation requirements; synchronized the live audit method | ARGO Engineering / Repository Audit |
 | 2.7.0 | 2026-08-08 | Replaced blanket full-review-before-any-work rule with proportional evidence gates; added minimum-sufficient-control principle and explicit rule-replacement pathway | ARGO Engineering / Principal Architect |
 | 2.6.0 | 2026-08-08 | Added relationship-graph verification, bidirectional dependency validation, conflict propagation, local-to-global evidence boundary, audit-derived rule promotion and reopen-on-new-evidence controls discovered during live repository audit | ARGO Engineering / Principal Architect |
