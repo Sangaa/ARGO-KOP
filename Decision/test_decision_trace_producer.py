@@ -1,5 +1,3 @@
-import pytest
-
 from decision_trace_producer import record_decision_trace
 
 
@@ -17,12 +15,12 @@ def test_decision_trace_producer_materializes_lineage():
 
 
 def test_decision_trace_producer_rejects_missing_evidence():
-    with pytest.raises(AssertionError):
-        result = record_decision_trace(
-            trace_id="DEC-TRACE-2",
-            task_id="TASK-2",
-            session_id="SESSION-2",
-            evidence_map=[],
-            decision_status="NOT_EVALUATED",
-        )
-        assert result["status"] == "TRACE_RECORDED"
+    result = record_decision_trace(
+        trace_id="DEC-TRACE-2",
+        task_id="TASK-2",
+        session_id="SESSION-2",
+        evidence_map=[],
+        decision_status="NOT_EVALUATED",
+    )
+    assert result["status"] == "TRACE_REJECTED"
+    assert "EVIDENCE_MAP_REQUIRED" in result["issues"]
