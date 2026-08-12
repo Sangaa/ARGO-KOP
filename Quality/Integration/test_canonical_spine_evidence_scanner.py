@@ -4,7 +4,7 @@ from canonical_spine_evidence_scanner import scan
 def test_scanner_is_conservative_and_never_claims_connected():
     result = scan(".")
     evidence = result["evidence"]
-    assert len(evidence) == 10
+    assert len(evidence) == 11
     assert set(evidence.values()).issubset({"PARTIAL", "MISSING"})
     assert "candidate_files" in result
 
@@ -12,7 +12,7 @@ def test_scanner_is_conservative_and_never_claims_connected():
 def test_empty_repository_has_no_unsupported_positive_claims(tmp_path):
     result = scan(tmp_path)
     evidence = result["evidence"]
-    assert len(evidence) == 10
+    assert len(evidence) == 11
     assert all(state == "MISSING" for state in evidence.values())
     assert all(files == [] for files in result["candidate_files"].values())
 
@@ -45,3 +45,12 @@ def test_candidate_provenance_is_repository_relative(tmp_path):
     assert result["candidate_files"]["Decision -> Authorization"] == [
         "Decision/boundary.md"
     ]
+
+
+def test_execution_to_outcome_is_part_of_the_canonical_spine(tmp_path):
+    (tmp_path / "outcome.md").write_text(
+        "execution produces outcome", encoding="utf-8"
+    )
+    result = scan(tmp_path)
+    assert result["evidence"]["Execution -> Outcome"] == "PARTIAL"
+    assert result["candidate_files"]["Execution -> Outcome"] == ["outcome.md"]
