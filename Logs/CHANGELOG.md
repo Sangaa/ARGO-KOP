@@ -116,7 +116,7 @@ EJR-109 aligned the Outcome Evaluation contract with execution provenance and id
 
 EJR-110 added:
 
-- `Runtime/Execution/execution_trace_producer.py`
+- `Runtime/Execution/execution_trace_producer.py`;
 - producer regression tests;
 - a Producer → Learning test handoff;
 - root resumption documentation.
@@ -148,5 +148,29 @@ EJR-113 resolved the previous caller-discovery gap:
 - `START_HERE.md` now resumes from EJR-113.
 
 The path remains controlled/simulated with `side_effect=False`. The exact runner output has not yet been proven through the canonical Outcome Producer → Outcome Evaluation path, so the complete Execution → Outcome seam remains unpromoted.
+
+**Evidence boundary:** no CI PASS is recorded without an explicit GitHub status/workflow result.
+
+### 2026-08-12 — Connected Spine → Outcome Wiring
+
+EJR-114 added the canonical Outcome Producer and wired `connected_spine_runner.run()` output into Outcome Evaluation through the existing Learning pipeline. Controlled simulation maps to `INCONCLUSIVE` / `UNKNOWN` rather than manufactured success. Runtime execution trace IDs and Outcome evidence IDs are preserved as one lineage.
+
+### 2026-08-12 — Materialized Trace Evidence Boundary
+
+EJR-115 hardened the Verified Seam Evidence Loader so trace evidence must be a repository-relative JSON `EXECUTION_TRACE` artifact with required identity fields. This strengthened the evidence boundary without promoting a seam merely because a trace-shaped file exists.
+
+### 2026-08-12 — Reuse Existing Trace Persistence
+
+EJR-116 established that the existing explicit-target persistence adapter is sufficient to persist/re-read the exact runtime-produced trace. No second persistence architecture was introduced.
+
+### 2026-08-12 — Thin Runtime Evidence Capture
+
+EJR-117 added the thin `runtime_evidence_capture.py` adapter and regression coverage. It captures the exact runtime-produced trace through the existing persistence adapter, verifies trace identity after re-read, and never mutates canonical Memory implicitly.
+
+### 2026-08-12 — External Advisory Authority Boundary
+
+EJR-118 formalized that Gemini, Copilot and other external model reviews are advisory/test-only inputs. External findings must be analyzed against repository evidence and cannot directly alter architecture, priorities, governance, seam certification or build direction. The planned full repository audit retains version drift, baseline reconciliation and governance completeness as independent audit claims rather than automatic build instructions.
+
+The current checkpoint remains unpromoted until the complete contract + runtime consumer + executable test + exact runtime trace/outcome evidence set is justified as one verified seam and passed through the canonical audit.
 
 **Evidence boundary:** no CI PASS is recorded without an explicit GitHub status/workflow result.
