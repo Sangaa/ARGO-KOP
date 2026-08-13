@@ -14,8 +14,15 @@ def test_discovery_excludes_git_metadata(tmp_path: Path):
 def test_reference_graph_detects_local_markdown_link(tmp_path: Path):
     (tmp_path / "A.md").write_text("[B](B.md)", encoding="utf-8")
     (tmp_path / "B.md").write_text("# B", encoding="utf-8")
-    graph = build_reference_graph(tmp_path)
+    graph, broken = build_reference_graph(tmp_path)
     assert graph["A.md"] == {"B.md"}
+    assert broken == []
+
+
+def test_reference_graph_reports_missing_local_target(tmp_path: Path):
+    (tmp_path / "A.md").write_text("[missing](missing.md)", encoding="utf-8")
+    _, broken = build_reference_graph(tmp_path)
+    assert broken == [{"source": "A.md", "reference": "missing.md"}]
 
 
 def test_audit_reports_unreferenced_source_candidate(tmp_path: Path):
@@ -46,3 +53,11 @@ def test_audit_accepts_sibling_runtime_test(tmp_path: Path):
     (runtime / "test_worker.py").write_text("def test_run(): pass", encoding="utf-8")
     result = audit(tmp_path)
     assert "Runtime/worker.py" not in result["untested_candidates"]
+
+
+def test_audit_exposes_layer_inventory_and_evidence_classes(tmp_path: Path):
+    (tmp_path / "Runtime").mkdir()
+    (tmp_path / "Runtime" / "worker.py").write_text("def run(): pass", encoding="utf-8")
+    result = audit(tmp_path)
+    assert result["layer_file_counts"]["Runtime / Execution"] == 1
+    assert "RUNTIME_REACHABLE" in result["evidence_classes"]
