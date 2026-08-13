@@ -3,40 +3,31 @@
 ---
 
 Platform
-
 ARGO KOP (Knowledge Operating Platform)
 
 Artifact Type
-
 Architecture Map / Navigation Artifact
 
 Version
-
-1.3.1
+1.3.2
 
 Status
-
 Validated / Integrity Hold
 
 Category
-
 Architecture / Repository Navigation
 
 Canonical
-
 Yes — as the Architecture Map artifact
 
 Repository Development Baseline
-
-3.3.0
+3.2.1
 
 Latest Official Release
-
 1.0.0
 
 Last Audit
-
-2026-08-09
+2026-08-13
 
 ---
 
@@ -47,8 +38,6 @@ This file is a **map artifact**, not `ARC-001`.
 `ARC-001` is reserved for `Architecture/ARC-001_PLATFORM_ARCHITECTURE.md`.
 
 The map intentionally has no numeric `ARC-NNN` Document ID so that it cannot create a duplicate architectural identity with the canonical platform architecture document.
-
----
 
 # Purpose
 
@@ -166,7 +155,6 @@ Architecture remains **INTEGRITY HOLD** until active architectural artifacts, fo
 - `Repository/REP-002_REPOSITORY_MAP.md`
 - `Architecture/ARC-001_PLATFORM_ARCHITECTURE.md`
 - `Architecture/ARC-004_LAYER_MODEL.md`
-- `Architecture/ARC-006_DEPENDENCY_MODEL.md`
 - `Architecture/ARC-009_ARCHITECTURE_DECISIONS.md`
 - `Architecture/ARC-010_EVOLUTION_MODEL.md`
 - `Architecture/ARC-011_CANONICAL_ARCHITECTURE_MODEL.md`
