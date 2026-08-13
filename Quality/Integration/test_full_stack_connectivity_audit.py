@@ -1,6 +1,12 @@
 from pathlib import Path
 
-from full_stack_connectivity_audit import audit, build_reference_graph, discover_files, normalize_local_reference
+from full_stack_connectivity_audit import (
+    audit,
+    build_reference_graph,
+    discover_files,
+    normalize_local_reference,
+    python_import_candidates,
+)
 
 
 def test_discovery_excludes_git_metadata(tmp_path: Path):
@@ -19,10 +25,23 @@ def test_reference_graph_detects_local_markdown_link(tmp_path: Path):
     assert broken == []
 
 
-def test_reference_graph_reports_missing_local_target(tmp_path: Path):
+def test_reference_graph_reports_missing_markdown_target(tmp_path: Path):
     (tmp_path / "A.md").write_text("[missing](missing.md)", encoding="utf-8")
     _, broken = build_reference_graph(tmp_path)
     assert broken == [{"source": "A.md", "reference": "missing.md"}]
+
+
+def test_python_source_code_is_not_scanned_as_markdown(tmp_path: Path):
+    (tmp_path / "test_example.py").write_text('example = "[B](B.md)"\n', encoding="utf-8")
+    (tmp_path / "B.md").write_text("# B", encoding="utf-8")
+    _, broken = build_reference_graph(tmp_path)
+    assert broken == []
+
+
+def test_python_imports_are_extracted_syntactically():
+    refs = python_import_candidates("from Runtime.Execution import execution_plan\nimport json\n")
+    assert "Runtime.Execution" in refs
+    assert "json" in refs
 
 
 def test_reference_normalization_strips_fragment_and_query(tmp_path: Path):
@@ -36,7 +55,8 @@ def test_reference_normalization_strips_fragment_and_query(tmp_path: Path):
 def test_reference_normalization_accepts_backslash_paths(tmp_path: Path):
     source = tmp_path / "docs" / "A.md"
     source.parent.mkdir()
-    target = tmp_path / "docs" / "B.md"
+    target = tmp_path / "docs" / "B" / "B.md"
+    target.parent.mkdir()
     target.write_text("# B", encoding="utf-8")
     assert normalize_local_reference("B\\B.md", source, tmp_path) == "docs/B/B.md"
 
