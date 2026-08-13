@@ -1,0 +1,29 @@
+name: Full-Stack Repository Audit
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  repository-audit:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Execute repository-wide audit
+        working-directory: Quality/Integration
+        run: python run_full_stack_audit.py ../.. | tee ../../full-stack-audit-report.json
+
+      - name: Upload audit evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: full-stack-audit-report
+          path: full-stack-audit-report.json
+          if-no-files-found: error
