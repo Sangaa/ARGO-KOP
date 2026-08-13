@@ -6,12 +6,13 @@
 
 Platform: ARGO KOP (Knowledge Operating Platform)
 Document ID: REP-002
-Version: 1.7.0
+Version: 1.7.1
 Status: Integrity Hold
 Category: Repository
 Canonical: Yes
 Priority: Critical
-Last Audit Date: Aug 11, 2026
+Last Audit Date: Aug 13, 2026
+Development Baseline: 3.2.1
 
 ---
 
@@ -186,13 +187,49 @@ Path: `Memory/Operational_Memory/`
 
 Build-01 is physically constructed and verified. The artifacts remain `Candidate / Integrity Hold` pending consolidated Memory and cross-layer validation.
 
-## 13. Other Repository Domains
+## 13. Memory — Decision Memory
+
+Path: `Memory/Decision_Memory/`
+
+- `Memory/Decision_Memory/README.md`
+- `Memory/Decision_Memory/DM-001_DECISION_RECORD_MODEL.md`
+- `Memory/Decision_Memory/DM-002_DECISION_LIFECYCLE_AND_REVIEW.md`
+- `Memory/Decision_Memory/DM-003_DECISION_EVIDENCE_AND_REVISION.md`
+- `Memory/Decision_Memory/DM-004_DECISION_TRACEABILITY_AND_CONSUMER_LINKS.md`
+
+Build-01 is physically constructed and re-read. The artifacts remain `Candidate / Integrity Hold` pending consolidated Memory and cross-layer validation. They define decision-memory structure and traceability; they do not independently create decision authority.
+
+## 14. Memory — Historical Memory
+
+Path: `Memory/Historical_Memory/`
+
+- `Memory/Historical_Memory/README.md`
+- `Memory/Historical_Memory/HM-001_HISTORICAL_RECORD_MODEL.md`
+- `Memory/Historical_Memory/HM-002_PROVENANCE_AND_TEMPORAL_CONTEXT.md`
+- `Memory/Historical_Memory/HM-003_HISTORICAL_RETRIEVAL_AND_RELEVANCE.md`
+- `Memory/Historical_Memory/HM-004_HISTORICAL_TO_CURRENT_TRANSITION.md`
+
+Build-01 is physically constructed and re-read. The artifacts remain `Candidate / Integrity Hold` pending consolidated Memory and cross-layer validation. They preserve historical evidence without silently promoting it to current authority.
+
+## 15. Memory — Project Memory
+
+Path: `Memory/Project_Memory/`
+
+- `Memory/Project_Memory/README.md`
+- `Memory/Project_Memory/PM-001_PROJECT_RECORD_MODEL.md`
+- `Memory/Project_Memory/PM-002_PROJECT_LIFECYCLE_AND_STATE.md`
+- `Memory/Project_Memory/PM-003_PROJECT_TRACEABILITY_AND_CONTINUITY.md`
+- `Memory/Project_Memory/PM-004_PROJECT_KNOWLEDGE_AND_LESSONS.md`
+
+Build-01 is physically constructed and re-read. The artifacts remain `Candidate / Integrity Hold` pending consolidated Memory and cross-layer validation. They preserve project-local continuity and controlled promotion of project experience into reusable knowledge.
+
+## 16. Other Repository Domains
 
 Current `SYSTEM_MAP.md` also identifies Knowledge, Memory, Decision, AI, Services, Intelligence, Quality, Projects, Release, Logs, Examples and Future as physical repository domains/groupings.
 
 These domains are not assumed complete or architecturally authoritative from folder names alone. Their active inventories and relationships remain under connected-baseline validation and are tracked through REP-011 review evidence.
 
-## 14. Mapping Rules
+## 17. Mapping Rules
 
 1. Every active canonical document has exactly one canonical path.
 2. Filename identity must match internal Document ID where one exists.
@@ -211,12 +248,15 @@ These domains are not assumed complete or architecturally authoritative from fol
 15. If a reviewed file changes, or a dependency/authority/consumer changes materially, its prior review state must be revalidated.
 16. Critical Repository Control artifacts (`REP-011` through `REP-015`) must remain mutually discoverable through the active repository map while their cross-registry reconciliation remains open.
 17. New Memory subdomains must be mapped when physically constructed and must remain capped by their verified scope until consolidated validation.
+18. New Decision Memory, Historical Memory and Project Memory subdomains must be mapped when physically constructed and must remain capped by their verified scope until consolidated validation.
+19. Memory mapping establishes physical inventory only; it does not grant Memory authority or certify cross-layer consumers.
+20. `REP-001`, `REP-002`, `REP-013` and `REP-014` must be reconciled after material Memory inventory or relationship changes.
 
-## 15. Integrity State
+## 18. Integrity State
 
 Current repository state: **INTEGRITY HOLD**.
 
-The map is synchronized with the current declared Core, Governance, Repository control-plane, Runtime, Architecture, Lifecycle, Interfaces, Models, Plugins and Build-01 Operational Memory inventory within the inspected scope. Cross-layer relationship validation remains open.
+The map is synchronized with the current declared Core, Governance, Repository control-plane, Runtime, Architecture, Lifecycle, Interfaces, Models, Plugins and Build-01 Memory inventory within the inspected scope. Cross-layer relationship validation remains open.
 
 Completion of individual files or reviewed subsets must not be interpreted as Phase 1 repository completion. REP-011 is the binding review/completion evidence ledger until an explicit Phase 1 closure decision is recorded.
 
