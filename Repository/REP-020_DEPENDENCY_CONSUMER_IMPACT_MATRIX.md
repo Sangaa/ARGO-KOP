@@ -2,7 +2,7 @@
 
 Platform: ARGO KOP  
 Document ID: REP-020  
-Version: 0.1.0  
+Version: 0.1.1  
 Status: **Provisional / Phase-1 Seed / Not Authority**  
 Development Baseline: 3.2.1  
 Last Audit: 2026-08-13
@@ -83,49 +83,48 @@ Matrix Update
 
 `VERIFIED` is an evidence claim, not a value inferred from the presence of a row.
 
+## Phase-1 Service Node Seed
+
+The Services folder was physically inspected during this audit. `_FOLDER_STATUS.md` confirms the declared inventory as `SRV-001` through `SRV-010`, plus `README.md` and the folder status file, while explicitly keeping the folder on `INTEGRITY HOLD`. `Services/README.md` enumerates the exact ten service filenames.
+
+| Node ID | Artifact | Baseline | State | Directly evidenced relationships / consumers |
+|---|---|---|---|---|
+| SVC-001 | Services/SRV-001_SERVICE_ARCHITECTURE.md | 3.2.1 | OBSERVED / REVALIDATION_REQUIRED | References SRV-002, CORE-003, RUN-010; defines service-layer intent |
+| SVC-002 | Services/SRV-002_REPOSITORY_SERVICE.md | 3.2.1 | OBSERVED / REVALIDATION_REQUIRED | References SRV-001, SRV-003, RUN-001, RUN-004; repository operation contract |
+| SVC-003 | Services/SRV-003_MEMORY_SERVICE.md | not declared in artifact | OBSERVED / REVALIDATION_REQUIRED | References SRV-001, SRV-002, SRV-004, RUN-004; memory continuity contract |
+| SVC-004 | Services/SRV-004_KNOWLEDGE_SERVICE.md | 3.2.1 | OBSERVED / REVALIDATION_REQUIRED | References MOD-001 and SPEC-001; direct specification existence re-read |
+| SVC-005 | Services/SRV-005_VALIDATION_SERVICE.md | 3.2.1 | REVALIDATED / INTEGRITY HOLD | Consumer of ENG-004; references CORE-003, REP-001/002, RUN-007 |
+| SVC-006 | Services/SRV-006_SEARCH_SERVICE.md | not declared in artifact | OBSERVED / REVALIDATION_REQUIRED | References SRV-001/002/005/007 and PROJECT_BOOTSTRAP |
+| SVC-007 | Services/SRV-007_LOGGING_SERVICE.md | not declared in artifact | OBSERVED / REVALIDATION_REQUIRED | References SRV-001/005/006/008 and RUN-007 |
+| SVC-008 | Services/SRV-008_INDEX_SERVICE.md | not declared in artifact | OBSERVED / REVALIDATION_REQUIRED | References SRV-001/006/007/009; indexing/relationship role |
+| SVC-009 | Services/SRV-009_UPDATE_SERVICE.md | 3.2.1 | REVALIDATED / INTEGRITY HOLD | Controlled mutation service consumed by ENG-006; depends on SRV-005/007/008 |
+| SVC-010 | Services/SRV-010_SERVICE_REFERENCE.md | 3.2.1 | REVALIDATED / INTEGRITY HOLD | Navigation/reference artifact; selected relationships only |
+
+**Important:** `OBSERVED / REVALIDATION_REQUIRED` means the physical artifact and declared relationships were inspected; it does not certify implementation, runtime execution, or global integration.
+
+## Phase-1 Service Relationship Edges
+
+| ID | Source | Target | Type | State | Impact / Revalidation |
+|---|---|---|---|---|---|
+| SVC-E01 | SRV-001 | SRV-002 | REFERENCES | OBSERVED | Revalidate if service architecture changes |
+| SVC-E02 | SRV-002 | SRV-003 | REFERENCES | OBSERVED | Memory/repository contract impact |
+| SVC-E03 | SRV-003 | SRV-004 | REFERENCES | OBSERVED | Memory/knowledge boundary impact |
+| SVC-E04 | SRV-004 | MOD-001 | DEPENDS_ON | OBSERVED | Revalidate model identity/content |
+| SVC-E05 | SRV-004 | SPEC-001-KNOWLEDGE-ORGANIZATION | DEPENDS_ON | PARTIALLY_VERIFIED | Specification existence and identity verified; full bidirectional validation remains open |
+| SVC-E06 | ENG-004 | SRV-005 | CONSUMES | VERIFIED within inspected scope | Validation gate impact; revalidate on engine/service contract changes |
+| SVC-E07 | SRV-005 | ENG-004 | CONSUMES / IMPLEMENTS RESPONSIBILITY | VERIFIED within inspected scope | Reverse validation required on ENG-004 changes |
+| SVC-E08 | SRV-006 | SRV-007 | REFERENCES | OBSERVED | Search/logging integration impact |
+| SVC-E09 | SRV-007 | SRV-008 | REFERENCES | OBSERVED | Logging/index impact |
+| SVC-E10 | SRV-008 | SRV-009 | REFERENCES | OBSERVED | Index/update synchronization impact |
+| SVC-E11 | ENG-006 | SRV-009 | CONSUMES | VERIFIED within inspected scope | Mutation-control impact |
+| SVC-E12 | SRV-009 | SRV-005 | DEPENDS_ON | OBSERVED | Mutation validation dependency |
+| SVC-E13 | SRV-009 | SRV-007 | DEPENDS_ON | OBSERVED | Mutation traceability dependency |
+| SVC-E14 | SRV-009 | SRV-008 | DEPENDS_ON | OBSERVED | Index/status synchronization impact |
+| SVC-E15 | RUN-010 | Services | RUNTIME_REFERENCE | PARTIALLY_VERIFIED | Runtime/service boundary exists; does not prove every service path |
+
 ## Initial Control-Plane Seed
 
-The following seed is populated from current `REP-013` inventory and `REP-014` relationship evidence. It is intentionally limited and must expand only from inspected repository evidence.
-
-| ID | Source | Target | Type | Direction | State | Impact / Revalidation |
-|---|---|---|---|---|---|---|
-| MX-001 | REP-001 | REP-002 | REFERENCES | → | VERIFIED within control-plane scope | Revalidate if master index/map changes |
-| MX-002 | REP-002 | REP-001 | REFERENCES | → | VERIFIED within control-plane scope | Revalidate if map/index changes |
-| MX-003 | REP-001 | REP-013 | DEPENDS_ON | → | VERIFIED within control-plane scope | Revalidate if content inventory changes |
-| MX-004 | REP-002 | REP-013 | DEPENDS_ON | → | VERIFIED within control-plane scope | Revalidate if content tree changes |
-| MX-005 | REP-013 | REP-011 | DEPENDS_ON | → | VERIFIED within control-plane scope | Review-state impact |
-| MX-006 | REP-013 | REP-012 | DEPENDS_ON | → | VERIFIED within control-plane scope | Allocation-state impact |
-| MX-007 | REP-013 | REP-014 | DEPENDS_ON | → | VERIFIED within control-plane scope | Relationship graph impact |
-| MX-008 | REP-014 | REP-011 | DEPENDS_ON | → | VERIFIED within control-plane scope | Evidence/review impact |
-| MX-009 | REP-014 | REP-012 | DEPENDS_ON | → | VERIFIED within control-plane scope | Allocation/checkpoint impact |
-| MX-010 | REP-015 | REP-011 | DEPENDS_ON | → | VERIFIED within control-plane scope | Bootstrap evidence impact |
-| MX-011 | REP-015 | REP-012 | DEPENDS_ON | → | VERIFIED within control-plane scope | Allocation/recovery impact |
-| MX-012 | REP-015 | REP-013 | DEPENDS_ON | → | VERIFIED within control-plane scope | Inventory impact |
-| MX-013 | REP-015 | REP-014 | DEPENDS_ON | → | VERIFIED within control-plane scope | Relationship impact |
-| MX-014 | REP-015 | REP-016 | DEPENDS_ON | → | VERIFIED within control-plane scope | Work-queue impact |
-| MX-015 | REP-016 | REP-011 | DEPENDS_ON | → | VERIFIED within control-plane scope | Review evidence impact |
-| MX-016 | REP-016 | REP-012 | DEPENDS_ON | → | VERIFIED within control-plane scope | Allocation/recovery impact |
-| MX-017 | REP-016 | REP-013 | DEPENDS_ON | → | VERIFIED within control-plane scope | Inventory impact |
-| MX-018 | REP-016 | REP-014 | DEPENDS_ON | → | VERIFIED within control-plane scope | Relationship impact |
-| MX-019 | REP-016 | REP-015 | CONSUMES | → | VERIFIED within current control-plane scope | Bootstrap/work-queue impact |
-| MX-020 | REP-012 | DIAG-001 | DOCUMENTS | → | PROVISIONAL / provenance-linked | Revalidate/regenerate when REP-012 changes |
-| MX-021 | DIAG-001 | REP-012 | DERIVED_FROM | → | PROVISIONAL / provenance-linked | Stale if source registry changes |
-
-## Current Artifact Inventory Seed
-
-The current content tree explicitly identifies the following control-plane artifacts:
-
-```text
-Repository/
-├── REP-011_REVIEW_TRACEABILITY_LEDGER.md
-├── REP-012_REPOSITORY_ALLOCATION_REGISTRY.md
-├── REP-013_REPOSITORY_CONTENT_TREE.md
-├── REP-014_REPOSITORY_RELATIONSHIP_REGISTRY.md
-├── REP-015_CONTROL_PLANE_BOOTSTRAP_CHECKLIST.md
-└── REP-016_PHASE1_PARTITION_WORK_QUEUE.md
-```
-
-`REP-013` confirms this set as physically present and states that allocation, review and relationship records remain subject to cross-registry reconciliation.
+The control-plane seed remains as previously established from `REP-013` inventory and `REP-014` relationship evidence, including MX-001 through MX-021. It is intentionally limited and must expand only from inspected repository evidence.
 
 ## Baseline Control
 
@@ -167,10 +166,10 @@ At every session closure, once this matrix is governed for operational use, reco
 ## Limitations / Open Work
 
 - This is a Phase-1 seed, not an exhaustive repository graph.
-- Wildcard/partial inventory entries remain unresolved until physically enumerated.
+- `SRV-003`, `SRV-006`, `SRV-007`, and `SRV-008` do not explicitly declare a Development Baseline in their inspected documents; this is a metadata completeness finding, not permission to infer a baseline.
 - Bidirectional validation is not globally complete.
-- Domain semantic relationships outside the inspected control plane remain open.
-- `REP-020` must not be used as an authority substitute for `REP-014`, `REP-011`, `REP-012`, `REP-013`, `REP-015`, `REP-016`, `STD-003`, or other canonical authorities.
+- Domain semantic relationships outside the inspected control plane and service boundary remain open.
+- `REP-020` must not be used as an authority substitute for canonical authorities.
 
 ## Integrity State
 
@@ -178,11 +177,12 @@ At every session closure, once this matrix is governed for operational use, reco
 
 ## Evidence Basis
 
-- `REP-013` — physical content inventory and state rules.
-- `REP-014` — relationship schema and current relationship evidence.
+- `Services/README.md` — exact service inventory.
+- `Services/_FOLDER_STATUS.md` — bounded folder status and audit boundary.
+- `SRV-001` through `SRV-010` — inspected service contracts and declared relationships.
+- `REP-013` / `REP-014` — control-plane inventory and relationship contract.
 - `STD-003` — cross-reference verification contract.
 - `Release/VERSION.md` — current development baseline.
-- `ROADMAP.md` F-004 — pre-existing Dependency & Consumer Impact Matrix candidate.
 
 ## Design Principle
 
