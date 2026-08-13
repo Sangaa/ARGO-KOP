@@ -7,11 +7,12 @@ runtime connectivity on its own.
 
 from __future__ import annotations
 
+import ast
 import re
 from pathlib import Path
 
 IGNORED_DIRS = {".git", "__pycache__", ".pytest_cache"}
-REFERENCE_RE = re.compile(r"(?:\]\(|from\s+|import\s+)([^\s)]+)")
+MARKDOWN_LINK_RE = re.compile(r"\[[^\]]*\]\(([^)]+)\)")
 EVIDENCE_CLASSES = (
     "IMPLEMENTED", "TESTED", "LINKED", "RUNTIME_REACHABLE",
     "DOCUMENTED", "ORPHAN_CANDIDATE", "UNTESTED_CANDIDATE", "BROKEN_REFERENCE",
@@ -32,10 +33,10 @@ def _relative(root: Path, path: Path) -> str:
 
 
 def normalize_local_reference(raw: str, source: Path, root: Path) -> str | None:
-    """Normalize a local markdown/Python reference without inventing targets."""
+    """Normalize a local file/directory reference without inventing targets."""
     candidate = raw.strip().strip("`'\"")
-    candidate = candidate.split("#", 1)[0].split("?", 1)[0]
-    if not candidate or candidate.startswith(("http://", "https://", "mailto:")):
+    candidate = candidate.split("#", 1)[0].split("?", 1)[0].strip().rstrip(".,;:)")
+    if not candidate or candidate.startswith(("http://", "https://", "mailto:", "#")):
         return None
     candidate = candidate.replace("\\", "/")
     target = (source.parent / candidate).resolve()
@@ -45,18 +46,53 @@ def normalize_local_reference(raw: str, source: Path, root: Path) -> str | None:
         return None
 
 
-def local_reference_candidates(text: str) -> set[str]:
+def markdown_reference_candidates(text: str) -> set[str]:
+    return {
+        match.strip().strip("`'\"")
+        for match in MARKDOWN_LINK_RE.findall(text)
+        if match.strip()
+    }
+
+
+def python_import_candidates(text: str) -> set[str]:
+    """Return only import statements, avoiding prose/string false positives."""
+    try:
+        tree = ast.parse(text)
+    except SyntaxError:
+        return set()
     refs: set[str] = set()
-    for match in REFERENCE_RE.findall(text):
-        candidate = match.strip("`'\"")
-        if not candidate.startswith(("http://", "https://")):
-            refs.add(candidate)
+    for node in ast.walk(tree):
+        if isinstance(node, ast.Import):
+            refs.update(alias.name for alias in node.names)
+        elif isinstance(node, ast.ImportFrom):
+            if node.level:
+                prefix = "." * node.level
+                refs.add(prefix + (node.module or ""))
+            elif node.module:
+                refs.add(node.module)
     return refs
+
+
+def local_reference_candidates(text: str, suffix: str = ".md") -> set[str]:
+    """Compatibility helper returning syntax-aware local candidates."""
+    if suffix == ".py":
+        return python_import_candidates(text)
+    return markdown_reference_candidates(text)
+
+
+def _import_to_path(raw: str) -> str | None:
+    if raw.startswith("."):
+        return None
+    return raw.replace(".", "/")
 
 
 def build_reference_graph(root: Path) -> tuple[dict[str, set[str]], list[dict[str, str]]]:
     files = discover_files(root)
     known = {_relative(root, p) for p in files}
+    known_dirs = {
+        _relative(root, p) for p in root.rglob("*")
+        if p.is_dir() and not any(part in IGNORED_DIRS for part in p.parts)
+    }
     graph = {_relative(root, p): set() for p in files}
     broken: list[dict[str, str]] = []
     for path in files:
@@ -67,9 +103,25 @@ def build_reference_graph(root: Path) -> tuple[dict[str, set[str]], list[dict[st
             text = path.read_text(encoding="utf-8")
         except (OSError, UnicodeDecodeError):
             continue
-        for ref in local_reference_candidates(text):
+        refs = local_reference_candidates(text, path.suffix)
+        for ref in refs:
+            if path.suffix == ".py":
+                if ref.startswith("."):
+                    candidate = (path.parent / (ref.lstrip(".").replace(".", "/"))).as_posix()
+                else:
+                    candidate = _import_to_path(ref)
+                if candidate is None:
+                    continue
+                matches = {candidate, f"{candidate}.py", f"{candidate}/__init__.py"}
+                target = next((item for item in matches if item in known), None)
+                if target:
+                    graph[source].add(target)
+                elif any(part in candidate.split("/") for part in ("Runtime", "Cognition", "Decision", "Knowledge", "Memory", "Quality", "Architecture", "Engine", "Services", "Models", "Repository")):
+                    broken.append({"source": source, "reference": ref})
+                continue
+
             rel = normalize_local_reference(ref, path, root)
-            if rel is not None and rel in known and rel != source:
+            if rel is not None and (rel in known or rel in known_dirs) and rel != source:
                 graph[source].add(rel)
             elif ("/" in ref or ref.endswith((".py", ".md", ".json", ".yaml", ".yml"))) and not ref.startswith(("http://", "https://")):
                 broken.append({"source": source, "reference": ref})
