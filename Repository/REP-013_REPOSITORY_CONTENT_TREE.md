@@ -2,7 +2,7 @@
 
 Platform: ARGO KOP  
 Document ID: REP-013  
-Version: 1.0.7  
+Version: 1.0.8  
 Status: Active / Phase 1 Population In Progress  
 Development Baseline: 3.2.1  
 Last Audit: 2026-08-13
@@ -194,15 +194,25 @@ Memory/
 │   ├── EJR-022_2026-08-10_HERMUZ_BUILD_METHOD_LESSONS.md
 │   ├── EJR-023_2026-08-11_SESSION_RESUME_AND_PHASE1_CONTINUATION.md
 │   └── EJR-025_2026-08-11_REP015_REVALIDATION_AND_SESSION_CLOSURE.md
-└── Operational_Memory/
+├── Operational_Memory/
+│   ├── README.md
+│   ├── OPM-001_OPERATIONAL_MEMORY_MODEL.md
+│   ├── OPM-002_OPERATIONAL_EVENT_CAPTURE.md
+│   ├── OPM-003_OPERATIONAL_RETRIEVAL.md
+│   └── OPM-004_OPERATIONAL_LIFECYCLE.md
+├── Decision_Memory/
+│   └── README.md
+├── Historical_Memory/
+│   └── Engineering_Journal/
+└── Project_Memory/
     ├── README.md
-    ├── OPM-001_OPERATIONAL_MEMORY_MODEL.md
-    ├── OPM-002_OPERATIONAL_EVENT_CAPTURE.md
-    ├── OPM-003_OPERATIONAL_RETRIEVAL.md
-    └── OPM-004_OPERATIONAL_LIFECYCLE.md
+    ├── PM-001_PROJECT_MEMORY_MODEL.md
+    └── PM-003_PROJECT_MEMORY_LIFECYCLE.md
 ```
 
-`Operational_Memory/` is now a physically constructed Build-01 subdomain. Its artifacts remain bounded by `Memory/_FOLDER_STATUS.md` and consolidated validation is still open.
+`Operational_Memory/`, `Decision_Memory/`, `Historical_Memory/`, and `Project_Memory/` are now explicitly represented in the content inventory because current repository evidence establishes their physical presence. Their review/allocation/relationship states remain governed by `REP-011`, `REP-012`, and `REP-014`; physical presence does not imply Phase-1 closure or canonical authority.
+
+The `Historical_Memory/Engineering_Journal/` entry is intentionally represented as a directory-level evidence path because the current evidence confirms historical engineering-journal artifacts, while the exhaustive physical enumeration of that subdomain remains open.
 
 This remains a known-evidence inventory and is not yet an exhaustive physical enumeration of `Memory/`.
 
@@ -374,7 +384,7 @@ Until then the folder remains **OPEN**.
 
 Current repository state: **INTEGRITY HOLD**.
 
-The content tree is synchronized with the current inspected repository baseline and records the canonical physical path for the Knowledge Organization specification. Cross-layer relationship validation remains open.
+The content tree is synchronized with the current inspected repository baseline and records the canonical physical path for the Knowledge Organization specification. Memory subdomains are now explicitly represented from current repository evidence; exhaustive enumeration and cross-layer relationship validation remain open.
 
 ## Verification Model
 
