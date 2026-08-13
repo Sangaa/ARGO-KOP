@@ -32,7 +32,7 @@ Architecture
 
 Development Baseline
 
-3.3.0
+3.2.1
 
 Latest Official Release
 
@@ -40,7 +40,7 @@ Latest Official Release
 
 Last Audit
 
-2026-08-09
+2026-08-13
 
 ---
 
