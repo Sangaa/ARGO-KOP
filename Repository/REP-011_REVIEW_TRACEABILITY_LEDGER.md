@@ -6,12 +6,12 @@
 
 Platform: ARGO KOP
 Document ID: REP-011
-Version: 1.0.7
+Version: 1.0.8
 Status: Active / Integrity Hold
 Category: Repository Control
 Canonical: Yes
 Priority: Critical
-Development Baseline: 3.3.0
+Development Baseline: 3.2.1
 Last Audit Date: 2026-08-13
 
 ---
@@ -90,7 +90,7 @@ Every material or canonical file that predates a relevant repository update, ins
 
 Current fitness requires, within the applicable scope:
 
-- current repository baseline compatibility;
+- compatibility with the authoritative current development baseline;
 - compliance with the latest applicable content instructions;
 - compatibility with current canonical authorities;
 - compatibility with current dependencies and consumers;
@@ -145,7 +145,8 @@ Before a review is marked `RELATIONSHIPS_REVALIDATED` or `CLOSED_FOR_PHASE_1`, r
 3. `REP-012` allocation/state/checkpoint entry;
 4. `REP-014` relationship entries, where applicable;
 5. current repository content/commit evidence;
-6. latest applicable content instructions and authority boundaries.
+6. latest applicable content instructions and authority boundaries;
+7. authoritative current development baseline and release/version authority.
 
 If any required registry view is missing or materially inconsistent, the review remains open or becomes `REVALIDATION_REQUIRED`.
 
@@ -237,7 +238,7 @@ Re-review is justified when the file, dependency, authority, consumer, evidence,
 
 Review failures or mistaken interpretations shall be preserved as reusable engineering knowledge when they change future review behavior.
 
-Examples include trusting conversation claims without repository evidence, using documentation date without temporal analysis, treating commit existence as semantic correctness, assuming selected-file review closes a folder, accepting references as relationships without authority/consumer checks, mutating without post-read, losing the last trusted state because no checkpoint existed, treating logical domain names as physical paths without evidence, or accepting an old file as current merely because it still exists.
+Examples include trusting conversation claims without repository evidence, using documentation date without temporal analysis, treating commit existence as semantic correctness, assuming selected-file review closes a folder, accepting references as relationships without authority/consumer checks, mutating without post-read, losing the last trusted state because no checkpoint existed, treating logical domain names as physical paths without evidence, accepting an old file as current merely because it still exists, and trusting a non-authoritative version string merely because it is higher than the current authoritative baseline.
 
 ## 16. Persistence Boundary
 
@@ -272,9 +273,11 @@ The current repository contains material reviewed and modified during the 2026-0
 
 The current audit also established a material methodological learning: historical checkpoints can remain valid historical evidence while their physical paths, content, relationships, and conclusions require independent validation against the current HEAD. A logical memory domain must not be assumed to equal a physical directory name without current repository evidence.
 
+A separate version-authority finding was also established: `PROJECT_STATUS.md` and `Release/VERSION.md` identify **3.2.1** as the active development baseline, while older control artifacts may still carry a higher stale baseline such as 3.3.0. The higher number must not be treated as authoritative merely because it is higher; current authority must be resolved from the designated version source before accepting the file as current.
+
 Current Phase 1 work therefore uses:
 
-`Historical Mutation Audit → Current Repository Review → Content-Fitness Check → Relationship Revalidation → Cross-Document Learning Capture → Post-Mutation Re-read → Registry Reconciliation → Allocation/Checkpoint Update → Explicit Closure`
+`Historical Mutation Audit → Current Repository Review → Content-Fitness Check → Version-Authority Check → Relationship Revalidation → Cross-Document Learning Capture → Post-Mutation Re-read → Registry Reconciliation → Allocation/Checkpoint Update → Explicit Closure`
 
 The existence of `EJR-015` does not close any affected domain.
 
@@ -290,6 +293,7 @@ Review State:
 Previous Review Evidence:
 Reason for Review/Re-review:
 Current Baseline Checked:
+Version Authority Checked:
 Content Contract Checked:
 Current-Fitness State:
 Authority Checked:
@@ -334,7 +338,7 @@ This ledger controls review traceability, content-fitness evidence, learning per
 
 ## 22. Guiding Rule
 
-**Never spend review effort twice because the repository forgot what was already proven; never declare unfinished work complete because the repository forgot what remains open; never treat an old file as current until its content, instructions, dependencies, relationships and operational fitness survive revalidation.**
+**Never spend review effort twice because the repository forgot what was already proven; never declare unfinished work complete because the repository forgot what remains open; never treat an old file as current until its content, instructions, dependencies, relationships, version authority and operational fitness survive revalidation.**
 
 ---
 
