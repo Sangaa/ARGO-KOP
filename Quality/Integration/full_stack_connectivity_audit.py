@@ -31,6 +31,20 @@ def _relative(root: Path, path: Path) -> str:
     return path.resolve().relative_to(root.resolve()).as_posix()
 
 
+def normalize_local_reference(raw: str, source: Path, root: Path) -> str | None:
+    """Normalize a local markdown/Python reference without inventing targets."""
+    candidate = raw.strip().strip("`'\"")
+    candidate = candidate.split("#", 1)[0].split("?", 1)[0]
+    if not candidate or candidate.startswith(("http://", "https://", "mailto:")):
+        return None
+    candidate = candidate.replace("\\", "/")
+    target = (source.parent / candidate).resolve()
+    try:
+        return target.relative_to(root.resolve()).as_posix()
+    except ValueError:
+        return None
+
+
 def local_reference_candidates(text: str) -> set[str]:
     refs: set[str] = set()
     for match in REFERENCE_RE.findall(text):
@@ -54,14 +68,10 @@ def build_reference_graph(root: Path) -> tuple[dict[str, set[str]], list[dict[st
         except (OSError, UnicodeDecodeError):
             continue
         for ref in local_reference_candidates(text):
-            normalized = (path.parent / ref).resolve()
-            try:
-                rel = normalized.relative_to(root.resolve()).as_posix()
-            except ValueError:
-                continue
-            if rel in known and rel != source:
+            rel = normalize_local_reference(ref, path, root)
+            if rel is not None and rel in known and rel != source:
                 graph[source].add(rel)
-            elif "/" in ref or ref.endswith((".py", ".md", ".json", ".yaml", ".yml")):
+            elif ("/" in ref or ref.endswith((".py", ".md", ".json", ".yaml", ".yml"))) and not ref.startswith(("http://", "https://")):
                 broken.append({"source": source, "reference": ref})
     return graph, broken
 
