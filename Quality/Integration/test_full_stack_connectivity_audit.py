@@ -1,6 +1,6 @@
 from pathlib import Path
 
-from full_stack_connectivity_audit import audit, build_reference_graph, discover_files
+from full_stack_connectivity_audit import audit, build_reference_graph, discover_files, normalize_local_reference
 
 
 def test_discovery_excludes_git_metadata(tmp_path: Path):
@@ -23,6 +23,28 @@ def test_reference_graph_reports_missing_local_target(tmp_path: Path):
     (tmp_path / "A.md").write_text("[missing](missing.md)", encoding="utf-8")
     _, broken = build_reference_graph(tmp_path)
     assert broken == [{"source": "A.md", "reference": "missing.md"}]
+
+
+def test_reference_normalization_strips_fragment_and_query(tmp_path: Path):
+    source = tmp_path / "docs" / "A.md"
+    source.parent.mkdir()
+    target = tmp_path / "docs" / "B.md"
+    target.write_text("# B", encoding="utf-8")
+    assert normalize_local_reference("B.md#section?view=1", source, tmp_path) == "docs/B.md"
+
+
+def test_reference_normalization_accepts_backslash_paths(tmp_path: Path):
+    source = tmp_path / "docs" / "A.md"
+    source.parent.mkdir()
+    target = tmp_path / "docs" / "B.md"
+    target.write_text("# B", encoding="utf-8")
+    assert normalize_local_reference("B\\B.md", source, tmp_path) == "docs/B/B.md"
+
+
+def test_reference_normalization_ignores_external_and_mailto_links(tmp_path: Path):
+    source = tmp_path / "A.md"
+    assert normalize_local_reference("https://example.com/x", source, tmp_path) is None
+    assert normalize_local_reference("mailto:test@example.com", source, tmp_path) is None
 
 
 def test_audit_reports_unreferenced_source_candidate(tmp_path: Path):
