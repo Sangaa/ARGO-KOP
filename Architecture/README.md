@@ -29,7 +29,7 @@ In accordance with CORE-003 Constitutional Laws, architecture strictly defines i
 
 The `Architecture/` directory is globally locked and organized by logical responsibility. Every valid artifact MUST be cataloged using the mandatory prefixes registered below:
 
-*   **Platform Architecture Framework:** [`Architecture/CORE-000_PLATFORM_ARCHITECTURE.md`](CORE-000_PLATFORM_ARCHITECTURE.md)
+*   **Platform Architecture Framework:** [`Core/CORE-000_PLATFORM_ARCHITECTURE.md`](../Core/CORE-000_PLATFORM_ARCHITECTURE.md)
     The ultimate guiding text specifying platform components. In case of conflict, this document overrides all project details.
 *   **Component Architecture Blueprint:** [`Architecture/ARC-002_COMPONENT_ARCHITECTURE.md`](ARC-002_COMPONENT_ARCHITECTURE.md)
     Defines internal component models, responsibilities, unique ownership boundaries, and interaction rules.
