@@ -4,8 +4,8 @@ Platform: ARGO KOP
 Document ID: REP-014  
 Version: 1.2.0  
 Status: Active / Relationship Enumeration In Progress  
-Development Baseline: 3.3.0  
-Last Audit: 2026-08-11
+Development Baseline: 3.2.1  
+Last Audit: 2026-08-13
 
 ---
 
@@ -67,7 +67,7 @@ The following are deliberately limited to relationships established during repos
 
 | ID | Source | Target | Type | State |
 |---|---|---|---|---|
-| REL-001 | SPEC-001 | MOD-001 | DEPENDS_ON | Revalidated within inspected scope |
+| REL-001 | SPEC-001-KNOWLEDGE-ORGANIZATION | MOD-001 | DEPENDS_ON | Revalidation Required |
 | REL-002 | MOD-001 | SRV-004 | CONSUMES | Revalidated within inspected scope |
 | REL-003 | ENG-004 | SRV-005 | PRODUCES | Revalidated within inspected scope |
 | REL-004 | ENG-002 | ENG-006 | DEPENDS_ON | Revalidation Required |
@@ -121,6 +121,14 @@ The following are deliberately limited to relationships established during repos
 | REL-052 | OPM-002 | MEM-008 | REFERENCES | Verified within current Guided-Discovery scope |
 | REL-053 | OPM-003 | OPM-002 | DEPENDS_ON | Verified within current Operational-Memory build scope |
 | REL-054 | OPM-004 | OPM-003 | DEPENDS_ON | Verified within current Operational-Memory build scope |
+
+## Identity Drift Reconciliation — 2026-08-13
+
+`REL-001` was reclassified because the inspected target artifact identifies itself as `SPEC-001-KNOWLEDGE-ORGANIZATION`, not the abbreviated `SPEC-001` identifier previously recorded in this registry.
+
+The target artifact exists at `Specifications/01-Knowledge-Organization.md` and is the artifact referenced by `MOD-001`. The relationship is therefore retained but marked `Revalidation Required` until the canonical identity mapping is independently reconciled across the applicable repository indexes.
+
+This avoids silently treating an abbreviated identifier as an authoritative document identity.
 
 ## Operational Memory Build-01 Reconciliation — 2026-08-11
 
