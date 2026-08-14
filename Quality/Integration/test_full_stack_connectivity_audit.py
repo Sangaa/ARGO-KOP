@@ -31,6 +31,13 @@ def test_reference_graph_reports_missing_markdown_target(tmp_path: Path):
     assert broken == [{"source": "A.md", "reference": "missing.md"}]
 
 
+def test_inline_code_is_not_scanned_as_markdown_reference(tmp_path: Path):
+    (tmp_path / "A.md").write_text("A Python string such as `[B](B.md)` is only an example.", encoding="utf-8")
+    (tmp_path / "B.md").write_text("# B", encoding="utf-8")
+    _, broken = build_reference_graph(tmp_path)
+    assert broken == []
+
+
 def test_python_source_code_is_not_scanned_as_markdown(tmp_path: Path):
     (tmp_path / "test_example.py").write_text('example = "[B](B.md)"\n', encoding="utf-8")
     (tmp_path / "B.md").write_text("# B", encoding="utf-8")
