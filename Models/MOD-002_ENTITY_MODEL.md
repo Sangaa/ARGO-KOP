@@ -8,13 +8,13 @@ Platform: ARGO KOP
 Knowledge Operating Platform
 
 Document ID: MOD-002
-Version: 1.2.0
+Version: 1.2.1
 Status: Approved / Revalidation Required
 Category: Models
 Canonical: Yes
 Priority: Critical
-Development Baseline: 3.3.0
-Last Audit: 2026-08-09
+Development Baseline: 3.2.1
+Last Audit: 2026-08-14
 
 ---
 
