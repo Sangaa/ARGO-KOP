@@ -16,7 +16,6 @@ class State(str, Enum):
     AUTHORIZED = "AUTHORIZED"
     PROPOSED = "PROPOSED"
     HOLD = "HOLD"
-    REJECTED = "REJECTED"
 
 
 @dataclass
@@ -110,12 +109,7 @@ def run(payload: Dict[str, Any], human_approved: bool = False) -> Dict[str, Any]
     authorization = authorize(validation, human_approved)
     action = propose(decision, authorization)
 
-    if action["status"] == "PROPOSED":
-        state = State.PROPOSED
-    elif authorization["status"] == "REJECTED":
-        state = State.REJECTED
-    else:
-        state = State.HOLD
+    state = State.PROPOSED if action["status"] == "PROPOSED" else State.HOLD
 
     trace = Trace(
         task_id=context.task_id,
