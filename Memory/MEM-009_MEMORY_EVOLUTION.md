@@ -6,7 +6,7 @@
 
 Platform: ARGO KOP (Knowledge Operating Platform)  
 Document ID: MEM-009  
-Version: 1.3.2  
+Version: 1.3.3  
 Status: Integrity Hold / Revalidated  
 Category: Memory  
 Canonical: Yes  
@@ -184,6 +184,40 @@ Apply these lessons whenever ARGO:
 
 ---
 
+# Validated Platform Learning — P31
+
+## Independent Negative-Search Confirmation
+
+A negative repository search result must not be treated as evidence of absence after a single search method. When the searched artifact is expected, ARGO must perform a second independent retrieval method with materially different failure modes (for example: a different query strategy, exact-name search, repository-path fetch, or direct authoritative source lookup).
+
+If the second method finds the artifact, the failure of the first search becomes evidence about the **search mechanism or its scope**, not evidence that the artifact was absent. The review must record why the first method failed and must not retain the original negative conclusion.
+
+This lesson is distinct from the existing rule that bounded search limits the claim: it adds a required **recovery procedure for negative results** and converts search failure into reusable diagnostic evidence.
+
+### Classification
+
+**Validated / Reusable platform lesson.** This is an evidence-handling and search-recovery rule, not a constitutional or governance override.
+
+### Provenance
+
+- Session: `P31`
+- Evidence: `Repository/REP-020_SESSION_DELTA_2026-08-14_P31.md`
+- Trigger: a repository search for `SESSION_DELTA_2026-08-14_P30` returned no results, while direct authoritative path retrieval subsequently located `Repository/REP-020_SESSION_DELTA_2026-08-14_P30.md` on `main`.
+- Root cause classification: search/index visibility or query/index behavior; the negative search result was not sufficient to establish artifact absence.
+- Validation: independent search strategy plus direct path fetch.
+- Promotion decision: **PROMOTED / CANONICAL REUSABLE LESSON**.
+
+### Reuse Conditions
+
+Apply this rule whenever:
+
+- a file, ID, branch, PR, symbol or artifact is reported as missing;
+- a repository-wide search returns zero results for an expected artifact;
+- a search result is truncated or otherwise bounded;
+- an absence claim could affect authority, dependency, identity, or closure decisions.
+
+---
+
 # Evolution Rules
 
 Memory evolution shall:
@@ -218,83 +252,3 @@ When memory changes because of an error, contradiction or recoverable execution 
 10. Any cross-domain promotion performed.
 11. Recovery action when a technical/tool failure was involved.
 12. Whether the recovery exposed a reusable process lesson.
-
----
-
-# Repository Authority
-
-Working Memory, Session Memory, User Memory and Conversation Context may generate learning candidates.
-
-They do not replace Platform Repository Memory directly.
-
-Only the applicable governed authority may publish a canonical memory change.
-
-Where Principal-Owner approval is required, repository publication must remain blocked until that approval is explicit.
-
----
-
-# Historical Preservation
-
-Previous authoritative memory states shall remain traceable through repository history or governed archive mechanisms.
-
-Archive is preferred to destructive deletion when historical context is needed.
-
-User/project history should remain attributable to its originating context rather than being silently absorbed into platform history.
-
----
-
-# Evolution Validation
-
-Before canonical publication, verify as applicable:
-
-Memory Quality
-
-Evidence Quality
-
-Memory Scope
-
-Memory Relationships
-
-Repository Alignment
-
-Architecture Alignment
-
-Governance Compliance
-
-Authority Requirement
-
-Version Consistency
-
-Historical Continuity
-
-Downstream Impact
-
-Promotion Justification
-
-Failure / Recovery Evidence where applicable
-
----
-
-# Related Documents
-
-- `Memory/MEM-001_MEMORY_MODEL.md`
-- `Memory/MEM-004_MEMORY_LIFECYCLE.md`
-- `Memory/MEM-005_MEMORY_GOVERNANCE.md`
-- `Memory/MEM-008_MEMORY_TRACEABILITY.md`
-- `Engine/ENG-007_LEARNING_ENGINE.md`
-- `Knowledge/KNW-009_KNOWLEDGE_EVOLUTION.md`
-- `Models/MOD-011_KNOWLEDGE_SOURCE_MODEL.md`
-- `Decision/DEC-009_DECISION_GOVERNANCE.md`
-- `Core/CORE-003_CONSTITUTION.md`
-- `Repository/REP-020_SESSION_DELTA_2026-08-14_P29.md`
-- `Memory/Engineering_Journal/EJR-211_2026-08-14_P29_VALIDATED_PLATFORM_LESSONS.md`
-
----
-
-# Guiding Statement
-
-**Memory should continuously improve from evidence and experience without silently acquiring authority; ARGO's system memory and each user's learned experience remain distinct, attributable domains, with source provenance preserved and validated learning crossing between a memory boundary only through explicit governed promotion.**
-
----
-
-End of Document
