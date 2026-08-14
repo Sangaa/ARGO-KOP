@@ -2,7 +2,7 @@
 
 Platform: ARGO KOP  
 Document ID: REP-016  
-Version: 1.1.0  
+Version: 1.1.1  
 Status: Active / Phase 1 Open / Integrity Hold  
 Development Baseline: 3.2.1  
 Last Audit: 2026-08-14
@@ -62,7 +62,7 @@ Material mutation remains:
 
 `ONE MATERIAL CHANGE → COMMIT → RE-READ → RECORD EVIDENCE → NEXT CHANGE`
 
-## Current Queue Decision — P30 Revalidation
+## Current Queue Decision — P31 Revalidation
 
 Current evidence does **not** justify global PASS. The strongest work remains concentrated in the control plane.
 
@@ -74,11 +74,12 @@ Current evidence does **not** justify global PASS. The strongest work remains co
 - Historical PR #9 evidence remains separated from current-main state because PR #9 was closed without merge.
 - `RUN-010 → ENG-006 → SRV-009` has documentation/boundary evidence but not sufficient direct executable consumer proof.
 - Duplicate-ID work has classified known active/archive distinctions but has not achieved exhaustive internal-ID/content reconciliation.
-- P29 validated reusable evidence lessons are already promoted in MEM-009; P30 review found no new lesson meeting the promotion threshold, so no new canonical memory mutation is justified.
+- P29 validated reusable evidence lessons are already promoted in MEM-009.
+- P31 validated one additional reusable search-recovery lesson: a negative result must be independently rechecked by a materially different retrieval method before an absence claim is accepted.
 
 ### Next highest-strength work
 
-1. **Exhaustive duplicate-ID audit** with explicit owner/authority decisions.
+1. **Exhaustive duplicate-ID audit** with explicit owner/authority decisions and independent confirmation of every material negative result.
 2. **Executable consumer proof / implementation-gap decision** for `RUN-010 → ENG-006 → SRV-009`.
 3. **Bidirectional critical-edge validation**.
 4. **Controlled mutation/reconciliation harness**.
@@ -93,17 +94,32 @@ PR #9 is historical/candidate evidence only. Its `REJECTED → HOLD` Runtime cha
 
 No historical PR result may silently promote a Runtime semantic into the current repository state.
 
-## Evidence Reuse Rules — P29 Revalidated in P30
+## Evidence Reuse Rules — P31 Revalidated
 
-The following rules remain **validated reusable engineering lessons** and are linked to `MEM-009` through the P29 evidence record:
+The following rules are validated reusable engineering lessons and are linked to `MEM-009`:
 
 1. A passing CI workflow proves the scope tested by that workflow; it does not by itself prove repository-wide integrity or Boot PASS.
 2. A Markdown/documentation edge proves a declared relationship only; executable relationship status requires current-main consumer/implementation evidence.
 3. Historical PR evidence must remain historical/candidate evidence until the change is independently reconciled against current main.
 4. A truncated or scope-limited search cannot support an exhaustive PASS claim; the limitation must remain attached to the result.
 5. A successful commit proves repository persistence, not semantic correctness; semantic claims require the corresponding verification evidence.
+6. **A negative search result must be independently rechecked using a materially different retrieval method before an absence claim is accepted. If the second method finds the artifact, classify the first result as a search/retrieval failure rather than artifact absence, record the failure mode, and retain the authoritative artifact evidence.**
 
-P30 revalidated these rules against the current queue/matrix state and found no contradiction requiring amendment. No new permanent platform lesson is promoted by this session.
+## Search Failure Recovery Contract — P31
+
+For any material negative search:
+
+`SEARCH-A → NEGATIVE → INDEPENDENT SEARCH-B → CONFIRM ABSENCE OR RECOVER ARTIFACT → ANALYZE SEARCH FAILURE → RECORD EVIDENCE`
+
+Search-B must have a materially different failure mode from Search-A. Repeating the identical query through the identical index does not satisfy independent confirmation.
+
+This contract is especially mandatory for claims affecting:
+
+- identity or duplicate status;
+- authority or canonical ownership;
+- dependency/consumer absence;
+- missing runtime/engine/service artifacts;
+- closure or Boot gates.
 
 ## Recovery / Anti-Loop / Anti-Premature-Closure
 
@@ -111,13 +127,13 @@ Every item must be resumable from repository evidence alone. Repeated review wit
 
 ## Current Checkpoint
 
-P30 evidence is recorded in:
+P31 evidence is recorded in:
 
-`Repository/REP-020_SESSION_DELTA_2026-08-14_P30.md`
+`Repository/REP-020_SESSION_DELTA_2026-08-14_P31.md`
 
 Session closure record:
 
-`Memory/Engineering_Journal/EJR-213_2026-08-14_P30_SESSION_CLOSURE.md`
+`Memory/Engineering_Journal/EJR-214_2026-08-14_P31_SESSION_CLOSURE.md`
 
 Next session resumes at **Priority 2 — Exhaustive duplicate-ID audit**, then **Priority 3 — executable consumer proof**.
 
