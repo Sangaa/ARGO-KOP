@@ -2,10 +2,10 @@
 
 Platform: ARGO KOP  
 Document ID: REP-015  
-Version: 1.0.5  
+Version: 1.0.6  
 Status: Active / Phase 1 Open / Integrity Hold  
-Development Baseline: 3.3.0  
-Last Audit: 2026-08-11
+Development Baseline: 3.2.1  
+Last Audit: 2026-08-14
 
 ## Purpose
 
@@ -360,28 +360,27 @@ Minimum control-plane load:
 
 `REP-001 → REP-002 → REP-013 → REP-011/012/014 → REP-015/016 → Journal`
 
-## Current Reconciliation Evidence — 2026-08-11
+## Current Reconciliation Evidence — 2026-08-14
 
-The checklist was revalidated against the current repository state after the `EJR-024` control-plane reconciliation checkpoint.
+The checklist was revalidated against the current repository state during the post-audit control-plane reconciliation cycle.
 
 Verified facts:
 
-- `REP-013` received the inventory reconciliation mutation recorded by `EJR-024`.
-- `REP-014` received the relationship reconciliation mutation recorded by `EJR-024`.
-- `REP-016` remains `RECONCILIATION` in `RING 0 — CONTROL PLANE`.
-- `REP-011` continues to define the cross-registry reconciliation boundary.
-- `REP-015` itself remains open and authoritative only for bootstrap/control procedure; it does not declare Phase 1 closure.
-- The control-plane state remains `PARTIALLY RECONCILED / INTEGRITY HOLD`.
+- Current authoritative development baseline is **3.2.1**.
+- `REP-012 v1.0.7` now agrees with the authoritative baseline.
+- `REP-020` current-cycle evidence records Runtime/Integration Run #136 and Full-Stack Audit Run #122 as successful scoped evidence.
+- The current executable prototype remains distinct from the documented `RUN-010 → ENG-006 → SRV-009` production mutation chain.
+- `RUN-010 → ENG-006 → SRV-009` remains **PARTIALLY VERIFIED** because an executable consumer path is not established in the inspected Python scope.
+- Full-Stack Audit evidence currently reports zero broken-reference candidates in its inspected scope.
+- Exhaustive internal-ID reconciliation and final boot PASS remain open.
 
-This update changes the audit freshness of `REP-015`; it does not promote any queue item or ring.
+Latest current-cycle matrix checkpoint:
 
-Latest reconciliation checkpoint:
+`Repository/REP-020_MATRIX_ADDENDUM_2026-08-14.md`
 
-`EJR-024_2026-08-11_SESSION_CLOSURE_CONTROL_PLANE_RECONCILIATION.md`
+Latest synchronized matrix commit:
 
-Latest checkpoint commit before this mutation:
-
-`48a45400902db2c60c692597ac2a6c18e741d631`
+`0746b6e56d3345115d323d8f6e940deaa91bda19`
 
 ## Guiding Rule
 
