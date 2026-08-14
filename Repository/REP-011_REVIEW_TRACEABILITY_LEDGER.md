@@ -6,13 +6,13 @@
 
 Platform: ARGO KOP
 Document ID: REP-011
-Version: 1.0.8
+Version: 1.0.9
 Status: Active / Integrity Hold
 Category: Repository Control
 Canonical: Yes
 Priority: Critical
 Development Baseline: 3.2.1
-Last Audit Date: 2026-08-13
+Last Audit Date: 2026-08-14
 
 ---
 
@@ -267,13 +267,18 @@ The pair is an **orientation/provenance artifact**. Its numerical/status claims 
 
 If its source registry changes materially, the diagram enters `REVALIDATION_REQUIRED` until regenerated or explicitly superseded.
 
-## 18. Current Known Audit Boundary — 2026-08-13
+## 18. Current Known Audit Boundary — 2026-08-14
 
 The current repository contains material reviewed and modified during the 2026-08-09 pre-failure window. `EJR-015` identifies those mutations as requiring independent audit.
 
-The current audit also established a material methodological learning: historical checkpoints can remain valid historical evidence while their physical paths, content, relationships, and conclusions require independent validation against the current HEAD. A logical memory domain must not be assumed to equal a physical directory name without current repository evidence.
+The current audit established several reusable method rules:
 
-A separate version-authority finding was also established: `PROJECT_STATUS.md` and `Release/VERSION.md` identify **3.2.1** as the active development baseline, while older control artifacts may still carry a higher stale baseline such as 3.3.0. The higher number must not be treated as authoritative merely because it is higher; current authority must be resolved from the designated version source before accepting the file as current.
+- historical checkpoints remain historical evidence until validated against current HEAD;
+- logical memory domains must not be assumed to equal physical directory names;
+- a higher version/baseline number is not authoritative unless the designated authority source supports it;
+- a successful candidate CI run does not by itself establish repository-wide integrity;
+- a relationship documented in Markdown is not executable proof;
+- stale PR candidates must be closed rather than allowed to contaminate the active work path.
 
 Current Phase 1 work therefore uses:
 
@@ -329,6 +334,7 @@ This ledger controls review traceability, content-fitness evidence, learning per
 - `Repository/REP-014_REPOSITORY_RELATIONSHIP_REGISTRY.md`
 - `Repository/REP-015_CONTROL_PLANE_BOOTSTRAP_CHECKLIST.md`
 - `Repository/REP-016_PHASE1_PARTITION_WORK_QUEUE.md`
+- `Repository/REP-020_DEPENDENCY_CONSUMER_IMPACT_MATRIX.md`
 - `Memory/Engineering_Journal/EJR-015_2026-08-10_PRE_FAILURE_MUTATION_AUDIT.md`
 - `Memory/Engineering_Journal/EJR-022_2026-08-10_HERMUZ_BUILD_METHOD_LESSONS.md`
 - `Assets/Diagrams/DIAG-001_REPOSITORY_PHASE1_STATUS_2026-08-10.svg`
@@ -336,7 +342,37 @@ This ledger controls review traceability, content-fitness evidence, learning per
 - `PROJECT_BOOTSTRAP.md`
 - `PROJECT_STATUS.md`
 
-## 22. Guiding Rule
+## 22. Current Review Cycle Evidence — 2026-08-14
+
+### Control-plane mutations
+
+| Artifact | Mutation | Evidence | Result |
+|---|---|---|---|
+| `REP-012` | Baseline authority reconciled `3.3.0 → 3.2.1`; version 1.0.7 | Commit `654d7f3377003f6882794c86ffc142ec45298e64` + re-read | PASS within authority scope |
+| `REP-020` | Matrix synchronized to v0.1.8 | Commit `64bf4c5df0edb6f1801c252a5c9a9255f840c718` + re-read | PASS |
+| `REP-014` | Relationship registry synchronized to v1.2.1 | Commit `3f7a9119023e280ea082dd8d86ca72d9ab9eac1a` + re-read | PASS within relationship scope |
+| `PR #1` | Closed as stale verification branch | GitHub PR closure evidence | PASS |
+| `PR #3` | Closed as superseded verification branch | GitHub PR closure evidence | PASS |
+
+### CI evidence
+
+- PR #9 Run #132: Prototype acceptance `PASS`;
+- Canonical scenarios `PASS`;
+- Integration quality suite `80 passed`;
+- workflow jobs completed successfully.
+
+The CI result is strong candidate evidence but not repository-wide integrity certification.
+
+### Unresolved scope
+
+- executable consumer proof for `RUN-010 → ENG-006 → SRV-009`;
+- exhaustive internal-ID/duplicate audit;
+- full bidirectional graph validation;
+- final Boot `BOOTED / INTEGRITY PASS`.
+
+These remain explicitly open.
+
+## 23. Guiding Rule
 
 **Never spend review effort twice because the repository forgot what was already proven; never declare unfinished work complete because the repository forgot what remains open; never treat an old file as current until its content, instructions, dependencies, relationships, version authority and operational fitness survive revalidation.**
 
