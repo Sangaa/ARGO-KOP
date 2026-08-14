@@ -2,7 +2,7 @@
 
 Platform: ARGO KOP  
 Document ID: REP-016  
-Version: 1.0.8  
+Version: 1.0.9  
 Status: Active / Phase 1 Open / Integrity Hold  
 Development Baseline: 3.2.1  
 Last Audit: 2026-08-14
@@ -62,7 +62,7 @@ Material mutation remains:
 
 `ONE MATERIAL CHANGE → COMMIT → RE-READ → RECORD EVIDENCE → NEXT CHANGE`
 
-## Current Queue Decision — P28 Revalidation
+## Current Queue Decision — P29 Revalidation
 
 Current evidence does **not** justify global PASS. The strongest work remains concentrated in the control plane.
 
@@ -74,6 +74,8 @@ Current evidence does **not** justify global PASS. The strongest work remains co
 - Historical PR #9 evidence remains separated from current-main state because PR #9 was closed without merge.
 - `RUN-010 → ENG-006 → SRV-009` has documentation/boundary evidence but not sufficient direct executable consumer proof.
 - Duplicate-ID work has classified known active/archive distinctions but has not achieved exhaustive internal-ID/content reconciliation.
+- Repeated review rounds have now validated a reusable evidence rule: **CI success is evidence for the tested workflow, not proof of global Boot PASS**.
+- Repeated review rounds have also validated that **documented relationship ≠ executable relationship** unless a current-main consumer/implementation path is directly evidenced.
 
 ### Next highest-strength work
 
@@ -92,15 +94,31 @@ PR #9 is historical/candidate evidence only. Its `REJECTED → HOLD` Runtime cha
 
 No historical PR result may silently promote a Runtime semantic into the current repository state.
 
+## Evidence Reuse Rules — P29
+
+The following rules are now treated as **validated reusable engineering lessons** and are linked to `MEM-009` through the P29 evidence record:
+
+1. A passing CI workflow proves the scope tested by that workflow; it does not by itself prove repository-wide integrity or Boot PASS.
+2. A Markdown/documentation edge proves a declared relationship only; executable relationship status requires current-main consumer/implementation evidence.
+3. Historical PR evidence must remain historical/candidate evidence until the change is independently reconciled against current main.
+4. A truncated or scope-limited search cannot support an exhaustive PASS claim; the limitation must remain attached to the result.
+5. A successful commit proves repository persistence, not semantic correctness; semantic claims require the corresponding verification evidence.
+
+These rules are reusable across repository-review sessions, but remain subordinate to canonical governance and authority documents.
+
 ## Recovery / Anti-Loop / Anti-Premature-Closure
 
 Every item must be resumable from repository evidence alone. Repeated review without new evidence must stop and record the missing evidence. No item may be closed merely because files were read, an index lists them, a previous model declared completion, or CI passed.
 
 ## Current Checkpoint
 
-P28 evidence is recorded in:
+P29 evidence is recorded in:
 
-`Repository/REP-020_SESSION_DELTA_2026-08-14_P28.md`
+`Repository/REP-020_SESSION_DELTA_2026-08-14_P29.md`
+
+Permanent-learning candidate and validation record:
+
+`Memory/Engineering_Journal/EJR-211_2026-08-14_P29_VALIDATED_PLATFORM_LESSONS.md`
 
 Next session resumes at **Priority 2 — Exhaustive duplicate-ID audit**, then **Priority 3 — executable consumer proof**.
 
