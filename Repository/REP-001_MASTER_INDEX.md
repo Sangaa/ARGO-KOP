@@ -6,12 +6,12 @@
 
 Platform: ARGO KOP (Knowledge Operating Platform)
 Document ID: REP-001
-Version: 1.11.0
+Version: 1.11.1
 Status: Integrity Hold
 Category: Repository
 Canonical: Yes
 Priority: Critical
-Last Audit Date: Aug 11, 2026
+Last Audit Date: Aug 14, 2026
 Development Baseline: 3.2.1
 
 ---
@@ -142,11 +142,14 @@ The following interface artifacts were directly verified during the current audi
 
 The following model artifacts were directly verified during the current audit:
 
+- `Models/MOD-001_KNOWLEDGE_MODEL.md`
 - `Models/MOD-002_ENTITY_MODEL.md`
 - `Models/MOD-003_DOCUMENT_MODEL.md`
 - `Models/MOD-004_MEMORY_MODEL.md`
 - `Models/MOD-011_KNOWLEDGE_SOURCE_MODEL.md`
 - `Models/_FOLDER_STATUS.md`
+
+`MOD-001` was reconciled from current-main evidence after independent ID-oriented search and direct authoritative-path verification. It is indexed here because it declares `Canonical: Yes`, is readable on current main, and is directly verified by `Models/_FOLDER_STATUS.md`.
 
 Declared model artifacts not directly located remain unresolved and are not promoted to active authority.
 
