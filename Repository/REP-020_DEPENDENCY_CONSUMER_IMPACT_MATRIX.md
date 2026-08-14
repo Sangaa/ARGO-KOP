@@ -2,11 +2,11 @@
 
 Platform: ARGO KOP  
 Document ID: REP-020  
-Version: 0.1.6  
+Version: 0.1.7  
 Status: **Provisional / Phase-1 Seed / Not Authority**  
 Current Development Baseline: **3.2.1**  
 Last Audit: 2026-08-14  
-Last Revalidation Commit: `54dc4fe138a4954db5c68154e5ee96fbdc8f905e`
+Last Revalidation Commit: `f74949877b4e495ae54e57ac708be6dfb8d235eb`
 
 ## Purpose
 
@@ -92,7 +92,7 @@ REP-001 and REP-002 are canonical Repository control-plane artifacts at Integrit
 | TST-009 | REP-020 mutation persistence + re-read | PASS | REP-020/main |
 | TST-010 | REP-011 review-traceability rule re-read | PASS | Review/evidence control |
 | TST-011 | REP-012 allocation/recovery rule re-read | PASS | Allocation/recovery control |
-| TST-012 | Current-baseline conflict detection across control-plane records | **CONFLICT DETECTED** | REP-020/Release authority vs REP-012 |
+| TST-012 | Current-baseline conflict detection across control-plane records | CONFLICT DETECTED | REP-020/Release authority vs REP-012 |
 | TST-013 | Content-fitness/currentness rule check | PARTIAL | Canonical control-plane scope |
 | TST-014 | Cross-registry reconciliation state check | PARTIAL / OPEN | REP-011..016 |
 | TST-015 | Direct read of authoritative version source | PASS | Release/VERSION.md |
@@ -107,7 +107,14 @@ REP-001 and REP-002 are canonical Repository control-plane artifacts at Integrit
 | TST-024 | Runtime → Engine → Service executable consumer search | PARTIAL / DOCUMENTATION ONLY | No Python references to ENG-006 or SRV-009 found by direct code search |
 | TST-025 | Current-main acceptance expectation vs harness state logic | CONFLICT CONFIRMED | SAFE-002 expects HOLD while current main harness still contains REJECTED path |
 | TST-026 | Reconciled candidate branch created from current main | PASS | ci/runtime-prototype-reconciled-20260814 |
-| TST-027 | Fresh PR CI for reconciled candidate | NOT_COMPLETE / QUEUED | PR #2 run #115 queued at audit time |
+| TST-027 | Fresh PR CI for reconciled candidate | PASS for prototype / FAIL integration | PR #3 run #117 / retry #2 |
+| TST-028 | PR #3 CI retry | PASS for prototype / FAIL integration | run #117 attempt #2, candidate `54c8a3e...` |
+| TST-029 | Integration failure step localization | PARTIAL | Failure isolated to `Run integration quality suite`; first assertion unavailable through exposed log endpoint |
+| TST-030 | Integration failure reproducibility | PASS | Same integration failure reproduced on retry |
+| TST-031 | PR #3 semantic claim vs runtime acceptance | PASS for candidate prototype behavior | Prototype acceptance + canonical scenarios passed |
+| TST-032 | EJR-164 session/checkpoint persistence | PASS | main @ `f74949877b4e495ae54e57ac708be6dfb8d235eb` |
+| TST-033 | REP-020 re-read before current mutation | PASS | v0.1.6, sha `c29c0f73...` |
+| TST-034 | Runtime consumer expansion evidence review | PARTIAL | EJR-181 + RUN-010 + ENG-006 evidence; executable consumer still unproven |
 
 ### Tests not performed / not yet sufficient
 
@@ -119,8 +126,10 @@ REP-001 and REP-002 are canonical Repository control-plane artifacts at Integrit
 | TST-104 | Exhaustive duplicate-ID scan | PARTIAL / NOT_CLOSED | Namespace filename searches performed; full internal-ID/content scan remains tool-limited |
 | TST-105 | Semantic content equivalence across all consumers | NOT_COMPLETED | Cross-layer consumer review required |
 | TST-106 | Matrix program performance/load test | NOT_PERFORMED | Program not yet implemented |
-| TST-107 | Final acceptance test after reconciled candidate CI | QUEUED | Waiting for PR #2 workflow completion |
+| TST-107 | Final acceptance test after reconciled candidate CI | PASS for prototype; FAIL integration | Integration suite remains unresolved |
 | TST-108 | Full-stack integration workflow on current main | NOT_PERFORMED | Current main has no associated workflow run at latest commit |
+| TST-109 | First failing integration assertion/file/function | NOT_IDENTIFIED | GitHub check annotation exposes exit code but not pytest traceback/log body |
+| TST-110 | Baseline authority reconciliation decision | NOT_PERFORMED / CONFLICT | 3.2.1 vs 3.3.0 remains unresolved; REP-012 not modified |
 
 **Interpretation:** `PASS` is scope-bound. `PARTIAL` is incomplete evidence. `CONFLICT` is a detected contradiction requiring authority resolution. `NOT_PERFORMED` is not failure.
 
@@ -212,16 +221,37 @@ Direct reads confirm the declared responsibilities and boundaries. However, a di
 
 For every material mutation, lookup outgoing edges, incoming/reverse edges, consumers, dependencies, authority, content contract, provenance/derived artifacts and audit/session records requiring synchronization. The resulting set is the minimum targeted revalidation scope.
 
+## Current P0/P1 Closure State — 2026-08-14
+
+### P0 — PR #3 CI
+**PARTIAL:** prototype acceptance and canonical scenarios PASS; integration job FAIL. Retry reproduced the failure. The failure is localized to the `Run integration quality suite` step, but the first pytest assertion/file/function is not exposed by the available GitHub log endpoint. No test/runtime change was made to force PASS.
+
+### P1 — Integration failure
+**CONFLICT / UNRESOLVED:** reproducible failure, but semantic classification remains open until first assertion/traceback is available. Environment setup, checkout, Python setup and test-runner installation all PASS. Only the integration suite invocation fails. fileciteturn103file0
+
+### P1 — Baseline 3.3.0
+**CONFLICT:** authority reconciliation remains open. 3.2.1 remains the current matrix baseline; REP-012 has not been changed.
+
+### P1 — Executable relationship proof
+**PARTIAL:** current evidence expands the impact surface and documents the intended edges, but no executable consumer was established. EJR-181 explicitly preserves this distinction and records no PASS promotion. fileciteturn106file0
+
+### P2 — Duplicate-ID audit
+**PARTIAL / NOT CLOSED:** active filename collisions were classified; exhaustive internal-ID/content reconciliation remains open because broad search responses can be truncated.
+
+## Session Evidence Checkpoint
+
+`EJR-164_2026-08-14_P0_PR3_CI_AND_INTEGRATION_FAILURE_CHECKPOINT.md` records the P0/P1 checkpoint and the missing evidence required for final classification.
+
 ## Open Work
 
+- Obtain the first failing integration pytest assertion/traceback and classify the failure.
 - Resolve the **3.2.1 vs 3.3.0 baseline authority conflict**.
 - Complete exhaustive internal Document-ID duplicate scan across all namespaces and historical/reference occurrences.
 - Complete bidirectional validation.
-- Complete PR #2 CI and acceptance evidence.
+- Complete executable consumer proof or explicitly document the implementation gap.
 - Execute controlled runtime/mutation tests with evidence capture.
 - Complete REP-001/REP-002/REP-011 reconciliation validation.
-- Continue Runtime Consumers → Repository/Index expansion.
-- Reconcile `SRV-001` through `SRV-009` contracts against actual consumers/dependencies.
+- Re-run final acceptance/regression after any approved corrective mutation.
 - Preserve provisional status until evidence supports promotion.
 
 ## Integrity State
