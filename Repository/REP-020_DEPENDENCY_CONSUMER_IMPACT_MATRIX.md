@@ -2,9 +2,9 @@
 
 Platform: ARGO KOP  
 Document ID: REP-020  
-Version: 0.1.4  
+Version: 0.1.5  
 Status: **Provisional / Phase-1 Seed / Not Authority**  
-Development Baseline: 3.2.1  
+Current Development Baseline: **3.2.1**  
 Last Audit: 2026-08-14
 
 ## Purpose
@@ -37,7 +37,7 @@ The matrix narrows rediscovery. It does **not** grant authority or prove runtime
 
 ## Repository / Index Expansion
 
-REP-001 and REP-002 are both canonical Repository control-plane artifacts at Integrity Hold and baseline 3.2.1. REP-001 explicitly states that index membership records inventory and does not itself certify graph relationships; REP-002 states that physical mapping and review/relationship evidence are tracked separately. fileciteturn1082file0 fileciteturn1081file0
+REP-001 and REP-002 are canonical Repository control-plane artifacts at Integrity Hold and baseline 3.2.1. REP-001 explicitly states that index membership records inventory and does not itself certify graph relationships; REP-002 separates physical mapping from review/relationship evidence. 
 
 | ID | Source | Target | Type | State | Impact |
 |---|---|---|---|---|---|
@@ -48,8 +48,6 @@ REP-001 and REP-002 are both canonical Repository control-plane artifacts at Int
 | REP-E05 | REP-001 ↔ REP-002 | CROSS_REGISTRY | CONTROL_PLANE_RECONCILIATION | PARTIALLY_VERIFIED | Material inventory changes require both registries to be reconciled |
 | REP-E06 | REP-001 | REP-011 | REVIEW_EVIDENCE | OBSERVED | Review/completion evidence is controlled by REP-011 |
 | REP-E07 | REP-002 | REP-011 | REVIEW_EVIDENCE | OBSERVED | Physical mapping does not equal review completion |
-
-**Important:** the Repository/index edges above are evidence-level relationships. They do not certify that every runtime mutation currently executes the documented update/reconciliation sequence.
 
 ## Service Reverse Edges
 
@@ -78,32 +76,43 @@ REP-001 and REP-002 are both canonical Repository control-plane artifacts at Int
 
 ## Test / Verification Ledger
 
-### Tests / checks performed in the current review
+### Tests / checks performed
 
 | Test ID | Check | Result | Scope |
 |---|---|---|---|
-| TST-001 | Exact Services inventory reconciliation | PASS within inspected scope | Services folder |
-| TST-002 | Artifact path/readability check for inspected SRV files | PASS | Inspected Services artifacts |
-| TST-003 | Internal identity/version/status extraction | PASS | Inspected SRV artifacts |
-| TST-004 | Development Baseline consistency against canonical version source | PASS for declared values; 4 undeclared metadata gaps preserved | SRV-001..010 |
-| TST-005 | Documentation-level forward relationship extraction | PASS | Services → Runtime/Engine/Repository references |
-| TST-006 | Documentation-level reverse-edge check | PARTIAL | Service boundary |
-| TST-007 | Runtime → Engine → Service relationship extraction | PARTIAL | RUN-010 / ENG-006 / SRV-009/SRV-005 |
-| TST-008 | REP-001 ↔ REP-002 inventory/control-plane comparison | PARTIAL | Repository control plane |
-| TST-009 | REP-020 mutation persistence re-read after update | PASS | REP-020 on main |
+| TST-001 | Exact Services inventory reconciliation | PASS within inspected scope | Services |
+| TST-002 | Artifact path/readability check | PASS | Inspected artifacts |
+| TST-003 | Identity/version/status extraction | PASS | Inspected SRV artifacts |
+| TST-004 | Baseline check against current canonical version authority | PASS for declared values; four undeclared gaps preserved | Services |
+| TST-005 | Forward relationship extraction | PASS | Services → Runtime/Engine/Repository |
+| TST-006 | Documentation reverse-edge check | PARTIAL | Service boundary |
+| TST-007 | Runtime → Engine → Service extraction | PARTIAL | RUN-010/ENG-006/Services |
+| TST-008 | REP-001 ↔ REP-002 comparison | PARTIAL | Repository control plane |
+| TST-009 | REP-020 mutation persistence + re-read | PASS | REP-020/main |
+| TST-010 | REP-011 review-traceability rule re-read | PASS | Review/evidence control |
+| TST-011 | REP-012 allocation/recovery rule re-read | PASS | Allocation/recovery control |
+| TST-012 | Current-baseline conflict detection across control-plane records | **CONFLICT DETECTED** | REP-020/Release authority vs REP-012 |
+| TST-013 | Content-fitness/currentness rule check | PARTIAL | Canonical control-plane scope |
+| TST-014 | Cross-registry reconciliation state check | PARTIAL / OPEN | REP-011..016 |
 
-### Tests / checks NOT performed or not yet sufficient
+### Tests not performed / not yet sufficient
 
-| TST ID | Check | State | Why |
+| Test ID | Check | State | Why |
 |---|---|---|---|
-| TST-101 | Actual executable runtime invocation of RUN-010 → ENG-006 → SRV-009 | NOT_PERFORMED | Current work is evidence/documentation audit; no runtime execution evidence established |
-| TST-102 | End-to-end repository mutation followed by automatic REP-001/REP-002/REP-011 reconciliation | NOT_PERFORMED | Requires controlled mutation test and environment/evidence capture |
-| TST-103 | Automated bidirectional graph traversal across all repository domains | NOT_PERFORMED | Matrix is Phase-1 seed, not exhaustive graph implementation |
-| TST-104 | Duplicate-ID exhaustive scan across entire repository | NOT_COMPLETED | Known open audit item |
-| TST-105 | Content-contract semantic equivalence across all consumers | NOT_COMPLETED | Requires cross-layer consumer review |
-| TST-106 | Live performance/load test of future matrix program | NOT_PERFORMED | Matrix is currently documentation/control-plane seed |
+| TST-101 | Actual executable RUN-010 → ENG-006 → SRV-009 invocation | NOT_PERFORMED | No runtime execution evidence captured |
+| TST-102 | Controlled repository mutation + automatic REP-001/002/011 reconciliation | NOT_PERFORMED | Requires controlled mutation environment |
+| TST-103 | Automated bidirectional graph traversal across all domains | NOT_PERFORMED | REP-020 remains Phase-1 seed |
+| TST-104 | Exhaustive duplicate-ID scan | NOT_COMPLETED | Existing audit item remains open |
+| TST-105 | Semantic content equivalence across all consumers | NOT_COMPLETED | Cross-layer consumer review required |
+| TST-106 | Matrix program performance/load test | NOT_PERFORMED | Program not yet implemented |
 
-**Test interpretation:** `PASS` means the stated check passed within the named evidence scope. It does not imply repository-wide integrity. `PARTIAL` means evidence is incomplete. `NOT_PERFORMED` is deliberately distinct from failure.
+**Interpretation:** `PASS` is scope-bound. `PARTIAL` is incomplete evidence. `CONFLICT` is a detected contradiction requiring authority resolution. `NOT_PERFORMED` is not failure.
+
+## Baseline Conflict Finding
+
+`REP-012` currently declares Development Baseline **3.3.0**, while the current version authority used by this matrix is **3.2.1**. This is now explicitly recorded as a **CONFLICT**, not silently normalized.
+
+Required action: resolve the canonical authority before promoting affected control-plane artifacts or changing the matrix baseline. Do not infer that 3.3.0 is current merely because it is numerically higher.
 
 ## High-Value Impact Chains
 
@@ -116,16 +125,8 @@ REP-001 and REP-002 are both canonical Repository control-plane artifacts at Int
 ### Chain C — Runtime / Repository Control Plane
 `RUN-010 → ENG-006 → SRV-009 → REP-001 + REP-002 + REP-011`
 
-Any material mutation in Chain C requires targeted review of repository inventory, physical mapping and review evidence before completion is claimed.
-
 ### Chain D — Memory / Knowledge
 `SRV-003 → SRV-004`
-
-Reverse validation remains open.
-
-## Baseline Control
-
-Current development baseline: **3.2.1**. Missing baseline metadata remains `UNDECLARED`; values are never inferred.
 
 ## Mutation Impact Contract
 
@@ -133,6 +134,7 @@ For every material mutation, lookup outgoing edges, incoming/reverse edges, cons
 
 ## Open Work
 
+- Resolve the **3.2.1 vs 3.3.0 baseline authority conflict**.
 - Resolve baseline metadata gaps in SRV-003/006/007/008.
 - Complete bidirectional validation.
 - Execute controlled runtime/mutation tests with evidence capture.
