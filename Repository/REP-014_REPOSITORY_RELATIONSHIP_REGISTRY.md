@@ -2,10 +2,10 @@
 
 Platform: ARGO KOP  
 Document ID: REP-014  
-Version: 1.2.0  
+Version: 1.2.1  
 Status: Active / Relationship Enumeration In Progress  
 Development Baseline: 3.2.1  
-Last Audit: 2026-08-13
+Last Audit: 2026-08-14
 
 ---
 
@@ -270,6 +270,44 @@ DIAG-001 ──derived_from──> REP-012
 The DIAG-001 edge is provenance/navigation only. It does not make the diagram authoritative over REP-012 or any canonical registry.
 
 This graph describes control-plane dependency only. It does not certify domain semantics.
+
+## Current Review-Cycle Reconciliation — 2026-08-14
+
+The current cycle added repository-grounded evidence that affects relationship interpretation and control-plane synchronization.
+
+### Baseline authority
+
+`REP-012` was reconciled from the conflicting declaration `3.3.0` to the authoritative current baseline `3.2.1`, matching `Release/VERSION.md`, `PROJECT_STATUS.md`, `REP-001`, `REP-002` and `RUN-001`.
+
+No new relationship authority is created by this correction; affected control-plane edges remain valid but are now associated with a consistent baseline declaration.
+
+### PR lineage
+
+- PR #1: stale verification branch, closed without merge.
+- PR #3: superseded verification branch, closed without merge.
+- PR #9: latest controlled candidate; Prototype + canonical + Integration evidence passed, then closed without merge because repository-wide integrity remains open.
+
+These are historical/control evidence relationships, not production Runtime dependencies.
+
+### Executable relationship boundary
+
+The intended path remains:
+
+`RUN-010 → ENG-006 → SRV-009 → REP-001/REP-002/REP-011`
+
+Direct documentation verifies the endpoint roles, but executable consumer proof is not established in the inspected Python scope. The relevant edges therefore remain `Revalidated within inspected scope` / `PARTIAL`, and no executable `VERIFIED` state is added.
+
+### REP-013 path reconciliation
+
+`Specifications/01-Knowledge-Organization.md` is explicitly present in the current `REP-013` content tree and was re-audited during the PR #9 candidate reconciliation. The path is therefore retained as the canonical physical path within the inspected scope.
+
+### Relationship confidence rule
+
+The current cycle reinforces the distinction:
+
+`DOCUMENTED ≠ EXECUTED ≠ TESTED ≠ VERIFIED`
+
+A relationship is promoted only when the evidence level supports the corresponding state.
 
 ## Registry Does Not Grant Authority
 
