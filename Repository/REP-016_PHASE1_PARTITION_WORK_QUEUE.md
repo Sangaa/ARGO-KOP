@@ -2,7 +2,7 @@
 
 Platform: ARGO KOP  
 Document ID: REP-016  
-Version: 1.0.5  
+Version: 1.0.6  
 Status: Active / Phase 1 Open / Integrity Hold  
 Development Baseline: 3.2.1  
 Last Audit: 2026-08-14
@@ -124,8 +124,8 @@ The queue may use the diagram for orientation only. Canonical decisions must res
 | Priority | Partition / Workstream | Current State | Required Entry Point | Closure Authority |
 |---:|---|---|---|---|
 | 1 | Repository Control Plane | RECONCILIATION | REP-011..016 + REP-020 | REP-011 + explicit closure decision |
-| 2 | Executable relationship proof | RELATIONSHIP_VALIDATION | RUN-010 → ENG-006 → SRV-009 | REP-011/014 + Runtime/Engine/Service evidence |
-| 3 | Exhaustive duplicate-ID audit | RELATIONSHIP_VALIDATION | REP-001 + full current tree | REP-011/014 + explicit identity decisions |
+| 2 | Exhaustive duplicate-ID audit | RELATIONSHIP_VALIDATION | REP-001 + full current tree | REP-011/014 + explicit identity decisions |
+| 3 | Executable relationship proof | RELATIONSHIP_VALIDATION | RUN-010 → ENG-006 → SRV-009 | REP-011/014 + Runtime/Engine/Service evidence |
 | 4 | Bidirectional critical graph validation | RELATIONSHIP_VALIDATION | REP-014 + critical edges | REP-014 + endpoint evidence |
 | 5 | Core | INVENTORYING | Core/_FOLDER_STATUS.md + REP-013 | Domain authority + REP-011 |
 | 6 | Governance | INVENTORYING | Governance/_FOLDER_STATUS.md + REP-013 | Governance authority + REP-011 |
@@ -298,14 +298,16 @@ Completed/reconciled within current scope:
 - REP-015 reconciled to baseline 3.2.1;
 - REP-020 current-cycle addendum refreshed and Full-Stack Audit on that mutation passed.
 
-Next highest-strength work items:
+Next highest-strength work items, re-ranked after the current identity reconnaissance:
 
-1. **Executable consumer proof** for `RUN-010 → ENG-006 → SRV-009`;
-2. **Exhaustive internal-ID/duplicate audit** with explicit owner/authority decisions;
+1. **Exhaustive duplicate-ID audit** with explicit owner/authority decisions;
+2. **Executable consumer proof / implementation-gap decision** for `RUN-010 → ENG-006 → SRV-009`;
 3. **Bidirectional critical-edge validation**;
 4. **Controlled mutation/reconciliation harness**;
 5. **Audit observability: correlate CI invocation evidence into the impact matrix**;
 6. **Final Boot Verification** only after the first five are closed or explicitly bounded.
+
+The duplicate-ID item is intentionally first because identity/authority integrity is a prerequisite to safely promoting relationship evidence.
 
 Current executable evidence must not be promoted into semantic relationship verification merely because the Runtime prototype workflows pass.
 
@@ -317,9 +319,9 @@ No broad repository completion claim is permitted from this queue alone.
 
 Current repository checkpoint before closure is represented by the latest committed control-plane changes. The next session must load:
 
-`REP-015 v1.0.6 → REP-016 v1.0.5 → REP-020 current-cycle addendum → EJR session closure`
+`REP-015 v1.0.6 → REP-016 v1.0.6 → REP-020 current-cycle delta → EJR latest session closure`
 
-and then resume at Priority 2.
+and then resume at **Priority 2 — Exhaustive duplicate-ID audit**.
 
 ---
 
