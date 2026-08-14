@@ -2,7 +2,7 @@
 
 Platform: ARGO KOP  
 Document ID: REP-016  
-Version: 1.1.3  
+Version: 1.1.4  
 Status: Active / Phase 1 Open / Integrity Hold  
 Development Baseline: 3.2.1  
 Last Audit: 2026-08-14
@@ -62,9 +62,9 @@ Material mutation remains:
 
 `ONE MATERIAL CHANGE → COMMIT → RE-READ → RECORD EVIDENCE → NEXT CHANGE`
 
-## Current Queue Decision — P35 Search-Recovery Revalidation
+## Current Queue Decision — P36 Search-Freshness Revalidation
 
-Current evidence does **not** justify global PASS. P34 established a concrete control-plane synchronization repair for `MOD-001`; P35 revalidates the stronger search discipline required for every material negative result.
+Current evidence does **not** justify global PASS. P34 established a concrete control-plane synchronization repair for `MOD-001`; P35 established mandatory independent confirmation for material negative search results; P36 demonstrated that positive search results can also be stale and therefore require current-ref freshness reconciliation.
 
 ### Completed or bounded evidence
 
@@ -75,12 +75,19 @@ Current evidence does **not** justify global PASS. P34 established a concrete co
 - `RUN-010 → ENG-006 → SRV-009` has documentation/boundary evidence but not sufficient direct executable consumer proof.
 - `MOD-001_KNOWLEDGE_MODEL.md` remains reconciled into both REP-001 and REP-002 after independent identity/content/folder-status confirmation.
 - Duplicate-ID work has classified known active/archive distinctions but has not achieved exhaustive internal-ID/content reconciliation.
-- P29/P31 reusable evidence lessons remain canonical in MEM-009.
-- P35 independently re-applied the dual-search rule: repository search evidence was followed by direct authoritative-path retrieval of the same artifact and exact content identity check. This confirms that a search result must not be treated as sufficient authority by itself.
+- P29/P31 reusable evidence lessons remain canonical in MEM-009; P36 adds a distinct freshness-control lesson.
+- P35 independently re-applied the dual-search rule for material negative results.
+- P36 independently compared repository-search result refs against the authoritative current `main` ref and proved that the search index returned artifacts pinned to an older commit. Current-main direct reads were then used for all authority/identity conclusions.
+
+### P36 Search-Freshness Finding
+
+A repository search for current Engine/Matrix artifacts returned URLs pinned to commit `fa54af3cbe141d24710ad8025931862e4df5ff75`. Independent current-state retrieval showed `main` at `551694caa2ada1a82c8e777fd7d33e03adae8cb9`. GitHub commit comparison established that `main` was **9 commits ahead** of the search-result commit and had no commits behind it. Therefore the search result was stale relative to current `main`.
+
+The exact internal refresh/index mechanism was not proven and is not asserted. The operational control is now explicit: **search-result ref freshness must be reconciled before using a search hit as current-main evidence.**
 
 ### Next highest-strength work
 
-1. **Exhaustive duplicate-ID audit** with explicit owner/authority decisions and independent confirmation of every material negative result.
+1. **Exhaustive duplicate-ID audit** with explicit owner/authority decisions, independent confirmation of every material negative result, and search-result freshness reconciliation.
 2. **Reconcile REP-013/REP-011 for the MOD-001 inventory change** before downstream control-plane promotion.
 3. **Executable consumer proof / implementation-gap decision** for `RUN-010 → ENG-006 → SRV-009`.
 4. **Bidirectional critical-edge validation**.
@@ -90,7 +97,7 @@ Current evidence does **not** justify global PASS. P34 established a concrete co
 
 The duplicate-ID item remains first because identity/authority integrity is a prerequisite for safely promoting relationship evidence.
 
-## P35 Search-Recovery Contract
+## P35/P36 Search Evidence Contract
 
 For any material negative search:
 
@@ -102,13 +109,19 @@ If Search-B recovers the artifact, the first result is classified as **search/re
 
 If both searches are negative, the result remains **bounded negative evidence** unless the search coverage is demonstrably exhaustive.
 
-## Learning Decision — P35
+For any material positive search:
 
-**No new permanent platform lesson promoted.**
+`SEARCH RESULT → CAPTURE RETURNED REF/SHA → COMPARE WITH AUTHORITATIVE CURRENT REF → RE-READ CURRENT AUTHORITY → CLASSIFY FRESH/STALE → USE AS EVIDENCE OR DISCARD AS CURRENT-STATE PROOF`
 
-The dual-search/negative-result recovery rule is already canonical in `MEM-009 v1.3.4`, including the P31 concrete recovery provenance. P35 revalidated and operationalized that rule but did not produce a distinct, broader lesson that requires a new permanent memory item.
+A positive search result pointing to an older commit is **stale-index/search evidence**, not current-main evidence. Do not use it to close identity, authority, dependency, consumer, runtime, or Boot decisions until the current authoritative ref is read.
 
-The P35 session record retains the evidence and failure-analysis discipline without duplicating canonical memory.
+## Learning Decision — P36
+
+**One new permanent platform lesson promoted.**
+
+P36 demonstrated a distinct, broadly reusable failure mode not covered by the existing negative-search lesson: a positive repository search result may resolve successfully while still pointing to an older repository commit. Because authority/identity conclusions can be corrupted by stale positive evidence, current-ref reconciliation is now a permanent evidence rule in MEM-009 v1.3.5.
+
+The exact search/index refresh mechanism remains intentionally unspecified because it was not proven.
 
 ## Recovery / Anti-Loop / Anti-Premature-Closure
 
@@ -116,15 +129,15 @@ Every item must be resumable from repository evidence alone. Repeated review wit
 
 ## Current Checkpoint
 
-P35 evidence is recorded in:
+P36 evidence is recorded in:
 
-`Repository/REP-020_SESSION_DELTA_2026-08-14_P35.md`
+`Repository/REP-020_SESSION_DELTA_2026-08-14_P36.md`
 
 Session closure record:
 
-`Memory/Engineering_Journal/EJR-218_2026-08-14_P35_SESSION_CLOSURE.md`
+`Memory/Engineering_Journal/EJR-219_2026-08-14_P36_SESSION_CLOSURE.md`
 
-Next session resumes at **Priority 2 — Exhaustive duplicate-ID audit**, with P34 reconciliation evidence and P35 search-recovery evidence already preserved.
+Next session resumes at **Priority 2 — Exhaustive duplicate-ID audit**, with P34 reconciliation evidence, P35 search-recovery evidence, and P36 search-freshness evidence already preserved.
 
 ---
 
