@@ -13,6 +13,7 @@ from pathlib import Path
 
 IGNORED_DIRS = {".git", "__pycache__", ".pytest_cache"}
 MARKDOWN_LINK_RE = re.compile(r"\[[^\]]*\]\(([^)]+)\)")
+INLINE_CODE_RE = re.compile(r"`+[^`]*?`+")
 EVIDENCE_CLASSES = (
     "IMPLEMENTED", "TESTED", "LINKED", "RUNTIME_REACHABLE",
     "DOCUMENTED", "ORPHAN_CANDIDATE", "UNTESTED_CANDIDATE", "BROKEN_REFERENCE",
@@ -47,9 +48,14 @@ def normalize_local_reference(raw: str, source: Path, root: Path) -> str | None:
 
 
 def markdown_reference_candidates(text: str) -> set[str]:
+    """Extract Markdown links while ignoring inline/fenced code spans.
+
+    Text shown as code is an example, not an executable/document reference.
+    """
+    visible = INLINE_CODE_RE.sub("", text)
     return {
         match.strip().strip("`'\"")
-        for match in MARKDOWN_LINK_RE.findall(text)
+        for match in MARKDOWN_LINK_RE.findall(visible)
         if match.strip()
     }
 
