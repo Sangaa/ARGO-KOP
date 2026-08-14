@@ -6,12 +6,12 @@ Platform: ARGO KOP
 Knowledge Operating Platform
 
 Folder: Models
-Version: 1.3.0
+Version: 1.3.1
 Status: INTEGRITY HOLD / STAGED RECONSTRUCTION
 Canonical: Domain container; individual authority is defined by each model artifact
 Priority: VERY HIGH
-Development Baseline: 3.3.0
-Last Audit: 2026-08-09
+Development Baseline: 3.2.1
+Last Audit: 2026-08-14
 Review Method: Repository First / Evidence Based
 
 ---
@@ -26,12 +26,13 @@ Models define structure, identity, relationships, provenance and semantic bounda
 
 Directly verified and currently maintained:
 
+- `MOD-001_KNOWLEDGE_MODEL.md`
 - `MOD-002_ENTITY_MODEL.md`
 - `MOD-003_DOCUMENT_MODEL.md`
 - `MOD-004_MEMORY_MODEL.md`
 - `MOD-011_KNOWLEDGE_SOURCE_MODEL.md`
 
-These documents have been revalidated against the current 3.3.0 baseline, but the domain remains on HOLD until their consumers, dependencies and missing historical declarations are reconciled.
+These documents are being revalidated against the authoritative 3.2.1 development baseline, but the domain remains on HOLD until their consumers, dependencies and missing historical declarations are reconciled.
 
 # Unresolved Historical Declarations
 
@@ -112,6 +113,7 @@ A model is not considered complete until material consumers and dependencies are
 - `Architecture/ARC-011_CANONICAL_ARCHITECTURE_MODEL.md`
 - `Repository/REP-001_MASTER_INDEX.md`
 - `Repository/REP-002_REPOSITORY_MAP.md`
+- `Release/VERSION.md`
 
 ---
 
