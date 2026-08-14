@@ -2,7 +2,7 @@
 
 Platform: ARGO KOP  
 Document ID: REP-016  
-Version: 1.1.5  
+Version: 1.1.6  
 Status: Active / Phase 1 Open / Integrity Hold  
 Development Baseline: 3.2.1  
 Last Audit: 2026-08-14
@@ -62,39 +62,52 @@ Material mutation remains:
 
 `ONE MATERIAL CHANGE → COMMIT → RE-READ → RECORD EVIDENCE → NEXT CHANGE`
 
-## Current Queue Decision — P37 Search-Recovery Revalidation
+## Search Evidence Contract
 
-P37 re-applied the dual-search discipline to the duplicate-ID/control-plane audit. A broad search returned `Models/MOD-003_DOCUMENT_MODEL.md`, while a materially different targeted filename search did not return it. Direct authoritative-path retrieval on current `main` recovered the file and confirmed its current identity and SHA. The broad search result was also pinned to an older commit (`0327b5db...`), while current `main` was 8 commits ahead and 0 behind. Therefore the targeted negative result is classified as a **search/retrieval miss**, not artifact absence, and the broad positive result is classified as stale relative to current main.
+For every material search result, positive or negative, use two materially different retrieval methods before making an absence or current-state claim.
 
-The exact internal search/index refresh mechanism remains unproven and is not asserted.
-
-## P37 Evidence Contract
-
-For material negative results, retain:
+For material negative results:
 
 `SEARCH-A → INDEPENDENT SEARCH-B → CONFIRM ABSENCE OR RECOVER → ANALYZE FAILURE → READ CURRENT AUTHORITY → RECORD`
 
-For material positive results, retain:
+For material positive results:
 
 `SEARCH RESULT → CAPTURE REF/SHA → COMPARE CURRENT REF → RE-READ CURRENT AUTHORITY → FRESH/STALE CLASSIFICATION → USE/DISCARD`
 
-If the second search recovers the artifact, the first negative result is a retrieval/search miss. If the positive result points to an older ref, it is stale evidence and cannot establish current-main identity, authority, dependency, consumer, runtime, or Boot state.
+A negative result is never an absence claim from one search. A positive result is never current-main evidence until its ref/SHA is reconciled with the current authoritative ref.
 
-## Learning Decision — P37
+## P37 Evidence
 
-**No new permanent platform lesson promoted.** P37 confirms and provides additional provenance for the existing MEM-009 P31/P36 lessons: independent confirmation of material negative search results and current-ref freshness reconciliation for positive search results. Adding another canonical lesson would duplicate an already validated rule without a materially new principle.
+P37 applied the dual-search discipline to `MOD-003_DOCUMENT_MODEL.md`. A broad search returned the artifact at an older commit, while a materially different targeted filename search did not return it. Direct current-main retrieval recovered the file. The stale search result was compared with current main; the exact internal index-refresh mechanism remained unproven and was not asserted.
 
-## Next highest-strength work
+## P38 — Search Freshness + Current Service Namespace Revalidation
 
-1. **Exhaustive duplicate-ID audit** with explicit owner/authority decisions, independent confirmation of every material negative result, and search-result freshness reconciliation.
-2. **Reconcile REP-013/REP-011 for the MOD-001 inventory change** before downstream control-plane promotion.
-3. **Executable consumer proof / implementation-gap decision** for `RUN-010 → ENG-006 → SRV-009`.
-4. **Bidirectional critical-edge validation**.
-5. **Controlled mutation/reconciliation harness**.
-6. **CI-to-impact-matrix observability correlation**.
-7. **Final Boot Verification** only after the preceding blockers are closed or explicitly bounded.
+P38 re-applied the rule to the Service namespace using two materially different searches:
 
-The duplicate-ID item remains first because identity/authority integrity is a prerequisite for safely promoting relationship evidence.
+1. `Document ID: SRV-` search: broad semantic/identity-oriented retrieval.
+2. `Services/SRV-` search: path-oriented retrieval.
+
+Both search result sets were pinned to commit `601b07e829af2f29aebefe92591fc352f1118954`, not current `main`. Therefore neither search result set was accepted as current-main evidence without reconciliation.
+
+A direct current-main directory enumeration of `Services/` was then performed. It recovered exactly ten active Service artifacts `SRV-001` through `SRV-010`, plus non-SRV support files. This establishes the current filename namespace within the Services directory. It does not, by itself, close internal Document-ID uniqueness across the repository.
+
+A commit comparison from the search-result ref to current main (`ac476465dfde3c9e52526eb20b0c3eb7f11dacea`) showed current main is **5 commits ahead / 0 behind**. The changed files in that interval are control/evidence records only; no Service artifact change was identified in that comparison. The internal search/index refresh mechanism remains unproven.
+
+P38 therefore classifies the two search results as **STALE SEARCH EVIDENCE**, the current directory enumeration as **CURRENT AUTHORITATIVE INVENTORY EVIDENCE**, and the Service filename namespace as **10 active artifacts / no active filename duplicate observed**.
+
+## P38 Search-Failure Learning Decision
+
+P38 does not promote a new permanent platform lesson. `MEM-009` already contains the validated rules for independent negative-search confirmation and current-ref freshness reconciliation. P38 adds provenance and confirms those rules on a second namespace, but introduces no materially new principle.
+
+## Current Queue Decision — P38
+
+1. **Exhaustive duplicate-ID audit** remains first and open. Filename uniqueness is not internal-ID uniqueness.
+2. Current Service inventory is revalidated as a bounded current-tree fact and should be used as the Service-side input to REP-020/REP-011 reconciliation.
+3. **Executable consumer proof** for `RUN-010 → ENG-006 → SRV-009` remains next after identity evidence is sufficiently bounded.
+4. Bidirectional critical-edge validation remains after executable proof.
+5. Controlled mutation/reconciliation harness follows graph closure.
+6. CI-to-impact-matrix observability follows mutation evidence.
+7. Final Boot Verification remains last and blocked by unresolved identity/relationship scope.
 
 ## Recovery / Anti-Loop / Anti-Premature-Closure
 
@@ -102,13 +115,13 @@ Every item must be resumable from repository evidence alone. Repeated review wit
 
 ## Current Checkpoint
 
-P37 evidence is recorded in:
+P38 evidence is recorded in:
 
-`Repository/REP-020_SESSION_DELTA_2026-08-14_P37.md`
+`Repository/REP-020_SESSION_DELTA_2026-08-14_P38.md`
 
-The session closure record is created only after the P37 mutation and its audit evidence are verified.
+The session closure record is created only after the P38 mutation and its audit evidence are verified.
 
-Next session resumes at **Priority 2 — Exhaustive duplicate-ID audit**, with P34/P35/P36/P37 search/reconciliation evidence preserved.
+Next session resumes at **Priority 2 — Exhaustive duplicate-ID audit**, with P31/P36/P37/P38 search/reconciliation evidence preserved.
 
 ---
 
