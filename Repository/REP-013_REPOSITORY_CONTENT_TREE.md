@@ -2,10 +2,10 @@
 
 Platform: ARGO KOP  
 Document ID: REP-013  
-Version: 1.0.8  
+Version: 1.0.9  
 Status: Active / Phase 1 Population In Progress  
 Development Baseline: 3.2.1  
-Last Audit: 2026-08-13
+Last Audit: 2026-08-14
 
 ## Purpose
 
@@ -224,6 +224,8 @@ Specifications/
 └── 01-Knowledge-Organization.md
 ```
 
+Canonical Path: `Specifications/01-Knowledge-Organization.md`
+
 The current specification artifact declares the internal identity `SPEC-001-KNOWLEDGE-ORGANIZATION`; the physical path above is canonical within the inspected scope. The registry relationship `REL-001` remains `Revalidation Required` until cross-index identity reconciliation is complete.
 
 ### Interfaces/
@@ -384,7 +386,7 @@ Until then the folder remains **OPEN**.
 
 Current repository state: **INTEGRITY HOLD**.
 
-The content tree is synchronized with the current inspected repository baseline and records the canonical physical path for the Knowledge Organization specification. Memory subdomains are now explicitly represented from current repository evidence; exhaustive enumeration and cross-layer relationship validation remain open.
+The content tree is synchronized with the current inspected repository baseline and records the canonical physical path for the Knowledge Organization specification. Memory subdomains are explicitly represented from current repository evidence; exhaustive enumeration and cross-layer relationship validation remain open.
 
 ## Verification Model
 
