@@ -2,7 +2,7 @@
 
 Platform: ARGO KOP  
 Document ID: REP-016  
-Version: 1.0.6  
+Version: 1.0.7  
 Status: Active / Phase 1 Open / Integrity Hold  
 Development Baseline: 3.2.1  
 Last Audit: 2026-08-14
@@ -315,13 +315,33 @@ The current active execution ring remains **RING 0 — CONTROL PLANE** until the
 
 No broad repository completion claim is permitted from this queue alone.
 
+## P26 Current-Main Revalidation — 2026-08-14
+
+A fresh GitHub review of the latest current-main state and the closed PR #9 lineage established an important boundary that must remain explicit in the queue:
+
+- PR #9 was **closed without merge**.
+- PR #9's head is **3 commits ahead and 61 commits behind** current `main`; its candidate changes therefore cannot be treated as current-main state.
+- PR #9 changed Runtime authorization semantics in `Runtime/Prototype/cognitive_loop_harness.py` by removing the `REJECTED` enum/state branch and mapping the unauthorized path to reversible `HOLD`.
+- Current `main` still contains `State.REJECTED` and the corresponding branch. Therefore the reconciled `REJECTED → HOLD` behavior is **candidate evidence, not current-main behavior**.
+- PR #9 also changed `REP-013` from v1.0.8 to v1.0.9 and recorded a merge-materialization discrepancy; because the PR was not merged, that candidate state must not be treated as the current canonical `main` state without direct main re-read.
+
+Decision:
+
+`PR #9 evidence = HISTORICAL / CANDIDATE`  
+`current main Runtime state = REJECTED branch still present`  
+`global Integrity Hold = unchanged`
+
+No direct Runtime mutation is authorized by this checkpoint. Any future Runtime change must be a new controlled candidate from the current `main`, followed by fresh prototype, canonical acceptance, integration, and repository-wide audit evidence.
+
+This revalidation prevents historical PR evidence from being silently promoted into current repository reality.
+
 ## Current Checkpoint
 
 Current repository checkpoint before closure is represented by the latest committed control-plane changes. The next session must load:
 
-`REP-015 v1.0.6 → REP-016 v1.0.6 → REP-020 current-cycle delta → EJR latest session closure`
+`REP-015 v1.0.6 → REP-016 v1.0.7 → REP-020 current-cycle delta → EJR latest session closure`
 
-and then resume at **Priority 2 — Exhaustive duplicate-ID audit**.
+and then resume at **Priority 2 — Exhaustive duplicate-ID audit**, with the Runtime `REJECTED → HOLD` discrepancy explicitly treated as a separate controlled candidate decision.
 
 ---
 
