@@ -2,7 +2,7 @@
 
 Platform: ARGO KOP  
 Document ID: REP-016  
-Version: 1.1.8  
+Version: 1.1.9  
 Status: Active / Phase 1 Open / Integrity Hold  
 Development Baseline: 3.2.1  
 Last Audit: 2026-08-14
@@ -193,6 +193,44 @@ P40 evidence is recorded in:
 The session closure record is created only after the P40 mutation and its audit evidence are verified.
 
 Next session resumes at **Priority 2 — Exhaustive duplicate-ID audit**, with P31/P36/P37/P38/P39/P40 search/reconciliation evidence preserved.
+
+---
+
+End of Document
+
+## P41 — Historical Identity Collision Reconciliation
+
+P41 targeted a known historical collision to distinguish active duplicate identity from retired provenance.
+
+### Search pair A — identity-oriented
+
+Search-A used `Document ID: GOV-005`. It returned `Governance/GOV-005_REVIEW_STANDARD.md` and related references, with result refs pinned to older search-index commits.
+
+### Search pair B — historical path-oriented
+
+Search-B used `Lifecycle/GOV-005_DOCUMENT_LIFECYCLE`. It did not return the retired lifecycle path as a current artifact; it returned current lifecycle/control references instead. This was treated as bounded negative retrieval evidence, not absence proof.
+
+### Current authority recovery
+
+Direct current-main retrieval of `Governance/GOV-005_REVIEW_STANDARD.md` confirmed active canonical `GOV-005`, Governance category, Canonical `Yes`, current blob SHA `7c158209467fbcfa327c9baeea8dbec8ad8f04bd`.
+
+Direct current-main retrieval of `Lifecycle/LIF-001_DOCUMENT_LIFECYCLE.md` confirmed canonical `LIF-001` and explicitly records that the former `Lifecycle/GOV-005_DOCUMENT_LIFECYCLE.md` used the same active Document ID as canonical `Governance/GOV-005_REVIEW_STANDARD.md`, and that the lifecycle artifact was migrated to `LIF-001` while the historical path was retired.
+
+A direct current-main fetch of `Lifecycle/GOV-005_DOCUMENT_LIFECYCLE.md` returned HTTP 404 / Not Found. Therefore the historical path is not a current physical artifact on `main`.
+
+### P41 decision
+
+`GOV-005` is **not an active duplicate** in the current physical namespace: the active canonical owner is `Governance/GOV-005_REVIEW_STANDARD.md`. The former lifecycle artifact is historical provenance, now represented by `LIF-001`.
+
+This is a **historical/reference occurrence**, not a current duplicate requiring archive/merge/reassign.
+
+### P41 learning decision
+
+No new permanent MEM-009 lesson is promoted. P41 is a concrete identity-collision reconciliation case already covered by the existing search-confirmation, freshness, provenance, and bounded-absence rules.
+
+## P41 Current Checkpoint
+
+P41 evidence must be recorded in `Repository/REP-020_SESSION_DELTA_2026-08-14_P41.md`, followed by closure evidence on the exact closure commit.
 
 ---
 
