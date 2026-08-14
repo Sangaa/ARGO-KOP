@@ -2,7 +2,7 @@
 
 Platform: ARGO KOP  
 Document ID: REP-016  
-Version: 1.0.4  
+Version: 1.0.5  
 Status: Active / Phase 1 Open / Integrity Hold  
 Development Baseline: 3.2.1  
 Last Audit: 2026-08-14
@@ -295,7 +295,8 @@ Completed/reconciled within current scope:
 - REP-013 canonical Specification path reconciled;
 - REP-011 updated with current review evidence;
 - REP-014 updated with current relationship-cycle evidence;
-- REP-020 updated to v0.1.8.
+- REP-015 reconciled to baseline 3.2.1;
+- REP-020 current-cycle addendum refreshed and Full-Stack Audit on that mutation passed.
 
 Next highest-strength work items:
 
@@ -303,11 +304,22 @@ Next highest-strength work items:
 2. **Exhaustive internal-ID/duplicate audit** with explicit owner/authority decisions;
 3. **Bidirectional critical-edge validation**;
 4. **Controlled mutation/reconciliation harness**;
-5. **Final Boot Verification** only after the first four are closed or explicitly bounded.
+5. **Audit observability: correlate CI invocation evidence into the impact matrix**;
+6. **Final Boot Verification** only after the first five are closed or explicitly bounded.
+
+Current executable evidence must not be promoted into semantic relationship verification merely because the Runtime prototype workflows pass.
 
 The current active execution ring remains **RING 0 — CONTROL PLANE** until the control-plane reconciliation gate is explicitly satisfied.
 
 No broad repository completion claim is permitted from this queue alone.
+
+## Current Checkpoint
+
+Current repository checkpoint before closure is represented by the latest committed control-plane changes. The next session must load:
+
+`REP-015 v1.0.6 → REP-016 v1.0.5 → REP-020 current-cycle addendum → EJR session closure`
+
+and then resume at Priority 2.
 
 ---
 
