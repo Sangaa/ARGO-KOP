@@ -1,76 +1,86 @@
-# REP-020 Matrix Addendum — 2026-08-14 Current-Cycle Revalidation
+# REP-020 Matrix Addendum — 2026-08-14 Final Current-Cycle Revalidation
 
-This addendum is subordinate to `Repository/REP-020_DEPENDENCY_CONSUMER_IMPACT_MATRIX.md` and records the current review-cycle delta from the synchronized `main` checkpoint. It supersedes the stale P13 snapshot previously stored in this path; historical P13 evidence remains preserved in Git history and is not treated as current state.
+This addendum is subordinate to `Repository/REP-020_DEPENDENCY_CONSUMER_IMPACT_MATRIX.md` and records the final current-cycle delta at the end of this review session. Historical P13/P14 snapshots remain preserved in Git history and are not treated as current state.
 
-## Current Repository Checkpoint
+## Final Repository Checkpoint
 
-- Current `main`: `22ee98c6d4c78ee0437f01594b021c254196d4b9`
+- Current `main` checkpoint before closure: `42595334a6e1cf9233f883dd4f17ec67897f7f10`
 - Development Baseline: **3.2.1**
 - Repository decision: **INTEGRITY HOLD**
 - Open PRs: **0**
 
-## Current Automated Evidence
+## Control-Plane Synchronization
 
-| Test / Evidence | Result | Scope | Current Evidence |
-|---|---|---|---|
-| Runtime / Integration workflow | PASS | current code state `c3f4136022676c8ad8d11312880cf28c47a35e06` | Run #136 / `31782243998` |
-| Prototype acceptance | PASS | Runtime prototype | Run #136 |
-| Canonical acceptance scenarios | PASS | SAFE scenarios | Run #136 |
-| Integration quality job | PASS | Quality/Integration | Run #136 |
-| Full-Stack Repository Audit | PASS | current main | Run #122 / `31782243964` |
-| Repository files inspected | 778 | current audit scope | Run #122 |
-| Broken-reference candidates | 0 | current audit scope | Run #122 |
-| Remaining audit gaps | 54 | candidate evidence only | Run #122 |
-| Final Boot `INTEGRITY PASS` | NOT ESTABLISHED | repository-wide | relationship + identity scope remains open |
+| Artifact | Current State | Current Evidence |
+|---|---|---|
+| REP-012 | v1.0.7 / baseline 3.2.1 | `654d7f3377003f6882794c86ffc142ec45298e64` |
+| REP-015 | v1.0.6 / baseline 3.2.1 | `2c3b610237c10760fdb0f427d6177e7ee3bab10e` |
+| REP-016 | v1.0.5 / baseline 3.2.1 | `42595334a6e1cf9233f883dd4f17ec67897f7f10` |
+| REP-020 addendum | Final current-cycle evidence | this artifact |
 
-## Executable Boundary Revalidation
+The active control-plane set is therefore aligned on baseline **3.2.1** within the inspected scope.
 
-The current executable prototype path was directly inspected through:
+## Automated Evidence
+
+| Evidence | Result | Scope |
+|---|---|---|
+| Runtime / Integration Run #136 (`31782243998`) | SUCCESS | current executable code lineage `c3f4136022676c8ad8d11312880cf28c47a35e06` |
+| Full-Stack Audit Run #122 (`31782243964`) | SUCCESS | 778 files / 0 broken-reference candidates / 54 candidate gaps |
+| Full-Stack Audit Run #124 (`31782380132`) | SUCCESS | session closure checkpoint |
+| Full-Stack Audit Run #125 (`31782556788`) | SUCCESS | refreshed matrix addendum |
+| Full-Stack Audit Run #126 (`31782609430`) | SUCCESS | REP-015 baseline reconciliation |
+| Full-Stack Audit Run #127 (`31782634752`) | SUCCESS | REP-016 queue synchronization |
+
+These workflow results prove the checked workflows completed successfully. They do not prove repository-wide semantic integrity or executable service integration.
+
+## Executable Boundary Evidence
+
+Direct inspection establishes:
 
 `Runtime/Execution/connected_spine_runner.py`
 
-The current implementation imports and executes runtime prototype modules such as authorization, decision, reasoning, execution-plan, execution-entrypoint and outcome recording. It does **not** directly import or invoke:
+is the current executable prototype path. It directly exercises Runtime prototype modules and does **not** invoke an executable implementation of:
 
-- `Engine/ENG-006_EXECUTION_ENGINE.md` as an executable implementation;
-- `Services/SRV-009_UPDATE_SERVICE.md` as an executable implementation.
+- `Engine/ENG-006_EXECUTION_ENGINE.md`
+- `Services/SRV-009_UPDATE_SERVICE.md`
 
-`ENG-006` defines the governed execution-engine contract and requires repository mutation operations to route through `SRV-009`. `SRV-009` defines the controlled mutation-service contract. `RUN-010` documents the intended relationship:
+The canonical Runtime reference documents the intended chain:
 
 `Decision Candidate → Validation → Authorization → ENG-006 Execution → SRV-009 Controlled Mutation → Post-Write Validation / Re-read`
 
-Therefore the current relationship remains:
+Accordingly:
 
 `RUN-010 → ENG-006 → SRV-009 = PARTIALLY_VERIFIED`
 
-**No executable consumer proof is claimed.**
+No executable `VERIFIED` promotion is justified in this session.
 
-## Reclassified Audit Findings
+## Audit Finding Reclassification
 
-The current Full-Stack audit heuristic previously classified several runtime sources as untested. Direct inspection established:
+The Full-Stack audit's heuristic `UNTESTED_CANDIDATE` findings were independently checked:
 
 - `Runtime/Execution/execution_plan.py` has direct tests in `Decision/test_authorization_and_execution_plan.py`.
 - `Runtime/Execution/synthetic_task_fixture.py` is directly exercised by `Runtime/Execution/test_connected_spine_runner.py`.
-- `Runtime/Prototype/run_acceptance_scenarios.py` is exercised by the canonical acceptance workflow and therefore remains **CI-TESTED / AUDIT-OBSERVABILITY GAP**, not a proven runtime defect.
+- `Runtime/Prototype/run_acceptance_scenarios.py` is exercised by canonical acceptance CI; its remaining finding is an **audit-observability gap**, not a proven defect.
 
-## Current Open Work
+## Remaining High-Value Open Scope
 
-1. Executable `RUN-010 → ENG-006 → SRV-009` proof.
+1. Executable consumer proof `RUN-010 → ENG-006 → SRV-009`.
 2. Exhaustive internal Document-ID / duplicate-content audit.
-3. Bidirectional critical relationship validation.
-4. Controlled repository mutation → automatic registry reconciliation harness.
-5. Audit observability integration with CI evidence.
-6. Final Boot `BOOTED / INTEGRITY PASS` after the above blockers are resolved or explicitly bounded.
+3. Bidirectional critical-edge validation.
+4. Controlled repository mutation → automatic REP-011/012/013/014/016 reconciliation.
+5. Audit observability that consumes CI invocation evidence.
+6. Final Boot `BOOTED / INTEGRITY PASS` only after the above evidence gates.
 
-## Authority / Baseline Reconciliation
+## Authority Rule
 
-Current authoritative development baseline is **3.2.1**. `Release/VERSION.md`, `PROJECT_STATUS.md`, `REP-001`, `REP-002`, `RUN-001`, and current `REP-012 v1.0.7` align on this value.
+`Release/VERSION.md` remains authoritative for the development/release baseline distinction. Current active control-plane declarations inspected in this cycle agree on **3.2.1**. Historical `3.3.0` declarations remain historical evidence unless independently revalidated by current authority.
 
-The former `3.3.0` declaration in `REP-012` was corrected and must remain historical evidence only.
+## Matrix Principle
 
-## Matrix Rule
+**Lookup evidence reduces rediscovery; it never substitutes for proof.**
 
-This addendum is evidence, not authority. It narrows rediscovery and preserves current-state traceability. A successful CI run does not promote relationship records to `VERIFIED`, and an audit candidate does not establish architectural failure without independent verification.
+A successful workflow is execution evidence. A documented edge is relationship evidence. Neither alone is proof of end-to-end executable coupling.
 
 ---
 
-End of Current-Cycle Addendum
+End of Final Current-Cycle Addendum
