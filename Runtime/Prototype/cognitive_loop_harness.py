@@ -16,7 +16,6 @@ class State(str, Enum):
     AUTHORIZED = "AUTHORIZED"
     PROPOSED = "PROPOSED"
     HOLD = "HOLD"
-    REJECTED = "REJECTED"
 
 
 @dataclass
@@ -112,8 +111,6 @@ def run(payload: Dict[str, Any], human_approved: bool = False) -> Dict[str, Any]
 
     if action["status"] == "PROPOSED":
         state = State.PROPOSED
-    elif authorization["status"] == "REJECTED":
-        state = State.REJECTED
     else:
         state = State.HOLD
 
