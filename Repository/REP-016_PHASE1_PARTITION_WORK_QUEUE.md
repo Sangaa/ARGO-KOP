@@ -2,7 +2,7 @@
 
 Platform: ARGO KOP  
 Document ID: REP-016  
-Version: 1.1.1  
+Version: 1.1.2  
 Status: Active / Phase 1 Open / Integrity Hold  
 Development Baseline: 3.2.1  
 Last Audit: 2026-08-14
@@ -62,9 +62,9 @@ Material mutation remains:
 
 `ONE MATERIAL CHANGE → COMMIT → RE-READ → RECORD EVIDENCE → NEXT CHANGE`
 
-## Current Queue Decision — P31 Revalidation
+## Current Queue Decision — P34 Reconciliation
 
-Current evidence does **not** justify global PASS. The strongest work remains concentrated in the control plane.
+Current evidence does **not** justify global PASS. P34 produced a concrete control-plane synchronization repair: `MOD-001` was independently confirmed as a current canonical model artifact and reconciled into both `REP-001` and `REP-002`.
 
 ### Completed or bounded evidence
 
@@ -73,9 +73,9 @@ Current evidence does **not** justify global PASS. The strongest work remains co
 - Current Service filename reconnaissance identifies SRV-001 through SRV-010 without an established active filename duplicate.
 - Historical PR #9 evidence remains separated from current-main state because PR #9 was closed without merge.
 - `RUN-010 → ENG-006 → SRV-009` has documentation/boundary evidence but not sufficient direct executable consumer proof.
+- `MOD-001_KNOWLEDGE_MODEL.md` is now indexed in both REP-001 and REP-002 after independent identity, content and folder-status confirmation.
 - Duplicate-ID work has classified known active/archive distinctions but has not achieved exhaustive internal-ID/content reconciliation.
-- P29 validated reusable evidence lessons are already promoted in MEM-009.
-- P31 validated one additional reusable search-recovery lesson: a negative result must be independently rechecked by a materially different retrieval method before an absence claim is accepted.
+- P29 validated reusable evidence lessons and the P31 negative-search recovery lesson remain canonical in MEM-009.
 
 ### Next highest-strength work
 
@@ -88,24 +88,33 @@ Current evidence does **not** justify global PASS. The strongest work remains co
 
 The duplicate-ID item remains first because identity/authority integrity is a prerequisite for safely promoting relationship evidence.
 
+## P34 Reconciliation Path
+
+`Models/_FOLDER_STATUS → MOD-001 → REP-001 → REP-002`
+
+The next affected control-plane revalidation path is:
+
+`REP-001 → REP-002 → REP-013 → REP-011 → REP-020`
+
+The reconciliation does not itself prove all downstream relationships; those remain subject to their own evidence gates.
+
 ## Historical PR Boundary
 
 PR #9 is historical/candidate evidence only. Its `REJECTED → HOLD` Runtime change must not be treated as current-main behavior without a new controlled candidate from current main.
 
 No historical PR result may silently promote a Runtime semantic into the current repository state.
 
-## Evidence Reuse Rules — P31 Revalidated
-
-The following rules are validated reusable engineering lessons and are linked to `MEM-009`:
+## Evidence Reuse Rules — P34 Revalidated
 
 1. A passing CI workflow proves the scope tested by that workflow; it does not by itself prove repository-wide integrity or Boot PASS.
 2. A Markdown/documentation edge proves a declared relationship only; executable relationship status requires current-main consumer/implementation evidence.
 3. Historical PR evidence must remain historical/candidate evidence until the change is independently reconciled against current main.
 4. A truncated or scope-limited search cannot support an exhaustive PASS claim; the limitation must remain attached to the result.
 5. A successful commit proves repository persistence, not semantic correctness; semantic claims require the corresponding verification evidence.
-6. **A negative search result must be independently rechecked using a materially different retrieval method before an absence claim is accepted. If the second method finds the artifact, classify the first result as a search/retrieval failure rather than artifact absence, record the failure mode, and retain the authoritative artifact evidence.**
+6. A negative search result must be independently rechecked using a materially different retrieval method before an absence claim is accepted. If the second method finds the artifact, classify the first result as a search/retrieval failure rather than artifact absence, record the failure mode, and retain the authoritative artifact evidence.
+7. **When a canonical promotion or inventory synchronization is claimed, the affected canonical artifact and all directly authoritative indexes/maps must be re-read after mutation before the promotion is considered complete.** This is currently a validated engineering control candidate from P32/P34, not a new permanent platform-memory lesson.
 
-## Search Failure Recovery Contract — P31
+## Search Failure Recovery Contract
 
 For any material negative search:
 
@@ -113,29 +122,21 @@ For any material negative search:
 
 Search-B must have a materially different failure mode from Search-A. Repeating the identical query through the identical index does not satisfy independent confirmation.
 
-This contract is especially mandatory for claims affecting:
-
-- identity or duplicate status;
-- authority or canonical ownership;
-- dependency/consumer absence;
-- missing runtime/engine/service artifacts;
-- closure or Boot gates.
-
 ## Recovery / Anti-Loop / Anti-Premature-Closure
 
 Every item must be resumable from repository evidence alone. Repeated review without new evidence must stop and record the missing evidence. No item may be closed merely because files were read, an index lists them, a previous model declared completion, or CI passed.
 
 ## Current Checkpoint
 
-P31 evidence is recorded in:
+P34 evidence is recorded in:
 
-`Repository/REP-020_SESSION_DELTA_2026-08-14_P31.md`
+`Repository/REP-020_SESSION_DELTA_2026-08-14_P34.md`
 
 Session closure record:
 
-`Memory/Engineering_Journal/EJR-214_2026-08-14_P31_SESSION_CLOSURE.md`
+`Memory/Engineering_Journal/EJR-217_2026-08-14_P34_SESSION_CLOSURE.md`
 
-Next session resumes at **Priority 2 — Exhaustive duplicate-ID audit**, then **Priority 3 — executable consumer proof**.
+Next session resumes at **Priority 2 — Exhaustive duplicate-ID audit**, with P34 reconciliation evidence already preserved.
 
 ---
 
