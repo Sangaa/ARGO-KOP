@@ -4,12 +4,12 @@
 
 Platform: ARGO KOP (Knowledge Operating Platform)
 Document ID: GOV-010
-Version: 1.3.0
+Version: 1.3.1
 Status: Approved
 Category: Governance
 Canonical: Yes
 Priority: Critical
-Last Audit Date: Aug 08, 2026
+Last Audit Date: Aug 14, 2026
 Owner: ARGO Governance
 
 ---
@@ -69,10 +69,11 @@ Mandatory governance documents currently verified in the repository include:
 - `Governance/GOV-005_REVIEW_STANDARD.md` — Review Standard
 - `Governance/GOV-006_NAMING_CONVENTION_STANDARD.md` — Naming Convention Standard
 - `Governance/GOV-009_REPOSITORY_POLICY.md` — Repository Policy
+- `Governance/GOV-011_EXTERNAL_FEEDBACK_REPORT_STANDARD.md` — External Feedback Report Standard, currently **Proposed / Integrity Hold / Canonical: No**
 
-`GOV-011 Verified Assessment Principle` is not currently present as a verified canonical Governance document. It is therefore classified as **Unknown / Unresolved Dependency** and is not treated as an active governance control.
+`GOV-011` is present and identity-resolved, but it is **not** an active canonical Governance control because its current status is Proposed / Integrity Hold and Canonical is No. It therefore remains an available governance intake standard, not a source of canonical authority.
 
-The repository MUST NOT treat a referenced Governance document as active or canonical until its path, identity, and canonical status are verified in the repository baseline.
+The repository MUST NOT treat a referenced Governance document as active or canonical until its path, identity, status, and canonical designation are verified in the repository baseline.
 
 Operational communication governance shall follow the Operational Conservatism Principle when added to the repository.
 
@@ -80,7 +81,9 @@ Operational communication governance shall follow the Operational Conservatism P
 
 # Governance Integrity Rule
 
-Every Governance reference must resolve to a current canonical repository path or be explicitly classified as an unresolved dependency. Unverified references shall not be presented as active governance controls.
+Every Governance reference must resolve to a current repository path and have its identity, status, and canonical authority explicitly classified. Unverified references shall not be presented as active governance controls.
+
+A resolved path does not by itself make a document canonical.
 
 ---
 
