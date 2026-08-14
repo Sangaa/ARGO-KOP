@@ -16,7 +16,6 @@ class State(str, Enum):
     AUTHORIZED = "AUTHORIZED"
     PROPOSED = "PROPOSED"
     HOLD = "HOLD"
-    REJECTED = "REJECTED"
 
 
 @dataclass
@@ -86,7 +85,6 @@ def authorize(validation: Dict[str, Any], approved: bool) -> Dict[str, Any]:
     if validation.get("status") != "VALIDATED":
         return {"status": "HOLD", "approved": False}
     # Lack of human authorization is a reversible HOLD, not a rejection.
-    # REJECTED remains reserved for an explicit negative policy/decision path.
     return {"status": "AUTHORIZED" if approved else "HOLD", "approved": approved}
 
 
@@ -112,8 +110,6 @@ def run(payload: Dict[str, Any], human_approved: bool = False) -> Dict[str, Any]
 
     if action["status"] == "PROPOSED":
         state = State.PROPOSED
-    elif authorization["status"] == "REJECTED":
-        state = State.REJECTED
     else:
         state = State.HOLD
 
