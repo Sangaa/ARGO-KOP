@@ -6,7 +6,7 @@
 
 Platform: ARGO KOP (Knowledge Operating Platform)  
 Document ID: MEM-009  
-Version: 1.3.3  
+Version: 1.3.4  
 Status: Integrity Hold / Revalidated  
 Category: Memory  
 Canonical: Yes  
@@ -149,19 +149,20 @@ Changes affecting protected governance, constitutional principles, authority own
 
 ---
 
-# Validated Platform Learning — P29
+# Validated Platform Learning — P29/P31
 
-The following lessons were promoted after repeated evidence across the repository review/build sequence and explicit validation in `Repository/REP-020_SESSION_DELTA_2026-08-14_P29.md` and `Memory/Engineering_Journal/EJR-211_2026-08-14_P29_VALIDATED_PLATFORM_LESSONS.md`:
+The following lessons were promoted after repeated evidence across the repository review/build sequence and explicit validation in the corresponding REP-020 session deltas and Engineering Journal records:
 
 1. **CI success is scope-bound.** A passing CI workflow proves the scope tested by that workflow; it does not by itself prove repository-wide integrity or `BOOTED / INTEGRITY PASS`.
 2. **Documentation is not execution proof.** A declared relationship in Markdown or a registry is evidence of intended/observed structure only. A relationship may be promoted to executable `VERIFIED` only when current-main consumer/implementation evidence supports it.
 3. **Historical evidence remains historical until reconciled.** A closed or unmerged PR may contain valid candidate evidence, but its behavior must not silently be treated as current-main behavior.
 4. **Search scope limits the claim.** A truncated, bounded, or heuristic search cannot justify an exhaustive repository-wide PASS. The scope limitation must remain attached to the result.
 5. **Persistence is not correctness.** A successful commit proves that a change was persisted to the repository; semantic correctness still requires the corresponding validation evidence.
+6. **Independent negative-search confirmation.** A material negative repository search must be independently rechecked using a materially different retrieval method before an absence claim is accepted. If the second method finds the artifact, the first result must be classified as a search/retrieval failure rather than artifact absence, the failure mode must be analyzed to the extent supported by evidence, and the recovered artifact must remain the authoritative evidence.
 
 ### Classification
 
-These are **Validated / Reusable platform lessons**. They are not constitutional rules or governance overrides. Their authority is limited to informing evidence interpretation, review discipline, and engineering decision-making until a higher governed artifact explicitly promotes or modifies them.
+These are **Validated / Reusable platform lessons**. They are not constitutional rules or governance overrides. Their authority is limited to informing evidence interpretation, review discipline, search/recovery discipline and engineering decision-making until a higher governed artifact explicitly promotes or modifies them.
 
 ### Reuse Conditions
 
@@ -171,84 +172,21 @@ Apply these lessons whenever ARGO:
 - validates cross-file or cross-layer relationships;
 - reviews historical branches or PRs;
 - performs repository-wide identity searches;
+- evaluates a negative search result involving identity, authority, dependency, consumer or runtime artifacts;
 - decides whether a change is semantically safe;
 - considers closing an Integrity Hold or Boot gate.
 
 ### Promotion Provenance
 
-- Evidence record: `Repository/REP-020_SESSION_DELTA_2026-08-14_P29.md`
-- Session record: `Memory/Engineering_Journal/EJR-211_2026-08-14_P29_VALIDATED_PLATFORM_LESSONS.md`
-- Work queue: `Repository/REP-016_PHASE1_PARTITION_WORK_QUEUE.md` v1.0.9
-- Baseline: 3.2.1
-- Promotion status: **Validated / Reusable / Canonical Memory Record**
+- P29 evidence record: `Repository/REP-020_SESSION_DELTA_2026-08-14_P29.md`
+- P29 session record: `Memory/Engineering_Journal/EJR-211_2026-08-14_P29_VALIDATED_PLATFORM_LESSONS.md`
+- P31 evidence record: `Repository/REP-020_SESSION_DELTA_2026-08-14_P31.md`
+- P31 session record: `Memory/Engineering_Journal/EJR-214_2026-08-14_P31_SESSION_CLOSURE.md`
+
+### P31 Search-Recovery Boundary
+
+P31 established the lesson through a concrete repository incident: a repository search returned no result for the expected P30 delta, while direct authoritative-path retrieval found `Repository/REP-020_SESSION_DELTA_2026-08-14_P30.md` on `main`. The exact internal cause of the search/index miss was not proven; therefore the canonical lesson is procedural and does not assert an unverified connector implementation defect.
 
 ---
 
-# Validated Platform Learning — P31
-
-## Independent Negative-Search Confirmation
-
-A negative repository search result must not be treated as evidence of absence after a single search method. When the searched artifact is expected, ARGO must perform a second independent retrieval method with materially different failure modes (for example: a different query strategy, exact-name search, repository-path fetch, or direct authoritative source lookup).
-
-If the second method finds the artifact, the failure of the first search becomes evidence about the **search mechanism or its scope**, not evidence that the artifact was absent. The review must record why the first method failed and must not retain the original negative conclusion.
-
-This lesson is distinct from the existing rule that bounded search limits the claim: it adds a required **recovery procedure for negative results** and converts search failure into reusable diagnostic evidence.
-
-### Classification
-
-**Validated / Reusable platform lesson.** This is an evidence-handling and search-recovery rule, not a constitutional or governance override.
-
-### Provenance
-
-- Session: `P31`
-- Evidence: `Repository/REP-020_SESSION_DELTA_2026-08-14_P31.md`
-- Trigger: a repository search for `SESSION_DELTA_2026-08-14_P30` returned no results, while direct authoritative path retrieval subsequently located `Repository/REP-020_SESSION_DELTA_2026-08-14_P30.md` on `main`.
-- Root cause classification: search/index visibility or query/index behavior; the negative search result was not sufficient to establish artifact absence.
-- Validation: independent search strategy plus direct path fetch.
-- Promotion decision: **PROMOTED / CANONICAL REUSABLE LESSON**.
-
-### Reuse Conditions
-
-Apply this rule whenever:
-
-- a file, ID, branch, PR, symbol or artifact is reported as missing;
-- a repository-wide search returns zero results for an expected artifact;
-- a search result is truncated or otherwise bounded;
-- an absence claim could affect authority, dependency, identity, or closure decisions.
-
----
-
-# Evolution Rules
-
-Memory evolution shall:
-
-- Preserve Repository Authority.
-- Preserve Traceability.
-- Maintain Historical Continuity.
-- Maintain Architecture Alignment.
-- Maintain Governance Compliance.
-- Avoid Duplicate Memory.
-- Record why the previous state was changed.
-- Record whether the change was autonomous preparation or authorized publication.
-- Preserve source memory scope.
-- Preserve provenance when learning crosses a memory boundary.
-- Prefer the simplest sufficient memory structure.
-
----
-
-# Error-to-Learning Record
-
-When memory changes because of an error, contradiction or recoverable execution failure, preserve at minimum:
-
-1. Previous belief or stored interpretation.
-2. Evidence that contradicted it or exposed the failure.
-3. Root cause or candidate root cause.
-4. Corrected interpretation or candidate.
-5. Affected relationships.
-6. Validation performed.
-7. Required authority.
-8. Final disposition: accepted, rejected, deferred or superseded.
-9. Memory domain affected.
-10. Any cross-domain promotion performed.
-11. Recovery action when a technical/tool failure was involved.
-12. Whether the recovery exposed a reusable process lesson.
+End of Document
