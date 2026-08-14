@@ -2,10 +2,10 @@
 
 Platform: ARGO KOP  
 Document ID: REP-013  
-Version: 1.0.8  
+Version: 1.0.9  
 Status: Active / Phase 1 Population In Progress  
 Development Baseline: 3.2.1  
-Last Audit: 2026-08-13
+Last Audit: 2026-08-14
 
 ## Purpose
 
@@ -391,6 +391,12 @@ The content tree is synchronized with the current inspected repository baseline 
 Current audit model:
 
 **Referenced → Located → Read → Identity Verified → Authority Verified → Relationship Validated → Consumer/Dependency Checked → Mutation Impact Checked → Re-read After Mutation**
+
+## PR Merge Materialization Revalidation — 2026-08-14
+
+The canonical `Specifications/01-Knowledge-Organization.md` path was directly confirmed in this artifact at `main` and at the PR base commit. A PR merge snapshot subsequently failed to materialize the same path during integration testing. This entry records the discrepancy as a **merge materialization / checkout snapshot mismatch** and does not remove or weaken the canonical path requirement.
+
+The artifact was re-audited on 2026-08-14 without changing the physical tree semantics.
 
 ## Governing Rule
 
