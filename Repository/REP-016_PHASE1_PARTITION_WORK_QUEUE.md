@@ -2,7 +2,7 @@
 
 Platform: ARGO KOP  
 Document ID: REP-016  
-Version: 1.1.9  
+Version: 1.2.0  
 Status: Active / Phase 1 Open / Integrity Hold  
 Development Baseline: 3.2.1  
 Last Audit: 2026-08-14
@@ -39,7 +39,7 @@ No promotion to a later ring is allowed until predecessor exit evidence, affecte
 | 16 | Plugins | RELATIONSHIP_VALIDATION | PLG-001 + plugin inventory | Plugin authority + REP-011/014 |
 | 17 | Memory | INVENTORYING | Engineering Journal + content tree | Memory authority + REP-011 |
 | 18 | Specifications | INVENTORYING | SPEC-001 + exact enumeration | Specification authority + REP-011/014 |
-| 19 | Templates | NOT_STARTED | Exact physical enumeration | Template authority + REP-011 |
+| 19 | Templates | INVENTORYING | Templates/README.md + exact physical enumeration + content review | Template authority + REP-011 |
 | 20 | Release | NOT_STARTED | Exact physical enumeration | Release authority + REP-011/014 |
 | 21 | Projects | NOT_STARTED | Exact physical enumeration | Project authority + REP-011/014 |
 | 22 | Docs | NOT_STARTED | Exact physical enumeration | Documentation authority + REP-011 |
@@ -64,11 +64,11 @@ Material mutation remains:
 
 ## Search Evidence Contract
 
-For every material search result, positive or negative, use two materially different retrieval methods before making an absence or current-state claim.
+For every material search result, positive or negative, use two materially different retrieval methods before making an absence or current-state claim. For critical absence decisions, a third materially different confirmation should be used where the tooling permits it.
 
 For material negative results:
 
-`SEARCH-A → INDEPENDENT SEARCH-B → CONFIRM ABSENCE OR RECOVER → ANALYZE FAILURE → READ CURRENT AUTHORITY → RECORD`
+`SEARCH-A → INDEPENDENT SEARCH-B → THIRD CONFIRMATION WHEN FEASIBLE → CONFIRM ABSENCE OR RECOVER → ANALYZE FAILURE → READ CURRENT AUTHORITY → RECORD`
 
 For material positive results:
 
@@ -180,24 +180,6 @@ No new permanent MEM-009 lesson is promoted. The observed cases are already cove
 5. CI-to-impact-matrix observability follows mutation evidence.
 6. Final Boot Verification remains last and blocked by unresolved identity/relationship scope.
 
-## Recovery / Anti-Loop / Anti-Premature-Closure
-
-Every item must be resumable from repository evidence alone. Repeated review without new evidence must stop and record the missing evidence. No item may be closed merely because files were read, an index lists them, a previous model declared completion, or CI passed.
-
-## Current Checkpoint
-
-P40 evidence is recorded in:
-
-`Repository/REP-020_SESSION_DELTA_2026-08-14_P40.md`
-
-The session closure record is created only after the P40 mutation and its audit evidence are verified.
-
-Next session resumes at **Priority 2 — Exhaustive duplicate-ID audit**, with P31/P36/P37/P38/P39/P40 search/reconciliation evidence preserved.
-
----
-
-End of Document
-
 ## P41 — Historical Identity Collision Reconciliation
 
 P41 targeted a known historical collision to distinguish active duplicate identity from retired provenance.
@@ -228,9 +210,65 @@ This is a **historical/reference occurrence**, not a current duplicate requiring
 
 No new permanent MEM-009 lesson is promoted. P41 is a concrete identity-collision reconciliation case already covered by the existing search-confirmation, freshness, provenance, and bounded-absence rules.
 
-## P41 Current Checkpoint
+## P42 — Templates Partition Revalidation + Three-Method Search Discipline
 
-P41 evidence must be recorded in `Repository/REP-020_SESSION_DELTA_2026-08-14_P41.md`, followed by closure evidence on the exact closure commit.
+P42 advanced Priority 19 because the queue previously marked Templates `NOT_STARTED`, while current repository evidence shows the partition is physically populated and has a canonical directory README.
+
+### Search-A — identity-oriented
+
+Query: `TEMPLATE-`
+
+The search returned `Templates/README.md` and related artifacts, but the returned result refs were pinned to commit `03f9eb49d9e21158708f7538dae85200705d80e7`, not proven current-main evidence. The search result therefore was not used as the current inventory authority. fileciteturn883file1
+
+### Search-B — path-oriented
+
+Query: `Templates/`
+
+The search returned `REP-001`, `REP-013`, and other references, but did not directly enumerate the physical Templates directory. This was treated as bounded retrieval evidence, not absence evidence. fileciteturn884file1turn884file2
+
+### Search-C — exact artifact-oriented
+
+Query: `TEMPLATE-006_UPDATE_PACK.md`
+
+The search returned only `Templates/README.md` at the stale search ref and did not return the exact target artifact. This is a material search miss, not proof that the file is absent. fileciteturn886file0
+
+### Current authoritative recovery
+
+Direct current-main directory retrieval of `Templates/` recovered `README.md` plus `TEMPLATE-001` through `TEMPLATE-010`. The directory therefore contains at least 11 current physical artifacts, with ten named template artifacts. The directory enumeration is the current physical authority for this inventory boundary. fileciteturn885file0
+
+Direct current-main content retrieval of `Templates/README.md` confirms `TPL-README`, Version `1.3.0`, Canonical `Yes`, Status `Validated / Reconstruction In Progress`, Development Baseline `3.3.0`, and explicitly lists `TEMPLATE-001` through `TEMPLATE-010`. It also defines template authority, lifecycle, validation requirements, downstream impact review, and the required external-feedback standard. fileciteturn887file0
+
+### P42 failure analysis
+
+The exact internal search-index mechanism is not proven. What is proven is that multiple search queries returned stale/bounded results while direct current-main directory retrieval recovered the expected artifacts. Therefore the safe diagnosis is **SEARCH/RETRIEVAL COVERAGE + FRESHNESS LIMITATION**, not file absence.
+
+This P42 result also exposes a stale work-queue state: Templates were marked `NOT_STARTED` even though the partition exists and has a canonical README plus ten template artifacts. The correct state is therefore **INVENTORYING**, not closure.
+
+### P42 content review boundary
+
+P42 reviewed the Templates README content itself. It establishes that templates are structural aids, not authority, and that canonical template changes require governed review and downstream impact review. The ten template files were enumerated but not yet individually content-audited; therefore the partition remains open.
+
+### P42 learning decision
+
+No new permanent MEM-009 lesson is promoted. P42 is a stronger three-method application of already-established search, freshness, bounded-negative, and current-authority rules. The new operational requirement is recorded here as a queue discipline, not a permanent memory lesson, because its principle is already represented in the existing memory set.
+
+## Current Queue Decision — P42
+
+1. **Exhaustive duplicate-ID audit** remains Priority 2 and open.
+2. **Executable consumer proof** remains Priority 3 and open.
+3. **Templates** advances from `NOT_STARTED` to `INVENTORYING`; individual template content/identity/reference validation remains required.
+4. Bidirectional critical-edge validation remains after executable proof.
+5. Controlled mutation/reconciliation harness follows graph closure.
+6. CI-to-impact-matrix observability follows mutation evidence.
+7. Final Boot Verification remains blocked until predecessor evidence is closed.
+
+## Recovery / Anti-Loop / Anti-Premature-Closure
+
+Every item must be resumable from repository evidence alone. Repeated review without new evidence must stop and record the missing evidence. No item may be closed merely because files were read, an index lists them, a previous model declared completion, or CI passed.
+
+## Current Checkpoint
+
+P42 evidence is recorded in the session matrix delta for this session. The next session resumes at **Priority 2 — Exhaustive duplicate-ID audit**, while Templates is now an explicit inventorying workstream rather than a false `NOT_STARTED` state.
 
 ---
 
