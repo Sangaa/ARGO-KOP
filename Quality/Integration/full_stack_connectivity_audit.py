@@ -48,10 +48,7 @@ def normalize_local_reference(raw: str, source: Path, root: Path) -> str | None:
 
 
 def markdown_reference_candidates(text: str) -> set[str]:
-    """Extract Markdown links while ignoring inline/fenced code spans.
-
-    Text shown as code is an example, not an executable/document reference.
-    """
+    """Extract Markdown links while ignoring inline/fenced code spans."""
     visible = INLINE_CODE_RE.sub("", text)
     return {
         match.strip().strip("`'\"")
@@ -134,12 +131,31 @@ def build_reference_graph(root: Path) -> tuple[dict[str, set[str]], list[dict[st
     return graph, broken
 
 
+def _test_imports(path: Path) -> set[str]:
+    """Extract imported module basenames from a test file for coverage matching."""
+    try:
+        tree = ast.parse(path.read_text(encoding="utf-8"))
+    except (OSError, UnicodeDecodeError, SyntaxError):
+        return set()
+    names: set[str] = set()
+    for node in ast.walk(tree):
+        if isinstance(node, ast.Import):
+            names.update(alias.name.rsplit(".", 1)[-1] for alias in node.names)
+        elif isinstance(node, ast.ImportFrom) and node.module:
+            names.add(node.module.rsplit(".", 1)[-1])
+    return names
+
+
 def _has_local_test(path: Path, root: Path, test_files: set[str], graph: dict[str, set[str]]) -> bool:
     sibling_names = {f"test_{path.stem}.py", f"{path.stem}_test.py"}
     if any(path.parent.joinpath(name).is_file() for name in sibling_names):
         return True
     source = _relative(root, path)
-    return any(source in graph.get(test, set()) for test in test_files)
+    if any(source in graph.get(test, set()) for test in test_files):
+        return True
+    # Tests may import modules from another package directory through PYTHONPATH.
+    # Exact module-basename import is evidence of test coverage, not runtime reachability.
+    return any(path.stem in _test_imports(root / test) for test in test_files)
 
 
 def _layer_for_path(relative: str) -> str:
@@ -187,7 +203,7 @@ def audit(root: Path) -> dict:
         "untested_candidates": sorted(set(untested_candidates)),
         "layer_file_counts": layer_counts,
         "evidence_classes": list(EVIDENCE_CLASSES),
-        "note": "Candidates require architectural review; zero incoming references or missing local tests alone do not prove a file is invalid.",
+        "note": "Candidates require architectural review; zero incoming references or missing local tests alone do not prove a file is invalid. Test-import matching is evidence of test coverage, not runtime reachability.",
     }
 
 
