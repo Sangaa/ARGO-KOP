@@ -2,7 +2,7 @@
 
 Platform: ARGO KOP  
 Document ID: REP-016  
-Version: 1.1.7  
+Version: 1.1.8  
 Status: Active / Phase 1 Open / Integrity Hold  
 Development Baseline: 3.2.1  
 Last Audit: 2026-08-14
@@ -131,10 +131,50 @@ P39 additionally rechecked the `ENG-006` identity through two materially differe
 
 No new permanent platform lesson is promoted. The observed search behavior is already governed by MEM-009 lessons 4, 6 and 7: bounded searches limit claims, negative results require independent confirmation, and positive results require freshness reconciliation.
 
-## Current Queue Decision — P39
+## P40 — Cross-namespace Duplicate-ID Evidence + Search Freshness Reconciliation
 
-1. **Exhaustive duplicate-ID audit** remains first and open; current tree enumeration improves physical coverage but does not close content-level uniqueness.
-2. **Executable consumer proof** remains second and open; current documentation proves intended dispatch binding, while independent invocation searches did not establish an executable consumer.
+P40 continued Priority 2 with two additional namespaces and did not manufacture a repository-wide PASS from bounded search output.
+
+### Architecture namespace — two materially different searches
+
+Search-A used `Document ID: ARC-` and returned active Architecture artifacts, but the search payload was broad/truncated and its result refs were pinned to older commit `794cb99e6047f242030ca1cbb0773604ecbe5daa`.
+
+Search-B used the materially different path-oriented query `Architecture/ARC-` and returned the same class of Architecture artifacts, again on the older ref. Therefore both result sets were classified as **STALE SEARCH EVIDENCE**, not current-main inventory proof.
+
+A ref comparison against current main `ff33d6f1d607d86bfbc2e8f99530105b5bb0dd3a` showed the search ref is behind current main by three commits in the available comparison result. The search index freshness mechanism itself remains unproven. No Architecture identity decision was based solely on the stale search payload.
+
+### Lifecycle namespace — two materially different searches
+
+Search-A used `Document ID: LIF-` and did not return the exact lifecycle artifact; it returned related control-plane artifacts on the same older search ref.
+
+Search-B used `Lifecycle/LIF-` and likewise did not return `Lifecycle/LIF-001_DOCUMENT_LIFECYCLE.md` directly. This is a bounded negative search pair, not proof of absence.
+
+Direct current-main retrieval then recovered `Lifecycle/LIF-001_DOCUMENT_LIFECYCLE.md`, Document ID `LIF-001`, canonical `Yes`, with current blob SHA `fca7bc1a8b3549b9e9cb5fb7f3d08aa62e02df9a`. The artifact itself records the historical `GOV-005` collision and the migration to `LIF-001`.
+
+Therefore the LIF search miss is classified as **SEARCH/RETRIEVAL MISS**, not file absence. The precise internal reason is not asserted beyond the observed bounded search behavior and stale search refs.
+
+### P40 identity decision
+
+The evidence strengthens the distinction between:
+
+`filename uniqueness` → physical namespace evidence
+
+`internal Document-ID uniqueness` → content-level evidence
+
+`historical occurrence` → provenance evidence
+
+`current authority` → current-main/direct retrieval evidence
+
+P40 does not close the exhaustive duplicate-ID audit. It advances the evidence boundary for Architecture and Lifecycle while preserving uncertainty where search coverage is bounded.
+
+### P40 learning decision
+
+No new permanent MEM-009 lesson is promoted. The observed cases are already covered by the validated search-freshness and independent-confirmation rules. P40 is a cross-namespace validation of those rules, not a materially new principle.
+
+## Current Queue Decision — P40
+
+1. **Exhaustive duplicate-ID audit** remains first and open; P40 adds Architecture and Lifecycle evidence but does not claim exhaustive internal-ID coverage.
+2. **Executable consumer proof** remains second and open; `RUN-010 → ENG-006 → SRV-009` remains documentation/boundary evidence only.
 3. Bidirectional critical-edge validation remains after executable proof.
 4. Controlled mutation/reconciliation harness follows graph closure.
 5. CI-to-impact-matrix observability follows mutation evidence.
@@ -146,13 +186,13 @@ Every item must be resumable from repository evidence alone. Repeated review wit
 
 ## Current Checkpoint
 
-P39 evidence is recorded in:
+P40 evidence is recorded in:
 
-`Repository/REP-020_SESSION_DELTA_2026-08-14_P39.md`
+`Repository/REP-020_SESSION_DELTA_2026-08-14_P40.md`
 
-The session closure record is created only after the P39 mutation and its audit evidence are verified.
+The session closure record is created only after the P40 mutation and its audit evidence are verified.
 
-Next session resumes at **Priority 2 — Exhaustive duplicate-ID audit**, with P31/P36/P37/P38/P39 search/reconciliation evidence preserved.
+Next session resumes at **Priority 2 — Exhaustive duplicate-ID audit**, with P31/P36/P37/P38/P39/P40 search/reconciliation evidence preserved.
 
 ---
 
