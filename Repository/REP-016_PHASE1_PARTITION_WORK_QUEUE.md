@@ -2,7 +2,7 @@
 
 Platform: ARGO KOP  
 Document ID: REP-016  
-Version: 1.1.2  
+Version: 1.1.3  
 Status: Active / Phase 1 Open / Integrity Hold  
 Development Baseline: 3.2.1  
 Last Audit: 2026-08-14
@@ -62,9 +62,9 @@ Material mutation remains:
 
 `ONE MATERIAL CHANGE → COMMIT → RE-READ → RECORD EVIDENCE → NEXT CHANGE`
 
-## Current Queue Decision — P34 Reconciliation
+## Current Queue Decision — P35 Search-Recovery Revalidation
 
-Current evidence does **not** justify global PASS. P34 produced a concrete control-plane synchronization repair: `MOD-001` was independently confirmed as a current canonical model artifact and reconciled into both `REP-001` and `REP-002`.
+Current evidence does **not** justify global PASS. P34 established a concrete control-plane synchronization repair for `MOD-001`; P35 revalidates the stronger search discipline required for every material negative result.
 
 ### Completed or bounded evidence
 
@@ -73,54 +73,42 @@ Current evidence does **not** justify global PASS. P34 produced a concrete contr
 - Current Service filename reconnaissance identifies SRV-001 through SRV-010 without an established active filename duplicate.
 - Historical PR #9 evidence remains separated from current-main state because PR #9 was closed without merge.
 - `RUN-010 → ENG-006 → SRV-009` has documentation/boundary evidence but not sufficient direct executable consumer proof.
-- `MOD-001_KNOWLEDGE_MODEL.md` is now indexed in both REP-001 and REP-002 after independent identity, content and folder-status confirmation.
+- `MOD-001_KNOWLEDGE_MODEL.md` remains reconciled into both REP-001 and REP-002 after independent identity/content/folder-status confirmation.
 - Duplicate-ID work has classified known active/archive distinctions but has not achieved exhaustive internal-ID/content reconciliation.
-- P29 validated reusable evidence lessons and the P31 negative-search recovery lesson remain canonical in MEM-009.
+- P29/P31 reusable evidence lessons remain canonical in MEM-009.
+- P35 independently re-applied the dual-search rule: repository search evidence was followed by direct authoritative-path retrieval of the same artifact and exact content identity check. This confirms that a search result must not be treated as sufficient authority by itself.
 
 ### Next highest-strength work
 
 1. **Exhaustive duplicate-ID audit** with explicit owner/authority decisions and independent confirmation of every material negative result.
-2. **Executable consumer proof / implementation-gap decision** for `RUN-010 → ENG-006 → SRV-009`.
-3. **Bidirectional critical-edge validation**.
-4. **Controlled mutation/reconciliation harness**.
-5. **CI-to-impact-matrix observability correlation**.
-6. **Final Boot Verification** only after the preceding blockers are closed or explicitly bounded.
+2. **Reconcile REP-013/REP-011 for the MOD-001 inventory change** before downstream control-plane promotion.
+3. **Executable consumer proof / implementation-gap decision** for `RUN-010 → ENG-006 → SRV-009`.
+4. **Bidirectional critical-edge validation**.
+5. **Controlled mutation/reconciliation harness**.
+6. **CI-to-impact-matrix observability correlation**.
+7. **Final Boot Verification** only after the preceding blockers are closed or explicitly bounded.
 
 The duplicate-ID item remains first because identity/authority integrity is a prerequisite for safely promoting relationship evidence.
 
-## P34 Reconciliation Path
-
-`Models/_FOLDER_STATUS → MOD-001 → REP-001 → REP-002`
-
-The next affected control-plane revalidation path is:
-
-`REP-001 → REP-002 → REP-013 → REP-011 → REP-020`
-
-The reconciliation does not itself prove all downstream relationships; those remain subject to their own evidence gates.
-
-## Historical PR Boundary
-
-PR #9 is historical/candidate evidence only. Its `REJECTED → HOLD` Runtime change must not be treated as current-main behavior without a new controlled candidate from current main.
-
-No historical PR result may silently promote a Runtime semantic into the current repository state.
-
-## Evidence Reuse Rules — P34 Revalidated
-
-1. A passing CI workflow proves the scope tested by that workflow; it does not by itself prove repository-wide integrity or Boot PASS.
-2. A Markdown/documentation edge proves a declared relationship only; executable relationship status requires current-main consumer/implementation evidence.
-3. Historical PR evidence must remain historical/candidate evidence until the change is independently reconciled against current main.
-4. A truncated or scope-limited search cannot support an exhaustive PASS claim; the limitation must remain attached to the result.
-5. A successful commit proves repository persistence, not semantic correctness; semantic claims require the corresponding verification evidence.
-6. A negative search result must be independently rechecked using a materially different retrieval method before an absence claim is accepted. If the second method finds the artifact, classify the first result as a search/retrieval failure rather than artifact absence, record the failure mode, and retain the authoritative artifact evidence.
-7. **When a canonical promotion or inventory synchronization is claimed, the affected canonical artifact and all directly authoritative indexes/maps must be re-read after mutation before the promotion is considered complete.** This is currently a validated engineering control candidate from P32/P34, not a new permanent platform-memory lesson.
-
-## Search Failure Recovery Contract
+## P35 Search-Recovery Contract
 
 For any material negative search:
 
-`SEARCH-A → NEGATIVE → INDEPENDENT SEARCH-B → CONFIRM ABSENCE OR RECOVER ARTIFACT → ANALYZE SEARCH FAILURE → RECORD EVIDENCE`
+`SEARCH-A → NEGATIVE → INDEPENDENT SEARCH-B → CONFIRM ABSENCE OR RECOVER ARTIFACT → ANALYZE FAILURE → RECORD EVIDENCE`
 
-Search-B must have a materially different failure mode from Search-A. Repeating the identical query through the identical index does not satisfy independent confirmation.
+Search-B must use a materially different retrieval path or failure mode. Repeating the identical query through the identical index does not satisfy independent confirmation.
+
+If Search-B recovers the artifact, the first result is classified as **search/retrieval failure**, not artifact absence. The recovered artifact is then read directly, its authority/identity is checked, and the failure mode is recorded without inventing an unsupported explanation of the underlying connector/index implementation.
+
+If both searches are negative, the result remains **bounded negative evidence** unless the search coverage is demonstrably exhaustive.
+
+## Learning Decision — P35
+
+**No new permanent platform lesson promoted.**
+
+The dual-search/negative-result recovery rule is already canonical in `MEM-009 v1.3.4`, including the P31 concrete recovery provenance. P35 revalidated and operationalized that rule but did not produce a distinct, broader lesson that requires a new permanent memory item.
+
+The P35 session record retains the evidence and failure-analysis discipline without duplicating canonical memory.
 
 ## Recovery / Anti-Loop / Anti-Premature-Closure
 
@@ -128,15 +116,15 @@ Every item must be resumable from repository evidence alone. Repeated review wit
 
 ## Current Checkpoint
 
-P34 evidence is recorded in:
+P35 evidence is recorded in:
 
-`Repository/REP-020_SESSION_DELTA_2026-08-14_P34.md`
+`Repository/REP-020_SESSION_DELTA_2026-08-14_P35.md`
 
 Session closure record:
 
-`Memory/Engineering_Journal/EJR-217_2026-08-14_P34_SESSION_CLOSURE.md`
+`Memory/Engineering_Journal/EJR-218_2026-08-14_P35_SESSION_CLOSURE.md`
 
-Next session resumes at **Priority 2 — Exhaustive duplicate-ID audit**, with P34 reconciliation evidence already preserved.
+Next session resumes at **Priority 2 — Exhaustive duplicate-ID audit**, with P34 reconciliation evidence and P35 search-recovery evidence already preserved.
 
 ---
 
