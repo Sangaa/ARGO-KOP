@@ -104,6 +104,17 @@ def test_audit_accepts_sibling_runtime_test(tmp_path: Path):
     assert "Runtime/worker.py" not in result["untested_candidates"]
 
 
+def test_audit_accepts_cross_directory_test_import(tmp_path: Path):
+    runtime = tmp_path / "Runtime" / "Execution"
+    runtime.mkdir(parents=True)
+    decision = tmp_path / "Decision"
+    decision.mkdir()
+    (runtime / "execution_plan.py").write_text("def build_plan(): pass", encoding="utf-8")
+    (decision / "test_authorization_and_execution_plan.py").write_text("from execution_plan import build_plan\n\ndef test_plan():\n    build_plan()\n", encoding="utf-8")
+    result = audit(tmp_path)
+    assert "Runtime/Execution/execution_plan.py" not in result["untested_candidates"]
+
+
 def test_audit_exposes_layer_inventory_and_evidence_classes(tmp_path: Path):
     (tmp_path / "Runtime").mkdir()
     (tmp_path / "Runtime" / "worker.py").write_text("def run(): pass", encoding="utf-8")
