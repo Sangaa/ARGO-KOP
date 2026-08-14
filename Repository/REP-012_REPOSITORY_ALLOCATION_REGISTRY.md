@@ -6,13 +6,15 @@
 
 Platform: ARGO KOP
 Document ID: REP-012
-Version: 1.0.6
+Version: 1.0.7
 Status: Active Control / Integrity Hold / Phase 1 Population In Progress
 Category: Repository Control
 Canonical: Yes
 Priority: Critical
-Development Baseline: 3.3.0
-Last Audit Date: 2026-08-10
+Development Baseline: 3.2.1
+Last Audit Date: 2026-08-14
+
+---
 
 ## 1. Purpose
 
@@ -278,15 +280,23 @@ The current control-plane review established the following evidence boundaries:
 
 **Important:** These results are scoped to the control-plane artifacts actually inspected. They are not a claim that the entire repository has been reconciled.
 
-### Baseline Reconciliation Note
+### Baseline Authority Reconciliation — 2026-08-14
 
-Earlier control-plane records carried Development Baseline `3.2.1`. The current reviewed control-plane sequence includes material changes through the `3.3.0` development baseline.
+Earlier versions of this registry carried Development Baseline `3.3.0`. That declaration conflicted with the current repository authority chain.
 
-This registry is therefore updated to `3.3.0` rather than preserving the older baseline value as if it represented the current construction state.
+Current authoritative evidence establishes Development Baseline `3.2.1`:
 
-The baseline change is a repository-state fact; it does **not** by itself mean Phase 1 is complete or that every artifact has been revalidated against 3.3.0.
+- `Release/VERSION.md` declares `3.2.1` as the Development Baseline;
+- `PROJECT_STATUS.md` records `3.2.1` and points to the release/version declaration as the baseline authority;
+- `REP-001_MASTER_INDEX.md` records `3.2.1`;
+- `REP-002_REPOSITORY_MAP.md` records `3.2.1`;
+- `RUN-001_BOOT_SEQUENCE.md` records `3.2.1` as the Runtime development baseline.
 
-`RECONCILED` must mean the required views agree within the recorded scope. It does not mean the entire repository or Phase 1 is complete.
+Therefore this registry is reconciled to **3.2.1**. The prior `3.3.0` value is treated as a conflicting historical declaration, not as current authority.
+
+This reconciliation does **not** imply Phase 1 completion or repository-wide semantic closure. Any artifact still declaring `3.3.0` remains an explicit follow-up target for authority/state reconciliation.
+
+`RECONCILED` continues to mean that the required views agree within the recorded scope; it does not mean the entire repository or Phase 1 is complete.
 
 ## 11. Recovery Model
 
@@ -490,28 +500,41 @@ Existing repository files must not be marked `ALLOCATED + REVIEWED + CHECKPOINTE
 
 The registry shall be populated incrementally during Phase 1 review.
 
-## 22. Control-Plane Checkpoint Synchronization — 2026-08-10
+## 22. Control-Plane Checkpoint Synchronization — 2026-08-14
 
-The active control-plane has continued to mutate after the earlier 2026-08-10 allocation checkpoint. The registry therefore records the latest observed control-plane commits separately from the older checkpoint rather than silently treating the older checkpoint as current.
+The active control plane has continued to mutate after the earlier 2026-08-10 allocation checkpoint. The registry therefore records the current reconciliation state explicitly rather than silently treating the older checkpoint as current.
 
-| Artifact | Latest Observed Commit | Latest Observed Content Identity | Synchronization Meaning |
-|---|---|---|---|
-| REP-015 | `f30d89ee1fb60d831d11efc4db7dda3ab5e145fa` | `29d2dcce15d46d55ea1a1b688b4bb3609adc970e` | Bootstrap updated; re-read confirmed |
-| REP-016 | `9e609972ec607c59e1c17559f78c78b83d9b642f` | `1a7114d0a328180899230cf3049bce2312cc1356` | Queue updated; re-read confirmed |
-| REP-014 | `662071186fc40c8f30a0371d32773bcbe7476c62` | `baa68f2b617eb44073f23c8809b57db085ad51d8` | Relationship registry updated; re-read confirmed |
-| REP-013 | `37e6d52cead7f6ff9f767ed15a98e078ef48934f` | `9b081fbeaee088d4e8eb33d8324bdf13512b3cf3` | Content tree updated; re-read confirmed |
-
-These are evidence records for the observed commits, not semantic closure claims.
+| Artifact | Current Observed State | Synchronization Meaning |
+|---|---|---|
+| REP-011 | Current repository control-plane artifact | Review/mutation evidence remains subject to cross-registry reconciliation |
+| REP-012 | Updated to v1.0.7 / baseline 3.2.1 | This commit becomes the next allocation-registry reconciliation checkpoint |
+| REP-013 | v1.0.8 on `main` during the inspected scope | Content inventory reconciled for the current Knowledge Organization path; exhaustive inventory remains open |
+| REP-014 | Current relationship registry | Relationship closure remains scoped and incomplete |
+| REP-015 | Current bootstrap/control-plane artifact | Boot gates remain authoritative within current scope |
+| REP-016 | Current Phase-1 queue | Open work remains governed by explicit queue state |
 
 ### Synchronization Rule
 
-Because `REP-012` itself is now being changed after these observations, its resulting commit/content identity must become the next checkpoint for the control-plane reconciliation pass. Any subsequent mutation to a listed control-plane artifact invalidates a claim of full synchronization until the affected record is re-read and reconciled again.
+Because `REP-012` itself has now been changed, its resulting commit and content identity become the next checkpoint for control-plane reconciliation. Any subsequent material mutation to a listed control-plane artifact invalidates a claim of full synchronization until the affected record is re-read and reconciled again.
 
 ### Diagram Freshness
 
-`DIAG-001` remains valid only as an orientation/provenance artifact relative to the source state from which it was generated. If `REP-012` or another source affecting its displayed values changes materially, `DIAG-001` must be treated as `REVALIDATION_REQUIRED` until regenerated or explicitly superseded.
+`DIAG-001` remains valid only as an orientation/provenance artifact relative to the source state from which it was generated. The baseline reconciliation above does not make its historical displayed values current; if values are consumed as status metrics, the diagram must be regenerated or explicitly superseded.
 
-## 23. Related Documents
+## 23. Relationship and Current Review Trace
+
+The current review cycle records these tested paths:
+
+- `RUN-001 → PROJECT_BOOTSTRAP → REP-001 → REP-002` — boot/authority documentation verified;
+- `RUN-010 → ENG-006 → SRV-009` — documentation relationship verified, executable consumer proof still open;
+- `REP-001 ↔ REP-002` — active inventory/path agreement verified within inspected scope;
+- `REP-013 ↔ Specifications/01-Knowledge-Organization.md` — canonical physical path verified;
+- `PR #1 / PR #3` — stale verification branches closed without merge;
+- `PR #9` — prototype and integration evidence passed, candidate closed without merge.
+
+Tests recorded in the associated REP-020 evidence deltas remain cumulative; this section is a navigation bridge, not a replacement for their detailed evidence.
+
+## 24. Related Documents
 
 - `Repository/REP-001_MASTER_INDEX.md`
 - `Repository/REP-002_REPOSITORY_MAP.md`
@@ -522,13 +545,17 @@ Because `REP-012` itself is now being changed after these observations, its resu
 - `Repository/REP-014_REPOSITORY_RELATIONSHIP_REGISTRY.md`
 - `Repository/REP-015_CONTROL_PLANE_BOOTSTRAP_CHECKLIST.md`
 - `Repository/REP-016_PHASE1_PARTITION_WORK_QUEUE.md`
+- `Repository/REP-020_DEPENDENCY_CONSUMER_IMPACT_MATRIX.md`
 - `PROJECT_BOOTSTRAP.md`
 - `PROJECT_STATUS.md`
 - `ROADMAP.md`
+- `Release/VERSION.md`
+- `Runtime/RUN-001_BOOT_SEQUENCE.md`
+- `Runtime/RUN-010_RUNTIME_REFERENCE.md`
 - `Assets/Diagrams/DIAG-001_REPOSITORY_PHASE1_STATUS_2026-08-10.svg`
 - `Assets/Diagrams/DIAG-001_REPOSITORY_PHASE1_STATUS_2026-08-10.md`
 
-## 24. Final Principle
+## 25. Final Principle
 
 **The registry is not the repository. It is the control layer that helps the repository remain discoverable, reviewable, traceable and recoverable.**
 
