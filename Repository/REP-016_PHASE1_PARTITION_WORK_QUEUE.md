@@ -2,7 +2,7 @@
 
 Platform: ARGO KOP  
 Document ID: REP-016  
-Version: 1.1.6  
+Version: 1.1.7  
 Status: Active / Phase 1 Open / Integrity Hold  
 Development Baseline: 3.2.1  
 Last Audit: 2026-08-14
@@ -99,15 +99,46 @@ P38 therefore classifies the two search results as **STALE SEARCH EVIDENCE**, th
 
 P38 does not promote a new permanent platform lesson. `MEM-009` already contains the validated rules for independent negative-search confirmation and current-ref freshness reconciliation. P38 adds provenance and confirms those rules on a second namespace, but introduces no materially new principle.
 
-## Current Queue Decision — P38
+## P39 — Executable Consumer Proof + Duplicate-ID Evidence Expansion
 
-1. **Exhaustive duplicate-ID audit** remains first and open. Filename uniqueness is not internal-ID uniqueness.
-2. Current Service inventory is revalidated as a bounded current-tree fact and should be used as the Service-side input to REP-020/REP-011 reconciliation.
-3. **Executable consumer proof** for `RUN-010 → ENG-006 → SRV-009` remains next after identity evidence is sufficiently bounded.
-4. Bidirectional critical-edge validation remains after executable proof.
-5. Controlled mutation/reconciliation harness follows graph closure.
-6. CI-to-impact-matrix observability follows mutation evidence.
-7. Final Boot Verification remains last and blocked by unresolved identity/relationship scope.
+P39 continued Priority 2 and opened Priority 3 without promoting either to closure.
+
+### Search pair A — identity-oriented
+
+A repository search for `Document ID: ENG-006` recovered `Engine/ENG-006_EXECUTION_ENGINE.md` on current `main`. The result was independently validated by direct authoritative retrieval of the same path; current blob SHA is `73b50ed29703a2af6f96d6f5f682b64f018cf8e0`.
+
+### Search pair B — path/content-oriented
+
+A materially different search for `ENG-006_EXECUTION_ENGINE` did not return the exact target as the first result and returned related Engine/Runtime artifacts. Because the result set was bounded/truncated, it was not treated as evidence of absence. Direct current-main retrieval remained the authority.
+
+### Executable consumer search
+
+Two independent searches were then used against the claimed `ENG-006 → SRV-009` implementation edge:
+
+1. `SRV-009_UPDATE_SERVICE` — recovered documentation and ENG-006 references, but no direct executable invocation was established by the search evidence.
+2. `update_service(` — returned **no results**.
+3. `UpdateService` — returned **no results**.
+
+The negative invocation searches are therefore classified as **bounded negative implementation evidence**, not repository-wide absence proof. The current conclusion remains **EXECUTABLE PROOF OPEN / DOCUMENTATION EVIDENCE ONLY**. The exact reason no invocation symbol was returned is not asserted beyond search scope; no runtime mutation was made to manufacture a consumer.
+
+### Duplicate-ID progress
+
+The current repository tree was also retrieved through the Git tree API at the current `main` commit `ff33d6f1d607d86bfbc2e8f99530105b5bb0dd3a`. This provides a current physical-path inventory boundary, but the response is too large for a single rendered payload; therefore it is not treated as exhaustive internal-ID/content proof by itself.
+
+P39 additionally rechecked the `ENG-006` identity through two materially different searches and direct retrieval. No active filename collision for `ENG-006` was established. Internal-ID uniqueness across all content remains open.
+
+### P39 learning decision
+
+No new permanent platform lesson is promoted. The observed search behavior is already governed by MEM-009 lessons 4, 6 and 7: bounded searches limit claims, negative results require independent confirmation, and positive results require freshness reconciliation.
+
+## Current Queue Decision — P39
+
+1. **Exhaustive duplicate-ID audit** remains first and open; current tree enumeration improves physical coverage but does not close content-level uniqueness.
+2. **Executable consumer proof** remains second and open; current documentation proves intended dispatch binding, while independent invocation searches did not establish an executable consumer.
+3. Bidirectional critical-edge validation remains after executable proof.
+4. Controlled mutation/reconciliation harness follows graph closure.
+5. CI-to-impact-matrix observability follows mutation evidence.
+6. Final Boot Verification remains last and blocked by unresolved identity/relationship scope.
 
 ## Recovery / Anti-Loop / Anti-Premature-Closure
 
@@ -115,13 +146,13 @@ Every item must be resumable from repository evidence alone. Repeated review wit
 
 ## Current Checkpoint
 
-P38 evidence is recorded in:
+P39 evidence is recorded in:
 
-`Repository/REP-020_SESSION_DELTA_2026-08-14_P38.md`
+`Repository/REP-020_SESSION_DELTA_2026-08-14_P39.md`
 
-The session closure record is created only after the P38 mutation and its audit evidence are verified.
+The session closure record is created only after the P39 mutation and its audit evidence are verified.
 
-Next session resumes at **Priority 2 — Exhaustive duplicate-ID audit**, with P31/P36/P37/P38 search/reconciliation evidence preserved.
+Next session resumes at **Priority 2 — Exhaustive duplicate-ID audit**, with P31/P36/P37/P38/P39 search/reconciliation evidence preserved.
 
 ---
 
