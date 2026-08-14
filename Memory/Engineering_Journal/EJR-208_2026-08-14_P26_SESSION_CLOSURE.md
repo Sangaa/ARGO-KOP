@@ -4,7 +4,7 @@ Date: 2026-08-14
 Platform: ARGO KOP  
 Baseline: 3.2.1  
 Active Ring: RING 0 — CONTROL PLANE  
-Status: Closure checkpoint / Integrity Hold
+Status: **CLOSED — Integrity Hold**
 
 ## Session Objective
 
@@ -41,6 +41,7 @@ Continue repository review and controlled modification while preserving the esta
 | P26-T09 | Executable RUN-010 → ENG-006 → SRV-009 proof | PARTIAL |
 | P26-T10 | Exhaustive duplicate-ID audit | PARTIAL / OPEN |
 | P26-T11 | Final Boot | NOT_PERFORMED / BLOCKED |
+| P26-T12 | Full-Stack Repository Audit on closure commit | PASS — Run #156 |
 
 ## Current Blockers
 
@@ -50,9 +51,11 @@ Continue repository review and controlled modification while preserving the esta
 - Controlled mutation/reconciliation harness remains unimplemented.
 - Final Boot remains blocked by unresolved integrity evidence.
 
-## Closure Rule
+## Closure Decision
 
-This session is considered a **closure checkpoint**, not a global ARGO PASS. The closure commit must pass the repository's applicable Full-Stack audit before the session is considered technically closed.
+P26 is **technically closed** because the closure commit `34b05a37c627956daea5ac5962363b8a17e12fc5` completed Full-Stack Repository Audit Run #156 successfully, including repository audit and evidence upload.
+
+This closure does **not** mean ARGO has reached global PASS. The repository remains under **INTEGRITY HOLD** by design.
 
 ## Next Session Resume Point
 
