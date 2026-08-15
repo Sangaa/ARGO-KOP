@@ -25,10 +25,13 @@ A seam becomes `CONNECTED` only when an explicit verified seam record is supplie
 4. Decision → Authorization
 5. Authorization → Execution
 6. Execution → Execution Trace
-7. Execution Trace → Outcome Evaluation
-8. Outcome Evaluation → Feedback Quality
-9. Feedback Quality → Learning Readiness
-10. Learning Readiness → Learning Pipeline
+7. Execution → Outcome
+8. Execution Trace → Outcome Evaluation
+9. Outcome Evaluation → Feedback Quality
+10. Feedback Quality → Learning Readiness
+11. Learning Readiness → Learning Pipeline
+
+The canonical seam count is **11** and must remain aligned with `Quality/Integration/canonical_spine_gap_map.py`.
 
 ## Output
 
