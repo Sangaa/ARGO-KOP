@@ -1,0 +1,7 @@
+{
+  "record_type": "EXECUTION_TRACE",
+  "trace_id": "TRACE-OUTCOME-FEEDBACK-QUALITY-001",
+  "task_id": "TASK-OUTCOME-FEEDBACK-QUALITY-001",
+  "session_id": "SESSION-OUTCOME-FEEDBACK-QUALITY-001",
+  "final_status": "SUCCESS"
+}
