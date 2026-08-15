@@ -5,6 +5,9 @@ on:
     branches: [main]
   workflow_dispatch:
 
+env:
+  PYTHONPATH: ${{ github.workspace }}:${{ github.workspace }}/Runtime/Execution:${{ github.workspace }}/Runtime/Learning:${{ github.workspace }}/Decision:${{ github.workspace }}/Cognition:${{ github.workspace }}/Memory/Execution:${{ github.workspace }}/Quality/Integration:${{ github.workspace }}/Runtime/Prototype
+
 jobs:
   repository-audit:
     runs-on: ubuntu-latest
@@ -19,10 +22,10 @@ jobs:
 
       - name: Execute repository-wide audit
         working-directory: Quality/Integration
-        run: python run_full_stack_audit.py ../.. | tee ../../full-stack-audit-report.json
+        run: set -o pipefail; python run_full_stack_audit.py ../.. | tee ../../full-stack-audit-report.json
 
       - name: Emit real runtime evidence
-        run: python Quality/Integration/emit_ci_runtime_evidence.py | tee ci-runtime-evidence.json
+        run: set -o pipefail; python Quality/Integration/emit_ci_runtime_evidence.py | tee ci-runtime-evidence.json
 
       - name: Upload audit evidence
         uses: actions/upload-artifact@v4
