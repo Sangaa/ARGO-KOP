@@ -35,9 +35,10 @@ def test_authorized_prototype_reaches_proposal_only_not_execution():
 
 
 def test_controlled_handoff_preserves_trace_identity_and_non_execution():
-    result = run(_payload(), human_approved=True)
+    payload = _payload()
+    result = run(payload, human_approved=True)
 
-    assert result["task_id"] == result["context"]["task_id"]
-    assert result["session_id"] == result["context"]["session_id"]
+    assert result["task_id"] == result["context"]["task_id"] == payload["task_id"]
+    assert result["context"]["session_id"] == payload["session_id"]
     assert all(stage in result for stage in ("context", "reasoning", "decision", "validation", "authorization", "action", "result"))
     assert result["result"]["executed"] is False
