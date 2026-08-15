@@ -46,11 +46,32 @@ def _candidate_paths(candidate_files, key):
     return normalized
 
 
-def build_gap_map(evidence: dict, candidate_files: dict | None = None) -> dict:
+def _candidate_kinds(candidate_kinds, key, candidate_paths):
+    """Return validated advisory kinds aligned with candidate provenance."""
+    if candidate_kinds is None:
+        return {}
+    values = candidate_kinds.get(key, {})
+    if not isinstance(values, dict):
+        raise ValueError(f"candidate kinds must be a mapping: {key}")
+    kinds = {}
+    for path in candidate_paths:
+        if path in values:
+            kind = values[path]
+            if not isinstance(kind, str) or not kind:
+                raise ValueError(f"invalid candidate kind: {path!r}")
+            kinds[path] = kind
+    return kinds
+
+
+def build_gap_map(
+    evidence: dict,
+    candidate_files: dict | None = None,
+    candidate_kinds: dict | None = None,
+) -> dict:
     """Build an evidence-bounded gap map with optional candidate provenance.
 
-    Candidate provenance is discovery context only. It never changes a seam
-    state and never promotes a seam to CONNECTED.
+    Candidate provenance and kinds are discovery context only. They never
+    change a seam state and never promote a seam to CONNECTED.
     """
     gaps = []
     for source, destination in SEAMS:
@@ -63,6 +84,9 @@ def build_gap_map(evidence: dict, candidate_files: dict | None = None) -> dict:
             candidates = _candidate_paths(candidate_files, key)
             if candidates:
                 gap["candidate_files"] = candidates
+                kinds = _candidate_kinds(candidate_kinds, key, candidates)
+                if kinds:
+                    gap["candidate_kinds"] = kinds
             gaps.append(gap)
     return {
         "status": "GAP_MAP_COMPLETE",
