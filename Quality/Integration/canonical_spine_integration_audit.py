@@ -76,7 +76,7 @@ def audit(root, verified_seams=None):
             raise ValueError(f"unknown seam: {seam}")
         evidence[seam] = _state_from_verified_record(root, seam, record)
 
-    report = build_gap_map(evidence, candidate_files)
+    report = build_gap_map(evidence, candidate_files, candidate_kinds)
     return {
         "status": "INTEGRATION_AUDIT_COMPLETE",
         "seam_count": len(SEAMS),
