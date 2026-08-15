@@ -153,9 +153,24 @@ def _has_local_test(path: Path, root: Path, test_files: set[str], graph: dict[st
     source = _relative(root, path)
     if any(source in graph.get(test, set()) for test in test_files):
         return True
-    # Tests may import modules from another package directory through PYTHONPATH.
-    # Exact module-basename import is evidence of test coverage, not runtime reachability.
     return any(path.stem in _test_imports(root / test) for test in test_files)
+
+
+def _workflow_invokes(path: Path, root: Path) -> bool:
+    """Detect explicit GitHub Actions invocation of a runtime script."""
+    workflows = root / ".github" / "workflows"
+    if not workflows.is_dir():
+        return False
+    relative = _relative(root, path)
+    basename = path.name
+    for workflow in workflows.glob("*.y*ml"):
+        try:
+            text = workflow.read_text(encoding="utf-8")
+        except (OSError, UnicodeDecodeError):
+            continue
+        if relative in text or basename in text:
+            return True
+    return False
 
 
 def _layer_for_path(relative: str) -> str:
@@ -189,7 +204,11 @@ def audit(root: Path) -> dict:
     source_files = [p for p in files if p.suffix == ".py" and _relative(root, p) not in test_files]
     orphan_candidates = [_relative(root, p) for p in source_files if incoming[_relative(root, p)] == 0 and p.parent.name not in {"Scripts", "Tools"}]
     runtime_sources = [p for p in source_files if p.is_relative_to(root / "Runtime")]
-    untested_candidates = [_relative(root, p) for p in runtime_sources if not _has_local_test(p, root, test_files, graph)]
+    untested_candidates = [
+        _relative(root, p)
+        for p in runtime_sources
+        if not _has_local_test(p, root, test_files, graph) and not _workflow_invokes(p, root)
+    ]
     layer_counts = {layer: 0 for layer in LAYER_PATHS}
     for relative in relative_files:
         layer_counts[_layer_for_path(relative)] += 1
@@ -203,7 +222,7 @@ def audit(root: Path) -> dict:
         "untested_candidates": sorted(set(untested_candidates)),
         "layer_file_counts": layer_counts,
         "evidence_classes": list(EVIDENCE_CLASSES),
-        "note": "Candidates require architectural review; zero incoming references or missing local tests alone do not prove a file is invalid. Test-import matching is evidence of test coverage, not runtime reachability.",
+        "note": "Candidates require architectural review; zero incoming references or missing local tests alone do not prove a file is invalid. Test-import matching is evidence of test coverage, not runtime reachability. Workflow invocation is evidence of CI execution intent, not runtime architectural connectivity.",
     }
 
 
