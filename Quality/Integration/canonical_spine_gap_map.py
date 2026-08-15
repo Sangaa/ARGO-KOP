@@ -25,6 +25,28 @@ VALID_STATES = {
 }
 
 
+def classify_candidate_path(path: str) -> str:
+    """Classify a candidate by repository path without treating it as proof."""
+    if not isinstance(path, str) or not path:
+        raise ValueError(f"invalid candidate path: {path!r}")
+    normalized = Path(path).as_posix()
+    suffix = Path(normalized).suffix.lower()
+    name = Path(normalized).name.lower()
+    parts = {part.lower() for part in Path(normalized).parts}
+
+    if "quality" in parts or name.startswith("test_") or name.endswith("_test.py"):
+        return "test"
+    if "contract" in name or "contracts" in parts:
+        return "contract"
+    if "trace" in name or "evidence" in name:
+        return "trace"
+    if suffix in {".py", ".js", ".ts", ".cpp", ".cc", ".c", ".java", ".kt"}:
+        return "implementation"
+    if suffix in {".md", ".rst", ".txt"} or "docs" in parts or "documentation" in parts:
+        return "documentation"
+    return "other"
+
+
 def _candidate_paths(candidate_files, key):
     """Return bounded repository-relative candidate provenance for one seam."""
     if candidate_files is None:
