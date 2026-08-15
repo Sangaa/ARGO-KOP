@@ -28,7 +28,7 @@ Critical
 
 Last Audit Date
 
-2026-08-11
+2026-08-15
 
 Review Method
 
@@ -38,16 +38,17 @@ Repository First / Evidence Based
 
 # Folder Purpose
 
-The Engine domain contains the currently identified `ENG-001` through `ENG-014` artifacts and `_FOLDER_STATUS.md`. Their declared responsibilities and relationships remain subject to repository-wide validation.
+The Engine domain contains the currently identified `ENG-001` through `ENG-015` artifacts and `_FOLDER_STATUS.md`. Their declared responsibilities and relationships remain subject to repository-wide validation.
 
 # Current Build Additions
 
-This build batch added:
+This build batch includes:
 
 - `ENG-013_COGNITIVE_EXECUTION_LOOP.md` — governed integration contract connecting Context → Cognition → Decision → Validation → Authorization → Execution → Result → Learning Candidate.
 - `ENG-014_COGNITIVE_LOOP_INTEGRATION_VALIDATION.md` — acceptance boundary for proving the connected path rather than merely documenting individual engines.
+- `ENG-015_LEARNING_PROMOTION_GATE.md` — governed promotion boundary preventing learning candidates from silently becoming authoritative knowledge.
 
-Both are **Candidate / Integrity Hold** contracts and do not claim executable implementation.
+These are **Candidate / Integrity Hold** contracts and do not claim executable implementation.
 
 ## Previous Build
 
@@ -63,8 +64,9 @@ Both are **Candidate / Integrity Hold** contracts and do not claim executable im
 6. `ENG-009` declares repository scope and metadata behavior whose broader Standards/Models authority relationship remains under validation.
 7. Prior audit dates and `Approved` labels are historical evidence, not current certification.
 8. `ENG-012` establishes the Engine ↔ AI execution boundary and requires validation against AI, Runtime, Interfaces, Memory and Knowledge.
-9. `ENG-013` now establishes the cognitive execution loop, but the loop remains a contract until its connected runtime path is tested.
+9. `ENG-013` establishes the cognitive execution loop, but the loop remains a contract until its connected runtime path is tested.
 10. `ENG-014` defines integration acceptance criteria; passing status requires evidence from the runtime/test layer.
+11. `ENG-015` establishes the learning-promotion gate; promotion remains governed and unverified until evidence, validation and authority are materialized.
 
 # Integrity Decision
 
@@ -74,13 +76,14 @@ No Engine artifact is globally certified merely because its local document is co
 
 # Required Next Actions
 
-1. Validate external dependencies named by `ENG-001` through `ENG-014`.
+1. Validate external dependencies named by `ENG-001` through `ENG-015`.
 2. Resolve active versus archived authority for `GOV-*`, `ARC-*`, `QLT-*`, `RUN-*`, `SRV-*`, `MOD-*`, `STD-*`, `AI-*`, `KNW-*` and `MEM-*` references.
 3. Validate engine-to-engine contracts and detect circular or contradictory responsibilities.
 4. Reconcile Engine status/index claims with current repository evidence.
 5. Validate `ENG-012` against AI, Runtime, Interfaces, Knowledge and Memory.
 6. Validate `ENG-013` / `ENG-014` against the actual Runtime implementation or prototype.
-7. Re-audit after connected-path validation.
+7. Validate `ENG-015` / `RUN-014` against the Memory promotion boundary without allowing silent promotion.
+8. Re-audit after connected-path validation.
 
 # Rules
 
@@ -97,7 +100,7 @@ No Engine artifact is globally certified merely because its local document is co
 
 # Next Audit Boundary
 
-`ENG-013 / ENG-014 → Runtime RUN-011 / RUN-012 → Interfaces / Services → Memory / Knowledge → Repository Control Plane`
+`ENG-013 / ENG-014 / ENG-015 → Runtime → Interfaces / Services → Memory / Knowledge → Repository Control Plane`
 
 ---
 
