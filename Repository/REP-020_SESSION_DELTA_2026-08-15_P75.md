@@ -5,7 +5,7 @@ Checkpoint: P75
 Status: Active / Integrity Hold  
 Development Baseline: 3.2.1  
 Base Commit: d9f319d813afdf1c70b84fbfc368135fe534816e  
-Resulting Registry Commit: 1a8fc67467aa41c2049950ffbf7de5d349ce4c61
+Resulting Registry Commits: `1a8fc67467aa41c2049950ffbf7de5d349ce4c61`, `71d9f61f9f0d22bdc3886e7c25ee177136776a10`, `79f3dc4bd3cdc2369400790e961ea5ea481f7ff1`
 
 ## Work Completed
 
@@ -15,6 +15,9 @@ Resulting Registry Commit: 1a8fc67467aa41c2049950ffbf7de5d349ce4c61
 - Preserved the evidence boundary: no executable dependency or authority relationship was inferred.
 - Re-read the modified `REP-014` after mutation and verified the new relationship records are present.
 - Cross-checked current `REP-001` and `REP-002`; both already enumerate `RUN-011..015` and `Runtime/Prototype/`, so no duplicate control-plane inventory mutation was required.
+- Updated `REP-013` so its Runtime content inventory now matches the current verified Runtime inventory.
+- Updated `REP-011` with P75 review/mutation/re-read evidence and the resulting reconciliation state.
+- Re-read the modified P75 session delta after the follow-up updates.
 
 ## Canonical Relationship Reconciliation
 
@@ -39,20 +42,23 @@ No new permanent learning is promoted from this discrepancy in P75.
 
 ## Control-Plane Cross-Check
 
-`REP-001` and `REP-002` are already synchronized for the current Runtime inventory:
+`REP-001` and `REP-002` are synchronized for the current Runtime inventory:
 
 - `RUN-011..015`
 - `Runtime/Prototype/`
 
-No inventory rewrite was required.
+`REP-013` now carries the same Runtime physical inventory, and `REP-014` carries the corresponding relationship records. `REP-011` now records the review/re-read evidence for those mutations.
 
-`REP-014` now carries the corresponding relationship records, reducing the previous gap between physical inventory and relationship registry evidence.
+The affected four-view path is therefore synchronized within inspected scope:
+
+`REP-001/002 → REP-013 → REP-014 → REP-011`
+
+`REP-012` allocation/checkpoint state remains the next unresolved control-plane view.
 
 ## Remaining Work
 
-- Cross-check `REP-011` review evidence against `REL-055..060`.
-- Cross-check `REP-013` artifact identities/paths for the affected Runtime and Engine endpoints.
-- Validate consumer impact and checkpoint provenance before considering these relationships closed/fully verified.
-- Continue to the next highest-priority integrity task only after the affected control-plane set is reconciled.
+- Reconcile Runtime allocation/checkpoint records in `REP-012`.
+- Validate consumer impact and checkpoint provenance before considering the affected relationships fully closed.
+- Continue to the next highest-priority integrity task after the affected control-plane set is reconciled.
 
 P75 does not close the session.
