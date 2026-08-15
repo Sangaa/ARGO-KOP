@@ -6,7 +6,7 @@
 
 Platform: ARGO KOP (Knowledge Operating Platform)
 Document ID: GOV-013
-Version: 1.0.0
+Version: 1.1.0
 Status: Approved / Canonical / Session Operating Contract
 Category: Governance / Engineering Operating Protocol
 Canonical: Yes
@@ -19,7 +19,7 @@ Development Baseline: 3.2.1
 
 HERMUZ is the fixed operating contract for an AI engineer or human engineer continuing ARGO KOP repository construction, verification, reconciliation and safe mutation.
 
-It defines how a session is resumed, how evidence is searched and rechecked, how relationships are proven, how changes are validated, how learning is evaluated, and when a session may close.
+It defines how a session is resumed, how evidence is searched and rechecked, how relationships are proven, how changes are validated, how integration between modules/files/folders is tested, how learning is evaluated, and when a session may close.
 
 HERMUZ is an operating protocol. It does not replace or override `Core/CORE-003_CONSTITUTION.md`, `PROJECT_BOOTSTRAP.md`, applicable Governance authority, canonical Architecture, Release authority, or domain-specific authority.
 
@@ -44,7 +44,7 @@ When either invocation is received, the engineer MUST:
 3. Load this document (`GOV-013`) as the HERMUZ session operating contract.
 4. Inspect the current checkpoint, open work and highest-priority safe continuation point.
 5. Continue from the current repository state; do not restart completed work merely because a new chat/session was opened.
-6. Apply the evidence, search, relationship, mutation, validation, learning and closure rules in this document and the higher-authority ARGO rules.
+6. Apply the evidence, search, relationship, mutation, integration-testing, validation, learning and closure rules in this document and the higher-authority ARGO rules.
 7. Do not require the user to resend this protocol unless current repository evidence proves the protocol artifact is unavailable.
 
 The invocation phrase is a **continuation command**, not permission to ignore repository evidence or to bypass safety/integrity gates.
@@ -60,7 +60,7 @@ During normal construction, responses to the user should remain operationally co
 3. The next decision/action.
 4. A real blocker or material risk only.
 
-The engineer should perform detailed verification, matrix tracing, relationship analysis, post-change validation and learning assessment as part of the work itself, not as repetitive user-facing protocol recitations.
+The engineer should perform detailed verification, matrix tracing, relationship analysis, integration testing, post-change validation and learning assessment as part of the work itself, not as repetitive user-facing protocol recitations.
 
 The protocol must not be reprinted in every operational response.
 
@@ -74,6 +74,7 @@ Before starting a task:
 - inspect existing session deltas, Engineering Journal entries, matrices and checkpoint evidence;
 - determine what is already complete;
 - identify the highest-priority safe continuation point;
+- recover the latest known integration-test state where one exists;
 - never repeat completed work without evidence that revalidation is required.
 
 Repository reality outranks conversation memory, prior summaries and previous status claims.
@@ -127,7 +128,7 @@ Never promote a relationship from `REFERENCE` to `CONSUMES`, `DEPENDS_ON`, `IMPL
 
 For a material relationship, seek the chain:
 
-**Forward Evidence → Reverse Evidence → Consumer/Dependency Evidence → Implementation/Executable Evidence → Matrix Classification**
+**Forward Evidence → Reverse Evidence → Consumer/Dependency Evidence → Implementation/Executable Evidence → Integration Test Evidence → Matrix Classification**
 
 Use the strongest justified state only. `DOCUMENTED ≠ EXECUTED ≠ TESTED ≠ VERIFIED`.
 
@@ -152,7 +153,7 @@ Use the smallest sufficient mutation that resolves the verified issue.
 
 Every mutation requires:
 
-**Pre-check → Change → Re-read → Relationship/Index Validation → Checkpoint Evidence**
+**Pre-check → Change → Re-read → Relationship/Index Validation → Integration/Regression Validation when applicable → Checkpoint Evidence**
 
 If a write succeeds but post-change validation fails, the work is not complete.
 
@@ -166,12 +167,70 @@ Maintain the repository as a connected graph and prioritize work by integrity va
 2. Core architecture and authority seams
 3. Repository control plane and matrices
 4. Runtime / Engine / Interface verified seams
-5. Validation and CI evidence
-6. Canonical documentation and inventory synchronization
-7. Improvements and future capability
-8. Model-gap assessment only after the current chain is stable
+5. **Integration / regression / CI evidence for module and cross-folder relationships**
+6. Validation and CI evidence
+7. Canonical documentation and inventory synchronization
+8. Improvements and future capability
+9. Model-gap assessment only after the current chain is stable
 
 A smaller set of strongly connected, tested and documented artifacts is preferable to a larger set of superficially modified files.
+
+---
+
+## 9A. Mandatory Module Integration Verification
+
+Integration testing is a **mandatory parallel workstream**, not a deferred phase after completion of the matrices.
+
+For every module, service, engine, runtime component, interface, memory component, or other material artifact being built, modified, reconciled or materially revalidated, the engineer MUST determine and execute the applicable integration verification before treating the work group as complete.
+
+The minimum required scope is:
+
+1. **Module ↔ Module** — verify declared consumers, dependencies and interfaces where executable evidence is available.
+2. **File ↔ File** — verify imports, references, IDs, contracts, schemas, producers/consumers and expected data/trace flow where applicable.
+3. **Folder/Layer ↔ Folder/Layer** — verify the actual cross-layer path for material boundaries such as Engine ↔ Runtime, Runtime ↔ Services, Services ↔ Repository Control Plane, and Engine/Memory ↔ Knowledge/Memory governance.
+4. **Test ↔ Implementation** — verify that an integration test exercises the intended implementation path and is not merely a structural or isolated unit test.
+5. **Runtime Reachability** — do not claim executable reachability without runtime evidence.
+6. **CI/Workflow Integration** — inspect applicable workflows and test results when the repository provides them.
+
+For each material relationship, classify the strongest supported state:
+
+`STRUCTURAL → CONTRACT → IMPLEMENTED → INTEGRATION-TESTED → RUNTIME-VERIFIED`
+
+No state may be promoted merely because a neighboring document declares the relationship.
+
+### 9A.1 Existing Tests First
+
+Before creating a new integration test, the engineer MUST search for and inspect existing tests, fixtures, runners, workflows and evidence capture mechanisms that may already cover the relationship.
+
+Do not duplicate an existing test without a demonstrated coverage gap.
+
+### 9A.2 Test Recovery Rule
+
+If integration testing was previously started and later interrupted, the engineer MUST recover the latest known test/checkpoint state and resume it as part of the current build. It must not be silently dropped because matrix construction or documentation work took priority temporarily.
+
+### 9A.3 Matrix/Test Synchronization
+
+Integration results MUST feed the applicable Matrix/Registry state:
+
+- PASS with adequate evidence → strengthen the supported relationship state.
+- FAIL → record the first meaningful failure boundary and keep the relationship below the unsupported state.
+- NOT TESTABLE → record the environmental or architectural reason.
+- STRUCTURAL ONLY → do not label it executable proof.
+- RUNTIME evidence absent → do not claim runtime verification.
+
+The Matrix does not replace integration testing, and integration testing does not replace relationship/evidence reconciliation.
+
+### 9A.4 Full-Stack Audit
+
+When `full-stack-audit.yml` and its associated audit tooling are present, the engineer MUST use them as part of the repository-wide integration/evidence sweep at appropriate checkpoints.
+
+Audit findings are evidence candidates, not automatic architectural proof. Negative findings require independent verification, and runtime reachability requires runtime evidence.
+
+### 9A.5 Regression After Mutation
+
+After any material mutation affecting a module or cross-layer seam, rerun the smallest sufficient affected integration/regression set before promoting the change as complete.
+
+A successful commit alone does not satisfy integration verification.
 
 ---
 
@@ -219,6 +278,8 @@ Important paths and relationships must be reflected in the applicable repository
 
 Matrix entries are evidence-bearing control records; they do not create domain authority by themselves.
 
+Integration evidence must be traceable back to the affected relationship/module and its test or runtime source.
+
 ---
 
 ## 13. Post-Change Verification
@@ -230,7 +291,7 @@ After every material mutation:
 3. verify affected IDs, versions and status;
 4. verify affected indexes/maps;
 5. verify affected relationship entries;
-6. verify tests/CI when applicable;
+6. verify applicable integration/regression tests and CI;
 7. check for propagation to consumers and dependencies;
 8. record the checkpoint and provenance.
 
@@ -252,6 +313,8 @@ Continue while:
 
 Do not wait for the user to repeat the protocol between tasks.
 
+Integration testing remains active while construction and matrix reconciliation continue; it is not a separate session stage unless the current evidence explicitly makes testing impossible.
+
 ---
 
 ## 15. Session Closure Rule
@@ -268,13 +331,14 @@ Before closure perform a concise closing audit:
 - work completed;
 - changes made;
 - evidence verified;
+- integration/regression status;
 - matrices/indexes synchronized;
 - remaining work and blockers;
 - next continuation point;
 - learning assessment;
 - final commit/checkpoint.
 
-Do not mark a session `CLOSED` when final documentation or verification failed.
+Do not mark a session `CLOSED` when final documentation, integration verification or other required validation failed.
 
 ---
 
@@ -292,7 +356,7 @@ The deterministic resolution path is:
 
 → `Current Repository State`
 
-→ `REP-020 / Engineering Journal / Matrices`
+→ `REP-020 / Engineering Journal / Matrices / Integration-Test State`
 
 → `Highest-Priority Safe Continuation`
 
@@ -318,7 +382,7 @@ When a new chat receives:
 
 it must interpret this as:
 
-> **Resume ARGO KOP construction from the current repository state, load the canonical HERMUZ operating contract, inspect the latest verified checkpoint and open work, apply three-method negative-search verification, preserve evidence/authority/relationship boundaries, make only safe evidence-backed mutations, update the required matrices, validate every change, promote learning only when justified, and continue automatically to the highest-priority safe task until a real blocker, explicit closure request, or exhaustion of safe high-priority work.**
+> **Resume ARGO KOP construction from the current repository state, load the canonical HERMUZ operating contract, inspect the latest verified checkpoint and open work, recover and continue any previously interrupted integration-testing work, apply three-method negative-search verification, preserve evidence/authority/relationship boundaries, perform integration verification in parallel with Matrix construction for every material module and cross-layer seam, make only safe evidence-backed mutations, update the required matrices, validate every change, promote learning only when justified, and continue automatically to the highest-priority safe task until a real blocker, explicit closure request, or exhaustion of safe high-priority work.**
 
 ---
 
