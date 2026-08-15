@@ -68,6 +68,7 @@ def audit(root, verified_seams=None):
     scanned = scan(root)
     evidence = scanned["evidence"]
     candidate_files = scanned["candidate_files"]
+    candidate_kinds = scanned["candidate_kinds"]
     verified_seams = verified_seams or {}
 
     for seam, record in verified_seams.items():
@@ -81,6 +82,7 @@ def audit(root, verified_seams=None):
         "seam_count": len(SEAMS),
         "evidence": evidence,
         "candidate_files": candidate_files,
+        "candidate_kinds": candidate_kinds,
         "gap_map": report,
         "verified_connection_count": sum(
             1 for state in evidence.values() if state == "CONNECTED"
