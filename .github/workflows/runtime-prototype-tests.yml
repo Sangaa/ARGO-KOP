@@ -9,8 +9,14 @@ on:
       - 'Runtime/Learning/**'
       - 'Decision/**'
       - 'Cognition/**'
-      - 'Memory/Execution/**'
+      - 'Memory/**'
+      - 'Engine/**'
+      - 'Services/**'
+      - 'Interfaces/**'
+      - 'AI/**'
       - 'Quality/Integration/**'
+      - 'Governance/**'
+      - 'Repository/**'
       - '.github/workflows/runtime-prototype-tests.yml'
   pull_request:
     paths:
@@ -19,8 +25,14 @@ on:
       - 'Runtime/Learning/**'
       - 'Decision/**'
       - 'Cognition/**'
-      - 'Memory/Execution/**'
+      - 'Memory/**'
+      - 'Engine/**'
+      - 'Services/**'
+      - 'Interfaces/**'
+      - 'AI/**'
       - 'Quality/Integration/**'
+      - 'Governance/**'
+      - 'Repository/**'
       - '.github/workflows/runtime-prototype-tests.yml'
 
 env:
