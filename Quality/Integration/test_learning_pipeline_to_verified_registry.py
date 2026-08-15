@@ -14,14 +14,13 @@ from synthetic_task_fixture import make_fixture
 def test_learning_pipeline_seam_can_form_verified_registry_evidence(tmp_path):
     result = run(make_fixture())
     execution = result["execution"]
-    outcome = result["outcome"]
 
     lineage = verify_runtime_outcome_evidence(result)
     assert lineage["status"] == "VERIFIED"
 
     learning = assess_for_promotion(
         decision_id="DEC-LEARN-1",
-        execution_id=execution["execution_id"],
+        execution_id="EXEC-LEARN-1",
         outcome={
             "outcome_id": "OUT-LEARN-1",
             "result": "SUCCESS",
