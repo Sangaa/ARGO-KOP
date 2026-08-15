@@ -1,0 +1,16 @@
+{
+  "record_type": "EXECUTION_TRACE",
+  "trace_id": "TRACE-CERT-002",
+  "task_id": "TASK-CERT-002",
+  "session_id": "SES-CERT-002",
+  "final_status": "SIMULATED",
+  "decision_id": "DEC-CERT-002",
+  "execution_id": "EXEC-CERT-002",
+  "outcome_id": "OUT-CERT-002",
+  "outcome_result": "INCONCLUSIVE",
+  "evidence_trace_ids": ["TRACE-CERT-002"],
+  "execution_trace_ids": ["TRACE-CERT-002"],
+  "learning_eligible": false,
+  "evidence_mode": "CONTROLLED_SYNTHETIC",
+  "side_effect": false
+}
