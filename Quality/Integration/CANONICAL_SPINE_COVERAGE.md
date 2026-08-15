@@ -18,16 +18,16 @@ Decision
 Authorization
       ↓
 Execution
-      ↓
-Execution Trace
-      ↓
-Outcome Evaluation
-      ↓
-Feedback Quality
-      ↓
-Learning Readiness
-      ↓
-Learning Pipeline
+      ├──→ Execution Trace
+      └──→ Outcome
+               ↓
+Execution Trace → Outcome Evaluation
+               ↓
+        Feedback Quality
+               ↓
+       Learning Readiness
+               ↓
+       Learning Pipeline
 ```
 
 ## Known Implemented Seams
@@ -36,12 +36,13 @@ Learning Pipeline
 - The cognition hold is wired into the connected execution spine.
 - Decision and authorization remain independent gates.
 - Execution produces traceable artifacts.
+- Execution also produces an evaluated outcome path.
 - Outcome, feedback quality, and learning readiness have dedicated Runtime/Learning components.
 - Learning pipeline integration exists as an explicit Runtime boundary.
 
 ## Audit Question
 
-For each arrow above, the final integration audit must establish one of:
+For each of the 11 arrows above, the final integration audit must establish one of:
 
 `CONNECTED` / `PARTIAL` / `MISSING` / `BLOCKED_BY_GOVERNANCE` / `INTENTIONALLY_ISOLATED`
 
