@@ -5,7 +5,7 @@ Document ID: REP-013
 Version: 1.0.9  
 Status: Active / Phase 1 Population In Progress  
 Development Baseline: 3.2.1  
-Last Audit: 2026-08-14
+Last Audit: 2026-08-15
 
 ## Purpose
 
@@ -159,8 +159,17 @@ Runtime/
 ├── RUN-008_RUNTIME_STATE.md
 ├── RUN-009_RECOVERY.md
 ├── RUN-010_RUNTIME_REFERENCE.md
+├── RUN-011_COGNITIVE_EXECUTION_TARGET.md
+├── RUN-012_COGNITIVE_CONTEXT_HANDOFF.md
+├── RUN-013_COGNITIVE_DECISION_GATE.md
+├── RUN-014_COGNITIVE_TRACE_TARGET.md
+├── RUN-015_COGNITIVE_ACCEPTANCE_TARGET.md
+├── Prototype/
+│   └── PROTOTYPE_INTEGRATION_CONTRACT.md
 └── _FOLDER_STATUS.md
 ```
+
+`RUN-011..015` and `Runtime/Prototype/` are directly verified current Runtime inventory. Their presence does not establish executable Runtime authority; cross-layer integration remains under `INTEGRITY HOLD`.
 
 ### AI/
 
@@ -386,7 +395,7 @@ Until then the folder remains **OPEN**.
 
 Current repository state: **INTEGRITY HOLD**.
 
-The content tree is synchronized with the current inspected repository baseline and records the canonical physical path for the Knowledge Organization specification. Memory subdomains are explicitly represented from current repository evidence; exhaustive enumeration and cross-layer relationship validation remain open.
+The content tree is synchronized with the current inspected repository baseline and records the canonical physical path for the Knowledge Organization specification. Runtime `RUN-011..015` and `Runtime/Prototype/` are now explicitly represented from current repository evidence; exhaustive Runtime and broader cross-layer relationship validation remain open.
 
 ## Verification Model
 
