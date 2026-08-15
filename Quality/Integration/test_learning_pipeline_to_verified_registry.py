@@ -11,6 +11,9 @@ from verified_seam_evidence_loader import load_records
 from synthetic_task_fixture import make_fixture
 
 
+REPO_ROOT = Path(__file__).resolve().parents[2]
+
+
 def test_learning_pipeline_seam_can_form_verified_registry_evidence(tmp_path):
     result = run(make_fixture())
     execution = result["execution"]
@@ -39,13 +42,15 @@ def test_learning_pipeline_seam_can_form_verified_registry_evidence(tmp_path):
     )
     assert captured["status"] == "CAPTURED"
 
-    contract = Path("Runtime/Learning/LEARNING_PIPELINE_INTEGRATION_CONTRACT.md")
-    test_artifact = Path("Runtime/Learning/test_learning_pipeline_integration.py")
+    contract = REPO_ROOT / "Runtime/Learning/LEARNING_PIPELINE_INTEGRATION_CONTRACT.md"
+    test_artifact = REPO_ROOT / "Runtime/Learning/test_learning_pipeline_integration.py"
     assert contract.is_file()
     assert test_artifact.is_file()
 
-    tmp_contract = tmp_path / contract
-    tmp_test = tmp_path / test_artifact
+    contract_relative = "Runtime/Learning/LEARNING_PIPELINE_INTEGRATION_CONTRACT.md"
+    test_relative = "Runtime/Learning/test_learning_pipeline_integration.py"
+    tmp_contract = tmp_path / contract_relative
+    tmp_test = tmp_path / test_relative
     tmp_contract.parent.mkdir(parents=True, exist_ok=True)
     tmp_test.parent.mkdir(parents=True, exist_ok=True)
     shutil.copyfile(contract, tmp_contract)
@@ -53,8 +58,8 @@ def test_learning_pipeline_seam_can_form_verified_registry_evidence(tmp_path):
 
     candidate = {
         "seam": "Learning Readiness -> Learning Pipeline",
-        "contract": str(contract).replace("\\", "/"),
-        "test": str(test_artifact).replace("\\", "/"),
+        "contract": contract_relative,
+        "test": test_relative,
         "trace": captured["repository_relative_path"],
         "verification_status": lineage["status"],
     }
