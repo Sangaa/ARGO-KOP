@@ -24,11 +24,11 @@ def test_feedback_quality_to_learning_readiness_is_canonically_certifiable():
         }
     }
     report = audit(root, verified_seams=verified)
-    assert report["verified_connection_count"] >= 4
+    assert report["verified_connection_count"] == 1
     assert report["evidence"][seam] == "CONNECTED"
 
     unrelated = [key for key in report["evidence"] if key != seam and report["evidence"][key] == "CONNECTED"]
-    assert len(unrelated) >= 3
+    assert unrelated == []
 
 
 def test_feedback_quality_readiness_certificate_cannot_promote_unverified_record():
