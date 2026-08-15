@@ -1,0 +1,10 @@
+{
+  "record_type": "EXECUTION_TRACE",
+  "trace_id": "TRACE-FEEDBACK-QUALITY-READINESS-001",
+  "task_id": "TASK-FEEDBACK-QUALITY-READINESS-001",
+  "session_id": "SESSION-FEEDBACK-QUALITY-READINESS-001",
+  "final_status": "CONTROLLED_SYNTHETIC",
+  "side_effect": false,
+  "evidence_class": "CONTROLLED_SYNTHETIC",
+  "path": "Feedback Quality -> Learning Readiness"
+}
