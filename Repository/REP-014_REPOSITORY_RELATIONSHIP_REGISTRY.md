@@ -5,7 +5,7 @@ Document ID: REP-014
 Version: 1.2.1  
 Status: Active / Relationship Enumeration In Progress  
 Development Baseline: 3.2.1  
-Last Audit: 2026-08-14
+Last Audit: 2026-08-15
 
 ---
 
@@ -121,6 +121,12 @@ The following are deliberately limited to relationships established during repos
 | REL-052 | OPM-002 | MEM-008 | REFERENCES | Verified within current Guided-Discovery scope |
 | REL-053 | OPM-003 | OPM-002 | DEPENDS_ON | Verified within current Operational-Memory build scope |
 | REL-054 | OPM-004 | OPM-003 | DEPENDS_ON | Verified within current Operational-Memory build scope |
+| REL-055 | RUN-011 | ENG-013 | REFERENCES | Revalidated within current Runtime prototype scope |
+| REL-056 | RUN-011 | ENG-014 | REFERENCES | Revalidated within current Runtime validation scope |
+| REL-057 | RUN-012 | RUN-011 | VALIDATES | Revalidated within current Runtime test scope |
+| REL-058 | RUN-013 | RUN-011 | VALIDATES | Revalidated within current controlled-handoff scope |
+| REL-059 | RUN-014 | RUN-011 | VALIDATES | Revalidated within current learning-promotion test scope |
+| REL-060 | RUN-015 | RUN-011 | VALIDATES | Revalidated within current CI validation scope |
 
 ## Identity Drift Reconciliation — 2026-08-13
 
@@ -308,6 +314,36 @@ The current cycle reinforces the distinction:
 `DOCUMENTED ≠ EXECUTED ≠ TESTED ≠ VERIFIED`
 
 A relationship is promoted only when the evidence level supports the corresponding state.
+
+## Runtime Cognitive Loop Reconciliation — 2026-08-15
+
+The current runtime review established a bounded set of relationships for the Cognitive Loop prototype and its validation contracts. These records are limited to evidence actually established in the current repository review and do not imply executable coupling.
+
+Evidence scope:
+
+- `RUN-011` is the Cognitive Loop prototype/runtime contract.
+- `ENG-013` is the cognitive-loop engine contract associated with the prototype scope.
+- `ENG-014` is the integration-validation contract associated with the prototype scope.
+- `RUN-012`, `RUN-013`, `RUN-014`, and `RUN-015` validate distinct aspects of the `RUN-011` runtime contract.
+- CI evidence exists for the prototype test workflow; acceptance remains bounded by the documented CI/integrity gates.
+
+The following records are revalidated within the current inspected Runtime scope:
+
+```text
+RUN-011 ──references──> ENG-013
+RUN-011 ──references──> ENG-014
+RUN-012 ──validates────> RUN-011
+RUN-013 ──validates────> RUN-011
+RUN-014 ──validates────> RUN-011
+RUN-015 ──validates────> RUN-011
+```
+
+Boundary:
+
+- These relationships do not establish `EXECUTABLE` dependency.
+- They do not transfer authority from Engine/Runtime artifacts to REP-014.
+- Reverse relationships are not inferred without independent source evidence.
+- Repository-wide graph closure remains open.
 
 ## Registry Does Not Grant Authority
 
