@@ -6,12 +6,12 @@
 
 Platform: ARGO KOP (Knowledge Operating Platform)
 Document ID: REP-002
-Version: 1.7.2
+Version: 1.7.3
 Status: Integrity Hold
 Category: Repository
 Canonical: Yes
 Priority: Critical
-Last Audit Date: Aug 14, 2026
+Last Audit Date: Aug 15, 2026
 Development Baseline: 3.2.1
 
 ---
@@ -80,11 +80,14 @@ Path: `Governance/`
 - `Governance/GOV-006_NAMING_CONVENTION_STANDARD.md`
 - `Governance/GOV-009_REPOSITORY_POLICY.md`
 - `Governance/GOV-010_GOVERNANCE_MODEL.md`
+- `Governance/GOV-013_HERMUZ_SESSION_BUILD_PROTOCOL.md`
 - `Governance/_FOLDER_STATUS.md`
 
 `Governance/GOV-011_EXTERNAL_FEEDBACK_REPORT_STANDARD.md` exists and is verified as `Proposed / Integrity Hold`; it is not active canonical authority until formally ratified.
 
 `Governance/GOV-012_DOMAIN_RECONSTRUCTION_STANDARD.md` exists as a proposed reconstruction standard. It is not active canonical authority until formally ratified.
+
+`GOV-013` is the approved canonical HERMUZ session operating contract. It governs engineering procedure only and does not override higher ARGO authority.
 
 ## 6. Runtime Layer
 
@@ -101,7 +104,15 @@ Path: `Runtime/`
 - `Runtime/RUN-008_RUNTIME_STATE.md`
 - `Runtime/RUN-009_RECOVERY.md`
 - `Runtime/RUN-010_RUNTIME_REFERENCE.md`
+- `Runtime/RUN-011_COGNITIVE_EXECUTION_TARGET.md`
+- `Runtime/RUN-012_COGNITIVE_CONTEXT_HANDOFF.md`
+- `Runtime/RUN-013_COGNITIVE_DECISION_GATE.md`
+- `Runtime/RUN-014_COGNITIVE_TRACE_TARGET.md`
+- `Runtime/RUN-015_COGNITIVE_ACCEPTANCE_TARGET.md`
+- `Runtime/Prototype/PROTOTYPE_INTEGRATION_CONTRACT.md`
 - `Runtime/_FOLDER_STATUS.md`
+
+The `RUN-011..015` and `Runtime/Prototype/` paths are directly verified physical inventory from the P71 Runtime reconciliation. They remain `CROSS-LAYER INTEGRATION HOLD` and are not promoted to executable Runtime authority by mapping alone.
 
 ## 7. Architecture Domain
 
@@ -254,12 +265,13 @@ These domains are not assumed complete or architecturally authoritative from fol
 18. New Decision Memory, Historical Memory and Project Memory subdomains must be mapped when physically constructed and must remain capped by their verified scope until consolidated validation.
 19. Memory mapping establishes physical inventory only; it does not grant Memory authority or certify cross-layer consumers.
 20. `REP-001`, `REP-002`, `REP-013` and `REP-014` must be reconciled after material Memory inventory or relationship changes.
+21. Directly verified Runtime target/prototype artifacts must be mapped when physically constructed while preserving their declared non-executable authority boundary.
 
 ## 18. Integrity State
 
 Current repository state: **INTEGRITY HOLD**.
 
-The map is synchronized with the current declared Core, Governance, Repository control-plane, Runtime, Architecture, Lifecycle, Interfaces, Models, Plugins and Build-01 Memory inventory within the inspected scope. Cross-layer relationship validation remains open.
+The map is synchronized with the current declared Core, Governance, Repository control-plane, Runtime, Architecture, Lifecycle, Interfaces, Models, Plugins and Build-01 Memory inventory within the inspected scope. Runtime ↔ Engine relationship validation remains open.
 
 Completion of individual files or reviewed subsets must not be interpreted as Phase 1 repository completion. REP-011 is the binding review/completion evidence ledger until an explicit Phase 1 closure decision is recorded.
 
