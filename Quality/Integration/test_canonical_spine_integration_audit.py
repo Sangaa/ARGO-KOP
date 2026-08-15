@@ -19,6 +19,7 @@ def test_audit_is_conservative_without_verified_seams(tmp_path):
     assert result["candidate_files"]["Decision -> Authorization"] == [
         "Runtime/pipeline.py"
     ]
+    assert result["candidate_kinds"]["Decision -> Authorization"]["Runtime/pipeline.py"] == "implementation"
 
 
 def _materialized_registry(tmp_path, verification_status="VERIFIED", trace_payload=None):
@@ -58,6 +59,7 @@ def test_candidate_provenance_never_promotes_a_seam(tmp_path):
     assert result["verified_connection_count"] == 0
     assert result["evidence"]["Decision -> Authorization"] == "PARTIAL"
     assert "candidate.md" in result["candidate_files"]["Decision -> Authorization"]
+    assert result["candidate_kinds"]["Decision -> Authorization"]["candidate.md"] == "documentation"
     assert any(
         gap["seam"] == "Decision -> Authorization"
         for gap in result["gap_map"]["gaps"]
