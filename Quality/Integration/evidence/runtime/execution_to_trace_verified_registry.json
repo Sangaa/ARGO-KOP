@@ -1,0 +1,10 @@
+{
+  "Execution -> Execution Trace": {
+    "state": "CONNECTED",
+    "contract": "Runtime/Execution/execution_trace_producer.py",
+    "test": "Quality/Integration/test_runtime_to_registry_evidence_set.py",
+    "trace": "Quality/Integration/evidence/runtime/execution_to_trace_controlled_trace.json",
+    "verification_status": "VERIFIED",
+    "evidence_mode": "CONTROLLED_SYNTHETIC"
+  }
+}
