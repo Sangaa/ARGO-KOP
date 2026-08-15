@@ -96,6 +96,7 @@ def build_gap_map(
     change a seam state and never promote a seam to CONNECTED.
     """
     gaps = []
+    candidate_kind_counts = {}
     for source, destination in SEAMS:
         key = f"{source} -> {destination}"
         state = evidence.get(key, "MISSING")
@@ -109,10 +110,13 @@ def build_gap_map(
                 kinds = _candidate_kinds(candidate_kinds, key, candidates)
                 if kinds:
                     gap["candidate_kinds"] = kinds
+                    for kind in kinds.values():
+                        candidate_kind_counts[kind] = candidate_kind_counts.get(kind, 0) + 1
             gaps.append(gap)
     return {
         "status": "GAP_MAP_COMPLETE",
         "seam_count": len(SEAMS),
         "gap_count": len(gaps),
+        "candidate_kind_counts": candidate_kind_counts,
         "gaps": gaps,
     }
