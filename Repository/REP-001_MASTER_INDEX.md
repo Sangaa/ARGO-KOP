@@ -6,12 +6,12 @@
 
 Platform: ARGO KOP (Knowledge Operating Platform)
 Document ID: REP-001
-Version: 1.11.1
+Version: 1.11.2
 Status: Integrity Hold
 Category: Repository
 Canonical: Yes
 Priority: Critical
-Last Audit Date: Aug 14, 2026
+Last Audit Date: Aug 15, 2026
 Development Baseline: 3.2.1
 
 ---
@@ -72,11 +72,14 @@ Historical root naming-convention material is not active canonical inventory and
 - `Governance/GOV-006_NAMING_CONVENTION_STANDARD.md`
 - `Governance/GOV-009_REPOSITORY_POLICY.md`
 - `Governance/GOV-010_GOVERNANCE_MODEL.md`
+- `Governance/GOV-013_HERMUZ_SESSION_BUILD_PROTOCOL.md`
 - `Governance/_FOLDER_STATUS.md`
 
 `Governance/GOV-011_EXTERNAL_FEEDBACK_REPORT_STANDARD.md` exists as a proposed intake standard but is not active canonical authority until formally ratified.
 
 `Governance/GOV-012_DOMAIN_RECONSTRUCTION_STANDARD.md` exists as a proposed reconstruction standard. It governs rebuilding legacy or immature domains but is not active canonical authority until formally ratified.
+
+`GOV-013` is the approved canonical HERMUZ session operating contract. It governs engineering procedure only and does not override higher ARGO authority.
 
 ## 6. Runtime Layer
 
@@ -91,7 +94,15 @@ Historical root naming-convention material is not active canonical inventory and
 - `Runtime/RUN-008_RUNTIME_STATE.md`
 - `Runtime/RUN-009_RECOVERY.md`
 - `Runtime/RUN-010_RUNTIME_REFERENCE.md`
+- `Runtime/RUN-011_COGNITIVE_EXECUTION_TARGET.md`
+- `Runtime/RUN-012_COGNITIVE_CONTEXT_HANDOFF.md`
+- `Runtime/RUN-013_COGNITIVE_DECISION_GATE.md`
+- `Runtime/RUN-014_COGNITIVE_TRACE_TARGET.md`
+- `Runtime/RUN-015_COGNITIVE_ACCEPTANCE_TARGET.md`
+- `Runtime/Prototype/PROTOTYPE_INTEGRATION_CONTRACT.md`
 - `Runtime/_FOLDER_STATUS.md`
+
+`RUN-011..015` and `Runtime/Prototype/` are directly verified current Runtime inventory, but remain bounded by `CROSS-LAYER INTEGRATION HOLD`. Their presence does not establish executable Runtime authority.
 
 ## 7. Architecture Domain
 
@@ -273,12 +284,13 @@ A domain is not considered complete merely because its folder exists or because 
 20. New Decision Memory subdomains must be indexed when physically constructed and must remain capped by their verified scope until consolidated validation.
 21. New Historical Memory subdomains must be indexed when physically constructed and must remain capped by their verified scope until consolidated validation.
 22. New Project Memory subdomains must be indexed when physically constructed and must remain capped by their verified scope until consolidated validation.
+23. Directly verified Runtime target/prototype artifacts must be indexed when physically constructed while preserving their declared non-executable authority boundary.
 
 ## 18. Integrity State
 
 Current repository state: **INTEGRITY HOLD**.
 
-The index is synchronized with the currently verified inventory within the inspected scope. Architecture, Lifecycle inventory, Plugin inventory, Memory cross-layer relationships and other staged reconstruction work remain open.
+The index is synchronized with the currently verified inventory within the inspected scope. Architecture, Lifecycle inventory, Plugin inventory, Memory cross-layer relationships, Runtime ↔ Engine integration and other staged reconstruction work remain open.
 
 ## 19. Verification Model
 
