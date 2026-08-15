@@ -25,17 +25,19 @@ Three materially different searches were used for Runtime Prototype/CI evidence:
 
 Historical workflow run `31840728777` (#137) on commit `11c34a6b6468e60b9b305f44e0563a38d374337f` passed both `prototype-tests` and `integration-tests`.
 
-A compare against current HEAD showed the prototype source/test artifacts were unchanged between that verified run commit and the current P69 commit. The test evidence is therefore relevant but not promoted to current-HEAD PASS.
+A compare against current repository history showed the prototype source/test artifacts were unchanged between that verified run commit and the P69 commit.
 
-The current report update triggered workflow run `31875392341` (#138) on HEAD `0045118eaeb09aaca3ee1024c6b2151d1ec61860`; at checkpoint time it remained `queued`. No current-HEAD PASS is claimed.
+The deliberately triggered current evidence run `31875392341` (#138) on commit `0045118eaeb09aaca3ee1024c6b2151d1ec61860` completed successfully. Both `prototype-tests` and `integration-tests` passed, including the prototype acceptance suite and canonical acceptance scenarios.
+
+The repository advanced afterward only by the P70 evidence addendum under `Repository/`; no Runtime Prototype artifact was changed after the tested commit. Therefore the implementation evidence is verified for the tested prototype state, but promotion to canonical runtime remains blocked by the explicit contract boundary and current Integrity Hold.
 
 ## Decision
 
-1. Keep prototype implementation under Integrity Hold.
+1. Runtime Prototype implementation/test evidence is VERIFIED for the tested state.
 2. Do not mark ENG-013/ENG-014 executable.
 3. Do not promote prototype behavior to canonical runtime.
-4. Wait for current-HEAD CI result before any promotion decision.
-5. Continue repository/matrix reconciliation in parallel where safe.
+4. Continue Runtime ↔ Engine ↔ REP matrix reconciliation.
+5. Keep global INTEGRITY HOLD.
 
 ## Learning Candidate
 
@@ -43,7 +45,7 @@ No permanent learning promoted. The observed retrieval failure pattern is alread
 
 ## Next Priority
 
-Current-HEAD CI result → failure analysis if needed → Runtime ↔ Engine ↔ REP matrix reconciliation.
+Runtime ↔ Engine ↔ REP matrix reconciliation, followed by unresolved consumer proof and final integrity review.
 
 ---
 
