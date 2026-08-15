@@ -57,12 +57,23 @@ No engineering work or repository mutation should begin by relying on remembered
 
 If required content cannot be inspected, that evidence gap must remain explicit.
 
+### HERMUZ Continuation Command
+
+The canonical continuation phrase for the HERMUZ session build protocol is:
+
+> **«أكمل البناء طبقًا لبروتوكول البناء الخاص بهرمز.»**
+
+When this phrase is received, load and apply [`Governance/GOV-013_HERMUZ_SESSION_BUILD_PROTOCOL.md`](Governance/GOV-013_HERMUZ_SESSION_BUILD_PROTOCOL.md) together with `PROJECT_BOOTSTRAP.md` and current repository evidence. Do not require the user to resend the protocol. Continue from the latest verified checkpoint and highest-priority safe work; do not restart completed work merely because the conversation changed.
+
+HERMUZ is an operating protocol and does not override ARGO constitutional, governance, architecture, release, or domain authority.
+
 ## Core Repository Navigation
 
 - **System Map:** [`SYSTEM_MAP.md`](SYSTEM_MAP.md)
 - **Master Repository Index:** [`Repository/REP-001_MASTER_INDEX.md`](Repository/REP-001_MASTER_INDEX.md)
 - **Repository Relationship Map:** [`Repository/REP-002_REPOSITORY_MAP.md`](Repository/REP-002_REPOSITORY_MAP.md)
 - **Platform Bootstrap:** [`PROJECT_BOOTSTRAP.md`](PROJECT_BOOTSTRAP.md)
+- **HERMUZ Session Protocol:** [`Governance/GOV-013_HERMUZ_SESSION_BUILD_PROTOCOL.md`](Governance/GOV-013_HERMUZ_SESSION_BUILD_PROTOCOL.md)
 - **Platform Status:** [`PROJECT_STATUS.md`](PROJECT_STATUS.md)
 - **Vision:** [`VISION.md`](VISION.md)
 - **Runtime Sequence:** [`Runtime/RUN-001_BOOT_SEQUENCE.md`](Runtime/RUN-001_BOOT_SEQUENCE.md)
