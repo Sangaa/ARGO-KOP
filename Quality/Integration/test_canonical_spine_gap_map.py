@@ -40,6 +40,20 @@ def test_candidate_provenance_is_preserved_without_promoting_state():
     assert gap["candidate_files"] == candidates["Decision -> Authorization"]
 
 
+def test_candidate_kinds_are_preserved_without_promoting_state():
+    evidence = {f"{a} -> {b}": "PARTIAL" for a, b in SEAMS}
+    candidates = {f"{a} -> {b}": [] for a, b in SEAMS}
+    kinds = {f"{a} -> {b}": {} for a, b in SEAMS}
+    seam = "Decision -> Authorization"
+    candidates[seam] = ["Runtime/pipeline.py", "docs/decision.md"]
+    kinds[seam] = {"Runtime/pipeline.py": "implementation", "docs/decision.md": "documentation"}
+
+    result = build_gap_map(evidence, candidates, kinds)
+    gap = next(item for item in result["gaps"] if item["seam"] == seam)
+    assert gap["state"] == "PARTIAL"
+    assert gap["candidate_kinds"] == kinds[seam]
+
+
 def test_candidate_paths_must_be_repository_relative():
     evidence = {f"{a} -> {b}": "PARTIAL" for a, b in SEAMS}
     candidates = {f"{a} -> {b}": [] for a, b in SEAMS}
