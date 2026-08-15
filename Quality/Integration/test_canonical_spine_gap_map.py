@@ -1,4 +1,4 @@
-from canonical_spine_gap_map import SEAMS, build_gap_map
+from canonical_spine_gap_map import SEAMS, build_gap_map, classify_candidate_path
 
 
 def test_complete_evidence_has_no_gaps():
@@ -64,3 +64,25 @@ def test_candidate_paths_must_be_repository_relative():
     except ValueError:
         return
     assert False, "candidate provenance must remain repository-relative"
+
+
+def test_candidate_classification_is_path_based_and_non_promotional():
+    assert classify_candidate_path("Runtime/pipeline.py") == "implementation"
+    assert classify_candidate_path("Quality/Integration/test_pipeline.py") == "test"
+    assert classify_candidate_path("Runtime/contracts/decision_contract.md") == "contract"
+    assert classify_candidate_path("Runtime/EXECUTION_TRACE.json") == "trace"
+    assert classify_candidate_path("docs/decision.md") == "documentation"
+
+
+def test_candidate_classification_does_not_change_seam_state():
+    evidence = {f"{a} -> {b}": "PARTIAL" for a, b in SEAMS}
+    seam = "Decision -> Authorization"
+    candidates = {f"{a} -> {b}": [] for a, b in SEAMS}
+    candidates[seam] = ["Runtime/pipeline.py"]
+    kinds = {f"{a} -> {b}": {} for a, b in SEAMS}
+    kinds[seam] = {"Runtime/pipeline.py": classify_candidate_path("Runtime/pipeline.py")}
+
+    result = build_gap_map(evidence, candidates, kinds)
+    gap = next(item for item in result["gaps"] if item["seam"] == seam)
+    assert gap["state"] == "PARTIAL"
+    assert gap["candidate_kinds"]["Runtime/pipeline.py"] == "implementation"
