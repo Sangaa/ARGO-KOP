@@ -1,32 +1,43 @@
 """Direct seam test: Feedback Quality -> Learning Readiness."""
 
-from Runtime.Learning.learning_pipeline_integration import assess_for_promotion
+from learning_pipeline_integration import assess_for_promotion
 
 
 def test_feedback_quality_propagates_to_learning_readiness_without_promotion():
-    outcome = {
-        "result": "success",
-        "evidence_trace_ids": ["trace-feedback-readiness-001"],
-        "confidence": 0.95,
-    }
+    trace_id = "trace-feedback-readiness-001"
+    report = assess_for_promotion(
+        decision_id="DEC-FEEDBACK-READINESS-001",
+        execution_id="EXEC-FEEDBACK-READINESS-001",
+        outcome={
+            "outcome_id": "OUT-FEEDBACK-READINESS-001",
+            "result": "SUCCESS",
+            "evidence_trace_ids": [trace_id],
+            "execution_trace_ids": [trace_id],
+            "confidence": "HIGH",
+        },
+    )
 
-    report = assess_for_promotion(outcome)
-
-    assert report["readiness"] is True
-    assert report["feedback_quality"]["accepted"] is True
-    assert report["evidence_trace_ids"] == ["trace-feedback-readiness-001"]
-    assert report["knowledge_promoted"] is False
+    assert report["status"] == "READY_FOR_PROMOTION_REVIEW"
+    assert report["stage"] == "READINESS"
+    assert report["quality"]["status"] == "QUALITY_ASSESSED"
+    assert report["quality"]["learning_ready"] is True
+    assert report["report"]["evidence_trace_ids"] == [trace_id]
+    assert report["report"]["knowledge_promoted"] is False
 
 
 def test_feedback_quality_failure_blocks_learning_readiness():
-    outcome = {
-        "result": "success",
-        "evidence_trace_ids": [],
-        "confidence": 0.95,
-    }
+    report = assess_for_promotion(
+        decision_id="DEC-FEEDBACK-READINESS-002",
+        execution_id="EXEC-FEEDBACK-READINESS-002",
+        outcome={
+            "outcome_id": "OUT-FEEDBACK-READINESS-002",
+            "result": "SUCCESS",
+            "evidence_trace_ids": [],
+            "execution_trace_ids": [],
+            "confidence": "HIGH",
+        },
+    )
 
-    report = assess_for_promotion(outcome)
-
-    assert report["readiness"] is False
-    assert report["feedback_quality"]["accepted"] is False
-    assert report["knowledge_promoted"] is False
+    assert report["status"] == "NOT_READY"
+    assert report["stage"] == "EVALUATION"
+    assert report["evaluation"]["status"] == "EVALUATION_REJECTED"
