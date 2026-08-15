@@ -1,0 +1,10 @@
+{
+  "record_type": "EXECUTION_TRACE",
+  "trace_id": "SYNTH-EXEC-TRACE-001",
+  "task_id": "SYNTH-TASK-EXEC-TRACE-001",
+  "session_id": "SYNTH-SESSION-EXEC-TRACE-001",
+  "final_status": "INCONCLUSIVE",
+  "side_effect": false,
+  "evidence_mode": "CONTROLLED_SYNTHETIC",
+  "purpose": "Canonical seam certification fixture for Execution -> Execution Trace."
+}
