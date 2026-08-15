@@ -7,6 +7,7 @@ def test_complete_evidence_has_no_gaps():
     assert result["status"] == "GAP_MAP_COMPLETE"
     assert result["seam_count"] == len(SEAMS)
     assert result["gap_count"] == 0
+    assert result["candidate_kind_counts"] == {}
 
 
 def test_missing_seam_is_explicitly_reported():
@@ -52,6 +53,7 @@ def test_candidate_kinds_are_preserved_without_promoting_state():
     gap = next(item for item in result["gaps"] if item["seam"] == seam)
     assert gap["state"] == "PARTIAL"
     assert gap["candidate_kinds"] == kinds[seam]
+    assert result["candidate_kind_counts"] == {"implementation": 1, "documentation": 1}
 
 
 def test_candidate_paths_must_be_repository_relative():
