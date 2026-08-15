@@ -12,7 +12,8 @@ Continue the repository review from P61 without reopening completed work, preser
 ## Repository State
 - Branch: `main`
 - Starting HEAD: `3b4853da0da0e21891b59ad21625f1ed7460396e`
-- Final P62 HEAD: `490862a3172e7e9b98309264c665e52337870a13`
+- Evidence checkpoint commit: `490862a3172e7e9b98309264c665e52337870a13`
+- Final closure HEAD: `82ccbdda485297ed8a206c5dad960ce44f076cbc`
 - Development baseline: `3.2.1`
 - Integrity: `INTEGRITY HOLD`
 
