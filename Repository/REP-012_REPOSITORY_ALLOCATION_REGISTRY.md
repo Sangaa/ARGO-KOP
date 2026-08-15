@@ -1,7 +1,3 @@
-# REP-012
-
----
-
 # ARGO KOP — REPOSITORY ALLOCATION, STATE & RECOVERY REGISTRY
 
 Platform: ARGO KOP
@@ -12,7 +8,7 @@ Category: Repository Control
 Canonical: Yes
 Priority: Critical
 Development Baseline: 3.2.1
-Last Audit Date: 2026-08-14
+Last Audit Date: 2026-08-15
 
 ---
 
@@ -508,7 +504,7 @@ The active control plane has continued to mutate after the earlier 2026-08-10 al
 |---|---|---|
 | REP-011 | Current repository control-plane artifact | Review/mutation evidence remains subject to cross-registry reconciliation |
 | REP-012 | Updated to v1.0.7 / baseline 3.2.1 | This commit becomes the next allocation-registry reconciliation checkpoint |
-| REP-013 | v1.0.8 on `main` during the inspected scope | Content inventory reconciled for the current Knowledge Organization path; exhaustive inventory remains open |
+| REP-013 | Current repository content tree | Content inventory is synchronized for the currently inspected Runtime and control-plane scope |
 | REP-014 | Current relationship registry | Relationship closure remains scoped and incomplete |
 | REP-015 | Current bootstrap/control-plane artifact | Boot gates remain authoritative within current scope |
 | REP-016 | Current Phase-1 queue | Open work remains governed by explicit queue state |
@@ -534,7 +530,37 @@ The current review cycle records these tested paths:
 
 Tests recorded in the associated REP-020 evidence deltas remain cumulative; this section is a navigation bridge, not a replacement for their detailed evidence.
 
-## 24. Related Documents
+## 24. Runtime Allocation Reconciliation — 2026-08-15
+
+The current Runtime inventory and relationship graph are now synchronized for the inspected Cognitive Loop scope. The allocation registry records the physical Runtime artifacts as mapped/reviewed within scope while keeping the broader repository allocation state open.
+
+| Artifact | Domain | Allocation | Review | Relationship | Reconciliation | Checkpoint |
+|---|---|---|---|---|---|---|
+| RUN-011 | Runtime | MAPPED | RE_READ / Integrity Hold | ACTIVE | PARTIALLY_RECONCILED | P75 / current main |
+| RUN-012 | Runtime | MAPPED | RE_READ / Integrity Hold | ACTIVE | PARTIALLY_RECONCILED | P75 / current main |
+| RUN-013 | Runtime | MAPPED | RE_READ / Integrity Hold | ACTIVE | PARTIALLY_RECONCILED | P75 / current main |
+| RUN-014 | Runtime | MAPPED | RE_READ / Integrity Hold | ACTIVE | PARTIALLY_RECONCILED | P75 / current main |
+| RUN-015 | Runtime | MAPPED | RE_READ / Integrity Hold | ACTIVE | PARTIALLY_RECONCILED | P75 / current main |
+| Runtime/Prototype/PROTOTYPE_INTEGRATION_CONTRACT.md | Runtime/Prototype | MAPPED | RE_READ / Integrity Hold | ACTIVE | PARTIALLY_RECONCILED | P75 / current main |
+
+Evidence boundary:
+
+- `REP-001` and `REP-002` enumerate the same Runtime inventory.
+- `REP-013` now enumerates the physical Runtime inventory.
+- `REP-014` now records the corresponding relationship set `REL-055..060`.
+- `REP-011` records the review/re-read evidence for the affected mutations.
+
+These records do not establish executable Runtime authority, Phase 1 closure, or repository-wide allocation completeness.
+
+The affected control-plane path is now:
+
+`REP-001/REP-002 → REP-013 → REP-014 → REP-011 → REP-012`
+
+with the overall reconciliation state remaining:
+
+`PARTIALLY RECONCILED / INTEGRITY HOLD`
+
+## 25. Related Documents
 
 - `Repository/REP-001_MASTER_INDEX.md`
 - `Repository/REP-002_REPOSITORY_MAP.md`
@@ -555,7 +581,7 @@ Tests recorded in the associated REP-020 evidence deltas remain cumulative; this
 - `Assets/Diagrams/DIAG-001_REPOSITORY_PHASE1_STATUS_2026-08-10.svg`
 - `Assets/Diagrams/DIAG-001_REPOSITORY_PHASE1_STATUS_2026-08-10.md`
 
-## 25. Final Principle
+## 26. Final Principle
 
 **The registry is not the repository. It is the control layer that helps the repository remain discoverable, reviewable, traceable and recoverable.**
 
