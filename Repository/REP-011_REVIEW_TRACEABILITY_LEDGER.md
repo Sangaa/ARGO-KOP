@@ -12,7 +12,7 @@ Category: Repository Control
 Canonical: Yes
 Priority: Critical
 Development Baseline: 3.2.1
-Last Audit Date: 2026-08-14
+Last Audit Date: 2026-08-15
 
 ---
 
@@ -372,7 +372,40 @@ The CI result is strong candidate evidence but not repository-wide integrity cer
 
 These remain explicitly open.
 
-## 23. Guiding Rule
+## 23. P75 Runtime Relationship and Inventory Reconciliation — 2026-08-15
+
+### Reviewed / Modified / Re-read
+
+| Artifact | Scope | Evidence | Result |
+|---|---|---|---|
+| `REP-014` | Runtime relationship registry | Commit `1a8fc67467aa41c2049950ffbf7de5d349ce4c61`; content SHA `10980fdc4155eec1ef6fea99473f4ea0a6e5c584`; post-mutation re-read | REL-055..060 persisted |
+| `REP-013` | Runtime content inventory | Commit `71d9f61f9f0d22bdc3886e7c25ee177136776a10`; content SHA `6c212f5d802d223d22116435ca85df9537abe94c`; post-mutation re-read | RUN-011..015 + Prototype persisted |
+| `REP-011` | Review evidence | Current commit after this update | P75 review record persisted |
+
+### Relationship evidence
+
+The current Runtime scope is recorded in `REP-014` as:
+
+- `RUN-011 → ENG-013` — `REFERENCES`, revalidated within prototype scope;
+- `RUN-011 → ENG-014` — `REFERENCES`, revalidated within validation scope;
+- `RUN-012 → RUN-011` — `VALIDATES`;
+- `RUN-013 → RUN-011` — `VALIDATES`;
+- `RUN-014 → RUN-011` — `VALIDATES`;
+- `RUN-015 → RUN-011` — `VALIDATES`.
+
+These records do not establish executable dependency or authority transfer.
+
+### Inventory reconciliation
+
+`REP-001` and `REP-002` already enumerate `RUN-011..015` and `Runtime/Prototype/`. `REP-013` was stale relative to those current inventories and has now been synchronized.
+
+### Remaining review state
+
+`REP-011` / `REP-013` / `REP-014` are synchronized for the affected Runtime inventory within the inspected scope. Allocation/checkpoint evidence in `REP-012`, broader consumer impact and full bidirectional graph closure remain open.
+
+P75 therefore remains **PARTIALLY RECONCILED / INTEGRITY HOLD**.
+
+## 24. Guiding Rule
 
 **Never spend review effort twice because the repository forgot what was already proven; never declare unfinished work complete because the repository forgot what remains open; never treat an old file as current until its content, instructions, dependencies, relationships, version authority and operational fitness survive revalidation.**
 
