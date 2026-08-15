@@ -32,15 +32,34 @@ def _endpoint_seen(text: str, endpoint: str) -> bool:
     return any(keyword in text for keyword in keywords)
 
 
+def _candidate_kind(relative: str) -> str:
+    """Classify discovery context without changing seam state."""
+    path = relative.lower()
+    name = Path(path).name
+    if "/test" in path or name.startswith("test_"):
+        return "test"
+    if path.endswith((".py", ".ccp", ".cc", ".cpp", ".c", ".java", ".kt")):
+        return "implementation"
+    if "contract" in name or "/contracts/" in path:
+        return "contract"
+    if "trace" in name or "/traces/" in path:
+        return "trace"
+    if path.endswith((".md", ".txt")):
+        return "documentation"
+    return "other"
+
+
 def scan(root) -> dict:
     """Return seam states plus bounded candidate artifact locations.
 
     Discovery remains conservative: co-occurrence only produces PARTIAL;
     verification is required elsewhere before CONNECTED can be claimed.
+    Candidate kinds are advisory metadata only.
     """
     root = Path(root)
     evidence = {f"{source} -> {destination}": "MISSING" for source, destination in SEAMS}
     candidate_files = {f"{source} -> {destination}": [] for source, destination in SEAMS}
+    candidate_kinds = {f"{source} -> {destination}": {} for source, destination in SEAMS}
 
     for path in _repository_files(root):
         try:
@@ -55,5 +74,10 @@ def scan(root) -> dict:
                 relative = path.relative_to(root).as_posix()
                 if relative not in candidate_files[key]:
                     candidate_files[key].append(relative)
+                candidate_kinds[key][relative] = _candidate_kind(relative)
 
-    return {"evidence": evidence, "candidate_files": candidate_files}
+    return {
+        "evidence": evidence,
+        "candidate_files": candidate_files,
+        "candidate_kinds": candidate_kinds,
+    }
