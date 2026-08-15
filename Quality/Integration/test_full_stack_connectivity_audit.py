@@ -87,6 +87,27 @@ def test_audit_does_not_treat_orphan_as_proven_failure(tmp_path: Path):
     assert "require architectural review" in result["note"]
 
 
+def test_audit_does_not_call_tested_source_orphan(tmp_path: Path):
+    (tmp_path / "module.py").write_text("def run(): pass", encoding="utf-8")
+    (tmp_path / "test_module.py").write_text("from module import run\n\ndef test_run():\n    run()\n", encoding="utf-8")
+    result = audit(tmp_path)
+    assert "module.py" not in result["orphan_candidates"]
+
+
+def test_audit_does_not_call_workflow_invoked_runtime_orphan(tmp_path: Path):
+    runtime = tmp_path / "Runtime"
+    runtime.mkdir()
+    (runtime / "worker.py").write_text("def run(): pass", encoding="utf-8")
+    workflow = tmp_path / ".github" / "workflows"
+    workflow.mkdir(parents=True)
+    (workflow / "runtime.yml").write_text(
+        "run: python Runtime/worker.py\n",
+        encoding="utf-8",
+    )
+    result = audit(tmp_path)
+    assert "Runtime/worker.py" not in result["orphan_candidates"]
+
+
 def test_audit_reports_runtime_source_without_sibling_test(tmp_path: Path):
     runtime = tmp_path / "Runtime"
     runtime.mkdir()
