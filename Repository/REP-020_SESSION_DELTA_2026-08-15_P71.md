@@ -47,6 +47,16 @@ A prior direct lookup used an incorrect guessed path for REP-014 (`REP-014_RELAT
 
 The failure cause is therefore **path/name mismatch**, not repository absence. The three-search rule and direct-path verification prevented the false negative from becoming a repository defect.
 
+## Safe Mutation Completed
+
+`Runtime/_FOLDER_STATUS.md` was updated from version `1.5.0` to `1.5.1` and re-read from current `main`.
+
+The update records the directly verified `RUN-011..015` and `Runtime/Prototype/` inventory, preserves `CROSS-LAYER INTEGRATION HOLD`, and explicitly distinguishes verified prototype evidence from executable Runtime authority.
+
+Mutation commit:
+
+`b51d8fb3ac4d095965e7e224f7c7bdcff066d641`
+
 ## Decision
 
 1. Keep `INTEGRITY HOLD`.
