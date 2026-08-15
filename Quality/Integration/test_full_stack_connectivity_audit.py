@@ -115,6 +115,20 @@ def test_audit_accepts_cross_directory_test_import(tmp_path: Path):
     assert "Runtime/Execution/execution_plan.py" not in result["untested_candidates"]
 
 
+def test_audit_accepts_explicit_workflow_invocation(tmp_path: Path):
+    runtime = tmp_path / "Runtime" / "Prototype"
+    runtime.mkdir(parents=True)
+    (runtime / "run_acceptance_scenarios.py").write_text("def main(): pass", encoding="utf-8")
+    workflow = tmp_path / ".github" / "workflows"
+    workflow.mkdir(parents=True)
+    (workflow / "runtime.yml").write_text(
+        "run: python Runtime/Prototype/run_acceptance_scenarios.py\n",
+        encoding="utf-8",
+    )
+    result = audit(tmp_path)
+    assert "Runtime/Prototype/run_acceptance_scenarios.py" not in result["untested_candidates"]
+
+
 def test_audit_exposes_layer_inventory_and_evidence_classes(tmp_path: Path):
     (tmp_path / "Runtime").mkdir()
     (tmp_path / "Runtime" / "worker.py").write_text("def run(): pass", encoding="utf-8")
