@@ -21,9 +21,21 @@ jobs:
         working-directory: Quality/Integration
         run: python run_full_stack_audit.py ../.. | tee ../../full-stack-audit-report.json
 
+      - name: Emit real runtime evidence
+        run: python Quality/Integration/emit_ci_runtime_evidence.py | tee ci-runtime-evidence.json
+
       - name: Upload audit evidence
         uses: actions/upload-artifact@v4
         with:
           name: full-stack-audit-report
           path: full-stack-audit-report.json
+          if-no-files-found: error
+
+      - name: Upload runtime evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: runtime-evidence
+          path: |
+            ci-runtime-evidence.json
+            Quality/Integration/evidence/runtime/*.json
           if-no-files-found: error
