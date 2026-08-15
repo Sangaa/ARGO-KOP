@@ -202,7 +202,14 @@ def audit(root: Path) -> dict:
 
     test_files = {_relative(root, p) for p in files if p.name.startswith("test_") or p.name.endswith("_test.py")}
     source_files = [p for p in files if p.suffix == ".py" and _relative(root, p) not in test_files]
-    orphan_candidates = [_relative(root, p) for p in source_files if incoming[_relative(root, p)] == 0 and p.parent.name not in {"Scripts", "Tools"}]
+    orphan_candidates = [
+        _relative(root, p)
+        for p in source_files
+        if incoming[_relative(root, p)] == 0
+        and p.parent.name not in {"Scripts", "Tools"}
+        and not _has_local_test(p, root, test_files, graph)
+        and not _workflow_invokes(p, root)
+    ]
     runtime_sources = [p for p in source_files if p.is_relative_to(root / "Runtime")]
     untested_candidates = [
         _relative(root, p)
@@ -222,7 +229,7 @@ def audit(root: Path) -> dict:
         "untested_candidates": sorted(set(untested_candidates)),
         "layer_file_counts": layer_counts,
         "evidence_classes": list(EVIDENCE_CLASSES),
-        "note": "Candidates require architectural review; zero incoming references or missing local tests alone do not prove a file is invalid. Test-import matching is evidence of test coverage, not runtime reachability. Workflow invocation is evidence of CI execution intent, not runtime architectural connectivity.",
+        "note": "Candidates require architectural review; zero incoming references alone do not prove a file is orphaned. Test-import matching is evidence of test coverage, not runtime reachability. Workflow invocation is evidence of CI execution intent, not runtime architectural connectivity.",
     }
 
 
