@@ -23,30 +23,29 @@ def test_feedback_quality_readiness_can_form_verified_registry_evidence(tmp_path
         stages=[{"name": "execute", "status": "SUCCESS"}],
     )
     trace_id = execution["execution_trace_id"]
+    outcome = {
+        "outcome_id": "OUT-FEEDBACK-READINESS-REG-001",
+        "result": "SUCCESS",
+        "evidence_trace_ids": [trace_id],
+        "execution_trace_ids": [trace_id],
+        "confidence": "HIGH",
+    }
 
     result = assess_for_promotion(
         decision_id="DEC-FEEDBACK-READINESS-REG-001",
         execution_id=execution["execution_id"],
-        outcome={
-            "outcome_id": "OUT-FEEDBACK-READINESS-REG-001",
-            "result": "SUCCESS",
-            "evidence_trace_ids": [trace_id],
-            "execution_trace_ids": [trace_id],
-            "confidence": "HIGH",
-        },
+        outcome=outcome,
     )
     assert result["status"] == "READY_FOR_PROMOTION_REVIEW"
     assert result["quality"]["quality"] == "ACCEPTABLE"
     assert result["report"]["knowledge_promoted"] is False
 
-    lineage = verify_runtime_outcome_evidence({
-        "execution": execution,
-        "outcome": result["evaluation"]["outcome"],
-    })
+    runtime_result = {"execution": execution, "outcome": outcome}
+    lineage = verify_runtime_outcome_evidence(runtime_result)
     assert lineage["status"] == "VERIFIED"
 
     captured = capture_repository_evidence(
-        {"execution": execution},
+        runtime_result,
         repository_root=str(tmp_path),
         relative_name="feedback_readiness_trace.json",
     )
