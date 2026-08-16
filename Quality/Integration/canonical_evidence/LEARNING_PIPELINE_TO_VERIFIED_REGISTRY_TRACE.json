@@ -1,0 +1,10 @@
+{
+  "record_type": "EXECUTION_TRACE",
+  "trace_id": "TRACE-LEARNING-PIPELINE-REGISTRY-001",
+  "task_id": "TASK-LEARNING-PIPELINE-REGISTRY-001",
+  "session_id": "SESSION-LEARNING-PIPELINE-REGISTRY-001",
+  "final_status": "CONTROLLED_SYNTHETIC",
+  "side_effect": false,
+  "evidence_class": "CONTROLLED_SYNTHETIC",
+  "path": "Learning Pipeline -> Verified Registry"
+}
