@@ -2,10 +2,10 @@
 
 Platform: ARGO KOP  
 Document ID: REP-016  
-Version: 1.2.0  
+Version: 1.2.1  
 Status: Active / Phase 1 Open / Integrity Hold  
 Development Baseline: 3.2.1  
-Last Audit: 2026-08-14
+Last Audit: 2026-08-16
 
 ## Purpose
 
@@ -76,200 +76,43 @@ For material positive results:
 
 A negative result is never an absence claim from one search. A positive result is never current-main evidence until its ref/SHA is reconciled with the current authoritative ref.
 
-## P37 Evidence
+## P261 Control-Plane Reconciliation
 
-P37 applied the dual-search discipline to `MOD-003_DOCUMENT_MODEL.md`. A broad search returned the artifact at an older commit, while a materially different targeted filename search did not return it. Direct current-main retrieval recovered the file. The stale search result was compared with current main; the exact internal index-refresh mechanism remained unproven and was not asserted.
+P261 recovered the canonical physical identity of REP-016 after a guessed-path lookup miss. The canonical path is:
 
-## P38 — Search Freshness + Current Service Namespace Revalidation
+`Repository/REP-016_PHASE1_PARTITION_WORK_QUEUE.md`
 
-P38 re-applied the rule to the Service namespace using two materially different searches:
+The previously guessed path:
 
-1. `Document ID: SRV-` search: broad semantic/identity-oriented retrieval.
-2. `Services/SRV-` search: path-oriented retrieval.
+`Repository/REP-016_EXECUTION_QUEUE.md`
 
-Both search result sets were pinned to commit `601b07e829af2f29aebefe92591fc352f1118954`, not current `main`. Therefore neither search result set was accepted as current-main evidence without reconciliation.
+is not treated as evidence of absence. Independent repository evidence established the canonical path and current identity.
 
-A direct current-main directory enumeration of `Services/` was then performed. It recovered exactly ten active Service artifacts `SRV-001` through `SRV-010`, plus non-SRV support files. This establishes the current filename namespace within the Services directory. It does not, by itself, close internal Document-ID uniqueness across the repository.
+P261 also completed the direct registry reconciliation for `REL-005` in REP-014. The relationship remains historical and open for revalidation:
 
-A commit comparison from the search-result ref to current main (`ac476465dfde3c9e52526eb20b0c3eb7f11dacea`) showed current main is **5 commits ahead / 0 behind**. The changed files in that interval are control/evidence records only; no Service artifact change was identified in that comparison. The internal search/index refresh mechanism remains unproven.
+`ENG-006 → SRV-009 = DOCUMENTED / CONTRACTUAL`
 
-P38 therefore classifies the two search results as **STALE SEARCH EVIDENCE**, the current directory enumeration as **CURRENT AUTHORITATIVE INVENTORY EVIDENCE**, and the Service filename namespace as **10 active artifacts / no active filename duplicate observed**.
-
-## P38 Search-Failure Learning Decision
-
-P38 does not promote a new permanent platform lesson. `MEM-009` already contains the validated rules for independent negative-search confirmation and current-ref freshness reconciliation. P38 adds provenance and confirms those rules on a second namespace, but introduces no materially new principle.
-
-## P39 — Executable Consumer Proof + Duplicate-ID Evidence Expansion
-
-P39 continued Priority 2 and opened Priority 3 without promoting either to closure.
-
-### Search pair A — identity-oriented
-
-A repository search for `Document ID: ENG-006` recovered `Engine/ENG-006_EXECUTION_ENGINE.md` on current `main`. The result was independently validated by direct authoritative retrieval of the same path; current blob SHA is `73b50ed29703a2af6f96d6f5f682b64f018cf8e0`.
-
-### Search pair B — path/content-oriented
-
-A materially different search for `ENG-006_EXECUTION_ENGINE` did not return the exact target as the first result and returned related Engine/Runtime artifacts. Because the result set was bounded/truncated, it was not treated as evidence of absence. Direct current-main retrieval remained the authority.
-
-### Executable consumer search
-
-Two independent searches were then used against the claimed `ENG-006 → SRV-009` implementation edge:
-
-1. `SRV-009_UPDATE_SERVICE` — recovered documentation and ENG-006 references, but no direct executable invocation was established by the search evidence.
-2. `update_service(` — returned **no results**.
-3. `UpdateService` — returned **no results**.
-
-The negative invocation searches are therefore classified as **bounded negative implementation evidence**, not repository-wide absence proof. The current conclusion remains **EXECUTABLE PROOF OPEN / DOCUMENTATION EVIDENCE ONLY**. The exact reason no invocation symbol was returned is not asserted beyond search scope; no runtime mutation was made to manufacture a consumer.
-
-### Duplicate-ID progress
-
-The current repository tree was also retrieved through the Git tree API at the current `main` commit `ff33d6f1d607d86bfbc2e8f99530105b5bb0dd3a`. This provides a current physical-path inventory boundary, but the response is too large for a single rendered payload; therefore it is not treated as exhaustive internal-ID/content proof by itself.
-
-P39 additionally rechecked the `ENG-006` identity through two materially different searches and direct retrieval. No active filename collision for `ENG-006` was established. Internal-ID uniqueness across all content remains open.
-
-### P39 learning decision
-
-No new permanent platform lesson is promoted. The observed search behavior is already governed by MEM-009 lessons 4, 6 and 7: bounded searches limit claims, negative results require independent confirmation, and positive results require freshness reconciliation.
-
-## P40 — Cross-namespace Duplicate-ID Evidence + Search Freshness Reconciliation
-
-P40 continued Priority 2 with two additional namespaces and did not manufacture a repository-wide PASS from bounded search output.
-
-### Architecture namespace — two materially different searches
-
-Search-A used `Document ID: ARC-` and returned active Architecture artifacts, but the search payload was broad/truncated and its result refs were pinned to older commit `794cb99e6047f242030ca1cbb0773604ecbe5daa`.
-
-Search-B used the materially different path-oriented query `Architecture/ARC-` and returned the same class of Architecture artifacts, again on the older ref. Therefore both result sets were classified as **STALE SEARCH EVIDENCE**, not current-main inventory proof.
-
-A ref comparison against current main `ff33d6f1d607d86bfbc2e8f99530105b5bb0dd3a` showed the search ref is behind current main by three commits in the available comparison result. The search index freshness mechanism itself remains unproven. No Architecture identity decision was based solely on the stale search payload.
-
-### Lifecycle namespace — two materially different searches
-
-Search-A used `Document ID: LIF-` and did not return the exact lifecycle artifact; it returned related control-plane artifacts on the same older search ref.
-
-Search-B used `Lifecycle/LIF-` and likewise did not return `Lifecycle/LIF-001_DOCUMENT_LIFECYCLE.md` directly. This is a bounded negative search pair, not proof of absence.
-
-Direct current-main retrieval then recovered `Lifecycle/LIF-001_DOCUMENT_LIFECYCLE.md`, Document ID `LIF-001`, canonical `Yes`, with current blob SHA `fca7bc1a8b3549b9e9cb5fb7f3d08aa62e02df9a`. The artifact itself records the historical `GOV-005` collision and the migration to `LIF-001`.
-
-Therefore the LIF search miss is classified as **SEARCH/RETRIEVAL MISS**, not file absence. The precise internal reason is not asserted beyond the observed bounded search behavior and stale search refs.
-
-### P40 identity decision
-
-The evidence strengthens the distinction between:
-
-`filename uniqueness` → physical namespace evidence
-
-`internal Document-ID uniqueness` → content-level evidence
-
-`historical occurrence` → provenance evidence
-
-`current authority` → current-main/direct retrieval evidence
-
-P40 does not close the exhaustive duplicate-ID audit. It advances the evidence boundary for Architecture and Lifecycle while preserving uncertainty where search coverage is bounded.
-
-### P40 learning decision
-
-No new permanent MEM-009 lesson is promoted. The observed cases are already covered by the validated search-freshness and independent-confirmation rules. P40 is a cross-namespace validation of those rules, not a materially new principle.
-
-## Current Queue Decision — P40
-
-1. **Exhaustive duplicate-ID audit** remains first and open; P40 adds Architecture and Lifecycle evidence but does not claim exhaustive internal-ID coverage.
-2. **Executable consumer proof** remains second and open; `RUN-010 → ENG-006 → SRV-009` remains documentation/boundary evidence only.
-3. Bidirectional critical-edge validation remains after executable proof.
-4. Controlled mutation/reconciliation harness follows graph closure.
-5. CI-to-impact-matrix observability follows mutation evidence.
-6. Final Boot Verification remains last and blocked by unresolved identity/relationship scope.
-
-## P41 — Historical Identity Collision Reconciliation
-
-P41 targeted a known historical collision to distinguish active duplicate identity from retired provenance.
-
-### Search pair A — identity-oriented
-
-Search-A used `Document ID: GOV-005`. It returned `Governance/GOV-005_REVIEW_STANDARD.md` and related references, with result refs pinned to older search-index commits.
-
-### Search pair B — historical path-oriented
-
-Search-B used `Lifecycle/GOV-005_DOCUMENT_LIFECYCLE`. It did not return the retired lifecycle path as a current artifact; it returned current lifecycle/control references instead. This was treated as bounded negative retrieval evidence, not absence proof.
-
-### Current authority recovery
-
-Direct current-main retrieval of `Governance/GOV-005_REVIEW_STANDARD.md` confirmed active canonical `GOV-005`, Governance category, Canonical `Yes`, current blob SHA `7c158209467fbcfa327c9baeea8dbec8ad8f04bd`.
-
-Direct current-main retrieval of `Lifecycle/LIF-001_DOCUMENT_LIFECYCLE.md` confirmed canonical `LIF-001` and explicitly records that the former `Lifecycle/GOV-005_DOCUMENT_LIFECYCLE.md` used the same active Document ID as canonical `Governance/GOV-005_REVIEW_STANDARD.md`, and that the lifecycle artifact was migrated to `LIF-001` while the historical path was retired.
-
-A direct current-main fetch of `Lifecycle/GOV-005_DOCUMENT_LIFECYCLE.md` returned HTTP 404 / Not Found. Therefore the historical path is not a current physical artifact on `main`.
-
-### P41 decision
-
-`GOV-005` is **not an active duplicate** in the current physical namespace: the active canonical owner is `Governance/GOV-005_REVIEW_STANDARD.md`. The former lifecycle artifact is historical provenance, now represented by `LIF-001`.
-
-This is a **historical/reference occurrence**, not a current duplicate requiring archive/merge/reassign.
-
-### P41 learning decision
-
-No new permanent MEM-009 lesson is promoted. P41 is a concrete identity-collision reconciliation case already covered by the existing search-confirmation, freshness, provenance, and bounded-absence rules.
-
-## P42 — Templates Partition Revalidation + Three-Method Search Discipline
-
-P42 advanced Priority 19 because the queue previously marked Templates `NOT_STARTED`, while current repository evidence shows the partition is physically populated and has a canonical directory README.
-
-### Search-A — identity-oriented
-
-Query: `TEMPLATE-`
-
-The search returned `Templates/README.md` and related artifacts, but the returned result refs were pinned to commit `03f9eb49d9e21158708f7538dae85200705d80e7`, not proven current-main evidence. The search result therefore was not used as the current inventory authority. fileciteturn883file1
-
-### Search-B — path-oriented
-
-Query: `Templates/`
-
-The search returned `REP-001`, `REP-013`, and other references, but did not directly enumerate the physical Templates directory. This was treated as bounded retrieval evidence, not absence evidence. fileciteturn884file1turn884file2
-
-### Search-C — exact artifact-oriented
-
-Query: `TEMPLATE-006_UPDATE_PACK.md`
-
-The search returned only `Templates/README.md` at the stale search ref and did not return the exact target artifact. This is a material search miss, not proof that the file is absent. fileciteturn886file0
-
-### Current authoritative recovery
-
-Direct current-main directory retrieval of `Templates/` recovered `README.md` plus `TEMPLATE-001` through `TEMPLATE-010`. The directory therefore contains at least 11 current physical artifacts, with ten named template artifacts. The directory enumeration is the current physical authority for this inventory boundary. fileciteturn885file0
-
-Direct current-main content retrieval of `Templates/README.md` confirms `TPL-README`, Version `1.3.0`, Canonical `Yes`, Status `Validated / Reconstruction In Progress`, Development Baseline `3.3.0`, and explicitly lists `TEMPLATE-001` through `TEMPLATE-010`. It also defines template authority, lifecycle, validation requirements, downstream impact review, and the required external-feedback standard. fileciteturn887file0
-
-### P42 failure analysis
-
-The exact internal search-index mechanism is not proven. What is proven is that multiple search queries returned stale/bounded results while direct current-main directory retrieval recovered the expected artifacts. Therefore the safe diagnosis is **SEARCH/RETRIEVAL COVERAGE + FRESHNESS LIMITATION**, not file absence.
-
-This P42 result also exposes a stale work-queue state: Templates were marked `NOT_STARTED` even though the partition exists and has a canonical README plus ten template artifacts. The correct state is therefore **INVENTORYING**, not closure.
-
-### P42 content review boundary
-
-P42 reviewed the Templates README content itself. It establishes that templates are structural aids, not authority, and that canonical template changes require governed review and downstream impact review. The ten template files were enumerated but not yet individually content-audited; therefore the partition remains open.
-
-### P42 learning decision
-
-No new permanent MEM-009 lesson is promoted. P42 is a stronger three-method application of already-established search, freshness, bounded-negative, and current-authority rules. The new operational requirement is recorded here as a queue discipline, not a permanent memory lesson, because its principle is already represented in the existing memory set.
-
-## Current Queue Decision — P42
-
-1. **Exhaustive duplicate-ID audit** remains Priority 2 and open.
-2. **Executable consumer proof** remains Priority 3 and open.
-3. **Templates** advances from `NOT_STARTED` to `INVENTORYING`; individual template content/identity/reference validation remains required.
-4. Bidirectional critical-edge validation remains after executable proof.
-5. Controlled mutation/reconciliation harness follows graph closure.
-6. CI-to-impact-matrix observability follows mutation evidence.
-7. Final Boot Verification remains blocked until predecessor evidence is closed.
-
-## Recovery / Anti-Loop / Anti-Premature-Closure
-
-Every item must be resumable from repository evidence alone. Repeated review without new evidence must stop and record the missing evidence. No item may be closed merely because files were read, an index lists them, a previous model declared completion, or CI passed.
+No executable promotion is authorized without callable SRV-009 consumer evidence.
 
 ## Current Checkpoint
 
-P42 evidence is recorded in the session matrix delta for this session. The next session resumes at **Priority 2 — Exhaustive duplicate-ID audit**, while Templates is now an explicit inventorying workstream rather than a false `NOT_STARTED` state.
+`P261` is the latest recorded checkpoint for this control-plane reconciliation cycle.
+
+Current state:
+
+- Priority 1 Control Plane reconciliation: **OPEN**
+- Priority 2 exhaustive duplicate-ID audit: **OPEN**
+- Priority 3 executable relationship proof: **OPEN**
+- Priority 4 bidirectional critical graph validation: **OPEN**
+- Integrity: **HOLD**
+- Global PASS: **NOT CLAIMED**
+
+## Next Safe Entry
+
+Continue Priority 1 using the canonical REP-016 path and reconcile the remaining REP-011..REP-015 control-plane identities against current-main evidence. Do not infer missing artifacts from guessed filenames. Any newly recovered artifact must pass identity, authority, content, dependency and consumer checks before relationship registration.
+
+The next namespace transition to Priority 2 remains blocked until the Priority 1 closure decision is explicitly evidenced.
 
 ---
 
-End of Document
+End of REP-016
