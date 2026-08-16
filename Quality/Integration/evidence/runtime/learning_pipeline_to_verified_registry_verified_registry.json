@@ -1,0 +1,8 @@
+{
+  "seam": "Learning Pipeline -> Verified Registry",
+  "state": "CONNECTED",
+  "contract": "Runtime/Learning/LEARNING_PIPELINE_INTEGRATION_CONTRACT.md",
+  "test": "Quality/Integration/test_learning_pipeline_verified_registry_handoff.py",
+  "trace": "Quality/Integration/canonical_evidence/LEARNING_PIPELINE_TO_VERIFIED_REGISTRY_TRACE.json",
+  "verification_status": "VERIFIED"
+}
