@@ -2,7 +2,7 @@
 
 Platform: ARGO KOP  
 Document ID: REP-014  
-Version: 1.2.2  
+Version: 1.2.3  
 Status: Active / Relationship Enumeration In Progress  
 Development Baseline: 3.2.1  
 Last Audit: 2026-08-16
@@ -75,7 +75,7 @@ The following are deliberately limited to relationships established during repos
 | REL-006 | RUN-010 | ENG-002 | CONSUMES | Revalidated within inspected scope |
 | REL-007 | RUN-010 | ENG-004 | CONSUMES | Revalidated within inspected scope |
 | REL-008 | RUN-010 | ENG-006 | CONSUMES | Revalidated within inspected scope |
-| REL-009 | RUN-010 | SRV-009 | CONSUMES | Revalidated within inspected scope |
+| REL-009 | RUN-010 | SRV-009 | CONSUMES | **REVALIDATION REQUIRED** |
 | REL-010 | MOD-011 | KNW-002 | DEPENDS_ON | Revalidation Required |
 | REL-011 | MOD-011 | KNW-003 | DEPENDS_ON | Revalidation Required |
 | REL-012 | MOD-011 | KNW-004 | DEPENDS_ON | Revalidation Required |
@@ -146,13 +146,29 @@ This reconciliation does **not** delete the relationship, rename the source or t
 
 Executable promotion requires independent callable consumer evidence in the connected Runtime path.
 
+### REL-009 executable boundary reconciliation
+
+`REL-009` is retained with its original source, target and `CONSUMES` relationship type, but its state is downgraded to `REVALIDATION REQUIRED`.
+
+Current evidence establishes:
+
+```text
+RUN-010 → SRV-009 = DOCUMENTED / CONTRACTUAL
+```
+
+`RUN-010_RUNTIME_REFERENCE.md` describes the `RUN-010 → ENG-006 → SRV-009` path as a relationship description and explicitly does not claim that every runtime operation follows the path. The inspected connected execution spine records execution traces through the current entrypoint and remains simulation-only at the adapter boundary; it does not establish a callable `SRV-009` dispatch.
+
+Therefore `REL-009` must not be treated as executable or verified coupling merely because the architectural sequence is documented.
+
+This reconciliation does **not** delete the relationship, alter its direction, create a synthetic consumer, or mutate Runtime implementation. Executable promotion requires independent callable consumer evidence.
+
 ### Authority boundary
 
-This state correction is evidence reconciliation only. It does not authorize mutation of `ENG-006`, `SRV-009`, Runtime execution code, or other canonical authority layers.
+These state corrections are evidence reconciliation only. They do not authorize mutation of `ENG-006`, `SRV-009`, Runtime execution code, or other canonical authority layers.
 
 ### Checkpoint
 
-`P259` established the disposition requiring this direct registry reconciliation. The relationship remains open until executable evidence is independently established and revalidated.
+`P277` established the discrepancy requiring this direct registry reconciliation. Both `REL-005` and `REL-009` remain open until their executable evidence requirements are independently established.
 
 ## Identity Drift Reconciliation — 2026-08-13
 
