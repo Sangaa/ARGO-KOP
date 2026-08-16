@@ -8,8 +8,8 @@ Version: 1.3.0
 Status: Validated / Reconstruction In Progress
 Category: Templates
 Canonical: Yes
-Development Baseline: 3.3.0
-Last Audit: 2026-08-09
+Development Baseline: 3.2.1
+Last Audit: 2026-08-16
 
 ---
 
