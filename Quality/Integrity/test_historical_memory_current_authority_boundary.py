@@ -16,4 +16,4 @@ def test_historical_memory_candidate_status_does_not_certify_current_authority()
     master_index = (root / "Repository/REP-001_MASTER_INDEX.md").read_text(encoding="utf-8")
     assert "Memory/Historical_Memory/README.md" in master_index
     assert "Candidate / Integrity Hold" in master_index
-    assert "Historical artifacts" in master_index
+    assert "preserve historical evidence without silently promoting it to current authority" in master_index
