@@ -1,0 +1,13 @@
+{
+  "seam": "Memory / Context -> Cognition",
+  "state": "CONNECTED",
+  "contract": "Cognition/CONTEXT_MEMORY_SELECTION_CONTRACT.md",
+  "test": "Quality/Integration/test_memory_to_context_selection_boundary.py",
+  "trace": "Quality/Integration/canonical_evidence/MEMORY_CONTEXT_TO_COGNITION_TRACE.json",
+  "verification_status": "VERIFIED",
+  "ci": {
+    "full_stack_audit": "success",
+    "runtime_prototype_tests": "success",
+    "certification_commit": "87dd65aef36eda9bcbe764e78243dcf32cd7552a"
+  }
+}
