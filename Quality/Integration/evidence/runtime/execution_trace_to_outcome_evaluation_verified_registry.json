@@ -1,0 +1,8 @@
+{
+  "seam": "Execution Trace -> Outcome Evaluation",
+  "state": "CONNECTED",
+  "contract": "Runtime/Learning/OUTCOME_EVALUATION_CONTRACT.md",
+  "test": "Quality/Integration/test_execution_outcome_registry_evidence.py",
+  "trace": "Quality/Integration/evidence/runtime/execution_trace_to_outcome_evaluation_certification.json",
+  "verification_status": "VERIFIED"
+}
