@@ -1,0 +1,8 @@
+{
+  "seam": "Cognition -> Reasoning",
+  "state": "CONNECTED",
+  "contract": "Cognition/TRACEABLE_REASONING_CONTRACT.md",
+  "test": "Cognition/test_traceable_reasoning.py",
+  "trace": "Quality/Integration/evidence/runtime/cognition_to_reasoning_verified_trace.json",
+  "verification_status": "VERIFIED"
+}
