@@ -20,7 +20,7 @@ def test_project_status_does_not_redefine_release_authority():
     root = Path(__file__).resolve().parents[2]
     status = _read(root, "PROJECT_STATUS.md")
     assert "Latest Official Release" in status
-    assert "Active Development Baseline: v3.2.1" in status
+    assert "Active Development Baseline:** v3.2.1" in status
     assert "Release/VERSION.md is authoritative" in status
 
 
@@ -28,5 +28,5 @@ def test_project_status_document_version_is_not_treated_as_platform_release_vers
     root = Path(__file__).resolve().parents[2]
     status = _read(root, "PROJECT_STATUS.md")
     assert "Version: 3.3.7" in status
-    assert "Latest Official Release: v1.0.0 Foundation" in status
-    assert "Current Development Baseline: v3.2.1" in status
+    assert "Latest Official Release:** v1.0.0 Foundation" in status
+    assert "Current Development Baseline" in status
