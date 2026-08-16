@@ -2,10 +2,10 @@
 
 Platform: ARGO KOP  
 Document ID: REP-015  
-Version: 1.0.6  
+Version: 1.0.7  
 Status: Active / Phase 1 Open / Integrity Hold  
 Development Baseline: 3.2.1  
-Last Audit: 2026-08-14
+Last Audit: 2026-08-16
 
 ## Purpose
 
@@ -360,7 +360,7 @@ Minimum control-plane load:
 
 `REP-001 → REP-002 → REP-013 → REP-011/012/014 → REP-015/016 → Journal`
 
-## Current Reconciliation Evidence — 2026-08-14
+## Current Reconciliation Evidence — 2026-08-14 (Historical)
 
 The checklist was revalidated against the current repository state during the post-audit control-plane reconciliation cycle.
 
@@ -381,6 +381,35 @@ Latest current-cycle matrix checkpoint:
 Latest synchronized matrix commit:
 
 `0746b6e56d3345115d323d8f6e940deaa91bda19`
+
+## Current Revalidation Evidence — 2026-08-16
+
+This section supersedes the 2026-08-14 current-reconciliation section for current operational interpretation while preserving the historical audit provenance above.
+
+Current evidence reviewed:
+
+- `REP-011` v1.1.2 — current review/mutation ledger, Integrity Hold.
+- `REP-012` v1.0.9 — current allocation/state/recovery registry, Integrity Hold.
+- `REP-013` v1.1.1 — current content inventory, Phase 1 population in progress.
+- `REP-014` v1.2.3 — current relationship registry; `REL-005` and `REL-009` are both `REVALIDATION REQUIRED`.
+- `REP-016` v1.2.2 — current Phase 1 queue synchronized to P279/current HEAD.
+- `REP-020` P283 — current evidence-binding assessment for this checklist.
+
+Current findings:
+
+1. The authoritative development baseline remains **3.2.1**.
+2. The active control-plane state remains **PARTIALLY RECONCILED / INTEGRITY HOLD**.
+3. `RUN-010 → ENG-006 → SRV-009` remains documented/contractual with executable proof open; current connected-spine evidence does not establish a callable `SRV-009` consumer.
+4. `REL-005` and `REL-009` remain `REVALIDATION REQUIRED`; no executable promotion is authorized by this checklist.
+5. `P261` is historical checkpoint evidence; `P279` is the current Phase-1 queue synchronization checkpoint.
+6. `REP-020` remains provisional/non-authoritative and must not be used as a substitute for canonical control-plane authority.
+7. Exhaustive internal-ID reconciliation, full bidirectional graph validation, controlled mutation harness, and final `BOOTED / INTEGRITY PASS` remain open.
+
+Revalidation result:
+
+`REP-015 = PRESENT / CURRENT within inspected control-plane scope / INTEGRITY HOLD`
+
+This revalidation updates the current evidence binding without altering the historical 2026-08-14 audit provenance.
 
 ## Guiding Rule
 
