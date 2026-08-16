@@ -4,11 +4,11 @@
 
 Platform: ARGO KOP (Knowledge Operating Platform)
 Folder: Interfaces/
-Version: 1.1.0
+Version: 1.1.1
 Status: INTEGRITY HOLD
 Canonical: Yes
 Priority: Critical
-Last Audit Date: 2026-08-08
+Last Audit Date: 2026-08-16
 Review Method: Repository First / Evidence Based
 
 ---
@@ -22,7 +22,7 @@ The Interfaces layer defines communication protocols, context ingestion routines
 | File Name | Document ID | Status | Canonical |
 | :--- | :--- | :--- | :--- |
 | `INTF-001_INTERFACE_SPEC.md` | `INTF-001` | Approved / Revalidated | Yes |
-| `INTF-004_API.md` | `INT-004` | Integrity Hold / Revalidated | Yes |
+| `INTF-004_API.md` | `INTF-004` | Integrity Hold / Revalidated | Yes |
 | `INTF-006_ENVIRONMENT_SENSING.md` | `INTF-006` | Proposed / Integrity Hold | Yes |
 | `_FOLDER_STATUS.md` | N/A | Audit Record | Yes |
 
@@ -33,6 +33,12 @@ The previous folder status declared the folder completed while only `INTF-001` w
 The current audit directly verified additional interface artifacts. Therefore the previous completion claim is no longer accepted as repository truth.
 
 The new environment-sensing interface is intentionally marked `Proposed / Integrity Hold` until its cross-layer relationships and runtime integration are validated.
+
+# Identity Reconciliation
+
+The current canonical API artifact is `INTF-004_API.md` with Document ID `INTF-004`.
+
+The prior `INT-004` metadata form was an identity-drift defect and is retained only as historical/reconciliation evidence in session records. It is not the active identity.
 
 # Compliance Check
 
@@ -49,6 +55,7 @@ The new environment-sensing interface is intentionally marked `Proposed / Integr
 3. New interface contracts require cross-layer validation before completion.
 4. Local interface validation does not prove global repository integrity.
 5. Historical status claims do not override current repository evidence.
+6. Folder inventory identity must match the current canonical artifact identity.
 
 # Current State
 
