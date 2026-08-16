@@ -1,0 +1,8 @@
+{
+  "seam": "Feedback Quality -> Learning Readiness",
+  "state": "CONNECTED",
+  "contract": "Runtime/Learning/FEEDBACK_QUALITY_GATE_CONTRACT.md",
+  "test": "Quality/Integration/test_feedback_quality_readiness_registry_evidence.py",
+  "trace": "Quality/Integration/evidence/runtime/feedback_quality_to_learning_readiness_verified_trace.json",
+  "verification_status": "VERIFIED"
+}
