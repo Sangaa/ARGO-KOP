@@ -6,7 +6,7 @@
 
 Platform: ARGO KOP
 Document ID: REP-011
-Version: 1.1.0
+Version: 1.1.1
 Status: Active / Integrity Hold
 Category: Repository Control
 Canonical: Yes
@@ -451,6 +451,36 @@ as an operationally reusable review rule.
 - final Boot `BOOTED / INTEGRITY PASS`.
 
 No closure claim is made by this update.
+
+## 26. P267 Services Identity Reconciliation — 2026-08-16
+
+`REP-013` contained an identity mismatch for `SRV-010`: it listed `SRV-010_SERVICE_CATALOG.md`, while direct current-main evidence identifies the canonical artifact as `Services/SRV-010_SERVICE_REFERENCE.md`.
+
+Evidence basis:
+
+- current-main direct read of `Services/SRV-010_SERVICE_REFERENCE.md` identifies `Document ID: SRV-010` and describes the artifact as the Services navigation/reference artifact;
+- `Services/_FOLDER_STATUS.md` confirms the declared service set `SRV-001` through `SRV-010` and the reference/navigation role of SRV-010;
+- historical P112 reconciliation independently established `SRV-010_SERVICE_REFERENCE.md` as the canonical Services reference/navigation artifact;
+- direct current-main lookup of `Services/SRV-010_SERVICE_CATALOG.md` returned Not Found.
+
+The evidence was sufficient to correct the **inventory identity only**. No executable status, implementation claim, relationship promotion, or Services partition closure was inferred.
+
+Mutation:
+
+- `REP-013` `v1.0.9 → v1.1.0`;
+- commit `ec36514b503db3857f57cefb9414512bfb866a48`;
+- content SHA `638d47a34f87acff744ba09b9f0b6730c8863e48`;
+- post-mutation current-main read-back confirmed the new identity binding.
+
+The mutation leaves the Services domain on Integrity Hold and preserves all unresolved scope.
+
+P267 checkpoint evidence is stored in:
+
+`Repository/REP-020_SESSION_DELTA_2026-08-16_P267.md`
+
+## 27. Current State
+
+`REP-011` remains **PARTIALLY RECONCILED / INTEGRITY HOLD**. The P267 identity correction does not close Priority 1, the Services domain, or the executable `ENG-006 → SRV-009` evidence gap.
 
 ---
 
