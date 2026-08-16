@@ -29,8 +29,9 @@ def test_active_service_artifacts_match_filename_identity():
         assert re.search(rf"(?m)^Document ID\s*:?\s*$\n\s*{re.escape(service_id)}\s*$", text) or re.search(
             rf"(?m)^Document ID\s*:\s*{re.escape(service_id)}\s*$", text
         )
-        assert "Canonical" in text
-        assert re.search(r"(?m)^\s*Yes\s*$", text)
+        assert re.search(r"(?m)^Canonical\s*$\n\s*Yes\s*$", text) or re.search(
+            r"(?m)^Canonical\s*:\s*Yes\s*$", text
+        )
 
 
 def test_service_inventory_declares_the_same_active_service_set():
