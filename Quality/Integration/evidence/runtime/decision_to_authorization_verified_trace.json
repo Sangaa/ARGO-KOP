@@ -1,0 +1,12 @@
+{
+  "record_type": "EXECUTION_TRACE",
+  "trace_id": "TRACE-DECISION-AUTHORIZATION-CANONICAL-001",
+  "task_id": "TASK-DECISION-AUTHORIZATION-CANONICAL-001",
+  "session_id": "SESSION-DECISION-AUTHORIZATION-CANONICAL-001",
+  "final_status": "CONTROLLED_SYNTHETIC",
+  "authorization_status": "AUTHORIZED",
+  "execution_status": "NOT_STARTED",
+  "side_effect": false,
+  "evidence_class": "CONTROLLED_SYNTHETIC",
+  "path": "Decision -> Authorization"
+}
