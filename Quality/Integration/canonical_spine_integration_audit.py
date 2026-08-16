@@ -44,6 +44,20 @@ def _valid_trace_artifact(root: Path, relative: str) -> bool:
     )
 
 
+def _normalize_verified_records(verified_seams):
+    """Normalize one record or seam-keyed registry mapping into record pairs."""
+    if not isinstance(verified_seams, dict):
+        raise ValueError("verified seam evidence must be a mapping")
+    if "seam" in verified_seams:
+        return [(verified_seams["seam"], verified_seams)]
+    pairs = []
+    for seam, record in verified_seams.items():
+        if not isinstance(record, dict):
+            raise ValueError(f"verified seam evidence must be a registry record: {seam}")
+        pairs.append((seam, record))
+    return pairs
+
+
 def _state_from_verified_record(root: Path, seam, record):
     if not isinstance(record, dict):
         raise ValueError(f"verified seam evidence must be a registry record: {seam}")
@@ -71,7 +85,7 @@ def audit(root, verified_seams=None):
     candidate_kinds = scanned["candidate_kinds"]
     verified_seams = verified_seams or {}
 
-    for seam, record in verified_seams.items():
+    for seam, record in _normalize_verified_records(verified_seams) if verified_seams else []:
         if seam not in SEAM_KEYS:
             raise ValueError(f"unknown seam: {seam}")
         evidence[seam] = _state_from_verified_record(root, seam, record)
