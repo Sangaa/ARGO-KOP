@@ -2,7 +2,7 @@
 
 Platform: ARGO KOP  
 Document ID: REP-016  
-Version: 1.2.1  
+Version: 1.2.2  
 Status: Active / Phase 1 Open / Integrity Hold  
 Development Baseline: 3.2.1  
 Last Audit: 2026-08-16
@@ -76,6 +76,21 @@ For material positive results:
 
 A negative result is never an absence claim from one search. A positive result is never current-main evidence until its ref/SHA is reconciled with the current authoritative ref.
 
+## P279 Current-HEAD Control-Plane Resynchronization — 2026-08-16
+
+The current `main` HEAD is `002cfca7b32b9f09fd74e65a916fb8fcb8ca56a9`, which records P278 as the latest session delta.
+
+The previous queue checkpoint `P261` is therefore retained as historical checkpoint evidence, but it is no longer the current queue checkpoint.
+
+Current evidence establishes:
+
+- `REP-014` was reconciled through P278, with `REL-005` and `REL-009` both explicitly `REVALIDATION REQUIRED`.
+- `REP-020` records the P278 evidence boundary and remains provisional/non-authoritative.
+- `ENG-006 → SRV-009` executable proof remains open.
+- The current control plane remains `PARTIALLY RECONCILED / INTEGRITY HOLD`.
+
+This update synchronizes the execution queue with the current repository evidence. It does not imply Phase-1 closure, executable proof, duplicate-ID closure, or Global PASS.
+
 ## P261 Control-Plane Reconciliation
 
 P261 recovered the canonical physical identity of REP-016 after a guessed-path lookup miss. The canonical path is:
@@ -96,7 +111,7 @@ No executable promotion is authorized without callable SRV-009 consumer evidence
 
 ## Current Checkpoint
 
-`P261` is the latest recorded checkpoint for this control-plane reconciliation cycle.
+`P279` is the latest recorded checkpoint for this control-plane reconciliation cycle.
 
 Current state:
 
@@ -109,7 +124,7 @@ Current state:
 
 ## Next Safe Entry
 
-Continue Priority 1 using the canonical REP-016 path and reconcile the remaining REP-011..REP-015 control-plane identities against current-main evidence. Do not infer missing artifacts from guessed filenames. Any newly recovered artifact must pass identity, authority, content, dependency and consumer checks before relationship registration.
+Continue Priority 1 by reconciling the remaining control-plane evidence surfaces (`REP-011`, `REP-012`, `REP-013`, `REP-014`, `REP-015`, `REP-020`) against current-main state. Preserve P261–P278 as historical/current evidence according to their actual repository binding. Do not promote the queue simply because a newer checkpoint exists; reconcile the affected registries first.
 
 The next namespace transition to Priority 2 remains blocked until the Priority 1 closure decision is explicitly evidenced.
 
