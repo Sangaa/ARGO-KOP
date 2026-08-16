@@ -26,11 +26,11 @@ CRITICAL_REFS = {
 
 
 def _resolve_reference(root: Path, source_path: Path, reference: str) -> Path:
-    # Release/VERSION.md uses root-relative references for root artifacts.
     if source_path.parent.name == "Release" and reference in {
         "PROJECT_STATUS.md",
         "PROJECT_BOOTSTRAP.md",
         "ROADMAP.md",
+        "Logs/CHANGELOG.md",
     }:
         return root / reference
     return (source_path.parent / reference).resolve()
