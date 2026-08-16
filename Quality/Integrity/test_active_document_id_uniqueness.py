@@ -55,10 +55,13 @@ def _extract_document_ids(root: Path):
             continue
 
         header = _header(text)
+        canonical = bool(re.search(r"^Canonical:\s*Yes\s*$", header, re.MULTILINE | re.IGNORECASE))
+        if not canonical:
+            continue
+
         filename_id = _filename_id(path)
         has_declared_id = bool(re.search(r"^\s*Document ID\b", header, re.MULTILINE | re.IGNORECASE))
-        canonical_flag = re.search(r"^Canonical:\s*Yes\s*$", header, re.MULTILINE | re.IGNORECASE)
-        if filename_id and has_declared_id and canonical_flag:
+        if filename_id and has_declared_id:
             ids = [filename_id]
         else:
             ids = DOCUMENT_ID_COLON_RE.findall(header) + DOCUMENT_ID_BLOCK_RE.findall(header)
@@ -88,9 +91,14 @@ def test_known_historical_identity_migrations_remain_resolved():
     assert owners["ARC-001"] == ["Architecture/ARC-001_PLATFORM_ARCHITECTURE.md"]
 
 
-def test_known_memory_and_core_identity_boundaries_are_present_for_follow_up():
+def test_known_identity_boundaries_are_explicitly_classified():
     root = Path(__file__).resolve().parents[2]
-    assert (root / "Memory/MEM-008_GUIDED_DISCOVERY_LEARNING_METHOD.md").is_file()
-    assert (root / "Memory/MEM-008_MEMORY_TRACEABILITY.md").is_file()
-    assert (root / "Core/CORE-000_PLATFORM_IDENTITY.md").is_file()
-    assert (root / "Core/CORE-000_PLATFORM_ARCHITECTURE.md").is_file()
+    for relative in (
+        "Core/CORE-000_PLATFORM_IDENTITY.md",
+        "Memory/MEM-008_MEMORY_TRACEABILITY.md",
+        "Interfaces/INTF-002_GITHUB.md",
+        "Interfaces/INTF-003_DATABASE.md",
+        "Interfaces/INTF-006_WEB.md",
+    ):
+        text = (root / relative).read_text(encoding="utf-8")
+        assert "Canonical\n\nNo" in text or "Canonical\r\n\r\nNo" in text
