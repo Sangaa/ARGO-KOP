@@ -1,0 +1,13 @@
+{
+  "record_type": "EXECUTION_TRACE",
+  "trace_id": "TRACE-MEMORY-CONTEXT-COGNITION-CANONICAL-001",
+  "task_id": "TASK-MEMORY-CONTEXT-COGNITION-CANONICAL-001",
+  "session_id": "SESSION-MEMORY-CONTEXT-COGNITION-CANONICAL-001",
+  "final_status": "CONTROLLED_SYNTHETIC",
+  "context_status": "CONTEXT_READY",
+  "historical_is_active_context": false,
+  "provenance_required": true,
+  "side_effect": false,
+  "evidence_class": "CONTROLLED_SYNTHETIC",
+  "path": "Memory -> Context -> Cognition"
+}
