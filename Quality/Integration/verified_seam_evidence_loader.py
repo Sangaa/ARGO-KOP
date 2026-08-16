@@ -32,10 +32,26 @@ def _valid_trace_artifact(root: Path, relative: str) -> bool:
     )
 
 
+def _normalize_candidates(candidates):
+    """Normalize list-style and seam-keyed registry payloads into records."""
+    if isinstance(candidates, dict):
+        if "seam" in candidates:
+            return [candidates]
+        normalized = []
+        for seam, record in candidates.items():
+            if not isinstance(record, dict):
+                raise ValueError("seam evidence mapping values must be records")
+            normalized.append({**record, "seam": seam})
+        return normalized
+    if isinstance(candidates, list):
+        return candidates
+    raise ValueError("seam evidence must be a record list or seam-keyed mapping")
+
+
 def load_records(root, candidates):
     root = Path(root)
     records = []
-    for candidate in candidates:
+    for candidate in _normalize_candidates(candidates):
         if not isinstance(candidate, dict):
             raise ValueError("seam evidence must be a record")
         seam = candidate.get("seam")
@@ -52,8 +68,6 @@ def load_records(root, candidates):
             ) if not valid
         ]
         if missing:
-            # Invalid evidence is rejected by the loader boundary, but the
-            # discovery/audit tests also need to inspect an empty load result.
             return {}
         records.append(candidate)
     return register(records)
