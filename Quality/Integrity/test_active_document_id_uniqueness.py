@@ -104,7 +104,8 @@ def test_known_historical_identity_migrations_remain_resolved():
     assert "Document ID: GOV-005" in governance
     assert "LIF-001" in lifecycle and _has_canonical_yes(lifecycle)
     assert "ARC-001" in architecture
-    assert "ARC-001" in architecture_status and "Canonical: Yes" in architecture_status
+    assert "ARC-001" in architecture_status
+    assert re.search(r"^Canonical\s*$\n\s*Yes\s+[—-]", architecture_status, re.MULTILINE)
     assert not (root / "Lifecycle/GOV-005_DOCUMENT_LIFECYCLE.md").exists()
 
 
