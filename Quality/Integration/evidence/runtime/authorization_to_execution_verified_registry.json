@@ -1,0 +1,10 @@
+{
+  "seam": "Authorization -> Execution",
+  "state": "CONNECTED",
+  "contract": "Quality/Integration/canonical_evidence/AUTHORIZATION_TO_EXECUTION.md",
+  "test": "Quality/Integration/test_authorization_to_execution_canonical_seam_certification.py",
+  "trace": "Quality/Integration/canonical_evidence/AUTHORIZATION_TO_EXECUTION_TRACE.json",
+  "verification_status": "VERIFIED",
+  "evidence_mode": "CONTROLLED_SYNTHETIC",
+  "side_effect": false
+}
