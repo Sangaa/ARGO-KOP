@@ -21,21 +21,21 @@ def _records(root: Path):
     return declared, records
 
 
-def test_runtime_registry_coverage_is_ten_verified_seams_and_one_governed_gap():
+def test_runtime_registry_coverage_is_eleven_verified_seams():
     root = Path(__file__).resolve().parents[2]
     declared, records = _records(root)
     assert len(declared) == 11
-    assert len(records) == 10
+    assert len(records) == 11
 
-    governed_gap = "Authorization -> Execution"
-    assert governed_gap not in records
-
-    for seam in declared - {governed_gap}:
+    for seam in declared:
         payload = records[seam]
         assert payload["state"] == "CONNECTED"
         assert payload["verification_status"] == "VERIFIED"
         for key in ("contract", "test", "trace"):
             assert (root / payload[key]).is_file(), (seam, key, payload[key])
+
+    authorization_execution = records["Authorization -> Execution"]
+    assert authorization_execution.get("evidence_mode", "CONTROLLED_SYNTHETIC") == "CONTROLLED_SYNTHETIC"
 
 
 def test_runtime_registry_coverage_does_not_count_registry_handoff_as_canonical_seam():
