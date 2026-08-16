@@ -7,8 +7,10 @@ ROOT = Path(__file__).resolve().parents[2]
 def _metadata(text: str, key: str):
     lines = text.splitlines()
     for index, line in enumerate(lines):
-        if line.strip().lower() == key.lower() and index + 1 < len(lines):
-            return lines[index + 1].strip()
+        if line.strip().lower() == key.lower():
+            for candidate in lines[index + 1 : index + 4]:
+                if candidate.strip():
+                    return candidate.strip()
         prefix = f"{key}:"
         if line.strip().lower().startswith(prefix.lower()):
             return line.split(":", 1)[1].strip()
