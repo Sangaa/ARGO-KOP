@@ -14,7 +14,7 @@ def test_controlled_mutation_sequence_is_consistent_across_control_plane_contrac
     required = [
         "READ → IDENTITY → AUTHORITY → DEPENDENCIES → CONSUMERS → MUTATE → COMMIT → RE-READ → REGISTRY SYNC",
         "MUTATE → COMMIT → RE-READ → RECORD EVIDENCE → CONTINUE",
-        "MUTATE → COMMIT → RE-READ → RECORD EVIDENCE → NEXT CHANGE",
+        "ONE MATERIAL CHANGE → COMMIT → RE-READ → RECORD EVIDENCE → NEXT CHANGE",
         "Path → Document ID → Commit SHA → Content/Blob SHA → Review Scope → Result",
         "REP-011",
         "REP-012",
