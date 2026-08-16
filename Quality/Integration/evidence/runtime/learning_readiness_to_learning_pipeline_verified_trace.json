@@ -1,0 +1,10 @@
+{
+  "record_type": "EXECUTION_TRACE",
+  "trace_id": "TRACE-LEARNING-READINESS-PIPELINE-001",
+  "task_id": "TASK-LEARNING-READINESS-PIPELINE-001",
+  "session_id": "SESSION-LEARNING-READINESS-PIPELINE-001",
+  "final_status": "CONTROLLED_SYNTHETIC",
+  "side_effect": false,
+  "evidence_class": "CONTROLLED_SYNTHETIC",
+  "path": "Learning Readiness -> Learning Pipeline"
+}
