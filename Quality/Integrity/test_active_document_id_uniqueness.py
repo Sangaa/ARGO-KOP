@@ -55,7 +55,7 @@ def _metadata_value(text: str, key: str):
     block = re.search(rf"^\s*{re.escape(key)}\s*:\s*(.+?)\s*$", text, re.MULTILINE | re.IGNORECASE)
     if block:
         return block.group(1).strip().lower()
-    block = re.search(rf"^\s*{re.escape(key)}\s*$\n\s*([^\n]+?)\s*$", text, re.MULTILINE | re.IGNORECASE)
+    block = re.search(rf"^\s*{re.escape(key)}\s*$\n(?:\s*\n)*\s*([^\n]+?)\s*$", text, re.MULTILINE | re.IGNORECASE)
     return block.group(1).strip().lower() if block else None
 
 
@@ -133,6 +133,16 @@ def test_active_canonical_filename_and_document_id_do_not_drift():
     assert not drifts, f"active canonical filename/Document ID drift: {drifts}"
 
 
+def test_interfaces_folder_inventory_matches_current_canonical_api_identity():
+    root = Path(__file__).resolve().parents[2]
+    folder_status = (root / "Interfaces/_FOLDER_STATUS.md").read_text(encoding="utf-8")
+    api = (root / "Interfaces/INTF-004_API.md").read_text(encoding="utf-8")
+
+    assert "`INTF-004_API.md` | `INTF-004` |" in folder_status
+    assert "Document ID: INTF-004" in api or "Document ID\nINTF-004" in api
+    assert "INT-004" not in folder_status
+
+
 def test_known_historical_identity_migrations_remain_resolved():
     root = Path(__file__).resolve().parents[2]
     governance = (root / "Governance/GOV-005_REVIEW_STANDARD.md").read_text(encoding="utf-8")
@@ -144,7 +154,7 @@ def test_known_historical_identity_migrations_remain_resolved():
     assert "LIF-001" in lifecycle and _has_canonical_yes(lifecycle)
     assert "ARC-001" in architecture
     assert "ARC-001" in architecture_status
-    assert re.search(r"^Canonical\s*$\n\s*Yes\s+[—-]", architecture_status, re.MULTILINE)
+    assert re.search(r"^Canonical\s*$\n(?:\s*\n)*\s*Yes\s+[—-]", architecture_status, re.MULTILINE)
     assert not (root / "Lifecycle/GOV-005_DOCUMENT_LIFECYCLE.md").exists()
 
 
