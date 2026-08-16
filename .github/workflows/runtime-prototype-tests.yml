@@ -71,8 +71,7 @@ jobs:
       - name: Install test runner
         run: python -m pip install --upgrade pytest
       - name: Run integration quality suite
-        working-directory: Quality/Integration
-        run: python -m pytest -q
+        run: python -m pytest -q Quality/Integration
 
   integrity-tests:
     runs-on: ubuntu-latest
