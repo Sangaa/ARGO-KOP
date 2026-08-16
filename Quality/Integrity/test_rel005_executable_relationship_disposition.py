@@ -10,7 +10,7 @@ def test_rel005_has_current_revalidation_disposition():
     text = DISPOSITION.read_text(encoding="utf-8")
     assert "REL-005 = REVALIDATION REQUIRED" in text
     assert "DOCUMENTED / CONTRACTUAL" in text
-    assert "no callable `SRV-009` consumer implementation" in text
+    assert "does not provide a callable `SRV-009` consumer implementation" in text
 
 
 def test_rel005_executable_proof_requires_existing_probe_and_registry_revalidation():
