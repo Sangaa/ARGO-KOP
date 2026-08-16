@@ -8,8 +8,8 @@ def test_architecture_map_and_platform_architecture_keep_distinct_identity():
 
     header = arc_map.split("# Purpose", 1)[0]
     assert "not `ARC-001`" in arc_map
-    assert "Document ID: ARC-001" not in header
-    assert "Document ID: ARC-NNN" in header
+    assert "Document ID:" not in header
+    assert "`ARC-001` is reserved for `Architecture/ARC-001_PLATFORM_ARCHITECTURE.md`." in header
     assert "Document ID" in platform_architecture
     assert "ARC-001" in platform_architecture
 
