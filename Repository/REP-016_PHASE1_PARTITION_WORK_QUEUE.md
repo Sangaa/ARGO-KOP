@@ -2,7 +2,7 @@
 
 Platform: ARGO KOP  
 Document ID: REP-016  
-Version: 1.2.3  
+Version: 1.2.4  
 Status: Active / Phase 1 Open / Integrity Hold  
 Development Baseline: 3.2.1  
 Last Audit: 2026-08-16
@@ -76,9 +76,27 @@ For material positive results:
 
 A negative result is never an absence claim from one search. A positive result is never current-main evidence until its ref/SHA is reconciled with the current authoritative ref.
 
+## P290 Governance Bootstrap Gate Registration — 2026-08-16
+
+Current repository evidence established `Governance/GOV-013A_HERMUZ_BOOTSTRAP_INTEGRITY_GATE.md` as `Approved / Canonical Addendum` to `GOV-013`. The addendum was created from EJR-181 to prevent pre-bootstrap structural mutation and requires:
+
+`BOOTSTRAP PROVEN → CHECKPOINT RECONCILED → SAFE CONTINUATION SELECTED → MUTATION AUTHORIZED`
+
+P290 synchronized this new governance artifact into both `REP-001` and `REP-002` so the canonical master index and physical storage map discover it as active Governance inventory. Both files were re-read after mutation.
+
+Current P290 evidence:
+
+- `REP-001` v1.11.3, commit `ce6aaac64727977d8feb9e6a603493678873ba62`, post-mutation re-read successful;
+- `REP-002` v1.7.4, commit `0c2891e62ccffdfe3fedfaa0e2ca76ba0c65f441`, post-mutation re-read successful;
+- `GOV-013A` current blob SHA `c92fd0f4e4da500a3cc8f3336c826ef81a1d3e51`.
+
+The repository search index did not return `GOV-013A` in the material search performed after creation, but direct current-path retrieval succeeded. Under the Search Defect Rule this is treated as an index/search-latency limitation, not evidence of absence.
+
+P290 does not close Priority 1, and does not promote any relationship or executable claim.
+
 ## P285 Current-HEAD Queue Synchronization — 2026-08-16
 
-Current `main` HEAD is `475e51ab2af895f34e7344c6ab553db34f14d72b`, recording P284 as the latest session delta.
+Current `main` HEAD at the time was `475e51ab2af895f34e7344c6ab553db34f14d72b`, recording P284 as the latest session delta.
 
 P284 revalidated `REP-015` from v1.0.6 to v1.0.7 and established it as `PRESENT / CURRENT within inspected control-plane scope / INTEGRITY HOLD` while preserving the historical 2026-08-14 audit provenance.
 
@@ -125,7 +143,7 @@ No executable promotion is authorized without callable SRV-009 consumer evidence
 
 ## Current Checkpoint
 
-`P285` is the latest recorded checkpoint for this control-plane reconciliation cycle.
+`P290` is the latest recorded checkpoint for this control-plane reconciliation cycle.
 
 Current state:
 
@@ -138,7 +156,7 @@ Current state:
 
 ## Next Safe Entry
 
-Continue Priority 1 by reconciling the remaining control-plane evidence surfaces (`REP-011`, `REP-012`, `REP-013`, `REP-014`, `REP-015`, `REP-020`) against current-main state. Preserve P261–P284 as repository-bound historical/current evidence according to their actual binding. Do not promote the queue simply because a newer checkpoint exists; reconcile the affected registries first.
+Continue Priority 1 by reconciling the remaining control-plane evidence surfaces (`REP-011`, `REP-012`, `REP-013`, `REP-014`, `REP-015`, `REP-020`) against current-main state. Preserve P261–P290 as repository-bound historical/current evidence according to their actual binding. Do not promote the queue simply because a newer checkpoint exists; reconcile the affected registries first.
 
 The next namespace transition to Priority 2 remains blocked until the Priority 1 closure decision is explicitly evidenced.
 
