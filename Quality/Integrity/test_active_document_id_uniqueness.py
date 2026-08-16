@@ -59,6 +59,11 @@ def _metadata_value(text: str, key: str):
     return block.group(1).strip().lower() if block else None
 
 
+def _document_ids(text: str):
+    values = DOCUMENT_ID_COLON_RE.findall(text) + DOCUMENT_ID_BLOCK_RE.findall(text)
+    return list(dict.fromkeys(values))
+
+
 def _has_canonical_yes(text: str) -> bool:
     return _metadata_value(text, "Canonical") == "yes"
 
@@ -80,12 +85,11 @@ def _extract_document_ids(root: Path):
             continue
 
         filename_id = _filename_id(path)
-        has_declared_id = bool(re.search(r"^\s*Document ID\b", header, re.MULTILINE | re.IGNORECASE))
-        if filename_id and has_declared_id:
+        declared_ids = _document_ids(header)
+        if filename_id and declared_ids:
             ids = [filename_id]
         else:
-            ids = DOCUMENT_ID_COLON_RE.findall(header) + DOCUMENT_ID_BLOCK_RE.findall(header)
-            ids = list(dict.fromkeys(ids))
+            ids = declared_ids
 
         for document_id in ids:
             owners[document_id].append(path.relative_to(root).as_posix())
@@ -101,6 +105,32 @@ def test_active_canonical_document_id_is_unique_within_current_evidence_scope():
         if len(set(paths)) > 1
     }
     assert not duplicates, f"active canonical Document ID collisions: {duplicates}"
+
+
+def test_active_canonical_filename_and_document_id_do_not_drift():
+    root = Path(__file__).resolve().parents[2]
+    drifts = {}
+    for path in root.rglob("*"):
+        if not path.is_file() or path.suffix.lower() not in TEXT_SUFFIXES:
+            continue
+        if not _is_active_document(path, root):
+            continue
+        try:
+            header = _header(path.read_text(encoding="utf-8"))
+        except (OSError, UnicodeDecodeError):
+            continue
+        if not _has_canonical_yes(header):
+            continue
+
+        filename_id = _filename_id(path)
+        declared_ids = _document_ids(header)
+        if filename_id and declared_ids and filename_id not in declared_ids:
+            drifts[path.relative_to(root).as_posix()] = {
+                "filename_id": filename_id,
+                "declared_ids": declared_ids,
+            }
+
+    assert not drifts, f"active canonical filename/Document ID drift: {drifts}"
 
 
 def test_known_historical_identity_migrations_remain_resolved():
