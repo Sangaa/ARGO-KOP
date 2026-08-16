@@ -9,7 +9,7 @@ def test_consolidated_audit_loads_materialized_verified_registry_evidence():
     assert result["seam_count"] == 11
     assert result["verified_registry_records_loaded"] >= 1
     assert result["authorization_to_execution_governed"] is True
-    assert "Authorization -> Execution" in result["partial"] or "Authorization -> Execution" in result["missing"]
+    assert "Authorization -> Execution" in result["connected"]
 
 
 def test_consolidated_audit_only_reports_declared_canonical_seams():
