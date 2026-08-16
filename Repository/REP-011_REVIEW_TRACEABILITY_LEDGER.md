@@ -6,13 +6,13 @@
 
 Platform: ARGO KOP
 Document ID: REP-011
-Version: 1.0.9
+Version: 1.1.0
 Status: Active / Integrity Hold
 Category: Repository Control
 Canonical: Yes
 Priority: Critical
 Development Baseline: 3.2.1
-Last Audit Date: 2026-08-15
+Last Audit Date: 2026-08-16
 
 ---
 
@@ -177,7 +177,7 @@ REVALIDATION_REQUIRED
 CLOSED
 ```
 
-The current control-plane state remains **PARTIALLY_RECONCILED / INTEGRITY HOLD** until all required cross-registry checks are supported by current repository evidence.
+The current control-plane state remains **PARTIALLY RECONCILED / INTEGRITY HOLD** until all required cross-registry checks are supported by current repository evidence.
 
 This explicit state prevents a successful edit of one control-plane file from being mistaken for repository-wide consistency.
 
@@ -408,6 +408,49 @@ P75 therefore remains **PARTIALLY RECONCILED / INTEGRITY HOLD**.
 ## 24. Guiding Rule
 
 **Never spend review effort twice because the repository forgot what was already proven; never declare unfinished work complete because the repository forgot what remains open; never treat an old file as current until its content, instructions, dependencies, relationships, version authority and operational fitness survive revalidation.**
+
+## 25. Current Control-Plane Reconciliation — 2026-08-16
+
+### REP-011 P240 evidence binding
+
+The repository contains a dedicated P240 reconciliation addendum for REP-011 at:
+
+`Repository/REP-011_RECONCILIATION_ADDENDUM_2026-08-16_P240.md`
+
+Its creation was itself governed by a current-main existence probe and records the P240 write-dispatch safety change. The addendum explicitly keeps REP-011 in `PARTIALLY_RECONCILED / INTEGRITY HOLD` and lists the unresolved executable consumer proof, duplicate audit, graph coverage, harness closure, CI/impact observability, domain coverage and final Boot integrity as open. The addendum also requires post-creation re-read before persistence is considered complete.
+
+### Current reconciliation boundary
+
+The P240 addendum is evidence of a specific reconciliation event; it does not close REP-011 or the wider control plane.
+
+The current control-plane chain remains:
+
+`REP-011 ↔ REP-012 ↔ REP-013 ↔ REP-014 ↔ REP-015 ↔ REP-016`
+
+with each edge requiring current evidence rather than historical reference alone.
+
+### P261/P262 continuation evidence
+
+P261 recovered the canonical identity/path of REP-016 after a lookup miss and recorded the distinction between a failed path lookup and an absence claim. P262 then synchronized the Phase-1 queue with that recovered identity while retaining Priority 1 open and preserving the Integrity Hold.
+
+The current session therefore treats:
+
+`lookup miss ≠ artifact absence`
+
+as an operationally reusable review rule.
+
+### Current unresolved scope
+
+- Priority 1 cross-registry reconciliation;
+- exhaustive internal Document-ID / duplicate audit;
+- executable `RUN-010 → ENG-006 → SRV-009` consumer proof;
+- complete current bidirectional relationship coverage;
+- controlled mutation/reconciliation harness closure;
+- CI ↔ impact-matrix observability closure;
+- domain-level Phase-1 coverage and explicit closure decision;
+- final Boot `BOOTED / INTEGRITY PASS`.
+
+No closure claim is made by this update.
 
 ---
 
