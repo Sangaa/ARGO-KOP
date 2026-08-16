@@ -94,11 +94,11 @@ Historical root naming-convention material is not active canonical inventory and
 - `Runtime/RUN-008_RUNTIME_STATE.md`
 - `Runtime/RUN-009_RECOVERY.md`
 - `Runtime/RUN-010_RUNTIME_REFERENCE.md`
-- `Runtime/RUN-011_COGNITIVE_EXECUTION_TARGET.md`
-- `Runtime/RUN-012_COGNITIVE_CONTEXT_HANDOFF.md`
-- `Runtime/RUN-013_COGNITIVE_DECISION_GATE.md`
-- `Runtime/RUN-014_COGNITIVE_TRACE_TARGET.md`
-- `Runtime/RUN-015_COGNITIVE_ACCEPTANCE_TARGET.md`
+- `Runtime/RUN-011_COGNITIVE_LOOP_PROTOTYPE.md`
+- `Runtime/RUN-012_COGNITIVE_LOOP_TEST_MATRIX.md`
+- `Runtime/RUN-013_CONTROLLED_HANDOFF.md`
+- `Runtime/RUN-014_LEARNING_PROMOTION_TEST.md`
+- `Runtime/RUN-015_RUNTIME_PROTOTYPE_CI_VALIDATION.md`
 - `Runtime/Prototype/PROTOTYPE_INTEGRATION_CONTRACT.md`
 - `Runtime/_FOLDER_STATUS.md`
 
@@ -285,6 +285,7 @@ A domain is not considered complete merely because its folder exists or because 
 21. New Historical Memory subdomains must be indexed when physically constructed and must remain capped by their verified scope until consolidated validation.
 22. New Project Memory subdomains must be indexed when physically constructed and must remain capped by their verified scope until consolidated validation.
 23. Directly verified Runtime target/prototype artifacts must be indexed when physically constructed while preserving their declared non-executable authority boundary.
+24. Master Index Runtime paths must match the current physical Runtime candidate paths; historical candidate names are not active inventory.
 
 ## 18. Integrity State
 
