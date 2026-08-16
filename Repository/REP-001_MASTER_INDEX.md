@@ -6,12 +6,12 @@
 
 Platform: ARGO KOP (Knowledge Operating Platform)
 Document ID: REP-001
-Version: 1.11.2
+Version: 1.11.3
 Status: Integrity Hold
 Category: Repository
 Canonical: Yes
 Priority: Critical
-Last Audit Date: Aug 15, 2026
+Last Audit Date: Aug 16, 2026
 Development Baseline: 3.2.1
 
 ---
@@ -73,13 +73,14 @@ Historical root naming-convention material is not active canonical inventory and
 - `Governance/GOV-009_REPOSITORY_POLICY.md`
 - `Governance/GOV-010_GOVERNANCE_MODEL.md`
 - `Governance/GOV-013_HERMUZ_SESSION_BUILD_PROTOCOL.md`
+- `Governance/GOV-013A_HERMUZ_BOOTSTRAP_INTEGRITY_GATE.md`
 - `Governance/_FOLDER_STATUS.md`
 
 `Governance/GOV-011_EXTERNAL_FEEDBACK_REPORT_STANDARD.md` exists as a proposed intake standard but is not active canonical authority until formally ratified.
 
 `Governance/GOV-012_DOMAIN_RECONSTRUCTION_STANDARD.md` exists as a proposed reconstruction standard. It governs rebuilding legacy or immature domains but is not active canonical authority until formally ratified.
 
-`GOV-013` is the approved canonical HERMUZ session operating contract. It governs engineering procedure only and does not override higher ARGO authority.
+`GOV-013` is the approved canonical HERMUZ session operating contract. `GOV-013A` is its approved canonical session-integrity addendum and establishes the mandatory pre-mutation bootstrap gate. Neither document overrides higher ARGO authority.
 
 ## 6. Runtime Layer
 
@@ -286,6 +287,7 @@ A domain is not considered complete merely because its folder exists or because 
 22. New Project Memory subdomains must be indexed when physically constructed and must remain capped by their verified scope until consolidated validation.
 23. Directly verified Runtime target/prototype artifacts must be indexed when physically constructed while preserving their declared non-executable authority boundary.
 24. Master Index Runtime paths must match the current physical Runtime candidate paths; historical candidate names are not active inventory.
+25. Approved canonical Governance addenda that govern HERMUZ session integrity must be represented in the active Governance inventory and remain subordinate to higher ARGO authority.
 
 ## 18. Integrity State
 
@@ -304,6 +306,14 @@ Local validation results remain bounded to their inspected scope. `100%` reposit
 ## 20. Governing Rule
 
 Repository Reality > Previous Status Claims > Conversation Memory
+
+---
+
+## P290 Current Governance Registration Reconciliation — 2026-08-16
+
+`GOV-013A_HERMUZ_BOOTSTRAP_INTEGRITY_GATE.md` is now registered in the active Governance inventory. The addendum remains subordinate to higher ARGO authority and does not create independent semantic or architectural authority.
+
+This registration closes the REP-001 discoverability gap for `GOV-013A` within the inspected Governance/Repository index scope.
 
 ---
 
