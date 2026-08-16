@@ -4,7 +4,7 @@
 
 Platform: ARGO KOP (Knowledge Operating Platform)
 Folder: Interfaces/
-Version: 1.1.1
+Version: 1.1.2
 Status: INTEGRITY HOLD
 Canonical: Yes
 Priority: Critical
@@ -40,6 +40,8 @@ The current canonical API artifact is `INTF-004_API.md` with Document ID `INTF-0
 
 The prior `INT-004` metadata form was an identity-drift defect and is retained only as historical/reconciliation evidence in session records. It is not the active identity.
 
+A reconciled folder-inventory identity must be treated as a distinct evidence surface: correcting the artifact metadata alone is insufficient when a folder inventory independently repeats the identity.
+
 # Compliance Check
 
 - Naming and identity must be verified against current repository evidence.
@@ -56,6 +58,7 @@ The prior `INT-004` metadata form was an identity-drift defect and is retained o
 4. Local interface validation does not prove global repository integrity.
 5. Historical status claims do not override current repository evidence.
 6. Folder inventory identity must match the current canonical artifact identity.
+7. Identity reconciliation must check the canonical artifact, its filename, and every authoritative inventory surface that repeats its identity.
 
 # Current State
 
