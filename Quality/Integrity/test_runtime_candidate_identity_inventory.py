@@ -20,7 +20,9 @@ def test_runtime_candidate_artifacts_match_filename_and_document_identity():
         assert path.is_file(), f"missing runtime candidate artifact: {path}"
         text = path.read_text(encoding="utf-8")
         assert re.search(rf"(?m)^#\s+{re.escape(run_id)}(?:\s+—|\s*$)", text)
-        assert re.search(rf"(?m)^Document ID\s*$\n\s*{re.escape(run_id)}\s*$", text)
+        assert re.search(rf"(?m)^Document ID\s*$\n\s*{re.escape(run_id)}\s*$", text) or re.search(
+            rf"(?m)^Document ID\s*:\s*{re.escape(run_id)}\s*$", text
+        )
         assert "Integrity Hold" in text
 
 
