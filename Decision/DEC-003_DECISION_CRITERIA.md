@@ -5,7 +5,7 @@
 
 Platform: ARGO KOP
 Module: Decision
-Document ID: DEC-001
+Document ID: DEC-003
 Version: 1.0
 Status: Approved
 Owner: ARGO Architecture
