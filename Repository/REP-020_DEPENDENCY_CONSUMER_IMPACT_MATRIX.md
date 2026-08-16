@@ -2,11 +2,11 @@
 
 Platform: ARGO KOP  
 Document ID: REP-020  
-Version: 0.1.8  
+Version: 0.1.9  
 Status: **Provisional / Phase-1 Seed / Not Authority**  
 Current Development Baseline: **3.2.1**  
-Last Audit: 2026-08-14  
-Last Revalidation Commit: `654d7f3377003f6882794c86ffc142ec45298e64`
+Last Audit: 2026-08-16  
+Last Revalidation Commit: `bf37455fe32478d0cbdd7f2faee6365fb5a60a57`
 
 ## Purpose
 
@@ -128,6 +128,9 @@ REP-001 and REP-002 are canonical Repository control-plane artifacts at Integrit
 | TST-045 | Current-open-PR audit | PASS | PR #1 and #3 closed; no obsolete verification PR left open in current working set |
 | TST-046 | Current REP-012 re-read after mutation | PASS | v1.0.7 / baseline 3.2.1 |
 | TST-047 | Matrix re-read after mutation | PASS | v0.1.8 |
+| TST-048 | Current-main control-plane revalidation | PASS within inspected scope | REP-011..016 + P265 checkpoint |
+| TST-049 | REP-020 currentness gap classification | PASS | Matrix classified STALE for current evidence binding, without altering semantic edge states |
+| TST-050 | REP-020 evidence-boundary refresh | PASS within control-plane scope | Revalidation metadata and scope note updated; matrix remains non-authoritative |
 
 ### Tests not performed / not yet sufficient
 
@@ -230,7 +233,7 @@ Direct reads confirm the declared responsibilities and boundaries. However, a di
 ### Chain D — Memory / Knowledge
 `SRV-003 → SRV-004`
 
-## Current Blocker State — 2026-08-14
+## Current Blocker State — 2026-08-16
 
 | Priority | Blocker | State | Next Action |
 |---|---|---|---|
@@ -256,6 +259,32 @@ For every material mutation, lookup outgoing edges, incoming/reverse edges, cons
 - Complete REP-001/REP-002/REP-011/REP-012/REP-013/REP-014 reconciliation validation after the latest REP-012 mutation.
 - Re-run final acceptance/regression after any approved corrective mutation.
 - Preserve provisional status until evidence supports promotion.
+
+## Current-Main Revalidation — 2026-08-16 / P266
+
+The matrix was revalidated against the current control-plane evidence boundary represented by P265 and its current-main checkpoint lineage.
+
+### Revalidated scope
+
+- `REP-011` — v1.1.0, Active / Integrity Hold;
+- `REP-012` — v1.0.7, Active Control / Integrity Hold / Phase 1 Population In Progress;
+- `REP-013` — v1.0.9, Active / Phase 1 Population In Progress;
+- `REP-014` — v1.2.2, Active / Relationship Enumeration In Progress;
+- `REP-015` — v1.0.6, Active / Phase 1 Open / Integrity Hold;
+- `REP-016` — v1.2.1, Active / Phase 1 Open / Integrity Hold;
+- `REP-020 P265` — current control-plane checkpoint evidence.
+
+### Revalidation boundary
+
+This refresh updates the matrix's evidence binding only. It does **not** promote any relationship to `VERIFIED`, does not establish executable `RUN-010 → ENG-006 → SRV-009` proof, and does not close the duplicate-ID or bidirectional-graph audits.
+
+The service/runtime relationship states above remain their previously established scope-bound states. They require direct artifact revalidation before being treated as current executable evidence.
+
+### Currentness disposition
+
+`REP-020` is now **PRESENT / CURRENT within the inspected control-plane evidence scope**, while remaining **non-authoritative** and **Phase-1 provisional**.
+
+The prior evidence binding to `654d7f3...` is retained historically; the current binding is `bf37455fe32478d0cbdd7f2faee6365fb5a60a57`.
 
 ## Integrity State
 
