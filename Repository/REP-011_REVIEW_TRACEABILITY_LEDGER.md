@@ -6,7 +6,7 @@
 
 Platform: ARGO KOP
 Document ID: REP-011
-Version: 1.1.1
+Version: 1.1.2
 Status: Active / Integrity Hold
 Category: Repository Control
 Canonical: Yes
@@ -478,9 +478,37 @@ P267 checkpoint evidence is stored in:
 
 `Repository/REP-020_SESSION_DELTA_2026-08-16_P267.md`
 
-## 27. Current State
+## 27. P269 Exact Services Inventory Reconciliation — 2026-08-16
 
-`REP-011` remains **PARTIALLY RECONCILED / INTEGRITY HOLD**. The P267 identity correction does not close Priority 1, the Services domain, or the executable `ENG-006 → SRV-009` evidence gap.
+Current-main direct directory evidence enumerated the Services partition as exactly:
+
+`SRV-001_SERVICE_ARCHITECTURE.md`
+`SRV-002_REPOSITORY_SERVICE.md`
+`SRV-003_MEMORY_SERVICE.md`
+`SRV-004_KNOWLEDGE_SERVICE.md`
+`SRV-005_VALIDATION_SERVICE.md`
+`SRV-006_SEARCH_SERVICE.md`
+`SRV-007_LOGGING_SERVICE.md`
+`SRV-008_INDEX_SERVICE.md`
+`SRV-009_UPDATE_SERVICE.md`
+`SRV-010_SERVICE_REFERENCE.md`
+
+The prior wildcard inventory in REP-013 was therefore replaced by observed physical identities. This is an inventory identity/content-tree correction only.
+
+Evidence included direct current-main enumeration of `Services/`, direct reads of `SRV-003`, `SRV-006`, `SRV-007`, `SRV-008`, and the existing SRV-010 reconciliation evidence. The Services folder status still states that the partition is `INTEGRITY HOLD` and that physical existence does not prove implementation or runtime execution.
+
+Mutation:
+
+- `REP-013` `v1.1.0 → v1.1.1`;
+- commit `f5e0e3f709442ba66861a75b07405bbd554be774`;
+- content SHA `e4cbcaba859554485f6c659d103118506629f824`;
+- post-mutation read-back required before checkpoint.
+
+No relationship promotion, executable claim, or Services closure was inferred.
+
+## 28. Current State
+
+`REP-011` remains **PARTIALLY RECONCILED / INTEGRITY HOLD**. P269 improves physical identity evidence for the Services partition but does not close Priority 1, the Services domain, or the executable `ENG-006 → SRV-009` evidence gap.
 
 ---
 
