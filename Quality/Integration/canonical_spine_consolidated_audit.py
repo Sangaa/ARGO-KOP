@@ -5,6 +5,8 @@ from canonical_spine_gap_map import SEAMS
 from canonical_spine_integration_audit import audit
 from verified_seam_evidence_loader import load_records
 
+CANONICAL_SEAMS = {f"{source} -> {destination}" for source, destination in SEAMS}
+
 
 def _load_verified_registry_records(root: Path) -> list[dict]:
     evidence_root = root / "Quality/Integration/evidence/runtime"
@@ -14,14 +16,16 @@ def _load_verified_registry_records(root: Path) -> list[dict]:
     for path in sorted(evidence_root.glob("*_verified_registry.json")):
         payload = json.loads(path.read_text(encoding="utf-8"))
         if isinstance(payload, dict) and "seam" in payload:
-            records.append(payload)
+            if payload.get("seam") in CANONICAL_SEAMS:
+                records.append(payload)
             continue
         if isinstance(payload, dict):
             for seam, record in payload.items():
-                if isinstance(record, dict):
-                    normalized = dict(record)
-                    normalized["seam"] = seam
-                    records.append(normalized)
+                if seam not in CANONICAL_SEAMS or not isinstance(record, dict):
+                    continue
+                normalized = dict(record)
+                normalized["seam"] = seam
+                records.append(normalized)
     return records
 
 
@@ -31,7 +35,7 @@ def build_consolidated_audit(root: Path) -> dict:
     verified_seams = load_records(root, registry_candidates) if registry_candidates else {}
     result = audit(root, verified_seams=verified_seams)
     evidence = result["evidence"]
-    canonical = {f"{source} -> {destination}" for source, destination in SEAMS}
+    canonical = CANONICAL_SEAMS
     connected = sorted(seam for seam in canonical if evidence.get(seam) == "CONNECTED")
     partial = sorted(seam for seam in canonical if evidence.get(seam) == "PARTIAL")
     missing = sorted(seam for seam in canonical if evidence.get(seam) == "MISSING")
