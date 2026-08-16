@@ -1,9 +1,11 @@
-import re
 from collections import defaultdict
 from pathlib import Path
+import re
 
 
-DOCUMENT_ID_RE = re.compile(r"^Document ID:\s*([A-Za-z0-9][A-Za-z0-9_-]*)\s*$", re.MULTILINE)
+DOCUMENT_ID_COLON_RE = re.compile(r"^Document ID:\s*([A-Za-z0-9][A-Za-z0-9_-]*)\s*$", re.MULTILINE)
+DOCUMENT_ID_BLOCK_RE = re.compile(r"^\s*Document ID\s*:?\s*$\n(?:\s*\n)*\s*([A-Za-z0-9][A-Za-z0-9_-]*)\s*$", re.MULTILINE)
+ID_RE = re.compile(r"^[A-Za-z]+-\d+$")
 EXCLUDED_PREFIXES = (
     "Archive/",
     "Memory/Engineering_Journal/",
@@ -19,6 +21,18 @@ def _is_active_document(path: Path, root: Path) -> bool:
     return not rel.startswith(EXCLUDED_PREFIXES)
 
 
+def _header(text: str) -> str:
+    for marker in ("# Purpose", "Purpose\n", "# 1."):
+        if marker in text:
+            text = text.split(marker, 1)[0]
+    return text[:12000]
+
+
+def _filename_id(path: Path):
+    token = path.stem.split("_", 1)[0]
+    return token if ID_RE.fullmatch(token) else None
+
+
 def _extract_document_ids(root: Path):
     owners = defaultdict(list)
     for path in root.rglob("*"):
@@ -30,7 +44,16 @@ def _extract_document_ids(root: Path):
             text = path.read_text(encoding="utf-8")
         except (OSError, UnicodeDecodeError):
             continue
-        for document_id in DOCUMENT_ID_RE.findall(text):
+
+        header = _header(text)
+        filename_id = _filename_id(path)
+        if filename_id and re.search(r"^\s*Document ID\b", header, re.MULTILINE | re.IGNORECASE):
+            ids = [filename_id]
+        else:
+            ids = DOCUMENT_ID_COLON_RE.findall(header) + DOCUMENT_ID_BLOCK_RE.findall(header)
+            ids = list(dict.fromkeys(ids))
+
+        for document_id in ids:
             owners[document_id].append(path.relative_to(root).as_posix())
     return owners
 
