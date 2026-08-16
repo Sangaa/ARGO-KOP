@@ -1,0 +1,12 @@
+{
+  "record_type": "EXECUTION_TRACE",
+  "trace_id": "TRACE-REASONING-DECISION-CANONICAL-001",
+  "task_id": "TASK-REASONING-DECISION-CANONICAL-001",
+  "session_id": "SESSION-REASONING-DECISION-CANONICAL-001",
+  "final_status": "CONTROLLED_SYNTHETIC",
+  "decision_status": "PROPOSAL_READY",
+  "execution_status": "NOT_REQUESTED",
+  "side_effect": false,
+  "evidence_class": "CONTROLLED_SYNTHETIC",
+  "path": "Reasoning -> Decision"
+}
