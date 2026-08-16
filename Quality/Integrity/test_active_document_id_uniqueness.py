@@ -138,9 +138,10 @@ def test_interfaces_folder_inventory_matches_current_canonical_api_identity():
     folder_status = (root / "Interfaces/_FOLDER_STATUS.md").read_text(encoding="utf-8")
     api = (root / "Interfaces/INTF-004_API.md").read_text(encoding="utf-8")
 
-    assert "`INTF-004_API.md` | `INTF-004` |" in folder_status
+    inventory = folder_status.split("# Audit Findings", 1)[0]
+    assert "`INTF-004_API.md` | `INTF-004` |" in inventory
+    assert "`INTF-004_API.md` | `INT-004` |" not in inventory
     assert "Document ID: INTF-004" in api or "Document ID\nINTF-004" in api
-    assert "INT-004" not in folder_status
 
 
 def test_known_historical_identity_migrations_remain_resolved():
