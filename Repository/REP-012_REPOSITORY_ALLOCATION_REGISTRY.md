@@ -2,13 +2,13 @@
 
 Platform: ARGO KOP
 Document ID: REP-012
-Version: 1.0.7
+Version: 1.0.8
 Status: Active Control / Integrity Hold / Phase 1 Population In Progress
 Category: Repository Control
 Canonical: Yes
 Priority: Critical
 Development Baseline: 3.2.1
-Last Audit Date: 2026-08-15
+Last Audit Date: 2026-08-16
 
 ---
 
@@ -560,26 +560,30 @@ with the overall reconciliation state remaining:
 
 `PARTIALLY RECONCILED / INTEGRITY HOLD`
 
-## 25. Related Documents
+## 25. P267 Services Identity Allocation Reconciliation — 2026-08-16
 
-- `Repository/REP-001_MASTER_INDEX.md`
-- `Repository/REP-002_REPOSITORY_MAP.md`
-- `Repository/REP-009_REPOSITORY_TRACEABILITY.md`
-- `Repository/REP-010_RELEASE_BASELINE.md`
-- `Repository/REP-011_REVIEW_TRACEABILITY_LEDGER.md`
-- `Repository/REP-013_REPOSITORY_CONTENT_TREE.md`
-- `Repository/REP-014_REPOSITORY_RELATIONSHIP_REGISTRY.md`
-- `Repository/REP-015_CONTROL_PLANE_BOOTSTRAP_CHECKLIST.md`
-- `Repository/REP-016_PHASE1_PARTITION_WORK_QUEUE.md`
-- `Repository/REP-020_DEPENDENCY_CONSUMER_IMPACT_MATRIX.md`
-- `PROJECT_BOOTSTRAP.md`
-- `PROJECT_STATUS.md`
-- `ROADMAP.md`
-- `Release/VERSION.md`
-- `Runtime/RUN-001_BOOT_SEQUENCE.md`
-- `Runtime/RUN-010_RUNTIME_REFERENCE.md`
-- `Assets/Diagrams/DIAG-001_REPOSITORY_PHASE1_STATUS_2026-08-10.svg`
-- `Assets/Diagrams/DIAG-001_REPOSITORY_PHASE1_STATUS_2026-08-10.md`
+A current-main identity correction was made in `REP-013` for `SRV-010`:
+
+`SRV-010_SERVICE_REFERENCE.md` is the canonical physical identity within the inspected scope.
+
+The prior inventory token `SRV-010_SERVICE_CATALOG.md` was an identity mismatch, not a second service artifact. Direct current-main read-back of the canonical reference and Services folder status confirm the corrected identity.
+
+Allocation disposition:
+
+- `SRV-010` remains `ALLOCATED` in the Services partition;
+- its review/reconciliation state remains bounded and under Integrity Hold;
+- physical identity correction does not establish implementation or runtime execution;
+- the broader Services partition remains open.
+
+Evidence:
+
+`REP-013 v1.1.0`, commit `ec36514b503db3857f57cefb9414512bfb866a48`, content SHA `638d47a34f87acff744ba09b9f0b6730c8863e48`.
+
+Checkpoint:
+
+`Repository/REP-020_SESSION_DELTA_2026-08-16_P267.md`
+
+This update does not close the control plane.
 
 ## 26. Final Principle
 
