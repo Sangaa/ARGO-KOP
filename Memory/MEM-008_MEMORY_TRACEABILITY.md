@@ -24,7 +24,7 @@ Version
 
 Status
 
-Approved
+Identity Reconciliation Required / Noncanonical Retained Artifact / Integrity Hold
 
 Category
 
@@ -32,13 +32,25 @@ Memory
 
 Canonical
 
-Yes
+No
+
+---
+
+# Identity Reconciliation Boundary
+
+This artifact is retained because it contains useful memory-traceability content and historical provenance.
+
+The active canonical `MEM-008` owner is `Memory/MEM-008_GUIDED_DISCOVERY_LEARNING_METHOD.md`, established by the persisted learning-method construction checkpoint.
+
+This file therefore must not be treated as a second canonical `MEM-008` authority.
+
+Its future canonical identity remains unresolved pending controlled Memory-domain identity allocation and consumer reconciliation.
 
 ---
 
 # Purpose
 
-This document defines the traceability model for repository memory throughout ARGO KOP.
+This retained artifact defines the traceability model for repository memory throughout ARGO KOP.
 
 Memory Traceability guarantees that every memory object can be followed from its origin through validation, operational use, revision and archival.
 
