@@ -4,7 +4,7 @@ import re
 
 
 DOCUMENT_ID_COLON_RE = re.compile(r"^Document ID:\s*([A-Za-z0-9][A-Za-z0-9_-]*)\s*$", re.MULTILINE)
-DOCUMENT_ID_BLOCK_RE = re.compile(r"^Document ID\s*$\n\s*([A-Za-z0-9][A-Za-z0-9_-]*)\s*$", re.MULTILINE)
+DOCUMENT_ID_BLOCK_RE = re.compile(r"^\s*Document ID\s*:?\s*$\n(?:\s*\n)*\s*([A-Za-z0-9][A-Za-z0-9_-]*)\s*$", re.MULTILINE)
 FILENAME_ID_RE = re.compile(r"(?:^|/)([A-Za-z]+-\d+)(?:_|\.|$)")
 EXCLUDED_PREFIXES = (
     "Archive/",
@@ -22,8 +22,6 @@ def _is_active_document(path: Path, root: Path) -> bool:
 
 
 def _header(text: str) -> str:
-    # Identity metadata belongs to the document preamble. This excludes
-    # related-document lists, examples and explanatory body text.
     for marker in ("# Purpose", "Purpose\n", "# 1."):
         if marker in text:
             text = text.split(marker, 1)[0]
@@ -41,14 +39,16 @@ def _extract_document_ids(root: Path):
             text = path.read_text(encoding="utf-8")
         except (OSError, UnicodeDecodeError):
             continue
+
         header = _header(text)
         ids = DOCUMENT_ID_COLON_RE.findall(header) + DOCUMENT_ID_BLOCK_RE.findall(header)
-
-        # A file may contain a retired/stale metadata block followed by its
-        # current canonical Document ID. Prefer the ID that matches its filename.
         filename_match = FILENAME_ID_RE.search(path.relative_to(root).as_posix())
         filename_id = filename_match.group(1) if filename_match else None
-        if filename_id and filename_id in ids:
+
+        # Canonical ownership follows the physical identity when the file's
+        # header explicitly declares a Document ID. This prevents an old,
+        # copied preamble from reassigning identity to the owner of another file.
+        if filename_id and re.search(r"^\s*Document ID\b", header, re.MULTILINE | re.IGNORECASE):
             ids = [filename_id]
         else:
             ids = list(dict.fromkeys(ids))
