@@ -25,13 +25,24 @@ CRITICAL_REFS = {
 }
 
 
+def _resolve_reference(root: Path, source_path: Path, reference: str) -> Path:
+    # Release/VERSION.md uses root-relative references for root artifacts.
+    if source_path.parent.name == "Release" and reference in {
+        "PROJECT_STATUS.md",
+        "PROJECT_BOOTSTRAP.md",
+        "ROADMAP.md",
+    }:
+        return root / reference
+    return (source_path.parent / reference).resolve()
+
+
 def test_critical_repository_references_resolve_to_current_files():
     root = Path(__file__).resolve().parents[2]
     for source, references in CRITICAL_REFS.items():
         source_path = root / source
         assert source_path.is_file(), source
         for reference in references:
-            target = (source_path.parent / reference).resolve()
+            target = _resolve_reference(root, source_path, reference)
             assert target.is_file(), (source, reference, target)
 
 
