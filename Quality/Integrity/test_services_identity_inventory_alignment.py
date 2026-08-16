@@ -26,7 +26,9 @@ def test_active_service_artifacts_match_filename_identity():
         assert path.is_file(), f"missing active service artifact: {path}"
         text = path.read_text(encoding="utf-8")
         assert re.search(rf"(?m)^#\s+{re.escape(service_id)}\s*$", text)
-        assert re.search(rf"(?m)^Document ID\s*$\n\s*{re.escape(service_id)}\s*$", text)
+        assert re.search(rf"(?m)^Document ID\s*:?\s*$\n\s*{re.escape(service_id)}\s*$", text) or re.search(
+            rf"(?m)^Document ID\s*:\s*{re.escape(service_id)}\s*$", text
+        )
         assert "Canonical" in text
         assert re.search(r"(?m)^\s*Yes\s*$", text)
 
@@ -34,7 +36,7 @@ def test_active_service_artifacts_match_filename_identity():
 def test_service_inventory_declares_the_same_active_service_set():
     folder_status = FOLDER_STATUS.read_text(encoding="utf-8")
     reference = SERVICE_REFERENCE.read_text(encoding="utf-8")
-    assert "SRV-001 through SRV-010" in folder_status
+    assert "`SRV-001` through `SRV-010`" in folder_status
     for service_id in SERVICES:
         assert service_id in reference
 
