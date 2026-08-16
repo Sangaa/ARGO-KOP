@@ -1,0 +1,11 @@
+{
+  "record_type": "EXECUTION_TRACE",
+  "trace_id": "TRACE-COGNITION-REASONING-CANONICAL-001",
+  "task_id": "TASK-COGNITION-REASONING-CANONICAL-001",
+  "session_id": "SESSION-COGNITION-REASONING-CANONICAL-001",
+  "final_status": "CONTROLLED_SYNTHETIC",
+  "reasoning_status": "REASONED",
+  "side_effect": false,
+  "evidence_class": "CONTROLLED_SYNTHETIC",
+  "path": "Cognition -> Reasoning"
+}
