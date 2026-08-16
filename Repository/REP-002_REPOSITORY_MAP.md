@@ -6,12 +6,12 @@
 
 Platform: ARGO KOP (Knowledge Operating Platform)
 Document ID: REP-002
-Version: 1.7.3
+Version: 1.7.4
 Status: Integrity Hold
 Category: Repository
 Canonical: Yes
 Priority: Critical
-Last Audit Date: Aug 15, 2026
+Last Audit Date: Aug 16, 2026
 Development Baseline: 3.2.1
 
 ---
@@ -81,13 +81,14 @@ Path: `Governance/`
 - `Governance/GOV-009_REPOSITORY_POLICY.md`
 - `Governance/GOV-010_GOVERNANCE_MODEL.md`
 - `Governance/GOV-013_HERMUZ_SESSION_BUILD_PROTOCOL.md`
+- `Governance/GOV-013A_HERMUZ_BOOTSTRAP_INTEGRITY_GATE.md`
 - `Governance/_FOLDER_STATUS.md`
 
 `Governance/GOV-011_EXTERNAL_FEEDBACK_REPORT_STANDARD.md` exists and is verified as `Proposed / Integrity Hold`; it is not active canonical authority until formally ratified.
 
 `Governance/GOV-012_DOMAIN_RECONSTRUCTION_STANDARD.md` exists as a proposed reconstruction standard. It is not active canonical authority until formally ratified.
 
-`GOV-013` is the approved canonical HERMUZ session operating contract. It governs engineering procedure only and does not override higher ARGO authority.
+`GOV-013` is the approved canonical HERMUZ session operating contract. `GOV-013A` is its approved canonical session-integrity addendum and establishes the mandatory pre-mutation bootstrap gate. Neither document overrides higher ARGO authority.
 
 ## 6. Runtime Layer
 
@@ -267,6 +268,7 @@ These domains are not assumed complete or architecturally authoritative from fol
 20. `REP-001`, `REP-002`, `REP-013` and `REP-014` must be reconciled after material Memory inventory or relationship changes.
 21. Directly verified Runtime target/prototype artifacts must be mapped when physically constructed while preserving their declared non-executable authority boundary.
 22. Runtime candidate paths in the physical map must match the current `Runtime/` repository paths; historical candidate names are not active inventory.
+23. Approved canonical Governance addenda that govern HERMUZ session integrity must appear in both the master index and physical storage map while remaining subordinate to higher ARGO authority.
 
 ## 18. Integrity State
 
@@ -275,6 +277,14 @@ Current repository state: **INTEGRITY HOLD**.
 The map is synchronized with the current declared Core, Governance, Repository control-plane, Runtime, Architecture, Lifecycle, Interfaces, Models, Plugins and Build-01 Memory inventory within the inspected scope. Runtime ↔ Engine relationship validation remains open.
 
 Completion of individual files or reviewed subsets must not be interpreted as Phase 1 repository completion. REP-011 is the binding review/completion evidence ledger until an explicit Phase 1 closure decision is recorded.
+
+---
+
+## P290 Current Governance Registration Reconciliation — 2026-08-16
+
+`GOV-013A_HERMUZ_BOOTSTRAP_INTEGRITY_GATE.md` is now physically mapped in the active Governance inventory and is synchronized with REP-001. Its status remains `Approved / Canonical Addendum`, subordinate to higher ARGO authority.
+
+This closes the REP-002 physical-map discoverability gap for `GOV-013A` within the inspected Governance/Repository scope.
 
 ---
 
