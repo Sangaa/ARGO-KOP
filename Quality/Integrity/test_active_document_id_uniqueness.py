@@ -99,10 +99,12 @@ def test_known_historical_identity_migrations_remain_resolved():
     governance = (root / "Governance/GOV-005_REVIEW_STANDARD.md").read_text(encoding="utf-8")
     lifecycle = (root / "Lifecycle/LIF-001_DOCUMENT_LIFECYCLE.md").read_text(encoding="utf-8")
     architecture = (root / "Architecture/ARC-001_PLATFORM_ARCHITECTURE.md").read_text(encoding="utf-8")
+    architecture_status = (root / "Architecture/_FOLDER_STATUS.md").read_text(encoding="utf-8")
 
     assert "Document ID: GOV-005" in governance
     assert "LIF-001" in lifecycle and _has_canonical_yes(lifecycle)
-    assert "ARC-001" in architecture and _has_canonical_yes(architecture)
+    assert "ARC-001" in architecture
+    assert "ARC-001" in architecture_status and "Canonical: Yes" in architecture_status
     assert not (root / "Lifecycle/GOV-005_DOCUMENT_LIFECYCLE.md").exists()
 
 
