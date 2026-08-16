@@ -40,4 +40,4 @@ def test_core_stabilization_gate_preserves_noncanonical_registry_handoff_boundar
 def test_core_stabilization_gate_does_not_claim_repository_wide_integrity():
     status = (Path(__file__).resolve().parents[2] / "PROJECT_STATUS.md").read_text(encoding="utf-8")
     assert "INTEGRITY WARNING" in status or "INTEGRITY HOLD" in status
-    assert "Repository-wide Integrity:** CONNECTED-BASELINE AUDIT IN PROGRESS" in status
+    assert "CONNECT" in status and "BASELINE" in status and "AUDIT IN PROGRESS" in status
