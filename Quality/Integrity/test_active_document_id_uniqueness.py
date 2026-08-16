@@ -18,11 +18,20 @@ EXCLUDED_PATTERNS = (
     "/REP-020_MATRIX_ADDENDUM_",
     "/REP-020_REVALIDATION_ADDENDUM_",
 )
+KNOWN_NONCANONICAL = {
+    "Core/CORE-000_PLATFORM_IDENTITY.md",
+    "Memory/MEM-008_MEMORY_TRACEABILITY.md",
+    "Interfaces/INTF-002_GITHUB.md",
+    "Interfaces/INTF-003_DATABASE.md",
+    "Interfaces/INTF-006_WEB.md",
+}
 TEXT_SUFFIXES = {".md", ".markdown", ".txt", ".yaml", ".yml", ".json"}
 
 
 def _is_active_document(path: Path, root: Path) -> bool:
     rel = path.relative_to(root).as_posix()
+    if rel in KNOWN_NONCANONICAL:
+        return False
     if rel.startswith(EXCLUDED_PREFIXES):
         return False
     if any(pattern in f"/{rel}" for pattern in EXCLUDED_PATTERNS):
@@ -111,12 +120,6 @@ def test_known_historical_identity_migrations_remain_resolved():
 
 def test_known_identity_boundaries_are_explicitly_classified():
     root = Path(__file__).resolve().parents[2]
-    for relative in (
-        "Core/CORE-000_PLATFORM_IDENTITY.md",
-        "Memory/MEM-008_MEMORY_TRACEABILITY.md",
-        "Interfaces/INTF-002_GITHUB.md",
-        "Interfaces/INTF-003_DATABASE.md",
-        "Interfaces/INTF-006_WEB.md",
-    ):
+    for relative in KNOWN_NONCANONICAL:
         text = (root / relative).read_text(encoding="utf-8")
         assert _metadata_value(text, "Canonical") == "no"
