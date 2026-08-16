@@ -1,0 +1,13 @@
+{
+  "record_type": "EXECUTION_TRACE",
+  "trace_id": "TRACE-EXECUTION-OUTCOME-CANONICAL-001",
+  "task_id": "TASK-EXECUTION-OUTCOME-CANONICAL-001",
+  "session_id": "SESSION-EXECUTION-OUTCOME-CANONICAL-001",
+  "final_status": "SIMULATED",
+  "outcome_result": "INCONCLUSIVE",
+  "execution_trace_ids": ["TRACE-EXECUTION-OUTCOME-CANONICAL-001"],
+  "evidence_trace_ids": ["TRACE-EXECUTION-OUTCOME-CANONICAL-001"],
+  "side_effect": false,
+  "evidence_class": "CONTROLLED_SYNTHETIC",
+  "path": "Execution -> Outcome"
+}
