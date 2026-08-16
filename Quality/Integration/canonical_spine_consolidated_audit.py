@@ -42,6 +42,7 @@ def build_consolidated_audit(root: Path) -> dict:
     governed = sorted(
         seam for seam in canonical if evidence.get(seam) in {"BLOCKED_BY_GOVERNANCE", "INTENTIONALLY_ISOLATED"}
     )
+    authorization_state = evidence.get("Authorization -> Execution")
     return {
         "seam_count": len(SEAMS),
         "connected": connected,
@@ -49,7 +50,9 @@ def build_consolidated_audit(root: Path) -> dict:
         "missing": missing,
         "governed_or_isolated": governed,
         "verified_registry_records_loaded": len(verified_seams),
-        "authorization_to_execution_governed": evidence.get("Authorization -> Execution") != "CONNECTED",
+        # A connected record here proves a governed, side-effect-bounded seam;
+        # it does not imply autonomous real-world execution authority.
+        "authorization_to_execution_governed": authorization_state == "CONNECTED",
     }
 
 
