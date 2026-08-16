@@ -42,6 +42,14 @@ def _filename_id(path: Path):
     return token if ID_RE.fullmatch(token) else None
 
 
+def _metadata_value(text: str, key: str):
+    block = re.search(rf"^\s*{re.escape(key)}\s*:\s*(.+?)\s*$", text, re.MULTILINE | re.IGNORECASE)
+    if block:
+        return block.group(1).strip().lower()
+    block = re.search(rf"^\s*{re.escape(key)}\s*$\n\s*([^\n]+?)\s*$", text, re.MULTILINE | re.IGNORECASE)
+    return block.group(1).strip().lower() if block else None
+
+
 def _extract_document_ids(root: Path):
     owners = defaultdict(list)
     for path in root.rglob("*"):
@@ -55,8 +63,7 @@ def _extract_document_ids(root: Path):
             continue
 
         header = _header(text)
-        canonical = bool(re.search(r"^Canonical:\s*Yes\s*$", header, re.MULTILINE | re.IGNORECASE))
-        if not canonical:
+        if _metadata_value(header, "Canonical") != "yes":
             continue
 
         filename_id = _filename_id(path)
@@ -90,8 +97,8 @@ def test_known_historical_identity_migrations_remain_resolved():
     architecture = (root / "Architecture/ARC-001_PLATFORM_ARCHITECTURE.md").read_text(encoding="utf-8")
 
     assert "Document ID: GOV-005" in governance
-    assert "LIF-001" in lifecycle and "Canonical: Yes" in lifecycle
-    assert "ARC-001" in architecture and "Canonical: Yes" in architecture
+    assert "LIF-001" in lifecycle and _metadata_value(lifecycle, "Canonical") == "yes"
+    assert "ARC-001" in architecture and _metadata_value(architecture, "Canonical") == "yes"
     assert not (root / "Lifecycle/GOV-005_DOCUMENT_LIFECYCLE.md").exists()
 
 
@@ -105,4 +112,4 @@ def test_known_identity_boundaries_are_explicitly_classified():
         "Interfaces/INTF-006_WEB.md",
     ):
         text = (root / relative).read_text(encoding="utf-8")
-        assert re.search(r"^Canonical\s*$\n\s*No\s*$", text, re.MULTILINE)
+        assert _metadata_value(text, "Canonical") == "no"
