@@ -2,7 +2,7 @@
 
 Platform: ARGO KOP  
 Document ID: REP-016  
-Version: 1.2.2  
+Version: 1.2.3  
 Status: Active / Phase 1 Open / Integrity Hold  
 Development Baseline: 3.2.1  
 Last Audit: 2026-08-16
@@ -76,20 +76,34 @@ For material positive results:
 
 A negative result is never an absence claim from one search. A positive result is never current-main evidence until its ref/SHA is reconciled with the current authoritative ref.
 
-## P279 Current-HEAD Control-Plane Resynchronization — 2026-08-16
+## P285 Current-HEAD Queue Synchronization — 2026-08-16
 
-The current `main` HEAD is `002cfca7b32b9f09fd74e65a916fb8fcb8ca56a9`, which records P278 as the latest session delta.
+Current `main` HEAD is `475e51ab2af895f34e7344c6ab553db34f14d72b`, recording P284 as the latest session delta.
 
-The previous queue checkpoint `P261` is therefore retained as historical checkpoint evidence, but it is no longer the current queue checkpoint.
+P284 revalidated `REP-015` from v1.0.6 to v1.0.7 and established it as `PRESENT / CURRENT within inspected control-plane scope / INTEGRITY HOLD` while preserving the historical 2026-08-14 audit provenance.
 
 Current evidence establishes:
 
-- `REP-014` was reconciled through P278, with `REL-005` and `REL-009` both explicitly `REVALIDATION REQUIRED`.
-- `REP-020` records the P278 evidence boundary and remains provisional/non-authoritative.
+- `REP-015` is current within the inspected Ring-0 scope.
+- `REP-014` remains v1.2.3 with `REL-005` and `REL-009` both `REVALIDATION REQUIRED`.
+- `REP-020` remains provisional/non-authoritative.
 - `ENG-006 → SRV-009` executable proof remains open.
-- The current control plane remains `PARTIALLY RECONCILED / INTEGRITY HOLD`.
+- Priority 1 remains open; no Ring-0 closure or Global PASS is implied.
 
-This update synchronizes the execution queue with the current repository evidence. It does not imply Phase-1 closure, executable proof, duplicate-ID closure, or Global PASS.
+P279 and P284 are preserved as repository-bound historical/current checkpoints according to their actual evidence. This update synchronizes the queue with P284; it does not promote Priority 2 or close Ring 0.
+
+## P279 Current-HEAD Control-Plane Resynchronization — 2026-08-16
+
+The current `main` HEAD at the time was `002cfca7b32b9f09fd74e65a916fb8fcb8ca56a9`, which recorded P278 as the latest session delta.
+
+The previous queue checkpoint `P261` was retained as historical checkpoint evidence, but was no longer the current queue checkpoint.
+
+Current evidence established:
+
+- `REP-014` was reconciled through P278, with `REL-005` and `REL-009` both explicitly `REVALIDATION REQUIRED`.
+- `REP-020` recorded the P278 evidence boundary and remained provisional/non-authoritative.
+- `ENG-006 → SRV-009` executable proof remained open.
+- The current control plane remained `PARTIALLY RECONCILED / INTEGRITY HOLD`.
 
 ## P261 Control-Plane Reconciliation
 
@@ -111,7 +125,7 @@ No executable promotion is authorized without callable SRV-009 consumer evidence
 
 ## Current Checkpoint
 
-`P279` is the latest recorded checkpoint for this control-plane reconciliation cycle.
+`P285` is the latest recorded checkpoint for this control-plane reconciliation cycle.
 
 Current state:
 
@@ -124,7 +138,7 @@ Current state:
 
 ## Next Safe Entry
 
-Continue Priority 1 by reconciling the remaining control-plane evidence surfaces (`REP-011`, `REP-012`, `REP-013`, `REP-014`, `REP-015`, `REP-020`) against current-main state. Preserve P261–P278 as historical/current evidence according to their actual repository binding. Do not promote the queue simply because a newer checkpoint exists; reconcile the affected registries first.
+Continue Priority 1 by reconciling the remaining control-plane evidence surfaces (`REP-011`, `REP-012`, `REP-013`, `REP-014`, `REP-015`, `REP-020`) against current-main state. Preserve P261–P284 as repository-bound historical/current evidence according to their actual binding. Do not promote the queue simply because a newer checkpoint exists; reconcile the affected registries first.
 
 The next namespace transition to Priority 2 remains blocked until the Priority 1 closure decision is explicitly evidenced.
 
