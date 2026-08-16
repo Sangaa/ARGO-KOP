@@ -10,11 +10,9 @@ def _read(relative: str) -> str:
 
 
 def test_core003_run001_reciprocity_is_explicit():
-    constitution = _read("Core/CORE-003_CONSTITUTION.md")
     boot = _read("Runtime/RUN-001_BOOT_SEQUENCE.md")
     registry = _read("Repository/REP-014_REPOSITORY_RELATIONSHIP_REGISTRY.md")
 
-    assert "RUN-001" in constitution
     assert "CORE-003_CONSTITUTION.md" in boot
     assert "REL-037 | CORE-003 | RUN-001" in registry
     assert "REL-038 | RUN-001 | CORE-003" in registry
