@@ -1,11 +1,11 @@
-# REP-013 — REPOSITORY CONTENT TREE
+# REP-013 — REPOSITORY CONTENT TREE  
 
 Platform: ARGO KOP  
 Document ID: REP-013  
-Version: 1.0.9  
+Version: 1.1.0  
 Status: Active / Phase 1 Population In Progress  
 Development Baseline: 3.2.1  
-Last Audit: 2026-08-15
+Last Audit: 2026-08-16
 
 ## Purpose
 
@@ -136,11 +136,11 @@ Services/
 ├── SRV-007_*.md
 ├── SRV-008_*.md
 ├── SRV-009_UPDATE_SERVICE.md
-├── SRV-010_SERVICE_CATALOG.md
+├── SRV-010_SERVICE_REFERENCE.md
 └── _FOLDER_STATUS.md
 ```
 
-Wildcard entries are intentionally unresolved until exact filenames are enumerated from current repository evidence. They are placeholders, not fabricated file identities.
+`SRV-010_SERVICE_REFERENCE.md` is the canonical current physical identity established by direct current-main read-back. Wildcard entries remain intentionally unresolved until exact filenames are enumerated from current repository evidence. They are placeholders, not fabricated file identities.
 
 ### Runtime/
 
@@ -395,7 +395,7 @@ Until then the folder remains **OPEN**.
 
 Current repository state: **INTEGRITY HOLD**.
 
-The content tree is synchronized with the current inspected repository baseline and records the canonical physical path for the Knowledge Organization specification. Runtime `RUN-011..015` and `Runtime/Prototype/` are now explicitly represented from current repository evidence; exhaustive Runtime and broader cross-layer relationship validation remain open.
+The content tree is synchronized with the current inspected repository baseline and records the canonical physical path for the Knowledge Organization specification and `SRV-010_SERVICE_REFERENCE.md`. Runtime `RUN-011..015` and `Runtime/Prototype/` are explicitly represented from current repository evidence; exhaustive Runtime and broader cross-layer relationship validation remain open.
 
 ## Verification Model
 
