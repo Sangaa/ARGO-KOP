@@ -1,0 +1,8 @@
+{
+  "seam": "Outcome Evaluation -> Feedback Quality",
+  "state": "CONNECTED",
+  "contract": "Runtime/Learning/FEEDBACK_QUALITY_GATE_CONTRACT.md",
+  "test": "Quality/Integration/test_outcome_evaluation_to_feedback_quality.py",
+  "trace": "Quality/Integration/evidence/runtime/outcome_evaluation_to_feedback_quality_verified_trace.json",
+  "verification_status": "VERIFIED"
+}
