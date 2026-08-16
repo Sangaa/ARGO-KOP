@@ -21,10 +21,10 @@ def test_connected_spine_preserves_trace_lineage_into_outcome_evaluation_and_rea
     )
 
     assert readiness["status"] == "NOT_READY"
-    assert readiness["stage"] == "EVALUATION"
-    assert readiness["evaluation"]["status"] == "EVALUATION_REJECTED"
-    assert "OUTCOME_EVIDENCE_REQUIRED" not in readiness["evaluation"]["issues"]
-    assert "EXECUTION_TRACE_REQUIRED" not in readiness["evaluation"]["issues"]
+    assert readiness["stage"] == "READINESS"
+    assert readiness["quality"]["status"] == "QUALITY_ASSESSED"
+    assert readiness["quality"]["quality"] == "INSUFFICIENT"
+    assert readiness["report"]["knowledge_promoted"] is False
 
 
 def test_unauthorized_path_does_not_enter_downstream_learning_chain():
