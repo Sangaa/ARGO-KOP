@@ -1,0 +1,8 @@
+{
+  "seam": "Learning Readiness -> Learning Pipeline",
+  "state": "CONNECTED",
+  "contract": "Runtime/Learning/LEARNING_PIPELINE_INTEGRATION_CONTRACT.md",
+  "test": "Quality/Integration/test_learning_pipeline_to_verified_registry.py",
+  "trace": "Quality/Integration/evidence/runtime/learning_readiness_to_learning_pipeline_verified_trace.json",
+  "verification_status": "VERIFIED"
+}
