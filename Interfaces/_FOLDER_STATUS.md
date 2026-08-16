@@ -24,6 +24,7 @@ The Interfaces layer defines communication protocols, context ingestion routines
 | `INTF-001_INTERFACE_SPEC.md` | `INTF-001` | Approved / Revalidated | Yes |
 | `INTF-004_API.md` | `INTF-004` | Integrity Hold / Revalidated | Yes |
 | `INTF-006_ENVIRONMENT_SENSING.md` | `INTF-006` | Proposed / Integrity Hold | Yes |
+| `INTF-010_INTEGRATIONS.md` | `INTF-010` | Validated / Revalidated / Integrity Hold | Yes |
 | `_FOLDER_STATUS.md` | N/A | Audit Record | Yes |
 
 # Audit Findings
@@ -31,6 +32,8 @@ The Interfaces layer defines communication protocols, context ingestion routines
 The previous folder status declared the folder completed while only `INTF-001` was inventoried.
 
 The current audit directly verified additional interface artifacts. Therefore the previous completion claim is no longer accepted as repository truth.
+
+`INTF-010_INTEGRATIONS.md` is a directly verified canonical integration artifact and is now included in the active inventory. Its indexing in `REP-001` and use by current interface/runtime contracts establishes that its prior omission from this folder inventory was an inventory-surface drift, not an artifact identity defect.
 
 The new environment-sensing interface is intentionally marked `Proposed / Integrity Hold` until its cross-layer relationships and runtime integration are validated.
 
@@ -59,6 +62,7 @@ A reconciled folder-inventory identity must be treated as a distinct evidence su
 5. Historical status claims do not override current repository evidence.
 6. Folder inventory identity must match the current canonical artifact identity.
 7. Identity reconciliation must check the canonical artifact, its filename, and every authoritative inventory surface that repeats its identity.
+8. Any directly verified canonical Interface artifact represented in the active master index must be reflected in this folder inventory or explicitly dispositioned as intentionally excluded.
 
 # Current State
 
