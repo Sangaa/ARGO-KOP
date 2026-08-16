@@ -50,6 +50,10 @@ def _metadata_value(text: str, key: str):
     return block.group(1).strip().lower() if block else None
 
 
+def _has_canonical_yes(text: str) -> bool:
+    return _metadata_value(text, "Canonical") == "yes"
+
+
 def _extract_document_ids(root: Path):
     owners = defaultdict(list)
     for path in root.rglob("*"):
@@ -63,7 +67,7 @@ def _extract_document_ids(root: Path):
             continue
 
         header = _header(text)
-        if _metadata_value(header, "Canonical") != "yes":
+        if not _has_canonical_yes(header):
             continue
 
         filename_id = _filename_id(path)
@@ -97,8 +101,8 @@ def test_known_historical_identity_migrations_remain_resolved():
     architecture = (root / "Architecture/ARC-001_PLATFORM_ARCHITECTURE.md").read_text(encoding="utf-8")
 
     assert "Document ID: GOV-005" in governance
-    assert "LIF-001" in lifecycle and _metadata_value(lifecycle, "Canonical") == "yes"
-    assert "ARC-001" in architecture and _metadata_value(architecture, "Canonical") == "yes"
+    assert "LIF-001" in lifecycle and _has_canonical_yes(lifecycle)
+    assert "ARC-001" in architecture and _has_canonical_yes(architecture)
     assert not (root / "Lifecycle/GOV-005_DOCUMENT_LIFECYCLE.md").exists()
 
 
