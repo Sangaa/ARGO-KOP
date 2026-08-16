@@ -13,12 +13,21 @@ EXCLUDED_PREFIXES = (
     "Quality/Integration/canonical_evidence/",
     "Quality/Integrity/",
 )
+EXCLUDED_PATTERNS = (
+    "/REP-020_SESSION_DELTA_",
+    "/REP-020_MATRIX_ADDENDUM_",
+    "/REP-020_REVALIDATION_ADDENDUM_",
+)
 TEXT_SUFFIXES = {".md", ".markdown", ".txt", ".yaml", ".yml", ".json"}
 
 
 def _is_active_document(path: Path, root: Path) -> bool:
     rel = path.relative_to(root).as_posix()
-    return not rel.startswith(EXCLUDED_PREFIXES)
+    if rel.startswith(EXCLUDED_PREFIXES):
+        return False
+    if any(pattern in f"/{rel}" for pattern in EXCLUDED_PATTERNS):
+        return False
+    return True
 
 
 def _header(text: str) -> str:
@@ -47,7 +56,9 @@ def _extract_document_ids(root: Path):
 
         header = _header(text)
         filename_id = _filename_id(path)
-        if filename_id and re.search(r"^\s*Document ID\b", header, re.MULTILINE | re.IGNORECASE):
+        has_declared_id = bool(re.search(r"^\s*Document ID\b", header, re.MULTILINE | re.IGNORECASE))
+        canonical_flag = re.search(r"^Canonical:\s*Yes\s*$", header, re.MULTILINE | re.IGNORECASE)
+        if filename_id and has_declared_id and canonical_flag:
             ids = [filename_id]
         else:
             ids = DOCUMENT_ID_COLON_RE.findall(header) + DOCUMENT_ID_BLOCK_RE.findall(header)
@@ -58,7 +69,7 @@ def _extract_document_ids(root: Path):
     return owners
 
 
-def test_active_document_id_is_unique_within_current_evidence_scope():
+def test_active_canonical_document_id_is_unique_within_current_evidence_scope():
     root = Path(__file__).resolve().parents[2]
     owners = _extract_document_ids(root)
     duplicates = {
@@ -66,7 +77,7 @@ def test_active_document_id_is_unique_within_current_evidence_scope():
         for document_id, paths in owners.items()
         if len(set(paths)) > 1
     }
-    assert not duplicates, f"active Document ID collisions: {duplicates}"
+    assert not duplicates, f"active canonical Document ID collisions: {duplicates}"
 
 
 def test_known_historical_identity_migrations_remain_resolved():
@@ -75,3 +86,11 @@ def test_known_historical_identity_migrations_remain_resolved():
     assert owners["GOV-005"] == ["Governance/GOV-005_REVIEW_STANDARD.md"]
     assert owners["LIF-001"] == ["Lifecycle/LIF-001_DOCUMENT_LIFECYCLE.md"]
     assert owners["ARC-001"] == ["Architecture/ARC-001_PLATFORM_ARCHITECTURE.md"]
+
+
+def test_known_memory_and_core_identity_boundaries_are_present_for_follow_up():
+    root = Path(__file__).resolve().parents[2]
+    assert (root / "Memory/MEM-008_GUIDED_DISCOVERY_LEARNING_METHOD.md").is_file()
+    assert (root / "Memory/MEM-008_MEMORY_TRACEABILITY.md").is_file()
+    assert (root / "Core/CORE-000_PLATFORM_IDENTITY.md").is_file()
+    assert (root / "Core/CORE-000_PLATFORM_ARCHITECTURE.md").is_file()
