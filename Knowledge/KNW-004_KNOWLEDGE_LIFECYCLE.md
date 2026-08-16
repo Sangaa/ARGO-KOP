@@ -244,7 +244,7 @@ This lifecycle is itself reviewable. If a rule is shown to be incorrect, contrad
 - `Knowledge/KNW-009_KNOWLEDGE_EVOLUTION.md`
 - `Repository/REP-006_REPOSITORY_LIFECYCLE.md`
 - `Repository/REP-009_REPOSITORY_TRACEABILITY.md`
-- `Lifecycle/GOV-005_DOCUMENT_LIFECYCLE.md`
+- `Lifecycle/LIF-001_DOCUMENT_LIFECYCLE.md`
 - `Core/CORE-003_CONSTITUTION.md`
 
 # Guiding Statement
