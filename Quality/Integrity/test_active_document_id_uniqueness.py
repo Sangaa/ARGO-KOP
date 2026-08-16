@@ -85,10 +85,14 @@ def test_active_canonical_document_id_is_unique_within_current_evidence_scope():
 
 def test_known_historical_identity_migrations_remain_resolved():
     root = Path(__file__).resolve().parents[2]
-    owners = _extract_document_ids(root)
-    assert owners["GOV-005"] == ["Governance/GOV-005_REVIEW_STANDARD.md"]
-    assert owners["LIF-001"] == ["Lifecycle/LIF-001_DOCUMENT_LIFECYCLE.md"]
-    assert owners["ARC-001"] == ["Architecture/ARC-001_PLATFORM_ARCHITECTURE.md"]
+    governance = (root / "Governance/GOV-005_REVIEW_STANDARD.md").read_text(encoding="utf-8")
+    lifecycle = (root / "Lifecycle/LIF-001_DOCUMENT_LIFECYCLE.md").read_text(encoding="utf-8")
+    architecture = (root / "Architecture/ARC-001_PLATFORM_ARCHITECTURE.md").read_text(encoding="utf-8")
+
+    assert "Document ID: GOV-005" in governance
+    assert "LIF-001" in lifecycle and "Canonical: Yes" in lifecycle
+    assert "ARC-001" in architecture and "Canonical: Yes" in architecture
+    assert not (root / "Lifecycle/GOV-005_DOCUMENT_LIFECYCLE.md").exists()
 
 
 def test_known_identity_boundaries_are_explicitly_classified():
@@ -101,4 +105,4 @@ def test_known_identity_boundaries_are_explicitly_classified():
         "Interfaces/INTF-006_WEB.md",
     ):
         text = (root / relative).read_text(encoding="utf-8")
-        assert "Canonical\n\nNo" in text or "Canonical\r\n\r\nNo" in text
+        assert re.search(r"^Canonical\s*$\n\s*No\s*$", text, re.MULTILINE)
