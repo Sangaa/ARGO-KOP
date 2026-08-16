@@ -104,15 +104,15 @@ Path: `Runtime/`
 - `Runtime/RUN-008_RUNTIME_STATE.md`
 - `Runtime/RUN-009_RECOVERY.md`
 - `Runtime/RUN-010_RUNTIME_REFERENCE.md`
-- `Runtime/RUN-011_COGNITIVE_EXECUTION_TARGET.md`
-- `Runtime/RUN-012_COGNITIVE_CONTEXT_HANDOFF.md`
-- `Runtime/RUN-013_COGNITIVE_DECISION_GATE.md`
-- `Runtime/RUN-014_COGNITIVE_TRACE_TARGET.md`
-- `Runtime/RUN-015_COGNITIVE_ACCEPTANCE_TARGET.md`
+- `Runtime/RUN-011_COGNITIVE_LOOP_PROTOTYPE.md`
+- `Runtime/RUN-012_COGNITIVE_LOOP_TEST_MATRIX.md`
+- `Runtime/RUN-013_CONTROLLED_HANDOFF.md`
+- `Runtime/RUN-014_LEARNING_PROMOTION_TEST.md`
+- `Runtime/RUN-015_RUNTIME_PROTOTYPE_CI_VALIDATION.md`
 - `Runtime/Prototype/PROTOTYPE_INTEGRATION_CONTRACT.md`
 - `Runtime/_FOLDER_STATUS.md`
 
-The `RUN-011..015` and `Runtime/Prototype/` paths are directly verified physical inventory from the P71 Runtime reconciliation. They remain `CROSS-LAYER INTEGRATION HOLD` and are not promoted to executable Runtime authority by mapping alone.
+The `RUN-011..015` and `Runtime/Prototype/` paths are directly verified physical inventory from the current Runtime reconciliation. They remain `CROSS-LAYER INTEGRATION HOLD` and are not promoted to executable Runtime authority by mapping alone.
 
 ## 7. Architecture Domain
 
@@ -266,6 +266,7 @@ These domains are not assumed complete or architecturally authoritative from fol
 19. Memory mapping establishes physical inventory only; it does not grant Memory authority or certify cross-layer consumers.
 20. `REP-001`, `REP-002`, `REP-013` and `REP-014` must be reconciled after material Memory inventory or relationship changes.
 21. Directly verified Runtime target/prototype artifacts must be mapped when physically constructed while preserving their declared non-executable authority boundary.
+22. Runtime candidate paths in the physical map must match the current `Runtime/` repository paths; historical candidate names are not active inventory.
 
 ## 18. Integrity State
 
