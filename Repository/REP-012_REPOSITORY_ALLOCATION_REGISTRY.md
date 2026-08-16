@@ -2,7 +2,7 @@
 
 Platform: ARGO KOP
 Document ID: REP-012
-Version: 1.0.8
+Version: 1.0.9
 Status: Active Control / Integrity Hold / Phase 1 Population In Progress
 Category: Repository Control
 Canonical: Yes
@@ -258,7 +258,7 @@ Controlled reconciliation states are:
 
 `CLOSED`
 
-The current control-plane state is **PARTIALLY_RECONCILED / INTEGRITY HOLD**.
+The current control-plane state is **PARTIALLY RECONCILED / INTEGRITY HOLD**.
 
 ### Reconciliation Evidence Recorded 2026-08-10
 
@@ -585,9 +585,32 @@ Checkpoint:
 
 This update does not close the control plane.
 
-## 26. Final Principle
+## 26. P269 Services Inventory Allocation Reconciliation — 2026-08-16
 
-**The registry is not the repository. It is the control layer that helps the repository remain discoverable, reviewable, traceable and recoverable.**
+`REP-013` now contains exact current-main physical identities for the ten declared Services artifacts rather than wildcard placeholders.
+
+The current physical allocation evidence is:
+
+- `SRV-001_SERVICE_ARCHITECTURE.md`
+- `SRV-002_REPOSITORY_SERVICE.md`
+- `SRV-003_MEMORY_SERVICE.md`
+- `SRV-004_KNOWLEDGE_SERVICE.md`
+- `SRV-005_VALIDATION_SERVICE.md`
+- `SRV-006_SEARCH_SERVICE.md`
+- `SRV-007_LOGGING_SERVICE.md`
+- `SRV-008_INDEX_SERVICE.md`
+- `SRV-009_UPDATE_SERVICE.md`
+- `SRV-010_SERVICE_REFERENCE.md`
+
+Allocation disposition remains `ALLOCATED` for the Services partition within the inspected scope. Exact physical identity does not promote review, implementation, runtime execution, or partition closure.
+
+Evidence:
+
+`REP-013 v1.1.1`, commit `f5e0e3f709442ba66861a75b07405bbd554be774`, content SHA `e4cbcaba859554485f6c659d103118506629f824`.
+
+The Services folder status remains `INTEGRITY HOLD`, and the four previously identified metadata-baseline gaps for `SRV-003`, `SRV-006`, `SRV-007`, and `SRV-008` remain unresolved rather than being inferred from the repository baseline.
+
+This update does not close the control plane.
 
 ---
 
