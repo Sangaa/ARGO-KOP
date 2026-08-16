@@ -3,23 +3,48 @@ import json
 
 from canonical_spine_gap_map import SEAMS
 from canonical_spine_integration_audit import audit
+from verified_seam_evidence_loader import load_records
+
+
+def _load_verified_registry_records(root: Path) -> list[dict]:
+    evidence_root = root / "Quality/Integration/evidence/runtime"
+    records = []
+    if not evidence_root.is_dir():
+        return records
+    for path in sorted(evidence_root.glob("*_verified_registry.json")):
+        payload = json.loads(path.read_text(encoding="utf-8"))
+        if isinstance(payload, dict) and "seam" in payload:
+            records.append(payload)
+            continue
+        if isinstance(payload, dict):
+            for seam, record in payload.items():
+                if isinstance(record, dict):
+                    normalized = dict(record)
+                    normalized["seam"] = seam
+                    records.append(normalized)
+    return records
 
 
 def build_consolidated_audit(root: Path) -> dict:
-    result = audit(root)
-    registry_path = root / "Quality/Integration/verified_seam_evidence_registry.json"
-    registry = json.loads(registry_path.read_text(encoding="utf-8")) if registry_path.exists() else {}
+    root = Path(root)
+    registry_candidates = _load_verified_registry_records(root)
+    verified_seams = load_records(root, registry_candidates) if registry_candidates else {}
+    result = audit(root, verified_seams=verified_seams)
     evidence = result["evidence"]
     canonical = {f"{source} -> {destination}" for source, destination in SEAMS}
-    connected = sorted(seam for seam, state in evidence.items() if seam in canonical and state == "CONNECTED")
-    partial = sorted(seam for seam, state in evidence.items() if seam in canonical and state == "PARTIAL")
-    missing = sorted(seam for seam, state in evidence.items() if seam in canonical and state == "MISSING")
+    connected = sorted(seam for seam in canonical if evidence.get(seam) == "CONNECTED")
+    partial = sorted(seam for seam in canonical if evidence.get(seam) == "PARTIAL")
+    missing = sorted(seam for seam in canonical if evidence.get(seam) == "MISSING")
+    governed = sorted(
+        seam for seam in canonical if evidence.get(seam) in {"BLOCKED_BY_GOVERNANCE", "INTENTIONALLY_ISOLATED"}
+    )
     return {
         "seam_count": len(SEAMS),
         "connected": connected,
         "partial": partial,
         "missing": missing,
-        "registry_records": len(registry.get("records", [])) if isinstance(registry, dict) else 0,
+        "governed_or_isolated": governed,
+        "verified_registry_records_loaded": len(verified_seams),
         "authorization_to_execution_governed": evidence.get("Authorization -> Execution") != "CONNECTED",
     }
 
