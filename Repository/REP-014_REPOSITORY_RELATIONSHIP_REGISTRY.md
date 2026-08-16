@@ -2,10 +2,10 @@
 
 Platform: ARGO KOP  
 Document ID: REP-014  
-Version: 1.2.1  
+Version: 1.2.2  
 Status: Active / Relationship Enumeration In Progress  
 Development Baseline: 3.2.1  
-Last Audit: 2026-08-15
+Last Audit: 2026-08-16
 
 ---
 
@@ -71,7 +71,7 @@ The following are deliberately limited to relationships established during repos
 | REL-002 | MOD-001 | SRV-004 | CONSUMES | Revalidated within inspected scope |
 | REL-003 | ENG-004 | SRV-005 | PRODUCES | Revalidated within inspected scope |
 | REL-004 | ENG-002 | ENG-006 | DEPENDS_ON | Revalidation Required |
-| REL-005 | ENG-006 | SRV-009 | IMPLEMENTS | Revalidated within inspected scope |
+| REL-005 | ENG-006 | SRV-009 | IMPLEMENTS | **REVALIDATION REQUIRED** |
 | REL-006 | RUN-010 | ENG-002 | CONSUMES | Revalidated within inspected scope |
 | REL-007 | RUN-010 | ENG-004 | CONSUMES | Revalidated within inspected scope |
 | REL-008 | RUN-010 | ENG-006 | CONSUMES | Revalidated within inspected scope |
@@ -127,6 +127,32 @@ The following are deliberately limited to relationships established during repos
 | REL-058 | RUN-013 | RUN-011 | VALIDATES | Revalidated within current controlled-handoff scope |
 | REL-059 | RUN-014 | RUN-011 | VALIDATES | Revalidated within current learning-promotion test scope |
 | REL-060 | RUN-015 | RUN-011 | VALIDATES | Revalidated within current CI validation scope |
+
+## Current Review-Cycle Reconciliation — 2026-08-16
+
+### REL-005 executable boundary reconciliation
+
+`REL-005` is retained as a historical relationship record, but its current state is explicitly downgraded to `REVALIDATION REQUIRED`.
+
+Current evidence establishes:
+
+```text
+ENG-006 → SRV-009 = DOCUMENTED / CONTRACTUAL
+```
+
+The reviewed Runtime execution path does not provide a callable `SRV-009` consumer implementation. Therefore the registry must not represent `REL-005` as executable implementation proof.
+
+This reconciliation does **not** delete the relationship, rename the source or target, create a synthetic implementation, or promote the relationship to verified executable authority.
+
+Executable promotion requires independent callable consumer evidence in the connected Runtime path.
+
+### Authority boundary
+
+This state correction is evidence reconciliation only. It does not authorize mutation of `ENG-006`, `SRV-009`, Runtime execution code, or other canonical authority layers.
+
+### Checkpoint
+
+`P259` established the disposition requiring this direct registry reconciliation. The relationship remains open until executable evidence is independently established and revalidated.
 
 ## Identity Drift Reconciliation — 2026-08-13
 
@@ -277,175 +303,6 @@ The DIAG-001 edge is provenance/navigation only. It does not make the diagram au
 
 This graph describes control-plane dependency only. It does not certify domain semantics.
 
-## Current Review-Cycle Reconciliation — 2026-08-14
-
-The current cycle added repository-grounded evidence that affects relationship interpretation and control-plane synchronization.
-
-### Baseline authority
-
-`REP-012` was reconciled from the conflicting declaration `3.3.0` to the authoritative current baseline `3.2.1`, matching `Release/VERSION.md`, `PROJECT_STATUS.md`, `REP-001`, `REP-002` and `RUN-001`.
-
-No new relationship authority is created by this correction; affected control-plane edges remain valid but are now associated with a consistent baseline declaration.
-
-### PR lineage
-
-- PR #1: stale verification branch, closed without merge.
-- PR #3: superseded verification branch, closed without merge.
-- PR #9: latest controlled candidate; Prototype + canonical + Integration evidence passed, then closed without merge because repository-wide integrity remains open.
-
-These are historical/control evidence relationships, not production Runtime dependencies.
-
-### Executable relationship boundary
-
-The intended path remains:
-
-`RUN-010 → ENG-006 → SRV-009 → REP-001/REP-002/REP-011`
-
-Direct documentation verifies the endpoint roles, but executable consumer proof is not established in the inspected Python scope. The relevant edges therefore remain `Revalidated within inspected scope` / `PARTIAL`, and no executable `VERIFIED` state is added.
-
-### REP-013 path reconciliation
-
-`Specifications/01-Knowledge-Organization.md` is explicitly present in the current `REP-013` content tree and was re-audited during the PR #9 candidate reconciliation. The path is therefore retained as the canonical physical path within the inspected scope.
-
-### Relationship confidence rule
-
-The current cycle reinforces the distinction:
-
-`DOCUMENTED ≠ EXECUTED ≠ TESTED ≠ VERIFIED`
-
-A relationship is promoted only when the evidence level supports the corresponding state.
-
-## Runtime Cognitive Loop Reconciliation — 2026-08-15
-
-The current runtime review established a bounded set of relationships for the Cognitive Loop prototype and its validation contracts. These records are limited to evidence actually established in the current repository review and do not imply executable coupling.
-
-Evidence scope:
-
-- `RUN-011` is the Cognitive Loop prototype/runtime contract.
-- `ENG-013` is the cognitive-loop engine contract associated with the prototype scope.
-- `ENG-014` is the integration-validation contract associated with the prototype scope.
-- `RUN-012`, `RUN-013`, `RUN-014`, and `RUN-015` validate distinct aspects of the `RUN-011` runtime contract.
-- CI evidence exists for the prototype test workflow; acceptance remains bounded by the documented CI/integrity gates.
-
-The following records are revalidated within the current inspected Runtime scope:
-
-```text
-RUN-011 ──references──> ENG-013
-RUN-011 ──references──> ENG-014
-RUN-012 ──validates────> RUN-011
-RUN-013 ──validates────> RUN-011
-RUN-014 ──validates────> RUN-011
-RUN-015 ──validates────> RUN-011
-```
-
-Boundary:
-
-- These relationships do not establish `EXECUTABLE` dependency.
-- They do not transfer authority from Engine/Runtime artifacts to REP-014.
-- Reverse relationships are not inferred without independent source evidence.
-- Repository-wide graph closure remains open.
-
-## Registry Does Not Grant Authority
-
-REP-014 is a relationship registry and navigation/control artifact.
-
-It does not become the canonical owner of Governance, Architecture, Models, Knowledge, Runtime, or other domain semantics merely by recording a relationship.
-
-Domain authority remains with the applicable canonical authority document.
-
-## Bidirectional Reconciliation
-
-For every material relationship, the review process should eventually verify both directions:
-
-```text
-Source → Target
-Target → Source
-```
-
-A one-sided reference is insufficient to declare the graph closed.
-
-The control-plane relationships above are considered verified only within the inspected scope; broader repository graph closure remains open.
-
-## Relationship-to-Artifact Control
-
-Every registry relationship must be resolvable through `REP-013` and its artifact state through `REP-012`/`REP-011`.
-
-A relationship must not be marked `Verified` if either endpoint:
-
-- cannot be resolved to a current repository artifact;
-- has unresolved identity conflict;
-- is marked `QUARANTINED` without explicit relationship review;
-- or has a material mutation requiring revalidation.
-
-## Visual Artifact Provenance Rule
-
-Visual or derived artifacts may summarize repository state, but they require an explicit provenance relationship to the source artifacts from which their content was derived.
-
-For `DIAG-001`:
-
-`REP-012 → DOCUMENTS → DIAG-001`
-
-`DIAG-001 → DERIVED_FROM → REP-012`
-
-The paired SVG/metadata files are orientation/provenance artifacts. Their numerical or status claims cannot override current registry evidence.
-
-If the source registry materially changes, DIAG-001 becomes stale and must enter:
-
-`REVALIDATION_REQUIRED`
-
-until regenerated or explicitly superseded.
-
-## Change Impact Rule
-
-A mutation to a source or target artifact may invalidate relationship records.
-
-When a file is renamed, moved, archived, merged, split, or materially changed, affected relationship records enter:
-
-`REVALIDATION_REQUIRED`
-
-until the source, target and known consumers are re-read.
-
-## Control-Plane Synchronization Rule
-
-A control-plane artifact that creates or changes execution state must be represented in the relationship graph before that relationship is treated as closed.
-
-For the current Phase-1 control plane, the minimum synchronized set is:
-
-`REP-011 ↔ REP-012 ↔ REP-013 ↔ REP-014 ↔ REP-015 ↔ REP-016`
-
-The current registry explicitly represents the previously missing `REP-015 ↔ REP-016` execution/bootstrap relationship.
-
-No reverse relationship has been inferred merely because two artifacts participate in the same control plane. Reverse links must be added only when their source, target, type and evidence are independently established.
-
-If a new control-plane artifact is added, moved or materially changed, its relationships must be reconciled before claiming control-plane completeness.
-
-## Reconciliation State
-
-The presence of a relationship record does not by itself mean the entire control plane is reconciled.
-
-Current control-plane relationship status:
-
-`PARTIALLY RECONCILED / INTEGRITY HOLD`
-
-The remaining open work includes broader endpoint identity verification, evidence/checkpoint completion, consumer impact validation, and enumeration beyond the inspected control-plane scope.
-
-## Completion Rule
-
-The registry is not complete until the applicable repository scope has been enumerated and all material relationships are either:
-
-- verified;
-- explicitly unresolved;
-- rejected with reason;
-- or marked for later phase.
-
-Unknown relationships must not be silently inferred.
-
-## Phase 1 Rule
-
-Relationship enumeration remains **OPEN** until Phase-1 completion is explicitly decided.
-
-The existence of this registry does not close any folder or domain.
-
 ---
 
-End of Document
+End of REP-014
