@@ -1,0 +1,8 @@
+{
+  "seam": "Decision -> Authorization",
+  "state": "CONNECTED",
+  "contract": "Decision/DECISION_PASS_CONTRACT.md",
+  "test": "Quality/Integration/test_decision_to_authorization_boundary.py",
+  "trace": "Quality/Integration/evidence/runtime/decision_to_authorization_verified_trace.json",
+  "verification_status": "VERIFIED"
+}
