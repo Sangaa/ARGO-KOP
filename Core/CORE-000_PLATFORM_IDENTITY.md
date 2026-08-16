@@ -6,15 +6,29 @@ Document ID: CORE-000
 
 Version: 1.1.0
 
-Status: Official / Revalidated / Integrity Hold
+Status: Legacy / Superseded / Identity Reconciliation / Integrity Hold
 
 Classification: Core Identity
 
 Owner: ARGO KOP
 
-Last Audit: 2026-08-10
+Canonical: No
 
-Review Type: Repository Re-Audit / Targeted Platform Identity Review
+Last Audit: 2026-08-16
+
+Review Type: Repository Re-Audit / Identity Conflict Resolution
+
+---
+
+# Supersession Boundary
+
+This artifact is retained for provenance and historical continuity.
+
+The active canonical platform-identity artifact is `Core/CORE-002_ARGO_IDENTITY.md`.
+
+The active canonical Core architecture artifact is `Core/CORE-000_PLATFORM_ARCHITECTURE.md`.
+
+This retained artifact must not be treated as a second active `CORE-000` authority.
 
 ---
 
@@ -100,7 +114,7 @@ An implementation's output is evidence to be examined, not authority by default.
 
 # Statement / Capability Boundary
 
-This identity document defines platform identity and intent. It does not certify that every stated capability is currently implemented, operational or validated.
+This identity document defines historical platform identity statements and intent. It does not certify that every stated capability is currently implemented, operational or validated.
 
 For a material capability claim, use:
 
@@ -124,41 +138,19 @@ If evidence is insufficient, the claim remains provisional or unresolved.
 
 ---
 
-# Platform Status
-
-Current Release
-
-Baseline Version 1.0
-
-Repository Status
-
-Active Development
-
-Architecture Status
-
-Stable
-
-These status labels are descriptive snapshots and do not replace the applicable release, governance, architecture or validation evidence.
-
----
-
 # Historical and Review Provenance
 
-A historical audit date records an actual completed review event and shall not be advanced merely because another Core artifact was reviewed.
+A historical audit date records an actual completed review event. This artifact was reclassified on 2026-08-16 after the active duplicate `CORE-000` ownership was confirmed against current repository evidence.
 
-This document was specifically re-audited on 2026-08-10. The review applies to CORE-000 and does not certify the entire Core folder or repository.
+The content is preserved to retain provenance; reclassification does not create a new canonical authority.
 
 # Integrity Status
 
-CORE-000 is revalidated at the scope of this targeted review.
-
-Core remains under `INTEGRITY HOLD` until the remaining canonical Core artifacts and relevant cross-layer relationships are revalidated.
+Identity collision resolution is recorded at the scope of this artifact. Core remains under `INTEGRITY HOLD` until the remaining canonical Core artifacts and relevant cross-layer relationships are revalidated.
 
 ---
 
 # Identity Statement
-
-ARGO KOP is not an AI assistant.
 
 ARGO KOP is a cognitive engineering platform that enables multiple AI systems to operate under a common engineering methodology through governance, structured knowledge, and repository-driven reasoning.
 
