@@ -2,7 +2,7 @@
 
 Platform: ARGO KOP  
 Document ID: REP-013  
-Version: 1.1.0  
+Version: 1.1.1  
 Status: Active / Phase 1 Population In Progress  
 Development Baseline: 3.2.1  
 Last Audit: 2026-08-16
@@ -127,20 +127,21 @@ Engine/
 
 ```text
 Services/
-├── SRV-001_*.md
-├── SRV-002_*.md
-├── SRV-003_*.md
-├── SRV-004_*.md
-├── SRV-005_*.md
-├── SRV-006_*.md
-├── SRV-007_*.md
-├── SRV-008_*.md
+├── SRV-001_SERVICE_ARCHITECTURE.md
+├── SRV-002_REPOSITORY_SERVICE.md
+├── SRV-003_MEMORY_SERVICE.md
+├── SRV-004_KNOWLEDGE_SERVICE.md
+├── SRV-005_VALIDATION_SERVICE.md
+├── SRV-006_SEARCH_SERVICE.md
+├── SRV-007_LOGGING_SERVICE.md
+├── SRV-008_INDEX_SERVICE.md
 ├── SRV-009_UPDATE_SERVICE.md
 ├── SRV-010_SERVICE_REFERENCE.md
+├── README.md
 └── _FOLDER_STATUS.md
 ```
 
-`SRV-010_SERVICE_REFERENCE.md` is the canonical current physical identity established by direct current-main read-back. Wildcard entries remain intentionally unresolved until exact filenames are enumerated from current repository evidence. They are placeholders, not fabricated file identities.
+The exact current-main Services directory enumeration establishes the physical filenames for `SRV-001` through `SRV-010`. `SRV-010_SERVICE_REFERENCE.md` remains the canonical current physical identity established by direct current-main read-back. This mutation replaces earlier wildcard placeholders with observed physical identities; it does not assert implementation, runtime execution, or Services partition closure.
 
 ### Runtime/
 
