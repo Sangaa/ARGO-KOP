@@ -1,4 +1,5 @@
 from pathlib import Path
+import re
 
 ROOT = Path(__file__).resolve().parents[2]
 SERVICES = {
@@ -20,29 +21,21 @@ FOLDER_STATUS = ROOT / "Services/_FOLDER_STATUS.md"
 SERVICE_REFERENCE = ROOT / "Services/SRV-010_SERVICE_REFERENCE.md"
 
 
-def _document_id(text: str) -> str | None:
-    lines = text.splitlines()
-    for index, line in enumerate(lines):
-        if line.strip() == "Document ID" and index + 1 < len(lines):
-            value = lines[index + 1].strip()
-            if value:
-                return value
-        if line.startswith("Document ID") and ":" in line:
-            return line.split(":", 1)[1].strip()
-    return None
-
-
 def test_active_service_artifacts_match_filename_identity():
     for service_id, path in SERVICES.items():
         assert path.is_file(), f"missing active service artifact: {path}"
-        assert _document_id(path.read_text(encoding="utf-8")) == service_id
+        text = path.read_text(encoding="utf-8")
+        assert re.search(rf"(?m)^#\s+{re.escape(service_id)}\s*$", text)
+        assert re.search(rf"(?m)^Document ID\s*$\n\s*{re.escape(service_id)}\s*$", text)
+        assert "Canonical" in text
+        assert re.search(r"(?m)^\s*Yes\s*$", text)
 
 
 def test_service_inventory_declares_the_same_active_service_set():
     folder_status = FOLDER_STATUS.read_text(encoding="utf-8")
     reference = SERVICE_REFERENCE.read_text(encoding="utf-8")
+    assert "SRV-001 through SRV-010" in folder_status
     for service_id in SERVICES:
-        assert service_id in folder_status
         assert service_id in reference
 
 
