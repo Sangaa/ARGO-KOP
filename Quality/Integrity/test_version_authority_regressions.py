@@ -21,7 +21,7 @@ def test_project_status_does_not_redefine_release_authority():
     status = _read(root, "PROJECT_STATUS.md")
     assert "Latest Official Release" in status
     assert "Active Development Baseline:** v3.2.1" in status
-    assert "Release/VERSION.md is authoritative" in status
+    assert "`Release/VERSION.md` is authoritative" in status
 
 
 def test_project_status_document_version_is_not_treated_as_platform_release_version():
