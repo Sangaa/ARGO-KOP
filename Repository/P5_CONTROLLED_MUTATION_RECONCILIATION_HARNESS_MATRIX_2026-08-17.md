@@ -1,7 +1,7 @@
 # P5 — CONTROLLED MUTATION / RECONCILIATION HARNESS MATRIX
 
 Date: 2026-08-17
-Status: `ACTIVE / P5 BUILD`
+Status: `EXECUTION-VERIFIED / P5 BUILD CLOSED`
 Authority: `GOV-014 v1.0.1`
 Scope: Reusable harness for high-risk document mutation and post-commit reconciliation.
 
@@ -30,6 +30,20 @@ Convert the proven GOV-014 transaction pattern into a reusable P5 harness that c
 | H-11 | Evidence closure | Commit/blob/workflow/read-back evidence recorded |
 | H-12 | Abort integrity | Any failed gate blocks commit and remains traceable |
 
+## Execution Evidence
+
+- Workflow: `P5 Controlled Mutation Harness`
+- Workflow ID: `336293577`
+- Successful run: `32040965964`
+- Event: `push`
+- Head SHA: `192e9482c4ef7446b53ca195c11af2801f2705ce`
+- Job: `p5-harness`
+- Job result: `SUCCESS`
+- `Run P5 fixture and dispatcher tests`: `SUCCESS`
+- `Verify no canonical artifact was modified by tests`: `SUCCESS`
+
+The same workflow also produced a prior successful run `32040934574`. The current run is the authoritative execution evidence for this closure.
+
 ## Failure Classes
 
 - `SOURCE-INCOMPLETE`
@@ -48,7 +62,7 @@ The harness is model-independent. A model may select the mutation, but the repos
 
 ## Boundary
 
-This matrix does not itself authorize mutation of any canonical artifact. It defines the P5 harness contract only.
+P5 execution verification validates the harness and its fixture/dispatcher tests. It does not authorize or certify any new mutation of a canonical artifact.
 
 ---
 
