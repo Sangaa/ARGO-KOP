@@ -34,7 +34,13 @@ jobs:
       - name: Install test runner
         run: python -m pip install --upgrade pytest
 
-      - name: Run P5 fixture and dispatcher tests
+      - name: Run default fixture validation path
+        env:
+          PYTHONPATH: ${{ github.workspace }}
+        run: |
+          python -m pytest -q Quality/P5/test_controlled_mutation_harness.py
+
+      - name: Run dispatcher and full compatibility regression suite
         env:
           PYTHONPATH: ${{ github.workspace }}
         run: |
