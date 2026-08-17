@@ -32,3 +32,7 @@ def test_rel009_is_not_promoted_without_callable_consumer_evidence() -> None:
 def test_rel009_gate_files_are_current() -> None:
     assert REGISTRY.exists()
     assert RUN_010.exists()
+
+
+# Keep the test intentionally side-effect free: it must never mutate the
+# repository or manufacture runtime evidence for the unresolved relationship.
