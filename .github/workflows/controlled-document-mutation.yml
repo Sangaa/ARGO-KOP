@@ -95,10 +95,11 @@ jobs:
 
           Path('/tmp/REP-001.candidate.md').write_text(candidate, encoding='utf-8')
           Path('/tmp/REP-001.report.json').write_text(json.dumps(report, indent=2), encoding='utf-8')
+          Path('/tmp/mutation_request.json').write_text(json.dumps(req, indent=2), encoding='utf-8')
           print(json.dumps(report, indent=2))
           PY
 
-          python -m pytest -q "${{ steps.request.outputs.test_file }}" 2>/dev/null || python -m pytest -q "$(python - <<'PY'
+          python -m pytest -q "$(python - <<'PY'
           import json
           from pathlib import Path
           print(json.loads(Path('Repository/CONTROLLED_MUTATION_REQUEST.json').read_text())['candidate_test'])
@@ -123,6 +124,13 @@ jobs:
         if: steps.request.outputs.present == 'true'
         shell: bash
         run: |
+          req_json=$(cat /tmp/mutation_request.json)
+          tx_id=$(python - <<'PY'
+          import json
+          from pathlib import Path
+          print(json.loads(Path('/tmp/mutation_request.json').read_text())['transaction_id'])
+          PY
+          )
           git config user.name "ARGO GOV-014 Mutation Bot"
           git config user.email "argo-governed-mutation@users.noreply.github.com"
           git add Repository/REP-001_MASTER_INDEX.md
@@ -132,13 +140,7 @@ jobs:
           test "$(printf '%s\n' "$tracked_changed" | wc -l)" -eq 2
           printf '%s\n' "$tracked_changed" | grep -q '^M  Repository/REP-001_MASTER_INDEX.md$'
           printf '%s\n' "$tracked_changed" | grep -q '^D  Repository/CONTROLLED_MUTATION_REQUEST.json$'
-          git commit -m "$(python - <<'PY'
-          import json
-          from pathlib import Path
-          req = json.loads(Path('Repository/CONTROLLED_MUTATION_REQUEST.json').read_text())
-          print(f"GOV-014 controlled mutation: {req['transaction_id']}")
-          PY
-          )"
+          git commit -m "GOV-014 controlled mutation: $tx_id"
           git push origin HEAD:main
 
       - name: Finalize no-op
