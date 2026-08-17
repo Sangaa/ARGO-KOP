@@ -63,13 +63,13 @@ Relationship sublabels such as `DECISION INPUT`, `ORCHESTRATION`, `SERVICE INPUT
 
 ## Current Verified / Revalidated Relationships
 
-The following are deliberately limited to relationships established during repository review. This is **not a complete graph**.
+The following are deliberately limited to relationships established during repository review. This is **not** a complete graph.
 
 | ID | Source | Target | Type | State |
 |---|---|---|---|---|
 | REL-001 | SPEC-001-KNOWLEDGE-ORGANIZATION | MOD-001 | DEPENDS_ON | Revalidation Required |
 | REL-002 | MOD-001 | SRV-004 | CONSUMES | Revalidated within inspected scope |
-| REL-003 | ENG-004 | SRV-005 | PRODUCES | Revalidated within inspected scope |
+| REL-003 | SRV-005 | ENG-004 | CONSUMES | Revalidation Required |
 | REL-004 | ENG-002 | ENG-006 | DEPENDS_ON | Revalidation Required |
 | REL-005 | ENG-006 | SRV-009 | IMPLEMENTS | **BIDIRECTIONAL / EXECUTABLE-VERIFIED / GOVERNED / ISOLATED E2E** |
 | REL-006 | RUN-010 | ENG-002 | CONSUMES | Revalidated within inspected scope |
