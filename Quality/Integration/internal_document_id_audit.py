@@ -4,6 +4,7 @@ GOV-004 defines identity rules, while REP-001 defines the currently verified
 active inventory scope. This audit separates:
 - indexed active canonical artifacts;
 - canonical artifacts outside the current active inventory;
+- canonical artifacts inside domains explicitly deferred by domain authority;
 - legacy/non-canonical artifacts retained for provenance;
 - shadowed legacy identities where one active canonical owner coexists with
   explicit historical/non-canonical retained artifacts;
@@ -29,10 +30,17 @@ ID_PATTERN = rf"(?:{NAMESPACE_PATTERN})-\d{{3}}"
 ID_RE = re.compile(rf"(?<![A-Z])({ID_PATTERN})(?![A-Z0-9-])", re.I)
 INLINE_RE = re.compile(rf"^\s*Document ID\s*[:：]\s*`?({ID_PATTERN})`?\s*$", re.I | re.M)
 BLOCK_RE = re.compile(rf"^\s*Document ID\s*$\n\s*`?({ID_PATTERN})`?\s*$", re.I | re.M)
-CANONICAL_RE = re.compile(r"^\s*Canonical\s*[:：]\s*(Yes|No)\s*$", re.I | re.M)
+CANONICAL_RE = re.compile(r"^\s*Canonical\s*[:：]\s*(Yes|No|Pending)\s*$", re.I | re.M)
 STATUS_RE = re.compile(r"^\s*Status\s*[:：]?\s*(.+?)\s*$", re.I | re.M)
 TEXT_SUFFIXES = {".md", ".markdown", ".txt", ".rst", ".json", ".yaml", ".yml", ".toml", ".py"}
 LEGACY_TOKENS = ("legacy", "historical", "superseded", "archived")
+DEFERRED_DOMAIN_TOKENS = (
+    "canonical pending",
+    "pending consolidated validation",
+    "under reconstruction",
+    "staged reconstruction",
+    "reconstruction pending",
+)
 
 
 @dataclass(frozen=True)
@@ -44,6 +52,7 @@ class ArtifactRecord:
     indexed_active: bool
     filename_prefix: str | None
     status: str | None
+    deferred_domain: bool
 
     @property
     def active_canonical(self) -> bool:
@@ -66,6 +75,8 @@ class ArtifactRecord:
     @property
     def canonical_unindexed(self) -> bool:
         if self.archived or self.indexed_active or self.canonical is not True:
+            return False
+        if self.deferred_domain:
             return False
         status = (self.status or "").lower()
         return not any(token in status for token in LEGACY_TOKENS)
@@ -96,7 +107,8 @@ def _extract_canonical(text: str) -> bool | None:
     match = CANONICAL_RE.search(text)
     if not match:
         return None
-    return match.group(1).lower() == "yes"
+    value = match.group(1).lower()
+    return True if value == "yes" else False if value == "no" else None
 
 
 def _extract_status(text: str) -> str | None:
@@ -110,12 +122,32 @@ def _filename_prefix(path: Path) -> str | None:
     return match.group(1).upper() if match else None
 
 
+def _deferred_domain(path: Path, root: Path, folder_status_cache: dict[str, bool]) -> bool:
+    parts = path.parts
+    if not parts:
+        return False
+    domain = parts[0]
+    if domain in {"Archive", "Repository"}:
+        return False
+    if domain in folder_status_cache:
+        return folder_status_cache[domain]
+    status_path = root / domain / "_FOLDER_STATUS.md"
+    if not status_path.is_file():
+        folder_status_cache[domain] = False
+        return False
+    text = status_path.read_text(encoding="utf-8", errors="ignore").lower()
+    deferred = any(token in text for token in DEFERRED_DOMAIN_TOKENS)
+    folder_status_cache[domain] = deferred
+    return deferred
+
+
 def scan(root: Path) -> dict:
     root = Path(root)
     records: list[ArtifactRecord] = []
     unreadable: list[str] = []
     tracked = _git_files(root)
     active_index = _master_index_paths(root)
+    folder_status_cache: dict[str, bool] = {}
 
     for path in tracked:
         if path.suffix.lower() not in TEXT_SUFFIXES:
@@ -139,6 +171,7 @@ def scan(root: Path) -> dict:
                 indexed_active=relative in active_index,
                 filename_prefix=_filename_prefix(path),
                 status=_extract_status(text),
+                deferred_domain=_deferred_domain(path, root, folder_status_cache),
             )
         )
 
@@ -146,6 +179,10 @@ def scan(root: Path) -> dict:
     unindexed = [record for record in records if not record.active_canonical and not record.archived]
     archived = [record for record in records if record.archived]
     canonical_unindexed = [record for record in records if record.canonical_unindexed]
+    deferred_domain_records = [
+        record for record in records
+        if record.canonical is True and not record.indexed_active and not record.archived and record.deferred_domain
+    ]
 
     by_id: dict[str, list[str]] = {}
     for record in active:
@@ -197,6 +234,8 @@ def scan(root: Path) -> dict:
         "active_indexed_canonical_records": len(active),
         "canonical_unindexed_records": len(canonical_unindexed),
         "canonical_unindexed_paths": sorted(record.path for record in canonical_unindexed),
+        "deferred_domain_records": len(deferred_domain_records),
+        "deferred_domain_paths": sorted(record.path for record in deferred_domain_records),
         "unindexed_id_records": len(unindexed),
         "archived_records": len(archived),
         "duplicate_active_ids": duplicate_active_ids,
