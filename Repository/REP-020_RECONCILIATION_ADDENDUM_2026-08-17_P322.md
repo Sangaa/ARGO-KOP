@@ -45,6 +45,26 @@ The associated runtime-evidence artifact set was also successfully produced. Dir
 
 Therefore the P323 audit result strengthens repository-wide audit confidence but does **not** establish callable `RUN-010 → SRV-009` consumer connectivity. The general audit contract explicitly distinguishes audit candidates from runtime reachability.
 
+## Identity Audit Execution — P325
+
+The current-tree Internal Document-ID Audit was installed as an explicit CI control and executed successfully:
+
+- Workflow: `Internal Document-ID Audit`
+- Workflow ID: `336325470`
+- Run: `32044540324`
+- Job: `95429585816`
+- `Run internal Document-ID audit`: `SUCCESS`
+- `Re-run audit as deterministic report`: `SUCCESS`
+
+The live audit suite verified within its declared scope:
+
+- no active duplicate Document IDs;
+- no unreadable text files;
+- clean filename/internal Document-ID alignment for identifier-named artifacts;
+- archive records separated from active identity.
+
+This closes the **internal Document-ID execution subgate of P1**. It does not close all Priority-1 integrity work and does not authorize identity mutations.
+
 ## Relationship Boundary
 
 - `REL-009` remains `REVALIDATION REQUIRED`.
@@ -55,10 +75,20 @@ Therefore the P323 audit result strengthens repository-wide audit confidence but
 
 This addendum does not rewrite `REP-020`, `REP-014`, Runtime execution code, or the production adapter. It narrows interpretation using current evidence only.
 
+Any future canonical mutation must use the governed Mutation Matrix, full-content preservation and pre-write current-state recheck.
+
+## Current State
+
+- P1 identity subgate: `VERIFIED`
+- P1 overall: `OPEN / INTEGRITY RECONCILIATION`
+- P4: `OPEN`
+- P5: `EXECUTION-VERIFIED / FIXTURE-DEFAULT`
+- Global PASS: `NOT CLAIMED`
+
 ## Next Safe Entry
 
-A future change to the unresolved `REL-009` state requires authoritative callable consumer evidence. Any canonical mutation must use the governed Mutation Matrix, full-content preservation and pre-write current-state recheck.
+A future change to the unresolved `REL-009` state requires authoritative callable consumer evidence. Otherwise continue only the bounded P1/P4 evidence queue without speculative runtime mutation.
 
 ---
 
-End of P322
+End of P322 Reconciliation Addendum
