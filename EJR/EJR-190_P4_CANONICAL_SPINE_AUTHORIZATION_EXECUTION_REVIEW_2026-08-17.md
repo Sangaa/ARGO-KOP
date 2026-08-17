@@ -1,4 +1,4 @@
-# EJR-190 — P4 Canonical Spine Authorization → Execution Review
+# EJR-190 — P4 Canonical Spine Evidence Review
 
 Date: 2026-08-17
 Status: RECORDED / NOT CLOSED
@@ -23,23 +23,25 @@ This record does not close P4 and does not promote either P4 edge.
 
 ---
 
-## 2. Canonical Spine Target Reviewed
+## 2. Canonical Spine Seams Reviewed
 
-`Authorization → Execution`
+### 2.1 Authorization → Execution
 
-This seam is one of the 11 declared canonical spine seams and represents the governed boundary between authorization and execution.
+This is the governed boundary between authorization and execution.
+
+### 2.2 Execution → Execution Trace
+
+This is the immediate downstream evidence seam connecting governed execution output to the canonical execution-trace record.
 
 ---
 
-## 3. Evidence Reviewed
+## 3. Authorization → Execution Evidence
 
-### Registry Evidence
-
-Current repository registry record:
+### Registry
 
 `Quality/Integration/evidence/runtime/authorization_to_execution_verified_registry.json`
 
-Observed state:
+Observed:
 
 - State: `CONNECTED`
 - Verification status: `VERIFIED`
@@ -49,94 +51,137 @@ Observed state:
 - Test: `Quality/Integration/test_authorization_to_execution_canonical_seam_certification.py`
 - Trace: `Quality/Integration/canonical_evidence/AUTHORIZATION_TO_EXECUTION_TRACE.json`
 
-### Contract Evidence
+### Contract
 
-The canonical evidence document states that authorization must explicitly approve execution; the governed execution entrypoint rejects missing authorization or missing source trace; the path is bounded and side-effect-free.
+The canonical evidence document defines explicit authorization as a prerequisite to governed execution, requires a source trace, and bounds the path to side-effect-free simulation.
 
-### Test Evidence
+### Test
 
-The repository-contained certification test covers:
+The repository test covers:
 
-1. material verified registry evidence;
+1. verified registry materiality;
 2. authorized execution reaching canonical trace;
-3. canonical `EXECUTION_TRACE` output;
+3. `EXECUTION_TRACE` production;
 4. `side_effect=false`;
-5. unauthorized execution remaining blocked.
+5. unauthorized execution rejection.
 
-### Trace Evidence
+### Trace
 
-The canonical trace is a repository-contained JSON artifact with:
+The canonical trace contains the required execution-trace identity fields and records an authorized simulated handoff with no external side effect.
+
+### Classification
+
+`CONNECTED / VERIFIED / CONTROLLED_SYNTHETIC`
+
+This is repository-evidence confirmation. Runtime execution was not re-run in the current session.
+
+---
+
+## 4. Execution → Execution Trace Evidence
+
+### Registry
+
+`Quality/Integration/evidence/runtime/execution_to_trace_verified_registry.json`
+
+Observed:
+
+- State: `CONNECTED`
+- Verification status: `VERIFIED`
+- Contract/producer: `Runtime/Execution/execution_trace_producer.py`
+- Test: `Quality/Integration/test_runtime_to_registry_evidence_set.py`
+- Trace: `Quality/Integration/evidence/runtime/execution_to_trace_controlled_trace.json`
+- Evidence mode: `CONTROLLED_SYNTHETIC`
+
+### Producer / Contract Boundary
+
+`Runtime/Execution/execution_trace_producer.py` explicitly identifies itself as a trace producer, not an executor or authorization path. It validates required trace identity, task/session identity, final status, side-effect type and stages before materializing `EXECUTION_TRACE`.
+
+### Test
+
+`Quality/Integration/test_runtime_to_registry_evidence_set.py` verifies that the connected spine runner produces an execution trace, that the trace can be captured as repository evidence, and that the registry can classify the `Execution → Execution Trace` seam as `CONNECTED`.
+
+### Trace
+
+The current controlled synthetic trace contains:
 
 - `record_type=EXECUTION_TRACE`
 - non-empty `trace_id`
 - non-empty `task_id`
 - non-empty `session_id`
-- `final_status=SIMULATED`
-- `authorization_status=AUTHORIZED`
-- `execution_status=SIMULATED`
+- `final_status=INCONCLUSIVE`
 - `side_effect=false`
-- `evidence_class=CONTROLLED_SYNTHETIC`
+- `evidence_mode=CONTROLLED_SYNTHETIC`
+
+The current canonical audit validator requires the trace artifact to be a repository-relative JSON execution trace with the required identity/status fields; the reviewed artifact satisfies that shape.
+
+### Classification
+
+`CONNECTED / VERIFIED / CONTROLLED_SYNTHETIC`
+
+Again, this is repository-evidence confirmation and not a fresh runtime execution claim.
 
 ---
 
-## 4. Verification Classification
+## 5. Aggregate Evidence Position
 
-| Evidence Class | Result |
-| :--- | :--- |
-| Contract | PRESENT |
-| Identity | PRESENT |
-| Authority | PRESENT / GOVERNED |
-| Executable Test Artifact | PRESENT |
-| Trace Artifact | PRESENT |
-| Trace Shape | SATISFIES CURRENT CANONICAL TRACE REQUIREMENTS |
-| Registry State | CONNECTED / VERIFIED |
-| Runtime Test Execution in This Session | NOT EXECUTED |
-| External Side Effect | NONE / CONTROLLED SYNTHETIC |
+| Canonical Seam | Contract | Test Artifact | Trace Artifact | Registry | Current Supported State |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| Authorization → Execution | PRESENT | PRESENT | PRESENT | CONNECTED / VERIFIED | VERIFIED / CONTROLLED SYNTHETIC |
+| Execution → Execution Trace | PRESENT | PRESENT | PRESENT | CONNECTED / VERIFIED | VERIFIED / CONTROLLED SYNTHETIC |
 
-### Current Supported State
-
-`CANONICAL-SEAM VERIFIED BY REPOSITORY EVIDENCE / RUNTIME EXECUTION NOT RE-RUN IN THIS SESSION`
-
-This is repository evidence confirmation, not a fresh CI execution claim.
+No seam was promoted from `PARTIAL` to `CONNECTED` by this journal entry. Both states were already present in the current repository registry evidence and were independently re-read during this session.
 
 ---
 
-## 5. P4 Boundary
+## 6. P4 Boundary
 
 The P4 contractual edges remain unresolved:
 
 - `ENG-004 ↔ SRV-005` remains `CONTRACTUAL / PARTIAL`.
 - `ENG-006 ↔ SRV-005` remains `CONTRACTUAL / PARTIAL`.
 
-No P4 edge was promoted through inference from the canonical spine review.
+No P4 edge was promoted through inference from canonical-spine evidence.
 
-The canonical seam evidence is a separate evidence surface and does not prove either P4 relationship.
-
----
-
-## 6. Tests / Validation
-
-Tests were inspected but not executed in the current environment because direct repository runtime execution is unavailable here.
-
-The certification test itself asserts that the canonical audit would report the seam as `CONNECTED` and that unauthorized execution remains blocked.
-
-No new mutation to runtime behavior was performed.
+The canonical seams are a separate evidence surface and do not prove either P4 relationship.
 
 ---
 
-## 7. Next Safe Action
+## 7. Test / Execution Boundary
 
-Continue P4 using the canonical spine as the evidence-rich reference path, then select the highest-value unresolved seam or relationship that can be proven with complete current repository evidence.
+Repository test artifacts were inspected, but tests were not executed in the current environment because direct runtime execution is unavailable here.
+
+Therefore:
+
+- `CONNECTED / VERIFIED` is retained as the repository's evidence-backed registry state.
+- No new `CI SUCCESS` claim is made.
+- No new `RUNTIME VERIFIED` claim is made for this session.
+- No external side effect was performed.
+
+---
+
+## 8. Mutation Boundary
+
+The only mutation in this continuation was this Engineering Journal record.
+
+No runtime behavior, authority rule, seam registry state, canonical architecture identity, or P4 relationship was modified.
+
+The journal record was re-read after creation.
+
+---
+
+## 9. Next Safe Action
+
+Continue the canonical-spine review from the strongest verified boundary into the next critical seam, while using the existing P4 edge records as unresolved graph constraints rather than as promotion evidence.
 
 Priority remains:
 
-`Evidence → Relationship → Test/Trace → Re-read → Revalidate → Checkpoint`
+`Evidence → Relationship → Contract/Test/Trace → Re-read → Revalidate → Checkpoint`
 
 P4 remains OPEN.
 
 ---
 
-## 8. Closure State
+## 10. Closure State
 
 Session checkpoint status: `RECORDED / NOT CLOSED`
 
