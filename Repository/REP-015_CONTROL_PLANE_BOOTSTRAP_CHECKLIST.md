@@ -411,6 +411,26 @@ Revalidation result:
 
 This revalidation updates the current evidence binding without altering the historical 2026-08-14 audit provenance.
 
+## P310 Cross-Control-Plane Bootstrap Revalidation — 2026-08-17
+
+P310 performed a fresh cross-read after `REP-011` and `REP-012` were bound to the current control-plane cycle.
+
+Current evidence confirms:
+
+- `REP-011` is current and internally bound within the current session cycle while remaining Integrity Hold.
+- `REP-012` is current and internally bound within the current session cycle while remaining Integrity Hold.
+- `REP-013` and `REP-014` were re-read during the same closure-readiness pass.
+- `REP-016` remains the active queue authority and keeps Priority 1 open.
+- `REP-020` remains provisional and non-authoritative.
+
+This revalidation does not change the historical audit date and does not promote Ring 0 to closure.
+
+The bootstrap gate remains:
+
+`BOOTSTRAP PROVEN → CHECKPOINT RECONCILED → SAFE CONTINUATION SELECTED → MUTATION AUTHORIZED`
+
+The next gate is explicit Priority-1 closure review only after all required control-plane evidence is current enough for that decision.
+
 ## Guiding Rule
 
 **The repository is the operational memory; conversation is context, not the authoritative state.**
