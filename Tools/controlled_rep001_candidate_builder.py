@@ -116,12 +116,12 @@ def main() -> int:
     args = parser.parse_args()
 
     source_path = args.repo / "Repository" / "REP-001_MASTER_INDEX.md"
-    source = source_path.read_text(encoding="utf-8", newline="")
+    source = source_path.read_text(encoding="utf-8")
     candidate, report = build_candidate(source)
 
     if args.candidate:
         args.candidate.parent.mkdir(parents=True, exist_ok=True)
-        args.candidate.write_text(candidate, encoding="utf-8", newline="")
+        args.candidate.write_text(candidate, encoding="utf-8")
 
     print(report)
     return 0
