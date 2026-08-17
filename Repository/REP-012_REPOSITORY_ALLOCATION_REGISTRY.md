@@ -630,6 +630,27 @@ Next required state transition:
 
 `REP-011 + REP-012 BOUND → REP-013/014/015/016/020 RECONCILIATION → EXPLICIT PRIORITY 1 CLOSURE REVIEW`
 
+## 28. P343 Current Control-Plane Evidence Binding — 2026-08-17
+
+Current main evidence through P341 was re-read against the control-plane boundary manifest and the manifest-driven reconciliation gate.
+
+Evidence bound in this section:
+
+- P341 checkpoint: current session evidence persisted before this binding;
+- control-plane manifest: current `REP-011..016/020` identities and states captured in P339;
+- P340 gate: manifest-driven control-plane boundary check passed on current main;
+- P340 CI: Integration, Prototype, Integrity and Full-Stack audit all passed;
+- current REP-012 content/blob before this mutation was `b363f6c5afaec7feac778ed7437998340c2b2778`;
+- this mutation preserves all prior REP-012 content and appends only this evidence-binding section.
+
+Disposition:
+
+`REP-012 = PRESENT / CURRENT / P343-BINDING-COMPLETE WITHIN CURRENT CONTROL-PLANE EVIDENCE SCOPE`
+
+This is an evidence-binding result only. It does **not** promote the control-plane to `RECONCILED`, does not set `CLOSED_FOR_PHASE_1`, and does not close Priority 1.
+
+The cross-registry state remains open until the corresponding `REP-013/014/015/016/020` evidence is reconciled to the same current checkpoint.
+
 ---
 
 End of Document
