@@ -2,7 +2,7 @@
 
 Platform: ARGO KOP  
 Document ID: REP-016  
-Version: 1.2.9  
+Version: 1.3.0  
 Status: Active / Phase 1 Open / Integrity Hold  
 Development Baseline: 3.2.1  
 Last Audit: 2026-08-17
@@ -75,6 +75,28 @@ For material positive results:
 `SEARCH RESULT → CAPTURE REF/SHA → COMPARE CURRENT REF → RE-READ CURRENT AUTHORITY → FRESH/STALE CLASSIFICATION → USE/DISCARD`
 
 A negative result is never an absence claim from one search. A positive result is never current-main evidence until its ref/SHA is reconciled with the current authoritative ref.
+
+## P325 Priority-1 Closure-Claim Integrity Incident Synchronization — 2026-08-17
+
+P325 records a forensic finding triggered by an expectation that Priority 1 had been completed in the previous session/day. Repository evidence showed that this expectation was incorrect: the latest prior-session checkpoint P297 explicitly recorded `Priority 1: OPEN`, and P311 independently recorded `Priority 1 is NOT CLOSED` during the first explicit closure review of the current cycle.
+
+Root classification:
+
+`REPOSITORY STATE CORRECT / OPERATIONAL INTERPRETATION FAILURE`
+
+The canonical HERMUZ protocol already distinguishes `SESSION CLOSED`, `CLOSURE-READINESS`, and actual Priority-1 closure. The incident was therefore treated as a process-control finding, not a reason to force-promote repository state.
+
+Mandatory closure rule now recorded for the queue:
+
+A Priority-1 closure claim is valid only when the current authoritative queue/control-plane evidence explicitly records `Priority 1 = CLOSED`, all Priority-1 blockers are resolved, applicable REP-011..016 and REP-020 evidence are reconciled to the same closure checkpoint, and the decision is explicitly recorded as a closure decision.
+
+`SESSION CLOSED ≠ PRIORITY-1 CLOSED`
+
+`CLOSURE-READINESS ≠ CLOSURE`
+
+`CI PASS ≠ SEMANTIC CLOSURE`
+
+P325 does not close Priority 1, does not promote Priority 2, and does not claim Global PASS.
 
 ## P320 Governance Relationship Registration Synchronization — 2026-08-17
 
@@ -231,22 +253,21 @@ No executable promotion is authorized without callable SRV-009 consumer evidence
 
 ## Current Checkpoint
 
-`P320` is the latest recorded checkpoint for this control-plane reconciliation cycle.
+`P325` is the latest recorded checkpoint for this control-plane reconciliation cycle.
 
 Current state:
 
-- Priority 1 Control Plane reconciliation: **OPEN / CLOSURE-READINESS REVIEWED**
+- Priority 1 Control Plane reconciliation: **OPEN / CLOSURE-READINESS REVIEWED / INTERPRETATION INCIDENT REPAIRED**
 - Priority 2 exhaustive duplicate-ID audit: **OPEN**
 - Priority 3 executable relationship proof: **OPEN / evidence narrowed**
 - Priority 4 bidirectional critical graph validation: **OPEN**
+- Priority 5 controlled mutation/reconciliation harness: **PARTIAL / UNIT-LEVEL ONLY**
 - Integrity: **HOLD**
 - Global PASS: **NOT CLAIMED**
 
 ## Next Safe Entry
 
-Continue with the explicit Priority-1 closure review. If closure is not justified, preserve all unresolved items and move to the highest-value remaining evidence action without promoting Priority 2.
-
-The next namespace transition to Priority 2 remains blocked until the Priority 1 closure decision is explicitly evidenced.
+Continue with the highest-value unresolved Priority-1 evidence action. Do not infer Priority-1 closure from session closure, closure-readiness, CI PASS, or checkpoint existence. A closure transition must be explicitly recorded against the current authoritative queue/control-plane state after all Priority-1 blockers are resolved.
 
 ---
 
