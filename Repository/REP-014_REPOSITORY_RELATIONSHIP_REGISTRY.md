@@ -323,6 +323,27 @@ The DIAG-001 edge is provenance/navigation only. It does not make the diagram au
 
 This graph describes control-plane dependency only. It does not certify domain semantics.
 
+## P310 Cross-Control-Plane Binding Reconciliation — 2026-08-17
+
+P310 established closure-readiness evidence after `REP-011` and `REP-012` were bound to the current control-plane cycle.
+
+Current evidence:
+
+- `REP-011/REP-012` current content and binding were re-read after their latest mutations.
+- `REP-013` inventory identity was re-read within the same closure-readiness pass.
+- `REP-015` bootstrap rules remain authoritative within scope.
+- `REP-016` is the current queue authority and remains Priority 1 open.
+- `REP-020` remains provisional/non-authoritative.
+- `REL-005` and `REL-009` remain `REVALIDATION REQUIRED`; no executable promotion is implied.
+
+This section does not register `GOV-013A` as a relationship because its authoritative direction/type remains insufficiently evidenced.
+
+No relationship is promoted merely because the affected control-plane artifacts were re-read.
+
+## Authority Boundary
+
+Relationship states describe evidence scope; they do not authorize implementation changes or override domain authorities.
+
 ---
 
 End of REP-014
