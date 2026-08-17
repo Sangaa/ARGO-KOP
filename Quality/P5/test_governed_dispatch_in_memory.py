@@ -9,8 +9,8 @@ from Tools.GOVERNED_WRITE_DISPATCH import (
 )
 
 
-def make_store() -> tuple[dict[str, ExistingFile], list[str]]:
-    store = {}
+def make_store():
+    store: dict[str, ExistingFile] = {}
     writes: list[str] = []
 
     def read_current(path: str):
@@ -80,6 +80,81 @@ def test_dispatch_update_uses_current_sha() -> None:
     assert result.operation == "UPDATE"
     assert store["fixtures/p5/example.md"].content == "fixture-v2\n"
     assert writes == ["test update"]
+
+
+def test_dispatch_aborts_when_state_changes_before_update() -> None:
+    store, writes, _, create_file, update_file, read_back = make_store()
+    path = "fixtures/p5/race.md"
+    store[path] = ExistingFile(path, "source-sha", "fixture-v1\n")
+    calls = 0
+
+    def racing_reader(target: str):
+        nonlocal calls
+        calls += 1
+        current = store.get(target)
+        if calls == 2 and current is not None:
+            store[target] = ExistingFile(target, "newer-sha", current.content)
+        return store.get(target)
+
+    try:
+        dispatch_write(
+            WriteIntent(
+                path=path,
+                content="fixture-v2\n",
+                commit_message="race update",
+                purpose="P5 stale-state regression",
+                importance=FileImportance.EXECUTABLE_TEST,
+                necessity_evidence="P5-T13 current-state recheck",
+            ),
+            read_current=racing_reader,
+            create_file=create_file,
+            update_file=update_file,
+            read_back=read_back,
+        )
+    except WriteDispatchError as exc:
+        assert str(exc) == "CURRENT_STATE_CHANGED_BEFORE_WRITE"
+    else:
+        raise AssertionError("expected stale-state write rejection")
+
+    assert writes == []
+    assert store[path].sha == "newer-sha"
+    assert store[path].content == "fixture-v1\n"
+
+
+def test_dispatch_aborts_when_file_appears_before_create() -> None:
+    store, writes, _, create_file, update_file, read_back = make_store()
+    path = "fixtures/p5/create-race.md"
+    calls = 0
+
+    def racing_reader(target: str):
+        nonlocal calls
+        calls += 1
+        if calls == 2:
+            store[target] = ExistingFile(target, "arrived-sha", "other-writer\n")
+        return store.get(target)
+
+    try:
+        dispatch_write(
+            WriteIntent(
+                path=path,
+                content="fixture-v1\n",
+                commit_message="race create",
+                purpose="P5 create race regression",
+                importance=FileImportance.EXECUTABLE_TEST,
+                necessity_evidence="P5-T13 current-state recheck",
+            ),
+            read_current=racing_reader,
+            create_file=create_file,
+            update_file=update_file,
+            read_back=read_back,
+        )
+    except WriteDispatchError as exc:
+        assert str(exc) == "CURRENT_STATE_CHANGED_BEFORE_WRITE"
+    else:
+        raise AssertionError("expected create-race rejection")
+
+    assert writes == []
+    assert store[path].content == "other-writer\n"
 
 
 def test_dispatch_rejects_missing_necessity_evidence() -> None:
