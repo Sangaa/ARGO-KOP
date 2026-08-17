@@ -510,6 +510,25 @@ No relationship promotion, executable claim, or Services closure was inferred.
 
 `REP-011` remains **PARTIALLY RECONCILED / INTEGRITY HOLD**. P269 improves physical identity evidence for the Services partition but does not close Priority 1, the Services domain, or the executable `ENG-006 → SRV-009` evidence gap.
 
+## 29. P306 Control-Plane Binding Reconciliation — 2026-08-17
+
+P306 established a repository-native Git mutation safety boundary and P305 established that the current content identities of `REP-011` and `REP-012` are physically current while their internal evidence bindings lag the latest session checkpoint.
+
+Current binding evidence:
+
+- `REP-011` pre-mutation blob: `77ad9a18827099e54ddd8dd16a278535d226abbd`;
+- current reconciliation checkpoint: `P306`;
+- previous evidence delta: `P305` blob `7d2ce804510fff20f0809d75539e47bf2bb103eb`;
+- no prior canonical-content mutation is being discarded or superseded by this section.
+
+The current `REP-011` content remains **PRESENT / CURRENT with INTERNAL BINDING LAG** within the inspected control-plane scope. The new evidence does not retroactively convert the historical last-audit date into a new audit date.
+
+This section records synchronization evidence only. It does not claim `REP-011` is `CLOSED_FOR_PHASE_1`, `RECONCILED`, or globally current across all consumers.
+
+Next required state transition:
+
+`FULL-CONTENT PRESERVING MUTATION → P305/P306 BINDING → FULL READ-BACK → REP-012/013/014/015/016/020 RECONCILIATION`
+
 ---
 
 End of Document
