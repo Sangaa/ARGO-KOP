@@ -5,9 +5,9 @@
 # P5 EXECUTION VERIFICATION CLOSURE
 
 Date: 2026-08-17
-Status: `CLOSED / EXECUTION-VERIFIED` → `REGRESSION UPDATE PENDING`
+Status: `CLOSED / EXECUTION-VERIFIED`
 
-## Evidence
+## Original Evidence
 
 P5 Controlled Mutation Harness workflow executed successfully on main.
 
@@ -18,23 +18,11 @@ P5 Controlled Mutation Harness workflow executed successfully on main.
 - Run P5 fixture and dispatcher tests: `SUCCESS`
 - Canonical-artifact immutability guard: `SUCCESS`
 
-The earlier job-level evidence confirmed both the harness tests and the guard protecting `REP-001`, `REP-014`, and `REP-016` completed successfully.
+## New Learning / Regression Cause
 
-## Cleanup
+A traditional replay of `MUT-2026-08-17-REP002-001` reached `PRE_COMMIT_VALIDATED` and passed its candidate test, but its push was rejected because the runner checked out an older `main` while the remote advanced before the write. This exposed a missing **write-boundary state gate**.
 
-Temporary non-canonical CI trigger fixture `Quality/P5/PR_TRIGGER_TOUCH.md` was removed after verification. No canonical artifact was changed by the fixture or its cleanup.
-
-## Original Decision
-
-`P5 = EXECUTION-VERIFIED`
-
-This closed the original P5 implementation-verification boundary. It did not authorize mutation of canonical artifacts and did not close P4 or P6.
-
-## New Learning / Regression Update
-
-A traditional replay of `MUT-2026-08-17-REP002-001` later reached `PRE_COMMIT_VALIDATED` and passed its candidate test, but its push was rejected because the runner checked out an older `main` while the remote advanced before the write. This exposed a missing **write-boundary state gate**.
-
-A transaction-start SHA check is necessary but insufficient. The governed sequence must now be:
+A transaction-start SHA check is necessary but insufficient. The governed sequence must be:
 
 `READ CURRENT -> CAPTURE SHA -> BUILD/TEST -> RE-READ CURRENT IMMEDIATELY BEFORE WRITE -> WRITE ONLY IF STATE MATCHES -> READ-BACK`
 
@@ -51,15 +39,33 @@ No write is allowed after this failure.
 - `Quality/P5/test_controlled_mutation_harness.py`: traditional-vs-fixture equivalence and successive-update regression tests.
 - `Quality/P5_CONTROLLED_MUTATION_RECONCILIATION_HARNESS_TEST_MATRIX_2026-08-17.md`: P5-T13 through P5-T16 added.
 
-## Verification Boundary
+## Verification Evidence
 
-The regression update becomes `EXECUTION-VERIFIED` only after the P5 CI workflow runs successfully on the new head. Until then:
+P5 workflow: `336293577`
+Successful regression run: `32041698059`
+Successful head: `2ad1c505e24092a4752d3977c6d8c2509d3b5a72`
+Job: `p5-harness` (`95422049526`)
 
-`P5 = IMPLEMENTED / REGRESSION-EXECUTION-VERIFICATION-PENDING`
+Verified:
+
+- P5 fixture and dispatcher tests: `SUCCESS`
+- Canonical-artifact immutability guard: `SUCCESS`
+- Stale-state update race: `VERIFIED`
+- Create race: `VERIFIED`
+- Traditional vs fixture equivalence: `VERIFIED`
+- Successive fixture update preservation: `VERIFIED`
+
+## Decision
+
+`P5 = EXECUTION-VERIFIED`
+
+The regression update is now part of the executable P5 boundary. The fixture path supplements rather than replaces the traditional path.
+
+The rule is repository-enforced and model-independent; future models must inherit it from the dispatcher and test matrix rather than memory of this incident.
 
 ## Next Safe Action
 
-Verify the new P5 CI run and then update the P5 execution state. Do not reopen canonical mutation work solely because this regression test is pending.
+Proceed to P4 final disposition according to the active queue. Do not reopen P5 unless a regression is observed.
 
 ---
 
