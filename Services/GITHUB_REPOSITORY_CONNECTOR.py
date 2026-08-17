@@ -62,7 +62,12 @@ class GitHubRepositoryConnector(RepositoryConnector):
             with urllib.request.urlopen(request, timeout=self._timeout) as response:
                 return json.loads(response.read().decode("utf-8"))
         except urllib.error.HTTPError as exc:
-            body = exc.read().decode("utf-8", errors="replace")
+            body = ""
+            if getattr(exc, "fp", None) is not None:
+                try:
+                    body = exc.read().decode("utf-8", errors="replace")
+                except (AttributeError, OSError):
+                    body = ""
             if exc.code == 404:
                 raise FileNotFoundError(path) from exc
             raise ConnectorError(f"GITHUB_HTTP_{exc.code}: {body[:500]}") from exc
@@ -81,11 +86,7 @@ class GitHubRepositoryConnector(RepositoryConnector):
 
     def read_current(self, path: str) -> ConnectorFile | None:
         try:
-            payload = self._request(
-                "GET",
-                path,
-                None,
-            )
+            payload = self._request("GET", path, None)
         except FileNotFoundError:
             return None
         return ConnectorFile(path=path, sha=str(payload["sha"]), content=self._decode_content(payload, path))
