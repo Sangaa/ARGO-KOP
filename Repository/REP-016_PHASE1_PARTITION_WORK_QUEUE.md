@@ -2,10 +2,10 @@
 
 Platform: ARGO KOP  
 Document ID: REP-016  
-Version: 1.2.6  
+Version: 1.2.7  
 Status: Active / Phase 1 Open / Integrity Hold  
 Development Baseline: 3.2.1  
-Last Audit: 2026-08-16
+Last Audit: 2026-08-17
 
 ## Purpose
 
@@ -76,13 +76,29 @@ For material positive results:
 
 A negative result is never an absence claim from one search. A positive result is never current-main evidence until its ref/SHA is reconciled with the current authoritative ref.
 
+## P301 Current Queue Synchronization — 2026-08-17
+
+P298 established the new-session bootstrap snapshot, P299 reconciled persistence of that snapshot, and P300 established the current evidence boundary for the unresolved GOV-013A relationship direction.
+
+P301 synchronizes this queue with those session evidence points without promoting any unresolved relationship or executable claim.
+
+Current evidence:
+- Current `main` began this synchronization from the P300 session evidence chain.
+- `REP-011/012` binding lag remains OPEN and protected from unsafe full-file replacement.
+- `REP-013` remains repaired and contains `GOV-013A` in the Governance inventory.
+- `REP-014` remains at v1.2.3; no speculative GOV-013A relationship is registered.
+- `REP-015` remains current within inspected bootstrap scope.
+- `ENG-006 → SRV-009` executable proof remains OPEN.
+
+P301 does not close Priority 1, does not promote Priority 2, and does not claim Global PASS.
+
 ## P291 Regression Repair — 2026-08-16
 
 P291 correctly identified the need to bind the current queue checkpoint to P291, but its rewrite unintentionally replaced the full REP-016 queue/history with a shortened document. This is classified as a **content-preservation regression**, not an architectural change.
 
 Repair action:
 
-- restored the complete pre-P291 queue/history content from the verified P290 state;
+- restored the complete pre-P291 queue/history from the verified P290 state;
 - retained the full priority queue and prior checkpoint evidence;
 - set the current checkpoint to P291;
 - preserved P290 as historical evidence;
@@ -169,7 +185,7 @@ No executable promotion is authorized without callable SRV-009 consumer evidence
 
 ## Current Checkpoint
 
-`P291` is the latest recorded checkpoint for this control-plane reconciliation cycle.
+`P301` is the latest recorded checkpoint for this control-plane reconciliation cycle.
 
 Current state:
 
@@ -182,7 +198,7 @@ Current state:
 
 ## Next Safe Entry
 
-Continue Priority 1 by reconciling the remaining control-plane evidence surfaces (`REP-011`, `REP-012`, `REP-013`, `REP-014`, `REP-015`, `REP-020`) against current-main state. Preserve P261–P291 as repository-bound historical/current evidence according to their actual binding. Do not promote the queue simply because a newer checkpoint exists; reconcile the affected registries first.
+Continue Priority 1 by reconciling the remaining control-plane evidence surfaces (`REP-011`, `REP-012`, `REP-013`, `REP-014`, `REP-015`, `REP-016`, `REP-020`) against current-main state. Preserve prior checkpoints as repository-bound historical/current evidence according to their actual binding. Do not promote the queue simply because a newer checkpoint exists; reconcile the affected registries first.
 
 The next namespace transition to Priority 2 remains blocked until the Priority 1 closure decision is explicitly evidenced.
 
