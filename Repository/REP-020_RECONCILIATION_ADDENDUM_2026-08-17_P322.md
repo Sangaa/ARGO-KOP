@@ -91,6 +91,31 @@ Applied the reusable `Templates/GOV-015_EXECUTION_RECORD_TEMPLATE.md` to this bo
 
 This check does not promote the template to a new governance rule; it validates the existing GOV-015 implementation support and identifies fields to observe in subsequent mutation and reconciliation sessions.
 
+## EJR-237 Negative Runtime Evidence — Current Connected Spine
+
+The inspected current runtime seam was revalidated through `EJR-237`.
+
+Evidence:
+
+- `Runtime/Execution/connected_spine_runner.py` constructs `action="SIMULATED_REVIEW"` and executes with `side_effect=False`.
+- `Runtime/Execution/execution_entrypoint.py` records canonical execution traces and does not perform arbitrary side effects or infer authorization.
+- No direct `SRV-009` dispatch was established at this inspected connected-spine boundary.
+- A repository-controlled negative runtime evidence gate was executed successfully in the proven Full-Stack CI.
+
+Current CI evidence:
+
+- Full-Stack workflow: `333498182`
+- Successful run: `32047077359`
+- Successful job: `95437686978`
+- P4 REL-009 consumer boundary gate: `SUCCESS`
+- P4 negative runtime evidence gate: `SUCCESS`
+- Repository-wide audit: `SUCCESS`
+- Runtime evidence emission: `SUCCESS`
+- Audit evidence upload: `SUCCESS`
+- Runtime evidence upload: `SUCCESS`
+
+This is **negative evidence for the inspected seam**, not proof of a global absence of all possible `SRV-009` consumers.
+
 ## Relationship Boundary
 
 - `REL-009` remains `REVALIDATION REQUIRED`.
@@ -107,7 +132,7 @@ Any future canonical mutation must use the governed Mutation Matrix, full-conten
 
 - P1 identity subgate: `VERIFIED`
 - P1 overall: `OPEN / INTEGRITY RECONCILIATION`
-- P4: `OPEN`
+- P4: `OPEN / REL-009 SAFETY BOUNDARY VERIFIED`
 - P5: `EXECUTION-VERIFIED / FIXTURE-DEFAULT`
 - Global PASS: `NOT CLAIMED`
 
