@@ -269,6 +269,25 @@ Current state:
 
 Continue with the highest-value unresolved Priority-1 evidence action. Do not infer Priority-1 closure from session closure, closure-readiness, CI PASS, or checkpoint existence. A closure transition must be explicitly recorded against the current authoritative queue/control-plane state after all Priority-1 blockers are resolved.
 
+## P348 Current Control-Plane Evidence Binding — 2026-08-17
+
+Current main evidence through P347 was re-read against the current control-plane manifest and the manifest-driven reconciliation gate.
+
+Evidence bound in this section:
+
+- P347 bound REP-015 after full-content preservation and read-back;
+- P347 CI passed Integration, Integrity and Prototype jobs, with the Full-Stack Repository Audit also passing;
+- current REP-016 content/blob before this mutation was `40037e4053226e3f96686383adf67cea64da7ebc`;
+- this mutation preserves all prior REP-016 queue/history and appends only this evidence-binding section.
+
+Disposition:
+
+`REP-016 = PRESENT / CURRENT / P348-BINDING-COMPLETE WITHIN CURRENT CONTROL-PLANE EVIDENCE SCOPE`
+
+This is an evidence-binding result only. It does **not** change the Priority-1 current state, does not promote Priority 2, does not set `CLOSED_FOR_PHASE_1`, and does not claim Global PASS.
+
+The remaining current control-plane evidence surface is `REP-020`; after it is reconciled to the same checkpoint, an explicit Priority-1 Closure Review can be performed.
+
 ---
 
 End of REP-016
