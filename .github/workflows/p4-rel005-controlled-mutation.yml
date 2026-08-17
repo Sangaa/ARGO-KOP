@@ -11,6 +11,8 @@ permissions:
 jobs:
   mutate:
     runs-on: ubuntu-latest
+    env:
+      PYTHONPATH: ${{ github.workspace }}
     steps:
       - name: Checkout current branch
         uses: actions/checkout@v4
@@ -34,7 +36,6 @@ jobs:
         run: |
           python - <<'PY'
           import base64
-          import hashlib
           import json
           import os
           import urllib.parse
@@ -75,10 +76,7 @@ jobs:
 
           target = request["target_path"]
           encoded = urllib.parse.quote(target, safe="")
-          current = api_request(
-              "GET",
-              f"{api}/contents/{encoded}?ref={urllib.parse.quote('main')}"
-          )
+          current = api_request("GET", f"{api}/contents/{encoded}?ref=main")
           source_sha = current["sha"]
           if source_sha != request["source_blob_sha"]:
               raise SystemExit(f"SOURCE_BLOB_SHA_MISMATCH:{request['source_blob_sha']}!={source_sha}")
@@ -92,30 +90,26 @@ jobs:
           if candidate == content:
               raise SystemExit("CANDIDATE_EQUALS_SOURCE")
 
-          payload = {
-              "message": "P4: promote REL-005 after bidirectional executable verification",
-              "content": base64.b64encode(candidate.encode("utf-8")).decode("ascii"),
-              "sha": source_sha,
-              "branch": "main",
-          }
-          commit_result = api_request("PUT", f"{api}/contents/{encoded}", payload)
+          commit_result = api_request(
+              "PUT",
+              f"{api}/contents/{encoded}",
+              {
+                  "message": "P4: promote REL-005 after bidirectional executable verification",
+                  "content": base64.b64encode(candidate.encode("utf-8")).decode("ascii"),
+                  "sha": source_sha,
+                  "branch": "main",
+              },
+          )
           commit_sha = commit_result["commit"]["sha"]
 
-          readback = api_request(
-              "GET",
-              f"{api}/contents/{encoded}?ref={urllib.parse.quote('main')}"
-          )
+          readback = api_request("GET", f"{api}/contents/{encoded}?ref=main")
           rb_content = base64.b64decode(readback["content"].replace("\n", "")).decode("utf-8")
           if rb_content != candidate:
               raise SystemExit("POST_WRITE_READBACK_MISMATCH")
           if readback["sha"] != candidate_sha:
               raise SystemExit(f"POST_WRITE_BLOB_SHA_MISMATCH:{candidate_sha}!={readback['sha']}")
 
-          # Mark the transaction applied. A second workflow run sees APPLIED and exits safely.
-          req_current = api_request(
-              "GET",
-              f"{api}/contents/{urllib.parse.quote(request_path, safe='')}?ref=main"
-          )
+          req_current = api_request("GET", f"{api}/contents/{urllib.parse.quote(request_path, safe='')}?ref=main")
           request_payload = {
               **request,
               "status": "APPLIED",
