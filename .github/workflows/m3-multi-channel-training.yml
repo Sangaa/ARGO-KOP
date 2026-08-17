@@ -18,4 +18,4 @@ jobs:
       - name: Execute deterministic M3 checks
         run: |
           python Runtime/Prototype/multi_channel_m3_reconciliation_harness.py
-          python -m pytest -q Quality/Integration/test_multi_channel_m3_reconciliation_harness.py
+          python -m unittest -v Quality/Integration/test_multi_channel_m3_reconciliation_harness.py
