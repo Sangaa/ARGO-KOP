@@ -4,6 +4,20 @@ Date: 2026-08-17
 Status: `EXECUTION-VERIFIED`
 Authority: `GOV-014 v1.0.1`
 
+## Default Test Policy
+
+`FIXTURE = DEFAULT VALIDATION PATH`
+
+The reusable non-canonical fixture path is the default execution path for routine mutation-harness validation because it is faster, isolated and deterministic.
+
+`TRADITIONAL = INTEGRATION / PERIODIC REGRESSION PATH`
+
+The traditional repository-document path remains mandatory whenever real repository integration is being validated and must be retained as a compatibility/regression control. Fixture success never authorizes a canonical write by itself.
+
+Canonical mutation remains governed by the full mutation sequence:
+
+`FIXTURE DEFAULT → REQUIRED GATES PASS → TRADITIONAL/INTEGRATION WHEN APPLICABLE → CANONICAL WRITE ONLY UNDER GOVERNED MUTATION MATRIX`
+
 ## Test Matrix
 
 | Test ID | Scenario | Expected Result | Latest Verification |
@@ -24,6 +38,8 @@ Authority: `GOV-014 v1.0.1`
 | P5-T14 | Traditional source path vs fixture path | Both paths must produce equivalent validated candidates and preservation results | VERIFIED |
 | P5-T15 | Second update after a prior fixture update | Prior mutation must remain preserved while the new mutation is applied | VERIFIED |
 | P5-T16 | Create race: file appears after initial absence check | ABORT / `CURRENT_STATE_CHANGED_BEFORE_WRITE`; zero write allowed | VERIFIED |
+| P5-T17 | Fixture is default routine validation path | CI executes fixture tests first; traditional path remains available for compatibility/regression | VERIFIED |
+| P5-T18 | Fixture fidelity regression | Fixture and traditional path must remain semantically equivalent for the supported mutation scenario | VERIFIED |
 
 ## Regression Focus
 
@@ -43,26 +59,36 @@ The dispatcher therefore requires a second repository-state probe immediately be
 
 No write is permitted after that failure.
 
-## Dual-Path Regression
+## Dual-Path Regression and Default Strategy
 
-The fixture path is not a replacement for the traditional path. Both are retained and are now execution-verified. The reusable fixture must:
+The fixture path is now the **default routine validation path**. It is not a replacement for the traditional repository-document path.
+
+The fixture path must:
 
 1. match the traditional candidate and preservation result;
 2. survive a second update without losing the first update;
 3. preserve all untouched sections;
-4. remain non-canonical and disposable.
+4. remain non-canonical and disposable;
+5. be periodically compared against the traditional path so fixture drift cannot silently weaken validation coverage.
+
+The traditional path is reserved for integration/compatibility/regression verification or whenever the actual repository artifact semantics are material to the decision.
 
 ## Execution Evidence
 
 P5 workflow: `336293577`
 Successful regression run: `32041698059`
-Job: `95422049526`
+Latest successful regression run: `32041738841`
+Job: `p5-harness`
 Result: `SUCCESS`
 
 Verified steps:
 
-- P5 fixture and dispatcher tests: `SUCCESS`
+- P5 fixture/default tests: `SUCCESS`
 - Canonical-artifact immutability guard: `SUCCESS`
+- Stale-state update race: `VERIFIED`
+- Create race: `VERIFIED`
+- Traditional vs fixture equivalence: `VERIFIED`
+- Successive fixture update preservation: `VERIFIED`
 
 ## Model-Independence
 
