@@ -1,11 +1,13 @@
 """Current-tree internal Document ID audit.
 
-The audit follows GOV-004 metadata semantics:
-- only active canonical artifacts participate in active-ID uniqueness;
-- legacy/archive/non-canonical artifacts are reported separately;
-- filename/internal-ID alignment is checked only when the filename carries
-  an exact namespace-style identifier;
-- textual references are not interpreted as document identity.
+GOV-004 defines identity rules, while REP-001 defines the currently verified
+active inventory scope. This audit therefore separates:
+- indexed active canonical artifacts;
+- non-canonical / historical artifacts;
+- ID-bearing artifacts outside the current verified active inventory.
+
+It never promotes an unindexed artifact to active authority from its filename
+or internal Document ID alone.
 """
 
 from __future__ import annotations
@@ -16,8 +18,8 @@ from dataclasses import dataclass
 from pathlib import Path
 
 NAMESPACE_PREFIXES = {
-    "AI", "ARC", "AS", "CORE", "ENG", "EJR", "GOV", "INT", "INTF",
-    "KNW", "LIF", "MEM", "MOD", "PLG", "REP", "RUN", "SPEC", "SRV",
+    "AI", "ARC", "AS", "CORE", "EJR", "ENG", "GOV", "INT", "INTF", "KNW",
+    "LIF", "MEM", "MOD", "PLG", "REP", "RUN", "SPEC", "SRV",
 }
 NAMESPACE_PATTERN = "|".join(sorted(NAMESPACE_PREFIXES, key=len, reverse=True))
 ID_PATTERN = rf"(?:{NAMESPACE_PATTERN})-\d{{3}}"
@@ -35,12 +37,13 @@ class ArtifactRecord:
     document_id: str
     canonical: bool | None
     archived: bool
+    indexed_active: bool
     filename_prefix: str | None
     status: str | None
 
     @property
     def active_canonical(self) -> bool:
-        if self.archived:
+        if self.archived or not self.indexed_active:
             return False
         if self.canonical is False:
             return False
@@ -51,6 +54,17 @@ class ArtifactRecord:
 def _git_files(root: Path) -> list[Path]:
     output = subprocess.check_output(["git", "ls-files", "-z"], cwd=root)
     return [root / raw.decode("utf-8") for raw in output.split(b"\0") if raw]
+
+
+def _master_index_paths(root: Path) -> set[str]:
+    index_path = root / "Repository/REP-001_MASTER_INDEX.md"
+    if not index_path.is_file():
+        return set()
+    text = index_path.read_text(encoding="utf-8", errors="ignore")
+    paths = set()
+    for match in re.finditer(r"`([A-Za-z0-9_./-]+\.md)`", text):
+        paths.add(match.group(1))
+    return paths
 
 
 def _extract_document_id(text: str) -> str | None:
@@ -81,6 +95,7 @@ def scan(root: Path) -> dict:
     records: list[ArtifactRecord] = []
     unreadable: list[str] = []
     tracked = _git_files(root)
+    active_index = _master_index_paths(root)
 
     for path in tracked:
         if path.suffix.lower() not in TEXT_SUFFIXES:
@@ -101,13 +116,15 @@ def scan(root: Path) -> dict:
                 document_id=document_id,
                 canonical=_extract_canonical(text),
                 archived=archived,
+                indexed_active=relative in active_index,
                 filename_prefix=_filename_prefix(path),
                 status=_extract_status(text),
             )
         )
 
     active = [record for record in records if record.active_canonical]
-    noncanonical = [record for record in records if not record.active_canonical]
+    unindexed = [record for record in records if not record.active_canonical and not record.archived]
+    archived = [record for record in records if record.archived]
 
     by_id: dict[str, list[str]] = {}
     for record in active:
@@ -126,23 +143,21 @@ def scan(root: Path) -> dict:
         }
     )
 
-    historical_reuse: dict[str, list[str]] = {}
-    for record in noncanonical:
-        historical_reuse.setdefault(record.document_id, []).append(record.path)
-    historical_reuse = {
-        document_id: sorted(paths)
-        for document_id, paths in historical_reuse.items()
-        if len(paths) > 1 or any(path.startswith("Memory/Engineering_Journal/") for path in paths)
-    }
+    unindexed_ids: dict[str, list[str]] = {}
+    for record in unindexed:
+        unindexed_ids.setdefault(record.document_id, []).append(record.path)
+    unindexed_ids = {key: sorted(value) for key, value in unindexed_ids.items()}
 
     return {
         "tracked_files_scanned": len(tracked),
+        "master_index_paths": len(active_index),
         "document_id_records": len(records),
-        "active_canonical_records": len(active),
-        "noncanonical_records": len(noncanonical),
+        "active_indexed_canonical_records": len(active),
+        "unindexed_id_records": len(unindexed),
+        "archived_records": len(archived),
         "duplicate_active_ids": duplicate_active_ids,
         "filename_internal_id_mismatches": filename_mismatches,
-        "historical_or_noncanonical_reuse": historical_reuse,
+        "unindexed_id_records_by_id": unindexed_ids,
         "unreadable": sorted(unreadable),
         "active_duplicate_pass": not duplicate_active_ids and not unreadable,
         "filename_alignment_pass": not filename_mismatches,
