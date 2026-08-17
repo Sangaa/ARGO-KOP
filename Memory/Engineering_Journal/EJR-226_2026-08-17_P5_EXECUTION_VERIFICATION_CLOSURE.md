@@ -13,12 +13,16 @@ P5 Controlled Mutation Harness workflow executed successfully on main.
 
 - Workflow ID: `336293577`
 - Authoritative successful run: `32040965964`
-- Head SHA: `192e9482c4ef7446b53ca195c11af2801f2705ce`
-- Job: `p5-harness`
+- Head SHA at execution: `192e9482c4ef7446b53ca195c11af2801f2705ce`
+- Job: `p5-harness` (`95420079544`)
 - Run P5 fixture and dispatcher tests: `SUCCESS`
 - Canonical-artifact immutability guard: `SUCCESS`
 
 The job-level evidence confirms both the harness tests and the guard protecting `REP-001`, `REP-014`, and `REP-016` completed successfully.
+
+## Cleanup
+
+Temporary non-canonical CI trigger fixture `Quality/P5/PR_TRIGGER_TOUCH.md` was removed after verification. No canonical artifact was changed by the fixture or its cleanup.
 
 ## Decision
 
@@ -32,7 +36,7 @@ The earlier absence of evidence came from using a PR-filtered workflow-run acces
 
 ## Next Safe Action
 
-Proceed to P4 final disposition or P6 only according to the queue and current evidence; do not reopen P5 unless a regression is observed.
+Proceed to P4 final disposition according to the queue and current evidence; do not reopen P5 unless a regression is observed.
 
 ---
 
