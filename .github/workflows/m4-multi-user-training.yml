@@ -1,0 +1,21 @@
+name: M4 Multi-User Multi-Task Training
+on:
+  push:
+    paths:
+      - 'Runtime/Prototype/multi_channel_m4_multi_user_harness.py'
+      - 'Quality/Integration/test_multi_channel_m4_multi_user_harness.py'
+      - '.github/workflows/m4-multi-user-training.yml'
+jobs:
+  m4-harness:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Execute deterministic M4 checks
+        run: |
+          python Runtime/Prototype/multi_channel_m4_multi_user_harness.py
+          python -m unittest -v Quality/Integration/test_multi_channel_m4_multi_user_harness.py
