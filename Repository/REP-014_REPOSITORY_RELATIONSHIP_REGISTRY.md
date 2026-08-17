@@ -1,4 +1,4 @@
-# REP-014 — REPOSITORY RELATIONSHIP REGISTRY
+# REP-014 — REPOSITORY RELATIONSHIP REGISTRY  
 
 Platform: ARGO KOP  
 Document ID: REP-014  
@@ -335,6 +335,26 @@ DIAG-001 ──derived_from──> REP-012
 The DIAG-001 edge is provenance/navigation only. It does not make the diagram authoritative over REP-012 or any canonical registry.
 
 This graph describes control-plane dependency only. It does not certify domain semantics.
+
+## P346 Current Control-Plane Evidence Binding — 2026-08-17
+
+Current main evidence through P345 was re-read against the current control-plane manifest and the manifest-driven reconciliation gate.
+
+Evidence bound in this section:
+
+- P345 bound REP-013 after full-content preservation and read-back;
+- P340 manifest-driven control-plane gate remained the current consistency gate;
+- P345 CI passed Integrity, Integration and Prototype jobs, with the Full-Stack Repository Audit also passing;
+- current REP-014 content/blob before this mutation was `6aa9e2d29800659186187203a49db407190327f3`;
+- this mutation preserves all prior REP-014 content and appends only this evidence-binding section.
+
+Disposition:
+
+`REP-014 = PRESENT / CURRENT / P346-BINDING-COMPLETE WITHIN CURRENT CONTROL-PLANE EVIDENCE SCOPE`
+
+This is an evidence-binding result only. It does **not** promote any unresolved relationship to `VERIFIED`, does not promote the control plane to `RECONCILED`, does not set `CLOSED_FOR_PHASE_1`, and does not close Priority 1.
+
+The cross-registry state remains open until the corresponding `REP-015/016/020` evidence is reconciled to the same current checkpoint.
 
 ---
 
