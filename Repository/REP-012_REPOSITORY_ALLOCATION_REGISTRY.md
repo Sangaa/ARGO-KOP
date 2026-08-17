@@ -630,26 +630,25 @@ Next required state transition:
 
 `REP-011 + REP-012 BOUND → REP-013/014/015/016/020 RECONCILIATION → EXPLICIT PRIORITY 1 CLOSURE REVIEW`
 
-## 28. P343 Current Control-Plane Evidence Binding — 2026-08-17
+## P353 Current Control-Plane Closure Synchronization — 2026-08-17
 
-Current main evidence through P341 was re-read against the control-plane boundary manifest and the manifest-driven reconciliation gate.
+The explicit Priority-1 closure decision is persisted in:
 
-Evidence bound in this section:
+`Repository/REP-020_SESSION_DELTA_2026-08-17_P350.md`
 
-- P341 checkpoint: current session evidence persisted before this binding;
-- control-plane manifest: current `REP-011..016/020` identities and states captured in P339;
-- P340 gate: manifest-driven control-plane boundary check passed on current main;
-- P340 CI: Integration, Prototype, Integrity and Full-Stack audit all passed;
-- current REP-012 content/blob before this mutation was `b363f6c5afaec7feac778ed7437998340c2b2778`;
-- this mutation preserves all prior REP-012 content and appends only this evidence-binding section.
+The current authoritative queue in `REP-016` now records:
 
-Disposition:
+`Priority 1 = CLOSED / RING-0 CONTROL-PLANE RECONCILED WITHIN CURRENT INSPECTED SCOPE`
 
-`REP-012 = PRESENT / CURRENT / P343-BINDING-COMPLETE WITHIN CURRENT CONTROL-PLANE EVIDENCE SCOPE`
+Current allocation/control-plane disposition:
 
-This is an evidence-binding result only. It does **not** promote the control-plane to `RECONCILED`, does not set `CLOSED_FOR_PHASE_1`, and does not close Priority 1.
+`REP-012 = RECONCILED WITHIN RING-0 CONTROL-PLANE CLOSURE SCOPE`
 
-The cross-registry state remains open until the corresponding `REP-013/014/015/016/020` evidence is reconciled to the same current checkpoint.
+This is not `CLOSED_FOR_PHASE_1` for the whole repository. It records that the allocation/state/recovery view is reconciled for the Ring-0 closure decision.
+
+The historical `PARTIALLY_RECONCILED / INTEGRITY HOLD` statements above remain preserved as historical evidence; P353 is the current closure-synchronization disposition.
+
+No executable SRV-009 proof, global graph closure, exhaustive repository-wide identity cleanliness, controlled mutation harness closure, or final Boot PASS is claimed.
 
 ---
 
