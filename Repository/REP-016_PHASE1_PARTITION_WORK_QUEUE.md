@@ -21,7 +21,7 @@ No promotion to a later ring is allowed until predecessor exit evidence, affecte
 
 | Priority | Partition / Workstream | Current State | Required Entry Point | Closure Authority |
 |---:|---|---|---|---|
-| 1 | Repository Control Plane reconciliation | RECONCILIATION | REP-011..016 + REP-020 | REP-011 + explicit closure decision |
+| 1 | Repository Control Plane reconciliation | **CLOSED** | REP-011..016 + REP-020 | REP-011 + explicit closure decision |
 | 2 | Exhaustive duplicate-ID audit | RELATIONSHIP_VALIDATION | REP-001 + full current tree/content | REP-011/014 + explicit identity decisions |
 | 3 | Executable relationship proof | RELATIONSHIP_VALIDATION | RUN-010 → ENG-006 → SRV-009 | REP-011/014 + Runtime/Engine/Service evidence |
 | 4 | Bidirectional critical graph validation | RELATIONSHIP_VALIDATION | REP-014 + critical edges | REP-014 + endpoint evidence |
@@ -253,21 +253,32 @@ No executable promotion is authorized without callable SRV-009 consumer evidence
 
 ## Current Checkpoint
 
-`P325` is the latest recorded checkpoint for this control-plane reconciliation cycle.
+`P351` is now the latest recorded checkpoint for this control-plane reconciliation cycle.
 
 Current state:
 
-- Priority 1 Control Plane reconciliation: **OPEN / CLOSURE-READINESS REVIEWED / INTERPRETATION INCIDENT REPAIRED**
+- Priority 1 Control Plane reconciliation: **CLOSED / RING-0 CONTROL-PLANE RECONCILED WITHIN CURRENT INSPECTED SCOPE**
 - Priority 2 exhaustive duplicate-ID audit: **OPEN**
 - Priority 3 executable relationship proof: **OPEN / evidence narrowed**
 - Priority 4 bidirectional critical graph validation: **OPEN**
-- Priority 5 controlled mutation/reconciliation harness: **PARTIAL / UNIT-LEVEL ONLY**
+- Priority 5 controlled mutation/reconciliation harness: **PARTIAL / REPOSITORY-LEVEL TESTED**
+- Priority 6 CI ↔ impact-matrix observability: **NOT_STARTED**
 - Integrity: **HOLD**
 - Global PASS: **NOT CLAIMED**
 
-## Next Safe Entry
+## P350 Explicit Priority-1 Closure Decision — 2026-08-17
 
-Continue with the highest-value unresolved Priority-1 evidence action. Do not infer Priority-1 closure from session closure, closure-readiness, CI PASS, or checkpoint existence. A closure transition must be explicitly recorded against the current authoritative queue/control-plane state after all Priority-1 blockers are resolved.
+The explicit closure decision is persisted in:
+
+`Repository/REP-020_SESSION_DELTA_2026-08-17_P350.md`
+
+Decision:
+
+**PRIORITY 1 = CLOSED / RING-0 CONTROL-PLANE RECONCILED WITHIN CURRENT INSPECTED SCOPE**
+
+Closure scope is limited to the Repository Control Plane reconciliation partition defined by Priority 1. P2–P6 remain independently open and are not implicitly promoted by this decision.
+
+The closure decision is based on current artifact identity evidence, P340 manifest-driven gate PASS, P342–P349 binding/read-back evidence, and successful current-main CI. It does not claim executable SRV-009 proof, global graph closure, exhaustive repository-wide identity cleanliness, or final Boot PASS.
 
 ## P348 Current Control-Plane Evidence Binding — 2026-08-17
 
