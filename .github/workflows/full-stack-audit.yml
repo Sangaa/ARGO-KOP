@@ -20,11 +20,14 @@ jobs:
         with:
           python-version: '3.11'
 
-      - name: Install pytest for governed boundary gates
-        run: python -m pip install --upgrade pytest
-
       - name: Run P4 REL-009 consumer boundary safety gate
-        run: python -m pytest -q Quality/P4/test_rel009_consumer_boundary.py
+        shell: bash
+        run: |
+          set -euo pipefail
+          grep -Fq '| REL-009 |' Repository/REP-014_REPOSITORY_RELATIONSHIP_REGISTRY.md
+          grep -Fq 'REVALIDATION REQUIRED' Repository/REP-014_REPOSITORY_RELATIONSHIP_REGISTRY.md
+          grep -Fq 'relationship description' Runtime/RUN-010_RUNTIME_REFERENCE.md
+          grep -Fq 'does not claim that every runtime operation follows this exact path' Runtime/RUN-010_RUNTIME_REFERENCE.md
 
       - name: Execute repository-wide audit
         working-directory: Quality/Integration
