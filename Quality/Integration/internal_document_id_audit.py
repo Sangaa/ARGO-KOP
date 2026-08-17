@@ -1,10 +1,11 @@
 """Current-tree internal Document ID audit.
 
 GOV-004 defines identity rules, while REP-001 defines the currently verified
-active inventory scope. This audit therefore separates:
+active inventory scope. This audit separates:
 - indexed active canonical artifacts;
-- non-canonical / historical artifacts;
-- ID-bearing artifacts outside the current verified active inventory.
+- canonical artifacts outside the current active inventory;
+- legacy/non-canonical artifacts retained for provenance;
+- ambiguous duplicate IDs that require an explicit identity decision.
 
 It never promotes an unindexed artifact to active authority from its filename
 or internal Document ID alone.
@@ -29,6 +30,7 @@ BLOCK_RE = re.compile(rf"^\s*Document ID\s*$\n\s*`?({ID_PATTERN})`?\s*$", re.I |
 CANONICAL_RE = re.compile(r"^\s*Canonical\s*[:：]\s*(Yes|No)\s*$", re.I | re.M)
 STATUS_RE = re.compile(r"^\s*Status\s*[:：]?\s*(.+?)\s*$", re.I | re.M)
 TEXT_SUFFIXES = {".md", ".markdown", ".txt", ".rst", ".json", ".yaml", ".yml", ".toml", ".py"}
+LEGACY_TOKENS = ("legacy", "historical", "superseded", "archived")
 
 
 @dataclass(frozen=True)
@@ -48,7 +50,22 @@ class ArtifactRecord:
         if self.canonical is False:
             return False
         status = (self.status or "").lower()
-        return not any(token in status for token in ("legacy", "historical", "superseded", "archived"))
+        return not any(token in status for token in LEGACY_TOKENS)
+
+    @property
+    def explicit_historical_or_noncanonical(self) -> bool:
+        if self.archived or self.canonical is False:
+            status = (self.status or "").lower()
+            return True or any(token in status for token in LEGACY_TOKENS)
+        status = (self.status or "").lower()
+        return any(token in status for token in LEGACY_TOKENS)
+
+    @property
+    def canonical_unindexed(self) -> bool:
+        if self.archived or self.indexed_active or self.canonical is not True:
+            return False
+        status = (self.status or "").lower()
+        return not any(token in status for token in LEGACY_TOKENS)
 
 
 def _git_files(root: Path) -> list[Path]:
@@ -125,6 +142,7 @@ def scan(root: Path) -> dict:
     active = [record for record in records if record.active_canonical]
     unindexed = [record for record in records if not record.active_canonical and not record.archived]
     archived = [record for record in records if record.archived]
+    canonical_unindexed = [record for record in records if record.canonical_unindexed]
 
     by_id: dict[str, list[str]] = {}
     for record in active:
@@ -148,19 +166,37 @@ def scan(root: Path) -> dict:
         unindexed_ids.setdefault(record.document_id, []).append(record.path)
     unindexed_ids = {key: sorted(value) for key, value in unindexed_ids.items()}
 
+    # A duplicate ID outside the active index is ambiguous unless every record
+    # in that ID group is explicitly historical/non-canonical/archived.
+    records_by_id: dict[str, list[ArtifactRecord]] = {}
+    for record in records:
+        if not record.archived:
+            records_by_id.setdefault(record.document_id, []).append(record)
+    ambiguous_duplicate_ids = {}
+    for document_id, group in records_by_id.items():
+        if len(group) < 2:
+            continue
+        if all(record.explicit_historical_or_noncanonical for record in group):
+            continue
+        ambiguous_duplicate_ids[document_id] = sorted(record.path for record in group)
+
     return {
         "tracked_files_scanned": len(tracked),
         "master_index_paths": len(active_index),
         "document_id_records": len(records),
         "active_indexed_canonical_records": len(active),
+        "canonical_unindexed_records": len(canonical_unindexed),
+        "canonical_unindexed_paths": sorted(record.path for record in canonical_unindexed),
         "unindexed_id_records": len(unindexed),
         "archived_records": len(archived),
         "duplicate_active_ids": duplicate_active_ids,
+        "ambiguous_duplicate_ids": {key: sorted(value) for key, value in sorted(ambiguous_duplicate_ids.items())},
         "filename_internal_id_mismatches": filename_mismatches,
         "unindexed_id_records_by_id": unindexed_ids,
         "unreadable": sorted(unreadable),
         "active_duplicate_pass": not duplicate_active_ids and not unreadable,
         "filename_alignment_pass": not filename_mismatches,
+        "identity_scope_reconciled": not canonical_unindexed and not ambiguous_duplicate_ids,
     }
 
 
