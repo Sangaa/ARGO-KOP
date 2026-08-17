@@ -54,7 +54,11 @@ Historical root naming-convention material is not active canonical inventory and
 - `Repository/REP-001_MASTER_INDEX.md`
 - `Repository/REP-002_REPOSITORY_MAP.md`
 - `Repository/REP-003_REPOSITORY_STANDARDS.md`
+- `Repository/REP-004_REPOSITORY_NAVIGATION.md`
+- `Repository/REP-005_REPOSITORY_COMPONENTS.md`
 - `Repository/REP-006_REPOSITORY_LIFECYCLE.md`
+- `Repository/REP-007_REPOSITORY_GOVERNANCE.md`
+- `Repository/REP-008_REPOSITORY_BASELINE.md`
 - `Repository/REP-009_REPOSITORY_TRACEABILITY.md`
 - `Repository/REP-010_RELEASE_BASELINE.md`
 - `Repository/REP-011_REVIEW_TRACEABILITY_LEDGER.md`
@@ -230,6 +234,12 @@ Build-01 is physically constructed and re-read. These artifacts remain `Candidat
 ## 16. Other Active Repository Domains
 
 The repository contains additional physical domains shown by the current `SYSTEM_MAP.md`, including Knowledge, Memory, Decision, AI, Services, Intelligence, Quality, Projects, Release, Logs, Examples and Future.
+
+The following Intelligence artifacts are directly verified as Approved and Canonical by `Intelligence/_FOLDER_STATUS.md`:
+
+- `Intelligence/INT-001_INTELLIGENCE_LAYER.md`
+- `Intelligence/INT-002_PATTERN_EXTRACTION.md`
+- `Intelligence/INT-003_ANOMALY_DETECTOR.md`
 
 The current audit also identifies physical domains requiring staged reconstruction or re-audit, including:
 
