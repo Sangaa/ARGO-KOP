@@ -1,0 +1,37 @@
+name: Internal Document-ID Audit
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - 'Quality/Integration/internal_document_id_audit.py'
+      - 'Quality/Integration/test_internal_document_id_audit.py'
+      - 'Repository/REP-001_MASTER_INDEX.md'
+      - '.github/workflows/internal-id-audit.yml'
+
+jobs:
+  internal-id-audit:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install test runner
+        run: python -m pip install --upgrade pytest
+
+      - name: Run internal Document-ID audit
+        env:
+          PYTHONPATH: ${{ github.workspace }}/Quality/Integration
+        run: python -m pytest -q Quality/Integration/test_internal_document_id_audit.py
+
+      - name: Re-run audit as deterministic report
+        env:
+          PYTHONPATH: ${{ github.workspace }}/Quality/Integration
+        run: python Quality/Integration/internal_document_id_audit.py
