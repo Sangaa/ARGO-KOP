@@ -67,6 +67,20 @@ When this phrase is received, load and apply [`Governance/GOV-013_HERMUZ_SESSION
 
 HERMUZ is an operating protocol and does not override ARGO constitutional, governance, architecture, release, or domain authority.
 
+### Mandatory Failure-to-Learning Protocol
+
+**Every engineer, contributor, and AI model MUST apply [`GOVERNANCE/GOV-016_FAILURE_TO_LEARNING_PROTOCOL.md`](GOVERNANCE/GOV-016_FAILURE_TO_LEARNING_PROTOCOL.md).**
+
+An unexpected failure must not be silently fixed, ignored, or reduced to a generic `FAILED` state. It must be analyzed from evidence, classified, root-caused where possible, corrected or safely contained, regression-tested when practical, and transferred into reusable knowledge according to its validated scope.
+
+The mandatory chain is:
+
+**Failure → Evidence → Root Cause → Failure Class → Corrective Pattern → Regression Test → Reuse → Knowledge Transfer**
+
+**Bad Idea ≠ Bad Implementation ≠ Bad Test ≠ Bad Execution Channel.**
+
+This protocol is mandatory for all models so that ARGO continuously converts failures into bounded, verified, reusable capability rather than merely accumulating successful outcomes.
+
 ## Core Repository Navigation
 
 - **System Map:** [`SYSTEM_MAP.md`](SYSTEM_MAP.md)
@@ -74,6 +88,7 @@ HERMUZ is an operating protocol and does not override ARGO constitutional, gover
 - **Repository Relationship Map:** [`Repository/REP-002_REPOSITORY_MAP.md`](Repository/REP-002_REPOSITORY_MAP.md)
 - **Platform Bootstrap:** [`PROJECT_BOOTSTRAP.md`](PROJECT_BOOTSTRAP.md)
 - **HERMUZ Session Protocol:** [`Governance/GOV-013_HERMUZ_SESSION_BUILD_PROTOCOL.md`](Governance/GOV-013_HERMUZ_SESSION_BUILD_PROTOCOL.md)
+- **Failure-to-Learning Protocol:** [`GOVERNANCE/GOV-016_FAILURE_TO_LEARNING_PROTOCOL.md`](GOVERNANCE/GOV-016_FAILURE_TO_LEARNING_PROTOCOL.md)
 - **Platform Status:** [`PROJECT_STATUS.md`](PROJECT_STATUS.md)
 - **Vision:** [`VISION.md`](VISION.md)
 - **Runtime Sequence:** [`Runtime/RUN-001_BOOT_SEQUENCE.md`](Runtime/RUN-001_BOOT_SEQUENCE.md)
@@ -99,6 +114,10 @@ ARGO KOP is intended to learn from both successful and unsuccessful engineering 
 The current operational learning path is:
 
 **Observed → Recorded → Re-examined → Tested → Governed → Reused**
+
+GOV-016 adds the mandatory failure-analysis branch:
+
+**Failure → Evidence → Root Cause → Correction → Verification → Memory → Reuse**
 
 New audit-derived rules remain candidates until explicitly promoted through the applicable authority path.
 
