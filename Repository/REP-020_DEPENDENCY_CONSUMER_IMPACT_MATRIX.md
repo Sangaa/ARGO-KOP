@@ -330,6 +330,25 @@ The remaining closure blockers are:
 
 No relationship promotion or final closure is implied by this section.
 
+## P349 Current Control-Plane Evidence Binding — 2026-08-17
+
+Current main evidence through P348 was re-read against the current control-plane manifest, the manifest-driven reconciliation gate, and the latest P348 queue checkpoint.
+
+Evidence bound in this section:
+
+- P348 bound REP-016 after full-content preservation and read-back;
+- P348 CI was verified across Integrity, Prototype and Integration jobs, with Full-Stack Repository Audit also active/successful for the resulting current-main cycle;
+- current REP-020 content/blob before this mutation was `07d34b37a0410c984d9f53c69b674eeed2c56846`;
+- this mutation preserves all prior REP-020 evidence and appends only this evidence-binding section.
+
+Disposition:
+
+`REP-020 = PRESENT / CURRENT / P349-BINDING-COMPLETE WITHIN CURRENT CONTROL-PLANE EVIDENCE SCOPE`
+
+This remains a provisional/non-authoritative evidence surface. It does **not** grant authority, promote `RUN-E02/RUN-E03`, establish executable SRV-009 coupling, or close Priority 1.
+
+The full Ring-0 control-plane evidence chain is now bound through `REP-020`. The next operation is an explicit Priority-1 Closure Review against the current synchronized state; no additional checkpoint should be mistaken for closure.
+
 ## Integrity State
 
 `INTEGRITY HOLD`
