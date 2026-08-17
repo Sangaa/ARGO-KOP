@@ -2,7 +2,7 @@
 
 Platform: ARGO KOP  
 Document ID: REP-016  
-Version: 1.2.7  
+Version: 1.2.8  
 Status: Active / Phase 1 Open / Integrity Hold  
 Development Baseline: 3.2.1  
 Last Audit: 2026-08-17
@@ -75,6 +75,19 @@ For material positive results:
 `SEARCH RESULT → CAPTURE REF/SHA → COMPARE CURRENT REF → RE-READ CURRENT AUTHORITY → FRESH/STALE CLASSIFICATION → USE/DISCARD`
 
 A negative result is never an absence claim from one search. A positive result is never current-main evidence until its ref/SHA is reconciled with the current authoritative ref.
+
+## P304 Current Queue Synchronization — 2026-08-17
+
+P304 revalidated the executable boundary for `RUN-010 → ENG-006 → SRV-009` and confirmed that the canonical documents are contractual while no callable `SRV-009` consumer was established in the inspected code/search scope.
+
+Current evidence:
+- `RUN-010`, `ENG-006`, and `SRV-009` contracts remain aligned and intact.
+- `connected_spine_runner.py` reaches `execution_entrypoint.py` with `SIMULATED_REVIEW` and `side_effect=False`.
+- `execution_entrypoint.py` records governed execution traces and does not dispatch to `SRV-009`.
+- Targeted repository searches did not establish a callable `SRV-009` consumer implementation.
+- P303 CI evidence for the preceding `REP-014` boundary correction passed: integrity, prototype, integration, and full-stack audit.
+
+P304 does not close Priority 1, does not promote Priority 2, and does not claim executable verification.
 
 ## P301 Current Queue Synchronization — 2026-08-17
 
@@ -185,13 +198,13 @@ No executable promotion is authorized without callable SRV-009 consumer evidence
 
 ## Current Checkpoint
 
-`P301` is the latest recorded checkpoint for this control-plane reconciliation cycle.
+`P304` is the latest recorded checkpoint for this control-plane reconciliation cycle.
 
 Current state:
 
 - Priority 1 Control Plane reconciliation: **OPEN**
 - Priority 2 exhaustive duplicate-ID audit: **OPEN**
-- Priority 3 executable relationship proof: **OPEN**
+- Priority 3 executable relationship proof: **OPEN / evidence narrowed**
 - Priority 4 bidirectional critical graph validation: **OPEN**
 - Integrity: **HOLD**
 - Global PASS: **NOT CLAIMED**
