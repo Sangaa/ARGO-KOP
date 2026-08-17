@@ -37,6 +37,7 @@ Historical root naming-convention material is not active canonical inventory and
 
 ## 3. Core Layer
 
+- `Core/CORE-000_PLATFORM_ARCHITECTURE.md`
 - `Core/CORE-003_CONSTITUTION.md`
 - `Core/CORE-004_CORE_PRINCIPLES.md`
 - `Core/CORE-005_COGNITIVE_MODEL.md`
@@ -314,6 +315,18 @@ Repository Reality > Previous Status Claims > Conversation Memory
 `GOV-013A_HERMUZ_BOOTSTRAP_INTEGRITY_GATE.md` is now registered in the active Governance inventory. The addendum remains subordinate to higher ARGO authority and does not create independent semantic or architectural authority.
 
 This registration closes the REP-001 discoverability gap for `GOV-013A` within the inspected Governance/Repository index scope.
+
+## P356 Current Canonical Core Inventory Reconciliation — 2026-08-17
+
+Current Core folder evidence (`Core/_FOLDER_STATUS.md`) explicitly identifies `Core/CORE-000_PLATFORM_ARCHITECTURE.md` as a known canonical Core artifact independently revalidated on 2026-08-10. The artifact declares `Document ID: CORE-000` and `Canonical: Yes`.
+
+The active Core inventory therefore now explicitly includes:
+
+`Core/CORE-000_PLATFORM_ARCHITECTURE.md`
+
+This mutation repairs an index-scope discrepancy; it does not promote `CORE-000_PLATFORM_IDENTITY.md`, whose own document states `Canonical: No / Legacy / Superseded`.
+
+P356 is an inventory/identity reconciliation only. Core remains under Integrity Hold and cross-layer validation.
 
 ---
 
