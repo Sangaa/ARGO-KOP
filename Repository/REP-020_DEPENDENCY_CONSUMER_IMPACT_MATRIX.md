@@ -286,6 +286,33 @@ The service/runtime relationship states above remain their previously establishe
 
 The prior evidence binding to `654d7f3...` is retained historically; the current binding is `bf37455fe32478d0cbdd7f2faee6365fb5a60a57`.
 
+## P310 Cross-Control-Plane Closure-Readiness Reconciliation — 2026-08-17
+
+P310 performed a current cross-read after `REP-011` and `REP-012` were bound to the P309 control-plane cycle.
+
+Evidence currently confirms:
+
+- `REP-013` physical inventory was re-read and remains current within the inspected scope.
+- `REP-014` relationship states were re-read; `REL-005` and `REL-009` remain `REVALIDATION REQUIRED`.
+- `REP-015` bootstrap gates remain current within the inspected scope.
+- `REP-016` remains the active Priority-1 work queue.
+- `REP-020` itself remains provisional and non-authoritative.
+- P309 Runtime/Integration and Full-Stack CI evidence passed.
+
+Interpretation:
+
+`P310 = CLOSURE-READINESS EVIDENCE, not Priority-1 closure.`
+
+The remaining closure blockers are semantic/evidence blockers, not CI integrity failures:
+
+1. executable `RUN-010 → ENG-006 → SRV-009` consumer proof remains open;
+2. exhaustive internal-ID/content duplicate reconciliation remains partial;
+3. complete bidirectional graph validation remains open;
+4. controlled mutation/reconciliation harness remains not performed;
+5. final `BOOTED / INTEGRITY PASS` remains blocked by the preceding items.
+
+No relationship promotion or final closure is implied by this section.
+
 ## Integrity State
 
 `INTEGRITY HOLD`
