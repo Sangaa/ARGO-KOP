@@ -43,6 +43,28 @@ jobs:
           assert 'SRV-009' not in entrypoint
           PY
 
+      - name: Run Mutation Matrix preflight regression
+        run: |
+          python - <<'PY'
+          from check_mutation_matrix_preflight import evaluate
+          assert evaluate(['Engine/ENG-TEST.md', 'EJR/EJR-TEST.md']) == (['Engine/ENG-TEST.md'], [])
+          assert evaluate(['Engine/ENG-TEST.md', 'Repository/MUT-TEST_MUTATION_MATRIX.md']) == (['Engine/ENG-TEST.md'], ['Repository/MUT-TEST_MUTATION_MATRIX.md'])
+          assert evaluate(['EJR/EJR-TEST.md', 'Docs/TEST.md']) == ([], [])
+          assert evaluate(['Repository/MUT-TEST_MUTATION_MATRIX.md']) == ([], ['Repository/MUT-TEST_MUTATION_MATRIX.md'])
+          print('MUTATION_MATRIX_PREFLIGHT_REGRESSION=PASS')
+          PY
+
+      - name: Enforce Mutation Matrix on current change set
+        shell: bash
+        run: |
+          set -euo pipefail
+          BASE="${{ github.event.before }}"
+          HEAD="${{ github.sha }}"
+          if [ -z "$BASE" ] || [ "$BASE" = "0000000000000000000000000000000000000000" ]; then
+            BASE="$(git rev-parse HEAD^)"
+          fi
+          python Quality/Integration/check_mutation_matrix_preflight.py "$BASE" "$HEAD"
+
       - name: Execute repository-wide audit
         working-directory: Quality/Integration
         run: set -o pipefail; python run_full_stack_audit.py ../.. | tee ../../full-stack-audit-report.json
