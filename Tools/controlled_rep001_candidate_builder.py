@@ -19,7 +19,7 @@ REPOSITORY_LAYER_OLD = """- `Repository/REP-001_MASTER_INDEX.md`\n- `Repository/
 REPOSITORY_LAYER_NEW = """- `Repository/REP-001_MASTER_INDEX.md`\n- `Repository/REP-002_REPOSITORY_MAP.md`\n- `Repository/REP-003_REPOSITORY_STANDARDS.md`\n- `Repository/REP-004_REPOSITORY_NAVIGATION.md`\n- `Repository/REP-005_REPOSITORY_COMPONENTS.md`\n- `Repository/REP-006_REPOSITORY_LIFECYCLE.md`\n- `Repository/REP-007_REPOSITORY_GOVERNANCE.md`\n- `Repository/REP-008_REPOSITORY_BASELINE.md`\n- `Repository/REP-009_REPOSITORY_TRACEABILITY.md`\n"""
 
 INTELLIGENCE_ANCHOR = "The repository contains additional physical domains shown by the current `SYSTEM_MAP.md`, including Knowledge, Memory, Decision, AI, Services, Intelligence, Quality, Projects, Release, Logs, Examples and Future.\n"
-INTELLIGENCE_INSERT = INTELLIGENCE_ANCHOR + "\nThe following Intelligence artifacts are directly verified as Approved and Canonical by `Intelligence/_FOLDER_STATUS.md`: \n\n- `Intelligence/INT-001_INTELLIGENCE_LAYER.md`\n- `Intelligence/INT-002_PATTERN_EXTRACTION.md`\n- `Intelligence/INT-003_ANOMALY_DETECTOR.md`\n"
+INTELLIGENCE_INSERT = INTELLIGENCE_ANCHOR + "\nThe following Intelligence artifacts are directly verified as Approved and Canonical by `Intelligence/_FOLDER_STATUS.md`:\n\n- `Intelligence/INT-001_INTELLIGENCE_LAYER.md`\n- `Intelligence/INT-002_PATTERN_EXTRACTION.md`\n- `Intelligence/INT-003_ANOMALY_DETECTOR.md`\n"
 
 @dataclass(frozen=True)
 class Section:
@@ -49,6 +49,12 @@ def parse_sections(text: str) -> list[Section]:
     return sections
 
 
+def assert_no_trailing_whitespace(text: str) -> None:
+    bad_lines = [line_no for line_no, line in enumerate(text.splitlines(), 1) if line.rstrip() != line]
+    if bad_lines:
+        raise RuntimeError(f"TRAILING_WHITESPACE_LINES={bad_lines}")
+
+
 def build_candidate(source: str) -> tuple[str, dict[str, object]]:
     original_blob_sha = git_blob_sha1(source)
     original_sha256 = sha256_text(source)
@@ -62,6 +68,7 @@ def build_candidate(source: str) -> tuple[str, dict[str, object]]:
 
     candidate = source.replace(REPOSITORY_LAYER_OLD, REPOSITORY_LAYER_NEW, 1)
     candidate = candidate.replace(INTELLIGENCE_ANCHOR, INTELLIGENCE_INSERT, 1)
+    assert_no_trailing_whitespace(candidate)
 
     original_sections = parse_sections(source)
     candidate_sections = parse_sections(candidate)
@@ -112,6 +119,7 @@ def build_candidate(source: str) -> tuple[str, dict[str, object]]:
         "unexpected_changes": 0,
         "required_changes": len(required),
         "required_changes_present": len(required),
+        "trailing_whitespace_lines": [],
         "status": "PRE_COMMIT_VALIDATED",
     }
     return candidate, report
