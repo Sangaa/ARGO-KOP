@@ -30,7 +30,8 @@ ID_PATTERN = rf"(?:{NAMESPACE_PATTERN})-\d{{3}}"
 ID_RE = re.compile(rf"(?<![A-Z])({ID_PATTERN})(?![A-Z0-9-])", re.I)
 INLINE_RE = re.compile(rf"^\s*Document ID\s*[:：]\s*`?({ID_PATTERN})`?\s*$", re.I | re.M)
 BLOCK_RE = re.compile(rf"^\s*Document ID\s*$\n\s*`?({ID_PATTERN})`?\s*$", re.I | re.M)
-CANONICAL_RE = re.compile(r"^\s*Canonical\s*[:：]\s*(Yes|No|Pending)\s*$", re.I | re.M)
+CANONICAL_INLINE_RE = re.compile(r"^\s*Canonical\s*[:：]\s*(Yes|No|Pending)\s*$", re.I | re.M)
+CANONICAL_BLOCK_RE = re.compile(r"^\s*Canonical\s*$\n\s*(Yes|No|Pending)\s*$", re.I | re.M)
 STATUS_RE = re.compile(r"^\s*Status\s*[:：]?\s*(.+?)\s*$", re.I | re.M)
 TEXT_SUFFIXES = {".md", ".markdown", ".txt", ".rst", ".json", ".yaml", ".yml", ".toml", ".py"}
 LEGACY_TOKENS = ("legacy", "historical", "superseded", "archived")
@@ -104,7 +105,7 @@ def _extract_document_id(text: str) -> str | None:
 
 
 def _extract_canonical(text: str) -> bool | None:
-    match = CANONICAL_RE.search(text)
+    match = CANONICAL_INLINE_RE.search(text) or CANONICAL_BLOCK_RE.search(text)
     if not match:
         return None
     value = match.group(1).lower()
