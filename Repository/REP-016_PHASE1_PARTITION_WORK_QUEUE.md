@@ -2,7 +2,7 @@
 
 Platform: ARGO KOP  
 Document ID: REP-016  
-Version: 1.2.8  
+Version: 1.2.9  
 Status: Active / Phase 1 Open / Integrity Hold  
 Development Baseline: 3.2.1  
 Last Audit: 2026-08-17
@@ -75,6 +75,18 @@ For material positive results:
 `SEARCH RESULT → CAPTURE REF/SHA → COMPARE CURRENT REF → RE-READ CURRENT AUTHORITY → FRESH/STALE CLASSIFICATION → USE/DISCARD`
 
 A negative result is never an absence claim from one search. A positive result is never current-main evidence until its ref/SHA is reconciled with the current authoritative ref.
+
+## P320 Governance Relationship Registration Synchronization — 2026-08-17
+
+P320 registered `GOV-013A → GOV-013 = REFERENCES` in `REP-014` after current canonical evidence resolved the direction and controlled registry type. The stronger semantic description `Canonical Addendum / Supplements GOV-013` remains preserved in the relationship evidence.
+
+Current evidence:
+- `GOV-013A` remains `Approved / Canonical Addendum` and explicitly states `Authority: Supplements GOV-013`.
+- `REP-014` v1.2.6 now contains `REL-061` for the controlled `REFERENCES` representation.
+- `REL-005` and `REL-009` remain `REVALIDATION REQUIRED`; no executable relationship was promoted.
+- The `REP-016` queue content and prior checkpoint history were preserved in full during this synchronization.
+
+P320 does not close Priority 1, promote Priority 2, or claim Global PASS.
 
 ## P310 Cross-Control-Plane Closure-Readiness Synchronization — 2026-08-17
 
@@ -219,7 +231,7 @@ No executable promotion is authorized without callable SRV-009 consumer evidence
 
 ## Current Checkpoint
 
-`P310` is the latest recorded checkpoint for this control-plane reconciliation cycle.
+`P320` is the latest recorded checkpoint for this control-plane reconciliation cycle.
 
 Current state:
 
