@@ -1,6 +1,6 @@
 """Concrete GitHub Contents API connector for the governed repository boundary.
 
-Provider-specific implementation.  Credentials and repository identity come
+Provider-specific implementation. Credentials and repository identity come
 from the runtime environment; no authority is inferred from technical access.
 """
 from __future__ import annotations
@@ -43,12 +43,22 @@ class GitHubRepositoryConnector(RepositoryConnector):
         self._config = config
         self._timeout = timeout
 
-    def _url(self, path: str) -> str:
+    def _url(self, path: str, *, include_ref: bool = False) -> str:
         encoded = "/".join(urllib.parse.quote(part, safe="") for part in path.split("/"))
-        return f"{self._config.api_base}/repos/{self._config.owner}/{self._config.repo}/contents/{encoded}"
+        url = f"{self._config.api_base}/repos/{self._config.owner}/{self._config.repo}/contents/{encoded}"
+        if include_ref:
+            url += "?ref=" + urllib.parse.quote(self._config.branch, safe="")
+        return url
 
-    def _request(self, method: str, path: str, payload: dict[str, Any] | None = None) -> dict[str, Any]:
-        url = self._url(path)
+    def _request(
+        self,
+        method: str,
+        path: str,
+        payload: dict[str, Any] | None = None,
+        *,
+        include_ref: bool = False,
+    ) -> dict[str, Any]:
+        url = self._url(path, include_ref=include_ref)
         data = None if payload is None else json.dumps(payload).encode("utf-8")
         request = urllib.request.Request(url, data=data, method=method)
         request.add_header("Accept", "application/vnd.github+json")
@@ -86,7 +96,7 @@ class GitHubRepositoryConnector(RepositoryConnector):
 
     def read_current(self, path: str) -> ConnectorFile | None:
         try:
-            payload = self._request("GET", path, None)
+            payload = self._request("GET", path, None, include_ref=True)
         except FileNotFoundError:
             return None
         return ConnectorFile(path=path, sha=str(payload["sha"]), content=self._decode_content(payload, path))
