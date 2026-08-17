@@ -6,7 +6,7 @@ active inventory scope. This audit separates:
 - canonical artifacts outside the current active inventory;
 - canonical artifacts inside domains explicitly deferred by domain authority;
 - legacy/non-canonical artifacts retained for provenance;
-- shadowed legacy identities where one active canonical owner coexists with
+- shadowed legacy identities where one canonical owner coexists with
   explicit historical/non-canonical retained artifacts;
 - ambiguous duplicate IDs that require an explicit identity decision.
 
@@ -217,12 +217,12 @@ def scan(root: Path) -> dict:
     for document_id, group in records_by_id.items():
         if len(group) < 2:
             continue
-        active_group = [record for record in group if record.active_canonical]
-        nonactive_group = [record for record in group if not record.active_canonical]
-        if len(active_group) == 1 and nonactive_group and all(
-            record.explicit_historical_or_noncanonical for record in nonactive_group
+        canonical_group = [record for record in group if record.canonical is True]
+        noncanonical_group = [record for record in group if record.canonical is not True]
+        if len(canonical_group) == 1 and noncanonical_group and all(
+            record.explicit_historical_or_noncanonical for record in noncanonical_group
         ):
-            shadowed_legacy_ids[document_id] = sorted(record.path for record in nonactive_group)
+            shadowed_legacy_ids[document_id] = sorted(record.path for record in noncanonical_group)
             continue
         if all(record.explicit_historical_or_noncanonical for record in group):
             continue
