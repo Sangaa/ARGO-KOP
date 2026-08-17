@@ -2,7 +2,7 @@
 
 Platform: ARGO KOP  
 Document ID: REP-014  
-Version: 1.2.4  
+Version: 1.2.5  
 Status: Active / Relationship Enumeration In Progress  
 Development Baseline: 3.2.1  
 Last Audit: 2026-08-17
@@ -142,7 +142,7 @@ ENG-006 → SRV-009 = DOCUMENTED / CONTRACTUAL
 
 The reviewed Runtime execution path does not provide a callable `SRV-009` consumer implementation. Therefore the registry must not represent `REL-005` as executable implementation proof.
 
-**The executable consumer proof is not established. No executable `VERIFIED` state is added.**
+**The executable consumer proof is not established. no executable `VERIFIED` state is added.**
 
 This reconciliation does **not** delete the relationship, rename the source or target, create a synthetic implementation, or promote the relationship to verified executable authority.
 
@@ -160,7 +160,7 @@ RUN-010 → SRV-009 = DOCUMENTED / CONTRACTUAL
 
 `RUN-010_RUNTIME_REFERENCE.md` describes the `RUN-010 → ENG-006 → SRV-009` path as a relationship description and explicitly does not claim that every runtime operation follows the path. The inspected connected execution spine records execution traces through the current entrypoint and remains simulation-only at the adapter boundary; it does not establish a callable `SRV-009` dispatch.
 
-**The executable consumer proof is not established. No executable `VERIFIED` state is added.**
+**The executable consumer proof is not established. no executable `VERIFIED` state is added.**
 
 Therefore `REL-009` must not be treated as executable or verified coupling merely because the architectural sequence is documented.
 
@@ -172,7 +172,7 @@ These state corrections are evidence reconciliation only. They do not authorize 
 
 ### Checkpoint
 
-`P302` updated the explicit evidence language requested by the current integration/integrity tests while preserving the unresolved executable boundary. The relationship remains open until executable evidence is independently established.
+`P303` updated the explicit evidence language requested by the current integration/integrity tests while preserving the unresolved executable boundary. The relationship remains open until executable evidence is independently established.
 
 ## Identity Drift Reconciliation — 2026-08-13
 
@@ -299,7 +299,7 @@ REP-013 ──depends_on──> REP-011
 
 REP-014 ──depends_on──> REP-011
    │
-   └──depends_on──────> REP-012
+   └──depends_on──> REP-012
 
 REP-015 ──depends_on──> REP-011
          ├────────────> REP-012
