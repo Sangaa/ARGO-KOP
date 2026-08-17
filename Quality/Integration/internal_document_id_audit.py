@@ -122,8 +122,8 @@ def _filename_prefix(path: Path) -> str | None:
     return match.group(1).upper() if match else None
 
 
-def _deferred_domain(path: Path, root: Path, folder_status_cache: dict[str, bool]) -> bool:
-    parts = path.parts
+def _deferred_domain(relative_path: Path, root: Path, folder_status_cache: dict[str, bool]) -> bool:
+    parts = relative_path.parts
     if not parts:
         return False
     domain = parts[0]
@@ -161,6 +161,7 @@ def scan(root: Path) -> dict:
         if not document_id:
             continue
         relative = path.relative_to(root).as_posix()
+        relative_path = Path(relative)
         archived = relative == "Archive" or relative.startswith("Archive/")
         records.append(
             ArtifactRecord(
@@ -169,9 +170,9 @@ def scan(root: Path) -> dict:
                 canonical=_extract_canonical(text),
                 archived=archived,
                 indexed_active=relative in active_index,
-                filename_prefix=_filename_prefix(path),
+                filename_prefix=_filename_prefix(relative_path),
                 status=_extract_status(text),
-                deferred_domain=_deferred_domain(path, root, folder_status_cache),
+                deferred_domain=_deferred_domain(relative_path, root, folder_status_cache),
             )
         )
 
