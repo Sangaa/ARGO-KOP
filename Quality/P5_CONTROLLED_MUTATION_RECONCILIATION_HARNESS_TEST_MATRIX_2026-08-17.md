@@ -40,7 +40,7 @@ Canonical mutation remains governed by the full mutation sequence:
 | P5-T16 | Create race: file appears after initial absence check | ABORT / `CURRENT_STATE_CHANGED_BEFORE_WRITE`; zero write allowed | VERIFIED |
 | P5-T17 | Fixture is default routine validation path | CI executes fixture tests first; traditional path remains available for compatibility/regression | VERIFIED |
 | P5-T18 | Fixture fidelity regression | Fixture and traditional path must remain semantically equivalent for the supported mutation scenario | VERIFIED |
-| P5-T19 | GOV-015 execution-record template applied to fixture/test session | Required execution identity, evidence boundary, learning classification, transfer decision and closure gates are capturable without implying canonical write authority | PENDING |
+| P5-T19 | GOV-015 execution-record template applied to fixture/test session | Required execution identity, evidence boundary, learning classification, transfer decision and closure gates are capturable without implying canonical write authority | VERIFIED |
 
 ## Regression Focus
 
@@ -79,7 +79,8 @@ The traditional path is reserved for integration/compatibility/regression verifi
 P5 workflow: `336293577`
 Successful regression run: `32041698059`
 Latest successful regression run: `32041738841`
-Job: `p5-harness`
+Current GOV-015 fixture/test verification run: `32045549749`
+Job: `p5-harness` / `95432507754`
 Result: `SUCCESS`
 
 Verified steps:
@@ -90,7 +91,7 @@ Verified steps:
 - Create race: `VERIFIED`
 - Traditional vs fixture equivalence: `VERIFIED`
 - Successive fixture update preservation: `VERIFIED`
-- P5-T19 GOV-015 fixture/test execution-record capture: `PENDING`
+- P5-T19 GOV-015 fixture/test execution-record capture: `VERIFIED`
 
 ## Model-Independence
 
