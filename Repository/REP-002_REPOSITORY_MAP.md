@@ -56,7 +56,11 @@ Path: `Repository/`
 - `Repository/REP-001_MASTER_INDEX.md`
 - `Repository/REP-002_REPOSITORY_MAP.md`
 - `Repository/REP-003_REPOSITORY_STANDARDS.md`
+- `Repository/REP-004_REPOSITORY_NAVIGATION.md`
+- `Repository/REP-005_REPOSITORY_COMPONENTS.md`
 - `Repository/REP-006_REPOSITORY_LIFECYCLE.md`
+- `Repository/REP-007_REPOSITORY_GOVERNANCE.md`
+- `Repository/REP-008_REPOSITORY_BASELINE.md`
 - `Repository/REP-009_REPOSITORY_TRACEABILITY.md`
 - `Repository/REP-010_RELEASE_BASELINE.md`
 - `Repository/REP-011_REVIEW_TRACEABILITY_LEDGER.md`
@@ -79,6 +83,7 @@ Path: `Governance/`
 - `Governance/GOV-010_GOVERNANCE_MODEL.md`
 - `Governance/GOV-013_HERMUZ_SESSION_BUILD_PROTOCOL.md`
 - `Governance/GOV-013A_HERMUZ_BOOTSTRAP_INTEGRITY_GATE.md`
+- `Governance/GOV-014_CONTROLLED_DOCUMENT_MUTATION_PROTOCOL.md`
 - `Governance/_FOLDER_STATUS.md`
 
 `Governance/GOV-011_EXTERNAL_FEEDBACK_REPORT_STANDARD.md` exists and is verified as `Proposed / Integrity Hold`; it is not active canonical authority until formally ratified.
