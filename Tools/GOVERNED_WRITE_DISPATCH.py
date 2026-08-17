@@ -9,6 +9,8 @@ Rules enforced here:
 - Create requires explicit importance and evidence proving why the new file is
   necessary;
 - a create/update decision is never inferred from the intended filename alone;
+- the current repository state is re-read immediately before write so a race
+  after candidate validation cannot turn a stale transaction into a write;
 - after mutation, the caller must perform a read-back and verify the resulting
   content before the mutation is considered persisted.
 """
@@ -90,10 +92,12 @@ def dispatch_write(
     """Choose Create or Update from current repository state, then verify it.
 
     Safety properties:
-    - Create is selected only after a confirmed not-found result.
-    - Update is selected only when a current SHA exists.
-    - A race where a new file appears between the existence probe and Create
-      must surface as an error; the dispatcher never silently overwrites it.
+    - Create is selected only after a confirmed not-found result and a second
+      existence probe immediately before the write.
+    - Update is selected only when a current SHA exists, and the same SHA is
+      confirmed immediately before the write.
+    - A race where repository state changes between probes aborts the write;
+      the dispatcher never silently writes a stale transaction.
     - Post-mutation read-back is mandatory and content must match exactly.
     """
     if not intent.path or intent.path.startswith("/") or ".." in intent.path.split("/"):
@@ -117,9 +121,11 @@ def dispatch_write(
     current = read_current(intent.path)
 
     if current is None:
-        # New-file creation is a structural mutation. Its need must already
-        # be evidenced; this dispatcher intentionally does not manufacture the
-        # justification from the filename.
+        # Re-check immediately before CREATE. A successful candidate build is
+        # not proof that the path is still absent on the live repository.
+        pre_write = read_current(intent.path)
+        if pre_write is not None:
+            raise WriteDispatchError("CURRENT_STATE_CHANGED_BEFORE_WRITE")
         commit_sha = create_file(
             intent.path,
             intent.content,
@@ -127,11 +133,19 @@ def dispatch_write(
         )
         operation = "CREATE"
     else:
+        # Re-check immediately before UPDATE. The expected SHA must still be
+        # the live SHA at the write boundary, not merely the SHA used to build
+        # the candidate earlier in the transaction.
+        pre_write = read_current(intent.path)
+        if pre_write is None:
+            raise WriteDispatchError("CURRENT_STATE_CHANGED_BEFORE_WRITE")
+        if pre_write.sha != current.sha:
+            raise WriteDispatchError("CURRENT_STATE_CHANGED_BEFORE_WRITE")
         commit_sha = update_file(
             intent.path,
             intent.content,
             intent.commit_message,
-            current.sha,
+            pre_write.sha,
         )
         operation = "UPDATE"
 
