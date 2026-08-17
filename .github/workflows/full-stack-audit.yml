@@ -29,6 +29,20 @@ jobs:
           grep -Fq 'relationship description' Runtime/RUN-010_RUNTIME_REFERENCE.md
           grep -Fq 'This is a relationship description, not a claim that every runtime operation follows this exact path.' Runtime/RUN-010_RUNTIME_REFERENCE.md
 
+      - name: Run P4 negative runtime evidence gate
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          root = Path('.')
+          runner = (root / 'Runtime/Execution/connected_spine_runner.py').read_text(encoding='utf-8')
+          entrypoint = (root / 'Runtime/Execution/execution_entrypoint.py').read_text(encoding='utf-8')
+          assert 'action="SIMULATED_REVIEW"' in runner
+          assert 'side_effect=False' in runner
+          assert 'record_execution_trace' in entrypoint
+          assert 'SRV-009' not in runner
+          assert 'SRV-009' not in entrypoint
+          PY
+
       - name: Execute repository-wide audit
         working-directory: Quality/Integration
         run: set -o pipefail; python run_full_stack_audit.py ../.. | tee ../../full-stack-audit-report.json
