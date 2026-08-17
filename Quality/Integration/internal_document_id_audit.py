@@ -54,10 +54,11 @@ class ArtifactRecord:
 
     @property
     def explicit_historical_or_noncanonical(self) -> bool:
-        if self.archived or self.canonical is False:
-            status = (self.status or "").lower()
-            return True or any(token in status for token in LEGACY_TOKENS)
+        if self.archived:
+            return True
         status = (self.status or "").lower()
+        if self.canonical is False:
+            return any(token in status for token in LEGACY_TOKENS)
         return any(token in status for token in LEGACY_TOKENS)
 
     @property
@@ -166,8 +167,6 @@ def scan(root: Path) -> dict:
         unindexed_ids.setdefault(record.document_id, []).append(record.path)
     unindexed_ids = {key: sorted(value) for key, value in unindexed_ids.items()}
 
-    # A duplicate ID outside the active index is ambiguous unless every record
-    # in that ID group is explicitly historical/non-canonical/archived.
     records_by_id: dict[str, list[ArtifactRecord]] = {}
     for record in records:
         if not record.archived:
