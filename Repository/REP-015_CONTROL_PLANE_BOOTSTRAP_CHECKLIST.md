@@ -431,6 +431,25 @@ The bootstrap gate remains:
 
 The next gate is explicit Priority-1 closure review only after all required control-plane evidence is current enough for that decision.
 
+## P347 Current Control-Plane Evidence Binding — 2026-08-17
+
+Current main evidence through P346 was re-read against the current control-plane manifest and the manifest-driven reconciliation gate.
+
+Evidence bound in this section:
+
+- P346 bound REP-014 after Git-native full-content preservation, tree/commit persistence and current-main read-back;
+- P346 Runtime/Integration and Full-Stack CI passed on the resulting HEAD;
+- current REP-015 content/blob before this mutation was `5dfff3c36bb98c9cf8f23bc4fb499017b9bbdfa0`;
+- this mutation preserves all prior REP-015 content and appends only this evidence-binding section.
+
+Disposition:
+
+`REP-015 = PRESENT / CURRENT / P347-BINDING-COMPLETE WITHIN CURRENT CONTROL-PLANE EVIDENCE SCOPE`
+
+This is an evidence-binding result only. It does **not** promote the control plane to `RECONCILED`, does not set `CLOSED_FOR_PHASE_1`, and does not close Priority 1.
+
+The cross-registry state remains open until the corresponding `REP-016/020` evidence is reconciled to the same current checkpoint.
+
 ## Guiding Rule
 
 **The repository is the operational memory; conversation is context, not the authoritative state.**
