@@ -13,7 +13,7 @@ from dataclasses import dataclass
 from typing import Any
 
 from Runtime.Execution.execution_entrypoint import execute
-from Tools.GOVERNED_WRITE_DISPATCH import dispatch_write, FileImportance, WriteIntent, WriteResult
+from Tools.GOVERNED_WRITE_DISPATCH import FileImportance, WriteIntent, WriteResult, dispatch_write
 from Services.REPOSITORY_CONNECTOR_INTERFACE import RepositoryConnector
 
 
@@ -63,7 +63,7 @@ def execute_update(
         read_back=connector.read_back,
     )
 
-    if result.status != "SUCCESS":
+    if not result.post_read_verified:
         return {
             "status": "UPDATE_BLOCKED",
             "write_result": result,
