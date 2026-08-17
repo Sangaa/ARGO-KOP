@@ -5,6 +5,7 @@ on:
     paths:
       - 'Repository/CONTROLLED_MUTATION_REQUEST.json'
       - 'Repository/REP-001_MASTER_INDEX.md'
+      - 'Repository/REP-002_REPOSITORY_MAP.md'
   workflow_dispatch:
 
 permissions:
@@ -50,7 +51,11 @@ jobs:
           missing = [k for k in required if k not in req]
           if missing:
               raise SystemExit(f'MISSING_REQUEST_FIELDS={missing}')
-          if req['target_path'] != 'Repository/REP-001_MASTER_INDEX.md':
+          allowed = {
+              'Repository/REP-001_MASTER_INDEX.md',
+              'Repository/REP-002_REPOSITORY_MAP.md',
+          }
+          if req['target_path'] not in allowed:
               raise SystemExit('UNAUTHORIZED_TARGET_PATH')
           if not isinstance(req['expected_changes'], int) or req['expected_changes'] < 1:
               raise SystemExit('INVALID_EXPECTED_CHANGES')
@@ -70,14 +75,12 @@ jobs:
           req = json.loads(Path('Repository/CONTROLLED_MUTATION_REQUEST.json').read_text(encoding='utf-8'))
           module_name = req['candidate_builder'].replace('/', '.').replace('.py', '')
           builder = importlib.import_module(module_name)
-
           if not hasattr(builder, 'build_candidate'):
               raise SystemExit('BUILDER_MISSING_BUILD_CANDIDATE')
 
           source_path = Path(req['target_path'])
           source = source_path.read_text(encoding='utf-8')
           actual_blob = subprocess.check_output(['git', 'hash-object', str(source_path)], text=True).strip()
-
           if actual_blob != req['source_blob_sha']:
               raise SystemExit(f"SOURCE_BLOB_SHA_MISMATCH expected={req['source_blob_sha']} actual={actual_blob}")
 
@@ -89,12 +92,11 @@ jobs:
           if report.get('keep_hash_mismatches'):
               raise SystemExit(f"KEEP_HASH_MISMATCHES={report['keep_hash_mismatches']}")
           if report.get('required_changes_present') != req['expected_changes']:
-              raise SystemExit(
-                  f"EXPECTED_CHANGES_MISMATCH expected={req['expected_changes']} actual={report.get('required_changes_present')}"
-              )
+              raise SystemExit(f"EXPECTED_CHANGES_MISMATCH expected={req['expected_changes']} actual={report.get('required_changes_present')}")
 
-          Path('/tmp/REP-001.candidate.md').write_text(candidate, encoding='utf-8')
-          Path('/tmp/REP-001.report.json').write_text(json.dumps(report, indent=2), encoding='utf-8')
+          target_name = source_path.name
+          Path(f'/tmp/{target_name}.candidate.md').write_text(candidate, encoding='utf-8')
+          Path('/tmp/mutation_report.json').write_text(json.dumps(report, indent=2), encoding='utf-8')
           Path('/tmp/mutation_request.json').write_text(json.dumps(req, indent=2), encoding='utf-8')
           print(json.dumps(report, indent=2))
           PY
@@ -111,34 +113,44 @@ jobs:
         if: steps.request.outputs.present == 'true'
         shell: bash
         run: |
-          cp /tmp/REP-001.candidate.md Repository/REP-001_MASTER_INDEX.md
+          target_path=$(python - <<'PY'
+          import json
+          from pathlib import Path
+          print(json.loads(Path('Repository/CONTROLLED_MUTATION_REQUEST.json').read_text())['target_path'])
+          PY
+          )
+          target_name=$(basename "$target_path")
+          cp "/tmp/${target_name}.candidate.md" "$target_path"
           git diff --check
-
           tracked_changed=$(git status --porcelain --untracked-files=no)
           printf '%s\n' "$tracked_changed"
-          test "$(printf '%s\n' "$tracked_changed" | grep -c '^ M Repository/REP-001_MASTER_INDEX.md$')" -eq 1
           test "$(printf '%s\n' "$tracked_changed" | wc -l)" -eq 1
-          printf '%s\n' "$tracked_changed" | grep -q '^ M Repository/REP-001_MASTER_INDEX.md$'
+          printf '%s\n' "$tracked_changed" | grep -q "^ M $target_path$"
 
       - name: Commit validated candidate
         if: steps.request.outputs.present == 'true'
         shell: bash
         run: |
-          req_json=$(cat /tmp/mutation_request.json)
           tx_id=$(python - <<'PY'
           import json
           from pathlib import Path
           print(json.loads(Path('/tmp/mutation_request.json').read_text())['transaction_id'])
           PY
           )
+          target_path=$(python - <<'PY'
+          import json
+          from pathlib import Path
+          print(json.loads(Path('/tmp/mutation_request.json').read_text())['target_path'])
+          PY
+          )
           git config user.name "ARGO GOV-014 Mutation Bot"
           git config user.email "argo-governed-mutation@users.noreply.github.com"
-          git add Repository/REP-001_MASTER_INDEX.md
+          git add "$target_path"
           git rm Repository/CONTROLLED_MUTATION_REQUEST.json
           tracked_changed=$(git status --porcelain --untracked-files=no)
           printf '%s\n' "$tracked_changed"
           test "$(printf '%s\n' "$tracked_changed" | wc -l)" -eq 2
-          printf '%s\n' "$tracked_changed" | grep -q '^M  Repository/REP-001_MASTER_INDEX.md$'
+          printf '%s\n' "$tracked_changed" | grep -q "^M  $target_path$"
           printf '%s\n' "$tracked_changed" | grep -q '^D  Repository/CONTROLLED_MUTATION_REQUEST.json$'
           git commit -m "GOV-014 controlled mutation: $tx_id"
           git push origin HEAD:main
