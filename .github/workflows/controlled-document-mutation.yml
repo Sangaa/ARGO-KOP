@@ -79,11 +79,12 @@ jobs:
           cp /tmp/REP-001.candidate.md Repository/REP-001_MASTER_INDEX.md
           git diff --check
 
-          changed=$(git status --short)
-          printf '%s\n' "$changed"
-          test "$(printf '%s\n' "$changed" | wc -l)" -eq 2
-          printf '%s\n' "$changed" | grep -q 'Repository/CONTROLLED_MUTATION_REQUEST.json'
-          printf '%s\n' "$changed" | grep -q 'Repository/REP-001_MASTER_INDEX.md'
+          tracked_changed=$(git status --porcelain --untracked-files=no)
+          printf '%s\n' "$tracked_changed"
+          test "$(printf '%s\n' "$tracked_changed" | grep -c '^ M Repository/REP-001_MASTER_INDEX.md$')" -eq 1
+          test "$(printf '%s\n' "$tracked_changed" | wc -l)" -eq 1
+
+          printf '%s\n' "$tracked_changed" | grep -q '^ M Repository/REP-001_MASTER_INDEX.md$'
 
       - name: Commit validated candidate
         if: steps.request.outputs.present == 'true'
@@ -93,6 +94,11 @@ jobs:
           git config user.email "argo-governed-mutation@users.noreply.github.com"
           git add Repository/REP-001_MASTER_INDEX.md
           git rm Repository/CONTROLLED_MUTATION_REQUEST.json
+          tracked_changed=$(git status --porcelain --untracked-files=no)
+          printf '%s\n' "$tracked_changed"
+          test "$(printf '%s\n' "$tracked_changed" | wc -l)" -eq 2
+          printf '%s\n' "$tracked_changed" | grep -q '^M  Repository/REP-001_MASTER_INDEX.md$'
+          printf '%s\n' "$tracked_changed" | grep -q '^D  Repository/CONTROLLED_MUTATION_REQUEST.json$'
           git commit -m "P2 GOV-014 controlled mutation: REP-001 index reconciliation"
           git push origin HEAD:main
 
