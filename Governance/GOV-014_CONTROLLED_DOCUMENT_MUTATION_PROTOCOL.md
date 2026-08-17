@@ -6,8 +6,8 @@
 
 Platform: ARGO KOP (Knowledge Operating Platform)
 Document ID: GOV-014
-Version: 1.0.0
-Status: Proposed / Session-Approved Operating Pattern
+Version: 1.0.1
+Status: Canonical / Session-Approved Operating Pattern
 Category: Governance / Repository Mutation
 Canonical: Yes
 Priority: Critical
@@ -128,16 +128,22 @@ Every controlled mutation MUST have a unique Transaction ID, for example:
 
 `MUT-2026-08-17-REP001-001`
 
-The transaction record SHOULD retain:
+The transaction record MUST retain:
 
 - target path;
 - source commit/blob SHA;
+- Section Matrix reference;
+- Mutation Matrix reference;
 - candidate specification;
 - expected changes;
 - pre-commit validation result;
 - resulting commit SHA;
 - post-commit validation result;
 - final reconciliation status.
+
+A controlled mutation MUST NOT be considered Matrix-compliant unless its Mutation Matrix artifact exists **before the repository write** and is linked to the transaction record.
+
+A retroactive Matrix record may repair traceability after a historical gap, but MUST be explicitly labeled `RETROACTIVE RECONCILIATION` and MUST NOT be represented as proof that the original pre-write gate was satisfied.
 
 ---
 
@@ -175,7 +181,8 @@ Mutation closure requires:
 - no unexpected changes;
 - identity/path consistency maintained;
 - downstream registry/index impact recorded;
-- transaction status explicitly closed or blocked.
+- transaction status explicitly closed or blocked;
+- Mutation Matrix transaction record preserved and linked.
 
 A session MUST NOT claim the mutation is complete while any required row remains unresolved.
 
