@@ -1,4 +1,4 @@
-# Dual-path fixture
+# Fixture
 
 ## Alpha
 alpha body
