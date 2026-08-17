@@ -56,6 +56,20 @@ jobs:
           print('MUTATION_MATRIX_PREFLIGHT_REGRESSION=PASS')
           PY
 
+      - name: Run Mutation Matrix semantic regression
+        run: |
+          python - <<'PY'
+          from check_mutation_matrix_semantics import validate_matrix_text
+          from pathlib import Path
+          valid = '''# MUTATION MATRIX — TEST\nTransaction ID: `MUT-TEST-001`\nProtocol: GOV-014 v1.0.1\n\n| Change ID | Target | Action | Expected Content | Applied | Verified |\n|---|---|---|---|:---:|:---:|\n| TEST-001 | `Engine/ENG-TEST.md` | UPDATE | bounded test change | N | N |\n\n## KEEP REQUIREMENT\n\nAll other content is `KEEP`.\n\n## Execution Evidence\n\n- Post-write read-back completed.\n- Unexpected Changes = 0.\n\n## Closure\n\n`TEST TRANSACTION = CONTROLLED`.\n'''
+          invalid = valid.replace('| TEST-001 | `Engine/ENG-TEST.md` | UPDATE | bounded test change | N | N |', '| TEST-001 | `Engine/ENG-TEST.md` | UPDATE | bounded test change | MAYBE | N |')
+          assert validate_matrix_text(valid) == []
+          assert any('Applied must be Y or N' in e for e in validate_matrix_text(invalid))
+          real = Path('Repository/MUT-2026-08-17-AUDIT-RECON-001_MUTATION_MATRIX.md').read_text(encoding='utf-8')
+          assert validate_matrix_text(real) == []
+          print('MUTATION_MATRIX_SEMANTICS_REGRESSION=PASS')
+          PY
+
       - name: Enforce Mutation Matrix on current change set
         shell: bash
         run: |
