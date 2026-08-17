@@ -1,7 +1,3 @@
-# REP-002
-
----
-
 # ARGO KOP - CANONICAL REPOSITORY STORAGE MAP
 
 Platform: ARGO KOP (Knowledge Operating Platform)
@@ -41,6 +37,7 @@ Historical root naming-convention material is excluded from active inventory and
 
 Path: `Core/`
 
+- `Core/CORE-000_PLATFORM_ARCHITECTURE.md`
 - `Core/CORE-003_CONSTITUTION.md`
 - `Core/CORE-004_CORE_PRINCIPLES.md`
 - `Core/CORE-005_COGNITIVE_MODEL.md`
@@ -285,6 +282,14 @@ Completion of individual files or reviewed subsets must not be interpreted as Ph
 `GOV-013A_HERMUZ_BOOTSTRAP_INTEGRITY_GATE.md` is now physically mapped in the active Governance inventory and is synchronized with REP-001. Its status remains `Approved / Canonical Addendum`, subordinate to higher ARGO authority.
 
 This closes the REP-002 physical-map discoverability gap for `GOV-013A` within the inspected Governance/Repository scope.
+
+## P357 Current Canonical Core Map Reconciliation — 2026-08-17
+
+Current Core folder evidence explicitly identifies `Core/CORE-000_PLATFORM_ARCHITECTURE.md` as a known canonical Core artifact independently revalidated on 2026-08-10. The master index now includes this path as P356.
+
+The physical storage map is synchronized to that same canonical Core path.
+
+This mutation repairs the REP-001 ↔ REP-002 discoverability gap and does not promote the legacy `CORE-000_PLATFORM_IDENTITY.md`, which remains noncanonical historical evidence.
 
 ---
 
