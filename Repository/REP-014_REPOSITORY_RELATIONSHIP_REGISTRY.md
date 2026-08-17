@@ -71,7 +71,7 @@ The following are deliberately limited to relationships established during repos
 | REL-002 | MOD-001 | SRV-004 | CONSUMES | Revalidated within inspected scope |
 | REL-003 | ENG-004 | SRV-005 | PRODUCES | Revalidated within inspected scope |
 | REL-004 | ENG-002 | ENG-006 | DEPENDS_ON | Revalidation Required |
-| REL-005 | ENG-006 | SRV-009 | IMPLEMENTS | **REVALIDATION REQUIRED** |
+| REL-005 | ENG-006 | SRV-009 | IMPLEMENTS | **BIDIRECTIONAL / EXECUTABLE-VERIFIED / GOVERNED / ISOLATED E2E** |
 | REL-006 | RUN-010 | ENG-002 | CONSUMES | Revalidated within inspected scope |
 | REL-007 | RUN-010 | ENG-004 | CONSUMES | Revalidated within inspected scope |
 | REL-008 | RUN-010 | ENG-006 | CONSUMES | Revalidated within inspected scope |
@@ -133,21 +133,37 @@ The following are deliberately limited to relationships established during repos
 
 ### REL-005 executable boundary reconciliation
 
-`REL-005` is retained as a historical relationship record, but its current state is explicitly downgraded to `REVALIDATION REQUIRED`.
+`REL-005` is now revalidated as a bidirectional relationship using current endpoint authority plus isolated production-runtime evidence.
 
-Current evidence establishes:
+Current evidence establishes both directions:
 
 ```text
-ENG-006 → SRV-009 = DOCUMENTED / CONTRACTUAL
+ENG-006 → SRV-009 = DOCUMENTED / CONTRACTUAL + EXECUTABLE-VERIFIED IN ISOLATED E2E
+SRV-009 → ENG-006 = CONTROLLED MUTATION SERVICE CONSUMED BY ENG-006
 ```
 
-The reviewed Runtime execution path does not provide a callable `SRV-009` consumer implementation. Therefore the registry must not represent `REL-005` as executable implementation proof.
+The Runtime production adapter executed the relationship through the governed write dispatcher and the concrete GitHub repository connector in an isolated non-canonical branch. The successful E2E run created and updated a probe artifact, performed mandatory post-write read-back, emitted governed execution traces, and removed the probe after validation.
 
-**The executable consumer proof is not established. no executable `VERIFIED` state is added.**
+Runtime evidence:
 
-This reconciliation does **not** delete the relationship, rename the source or target, create a synthetic implementation, or promote the relationship to verified executable authority.
+- Workflow run: `32021524046`
+- Successful HEAD: `702f73b113ce9074ad090ba320867e1dc1eeb3c1`
+- Create trace: `TR-6e94cc825acc`
+- Update trace: `TR-3d0dd3df6ce3`
+- Final persisted SHA before cleanup: `d3287757b644047d6de70a548cf202e34dab1e49`
 
-Executable promotion requires independent callable consumer evidence in the connected Runtime path.
+Therefore the registry may now classify `REL-005` as:
+
+`BIDIRECTIONAL / EXECUTABLE-VERIFIED / GOVERNED / ISOLATED E2E`
+
+Boundary:
+
+- this promotion applies only to the validated ENG-006 ↔ SRV-009 relationship;
+- it does not promote `REL-009` or `REL-061`;
+- it does not authorize arbitrary canonical mutation;
+- repository-wide graph closure remains open.
+
+Historical P303 evidence is preserved below in repository history; this section supersedes its current-state interpretation for the present review cycle.
 
 ### REL-009 executable boundary reconciliation
 
