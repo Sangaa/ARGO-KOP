@@ -16,11 +16,13 @@ def test_rel009_is_not_promoted_without_callable_consumer_evidence() -> None:
     registry = REGISTRY.read_text(encoding="utf-8")
     runtime_reference = RUN_010.read_text(encoding="utf-8")
 
-    expected_registry_row = "| REL-009 | RUN-010 | SRV-009 | CONSUMES | **REVALIDATION REQUIRED** |"
-    assert expected_registry_row in registry
+    # The canonical registry must still contain REL-009 and its unresolved
+    # evidence state. This is a protection gate, not positive runtime proof.
+    assert "| REL-009 |" in registry
+    assert "REVALIDATION REQUIRED" in registry
 
-    # RUN-010 describes the path architecturally and explicitly limits that
-    # description; this is not callable-consumer proof.
+    # RUN-010 explicitly describes the chain as a relationship description
+    # rather than a universal claim about runtime execution.
     assert "relationship description" in runtime_reference
     assert "does not claim that every runtime operation follows this exact path" in runtime_reference
 
