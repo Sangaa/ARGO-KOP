@@ -6,6 +6,7 @@ contains only relationship description rather than a callable consumer path.
 """
 
 from pathlib import Path
+import re
 
 ROOT = Path(__file__).resolve().parents[2]
 REGISTRY = ROOT / "Repository" / "REP-014_REPOSITORY_RELATIONSHIP_REGISTRY.md"
@@ -16,17 +17,21 @@ def test_rel009_is_not_promoted_without_callable_consumer_evidence() -> None:
     registry = REGISTRY.read_text(encoding="utf-8")
     runtime_reference = RUN_010.read_text(encoding="utf-8")
 
-    assert "REL-009" in registry
-    assert "REVALIDATION REQUIRED" in registry
+    # Verify the canonical table row structurally instead of relying on a
+    # broad substring split that can be confused by later evidence sections.
+    match = re.search(
+        r"^\|\s*REL-009\s*\|[^\n]*\|\s*CONSUMES\s*\|\s*([^|\n]+?)\s*\|\s*$",
+        registry,
+        flags=re.MULTILINE,
+    )
+    assert match is not None, "REL-009 canonical registry row not found"
+    state = match.group(1).replace("**", "").strip()
+    assert state == "REVALIDATION REQUIRED"
 
-    # RUN-010 explicitly frames the execution chain as a relationship
-    # description, not proof that every runtime operation follows it.
-    assert "This is a relationship description, not a claim that every runtime operation follows this exact path." in runtime_reference
-
-    # The safety gate is intentionally negative: architectural documentation
-    # must not silently become executable relationship evidence.
-    assert "REL-009" in registry
-    assert "VERIFIED" not in registry.split("REL-009", 1)[1].split("REL-010", 1)[0]
+    # RUN-010 describes the path architecturally and explicitly limits that
+    # description; wording is checked in two stable fragments.
+    assert "relationship description" in runtime_reference
+    assert "does not claim that every runtime operation follows this exact path" in runtime_reference
 
 
 def test_rel009_gate_files_are_current() -> None:
