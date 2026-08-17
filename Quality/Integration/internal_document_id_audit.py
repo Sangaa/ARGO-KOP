@@ -34,7 +34,7 @@ CANONICAL_INLINE_RE = re.compile(r"^\s*Canonical\s*[:：]\s*(Yes|No|Pending)\s*$
 CANONICAL_BLOCK_RE = re.compile(r"^\s*Canonical\s*$\n\s*(Yes|No|Pending)\s*$", re.I | re.M)
 STATUS_RE = re.compile(r"^\s*Status\s*[:：]?\s*(.+?)\s*$", re.I | re.M)
 TEXT_SUFFIXES = {".md", ".markdown", ".txt", ".rst", ".json", ".yaml", ".yml", ".toml", ".py"}
-LEGACY_TOKENS = ("legacy", "historical", "superseded", "archived")
+LEGACY_TOKENS = ("legacy", "historical", "superseded", "archived", "noncanonical")
 DEFERRED_DOMAIN_TOKENS = (
     "canonical pending",
     "pending consolidated validation",
