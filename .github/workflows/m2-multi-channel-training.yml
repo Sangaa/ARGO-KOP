@@ -1,0 +1,32 @@
+name: M2 Multi-Channel Proposal Training
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  m2-harness:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Execute deterministic M2 checks
+        run: |
+          python - <<'PY'
+          from Runtime.Prototype.multi_channel_m2_proposal_harness import run_m2
+          normal = run_m2()
+          assert normal['canonical_mutation'] is False
+          assert len(normal['proposal_workspaces']) == 2
+          assert all(any(e['event'] == 'READ_BACK' for e in t) for t in normal['traces'])
+          collision = run_m2(collide=True)
+          assert collision['canonical_mutation'] is False
+          assert collision['conflicts'] == [{'type': 'SHARED_TARGET_OVERLAP', 'task_ids': ['TASK-001', 'TASK-002']}]
+          print('M2_PROPOSAL_ISOLATION=PASS')
+          print('M2_CONFLICT_DETECTION=PASS')
+          print('M2_CANONICAL_MUTATION=FALSE')
+          PY
