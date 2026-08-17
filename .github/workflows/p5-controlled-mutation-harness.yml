@@ -1,0 +1,46 @@
+name: P5 Controlled Mutation Harness
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - 'Tools/P5_CONTROLLED_MUTATION_HARNESS.py'
+      - 'Tools/GOVERNED_WRITE_DISPATCH.py'
+      - 'Quality/P5/**'
+      - 'Repository/P5_CONTROLLED_MUTATION_RECONCILIATION_HARNESS_MATRIX_2026-08-17.md'
+      - 'Quality/P5_CONTROLLED_MUTATION_RECONCILIATION_HARNESS_TEST_MATRIX_2026-08-17.md'
+  pull_request:
+    paths:
+      - 'Tools/P5_CONTROLLED_MUTATION_HARNESS.py'
+      - 'Tools/GOVERNED_WRITE_DISPATCH.py'
+      - 'Quality/P5/**'
+      - 'Repository/P5_CONTROLLED_MUTATION_RECONCILIATION_HARNESS_MATRIX_2026-08-17.md'
+      - 'Quality/P5_CONTROLLED_MUTATION_RECONCILIATION_HARNESS_TEST_MATRIX_2026-08-17.md'
+
+jobs:
+  p5-harness:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+
+      - name: Install test runner
+        run: python -m pip install --upgrade pytest
+
+      - name: Run P5 fixture and dispatcher tests
+        env:
+          PYTHONPATH: ${{ github.workspace }}
+        run: |
+          python -m pytest -q Quality/P5
+          python -m pytest -q Quality/P5/test_governed_dispatch_in_memory.py
+
+      - name: Verify no canonical artifact was modified by tests
+        run: |
+          git diff --exit-code -- Repository/REP-001_MASTER_INDEX.md Repository/REP-014_REPOSITORY_RELATIONSHIP_REGISTRY.md Repository/REP-016_PHASE1_PARTITION_WORK_QUEUE.md
