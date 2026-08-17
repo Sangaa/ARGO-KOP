@@ -1,6 +1,7 @@
 {
   "transaction_id": "P4-REL005-2026-08-17-001",
   "status": "APPROVED",
+  "retry": 1,
   "target_path": "Repository/REP-014_REPOSITORY_RELATIONSHIP_REGISTRY.md",
   "source_blob_sha": "794d4b9efe8b82a0c7f6b973c0a81fb03cc2bd3c",
   "allowed_change": "Promote REL-005 only after current bidirectional authority evidence and P3 runtime E2E executable proof.",
