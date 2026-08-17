@@ -27,7 +27,7 @@ jobs:
           grep -Fq '| REL-009 |' Repository/REP-014_REPOSITORY_RELATIONSHIP_REGISTRY.md
           grep -Fq 'REVALIDATION REQUIRED' Repository/REP-014_REPOSITORY_RELATIONSHIP_REGISTRY.md
           grep -Fq 'relationship description' Runtime/RUN-010_RUNTIME_REFERENCE.md
-          grep -Fq 'does not claim that every runtime operation follows this exact path' Runtime/RUN-010_RUNTIME_REFERENCE.md
+          grep -Fq 'This is a relationship description, not a claim that every runtime operation follows this exact path.' Runtime/RUN-010_RUNTIME_REFERENCE.md
 
       - name: Execute repository-wide audit
         working-directory: Quality/Integration
