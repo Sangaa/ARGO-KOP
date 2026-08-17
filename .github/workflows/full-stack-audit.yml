@@ -20,6 +20,9 @@ jobs:
         with:
           python-version: '3.11'
 
+      - name: Install pytest for governed boundary gates
+        run: python -m pip install --upgrade pytest
+
       - name: Run P4 REL-009 consumer boundary safety gate
         run: python -m pytest -q Quality/P4/test_rel009_consumer_boundary.py
 
