@@ -438,6 +438,26 @@ Next required transition:
 
 `REP-013/014/015/016/020 CURRENT CROSS-READ → EXPLICIT PRIORITY-1 CLOSURE REVIEW`
 
+## P345 Current Control-Plane Evidence Binding — 2026-08-17
+
+Current main evidence through P344 was re-read against the current control-plane manifest, REP-011/REP-012 binding sections and the manifest-driven reconciliation gate.
+
+Evidence bound in this section:
+
+- P344 synchronized REP-011 and REP-012 evidence checkpoints;
+- P340 manifest-driven control-plane gate passed on current main;
+- P343 CI passed Integrity, Prototype and Integration jobs, with Full-Stack Repository Audit also PASS;
+- current REP-013 content/blob before this mutation was `a6653b6d6665e92a14fa6b9a21e3ce1569cf49b5`;
+- this mutation preserves all prior REP-013 content and appends only this evidence-binding section.
+
+Disposition:
+
+`REP-013 = PRESENT / CURRENT / P345-BINDING-COMPLETE WITHIN CURRENT CONTROL-PLANE EVIDENCE SCOPE`
+
+This is an evidence-binding result only. It does **not** promote the control plane to `RECONCILED`, does not set `CLOSED_FOR_PHASE_1`, and does not close Priority 1.
+
+The cross-registry state remains open until the corresponding `REP-014/015/016/020` evidence is reconciled to the same current checkpoint.
+
 ## Governing Rule
 
 Repository Reality > Previous Status Claims > Conversation Memory
