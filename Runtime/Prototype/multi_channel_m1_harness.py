@@ -2,6 +2,8 @@
 
 Read-only, fixture-driven simulation for one user / multiple isolated tasks.
 This module never writes canonical repository artifacts.
+
+M1 training invariant: parallel logical work must not imply shared authority.
 """
 from __future__ import annotations
 
