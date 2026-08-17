@@ -2,7 +2,7 @@
 
 Platform: ARGO KOP  
 Document ID: REP-014  
-Version: 1.2.5  
+Version: 1.2.6  
 Status: Active / Relationship Enumeration In Progress  
 Development Baseline: 3.2.1  
 Last Audit: 2026-08-17
@@ -127,6 +127,7 @@ The following are deliberately limited to relationships established during repos
 | REL-058 | RUN-013 | RUN-011 | VALIDATES | Revalidated within current controlled-handoff scope |
 | REL-059 | RUN-014 | RUN-011 | VALIDATES | Revalidated within current learning-promotion test scope |
 | REL-060 | RUN-015 | RUN-011 | VALIDATES | Revalidated within current CI validation scope |
+| REL-061 | GOV-013A | GOV-013 | REFERENCES | Revalidated within governance scope |
 
 ## Current Review-Cycle Reconciliation — 2026-08-17
 
@@ -165,6 +166,18 @@ RUN-010 → SRV-009 = DOCUMENTED / CONTRACTUAL
 Therefore `REL-009` must not be treated as executable or verified coupling merely because the architectural sequence is documented.
 
 This reconciliation does **not** delete the relationship, alter its direction, create a synthetic consumer, or mutate Runtime implementation. Executable promotion requires independent callable consumer evidence.
+
+### REL-061 governance bootstrap relationship
+
+`GOV-013A` is a canonical addendum that explicitly states it `Supplements GOV-013`. The registry controlled relationship types do not include `SUPPLEMENTS`; therefore the governed registry representation is:
+
+```text
+GOV-013A → GOV-013 = REFERENCES
+```
+
+The evidence description preserves the stronger semantic fact: `Canonical Addendum / Supplements GOV-013`.
+
+This record does not grant `GOV-013A` higher authority, replace `GOV-013`, or authorize any unrelated mutation.
 
 ### Authority boundary
 
@@ -322,27 +335,6 @@ DIAG-001 ──derived_from──> REP-012
 The DIAG-001 edge is provenance/navigation only. It does not make the diagram authoritative over REP-012 or any canonical registry.
 
 This graph describes control-plane dependency only. It does not certify domain semantics.
-
-## P310 Cross-Control-Plane Binding Reconciliation — 2026-08-17
-
-P310 established closure-readiness evidence after `REP-011` and `REP-012` were bound to the current control-plane cycle.
-
-Current evidence:
-
-- `REP-011/REP-012` current content and binding were re-read after their latest mutations.
-- `REP-013` inventory identity was re-read within the same closure-readiness pass.
-- `REP-015` bootstrap rules remain authoritative within scope.
-- `REP-016` is the current queue authority and remains Priority 1 open.
-- `REP-020` remains provisional/non-authoritative.
-- `REL-005` and `REL-009` remain `REVALIDATION REQUIRED`; no executable promotion is implied.
-
-This section does not register `GOV-013A` as a relationship because its authoritative direction/type remains insufficiently evidenced.
-
-No relationship is promoted merely because the affected control-plane artifacts were re-read.
-
-## Authority Boundary
-
-Relationship states describe evidence scope; they do not authorize implementation changes or override domain authorities.
 
 ---
 
