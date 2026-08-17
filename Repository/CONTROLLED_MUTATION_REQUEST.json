@@ -1,0 +1,13 @@
+{
+  "transaction_id": "MUT-2026-08-17-REP002-001",
+  "attempt": 1,
+  "target_path": "Repository/REP-002_REPOSITORY_MAP.md",
+  "source_blob_sha": "386308c528cdb80c48b2aad7208753e864728a1f",
+  "section_matrix": "Repository/MUT-2026-08-17-REP002-001_SECTION_MATRIX.md",
+  "mutation_matrix": "Repository/MUT-2026-08-17-REP002-001_MUTATION_MATRIX.md",
+  "candidate_builder": "Tools/controlled_rep002_candidate_builder.py",
+  "candidate_test": "Quality/Integration/test_rep002_gov014_sync_candidate.py",
+  "expected_changes": 5,
+  "authorization": "GOV-014 / REP-001↔REP-002 physical-map reconciliation",
+  "scope": "Repository/REP-002 Sections 4 and 5 only: REP-004/005/007/008 + GOV-014"
+}
