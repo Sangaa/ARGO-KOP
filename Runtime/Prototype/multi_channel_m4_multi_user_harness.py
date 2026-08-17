@@ -40,10 +40,11 @@ def main() -> None:
         Request("USER-B", "TASK-2", "CH-B1", "B", True),
         Request("USER-C", "TASK-3", "CH-C1", "C", False),
         Request("USER-B", "TASK-4", "CH-B1", "D", True),
+        Request("USER-D", "TASK-5", "CH-D1", "E", True),
     ])
-    assert len(result["accepted"]) == 2
+    assert len(result["accepted"]) == 3
     assert len(result["rejected"]) == 2
-    assert result["users_served"] == ["USER-A", "USER-B"]
+    assert result["users_served"] == ["USER-A", "USER-B", "USER-D"]
     assert result["fairness"] is True
     assert result["canonical_mutation"] is False
     print("M4 deterministic multi-user isolation: PASS")
