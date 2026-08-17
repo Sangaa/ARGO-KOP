@@ -76,6 +76,27 @@ For material positive results:
 
 A negative result is never an absence claim from one search. A positive result is never current-main evidence until its ref/SHA is reconciled with the current authoritative ref.
 
+## P310 Cross-Control-Plane Closure-Readiness Synchronization — 2026-08-17
+
+P310 records that the current control-plane evidence surfaces have been re-read after the P309 binding cycle and that the following remain explicitly open:
+
+- Priority 1 control-plane reconciliation;
+- executable `RUN-010 → ENG-006 → SRV-009` proof;
+- exhaustive internal-ID/content duplicate reconciliation;
+- complete bidirectional graph validation;
+- controlled mutation/reconciliation harness;
+- final `BOOTED / INTEGRITY PASS`.
+
+Current evidence:
+
+- `REP-011` and `REP-012` are internally bound to the current session cycle.
+- `REP-013`, `REP-014`, `REP-015`, and `REP-020` were re-read and bound to the same closure-readiness cycle without promoting unresolved claims.
+- P309 Runtime/Integration and Full-Stack CI passed.
+- `REL-005` and `REL-009` remain `REVALIDATION REQUIRED`.
+- `GOV-013A` relationship direction/type remains intentionally unresolved.
+
+`P310 = CLOSURE-READINESS EVIDENCE` only. It does not close Ring 0 or promote the next priority.
+
 ## P304 Current Queue Synchronization — 2026-08-17
 
 P304 revalidated the executable boundary for `RUN-010 → ENG-006 → SRV-009` and confirmed that the canonical documents are contractual while no callable `SRV-009` consumer was established in the inspected code/search scope.
@@ -198,11 +219,11 @@ No executable promotion is authorized without callable SRV-009 consumer evidence
 
 ## Current Checkpoint
 
-`P304` is the latest recorded checkpoint for this control-plane reconciliation cycle.
+`P310` is the latest recorded checkpoint for this control-plane reconciliation cycle.
 
 Current state:
 
-- Priority 1 Control Plane reconciliation: **OPEN**
+- Priority 1 Control Plane reconciliation: **OPEN / CLOSURE-READINESS REVIEWED**
 - Priority 2 exhaustive duplicate-ID audit: **OPEN**
 - Priority 3 executable relationship proof: **OPEN / evidence narrowed**
 - Priority 4 bidirectional critical graph validation: **OPEN**
@@ -211,7 +232,7 @@ Current state:
 
 ## Next Safe Entry
 
-Continue Priority 1 by reconciling the remaining control-plane evidence surfaces (`REP-011`, `REP-012`, `REP-013`, `REP-014`, `REP-015`, `REP-016`, `REP-020`) against current-main state. Preserve prior checkpoints as repository-bound historical/current evidence according to their actual binding. Do not promote the queue simply because a newer checkpoint exists; reconcile the affected registries first.
+Continue with the explicit Priority-1 closure review. If closure is not justified, preserve all unresolved items and move to the highest-value remaining evidence action without promoting Priority 2.
 
 The next namespace transition to Priority 2 remains blocked until the Priority 1 closure decision is explicitly evidenced.
 
