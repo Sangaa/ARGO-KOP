@@ -2,11 +2,11 @@
 
 Platform: ARGO KOP  
 Document ID: REP-020  
-Version: 0.1.9  
+Version: 0.2.0  
 Status: **Provisional / Phase-1 Seed / Not Authority**  
 Current Development Baseline: **3.2.1**  
-Last Audit: 2026-08-16  
-Last Revalidation Commit: `bf37455fe32478d0cbdd7f2faee6365fb5a60a57`
+Last Audit: 2026-08-17  
+Last Revalidation Evidence: `P322` / `314b9945af192cb33f05dfdf6520196b4a610c55`
 
 ## Purpose
 
@@ -68,8 +68,8 @@ REP-001 and REP-002 are canonical Repository control-plane artifacts at Integrit
 | ID | Source | Target | Type | State |
 |---|---|---|---|---|
 | RUN-E01 | RUN-010 | ENG-006 | RUNTIME_CONSUMER | PARTIALLY_VERIFIED |
-| RUN-E02 | RUN-010 | SRV-009 | CONTROLLED_MUTATION_PATH | PARTIALLY_VERIFIED |
-| RUN-E03 | ENG-006 | SRV-009 | SERVICE_DISPATCH | PARTIALLY_VERIFIED |
+| RUN-E02 | RUN-010 | SRV-009 | CONTROLLED_MUTATION_PATH | REVALIDATION_REQUIRED |
+| RUN-E03 | ENG-006 | SRV-009 | SERVICE_DISPATCH | REVALIDATION_REQUIRED |
 | RUN-E04 | ENG-006 | SRV-005 | VALIDATION_DEPENDENCY | PARTIALLY_VERIFIED |
 | RUN-E05 | ENG-006 | RUN-010 | RUNTIME_CONTROL | OBSERVED |
 | RUN-E06 | SRV-009 | ENG-006 | REVERSE_CONSUMER | OBSERVED |
@@ -217,7 +217,9 @@ and
 
 `SRV-006 → SRV-007 → SRV-008 → SRV-009 → SRV-005`.
 
-Direct reads confirm the declared responsibilities and boundaries. However, a direct repository code search found **no Python consumer references** to `ENG-006` or `SRV-009`. Therefore these relationships remain **documentation-backed / PARTIALLY VERIFIED**, not executable integration proof.
+Direct reads confirm the declared responsibilities and boundaries. However, direct current executable-surface inspection established that `connected_spine_runner.py` reaches `execution_entrypoint.py` in `SIMULATED_REVIEW` mode and `execution_entrypoint.py` records execution traces without dispatching to `SRV-009`. `Tools/GOVERNED_WRITE_DISPATCH.py` is a write-dispatch helper requiring caller-supplied repository operations and is not itself an `SRV-009` consumer.
+
+Therefore these relationships remain **documentation-backed / contractual**, not executable integration proof.
 
 ## High-Value Impact Chains
 
@@ -233,16 +235,16 @@ Direct reads confirm the declared responsibilities and boundaries. However, a di
 ### Chain D — Memory / Knowledge
 `SRV-003 → SRV-004`
 
-## Current Blocker State — 2026-08-16
+## Current Blocker State — 2026-08-17
 
 | Priority | Blocker | State | Next Action |
 |---|---|---|---|
 | P0 | PR #1 / PR #3 obsolete verification paths | CLOSED | No further action |
 | P0 | Latest candidate Runtime + Integration evidence | PASS (candidate) | Preserve evidence; no auto-merge |
 | P1 | REP-012 baseline declaration | RESOLVED | Re-read and reconcile affected control-plane nodes |
-| P1 | Executable RUN-010 → ENG-006 → SRV-009 proof | OPEN / PARTIAL | Locate implementation or explicitly record implementation gap |
-| P1 | Exhaustive duplicate-ID/content audit | OPEN / PARTIAL | Complete namespace-by-namespace internal-ID scan |
-| P1 | Bidirectional graph validation | OPEN / PARTIAL | Validate forward and reverse edges for critical paths |
+| P1 | Executable RUN-010 → ENG-006 → SRV-009 proof | OPEN / DIRECT-EVIDENCE NARROWED | No callable consumer established in inspected execution surface |
+| P1 | Exhaustive duplicate-ID/content audit | OPEN / PARTIAL | Complete current internal-ID/content reconciliation |
+| P1 | Bidirectional graph validation | OPEN / PARTIAL | Complete global domain coverage after scoped Ring-0 reconciliation |
 | P2 | Controlled mutation + automatic reconciliation | NOT_PERFORMED | Build/execute controlled harness later |
 | P2 | Final Boot PASS | BLOCKED | Re-run only after P1 graph/ID blockers close |
 
@@ -303,13 +305,28 @@ Interpretation:
 
 `P310 = CLOSURE-READINESS EVIDENCE, not Priority-1 closure.`
 
-The remaining closure blockers are semantic/evidence blockers, not CI integrity failures:
+## P322 Current Executable-Edge Reconciliation — 2026-08-17
 
-1. executable `RUN-010 → ENG-006 → SRV-009` consumer proof remains open;
-2. exhaustive internal-ID/content duplicate reconciliation remains partial;
-3. complete bidirectional graph validation remains open;
-4. controlled mutation/reconciliation harness remains not performed;
-5. final `BOOTED / INTEGRITY PASS` remains blocked by the preceding items.
+P322 reconciles the current provisional matrix against P321 direct execution-surface evidence.
+
+Current direct evidence establishes:
+
+- `RUN-010 → SRV-009` is documented/contractual but has no established callable consumer path;
+- `ENG-006 → SRV-009` is documented/contractual but has no established callable consumer path;
+- the current Runtime adapter boundary is simulation-only;
+- `Tools/GOVERNED_WRITE_DISPATCH.py` is a helper requiring caller-supplied repository operations, not an `SRV-009` consumer.
+
+Therefore `RUN-E02` and `RUN-E03` are now classified `REVALIDATION_REQUIRED` rather than `PARTIALLY_VERIFIED`.
+
+This is a narrowing of evidence, not a runtime or authority mutation. No executable verification is claimed.
+
+The remaining closure blockers are:
+
+1. executable `RUN-010 → ENG-006 → SRV-009` consumer proof;
+2. exhaustive internal-ID/content duplicate reconciliation;
+3. complete bidirectional graph validation;
+4. controlled mutation/reconciliation harness;
+5. final `BOOTED / INTEGRITY PASS`.
 
 No relationship promotion or final closure is implied by this section.
 
