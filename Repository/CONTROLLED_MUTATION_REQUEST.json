@@ -1,5 +1,6 @@
 {
   "transaction_id": "MUT-2026-08-17-REP001-001",
+  "attempt": 2,
   "target_path": "Repository/REP-001_MASTER_INDEX.md",
   "source_blob_sha": "067adc90433e5435df220b46882e8c1888fffd2d",
   "section_matrix": "Repository/MUT-2026-08-17-REP001-001_SECTION_MATRIX.md",
