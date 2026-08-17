@@ -535,10 +535,6 @@ Current main evidence through P341 was re-read against the control-plane boundar
 
 Evidence bound in this section:
 
-- P341 checkpoint: current session evidence persisted before this binding;
-- control-plane manifest: current `REP-011..016/020` identities and states captured in P339;
-- P340 gate: manifest-driven control-plane boundary check passed on current main;
-- P340 CI: Integration, Prototype, Integrity and Full-Stack audit all passed;
 - current REP-011 content/blob before this mutation was `0ef688969c056627f95bf19eaab6f655358cf668`;
 - this mutation preserves all prior REP-011 content and appends only this evidence-binding section.
 
@@ -549,6 +545,37 @@ Disposition:
 This is an evidence-binding result only. It does **not** promote the control-plane to `RECONCILED`, does not set `CLOSED_FOR_PHASE_1`, and does not close Priority 1.
 
 The cross-registry state remains open until the corresponding `REP-012/013/014/015/016/020` evidence is reconciled to the same current checkpoint.
+
+## 31. P350/P351/P352 Explicit Priority-1 Closure Synchronization — 2026-08-17
+
+The current explicit closure decision is persisted in:
+
+`Repository/REP-020_SESSION_DELTA_2026-08-17_P350.md`
+
+The authoritative queue in `REP-016` now records:
+
+`Priority 1 = CLOSED / RING-0 CONTROL-PLANE RECONCILED WITHIN CURRENT INSPECTED SCOPE`
+
+The closure decision is supported by the current Ring-0 evidence chain through P349 and the manifest-driven reconciliation gate. It explicitly excludes P2–P6 from implicit promotion or closure.
+
+### Decision
+
+**PRIORITY 1 = CLOSED / RING-0 CONTROL-PLANE RECONCILED WITHIN CURRENT INSPECTED SCOPE**
+
+### Integrity Boundary
+
+This closure does not claim:
+
+- executable `RUN-010 → ENG-006 → SRV-009` proof;
+- exhaustive repository-wide identity cleanliness;
+- global bidirectional graph closure;
+- controlled mutation harness closure;
+- final `BOOTED / INTEGRITY PASS`;
+- Global PASS.
+
+Those remain independent downstream workstreams.
+
+The closure is an explicit current decision and supersedes the older historical `OPEN / Integrity Hold` statements recorded in earlier sections of this ledger; those historical statements are retained as provenance and are not current closure truth.
 
 ---
 
