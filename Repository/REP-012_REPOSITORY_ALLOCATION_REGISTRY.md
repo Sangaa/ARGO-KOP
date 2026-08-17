@@ -612,6 +612,24 @@ The Services folder status remains `INTEGRITY HOLD`, and the four previously ide
 
 This update does not close the control plane.
 
+## 27. P308 Control-Plane Binding Reconciliation — 2026-08-17
+
+P307 bound `REP-011` to the current reconciliation evidence while preserving its complete prior content. P308 performs the corresponding minimum binding for `REP-012`.
+
+Current binding evidence:
+
+- `REP-012` pre-mutation blob: `5b51e0b468e479842d7d83468e8e7c20a06ec1b1`;
+- current session evidence: `P306` and `P307`;
+- P305 remains the evidence delta that first distinguished physical currentness from internal binding lag.
+
+`REP-012` is **PRESENT / CURRENT with INTERNAL BINDING LAG** within the inspected control-plane scope. The historical 2026-08-16 audit date remains historical provenance and is not retroactively converted into a new audit date merely by this binding section.
+
+This section records allocation/checkpoint synchronization evidence only. It does not mark `REP-012` `CLOSED_FOR_PHASE_1`, `RECONCILED`, or globally current across all dependencies and consumers.
+
+Next required state transition:
+
+`REP-011 + REP-012 BOUND → REP-013/014/015/016/020 RECONCILIATION → EXPLICIT PRIORITY 1 CLOSURE REVIEW`
+
 ---
 
 End of Document
