@@ -5,6 +5,8 @@ active inventory scope. This audit separates:
 - indexed active canonical artifacts;
 - canonical artifacts outside the current active inventory;
 - legacy/non-canonical artifacts retained for provenance;
+- shadowed legacy identities where one active canonical owner coexists with
+  explicit historical/non-canonical retained artifacts;
 - ambiguous duplicate IDs that require an explicit identity decision.
 
 It never promotes an unindexed artifact to active authority from its filename
@@ -171,9 +173,18 @@ def scan(root: Path) -> dict:
     for record in records:
         if not record.archived:
             records_by_id.setdefault(record.document_id, []).append(record)
-    ambiguous_duplicate_ids = {}
+
+    ambiguous_duplicate_ids: dict[str, list[str]] = {}
+    shadowed_legacy_ids: dict[str, list[str]] = {}
     for document_id, group in records_by_id.items():
         if len(group) < 2:
+            continue
+        active_group = [record for record in group if record.active_canonical]
+        nonactive_group = [record for record in group if not record.active_canonical]
+        if len(active_group) == 1 and nonactive_group and all(
+            record.explicit_historical_or_noncanonical for record in nonactive_group
+        ):
+            shadowed_legacy_ids[document_id] = sorted(record.path for record in nonactive_group)
             continue
         if all(record.explicit_historical_or_noncanonical for record in group):
             continue
@@ -189,6 +200,7 @@ def scan(root: Path) -> dict:
         "unindexed_id_records": len(unindexed),
         "archived_records": len(archived),
         "duplicate_active_ids": duplicate_active_ids,
+        "shadowed_legacy_ids": {key: sorted(value) for key, value in sorted(shadowed_legacy_ids.items())},
         "ambiguous_duplicate_ids": {key: sorted(value) for key, value in sorted(ambiguous_duplicate_ids.items())},
         "filename_internal_id_mismatches": filename_mismatches,
         "unindexed_id_records_by_id": unindexed_ids,
