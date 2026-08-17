@@ -65,6 +65,32 @@ The live audit suite verified within its declared scope:
 
 This closes the **internal Document-ID execution subgate of P1**. It does not close all Priority-1 integrity work and does not authorize identity mutations.
 
+## GOV-015 Field Sufficiency Check — First Real Reconciliation Application
+
+Applied the reusable `Templates/GOV-015_EXECUTION_RECORD_TEMPLATE.md` to this bounded reconciliation update.
+
+### Fields demonstrated useful
+
+- execution identity and starting/ending SHA;
+- governing controls and evidence boundary;
+- target artifact and preservation boundary;
+- post-write read-back;
+- explicit `Proven / Not Proven` separation;
+- learning classification and transfer decision;
+- next safe entry.
+
+### Fields requiring continued validation
+
+- workflow evidence is useful for CI-backed changes but may be absent for a purely documentary reconciliation;
+- candidate/pre-execution validation needs to remain explicit even when the mutation is an append-only reconciliation update;
+- failure/recovery fields should remain available but may legitimately record `None` for a clean execution.
+
+### Result
+
+`TEMPLATE SUFFICIENT FOR FIRST RECONCILIATION / REPEAT-SESSION VALIDATION REQUIRED`
+
+This check does not promote the template to a new governance rule; it validates the existing GOV-015 implementation support and identifies fields to observe in subsequent mutation and reconciliation sessions.
+
 ## Relationship Boundary
 
 - `REL-009` remains `REVALIDATION REQUIRED`.
