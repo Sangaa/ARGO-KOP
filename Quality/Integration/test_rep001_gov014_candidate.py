@@ -5,7 +5,7 @@ from pathlib import Path
 from Tools.controlled_rep001_candidate_builder import (
     SOURCE_BLOB_SHA,
     build_candidate,
-    sha256_text,
+    git_blob_sha1,
 )
 
 
@@ -16,7 +16,7 @@ def test_rep001_gov014_candidate_pre_commit_validation(tmp_path: Path) -> None:
 
     candidate, report = build_candidate(source)
 
-    assert report["source_sha"] == SOURCE_BLOB_SHA
+    assert report["source_blob_sha"] == SOURCE_BLOB_SHA
     assert report["status"] == "PRE_COMMIT_VALIDATED"
     assert report["unexpected_changes"] == 0
     assert report["keep_hash_mismatches"] == []
@@ -29,7 +29,7 @@ def test_rep001_gov014_candidate_pre_commit_validation(tmp_path: Path) -> None:
     assert "Intelligence/INT-001_INTELLIGENCE_LAYER.md" in candidate
     assert "Intelligence/INT-002_PATTERN_EXTRACTION.md" in candidate
     assert "Intelligence/INT-003_ANOMALY_DETECTOR.md" in candidate
-    assert sha256_text(source) == SOURCE_BLOB_SHA
+    assert git_blob_sha1(source) == SOURCE_BLOB_SHA
 
     candidate_path = tmp_path / "REP-001.candidate.md"
     candidate_path.write_text(candidate, encoding="utf-8")
