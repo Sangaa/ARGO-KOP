@@ -1,0 +1,21 @@
+name: M3 Multi-Channel Reconciliation Training
+on:
+  push:
+    paths:
+      - 'Runtime/Prototype/multi_channel_m3_reconciliation_harness.py'
+      - 'Quality/Integration/test_multi_channel_m3_reconciliation_harness.py'
+      - '.github/workflows/m3-multi-channel-training.yml'
+jobs:
+  m3-harness:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Execute deterministic M3 checks
+        run: |
+          python Runtime/Prototype/multi_channel_m3_reconciliation_harness.py
+          python -m pytest -q Quality/Integration/test_multi_channel_m3_reconciliation_harness.py
