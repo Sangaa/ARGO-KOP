@@ -1,60 +1,41 @@
 # GOV-014 — REP-001 Index Reconciliation Candidate
 
-Status: SCAFFOLD READY / NOT EXECUTED
+Status: **STALE / SUPERSEDED BY CURRENT-MAIN EVIDENCE**
 Date: 2026-08-17
 Baseline: 3.2.1
 
-## Purpose
+## Disposition
 
-Prepare a controlled, exact-content-preserving mutation for the current P2 index-scope gap without granting authority or writing the canonical index prematurely.
+The original candidate was based on `REP-021` evidence that is older than the current `REP-001` / `REP-002` state.
 
-## Authoritative Evidence
+Current-main re-read shows all seven previously proposed inventory entries are already present:
 
-- `REP-021_P2_INDEX_SCOPE_RECONCILIATION_2026-08-17.md`
-- `Intelligence/_FOLDER_STATUS.md`
-- `Repository/_FOLDER_STATUS.md`
-- current `REP-001_MASTER_INDEX.md`
-- current `REP-002_REPOSITORY_MAP.md`
+- `Intelligence/INT-001_INTELLIGENCE_LAYER.md`
+- `Intelligence/INT-002_PATTERN_EXTRACTION.md`
+- `Intelligence/INT-003_ANOMALY_DETECTOR.md`
+- `Repository/REP-004_REPOSITORY_NAVIGATION.md`
+- `Repository/REP-005_REPOSITORY_COMPONENTS.md`
+- `Repository/REP-007_REPOSITORY_GOVERNANCE.md`
+- `Repository/REP-008_REPOSITORY_BASELINE.md`
 
-## Approved Candidate Additions — REP-001
+Therefore a seven-entry mutation would be duplicate work and is explicitly prohibited.
 
-Only these seven currently evidenced inventory gaps are in scope:
+## Evidence
 
-```text
-Intelligence/INT-001_INTELLIGENCE_LAYER.md
-Intelligence/INT-002_PATTERN_EXTRACTION.md
-Intelligence/INT-003_ANOMALY_DETECTOR.md
-Repository/REP-004_REPOSITORY_NAVIGATION.md
-Repository/REP-005_REPOSITORY_COMPONENTS.md
-Repository/REP-007_REPOSITORY_GOVERNANCE.md
-Repository/REP-008_REPOSITORY_BASELINE.md
-```
+- `Repository/REP-001_MASTER_INDEX.md` current-main re-read: all seven entries present.
+- `Repository/REP-002_REPOSITORY_MAP.md` current-main re-read: the four Repository entries are present; the Intelligence inventory is also acknowledged by the current master index.
+- `Intelligence/_FOLDER_STATUS.md`: `INT-001..003` are Approved / Canonical.
+- `Repository/_FOLDER_STATUS.md`: `REP-004/005/007/008` are among reviewed Repository artifacts.
+- `Repository/REP-021_P2_INDEX_SCOPE_RECONCILIATION_2026-08-17.md`: retained as historical evidence only; its seven-entry index-gap finding is stale against current main.
 
-Knowledge `KNW-001..010` is explicitly excluded pending its own domain-authority classification.
+## Safety Decision
 
-## Mutation Gate
+**NO MUTATION.**
 
-```text
-READ CURRENT REP-001
-→ VERIFY CURRENT SHA
-→ VERIFY ALL 7 TARGET PATHS / IDENTITIES
-→ VERIFY EXISTING ENTRIES ARE ABSENT
-→ BUILD CANDIDATE FROM FULL CURRENT CONTENT
-→ ASSERT ONLY 7 INVENTORY INSERTIONS
-→ ASSERT NON-TARGET CONTENT PRESERVED
-→ WRITE ONLY AFTER EXPLICIT AUTHORIZATION
-→ COMMIT
-→ RE-READ
-→ RECONCILE REP-002
-→ UPDATE REP-011 / REP-012 / REP-013 / REP-016 AS APPLICABLE
-→ RUN AVAILABLE CI
-→ RECORD RESULT
-```
+The correct action is reconciliation of the stale evidence record / queue boundary, not modification of the canonical index.
 
-## Safety Boundary
+## Learning
 
-This scaffold does **not** mutate `REP-001` or `REP-002`, does not change canonical authority, and does not promote any Knowledge artifact.
+A previously valid evidence boundary can become stale after later repository mutations. Before any controlled write, the current canonical artifact must be re-read and compared against the candidate target state. A stale gap must never trigger a duplicate mutation.
 
-## Next Safe Action
-
-Execute the seven-entry REP-001 mutation through a full-content-preserving GOV-014 write path, then perform synchronized REP-002 reconciliation before any P2 closure decision.
+End of Candidate
