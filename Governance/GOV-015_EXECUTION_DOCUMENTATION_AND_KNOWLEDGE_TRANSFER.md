@@ -24,6 +24,8 @@ Every governed execution must record, at minimum:
 10. Explicit statement of what was not proven.
 11. Session closure state and next safe entry.
 
+The reusable execution record template is `Templates/GOV-015_EXECUTION_RECORD_TEMPLATE.md` and should be used as the default session record structure.
+
 ## 3. Knowledge Transfer Protocol
 
 A new lesson must pass this chain before becoming reusable knowledge:
