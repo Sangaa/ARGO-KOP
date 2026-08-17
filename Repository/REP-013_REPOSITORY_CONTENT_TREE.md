@@ -421,6 +421,23 @@ Current audit model:
 
 **Referenced → Located → Read → Identity Verified → Authority Verified → Relationship Validated → Consumer/Dependency Checked → Mutation Impact Checked → Re-read After Mutation**
 
+## P310 Cross-Control-Plane Binding Reconciliation — 2026-08-17
+
+P310 established closure-readiness evidence after `REP-011` and `REP-012` were bound to the P309 control-plane cycle.
+
+Current identity evidence:
+
+- `REP-011` bound within current cycle; current reconciliation remains `PARTIALLY_RECONCILED / INTEGRITY HOLD`.
+- `REP-012` bound within current cycle; current reconciliation remains `PARTIALLY_RECONCILED / INTEGRITY HOLD`.
+- `REP-013` remains the canonical content inventory and is revalidated as physically current within the inspected scope.
+- P309 Runtime/Integration and Full-Stack CI evidence passed on the resulting control-plane HEAD.
+
+This section does not mark `REP-013` or Ring 0 closed. It records that its inventory identity was re-read as part of the P310 closure-readiness pass.
+
+Next required transition:
+
+`REP-013/014/015/016/020 CURRENT CROSS-READ → EXPLICIT PRIORITY-1 CLOSURE REVIEW`
+
 ## Governing Rule
 
 Repository Reality > Previous Status Claims > Conversation Memory
