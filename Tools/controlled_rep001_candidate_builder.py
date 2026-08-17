@@ -33,6 +33,12 @@ def sha256_text(text: str) -> str:
     return hashlib.sha256(text.encode("utf-8")).hexdigest()
 
 
+def git_blob_sha1(text: str) -> str:
+    payload = text.encode("utf-8")
+    header = f"blob {len(payload)}\0".encode("ascii")
+    return hashlib.sha1(header + payload).hexdigest()
+
+
 def parse_sections(text: str) -> list[Section]:
     matches = list(re.finditer(r"(?m)^## (.+)$", text))
     sections: list[Section] = []
@@ -44,9 +50,10 @@ def parse_sections(text: str) -> list[Section]:
 
 
 def build_candidate(source: str) -> tuple[str, dict[str, object]]:
-    original_sha = sha256_text(source)
-    if original_sha != SOURCE_BLOB_SHA:
-        raise RuntimeError(f"SOURCE_SHA_MISMATCH expected={SOURCE_BLOB_SHA} actual={original_sha}")
+    original_blob_sha = git_blob_sha1(source)
+    original_sha256 = sha256_text(source)
+    if original_blob_sha != SOURCE_BLOB_SHA:
+        raise RuntimeError(f"SOURCE_BLOB_SHA_MISMATCH expected={SOURCE_BLOB_SHA} actual={original_blob_sha}")
 
     if source.count(REPOSITORY_LAYER_OLD) != 1:
         raise RuntimeError("REPOSITORY_LAYER_ANCHOR_COUNT != 1")
@@ -95,8 +102,9 @@ def build_candidate(source: str) -> tuple[str, dict[str, object]]:
 
     report = {
         "transaction_id": TX_ID,
-        "source_sha": original_sha,
-        "candidate_sha": sha256_text(candidate),
+        "source_blob_sha": original_blob_sha,
+        "source_sha256": original_sha256,
+        "candidate_sha256": sha256_text(candidate),
         "section_count_source": len(original_sections),
         "section_count_candidate": len(candidate_sections),
         "changed_sections": sorted(changed_sections),
