@@ -38,17 +38,42 @@ jobs:
           fi
           echo "present=true" >> "$GITHUB_OUTPUT"
 
-      - name: Validate and build candidate
+      - name: Validate request contract
         if: steps.request.outputs.present == 'true'
         shell: bash
         run: |
           python - <<'PY'
           import json
           from pathlib import Path
+          req = json.loads(Path('Repository/CONTROLLED_MUTATION_REQUEST.json').read_text(encoding='utf-8'))
+          required = ['transaction_id','target_path','source_blob_sha','candidate_builder','candidate_test','expected_changes']
+          missing = [k for k in required if k not in req]
+          if missing:
+              raise SystemExit(f'MISSING_REQUEST_FIELDS={missing}')
+          if req['target_path'] != 'Repository/REP-001_MASTER_INDEX.md':
+              raise SystemExit('UNAUTHORIZED_TARGET_PATH')
+          if not isinstance(req['expected_changes'], int) or req['expected_changes'] < 1:
+              raise SystemExit('INVALID_EXPECTED_CHANGES')
+          print(json.dumps(req, indent=2))
+          PY
+
+      - name: Validate and build candidate
+        if: steps.request.outputs.present == 'true'
+        shell: bash
+        run: |
+          python - <<'PY'
+          import importlib
+          import json
+          from pathlib import Path
           import subprocess
-          from Tools.controlled_rep001_candidate_builder import build_candidate
 
           req = json.loads(Path('Repository/CONTROLLED_MUTATION_REQUEST.json').read_text(encoding='utf-8'))
+          module_name = req['candidate_builder'].replace('/', '.').replace('.py', '')
+          builder = importlib.import_module(module_name)
+
+          if not hasattr(builder, 'build_candidate'):
+              raise SystemExit('BUILDER_MISSING_BUILD_CANDIDATE')
+
           source_path = Path(req['target_path'])
           source = source_path.read_text(encoding='utf-8')
           actual_blob = subprocess.check_output(['git', 'hash-object', str(source_path)], text=True).strip()
@@ -56,20 +81,29 @@ jobs:
           if actual_blob != req['source_blob_sha']:
               raise SystemExit(f"SOURCE_BLOB_SHA_MISMATCH expected={req['source_blob_sha']} actual={actual_blob}")
 
-          candidate, report = build_candidate(source)
+          candidate, report = builder.build_candidate(source)
           if report['status'] != 'PRE_COMMIT_VALIDATED':
               raise SystemExit('Candidate did not reach PRE_COMMIT_VALIDATED')
           if report['unexpected_changes'] != 0:
               raise SystemExit('Unexpected changes detected')
-          if report['keep_hash_mismatches']:
+          if report.get('keep_hash_mismatches'):
               raise SystemExit(f"KEEP_HASH_MISMATCHES={report['keep_hash_mismatches']}")
+          if report.get('required_changes_present') != req['expected_changes']:
+              raise SystemExit(
+                  f"EXPECTED_CHANGES_MISMATCH expected={req['expected_changes']} actual={report.get('required_changes_present')}"
+              )
 
           Path('/tmp/REP-001.candidate.md').write_text(candidate, encoding='utf-8')
           Path('/tmp/REP-001.report.json').write_text(json.dumps(report, indent=2), encoding='utf-8')
           print(json.dumps(report, indent=2))
           PY
 
-          python -m pytest -q Quality/Integration/test_rep001_gov014_candidate.py
+          python -m pytest -q "${{ steps.request.outputs.test_file }}" 2>/dev/null || python -m pytest -q "$(python - <<'PY'
+          import json
+          from pathlib import Path
+          print(json.loads(Path('Repository/CONTROLLED_MUTATION_REQUEST.json').read_text())['candidate_test'])
+          PY
+          )"
           git diff --check
 
       - name: Apply candidate to working tree
@@ -83,7 +117,6 @@ jobs:
           printf '%s\n' "$tracked_changed"
           test "$(printf '%s\n' "$tracked_changed" | grep -c '^ M Repository/REP-001_MASTER_INDEX.md$')" -eq 1
           test "$(printf '%s\n' "$tracked_changed" | wc -l)" -eq 1
-
           printf '%s\n' "$tracked_changed" | grep -q '^ M Repository/REP-001_MASTER_INDEX.md$'
 
       - name: Commit validated candidate
@@ -99,7 +132,13 @@ jobs:
           test "$(printf '%s\n' "$tracked_changed" | wc -l)" -eq 2
           printf '%s\n' "$tracked_changed" | grep -q '^M  Repository/REP-001_MASTER_INDEX.md$'
           printf '%s\n' "$tracked_changed" | grep -q '^D  Repository/CONTROLLED_MUTATION_REQUEST.json$'
-          git commit -m "P2 GOV-014 controlled mutation: REP-001 index reconciliation"
+          git commit -m "$(python - <<'PY'
+          import json
+          from pathlib import Path
+          req = json.loads(Path('Repository/CONTROLLED_MUTATION_REQUEST.json').read_text())
+          print(f"GOV-014 controlled mutation: {req['transaction_id']}")
+          PY
+          )"
           git push origin HEAD:main
 
       - name: Finalize no-op
