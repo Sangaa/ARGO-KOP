@@ -1,7 +1,7 @@
 """M5 deterministic multi-source intake training harness.
 
-Simulates concurrent reports from independent platforms. Provenance and schema
-identity remain attached to every item; conflicting facts are quarantined.
+Simulates reports from independent platforms. Provenance and schema identity
+remain attached to every item; conflicting facts are quarantined.
 No canonical mutation is performed.
 """
 from dataclasses import dataclass
@@ -44,10 +44,11 @@ def main() -> None:
         Report("PLATFORM-A", "R-A1", "SCHEMA-A", "shipment:1", "eta", "2026-08-20"),
         Report("PLATFORM-B", "R-B1", "SCHEMA-B", "shipment:1", "eta", "2026-08-21"),
         Report("PLATFORM-C", "R-C1", "SCHEMA-C", "shipment:2", "status", "READY"),
+        Report("PLATFORM-D", "R-D1", "SCHEMA-D", "shipment:3", "status", "READY"),
     ])
     assert result["provenance_preserved"] is True
     assert len(result["conflicts"]) == 1
-    assert len(result["accepted"]) == 1
+    assert len(result["accepted"]) == 2
     assert result["canonical_mutation"] is False
     print("M5 deterministic multi-source intake: PASS")
 
