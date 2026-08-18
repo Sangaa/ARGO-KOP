@@ -127,7 +127,7 @@ The following are deliberately limited to relationships established during repos
 | REL-058 | RUN-013 | RUN-011 | VALIDATES | Revalidated within current controlled-handoff scope |
 | REL-059 | RUN-014 | RUN-011 | VALIDATES | Revalidated within current learning-promotion test scope |
 | REL-060 | RUN-015 | RUN-011 | VALIDATES | Revalidated within current CI validation scope |
-| REL-061 | GOV-013A | GOV-013 | REFERENCES | Revalidated within governance scope |
+| REL-061 | GOV-013A | GOV-013 | REFERENCES | **INTENTIONAL ONE-WAY / GOVERNANCE-REVALIDATED** |
 
 ## Current Review-Cycle Reconciliation — 2026-08-17
 
