@@ -1,7 +1,7 @@
 # GEN-001 — ELEVENTH-RULE GENERATION TEST
 
 **Status:** `Prototype / Integrity Hold`
-**Authority:** `CORE-011_GENERATIVE_KNOWLEDGE_AND_SELF_DEVELOPMENT.md`
+**Authority:** `CORE-012_GENERATIVE_KNOWLEDGE_AND_SELF_DEVELOPMENT.md`
 **Purpose:** Test whether ARGO can generate a candidate rule that is not explicitly inherited, while keeping generation separate from authority and truth.
 
 ## 1. Test Principle
