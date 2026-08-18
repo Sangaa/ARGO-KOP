@@ -97,6 +97,9 @@ All other content is `KEEP`.
           print('REAL_MATRIX_VARIANTS_VALIDATED=3')
           PY
 
+      - name: Run GEN-001 Candidate-001 reuse regression
+        run: python Quality/Integration/test_gen001_candidate001_reuse.py
+
       - name: Enforce Mutation Matrix on current change set
         shell: bash
         run: |
