@@ -22,6 +22,38 @@ A one-sided reference is insufficient for `BIDIRECTIONAL VERIFIED`.
 - `REL-009` remains open because the reverse endpoint evidence is absent and the source contract itself limits the scope of its runtime sequence claim.
 - `REL-061` remains governance-revalidated but one-way.
 
+## P4 Reverse-Evidence Revalidation — 2026-08-18
+
+### REL-009 verification delta
+
+This cycle did not recreate the prior P4 search campaign. It performed a bounded verification delta against the current canonical `main` checkpoint:
+
+1. **Independent repository search** for `RUN-010` / `SRV-009` relationship evidence did not surface a new canonical reverse relationship owned by `SRV-009`.
+2. **Direct canonical read** of `Runtime/RUN-010_RUNTIME_REFERENCE.md` confirmed the forward runtime sequence remains explicitly described as:
+   `Decision Candidate → Validation → Authorization → ENG-006 Execution → SRV-009 Controlled Mutation → Post-Write Validation / Re-read`.
+   The same authority explicitly states that this is a relationship description and not a claim that every runtime operation follows the exact path.
+3. **Direct canonical read** of `Services/SRV-009_UPDATE_SERVICE.md` confirmed its Relationship Position identifies `SRV-009` as the controlled mutation service consumed by `ENG-006`, with `ENG-006` listed in Related Documents. `RUN-010` is not independently named as a consumer, relationship endpoint, or caller.
+
+Disposition:
+
+`REL-009 = ONE-WAY / REVALIDATION REQUIRED`
+
+This verification does **not** establish a callable `RUN-010 → SRV-009` consumer path, does not alter relationship identity or direction, and does not authorize executable promotion.
+
+### Evidence boundary
+
+The negative conclusion is intentionally limited to the inspected canonical endpoint/document scope. It is not a repository-wide absence claim.
+
+### Next safe decision point
+
+Promotion requires a new independent source of evidence, such as:
+
+- a canonical caller relationship explicitly naming `RUN-010` from the `SRV-009` side;
+- callable runtime code where `RUN-010` execution context directly reaches `SRV-009` dispatch;
+- or an authoritative architecture/governance disposition redefining the relationship as intentionally one-way/documentary.
+
+Absent such evidence, the correct state remains open.
+
 ## Boundary
 
 This matrix validates only the listed critical edges. It does not claim repository-wide graph closure.
