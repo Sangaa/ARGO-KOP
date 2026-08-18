@@ -6,12 +6,12 @@
 
 Platform: ARGO KOP (Knowledge Operating Platform)
 Document ID: REP-001
-Version: 1.11.3
+Version: 1.11.4
 Status: Integrity Hold
 Category: Repository
 Canonical: Yes
 Priority: Critical
-Last Audit Date: Aug 16, 2026
+Last Audit Date: Aug 18, 2026
 Development Baseline: 3.2.1
 
 ---
@@ -47,6 +47,7 @@ Historical root naming-convention material is not active canonical inventory and
 - `Core/CORE-009_PLATFORM_LIFECYCLE.md`
 - `Core/CORE-010_PLATFORM_ROADMAP.md`
 - `Core/CORE-011_PLATFORM_CHARTER.md`
+- `Core/CORE-012_GENERATIVE_KNOWLEDGE_AND_SELF_DEVELOPMENT.md`
 - `Core/_FOLDER_STATUS.md`
 
 ## 4. Repository Layer
@@ -80,6 +81,7 @@ Historical root naming-convention material is not active canonical inventory and
 - `Governance/GOV-013_HERMUZ_SESSION_BUILD_PROTOCOL.md`
 - `Governance/GOV-013A_HERMUZ_BOOTSTRAP_INTEGRITY_GATE.md`
 - `Governance/GOV-014_CONTROLLED_DOCUMENT_MUTATION_PROTOCOL.md`
+- `GOVERNANCE/GOV-016_FAILURE_TO_LEARNING_PROTOCOL.md`
 - `Governance/_FOLDER_STATUS.md`
 
 `Governance/GOV-011_EXTERNAL_FEEDBACK_REPORT_STANDARD.md` exists as a proposed intake standard but is not active canonical authority until formally ratified.
