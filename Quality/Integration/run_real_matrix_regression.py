@@ -11,6 +11,7 @@ CORPUS = [
 
 
 def main() -> int:
+    print(f"REAL_MATRIX_CORPUS_COUNT={len(CORPUS)}")
     missing = [path for path in CORPUS if not Path(path).is_file()]
     if missing:
         for path in missing:
