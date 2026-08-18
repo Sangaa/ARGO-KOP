@@ -69,7 +69,7 @@ HERMUZ is an operating protocol and does not override ARGO constitutional, gover
 
 ### Mandatory Failure-to-Learning Protocol
 
-**Every engineer, contributor, and AI model MUST apply [`GOVERNANCE/GOV-016_FAILURE_TO_LEARNING_PROTOCOL.md`](GOVERNANCE/GOV-016_FAILURE_TO_LEARNING_PROTOCOL.md).**
+**Every engineer, contributor, and AI model MUST apply [`Governance/GOV-016_FAILURE_TO_LEARNING_PROTOCOL.md`](Governance/GOV-016_FAILURE_TO_LEARNING_PROTOCOL.md).**
 
 An unexpected failure must not be silently fixed, ignored, or reduced to a generic `FAILED` state. It must be analyzed from evidence, classified, root-caused where possible, corrected or safely contained, regression-tested when practical, and transferred into reusable knowledge according to its validated scope.
 
@@ -88,7 +88,7 @@ This protocol is mandatory for all models so that ARGO continuously converts fai
 - **Repository Relationship Map:** [`Repository/REP-002_REPOSITORY_MAP.md`](Repository/REP-002_REPOSITORY_MAP.md)
 - **Platform Bootstrap:** [`PROJECT_BOOTSTRAP.md`](PROJECT_BOOTSTRAP.md)
 - **HERMUZ Session Protocol:** [`Governance/GOV-013_HERMUZ_SESSION_BUILD_PROTOCOL.md`](Governance/GOV-013_HERMUZ_SESSION_BUILD_PROTOCOL.md)
-- **Failure-to-Learning Protocol:** [`GOVERNANCE/GOV-016_FAILURE_TO_LEARNING_PROTOCOL.md`](GOVERNANCE/GOV-016_FAILURE_TO_LEARNING_PROTOCOL.md)
+- **Failure-to-Learning Protocol:** [`Governance/GOV-016_FAILURE_TO_LEARNING_PROTOCOL.md`](Governance/GOV-016_FAILURE_TO_LEARNING_PROTOCOL.md)
 - **Platform Status:** [`PROJECT_STATUS.md`](PROJECT_STATUS.md)
 - **Vision:** [`VISION.md`](VISION.md)
 - **Runtime Sequence:** [`Runtime/RUN-001_BOOT_SEQUENCE.md`](Runtime/RUN-001_BOOT_SEQUENCE.md)
