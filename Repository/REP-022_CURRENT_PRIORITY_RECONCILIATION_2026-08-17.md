@@ -16,7 +16,7 @@ Baseline: 3.2.1
 
 `P5 = EXECUTION-VERIFIED / BUILD CLOSED` within the current P5 harness scope.
 
-`P6 = SPECIFICATION-ESTABLISHED / IMPLEMENTATION-PENDING` within P6 Build-01 scope.
+`P6 = IMPLEMENTED / EXECUTION-VERIFICATION-PENDING` within the current P6 Build-02 scope.
 
 ## P2 Reconciliation Note
 
@@ -60,32 +60,43 @@ This evidence closes the P5 harness build scope only. It does not authorize any 
 
 `P5 = EXECUTION-VERIFIED / BUILD CLOSED / NO NEW CANONICAL MUTATION AUTHORIZED`
 
-## P6 Build-01 Reconciliation Note
+## P6 Build-02 Reconciliation Note
 
-`Repository/P6_CI_IMPACT_OBSERVABILITY_MATRIX_2026-08-18.md` establishes the first bounded P6 specification from current repository evidence.
+`Repository/P6_CI_IMPACT_OBSERVABILITY_MATRIX_2026-08-18.md` now records a bounded Build-02 implementation.
 
-Current verified inputs include:
+Current implementation evidence includes:
 
-- `.github/workflows/full-stack-audit.yml` with P4 safety gates, matrix regressions, repository audit and runtime evidence emission;
-- `.github/workflows/real-matrix-regression.yml` with real Matrix corpus regression;
-- `Quality/Integration/emit_ci_runtime_evidence.py` with non-canonical runtime evidence emission;
-- `REP-020_DEPENDENCY_CONSUMER_IMPACT_MATRIX.md` as the provisional impact/consumer lookup surface;
-- `REP-014_REPOSITORY_RELATIONSHIP_REGISTRY.md` as the canonical relationship state surface.
+- `Quality/Integration/ci_impact_correlation.py` — deterministic changed-path correlation against current `REP-020` and `REP-014` evidence;
+- `Quality/Integration/test_ci_impact_correlation.py` — regression coverage for direct mapping and explicit unmapped behavior;
+- `.github/workflows/full-stack-audit.yml` — P6 regression, correlation execution, and artifact upload integrated into the existing Full-Stack workflow.
 
-The identified gap is **CI-to-impact correlation**, not absence of CI execution.
+The implementation is intentionally fail-safe:
 
-Build-01 intentionally establishes specification and evidence contract only. It does not mutate workflows, does not auto-promote relationships, and does not claim CI-impact observability implementation complete.
+- direct evidence → `MAPPED`;
+- no direct evidence → `UNMAPPED`;
+- no changed paths → `NO_CHANGES`;
+- all outputs → `NO_AUTO_PROMOTION`.
 
-`P6 = SPECIFICATION-ESTABLISHED / IMPLEMENTATION-PENDING / NO NEW CANONICAL AUTHORITY`
+The GitHub Actions status surface has not yet returned a workflow run/status for the implementation commit. Therefore:
+
+`P6 = IMPLEMENTED / EXECUTION-VERIFICATION-PENDING / NO AUTO-PROMOTION`
+
+The missing evidence is specifically:
+
+`CI Run → Job Result → ci-impact-correlation.json → Read-back → Classification`
+
+This is an execution-evidence gap, not a failed implementation claim.
 
 ## Constraint
 
-No executable promotion is justified by the contracts alone. P3 still requires independent callable consumer evidence, test evidence, or trace evidence. P5 completion is a reusable control capability. P6 specification is an observability contract, not implementation proof.
+No executable promotion is justified by the contracts alone. P3 still requires independent callable consumer evidence, test evidence, or trace evidence. P5 completion is a reusable control capability. P6 implementation is present but remains below execution-verified until CI evidence is available.
 
 ## Learning
 
 Current authoritative evidence must be compared against queue snapshots before resuming work. A stale queue statement must not override a newer reconciled domain evidence record, but it must remain visible until explicitly resynchronized.
 
-Capability/build state and relationship state must be reconciled independently: completing a P5 harness or defining a P6 observability contract must not silently promote unrelated runtime relationships.
+Capability/build state and relationship state must be reconciled independently: completing a P5 harness or implementing a P6 observability mechanism must not silently promote unrelated runtime relationships.
+
+A committed CI implementation is not CI execution evidence; the workflow run and its produced artifact remain the required proof boundary.
 
 ## End of REP-022
