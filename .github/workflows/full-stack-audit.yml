@@ -100,6 +100,9 @@ All other content is `KEEP`.
       - name: Run GEN-001 Candidate-001 reuse regression
         run: python Quality/Integration/test_gen001_candidate001_reuse.py
 
+      - name: Run REL-009 negative executable-consumer regression
+        run: python Quality/Integrity/test_rel009_negative_executable_consumer_boundary.py
+
       - name: Enforce Mutation Matrix on current change set
         shell: bash
         run: |
