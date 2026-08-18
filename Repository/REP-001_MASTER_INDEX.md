@@ -81,7 +81,7 @@ Historical root naming-convention material is not active canonical inventory and
 - `Governance/GOV-013_HERMUZ_SESSION_BUILD_PROTOCOL.md`
 - `Governance/GOV-013A_HERMUZ_BOOTSTRAP_INTEGRITY_GATE.md`
 - `Governance/GOV-014_CONTROLLED_DOCUMENT_MUTATION_PROTOCOL.md`
-- `GOVERNANCE/GOV-016_FAILURE_TO_LEARNING_PROTOCOL.md`
+- `Governance/GOV-016_FAILURE_TO_LEARNING_PROTOCOL.md`
 - `Governance/_FOLDER_STATUS.md`
 
 `Governance/GOV-011_EXTERNAL_FEEDBACK_REPORT_STANDARD.md` exists as a proposed intake standard but is not active canonical authority until formally ratified.
