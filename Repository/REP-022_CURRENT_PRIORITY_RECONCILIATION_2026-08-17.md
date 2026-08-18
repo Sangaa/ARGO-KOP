@@ -1,6 +1,6 @@
 # REP-022 — CURRENT PRIORITY RECONCILIATION
 
-Date: 2026-08-17
+Date: 2026-08-18
 Status: Evidence Record / Integrity Hold
 Baseline: 3.2.1
 
@@ -16,7 +16,7 @@ Baseline: 3.2.1
 
 `P5 = EXECUTION-VERIFIED / BUILD CLOSED` within the current P5 harness scope.
 
-`P6 = NOT_STARTED / CI-IMPACT OBSERVABILITY`
+`P6 = SPECIFICATION-ESTABLISHED / IMPLEMENTATION-PENDING` within P6 Build-01 scope.
 
 ## P2 Reconciliation Note
 
@@ -60,14 +60,32 @@ This evidence closes the P5 harness build scope only. It does not authorize any 
 
 `P5 = EXECUTION-VERIFIED / BUILD CLOSED / NO NEW CANONICAL MUTATION AUTHORIZED`
 
+## P6 Build-01 Reconciliation Note
+
+`Repository/P6_CI_IMPACT_OBSERVABILITY_MATRIX_2026-08-18.md` establishes the first bounded P6 specification from current repository evidence.
+
+Current verified inputs include:
+
+- `.github/workflows/full-stack-audit.yml` with P4 safety gates, matrix regressions, repository audit and runtime evidence emission;
+- `.github/workflows/real-matrix-regression.yml` with real Matrix corpus regression;
+- `Quality/Integration/emit_ci_runtime_evidence.py` with non-canonical runtime evidence emission;
+- `REP-020_DEPENDENCY_CONSUMER_IMPACT_MATRIX.md` as the provisional impact/consumer lookup surface;
+- `REP-014_REPOSITORY_RELATIONSHIP_REGISTRY.md` as the canonical relationship state surface.
+
+The identified gap is **CI-to-impact correlation**, not absence of CI execution.
+
+Build-01 intentionally establishes specification and evidence contract only. It does not mutate workflows, does not auto-promote relationships, and does not claim CI-impact observability implementation complete.
+
+`P6 = SPECIFICATION-ESTABLISHED / IMPLEMENTATION-PENDING / NO NEW CANONICAL AUTHORITY`
+
 ## Constraint
 
-No executable promotion is justified by the contracts alone. The next useful work for P3 requires acquisition of independent callable consumer evidence, test evidence, or trace evidence. P5 completion may now be treated as a reusable control capability rather than an unfinished build item.
+No executable promotion is justified by the contracts alone. P3 still requires independent callable consumer evidence, test evidence, or trace evidence. P5 completion is a reusable control capability. P6 specification is an observability contract, not implementation proof.
 
 ## Learning
 
 Current authoritative evidence must be compared against queue snapshots before resuming work. A stale queue statement must not override a newer reconciled domain evidence record, but it must remain visible until explicitly resynchronized.
 
-The same rule applies to capability/build states: verified harness evidence may close the applicable P5 scope without silently promoting unrelated relationship or runtime claims.
+Capability/build state and relationship state must be reconciled independently: completing a P5 harness or defining a P6 observability contract must not silently promote unrelated runtime relationships.
 
 ## End of REP-022
