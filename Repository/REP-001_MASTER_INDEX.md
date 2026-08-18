@@ -6,12 +6,12 @@
 
 Platform: ARGO KOP (Knowledge Operating Platform)
 Document ID: REP-001
-Version: 1.11.4
+Version: 1.11.3
 Status: Integrity Hold
 Category: Repository
 Canonical: Yes
 Priority: Critical
-Last Audit Date: Aug 18, 2026
+Last Audit Date: Aug 16, 2026
 Development Baseline: 3.2.1
 
 ---
