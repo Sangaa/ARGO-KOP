@@ -1,7 +1,7 @@
 # GEN-001 Candidate 001 — Minimal Failure Discriminator
 
-Status: `VALIDATION COMPLETE / GENERATED KNOWLEDGE CANDIDATE`
-Class: `GENERATED_HYPOTHESIS`
+Status: `VALIDATED_GENERATED_KNOWLEDGE / BOUNDED SCOPE`
+Class: `VALIDATED_GENERATED_KNOWLEDGE`
 Not an ARGO-Native Rule.
 
 ## Generated Hypothesis
@@ -36,19 +36,35 @@ The reconciliation harness printed `PASS`, while the CI step failed because `pyt
 ### Case B — Multi-Matrix
 The proposed three-Matrix run returned `jobs=[]`, so no test job executed. The smallest discriminator was checking workflow/job state before modifying Matrix semantics. Root cause: workflow execution/loading boundary, not Matrix evaluation.
 
-Both cases support the candidate's predicted behavior: distinguish the layer before mutating the subject.
+### Case C — Prospective Controlled Test
+A deterministic validator injected four bounded states: subject-only failure, channel-only failure, composite failure and no failure. The discriminator returned the corresponding classification for each case in CI.
+
+Workflow: `GEN-001 Candidate Training`
+Run: `32058801487`
+Job: `95474138297`
+Conclusion: `SUCCESS`
 
 ## Validation Result
 
-`RETROSPECTIVELY SUPPORTED`
+`VALIDATED_GENERATED_KNOWLEDGE`
+
+The candidate has passed bounded prospective validation as a failure-triage decision procedure.
 
 ## Limits
 
-Retrospective support is not sufficient for ARGO-Native promotion. A prospective controlled experiment must demonstrate that the discriminator selects the correct failure layer for injected subject faults and injected channel faults.
+Validation is bounded to test-failure triage. It does not prove the heuristic is optimal in every production environment, nor does it grant permission to modify canonical behavior automatically.
+
+## Reuse Value
+
+Use as a default **triage heuristic** for material test failures when the failure layer is uncertain:
+
+`Discriminate first → Mutate second`
+
+Further domain-specific validation is required before broader governance promotion.
 
 ## Promotion Recommendation
 
-Remain `GENERATED_HYPOTHESIS` until prospective validation and reuse are demonstrated.
+Keep as `VALIDATED_GENERATED_KNOWLEDGE` until repeated use demonstrates stable benefit across additional failure classes. Do not promote automatically to an ARGO-Native Rule.
 
 ---
 
