@@ -1,0 +1,19 @@
+name: GEN-001 Candidate Training
+on:
+  push:
+    paths:
+      - 'Quality/Integration/gen001_candidate001_failure_discriminator_validator.py'
+      - 'Quality/Integration/GEN-001_CANDIDATE-001_FAILURE_DISCRIMINATOR.md'
+      - '.github/workflows/gen001-candidate-training.yml'
+jobs:
+  candidate-validator:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Execute prospective candidate validation
+        run: python Quality/Integration/gen001_candidate001_failure_discriminator_validator.py
