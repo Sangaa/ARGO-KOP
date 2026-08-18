@@ -16,10 +16,14 @@ def discriminate(*, subject_failed: bool, channel_failed: bool) -> str:
 
 
 def main() -> None:
-    assert discriminate(subject_failed=False, channel_failed=True) == "EXECUTION_CHANNEL"
-    assert discriminate(subject_failed=True, channel_failed=False) == "SUBJECT_UNDER_TEST"
-    assert discriminate(subject_failed=True, channel_failed=True) == "AMBIGUOUS_COMPOSITE"
-    assert discriminate(subject_failed=False, channel_failed=False) == "NO_FAILURE"
+    cases = [
+        (False, True, "EXECUTION_CHANNEL"),
+        (True, False, "SUBJECT_UNDER_TEST"),
+        (True, True, "AMBIGUOUS_COMPOSITE"),
+        (False, False, "NO_FAILURE"),
+    ]
+    for subject_failed, channel_failed, expected in cases:
+        assert discriminate(subject_failed=subject_failed, channel_failed=channel_failed) == expected
     print("GEN-001 Candidate 001 prospective discriminator: PASS")
 
 
