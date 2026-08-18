@@ -1,32 +1,34 @@
 # MUT-2026-08-18-REL061-REGISTRY-STATE-MATRIX
 
 Date: `2026-08-18`
-Status: `CANDIDATE / WRITE PENDING`
+Status: `APPLIED / VERIFIED`
 Authority: `GOV-013 + GOV-013A + GOV-014 + GOV-015`
 Target: `Repository/REP-014_REPOSITORY_RELATIONSHIP_REGISTRY.md`
-Current target blob SHA at preparation: `57c872e8bed3fec34e114d72d2093bd134e0ae2b`
+Pre-mutation target blob SHA: `57c872e8bed3fec34e114d72d2093bd134e0ae2b`
+Post-mutation target commit: `e5262fba000228725a0638909b983577bc12b873`
+Post-mutation target blob SHA: `a6926b0b27e515b38b65594846fd82d1f1252ea9`
 
 ## Purpose
 
-Prepare the smallest sufficient registry-state mutation for `REL-061` without changing relationship identity, direction, semantic authority, or unrelated REP-014 content.
+Prepare and record the smallest sufficient registry-state mutation for `REL-061` without changing relationship identity, direction, semantic authority, or unrelated REP-014 content.
 
 ## Evidence Basis
 
 - `Governance/GOV-013A_HERMUZ_BOOTSTRAP_INTEGRITY_GATE.md` declares `Approved / Canonical Addendum` and states that it supplements `GOV-013`.
 - `Repository/P4_REL061_INTENTIONAL_ONE_WAY_DISPOSITION_2026-08-17.md` establishes the relationship as intentionally asymmetric.
-- `REP-014` already uses the controlled relationship type `REFERENCES` for `REL-061` because `SUPPLEMENTS` is not a controlled registry type.
+- `REP-014` uses the controlled relationship type `REFERENCES` for `REL-061` because `SUPPLEMENTS` is not a controlled registry type.
 
-## Intended Mutation
+## Applied Mutation
 
-Current row:
+Previous row:
 
 `| REL-061 | GOV-013A | GOV-013 | REFERENCES | Revalidated within governance scope |`
 
-Proposed row state:
+Applied row:
 
 `| REL-061 | GOV-013A | GOV-013 | REFERENCES | INTENTIONAL ONE-WAY / GOVERNANCE-REVALIDATED |`
 
-No change to:
+No change was made to:
 
 - Relationship ID
 - source
@@ -35,22 +37,32 @@ No change to:
 - direction
 - `GOV-013` authority
 - `GOV-013A` authority
+- REL-009
+- REL-005
+- unrelated REP-014 relationships or narrative
 
-The existing reconciliation narrative should remain preserved. A concise current-cycle evidence note may be appended only after the full target content is preserved and re-read.
+## Verification Sequence
 
-## Required Mutation Sequence
+`PRE-SHA RECHECK → FULL-CONTENT READ → MINIMUM EDIT → WRITE → CURRENT FILE RE-READ → VERIFY REL-061 → VERIFY POST-WRITE SHA → CHECK IMPACT`
 
-`PRE-SHA RECHECK → FULL-CONTENT READ → MINIMUM EDIT → WRITE → FULL RE-READ → VERIFY REL-061 → VERIFY REP-014 SHA → REGISTRY/INDEX IMPACT CHECK → CHECKPOINT`
+Results:
 
-## Safety Boundary
+- Pre-write SHA matched the current canonical REP-014 blob: `57c872e8bed3fec34e114d72d2093bd134e0ae2b`.
+- Mutation committed successfully as `e5262fba000228725a0638909b983577bc12b873`.
+- Post-write blob SHA: `a6926b0b27e515b38b65594846fd82d1f1252ea9`.
+- Current-path read-back confirms the exact `REL-061` row is present.
+- The surrounding relationship table remains preserved; `REL-009` remains `REVALIDATION REQUIRED` and `REL-005` remains executable-verified.
+- No workflow run was associated with this direct commit, so no new CI PASS is claimed from this mutation alone.
 
-Do not replace REP-014 from a shortened or reconstructed copy. Do not modify REL-009, REL-005, or unrelated relationships in the same write.
+## State Decision
+
+`REL-061 = INTENTIONAL ONE-WAY / GOVERNANCE-REVALIDATED`
+
+This is a relationship-state reconciliation only. It does not promote P4, close Priority 1, or establish Global PASS.
 
 ## Closure Condition
 
-This matrix can be marked `APPLIED / VERIFIED` only after the resulting REP-014 content is fully re-read and the exact REL-061 state is confirmed on current `main`.
-
-Until then, the canonical registry remains unchanged and P4 remains open.
+Mutation is `APPLIED / VERIFIED` at the file/relationship scope. P4 remains open because `REL-009` still lacks independent callable consumer evidence.
 
 ---
 
