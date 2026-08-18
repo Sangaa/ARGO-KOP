@@ -45,6 +45,9 @@ jobs:
           assert 'SRV-009' not in entrypoint
           PY
 
+      - name: Run P6 CI impact correlation regression
+        run: python Quality/Integration/test_ci_impact_correlation.py
+
       - name: Run Mutation Matrix preflight regression
         run: |
           python - <<'PY'
@@ -114,6 +117,17 @@ All other content is `KEEP`.
           fi
           python Quality/Integration/check_mutation_matrix_preflight.py "$BASE" "$HEAD"
 
+      - name: Correlate CI commit with impact matrix
+        shell: bash
+        run: |
+          set -euo pipefail
+          BASE="${{ github.event.before }}"
+          HEAD="${{ github.sha }}"
+          if [ -z "$BASE" ] || [ "$BASE" = "0000000000000000000000000000000000000000" ]; then
+            BASE="$(git rev-parse HEAD^)"
+          fi
+          python Quality/Integration/ci_impact_correlation.py "$BASE" "$HEAD" --output ci-impact-correlation.json
+
       - name: Execute repository-wide audit
         working-directory: Quality/Integration
         run: set -o pipefail; python run_full_stack_audit.py ../.. | tee ../../full-stack-audit-report.json
@@ -135,4 +149,11 @@ All other content is `KEEP`.
           path: |
             ci-runtime-evidence.json
             Quality/Integration/evidence/runtime/*.json
+          if-no-files-found: error
+
+      - name: Upload CI impact correlation evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: ci-impact-correlation
+          path: ci-impact-correlation.json
           if-no-files-found: error
