@@ -8,9 +8,6 @@ def _source() -> str:
 
 
 def test_builder_requires_explicit_authorization():
-    # Authorization is a security precondition and must be rejected before
-    # source-hash validation, so an unauthorized request cannot be repurposed
-    # into a source-identity probe.
     with pytest.raises(RuntimeError, match="AUTHORIZATION_EVIDENCE_REQUIRED"):
         build_candidate(
             _source(),
@@ -31,3 +28,10 @@ def test_builder_changes_only_rel001_row_and_preserves_other_sections(monkeypatc
         source,
         target_state="Verified",
         authorization_evidence="TEST AUTHORIZATION ONLY; NO CANONICAL MUTATION.",
+    )
+
+    assert "| REL-001 | SPEC-001-KNOWLEDGE-ORGANIZATION | MOD-001 | DEPENDS_ON | Verified |" in candidate
+    assert "Keep this content byte-equivalent." in candidate
+    assert meta["unexpected_changes"] == 0
+    assert meta["current_state"] == "Revalidation Required"
+    assert meta["target_state"] == "Verified"
