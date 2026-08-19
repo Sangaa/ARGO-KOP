@@ -1,48 +1,51 @@
-"""P6-08/P6-09 boundary regression fixtures.
+"""P6-08/P6-09 boundary regression tests.
 
-These tests intentionally validate the decision boundary, not live GitHub state.
-Live execution evidence remains a separate CI responsibility.
+The decision logic lives in p6_reconciliation.py. This module owns only
+scenario coverage and an explicit stdlib test-runner entry point.
 """
 
-from dataclasses import dataclass
+import unittest
+
+from p6_reconciliation import Evidence, P6ReconciliationEngine
 
 
-@dataclass(frozen=True)
-class Evidence:
-    run_id: str | None
-    head_sha: str | None
-    artifact_sha: str | None
-    result: str
+class P6ReconciliationBoundaryTests(unittest.TestCase):
+    def setUp(self) -> None:
+        self.engine = P6ReconciliationEngine()
+
+    def test_p6_08_current_execution_is_evidence_bearing(self) -> None:
+        evidence = Evidence("r1", "sha1", "sha1", "PASS")
+        self.assertEqual(
+            self.engine.reconcile(evidence, "sha1"), "VALID_CURRENT_EXECUTION"
+        )
+
+    def test_p6_08_stale_execution_is_not_current(self) -> None:
+        evidence = Evidence("r1", "old", "old", "PASS")
+        self.assertEqual(
+            self.engine.reconcile(evidence, "sha1"),
+            "VALID_EXECUTION_STALE_BASELINE",
+        )
+
+    def test_p6_09_first_failure_boundary_is_preserved(self) -> None:
+        cases = [
+            (Evidence(None, None, None, "PASS"), "NO_OBSERVATION"),
+            (Evidence("r1", None, None, "PASS"), "IDENTITY_EVIDENCE_MISSING"),
+            (Evidence("r1", "sha1", None, "PASS"), "ARTIFACT_EVIDENCE_MISSING"),
+            (Evidence("r1", "sha1", "old", "PASS"), "ARTIFACT_IDENTITY_MISMATCH"),
+            (Evidence("r1", "sha1", "sha1", "FAIL"), "EXECUTION_FAILED"),
+        ]
+        for evidence, expected in cases:
+            with self.subTest(expected=expected):
+                self.assertEqual(self.engine.reconcile(evidence, "sha1"), expected)
+
+    def test_p6_never_promotes_stale_execution(self) -> None:
+        evidence = Evidence("r1", "old", "old", "PASS")
+        self.assertNotEqual(
+            self.engine.reconcile(evidence, "sha1"), "VALID_CURRENT_EXECUTION"
+        )
 
 
-def reconcile(evidence: Evidence, expected_sha: str) -> str:
-    if evidence.run_id is None:
-        return "NO_OBSERVATION"
-    if evidence.result != "PASS":
-        return "EXECUTION_FAILED"
-    if evidence.head_sha is None:
-        return "IDENTITY_EVIDENCE_MISSING"
-    if evidence.head_sha != expected_sha:
-        return "VALID_EXECUTION_STALE_BASELINE"
-    if evidence.artifact_sha is None:
-        return "ARTIFACT_EVIDENCE_MISSING"
-    if evidence.artifact_sha != evidence.head_sha:
-        return "ARTIFACT_IDENTITY_MISMATCH"
-    return "VALID_CURRENT_EXECUTION"
-
-
-def test_p6_08_matrix_update_boundary_is_evidence_bearing():
-    assert reconcile(Evidence("r1", "sha1", "sha1", "PASS"), "sha1") == "VALID_CURRENT_EXECUTION"
-    assert reconcile(Evidence("r1", "old", "old", "PASS"), "sha1") == "VALID_EXECUTION_STALE_BASELINE"
-
-
-def test_p6_09_reconciliation_preserves_first_failure_boundary():
-    assert reconcile(Evidence(None, None, None, "PASS"), "sha1") == "NO_OBSERVATION"
-    assert reconcile(Evidence("r1", None, None, "PASS"), "sha1") == "IDENTITY_EVIDENCE_MISSING"
-    assert reconcile(Evidence("r1", "sha1", None, "PASS"), "sha1") == "ARTIFACT_EVIDENCE_MISSING"
-    assert reconcile(Evidence("r1", "sha1", "old", "PASS"), "sha1") == "ARTIFACT_IDENTITY_MISMATCH"
-    assert reconcile(Evidence("r1", "sha1", "sha1", "FAIL"), "sha1") == "EXECUTION_FAILED"
-
-
-def test_p6_reconciliation_never_promotes_stale_execution():
-    assert reconcile(Evidence("r1", "old", "old", "PASS"), "sha1") != "VALID_CURRENT_EXECUTION"
+if __name__ == "__main__":
+    result = unittest.main(verbosity=2, exit=False)
+    if not result.result.wasSuccessful():
+        raise SystemExit(1)
