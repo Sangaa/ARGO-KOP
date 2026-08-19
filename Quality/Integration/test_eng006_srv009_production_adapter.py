@@ -66,10 +66,12 @@ def test_authorized_candidate_uses_governed_dispatch_and_trace():
     connector = FakeConnector()
     result = execute_update(candidate(), connector=connector)
     assert result["status"] == "UPDATE_ACCEPTED"
+    # The governed dispatcher intentionally performs a second read immediately
+    # before CREATE to prevent a stale absence from becoming an unsafe write.
     assert [name for name, _ in connector.calls] == [
         "read_current",
-        "create_file",
         "read_current",
+        "create_file",
         "read_back",
     ]
     assert result["execution"]["trace"]["final_status"] == "UPDATE_ACCEPTED"
