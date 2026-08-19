@@ -65,7 +65,7 @@ jobs:
         run: python Quality/Integration/test_p6_layered_boundaries.py
 
       - name: Run P6 reconciliation boundary regression
-        run: python Quality/Integration/test_p6_reconciliation_boundaries.py
+        run: python -m unittest discover -s Quality/Integration -p 'test_p6_reconciliation_boundaries.py' -v
 
       - name: Run Mutation Matrix preflight regression
         run: |
