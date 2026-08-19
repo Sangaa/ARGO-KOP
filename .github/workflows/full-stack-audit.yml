@@ -22,6 +22,14 @@ jobs:
         with:
           python-version: '3.11'
 
+      - name: Assert execution is bound to current checkout SHA
+        shell: bash
+        run: |
+          set -euo pipefail
+          CHECKOUT_SHA="$(git rev-parse HEAD)"
+          test "$CHECKOUT_SHA" = "${{ github.sha }}"
+          printf '%s\n' "{\"workflow\":\"${{ github.workflow }}\",\"run_id\":\"${{ github.run_id }}\",\"event\":\"${{ github.event_name }}\",\"ref\":\"${{ github.ref }}\",\"github_sha\":\"${{ github.sha }}\",\"checkout_sha\":\"$CHECKOUT_SHA\",\"before\":\"${{ github.event.before }}\"}" > ci-execution-identity.json
+
       - name: Run P4 REL-009 consumer boundary safety gate
         shell: bash
         run: |
@@ -159,4 +167,11 @@ All other content is `KEEP`.
         with:
           name: ci-impact-correlation
           path: ci-impact-correlation.json
+          if-no-files-found: error
+
+      - name: Upload CI execution identity
+        uses: actions/upload-artifact@v4
+        with:
+          name: ci-execution-identity
+          path: ci-execution-identity.json
           if-no-files-found: error
