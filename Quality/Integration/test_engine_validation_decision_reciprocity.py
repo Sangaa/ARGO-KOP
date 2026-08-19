@@ -16,7 +16,8 @@ def test_eng004_srv005_validation_reciprocity():
 
     assert "SRV-005" in eng004
     assert "ENG-004_VALIDATION_ENGINE.md" in srv005
-    assert "REL-003 | ENG-004 | SRV-005" in registry
+    # REP-014 defines REL-003 direction as SRV-005 -> ENG-004.
+    assert "REL-003 | SRV-005 | ENG-004" in registry
 
 
 def test_eng002_execution_boundary_is_explicit():
