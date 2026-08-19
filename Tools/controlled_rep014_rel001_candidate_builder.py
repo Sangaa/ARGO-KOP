@@ -46,13 +46,16 @@ def build_candidate(
     target_state: str,
     authorization_evidence: str,
 ) -> tuple[str, dict[str, object]]:
+    # Authorization is the security precondition. Reject an unauthorized
+    # mutation before exposing source-identity/hash details.
+    if not authorization_evidence.strip():
+        raise RuntimeError("AUTHORIZATION_EVIDENCE_REQUIRED")
+
     actual_sha = git_blob_sha1(source)
     if actual_sha != SOURCE_BLOB_SHA:
         raise RuntimeError(f"SOURCE_BLOB_SHA_MISMATCH expected={SOURCE_BLOB_SHA} actual={actual_sha}")
     if target_state not in ALLOWED_TARGET_STATES:
         raise RuntimeError(f"UNCONTROLLED_TARGET_STATE={target_state}")
-    if not authorization_evidence.strip():
-        raise RuntimeError("AUTHORIZATION_EVIDENCE_REQUIRED")
 
     matches = CURRENT_ROW_RE.findall(source)
     if len(matches) != 1:
