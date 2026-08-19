@@ -1,9 +1,8 @@
-"""Correlate a CI commit range with repository impact/relationship evidence.
+"""Correlate CI evidence with repository impact without guessing relationships.
 
-This tool is intentionally conservative: changed paths are mapped to evidence only
-when the current matrix/registry text contains the exact repository-relative path.
-A basename-only match is unsafe because unrelated files can share a filename.
-Unmapped paths remain UNMAPPED rather than inferred into a relationship.
+P6 distinguishes execution validity from evidence freshness. A successful historical
+run is valid execution evidence, but it is not current-HEAD evidence when its SHA
+chain is stale. Stale evidence must be classified, not treated as a test failure.
 """
 
 from __future__ import annotations
@@ -62,6 +61,25 @@ def correlate_paths(
     return records
 
 
+def classify_execution_evidence(
+    baseline_sha: str,
+    run_sha: str,
+    artifact_sha: str,
+    execution_passed: bool,
+) -> str:
+    """Classify execution independently from freshness/provenance.
+
+    A successful run whose run/artifact SHA differs from the current baseline is
+    VALID_EXECUTION_STALE_BASELINE, not a failed execution. It remains ineligible
+    for current-baseline promotion until a fresh execution is available.
+    """
+    if not execution_passed:
+        return "EXECUTION_FAILED"
+    if run_sha == baseline_sha and artifact_sha == baseline_sha:
+        return "VALID_CURRENT_EXECUTION"
+    return "VALID_EXECUTION_STALE_BASELINE"
+
+
 def build_report(base: str, head: str) -> dict[str, object]:
     paths = changed_paths(base, head)
     matrix = DEFAULT_MATRIX.read_text(encoding="utf-8")
@@ -75,7 +93,7 @@ def build_report(base: str, head: str) -> dict[str, object]:
     else:
         overall = "MAPPED"
     return {
-        "schema": "P6-CI-IMPACT-CORRELATION/v1",
+        "schema": "P6-CI-IMPACT-CORRELATION/v2",
         "base": base,
         "head": head,
         "changed_path_count": len(paths),
