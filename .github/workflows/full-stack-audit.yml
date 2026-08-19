@@ -45,6 +45,9 @@ jobs:
           assert 'SRV-009' not in entrypoint
           PY
 
+      - name: Run P4 critical graph bidirectional boundary regression
+        run: python Quality/Integrity/test_critical_graph_bidirectional_boundaries.py
+
       - name: Run P6 CI impact correlation regression
         run: python Quality/Integration/test_ci_impact_correlation.py
 
