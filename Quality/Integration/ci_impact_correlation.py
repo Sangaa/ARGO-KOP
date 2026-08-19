@@ -1,8 +1,9 @@
 """Correlate a CI commit range with repository impact/relationship evidence.
 
 This tool is intentionally conservative: changed paths are mapped to evidence only
-when the current matrix/registry text contains direct path evidence. An unmapped
-path is reported as UNMAPPED rather than inferred into a relationship.
+when the current matrix/registry text contains the exact repository-relative path.
+A basename-only match is unsafe because unrelated files can share a filename.
+Unmapped paths remain UNMAPPED rather than inferred into a relationship.
 """
 
 from __future__ import annotations
@@ -32,13 +33,12 @@ def changed_paths(base: str, head: str) -> list[str]:
 
 
 def _evidence_lines(path: str, text: str) -> list[str]:
-    """Find direct path mentions, preferring exact path before basename matches."""
-    lines = text.splitlines()
-    exact = [f"L{i}: {line}" for i, line in enumerate(lines, 1) if path in line]
-    if exact:
-        return exact[:10]
-    basename = Path(path).name
-    return [f"L{i}: {line}" for i, line in enumerate(lines, 1) if basename in line][:10]
+    """Find only exact repository-relative path mentions; never infer by basename."""
+    return [
+        f"L{i}: {line}"
+        for i, line in enumerate(text.splitlines(), 1)
+        if path in line
+    ][:10]
 
 
 def correlate_paths(
