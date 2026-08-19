@@ -1,6 +1,6 @@
 """Regression tests for the P6 CI-impact correlation helper."""
 
-from ci_impact_correlation import correlate_paths
+from ci_impact_correlation import classify_execution_evidence, correlate_paths
 
 
 def test_direct_matrix_mapping_is_reported_without_promotion() -> None:
@@ -38,8 +38,32 @@ def test_same_basename_does_not_create_false_mapping() -> None:
     assert records[0]["promotion"] == "NO_AUTO_PROMOTION"
 
 
+def test_successful_stale_run_is_valid_execution_not_execution_failure() -> None:
+    assert (
+        classify_execution_evidence("HEAD-NEW", "HEAD-OLD", "HEAD-OLD", True)
+        == "VALID_EXECUTION_STALE_BASELINE"
+    )
+
+
+def test_successful_exact_sha_chain_is_current_execution() -> None:
+    assert (
+        classify_execution_evidence("HEAD", "HEAD", "HEAD", True)
+        == "VALID_CURRENT_EXECUTION"
+    )
+
+
+def test_failed_run_remains_execution_failure() -> None:
+    assert (
+        classify_execution_evidence("HEAD", "HEAD", "HEAD", False)
+        == "EXECUTION_FAILED"
+    )
+
+
 if __name__ == "__main__":
     test_direct_matrix_mapping_is_reported_without_promotion()
     test_unmapped_path_is_explicit_not_inferred()
     test_same_basename_does_not_create_false_mapping()
+    test_successful_stale_run_is_valid_execution_not_execution_failure()
+    test_successful_exact_sha_chain_is_current_execution()
+    test_failed_run_remains_execution_failure()
     print("P6_CI_IMPACT_CORRELATION_REGRESSION=PASS")
