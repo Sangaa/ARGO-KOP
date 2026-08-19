@@ -1,8 +1,11 @@
 """Layered P6 regression: isolate failures by execution boundary.
 
-This test deliberately keeps functional validity, observation availability,
-identity correlation, artifact validity and final classification separate.
+This module owns scenario coverage only. The functional classification logic
+remains in the shared integration layer, while unittest provides the standard
+CI discovery/execution contract.
 """
+
+import unittest
 
 from ci_impact_correlation import classify_execution_evidence
 
@@ -39,54 +42,56 @@ def p6_e_classification(
     )
 
 
-def test_p6_functional_failure_isolated() -> None:
-    assert p6_a_functional(False) == "FAIL"
-    assert p6_b_observation(False, False) == "MISSING"
+class P6LayeredBoundaryTests(unittest.TestCase):
+    def test_p6_functional_failure_isolated(self) -> None:
+        self.assertEqual(p6_a_functional(False), "FAIL")
+        self.assertEqual(p6_b_observation(False, False), "MISSING")
 
+    def test_p6_missing_observation_is_not_execution_failure(self) -> None:
+        self.assertEqual(p6_a_functional(True), "PASS")
+        self.assertEqual(p6_b_observation(False, False), "MISSING")
+        self.assertEqual(
+            p6_e_classification(True, "HEAD", "HEAD-OLD", "HEAD-OLD"),
+            "VALID_EXECUTION_STALE_BASELINE",
+        )
 
-def test_p6_missing_observation_is_not_execution_failure() -> None:
-    assert p6_a_functional(True) == "PASS"
-    assert p6_b_observation(False, False) == "MISSING"
-    assert p6_e_classification(True, "HEAD", "HEAD-OLD", "HEAD-OLD") == "VALID_EXECUTION_STALE_BASELINE"
+    def test_p6_current_chain_requires_all_identity_links(self) -> None:
+        self.assertEqual(p6_b_observation(True, True), "PRESENT")
+        self.assertEqual(p6_c_identity("HEAD", "HEAD"), "CURRENT")
+        self.assertEqual(p6_d_artifact(True, "HEAD", "HEAD"), "VALID")
+        self.assertEqual(
+            p6_e_classification(True, "HEAD", "HEAD", "HEAD"),
+            "VALID_CURRENT_EXECUTION",
+        )
 
+    def test_p6_artifact_mismatch_isolated(self) -> None:
+        self.assertEqual(p6_a_functional(True), "PASS")
+        self.assertEqual(p6_b_observation(True, True), "PRESENT")
+        self.assertEqual(p6_c_identity("HEAD", "HEAD"), "CURRENT")
+        self.assertEqual(p6_d_artifact(True, "ARTIFACT-OLD", "HEAD"), "INVALID")
+        self.assertEqual(
+            p6_e_classification(True, "HEAD", "HEAD", "ARTIFACT-OLD"),
+            "ARTIFACT_IDENTITY_MISMATCH",
+        )
 
-def test_p6_current_chain_requires_all_identity_links() -> None:
-    assert p6_b_observation(True, True) == "PRESENT"
-    assert p6_c_identity("HEAD", "HEAD") == "CURRENT"
-    assert p6_d_artifact(True, "HEAD", "HEAD") == "VALID"
-    assert p6_e_classification(True, "HEAD", "HEAD", "HEAD") == "VALID_CURRENT_EXECUTION"
+    def test_p6_missing_artifact_is_not_execution_failure(self) -> None:
+        self.assertEqual(p6_a_functional(True), "PASS")
+        self.assertEqual(p6_d_artifact(False, "", "HEAD"), "MISSING")
+        self.assertEqual(
+            p6_e_classification(True, "HEAD", "HEAD", ""),
+            "ARTIFACT_EVIDENCE_MISSING",
+        )
 
+    def test_p6_missing_identity_is_not_execution_failure(self) -> None:
+        self.assertEqual(p6_a_functional(True), "PASS")
+        self.assertEqual(p6_c_identity("", "HEAD"), "MISSING")
+        self.assertEqual(
+            p6_e_classification(True, "", "HEAD", "HEAD"),
+            "IDENTITY_EVIDENCE_MISSING",
+        )
 
-def test_p6_artifact_mismatch_isolated() -> None:
-    assert p6_a_functional(True) == "PASS"
-    assert p6_b_observation(True, True) == "PRESENT"
-    assert p6_c_identity("HEAD", "HEAD") == "CURRENT"
-    assert p6_d_artifact(True, "ARTIFACT-OLD", "HEAD") == "INVALID"
-    assert p6_e_classification(True, "HEAD", "HEAD", "ARTIFACT-OLD") == "ARTIFACT_IDENTITY_MISMATCH"
-
-
-def test_p6_missing_artifact_is_not_execution_failure() -> None:
-    assert p6_a_functional(True) == "PASS"
-    assert p6_d_artifact(False, "", "HEAD") == "MISSING"
-    assert p6_e_classification(True, "HEAD", "HEAD", "") == "ARTIFACT_EVIDENCE_MISSING"
-
-
-def test_p6_missing_identity_is_not_execution_failure() -> None:
-    assert p6_a_functional(True) == "PASS"
-    assert p6_c_identity("", "HEAD") == "MISSING"
-    assert p6_e_classification(True, "", "HEAD", "HEAD") == "IDENTITY_EVIDENCE_MISSING"
-
-
-def test_p6_failed_execution_remains_failure() -> None:
-    assert p6_e_classification(False, "HEAD", "HEAD", "HEAD") == "EXECUTION_FAILED"
-
-
-if __name__ == "__main__":
-    test_p6_functional_failure_isolated()
-    test_p6_missing_observation_is_not_execution_failure()
-    test_p6_current_chain_requires_all_identity_links()
-    test_p6_artifact_mismatch_isolated()
-    test_p6_missing_artifact_is_not_execution_failure()
-    test_p6_missing_identity_is_not_execution_failure()
-    test_p6_failed_execution_remains_failure()
-    print("P6_LAYERED_BOUNDARY_REGRESSION=PASS")
+    def test_p6_failed_execution_remains_failure(self) -> None:
+        self.assertEqual(
+            p6_e_classification(False, "HEAD", "HEAD", "HEAD"),
+            "EXECUTION_FAILED",
+        )
