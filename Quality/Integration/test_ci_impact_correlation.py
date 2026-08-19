@@ -52,6 +52,27 @@ def test_successful_exact_sha_chain_is_current_execution() -> None:
     )
 
 
+def test_current_run_with_mismatched_artifact_is_not_current_execution() -> None:
+    assert (
+        classify_execution_evidence("HEAD", "HEAD", "ARTIFACT-OLD", True)
+        == "ARTIFACT_IDENTITY_MISMATCH"
+    )
+
+
+def test_current_run_with_missing_artifact_evidence_is_explicit() -> None:
+    assert (
+        classify_execution_evidence("HEAD", "HEAD", "", True)
+        == "ARTIFACT_EVIDENCE_MISSING"
+    )
+
+
+def test_missing_identity_evidence_is_not_execution_failure() -> None:
+    assert (
+        classify_execution_evidence("", "", "", True)
+        == "IDENTITY_EVIDENCE_MISSING"
+    )
+
+
 def test_failed_run_remains_execution_failure() -> None:
     assert (
         classify_execution_evidence("HEAD", "HEAD", "HEAD", False)
@@ -65,5 +86,8 @@ if __name__ == "__main__":
     test_same_basename_does_not_create_false_mapping()
     test_successful_stale_run_is_valid_execution_not_execution_failure()
     test_successful_exact_sha_chain_is_current_execution()
+    test_current_run_with_mismatched_artifact_is_not_current_execution()
+    test_current_run_with_missing_artifact_evidence_is_explicit()
+    test_missing_identity_evidence_is_not_execution_failure()
     test_failed_run_remains_execution_failure()
     print("P6_CI_IMPACT_CORRELATION_REGRESSION=PASS")
