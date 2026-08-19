@@ -61,11 +61,8 @@ jobs:
       - name: Run P6 CI impact correlation regression
         run: python Quality/Integration/test_ci_impact_correlation.py
 
-      - name: Run P6 layered boundary regression
-        run: python Quality/Integration/test_p6_layered_boundaries.py
-
-      - name: Run P6 reconciliation boundary regression
-        run: python -m unittest discover -s Quality/Integration -p 'test_p6_reconciliation_boundaries.py' -v
+      - name: Run P6 boundary regressions via unittest discovery
+        run: python -m unittest discover -s Quality/Integration -p 'test_p6_*_boundaries.py' -v
 
       - name: Run Mutation Matrix preflight regression
         run: |
