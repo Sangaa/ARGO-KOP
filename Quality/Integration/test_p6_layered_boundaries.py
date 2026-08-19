@@ -20,11 +20,13 @@ def p6_b_observation(run_present: bool, job_present: bool) -> str:
 
 
 def p6_c_identity(baseline_sha: str, run_sha: str) -> str:
+    if not baseline_sha or not run_sha:
+        return "MISSING"
     return "CURRENT" if baseline_sha == run_sha else "STALE"
 
 
 def p6_d_artifact(artifact_present: bool, artifact_sha: str, run_sha: str) -> str:
-    if not artifact_present:
+    if not artifact_present or not artifact_sha:
         return "MISSING"
     return "VALID" if artifact_sha == run_sha else "INVALID"
 
@@ -60,6 +62,19 @@ def test_p6_artifact_mismatch_isolated() -> None:
     assert p6_b_observation(True, True) == "PRESENT"
     assert p6_c_identity("HEAD", "HEAD") == "CURRENT"
     assert p6_d_artifact(True, "ARTIFACT-OLD", "HEAD") == "INVALID"
+    assert p6_e_classification(True, "HEAD", "HEAD", "ARTIFACT-OLD") == "ARTIFACT_IDENTITY_MISMATCH"
+
+
+def test_p6_missing_artifact_is_not_execution_failure() -> None:
+    assert p6_a_functional(True) == "PASS"
+    assert p6_d_artifact(False, "", "HEAD") == "MISSING"
+    assert p6_e_classification(True, "HEAD", "HEAD", "") == "ARTIFACT_EVIDENCE_MISSING"
+
+
+def test_p6_missing_identity_is_not_execution_failure() -> None:
+    assert p6_a_functional(True) == "PASS"
+    assert p6_c_identity("", "HEAD") == "MISSING"
+    assert p6_e_classification(True, "", "HEAD", "HEAD") == "IDENTITY_EVIDENCE_MISSING"
 
 
 def test_p6_failed_execution_remains_failure() -> None:
@@ -71,5 +86,7 @@ if __name__ == "__main__":
     test_p6_missing_observation_is_not_execution_failure()
     test_p6_current_chain_requires_all_identity_links()
     test_p6_artifact_mismatch_isolated()
+    test_p6_missing_artifact_is_not_execution_failure()
+    test_p6_missing_identity_is_not_execution_failure()
     test_p6_failed_execution_remains_failure()
     print("P6_LAYERED_BOUNDARY_REGRESSION=PASS")
