@@ -67,17 +67,24 @@ def classify_execution_evidence(
     artifact_sha: str,
     execution_passed: bool,
 ) -> str:
-    """Classify execution independently from freshness/provenance.
+    """Classify each evidence boundary without collapsing distinct failures.
 
-    A successful run whose run/artifact SHA differs from the current baseline is
-    VALID_EXECUTION_STALE_BASELINE, not a failed execution. It remains ineligible
-    for current-baseline promotion until a fresh execution is available.
+    A successful run whose run SHA differs from the current baseline is valid
+    historical execution evidence. A run that is current but whose artifact SHA
+    differs is an artifact-integrity failure, not stale execution. Missing identity
+    values are invalid evidence rather than an execution result.
     """
     if not execution_passed:
         return "EXECUTION_FAILED"
-    if run_sha == baseline_sha and artifact_sha == baseline_sha:
-        return "VALID_CURRENT_EXECUTION"
-    return "VALID_EXECUTION_STALE_BASELINE"
+    if not baseline_sha or not run_sha:
+        return "IDENTITY_EVIDENCE_MISSING"
+    if run_sha != baseline_sha:
+        return "VALID_EXECUTION_STALE_BASELINE"
+    if not artifact_sha:
+        return "ARTIFACT_EVIDENCE_MISSING"
+    if artifact_sha != run_sha:
+        return "ARTIFACT_IDENTITY_MISMATCH"
+    return "VALID_CURRENT_EXECUTION"
 
 
 def build_report(base: str, head: str) -> dict[str, object]:
@@ -93,7 +100,7 @@ def build_report(base: str, head: str) -> dict[str, object]:
     else:
         overall = "MAPPED"
     return {
-        "schema": "P6-CI-IMPACT-CORRELATION/v2",
+        "schema": "P6-CI-IMPACT-CORRELATION/v3",
         "base": base,
         "head": head,
         "changed_path_count": len(paths),
