@@ -40,6 +40,10 @@ The required proof remains:
 
 The latest boot checkpoint `EJR-266` confirms that no qualifying P6 execution evidence was available through the current connector surface and that historical Full-Stack evidence predating P6 Build-02 cannot be reused.
 
+## Connector Capability Clarification
+
+A controlled repository write/delete test was executed on `main` during the current session and both operations succeeded, proving that the GitHub connector can mutate repository files. The temporary diagnostic file was immediately removed. This confirms that the current blocker is **not repository write connectivity**; the remaining limitation is authoritative GitHub Actions dispatch/execution evidence for the current HEAD.
+
 ## Decision
 
 No relationship promotion, canonical Runtime mutation, or semantic closure is authorized by this addendum.
@@ -49,6 +53,8 @@ No relationship promotion, canonical Runtime mutation, or semantic closure is au
 **Current-state addenda are preferable to rewriting a large canonical record when the available read surface cannot guarantee complete content preservation.**
 
 **Evidence corrections must narrow stale language without erasing historical queue evidence.**
+
+**Repository write capability and workflow-dispatch capability are separate evidence surfaces and must not be conflated.**
 
 ## Next Safe Step
 
