@@ -80,7 +80,9 @@ def validate_matrix_text(text: str) -> list[str]:
     evidence_present = bool(
         re.search(r"Post[- ](?:write )?read[- ]?back|Post-commit read-back|Post-commit reconciliation", text, re.IGNORECASE)
     )
-    unexpected_present = bool(re.search(r"Unexpected Changes|UNEXPECTED changes|UNEXPECTED CHANGES", text))
+    unexpected_present = bool(
+        re.search(r"Unexpected Changes|UNEXPECTED changes|UNEXPECTED CHANGES|UNEXPECTED_(?:ADDITIONS|DELETIONS)", text)
+    )
 
     if not keep_present:
         errors.append("missing KEEP preservation language")
