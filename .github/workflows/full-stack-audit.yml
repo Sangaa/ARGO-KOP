@@ -83,27 +83,21 @@ jobs:
           python - <<'PY'
           from check_mutation_matrix_semantics import validate_matrix_text
           from pathlib import Path
-          valid = '''# MUTATION MATRIX — TEST
-Transaction ID: `MUT-TEST-001`
-Protocol: GOV-014 v1.0.1
-
-| Change ID | Target | Action | Expected Content | Applied | Verified |
-|---|---|---|---|:---:|:---:|
-| TEST-001 | `Engine/ENG-TEST.md` | UPDATE | bounded test change | N | N |
-
-## KEEP REQUIREMENT
-
-All other content is `KEEP`.
-
-## Execution Evidence
-
-- Post-write read-back completed.
-- Unexpected Changes = 0.
-
-## Closure
-
-`TEST TRANSACTION = CONTROLLED`.
-'''
+          valid = (
+              '# MUTATION MATRIX — TEST\n'
+              'Transaction ID: `MUT-TEST-001`\n'
+              'Protocol: GOV-014 v1.0.1\n\n'
+              '| Change ID | Target | Action | Expected Content | Applied | Verified |\n'
+              '|---|---|---|---|:---:|:---:|\n'
+              '| TEST-001 | `Engine/ENG-TEST.md` | UPDATE | bounded test change | N | N |\n\n'
+              '## KEEP REQUIREMENT\n\n'
+              'All other content is `KEEP`.\n\n'
+              '## Execution Evidence\n\n'
+              '- Post-write read-back completed.\n'
+              '- Unexpected Changes = 0.\n\n'
+              '## Closure\n\n'
+              '`TEST TRANSACTION = CONTROLLED`.\n'
+          )
           invalid = valid.replace('| TEST-001 | `Engine/ENG-TEST.md` | UPDATE | bounded test change | N | N |', '| TEST-001 | `Engine/ENG-TEST.md` | UPDATE | bounded test change | MAYBE | N |')
           assert validate_matrix_text(valid) == []
           assert any('Applied must be Y or N' in e for e in validate_matrix_text(invalid))
