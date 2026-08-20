@@ -14,7 +14,10 @@ def _heading_exists(text: str, heading: str) -> bool:
 
 def validate_matrix_text(text: str) -> list[str]:
     errors: list[str] = []
-    if not re.search(r"^#\s+MUTATION MATRIX\b", text, re.MULTILINE | re.IGNORECASE):
+    # Governed matrices may use a domain/prefix before the canonical phrase,
+    # e.g. '# REP-001 MUTATION MATRIX'. Do not require the phrase to begin
+    # immediately after the markdown heading marker.
+    if not re.search(r"^#\s+(?:.*\s+)?MUTATION MATRIX\b", text, re.MULTILINE | re.IGNORECASE):
         errors.append("missing MUTATION MATRIX title")
     if not re.search(r"^Transaction ID:\s*`MUT-[^`]+`", text, re.MULTILINE):
         errors.append("missing valid Transaction ID")
