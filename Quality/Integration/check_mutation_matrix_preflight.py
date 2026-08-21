@@ -18,6 +18,7 @@ EXEMPT_PREFIXES = (
     "Templates/",
     ".github/",
     "Docs/",
+    "Memory/Engineering_Journal/",
 )
 CANONICAL_PREFIXES = (
     "Engine/",
