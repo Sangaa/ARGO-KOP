@@ -1,4 +1,0 @@
-ARGO KOP external GitHub channel probe.
-Purpose: verify connector write capability only.
-Probe ID: GH-CHANNEL-PROBE-20260821-01
-No ARGO production logic or governance artifact.
