@@ -1,6 +1,20 @@
-"""Regression tests for the P6 CI-impact correlation helper."""
+"""Regression tests for the P6 CI-impact correlation helper.
+
+These are controlled synthetic tests. Canonical repository behavior is covered
+separately by test_p6_canonical_repository.py.
+"""
 
 from ci_impact_correlation import classify_execution_evidence, correlate_paths
+
+
+SYNTHETIC_SCOPE = """
+| Path Class | P6 Scope | Authority | Evidence | Correlation Rule |
+|---|---|---|---|---|
+| `Engine/**` | `IN_SCOPE` | synthetic-test-authority | fixture | test |
+| `Runtime/**` | `IN_SCOPE` | synthetic-test-authority | fixture | test |
+| `Docs/**` | `OUT_OF_SCOPE` | synthetic-test-authority | fixture | test |
+| `EJR/**` | `UNRESOLVED` | synthetic-governance-gap | fixture | test |
+"""
 
 
 def test_direct_matrix_mapping_is_reported_without_promotion() -> None:
@@ -8,34 +22,57 @@ def test_direct_matrix_mapping_is_reported_without_promotion() -> None:
         ["Engine/ENG-006_EXECUTION_ENGINE.md"],
         "| ENG-001 | `Engine/ENG-006_EXECUTION_ENGINE.md` | SRV-009 |",
         "",
+        SYNTHETIC_SCOPE,
     )
     assert records[0]["status"] == "MAPPED"
     assert records[0]["promotion"] == "NO_AUTO_PROMOTION"
     assert records[0]["matrix_evidence"]
 
 
-def test_unmapped_path_is_explicit_not_inferred() -> None:
+def test_in_scope_without_mapping_remains_unmapped() -> None:
+    records = correlate_paths(
+        ["Engine/NewFile.md"],
+        "| REL-001 | `Known/File.md` |",
+        "| REL-001 | `Known/Other.md` |",
+        SYNTHETIC_SCOPE,
+    )
+    assert records[0]["eligibility"] == "IN_SCOPE"
+    assert records[0]["status"] == "UNMAPPED"
+    assert records[0]["promotion"] == "NO_AUTO_PROMOTION"
+
+
+def test_out_of_scope_is_not_applicable_not_unmapped() -> None:
+    records = correlate_paths(
+        ["Docs/NewFile.md"],
+        "| REL-001 | `Docs/NewFile.md` |",
+        "| REL-002 | `Docs/NewFile.md` |",
+        SYNTHETIC_SCOPE,
+    )
+    assert records[0]["eligibility"] == "OUT_OF_SCOPE"
+    assert records[0]["status"] == "NOT_APPLICABLE"
+
+
+def test_unresolved_is_policy_unresolved_not_unmapped() -> None:
+    records = correlate_paths(
+        ["EJR/EJR-001.md"],
+        "| REL-001 | `EJR/EJR-001.md` |",
+        "| REL-002 | `EJR/EJR-001.md` |",
+        SYNTHETIC_SCOPE,
+    )
+    assert records[0]["eligibility"] == "UNRESOLVED"
+    assert records[0]["status"] == "POLICY_UNRESOLVED"
+    assert records[0]["promotion"] == "NO_AUTO_PROMOTION"
+
+
+def test_unknown_path_is_unresolved_not_an_implicit_mapping_failure() -> None:
     records = correlate_paths(
         ["Unknown/NewFile.md"],
         "| REL-001 | `Known/File.md` |",
         "| REL-001 | `Known/Other.md` |",
+        SYNTHETIC_SCOPE,
     )
-    assert records[0]["status"] == "UNMAPPED"
-    assert records[0]["matrix_evidence"] == []
-    assert records[0]["relationship_evidence"] == []
-    assert records[0]["promotion"] == "NO_AUTO_PROMOTION"
-
-
-def test_same_basename_does_not_create_false_mapping() -> None:
-    records = correlate_paths(
-        ["Runtime/NewFile.md"],
-        "| REL-001 | `Repository/NewFile.md` |",
-        "| REL-002 | `Docs/NewFile.md` |",
-    )
-    assert records[0]["status"] == "UNMAPPED"
-    assert records[0]["matrix_evidence"] == []
-    assert records[0]["relationship_evidence"] == []
-    assert records[0]["promotion"] == "NO_AUTO_PROMOTION"
+    assert records[0]["eligibility"] == "UNRESOLVED"
+    assert records[0]["status"] == "POLICY_UNRESOLVED"
 
 
 def test_successful_stale_run_is_valid_execution_not_execution_failure() -> None:
@@ -82,8 +119,10 @@ def test_failed_run_remains_execution_failure() -> None:
 
 if __name__ == "__main__":
     test_direct_matrix_mapping_is_reported_without_promotion()
-    test_unmapped_path_is_explicit_not_inferred()
-    test_same_basename_does_not_create_false_mapping()
+    test_in_scope_without_mapping_remains_unmapped()
+    test_out_of_scope_is_not_applicable_not_unmapped()
+    test_unresolved_is_policy_unresolved_not_unmapped()
+    test_unknown_path_is_unresolved_not_an_implicit_mapping_failure()
     test_successful_stale_run_is_valid_execution_not_execution_failure()
     test_successful_exact_sha_chain_is_current_execution()
     test_current_run_with_mismatched_artifact_is_not_current_execution()
