@@ -21,6 +21,14 @@ def test_documentation_only_is_exempt():
     assert matrices == []
 
 
+def test_nested_engineering_journal_is_exempt():
+    protected, matrices = evaluate(
+        ["Memory/Engineering_Journal/EJR-TEST.md", "Memory/Engineering_Journal/EJR-TEST-2.md"]
+    )
+    assert protected == []
+    assert matrices == []
+
+
 def test_matrix_only_is_exempt():
     protected, matrices = evaluate(["Repository/MUT-TEST_MUTATION_MATRIX.md"])
     assert protected == []
