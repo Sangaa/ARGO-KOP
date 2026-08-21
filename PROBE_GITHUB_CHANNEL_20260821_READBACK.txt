@@ -1,0 +1,2 @@
+ARGO KOP external GitHub channel probe read-back marker.
+Probe ID: GH-CHANNEL-PROBE-20260821-01
