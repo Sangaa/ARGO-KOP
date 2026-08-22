@@ -6,9 +6,22 @@ rules. Live CI evidence remains outside this domain layer.
 Important boundary: an empty observation result and an unavailable/rejected
 observation surface are different states. The engine must not collapse a
 connector capability failure into ``NO_OBSERVATION``.
+
+Observation-state provenance is explicit: callers must state whether evidence
+was observed, whether the query legitimately returned an empty set, or whether
+the observation surface was unavailable/rejected. This prevents adapters from
+silently converting capability failures into repository claims.
 """
 
 from dataclasses import dataclass
+
+
+OBSERVATION_STATES = {
+    "OBSERVED",
+    "EMPTY_RESULT",
+    "SURFACE_UNAVAILABLE",
+    "SURFACE_REJECTED",
+}
 
 
 @dataclass(frozen=True)
