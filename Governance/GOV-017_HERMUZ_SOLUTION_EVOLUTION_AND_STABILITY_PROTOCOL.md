@@ -14,7 +14,44 @@
 7. **Uncertainty is local unless evidence establishes a causal connection to other decisions.**
 8. **Do not reopen old decisions merely because they are old, untested, or improvable in theory.**
 
-## 2. Solution State
+## 2. Universal Law & Effect Principle
+
+**ARGO Law — No Effect Without Governing Regularity:**
+
+> **No observed effect is to be treated as lawless or causeless merely because ARGO does not yet know the governing law, mechanism, or relationship. Every observed effect is presumed to have an underlying governing regularity in reality; the current unknown is ARGO's knowledge of it, not the existence of the regularity itself.**
+
+This is an epistemic operating law, not a claim that ARGO already knows the explanation of every phenomenon. It therefore imposes the following discipline:
+
+1. When an effect is observed, first separate **observation** from **interpretation**.
+2. Ask what mechanism, relationship, constraint, or law could govern the effect.
+3. Search for patterns, correlations, causal relationships, and cross-domain analogues.
+4. Design the smallest useful experiment capable of distinguishing competing explanations.
+5. If the governing explanation is discovered, record the law/pattern, evidence, scope, and confidence.
+6. If it remains unexplained, record it explicitly as a **Mystery / Unresolved Effect** rather than forcing an explanation.
+7. Revisit unresolved effects after each **material ARGO capability, knowledge, architectural, or methodological development** when there is a plausible reason the new capability can reduce the uncertainty.
+8. Do not repeatedly reopen an unresolved effect without a new capability, evidence, hypothesis, or relevant change; this is the anti-loop boundary.
+
+### Mystery Record Minimum
+
+Every retained unexplained effect should record:
+
+- `Effect ID`
+- observation and exact context
+- date / checkpoint
+- known inputs and observed outputs
+- what was expected versus what occurred
+- tested explanations
+- rejected explanations and evidence
+- current unknowns
+- relevant cross-domain patterns considered
+- next trigger for reconsideration
+- current confidence / evidence level
+
+### Important Boundary
+
+The principle does **not** authorize inventing a law merely because an effect exists. The correct state may remain `UNKNOWN` until evidence supports a model. "Unknown law" means **unknown to ARGO**, not "without a law".
+
+## 3. Solution State
 
 Every material solution may carry a maturity record:
 
@@ -26,7 +63,7 @@ Every material solution may carry a maturity record:
 
 A solution is never labeled `OPTIMAL` merely because it passed one test.
 
-## 3. Improvement Ledger
+## 4. Improvement Ledger
 
 Each meaningful improvement records:
 
@@ -50,7 +87,7 @@ Example:
 
 The number of improvements is **historical evidence**, not a quality score by itself.
 
-## 4. Fitness Before Optimization
+## 5. Fitness Before Optimization
 
 Before rejecting a practical solution because a better theoretical solution may exist, determine:
 
@@ -62,7 +99,7 @@ Before rejecting a practical solution because a better theoretical solution may 
 
 If yes, the solution may be implemented as `PRACTICAL-NOW` while retaining an improvement marker.
 
-## 5. Anti-Loop Gate
+## 6. Anti-Loop Gate
 
 Before another optimization cycle, HERMUZ must state:
 
@@ -73,7 +110,7 @@ Before another optimization cycle, HERMUZ must state:
 
 If no material weakness or measurable benefit is identified, optimization should pause.
 
-## 6. Targeted Decision Reconsideration Gate
+## 7. Targeted Decision Reconsideration Gate
 
 When prior learning and available solution patterns have been exhausted without resolving the current problem, HERMUZ may reconsider selected prior decisions **only when the decision is materially relevant to the current problem**.
 
@@ -113,11 +150,11 @@ A reviewed decision may be:
 
 Targeted reconsideration is a diagnostic resource, **not a standing mandate to doubt all prior decisions**.
 
-## 7. Simulation Requirement
+## 8. Simulation Requirement
 
 For material architectural/build solutions, GOV-016 simulation/effect analysis should be used before implementation when feasible. Unexpected effects trigger model review rather than automatic rejection.
 
-## 8. Evolution as Learning Evidence
+## 9. Evolution as Learning Evidence
 
 The evolution ledger is also a learning instrument. Comparing solution iterations over time can reveal:
 
@@ -129,14 +166,14 @@ The evolution ledger is also a learning instrument. Comparing solution iteration
 
 However, solution version count must never be treated as a standalone measure of intelligence or progress.
 
-## 9. Authority Boundary
+## 10. Authority Boundary
 
 This protocol does not authorize production mutation by itself and does not override GOV-013, integrity holds, evidence authority, or existing governance contracts.
 
-## 10. Required Closure
+## 11. Required Closure
 
-Every optimization or targeted reconsideration cycle must close with:
+Every optimization, targeted reconsideration, or material unresolved-effect cycle must close with:
 
-`Problem → Prior Learning → Relevance Gate → Baseline/Assumption → Candidate → Simulation/Test → Effects → Decision → Implementation (if authorized) → Verification → Evolution/Reconsideration Record → Stop/Next Trigger`
+`Problem → Prior Learning → Relevance Gate → Baseline/Assumption → Candidate → Simulation/Test → Effects → Law/Pattern or Mystery Record → Decision → Implementation (if authorized) → Verification → Evolution/Reconsideration Record → Stop/Next Trigger`
 
 **Current status: PROPOSED; empirical validation required before canonical promotion.**
