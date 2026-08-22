@@ -1,7 +1,7 @@
 # GOV-017 — HERMUZ Solution Evolution & Stability Protocol
 
 **Status:** PROPOSED — GOVERNANCE REVIEW REQUIRED  
-**Purpose:** Preserve ARGO's principle that solutions remain reviewable and improvable without forcing premature optimization or endless analysis.
+**Purpose:** Preserve ARGO's principle that solutions remain reviewable and improvable without forcing premature optimization, endless analysis, or indiscriminate doubt.
 
 ## 1. Core Principles
 
@@ -11,6 +11,8 @@
 4. **Solve the current real problem first when a safe practical solution exists.**
 5. **Do not optimize indefinitely when the current solution satisfies the actual need.**
 6. **Every meaningful improvement should leave an evolution record.**
+7. **Uncertainty is local unless evidence establishes a causal connection to other decisions.**
+8. **Do not reopen old decisions merely because they are old, untested, or improvable in theory.**
 
 ## 2. Solution State
 
@@ -71,11 +73,51 @@ Before another optimization cycle, HERMUZ must state:
 
 If no material weakness or measurable benefit is identified, optimization should pause.
 
-## 6. Simulation Requirement
+## 6. Targeted Decision Reconsideration Gate
+
+When prior learning and available solution patterns have been exhausted without resolving the current problem, HERMUZ may reconsider selected prior decisions **only when the decision is materially relevant to the current problem**.
+
+A prior decision is eligible for reconsideration only if one or more of the following are evidenced:
+
+- it is causally connected to the current problem;
+- it rests on an assumption now shown to be relevant and insufficiently verified;
+- it has never received a material simulation/test and that missing evidence can affect the current decision;
+- a newly discovered effect creates a concrete reason to revisit it;
+- revisiting it can realistically change the current solution choice.
+
+Before reopening a decision, record:
+
+- Decision ID and original context;
+- exact reason it is relevant now;
+- prior evidence and assumptions;
+- missing/weak evidence;
+- expected value of reconsideration;
+- cost and scope of the review;
+- explicit stop condition.
+
+The unit of review should normally be the **assumption/model that produced the decision**, not the decision label alone. If the assumption survives, the decision remains valid unless new evidence independently changes it.
+
+### Non-propagation rule
+
+An unverified or imperfect decision does **not** make neighboring decisions suspect automatically. Uncertainty must not propagate without evidence of causal relevance.
+
+### Reconsideration outcomes
+
+A reviewed decision may be:
+
+- `CONFIRMED` — prior basis remains adequate;
+- `REFINED` — decision remains but its model/constraints improve;
+- `MODIFIED` — evidence justifies a changed decision;
+- `SUPERSEDED` — a better validated decision replaces it;
+- `INCONCLUSIVE` — evidence remains insufficient and the prior decision is retained with an explicit uncertainty marker.
+
+Targeted reconsideration is a diagnostic resource, **not a standing mandate to doubt all prior decisions**.
+
+## 7. Simulation Requirement
 
 For material architectural/build solutions, GOV-016 simulation/effect analysis should be used before implementation when feasible. Unexpected effects trigger model review rather than automatic rejection.
 
-## 7. Evolution as Learning Evidence
+## 8. Evolution as Learning Evidence
 
 The evolution ledger is also a learning instrument. Comparing solution iterations over time can reveal:
 
@@ -87,14 +129,14 @@ The evolution ledger is also a learning instrument. Comparing solution iteration
 
 However, solution version count must never be treated as a standalone measure of intelligence or progress.
 
-## 8. Authority Boundary
+## 9. Authority Boundary
 
 This protocol does not authorize production mutation by itself and does not override GOV-013, integrity holds, evidence authority, or existing governance contracts.
 
-## 9. Required Closure
+## 10. Required Closure
 
-Every optimization cycle must close with:
+Every optimization or targeted reconsideration cycle must close with:
 
-`Problem → Baseline → Candidate → Simulation/Test → Effects → Decision → Implementation (if authorized) → Verification → Evolution Record → Stop/Next Trigger`
+`Problem → Prior Learning → Relevance Gate → Baseline/Assumption → Candidate → Simulation/Test → Effects → Decision → Implementation (if authorized) → Verification → Evolution/Reconsideration Record → Stop/Next Trigger`
 
 **Current status: PROPOSED; empirical validation required before canonical promotion.**
