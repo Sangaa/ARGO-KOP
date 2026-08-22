@@ -1,0 +1,3 @@
+HERMUZ-BLIND-LAW-PROBE-20260822-Ω17
+Purpose: controlled observation-surface experiment only.
+Expected law: a repository write should create a commit trace and searchable content trace, while commit metadata may require commit-specific observation.
