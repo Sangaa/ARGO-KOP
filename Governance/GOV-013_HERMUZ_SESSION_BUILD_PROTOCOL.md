@@ -6,7 +6,7 @@
 
 Platform: ARGO KOP (Knowledge Operating Platform)
 Document ID: GOV-013
-Version: 1.1.0
+Version: 1.1.1
 Status: Approved / Canonical / Session Operating Contract
 Category: Governance / Engineering Operating Protocol
 Canonical: Yes
@@ -78,6 +78,74 @@ Before starting a task:
 - never repeat completed work without evidence that revalidation is required.
 
 Repository reality outranks conversation memory, prior summaries and previous status claims.
+
+---
+
+## 4A. Mandatory Prior-Learning Retrieval Gate
+
+Before proposing or implementing any new solution to a material problem, the engineer MUST first attempt to recover relevant prior ARGO learning and experience.
+
+The retrieval gate is:
+
+**Problem Definition → Prior-Learning Retrieval → Prior-Evidence Review → Solution Simulation → New-Learning Search only if required**
+
+At minimum, the engineer MUST search for relevant:
+
+1. Engineering Journal / lessons learned / mistakes and prior session evidence.
+2. Existing protocols, rules, matrices, registries and canonical contracts.
+3. Prior implementations, tests, checkpoints, issues or incidents addressing the same or materially similar failure mode.
+
+The search MUST use materially different retrieval methods where available. A direct exact-name search alone is insufficient for a material problem.
+
+### 4A.1 Prior-Learning Classification
+
+Recovered prior knowledge MUST be classified before reuse:
+
+- **DIRECTLY APPLICABLE** — same problem/failure mode and same boundary; may guide the current solution after verification.
+- **TRANSFERABLE** — materially similar mechanism but different context; requires explicit adaptation and revalidation.
+- **HISTORICAL / SUPERSEDED** — useful context but not authoritative for the current state.
+- **CONTRADICTORY / UNRESOLVED** — must not be silently reused; reconcile against current authority/evidence.
+- **NOT FOUND** — retrieval completed but no adequate prior learning was found.
+
+Finding an old artifact is not enough; the engineer MUST verify whether its assumptions, authority, environment and repository state still apply.
+
+### 4A.2 Simulation Before New Learning
+
+When relevant prior learning exists, the engineer MUST perform a bounded mental/design simulation against the current problem before searching for or creating a new solution.
+
+The simulation should answer:
+
+- Does an existing known pattern already explain the failure?
+- What would happen if the prior remedy were applied to the current boundary?
+- What assumptions differ?
+- What evidence is missing to safely reuse it?
+
+If the prior learning resolves the problem, do not invent a new solution.
+
+If it does not resolve the problem, explicitly identify the **remaining gap** before initiating new research or experimentation.
+
+### 4A.3 New-Learning Escalation
+
+Only after the Prior-Learning Retrieval Gate and bounded simulation fail to resolve the problem may the engineer escalate to:
+
+**new evidence search → controlled experiment → new implementation → candidate learning**.
+
+New learning MUST NOT overwrite, duplicate or contradict existing learning merely because the current search path failed to retrieve it.
+
+### 4A.4 Search-Failure Learning
+
+If prior learning is later discovered after a new solution was proposed or tested, classify the event as a **Prior-Learning Retrieval Defect** and determine why retrieval failed:
+
+- indexing/search limitation;
+- query/path/identifier mismatch;
+- semantic mismatch;
+- pagination/truncation;
+- branch/ref mismatch;
+- repository placement problem;
+- connector/tool coverage limitation;
+- failure to search the correct canonical learning surface.
+
+If repeatable and materially useful, promote the retrieval lesson through the Learning Promotion Gate rather than treating it as a one-off observation.
 
 ---
 
@@ -259,6 +327,10 @@ Permanent promotion requires evidence that the learning is:
 - assigned to the correct canonical learning location;
 - reviewed and documented with provenance.
 
+The Prior-Learning Retrieval Gate in §4A is mandatory before declaring a material learning genuinely new.
+
+If prior learning exists, the preferred action is to strengthen/reuse the existing canonical learning rather than create a duplicate artifact.
+
 Otherwise record it as session evidence/candidate learning only.
 
 ---
@@ -358,6 +430,8 @@ The deterministic resolution path is:
 
 → `REP-020 / Engineering Journal / Matrices / Integration-Test State`
 
+→ `Prior-Learning Retrieval Gate`
+
 → `Highest-Priority Safe Continuation`
 
 This path makes the phrase a stable operational command while preserving current-repository authority.
@@ -382,7 +456,7 @@ When a new chat receives:
 
 it must interpret this as:
 
-> **Resume ARGO KOP construction from the current repository state, load the canonical HERMUZ operating contract, inspect the latest verified checkpoint and open work, recover and continue any previously interrupted integration-testing work, apply three-method negative-search verification, preserve evidence/authority/relationship boundaries, perform integration verification in parallel with Matrix construction for every material module and cross-layer seam, make only safe evidence-backed mutations, update the required matrices, validate every change, promote learning only when justified, and continue automatically to the highest-priority safe task until a real blocker, explicit closure request, or exhaustion of safe high-priority work.**
+> **Resume ARGO KOP construction from the current repository state, load the canonical HERMUZ operating contract, inspect the latest verified checkpoint and open work, recover and continue any previously interrupted integration-testing work, retrieve and review relevant prior ARGO learning before designing a new solution, simulate applicable prior remedies against the current problem, escalate to new research only after prior learning fails to resolve the verified gap, apply three-method negative-search verification, preserve evidence/authority/relationship boundaries, perform integration verification in parallel with Matrix construction for every material module and cross-layer seam, make only safe evidence-backed mutations, update the required matrices, validate every change, promote learning only when justified, and continue automatically to the highest-priority safe task until a real blocker, explicit closure request, or exhaustion of safe high-priority work.**
 
 ---
 
