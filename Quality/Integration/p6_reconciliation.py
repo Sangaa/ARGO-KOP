@@ -7,10 +7,11 @@ Important boundary: an empty observation result and an unavailable/rejected
 observation surface are different states. The engine must not collapse a
 connector capability failure into ``NO_OBSERVATION``.
 
-Observation-state provenance is explicit: callers must state whether evidence
-was observed, whether the query legitimately returned an empty set, or whether
-the observation surface was unavailable/rejected. This prevents adapters from
-silently converting capability failures into repository claims.
+Observation-state provenance is explicit and mandatory: callers must state
+whether evidence was observed, whether the query legitimately returned an
+empty set, or whether the observation surface was unavailable/rejected. This
+prevents adapters from silently converting capability failures into repository
+claims.
 """
 
 from dataclasses import dataclass
@@ -30,7 +31,7 @@ class Evidence:
     head_sha: str | None
     artifact_sha: str | None
     result: str
-    observation_state: str = "OBSERVED"
+    observation_state: str
 
 
 class P6ReconciliationEngine:
