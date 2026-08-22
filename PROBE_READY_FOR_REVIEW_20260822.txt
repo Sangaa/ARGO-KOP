@@ -1,0 +1,4 @@
+External diagnostic probe only.
+Tests whether a real changed-file PR transitioning from draft to ready-for-review affects Actions observability.
+No ARGO production logic.
+Probe ID: GH-ACTIONS-BOUNDARY-20260822-02
