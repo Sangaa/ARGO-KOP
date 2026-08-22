@@ -2,6 +2,10 @@
 
 Test modules should consume this component rather than duplicate reconciliation
 rules. Live CI evidence remains outside this domain layer.
+
+Important boundary: an empty observation result and an unavailable/rejected
+observation surface are different states. The engine must not collapse a
+connector capability failure into ``NO_OBSERVATION``.
 """
 
 from dataclasses import dataclass
@@ -13,12 +17,19 @@ class Evidence:
     head_sha: str | None
     artifact_sha: str | None
     result: str
+    observation_state: str = "OBSERVED"
 
 
 class P6ReconciliationEngine:
     """Apply P6 evidence boundaries in a deterministic order."""
 
     def reconcile(self, evidence: Evidence, expected_sha: str) -> str:
+        if evidence.observation_state == "SURFACE_UNAVAILABLE":
+            return "OBSERVATION_SURFACE_UNAVAILABLE"
+        if evidence.observation_state == "SURFACE_REJECTED":
+            return "OBSERVATION_SURFACE_REJECTED"
+        if evidence.observation_state not in {"OBSERVED", "EMPTY_RESULT"}:
+            return "OBSERVATION_STATE_UNKNOWN"
         if evidence.run_id is None:
             return "NO_OBSERVATION"
         if evidence.result != "PASS":
