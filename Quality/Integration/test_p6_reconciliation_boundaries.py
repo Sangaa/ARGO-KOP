@@ -29,6 +29,10 @@ class P6ReconciliationBoundaryTests(unittest.TestCase):
     def test_p6_09_first_failure_boundary_is_preserved(self) -> None:
         cases = [
             (Evidence(None, None, None, "PASS"), "NO_OBSERVATION"),
+            (Evidence(None, None, None, "PASS", "EMPTY_RESULT"), "NO_OBSERVATION"),
+            (Evidence(None, None, None, "PASS", "SURFACE_UNAVAILABLE"), "OBSERVATION_SURFACE_UNAVAILABLE"),
+            (Evidence(None, None, None, "PASS", "SURFACE_REJECTED"), "OBSERVATION_SURFACE_REJECTED"),
+            (Evidence(None, None, None, "PASS", "UNKNOWN_STATE"), "OBSERVATION_STATE_UNKNOWN"),
             (Evidence("r1", None, None, "PASS"), "IDENTITY_EVIDENCE_MISSING"),
             (Evidence("r1", "sha1", None, "PASS"), "ARTIFACT_EVIDENCE_MISSING"),
             (Evidence("r1", "sha1", "old", "PASS"), "ARTIFACT_IDENTITY_MISMATCH"),
@@ -43,6 +47,14 @@ class P6ReconciliationBoundaryTests(unittest.TestCase):
         self.assertNotEqual(
             self.engine.reconcile(evidence, "sha1"), "VALID_CURRENT_EXECUTION"
         )
+
+    def test_p6_never_collapses_surface_failure_into_no_observation(self) -> None:
+        for state in ("SURFACE_UNAVAILABLE", "SURFACE_REJECTED"):
+            with self.subTest(state=state):
+                evidence = Evidence(None, None, None, "PASS", state)
+                self.assertNotEqual(
+                    self.engine.reconcile(evidence, "sha1"), "NO_OBSERVATION"
+                )
 
 
 if __name__ == "__main__":
