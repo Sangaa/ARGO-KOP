@@ -6,12 +6,23 @@ scenario coverage and an explicit stdlib test-runner entry point.
 
 import unittest
 
-from p6_reconciliation import Evidence, P6ReconciliationEngine
+from p6_reconciliation import Evidence, P6ReconciliationEngine, OBSERVATION_STATES
 
 
 class P6ReconciliationBoundaryTests(unittest.TestCase):
     def setUp(self) -> None:
         self.engine = P6ReconciliationEngine()
+
+    def test_observation_state_vocabulary_is_explicit(self) -> None:
+        self.assertEqual(
+            OBSERVATION_STATES,
+            {
+                "OBSERVED",
+                "EMPTY_RESULT",
+                "SURFACE_UNAVAILABLE",
+                "SURFACE_REJECTED",
+            },
+        )
 
     def test_p6_08_current_execution_is_evidence_bearing(self) -> None:
         evidence = Evidence("r1", "sha1", "sha1", "PASS")
