@@ -25,13 +25,13 @@ class P6ReconciliationBoundaryTests(unittest.TestCase):
         )
 
     def test_p6_08_current_execution_is_evidence_bearing(self) -> None:
-        evidence = Evidence("r1", "sha1", "sha1", "PASS")
+        evidence = Evidence("r1", "sha1", "sha1", "PASS", "OBSERVED")
         self.assertEqual(
             self.engine.reconcile(evidence, "sha1"), "VALID_CURRENT_EXECUTION"
         )
 
     def test_p6_08_stale_execution_is_not_current(self) -> None:
-        evidence = Evidence("r1", "old", "old", "PASS")
+        evidence = Evidence("r1", "old", "old", "PASS", "OBSERVED")
         self.assertEqual(
             self.engine.reconcile(evidence, "sha1"),
             "VALID_EXECUTION_STALE_BASELINE",
@@ -39,22 +39,26 @@ class P6ReconciliationBoundaryTests(unittest.TestCase):
 
     def test_p6_09_first_failure_boundary_is_preserved(self) -> None:
         cases = [
-            (Evidence(None, None, None, "PASS"), "NO_OBSERVATION"),
+            (Evidence(None, None, None, "PASS", "OBSERVED"), "NO_OBSERVATION"),
             (Evidence(None, None, None, "PASS", "EMPTY_RESULT"), "NO_OBSERVATION"),
             (Evidence(None, None, None, "PASS", "SURFACE_UNAVAILABLE"), "OBSERVATION_SURFACE_UNAVAILABLE"),
             (Evidence(None, None, None, "PASS", "SURFACE_REJECTED"), "OBSERVATION_SURFACE_REJECTED"),
             (Evidence(None, None, None, "PASS", "UNKNOWN_STATE"), "OBSERVATION_STATE_UNKNOWN"),
-            (Evidence("r1", None, None, "PASS"), "IDENTITY_EVIDENCE_MISSING"),
-            (Evidence("r1", "sha1", None, "PASS"), "ARTIFACT_EVIDENCE_MISSING"),
-            (Evidence("r1", "sha1", "old", "PASS"), "ARTIFACT_IDENTITY_MISMATCH"),
-            (Evidence("r1", "sha1", "sha1", "FAIL"), "EXECUTION_FAILED"),
+            (Evidence("r1", None, None, "PASS", "OBSERVED"), "IDENTITY_EVIDENCE_MISSING"),
+            (Evidence("r1", "sha1", None, "PASS", "OBSERVED"), "ARTIFACT_EVIDENCE_MISSING"),
+            (Evidence("r1", "sha1", "old", "PASS", "OBSERVED"), "ARTIFACT_IDENTITY_MISMATCH"),
+            (Evidence("r1", "sha1", "sha1", "FAIL", "OBSERVED"), "EXECUTION_FAILED"),
         ]
         for evidence, expected in cases:
             with self.subTest(expected=expected):
                 self.assertEqual(self.engine.reconcile(evidence, "sha1"), expected)
 
+    def test_p6_evidence_requires_explicit_observation_state(self) -> None:
+        with self.assertRaises(TypeError):
+            Evidence("r1", "sha1", "sha1", "PASS")
+
     def test_p6_never_promotes_stale_execution(self) -> None:
-        evidence = Evidence("r1", "old", "old", "PASS")
+        evidence = Evidence("r1", "old", "old", "PASS", "OBSERVED")
         self.assertNotEqual(
             self.engine.reconcile(evidence, "sha1"), "VALID_CURRENT_EXECUTION"
         )
