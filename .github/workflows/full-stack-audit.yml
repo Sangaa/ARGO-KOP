@@ -70,6 +70,9 @@ jobs:
       - name: Run P6 reconciliation boundary regressions via unittest discovery
         run: python -m unittest discover -s Quality/Integration -p 'test_p6_reconciliation_boundaries.py' -v
 
+      - name: Run P6 controlled runtime lineage adapter regression
+        run: python Quality/Integration/test_p6_runtime_lineage_adapter.py
+
       - name: Run Mutation Matrix preflight regression
         run: |
           python - <<'PY'
