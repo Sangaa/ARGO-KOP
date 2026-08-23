@@ -52,6 +52,17 @@ def classify(a: EvidenceObservation, b: EvidenceObservation) -> str:
     return "CONTRADICTION"
 
 
+def classify_execution_occurrence(capability: EvidenceObservation, occurrence: EvidenceObservation) -> str:
+    """Prevent channel capability from certifying occurrence on another execution identity."""
+    if capability.claim_type != "EXECUTION" or occurrence.claim_type != "EXECUTION":
+        return "UNRESOLVED"
+    if capability.semantic_status != "VERIFIED_CAPABILITY":
+        return "UNRESOLVED"
+    if occurrence.semantic_status == "VERIFIED_OCCURRENCE":
+        return "VERIFIED_OCCURRENCE"
+    return "UNRESOLVED"
+
+
 def resolve_by_authority(a: EvidenceObservation, b: EvidenceObservation) -> Optional[str]:
     if classify(a, b) != "CONTRADICTION":
         return None
@@ -187,3 +198,57 @@ def test_missing_execution_identity_is_unresolved_not_failure():
     )
 
     assert classify(unavailable, asserted_failure) == "UNRESOLVED"
+
+
+def test_verified_capability_does_not_promote_unrelated_occurrence():
+    common = dict(
+        claim_id="execution-channel",
+        claim_type="EXECUTION",
+        proposition="execution evidence channel",
+        target_id="ARGO-KOP",
+        scope="repository",
+        temporal_context="2026-08-23",
+        evidence_layer="EXECUTION_SURFACE",
+        source_ref="github:historical-run",
+        authority_scope="FACTUAL",
+        claim_fitness="DIRECT",
+        identity_confidence="HIGH",
+        evidence_independence="CORRELATED",
+        completeness="COMPLETE",
+        observed_value="AVAILABLE",
+    )
+    capability = EvidenceObservation(
+        evidence_id="cap-1", semantic_status="VERIFIED_CAPABILITY", **common
+    )
+    current = EvidenceObservation(
+        evidence_id="occ-1", semantic_status="UNRESOLVED", **{**common, "source_ref": "github:current-commit", "observed_value": "EXECUTION_ID_UNAVAILABLE"}
+    )
+
+    assert classify_execution_occurrence(capability, current) == "UNRESOLVED"
+
+
+def test_verified_occurrence_requires_explicit_occurrence_evidence():
+    common = dict(
+        claim_id="execution-channel",
+        claim_type="EXECUTION",
+        proposition="execution evidence channel",
+        target_id="ARGO-KOP",
+        scope="repository",
+        temporal_context="2026-08-23",
+        evidence_layer="EXECUTION_SURFACE",
+        source_ref="github:current-commit",
+        authority_scope="FACTUAL",
+        claim_fitness="DIRECT",
+        identity_confidence="HIGH",
+        evidence_independence="CORRELATED",
+        completeness="COMPLETE",
+        observed_value="EXECUTED",
+    )
+    capability = EvidenceObservation(
+        evidence_id="cap-2", semantic_status="VERIFIED_CAPABILITY", **common
+    )
+    occurrence = EvidenceObservation(
+        evidence_id="occ-2", semantic_status="VERIFIED_OCCURRENCE", **common
+    )
+
+    assert classify_execution_occurrence(capability, occurrence) == "VERIFIED_OCCURRENCE"
