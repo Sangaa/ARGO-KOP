@@ -104,6 +104,28 @@ Reuse rule: when a Git object is required for evidence, use a verified full SHA 
 Training classification: ERROR / INPUT-VALIDATION; no repository mutation.
 Canonical mutation involved: NO.
 
+### GT-007C — Blob and ref-bound file retrieval
+Operation: `fetch_blob`
+Target: verified blob SHA `ddcfe4770e51a34a25a57f01936a84225e5208f1` for the current EJR-317 content.
+Observed behavior: the connector returned the stored blob content successfully.
+Interpretation: `fetch_blob` can retrieve Git blob content when supplied a verified blob SHA. It is a lower-level object read than path-based file retrieval and does not require a guessed repository path once the blob identity is known.
+Reuse rule: use `fetch_blob` when object-level identity is already established; do not infer a blob SHA from a filename.
+Training classification: READ + GIT-OBJECT; no repository mutation.
+Canonical mutation involved: NO.
+
+### GT-007C-REF — Ref-bound file retrieval
+Operation: `fetch_file`
+Target: `PROJECT_STATUS.md` at commit ref `f4db8043cbf5129452fd4270f25ea8d9dce7f870`.
+Observed behavior: the connector resolved the file at the exact commit ref and returned its content plus file blob SHA `fc58dc781a189f145f37e5df240e19fe54e803fb`.
+Interpretation: `fetch_file` can bind content retrieval to an explicit commit ref, allowing point-in-time reading without relying on the moving default branch.
+Reuse rule: when evidence must be tied to a precise repository state, provide a verified commit ref rather than implicitly reading the moving default branch.
+Training classification: READ + REF-BOUND; no repository mutation.
+Canonical mutation involved: NO.
+
+### GT-007C-LIMIT — Tree/ref exposure boundary
+Observation: no dedicated tree-list/ref-inspection operation was exposed in the currently loaded session surface during this unit. Tree creation and ref-update operations exist as mutation capabilities but were not used for training.
+Interpretation: capability inventory must distinguish an operation's existence in the connector catalog from its being loaded/exposed to the current model/session. Read-only training should not mutate Git trees or refs merely to learn their semantics.
+
 ## 4. Preliminary behavioral laws
 
 1. Repository access does not imply Actions execution observability.
@@ -114,6 +136,11 @@ Canonical mutation involved: NO.
 6. Repository search is discovery, not authoritative content; exact file retrieval must establish the content and SHA before state claims are reused.
 7. Commit comparison can establish Git-ref identity and change lineage, but it is not an execution-evidence channel.
 8. Invalid or partial object identifiers must be classified as connector input behavior, not repository absence.
+9. A verified blob SHA permits object-level content retrieval without path discovery.
+10. A path plus verified commit ref provides point-in-time repository evidence.
+11. Default-branch reads and ref-bound reads are different evidence modes and must not be conflated.
+12. Tool catalog availability, loaded tool availability, and callable session exposure are separate states.
+13. Mutation-capable Git object operations are not required to learn read semantics; training should prefer read-only paths.
 
 ## 5. Training still required
 
@@ -138,7 +165,7 @@ First complete the connector capability training and test the independent eviden
 
 ## 7. Next task
 
-`GT-007C — Train blob/tree/ref read surfaces using verified Git objects.`
+`GT-007D — Train Pull Request lineage and review/read surfaces, then map PR evidence against commit-bound Git evidence.`
 
 Required order:
 
