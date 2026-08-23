@@ -71,6 +71,21 @@ Learning:
 3. A tool-argument validation error is different from a provider HTTP error and different from endpoint absence.
 4. After a schema rejection, retry with a schema-valid representation only; do not infer provider behavior from the invalid call.
 
+## GT-011A — General error taxonomy and Actions ID dependency
+
+Training objective: classify error/result semantics without using P6 as the selection criterion.
+
+Read-only observations:
+- `get_commit_combined_status` on a known ARGO commit returned `statuses=[]`. This is a successful empty result and must not be classified as endpoint absence, provider failure, or proof that no CI execution exists.
+- A historical Issue #21 comment records that an exact public workflow-run URL can be read when a valid run_id is already known, and that specialized workflow-job and job-log readers work with valid run/job IDs. It also records that no valid ARGO run_id had been recovered through the then-available discovery path. This establishes an ID-dependent downstream observation model, not non-existence of runs. 
+- A deliberately cross-repository job lookup using a known run ID from a public control repository against `Sangaa/ARGO-KOP` returned provider `404 Not Found`. This was not promoted to "tool missing" or "run absent" because the run ID did not belong to ARGO-KOP. It is retained as a negative boundary example showing that resource identity must be validated before interpreting a 404.
+
+Classification model reinforced:
+`tool schema rejection` ≠ `connector allowlist rejection` ≠ `provider 4xx` ≠ `resource 404` ≠ `successful empty result`.
+
+Important refinement:
+A valid downstream Actions reader does not imply that the connector can discover a run ID. Conversely, failure to discover a run ID does not imply downstream readers are absent.
+
 ## Cross-operation behavioral laws
 
 1. Search result sets are bounded observations unless pagination/exhaustion is established.
@@ -80,26 +95,32 @@ Learning:
 5. Invalid tool arguments reveal connector contract boundaries; they are not evidence of repository/provider failure.
 6. Related repository names are not identity matches.
 7. A search miss or limited result must never be promoted to non-existence without an appropriate exhaustive or exact lookup channel.
+8. Successful empty results are distinct from failed calls.
+9. A resource 404 is only meaningful after repository/resource identity has been validated.
+10. Downstream CI observation capabilities are ID-dependent; discovery and inspection are separate capabilities.
+11. Cross-repository control probes can characterize tool behavior, but their IDs and results must never be attributed to the target repository.
 
 ## P6 independence check
 
-None of these probes was selected because it could solve P6. They were selected to characterize generic connector behavior. P6 remains an application to be mapped only after the broader capability model is sufficiently mature.
+The GT-011A observations were selected to characterize generic error/result semantics and identity boundaries. They were not selected to solve P6. P6 remains an application to be mapped only after the broader capability model is sufficiently mature.
 
 ## Current training state
 
 GT-010A — COMPLETED
 GT-010B — COMPLETED
 GT-010C — COMPLETED
+GT-011A — COMPLETED
 
 Training remains IN PROGRESS globally.
 
 ## Next task
 
-`GT-011 — General GitHub error taxonomy and safe read/write boundary training.`
+`GT-011B — Read-only capability matrix across Issues, PRs, Git, and Actions, with explicit evidence type/scope/error semantics.`
 
 Focus:
-- distinguish tool-schema errors, connector allowlist errors, provider 4xx errors, not-found conditions, and successful empty results;
-- inspect additional read-only capabilities across issues/PR/Git surfaces;
-- use a bounded mutation only when necessary to characterize a capability and always read back/close the cycle.
+- expand the capability map without P6-driven selection;
+- identify duplicate capabilities exposed through different operations;
+- classify each operation by discovery, exact retrieval, mutation, observation, or evidence role;
+- avoid further cross-repository Actions probes unless needed for a specific tool semantic.
 
 No P6 promotion is authorized by this training record.
