@@ -85,6 +85,25 @@ Reuse rule: `SEARCH → SELECT EXACT PATH → FETCH FILE → VERIFY SHA/CONTENT`
 Training classification: READ + DISCOVER; direct repository file retrieval after discovery.
 Canonical mutation involved: NO.
 
+### GT-007B — Commit comparison / Git-object lineage
+Operation: `compare_commits`
+Target: `Sangaa/ARGO-KOP`, base=`8af28e47428f6550f92581f795428a433eb97be0`, head=`8af28e47428f6550f92581f795428a433eb97be0`.
+Hypothesis: the compare surface can validate whether two refs represent the same Git object and therefore act as a low-level lineage sanity check independent of PR or Actions surfaces.
+Observed behavior: response classified the refs as `identical`, with `ahead_by=0`, `behind_by=0`, `total_commits=0`, and `files=[]`; the merge-base was the same SHA.
+Interpretation: `compare_commits` is useful not only for changed-file discovery but also for proving ref identity/equivalence when the same SHA is supplied. It must not be treated as an execution-evidence source.
+Reuse rule: before comparing downstream evidence from two refs, establish whether the refs actually diverge; identical refs produce no change set and do not justify further change-analysis assumptions.
+Training classification: READ + GIT-LINEAGE; no repository mutation.
+Canonical mutation involved: NO.
+
+### GT-007B-NEG — Invalid/partial SHA behavior
+Operation: `fetch_commit`
+Target: `Sangaa/ARGO-KOP`, SHA=`0844d9`.
+Observed behavior: connector returned `No commit found for SHA: 0844d9`.
+Interpretation: this connector requires a resolvable commit SHA and does not treat a short, non-resolved value as a valid commit identity in this call. This is a connector input-validation observation, not evidence that the commit itself is absent.
+Reuse rule: when a Git object is required for evidence, use a verified full SHA obtained from the connector rather than a guessed/partial identifier.
+Training classification: ERROR / INPUT-VALIDATION; no repository mutation.
+Canonical mutation involved: NO.
+
 ## 4. Preliminary behavioral laws
 
 1. Repository access does not imply Actions execution observability.
@@ -93,6 +112,8 @@ Canonical mutation involved: NO.
 4. A downstream Actions operation requires a real upstream identifier such as run_id or job_id.
 5. Provider capability, repository implementation, connector contract, session exposure, and observed behavior must remain distinct.
 6. Repository search is discovery, not authoritative content; exact file retrieval must establish the content and SHA before state claims are reused.
+7. Commit comparison can establish Git-ref identity and change lineage, but it is not an execution-evidence channel.
+8. Invalid or partial object identifiers must be classified as connector input behavior, not repository absence.
 
 ## 5. Training still required
 
@@ -117,7 +138,7 @@ First complete the connector capability training and test the independent eviden
 
 ## 7. Next task
 
-`GT-007B — Train Git-object and reference surfaces.`
+`GT-007C — Train blob/tree/ref read surfaces using verified Git objects.`
 
 Required order:
 
