@@ -31,7 +31,9 @@ def classify(a: EvidenceObservation, b: EvidenceObservation) -> str:
     if a.proposition != b.proposition:
         return "DIFFERENT EVIDENCE LAYERS"
     if a.observed_value == b.observed_value:
-        return "CONSISTENT / CORROBORATED"
+        if a.evidence_independence == "INDEPENDENT" and b.evidence_independence == "INDEPENDENT":
+            return "CONSISTENT / INDEPENDENT CORROBORATION"
+        return "CONSISTENT / CORRELATED"
     if a.completeness != "COMPLETE" or b.completeness != "COMPLETE":
         return "UNRESOLVED"
     return "CONTRADICTION"
@@ -40,9 +42,7 @@ def classify(a: EvidenceObservation, b: EvidenceObservation) -> str:
 def classify_execution_occurrence(capability: EvidenceObservation, occurrence: EvidenceObservation) -> str:
     if capability.claim_type != "EXECUTION" or occurrence.claim_type != "EXECUTION":
         return "UNRESOLVED"
-    if capability.semantic_status != "VERIFIED_CAPABILITY":
-        return "UNRESOLVED"
-    if occurrence.semantic_status != "VERIFIED_OCCURRENCE":
+    if capability.semantic_status != "VERIFIED_CAPABILITY" or occurrence.semantic_status != "VERIFIED_OCCURRENCE":
         return "UNRESOLVED"
     if not occurrence.execution_identity or not occurrence.target_commit:
         return "UNRESOLVED"
@@ -131,3 +131,17 @@ def test_execution_identity_mismatch_is_unresolved():
     capability = EvidenceObservation(evidence_id="cap-5", execution_identity="run:A", target_commit="target-A", semantic_status="VERIFIED_CAPABILITY", **common)
     mismatch = EvidenceObservation(evidence_id="occ-5", execution_identity="run:B", target_commit="target-A", **common)
     assert classify_execution_occurrence(capability, mismatch) == "UNRESOLVED"
+
+
+def test_correlated_evidence_is_not_independent_corroboration():
+    common = dict(claim_id="run-status", claim_type="EXECUTION", proposition="run completed successfully", target_id="run:current", scope="repository", temporal_context="2026-08-23", evidence_layer="EXECUTION_SURFACE", authority_scope="FACTUAL", claim_fitness="DIRECT", identity_confidence="HIGH", completeness="COMPLETE", observed_value="SUCCESS", semantic_status="OBSERVED")
+    metadata = EvidenceObservation(evidence_id="e6", source_ref="run-metadata", evidence_independence="CORRELATED", **common)
+    artifact = EvidenceObservation(evidence_id="e7", source_ref="artifact-upload", evidence_independence="CORRELATED", **common)
+    assert classify(metadata, artifact) == "CONSISTENT / CORRELATED"
+
+
+def test_independent_evidence_is_stronger_corroboration():
+    common = dict(claim_id="run-status", claim_type="EXECUTION", proposition="run completed successfully", target_id="run:current", scope="repository", temporal_context="2026-08-23", authority_scope="FACTUAL", claim_fitness="DIRECT", identity_confidence="HIGH", completeness="COMPLETE", observed_value="SUCCESS", semantic_status="OBSERVED")
+    run = EvidenceObservation(evidence_id="e8", source_ref="workflow-run", evidence_layer="RUN_METADATA", evidence_independence="INDEPENDENT", **common)
+    external = EvidenceObservation(evidence_id="e9", source_ref="independent-check", evidence_layer="INDEPENDENT_CHECK", evidence_independence="INDEPENDENT", **common)
+    assert classify(run, external) == "CONSISTENT / INDEPENDENT CORROBORATION"
