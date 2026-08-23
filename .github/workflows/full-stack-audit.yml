@@ -73,6 +73,9 @@ jobs:
       - name: Run P6 controlled runtime lineage adapter regression
         run: python Quality/Integration/test_p6_runtime_lineage_adapter.py
 
+      - name: Run GT-018 evidence reasoning classification regression
+        run: python -m unittest Quality/Integration/test_evidence_reasoning_classification.py -v
+
       - name: Run Mutation Matrix preflight regression
         run: |
           python - <<'PY'
