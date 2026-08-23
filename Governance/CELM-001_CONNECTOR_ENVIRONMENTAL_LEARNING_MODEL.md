@@ -99,16 +99,40 @@ Each learned behavior must be persisted as reusable knowledge containing:
 
 Training results must survive the session and be available to later models.
 
-## 9. Revalidation rule
+## 9. Operational learning / Knowledge Delta
+
+Connector knowledge must continue to grow during real work. A tool invocation made for a substantive repository task is also a learning opportunity.
+
+When actual use reveals an error, limitation, unexpected capability, filtering rule, dependency, better invocation pattern, or any other behavior not represented accurately in the current model, ARGO must record a `Knowledge Delta` rather than silently adapting its plan.
+
+A Knowledge Delta must contain:
+
+`KD-ID → Tool → Previous Knowledge → Action → Expected Behavior → Observed Behavior → Difference → Layer → Evidence → Evidence Strength → Classification → Impact → Follow-up → Reusable Rule`
+
+Knowledge Delta classification must distinguish at least:
+
+`KNOWN`
+`NEW OBSERVATION`
+`POSSIBLE BUG`
+`CONNECTOR LIMITATION`
+`PROVIDER BEHAVIOR`
+`MODEL MISUNDERSTANDING`
+`UNRESOLVED`
+
+A difference is not promoted to architectural truth until its layer and evidence strength are understood. Repeated or high-impact deltas should trigger targeted re-testing or knowledge-model review.
+
+## 10. Revalidation rule
 
 A later session should reuse validated knowledge and perform only targeted freshness checks unless there is evidence that the provider, connector implementation, contract, exposure surface, or behavior has changed.
 
-## 10. Current instantiation: GitHub
+Operational learning may override a prior assumption only after the delta is classified and supported by evidence. The latest observation must not silently erase historical knowledge; it should extend, refine, or invalidate it explicitly.
+
+## 11. Current instantiation: GitHub
 
 GitHub is the first fully trained connector environment under this model. `GOV-017_HERMUZ_CONNECTOR_SELF_LEARNING_PROTOCOL.md` governs the active training program and `EJR-317_2026-08-23_GITHUB_CONNECTOR_SELF_TRAINING.md` stores the current behavioral observations.
 
 The current P6 investigation must use CELM knowledge before declaring an external boundary. In particular, GitHub Actions Run-ID discovery must be analyzed against all relevant connector layers and independent evidence surfaces rather than against a single Actions wrapper.
 
-## 11. Architectural consequence
+## 12. Architectural consequence
 
 CELM is a reusable ARGO architecture pattern, not a GitHub-specific workaround. A future connector should instantiate the same environmental-learning process before ARGO relies on it for substantive work.
