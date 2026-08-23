@@ -46,6 +46,10 @@ def classify_execution_occurrence(capability: EvidenceObservation, occurrence: E
         return "UNRESOLVED"
     if not occurrence.execution_identity or not occurrence.target_commit:
         return "UNRESOLVED"
+    if capability.execution_identity and occurrence.execution_identity != capability.execution_identity:
+        return "UNRESOLVED"
+    if capability.target_commit and occurrence.target_commit != capability.target_commit:
+        return "UNRESOLVED"
     return "VERIFIED_OCCURRENCE"
 
 
@@ -113,3 +117,17 @@ def test_verified_occurrence_with_bound_identity_is_verifiable():
     capability = EvidenceObservation(evidence_id="cap-3", execution_identity="run:current", target_commit="c422556", semantic_status="VERIFIED_CAPABILITY", **common)
     occurrence = EvidenceObservation(evidence_id="occ-3", execution_identity="run:current", target_commit="c422556", **common)
     assert classify_execution_occurrence(capability, occurrence) == "VERIFIED_OCCURRENCE"
+
+
+def test_cross_binding_mismatch_is_unresolved():
+    common = dict(claim_id="execution-channel", claim_type="EXECUTION", proposition="execution evidence channel", target_id="ARGO-KOP", scope="repository", temporal_context="2026-08-23", evidence_layer="EXECUTION_SURFACE", source_ref="github:current-commit", authority_scope="FACTUAL", claim_fitness="DIRECT", identity_confidence="HIGH", evidence_independence="CORRELATED", completeness="COMPLETE", observed_value="EXECUTED", semantic_status="VERIFIED_OCCURRENCE")
+    capability = EvidenceObservation(evidence_id="cap-4", execution_identity="run:current", target_commit="target-A", semantic_status="VERIFIED_CAPABILITY", **common)
+    mismatch = EvidenceObservation(evidence_id="occ-4", execution_identity="run:current", target_commit="target-B", **common)
+    assert classify_execution_occurrence(capability, mismatch) == "UNRESOLVED"
+
+
+def test_execution_identity_mismatch_is_unresolved():
+    common = dict(claim_id="execution-channel", claim_type="EXECUTION", proposition="execution evidence channel", target_id="ARGO-KOP", scope="repository", temporal_context="2026-08-23", evidence_layer="EXECUTION_SURFACE", source_ref="github:current-commit", authority_scope="FACTUAL", claim_fitness="DIRECT", identity_confidence="HIGH", evidence_independence="CORRELATED", completeness="COMPLETE", observed_value="EXECUTED", semantic_status="VERIFIED_OCCURRENCE")
+    capability = EvidenceObservation(evidence_id="cap-5", execution_identity="run:A", target_commit="target-A", semantic_status="VERIFIED_CAPABILITY", **common)
+    mismatch = EvidenceObservation(evidence_id="occ-5", execution_identity="run:B", target_commit="target-A", **common)
+    assert classify_execution_occurrence(capability, mismatch) == "UNRESOLVED"
