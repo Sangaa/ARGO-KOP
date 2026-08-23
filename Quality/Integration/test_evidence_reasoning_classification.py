@@ -30,15 +30,17 @@ class EvidenceObservation:
 
 
 def classify(a: EvidenceObservation, b: EvidenceObservation) -> str:
-    same_claim = (
+    same_identity = (
         a.claim_id == b.claim_id
-        and a.proposition == b.proposition
         and a.target_id == b.target_id
         and a.scope == b.scope
         and a.temporal_context == b.temporal_context
     )
 
-    if not same_claim:
+    if not same_identity:
+        return "DIFFERENT CLAIMS"
+
+    if a.proposition != b.proposition:
         return "DIFFERENT EVIDENCE LAYERS"
 
     if a.observed_value == b.observed_value:
@@ -157,3 +159,31 @@ def test_resolution_does_not_mutate_original_observations():
     assert resolve_by_authority(a, b) == "A"
     assert a == before_a
     assert b == before_b
+
+
+def test_missing_execution_identity_is_unresolved_not_failure():
+    common = dict(
+        claim_id="execution-claim",
+        claim_type="EXECUTION",
+        proposition="GT-018 execution observed",
+        target_id="ARGO-KOP",
+        scope="repository",
+        temporal_context="2026-08-23",
+        evidence_layer="EXECUTION_OBSERVATION",
+        source_ref="github:execution-surface",
+        authority_scope="FACTUAL",
+        claim_fitness="DIRECT",
+        identity_confidence="LOW",
+        evidence_independence="CORRELATED",
+        semantic_status="UNRESOLVED",
+    )
+    unavailable = EvidenceObservation(
+        evidence_id="e7", completeness="INCOMPLETE",
+        observed_value="EXECUTION_ID_UNAVAILABLE", **common
+    )
+    asserted_failure = EvidenceObservation(
+        evidence_id="e8", completeness="COMPLETE",
+        observed_value="FAIL", **common
+    )
+
+    assert classify(unavailable, asserted_failure) == "UNRESOLVED"
