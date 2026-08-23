@@ -7,40 +7,52 @@ Primary objective: train HERMUZ on the active GitHub connector before further P6
 
 ## Current completed training
 
-The training record has now reached GT-007D. Training remains read-first and evidence-scoped.
+The training record has now reached GT-007E. Training remains read-first and evidence-scoped.
 
-### GT-007D — Pull Request metadata vs change evidence
-Operations: `fetch_pr`, `get_pr_diff`, `fetch_pr_patch`
+### GT-007E — Pull Request review/discussion surfaces
+Operations: `list_pull_request_reviews`, `list_pull_request_review_threads`, `fetch_pr_comments`
 Target: `Sangaa/ARGO-KOP#25`
 
-Hypothesis: PR metadata, PR diff, and PR patch are separate evidence surfaces and should not be treated as interchangeable.
+Hypothesis: PR review submissions, inline review threads, and conversation comments are separate observation surfaces and may provide lineage evidence that is not present in PR metadata or diff/patch output.
 
 Observed behavior:
-- `fetch_pr` returned authoritative PR metadata: PR #25 is closed, not merged, base `main`, head `probe/hermuz-layered-channel-law-20260822`, head SHA `2378f1bdfad2ba93dad09597950f1219ea6d819f`, with `commits=2`, `changed_files=0`, and `additions/deletions=0`.
-- `get_pr_diff` returned an empty diff.
-- `fetch_pr_patch` returned an empty patch list.
+- `list_pull_request_reviews` returned `reviews=[]`.
+- `list_pull_request_review_threads` returned `review_threads=[]`.
+- `fetch_pr_comments` returned `comments=[]`.
 
 Interpretation:
-1. PR metadata can exist even when no code-change payload is returned by diff/patch surfaces.
-2. `commits=2` must not be interpreted as `changed_files>0`.
-3. Empty diff/patch is evidence about the PR change surface returned by these operations; it is not evidence that the PR never existed or that no execution occurred.
-4. For lineage work, use `fetch_pr` first to bind base/head identity, then use diff/patch only when actual change evidence is required.
+1. The connector exposes three distinct read surfaces for PR review/discussion evidence.
+2. An empty result across all three surfaces for PR #25 means no review submissions, inline review threads, or PR comments were returned through those operations at the time of the probe.
+3. This does not prove that no workflow execution occurred.
+4. Review/discussion surfaces are useful for corroborating human/PR process lineage, but they are not authoritative Actions execution evidence by themselves.
+
+Additional boundary probe:
+- `update_review_comment` with a deliberately nonexistent comment ID returned HTTP 404 / Not Found.
+- This was a non-mutating negative probe because the target identifier was fabricated and no existing resource could be modified.
+
+Interpretation of negative probe:
+- The operation is exposed to the session.
+- The connector reaches GitHub and returns a resource-level Not Found rather than an exposure-level "operation unavailable" error.
+- Therefore operation exposure and resource existence are distinguishable in this surface.
+- No write to an existing review comment was performed.
 
 Reuse rule:
-`PR metadata → bind head/base/merge state → inspect change surface → correlate commit/evidence channels`.
+`PR metadata → reviews → review threads → comments → commit/Actions correlation`.
+For write operations, never use a fabricated ID against a real resource; only bounded negative probes with guaranteed nonexistent identifiers are permitted during connector training.
 
-Training classification: READ + PR-LINEAGE + EVIDENCE-CLASSIFICATION.
+Training classification: READ + SAFE-NEGATIVE-BOUNDARY + PR-LINEAGE + EVIDENCE-CLASSIFICATION.
 Canonical mutation involved: NO.
 
-## Behavioral laws added by GT-007D
+## Behavioral laws added by GT-007E
 
-14. PR metadata and PR change payloads are separate evidence surfaces.
-15. A PR can report commits while exposing zero changed files and an empty diff/patch; do not infer code change from commit count alone.
-16. Empty PR diff/patch must remain scoped to that PR-change surface and must not be promoted to execution absence.
+17. Review submissions, review threads, and PR conversation comments are distinct evidence surfaces.
+18. Empty review surfaces are scoped observations, not execution-absence evidence.
+19. A resource-level 404 from an exposed operation is evidence that the operation reached the provider/resource lookup layer; it is not evidence that the operation is unavailable.
+20. Connector self-training must avoid mutations to real resources; safe negative identifiers can test error classification without changing repository state.
 
 ## Next task
 
-`GT-007E — Train PR discussion/review surfaces and correlate review evidence with commit lineage.`
+`GT-007F — Train repository Git-object surfaces: refs, blobs/trees, and commit lineage, then correlate the result with PR head/base identity.`
 
 Required order:
 `Inventory → safe read-only training → evidence classification → update EJR → derive P6 evidence plan → smallest justified probe → document → close session.`
