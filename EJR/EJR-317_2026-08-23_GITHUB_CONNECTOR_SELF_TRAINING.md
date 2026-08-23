@@ -75,6 +75,16 @@ Observation: retrieved P6 issue #11 and architectural learning issue #21.
 Interpretation: Issues are a durable learning/evidence surface and can prevent repetition of known connector probes.
 Reuse: mandatory prior-learning retrieval for connector-related investigations.
 
+### GT-007A — Repository search → exact file retrieval
+Operations: `search`, then `fetch_file`
+Target: `Sangaa/ARGO-KOP`, `PROJECT_STATUS.md`
+Hypothesis: repository search can discover relevant canonical files, after which exact file retrieval can be used for authoritative bounded reading.
+Observed behavior: search located `PROJECT_STATUS.md`; `fetch_file` then retrieved its canonical content and SHA. The file reports Version 3.3.7, `INTEGRITY WARNING / CONNECTED-BASELINE AUDIT`, canonical status, and `Sangaa/ARGO-KOP` on `main` as the primary repository source of truth.
+Interpretation: search is a discovery surface; `fetch_file` is a deterministic exact-file read surface. Search result metadata can identify a candidate, but authoritative content and file identity should be confirmed by exact retrieval.
+Reuse rule: `SEARCH → SELECT EXACT PATH → FETCH FILE → VERIFY SHA/CONTENT` before relying on repository state claims.
+Training classification: READ + DISCOVER; direct repository file retrieval after discovery.
+Canonical mutation involved: NO.
+
 ## 4. Preliminary behavioral laws
 
 1. Repository access does not imply Actions execution observability.
@@ -82,6 +92,7 @@ Reuse: mandatory prior-learning retrieval for connector-related investigations.
 3. Status, Git objects, PRs, and Actions are separate evidence channels.
 4. A downstream Actions operation requires a real upstream identifier such as run_id or job_id.
 5. Provider capability, repository implementation, connector contract, session exposure, and observed behavior must remain distinct.
+6. Repository search is discovery, not authoritative content; exact file retrieval must establish the content and SHA before state claims are reused.
 
 ## 5. Training still required
 
@@ -106,7 +117,7 @@ First complete the connector capability training and test the independent eviden
 
 ## 7. Next task
 
-`GT-007 — Complete read-only GitHub capability training matrix.`
+`GT-007B — Train Git-object and reference surfaces.`
 
 Required order:
 
