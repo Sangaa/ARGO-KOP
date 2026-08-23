@@ -76,6 +76,89 @@ Interpretation:
 
 Reuse: before repository mutation or investigation, establish default branch, visibility, archival state, and connector-reported permission context.
 
+## GT-010 — PR discovery and layered PR observation
+
+Purpose: train collaboration-surface semantics without selecting the task because of P6.
+
+Operations exercised:
+- `search_prs`
+- `get_pr_info`
+- `list_pull_request_reviews`
+- `fetch_pr_comments`
+- `update_pull_request` (see Knowledge Delta KD-001)
+
+### GT-010A — PR search
+
+`search_prs(query="repo:Sangaa/ARGO-KOP", state="all", sort="updated", order="desc")` returned recent repository PRs, including diagnostic PRs #25, #24, #23, #22, #19, #18 and P6-related PRs #14, #13, #12, and #10.
+
+Learning:
+- Search is a discovery surface, not the canonical full PR object.
+- Search results can provide a useful candidate identifier (`pr_number`) for subsequent exact retrieval.
+- Repository-scoped search can expose historical diagnostic work that is valuable as environmental training data without making that history production evidence.
+
+### GT-010B — Exact PR metadata
+
+`get_pr_info(pr_number=25)` returned a normalized PR snapshot:
+- state: closed
+- merged: false
+- draft: false
+- base: main
+- base_sha: `942271c4830b059258e6f2fc1b364f084df7c92f`
+- head: `probe/hermuz-layered-channel-law-20260822`
+- head_sha: `2378f1bdfad2ba93dad09597950f1219ea6d819f`
+- commits: 2
+- changed_files: 0
+- additions: 0
+- deletions: 0
+
+Learning:
+- PR metadata contains branch and SHA identity that can be used as correlation anchors.
+- A PR can be a diagnostic object with zero changed files in the normalized snapshot; therefore `changed_files=0` must not be interpreted as proof that no underlying Git activity ever existed without consulting the appropriate Git/diff surface.
+- PR metadata is collaboration evidence, not Actions execution evidence.
+
+### GT-010C — Review surface
+
+`list_pull_request_reviews(pr_number=25)` returned an empty review list.
+
+Learning:
+- An empty review list is evidence only about the review-submission surface queried at that moment.
+- It cannot prove that the PR had no other collaboration activity; review comments, issue comments, and review threads are separate surfaces.
+
+### GT-010D — Discussion/timeline surface
+
+`fetch_pr_comments(pr_number=25)` returned an empty normalized comments/timeline list.
+
+Learning:
+- The connector intentionally normalizes multiple discussion sources into a single timeline operation.
+- Empty timeline output must remain scoped to that operation and must not be generalized to all PR state.
+
+### GT-010E — Cross-layer correlation
+
+For PR #25, the same PR identity can now be traced through:
+
+`PR Search → PR Metadata → Head SHA/Base SHA → Reviews → Discussion Timeline`
+
+This establishes a collaboration-layer evidence chain independent from Actions run discovery.
+
+## Knowledge Delta KD-001 — Unnecessary mutation during training
+
+During GT-010, `update_pull_request` was invoked with the PR already in the requested state (`closed`) and with the same body. The resulting snapshot showed no substantive state change.
+
+Classification: `MODEL/PROCESS LEARNING` + `NEW OBSERVATION`
+
+Expected: read-only training should not invoke mutation when the same observation can be obtained through a read operation.
+
+Observed: the connector accepted the mutation-shaped call and returned the normalized PR snapshot without a substantive state change.
+
+Layer: session-exposed connector operation / GitHub PR mutation surface.
+
+Impact: no intended repository state change, but the action violated the read-first training discipline because it was unnecessary.
+
+New reusable rule:
+`Before any mutation-shaped connector call, prove that a read-only operation cannot answer the training question. If the target state already matches, do not mutate merely to observe behavior.`
+
+This delta is intentionally retained as a process-learning event rather than hidden, because operational mistakes are themselves training data.
+
 ## Capability families now explicitly recognized
 
 The active GitHub connector exposes a broad surface including:
@@ -108,6 +191,9 @@ This is a connector capability inventory, not a claim that every GitHub REST end
 51. Search-index availability is a connector capability signal, not proof of repository content availability.
 52. Repository metadata establishes context and authority boundaries; it does not establish workflow execution.
 53. A tool should be classified by operation semantics and evidence produced, not merely by its endpoint name.
+54. PR search is discovery; exact PR retrieval is identity/metadata evidence; reviews and discussion timelines are separate observation layers.
+55. Empty output is always scoped to the surface queried and cannot automatically establish global absence.
+56. Operational use can reveal process knowledge; unnecessary mutation must be recorded and used to strengthen the read-first boundary.
 
 ## Revised training matrix
 
@@ -174,7 +260,7 @@ No future training task may be selected solely because it might help P6. Each ta
 
 ## Next task
 
-`GT-010 — Continue capability-first training with repository discovery/search, pagination/filtering, and issue/PR search semantics without using P6 as the selection criterion.`
+`GT-011 — Train issue/search semantics and pagination/filtering using read-only surfaces, then update the connector knowledge model with any Knowledge Deltas.`
 
 Only after the general capability matrix reaches sufficient coverage will the process return to `P6 Capability Mapping`.
 
