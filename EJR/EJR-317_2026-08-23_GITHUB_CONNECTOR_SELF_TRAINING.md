@@ -7,52 +7,52 @@ Primary objective: train HERMUZ on the active GitHub connector before further P6
 
 ## Current completed training
 
-The training record has now reached GT-007F. Training remains read-first and evidence-scoped.
+The training record has now reached GT-007G. Training remains read-first and evidence-scoped.
 
-### GT-007F — Git-object surfaces and PR head/base correlation
-Operations: `fetch` (Git tree endpoint), `fetch_blob`, `compare_commits`
-Targets: `Sangaa/ARGO-KOP`, base commit `8af28e47428f6550f92581f795428a433eb97be0`, PR #25 head `2378f1bdfad2ba93dad09597950f1219ea6d819f`.
+### GT-007G — Branch/ref discovery and exact ref-to-commit resolution
+Operations: `search_branches`, `fetch_file(ref=...)`
+Target: `Sangaa/ARGO-KOP`
 
-Hypothesis: Git-object surfaces can establish repository structure, exact blob identity, and commit ancestry independently of Actions Run-ID discovery; PR head/base identity can then be correlated with this lineage.
+Hypothesis: branch discovery and exact ref reads can establish the identity of P6-related branches and bind a symbolic branch name to the exact repository content currently reachable through that ref.
 
 Observed behavior:
-- The Git tree endpoint for commit `8af28e47428f6550f92581f795428a433eb97be0` returned a recursive repository tree including workflow files and their blob SHAs. This demonstrates that the connector can expose Git tree/object identity through its approved fetch surface.
-- `fetch_blob` successfully retrieved the exact blob content for `AI/README.md` using its SHA `e921632ae70806ce7ee1ef40bf2a5d25536a8d67`.
-- `compare_commits` between base `8af28e47428f6550f92581f795428a433eb97be0` and PR #25 head `2378f1bdfad2ba93dad09597950f1219ea6d819f` returned `status=diverged`, `ahead_by=2`, `behind_by=34`, `total_commits=2`, `merge_base=942271c4830b059258e6f2fc1b364f084df7c92f`, and `files=[]`.
+- `search_branches(query="p6")` returned seven P6-related branches, including `fix/p6-head-binding-20260819`, `fix/p6-actions-pr-trigger-20260819`, `fix/p6-pr-trigger-main-20260819`, three `revalidate/p4-p6-execution-boundary...` variants, and `revalidate/p6-execution-evidence-20260819`.
+- A direct REST-style `fetch` attempt against `/branches/{branch}` was rejected by the connector as an unapproved public GitHub endpoint. This is a connector-surface restriction, not evidence that the branch does not exist.
+- The dedicated `fetch_file` surface accepted `ref="fix/p6-head-binding-20260819"` and returned `PROJECT_STATUS.md` from that branch, with blob SHA `69394d0140af7d27aee5e42caeec9172c88ece50`.
+- The branch's `PROJECT_STATUS.md` explicitly states that `Sangaa/ARGO-KOP` on `main` is the primary repository source of truth, while the branch is a historical/development ref. Therefore branch-local evidence must not silently override the main authority boundary.
 
 Interpretation:
-1. Git tree and blob surfaces provide object-level evidence that is independent of PR review and Actions observation.
-2. A known blob SHA can be used as an exact content identity, allowing content retrieval without path-based ambiguity.
-3. Commit comparison can establish ancestry and divergence even when the returned file list is empty.
-4. `status=diverged` with `ahead_by=2` and `behind_by=34` is materially different from a simple linear "PR is two commits ahead" interpretation. The comparison must retain both sides of the relation.
-5. `files=[]` from this comparison is scoped to the returned comparison payload and must not be interpreted as proof that the two refs contain no differences.
-6. PR head/base identity can therefore be correlated to commit lineage, but the comparison result must be interpreted using its status, ahead/behind counts, and merge base together.
+1. Branch discovery is a distinct capability and can surface multiple historical/revalidation lines that would be missed by looking only at main.
+2. Symbolic ref resolution is reliable through the dedicated file-read surface when a known file is selected, but the generic REST fetch surface has narrower endpoint allowlisting.
+3. Branch existence and branch content are separate evidence facts; discovering a branch does not establish its current commit identity unless a ref-to-content operation resolves it.
+4. A branch-local status document may itself declare `main` as the authority source; therefore reading a branch is not equivalent to promoting that branch as canonical.
+5. The connector's endpoint restriction must be classified as a surface limitation, not as a GitHub repository absence.
 
 Reuse rule:
-`PR metadata → exact head/base SHA → compare refs → inspect merge-base/divergence → use tree/blob identity for exact object evidence → correlate with Actions evidence when available`.
+`Discover refs → select exact ref → read a known repository artifact at that ref → record content SHA/authority claims → compare to main or other lineage only when needed`.
 
-Training classification: READ + GIT-OBJECT-LINEAGE + EVIDENCE-CLASSIFICATION.
+Training classification: READ + BRANCH/REF-DISCOVERY + AUTHORITY-CLASSIFICATION + ERROR-CLASSIFICATION.
 Canonical mutation involved: NO.
 
-## Behavioral laws added by GT-007F
+## Behavioral laws added by GT-007G
 
-21. Git tree, blob, and commit comparison are independent evidence surfaces from PR and Actions.
-22. Blob SHA is an exact content identity and can be used for content verification independently of path discovery.
-23. Commit comparison must preserve `status`, `ahead_by`, `behind_by`, and `merge_base`; a single count is insufficient to describe lineage.
-24. Empty `files` in a comparison response is scoped to the connector response and is not proof of zero repository differences.
-25. PR head/base correlation must be SHA-based before execution evidence is attached to a change lineage.
+42. Branch discovery and branch content resolution are separate evidence operations.
+43. A discovered branch is not execution evidence and is not automatically canonical authority.
+44. Generic fetch endpoint rejection must be classified as connector allowlisting behavior when the dedicated operation succeeds.
+45. A branch-local artifact may explicitly defer authority to `main`; authority claims must therefore be read, not inferred from the ref being queried.
+46. Ref identity should be bound to exact content evidence before using a branch in lineage analysis.
 
-## P6 implication after GT-007F
+## P6 implication after GT-007G
 
-The current evidence model is now broader:
+The P6 evidence model now includes a ref layer:
 
-`PR → head/base SHA → Git lineage → status/PR evidence → Actions evidence`
+`P6 branch discovery → exact ref/content evidence → PR/commit lineage → Actions execution evidence`
 
-This does not remove the Actions Run-ID gap, but it prevents P6 from treating Run-ID discovery as the only available lineage evidence. The Actions run remains the authoritative execution layer when available; Git/PR evidence is corroborating lineage, not a substitute for execution proof.
+This improves pre-Run-ID lineage and prevents the investigation from confusing historical P6 branches with the current canonical `main` baseline. It does not prove Actions execution and does not close the Run-ID discovery gap.
 
 ## Next task
 
-`GT-007G — Train branch/ref discovery and exact ref-to-commit resolution, then map the resulting evidence to the P6 branches already identified.`
+`GT-007H — Train Actions read-only surfaces using any already-known real workflow-run/job identifiers; if no real identifier is available, inventory and classify the exposed Actions operations without fabricating IDs.`
 
 Required order:
 `Inventory → safe read-only training → evidence classification → update EJR → derive P6 evidence plan → smallest justified probe → document → close session.`
