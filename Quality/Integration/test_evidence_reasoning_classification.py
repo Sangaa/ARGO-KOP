@@ -26,7 +26,34 @@ class EvidenceObservation:
     provenance_parent: Optional[str] = None
 
 
+def provenance_graph_state(observations: dict[str, EvidenceObservation]) -> str:
+    """Return INVALID PROVENANCE when any parent chain contains a cycle."""
+    visiting = set()
+    visited = set()
+
+    def visit(node_id: str) -> bool:
+        if node_id in visiting:
+            return True
+        if node_id in visited:
+            return False
+        visiting.add(node_id)
+        node = observations.get(node_id)
+        if node and node.provenance_parent and node.provenance_parent in observations:
+            if visit(node.provenance_parent):
+                return True
+        visiting.remove(node_id)
+        visited.add(node_id)
+        return False
+
+    for evidence_id in observations:
+        if visit(evidence_id):
+            return "INVALID PROVENANCE"
+    return "VALID PROVENANCE"
+
+
 def provenance_connected(a: EvidenceObservation, b: EvidenceObservation, observations: dict[str, EvidenceObservation]) -> bool:
+    if provenance_graph_state(observations) != "VALID PROVENANCE":
+        return False
     if a.provenance_root and b.provenance_root and a.provenance_root == b.provenance_root:
         return True
     parents = {a.evidence_id, b.evidence_id}
@@ -53,8 +80,12 @@ def classify(a: EvidenceObservation, b: EvidenceObservation, observations: Optio
     if a.proposition != b.proposition:
         return "DIFFERENT EVIDENCE LAYERS"
     if a.observed_value == b.observed_value:
-        if observations and provenance_connected(a, b, observations):
-            return "CONSISTENT / CORRELATED"
+        if observations:
+            graph_state = provenance_graph_state(observations)
+            if graph_state != "VALID PROVENANCE":
+                return "UNRESOLVED"
+            if provenance_connected(a, b, observations):
+                return "CONSISTENT / CORRELATED"
         if a.evidence_independence == "INDEPENDENT" and b.evidence_independence == "INDEPENDENT":
             return "CONSISTENT / INDEPENDENT CORROBORATION"
         return "CONSISTENT / CORRELATED"
@@ -186,3 +217,20 @@ def test_disconnected_provenance_can_remain_independent():
     b = EvidenceObservation(evidence_id="ind-b", source_ref="workflow-run-B", evidence_layer="RUN_METADATA", evidence_independence="INDEPENDENT", provenance_root="root-B", **common)
     observations = {a.evidence_id: a, b.evidence_id: b}
     assert classify(a, b, observations) == "CONSISTENT / INDEPENDENT CORROBORATION"
+
+
+def test_provenance_cycle_is_invalid_graph_state():
+    common = dict(claim_id="cycle", claim_type="DERIVED_RESULT", proposition="provenance graph integrity", target_id="ARGO-KOP", scope="repository", temporal_context="2026-08-24", authority_scope="FACTUAL", claim_fitness="DIRECT", identity_confidence="HIGH", evidence_independence="INDEPENDENT", completeness="COMPLETE", observed_value="VALID", semantic_status="OBSERVED")
+    a = EvidenceObservation(evidence_id="cycle-a", source_ref="a", evidence_layer="A", provenance_parent="cycle-c", **common)
+    b = EvidenceObservation(evidence_id="cycle-b", source_ref="b", evidence_layer="B", provenance_parent="cycle-a", **common)
+    c = EvidenceObservation(evidence_id="cycle-c", source_ref="c", evidence_layer="C", provenance_parent="cycle-b", **common)
+    observations = {x.evidence_id: x for x in (a, b, c)}
+    assert provenance_graph_state(observations) == "INVALID PROVENANCE"
+
+
+def test_provenance_cycle_forces_unresolved_not_independent_corroboration():
+    common = dict(claim_id="cycle-claim", claim_type="EXECUTION", proposition="run completed successfully", target_id="run:cycle", scope="repository", temporal_context="2026-08-24", authority_scope="FACTUAL", claim_fitness="DIRECT", identity_confidence="HIGH", evidence_independence="INDEPENDENT", completeness="COMPLETE", observed_value="SUCCESS", semantic_status="OBSERVED")
+    a = EvidenceObservation(evidence_id="a", source_ref="source-a", evidence_layer="A", provenance_parent="b", **common)
+    b = EvidenceObservation(evidence_id="b", source_ref="source-b", evidence_layer="B", provenance_parent="a", **common)
+    observations = {a.evidence_id: a, b.evidence_id: b}
+    assert classify(a, b, observations) == "UNRESOLVED"
