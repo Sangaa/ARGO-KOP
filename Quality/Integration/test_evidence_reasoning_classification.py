@@ -23,24 +23,39 @@ class EvidenceObservation:
     execution_identity: Optional[str] = None
     target_commit: Optional[str] = None
     provenance_root: Optional[str] = None
+    provenance_parent: Optional[str] = None
 
 
-def effective_independence(a: EvidenceObservation, b: EvidenceObservation) -> str:
+def provenance_connected(a: EvidenceObservation, b: EvidenceObservation, observations: dict[str, EvidenceObservation]) -> bool:
     if a.provenance_root and b.provenance_root and a.provenance_root == b.provenance_root:
-        return "CORRELATED"
-    if a.evidence_independence == "INDEPENDENT" and b.evidence_independence == "INDEPENDENT":
-        return "INDEPENDENT"
-    return "CORRELATED"
+        return True
+    parents = {a.evidence_id, b.evidence_id}
+    frontier = list(parents)
+    visited = set(parents)
+    while frontier:
+        current_id = frontier.pop()
+        current = observations.get(current_id)
+        if not current or not current.provenance_parent:
+            continue
+        parent_id = current.provenance_parent
+        if parent_id in parents:
+            return True
+        if parent_id not in visited:
+            visited.add(parent_id)
+            frontier.append(parent_id)
+    return False
 
 
-def classify(a: EvidenceObservation, b: EvidenceObservation) -> str:
+def classify(a: EvidenceObservation, b: EvidenceObservation, observations: Optional[dict[str, EvidenceObservation]] = None) -> str:
     same_identity = (a.claim_id == b.claim_id and a.target_id == b.target_id and a.scope == b.scope and a.temporal_context == b.temporal_context)
     if not same_identity:
         return "DIFFERENT CLAIMS"
     if a.proposition != b.proposition:
         return "DIFFERENT EVIDENCE LAYERS"
     if a.observed_value == b.observed_value:
-        if effective_independence(a, b) == "INDEPENDENT":
+        if observations and provenance_connected(a, b, observations):
+            return "CONSISTENT / CORRELATED"
+        if a.evidence_independence == "INDEPENDENT" and b.evidence_independence == "INDEPENDENT":
             return "CONSISTENT / INDEPENDENT CORROBORATION"
         return "CONSISTENT / CORRELATED"
     if a.completeness != "COMPLETE" or b.completeness != "COMPLETE":
@@ -156,9 +171,18 @@ def test_independent_evidence_is_stronger_corroboration():
     assert classify(run, external) == "CONSISTENT / INDEPENDENT CORROBORATION"
 
 
-def test_declared_independence_is_overridden_by_shared_provenance_root():
-    common = dict(claim_id="run-status", claim_type="EXECUTION", proposition="run completed successfully", target_id="run:current", scope="repository", temporal_context="2026-08-23", authority_scope="FACTUAL", claim_fitness="DIRECT", identity_confidence="HIGH", evidence_independence="INDEPENDENT", completeness="COMPLETE", observed_value="SUCCESS", semantic_status="OBSERVED", provenance_root="artifact:single-source")
-    metadata = EvidenceObservation(evidence_id="e10", source_ref="run-metadata", evidence_layer="RUN_METADATA", **common)
-    artifact = EvidenceObservation(evidence_id="e11", source_ref="artifact-payload", evidence_layer="ARTIFACT_PAYLOAD", **common)
-    assert effective_independence(metadata, artifact) == "CORRELATED"
-    assert classify(metadata, artifact) == "CONSISTENT / CORRELATED"
+def test_transitive_provenance_marks_independence_as_correlated():
+    common = dict(claim_id="run-status", claim_type="EXECUTION", proposition="run completed successfully", target_id="run:current", scope="repository", temporal_context="2026-08-23", authority_scope="FACTUAL", claim_fitness="DIRECT", identity_confidence="HIGH", completeness="COMPLETE", observed_value="SUCCESS", semantic_status="OBSERVED")
+    root = EvidenceObservation(evidence_id="root", source_ref="source-run", evidence_layer="RUN_METADATA", evidence_independence="INDEPENDENT", provenance_root="root", **common)
+    child = EvidenceObservation(evidence_id="child", source_ref="derived-artifact", evidence_layer="ARTIFACT", evidence_independence="INDEPENDENT", provenance_root=None, provenance_parent="root", **common)
+    grandchild = EvidenceObservation(evidence_id="grandchild", source_ref="derived-report", evidence_layer="REPORT", evidence_independence="INDEPENDENT", provenance_root=None, provenance_parent="child", **common)
+    observations = {x.evidence_id: x for x in (root, child, grandchild)}
+    assert classify(root, grandchild, observations) == "CONSISTENT / CORRELATED"
+
+
+def test_disconnected_provenance_can_remain_independent():
+    common = dict(claim_id="run-status", claim_type="EXECUTION", proposition="run completed successfully", target_id="run:current", scope="repository", temporal_context="2026-08-23", authority_scope="FACTUAL", claim_fitness="DIRECT", identity_confidence="HIGH", completeness="COMPLETE", observed_value="SUCCESS", semantic_status="OBSERVED")
+    a = EvidenceObservation(evidence_id="ind-a", source_ref="workflow-run-A", evidence_layer="RUN_METADATA", evidence_independence="INDEPENDENT", provenance_root="root-A", **common)
+    b = EvidenceObservation(evidence_id="ind-b", source_ref="workflow-run-B", evidence_layer="RUN_METADATA", evidence_independence="INDEPENDENT", provenance_root="root-B", **common)
+    observations = {a.evidence_id: a, b.evidence_id: b}
+    assert classify(a, b, observations) == "CONSISTENT / INDEPENDENT CORROBORATION"
