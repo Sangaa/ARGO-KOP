@@ -27,7 +27,7 @@ class EvidenceObservation:
 
 
 def provenance_graph_state(observations: dict[str, EvidenceObservation]) -> str:
-    """Return INVALID PROVENANCE when a parent chain is cyclic or broken."""
+    """Return INVALID PROVENANCE when a parent/root chain is cyclic or broken."""
     visiting = set()
     visited = set()
 
@@ -38,12 +38,17 @@ def provenance_graph_state(observations: dict[str, EvidenceObservation]) -> str:
             return False
         visiting.add(node_id)
         node = observations.get(node_id)
-        if node and node.provenance_parent:
-            if node.provenance_parent not in observations:
-                visiting.remove(node_id)
-                return True
-            if visit(node.provenance_parent):
-                return True
+        if node:
+            if node.provenance_parent:
+                if node.provenance_parent not in observations:
+                    visiting.remove(node_id)
+                    return True
+                if visit(node.provenance_parent):
+                    return True
+            if node.provenance_root:
+                if node.provenance_root not in observations:
+                    visiting.remove(node_id)
+                    return True
         visiting.remove(node_id)
         visited.add(node_id)
         return False
@@ -218,6 +223,7 @@ def test_disconnected_provenance_can_remain_independent():
     a = EvidenceObservation(evidence_id="ind-a", source_ref="workflow-run-A", evidence_layer="RUN_METADATA", evidence_independence="INDEPENDENT", provenance_root="root-A", **common)
     b = EvidenceObservation(evidence_id="ind-b", source_ref="workflow-run-B", evidence_layer="RUN_METADATA", evidence_independence="INDEPENDENT", provenance_root="root-B", **common)
     observations = {a.evidence_id: a, b.evidence_id: b}
+    assert provenance_graph_state(observations) == "VALID PROVENANCE"
     assert classify(a, b, observations) == "CONSISTENT / INDEPENDENT CORROBORATION"
 
 
@@ -246,3 +252,29 @@ def test_valid_provenance_without_missing_links_preserves_independence():
     observations = {a.evidence_id: a, b.evidence_id: b}
     assert provenance_graph_state(observations) == "VALID PROVENANCE"
     assert classify(a, b, observations) == "CONSISTENT / INDEPENDENT CORROBORATION"
+
+
+def test_missing_provenance_root_invalidates_graph():
+    common = dict(claim_id="run-status", claim_type="EXECUTION", proposition="run completed successfully", target_id="run:current", scope="repository", temporal_context="2026-08-23", authority_scope="FACTUAL", claim_fitness="DIRECT", identity_confidence="HIGH", evidence_independence="INDEPENDENT", completeness="COMPLETE", observed_value="SUCCESS", semantic_status="OBSERVED")
+    a = EvidenceObservation(evidence_id="rootless-a", source_ref="run-A", evidence_layer="RUN_METADATA", evidence_independence="INDEPENDENT", provenance_root="missing-root-A", **common)
+    b = EvidenceObservation(evidence_id="rootless-b", source_ref="run-B", evidence_layer="RUN_METADATA", evidence_independence="INDEPENDENT", provenance_root="missing-root-B", **common)
+    observations = {a.evidence_id: a, b.evidence_id: b}
+    assert provenance_graph_state(observations) == "INVALID PROVENANCE"
+    assert classify(a, b, observations) == "UNRESOLVED"
+
+
+def test_existing_root_identity_is_valid_provenance_anchor():
+    common = dict(claim_id="run-status", claim_type="EXECUTION", proposition="run completed successfully", target_id="run:current", scope="repository", temporal_context="2026-08-23", authority_scope="FACTUAL", claim_fitness="DIRECT", identity_confidence="HIGH", completeness="COMPLETE", observed_value="SUCCESS", semantic_status="OBSERVED")
+    root = EvidenceObservation(evidence_id="anchor-root", source_ref="workflow-run", evidence_layer="RUN_METADATA", evidence_independence="INDEPENDENT", provenance_root="anchor-root", **common)
+    child = EvidenceObservation(evidence_id="anchored-child", source_ref="artifact", evidence_layer="ARTIFACT", evidence_independence="INDEPENDENT", provenance_root="anchor-root", provenance_parent="anchor-root", **common)
+    observations = {root.evidence_id: root, child.evidence_id: child}
+    assert provenance_graph_state(observations) == "VALID PROVENANCE"
+    assert classify(root, child, observations) == "CONSISTENT / CORRELATED"
+
+
+def test_missing_root_blocks_independent_corroboration_even_when_roots_differ():
+    common = dict(claim_id="run-status", claim_type="EXECUTION", proposition="run completed successfully", target_id="run:current", scope="repository", temporal_context="2026-08-23", authority_scope="FACTUAL", claim_fitness="DIRECT", identity_confidence="HIGH", completeness="COMPLETE", observed_value="SUCCESS", semantic_status="OBSERVED")
+    a = EvidenceObservation(evidence_id="unbound-a", source_ref="run-A", evidence_layer="RUN_METADATA", evidence_independence="INDEPENDENT", provenance_root="not-loaded-A", **common)
+    b = EvidenceObservation(evidence_id="unbound-b", source_ref="run-B", evidence_layer="RUN_METADATA", evidence_independence="INDEPENDENT", provenance_root="not-loaded-B", **common)
+    observations = {a.evidence_id: a, b.evidence_id: b}
+    assert classify(a, b, observations) == "UNRESOLVED"
