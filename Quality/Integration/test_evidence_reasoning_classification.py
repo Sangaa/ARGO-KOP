@@ -22,6 +22,15 @@ class EvidenceObservation:
     semantic_status: str = "OBSERVED"
     execution_identity: Optional[str] = None
     target_commit: Optional[str] = None
+    provenance_root: Optional[str] = None
+
+
+def effective_independence(a: EvidenceObservation, b: EvidenceObservation) -> str:
+    if a.provenance_root and b.provenance_root and a.provenance_root == b.provenance_root:
+        return "CORRELATED"
+    if a.evidence_independence == "INDEPENDENT" and b.evidence_independence == "INDEPENDENT":
+        return "INDEPENDENT"
+    return "CORRELATED"
 
 
 def classify(a: EvidenceObservation, b: EvidenceObservation) -> str:
@@ -31,7 +40,7 @@ def classify(a: EvidenceObservation, b: EvidenceObservation) -> str:
     if a.proposition != b.proposition:
         return "DIFFERENT EVIDENCE LAYERS"
     if a.observed_value == b.observed_value:
-        if a.evidence_independence == "INDEPENDENT" and b.evidence_independence == "INDEPENDENT":
+        if effective_independence(a, b) == "INDEPENDENT":
             return "CONSISTENT / INDEPENDENT CORROBORATION"
         return "CONSISTENT / CORRELATED"
     if a.completeness != "COMPLETE" or b.completeness != "COMPLETE":
@@ -145,3 +154,11 @@ def test_independent_evidence_is_stronger_corroboration():
     run = EvidenceObservation(evidence_id="e8", source_ref="workflow-run", evidence_layer="RUN_METADATA", evidence_independence="INDEPENDENT", **common)
     external = EvidenceObservation(evidence_id="e9", source_ref="independent-check", evidence_layer="INDEPENDENT_CHECK", evidence_independence="INDEPENDENT", **common)
     assert classify(run, external) == "CONSISTENT / INDEPENDENT CORROBORATION"
+
+
+def test_declared_independence_is_overridden_by_shared_provenance_root():
+    common = dict(claim_id="run-status", claim_type="EXECUTION", proposition="run completed successfully", target_id="run:current", scope="repository", temporal_context="2026-08-23", authority_scope="FACTUAL", claim_fitness="DIRECT", identity_confidence="HIGH", evidence_independence="INDEPENDENT", completeness="COMPLETE", observed_value="SUCCESS", semantic_status="OBSERVED", provenance_root="artifact:single-source")
+    metadata = EvidenceObservation(evidence_id="e10", source_ref="run-metadata", evidence_layer="RUN_METADATA", **common)
+    artifact = EvidenceObservation(evidence_id="e11", source_ref="artifact-payload", evidence_layer="ARTIFACT_PAYLOAD", **common)
+    assert effective_independence(metadata, artifact) == "CORRELATED"
+    assert classify(metadata, artifact) == "CONSISTENT / CORRELATED"
