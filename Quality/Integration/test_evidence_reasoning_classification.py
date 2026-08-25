@@ -175,30 +175,30 @@ def test_verified_capability_does_not_promote_unrelated_occurrence():
 
 
 def test_verified_occurrence_requires_explicit_bound_identity():
-    common = dict(claim_id="execution-channel", claim_type="EXECUTION", proposition="execution evidence channel", target_id="ARGO-KOP", scope="repository", temporal_context="2026-08-23", evidence_layer="EXECUTION_SURFACE", source_ref="github:current-commit", authority_scope="FACTUAL", claim_fitness="DIRECT", identity_confidence="HIGH", evidence_independence="CORRELATED", completeness="COMPLETE", observed_value="EXECUTED", semantic_status="VERIFIED_OCCURRENCE")
+    common = dict(claim_id="execution-channel", claim_type="EXECUTION", proposition="execution evidence channel", target_id="ARGO-KOP", scope="repository", temporal_context="2026-08-23", evidence_layer="EXECUTION_SURFACE", source_ref="github:current-commit", authority_scope="FACTUAL", claim_fitness="DIRECT", identity_confidence="HIGH", evidence_independence="CORRELATED", completeness="COMPLETE", observed_value="EXECUTED")
     capability = EvidenceObservation(evidence_id="cap-2", execution_identity="run:current", target_commit="c422556", semantic_status="VERIFIED_CAPABILITY", **common)
-    unbound = EvidenceObservation(evidence_id="occ-2", execution_identity=None, target_commit=None, **common)
+    unbound = EvidenceObservation(evidence_id="occ-2", execution_identity=None, target_commit=None, semantic_status="VERIFIED_OCCURRENCE", **common)
     assert classify_execution_occurrence(capability, unbound) == "UNRESOLVED"
 
 
 def test_verified_occurrence_with_bound_identity_is_verifiable():
-    common = dict(claim_id="execution-channel", claim_type="EXECUTION", proposition="execution evidence channel", target_id="ARGO-KOP", scope="repository", temporal_context="2026-08-23", evidence_layer="EXECUTION_SURFACE", source_ref="github:current-commit", authority_scope="FACTUAL", claim_fitness="DIRECT", identity_confidence="HIGH", evidence_independence="CORRELATED", completeness="COMPLETE", observed_value="EXECUTED", semantic_status="VERIFIED_OCCURRENCE")
+    common = dict(claim_id="execution-channel", claim_type="EXECUTION", proposition="execution evidence channel", target_id="ARGO-KOP", scope="repository", temporal_context="2026-08-23", evidence_layer="EXECUTION_SURFACE", source_ref="github:current-commit", authority_scope="FACTUAL", claim_fitness="DIRECT", identity_confidence="HIGH", evidence_independence="CORRELATED", completeness="COMPLETE", observed_value="EXECUTED")
     capability = EvidenceObservation(evidence_id="cap-3", execution_identity="run:current", target_commit="c422556", semantic_status="VERIFIED_CAPABILITY", **common)
-    occurrence = EvidenceObservation(evidence_id="occ-3", execution_identity="run:current", target_commit="c422556", **common)
+    occurrence = EvidenceObservation(evidence_id="occ-3", execution_identity="run:current", target_commit="c422556", semantic_status="VERIFIED_OCCURRENCE", **common)
     assert classify_execution_occurrence(capability, occurrence) == "VERIFIED_OCCURRENCE"
 
 
 def test_cross_binding_mismatch_is_unresolved():
-    common = dict(claim_id="execution-channel", claim_type="EXECUTION", proposition="execution evidence channel", target_id="ARGO-KOP", scope="repository", temporal_context="2026-08-23", evidence_layer="EXECUTION_SURFACE", source_ref="github:current-commit", authority_scope="FACTUAL", claim_fitness="DIRECT", identity_confidence="HIGH", evidence_independence="CORRELATED", completeness="COMPLETE", observed_value="EXECUTED", semantic_status="VERIFIED_OCCURRENCE")
+    common = dict(claim_id="execution-channel", claim_type="EXECUTION", proposition="execution evidence channel", target_id="ARGO-KOP", scope="repository", temporal_context="2026-08-23", evidence_layer="EXECUTION_SURFACE", source_ref="github:current-commit", authority_scope="FACTUAL", claim_fitness="DIRECT", identity_confidence="HIGH", evidence_independence="CORRELATED", completeness="COMPLETE", observed_value="EXECUTED")
     capability = EvidenceObservation(evidence_id="cap-4", execution_identity="run:current", target_commit="target-A", semantic_status="VERIFIED_CAPABILITY", **common)
-    mismatch = EvidenceObservation(evidence_id="occ-4", execution_identity="run:current", target_commit="target-B", **common)
+    mismatch = EvidenceObservation(evidence_id="occ-4", execution_identity="run:current", target_commit="target-B", semantic_status="VERIFIED_OCCURRENCE", **common)
     assert classify_execution_occurrence(capability, mismatch) == "UNRESOLVED"
 
 
 def test_execution_identity_mismatch_is_unresolved():
-    common = dict(claim_id="execution-channel", claim_type="EXECUTION", proposition="execution evidence channel", target_id="ARGO-KOP", scope="repository", temporal_context="2026-08-23", evidence_layer="EXECUTION_SURFACE", source_ref="github:current-commit", authority_scope="FACTUAL", claim_fitness="DIRECT", identity_confidence="HIGH", evidence_independence="CORRELATED", completeness="COMPLETE", observed_value="EXECUTED", semantic_status="VERIFIED_OCCURRENCE")
+    common = dict(claim_id="execution-channel", claim_type="EXECUTION", proposition="execution evidence channel", target_id="ARGO-KOP", scope="repository", temporal_context="2026-08-23", evidence_layer="EXECUTION_SURFACE", source_ref="github:current-commit", authority_scope="FACTUAL", claim_fitness="DIRECT", identity_confidence="HIGH", evidence_independence="CORRELATED", completeness="COMPLETE", observed_value="EXECUTED")
     capability = EvidenceObservation(evidence_id="cap-5", execution_identity="run:A", target_commit="target-A", semantic_status="VERIFIED_CAPABILITY", **common)
-    mismatch = EvidenceObservation(evidence_id="occ-5", execution_identity="run:B", target_commit="target-A", **common)
+    mismatch = EvidenceObservation(evidence_id="occ-5", execution_identity="run:B", target_commit="target-A", semantic_status="VERIFIED_OCCURRENCE", **common)
     assert classify_execution_occurrence(capability, mismatch) == "UNRESOLVED"
 
 
