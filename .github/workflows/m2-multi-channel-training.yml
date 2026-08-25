@@ -1,5 +1,4 @@
 name: M2 Multi-Channel Proposal Training
-
 on:
   push:
     branches: [main]
@@ -10,9 +9,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
       - name: Setup Python
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v6
         with:
           python-version: '3.11'
       - name: Execute deterministic M2 checks
