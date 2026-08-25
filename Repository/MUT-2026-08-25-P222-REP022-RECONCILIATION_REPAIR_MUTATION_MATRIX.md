@@ -1,6 +1,6 @@
 # MUT-2026-08-25-P222 — REP-022 Reconciliation Repair Mutation Matrix
 
-Status: RETROACTIVE-REMEDIATION / OPEN
+Status: RETROACTIVE-REMEDIATION / CLOSED
 
 ## Purpose
 
@@ -43,4 +43,12 @@ The original P222 mutation violated the intended pre-write Matrix discipline. Th
 
 ## Closure
 
-OPEN until a new Full-Stack run on the matrix commit is fully reviewed. No automatic promotion follows CI success.
+CLOSED after Full-Stack Audit run `32882578985` on commit `5b00826f3f46fe4eb29d062d3696075c89cecece` completed all 26 required steps successfully, including Mutation Matrix preflight, semantic regression, CI impact correlation, repository-wide audit, runtime evidence emission, and all required evidence uploads. The audit reported `AUDIT_COMPLETE` with `gap_count=0`. CI impact correlation for the closure matrix remained `POLICY_UNRESOLVED / NO_AUTO_PROMOTION`; this does not constitute a failure and does not authorize automatic promotion. Historical governance failure remains preserved above.
+
+## Post-Write Read-Back
+
+The matrix was re-read from the repository after the mutation and its status is `RETROACTIVE-REMEDIATION / CLOSED`.
+
+## Closure Boundary
+
+P222 remediation is execution-verified and transaction-closed. No unrelated runtime relationship, architectural claim, or policy promotion is inferred from this closure.
