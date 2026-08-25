@@ -15,10 +15,10 @@ jobs:
       PYTHONPATH: ${{ github.workspace }}
     steps:
       - name: Checkout current branch
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       - name: Setup Python
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v6
         with:
           python-version: '3.11'
 
@@ -90,16 +90,7 @@ jobs:
           if candidate == content:
               raise SystemExit("CANDIDATE_EQUALS_SOURCE")
 
-          commit_result = api_request(
-              "PUT",
-              f"{api}/contents/{encoded}",
-              {
-                  "message": "P4: promote REL-005 after bidirectional executable verification",
-                  "content": base64.b64encode(candidate.encode("utf-8")).decode("ascii"),
-                  "sha": source_sha,
-                  "branch": "main",
-              },
-          )
+          commit_result = api_request("PUT", f"{api}/contents/{encoded}", {"message": "P4: promote REL-005 after bidirectional executable verification", "content": base64.b64encode(candidate.encode("utf-8")).decode("ascii"), "sha": source_sha, "branch": "main"})
           commit_sha = commit_result["commit"]["sha"]
 
           readback = api_request("GET", f"{api}/contents/{encoded}?ref=main")
@@ -110,30 +101,8 @@ jobs:
               raise SystemExit(f"POST_WRITE_BLOB_SHA_MISMATCH:{candidate_sha}!={readback['sha']}")
 
           req_current = api_request("GET", f"{api}/contents/{urllib.parse.quote(request_path, safe='')}?ref=main")
-          request_payload = {
-              **request,
-              "status": "APPLIED",
-              "applied_commit_sha": commit_sha,
-              "candidate_blob_sha": candidate_sha,
-              "verified_readback": True,
-          }
-          api_request(
-              "PUT",
-              f"{api}/contents/{urllib.parse.quote(request_path, safe='')}",
-              {
-                  "message": "P4: record REL-005 mutation application",
-                  "content": base64.b64encode((json.dumps(request_payload, indent=2, sort_keys=True) + "\n").encode("utf-8")).decode("ascii"),
-                  "sha": req_current["sha"],
-                  "branch": "main",
-              },
-          )
+          request_payload = {**request, "status": "APPLIED", "applied_commit_sha": commit_sha, "candidate_blob_sha": candidate_sha, "verified_readback": True}
+          api_request("PUT", f"{api}/contents/{urllib.parse.quote(request_path, safe='')}", {"message": "P4: record REL-005 mutation application", "content": base64.b64encode((json.dumps(request_payload, indent=2, sort_keys=True) + "\n").encode("utf-8")).decode("ascii"), "sha": req_current["sha"], "branch": "main"})
 
-          print(json.dumps({
-              "status": "APPLIED",
-              "target": target,
-              "source_blob_sha": source_sha,
-              "candidate_blob_sha": candidate_sha,
-              "applied_commit_sha": commit_sha,
-              "verified_readback": True,
-          }, sort_keys=True))
+          print(json.dumps({"status": "APPLIED", "target": target, "source_blob_sha": source_sha, "candidate_blob_sha": candidate_sha, "applied_commit_sha": commit_sha, "verified_readback": True}, sort_keys=True))
           PY
