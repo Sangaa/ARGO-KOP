@@ -31,9 +31,12 @@ The registry does not execute code, grant authorization, or modify runtime behav
 | Seam | State | Contract | Test | Trace | Scope |
 | :--- | :--- | :--- | :--- | :--- | :--- |
 | `ENG-006 → SRV-009` | `CONNECTED / EXECUTABLE-VERIFIED` | `Engine/ENG-006_EXECUTION_ENGINE.md` + `Services/SRV-009_UPDATE_SERVICE.md` | `.github/workflows/p3-runtime-github-e2e.yml` | `Quality/Integration/P3_EXECUTABLE_PROOF_CLOSURE_2026-08-17.md` | Isolated non-canonical E2E only |
+| `Execution Trace → Outcome Evaluation` | `CONNECTED / CONTROLLED-SYNTHETIC-VERIFIED` | `Runtime/Learning/OUTCOME_EVALUATION_CONTRACT.md` | `Quality/Integration/test_execution_trace_to_outcome_evaluation.py` | `Quality/Integration/evidence/runtime/execution_trace_to_outcome_evaluation_certification.json` | Controlled synthetic evidence; `side_effect=false` |
 
 ### Promotion Boundary
 
-This entry is evidence-backed for the isolated E2E scope only. It does not authorize arbitrary canonical mutation, bypass governance, or imply repository-wide connectivity certification.
+The `ENG-006 → SRV-009` entry is evidence-backed for the isolated E2E scope only. The `Execution Trace → Outcome Evaluation` entry is evidence-backed under the controlled synthetic evidence policy and does not claim autonomous external execution. Neither entry authorizes arbitrary canonical mutation, bypasses governance, or implies repository-wide connectivity certification.
 
-The seam remains subject to the applicable validation, authorization, impact, post-write verification, and traceability controls.
+The seams remain subject to the applicable validation, authorization, impact, post-write verification, and traceability controls.
+
+The `Execution Trace → Outcome Evaluation` evidence set was previously certified at checkpoint P177 and later revalidated through the current repository audit evidence. Its contract, integration test, and trace artifact are repository-relative and current at the reconciled HEAD.
