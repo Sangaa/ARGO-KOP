@@ -1,7 +1,7 @@
 # P4 — REL-061 Intentional One-Way Disposition
 
 Date: 2026-08-17
-Status: `DISPOSITION-READY / REGISTRY UPDATE PENDING`
+Status: `DISPOSITION-RECONCILED / REGISTRY STATE CONFIRMED`
 
 ## Relationship
 
@@ -26,9 +26,15 @@ The controlled registry has no `SUPPLEMENTS` relationship type. `REFERENCES` is 
 
 ## Decision
 
-`REL-061` is disposition-ready as an **intentional one-way relationship**.
+`REL-061` is confirmed as an **intentional one-way relationship**.
 
 No bidirectional promotion is authorized.
+
+The current `REP-014` registry already records:
+
+`REL-061 = INTENTIONAL ONE-WAY / GOVERNANCE-REVALIDATED`
+
+This disposition record is therefore reconciled with the registry state; no further registry mutation is required by this disposition.
 
 ## Remaining P4 Blocker
 
@@ -36,9 +42,9 @@ No bidirectional promotion is authorized.
 
 ## Mutation Boundary
 
-This record does not modify `REP-014`, `GOV-013`, `GOV-013A`, Runtime, or the production adapter.
+This reconciliation does not modify `REP-014`, `GOV-013`, `GOV-013A`, Runtime, or the production adapter.
 
-A subsequent `REP-014` state update must use the full-content-preserving Mutation Matrix and current-SHA/pre-write recheck rules established by GOV-014/P5.
+Any future `REP-014` state update must use the full-content-preserving Mutation Matrix and current-SHA/pre-write recheck rules established by GOV-014/P5.
 
 ---
 
