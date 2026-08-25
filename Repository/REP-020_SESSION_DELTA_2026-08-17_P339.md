@@ -14,7 +14,7 @@ This manifest records the direct current-main identity/status boundary used by t
 | REP-014 | Repository/REP-014_REPOSITORY_RELATIONSHIP_REGISTRY.md | 1.2.6 | Active / Relationship Enumeration In Progress | CURRENT RELATIONSHIP EVIDENCE / SCOPED |
 | REP-015 | Repository/REP-015_CONTROL_PLANE_BOOTSTRAP_CHECKLIST.md | 1.0.7 | Active / Phase 1 Open / Integrity Hold | CURRENT BOOTSTRAP SCOPE |
 | REP-016 | Repository/REP-016_PHASE1_PARTITION_WORK_QUEUE.md | 1.3.0 | Active / Phase 1 Open / Integrity Hold | PRIORITY 1 OPEN |
-| REP-020 | Repository/REP-020_DEPENDENCY_CONSUMER_IMPACT_MATRIX.md | 0.2.1 | Provisional / Phase-1 Seed / Not Authority | CURRENT IMPACT EVIDENCE / NOT CLOSURE AUTHORITY |
+| REP-020 | Repository/REP-020_DEPENDENCY_CONSUMER_IMPACT_MATRIX.md | 0.2.3 | Provisional / Phase-1 Seed / Not Authority | CURRENT IMPACT EVIDENCE / NOT CLOSURE AUTHORITY |
 
 ## Closure Boundary
 
