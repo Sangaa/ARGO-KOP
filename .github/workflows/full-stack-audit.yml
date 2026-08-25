@@ -76,6 +76,9 @@ jobs:
       - name: Run GT-018 evidence reasoning classification regression
         run: python -m pip install --upgrade pytest && python -m pytest -q Quality/Integration/test_evidence_reasoning_classification.py
 
+      - name: Run P203 core stabilization gate
+        run: python Quality/Integrity/test_core_stabilization_gate.py
+
       - name: Run Mutation Matrix preflight regression
         run: |
           python - <<'PY'
