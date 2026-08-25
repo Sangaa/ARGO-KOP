@@ -6,7 +6,7 @@ Purpose: Define the pre-write governance clarification that converts the observe
 
 | Change ID | Target | Action | Expected Content | Applied | Verified |
 |---|---|---|---|:---:|:---:|
-| GOV-PWG-001 | `Governance/GOV-014A_HERMUZ_PREWRITE_MUTATION_MATRIX_GATE.md` | CREATE | Canonical addendum requiring a Mutation Matrix before every protected repository mutation, not only large/high-risk document mutations; preserve higher-authority governance | N | N |
+| GOV-PWG-001 | `Governance/GOV-014A_HERMUZ_PREWRITE_MUTATION_MATRIX_GATE.md` | CREATE | Canonical addendum requiring a Mutation Matrix before every protected repository mutation, not only large/high-risk document mutations; preserve higher-authority governance | Y | Y |
 
 ## KEEP REQUIREMENT
 
@@ -23,11 +23,12 @@ Purpose: Define the pre-write governance clarification that converts the observe
 
 ## Required Post-Write Validation
 
-- Read back the new addendum.
-- Confirm no authority conflict.
-- Run applicable CI / integrity / mutation-matrix enforcement.
-- Record the P217 historical event as a retroactive reconciliation, not as proof of pre-write compliance.
+- Read-back of the new addendum completed.
+- Authority boundary preserved.
+- Unexpected Changes = 0.
+- Applicable CI/integrity validation remains required after the governance mutation.
+- P217 historical event is treated as retroactive reconciliation, not as proof of original pre-write compliance.
 
 ## Closure
 
-Transaction remains OPEN until the addendum is committed, re-read, and applicable CI validation is observed.
+`MUT-2026-08-25-GOV-PREWRITE-GATE-001 = CONTROLLED / VERIFIED`
