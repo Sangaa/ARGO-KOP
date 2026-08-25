@@ -2,11 +2,11 @@
 
 Platform: ARGO KOP  
 Document ID: REP-020  
-Version: 0.2.1  
+Version: 0.2.2  
 Status: **Provisional / Phase-1 Seed / Not Authority**  
 Current Development Baseline: **3.2.1**  
 Last Audit: 2026-08-25  
-Last Revalidation Evidence: `P204` / `459c1d49541a7aa7bcd5d0d239261d5ff5a4acfb`
+Last Revalidation Evidence: `P211` / `RUN-E03 boundary reconciliation`
 
 ## Current Evidence Boundary
 
@@ -14,7 +14,7 @@ This matrix remains a lookup and impact-analysis surface. It does not grant auth
 
 The latest bounded execution evidence is `P203`, verified by workflow run `32810102376` at commit `4284ee9265f66e4631425f3cfddd84ab42dbcfbc`. `GT-018 = VERIFIED`, `P203 = VERIFIED`, and the Full-Stack Repository Audit = PASS for that execution boundary. This evidence does not close the Connected-Baseline Completion Gate.
 
-`P204` reconciled the stale execution-boundary wording found in root status evidence without promoting the global integrity state. Older matrix checkpoints remain historical unless explicitly revalidated below.
+`P204` reconciled the stale execution-boundary wording found in root status evidence without promoting the global integrity state. `P211` reconciles a current executable-boundary consumer entry exposed by Runtime Prototype CI while preserving the distinction between isolated E2E proof and runtime service coupling.
 
 ## Relationship States
 
@@ -37,6 +37,16 @@ The latest bounded execution evidence is `P203`, verified by workflow run `32810
 | RUN-001 | Runtime/RUN-010_RUNTIME_REFERENCE.md | 3.2.1 | PARTIALLY_VERIFIED boundary |
 | ENG-001 | Engine/ENG-006_EXECUTION_ENGINE.md | 3.2.1 | PARTIALLY_VERIFIED boundary |
 
+## RUN-E03 — ENG-006 → SRV-009 Evidence Boundary
+
+| Evidence ID | Relationship | Evidence Scope | Current State | Boundary |
+|---|---|---|---|---|
+| RUN-E03 | ENG-006 → SRV-009 | Isolated P3 E2E proof exists; runtime `RUN-010` service coupling is not established by that proof | PARTIALLY_VERIFIED | E2E execution verified in isolation; runtime-service coupling remains unproven |
+
+`RUN-E03` is retained because the relationship registry and integrity tests require an explicit evidence row for this edge. Its `PARTIALLY_VERIFIED` classification is intentional: the isolated E2E proof verifies the governed ENG-006 → SRV-009 path in its isolated execution boundary, but does not prove that the ordinary RUN-010 runtime path dispatches through SRV-009.
+
+Authoritative isolated E2E evidence remains `Repository/P3_EXECUTABLE_PROOF_CLOSURE_2026-08-17.md` and the P3 reconciliation addendum. Historical entries claiming that the isolated executable invocation was never performed are superseded for that narrow E2E scope, while the absence of ordinary runtime-service proof remains open.
+
 ## Control-Plane Reconciliation State
 
 - `Release/VERSION.md` remains authoritative for official release `1.0.0` and development baseline `3.2.1`.
@@ -48,7 +58,7 @@ The latest bounded execution evidence is `P203`, verified by workflow run `32810
 
 ## Current Bounded Next Work
 
-1. Complete root-status reconciliation as a whole-document consistency review.
+1. Preserve the distinction between isolated executable proof and ordinary runtime consumer proof.
 2. Continue Services → Runtime Consumers → Repository / Index Services relationship enumeration.
 3. Reconcile `SRV-001` through `SRV-009` against current Validation Engine declarations and actual consumers/dependencies.
 4. Continue duplicate-ID and authority-path validation without inferring missing artifacts from numeric sequences.
