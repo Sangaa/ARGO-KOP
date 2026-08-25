@@ -2,11 +2,11 @@
 
 Platform: ARGO KOP  
 Document ID: REP-020  
-Version: 0.2.2  
+Version: 0.2.3  
 Status: **Provisional / Phase-1 Seed / Not Authority**  
 Current Development Baseline: **3.2.1**  
 Last Audit: 2026-08-25  
-Last Revalidation Evidence: `P211` / `RUN-E03 boundary reconciliation`
+Last Revalidation Evidence: `P213` / `SERVICE_DISPATCH evidence-boundary regression`
 
 ## Current Evidence Boundary
 
@@ -46,6 +46,16 @@ The latest bounded execution evidence is `P203`, verified by workflow run `32810
 `RUN-E03` is retained because the relationship registry and integrity tests require an explicit evidence row for this edge. Its `PARTIALLY_VERIFIED` classification is intentional: the isolated E2E proof verifies the governed ENG-006 → SRV-009 path in its isolated execution boundary, but does not prove that the ordinary RUN-010 runtime path dispatches through SRV-009.
 
 Authoritative isolated E2E evidence remains `Repository/P3_EXECUTABLE_PROOF_CLOSURE_2026-08-17.md` and the P3 reconciliation addendum. Historical entries claiming that the isolated executable invocation was never performed are superseded for that narrow E2E scope, while the absence of ordinary runtime-service proof remains open.
+
+## SERVICE_DISPATCH — RUN-010 → SRV-009 Evidence Boundary
+
+`SERVICE_DISPATCH` is an explicit evidence-boundary marker for the unresolved runtime consumer relationship. It does **not** assert that runtime dispatch exists.
+
+| Evidence ID | Relationship | Evidence Scope | Current State | Boundary |
+|---|---|---|---|---|
+| SERVICE_DISPATCH | RUN-010 → SRV-009 | No independent callable-consumer source evidence or observed runtime dispatch trace recovered; existing prototype/adapter evidence remains insufficient | REVALIDATION_REQUIRED | Runtime-service coupling remains unproven; do not promote to VERIFIED |
+
+The marker exists so integrity tests can distinguish an intentionally unresolved runtime-coupling boundary from a missing control-plane declaration. It must not be interpreted as executable evidence or as authority to modify the runtime path.
 
 ## Control-Plane Reconciliation State
 
