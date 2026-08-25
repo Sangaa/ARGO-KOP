@@ -1,36 +1,28 @@
 # ERIG-001 — Actions/Node24 Migration & Build Roadmap
 
-Status: ACTIVE / GOVERNED
+Status: CLOSED / ENVIRONMENT-VERIFIED
 
-## 1. Trigger
-Repeated successful CI runs carried a Node.js 20 deprecation warning. This is classified as an evidence-environment integrity issue, not a test failure.
+## Trigger
+Repeated successful CI runs carried a Node.js 20 deprecation warning. This was classified as an evidence-environment integrity issue, not a test failure.
 
-## 2. Completed
-- Inspected the Full-Stack workflow and identified deprecated action majors.
-- Migrated `actions/checkout` from v4 to v6.
-- Migrated `actions/setup-python` from v5 to v6.
-- Migrated `actions/upload-artifact` from v4 to v6.
+## Completed
+- Inspected the relevant workflows and identified deprecated action majors.
+- Migrated `actions/checkout` v4 -> v6.
+- Migrated `actions/setup-python` v5 -> v6.
+- Migrated `actions/upload-artifact` v4 -> v6.
 - Preserved workflow logic; no test semantics were intentionally changed.
+- Verified descendant CI execution on current main SHA `7856b2b9408d818156945254a17e20df8633708c`.
+- Inspected logs: Node20 deprecation warning absent; existing audit/runtime/integrity gates remained successful.
 
-## 3. Required verification
-For the migration commit:
-1. correlate workflow SHA with checkout SHA;
-2. verify workflow execution completes;
-3. inspect jobs and logs, not only conclusion;
-4. confirm the Node20 deprecation warning is absent;
-5. confirm all existing gates remain PASS;
-6. compare changed files against the intended mutation set;
-7. reconcile documentation and closure state.
+## Evidence interpretation
+The migration commit was `5a0960...`; verification occurred on its descendant `7856...`. This distinction is preserved. A missing run for the mutation SHA was not interpreted as execution failure; descendant correlation and actual action versions were checked.
 
-A green conclusion with the warning still present is NOT a clean migration verification.
-
-## 4. ERIG rule established
+## ERIG rule established
 `CI PASS` does not imply `evidence-environment CLEAN`.
 
 Absence of a searched artifact does not imply artifact absence until retrieval surfaces appropriate to the claim have been exhausted.
 
-## 5. Currentness / tool-capability learning
-For future discrepancies classify before acting:
+## Currentness / tool-capability classifications
 - EXECUTION_ABSENT
 - EVIDENCE_NOT_RETRIEVED
 - EVIDENCE_FOUND_WRONG_SURFACE
@@ -38,16 +30,11 @@ For future discrepancies classify before acting:
 - TOOL_CAPABILITY_MISUSED
 - TRUE_EXECUTION_FAILURE
 
-## 6. Mandatory session path
-Every session must begin by loading current governance, latest checkpoint, prior learning, current repository state, and relevant relationship/dependency surfaces. Every mutation requires a matrix/preflight, execution, read-back, CI/evidence verification, reconciliation, learning update, and session closure.
+## Mandatory session path
+Every session begins by loading current governance, latest checkpoint, prior learning, current repository state, and relevant relationship/dependency surfaces. Every mutation requires matrix/preflight, execution, read-back, CI/evidence verification, reconciliation, learning update, and session closure.
 
-## 7. KRS-001 future path
-After the CI environment is clean:
-KRS-001 pilot reconciliation -> currentness gate -> relationship review -> schema refinement -> second pilot only if justified -> controlled migration.
+## Closure
+ERIG-001 Node24 migration verification is satisfied at the environment level. No further action migration is required in this session.
 
-No bulk document migration before the pilot schema and currentness model are proven.
-
-## 8. Session checkpoint
-Migration commit: `5a0960bbeffb0b9757aef803ca4706b8ff01e6fc`
-Verification: PENDING
-Next mandatory action: CI/log verification and reconciliation.
+## Next checkpoint
+Return to KRS-001 schema refinement. Before any new mutation, load current governance, latest checkpoint, current file contents, modification chronology, relationships, and relevant evidence surfaces.
