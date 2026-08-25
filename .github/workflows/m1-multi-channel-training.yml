@@ -13,10 +13,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       - name: Setup Python
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v6
         with:
           python-version: '3.11'
 
@@ -24,17 +24,14 @@ jobs:
         run: |
           python - <<'PY'
           from Runtime.Prototype.multi_channel_m1_harness import run_m1
-
           ok = run_m1()
           assert ok['canonical_mutation'] is False
           assert [r['status'] for r in ok['results']] == ['SUCCESS', 'SUCCESS']
           assert ok['contexts'][0]['state'] != ok['contexts'][1]['state']
-
           failed = run_m1(fail_task='TASK-001')
           assert [r['status'] for r in failed['results']] == ['FAILED', 'SUCCESS']
           assert failed['traces'][0][-1]['event'] == 'FAIL'
           assert failed['traces'][1][-1]['event'] == 'COMPLETE'
-
           print('M1_MULTI_CHANNEL_TRAINING=PASS')
           print('M1_FAILURE_CONTAINMENT=PASS')
           print('M1_CANONICAL_MUTATION=False')
