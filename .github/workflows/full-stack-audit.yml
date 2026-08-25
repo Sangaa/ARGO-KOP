@@ -8,7 +8,7 @@ on:
   workflow_dispatch:
 
 env:
-  PYTHONPATH: ${{ github.workspace }}:${{ github.workspace }}/Runtime/Execution:${{ github.workspace }}/Runtime/Learning:${{ github.workspace }}/Decision:${{ github.workspace }}/Cognition:${{ github.workspace }}/Memory/Execution:${{ github.workspace }}/Quality/Integration:${{ github.workspace }}/Runtime/Prototype
+  PYTHONPATH: ${{ github.workspace }}:${{ github.workspace }}/Runtime/Execution:${{ github.workspace }}/Runtime/Learning:${{ github.workspace }}/Decision:${{ github.workspace }}/Cognition:${{ github.workspace }}/Memory/Execution:${{ github.workspace }}/Memory/Learning:${{ github.workspace }}/Quality/Integration:${{ github.workspace }}/Runtime/Prototype
 
 jobs:
   repository-audit:
@@ -74,7 +74,7 @@ jobs:
         run: python Quality/Integration/test_p6_runtime_lineage_adapter.py
 
       - name: Run GT-018 evidence reasoning classification regression
-        run: python -m unittest Quality/Integration/test_evidence_reasoning_classification.py -v
+        run: python -m pip install --upgrade pytest && python -m pytest -q Quality/Integration/test_evidence_reasoning_classification.py
 
       - name: Run Mutation Matrix preflight regression
         run: |
