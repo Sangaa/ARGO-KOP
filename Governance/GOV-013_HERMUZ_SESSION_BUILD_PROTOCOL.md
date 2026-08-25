@@ -6,7 +6,7 @@
 
 Platform: ARGO KOP (Knowledge Operating Platform)
 Document ID: GOV-013
-Version: 1.1.1
+Version: 1.1.2
 Status: Approved / Canonical / Session Operating Contract
 Category: Governance / Engineering Operating Protocol
 Canonical: Yes
@@ -300,6 +300,96 @@ After any material mutation affecting a module or cross-layer seam, rerun the sm
 
 A successful commit alone does not satisfy integration verification.
 
+### 9B. Mandatory CI Failure Root-Cause Gate
+
+A failing CI/Action/Workflow is a **HARD HOLD**, not a reason to continue to the next checkpoint.
+
+The engineer MUST NOT:
+
+- treat a failing Action as informational;
+- skip, ignore, or summarize away a failed Job/Step;
+- infer the cause from the Action title or summary alone;
+- declare the current checkpoint complete while an applicable required check is failing;
+- move to the next build point merely because other Jobs passed;
+- treat a commit succeeding as evidence that the build is correct.
+
+For every failed required Action, the engineer MUST execute this sequence:
+
+**Workflow → Run → Job → Step → Test/Command → First Meaningful Failure → Root Cause → Prior-Learning Retrieval → Minimal Safe Fix → Re-run → Full Result Review → Post-change Validation → Documentation → Checkpoint Closure**
+
+The engineer MUST inspect the failed Job's steps and logs, not merely the workflow conclusion. Where logs are available, the first meaningful failure boundary must be identified and distinguished from downstream/cascading failures.
+
+The engineer MUST classify the failure before choosing a fix, at minimum as one or more of:
+
+- implementation/code defect;
+- test defect;
+- fixture/data defect;
+- configuration/workflow defect;
+- manifest/index/version drift;
+- evidence/matrix inconsistency;
+- repository synchronization defect;
+- environment/tooling/connector limitation;
+- governance/authority defect;
+- unknown/unresolved.
+
+A suspected cause is **not** a root cause until the available evidence supports it and, where practical, the correction removes the observed failure on a re-run.
+
+### 9B.1 Failure Boundary Before Fix
+
+Before modifying anything, record:
+
+1. exact failing workflow/run;
+2. commit/ref under test;
+3. failed Job and Step;
+4. exact failing test/command or assertion;
+5. relevant error output;
+6. first meaningful failure boundary;
+7. known upstream/downstream failures;
+8. applicable prior ARGO learning and whether it is directly applicable, transferable, historical, contradictory, or not found.
+
+Do not modify a file merely because it appears near the failure.
+
+### 9B.2 Fix Verification Gate
+
+After a fix:
+
+1. re-read the changed artifact(s);
+2. verify IDs, versions, relationships, indexes and affected consumers;
+3. rerun the smallest sufficient targeted test;
+4. rerun the affected workflow/required integration checks;
+5. inspect **all required Jobs/Steps** in the resulting run;
+6. investigate any new or remaining failure independently;
+7. only then classify the fix as verified.
+
+If the re-run fails, the checkpoint remains **OPEN/HOLD** and the cycle repeats from failure-boundary analysis. A new failure must not be silently appended to the previous cause.
+
+### 9B.3 No-Transition Rule
+
+**No failed required check → next checkpoint transition is permitted.**
+
+A checkpoint may advance only when:
+
+- all required applicable checks pass; or
+- the repository's governing authority explicitly classifies a known non-blocking condition as such, with provenance and evidence recorded.
+
+A user request to continue does not override this gate.
+
+### 9B.4 Complete-Run Review
+
+A green headline is insufficient when any required Job, Step, matrix row, artifact, runtime evidence surface or post-change validation remains unexamined or failed.
+
+For material checkpoints, the engineer must reconcile:
+
+**Workflow Result + Job Results + Step/Log Evidence + Test Result + Runtime Evidence (when applicable) + Matrix/Registry State + Commit/File State.**
+
+Only the reconciled state may be used to choose the next build point.
+
+### 9B.5 Failure Learning Promotion
+
+If a failure exposes a repeatable control weakness, the engineer MUST search existing ARGO learning before creating new guidance. If no adequate rule exists, record candidate learning and determine whether it should be promoted into this protocol, a test gate, a matrix rule, or another canonical learning surface.
+
+A prior occurrence of the same failure that was not retrieved is a **Prior-Learning Retrieval Defect** and must be documented when materially relevant.
+
 ---
 
 ## 10. Model Creation Gate
@@ -456,7 +546,7 @@ When a new chat receives:
 
 it must interpret this as:
 
-> **Resume ARGO KOP construction from the current repository state, load the canonical HERMUZ operating contract, inspect the latest verified checkpoint and open work, recover and continue any previously interrupted integration-testing work, retrieve and review relevant prior ARGO learning before designing a new solution, simulate applicable prior remedies against the current problem, escalate to new research only after prior learning fails to resolve the verified gap, apply three-method negative-search verification, preserve evidence/authority/relationship boundaries, perform integration verification in parallel with Matrix construction for every material module and cross-layer seam, make only safe evidence-backed mutations, update the required matrices, validate every change, promote learning only when justified, and continue automatically to the highest-priority safe task until a real blocker, explicit closure request, or exhaustion of safe high-priority work.**
+> **Resume ARGO KOP construction from the current repository state, load the canonical HERMUZ operating contract, inspect the latest verified checkpoint and open work, recover and continue any previously interrupted integration-testing work, retrieve and review relevant prior ARGO learning before designing a new solution, simulate applicable prior remedies against the current problem, escalate to new research only after prior learning fails to resolve the verified gap, apply three-method negative-search verification, preserve evidence/authority/relationship boundaries, perform integration verification in parallel with Matrix construction for every material module and cross-layer seam, make only safe evidence-backed mutations, update the required matrices, validate every change, promote learning only when justified, treat every required CI failure as a hard hold requiring job/step/log/root-cause analysis and successful re-run before transition, and continue automatically to the highest-priority safe task until a real blocker, explicit closure request, or exhaustion of safe high-priority work.**
 
 ---
 
