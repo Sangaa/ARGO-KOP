@@ -8,7 +8,7 @@ on:
   workflow_dispatch:
 
 env:
-  PYTHONPATH: ${{ github.workspace }}:${{ github.workspace }}/Runtime/Execution:${{ github.workspace }}/Runtime/Learning:${{ github.workspace }}/Decision:${{ github.workspace }}/Cognition:${{ github.workspace }}/Memory/Execution:${{ github.workspace }}/Memory/Learning:${{ github.workspace }}/Quality/Integration:${{ github.workspace }}/Runtime/Prototype
+  PYTHONPATH: ${{ github.workspace }}:${{ github.workspace }}/Runtime/Execution:${{ github.workspace }}/Runtime/Learning:${{ github.workspace }}/Decision:${{ github.workspace }}/Cognition:${{ github.workspace }}/Memory/Execution:${{ github.workspace }}/Quality/Integration:${{ github.workspace }}/Runtime/Prototype
 
 jobs:
   repository-audit:
