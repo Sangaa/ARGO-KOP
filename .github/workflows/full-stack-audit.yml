@@ -18,12 +18,10 @@ jobs:
         uses: actions/checkout@v6
         with:
           fetch-depth: 0
-
       - name: Setup Python
         uses: actions/setup-python@v6
         with:
           python-version: '3.11'
-
       - name: Assert execution is bound to current checkout SHA
         shell: bash
         run: |
@@ -31,7 +29,6 @@ jobs:
           CHECKOUT_SHA="$(git rev-parse HEAD)"
           test "$CHECKOUT_SHA" = "${{ github.sha }}"
           printf '%s\n' "{\"workflow\":\"${{ github.workflow }}\",\"run_id\":\"${{ github.run_id }}\",\"event\":\"${{ github.event_name }}\",\"ref\":\"${{ github.ref }}\",\"github_sha\":\"${{ github.sha }}\",\"checkout_sha\":\"$CHECKOUT_SHA\",\"before\":\"${{ github.event.before }}\"}" > ci-execution-identity.json
-
       - name: Run P4 REL-009 consumer boundary safety gate
         shell: bash
         run: |
@@ -40,7 +37,6 @@ jobs:
           grep -Fq 'REVALIDATION REQUIRED' Repository/REP-014_REPOSITORY_RELATIONSHIP_REGISTRY.md
           grep -Fq 'relationship description' Runtime/RUN-010_RUNTIME_REFERENCE.md
           grep -Fq 'This is a relationship description, not a claim that every runtime operation follows this exact path.' Runtime/RUN-010_RUNTIME_REFERENCE.md
-
       - name: Run P4 negative runtime evidence gate
         run: |
           python - <<'PY'
@@ -54,31 +50,22 @@ jobs:
           assert 'SRV-009' not in runner
           assert 'SRV-009' not in entrypoint
           PY
-
       - name: Run P4 critical graph bidirectional boundary regression
         run: python Quality/Integrity/test_critical_graph_bidirectional_boundaries.py
-
       - name: Run P6 CI impact correlation regression
         run: python Quality/Integration/test_ci_impact_correlation.py
-
       - name: Run P6 canonical repository boundary regression
         run: python Quality/Integration/test_p6_canonical_repository.py
-
       - name: Run P6 layered boundary regressions via unittest discovery
         run: python -m unittest discover -s Quality/Integration -p 'test_p6_layered_boundaries.py' -v
-
       - name: Run P6 reconciliation boundary regressions via unittest discovery
         run: python -m unittest discover -s Quality/Integration -p 'test_p6_reconciliation_boundaries.py' -v
-
       - name: Run P6 controlled runtime lineage adapter regression
         run: python Quality/Integration/test_p6_runtime_lineage_adapter.py
-
       - name: Run GT-018 evidence reasoning classification regression
         run: python -m pip install --upgrade pytest && python -m pytest -q Quality/Integration/test_evidence_reasoning_classification.py
-
       - name: Run P203 core stabilization gate
         run: python Quality/Integrity/test_core_stabilization_gate.py
-
       - name: Run Mutation Matrix preflight regression
         run: |
           python - <<'PY'
@@ -89,102 +76,69 @@ jobs:
           assert evaluate(['Repository/MUT-TEST_MUTATION_MATRIX.md']) == ([], ['Repository/MUT-TEST_MUTATION_MATRIX.md'])
           print('MUTATION_MATRIX_PREFLIGHT_REGRESSION=PASS')
           PY
-
       - name: Run Mutation Matrix semantic regression
         run: |
           python - <<'PY'
           from check_mutation_matrix_semantics import validate_matrix_text
           from pathlib import Path
-          valid = (
-              '# MUTATION MATRIX — TEST\n'
-              'Transaction ID: `MUT-TEST-001`\n'
-              'Protocol: GOV-014 v1.0.1\n\n'
-              '| Change ID | Target | Action | Expected Content | Applied | Verified |\n'
-              '|---|---|---|---|:---:|:---:|\n'
-              '| TEST-001 | `Engine/ENG-TEST.md` | UPDATE | bounded test change | N | N |\n\n'
-              '## KEEP REQUIREMENT\n\n'
-              'All other content is `KEEP`.\n\n'
-              '## Execution Evidence\n\n'
-              '- Post-write read-back completed.\n'
-              '- Unexpected Changes = 0.\n\n'
-              '## Closure\n\n'
-              '`TEST TRANSACTION = CONTROLLED`.\n'
-          )
+          valid = ('# MUTATION MATRIX — TEST\nTransaction ID: `MUT-TEST-001`\nProtocol: GOV-014 v1.0.1\n\n| Change ID | Target | Action | Expected Content | Applied | Verified |\n|---|---|---|---|:---:|:---:|\n| TEST-001 | `Engine/ENG-TEST.md` | UPDATE | bounded test change | N | N |\n\n## KEEP REQUIREMENT\n\nAll other content is `KEEP`.\n\n## Execution Evidence\n\n- Post-write read-back completed.\n- Unexpected Changes = 0.\n\n## Closure\n\n`TEST TRANSACTION = CONTROLLED`.\n')
           invalid = valid.replace('| TEST-001 | `Engine/ENG-TEST.md` | UPDATE | bounded test change | N | N |', '| TEST-001 | `Engine/ENG-TEST.md` | UPDATE | bounded test change | MAYBE | N |')
           assert validate_matrix_text(valid) == []
           assert any('Applied must be Y or N' in e for e in validate_matrix_text(invalid))
-          real_variants = [
-              'Repository/MUT-2026-08-17-AUDIT-RECON-001_MUTATION_MATRIX.md',
-              'Repository/MUT-2026-08-17-REP001-001_MUTATION_MATRIX.md',
-              'Repository/MUT-2026-08-17-REP001-002_MUTATION_MATRIX.md',
-          ]
+          real_variants = ['Repository/MUT-2026-08-17-AUDIT-RECON-001_MUTATION_MATRIX.md','Repository/MUT-2026-08-17-REP001-001_MUTATION_MATRIX.md','Repository/MUT-2026-08-17-REP001-002_MUTATION_MATRIX.md']
           for path in real_variants:
               text = Path(path).read_text(encoding='utf-8')
               assert validate_matrix_text(text) == [], path
           print('MUTATION_MATRIX_SEMANTICS_REGRESSION=PASS')
           print('REAL_MATRIX_VARIANTS_VALIDATED=3')
           PY
-
       - name: Run GEN-001 Candidate-001 reuse regression
         run: python Quality/Integration/test_gen001_candidate001_reuse.py
-
       - name: Run REL-009 negative executable-consumer regression
         run: python Quality/Integrity/test_rel009_negative_executable_consumer_boundary.py
-
       - name: Enforce Mutation Matrix on current change set
         shell: bash
         run: |
           set -euo pipefail
           BASE="${{ github.event.before }}"
           HEAD="${{ github.sha }}"
-          if [ -z "$BASE" ] || [ "$BASE" = "0000000000000000000000000000000000000000" ]; then
-            BASE="$(git rev-parse HEAD^)"
-          fi
+          if [ -z "$BASE" ] || [ "$BASE" = "0000000000000000000000000000000000000000" ]; then BASE="$(git rev-parse HEAD^)"; fi
           python Quality/Integration/check_mutation_matrix_preflight.py "$BASE" "$HEAD"
-
       - name: Correlate CI commit with impact matrix
         shell: bash
         run: |
           set -euo pipefail
           BASE="${{ github.event.before }}"
           HEAD="${{ github.sha }}"
-          if [ -z "$BASE" ] || [ "$BASE" = "0000000000000000000000000000000000000000" ]; then
-            BASE="$(git rev-parse HEAD^)"
-          fi
+          if [ -z "$BASE" ] || [ "$BASE" = "0000000000000000000000000000000000000000" ]; then BASE="$(git rev-parse HEAD^)"; fi
           python Quality/Integration/ci_impact_correlation.py "$BASE" "$HEAD" --output ci-impact-correlation.json
-
       - name: Execute repository-wide audit
         working-directory: Quality/Integration
         run: set -o pipefail; python run_full_stack_audit.py ../.. | tee ../../full-stack-audit-report.json
-
       - name: Emit real runtime evidence
         run: set -o pipefail; python Quality/Integration/emit_ci_runtime_evidence.py | tee ci-runtime-evidence.json
-
       - name: Upload audit evidence
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         with:
           name: full-stack-audit-report
           path: full-stack-audit-report.json
           if-no-files-found: error
-
       - name: Upload runtime evidence
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         with:
           name: runtime-evidence
           path: |
             ci-runtime-evidence.json
             Quality/Integration/evidence/runtime/*.json
           if-no-files-found: error
-
       - name: Upload CI impact correlation evidence
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         with:
           name: ci-impact-correlation
           path: ci-impact-correlation.json
           if-no-files-found: error
-
       - name: Upload CI execution identity
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         with:
           name: ci-execution-identity
           path: ci-execution-identity.json
