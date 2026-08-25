@@ -7,7 +7,7 @@ Status: INTEGRITY WARNING / CONNECTED-BASELINE AUDIT
 Category: Root Baseline
 Canonical: Yes
 Priority: Critical
-Last Audit Date: Aug 12, 2026
+Last Audit Date: Aug 25, 2026
 
 ---
 
@@ -148,7 +148,7 @@ Only after this gate passes may the project move from **Connected Baseline Stabi
 | Verified seam registry → canonical spine audit | WIRED / REGISTRY-ONLY CONNECTED PROMOTION ENFORCED |
 | Canonical spine evidence scanner | HARDENED / FILE-LOCAL CANDIDATE DETECTION |
 | Full-stack runtime test coverage detection | HARDENED / TESTS ADDED |
-| Integration CI execution path | WIRED / NO SUCCESSFUL RUN OBSERVED AT CHECKPOINT |
+| Integration CI execution path | VERIFIED / SUCCESSFUL RUN 32810102376 OBSERVED FOR COMMIT 4284ee9265f66e4631425f3cfddd84ab42dbcfbc; CURRENT ROOT BASELINE RECONCILED |
 | Actual candidate seam population | OPEN / NO SEAM PROMOTED WITHOUT COMPLETE EVIDENCE |
 | Full Repository Connectivity / End-to-End Audit | PENDING AFTER EVIDENCE-BACKED CANONICAL SPINE INPUT |
 | GAP MAP | PENDING CONNECTIVITY AUDIT OUTPUT |
