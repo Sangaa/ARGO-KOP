@@ -74,6 +74,10 @@ jobs:
           assert evaluate(['Engine/ENG-TEST.md', 'Repository/MUT-TEST_MUTATION_MATRIX.md']) == (['Engine/ENG-TEST.md'], ['Repository/MUT-TEST_MUTATION_MATRIX.md'])
           assert evaluate(['EJR/EJR-TEST.md', 'Docs/TEST.md']) == ([], [])
           assert evaluate(['Repository/MUT-TEST_MUTATION_MATRIX.md']) == ([], ['Repository/MUT-TEST_MUTATION_MATRIX.md'])
+          # Session-delta governance records are documentation/session evidence,
+          # not canonical implementation mutations; ordinary Repository/REP-* remains protected.
+          assert evaluate(['Repository/REP-037_SESSION_DELTA_2026-08-26_P245_CI_TRIGGER_GAP.md']) == ([], [])
+          assert evaluate(['Repository/REP-014_REPOSITORY_RELATIONSHIP_REGISTRY.md']) == (['Repository/REP-014_REPOSITORY_RELATIONSHIP_REGISTRY.md'], [])
           print('MUTATION_MATRIX_PREFLIGHT_REGRESSION=PASS')
           PY
       - name: Run Mutation Matrix semantic regression

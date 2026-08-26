@@ -3,6 +3,11 @@
 The gate is intentionally conservative: canonical Runtime/Engine/Service/Repository
 artifacts require a Mutation Matrix in the same change set. Documentation, tests,
 CI, templates, EJR/session records, and existing Matrix files are exempt.
+
+Repository session-delta records are explicitly treated as governance/session
+records, not as canonical implementation artifacts. This preserves protection for
+Repository/REP-* control artifacts while preventing false-positive Matrix gates
+for REP-* session deltas.
 """
 
 from __future__ import annotations
@@ -47,8 +52,13 @@ def is_matrix(path: str) -> bool:
     return any(marker in PurePosixPath(path).name for marker in MATRIX_MARKERS)
 
 
+def is_session_delta(path: str) -> bool:
+    name = PurePosixPath(path).name
+    return path.startswith("Repository/REP-") and "_SESSION_DELTA_" in name
+
+
 def requires_matrix(path: str) -> bool:
-    if path.startswith(EXEMPT_PREFIXES) or is_matrix(path):
+    if path.startswith(EXEMPT_PREFIXES) or is_matrix(path) or is_session_delta(path):
         return False
     return path.startswith(CANONICAL_PREFIXES)
 
