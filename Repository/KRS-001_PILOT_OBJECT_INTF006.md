@@ -1,6 +1,6 @@
 # KRS-001 Pilot Knowledge Object — INTF-006
 
-OBJECT_FORMAT: KRS-KO/0.1
+OBJECT_FORMAT: KRS-KO/0.2
 OBJECT_ID: INTF-006
 OBJECT_TYPE: CANONICAL_INTERFACE
 SOURCE_PATH: Interfaces/INTF-006_ENVIRONMENT_SENSING.md
@@ -27,6 +27,13 @@ RUNTIME: Runtime/RUN-005_RUNTIME_WORKFLOW.md
 TEST: Quality/Integrity/test_environment_sensing_boundary.py
 SESSION_EVIDENCE: Repository/REP-020_SESSION_DELTA_2026-08-25_P224_INTF006_SAFE_SEAM_VERIFICATION.md
 
+## RELATIONSHIP_EVIDENCE
+- ARCHITECTURE: `REFERENCES / ARCHITECTURAL-CONTEXT` — STRUCTURAL; not execution evidence.
+- INTEGRATION: `REFERENCES / INTEGRATION-CONTEXT` — STRUCTURAL; not production-consumer evidence.
+- RUNTIME: `REFERENCES / RUNTIME-CONTEXT` — STRUCTURAL; not runtime execution evidence.
+- TEST: `REFERENCES / BOUNDED-TEST-SURFACE` — EXECUTABLE-SURFACE; not proof that the canonical contract executed in production.
+- SESSION_EVIDENCE: `REFERENCES / SESSION-VERIFICATION-EVIDENCE` — GOVERNANCE/EVIDENCE; bounded to the documented synthetic seam.
+
 ## EVIDENCE
 STRUCTURAL: VERIFIED
 CONTRACT: VERIFIED
@@ -39,16 +46,19 @@ A001: Canonicality defines the contract/evidence boundary, not implementation re
 A002: Production provider/consumer is not established.
 A003: Synthetic seam evidence must not be promoted to production evidence.
 A004: Raw observation remains distinct from interpretation and verified fact.
+A005: A relationship path alone is not execution evidence; relationship semantics and evidence class must be explicit.
 
 ## CONSTRAINTS
 C001: No fabricated sensing source/provider/permission/runtime call.
 C002: Authorization and provenance remain explicit.
 C003: Unknown sensing state remains distinct from successful acquisition.
 C004: Original Markdown remains authoritative during the pilot.
+C005: Structural relationship evidence must not be promoted to runtime or production evidence.
 
 ## HISTORY
 H001: P223 established implementation/consumer frontier as unproven.
 H002: P224 established a bounded synthetic seam and verified it through CI without production promotion.
+H003: KRS-001 schema refinement identified that relationship paths lacked explicit semantics/evidence class; v0.2 adds that distinction without changing source authority.
 
 ## PAYLOAD
 This object is a traceability representation only. It intentionally does not copy the full semantic payload of INTF-006. The source artifact remains the authoritative human-readable contract.
