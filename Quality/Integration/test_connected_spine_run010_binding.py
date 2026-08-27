@@ -3,7 +3,7 @@ from Runtime.Execution.connected_spine_runner import run
 
 def _fixture(consumer):
     return {
-        "context": {"session_id": "P316", "signal": "clean"},
+        "context": {"session_id": "P317", "signal": "clean"},
         "knowledge": {"facts": ["fixture"]},
         "rules": {"mode": "governed"},
         "authorization": {"approved": True},
@@ -17,7 +17,7 @@ def test_run010_connected_spine_dispatches_authorized_consumer_and_preserves_tra
 
     def consumer(payload):
         seen.update(payload)
-        return {"status": "ENG006_ACCEPTED", "execution_trace_id": "EXEC-P316"}
+        return {"status": "ENG006_ACCEPTED", "execution_trace_id": "EXEC-P317"}
 
     result = run(_fixture(consumer))
     assert result["execution"]["status"] == "ENG006_ACCEPTED"
