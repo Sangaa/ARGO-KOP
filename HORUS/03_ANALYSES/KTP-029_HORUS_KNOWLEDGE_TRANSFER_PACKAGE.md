@@ -138,15 +138,15 @@ Test scope: `HORUS BRANCH ONLY`
 
 Branch: `horus/meta-learning-foundation-v6`
 
-Test file: `HORUS/03_ANALYSES/_WRITE_TEST_P346.md`
+Test file: `HORUS/03_ANALYSES/_WRITE_TEST_P347.md`
 
 Write result: `SUCCESS`
 
-Write commit SHA: `36dc12962d963e711c93f42dfd7c959b6968b314`
+Write commit SHA: `cfee7141d44c3db8ac9acb2fd2763b1ca9a43ce7`
 
 Independent read-back: `SUCCESS`
 
-Read-back blob SHA: `28bbecd3030c84c3e5416473d4d0a62a72292aa8`
+Read-back blob SHA: `8dcbf0862ab719d61f77bd75fc18830c8f4e735a`
 
 The test was confined to the Horus branch and did not modify `main`.
 
@@ -163,6 +163,10 @@ Initial independent read-back blob SHA: `91e9dda3d94b6fcfa336547427f5a3b3ee0c8c8
 Metadata-completion commit SHA: `c406eb35bb1b9b4c463690ca3dc17f000518ebb8`
 
 Metadata-completion blob SHA: `330c2790d8057d903b235834f11e15eb88532ad9`
+
+Current KTP metadata-finalization commit: `PENDING CURRENT COMMIT READ-BACK`
+
+Current KTP blob SHA: `PENDING CURRENT COMMIT READ-BACK`
 
 ## 22. Interpretation Boundary
 
