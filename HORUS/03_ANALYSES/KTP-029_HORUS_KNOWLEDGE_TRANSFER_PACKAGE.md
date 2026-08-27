@@ -160,9 +160,9 @@ Initial KTP write commit SHA: `16523e5ec4def98402891c735f407527aeb2374d`
 
 Initial independent read-back blob SHA: `91e9dda3d94b6fcfa336547427f5a3b3ee0c8c8a`
 
-Final metadata-completion commit SHA: `PENDING FINAL READ-BACK`
+Metadata-completion commit SHA: `c406eb35bb1b9b4c463690ca3dc17f000518ebb8`
 
-Final blob SHA: `PENDING FINAL READ-BACK`
+Metadata-completion blob SHA: `330c2790d8057d903b235834f11e15eb88532ad9`
 
 ## 22. Interpretation Boundary
 
@@ -181,4 +181,4 @@ Promotion remains blocked until applicable independent evidence exists.
 `AUTHORITY = NONE`
 `GOVERNANCE = NOT PROMOTED`
 `RUNTIME = UNCHANGED`
-`HANDOFF = COMPLETE PENDING FINAL READ-BACK`
+`HANDOFF = COMPLETE / FINAL READ-BACK REQUIRED`
