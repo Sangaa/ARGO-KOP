@@ -12,17 +12,11 @@ from context_conflict_detector import detect
 from reasoning_hold import evaluate
 from decision_trace_producer import record_decision_trace
 from outcome_producer import record_execution_outcome
+from Runtime.Execution.run010_eng006_consumer import dispatch_run010
 
 
 def run(fixture: dict) -> dict:
-    # The classifier contract consumes a reasoning packet with explicit
-    # `context` and `knowledge` roots. Keep the cognition context itself
-    # separate so downstream conflict detection receives the original
-    # governed context rather than the classifier envelope.
-    reasoning_packet = {
-        "context": fixture["context"],
-        "knowledge": fixture["knowledge"],
-    }
+    reasoning_packet = {"context": fixture["context"], "knowledge": fixture["knowledge"]}
     classified = classify(reasoning_packet)
     reasoning = reason(classified)
 
@@ -48,11 +42,7 @@ def run(fixture: dict) -> dict:
         decision_status=proposal.get("status", "UNKNOWN"),
     )
     if decision_trace_result["status"] != "TRACE_RECORDED":
-        blocked = {
-            "status": "BLOCKED",
-            "reason": "DECISION_TRACE_RECORDING_FAILED",
-            "issues": decision_trace_result.get("issues", []),
-        }
+        blocked = {"status": "BLOCKED", "reason": "DECISION_TRACE_RECORDING_FAILED", "issues": decision_trace_result.get("issues", [])}
         return {
             "task_id": fixture["task"]["task_id"],
             "stages": [classified, reasoning, conflict, hold, proposal, authorization, plan, blocked],
@@ -62,6 +52,32 @@ def run(fixture: dict) -> dict:
     decision_trace = decision_trace_result["trace"]
     if plan.get("status") != "PLAN_READY":
         execution = {"status": "BLOCKED", "reason": "PLAN_NOT_READY"}
+    elif fixture["task"]["task_id"] == "RUN-010" and authorization.get("status") == "AUTHORIZED":
+        consumer_result = dispatch_run010(
+            candidate={
+                "task_id": "RUN-010",
+                "authorization_status": authorization.get("status"),
+                "source_trace_id": decision_trace["trace_id"],
+            },
+            eng006_consumer=fixture.get("eng006_consumer"),
+        ) if fixture.get("eng006_consumer") else None
+        if consumer_result is not None:
+            execution = consumer_result
+        else:
+            execution = execute(
+                execution_id=f"EXEC-{uuid4().hex[:12]}",
+                task_id=fixture["task"]["task_id"],
+                session_id=fixture["context"]["session_id"],
+                source_trace_id=decision_trace["trace_id"],
+                authorized=True,
+                final_status="SIMULATED",
+                side_effect=False,
+                stages=[
+                    {"name": "decision", "status": proposal.get("status", "UNKNOWN")},
+                    {"name": "authorization", "status": "AUTHORIZED"},
+                    {"name": "execution", "status": "SIMULATED"},
+                ],
+            )
     else:
         execution = execute(
             execution_id=f"EXEC-{uuid4().hex[:12]}",
@@ -80,18 +96,8 @@ def run(fixture: dict) -> dict:
 
     outcome = None
     if execution.get("execution_trace_id"):
-        outcome_result = record_execution_outcome(
-            decision_id=decision_trace["trace_id"],
-            execution=execution,
-        )
-        if outcome_result["status"] == "OUTCOME_RECORDED":
-            outcome = outcome_result["outcome"]
-        else:
-            outcome = {
-                "status": "BLOCKED",
-                "reason": "OUTCOME_RECORDING_FAILED",
-                "issues": outcome_result.get("issues", []),
-            }
+        outcome_result = record_execution_outcome(decision_id=decision_trace["trace_id"], execution=execution)
+        outcome = outcome_result.get("outcome") if outcome_result["status"] == "OUTCOME_RECORDED" else {"status": "BLOCKED", "reason": "OUTCOME_RECORDING_FAILED", "issues": outcome_result.get("issues", [])}
 
     return {
         "task_id": fixture["task"]["task_id"],
