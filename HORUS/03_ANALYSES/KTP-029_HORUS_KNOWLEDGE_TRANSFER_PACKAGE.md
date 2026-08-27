@@ -164,9 +164,9 @@ Metadata-completion commit SHA: `c406eb35bb1b9b4c463690ca3dc17f000518ebb8`
 
 Metadata-completion blob SHA: `330c2790d8057d903b235834f11e15eb88532ad9`
 
-Current KTP metadata-finalization commit: `PENDING CURRENT COMMIT READ-BACK`
+Current KTP finalization commit SHA: `PENDING FINAL READ-BACK`
 
-Current KTP blob SHA: `PENDING CURRENT COMMIT READ-BACK`
+Current KTP finalization blob SHA: `PENDING FINAL READ-BACK`
 
 ## 22. Interpretation Boundary
 
