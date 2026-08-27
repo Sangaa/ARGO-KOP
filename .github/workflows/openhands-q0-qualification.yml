@@ -1,0 +1,62 @@
+name: OpenHands Q0 Qualification
+
+on:
+  push:
+    paths:
+      - '.github/workflows/openhands-q0-qualification.yml'
+      - 'Execution/OpenHands/**'
+  workflow_dispatch:
+
+permissions: {}
+
+jobs:
+  q0:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Capture runner identity without repository checkout
+        shell: bash
+        run: |
+          set -euo pipefail
+          printf 'runner=%s\nos=%s\narch=%s\n' "$RUNNER_NAME" "$(uname -a)" "$(uname -m)"
+
+      - name: Verify Docker sandbox availability
+        shell: bash
+        run: |
+          set -euo pipefail
+          docker version
+          docker info --format '{{.ServerVersion}}'
+          docker run --rm hello-world >/tmp/docker-q0.log
+          grep -Fq 'Hello from Docker!' /tmp/docker-q0.log
+
+      - name: Install pinned OpenHands release in isolated tool environment
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl -LsSf https://astral.sh/uv/install.sh | sh
+          export PATH="$HOME/.local/bin:$PATH"
+          uv --version
+          uv python install 3.12
+          uv tool install 'openhands==1.14.0' --python 3.12
+          openhands --version
+          command -v openhands
+
+      - name: Assert Q0 has no repository credentials
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -z "${ARGO_GITHUB_TOKEN:-}"
+          test -z "${GITHUB_TOKEN:-}"
+          test -z "${GH_TOKEN:-}"
+          echo 'Q0_CREDENTIAL_BOUNDARY=PASS'
+
+      - name: Record Q0 qualification boundary
+        shell: bash
+        run: |
+          set -euo pipefail
+          echo 'Q0_DOCKER_SANDBOX=AVAILABLE'
+          echo 'Q0_OPENHANDS_VERSION=1.14.0_TARGET'
+          echo 'Q0_REPOSITORY_WORKSPACE=MOUNTED=NO'
+          echo 'Q0_GITHUB_WRITE_AUTHORITY=NONE'
+          echo 'Q0_PRODUCTION_SECRETS=NONE'
+          echo 'Q0_STATUS=IDENTITY_AND_ENVIRONMENT_VERIFIED'
