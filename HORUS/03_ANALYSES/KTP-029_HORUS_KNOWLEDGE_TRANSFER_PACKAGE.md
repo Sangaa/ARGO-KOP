@@ -164,9 +164,11 @@ Metadata-completion commit SHA: `c406eb35bb1b9b4c463690ca3dc17f000518ebb8`
 
 Metadata-completion blob SHA: `330c2790d8057d903b235834f11e15eb88532ad9`
 
-Current KTP finalization commit SHA: `PENDING FINAL READ-BACK`
+Last independently verified KTP content commit: `bc60ce9e9b649cb6c9fcb91979577b6a48085663`
 
-Current KTP finalization blob SHA: `PENDING FINAL READ-BACK`
+Last independently verified KTP content blob: `c1c05f632d5951b392832263200dcad6baf308db`
+
+The current closing commit is externally verified in the session report; this file intentionally records the immediately preceding independently verified content identity to avoid self-referential SHA claims.
 
 ## 22. Interpretation Boundary
 
