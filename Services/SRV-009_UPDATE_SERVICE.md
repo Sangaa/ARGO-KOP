@@ -20,7 +20,7 @@ SRV-009
 
 Version
 
-1.2.1
+1.2.2
 
 Status
 
@@ -48,7 +48,7 @@ Official Release
 
 Last Audit
 
-2026-08-10
+2026-08-27
 
 ---
 
@@ -217,8 +217,6 @@ The Update Service shall:
 - require applicable validation and authorization before material mutation;
 - distinguish technical write success from governed update acceptance.
 
----
-
 # Repository Protection
 
 Before every material update verify, as applicable:
@@ -267,6 +265,10 @@ The Update Service shall stop or enter an explicit hold when:
 
 `SRV-009` is the controlled mutation service consumed by `ENG-006` for repository state updates.
 
+For the bounded `RUN-010` execution path, the connected Runtime dispatches `RUN-010 → ENG-006 → SRV-009`; `SRV-009` is therefore the downstream controlled mutation service for that path through `ENG-006`.
+
+This statement does not claim that every `SRV-009` operation originates in `RUN-010`, nor does it transfer authority from `ENG-006`, Runtime, Governance or Repository controls.
+
 `SRV-009` depends on applicable validation and authorization controls and does not independently create canonical authority.
 
 Technical write completion is not equivalent to governed acceptance; the post-write validation and traceability sequence remains mandatory.
@@ -290,6 +292,7 @@ Technical write completion is not equivalent to governed acceptance; the post-wr
 # Related Documents
 
 - `Engine/ENG-006_EXECUTION_ENGINE.md`
+- `Runtime/RUN-010_RUNTIME_REFERENCE.md`
 - `Services/SRV-005_VALIDATION_SERVICE.md`
 - `SRV-001_SERVICE_ARCHITECTURE.md`
 - `SRV-007_LOGGING_SERVICE.md`
