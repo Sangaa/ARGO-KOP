@@ -156,9 +156,13 @@ Target branch: `horus/meta-learning-foundation-v6`
 
 KTP path: `HORUS/03_ANALYSES/KTP-029_HORUS_KNOWLEDGE_TRANSFER_PACKAGE.md`
 
-KTP commit SHA: to be recorded from the write operation and independently checked by read-back.
+Initial KTP write commit SHA: `16523e5ec4def98402891c735f407527aeb2374d`
 
-KTP blob SHA: to be recorded from independent read-back.
+Initial independent read-back blob SHA: `91e9dda3d94b6fcfa336547427f5a3b3ee0c8c8a`
+
+Final metadata-completion commit SHA: `PENDING FINAL READ-BACK`
+
+Final blob SHA: `PENDING FINAL READ-BACK`
 
 ## 22. Interpretation Boundary
 
@@ -177,4 +181,4 @@ Promotion remains blocked until applicable independent evidence exists.
 `AUTHORITY = NONE`
 `GOVERNANCE = NOT PROMOTED`
 `RUNTIME = UNCHANGED`
-`HANDOFF = COMPLETE PENDING SHA READ-BACK`
+`HANDOFF = COMPLETE PENDING FINAL READ-BACK`
