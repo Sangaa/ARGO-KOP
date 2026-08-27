@@ -6,7 +6,7 @@
 
 Platform: ARGO KOP (Knowledge Operating Platform)
 Document ID: GOV-013
-Version: 1.1.2
+Version: 1.1.3
 Status: Approved / Canonical / Session Operating Contract
 Category: Governance / Engineering Operating Protocol
 Canonical: Yes
@@ -406,148 +406,90 @@ If no evidence proves a real gap, create no new Model.
 
 ## 11. Learning Promotion Gate
 
-Any newly observed engineering experience must first be checked against existing ARGO knowledge.
+Learning MUST NOT become canonical merely because it was observed, repeated, or documented.
 
-Permanent promotion requires evidence that the learning is:
+Candidate learning requires:
 
-- genuinely new or materially improves an existing rule;
-- repeatable or sufficiently important;
-- supported by repository evidence;
-- non-contradictory with higher authority;
-- assigned to the correct canonical learning location;
-- reviewed and documented with provenance.
+`Observation → Evidence → Boundary → Reproducibility/Transfer Test → Review → Explicit Promotion Decision`
 
-The Prior-Learning Retrieval Gate in §4A is mandatory before declaring a material learning genuinely new.
+Where applicable, classify learning as:
 
-If prior learning exists, the preferred action is to strengthen/reuse the existing canonical learning rather than create a duplicate artifact.
+- `OBSERVED`
+- `CANDIDATE`
+- `REUSABLE`
+- `VERIFIED`
+- `CANONICAL`
 
-Otherwise record it as session evidence/candidate learning only.
-
----
-
-## 12. Matrix and Traceability Rule
-
-Important paths and relationships must be reflected in the applicable repository matrices/registries, especially:
-
-- `REP-001` — Master Index
-- `REP-002` — Repository Map
-- `REP-011` — Review Traceability Ledger
-- `REP-012` — Allocation / State / Recovery Registry
-- `REP-013` — Content Tree
-- `REP-014` — Relationship Registry
-- `REP-015` — Control-Plane Bootstrap Checklist
-- `REP-020` — Session Delta / Engineering Checkpoint evidence
-
-Matrix entries are evidence-bearing control records; they do not create domain authority by themselves.
-
-Integration evidence must be traceable back to the affected relationship/module and its test or runtime source.
+The classification must preserve provenance and uncertainty.
 
 ---
 
-## 13. Post-Change Verification
+## 11A. Provenance and Authority State
 
-After every material mutation:
+Every material analytical claim received from another execution identity, analysis surface, external evaluation, or prior session MUST preserve two separate dimensions:
 
-1. verify the resulting commit;
-2. re-read every changed file;
-3. verify affected IDs, versions and status;
-4. verify affected indexes/maps;
-5. verify affected relationship entries;
-6. verify applicable integration/regression tests and CI;
-7. check for propagation to consumers and dependencies;
-8. record the checkpoint and provenance.
+**Evidence State** and **Authority State**.
 
-A commit alone is not proof that the change is correct.
+Minimum evidence states:
 
----
+- `REPORTED` — stated by a source but not independently checked by the current executor.
+- `PROVEN` — supported by direct repository/tool/test evidence available to the current executor.
+- `CANDIDATE` — plausible analytical inference requiring validation.
+- `UNPROVEN` — not independently established.
+- `INVALIDATED` — previously recorded evidence subsequently shown to be contaminated, contradicted, stale, or baseline-invalid.
 
-## 14. Session Continuation Rule
+Minimum authority states:
 
-Do NOT close a session merely because one task or one checkpoint is complete.
+- `NON-AUTHORITATIVE`
+- `CANDIDATE-AUTHORITY`
+- `GOVERNANCE-AUTHORITY`
+- `CANONICAL`
 
-After completing a coherent work group, automatically continue to the highest-priority safe task available under the current build order.
+**Documentation does not upgrade authority.**
 
-Continue while:
+Preserving a claim in `main`, an Engineering Journal, a Knowledge Package, or another shared memory surface does not by itself promote its authority or validity.
 
-- useful safe work remains;
-- required evidence is available or the work can be bounded honestly;
-- no material blocker prevents the next step.
+For claims crossing execution identities, preserve at minimum:
 
-Do not wait for the user to repeat the protocol between tasks.
+`SOURCE_IDENTITY → CLAIM → SOURCE_EVIDENCE → EVIDENCE_STATE → VERIFIED_BY → VERIFICATION_METHOD → AUTHORITY_STATE → VERIFICATION_DATE → CHECKPOINT`
 
-Integration testing remains active while construction and matrix reconciliation continue; it is not a separate session stage unless the current evidence explicitly makes testing impossible.
+`PROVEN` must mean proven by the current evidence record, not merely asserted by the source.
 
 ---
 
-## 15. Session Closure Rule
+## 11B. Session Closure Gate
 
-Session Closure occurs only when:
+A session is not closed by writing the word `CLOSED` in a report.
 
-- all safe high-priority work reasonably available in the session is complete;
-- a real blocker prevents safe continuation; or
-- the user explicitly requests closure.
+Before closure, the engineer MUST complete, as applicable:
 
-Before closure perform a concise closing audit:
+`EXECUTE → VERIFY → DOCUMENT → RE-READ → COMMIT/SHA VERIFY → CHECKPOINT RECORD → CLOSE`
 
-- current state;
-- work completed;
-- changes made;
-- evidence verified;
-- integration/regression status;
-- matrices/indexes synchronized;
-- remaining work and blockers;
-- next continuation point;
-- learning assessment;
-- final commit/checkpoint.
+For any material mutation, the final repository state must be re-read after the mutation and its commit/blob identity must be verified before the session may be reported as closed.
 
-Do not mark a session `CLOSED` when final documentation, integration verification or other required validation failed.
+If verification is unavailable or incomplete, the session state MUST remain explicitly `OPEN / HOLD / VERIFICATION-PENDING`, as applicable; the report must not claim completed closure.
 
 ---
 
-## 16. Cross-Session Determinism
+## 12. Session Closure
 
-A new AI chat must be able to interpret the invocation phrase without relying on the previous conversation.
+A session may close only when:
 
-The deterministic resolution path is:
+1. all planned safe actions for the checkpoint are complete, or a genuine blocker has been recorded;
+2. required post-change verification is complete;
+3. open contradictions or unresolved authority conflicts are explicitly recorded;
+4. checkpoint evidence is written to the repository;
+5. no required failing CI/integration check is being silently carried forward;
+6. the next continuation point is explicit;
+7. for material mutations, re-read and commit/blob verification are complete.
 
-`Invocation Phrase`
+The final report should state:
 
-→ `PROJECT_BOOTSTRAP.md`
+- what was completed;
+- what was discovered;
+- what remains unproven/open;
+- verification state;
+- checkpoint;
+- closure state.
 
-→ `GOV-013_HERMUZ_SESSION_BUILD_PROTOCOL.md`
-
-→ `Current Repository State`
-
-→ `REP-020 / Engineering Journal / Matrices / Integration-Test State`
-
-→ `Prior-Learning Retrieval Gate`
-
-→ `Highest-Priority Safe Continuation`
-
-This path makes the phrase a stable operational command while preserving current-repository authority.
-
----
-
-## 17. Authority Boundary
-
-HERMUZ does not grant permission to bypass ARGO governance.
-
-Authority remains ordered by the current ARGO constitutional/governance structure. HERMUZ controls **how the engineer works**, not **what the engineer is authorized to override**.
-
-The engineer must preserve `INTEGRITY HOLD` whenever unresolved evidence or relationships justify it. No false PASS may be created for convenience.
-
----
-
-## 18. Canonical Invocation Summary
-
-When a new chat receives:
-
-> **«أكمل البناء طبقًا لبروتوكول البناء الخاص بهرمز.»**
-
-it must interpret this as:
-
-> **Resume ARGO KOP construction from the current repository state, load the canonical HERMUZ operating contract, inspect the latest verified checkpoint and open work, recover and continue any previously interrupted integration-testing work, retrieve and review relevant prior ARGO learning before designing a new solution, simulate applicable prior remedies against the current problem, escalate to new research only after prior learning fails to resolve the verified gap, apply three-method negative-search verification, preserve evidence/authority/relationship boundaries, perform integration verification in parallel with Matrix construction for every material module and cross-layer seam, make only safe evidence-backed mutations, update the required matrices, validate every change, promote learning only when justified, treat every required CI failure as a hard hold requiring job/step/log/root-cause analysis and successful re-run before transition, and continue automatically to the highest-priority safe task until a real blocker, explicit closure request, or exhaustion of safe high-priority work.**
-
----
-
-End of GOV-013
+The report should remain concise. Detailed evidence belongs in the repository.
