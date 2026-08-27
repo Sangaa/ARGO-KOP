@@ -27,15 +27,20 @@ def _fixture():
 
 def test_c1_authorization_is_present_before_boundary():
     result = connected_spine_runner.run(_fixture())
-    assert result["execution"]["status"] == "SIMULATED"
-    assert any(s.get("status") == "AUTHORIZED" for s in result["stages"] if isinstance(s, dict))
+    assert any(
+        s.get("status") == "AUTHORIZED"
+        for s in result["stages"]
+        if isinstance(s, dict)
+    )
 
 
 def test_c2_current_runner_does_not_claim_callable_eng006_consumer():
     result = connected_spine_runner.run(_fixture())
     assert result["final_status"] == "SIMULATED"
-    assert result["execution"]["final_status"] == "SIMULATED"
-    assert result["execution"]["side_effect"] is False
+    assert result["execution"]["execution_trace_id"]
+    runtime = (RUNTIME / "connected_spine_runner.py").read_text()
+    assert 'action="SIMULATED_REVIEW"' in runtime
+    assert "ENG-006" not in runtime
 
 
 def test_c3_trace_continuity_exists_only_for_simulated_execution():
@@ -51,6 +56,8 @@ def test_c4_validation_evidence_is_preserved():
 def test_c5_simulation_cannot_close_rel009():
     result = connected_spine_runner.run(_fixture())
     assert result["final_status"] != "EXECUTABLE-VERIFIED"
+    assert result["execution"]["trace"]["final_status"] == "SIMULATED"
+    assert result["execution"]["trace"]["side_effect"] is False
 
 
 def test_c6_downstream_boundary_is_not_implicitly_reclassified():
