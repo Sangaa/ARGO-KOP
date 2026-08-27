@@ -26,11 +26,7 @@ def execute(
     side_effect: bool = False,
     stages: list[dict] | None = None,
 ) -> dict:
-    """Record a governed execution and return its canonical trace handoff.
-
-    The entrypoint intentionally records the execution boundary only. It does
-    not infer authorization, execute arbitrary code, or promote learning.
-    """
+    """Record a governed execution and return its canonical trace handoff."""
     if not authorized:
         raise ExecutionDenied("EXECUTION_NOT_AUTHORIZED")
     if not source_trace_id:
@@ -50,6 +46,8 @@ def execute(
     trace = result["trace"]
     return {
         "execution_id": execution_id,
+        "task_id": task_id,
+        "session_id": session_id,
         "source_trace_id": source_trace_id,
         "execution_trace_id": trace["trace_id"],
         "trace": trace,
