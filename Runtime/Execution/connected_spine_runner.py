@@ -53,16 +53,16 @@ def run(fixture: dict) -> dict:
     if plan.get("status") != "PLAN_READY":
         execution = {"status": "BLOCKED", "reason": "PLAN_NOT_READY"}
     elif fixture["task"]["task_id"] == "RUN-010" and authorization.get("status") == "AUTHORIZED":
-        consumer_result = dispatch_run010(
-            candidate={
-                "task_id": "RUN-010",
-                "authorization_status": authorization.get("status"),
-                "source_trace_id": decision_trace["trace_id"],
-            },
-            eng006_consumer=fixture.get("eng006_consumer"),
-        ) if fixture.get("eng006_consumer") else None
-        if consumer_result is not None:
-            execution = consumer_result
+        consumer = fixture.get("eng006_consumer")
+        if consumer is not None:
+            execution = dispatch_run010(
+                candidate={
+                    "task_id": "RUN-010",
+                    "authorization_status": authorization.get("status"),
+                    "source_trace_id": decision_trace["trace_id"],
+                },
+                eng006_consumer=consumer,
+            )
         else:
             execution = execute(
                 execution_id=f"EXEC-{uuid4().hex[:12]}",
