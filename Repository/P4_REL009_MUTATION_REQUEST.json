@@ -1,0 +1,11 @@
+{
+  "applied_commit_sha": "dda16b3f2523fea03bf8d8c9724b237ab648046c",
+  "approved_state": "INTENTIONAL ONE-WAY / ISOLATED EXECUTION-OBSERVED / GOVERNED / NON-UNIVERSAL",
+  "branch": "hermuz/p4-rel009-registry-closure-20260828",
+  "candidate_blob_sha": "d75f460d152898709044a31433e8ae4c705d9191",
+  "source_blob_sha": "a6926b0b27e515b38b65594846fd82d1f1252ea9",
+  "status": "APPLIED",
+  "target_path": "Repository/REP-014_REPOSITORY_RELATIONSHIP_REGISTRY.md",
+  "transaction_id": "MUT-2026-08-28-P4-REL009-REGISTRY-CLOSURE-001",
+  "verified_readback": true
+}

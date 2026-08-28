@@ -1,0 +1,174 @@
+name: P4 REL-009 Controlled Mutation
+
+on:
+  push:
+    branches:
+      - hermuz/p4-rel009-registry-closure-20260828
+    paths:
+      - 'Repository/P4_REL009_MUTATION_REQUEST.json'
+
+permissions:
+  contents: write
+
+jobs:
+  mutate:
+    runs-on: ubuntu-latest
+    env:
+      PYTHONPATH: ${{ github.workspace }}
+    steps:
+      - name: Checkout controlled mutation branch
+        uses: actions/checkout@v6
+
+      - name: Setup Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: '3.11'
+
+      - name: Install pytest
+        run: python -m pip install --upgrade pytest
+
+      - name: Verify REL-009 mutation builder contract
+        run: pytest -q Quality/Tests/test_p4_rel009_controlled_mutation.py
+
+      - name: Execute one guarded REL-009 branch mutation
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_REPOSITORY: ${{ github.repository }}
+          GH_BRANCH: ${{ github.ref_name }}
+        run: |
+          python - <<'PY'
+          import base64
+          import json
+          import os
+          import urllib.parse
+          import urllib.request
+
+          from Tools.P4_REL009_CONTROLLED_MUTATION import (
+              EXPECTED_TARGET,
+              NEW_ROW,
+              build_candidate,
+              git_blob_sha,
+          )
+
+          expected_branch = "hermuz/p4-rel009-registry-closure-20260828"
+          if os.environ["GH_BRANCH"] != expected_branch:
+              raise SystemExit(
+                  f"P4_REL009_WRONG_BRANCH:{os.environ['GH_BRANCH']}!={expected_branch}"
+              )
+
+          request_path = "Repository/P4_REL009_MUTATION_REQUEST.json"
+          with open(request_path, "r", encoding="utf-8") as fh:
+              request = json.load(fh)
+
+          if request.get("transaction_id") != "MUT-2026-08-28-P4-REL009-REGISTRY-CLOSURE-001":
+              raise SystemExit("INVALID_TRANSACTION_ID")
+          if request.get("status") == "APPLIED":
+              print("REL-009 transaction already applied; no-op.")
+              raise SystemExit(0)
+          if request.get("status") != "APPROVED":
+              raise SystemExit(f"INVALID_REQUEST_STATUS:{request.get('status')}")
+          if request.get("target_path") != EXPECTED_TARGET:
+              raise SystemExit("INVALID_TARGET_PATH")
+          if request.get("branch") != expected_branch:
+              raise SystemExit("INVALID_REQUEST_BRANCH")
+
+          owner, repo = os.environ["GH_REPOSITORY"].split("/", 1)
+          api = f"https://api.github.com/repos/{owner}/{repo}"
+          token = os.environ["GH_TOKEN"]
+
+          def api_request(method, url, payload=None):
+              data = None if payload is None else json.dumps(payload).encode("utf-8")
+              req = urllib.request.Request(url, data=data, method=method)
+              req.add_header("Accept", "application/vnd.github+json")
+              req.add_header("Authorization", f"Bearer {token}")
+              req.add_header("X-GitHub-Api-Version", "2022-11-28")
+              req.add_header("User-Agent", "ARGO-KOP-P4-REL009")
+              if data is not None:
+                  req.add_header("Content-Type", "application/json")
+              with urllib.request.urlopen(req, timeout=30) as response:
+                  return json.loads(response.read().decode("utf-8"))
+
+          target = request["target_path"]
+          encoded_target = urllib.parse.quote(target, safe="")
+          current = api_request(
+              "GET", f"{api}/contents/{encoded_target}?ref={urllib.parse.quote(expected_branch)}"
+          )
+          source_sha = current["sha"]
+          if source_sha != request["source_blob_sha"]:
+              raise SystemExit(
+                  f"SOURCE_BLOB_SHA_MISMATCH:{request['source_blob_sha']}!={source_sha}"
+              )
+
+          content = base64.b64decode(current["content"].replace("\n", "")).decode("utf-8")
+          if git_blob_sha(content) != source_sha:
+              raise SystemExit("SOURCE_CONTENT_BLOB_SHA_INCONSISTENT")
+
+          candidate = build_candidate(content, source_sha)
+          candidate_sha = git_blob_sha(candidate)
+          if candidate == content:
+              raise SystemExit("CANDIDATE_EQUALS_SOURCE")
+          if candidate.count(NEW_ROW) != 1:
+              raise SystemExit("CANDIDATE_REL009_STATE_INVALID")
+
+          commit_result = api_request(
+              "PUT",
+              f"{api}/contents/{encoded_target}",
+              {
+                  "message": "P4: synchronize bounded REL-009 registry state",
+                  "content": base64.b64encode(candidate.encode("utf-8")).decode("ascii"),
+                  "sha": source_sha,
+                  "branch": expected_branch,
+              },
+          )
+          commit_sha = commit_result["commit"]["sha"]
+
+          readback = api_request(
+              "GET", f"{api}/contents/{encoded_target}?ref={urllib.parse.quote(expected_branch)}"
+          )
+          rb_content = base64.b64decode(readback["content"].replace("\n", "")).decode("utf-8")
+          if rb_content != candidate:
+              raise SystemExit("POST_WRITE_READBACK_MISMATCH")
+          if readback["sha"] != candidate_sha:
+              raise SystemExit(
+                  f"POST_WRITE_BLOB_SHA_MISMATCH:{candidate_sha}!={readback['sha']}"
+              )
+
+          encoded_request = urllib.parse.quote(request_path, safe="")
+          req_current = api_request(
+              "GET", f"{api}/contents/{encoded_request}?ref={urllib.parse.quote(expected_branch)}"
+          )
+          request_payload = {
+              **request,
+              "status": "APPLIED",
+              "source_blob_sha": source_sha,
+              "candidate_blob_sha": candidate_sha,
+              "applied_commit_sha": commit_sha,
+              "verified_readback": True,
+          }
+          api_request(
+              "PUT",
+              f"{api}/contents/{encoded_request}",
+              {
+                  "message": "P4: record REL-009 registry mutation application",
+                  "content": base64.b64encode(
+                      (json.dumps(request_payload, indent=2, sort_keys=True) + "\n").encode("utf-8")
+                  ).decode("ascii"),
+                  "sha": req_current["sha"],
+                  "branch": expected_branch,
+              },
+          )
+
+          print(
+              json.dumps(
+                  {
+                      "status": "APPLIED",
+                      "target": target,
+                      "source_blob_sha": source_sha,
+                      "candidate_blob_sha": candidate_sha,
+                      "applied_commit_sha": commit_sha,
+                      "verified_readback": True,
+                  },
+                  sort_keys=True,
+              )
+          )
+          PY

@@ -33,8 +33,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          grep -Fq '| REL-009 |' Repository/REP-014_REPOSITORY_RELATIONSHIP_REGISTRY.md
-          grep -Fq 'REVALIDATION REQUIRED' Repository/REP-014_REPOSITORY_RELATIONSHIP_REGISTRY.md
+          grep -Fq '| REL-009 | RUN-010 | SRV-009 | CONSUMES | **INTENTIONAL ONE-WAY / ISOLATED EXECUTION-OBSERVED / GOVERNED / NON-UNIVERSAL** |' Repository/REP-014_REPOSITORY_RELATIONSHIP_REGISTRY.md
           grep -Fq 'relationship description' Runtime/RUN-010_RUNTIME_REFERENCE.md
           grep -Fq 'This is a relationship description, not a claim that every runtime operation follows this exact path.' Runtime/RUN-010_RUNTIME_REFERENCE.md
       - name: Run P4 negative runtime evidence gate
