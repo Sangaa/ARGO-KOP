@@ -17,6 +17,14 @@ def test_real_data_contracts_flow_between_stages():
     assert result["decision_trace"]["record_type"] == "DECISION_TRACE"
     assert result["stages"][7]["source_trace_id"] == result["decision_trace"]["trace_id"]
 
+    handoff = result["handoff_candidate"]
+    assert handoff["execution_id"] == result["execution"]["execution_id"]
+    assert handoff["task_id"] == result["execution"]["task_id"]
+    assert handoff["session_id"] == result["execution"]["session_id"]
+    assert handoff["source_trace_id"] == result["execution"]["source_trace_id"]
+    assert handoff["authorization_id"] == result["stages"][5]["authorization_id"]
+    assert handoff["authorized"] is True
+
     assert result["execution"]["execution_trace_id"] == result["outcome"]["execution_trace_ids"][0]
     assert result["outcome"]["evidence_trace_ids"] == result["outcome"]["execution_trace_ids"]
     assert result["outcome"]["result"] == "INCONCLUSIVE"
@@ -31,3 +39,4 @@ def test_missing_authorization_stops_before_execution_and_outcome():
     assert result["stages"][6]["status"] == "BLOCKED"
     assert result["stages"][7]["status"] == "BLOCKED"
     assert result["outcome"] is None
+    assert result.get("handoff_candidate") is None
