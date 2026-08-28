@@ -8,6 +8,7 @@ from experience_spine_igt_external_resolver import (
     correlate_external_evidence,
     correlate_participant_observation,
     detect_duplicate_resolution_identity,
+    evidence_fingerprint,
     observation_digest,
 )
 
@@ -160,6 +161,7 @@ def test_exact_participant_observation_correlates_to_package_identity_and_digest
     assert result["state"] == "CORRELATED"
     assert result["reasons"] == []
     assert result["observation_digest"]
+    assert result["evidence_fingerprint"]
 
 
 def test_exact_attestation_observation_correlates_to_embedded_attestation():
@@ -318,17 +320,28 @@ def test_duplicate_resolution_record_does_not_create_independent_corroboration()
     assert result["state"] == "DUPLICATE_RESOLUTION_EVIDENCE"
     assert result["duplicate_resolution_ids"] == [(one["resolver_id"], one["resolution_id"])]
     assert result["duplicate_observation_digests"] == [observation_digest(one)]
+    assert result["duplicate_evidence_fingerprints"] == [evidence_fingerprint(one)]
     assert result["independent_corroboration"] == "NOT_ESTABLISHED_BY_DUPLICATION"
 
 
-def test_distinct_resolution_ids_with_identical_observation_content_still_expose_duplicate_digest():
+def test_resolution_id_churn_cannot_turn_same_evidence_into_corroboration():
     package = _package()
     one = _participant_observation(package)
     two = deepcopy(one)
     two["resolution_id"] = "RES-DIFFERENT"
     result = detect_duplicate_resolution_identity([one, two])
     assert result["duplicate_resolution_ids"] == []
-    # Changing resolution identity changes the full observation digest, so this is
-    # a distinct resolver record; no independent-corroboration claim is inferred.
-    assert result["state"] == "UNIQUE"
+    assert result["duplicate_observation_digests"] == []
+    assert result["duplicate_evidence_fingerprints"] == [evidence_fingerprint(one)]
+    assert result["state"] == "DUPLICATE_RESOLUTION_EVIDENCE"
     assert result["independent_corroboration"] == "NOT_ESTABLISHED_BY_DUPLICATION"
+
+
+def test_different_resolver_metadata_does_not_change_underlying_evidence_fingerprint():
+    package = _package()
+    one = _participant_observation(package)
+    two = deepcopy(one)
+    two["resolver_id"] = "resolver-adapter-C"
+    two["resolution_id"] = "RES-OTHER"
+    assert observation_digest(one) != observation_digest(two)
+    assert evidence_fingerprint(one) == evidence_fingerprint(two)
