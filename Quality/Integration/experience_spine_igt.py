@@ -110,6 +110,7 @@ def materialize_experience_views(experience_packet: dict) -> tuple[dict, dict]:
     evidence_boundary = source.get("evidence_boundary")
     decision.pop("correlated_evidence_groups", None)
     decision.pop("evidence_boundary", None)
+    decision.pop("authority_boundary", None)
 
     provenance_envelope = {
         "experience_items": provenance_items,
