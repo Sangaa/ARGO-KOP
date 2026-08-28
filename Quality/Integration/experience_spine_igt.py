@@ -101,9 +101,16 @@ def build_condition_payload(
 
 
 def validate_response(response: dict) -> list[str]:
+    """Return structurally missing fields; empty/wrong values remain scoreable.
+
+    IGT must distinguish an absent response field from an explicit empty or
+    incorrect answer. Empty lists are valid observations that should score zero
+    on the relevant dimension rather than converting the whole response into a
+    schema failure.
+    """
     if not isinstance(response, dict):
         return ["RESPONSE_NOT_MAPPING"]
-    return [field for field in REQUIRED_RESPONSE_FIELDS if not response.get(field)]
+    return [field for field in REQUIRED_RESPONSE_FIELDS if field not in response]
 
 
 def score_response(case_id: str, response: dict) -> dict:
