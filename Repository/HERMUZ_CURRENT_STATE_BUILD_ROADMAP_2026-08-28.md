@@ -1,317 +1,394 @@
 # HERMUZ Current-State Build Roadmap — 2026-08-28
 
-Status: `ACTIVE / ANALYSIS COMPLETE / EXECUTION IN PROGRESS`
-Protocol: `GOV-013 + GOV-013A`
-Base branch: `main`
-Base HEAD: `09b216e403fe99a6f1a4a35e3c3038831398f6a3`
-Working branch: `hermuz/current-state-roadmap-20260828`
-Authority class: `Analysis / Recovery / Planning Evidence — NON-CANONICAL`
+Status: `SESSION CLOSED / P3 CLEAN BUILD VERIFIED / PROMOTION REVIEW NEXT`
+Protocol: `GOV-013 + GOV-013A + GOV-014 + GOV-015`
+Base branch observed: `main`
+Base HEAD observed at final synchronization: `09b216e403fe99a6f1a4a35e3c3038831398f6a3`
+Roadmap branch: `hermuz/current-state-roadmap-20260828`
+Authority class: `Analysis / Recovery / Execution / Transfer Evidence — NON-CANONICAL`
 
 ## 1. Purpose
 
-Reconstruct the current ARGO-KOP state from repository evidence before further construction; reconcile accumulated HERMUZ lessons with current canonical authority; identify branch/control-plane debt; establish the current build order; perform only evidence-justified mutations; and leave one compact resume-safe session surface rather than another sequence of checkpoint documents.
+Reconstruct ARGO-KOP from current repository evidence before further construction; reconcile accumulated HERMUZ experience with current authority; remove stale branch/promotion assumptions; identify the actual priority chain; construct the smallest dependency-closed P3/REL-009 evidence candidate; verify it through governed CI and real provider execution where applicable; preserve concurrent-agent safety; and leave one compact resume-safe transfer surface rather than another sequence of checkpoint files.
 
-This document does not promote architecture, relationships, governance, runtime capability, or branch content.
+This record does not itself promote a relationship, governance rule, branch or runtime capability.
 
-## 2. Evidence Precedence Used
+## 2. Evidence Precedence Applied
 
-Current-state interpretation followed:
+`Current main + Canonical Authority + Exact-HEAD CI/Runtime Evidence > Current Reconciliation Records > Historical Branch Evidence > Memoirs/Learning > Conversation Narrative`
 
-`Current main + Canonical Authority + Current CI/Runtime Evidence > Current Reconciliation Records > Historical Branch Evidence > Memoirs/Learning > Conversation Narrative`
-
-The following were treated as controlling or current evidence where applicable:
+Key current authority/evidence read during the session:
 
 - `Governance/GOV-013_HERMUZ_SESSION_BUILD_PROTOCOL.md`
-- `Governance/GOV-013A_HERMUZ_BOOTSTRAP_INTEGRITY_GATE.md`
-- `Repository/REP-015_CONTROL_PLANE_BOOTSTRAP_CHECKLIST.md`
-- `Repository/REP-022_CURRENT_PRIORITY_RECONCILIATION_2026-08-17.md`
+- `Governance/GOV-014_CONTROLLED_DOCUMENT_MUTATION_PROTOCOL.md`
+- `Governance/GOV-015_EXECUTION_DOCUMENTATION_AND_KNOWLEDGE_TRANSFER.md`
 - `Repository/REP-021_P2_INDEX_SCOPE_RECONCILIATION_2026-08-17.md`
-- `Repository/REP-016_PHASE1_PARTITION_WORK_QUEUE.md`
+- `Repository/REP-022_CURRENT_PRIORITY_RECONCILIATION_2026-08-17.md`
 - `Repository/REP-014_REPOSITORY_RELATIONSHIP_REGISTRY.md`
-- `PROJECT_STATUS.md`
-- current `main` branch identity and current workflow evidence.
+- `Repository/P4_REL009_CONSUMER_BOUNDARY_MATRIX_2026-08-17.md`
+- `Repository/REP-042_SESSION_DELTA_2026-08-28_P374.md`
+- current branch/PR/workflow evidence.
 
-Historical/self-audit material was reviewed for reusable evidence but not granted canonical authority.
+Historical/self-audit/HORUS material was treated as evidence or learning according to its actual authority state, never auto-promoted by documentation.
 
-## 3. Current Repository State — FACTS
+## 3. Reconstructed Current Priority State
 
-### 3.1 Main
-
-Current canonical main HEAD is:
-
-`09b216e403fe99a6f1a4a35e3c3038831398f6a3`
-
-Commit message:
-
-`docs: record P374 minimum B07 B08 observation design`
-
-The current main Runtime/Integration workflow executed successfully on this HEAD. The integration suite reported:
-
-`291 passed / 1 warning / 11 subtests passed`
-
-The warning is the emitted P2 identity report, not a test failure.
-
-### 3.2 Platform phase
-
-`PROJECT_STATUS.md` still places the platform in:
-
-`CONNECTED-BASELINE STABILIZATION / INTEGRITY WARNING`
-
-The immediate objective remains repository connectivity, evidence integrity, relationship validation and consolidation — not feature expansion.
-
-### 3.3 Current priority authority
-
-`REP-022` is the current reconciliation record for operational priority interpretation:
+Current reconciliation evidence establishes:
 
 - `P1 = CLOSED` within inspected Ring-0 control-plane scope.
 - `P2 = RECONCILED` within verified active inventory scope.
-- `P3 = OPEN / EXECUTABLE RELATIONSHIP PROOF`.
+- `P3 = OPEN / EXECUTABLE RELATIONSHIP PROOF` at session entry.
 - `P4 = OPEN / BIDIRECTIONAL CRITICAL GRAPH VALIDATION`.
 - `P5 = EXECUTION-VERIFIED / BUILD CLOSED` within its harness scope.
 - `P6 = EXECUTION-VERIFIED / POLICY-UNRESOLVED / NO-AUTO-PROMOTION`.
 
-`REP-016` retains an older `P2 = OPEN` statement. This is preserved history/state layering; it must not override newer REP-021/REP-022 reconciliation.
+The older P2-open language retained in REP-016 is historical/current-state layering and does not override REP-021/REP-022.
 
-### 3.4 P2 interpretation
+The recurring `identity_scope_reconciled=false` CI warning does not authorize blind index mutation. REP-021 already classifies the twelve Core/Knowledge canonical-unindexed records as deferred authority/cross-layer scope rather than direct active-index defects.
 
-Current main CI emits:
+## 4. Historical Workstream Reconciliation
 
-- `active_duplicate_pass = true`
-- `duplicate_active_ids = {}`
-- `ambiguous_duplicate_ids = {}`
-- `filename_alignment_pass = true`
-- `unreadable = []`
-- `identity_scope_reconciled = false`
-- `canonical_unindexed_records = 12`
+### PR #63
 
-The 12 records are two Core artifacts and ten Knowledge artifacts.
-
-`REP-021` already explains why they are not direct index defects: Core and Knowledge remain authority/cross-layer validation scopes under Integrity Hold. It explicitly forbids mutating those domains merely to reduce the unindexed count.
-
-Therefore:
-
-`identity_scope_reconciled=false` is a scanner-level/global-scope signal, not evidence that the twelve files must be inserted into REP-001.
-
-P2 active identity/index reconciliation is complete within the verified scope; broader semantic/cross-layer identity closure remains outside that bounded claim.
-
-## 4. P3 / REL-009 Current State
-
-Canonical main currently records:
-
-- `REL-005: ENG-006 -> SRV-009 = BIDIRECTIONAL / EXECUTABLE-VERIFIED / GOVERNED / ISOLATED E2E`.
-- `REL-008: RUN-010 -> ENG-006 = Revalidated within inspected scope`.
-- `REL-009: RUN-010 -> SRV-009 = REVALIDATION REQUIRED`.
-
-P374 defines the current-main minimum evidence contract for REL-009 and explicitly rejects importing historical PR #63 wholesale.
-
-Required proof remains conceptually:
-
-`RUN-010 execution identity -> observable callable boundary -> explicit SRV-009 target -> attributable dispatch event -> preserved authorization/provenance -> side-effect-controlled observation -> exact-head governed CI`.
-
-No canonical promotion follows merely from branch-level test success.
-
-## 5. Branch / PR Reality
-
-### 5.1 PR #63
-
-Current state:
-
-- open;
-- head `a18bf9bae5fbdc29cde0fd237830f0c63b71556c`;
-- 48 commits / 39 files;
-- diverged from current main;
-- 48 commits ahead and 67 commits behind current main from merge-base `2ce52292...`.
-
-It contains useful historical RUN-010/ENG-006 design and tests and had successful PR CI. The workflow executed a GitHub-generated PR merge ref, proving compatibility with the then-base at that run, not making the branch current-main authority.
-
-Current disposition:
+Classified as:
 
 `HISTORICAL DESIGN + EXECUTION EVIDENCE SOURCE / NOT A WHOLESALE PROMOTION UNIT`.
 
-This supersedes any reading of the earlier P448 note that might imply PR #63 should become the active B08 promotion container. P374 on current main explicitly bounds PR #63 to historical design reuse.
+Its branch is materially diverged from current main. P374 explicitly permits design reuse only after current-main reconciliation. PR metadata was corrected accordingly.
 
-### 5.2 PR #64
+### PR #64
 
-Current state:
+Classified as:
 
-- open / unmerged / mergeable;
-- base = current main `09b216e...`;
-- head `f21ede4a9b9941e51813b4fdb3db858d23255426`;
-- 85 commits / 79 files;
-- +3586 / -7;
-- Runtime/Integration and Full-Stack workflows on current PR HEAD are successful.
+`EVIDENCE-RICH EXPERIMENTAL WORKSTREAM / NOT A CLEAN PROMOTION UNIT`.
 
-The PR began as a narrow B07 execution-observation probe but accumulated implementation, tests, workflow changes, mutation matrices, evidence and a large session-history surface.
+Its current exact head had successful Runtime/Integration and Full-Stack pull-request CI, superseding the stale historical `NO RUN` narrative. Its 85-commit/79-file accumulated surface was deliberately not promoted wholesale. PR metadata was corrected accordingly.
 
-Its title/body remain materially stale: the body still preserves the earlier `P381 NO RUN` narrative although exact-head workflow execution is now observed.
+### Self-audit branch
 
-Current disposition:
+Classified as:
 
-`EVIDENCE-RICH EXPERIMENTAL WORKSTREAM / NOT YET A CLEAN PROMOTION UNIT`.
+`HISTORICAL ANALYSIS + EVIDENCE SOURCE`.
 
-### 5.3 Self-audit branch
+The branch itself demonstrates that an audit branch can become accumulation debt. No further functional work was added to it in this session.
 
-`hermuz/self-audit-20260828` is currently 105 commits ahead of main.
+## 5. Clean P3 Extraction
 
-Its archaeology, memoir, process-correction and reconciliation work is valuable, but the branch itself demonstrates the same accumulation risk it diagnosed: a review branch can become a history container if it is used indefinitely.
+Fresh branch created directly from current main:
 
-Current disposition:
+`hermuz/p3-rel009-clean-observation-20260828`
 
-`HISTORICAL ANALYSIS + EVIDENCE SOURCE / FREEZE FURTHER ACCUMULATION EXCEPT CORRECTION IF REQUIRED`.
+Draft PR:
 
-## 6. Accumulated Experience Reassessment
+`#65 — P3: clean isolated REL-009 observation seam`
 
-### VALIDATED KNOWLEDGE
+Final observed candidate head:
 
-1. Repository evidence outranks session memory.
-2. `NO RUN`, `PASS`, `FAIL`, `NO STATUS`, and `NOT OBSERVED` are different evidence states.
-3. Exact-head/checkout attribution is mandatory before assigning CI evidence.
-4. A branch can execute successfully while still being unsuitable as a promotion unit.
-5. A candidate Gap does not authorize mutation.
-6. A local/test PASS proves the tested invariant only.
-7. Independent callable/dispatch evidence must not be inferred from surrounding trace production.
-8. Raw provenance and session records are evidence, not executable payload.
-9. A long-lived isolated branch can become promotion debt.
-10. Current priority must be reconstructed from current reconciliation records, not from chronological momentum.
-11. An audit metric may remain globally false while the bounded operational sub-scope is correctly reconciled; scope semantics must be read before mutation.
-12. Successful technical proof and promotion/governance authority are independent states.
+`499c3cfda8e1fff52e3f808cff9ab80ed36e39db`
 
-### USEFUL BUT NON-NORMATIVE
+Final diff against main:
 
-- HERMUZ memoirs.
-- post-archaeology future operating mandate.
-- historical branch recommendations.
-- session-level synthesis and proposed future procedures.
+- 4 commits;
+- exactly 8 changed files;
+- no unexpected path;
+- `connected_spine_runner.py` unchanged;
+- canonical REL-009 registry state unchanged.
 
-These may guide review but do not become governance by existence.
+Mutation control:
 
-### SUPERSEDED / BOUNDED
+`Repository/MUT-2026-08-28-P3-REL009-CLEAN-001_MUTATION_MATRIX.md`
 
-- old `NO RUN` claims when later exact-head workflow evidence exists;
-- treating PR #63 as the active B08 container;
-- treating all twelve canonical-unindexed records as index defects;
-- assuming more REL-009 tests are automatically the next highest-value work.
+All rows C01-C08 reached:
 
-## 7. Current Debt Map
+`Applied = Y / Verified = Y`.
 
-### D1 — Promotion surface accumulation — HIGH
+### Included design
 
-PR #63, PR #64 and self-audit each contain useful evidence mixed with historical work. No branch should be promoted wholesale solely because CI succeeded.
+1. `Runtime/Execution/run010_handoff_contract.py`
+   - pure handoff builder;
+   - no repository I/O;
+   - no SRV-009 literal/dispatch;
+   - validates execution trace, authorization state and authorization identity.
 
-### D2 — PR narrative drift — HIGH
+2. `Services/ENG006_SRV009_PRODUCTION_ADAPTER.py`
+   - retains the existing governed dispatcher path;
+   - now requires explicit `authorization_id` before connector access;
+   - fails closed when authorization identity is absent.
 
-PR #64 metadata materially understates/incorrectly describes its current state and preserves a stale `NO RUN` claim.
+3. `Quality/Integration/rel009_run010_srv009_observation.py`
+   - integration-only evidence harness;
+   - composes the pure handoff contract with the existing governed production adapter;
+   - emits an attributable observation containing RUN-010 origin, explicit SRV-009 target, callable boundary, execution/task/session/source-trace identity, authorization identity, downstream execution trace, dispatch status and post-read verification.
 
-### D3 — Control-plane reference drift — MEDIUM/HIGH
+4. Focused integration regressions preserve positive and fail-closed paths.
 
-GOV-013 normal-entry prose references `CONTROL_PLANE_STATUS.md`, but current main has no such file. The operational bootstrap is actually provided by `REP-015` plus current root/control-plane records. This is a recoverability/document-reference inconsistency, not evidence that a new status file should be invented.
+5. Existing P3 provider E2E workflow was updated only for `authorization_id` dependency closure.
 
-### D4 — Queue/reconciliation layering — MEDIUM
+### Explicitly rejected historical path
 
-REP-016 retains older P2-open language while REP-021/REP-022 provide newer bounded reconciliation. This is preserved historical state but requires readers to know the precedence rule.
+Historical PR #64 contains `Runtime/Execution/run010_eng006_srv009_consumer.py`, which performs lower-level connector read/create/update/read-back directly.
 
-### D5 — Session-delta proliferation — HIGH
+It was deliberately NOT extracted because it would create a parallel dispatch implementation beside the already governed ENG-006/SRV-009 production adapter. The clean candidate composes the existing governed adapter instead.
 
-The P375+ work demonstrates that frequent checkpointing can preserve provenance while reducing signal. Future sessions should prefer one compact current-state/closure surface where possible.
+## 6. CI Failure, Root Cause and Correction
 
-### D6 — P3 clean-extraction gap — BLOCKING FOR PROMOTION
+Initial clean-candidate head:
 
-Technical evidence exists across branches, but a dependency-closed current-main promotion unit has not been proven.
+`c83683e3262412dc7015a62bae94389dfef6b020`
 
-### D7 — P4 remains open — HIGH AFTER P3 RECONCILIATION
+Observed results:
 
-Bidirectional critical graph validation remains the next canonical priority after P3 disposition.
+- Full-Stack Repository Audit: PASS.
+- Prototype job: PASS.
+- Integration job: PASS.
+- Integrity job: FAIL.
 
-## 8. Build Order
+First meaningful failure:
 
-### Priority A — Consolidate P3 evidence before more P3 code
+`Quality/Integrity/test_rel009_negative_executable_consumer_boundary.py`
 
-1. inspect PR #64 implementation/test/workflow dependencies;
-2. classify required executable payload vs tests vs evidence/history;
-3. identify the smallest dependency-closed current-main candidate;
-4. reject superseded or duplicate test generations;
-5. do not modify normal connected-spine simulation semantics unless current authority requires it;
-6. run candidate against exact-head governed CI;
-7. inspect the specific callable/dispatch evidence;
-8. only then perform REL-009 promotion review.
+The existing guard intentionally prohibits the literal `SRV-009` inside `Runtime/Execution/*.py`. The initial observation helper had been placed at:
 
-### Priority B — P4 critical graph validation
+`Runtime/Execution/run010_srv009_observation.py`
 
-After P3 disposition, resume current critical graph validation against REP-014 with endpoint authority, reverse evidence and consumer impact.
+Root classification:
 
-### Priority C — Control-plane truth synchronization
+`NEW EVIDENCE SEAM PLACED IN PROTECTED RUNTIME SCOPE / EXISTING INTEGRITY RULE CORRECT / DESIGN LOCATION DEFECT`.
 
-After the promotion/consolidation boundary is known:
+The guard was NOT weakened, bypassed or rewritten.
 
-- reconcile stale PR metadata;
-- reconcile the GOV-013 `CONTROL_PLANE_STATUS.md` reference against the actual REP-015 bootstrap model through an authorized governance review;
-- synchronize root/status/index claims only from proven state;
-- preserve history rather than rewriting old evidence.
+Correction:
 
-### Priority D — Branch/workstream hygiene
+- relocated the evidence helper to `Quality/Integration/rel009_run010_srv009_observation.py`;
+- removed the initial Runtime/Execution helper;
+- kept Runtime/Execution's negative consumer boundary intact;
+- kept connected spine simulation-only.
 
-- freeze further functional growth on evidence-history branches;
-- preserve them as provenance;
-- use fresh current-main branches for clean promotion candidates;
-- close/retire old PRs only through explicit decision, never as a side effect of cleanup.
+Correction commit:
 
-### Priority E — Resume broader Connected Baseline
+`180b4c89ee51ff93f0f2ba1043bdcbccd511865b`.
 
-Once P3/P4 are reconciled, continue repository-wide relationship/domain validation according to PROJECT_STATUS and current priority evidence before feature expansion.
+Post-correction read-back confirmed the old Runtime path absent, the new Quality path present, the focused test importing the new path, and the final diff still limited to eight files.
 
-## 9. Immediate Execution Decisions
+This failure is retained as useful execution evidence: when a proof harness conflicts with a deliberate architecture guard, first reassess the proof's placement rather than weakening the guard to make CI green.
 
-### AUTHORIZED / JUSTIFIED
+Learning level:
 
-- create this fresh analysis branch directly from current main;
-- create one current-state roadmap/closure artifact;
-- correct stale PR metadata that contradicts observed exact-head evidence;
-- perform read-only P3 dependency/extraction analysis;
-- update this same artifact with execution outcomes and session closure.
+`SESSION-LEARNING / TRANSFERABLE CANDIDATE`.
 
-### NOT YET JUSTIFIED
+It is not promoted to governance by this record.
 
-- merging PR #63 or PR #64;
-- copying either branch wholesale;
-- adding the twelve deferred Core/Knowledge artifacts to REP-001;
-- changing REL-009 state on main;
-- wiring production side effects into the normal connected spine;
-- promoting memoir/future-mandate content into governance;
-- closing old PRs without explicit lifecycle decision.
+## 7. Exact-HEAD Governed CI
 
-## 10. Known Tool Incident This Session
+Final clean candidate head:
 
-A pull-request creation action was accidentally invoked with a non-existent placeholder head and returned GitHub `422 Validation Failed`.
+`499c3cfda8e1fff52e3f808cff9ab80ed36e39db`
+
+### Runtime / Prototype / Integration workflow
+
+Run: `33193670294` — `SUCCESS`
+
+Jobs:
+
+- prototype-tests `98925253840` — SUCCESS;
+- integrity-tests `98925254152` — SUCCESS;
+- integration-tests `98925254218` — SUCCESS.
+
+Integration result:
+
+`295 passed / 1 expected P2 identity warning / 11 subtests passed`.
+
+Integrity result:
+
+`111 passed`.
+
+The unchanged Runtime/Execution negative REL-009 guard therefore passed after relocation of the evidence harness.
+
+### Full-Stack Repository Audit
+
+Run: `33193670090` — `SUCCESS` on the same candidate head.
+
+Classification:
+
+`SOURCE-VERIFIED + READ-BACK-VERIFIED + EXACT-HEAD PULL-REQUEST CI VERIFIED`.
+
+## 8. Provider-Backed E2E Revalidation
+
+Isolated E2E branch created from exact clean candidate `499c3cfd...`:
+
+`e2e/runtime-srv009-p3-clean-20260828`
+
+A single trigger-only descendant commit was created:
+
+`a5352d4b90f14387d12ad20a3f7d4676c0d80e2e`
+
+Dedicated workflow:
+
+`P3 Runtime GitHub E2E`
+
+Run:
+
+`33193773687` — `SUCCESS`
+
+Job:
+
+`98925604992` — `SUCCESS`.
+
+Observed real GitHub connector evidence:
+
+- create trace: `TR-c9ca3ebca1e3`;
+- update trace: `TR-1e7fe1a17e26`;
+- persisted SHA after update: `d3287757b644047d6de70a548cf202e34dab1e49`;
+- probe path: `Quality/E2E/P3_RUNTIME_SRV009_LIVE_PROBE.md`;
+- create/update/read-back succeeded;
+- cleanup succeeded;
+- final missing/read-back verification succeeded.
+
+Evidence boundary:
+
+This E2E proves the real ENG-006/SRV-009 adapter + GitHubRepositoryConnector path remains healthy after the authorization-id dependency closure. It does NOT independently prove that the new integration-only RUN-010 observation helper itself executed against the real GitHub connector. That RUN-010 observation seam is proven by the governed pull-request integration suite using the controlled fake connector. These two evidence classes remain separate.
+
+## 9. P374 / REL-009 Gate Reassessment
+
+P374 required:
+
+1. RUN-010 originating execution context;
+2. explicit SRV-009 target;
+3. observed callable boundary;
+4. attributable dispatch event;
+5. preserved authorization/provenance;
+6. controlled observation side effect;
+7. exact-head governed CI.
+
+The clean integration seam now supplies direct test/CI evidence for these requirements within its declared isolated integration scope.
+
+The provider-backed E2E independently confirms the reused governed adapter/connector implementation against GitHub.
+
+Therefore:
+
+`B07/B08 = TECHNICALLY SATISFIED WITHIN THE CLEAN ISOLATED EVIDENCE SCOPE / PROMOTION REVIEW ELIGIBLE`.
+
+This does NOT itself mutate `REP-014` or promote REL-009. The canonical matrix explicitly says B06+B07+B08 satisfaction permits the relationship state to be reconsidered; it does not mandate automatic promotion.
+
+## 10. Concurrent HORUS Safety
+
+The user explicitly stated that HORUS is concurrently updating accumulated experience/repository knowledge.
+
+Observed HORUS branch family includes:
+
+- `horus/identity-and-knowledge-foundation`;
+- `horus/meta-learning-foundation` through `v6`.
+
+Latest specifically inspected `horus/meta-learning-foundation-v6` head during this session:
+
+`f250edd2c4ba86039941e2a2efdee6055689ecd8`.
+
+Final session synchronization re-read `main` and still observed:
+
+`09b216e403fe99a6f1a4a35e3c3038831398f6a3`.
+
+No current-main collision with the P3 branch was observed during this session.
+
+Mandatory continuation rule while HORUS or another agent may be active:
+
+`RE-READ MAIN HEAD IMMEDIATELY BEFORE PROMOTION/MERGE -> COMPARE NEW MAIN AGAINST CANDIDATE -> INSPECT OVERLAPPING PATHS -> REVALIDATE REQUIRED CI -> ONLY THEN DECIDE`.
+
+No blind rebase/cherry-pick/merge is permitted from a stale snapshot.
+
+This is a concurrency safety application, not a new governance rule.
+
+## 11. Tool/Execution Incidents
+
+Several accidental pull-request creation calls were issued with deliberately/nonexistent placeholder heads while navigating connector surfaces. GitHub rejected each with `422 Validation Failed`.
+
+Classification:
+
+`TOOL INVOCATION ERROR / REJECTED BEFORE STATE CHANGE`.
 
 Result:
 
-`NO PR CREATED / NO REPOSITORY MUTATION / NO STATE CHANGE`.
+- no unintended PR created;
+- no ref changed;
+- no repository mutation caused by those rejected actions.
 
-The failed action was not retried. The correct explicit branch-creation surface was then used.
+The incident does not affect repository evidence but is retained for session traceability.
 
-## 11. Session Execution Log
+## 12. Accumulated Knowledge Reassessment
 
-- Repository/bootstrap/current-priority reconstruction: COMPLETE.
-- Current-main exact identity and CI observation: COMPLETE.
-- P2 scanner warning reconciliation against REP-021: COMPLETE.
-- PR #63 current-head / branch divergence / CI review: COMPLETE.
-- PR #64 current-head / file-surface / CI review: COMPLETE.
-- self-audit divergence review: COMPLETE.
-- P3 clean-extraction review: IN PROGRESS.
-- PR metadata correction: PENDING.
-- learning/session closure: PENDING.
+Validated/reapplied in this session:
 
-## 12. Explicit Non-Claims
+1. Repository reality outranks session memory.
+2. Exact-head/checkout attribution is mandatory.
+3. `NO RUN`, `NO STATUS`, `PASS`, `FAIL` and `NOT OBSERVED` are distinct states.
+4. Successful branch CI does not make a branch a good promotion unit.
+5. Historical evidence must be extracted by dependency closure, not copied wholesale.
+6. A candidate gap does not authorize mutation.
+7. Test success proves only the exercised boundary.
+8. A trace producer is not a downstream invocation.
+9. Runtime/provider proof and integration-harness proof must remain distinguishable.
+10. A deliberate negative architecture guard should not be weakened merely because a new proof harness was placed on the wrong side of it.
+11. Consolidation can be a higher-value engineering action than adding another test or document.
+12. Concurrent-agent work requires immediate pre-promotion state reconciliation.
+13. Documentation, memoirs and learning records do not self-upgrade authority.
+
+## 13. Debt / Roadmap After This Session
+
+### Priority 1 — P3 promotion review
+
+Technical construction/evidence is complete enough to enter a bounded promotion review.
+
+Review must determine whether the isolated evidence justifies changing canonical REL-009 state, and if so what exact state wording is supported. Do not infer universal runtime routing: RUN-010 still states that the sequence is a relationship description and not every runtime operation must use the path.
+
+No builder self-approval or automatic registry mutation is recorded here.
+
+### Priority 2 — P4 critical graph validation
+
+After P3 disposition, continue bidirectional critical graph validation from current REP-014/REP-022 evidence.
+
+### Priority 3 — Control-plane truth synchronization
+
+Reconcile remaining discoverability/state-reference debt, including the GOV-013 reference to `CONTROL_PLANE_STATUS.md` against the actual REP-015/root control-plane bootstrap surfaces. Do not invent a replacement file merely to satisfy a historical name.
+
+### Priority 4 — Branch/workstream hygiene
+
+After explicit promotion/disposition decisions:
+
+- retain PR #63/#64/self-audit as evidence/provenance as appropriate;
+- stop functional growth on them;
+- close/retire only through explicit lifecycle decisions;
+- keep future promotion units current-main-based and dependency-closed.
+
+### Priority 5 — broader Connected Baseline
+
+Resume repository-wide relationship/domain validation before feature expansion.
+
+## 14. Explicit Non-Claims
 
 - ARGO is not globally clean.
 - Connected Baseline is not complete.
-- REL-009 is not promoted.
-- PR #63 is not canonical.
-- PR #64 is not approved for merge.
-- successful CI is not promotion authority.
+- REL-009 is not canonically promoted by this record.
+- The normal connected spine is not converted to production dispatch.
+- The provider E2E does not prove the integration helper itself ran against GitHub.
+- PR #65 CI success is not merge authorization.
+- HORUS outputs are not auto-promoted into HERMUZ authority.
 - P2 bounded reconciliation is not repository-wide semantic closure.
-- this roadmap is not canonical governance.
 
-## 13. Next Safe Action
+## 15. Session Closure
 
-`P3 clean extraction review -> remove stale promotion assumptions -> exact dependency map -> metadata reconciliation -> decide whether a fresh minimal P3 candidate is justified -> verify -> close this session artifact`.
+Execution: COMPLETE for the bounded P3 clean construction/evidence objective.
+
+Verification: COMPLETE for source/read-back, exact-head PR CI, integrity regression, integration regression, Full-Stack, and provider-backed adapter/connector E2E within their declared scopes.
+
+Documentation: COMPLETE in this transfer record and the clean mutation matrix.
+
+Learning assessment: COMPLETE; no new lesson promoted to governance.
+
+Concurrent-agent reconciliation: COMPLETE at final observed main snapshot; must be repeated before any future promotion/merge.
+
+Session state:
+
+`CLOSED / RESUME-SAFE / P3 CLEAN BUILD VERIFIED / REL-009 PROMOTION REVIEW NEXT / MAIN UNCHANGED AT FINAL OBSERVATION`.
+
+## 16. Next Safe Entry
+
+`RE-READ main + HORUS-relevant changes -> confirm PR #65 head/base/diff -> perform bounded REL-009 promotion review against P374/P4 matrix/RUN-010/REP-014 -> promote only if authority and evidence support the exact state -> otherwise retain open with reason -> then proceed to P4 critical graph validation`.
