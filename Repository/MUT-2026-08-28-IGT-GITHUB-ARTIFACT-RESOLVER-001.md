@@ -4,7 +4,7 @@ Transaction ID: `MUT-2026-08-28-IGT-GITHUB-ARTIFACT-RESOLVER-001`
 Protocol: `GOV-013 / GOV-014 / GOV-015 + IGT + MI-IGT`
 Base: `main@90ad59cac9fbba69c1ed32cacc84d531eb5d9dfa`
 Working branch: `hermuz/igt-github-artifact-resolver-20260828`
-Status: `PRE-WRITE / PROVIDER-BACKED ARTIFACT ACQUISITION`
+Status: `SOURCE IMPLEMENTED / READ-BACK RECONCILED / DETERMINISTIC CI PENDING`
 Authority: `NONE`
 
 ## Entry State
@@ -17,59 +17,71 @@ Trusted Resolver Adapter Execution Boundary is merged and post-merge verified:
 
 ## Goal
 
-Implement the first real provider-specific **read-only evidence acquisition adapter** using GitHub immutable repository artifacts.
+Implement the first provider-specific read-only evidence acquisition adapter using GitHub immutable repository artifacts.
 
-The claim is deliberately narrow:
+Narrow claim:
 
 `GITHUB-BACKED ARTIFACT ACQUISITION != MODEL EXECUTION AUTHENTICITY`.
 
-The adapter may establish that an exact JSON evidence artifact was fetched from an exact GitHub repository path at an exact immutable commit SHA. It may not establish that the model/provider described inside that JSON actually executed.
-
 ## Reference Contract
 
-Only immutable references are accepted:
+Only:
 
 `github+artifact://OWNER/REPO@40_HEX_COMMIT_SHA/PATH`
 
-Branch names, tags, default-branch reads, floating `main`, abbreviated SHAs, and path traversal are rejected.
+is accepted.
 
-Participant and attestation package refs may point to separate artifacts at the same or different immutable commits.
+Branches, tags, floating `main`, abbreviated SHAs, traversal, empty segments and backslash ambiguity are rejected before network access.
 
-## Target Invariants
+## Applied Changes
 
-1. Adapter is read-only; no GitHub write method exists in its surface.
-2. Reference must include owner, repo, full 40-hex commit SHA, and non-empty normalized path.
-3. Mutable refs (`main`, branches, tags, short SHA) are rejected before network access.
-4. Path traversal / empty segments / backslash ambiguity are rejected.
-5. HTTP request must address GitHub Contents API with explicit immutable `ref=<commit_sha>`.
-6. GitHub response must be a file, not directory/submodule/symlink-like target.
-7. Returned GitHub blob SHA and content are captured in acquisition observation metadata.
-8. Content must decode as UTF-8 JSON object.
-9. The JSON artifact must be an observation payload only; resolver identity fields remain forbidden and are injected by the governed gate.
-10. HTTP 404 maps to an explicit `UNAVAILABLE` observation from an identified acquisition event rather than a fabricated mismatch.
-11. Other HTTP/network/decode failures fail closed as adapter errors.
-12. Credentials/repository access do not imply authority.
-13. GitHub artifact provenance proves only repository artifact acquisition.
-14. Model execution authenticity remains `UNVERIFIED / INCONCLUSIVE`.
-15. Deterministic transport tests verify adapter mechanics; a later live GitHub E2E is required before provider-backed acquisition is called live-verified.
+| ID | Target | Result | Applied | Verified |
+|---|---|---|:---:|:---:|
+| C01 | `Services/GITHUB_EVIDENCE_RESOLVER_ADAPTER.py` | read-only immutable-ref GitHub Contents API adapter implementing existing evidence resolver interface | Y | Y source/read-back |
+| C02 | `Quality/Integration/test_github_evidence_resolver_adapter.py` | immutable-ref, request, read-only, JSON, 404, non-file, reserved identity, governed-gate and nonclaim regressions | Y | Y source/read-back; CI pending |
+| C03 | `Repository/IGT_GITHUB_ARTIFACT_RESOLVER_CONTRACT_2026-08-28.md` | provider/artifact/model-execution separation contract | Y | Y source/read-back |
+| C04 | current integration suite | exact-head deterministic test discovery/execution | Y | CI pending |
+| C05 | dedicated live GitHub read-only E2E | real immutable artifact fetch | N | FUTURE after deterministic gate |
 
-## Planned Changes
+## Hardened Boundaries
 
-| ID | Target | Action | Expected Result | Applied | Verified |
-|---|---|---|---|:---:|:---:|
-| C01 | `Services/GITHUB_EVIDENCE_RESOLVER_ADAPTER.py` | ADD | read-only immutable GitHub artifact resolver implementing existing evidence adapter interface | N | N |
-| C02 | `Quality/Integration/test_github_evidence_resolver_adapter.py` | ADD | parsing, immutability, transport, JSON, 404/unavailable, reserved identity, and nonclaim regressions | N | N |
-| C03 | `Repository/IGT_GITHUB_ARTIFACT_RESOLVER_CONTRACT_2026-08-28.md` | ADD | immutable reference/provider boundary contract | N | N |
-| C04 | current integration suite | VERIFY | exact-head test discovery/execution | N | N |
-| C05 | dedicated live GitHub read-only E2E | FUTURE | fetch a controlled immutable artifact by exact commit/path and preserve provider response evidence | N | N |
+- Adapter surface contains no create/update/delete/write method.
+- Full 40-hex commit SHA required.
+- GET Contents API request always includes explicit immutable `ref=<commit_sha>`.
+- Target must be `type=file` with GitHub blob SHA.
+- Content must be valid base64 -> UTF-8 -> JSON object.
+- Artifact cannot self-inject `resolver_id`, `resolution_id`, or `requested_ref`.
+- GitHub owner/repo/commit/path/blob SHA are appended as artifact provenance metadata.
+- Confirmed 404 becomes identified `UNAVAILABLE`, not mismatch.
+- Other HTTP/network/decode failures fail closed.
+- Credentials imply technical access only, not authority.
+
+## Read-Back / Diff Reconciliation
+
+Compare from exact base `90ad59cac9fbba69c1ed32cacc84d531eb5d9dfa` showed:
+- ahead = 4 before this documentation update;
+- behind = 0;
+- exactly 4 changed paths;
+- all paths declared by this transaction;
+- no Runtime, cognition, memory, workflow, or write-path mutation.
 
 ## Explicit Non-Claims
 
-- GitHub account/repository access is not model-provider authentication.
-- A JSON artifact saying `source_model=X` does not prove model X produced it.
-- Commit immutability stabilizes artifact identity; it does not validate artifact truth.
-- Successful deterministic tests do not count as live GitHub provider evidence.
-- No model execution or cognitive-benefit claim is promoted by this transaction.
+- GitHub repository access is not model-provider authentication.
+- JSON claims do not authenticate themselves.
+- Commit immutability stabilizes artifact identity but does not validate artifact truth.
+- Deterministic transport fixtures do not count as live GitHub provider evidence.
+- Even future live GitHub acquisition will prove artifact source, not model execution authenticity.
+
+## Verification Plan
+
+1. Implement adapter/tests/contract — PASS.
+2. Read-back and exact diff reconciliation — PASS.
+3. Open Draft PR from exact main — NEXT.
+4. Require exact-head Runtime/Integration + Full-Stack CI; inspect actual test count and merge-ref.
+5. Document failure/repair if any.
+6. Final documentation-head CI → freeze → expected-SHA squash merge → post-merge exact-main verification.
+7. Only after deterministic closure, design a dedicated read-only live GitHub E2E.
 
 ## Closure Boundary
 
@@ -80,7 +92,5 @@ Potential deterministic result:
 while:
 
 `LIVE GITHUB ARTIFACT ACQUISITION = UNVERIFIED UNTIL E2E`.
-
-and:
 
 `MODEL EXECUTION AUTHENTICITY = UNVERIFIED / INCONCLUSIVE`.
