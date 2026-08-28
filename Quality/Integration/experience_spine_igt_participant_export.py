@@ -27,7 +27,6 @@ FORBIDDEN_KEYS = {
     "required_evidence",
     "required_non_claims",
     "dimensions",
-    "score",
     "max_score",
     "invariant_transfer",
     "cognitive_effect",
