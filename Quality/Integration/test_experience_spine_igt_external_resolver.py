@@ -120,6 +120,9 @@ def _participant_observation(package: dict, *, status: str = "FOUND") -> dict:
         "repository_baseline_sha": package["repository_baseline_sha"],
         "source_model": package["source_model"],
         "source_instance_id": package["source_instance_id"],
+        "execution_surface": package["execution_surface"],
+        "execution_started_at": package["execution_started_at"],
+        "execution_completed_at": package["execution_completed_at"],
         "payload_digest": package["payload_digest"],
         "response_digest": package["response_digest"],
     }
@@ -139,7 +142,7 @@ def _attestation_observation(package: dict, *, status: str = "FOUND") -> dict:
         "execution_context_id": package["execution_context_id"],
         "repository_baseline_sha": package["repository_baseline_sha"],
         "attestation_digest": digest_value(package["independence_attestation"]),
-        "independence_dimensions": deepcopy(package["independence_attestation"]),
+        "attestation_content": deepcopy(package["independence_attestation"]),
     }
     if status == "UNAVAILABLE":
         observation["observed_ref"] = None
@@ -227,6 +230,17 @@ def test_source_model_mismatch_is_not_hidden_by_matching_run_id():
     assert "SOURCE_MODEL_MISMATCH" in result["reasons"]
 
 
+def test_execution_surface_or_time_mismatch_is_direct_mismatch():
+    package = _package()
+    participant = _participant_observation(package)
+    participant["execution_surface"] = "other-surface"
+    participant["execution_started_at"] = "2026-08-28T22:00:00Z"
+    result = correlate_participant_observation(package, participant)
+    assert result["state"] == "MISMATCH"
+    assert "EXECUTION_SURFACE_MISMATCH" in result["reasons"]
+    assert "EXECUTION_STARTED_AT_MISMATCH" in result["reasons"]
+
+
 def test_attestation_digest_mismatch_is_direct_mismatch():
     package = _package()
     observation = _attestation_observation(package)
@@ -234,6 +248,15 @@ def test_attestation_digest_mismatch_is_direct_mismatch():
     result = correlate_attestation_observation(package, observation)
     assert result["state"] == "MISMATCH"
     assert "ATTESTATION_DIGEST_MISMATCH" in result["reasons"]
+
+
+def test_attestation_content_mismatch_is_not_hidden_by_matching_digest_field():
+    package = _package()
+    observation = _attestation_observation(package)
+    observation["attestation_content"]["state_independence"] = "NO"
+    result = correlate_attestation_observation(package, observation)
+    assert result["state"] == "MISMATCH"
+    assert "ATTESTATION_CONTENT_MISMATCH" in result["reasons"]
 
 
 def test_requested_reference_mismatch_is_direct_mismatch_before_content_comparison():
@@ -248,7 +271,7 @@ def test_requested_reference_mismatch_is_direct_mismatch_before_content_comparis
     }
 
 
-def test_unavailable_evidence_is_not_misclassified_as_mismatch():
+def test_unavailable_evidence_is_not_misclassified_as_mismatch_but_has_resolver_identity():
     package = _package()
     participant = _participant_observation(package, status="UNAVAILABLE")
     result = correlate_external_evidence(
@@ -259,6 +282,15 @@ def test_unavailable_evidence_is_not_misclassified_as_mismatch():
     assert result["participant"]["state"] == "UNAVAILABLE"
     assert result["state"] == "EXTERNAL_EVIDENCE_UNAVAILABLE"
     assert result["external_authenticity"] == "INCONCLUSIVE"
+
+
+def test_unavailable_without_resolution_identity_is_mismatch_of_resolver_event_not_absence_proof():
+    package = _package()
+    participant = _participant_observation(package, status="UNAVAILABLE")
+    participant["resolution_id"] = ""
+    result = correlate_participant_observation(package, participant)
+    assert result["state"] == "MISMATCH"
+    assert "RESOLUTION_ID_MISSING" in result["reasons"]
 
 
 def test_partial_observation_is_inconclusive_not_mismatch():
