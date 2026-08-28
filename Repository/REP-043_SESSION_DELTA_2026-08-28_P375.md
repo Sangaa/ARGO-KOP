@@ -3,7 +3,7 @@
 Date: 2026-08-28
 Branch: `feature/experience-spine-p375`
 Base main SHA: `09b216e403fe99a6f1a4a35e3c3038831398f6a3`
-Status: `OPEN / LOCAL VERIFICATION PASSED / BRANCH READ-BACK AND CI PENDING / NO CANONICAL PROMOTION`
+Status: `CLOSED / VERIFIED CANDIDATE / NO CANONICAL PROMOTION`
 Protocol: `GOV-013 / GOV-013A / GOV-014 / GOV-015 / GOV-016`
 
 ## RE-ENTRY
@@ -72,6 +72,29 @@ Free-text similarity alone is deliberately insufficient because it can load attr
 - Combined focused + adjacent result: `9 PASSED`.
 - The bundled local Python runtime did not include `pytest`; this was classified as `INFRASTRUCTURE_FAILURE / LOCAL TOOLING LIMITATION`, not a code failure. The nine plain assertion-based test functions were then executed directly with the same Python runtime and all passed.
 - Governed CI execution remains required before closure; local direct execution does not replace repository CI evidence.
+
+## BRANCH READ-BACK AND SHA VERIFICATION
+
+- Candidate commit: `25db88f79c2243ab34d0e238289fc4d12563e544`.
+- Base/merge-base: `09b216e403fe99a6f1a4a35e3c3038831398f6a3`.
+- Compare state: `ahead by 1 / behind by 0` at candidate verification.
+- Changed-file set: exactly five planned files.
+- All five branch files were fetched again from the candidate commit and their blob SHAs matched the pre-commit blobs.
+- Draft PR: `#66`.
+
+## CI VERIFICATION
+
+- Full-Stack Repository Audit run `33193142252`: `SUCCESS`.
+- ARGO Runtime Prototype and Integration Tests run `33193142257`: `SUCCESS`.
+- Required jobs inspected: `integrity-tests`, `integration-tests`, and `prototype-tests`; all completed successfully, including their test/acceptance steps.
+
+These results verify the candidate branch within the exercised CI scope. They do not prove repository-wide Experience Spine integration or model-wide compliance.
+
+## CLOSE
+
+`EXECUTE → VERIFY → DOCUMENT → RE-READ → COMMIT/SHA VERIFY → CHECKPOINT RECORD → CLOSE`
+
+P375 is closed as a verified, non-canonical candidate on the isolated branch. `main` remains untouched. The next governed decision is review of PR #66 and, only if approved, a separate integration/promotion checkpoint.
 
 ## CHECKPOINT
 
