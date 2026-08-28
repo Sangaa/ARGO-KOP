@@ -60,6 +60,12 @@ FORBIDDEN_EVALUATOR_KEYS = {
     "evaluator_expectation",
     "evaluator_expectations",
 }
+CONDITION_STRUCTURAL_INVALID_REASONS = {
+    "L1_EXPERIENCE_PACKET_MISSING",
+    "L1_EXPERIENCE_ITEMS_NOT_LIST",
+    "L2_EXPERIENCE_PACKET_MISSING",
+    "L2_PROVENANCE_ENVELOPE_MISSING",
+}
 
 
 def canonical_json(value: object) -> str:
@@ -257,7 +263,10 @@ def validate_package(package: object) -> dict:
         "_LEAK",
         "EVALUATOR_CONTAMINATION",
     )
-    invalid = any(any(marker in reason for marker in invalid_markers) for reason in reasons)
+    invalid = (
+        any(reason in CONDITION_STRUCTURAL_INVALID_REASONS for reason in reasons)
+        or any(any(marker in reason for marker in invalid_markers) for reason in reasons)
+    )
     if invalid:
         state = "INVALID"
     elif reasons:
