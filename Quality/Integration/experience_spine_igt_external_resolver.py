@@ -37,10 +37,24 @@ ATTESTATION_BINDINGS = (
 
 
 def observation_digest(observation: dict) -> str:
-    """Digest one resolver observation for receipt binding."""
+    """Digest one complete resolver record for receipt binding."""
     if not isinstance(observation, dict):
         raise TypeError("OBSERVATION_NOT_MAPPING")
     return digest_value(observation)
+
+
+def evidence_fingerprint(observation: dict) -> str:
+    """Fingerprint observed evidence independent of resolver event metadata.
+
+    Changing only resolver_id/resolution_id must not turn one underlying
+    observation into independent corroboration.
+    """
+    if not isinstance(observation, dict):
+        raise TypeError("OBSERVATION_NOT_MAPPING")
+    material = deepcopy(observation)
+    material.pop("resolver_id", None)
+    material.pop("resolution_id", None)
+    return digest_value(material)
 
 
 def _base_observation_checks(package: dict, observation: object, expected_ref_field: str) -> tuple[str, list[str]]:
@@ -90,6 +104,7 @@ def correlate_participant_observation(package: dict, observation: object) -> dic
         "resolver_id": observation.get("resolver_id"),
         "resolution_id": observation.get("resolution_id"),
         "observation_digest": observation_digest(observation),
+        "evidence_fingerprint": evidence_fingerprint(observation),
     }
 
 
@@ -123,6 +138,7 @@ def correlate_attestation_observation(package: dict, observation: object) -> dic
         "resolver_id": observation.get("resolver_id"),
         "resolution_id": observation.get("resolution_id"),
         "observation_digest": observation_digest(observation),
+        "evidence_fingerprint": evidence_fingerprint(observation),
     }
 
 
@@ -224,20 +240,29 @@ def correlate_external_evidence(
 
 
 def detect_duplicate_resolution_identity(observations: Iterable[dict]) -> dict:
-    """Prevent repeated resolver records from masquerading as corroboration."""
+    """Prevent repeated resolver records/evidence from masquerading as corroboration."""
     resolution_ids: dict[tuple[str, str], int] = {}
     observation_digests: dict[str, int] = {}
+    evidence_fingerprints: dict[str, int] = {}
     for observation in observations:
         key = (str(observation.get("resolver_id", "")), str(observation.get("resolution_id", "")))
         resolution_ids[key] = resolution_ids.get(key, 0) + 1
         digest = observation_digest(observation)
         observation_digests[digest] = observation_digests.get(digest, 0) + 1
+        fingerprint = evidence_fingerprint(observation)
+        evidence_fingerprints[fingerprint] = evidence_fingerprints.get(fingerprint, 0) + 1
 
     duplicate_resolution_ids = sorted(key for key, count in resolution_ids.items() if count > 1)
     duplicate_observation_digests = sorted(key for key, count in observation_digests.items() if count > 1)
+    duplicate_evidence_fingerprints = sorted(key for key, count in evidence_fingerprints.items() if count > 1)
     return {
-        "state": "DUPLICATE_RESOLUTION_EVIDENCE" if duplicate_resolution_ids or duplicate_observation_digests else "UNIQUE",
+        "state": (
+            "DUPLICATE_RESOLUTION_EVIDENCE"
+            if duplicate_resolution_ids or duplicate_observation_digests or duplicate_evidence_fingerprints
+            else "UNIQUE"
+        ),
         "duplicate_resolution_ids": duplicate_resolution_ids,
         "duplicate_observation_digests": duplicate_observation_digests,
+        "duplicate_evidence_fingerprints": duplicate_evidence_fingerprints,
         "independent_corroboration": "NOT_ESTABLISHED_BY_DUPLICATION",
     }
