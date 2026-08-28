@@ -65,6 +65,7 @@ def test_b08_same_run010_execution_reaches_srv009_dispatch_boundary():
         necessity_evidence="P374 minimum B08 observation design",
         commit_message="test: P394 B08 dispatch observation",
         authorized=True,
+        authorization_id="AUTH-P394-B08-OBSERVE",
     )
     connector = FakeConnector(content={})
 
@@ -93,6 +94,7 @@ def test_b08_dispatch_still_fails_closed_without_authorization():
         necessity_evidence="P374 minimum B08 observation design",
         commit_message="test: P394 denied B08 dispatch",
         authorized=False,
+        authorization_id="",
     )
     connector = FakeConnector(content={})
 
