@@ -1,8 +1,9 @@
 """Governed execution boundary for external evidence resolver adapters.
 
-This layer invokes an approved adapter itself and then delegates semantic
-comparison to the existing pure correlation gate. Registry membership and
-protocol conformance do not establish upstream provider authenticity.
+This layer validates package eligibility, invokes an approved adapter itself,
+and then delegates semantic comparison to the existing pure correlation gate.
+Registry membership and protocol conformance do not establish upstream provider
+authenticity.
 """
 from __future__ import annotations
 
@@ -16,6 +17,7 @@ from Services.EVIDENCE_RESOLVER_ADAPTER_INTERFACE import (
     ResolverAcquisition,
     ResolverAdapterIdentity,
 )
+from experience_spine_igt_evidence_package import validate_package
 from experience_spine_igt_external_resolver import (
     correlate_external_evidence,
     observation_digest,
@@ -119,12 +121,24 @@ def execute_registered_adapter_correlation(
     approved_registry: Mapping[str, ApprovedResolverAdapter],
 ) -> dict:
     """Invoke one registered adapter path without laundering it into authenticity."""
+    local = validate_package(package)
+    if local.get("state") != "STRUCTURALLY_QUALIFIED":
+        return {
+            "state": "PACKAGE_NOT_ELIGIBLE",
+            "package_state": local.get("state"),
+            "adapter_execution": "NOT_INVOKED",
+            "external_authenticity": "INCONCLUSIVE",
+            "provider_backed_authenticity": "NOT_ESTABLISHED",
+            "authority": "NONE",
+        }
+
     try:
         identity_before = _identity_snapshot(adapter)
     except Exception as exc:  # adapter boundary must fail closed
         return {
             "state": "ADAPTER_IDENTITY_REJECTED",
             "reason": str(exc),
+            "adapter_execution": "NOT_INVOKED",
             "external_authenticity": "INCONCLUSIVE",
             "provider_backed_authenticity": "NOT_ESTABLISHED",
             "authority": "NONE",
@@ -136,28 +150,21 @@ def execute_registered_adapter_correlation(
             "state": "ADAPTER_NOT_APPROVED",
             "reason": reason,
             "adapter_identity": identity_before,
+            "adapter_execution": "NOT_INVOKED",
             "external_authenticity": "INCONCLUSIVE",
             "provider_backed_authenticity": "NOT_ESTABLISHED",
             "authority": "NONE",
         }
 
-    participant_ref = package.get("participant_evidence_ref") if isinstance(package, dict) else None
-    attestation_ref = package.get("independence_attestation_ref") if isinstance(package, dict) else None
-    if not participant_ref or not attestation_ref:
-        return {
-            "state": "PACKAGE_REFERENCE_PRECONDITION_FAILED",
-            "adapter_identity": identity_before,
-            "external_authenticity": "INCONCLUSIVE",
-            "provider_backed_authenticity": "NOT_ESTABLISHED",
-            "authority": "NONE",
-        }
+    participant_ref = str(package["participant_evidence_ref"])
+    attestation_ref = str(package["independence_attestation_ref"])
 
     try:
-        participant_acquisition = adapter.acquire_participant(str(participant_ref))
+        participant_acquisition = adapter.acquire_participant(participant_ref)
         identity_mid = _identity_snapshot(adapter)
         if identity_mid != identity_before:
             raise EvidenceResolverAdapterError("ADAPTER_IDENTITY_CHANGED_DURING_EXECUTION")
-        attestation_acquisition = adapter.acquire_attestation(str(attestation_ref))
+        attestation_acquisition = adapter.acquire_attestation(attestation_ref)
         identity_after = _identity_snapshot(adapter)
         if identity_after != identity_before:
             raise EvidenceResolverAdapterError("ADAPTER_IDENTITY_CHANGED_DURING_EXECUTION")
@@ -165,12 +172,12 @@ def execute_registered_adapter_correlation(
         participant_observation = _normalize_acquisition(
             participant_acquisition,
             identity=identity_before,
-            expected_ref=str(participant_ref),
+            expected_ref=participant_ref,
         )
         attestation_observation = _normalize_acquisition(
             attestation_acquisition,
             identity=identity_before,
-            expected_ref=str(attestation_ref),
+            expected_ref=attestation_ref,
         )
         if participant_acquisition.acquisition_id == attestation_acquisition.acquisition_id:
             raise EvidenceResolverAdapterError("ACQUISITION_CHANNEL_ID_COLLISION")
@@ -179,6 +186,7 @@ def execute_registered_adapter_correlation(
             "state": "ADAPTER_EXECUTION_FAILED",
             "reason": str(exc),
             "adapter_identity": identity_before,
+            "adapter_execution": "FAILED",
             "external_authenticity": "INCONCLUSIVE",
             "provider_backed_authenticity": "NOT_ESTABLISHED",
             "authority": "NONE",
