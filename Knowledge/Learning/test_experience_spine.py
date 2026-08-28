@@ -1,4 +1,13 @@
-from experience_spine import build_experience_packet
+import importlib.util
+from pathlib import Path
+
+
+MODULE_PATH = Path(__file__).resolve().with_name("experience_spine.py")
+SPEC = importlib.util.spec_from_file_location("experience_spine_unit_target", MODULE_PATH)
+MODULE = importlib.util.module_from_spec(SPEC)
+assert SPEC.loader is not None
+SPEC.loader.exec_module(MODULE)
+build_experience_packet = MODULE.build_experience_packet
 
 
 def _profile(**overrides):
