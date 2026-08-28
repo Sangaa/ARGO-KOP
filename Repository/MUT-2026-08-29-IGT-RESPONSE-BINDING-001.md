@@ -4,7 +4,7 @@ Transaction ID: `MUT-2026-08-29-IGT-RESPONSE-BINDING-001`
 Protocol: `GOV-013 / GOV-014 / GOV-015 + IGT + MI-IGT`
 Base: `main@19805fbb948f4ae32e1c97169cc4f50b80681812`
 Working branch: `hermuz/igt-response-binding-20260829`
-Status: `SOURCE VERIFIED / READ-BACK VERIFIED / PR-CI VERIFIED / FINAL-HEAD CI PENDING`
+Status: `SOURCE VERIFIED / READ-BACK VERIFIED / PR-CI VERIFIED / LIFECYCLE REPLACEMENT REQUIRED`
 Authority: `NONE`
 
 ## Entry Evidence
@@ -26,7 +26,7 @@ A structurally valid response could be evaluated against a run-local case/condit
 | C01 | `Quality/Integration/experience_spine_igt_response_binding.py` | deterministic local response binding to one verified sealed export | Y | Y source/read-back/CI |
 | C02 | `Quality/Integration/test_experience_spine_igt_response_binding.py` | six-row plus adversarial binding regressions | Y | Y source/read-back/CI |
 | C03 | `Repository/IGT_RESPONSE_BINDING_CONTRACT_2026-08-29.md` | identity, integrity, state and nonclaim contract | Y | Y source/read-back |
-| C04 | Runtime/Prototype/Integrity/Integration + Full-Stack CI | exact-head validation | Y | Y at pre-documentation head; final-head rerun pending |
+| C04 | Runtime/Prototype/Integrity/Integration + Full-Stack CI | exact-head validation | Y | Y on both implementation and documentation heads |
 
 ## Implemented Boundaries
 1. Input participant export must pass the canonical local export verifier.
@@ -41,40 +41,63 @@ A structurally valid response could be evaluated against a run-local case/condit
 
 ## PR / CI Evidence
 
-Draft PR: `#83 — IGT: bind participant response to sealed export`.
+Initial Draft PR: `#83 — IGT: bind participant response to sealed export`.
 
-Pre-documentation candidate head:
+Implementation head:
 `812dc0d5ded8ad8045215a61705190c17faaf630`
 
-PR merge ref observed by GitHub Actions:
+Observed implementation merge ref:
 `0e52c4759cc03a5c8c93f2000f9d062e182c3e07`
 = `Merge 812dc0d5ded8ad8045215a61705190c17faaf630 into 19805fbb948f4ae32e1c97169cc4f50b80681812`.
 
-CI result:
+Implementation-head CI:
 - Prototype: SUCCESS
 - Integrity: SUCCESS
 - Integration: SUCCESS
-- Full-Stack Repository Audit: SUCCESS
+- Full-Stack: SUCCESS
 - Integration discovery: `421 passed, 1 warning, 11 subtests passed`
 - Prior canonical baseline: `405 passed`
-- Added discovered integration coverage: `+16 tests`
+- Added discovered coverage: `+16 tests`
 
-The remaining warning is the pre-existing P2 internal-ID audit warning; this transaction does not reinterpret or mutate that scope.
+Documentation/freeze head:
+`95e7161ffb2eda0fb96b5754813c1b6f1768d84a`
 
-## Diff / Concurrency Reconciliation
+Documentation-head CI:
+- Runtime/Prototype/Integrity/Integration workflow #1611: SUCCESS
+- Full-Stack Repository Audit #1858: SUCCESS
 
-Exact compare from base before this documentation update:
-- ahead: 4 commits;
-- behind: 0;
-- changed paths: exactly 4;
-- all changed paths were declared by this mutation;
-- no Runtime, Services, provider connector, workflow, cognition, memory or production dispatch mutation.
+Freeze reconciliation before lifecycle conversion attempt:
+- current main remained `19805fbb948f4ae32e1c97169cc4f50b80681812`;
+- PR head remained `95e7161ffb2eda0fb96b5754813c1b6f1768d84a`;
+- mergeable = true;
+- ahead = 5;
+- behind = 0;
+- exactly 4 changed files, all declared by this mutation.
 
-## Tool Incident
-Several pre-branch `create_file` attempts returned 404 because the intended branch did not yet exist. GitHub rejected every write before state change; no repository mutation occurred. The branch was then created explicitly from the exact base before the first successful matrix write.
+The remaining integration warning is the pre-existing P2 internal-ID audit warning; this transaction does not reinterpret or mutate that scope.
 
-Reusable operational lesson:
-`REJECTED PRECONDITION WRITE != REPOSITORY MUTATION`, but repeated tool-order errors must still be documented and corrected before continuing.
+## Tool / Lifecycle Incidents
+
+### T01 — pre-branch write order
+Several `create_file` attempts returned 404 because the intended branch did not yet exist. GitHub rejected every write before state change; no repository mutation occurred. The branch was then created explicitly from the exact base before the first successful matrix write.
+
+### T02 — Draft → Ready connector schema failure
+After final-head CI and clean freeze reconciliation, the connector's `markPullRequestReadyForReview` call failed on an upstream GraphQL response selection requesting non-existent Repository field `fullDatabaseId`.
+
+A direct re-read confirmed PR #83 remained `draft=true`. A guarded REST merge attempt with exact expected head was then rejected by GitHub with HTTP 405 `Pull Request is still a draft`; no merge occurred and main remained unchanged.
+
+Safe lifecycle disposition:
+- close PR #83 without merge;
+- preserve the exact branch/head;
+- open a replacement non-draft PR from the same head to the same unchanged base;
+- require fresh PR CI on the replacement merge ref before any merge.
+
+Reusable laws:
+`REJECTED PRECONDITION WRITE != REPOSITORY MUTATION`.
+
+`TOOL-SURFACE LIFECYCLE FAILURE MUST NOT BE BYPASSED BY STATE ASSUMPTION`.
+
+`SAME BRANCH + SAME BASE STILL REQUIRES FRESH REPLACEMENT-PR MERGE-REF CI AFTER LIFECYCLE RECREATION`.
 
 ## Explicit Non-Claims
 - Local binding does not prove delivery or model execution.
@@ -85,11 +108,11 @@ Reusable operational lesson:
 - Green CI does not grant repository authority beyond the bounded local-binding claim.
 
 ## Final Verification Plan
-1. Run Runtime/Integration + Full-Stack CI on this documentation head.
-2. Freeze branch if green.
-3. Re-read current main and PR head/base/diff for concurrency.
-4. Require exact 4-path delta and behind=0.
-5. Mark ready and squash merge with expected head SHA only if clean.
+1. Close #83 without merge after this head is re-verified.
+2. Open replacement non-draft PR from the same branch/head to unchanged main.
+3. Require fresh Runtime/Integration + Full-Stack CI on the replacement PR merge ref.
+4. Reconcile main/head/diff again.
+5. Squash merge with exact expected head SHA only if clean.
 6. Verify post-merge exact main with Runtime/Integration + Full-Stack (+ normal main workflows).
 
 ## Bounded Result If Final Verification Passes
