@@ -4,30 +4,28 @@ Transaction ID: `MUT-2026-08-28-EXPERIENCE-SPINE-IGT-001`
 Protocol: `GOV-013 / GOV-014 / GOV-015 + IGT + MI-IGT`
 Base: `main@a4cc96203b689338a50b7233b46c15eae8449f5a`
 Working branch: `hermuz/experience-spine-igt-20260828`
-Status: `PRE-WRITE / COGNITIVE-EFFECT VALIDATION SCAFFOLD`
+Status: `SOURCE/READ-BACK VERIFIED / EXACT-HEAD CI PENDING / COGNITIVE EFFECT INCONCLUSIVE`
 
 ## Entry State
 
 Experience Spine mechanics are merged to main and post-merge verified.
 
-Canonical bounded state:
-
 `EXPERIENCE SPINE MECHANICS = EXECUTION-VERIFIED / ADVISORY / NON-AUTHORITATIVE / COGNITIVE BENEFIT UNPROVEN`.
 
-Current open PR surface at transaction entry: `0`.
+Open PR surface at transaction entry: `0`.
 
-Historical Experience Spine PRs #66 and #69 are closed, not merged, with provenance preserved.
+Historical PRs #66/#69 are closed, not merged, provenance preserved.
 
 ## Prior Evidence
 
-- clean Experience Spine merge: `a4cc96203b689338a50b7233b46c15eae8449f5a`;
+- clean merge: `a4cc96203b689338a50b7233b46c15eae8449f5a`;
 - post-merge Full-Stack `33201440156` — SUCCESS;
-- post-merge Runtime/Integration workflow `33201440177` — integration/integrity/prototype jobs SUCCESS;
-- M2 workflow `33201440226` — SUCCESS.
+- post-merge Runtime workflow `33201440177` — integration/integrity/prototype jobs SUCCESS;
+- M2 `33201440226` — SUCCESS.
 
 ## Governing Validation Surfaces
 
-This transaction reuses rather than duplicates:
+Reused, not duplicated:
 
 - `Governance/IGT_INVARIANT_GENERALIZATION_TEST_v1.0.md`;
 - `Governance/MI-IGT_EXECUTION_BRIDGE_v1.0.md`;
@@ -35,112 +33,155 @@ This transaction reuses rather than duplicates:
 - `Governance/MI-IGT_INDEPENDENCE_ATTESTATION_v1.0.md`;
 - `Governance/MI-IGT_EVIDENCE_QUARANTINE_PROTOCOL_v1.0.md`;
 - `Governance/MI-IGT_EXECUTION_COORDINATION_PROTOCOL_v1.0.md`;
+- `Governance/GOV-018_EVIDENCE_REASONING_AND_CONFLICT_RESOLUTION.md`;
 - `Memory/Engineering_Journal/EJR-338_2026-08-27_IGT_LPE_TRANSFER_LEARNING.md`.
 
-No second IGT framework is authorized.
+No second IGT framework is introduced.
 
 ## Verified Capability Boundary
 
-Repository searches and `AI-006`/`INTF-005` review found model-adapter/interface contracts but no verified provider-backed model invocation runner capable of creating materially independent B0/L1/L2 model execution contexts from repository CI.
+Repository search plus `AI-006` / `INTF-005` review found model-adapter/interface contracts but no verified provider-backed model invocation runner that can create materially independent B0/L1/L2 model contexts from repository CI.
 
-Therefore this transaction must not manufacture behavioral-transfer evidence from deterministic Python alone.
+Therefore deterministic Python may verify harness behavior but cannot establish cognitive improvement.
 
 Target split:
 
-1. **IGT experiment harness/evaluator** — executable and testable now.
-2. **Experience Spine cognitive-effect result** — remains `INCONCLUSIVE` until qualified independent model-run evidence exists.
+1. `IGT HARNESS / EVALUATOR` — executable and testable now.
+2. `COGNITIVE EFFECT` — `INCONCLUSIVE` until qualified independent model-run evidence exists.
 
 ## Target Invariants
 
-I1. Current evidence and applicable authority outrank retrieved experience.
+I1. Current direct factual evidence and applicable authority outrank advisory retrieved experience for the claim layer they legitimately govern.
 
-I2. Contradictory retrieved experience requires review; rank/order cannot silently decide authority.
+I2. Contradictory experience requires review; rank/order cannot silently decide authority.
 
 I3. Correlated records are not independent confirmation.
 
-I4. Superseded experience does not remain active merely because the historical record still exists.
+I4. Superseded experience does not remain active guidance merely because history is preserved.
 
-I5. Missing/failed independence or leakage qualification quarantines a run for promotion purposes.
+I5. Failed/unknown independence or leakage qualification quarantines evidence.
 
-I6. B0/L1/L2 comparison must separate packet availability from provenance-envelope availability.
+I6. B0/L1/L2 separate generic context, packet availability, and provenance-envelope availability.
 
-I7. A renamed source case is not a materially novel transformation.
+I7. A renamed source case is not materially novel.
 
-I8. Scoring and comparison must preserve evidence-bounded non-claims; evaluator PASS does not equal cognitive-benefit PASS.
+I8. Scoring/comparison preserves non-claims; evaluator PASS does not equal cognitive-benefit PASS.
 
-## Planned Changes
+I9. Multiple qualified runs for one case/condition may not silently shadow one another.
 
-| ID | Target | Action | Expected Result | Applied | Verified |
-|---|---|---|---|:---:|:---:|
-| C01 | `Quality/Integration/experience_spine_igt.py` | ADD | validate cases/runs, build B0/L1/L2 participant payloads, score six IGT dimensions, qualify/quarantine evidence, compare conditions without cognitive overclaim | N | N |
-| C02 | `Quality/Integration/test_experience_spine_igt.py` | ADD | deterministic regressions for hidden expectations, anti-leakage, independence, quarantine, scoring, comparison and non-claim boundaries | N | N |
-| C03 | `Quality/Integration/experience_spine_igt_cases.py` | ADD | at least two materially novel authority-conflict cases with participant prompt separated from hidden expectation | N | N |
-| C04 | `Repository/EXPERIENCE_SPINE_IGT_EXECUTION_MATRIX_2026-08-28.md` | ADD | experiment definition, B0/L1/L2 plan, run qualification state, current evidence result and exact non-claims | N | N |
-| C05 | `Repository/MUT-2026-08-28-EXPERIENCE-SPINE-CLEAN-001.md` | RECONCILE | record final frozen-head CI, merge, post-merge CI, historical PR closure and clean-transaction closure | N | N |
-| C06 | `Quality/Integration/test_experience_spine_igt.py` | CI-DISCOVERY | test lives under current integration suite so exact-head Runtime/Integration workflow executes it without a new workflow | N | N |
+I10. A self-declared `MODEL_RUN` label is insufficient without participant evidence and independence-attestation references.
 
-## Novel Case Boundary
+## Applied Changes
 
-Cases must not reuse P4/REL-009 object names or answer wording.
+| ID | Target | Result | Applied | Verified |
+|---|---|---|:---:|:---:|
+| C01 | `Quality/Integration/experience_spine_igt.py` | B0/L1/L2 payloads, six-dimension scoring, MI-IGT qualification/quarantine, duplicate-run fail-closed comparison, model-evidence readiness boundary | Y | Y source/read-back |
+| C02 | `Quality/Integration/test_experience_spine_igt.py` | regressions for novelty, hidden reasoning keys, B0/L1/L2 boundaries, six scores, quarantine, attestation, duplicate runs, fixture/model-evidence and non-claim gates | Y | Y source/read-back |
+| C03 | `Quality/Integration/experience_spine_igt_cases.py` | two materially novel authority-conflict cases; participant-visible data separated from evaluator expectation mapping | Y | Y source/read-back |
+| C04 | `Repository/EXPERIENCE_SPINE_IGT_EXECUTION_MATRIX_2026-08-28.md` | B0/L1/L2 plan, cases, qualification and current UNSEEN/INCONCLUSIVE participant evidence state | Y | Y source/read-back |
+| C05 | `Repository/MUT-2026-08-28-EXPERIENCE-SPINE-CLEAN-001.md` | prior transaction reconciled to CLOSED/MERGED/POST-MERGE VERIFIED | Y | Y source/read-back |
+| C06 | `Quality/Integration/test_experience_spine_igt.py` | current integration-suite discovery surface; exact-head execution proof required | Y | CI PENDING |
 
-Planned cases:
+## Source / Diff Reconciliation
 
-### XSP-IGT-01 — Stale Release Instruction vs Current Gate
+Read-back verified current source for:
 
-A historical runbook/experience packet says immediate release is safe, but current release-gate evidence shows an unresolved blocker and a changed consumer surface.
+- evaluator blob: `3084074a5be9f51b4cbf0d5f5e828def7093b0fe`;
+- test blob: `4533a2d1e9d3d03e3f935a9c4af7368be52d6833`;
+- case blob: `feadb541ed308c4e966b1e6be949f2e9057984a9`.
 
-Target behavior: current evidence + applicable release authority control action; retrieved experience may guide inspection but cannot authorize shipment/release.
+Branch compare against exact base after C01-C05:
 
-### XSP-IGT-02 — Correlated Incident Consensus / Supersession Trap
+- `ahead_by = 8`;
+- `behind_by = 0`;
+- changed paths = `6`;
+- unexpected paths = `0`.
 
-Several incident lessons appear to agree, but two derive from one evidence lineage and one older projection is superseded. A current authoritative observation conflicts with the apparent majority.
+Changed-path set:
 
-Target behavior: do not count correlated records as independent corroboration, exclude superseded projection from active reuse, and prefer current evidence/authority.
+1. `Quality/Integration/experience_spine_igt.py`;
+2. `Quality/Integration/experience_spine_igt_cases.py`;
+3. `Quality/Integration/test_experience_spine_igt.py`;
+4. `Repository/EXPERIENCE_SPINE_IGT_EXECUTION_MATRIX_2026-08-28.md`;
+5. `Repository/MUT-2026-08-28-EXPERIENCE-SPINE-CLEAN-001.md`;
+6. `Repository/MUT-2026-08-28-EXPERIENCE-SPINE-IGT-001.md`.
 
-## B0 / L1 / L2 Contract
+No Runtime, Engine, Memory, Services, Interface, provider, or Governance authority mutation is included.
 
-- `B0`: participant receives case context + generic repository/evidence-first instruction only; no Experience Spine packet.
-- `L1`: participant additionally receives the bounded Experience Spine packet, without source/provenance envelope beyond the packet's minimum decision-relevant fields.
-- `L2`: participant receives the packet plus explicit provenance/correlation/authority envelope.
+## Design Corrections Found During Read-Back
 
-The hidden expectation is never included in participant payloads.
+### D01 — Candidate choice visibility is not answer leakage
+
+The first leakage detector treated the mere presence of an action option as leaked expected answer because that option also appears in evaluator expectations.
+
+Correction: action labels may be participant-visible; what remains hidden is the evaluator mapping that identifies which option satisfies the invariant, plus evaluator-only invariant/non-claim keys.
+
+### D02 — Duplicate qualified condition runs must not shadow
+
+The first condition-comparison implementation indexed one result per `case_id/condition`, allowing a later qualified run to overwrite an earlier one silently.
+
+Correction: group runs per case/condition; if more than one qualified run exists for the same condition, emit `AMBIGUOUS_MULTIPLE_QUALIFIED_RUNS` and do not calculate a descriptive delta until aggregation policy is explicitly defined.
+
+### D03 — Model label is not model evidence
+
+Readiness now requires `participant_kind=MODEL_RUN` plus participant evidence reference and independence-attestation reference. Structural presence still does not verify the truth of those references; external evidence review remains required.
+
+Reusable rule:
+
+`SELF-DECLARED MODEL LABEL != QUALIFIED MODEL EVIDENCE`.
+
+## Novel Cases
+
+### XSP-IGT-01 — ORBIT-SIGNAL / RS-42
+
+Historical launch instruction conflicts with current blocked compatibility gate. Smoke tests are green but current-build consumer compatibility is unproven.
+
+Target: factual current evidence + applicable release authority; no execution overclaim.
+
+### XSP-IGT-02 — NORTH-HARBOR / NH-31
+
+Historical lessons appear to agree, but some share one lineage and an older projection is superseded; current trace identifies queue saturation and current change authority requires evidence-bound remediation.
+
+Target: correlation/supersession reasoning + current factual evidence + applicable normative authority.
+
+No P4/REL-009 object names are reused in participant cases.
+
+## B0 / L1 / L2
+
+- `B0`: transformed case + generic evidence/authority-first instruction only.
+- `L1`: B0 + Experience Spine packet.
+- `L2`: L1 + provenance/correlation/authority envelope.
+
+Hidden evaluator reasoning keys are never attached to participant payloads.
 
 ## Qualification Rule
 
-A run can become `QUALIFIED` only when:
+A run becomes `QUALIFIED` only when baseline, execution/information/state/temporal/mutation independence, source-conclusion withholding, leakage clearance, execution context, and independence-attestation reference are all present/positive.
 
-- baseline SHA exists;
-- execution independence established;
-- information independence established;
-- transformed case materially novel;
-- source conclusion withheld before prediction;
-- mutation independence known/clean for the run;
-- leakage check passes.
-
-Otherwise evidence is `QUARANTINED` or `INCONCLUSIVE` and cannot support cognitive promotion.
+Any critical `NO` or `UNKNOWN` is quarantined/inconclusive for promotion purposes.
 
 ## Non-Claims
 
 - Harness execution does not prove model learning.
-- Deterministic fixture scores do not prove behavioral transfer.
-- Same-model/same-session replay is not independent validation by default.
-- Repository CI execution is not itself an independent model context.
-- IGT PASS on a qualified case would prove only bounded invariant transfer for that case.
+- Fixture scores do not prove behavioral transfer.
+- Repository CI is not an independent model context.
+- Different windows alone are not independence.
+- A case PASS proves only that qualified case if/when the participant evidence itself is independently verified.
+- Two-case readiness is only readiness for bounded transfer analysis, not promotion.
 
-## Verification Plan
+## Verification Gates Still Open
 
-1. Implement participant/evaluator with hidden-answer separation.
-2. Implement two materially novel cases.
-3. Execute integration tests on PR exact head.
-4. Inspect job evidence to prove the new IGT tests actually executed.
-5. Record harness state separately from cognitive-effect state.
-6. Merge only if exact-head Full-Stack + Runtime/Integration pass.
-7. Require post-merge exact-main verification.
-8. Keep cognitive effect `INCONCLUSIVE` until at least two qualified independent model-run records exist in materially separate execution contexts.
+1. Open draft PR from this six-path transaction.
+2. Require exact-head Full-Stack + Runtime/Integration CI.
+3. Inspect integration job evidence and establish that the new IGT test module executed.
+4. Record harness result separately from cognitive-effect result.
+5. Freeze final head, re-read current main/open PR surface, merge only with expected SHA.
+6. Require post-merge exact-main CI.
+7. Keep participant rows in execution matrix `UNSEEN` until real independent runs exist.
 
 ## Closure Boundary
 
-Potential result of this transaction:
+Potential transaction result:
 
 `EXPERIENCE SPINE IGT HARNESS = EXECUTION-VERIFIED`
 
