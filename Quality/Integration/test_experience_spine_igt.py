@@ -1,8 +1,11 @@
+from copy import deepcopy
+
 from experience_spine_igt import (
     bounded_transfer_readiness,
     build_condition_payload,
     compare_conditions,
     evaluate_run,
+    materialize_experience_views,
     qualify_run,
     score_response,
     validate_case_separation,
@@ -44,6 +47,48 @@ def _qualified_run(case_id: str, condition: str, *, run_id: str, context_id: str
     }
 
 
+def _experience_packet() -> dict:
+    return {
+        "status": "READY",
+        "task_id": "XSP-IGT-PACKET",
+        "execution_identity": "HERMUZ:source-packet",
+        "execution_context": {"consumer_route": "HERMUZ"},
+        "experience_items": [
+            {
+                "knowledge_id": "K-RELEASE",
+                "pattern": "Inspect current release gates before acting on historical launch guidance.",
+                "knowledge_scope": "project:test",
+                "lifecycle_state": "PROMOTED",
+                "validation_state": "VALIDATED",
+                "evidence": ["E-RELEASE-1"],
+                "evidence_state": "PROVEN",
+                "authority_state": "ADVISORY",
+                "source_identity": "HERMUZ:prior-run",
+                "source_type": "HERMUZ-ENGINEERING",
+                "evidence_group": "EG-RELEASE",
+                "consumer_routes": ["HERMUZ"],
+                "applicability_boundaries": ["release-operations"],
+                "counterindications": ["current gate supersedes old launch condition"],
+                "contradicts": [],
+                "match_reasons": {"problem_types": ["release-gate-conflict"]},
+                "score": 2,
+            }
+        ],
+        "conflicts": [],
+        "correlated_evidence_groups": [
+            {
+                "evidence_group": "EG-RELEASE",
+                "knowledge_ids": ["K-RELEASE"],
+                "independence": "CORRELATED_NOT_INDEPENDENT",
+            }
+        ],
+        "excluded_summary": {},
+        "reasoning_start": ["CURRENT_EVIDENCE", "APPLICABLE_AUTHORITY"],
+        "authority_boundary": "RETRIEVAL_DOES_NOT_PROMOTE_OR_AUTHORIZE",
+        "evidence_boundary": "CORRELATED_RECORDS_ARE_NOT_INDEPENDENT_CONFIRMATION",
+    }
+
+
 def test_cases_are_materially_renamed_away_from_source_workstream_objects():
     serialized = repr([participant_case(case_id) for case_id in list_case_ids()])
     for forbidden in ("REL-009", "RUN-010", "SRV-009", "REP-014", "P4-C12"):
@@ -61,22 +106,60 @@ def test_hidden_evaluator_reasoning_keys_are_not_present_in_participant_case():
         }
 
 
-def test_b0_l1_l2_payloads_preserve_condition_boundaries_without_hidden_reasoning_keys():
-    packet = {"status": "READY", "experience_items": [{"knowledge_id": "K-RELEASE"}]}
-    provenance = {"evidence_groups": ["EG-1"], "authority_boundary": "ADVISORY"}
+def test_materialized_views_strip_l2_provenance_from_l1_without_mutating_source():
+    source = _experience_packet()
+    original = deepcopy(source)
+    decision_view, provenance = materialize_experience_views(source)
 
+    assert source == original
+    item = decision_view["experience_items"][0]
+    for field in (
+        "evidence",
+        "evidence_state",
+        "authority_state",
+        "source_identity",
+        "source_type",
+        "evidence_group",
+        "consumer_routes",
+    ):
+        assert field not in item
+
+    assert "correlated_evidence_groups" not in decision_view
+    assert "evidence_boundary" not in decision_view
+    assert item["knowledge_id"] == "K-RELEASE"
+    assert item["pattern"] == original["experience_items"][0]["pattern"]
+    assert item["applicability_boundaries"] == ["release-operations"]
+
+    pitem = provenance["experience_items"][0]
+    assert pitem["knowledge_id"] == "K-RELEASE"
+    assert pitem["source_identity"] == "HERMUZ:prior-run"
+    assert pitem["source_type"] == "HERMUZ-ENGINEERING"
+    assert pitem["authority_state"] == "ADVISORY"
+    assert pitem["evidence_group"] == "EG-RELEASE"
+    assert provenance["correlated_evidence_groups"] == original["correlated_evidence_groups"]
+    assert provenance["evidence_boundary"] == original["evidence_boundary"]
+    assert provenance["authority_boundary"] == original["authority_boundary"]
+
+
+def test_b0_l1_l2_payloads_have_deterministic_information_boundaries():
+    packet = _experience_packet()
     b0 = build_condition_payload("XSP-IGT-01", "B0")
     l1 = build_condition_payload("XSP-IGT-01", "L1", experience_packet=packet)
-    l2 = build_condition_payload(
-        "XSP-IGT-01", "L2", experience_packet=packet, provenance_envelope=provenance
-    )
+    l2 = build_condition_payload("XSP-IGT-01", "L2", experience_packet=packet)
 
     assert "experience_packet" not in b0
     assert "provenance_envelope" not in b0
-    assert l1["experience_packet"] == packet
+
+    assert "experience_packet" in l1
     assert "provenance_envelope" not in l1
-    assert l2["experience_packet"] == packet
-    assert l2["provenance_envelope"] == provenance
+    assert "source_identity" not in l1["experience_packet"]["experience_items"][0]
+    assert "evidence_group" not in l1["experience_packet"]["experience_items"][0]
+    assert "correlated_evidence_groups" not in l1["experience_packet"]
+
+    assert l2["experience_packet"] == l1["experience_packet"]
+    assert l2["provenance_envelope"]["experience_items"][0]["source_identity"] == "HERMUZ:prior-run"
+    assert l2["provenance_envelope"]["experience_items"][0]["evidence_group"] == "EG-RELEASE"
+    assert l2["provenance_envelope"]["correlated_evidence_groups"] == packet["correlated_evidence_groups"]
 
     hidden = hidden_expectation("XSP-IGT-01")
     for payload in (b0, l1, l2):
@@ -86,26 +169,29 @@ def test_b0_l1_l2_payloads_preserve_condition_boundaries_without_hidden_reasonin
         for non_claim in hidden["required_non_claims"]:
             assert non_claim not in visible
 
-    # Candidate actions may be visible; the hidden mapping of which one is
-    # accepted is never attached to the participant payload.
     assert hidden["accepted_actions"][0] in repr(b0["context"])
     assert "accepted_actions" not in repr(b0)
 
 
-def test_l1_and_l2_require_their_declared_information_surfaces():
-    try:
-        build_condition_payload("XSP-IGT-01", "L1")
-    except ValueError as exc:
-        assert str(exc) == "EXPERIENCE_PACKET_REQUIRED"
-    else:
-        raise AssertionError("L1 accepted missing experience packet")
+def test_l1_and_l2_require_usable_experience_packet():
+    for condition in ("L1", "L2"):
+        try:
+            build_condition_payload("XSP-IGT-01", condition)
+        except ValueError as exc:
+            assert str(exc) == "EXPERIENCE_PACKET_REQUIRED"
+        else:
+            raise AssertionError(f"{condition} accepted missing experience packet")
 
-    try:
-        build_condition_payload("XSP-IGT-01", "L2", experience_packet={})
-    except ValueError as exc:
-        assert str(exc) == "PROVENANCE_ENVELOPE_REQUIRED"
-    else:
-        raise AssertionError("L2 accepted missing provenance envelope")
+        try:
+            build_condition_payload(
+                "XSP-IGT-01",
+                condition,
+                experience_packet={"status": "HOLD", "experience_items": []},
+            )
+        except ValueError as exc:
+            assert str(exc) == "EXPERIENCE_PACKET_NOT_USABLE"
+        else:
+            raise AssertionError(f"{condition} accepted HOLD experience packet")
 
 
 def test_scoring_uses_all_six_igt_dimensions_and_requires_full_fidelity():
@@ -124,6 +210,20 @@ def test_scoring_uses_all_six_igt_dimensions_and_requires_full_fidelity():
     assert failed["dimensions"]["explanation_fidelity"] == 0
 
 
+def test_missing_field_is_invalid_but_explicit_empty_answer_is_scoreable():
+    missing = _perfect_response("XSP-IGT-01")
+    del missing["non_claims"]
+    invalid = score_response("XSP-IGT-01", missing)
+    assert invalid["status"] == "INVALID_RESPONSE"
+    assert invalid["missing"] == ["non_claims"]
+
+    empty = _perfect_response("XSP-IGT-01")
+    empty["non_claims"] = []
+    scored = score_response("XSP-IGT-01", empty)
+    assert scored["status"] == "FAIL"
+    assert scored["dimensions"]["explanation_fidelity"] == 0
+
+
 def test_unknown_or_negative_independence_quarantines_evidence():
     run = _qualified_run("XSP-IGT-01", "B0", run_id="R1", context_id="CTX-1")
     run["state_independence"] = "UNKNOWN"
@@ -140,6 +240,14 @@ def test_missing_attestation_reference_quarantines_structurally_clean_run():
     result = qualify_run(run)
     assert result["evidence_state"] == "QUARANTINED"
     assert "INDEPENDENCE_ATTESTATION_REF_MISSING" in result["reasons"]
+
+
+def test_model_run_without_participant_evidence_reference_is_quarantined():
+    run = _qualified_run("XSP-IGT-01", "L1", run_id="R-EVIDENCE", context_id="CTX-EVIDENCE")
+    run["participant_evidence_ref"] = ""
+    result = qualify_run(run)
+    assert result["evidence_state"] == "QUARANTINED"
+    assert "PARTICIPANT_EVIDENCE_REF_MISSING" in result["reasons"]
 
 
 def test_leakage_or_missing_baseline_quarantines_even_a_perfect_response():
@@ -204,12 +312,14 @@ def test_python_fixtures_do_not_satisfy_independent_model_evidence_readiness():
     assert readiness["promotion"] == "NONE"
 
 
-def test_model_label_without_participant_evidence_reference_does_not_count():
+def test_quarantined_model_label_without_participant_evidence_does_not_count():
     run1 = _qualified_run("XSP-IGT-01", "L1", run_id="NOREF1", context_id="CTX-N1")
     run2 = _qualified_run("XSP-IGT-02", "L1", run_id="NOREF2", context_id="CTX-N2")
     run1["participant_evidence_ref"] = ""
     run2["participant_evidence_ref"] = ""
-    readiness = bounded_transfer_readiness([evaluate_run(run1), evaluate_run(run2)])
+    evaluated = [evaluate_run(run1), evaluate_run(run2)]
+    assert all(result["qualification"]["evidence_state"] == "QUARANTINED" for result in evaluated)
+    readiness = bounded_transfer_readiness(evaluated)
     assert readiness["status"] == "INSUFFICIENT_INDEPENDENT_MODEL_EVIDENCE"
     assert readiness["qualified_model_runs"] == 0
 
