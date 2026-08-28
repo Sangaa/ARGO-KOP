@@ -67,6 +67,7 @@ jobs:
               necessity_evidence='P3 executable proof requires runtime invocation over real connector.',
               commit_message='P3 E2E runtime create probe',
               authorized=True,
+              authorization_id='AUTH-P3-E2E-RUNTIME-001',
           )
           create_result = execute_update(create_candidate, connector=connector)
           assert create_result['status'] == 'UPDATE_ACCEPTED', create_result
@@ -83,6 +84,7 @@ jobs:
               necessity_evidence='Update must use observed current SHA and post-write read-back.',
               commit_message='P3 E2E runtime update probe',
               authorized=True,
+              authorization_id='AUTH-P3-E2E-RUNTIME-001',
           )
           update_result = execute_update(update_candidate, connector=connector)
           assert update_result['status'] == 'UPDATE_ACCEPTED', update_result
