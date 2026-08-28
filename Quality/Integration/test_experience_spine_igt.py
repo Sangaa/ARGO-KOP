@@ -29,6 +29,8 @@ def _qualified_run(case_id: str, condition: str, *, run_id: str, context_id: str
         "case_id": case_id,
         "condition": condition,
         "participant_kind": participant_kind,
+        "participant_evidence_ref": f"evidence://{run_id}",
+        "independence_attestation_ref": f"attestation://{run_id}",
         "execution_context_id": context_id,
         "baseline_sha": "a4cc96203b689338a50b7233b46c15eae8449f5a",
         "execution_independence": "YES",
@@ -49,7 +51,7 @@ def test_cases_are_materially_renamed_away_from_source_workstream_objects():
     assert set(list_case_ids()) == {"XSP-IGT-01", "XSP-IGT-02"}
 
 
-def test_hidden_expectations_are_not_present_in_participant_case():
+def test_hidden_evaluator_reasoning_keys_are_not_present_in_participant_case():
     for case_id in list_case_ids():
         separation = validate_case_separation(case_id)
         assert separation == {
@@ -59,7 +61,7 @@ def test_hidden_expectations_are_not_present_in_participant_case():
         }
 
 
-def test_b0_l1_l2_payloads_preserve_condition_boundaries_without_hidden_answer():
+def test_b0_l1_l2_payloads_preserve_condition_boundaries_without_hidden_reasoning_keys():
     packet = {"status": "READY", "experience_items": [{"knowledge_id": "K-RELEASE"}]}
     provenance = {"evidence_groups": ["EG-1"], "authority_boundary": "ADVISORY"}
 
@@ -79,10 +81,15 @@ def test_b0_l1_l2_payloads_preserve_condition_boundaries_without_hidden_answer()
     hidden = hidden_expectation("XSP-IGT-01")
     for payload in (b0, l1, l2):
         visible = repr(payload)
-        assert hidden["accepted_authorities"][0] not in visible
-        assert hidden["accepted_actions"][0] not in visible
         for invariant in hidden["target_invariants"]:
             assert invariant not in visible
+        for non_claim in hidden["required_non_claims"]:
+            assert non_claim not in visible
+
+    # Candidate actions may be visible; the hidden mapping of which one is
+    # accepted is never attached to the participant payload.
+    assert hidden["accepted_actions"][0] in repr(b0["context"])
+    assert "accepted_actions" not in repr(b0)
 
 
 def test_l1_and_l2_require_their_declared_information_surfaces():
@@ -127,6 +134,14 @@ def test_unknown_or_negative_independence_quarantines_evidence():
     assert "STATE_INDEPENDENCE_UNKNOWN" in result["reasons"]
 
 
+def test_missing_attestation_reference_quarantines_structurally_clean_run():
+    run = _qualified_run("XSP-IGT-01", "B0", run_id="R-ATTEST", context_id="CTX-ATTEST")
+    run["independence_attestation_ref"] = ""
+    result = qualify_run(run)
+    assert result["evidence_state"] == "QUARANTINED"
+    assert "INDEPENDENCE_ATTESTATION_REF_MISSING" in result["reasons"]
+
+
 def test_leakage_or_missing_baseline_quarantines_even_a_perfect_response():
     run = _qualified_run("XSP-IGT-01", "L1", run_id="R2", context_id="CTX-2")
     run["baseline_sha"] = ""
@@ -159,8 +174,23 @@ def test_condition_comparison_is_descriptive_and_never_declares_causal_improveme
 
     assert result["comparisons"][0]["L1_minus_B0"] > 0
     assert result["comparisons"][0]["L2_minus_L1"] == 0
+    assert result["ambiguities"] == []
     assert result["cognitive_effect"] == "INCONCLUSIVE_WITHOUT_QUALIFIED_INDEPENDENT_MODEL_RUN_DESIGN"
     assert "descriptive" in result["interpretation_boundary"].lower()
+
+
+def test_duplicate_qualified_condition_runs_are_not_silently_shadowed():
+    first = evaluate_run(_qualified_run("XSP-IGT-01", "L1", run_id="D1", context_id="CTX-D1"))
+    second = evaluate_run(_qualified_run("XSP-IGT-01", "L1", run_id="D2", context_id="CTX-D2"))
+    result = compare_conditions([first, second])
+    assert result["comparisons"] == []
+    assert result["ambiguities"] == [
+        {
+            "case_id": "XSP-IGT-01",
+            "duplicate_conditions": ["L1"],
+            "state": "AMBIGUOUS_MULTIPLE_QUALIFIED_RUNS",
+        }
+    ]
 
 
 def test_python_fixtures_do_not_satisfy_independent_model_evidence_readiness():
@@ -172,6 +202,16 @@ def test_python_fixtures_do_not_satisfy_independent_model_evidence_readiness():
     assert readiness["status"] == "INSUFFICIENT_INDEPENDENT_MODEL_EVIDENCE"
     assert readiness["qualified_model_runs"] == 0
     assert readiness["promotion"] == "NONE"
+
+
+def test_model_label_without_participant_evidence_reference_does_not_count():
+    run1 = _qualified_run("XSP-IGT-01", "L1", run_id="NOREF1", context_id="CTX-N1")
+    run2 = _qualified_run("XSP-IGT-02", "L1", run_id="NOREF2", context_id="CTX-N2")
+    run1["participant_evidence_ref"] = ""
+    run2["participant_evidence_ref"] = ""
+    readiness = bounded_transfer_readiness([evaluate_run(run1), evaluate_run(run2)])
+    assert readiness["status"] == "INSUFFICIENT_INDEPENDENT_MODEL_EVIDENCE"
+    assert readiness["qualified_model_runs"] == 0
 
 
 def test_readiness_requires_two_cases_and_two_execution_contexts_even_for_model_runs():
@@ -192,6 +232,7 @@ def test_readiness_requires_two_cases_and_two_execution_contexts_even_for_model_
     assert ready["qualified_model_runs"] == 2
     assert ready["materially_distinct_cases"] == 2
     assert ready["distinct_execution_contexts"] == 2
+    assert ready["attestation_verification"] == "REQUIRED_OUTSIDE_STRUCTURAL_EVALUATOR"
     assert ready["promotion"] == "NONE"
     assert ready["broad_generalization"] == "UNPROVEN"
     assert ready["model_weight_change"] == "UNPROVEN"
