@@ -4,7 +4,7 @@ import pytest
 
 from Decision.authorization_gate import authorize
 from Runtime.Execution.execution_entrypoint import execute
-from Runtime.Execution.run010_srv009_observation import observe_run010_srv009_dispatch
+from Quality.Integration.rel009_run010_srv009_observation import observe_run010_srv009_dispatch
 from Services.REPOSITORY_CONNECTOR_INTERFACE import ConnectorFile
 
 

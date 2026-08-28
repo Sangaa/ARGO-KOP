@@ -1,10 +1,9 @@
-"""Isolated observable RUN-010 -> SRV-009 composition seam.
+"""Isolated REL-009 evidence harness outside canonical Runtime/Execution scope.
 
-The normal connected spine remains simulation-only. This module exists to make
-the P374 evidence boundary directly observable without introducing an alternate
-write implementation: it validates the RUN-010 handoff contract, reuses the
-existing ENG-006/SRV-009 production adapter, and records the resulting dispatch
-event with preserved execution and authorization provenance.
+This module preserves the P374 evidence boundary without turning Runtime/Execution
+into a direct SRV-009 consumer. It validates the pure RUN-010 handoff contract,
+reuses the existing governed ENG-006/SRV-009 production adapter, and records an
+attributable dispatch observation for integration evidence only.
 """
 from __future__ import annotations
 
