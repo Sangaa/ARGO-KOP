@@ -74,8 +74,6 @@ jobs:
           assert evaluate(['Engine/ENG-TEST.md', 'Repository/MUT-TEST_MUTATION_MATRIX.md']) == (['Engine/ENG-TEST.md'], ['Repository/MUT-TEST_MUTATION_MATRIX.md'])
           assert evaluate(['EJR/EJR-TEST.md', 'Docs/TEST.md']) == ([], [])
           assert evaluate(['Repository/MUT-TEST_MUTATION_MATRIX.md']) == ([], ['Repository/MUT-TEST_MUTATION_MATRIX.md'])
-          # Session-delta governance records are documentation/session evidence,
-          # not canonical implementation mutations; ordinary Repository/REP-* remains protected.
           assert evaluate(['Repository/REP-037_SESSION_DELTA_2026-08-26_P245_CI_TRIGGER_GAP.md']) == ([], [])
           assert evaluate(['Repository/REP-014_REPOSITORY_RELATIONSHIP_REGISTRY.md']) == (['Repository/REP-014_REPOSITORY_RELATIONSHIP_REGISTRY.md'], [])
           print('MUTATION_MATRIX_PREFLIGHT_REGRESSION=PASS')
@@ -100,6 +98,8 @@ jobs:
         run: python Quality/Integration/test_gen001_candidate001_reuse.py
       - name: Run REL-009 negative executable-consumer regression
         run: python Quality/Integrity/test_rel009_negative_executable_consumer_boundary.py
+      - name: Run P391 focused B07 mutation-boundary regression
+        run: python -m pip install --upgrade pytest && python -m pytest -q Quality/Integration/test_b07_matrix_gap_resolution_p391.py
       - name: Enforce Mutation Matrix on current change set
         shell: bash
         run: |
