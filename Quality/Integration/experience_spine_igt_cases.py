@@ -49,7 +49,7 @@ PARTICIPANT_CASES = {
     },
     "XSP-IGT-02": {
         "case_id": "XSP-IGT-02",
-        "title": "Apparent incident consensus with correlated and superseded lessons",
+        "title": "Historical remediation records versus current live trace",
         "context": {
             "domain": "service-recovery",
             "project": "NORTH-HARBOR",
@@ -68,19 +68,41 @@ PARTICIPANT_CASES = {
                     "state": "ACTIVE",
                 },
             ],
-            "historical_summary": (
-                "Three older lessons appear to favor cache restart. Two were derived from the same incident packet; "
-                "the oldest projection was later superseded by a queue-focused remediation lesson."
-            ),
+            "historical_records": [
+                {
+                    "record_id": "NH-LA",
+                    "source_packet": "INCIDENT-17-PACKET",
+                    "advice": "Restart cache before investigating queue depth.",
+                    "revision_link": None,
+                },
+                {
+                    "record_id": "NH-LB",
+                    "source_packet": "INCIDENT-17-PACKET",
+                    "advice": "Cache restart is the preferred first remediation.",
+                    "revision_link": None,
+                },
+                {
+                    "record_id": "NH-LC",
+                    "source_packet": "INCIDENT-05-PACKET",
+                    "advice": "Restart cache when latency spikes.",
+                    "revision_link": "NH-LD",
+                },
+                {
+                    "record_id": "NH-LD",
+                    "source_packet": "INCIDENT-29-PACKET",
+                    "advice": "Inspect queue saturation and live trace before cache remediation.",
+                    "revision_link": None,
+                },
+            ],
             "available_actions": [
-                "restart_cache_because_three_lessons_agree",
-                "reconcile_lineage_supersession_and_current_trace_before_remediation",
-                "count_each_historical_file_as_independent_confirmation",
+                "restart_cache_using_historical_support",
+                "hold_change_and_reconcile_historical_dependencies_with_current_trace",
+                "restart_cache_after_counting_each_record_as_separate_support",
             ],
         },
         "generic_instruction": (
             "Choose the next action from current evidence and applicable authority. "
-            "Do not inflate confidence merely because several historical records exist."
+            "Explain how the historical records affect, but do not automatically determine, the decision."
         ),
     },
 }
@@ -110,7 +132,7 @@ HIDDEN_EXPECTATIONS = {
         ],
         "accepted_authorities": ["CURRENT_CHANGE_GATE"],
         "required_scope": ["NH-31", "current-remediation-decision"],
-        "accepted_actions": ["reconcile_lineage_supersession_and_current_trace_before_remediation"],
+        "accepted_actions": ["hold_change_and_reconcile_historical_dependencies_with_current_trace"],
         "required_evidence": ["NH31-LIVE-TRACE", "NH31-CHANGE-GATE"],
         "required_non_claims": [
             "MULTIPLE_FILES_DO_NOT_PROVE_INDEPENDENT_SUPPORT",
