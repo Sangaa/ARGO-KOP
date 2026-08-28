@@ -29,6 +29,7 @@ class ProductionExecutionCandidate:
     necessity_evidence: str
     commit_message: str
     authorized: bool
+    authorization_id: str
 
 
 def execute_update(
@@ -38,12 +39,14 @@ def execute_update(
 ) -> dict[str, Any]:
     """Execute one governed repository update and return traceable evidence.
 
-    Authorization must already be explicit. Technical connector access never
-    grants canonical authority. The dispatcher performs target identity checks
-    and mandatory post-write read-back.
+    Authorization must already be explicit and attributable. Technical connector
+    access never grants canonical authority. The dispatcher performs target
+    identity checks and mandatory post-write read-back.
     """
     if not candidate.authorized:
         raise ValueError("EXECUTION_NOT_AUTHORIZED")
+    if not candidate.authorization_id:
+        raise ValueError("AUTHORIZATION_ID_REQUIRED")
 
     intent = WriteIntent(
         path=candidate.path,
