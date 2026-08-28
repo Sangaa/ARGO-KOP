@@ -60,11 +60,12 @@ def _walk_strings(value: Any, path: tuple[str, ...] = ()) -> list[tuple[tuple[st
     return found
 
 
-def _hidden_groups(case_id: str) -> tuple[set[str], set[str]]:
+def _hidden_values(case_id: str) -> set[str]:
     hidden = hidden_expectation(case_id)
-    targets = {str(v) for v in hidden.get("target_invariants", []) if str(v)}
-    nonclaims = {str(v) for v in hidden.get("required_non_claims", []) if str(v)}
-    return targets, nonclaims
+    values: set[str] = set()
+    for key in ("target_invariants", "required_non_claims"):
+        values.update(str(value) for value in hidden.get(key, []) if str(value))
+    return values
 
 
 def _assert_blind(case_id: str, package_without_digest: dict) -> None:
@@ -72,13 +73,11 @@ def _assert_blind(case_id: str, package_without_digest: dict) -> None:
     if present_forbidden:
         raise ValueError("FORBIDDEN_EXPORT_KEYS:" + ",".join(present_forbidden))
 
-    targets, nonclaims = _hidden_groups(case_id)
+    hidden_values = _hidden_values(case_id)
     leaked: list[str] = []
     for path, value in _walk_strings(package_without_digest):
-        if value in targets:
-            leaked.append(f"TARGET@{'/'.join(path)}={value}")
-        if value in nonclaims and path[:2] != ALLOWED_PROVENANCE_PREFIX:
-            leaked.append(f"NONCLAIM@{'/'.join(path)}={value}")
+        if value in hidden_values and path[:2] != ALLOWED_PROVENANCE_PREFIX:
+            leaked.append(f"HIDDEN@{'/'.join(path)}={value}")
     if leaked:
         raise ValueError("HIDDEN_EVALUATOR_VALUE_LEAK:" + "|".join(sorted(leaked)))
 
@@ -159,11 +158,17 @@ def verify_participant_export(package: dict) -> dict:
     if not isinstance(execution, dict):
         reasons.append("EXECUTION_EVIDENCE_BOUNDARY_INVALID")
     else:
-        if execution.get("state") != "NOT_YET_EXECUTED": reasons.append("EXECUTION_STATE_PREMATURE")
-        if execution.get("participant_evidence_ref") is not None: reasons.append("PARTICIPANT_EVIDENCE_PREMATURE")
-        if execution.get("provider_receipt") is not None: reasons.append("PROVIDER_RECEIPT_PREMATURE")
+        if execution.get("state") != "NOT_YET_EXECUTED":
+            reasons.append("EXECUTION_STATE_PREMATURE")
+        if execution.get("participant_evidence_ref") is not None:
+            reasons.append("PARTICIPANT_EVIDENCE_PREMATURE")
+        if execution.get("provider_receipt") is not None:
+            reasons.append("PROVIDER_RECEIPT_PREMATURE")
 
-    identity_fields = ("export_version", "experiment_id", "case_id", "condition", "baseline_sha", "participant_payload", "response_contract")
+    identity_fields = (
+        "export_version", "experiment_id", "case_id", "condition", "baseline_sha",
+        "participant_payload", "response_contract",
+    )
     if all(field in package for field in identity_fields):
         expected = "IGT-EXP-" + _digest(_identity_material(package))[:24]
         if package.get("export_id") != expected:
