@@ -26,6 +26,9 @@ PARTICIPANT_BINDINGS = (
     ("repository_baseline_sha", "repository_baseline_sha"),
     ("source_model", "source_model"),
     ("source_instance_id", "source_instance_id"),
+    ("execution_surface", "execution_surface"),
+    ("execution_started_at", "execution_started_at"),
+    ("execution_completed_at", "execution_completed_at"),
     ("payload_digest", "payload_digest"),
     ("response_digest", "response_digest"),
 )
@@ -61,27 +64,28 @@ def _base_observation_checks(package: dict, observation: object, expected_ref_fi
     if not isinstance(observation, dict):
         return "MISMATCH", ["OBSERVATION_NOT_MAPPING"]
 
+    reasons: list[str] = []
     status = str(observation.get("status", ""))
     if status not in OBSERVATION_STATES:
         return "MISMATCH", ["OBSERVATION_STATUS_INVALID"]
 
     expected_ref = package.get(expected_ref_field)
-    requested_ref = observation.get("requested_ref")
-    if requested_ref != expected_ref:
-        return "MISMATCH", ["REQUESTED_REF_MISMATCH"]
+    if observation.get("requested_ref") != expected_ref:
+        reasons.append("REQUESTED_REF_MISMATCH")
+    if not observation.get("resolution_id"):
+        reasons.append("RESOLUTION_ID_MISSING")
+    if not observation.get("resolver_id"):
+        reasons.append("RESOLVER_ID_MISSING")
+    if reasons:
+        return "MISMATCH", reasons
 
     if status == UNAVAILABLE:
         return "UNAVAILABLE", []
     if status == PARTIAL:
         return "INCONCLUSIVE", []
 
-    reasons: list[str] = []
     if observation.get("observed_ref") != expected_ref:
         reasons.append("OBSERVED_REF_MISMATCH")
-    if not observation.get("resolution_id"):
-        reasons.append("RESOLUTION_ID_MISSING")
-    if not observation.get("resolver_id"):
-        reasons.append("RESOLVER_ID_MISSING")
     return ("MISMATCH" if reasons else "CORRELATED"), reasons
 
 
@@ -124,11 +128,11 @@ def correlate_attestation_observation(package: dict, observation: object) -> dic
     if observation.get("attestation_digest") != expected_attestation_digest:
         reasons.append("ATTESTATION_DIGEST_MISMATCH")
 
-    observed_dimensions = observation.get("independence_dimensions")
-    if not isinstance(observed_dimensions, dict):
-        reasons.append("INDEPENDENCE_DIMENSIONS_MISSING")
-    elif observed_dimensions != embedded:
-        reasons.append("INDEPENDENCE_DIMENSIONS_MISMATCH")
+    observed_content = observation.get("attestation_content")
+    if not isinstance(observed_content, dict):
+        reasons.append("ATTESTATION_CONTENT_MISSING")
+    elif observed_content != embedded:
+        reasons.append("ATTESTATION_CONTENT_MISMATCH")
 
     state = "MISMATCH" if reasons else "CORRELATED"
     return {
