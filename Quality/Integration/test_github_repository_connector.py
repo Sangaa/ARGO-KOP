@@ -112,6 +112,26 @@ def test_update_uses_observed_sha_and_returns_commit(monkeypatch: pytest.MonkeyP
     assert body["content"] == base64.b64encode(b"new").decode("ascii")
 
 
+def test_update_propagates_connector_unavailability(monkeypatch: pytest.MonkeyPatch):
+    calls = []
+
+    def fake_urlopen(request, timeout):
+        calls.append(request.method)
+        if len(calls) == 1:
+            return FakeResponse(github_file("observed-sha", "old"))
+        raise urllib.error.URLError("simulated transport outage")
+
+    monkeypatch.setattr("urllib.request.urlopen", fake_urlopen)
+    connector = GitHubRepositoryConnector(
+        GitHubConnectorConfig(owner="Sangaa", repo="ARGO-KOP", token="test-token"),
+    )
+
+    with pytest.raises(ConnectorError, match="GITHUB_CONNECTOR_UNAVAILABLE"):
+        connector.update_file("Repository/test.md", "new", "update", "observed-sha")
+
+    assert calls == ["GET", "PUT"]
+
+
 def test_read_back_requires_persisted_file(monkeypatch: pytest.MonkeyPatch):
     def fake_urlopen(request, timeout):
         raise urllib.error.HTTPError(request.full_url, 404, "Not Found", {}, None)
