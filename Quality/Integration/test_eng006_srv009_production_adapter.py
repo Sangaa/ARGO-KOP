@@ -59,6 +59,7 @@ def candidate(authorized: bool = True) -> ProductionExecutionCandidate:
         necessity_evidence="P3 production adapter seam verification",
         commit_message="test: governed ENG-006 SRV-009 adapter",
         authorized=authorized,
+        authorization_id="AUTH-P3-ADAPTER-TEST" if authorized else "",
     )
 
 
