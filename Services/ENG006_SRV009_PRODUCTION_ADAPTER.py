@@ -29,6 +29,7 @@ class ProductionExecutionCandidate:
     necessity_evidence: str
     commit_message: str
     authorized: bool
+    authorization_id: str
 
 
 def execute_update(
@@ -44,6 +45,8 @@ def execute_update(
     """
     if not candidate.authorized:
         raise ValueError("EXECUTION_NOT_AUTHORIZED")
+    if not candidate.authorization_id:
+        raise ValueError("AUTHORIZATION_ID_REQUIRED")
 
     intent = WriteIntent(
         path=candidate.path,
