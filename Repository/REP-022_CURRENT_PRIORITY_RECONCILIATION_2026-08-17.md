@@ -7,29 +7,29 @@ Current main inspected: `94a9bbb43432f3e098854571130778a498f76299`
 
 ## Current Priority State
 
-`P1 = CLOSED` within the inspected Ring-0 control-plane scope, explicitly recorded by P351 in REP-016.
+`P1 = CLOSED` within the inspected Ring-0 control-plane scope.
 
-`P2 = RECONCILED` within the verified active inventory scope, explicitly recorded by REP-021.
+`P2 = RECONCILED` within the verified active inventory scope.
 
 `P3 = CLOSED / EXECUTABLE RELATIONSHIP PROOF ESTABLISHED WITHIN BOUNDED ISOLATED OBSERVATION SCOPE`.
 
-`P4 = REGISTRY-SYNCHRONIZED / CLOSURE-CANDIDATE / FINAL TRANSACTION CI PENDING` for the listed critical-edge set only.
+`P4 = CLOSED / LISTED CRITICAL-EDGE SET / BOUNDED DIRECTIONAL SCOPE`.
 
 `P5 = EXECUTION-VERIFIED / BUILD CLOSED` within the current P5 harness scope.
 
 `P6 = EXECUTION-VERIFIED / POLICY-UNRESOLVED / NO-AUTO-PROMOTION` within the current P6 Build-02 scope.
 
-Broader Connected-Baseline completion remains open. No repository-wide graph closure or Global PASS is claimed.
+Broader Connected-Baseline completion remains OPEN. No repository-wide graph closure or Global PASS is claimed.
 
-## P2 Reconciliation Note
+## Queue / Current-State Precedence
 
-REP-016 retains an older `P2 = OPEN` queue statement in its historical/current body. REP-021 is newer evidence and records P2 as reconciled within verified active inventory. This record preserves the discrepancy rather than rewriting queue history.
+REP-016 preserves historical queue language and older open states. This file is the current priority-reconciliation surface and may supersede historical queue wording when newer evidence is explicit, while preserving the older records as provenance.
 
-The same precedence rule applies to later priorities: historical queue text remains provenance, while this file records the current reconciled execution state.
+`HISTORICAL QUEUE STATE ≠ CURRENT RECONCILED STATE`.
 
-## P3 Current Reconciliation
+## P3 Closure Evidence
 
-Canonical relationship identity remains:
+Canonical relationship identity:
 
 `REL-009: RUN-010 → SRV-009 = CONSUMES`.
 
@@ -37,138 +37,132 @@ P3 clean proof was squash-merged to main as:
 
 `a538325bcde36d3a45f19583ca20d72d8f591e0a`.
 
-The bounded implementation/evidence seam is:
+Bounded executable seam:
 
 `RUN-010 execution identity → pure governed handoff → existing ENG-006/SRV-009 production adapter → isolated dispatch observation`.
 
-Current evidence establishes:
+Established evidence:
 
 - independent callable source evidence from RUN-010 execution context;
-- explicit authorization identity preservation;
+- authorization identity preservation;
 - execution/task/session/source-trace preservation;
-- attributable `SRV-009` dispatch observation through the existing governed adapter;
-- downstream execution trace and post-read verification;
+- attributable SRV-009 dispatch observation;
+- downstream trace and post-read verification;
 - fail-closed behavior for missing/blocked authorization;
 - unchanged normal connected-spine simulation semantics.
 
-Exact-main P3 verification on `a538325b...`:
+Exact-main P3 verification:
 
-- Full-Stack Repository Audit `33196013636` — SUCCESS;
-- ARGO Runtime Prototype and Integration Tests `33196013609` — SUCCESS;
+- Full-Stack `33196013636` — SUCCESS;
+- Runtime/Integration `33196013609` — SUCCESS;
 - Real Mutation Matrix Regression `33196013638` — SUCCESS;
-- M2 Multi-Channel Proposal Training `33196013623` — SUCCESS.
+- M2 training `33196013623` — SUCCESS.
 
-Therefore P3 is closed only within the bounded executable-proof scope. This does not mean every RUN-010 operation routes through SRV-009.
+P3 closure is scope-bound and does not imply universal runtime routing.
 
-## P4 Current Reconciliation
+## P4 Closure Evidence
 
 P4 semantic reconciliation was squash-merged to main as:
 
 `94a9bbb43432f3e098854571130778a498f76299`.
 
-Exact-main verification on that state:
+Exact-main verification:
 
-- Full-Stack Repository Audit `33196750118` — SUCCESS;
-- ARGO Runtime Prototype and Integration Tests `33196750113` — SUCCESS;
-- M2 Multi-Channel Proposal Training `33196750126` — SUCCESS.
+- Full-Stack `33196750118` — SUCCESS;
+- Runtime/Integration `33196750113` — SUCCESS;
+- M2 training `33196750126` — SUCCESS.
 
-The supported REL-009 semantic disposition is:
+Supported REL-009 disposition:
 
 `INTENTIONAL ONE-WAY / CONSUMES / ISOLATED EXECUTION-OBSERVED / GOVERNED / NON-UNIVERSAL`.
 
-This intentionally does not create `SRV-009 → RUN-010` merely for graph symmetry. Architecture requires dependencies to be necessary and justified; directional service consumption does not imply a reverse dependency.
+No `SRV-009 → RUN-010` dependency is created merely for symmetry.
 
 ### Canonical registry synchronization
 
-Controlled transaction:
+Transaction:
 
 `MUT-2026-08-28-P4-REL009-REGISTRY-CLOSURE-001`.
 
-Controlled mutation workflow run `33197498585` completed successfully on the isolated transaction branch:
+Controlled mutation run `33197498585` — SUCCESS.
 
-- mutation builder tests: `3 passed`;
-- source REP-014 blob: `a6926b0b27e515b38b65594846fd82d1f1252ea9`;
-- registry mutation commit: `dda16b3f2523fea03bf8d8c9724b237ab648046c`;
-- candidate/read-back blob: `d75f460d152898709044a31433e8ae4c705d9191`;
-- request status: `APPLIED`;
-- `verified_readback = true`.
+- builder tests: 3 passed;
+- source REP-014 blob `a6926b0b27e515b38b65594846fd82d1f1252ea9`;
+- mutation commit `dda16b3f2523fea03bf8d8c9724b237ab648046c`;
+- candidate/read-back blob `d75f460d152898709044a31433e8ae4c705d9191`;
+- request APPLIED;
+- verified read-back true.
 
-The mutation preserves REL-009 source, target and controlled relationship type, changes only its bounded state/current reconciliation, and preserves REL-005/REL-061 through explicit guards.
+The registry preserves REL-009 source, target and controlled relationship type and changes only its bounded state/current reconciliation.
 
-The P4 listed critical-edge set currently has no known semantic or registry-synchronization blocker. Final closure remains gated by exact-head CI on the complete closure transaction so registry state, dependent guards, impact matrix and closure surfaces are proven together.
+### Complete transaction verification
 
-`SEMANTIC DISPOSITION + REGISTRY SYNCHRONIZATION ≠ FINAL CLOSURE UNTIL FINAL TRANSACTION CI`.
+At `66cf5dde...`, Full-Stack passed but Runtime/Integration exposed one stale semantic assertion in a second control-plane consumer. That was classified as a consumer-impact discovery gap, not a relationship rollback.
+
+C12 reconciled the stale integration guard.
+
+Re-run at `58b1bae849481a22e76058b6f5ec6a4d05f88c46`:
+
+- Full-Stack `33199477029` — SUCCESS;
+- Runtime/Integration `33199477054` — SUCCESS.
+
+Therefore the listed P4 critical-edge set is closed within its declared bounded scope.
+
+## P4 Boundary
+
+P4 closure does not claim:
+
+- every RUN-010 operation reaches SRV-009;
+- normal connected-spine production dispatch;
+- SRV-009 depends on RUN-010;
+- repository-wide graph closure;
+- Connected-Baseline completion;
+- Global PASS.
 
 ## P5 Reconciliation Note
 
-`Repository/P5_CONTROLLED_MUTATION_RECONCILIATION_HARNESS_MATRIX_2026-08-17.md` records:
-
-`EXECUTION-VERIFIED / P5 BUILD CLOSED`.
-
-Current recorded evidence includes successful P5 regression runs, fixture/default validation success, equivalence verification, race verification, successive fixture update preservation, and canonical-artifact immutability guard success.
-
-This evidence closes the P5 harness build scope only. It does not authorize any new canonical mutation or imply Connected-Baseline completion.
-
 `P5 = EXECUTION-VERIFIED / BUILD CLOSED / NO NEW CANONICAL MUTATION AUTHORIZED`.
 
-## P6 Build-02 Reconciliation Note
+P5 remains a reusable control capability only.
 
-`Repository/P6_CI_IMPACT_OBSERVABILITY_MATRIX_2026-08-18.md` records the bounded Build-02 implementation.
-
-Current implementation evidence includes:
-
-- `Quality/Integration/ci_impact_correlation.py` — deterministic changed-path correlation against current REP-020 and REP-014 evidence;
-- `Quality/Integration/test_ci_impact_correlation.py` — regression coverage for direct mapping and explicit unmapped behavior;
-- `.github/workflows/full-stack-audit.yml` — P6 regression, correlation execution, and artifact upload integrated into the existing Full-Stack workflow.
-
-Full-Stack execution evidence is available from run `32847416016` at commit `de89759d91ec959bb4d55bff8b409ca001df025c`.
-
-The run produced `ci-impact-correlation.json` with:
-
-`overall = POLICY_UNRESOLVED`.
-
-Artifact digest:
-
-`sha256:88369593289dd3137a426269d81fd3ba4133c812fad0012383108d2894612527`.
-
-Therefore:
+## P6 Reconciliation Note
 
 `P6 = EXECUTION-VERIFIED / POLICY-UNRESOLVED / NO-AUTO-PROMOTION`.
 
-The execution-evidence gap is closed. The policy classification remains unresolved by design and is not authorization to promote the affected relationship.
+Execution evidence exists; policy classification remains unresolved by design.
 
-## Multi-Writer / Concurrent-Operation Boundary
+## Multi-Writer Operating Rule
 
-Repository work may be produced by multiple concurrent ARGO/HERMUZ/HORUS sessions or other controlled workstreams.
+Repository work may be produced by multiple concurrent controlled sessions.
 
-Current-state claims therefore require fresh reconciliation immediately before material mutation or merge:
+Before material mutation or merge:
 
 `MAIN HEAD → ACTIVE PR HEADS → CHANGED PATHS → SEMANTIC OVERLAP → EXACT-HEAD CI → MUTATE/MERGE`.
 
-A prior no-overlap observation is not durable evidence after any writer advances a branch or main.
-
-## Constraint
-
-PASS is always scope-bound.
-
-- P3 closure does not imply universal runtime routing.
-- P4 candidate closure does not imply repository-wide graph closure.
-- P5 completion is a reusable control capability, not mutation authority.
-- P6 execution verification confirms observability executed successfully; it does not resolve policy or promote unrelated relationships.
-- Historical queue states remain useful provenance but do not override newer reconciled evidence.
+A prior no-overlap observation expires when any writer moves main or a branch.
 
 ## Learning
 
-Current authoritative evidence must be compared against queue snapshots before resuming work. A stale queue statement must not override newer reconciled domain evidence, but it should remain visible as history rather than being rewritten retroactively.
+- Current authority/evidence outranks stale queue wording.
+- PASS is scope-bound.
+- Capability state and relationship state must be reconciled independently.
+- CI implementation is not execution evidence until the run/jobs exist.
+- Broad audit PASS does not override a narrower failing consumer.
+- Impact search must include semantic assertion consumers, not only first-match files.
+- Concurrent work requires point-of-action revalidation, not only session-start inspection.
 
-Capability/build state and relationship state must be reconciled independently.
+## Next Road Priority
 
-A committed CI implementation is not CI execution evidence; the workflow run, job/step results and produced artifact remain the required proof boundary.
+With P3 and the bounded P4 critical-edge set closed, the next active engineering decision should be selected from current unresolved scopes rather than inherited historical numbering alone.
 
-Concurrent work requires revalidation at the point of action, not merely at session start.
+Immediate selection rule:
 
-## Next Safe Gate
+`CURRENT REPOSITORY RE-ENTRY → OPEN GAP INVENTORY → VALUE / RISK / DEPENDENCY ORDER → ONE ACTIVE ENGINEERING FRONT`.
 
-Complete the P4 closure transaction exact-head CI. If successful, update P4/REP-022 to bounded CLOSED state, run final-head CI, then merge with a fresh concurrency check.
+Current Experience-Spine work remains a separate learning/cognition workstream and must be reconciled independently before any merge or promotion.
+
+## Final Merge Gate
+
+This priority closure wording requires final exact-head CI on the closure branch before merge. Broader status does not advance until post-merge exact-main verification succeeds.
 
 ## End of REP-022
