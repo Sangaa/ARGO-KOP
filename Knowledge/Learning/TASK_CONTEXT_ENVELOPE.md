@@ -8,6 +8,7 @@ Bound knowledge retrieval to the context of the task instead of treating the ent
 
 - `task_id`
 - `session_id`
+- `execution_identity`
 - `project_id`
 - `domain`
 - `active_state`
@@ -21,8 +22,11 @@ For the Experience Spine candidate, callers should also provide:
 - `artifact_ids` — exact affected artifacts when known;
 - `failure_classes` — applicable governed failure classes when known;
 - `max_records` — bounded packet size (default 5, maximum 10).
+- `consumer_route` — current `ARGO`, `HORUS`, `HERMUZ`, or `SHARED` consumer path.
+- `repository_ref` / `repository_head` — exact repository context when repository work is involved.
+- `concurrent_work_refs` — known parallel branches/PRs relevant to collision review.
 
-The legacy singular `allowed_scope` remains supported by existing retrieval code. The Experience Spine uses plural `allowed_scopes` so widening must be explicit.
+The legacy singular `allowed_scope` remains supported by existing retrieval code. The Experience Spine uses plural `allowed_scopes` so widening must be explicit. `execution_identity` and `consumer_route` are required by the Experience Spine candidate so outputs from parallel model instances remain attributable and correctly routed.
 
 ## Retrieval Principle
 

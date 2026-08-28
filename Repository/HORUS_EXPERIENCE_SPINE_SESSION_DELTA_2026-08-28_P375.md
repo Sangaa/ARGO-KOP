@@ -3,7 +3,7 @@
 Date: 2026-08-28
 Branch: `feature/experience-spine-p375`
 Base main SHA: `09b216e403fe99a6f1a4a35e3c3038831398f6a3`
-Status: `CLOSED / VERIFIED CANDIDATE / NO CANONICAL PROMOTION`
+Status: `OPEN / MULTI-INSTANCE RECONCILIATION IN PROGRESS / NO CANONICAL PROMOTION`
 Protocol: `GOV-013 / GOV-013A / GOV-014 / GOV-015 / GOV-016`
 
 ## RE-ENTRY
@@ -95,6 +95,33 @@ These results verify the candidate branch within the exercised CI scope. They do
 `EXECUTE → VERIFY → DOCUMENT → RE-READ → COMMIT/SHA VERIFY → CHECKPOINT RECORD → CLOSE`
 
 P375 is closed as a verified, non-canonical candidate on the isolated branch. `main` remains untouched. The next governed decision is review of PR #66 and, only if approved, a separate integration/promotion checkpoint.
+
+## MULTI-INSTANCE RE-ENTRY — 2026-08-28
+
+A fresh repository/branch/PR enumeration found concurrent work across PRs #59, #63, #64, #65, and #66 plus unmerged HORUS/HERMUZ branches.
+
+Direct conflict found:
+
+- PR #64 independently contains `Repository/REP-043_SESSION_DELTA_2026-08-28_P375.md` with different REL-009 history.
+- Retaining that path in PR #66 would create a path/content collision even though the implementation files do not overlap.
+
+Disposition:
+
+- this checkpoint is moved to the collision-resistant path `Repository/HORUS_EXPERIENCE_SPINE_SESSION_DELTA_2026-08-28_P375.md`;
+- the conflicting numeric path is removed from PR #66;
+- no PR #64 content is overwritten or interpreted as Experience Spine evidence;
+- diverged HORUS foundation branches remain historical/transferable evidence only;
+- lineage/routing ideas are reconciled into the candidate through current `GOV-013/015/016` controls, not copied wholesale.
+
+The reconciliation is governed by `Repository/MUT-2026-08-28-HORUS-EXPERIENCE-SPINE-002.md`.
+
+Local verification after reconciliation candidate construction:
+
+- Experience Spine focused tests: `8 PASSED`.
+- Adjacent retrieval regression tests: `4 PASSED`.
+- Combined assertion tests: `12 PASSED`.
+- Python compilation: `PASS`.
+- Branch read-back and exact-head CI remain pending; closure is not yet reasserted.
 
 ## CHECKPOINT
 

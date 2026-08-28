@@ -31,7 +31,10 @@ def _identity(record: dict) -> str | None:
 
 def build_experience_packet(records: list[dict], context: dict) -> dict:
     """Select explicit, scope-compatible experience without changing authority."""
-    required = ("task_id", "domain", "problem_types", "allowed_scopes")
+    required = (
+        "task_id", "execution_identity", "domain", "problem_types",
+        "allowed_scopes", "consumer_route",
+    )
     missing = [field for field in required if not context.get(field)]
     if missing:
         return {
@@ -47,6 +50,7 @@ def build_experience_packet(records: list[dict], context: dict) -> dict:
         requested_limit = 5
     limit = min(max(requested_limit, 1), 10)
     allowed_scopes = _values(context["allowed_scopes"])
+    consumer_route = str(context["consumer_route"])
     task_keys = {
         "domains": _values(context["domain"]),
         "problem_types": _values(context["problem_types"]),
@@ -70,8 +74,17 @@ def build_experience_packet(records: list[dict], context: dict) -> dict:
         if record.get("knowledge_scope") not in allowed_scopes:
             excluded["OUT_OF_SCOPE"] += 1
             continue
-        if not record.get("evidence") or not record.get("authority_state"):
+        if (
+            not record.get("evidence")
+            or not record.get("authority_state")
+            or not record.get("source_identity")
+            or not record.get("source_type")
+        ):
             excluded["PROVENANCE_OR_AUTHORITY_MISSING"] += 1
+            continue
+        routes = _values(record.get("consumer_routes"))
+        if consumer_route not in routes and "SHARED" not in routes:
+            excluded["CONSUMER_ROUTE_MISMATCH"] += 1
             continue
 
         reasons = {}
@@ -92,10 +105,29 @@ def build_experience_packet(records: list[dict], context: dict) -> dict:
             "evidence": record.get("evidence"),
             "evidence_state": record.get("evidence_state", "REPORTED"),
             "authority_state": record["authority_state"],
+            "source_identity": record["source_identity"],
+            "source_type": record["source_type"],
+            "consumer_routes": sorted(routes),
+            "applicability_boundaries": sorted(_values(record.get("applicability_boundaries"))),
+            "counterindications": sorted(_values(record.get("counterindications"))),
             "match_reasons": reasons,
             "score": score,
             "contradicts": sorted(_values(record.get("contradicts"))),
         })
+
+    identity_counts = Counter(item["knowledge_id"] for item in selected)
+    duplicate_ids = sorted(identity for identity, count in identity_counts.items() if count > 1)
+    if duplicate_ids:
+        return {
+            "status": "HOLD",
+            "reason": "DUPLICATE_KNOWLEDGE_IDENTITY",
+            "duplicate_knowledge_ids": duplicate_ids,
+            "task_id": context["task_id"],
+            "execution_identity": context["execution_identity"],
+            "experience_items": [],
+            "excluded_summary": dict(sorted(excluded.items())),
+            "authority_boundary": "RETRIEVAL_DOES_NOT_PROMOTE_OR_AUTHORIZE",
+        }
 
     selected.sort(key=lambda item: (-item["score"], item["knowledge_id"]))
     selected = selected[:limit]
@@ -110,6 +142,13 @@ def build_experience_packet(records: list[dict], context: dict) -> dict:
     return {
         "status": "READY",
         "task_id": context["task_id"],
+        "execution_identity": context["execution_identity"],
+        "execution_context": {
+            "repository_ref": context.get("repository_ref"),
+            "repository_head": context.get("repository_head"),
+            "concurrent_work_refs": sorted(_values(context.get("concurrent_work_refs"))),
+            "consumer_route": consumer_route,
+        },
         "experience_items": selected,
         "conflicts": [list(pair) for pair in conflicts],
         "excluded_summary": dict(sorted(excluded.items())),
@@ -124,5 +163,4 @@ def build_experience_packet(records: list[dict], context: dict) -> dict:
         ],
         "authority_boundary": "RETRIEVAL_DOES_NOT_PROMOTE_OR_AUTHORIZE",
     }
-
 

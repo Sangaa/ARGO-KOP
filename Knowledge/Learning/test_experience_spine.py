@@ -9,6 +9,9 @@ def _record(knowledge_id, **overrides):
         "evidence": [f"evidence:{knowledge_id}"],
         "evidence_state": "PROVEN",
         "authority_state": "NON-AUTHORITATIVE",
+        "source_identity": "HORUS:test",
+        "source_type": "HORUS-ANALYSIS",
+        "consumer_routes": ["SHARED"],
         "domains": ["repository"],
         "problem_types": ["retrieval-defect"],
         "artifact_ids": [],
@@ -22,10 +25,15 @@ def _record(knowledge_id, **overrides):
 def _context(**overrides):
     context = {
         "task_id": "P375",
+        "execution_identity": "HORUS:instance-current",
         "domain": "repository",
         "problem_types": ["retrieval-defect"],
         "allowed_scopes": ["project:argo-kop"],
         "max_records": 5,
+        "consumer_route": "HERMUZ",
+        "repository_ref": "feature/experience-spine-p375",
+        "repository_head": "candidate-head",
+        "concurrent_work_refs": ["PR-64", "PR-65"],
     }
     context.update(overrides)
     return context
@@ -47,6 +55,7 @@ def test_scope_and_authority_are_preserved():
     packet = build_experience_packet(records, _context())
     assert [item["knowledge_id"] for item in packet["experience_items"]] == ["K-IN"]
     assert packet["experience_items"][0]["authority_state"] == "NON-AUTHORITATIVE"
+    assert packet["experience_items"][0]["source_identity"] == "HORUS:test"
     assert packet["authority_boundary"] == "RETRIEVAL_DOES_NOT_PROMOTE_OR_AUTHORIZE"
 
 
@@ -77,4 +86,36 @@ def test_conflict_is_reported_not_silently_resolved():
     packet = build_experience_packet(records, _context())
     assert packet["conflicts"] == [["K-A", "K-B"]]
 
+
+def test_consumer_route_filters_other_execution_paths():
+    records = [
+        _record("K-HERMUZ", consumer_routes=["HERMUZ"]),
+        _record("K-ARGO", consumer_routes=["ARGO"]),
+    ]
+    packet = build_experience_packet(records, _context(consumer_route="HERMUZ"))
+    assert [item["knowledge_id"] for item in packet["experience_items"]] == ["K-HERMUZ"]
+    assert packet["excluded_summary"]["CONSUMER_ROUTE_MISMATCH"] == 1
+
+
+def test_duplicate_identity_holds_instead_of_shadowing_parallel_record():
+    records = [
+        _record("K-DUP", source_identity="HORUS:instance-a"),
+        _record("K-DUP", source_identity="HORUS:instance-b"),
+    ]
+    packet = build_experience_packet(records, _context())
+    assert packet["status"] == "HOLD"
+    assert packet["reason"] == "DUPLICATE_KNOWLEDGE_IDENTITY"
+    assert packet["duplicate_knowledge_ids"] == ["K-DUP"]
+    assert packet["experience_items"] == []
+
+
+def test_execution_context_preserves_multi_instance_attribution():
+    packet = build_experience_packet([_record("K-1")], _context())
+    assert packet["execution_identity"] == "HORUS:instance-current"
+    assert packet["execution_context"] == {
+        "repository_ref": "feature/experience-spine-p375",
+        "repository_head": "candidate-head",
+        "concurrent_work_refs": ["PR-64", "PR-65"],
+        "consumer_route": "HERMUZ",
+    }
 
