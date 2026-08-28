@@ -1,0 +1,55 @@
+# REL-009 CLEAN OBSERVATION MUTATION MATRIX
+
+Transaction ID: `MUT-2026-08-28-P3-REL009-CLEAN-001`
+Protocol: GOV-014
+Base: `main@09b216e403fe99a6f1a4a35e3c3038831398f6a3`
+Scope: isolated P3 REL-009 observation candidate only
+
+## Boundary
+
+This transaction extracts only the dependency-closed observation seam needed to test the current P374 evidence contract. It does not copy PR #63 or PR #64 wholesale, does not promote REL-009, and does not enable production side effects in the normal connected spine.
+
+| Change ID | Target | Action | Expected Content | Applied | Verified |
+|---|---|---|---|---|---|
+| C01 | Services/ENG006_SRV009_PRODUCTION_ADAPTER.py | MODIFY | require explicit authorization identity before governed dispatch | Y | N |
+| C02 | Runtime/Execution/run010_handoff_contract.py | ADD | pure execution and authorization provenance handoff builder | Y | N |
+| C03 | Runtime/Execution/run010_srv009_observation.py | ADD | isolated observable RUN-010 to SRV-009 composition using existing adapter | Y | N |
+| C04 | Quality/Integration/test_eng006_srv009_production_adapter.py | MODIFY | preserve adapter regressions and fail closed without authorization identity | Y | N |
+| C05 | Quality/Integration/test_run010_eng006_handoff_contract.py | MODIFY | update existing candidate consumer for explicit authorization identity | Y | N |
+| C06 | Quality/Integration/test_rel009_run010_srv009_observation.py | ADD | positive attributable dispatch observation plus negative authorization controls | Y | N |
+| C07 | .github/workflows/p3-runtime-github-e2e.yml | MODIFY | keep real connector E2E compatible with authorization identity contract | Y | N |
+
+## Preservation Controls
+
+KEEP all unrelated main content unchanged.
+
+KEEP `Runtime/Execution/connected_spine_runner.py` unchanged; its normal path remains simulation-only.
+
+KEEP the existing governed `Tools/GOVERNED_WRITE_DISPATCH.py`, connector implementation, relationship registry and canonical authority unchanged.
+
+Do not import the alternate `run010_eng006_srv009_consumer.py` from historical PR #64 because it duplicates lower-level connector dispatch rather than composing the existing governed adapter.
+
+Unexpected Changes: NONE EXPECTED.
+
+## Verification Contract
+
+Post-commit read-back: REQUIRED for every target.
+
+After read-back, run exact-head governed CI through a pull-request observation surface. The REL-009 observation test must prove:
+
+1. originating runtime reference is RUN-010;
+2. explicit target is SRV-009;
+3. callable boundary is observable;
+4. downstream dispatch trace is attributable to the same execution context;
+5. authorization identity and source provenance are preserved;
+6. repository side effects are controlled by an in-memory connector in the integration test;
+7. post-write read-back is verified;
+8. no canonical promotion is inferred from PASS.
+
+## Promotion Boundary
+
+`SOURCE/APPLICATION != CI VERIFICATION != RELATIONSHIP PROMOTION`.
+
+Until exact-head CI and separate promotion review are complete:
+
+`REL-009 = REVALIDATION REQUIRED`

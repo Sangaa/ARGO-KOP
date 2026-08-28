@@ -47,7 +47,7 @@ class FakeConnector:
         return ConnectorFile(path=path, sha=sha, content=content)
 
 
-def candidate(authorized: bool = True) -> ProductionExecutionCandidate:
+def candidate(authorized: bool = True, authorization_id: str | None = None) -> ProductionExecutionCandidate:
     return ProductionExecutionCandidate(
         execution_id="EXE-P3-001",
         task_id="TASK-P3-001",
@@ -59,6 +59,7 @@ def candidate(authorized: bool = True) -> ProductionExecutionCandidate:
         necessity_evidence="P3 production adapter seam verification",
         commit_message="test: governed ENG-006 SRV-009 adapter",
         authorized=authorized,
+        authorization_id=("AUTH-P3-ADAPTER-TEST" if authorization_id is None and authorized else authorization_id or ""),
     )
 
 
@@ -66,8 +67,6 @@ def test_authorized_candidate_uses_governed_dispatch_and_trace():
     connector = FakeConnector()
     result = execute_update(candidate(), connector=connector)
     assert result["status"] == "UPDATE_ACCEPTED"
-    # The governed dispatcher intentionally performs a second read immediately
-    # before CREATE to prevent a stale absence from becoming an unsafe write.
     assert [name for name, _ in connector.calls] == [
         "read_current",
         "read_current",
@@ -81,4 +80,11 @@ def test_unauthorized_candidate_stops_before_connector_call():
     connector = FakeConnector()
     with pytest.raises(ValueError, match="EXECUTION_NOT_AUTHORIZED"):
         execute_update(candidate(False), connector=connector)
+    assert connector.calls == []
+
+
+def test_authorized_candidate_without_authorization_id_stops_before_connector_call():
+    connector = FakeConnector()
+    with pytest.raises(ValueError, match="AUTHORIZATION_ID_REQUIRED"):
+        execute_update(candidate(True, authorization_id=""), connector=connector)
     assert connector.calls == []

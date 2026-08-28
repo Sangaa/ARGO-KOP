@@ -33,6 +33,7 @@ def test_run010_execution_result_provides_traceable_handoff_identity():
         necessity_evidence="P289 handoff contract",
         commit_message="test: RUN-010 ENG-006 handoff contract",
         authorized=True,
+        authorization_id="AUTH-RUN010-HANDOFF-001",
     )
 
     assert candidate.execution_id == execution["execution_id"]
@@ -40,6 +41,7 @@ def test_run010_execution_result_provides_traceable_handoff_identity():
     assert candidate.session_id == execution["session_id"]
     assert candidate.source_trace_id == execution["execution_trace_id"]
     assert candidate.authorized is True
+    assert candidate.authorization_id == "AUTH-RUN010-HANDOFF-001"
 
 
 def test_handoff_contract_rejects_missing_trace_identity():
