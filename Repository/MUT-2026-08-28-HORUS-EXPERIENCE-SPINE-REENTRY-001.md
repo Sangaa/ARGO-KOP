@@ -7,7 +7,8 @@ Base repository: `Sangaa/ARGO-KOP`
 Base branch: `main`
 Base HEAD: `94a9bbb43432f3e098854571130778a498f76299`
 Target branch: `horus/experience-spine-reentry-20260828`
-Status: `EXECUTED / READ-BACK VERIFIED / REVIEW PENDING`
+Review surface: `Draft PR #69`
+Status: `EXECUTED / READ-BACK VERIFIED / DRAFT REVIEW OPEN`
 Authority: `NONE`
 Promotion: `NOT AUTHORIZED`
 
@@ -69,6 +70,7 @@ PR #66 / `feature/experience-spine-p375` is an existing bounded implementation c
 | MI-005 | historical HORUS v6 | Continue construction from stale base | High | Stale-state risk | BLOCK | NOT PERFORMED |
 | MI-006 | Governance / Core / Memory / Knowledge canonical files | Promote analytical conclusions now | High | Authority escalation | BLOCK | NOT PERFORMED |
 | MI-007 | Experience implementation | Add new store/database or runtime path | Medium/High | Architectural expansion | BLOCK pending validation | NOT PERFORMED |
+| MI-008 | Draft PR #69 | Expose documentation branch for review only | Low | None | ALLOW | PASS / DRAFT |
 
 ## 6. Preservation boundary
 
@@ -79,7 +81,8 @@ This mutation is documentation-only. It did not:
 - convert historical HORUS analysis into current truth;
 - duplicate promoted lessons into a second authoritative store;
 - modify PR #66;
-- close P4, REP-014 reconciliation, or the global Integrity Hold.
+- close P4, REP-014 reconciliation, or the global Integrity Hold;
+- merge Draft PR #69.
 
 ## 7. Post-write verification
 
@@ -107,6 +110,31 @@ HORUS analysis blob:
 
 Branch HEAD observed after MI-002:
 `4a8381e13bf6e90cc894f01b222b3fa2b0b2fe56`
+
+### Closure-matrix update
+
+Closure matrix commit before PR registration:
+`00adc5eeb0d9b5277b5bbca0427648029452aba7`
+
+Closure matrix read-back:
+`PASS`
+
+Closure matrix blob before PR registration:
+`77b764c0c3d38d37c4bf4b71c0fab94913fa79ad`
+
+### Review surface
+
+Draft PR:
+`#69 — HORUS: Experience Spine current-repository re-entry analysis`
+
+PR base:
+`main @ 94a9bbb43432f3e098854571130778a498f76299`
+
+PR state at creation:
+`OPEN / DRAFT / NOT MERGED`
+
+Files at PR creation:
+`2`
 
 The analysis read-back preserved the declared state:
 
@@ -152,6 +180,7 @@ Recommended next safe sequence:
 `READ-BACK = PASS`
 `LEARNING ASSESSMENT = RECORDED`
 `TRANSFER = HERMUZ VERIFICATION CANDIDATE`
+`REVIEW SURFACE = DRAFT PR #69`
 `AUTHORITY = NONE`
 `MAIN MUTATION = NONE`
 `MERGE = NOT PERFORMED`
