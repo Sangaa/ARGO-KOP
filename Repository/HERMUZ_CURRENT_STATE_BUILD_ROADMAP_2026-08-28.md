@@ -9,7 +9,7 @@ Authority class: `Analysis / Recovery / Execution / Transfer Evidence — NON-CA
 
 ## 1. Session Purpose
 
-Reconstruct ARGO-KOP from current repository evidence before further construction; reconcile accumulated HERMUZ experience with current authority; remove stale branch/promotion assumptions; identify the actual priority chain; construct and verify the smallest dependency-closed P3/REL-009 evidence candidate; preserve concurrent HORUS safety; investigate the next P4 architectural decision without inventing symmetry; and leave one compact resume-safe transfer surface rather than another long sequence of checkpoint files.
+Reconstruct ARGO-KOP from current repository evidence before further construction; reconcile accumulated HERMUZ experience with current authority; remove stale branch/promotion assumptions; identify the actual priority chain; construct and verify the smallest dependency-closed P3/REL-009 evidence candidate; preserve concurrent HORUS safety; investigate the next P4 architectural decision without inventing symmetry; eliminate false/stale work items when current repository evidence contradicts them; and leave one compact resume-safe transfer surface rather than another long sequence of checkpoint files.
 
 This record does not itself promote a relationship, governance rule, branch or runtime capability.
 
@@ -25,6 +25,7 @@ Key authority/evidence used:
 - `Architecture/ARC-006_DEPENDENCY_MODEL.md`
 - `Architecture/ARC-007_INTEGRATION_MODEL.md`
 - `Repository/REP-014_REPOSITORY_RELATIONSHIP_REGISTRY.md`
+- `Repository/REP-015_CONTROL_PLANE_BOOTSTRAP_CHECKLIST.md`
 - `Repository/REP-021_P2_INDEX_SCOPE_RECONCILIATION_2026-08-17.md`
 - `Repository/REP-022_CURRENT_PRIORITY_RECONCILIATION_2026-08-17.md`
 - `Repository/P4_REL009_CONSUMER_BOUNDARY_MATRIX_2026-08-17.md`
@@ -308,7 +309,32 @@ The next action should be:
 
 This changes the problem from document completion to semantic relationship disposition.
 
-## 11. Concurrent HORUS Safety
+## 11. Control-Plane False-Lead Correction
+
+An earlier analysis in this session carried forward a claim that current `GOV-013` referenced a missing file named `CONTROL_PLANE_STATUS.md`, creating an apparent control-plane recoverability debt.
+
+That claim was rechecked before any Governance mutation.
+
+Current evidence:
+
+- repository search for `CONTROL_PLANE_STATUS.md`: no result;
+- direct search inside the current `GOV-013` content: no occurrence;
+- current GOV-013 requires loading `PROJECT_BOOTSTRAP.md` and the current repository control-plane evidence, without naming that missing artifact;
+- `REP-015_CONTROL_PLANE_BOOTSTRAP_CHECKLIST.md` exists and explicitly defines the deterministic control-plane load sequence and cross-model handoff minimum.
+
+Correction:
+
+`NO CURRENT GOV-013 MISSING-FILE DEFECT IS ESTABLISHED`.
+
+The previously proposed control-plane repair task is removed from the roadmap. No new status file and no GOV-013 mutation are justified.
+
+Classification:
+
+`STALE PRIOR-STATE / MEMORY-DERIVED INTERPRETATION DEFECT / CURRENT REPOSITORY CORRECT`.
+
+This is a direct application of the repository-first rule to HERMUZ's own prior analysis.
+
+## 12. Concurrent HORUS Safety
 
 The user explicitly stated HORUS is concurrently working on accumulated experience and may update repository state.
 
@@ -330,7 +356,7 @@ Mandatory continuation rule while another agent may be active:
 
 No blind rebase/cherry-pick/merge from a stale snapshot.
 
-## 12. Tool Incidents
+## 13. Tool Incidents
 
 Several accidental PR creation calls were issued with nonexistent placeholder heads while navigating connector surfaces. GitHub rejected each with `422 Validation Failed`.
 
@@ -340,9 +366,9 @@ Classification:
 
 No unintended PR, ref change or repository mutation resulted.
 
-## 13. Validated / Reapplied Knowledge
+## 14. Validated / Reapplied Knowledge
 
-1. Repository reality outranks session memory.
+1. Repository reality outranks session memory and prior HERMUZ analysis.
 2. Exact-head/checkout attribution is mandatory.
 3. `NO RUN`, `NO STATUS`, `PASS`, `FAIL`, and `NOT OBSERVED` are distinct states.
 4. Successful CI does not make an accumulated branch a good promotion unit.
@@ -357,10 +383,11 @@ No unintended PR, ref change or repository mutation resulted.
 13. Documentation/memoirs do not self-upgrade authority.
 14. Bidirectional validation must not become a mechanical demand for symmetric dependencies when the semantic relationship is directional.
 15. A missing reverse reference can be an intentional architecture property; decide semantics before mutating documentation.
+16. A work item inherited from prior analysis must be deleted when current repository evidence disproves its premise; do not preserve debt merely because it was documented.
 
-Items 14-15 remain `SESSION-LEARNING / CANDIDATE-REUSABLE` until independently validated; they are not governance rules.
+Items 14-16 are retained as session/candidate learning according to evidence; they are not automatically Governance rules.
 
-## 14. Roadmap After This Session
+## 15. Roadmap After This Session
 
 ### Priority 1 — bounded P3/P4 relationship disposition review
 
@@ -384,23 +411,23 @@ If the relationship disposition is approved:
 
 If the disposition is not approved, leave REL-009 open with the exact unresolved semantic question rather than manufacturing reverse evidence.
 
-### Priority 3 — remaining P4 critical graph
+### Priority 3 — explicit P4 closure review
 
 REL-005 is already bidirectional/executable-verified; REL-061 is already intentionally one-way/governance-revalidated. Once REL-009 is dispositioned, perform an explicit P4 closure review rather than reopening already settled edges.
 
-### Priority 4 — control-plane truth synchronization
-
-Reconcile the GOV-013 reference to `CONTROL_PLANE_STATUS.md` against the actual REP-015/root bootstrap surfaces. Do not invent a replacement merely to satisfy a historical filename.
-
-### Priority 5 — branch hygiene
+### Priority 4 — branch hygiene
 
 After explicit disposition decisions, stop functional growth on PR #63/#64/self-audit, retain useful provenance, and close/retire only through explicit lifecycle decisions.
 
-### Priority 6 — broader Connected Baseline
+### Priority 5 — broader Connected Baseline
 
 Resume repository-wide relationship/domain validation before feature expansion.
 
-## 15. Explicit Non-Claims
+Removed work item:
+
+`CONTROL_PLANE_STATUS.md / GOV-013 repair` — removed because the current canonical GOV-013 does not contain the claimed missing-file reference.
+
+## 16. Explicit Non-Claims
 
 - ARGO is not globally clean.
 - Connected Baseline is not complete.
@@ -410,8 +437,9 @@ Resume repository-wide relationship/domain validation before feature expansion.
 - PR #65 success/readiness is not merge authorization.
 - HORUS outputs are not auto-promoted into HERMUZ authority.
 - The intentional-one-way P4 disposition is a candidate pending authorized review.
+- No current GOV-013 missing `CONTROL_PLANE_STATUS.md` defect is claimed.
 
-## 16. Closure
+## 17. Closure
 
 Execution: COMPLETE for the bounded P3 clean construction/evidence objective.
 
@@ -421,14 +449,16 @@ Historical branch cleanup: COMPLETE at metadata/disposition level; no destructiv
 
 P4 reconnaissance: COMPLETE / no mutation; old reverse-reference chase replaced with a semantic disposition question.
 
+False control-plane debt: INVALIDATED and removed before mutation.
+
 Documentation/knowledge transfer: COMPLETE in this consolidated record and the clean mutation matrix.
 
 Concurrent-agent reconciliation: COMPLETE at final observed snapshot; mandatory to repeat before any future promotion/merge.
 
 Session state:
 
-`CLOSED / RESUME-SAFE / P3 CLEAN BUILD VERIFIED / PR65 READY FOR REVIEW / P4 INTENTIONAL-ONE-WAY DISPOSITION CANDIDATE / MAIN UNCHANGED AT FINAL OBSERVATION`.
+`CLOSED / RESUME-SAFE / P3 CLEAN BUILD VERIFIED / PR65 READY FOR REVIEW / P4 INTENTIONAL-ONE-WAY DISPOSITION CANDIDATE / FALSE CONTROL-PLANE DEBT REMOVED / MAIN UNCHANGED AT FINAL OBSERVATION`.
 
-## 17. Next Safe Entry
+## 18. Next Safe Entry
 
 `RE-READ main + HORUS-relevant changes -> confirm PR #65 head/base/diff/CI -> perform authorized semantic disposition review for REL-009 -> if accepted, create smallest canonical registry/P4 mutation with GOV-014 and verify -> perform explicit P4 closure review -> continue Connected Baseline`.
