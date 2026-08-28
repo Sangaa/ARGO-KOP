@@ -1,0 +1,3 @@
+P3 clean REL-009 candidate provider-backed regression trigger.
+Source candidate: 499c3cfda8e1fff52e3f808cff9ab80ed36e39db
+Purpose: verify existing ENG-006 -> SRV-009 production adapter and GitHub connector remain healthy after authorization_id dependency closure.
