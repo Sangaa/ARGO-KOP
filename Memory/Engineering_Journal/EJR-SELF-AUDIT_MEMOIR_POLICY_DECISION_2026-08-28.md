@@ -14,6 +14,14 @@ At every session close, HERMUZ must update the memoir when learning, correction,
 
 Each memoir entry must identify the prior belief, evidence, result, learning class, changed/retained judgment, challenged assumptions, future impact, provenance, and review status.
 
+## Authority boundary — explicit correction
+
+The memoir is a learning and historical synthesis record, not a normative authority. Writing a conclusion into the memoir does not make that conclusion a mandatory rule.
+
+Memoir entries must distinguish, where applicable, between `OBSERVATION`, `HYPOTHESIS`, `EXPERIENCE`, `RECOMMENDATION`, `VALIDATED KNOWLEDGE`, `CANONICAL GOVERNANCE`, `SUPERSEDED`, and `UNKNOWN`.
+
+Mandatory force may arise only from the applicable validation/governance path and authorized canonical adoption. A memoir recommendation must never silently be promoted into a rule merely because a later agent inherited it.
+
 ## Review principle
 
 The memoir is evidence about HERMUZ's reasoning, not authority over the repository. It is itself subject to the same review discipline. No HERMUZ record, including its own memoirs, is above audit.
@@ -38,4 +46,5 @@ This closes a specific knowledge-transfer gap exposed by the archaeological revi
 `KNOWLEDGE/CONTROL MUTATION = YES`
 `PROMOTION = NONE`
 `MEMOIR = GOVERNED / REVIEWABLE`
+`MEMOIR AUTHORITY = NON-NORMATIVE`
 `NO AGENT ABOVE REVIEW = EXPLICIT`
