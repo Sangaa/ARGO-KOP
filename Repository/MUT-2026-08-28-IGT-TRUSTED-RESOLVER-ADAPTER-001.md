@@ -4,7 +4,7 @@ Transaction ID: `MUT-2026-08-28-IGT-TRUSTED-RESOLVER-ADAPTER-001`
 Protocol: `GOV-013 / GOV-014 / GOV-015 + IGT + MI-IGT`
 Base: `main@0664fb5451d2dacc7175009549ef9972d4efb0e6`
 Working branch: `hermuz/igt-trusted-resolver-adapter-boundary-20260828`
-Status: `SOURCE IMPLEMENTED / READ-BACK RECONCILED / CI PENDING`
+Status: `SOURCE + READ-BACK + PRE-DOC-HEAD CI VERIFIED / FINAL DOC-HEAD CI REQUIRED`
 Authority: `NONE`
 
 ## Entry State
@@ -54,11 +54,11 @@ Explicitly forbidden state:
 
 | ID | Target | Result | Applied | Verified |
 |---|---|---|:---:|:---:|
-| C01 | `Services/EVIDENCE_RESOLVER_ADAPTER_INTERFACE.py` | provider-neutral protocol, immutable adapter/acquisition records, explicit failure state, no authority inference | Y | Y source/read-back |
-| C02 | `Quality/Integration/experience_spine_igt_trusted_adapter_gate.py` | package precondition, registry identity checks, governed adapter invocation, acquisition normalization, identity-stability checks, correlation delegation | Y | Y source/read-back |
-| C03 | `Quality/Integration/test_experience_spine_igt_trusted_adapter_gate.py` | 15 positive/adversarial regressions | Y | Y source/read-back; CI pending |
-| C04 | `Repository/IGT_TRUSTED_RESOLVER_ADAPTER_CONTRACT_2026-08-28.md` | governed adapter-path contract and no-authenticity-overclaim boundary | Y | Y source/read-back |
-| C05 | current integration suite | exact-head discovery/execution | Y | CI pending |
+| C01 | `Services/EVIDENCE_RESOLVER_ADAPTER_INTERFACE.py` | provider-neutral protocol, immutable adapter/acquisition records, explicit failure state, no authority inference | Y | Y |
+| C02 | `Quality/Integration/experience_spine_igt_trusted_adapter_gate.py` | package precondition, registry identity checks, governed adapter invocation, acquisition normalization, identity-stability checks, correlation delegation | Y | Y |
+| C03 | `Quality/Integration/test_experience_spine_igt_trusted_adapter_gate.py` | 15 positive/adversarial regressions | Y | Y on pre-documentation head |
+| C04 | `Repository/IGT_TRUSTED_RESOLVER_ADAPTER_CONTRACT_2026-08-28.md` | governed adapter-path contract and no-authenticity-overclaim boundary | Y | Y |
+| C05 | current integration suite | exact-head discovery/execution | Y | Y on pre-documentation head; final doc-head CI required |
 
 ## D13 — Package Eligibility Must Precede External Acquisition
 
@@ -100,11 +100,54 @@ This transaction transfers the same principle to evidence acquisition:
 ## Read-Back / Diff Reconciliation
 
 Compare against exact base `0664fb5451d2dacc7175009549ef9972d4efb0e6` showed:
-- `ahead_by = 6` before this documentation update;
 - `behind_by = 0`;
 - exactly 5 changed paths;
 - all 5 paths declared in this transaction;
 - no Runtime, provider-specific connector, workflow, cognition, memory, or production dispatch mutation.
+
+## Pre-Documentation-Head CI Evidence
+
+PR #80 was opened as Draft from exact base with head:
+
+`b1f3dbb4fa367126b5d1cd3543ee225df0667a55`.
+
+Required CI completed successfully:
+- Runtime/Prototype/Integration workflow `33208120628` — SUCCESS;
+- Full-Stack Repository Audit `33208120643` — SUCCESS.
+
+Integration job:
+- job `98974315209` — SUCCESS;
+- checkout merge ref `34ee96a38b7dd3e64b7874e2358d14f81a5b38a6`;
+- checkout identity logged as `Merge b1f3dbb4fa367126b5d1cd3543ee225df0667a55 into 0664fb5451d2dacc7175009549ef9972d4efb0e6`;
+- command: `python -m pytest -q Quality/Integration`;
+- result: `365 passed, 1 warning, 11 subtests passed`.
+
+Current main baseline before this transaction was 350 integration tests. Therefore this transaction added and executed exactly 15 regressions:
+
+`365 - 350 = 15`.
+
+The existing P2 identity-scope warning remains unchanged and is not classified as an adapter-boundary defect.
+
+Interpretation boundary:
+
+`CI SUCCESS = ADAPTER EXECUTION BOUNDARY MECHANICS VERIFIED ON THIS HEAD`.
+
+It does **not** mean:
+- a real provider-backed resolver exists;
+- registry membership authenticates an upstream provider;
+- external model-run authenticity is established;
+- B0/L1/L2 cognitive benefit is established.
+
+## Exact-Head Closure Rule
+
+This documentation update changes the branch head. Therefore `b1f3dbb4...` CI remains valid pre-documentation execution evidence but is not the final merge gate.
+
+Required next gate:
+1. exact new-head Full-Stack + Runtime/Integration CI;
+2. freeze branch after success;
+3. reconcile current main, PR #80, open-PR surface and exact five-path diff;
+4. expected-head-SHA squash merge only;
+5. post-merge exact-main verification.
 
 ## Explicit Non-Claims
 
@@ -119,16 +162,16 @@ Compare against exact base `0664fb5451d2dacc7175009549ef9972d4efb0e6` showed:
 1. Implement interface + governed execution gate — PASS.
 2. Add adversarial tests before provider-specific work — PASS.
 3. Read back all paths and reconcile exact diff — PASS.
-4. Open Draft PR from exact current main — NEXT.
-5. Require exact-head Full-Stack + Runtime/Integration CI and inspect test count.
-6. Document any discovered defect/repair.
-7. Final documentation-head CI → freeze → expected-SHA squash merge → post-merge exact-main verification.
+4. Open Draft PR from exact current main — PASS (#80).
+5. Require exact-head Full-Stack + Runtime/Integration CI and inspect test count — PASS on pre-documentation head.
+6. Document any discovered defect/repair — PASS; D13 recorded; no CI failure occurred after hardening.
+7. Final documentation-head CI → freeze → expected-SHA squash merge → post-merge exact-main verification — PENDING.
 
 ## Closure Boundary
 
-Potential result:
+Current verified result:
 
-`TRUSTED RESOLVER ADAPTER EXECUTION BOUNDARY = EXECUTION-VERIFIED`.
+`TRUSTED RESOLVER ADAPTER EXECUTION BOUNDARY = SOURCE + READ-BACK + PRE-DOC-HEAD EXECUTION-VERIFIED`.
 
 while:
 
