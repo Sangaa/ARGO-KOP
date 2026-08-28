@@ -24,9 +24,13 @@ def test_master_index_declares_control_plane_and_integrity_boundary():
     assert "Repository Reality > Previous Status Claims > Conversation Memory" in text
 
 
-def test_relationship_registry_preserves_partial_runtime_consumer_boundary():
+def test_relationship_registry_preserves_bounded_runtime_consumer_boundary():
     root = Path(__file__).resolve().parents[2]
     text = (root / "Repository/REP-014_REPOSITORY_RELATIONSHIP_REGISTRY.md").read_text(encoding="utf-8")
     assert "RUN-010" in text and "SRV-009" in text
-    assert "executable consumer proof is not established" in text
-    assert "no executable `VERIFIED` state is added" in text
+    assert (
+        "| REL-009 | RUN-010 | SRV-009 | CONSUMES | "
+        "**INTENTIONAL ONE-WAY / ISOLATED EXECUTION-OBSERVED / GOVERNED / NON-UNIVERSAL** |"
+    ) in text
+    assert "this state does not mean every RUN-010 operation invokes SRV-009" in text
+    assert "this state does not convert the normal connected spine to production dispatch" in text
