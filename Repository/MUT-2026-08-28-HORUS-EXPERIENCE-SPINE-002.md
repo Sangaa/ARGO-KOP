@@ -6,7 +6,7 @@ Branch: `feature/experience-spine-p375`
 Pre-mutation HEAD: `856cc5fa842f0f79c91e79ef20512a0f30b43e51`
 Matrix persistence commit: `6aaf42d42ddb53858044e650b25819e74986cefb`
 Base main: `09b216e403fe99a6f1a4a35e3c3038831398f6a3`
-Status: `MUTATION CANDIDATE BUILT / LOCAL TEST PASS / BRANCH WRITE PENDING`
+Status: `IMPLEMENTATION WRITTEN / READ-BACK PASS / CI COVERAGE GAP IDENTIFIED / MI-008 PRE-WRITE`
 
 ## Trigger
 
@@ -31,6 +31,7 @@ Concurrent-work enumeration found that PR #64 independently owns the path `Repos
 | MI-005 | `Knowledge/Learning/TASK_CONTEXT_ENVELOPE.md` | blob `d01372d563fdfb073c7e6ffa2a9f53331215dcef` | UPDATE | Add execution identity, consumer route and repository/concurrent-ref context | Y | PENDING BRANCH READ-BACK |
 | MI-006 | `Knowledge/Learning/experience_spine.py` | blob `6d9e978606f8aed622ff57cfea535641903060bc` | UPDATE | Preserve source lineage, enforce routing, HOLD on duplicate selected identity | Y | LOCAL TEST PASS / BRANCH READ-BACK PENDING |
 | MI-007 | `Knowledge/Learning/test_experience_spine.py` | blob `d05517461c96600f1792eea8e7d8e9d49d914092` | UPDATE | Add lineage, routing, duplicate-ID and multi-instance context tests | Y | 8 FOCUSED TESTS PASS / CI PENDING |
+| MI-008 | `Quality/Integration/test_experience_spine_integration.py` | new unique path | ADD | Exercise ready packet and duplicate-identity HOLD in existing integration CI suite | N | N |
 
 ## Pre-Write Validation
 
@@ -49,8 +50,18 @@ Concurrent-work enumeration found that PR #64 independently owns the path `Repos
 - Combined assertion tests: `12 PASSED`.
 - Python compilation: `PASS`.
 
+## Post-Write Read-Back / CI Coverage Finding
+
+- Implementation commit: `0279f5c81c69ca6708811676271f9bc1565836dd`.
+- All seven intended implementation blobs matched after GitHub read-back.
+- The conflicting numeric session path returned `NOT_FOUND` on the branch.
+- PR #66 vs PR #64 exact changed-file overlap after correction: `0`.
+- Full-Stack run `33195645857`: `SUCCESS`.
+- Runtime/Integration run `33195645852`: `SUCCESS`.
+- Workflow command inspection proved that neither workflow directly collects `Knowledge/Learning/test_experience_spine.py`; the green runs therefore verify repository compatibility, not focused Experience Spine execution.
+- MI-008 is added before its write to close that explicit CI coverage gap through the existing `Quality/Integration` pytest suite without workflow mutation.
+
 ## Required Closure
 
-`ATOMIC COMMIT → BRANCH RE-READ → SHA/DIFF VERIFY → CI → MATRIX RECONCILE → CLOSE`
-
+`PERSIST MI-008 ROW → ADD INTEGRATION BRIDGE → BRANCH RE-READ → EXACT-HEAD CI → MATRIX RECONCILE → CLOSE`
 
