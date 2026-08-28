@@ -1,0 +1,77 @@
+name: IGT GitHub Immutable Artifact Live E2E
+
+on:
+  push:
+    branches:
+      - hermuz/igt-github-artifact-live-e2e-20260828
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  live-read-only-artifact-e2e:
+    runs-on: ubuntu-latest
+    env:
+      ARGO_GITHUB_TOKEN: ${{ github.token }}
+      PYTHONPATH: ${{ github.workspace }}
+    steps:
+      - name: Checkout exact branch commit
+        uses: actions/checkout@v6
+
+      - name: Setup Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: '3.11'
+
+      - name: Execute live immutable artifact acquisition
+        shell: bash
+        run: |
+          python - <<'PY'
+          import json
+          import os
+
+          from Services.GITHUB_EVIDENCE_RESOLVER_ADAPTER import (
+              GitHubEvidenceResolverAdapter,
+              GitHubEvidenceResolverConfig,
+          )
+
+          sha = os.environ["GITHUB_SHA"]
+          repository = os.environ["GITHUB_REPOSITORY"]
+          owner, repo = repository.split("/", 1)
+          fixture_path = "Quality/E2E/IGT_GITHUB_ARTIFACT_LIVE_FIXTURE.json"
+          ref = f"github+artifact://{owner}/{repo}@{sha}/{fixture_path}"
+
+          adapter = GitHubEvidenceResolverAdapter(
+              GitHubEvidenceResolverConfig.from_environment()
+          )
+          acquisition = adapter.acquire_participant(ref)
+          observation = acquisition.observation
+
+          assert observation["status"] == "FOUND"
+          assert observation["observed_ref"] == ref
+          assert observation["github_artifact_owner"] == owner
+          assert observation["github_artifact_repo"] == repo
+          assert observation["github_artifact_commit_sha"] == sha
+          assert observation["github_artifact_path"] == fixture_path
+          assert len(observation["github_artifact_blob_sha"]) == 40
+          assert observation["claim_boundary"] == "ARTIFACT_PROVENANCE_ONLY"
+          assert observation["model_execution_claim"] == "NONE"
+
+          missing_ref = f"github+artifact://{owner}/{repo}@{sha}/Quality/E2E/THIS_PATH_MUST_NOT_EXIST.json"
+          missing = adapter.acquire_attestation(missing_ref)
+          assert missing.observation == {"status": "UNAVAILABLE", "observed_ref": None}
+
+          print("IGT_GITHUB_LIVE_E2E=" + json.dumps({
+              "result": "PASS",
+              "repository": repository,
+              "commit_sha": sha,
+              "fixture_path": fixture_path,
+              "blob_sha": observation["github_artifact_blob_sha"],
+              "acquisition_id": acquisition.acquisition_id,
+              "missing_path_state": missing.observation["status"],
+              "claim": "LIVE_GITHUB_IMMUTABLE_ARTIFACT_ACQUISITION_VERIFIED",
+              "model_execution_authenticity": "UNVERIFIED",
+              "repository_mutation": "NONE",
+          }, sort_keys=True))
+          PY
