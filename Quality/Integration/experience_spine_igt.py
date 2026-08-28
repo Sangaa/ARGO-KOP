@@ -36,6 +36,16 @@ INDEPENDENCE_FIELDS = (
     "temporal_independence",
     "mutation_independence",
 )
+PROVENANCE_ITEM_FIELDS = {
+    "evidence",
+    "evidence_state",
+    "authority_state",
+    "source_identity",
+    "source_type",
+    "evidence_group",
+    "consumer_routes",
+}
+USABLE_PACKET_STATES = {"READY", "REVIEW_REQUIRED"}
 
 
 def _set(value: Iterable[str] | str | None) -> set[str]:
@@ -67,14 +77,56 @@ def validate_case_separation(case_id: str) -> dict:
     }
 
 
+def materialize_experience_views(experience_packet: dict) -> tuple[dict, dict]:
+    """Derive L1 decision view and L2 provenance envelope from one packet.
+
+    This prevents a caller from accidentally giving L1 the provenance/correlation
+    fields whose incremental effect belongs to L2. The source packet is not
+    mutated.
+    """
+    if not isinstance(experience_packet, dict):
+        raise ValueError("EXPERIENCE_PACKET_REQUIRED")
+    if str(experience_packet.get("status")) not in USABLE_PACKET_STATES:
+        raise ValueError("EXPERIENCE_PACKET_NOT_USABLE")
+    if not isinstance(experience_packet.get("experience_items"), list):
+        raise ValueError("EXPERIENCE_ITEMS_REQUIRED")
+
+    source = deepcopy(experience_packet)
+    decision = deepcopy(experience_packet)
+    provenance_items = []
+
+    for index, item in enumerate(decision["experience_items"]):
+        if not isinstance(item, dict):
+            raise ValueError(f"EXPERIENCE_ITEM_NOT_MAPPING:{index}")
+        original = source["experience_items"][index]
+        provenance = {"knowledge_id": original.get("knowledge_id")}
+        for field in PROVENANCE_ITEM_FIELDS:
+            if field in original:
+                provenance[field] = deepcopy(original[field])
+                item.pop(field, None)
+        provenance_items.append(provenance)
+
+    correlated = deepcopy(source.get("correlated_evidence_groups", []))
+    evidence_boundary = source.get("evidence_boundary")
+    decision.pop("correlated_evidence_groups", None)
+    decision.pop("evidence_boundary", None)
+
+    provenance_envelope = {
+        "experience_items": provenance_items,
+        "correlated_evidence_groups": correlated,
+        "evidence_boundary": evidence_boundary,
+        "authority_boundary": source.get("authority_boundary"),
+    }
+    return decision, provenance_envelope
+
+
 def build_condition_payload(
     case_id: str,
     condition: str,
     *,
     experience_packet: dict | None = None,
-    provenance_envelope: dict | None = None,
 ) -> dict:
-    """Construct B0/L1/L2 participant input without evaluator expectations."""
+    """Construct B0/L1/L2 input with deterministic information separation."""
     if condition not in CONDITIONS:
         raise ValueError(f"UNSUPPORTED_CONDITION:{condition}")
 
@@ -88,26 +140,16 @@ def build_condition_payload(
     }
 
     if condition in {"L1", "L2"}:
-        if not isinstance(experience_packet, dict):
-            raise ValueError("EXPERIENCE_PACKET_REQUIRED")
-        payload["experience_packet"] = deepcopy(experience_packet)
-
-    if condition == "L2":
-        if not isinstance(provenance_envelope, dict):
-            raise ValueError("PROVENANCE_ENVELOPE_REQUIRED")
-        payload["provenance_envelope"] = deepcopy(provenance_envelope)
+        decision_view, provenance_view = materialize_experience_views(experience_packet)
+        payload["experience_packet"] = decision_view
+        if condition == "L2":
+            payload["provenance_envelope"] = provenance_view
 
     return payload
 
 
 def validate_response(response: dict) -> list[str]:
-    """Return structurally missing fields; empty/wrong values remain scoreable.
-
-    IGT must distinguish an absent response field from an explicit empty or
-    incorrect answer. Empty lists are valid observations that should score zero
-    on the relevant dimension rather than converting the whole response into a
-    schema failure.
-    """
+    """Return structurally missing fields; empty/wrong values remain scoreable."""
     if not isinstance(response, dict):
         return ["RESPONSE_NOT_MAPPING"]
     return [field for field in REQUIRED_RESPONSE_FIELDS if field not in response]
@@ -170,6 +212,8 @@ def qualify_run(run: dict) -> dict:
         reasons.append("EXECUTION_CONTEXT_ID_MISSING")
     if not run.get("independence_attestation_ref"):
         reasons.append("INDEPENDENCE_ATTESTATION_REF_MISSING")
+    if str(run.get("participant_kind", "UNKNOWN")) == "MODEL_RUN" and not run.get("participant_evidence_ref"):
+        reasons.append("PARTICIPANT_EVIDENCE_REF_MISSING")
     if not run.get("case_id") or not run.get("condition"):
         reasons.append("RUN_IDENTITY_INCOMPLETE")
 
