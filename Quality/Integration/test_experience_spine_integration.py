@@ -2,10 +2,13 @@
 
 import importlib.util
 from pathlib import Path
+import subprocess
+import sys
 
 
 ROOT = Path(__file__).resolve().parents[2]
 MODULE_PATH = ROOT / "Knowledge" / "Learning" / "experience_spine.py"
+UNIT_SUITE = ROOT / "Knowledge" / "Learning" / "test_experience_spine.py"
 SPEC = importlib.util.spec_from_file_location("experience_spine_clean", MODULE_PATH)
 MODULE = importlib.util.module_from_spec(SPEC)
 assert SPEC.loader is not None
@@ -65,6 +68,20 @@ def _context():
         "repository_head": "github-sha",
         "concurrent_work_refs": ["PR-66", "PR-69"],
     }
+
+
+def test_focused_mechanics_suite_executes_under_ci():
+    """Prove the focused mechanics suite executes, not merely that its file exists."""
+    completed = subprocess.run(
+        [sys.executable, "-m", "pytest", "-q", str(UNIT_SUITE)],
+        cwd=ROOT,
+        capture_output=True,
+        text=True,
+        check=False,
+    )
+    output = f"STDOUT:\n{completed.stdout}\nSTDERR:\n{completed.stderr}"
+    assert completed.returncode == 0, output
+    assert "11 passed" in completed.stdout, output
 
 
 def test_packet_preserves_execution_source_and_authority_boundaries():
