@@ -130,3 +130,58 @@ def test_invalid_parent_traversal_is_rejected_before_io():
             update_file=lambda *args: "never",
             read_back=lambda path: ExistingFile(path, "sha", "new content\n"),
         )
+
+
+def test_update_aborts_when_sha_changes_at_write_boundary():
+    states = iter([
+        ExistingFile("Repository/TEST_SAFE_WRITE.md", "sha-1", "old\n"),
+        ExistingFile("Repository/TEST_SAFE_WRITE.md", "sha-2", "changed\n"),
+    ])
+
+    def read_current(path):
+        return next(states)
+
+    with pytest.raises(WriteDispatchError, match="CURRENT_STATE_CHANGED_BEFORE_WRITE"):
+        dispatch_write(
+            _intent(),
+            read_current=read_current,
+            create_file=lambda *args: "never",
+            update_file=lambda *args: (_ for _ in ()).throw(
+                AssertionError("Update must not occur after SHA drift")
+            ),
+            read_back=lambda path: ExistingFile(path, "sha", "new content\n"),
+        )
+
+
+def test_create_aborts_when_file_appears_at_write_boundary():
+    states = iter([
+        None,
+        ExistingFile("Repository/TEST_SAFE_WRITE.md", "sha-new", "created elsewhere\n"),
+    ])
+
+    def read_current(path):
+        return next(states)
+
+    with pytest.raises(WriteDispatchError, match="CURRENT_STATE_CHANGED_BEFORE_WRITE"):
+        dispatch_write(
+            _intent(),
+            read_current=read_current,
+            create_file=lambda *args: (_ for _ in ()).throw(
+                AssertionError("Create must not occur after file appears")
+            ),
+            update_file=lambda *args: "never",
+            read_back=lambda path: ExistingFile(path, "sha", "new content\n"),
+        )
+
+
+def test_empty_content_is_rejected_before_io():
+    with pytest.raises(WriteDispatchError, match="EMPTY_WRITE_CONTENT"):
+        dispatch_write(
+            _intent(content="   \n"),
+            read_current=lambda path: (_ for _ in ()).throw(
+                AssertionError("No repository access should occur")
+            ),
+            create_file=lambda *args: "never",
+            update_file=lambda *args: "never",
+            read_back=lambda path: ExistingFile(path, "sha", "new content\n"),
+        )
