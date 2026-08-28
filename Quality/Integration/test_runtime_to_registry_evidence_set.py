@@ -11,7 +11,7 @@ def _fixture():
         "knowledge": {"source": "integration-fixture"},
         "task": {"task_id": "TASK-EVIDENCE-001"},
         "rules": {"allow_simulated_review": True},
-        "authorization": {"approved": True},
+        "authorization": {"approved": True, "authorization_id": "AUTH-EVIDENCE-001"},
     }
 
 
