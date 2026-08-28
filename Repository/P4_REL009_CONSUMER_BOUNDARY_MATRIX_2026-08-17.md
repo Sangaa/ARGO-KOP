@@ -1,11 +1,11 @@
 # P4 — REL-009 Consumer Boundary Matrix
 
 Date: 2026-08-17
-Status: `EXECUTION-VERIFIED / DIRECTIONAL-DISPOSITION-READY / REGISTRY-SYNC-PENDING`
+Status: `EXECUTION-VERIFIED / REGISTRY-SYNCHRONIZED / CLOSURE-CANDIDATE / FINAL CI PENDING`
 Authority: `GOV-013 / GOV-014 / GOV-015`
 
 ## Purpose
-Protect `REL-009: RUN-010 → SRV-009` from speculative or over-broad promotion while preserving evidence that now exists on current main.
+Protect `REL-009: RUN-010 → SRV-009` from speculative or over-broad promotion while preserving the bounded executable evidence now established and canonically synchronized.
 
 This is a safety/evidence gate. It does not manufacture runtime evidence and does not authorize a bidirectional or universal runtime relationship claim.
 
@@ -20,11 +20,11 @@ Architectural prose, shared workflow descriptions, repository-wide audit complet
 | Gate | Condition | Current State |
 |---|---|---|
 | B01 | REL-009 exists in canonical registry | VERIFIED |
-| B02 | Registry remains `REVALIDATION REQUIRED` until controlled registry synchronization | VERIFIED / SYNC PENDING |
+| B02 | Canonical registry state matches the bounded directional disposition | VERIFIED — `REP-014` blob `d75f460d...` |
 | B03 | RUN-010 distinguishes relationship description from universal runtime-path proof | VERIFIED |
 | B04 | Automated safety test prevents accidental universal/executable overclaim | EXECUTION-VERIFIED |
 | B05 | Boundary gate integrated into proven Full-Stack CI | VERIFIED |
-| B06 | CI execution on current merged main | VERIFIED — `a538325b...` |
+| B06 | CI execution on merged P3/P4 main checkpoints | VERIFIED — `a538325b...` / `94a9bbb...` |
 | B07 | Independent callable consumer source evidence | SOURCE-VERIFIED ON MAIN — pure handoff + integration-only observation seam |
 | B08 | Independent execution trace proving attributable RUN-010 → SRV-009 dispatch | EXECUTION-OBSERVED / ISOLATED INTEGRATION / EXACT-MAIN CI VERIFIED |
 | B09 | Negative runtime evidence gate proves inspected connected spine is simulation/trace-only at current boundary | EXECUTION-VERIFIED |
@@ -65,7 +65,7 @@ P3 clean extraction was squash-merged to main as:
 
 `a538325bcde36d3a45f19583ca20d72d8f591e0a`
 
-Current main now contains:
+Current main contains:
 
 1. `Runtime/Execution/run010_handoff_contract.py`
    - validates RUN-010 execution identity and trace;
@@ -91,26 +91,57 @@ Exact-main push workflows on `a538325b...`:
 - Real Mutation Matrix Regression `33196013638` — SUCCESS;
 - M2 Multi-Channel Proposal Training `33196013623` — SUCCESS.
 
+P4 semantic reconciliation was then squash-merged to main as:
+
+`94a9bbb43432f3e098854571130778a498f76299`
+
+Exact-main push verification:
+
+- Full-Stack Repository Audit `33196750118` — SUCCESS;
+- ARGO Runtime Prototype and Integration Tests `33196750113` — SUCCESS;
+- M2 Multi-Channel Proposal Training `33196750126` — SUCCESS.
+
 A separate provider-backed P3 E2E proved the reused ENG-006/SRV-009 adapter + GitHub connector create/update/read-back/cleanup boundary. That provider proof remains distinct from the RUN-010 integration observation and is not used to claim universal RUN-010 routing.
+
+## Registry Synchronization — 2026-08-28
+
+Controlled transaction:
+
+`MUT-2026-08-28-P4-REL009-REGISTRY-CLOSURE-001`
+
+Workflow run `33197498585` completed successfully on the isolated transaction branch.
+
+Verified evidence:
+
+- mutation-builder tests: `3 passed`;
+- source `REP-014` blob: `a6926b0b27e515b38b65594846fd82d1f1252ea9`;
+- registry mutation commit: `dda16b3f2523fea03bf8d8c9724b237ab648046c`;
+- candidate/read-back blob: `d75f460d152898709044a31433e8ae4c705d9191`;
+- request state: `APPLIED`;
+- `verified_readback = true`.
+
+The canonical REL-009 identity and type remain:
+
+`RUN-010 → SRV-009 = CONSUMES`.
+
+The synchronized state is:
+
+`INTENTIONAL ONE-WAY / ISOLATED EXECUTION-OBSERVED / GOVERNED / NON-UNIVERSAL`.
 
 ## Reconsideration Rule
 
-B06, B07 and B08 are now satisfied within the declared isolated integration scope. Therefore the prior `REVALIDATION REQUIRED because executable evidence is absent` rationale is no longer current.
+B06, B07 and B08 are satisfied within the declared isolated integration scope, and B02 is now satisfied by canonical registry synchronization. Therefore the prior `REVALIDATION REQUIRED because executable evidence is absent` rationale is superseded for current operational interpretation.
 
-The evidence supports reconsideration as:
-
-`REL-009 = INTENTIONAL ONE-WAY / CONSUMES / ISOLATED EXECUTION-OBSERVED / GOVERNED / NON-UNIVERSAL`
-
-This state remains **registry synchronization pending** until `REP-014` is updated through a complete full-content-preserving controlled mutation and revalidated.
+The bounded disposition is now canonically synchronized. Final closure of this matrix still requires exact-head CI on the complete closure transaction so registry state, dependent guards, impact matrix and closure surfaces are proven together.
 
 ## Current Evidence Boundary
 
 - RUN-010 explicitly treats the execution chain as a relationship description, not proof that every runtime operation follows it.
 - ENG-006 → SRV-009 executable evidence does not propagate automatically into universal RUN-010 routing.
-- The new RUN-010 observation is deliberately isolated under `Quality/Integration`; it does not weaken the protected normal Runtime/Execution boundary.
-- Exact-main CI proves the observation seam and regressions execute on the merged repository state.
+- The RUN-010 observation is deliberately isolated under `Quality/Integration`; it does not weaken the protected normal Runtime/Execution boundary.
 - Provider-backed E2E and isolated RUN-010 observation are separate evidence classes.
 - A directional `CONSUMES` relationship does not require a synthetic reverse dependency from SRV-009 to RUN-010 merely to satisfy symmetry.
+- Canonical synchronization does not claim repository-wide graph closure or Connected-Baseline completion.
 
 ## Test Hardening Learning
 
@@ -130,9 +161,9 @@ Both negative and positive evidence must retain their exact inspected boundary.
 
 The gate is repository-controlled and does not depend on conversational memory or model identity.
 
-## Next Safe Mutation
+## Next Safe Gate
 
-Build and verify the complete `REP-014` candidate, change only the REL-009 state, preserve all unrelated registry content, then run exact-head CI before P4 closure.
+`OPEN PR ON COMPLETE CLOSURE PAYLOAD → EXACT-HEAD FULL-STACK + RUNTIME/INTEGRATION CI → IF PASS, RECORD BOUNDED CLOSURE → FINAL-HEAD CI → MERGE REVIEW`.
 
 ---
 
