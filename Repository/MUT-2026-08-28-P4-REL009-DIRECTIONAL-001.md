@@ -79,6 +79,43 @@ Branch reconciliation after C01/C02:
 - `Repository/REP-014_REPOSITORY_RELATIONSHIP_REGISTRY.md` remains untouched;
 - unexpected changed paths: `0`.
 
+## Exact-Head Pull-Request CI Evidence
+
+Draft PR: `#68 — P4: disposition REL-009 as bounded intentional one-way`.
+
+Verified head before this documentation-only evidence binding:
+
+`e81aa64e0c256e2654e4a18845424e0904f67fb6`
+
+Exact-head workflows:
+
+- Full-Stack Repository Audit `33196513213` — SUCCESS;
+- ARGO Runtime Prototype and Integration Tests `33196513241` — SUCCESS.
+
+Runtime workflow job results:
+
+- `integration-tests` — SUCCESS;
+- `integrity-tests` — SUCCESS;
+- `prototype-tests` — SUCCESS.
+
+Full-Stack job evidence included successful execution of:
+
+- checkout-SHA binding;
+- P4 REL-009 consumer boundary safety gate;
+- P4 negative runtime evidence gate;
+- P4 critical graph bidirectional boundary regression;
+- Mutation Matrix preflight regression;
+- Mutation Matrix semantic regression;
+- Mutation Matrix enforcement on current change set;
+- repository-wide audit;
+- runtime evidence emission.
+
+Therefore C01/C02 are:
+
+`SOURCE-APPLIED + READ-BACK-VERIFIED + EXACT-HEAD PR-CI VERIFIED`.
+
+This commit only binds that evidence into the transaction record; it does not alter either target matrix or `REP-014`. The resulting final branch HEAD must receive its own final CI observation before merge, but no further repository-content mutation should follow that final check.
+
 ## Preservation Controls
 
 KEEP unchanged:
@@ -117,12 +154,16 @@ Therefore C03 MUST remain pending until a complete current-source candidate can 
 
 This tool limitation is not evidence that the relationship remains semantically unresolved; it is a mutation-safety boundary.
 
-## Verification Still Required
+## Partial Transaction Closure State
 
-C01/C02 source/read-back verification is complete. Exact-head pull-request CI for this P4 branch is still required before this partial transaction can be merged as evidence reconciliation.
+C01/C02: `VERIFIED / MERGE-ELIGIBLE AFTER FINAL-HEAD CI + CONCURRENCY RECHECK`.
+
+C03: `OPEN / SAFE-MUTATION-PATH REQUIRED`.
+
+P4/REL-009 canonical closure: `OPEN / REGISTRY SYNC PENDING`.
 
 ## Closure Rule
 
-This transaction may close C01/C02 independently after exact-head CI. P4/REL-009 canonical registry closure remains pending until C03 is safely applied, read back and CI-verified.
+This partial evidence-reconciliation transaction may be merged without claiming canonical REL-009 registry closure. P4 remains open until C03 is safely applied, read back and CI-verified.
 
 `SEMANTIC DISPOSITION != REGISTRY PERSISTENCE != P4 CANONICAL CLOSURE`.
