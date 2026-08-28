@@ -14,20 +14,23 @@ PR #64 is open, unmerged, and its current head is:
 The B08 implementation commit referenced by P444 is:
 `f97728a568dab2876a0740eba823e6c15eba06eb`
 
-The two SHAs are different. A pull-request workflow lookup for `f97728a...` returns no workflow runs, and its combined status is empty.
+The two SHAs are different. The implementation commit adds `Quality/Integration/test_b08_run010_eng006_consumer.py` and has parent `7edef61...`. A pull-request workflow lookup and combined-status query for `f97728a...` return no observed CI/status entries.
+
+The current PR head `f21ede4...` does have two successful pull-request workflow runs, but those results belong to that exact PR head and are not automatically attributable to `f97728a...`.
+
+## Ancestry check
+A direct comparison reports the two commits as `diverged`, with merge base `6f05acb...`; therefore the B08 implementation SHA is not an ancestor of the current PR head on the compared graph.
 
 ## Interpretation
-This does NOT prove B08 failed. It proves only that the B08 implementation SHA is not the current PR #64 head, so the absence of PR-triggered CI at that SHA cannot be used as evidence about the current PR execution state.
-
-Likewise, CI observed on `f21ede4...` must not be attributed to `f97728a...` without an explicit ancestry/content equivalence proof appropriate to the claim.
+This does NOT prove B08 failed. It proves that the B08 implementation SHA is outside the currently observed PR #64 execution head. Therefore prior CI success on `f21ede4...` cannot be used as B08 execution evidence for `f97728a...`.
 
 ## Decision
-Stop exact-head conflation. B08 execution remains `UNOBSERVED` for the implementation SHA under review.
+Stop exact-head conflation. B08 execution for the implementation SHA remains `UNOBSERVED`.
 
-No code mutation and no promotion decision are justified.
+No code mutation and no promotion decision are justified by this evidence.
 
 ## Next decisive action
-Reconcile the ancestry between `f97728a...` and PR #64 head `f21ede4...`, and identify which exact commit contains the B08 test. Then obtain execution evidence for that exact commit through the governed path.
+Determine whether the B08 implementation should be reintroduced into the governed PR lineage or independently executed through an authorized workflow. Any such action must preserve exact-head attribution.
 
 ## Close
 P445 = CLOSED
