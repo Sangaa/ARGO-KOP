@@ -4,12 +4,12 @@ Transaction ID: `MUT-2026-08-28-IGT-EXTERNAL-EVIDENCE-RESOLVER-001`
 Protocol: `GOV-013 / GOV-014 / GOV-015 + IGT + MI-IGT`
 Base: `main@069c7c0b4103c745e40c6b2aa54f47816b560418`
 Working branch: `hermuz/igt-external-evidence-resolver-20260828`
-Status: `PRE-WRITE / EXTERNAL AUTHENTICITY CORRELATION DESIGN`
+Status: `SOURCE IMPLEMENTED / READ-BACK + EXACT-HEAD CI PENDING / PRODUCTION TRUSTED ADAPTER NOT IMPLEMENTED`
 Authority: `NONE`
 
 ## Entry State
 
-The portable model-run evidence package gate is merged and post-merge verified:
+Portable model-run evidence package gate is merged and post-merge verified:
 - main `069c7c0b4103c745e40c6b2aa54f47816b560418`;
 - Runtime/Integration `33205273818` — SUCCESS;
 - Full-Stack `33205273838` — SUCCESS;
@@ -27,92 +27,160 @@ Current bounded state:
 
 ## Problem
 
-A structurally qualified package now carries external evidence references, but the repository has no governed correlation surface that can compare those references with independently retrieved execution/attestation observations.
+A structurally qualified package carries external evidence references, but the repository lacked a governed surface for comparing those references with independently retrieved participant-execution and independence-attestation observations.
 
-A caller-provided dictionary must not become external verification merely because its fields match.
+A caller-supplied dictionary or receipt must never become trusted external verification merely because its values match.
 
-Required separation:
+Core separation:
 
 `PACKAGE QUALIFICATION != RESOLVER CORRELATION != RESOLVER TRUST != EXTERNAL AUTHENTICITY`.
 
-## Design Boundary
+## Critical Design Decision — No Pure-Function External Verification
 
-This transaction builds the correlation/trust gate only. It does not add a provider API connector and therefore cannot manufacture `EXTERNALLY_VERIFIED` evidence from deterministic fixtures.
+This transaction deliberately provides **no code path** from deterministic correlation to `EXTERNAL_AUTHENTICITY_VERIFIED`.
 
-A resolver observation has two independent dimensions:
+Even when:
+- participant observation correlates;
+- attestation observation correlates;
+- both resolver receipts bind exactly;
 
-1. **Correlation** — does the retrieved observation bind to the package identity, evidence reference and digests?
-2. **Resolver trust** — is the observation accompanied by a trusted resolver receipt produced by an approved external adapter rather than embedded/self-declared package content?
+maximum positive pure-correlation state is:
 
-Without both, final authenticity remains unresolved.
+`CORRELATED_AWAITING_TRUSTED_ADAPTER`.
 
-## Target Invariants
+Reason: a caller-provided receipt cannot authenticate the provenance of the resolver that allegedly produced it.
 
-1. The resolver must first require a locally `STRUCTURALLY_QUALIFIED` package.
-2. Participant evidence and independence-attestation evidence are resolved separately.
-3. Requested reference and observed reference must match exactly.
-4. Run/case/condition/context/baseline/source identity must correlate where the observation claims them.
-5. Participant payload/response digests must bind the external execution observation to the package content.
-6. Attestation observation must bind run/context/baseline and independence dimensions.
-7. `NOT_FOUND`, `UNAVAILABLE`, or partial evidence is not `MISMATCH`; it is unresolved/inconclusive.
-8. Explicit incompatible identity/digest values are `MISMATCH`.
-9. Correlated observations from an untrusted/self-declared resolver remain `CORRELATED_UNTRUSTED`, not externally verified.
-10. A trusted resolver receipt must bind resolver identity, resolution ID, source reference and observation digest.
-11. Trust receipt mismatch invalidates the resolver event rather than the underlying package.
-12. Duplicate resolver receipts or duplicate resolution identity do not create independent corroboration.
-13. External verification remains bounded to the exact package/run/condition; it does not establish cognitive benefit.
-14. Deterministic CI fixtures verify resolver mechanics only.
+`RECEIPT BINDING != RESOLVER TRUST`.
 
-## Planned Changes
+A future connector/adapter transaction must establish trusted acquisition provenance outside package-supplied/self-declared content.
 
-| ID | Target | Action | Expected Result | Applied | Verified |
-|---|---|---|---|:---:|:---:|
-| C01 | `Quality/Integration/experience_spine_igt_external_resolver.py` | ADD | correlate package with participant/attestation resolver observations; preserve unavailable vs mismatch; require trusted receipt before external verification | N | N |
-| C02 | `Quality/Integration/test_experience_spine_igt_external_resolver.py` | ADD | positive/adversarial regressions for correlation, mismatch, unavailable, trust receipt, digest binding, duplicate resolver identity and non-claims | N | N |
-| C03 | `Repository/IGT_EXTERNAL_EVIDENCE_RESOLVER_CONTRACT_2026-08-28.md` | ADD | resolver observation/receipt contract and authenticity state transitions | N | N |
-| C04 | current integration suite | VERIFY | exact-head discovery and execution | N | N |
+## Applied Changes
 
-## Resolver States
+| ID | Target | Result | Applied | Verified |
+|---|---|---|:---:|:---:|
+| C01 | `Quality/Integration/experience_spine_igt_external_resolver.py` | package eligibility; participant/attestation correlation; unavailable/partial/mismatch distinction; receipt binding; duplicate resolution/evidence fingerprint checks; no pure verification path | Y | source pending read-back |
+| C02 | `Quality/Integration/test_experience_spine_igt_external_resolver.py` | adversarial + positive regressions for identity, digests, execution surface/time, attestation content, unavailable/partial, trust receipts, package eligibility and duplicate evidence | Y | source pending read-back |
+| C03 | `Repository/IGT_EXTERNAL_EVIDENCE_RESOLVER_CONTRACT_2026-08-28.md` | correlation/trust contract, observation digest vs evidence fingerprint, explicit no-pure-verification boundary | Y | source pending read-back |
+| C04 | current integration suite | exact-head discovery/execution | Y | CI pending |
 
-### Participant / attestation resolution
-- `CORRELATED` — observation is complete and matches the package.
-- `MISMATCH` — direct incompatible identity/digest evidence exists.
-- `UNAVAILABLE` — resolver could not retrieve target evidence.
-- `INCONCLUSIVE` — evidence is partial/ambiguous.
+## Correlation Surfaces
 
-### Trust
-- `TRUSTED_RECEIPT_VALID` — receipt is structurally bound to the observation and supplied through the trusted adapter boundary.
-- `UNTRUSTED` — observation may correlate but no trusted-adapter receipt exists.
-- `RECEIPT_MISMATCH` — receipt does not bind the observation/resolution event.
+### Participant observation binds
+- requested/observed evidence reference;
+- run/case/condition;
+- execution context;
+- repository baseline;
+- source model + instance;
+- execution surface;
+- execution start/end timestamps;
+- participant payload digest;
+- participant response digest.
 
-### Final authenticity
-- `EXTERNAL_AUTHENTICITY_VERIFIED` requires both participant and attestation correlation plus valid trusted receipts for both.
-- `EXTERNAL_AUTHENTICITY_MISMATCH` if direct external evidence contradicts package identity/digests.
-- `EXTERNAL_AUTHENTICITY_INCONCLUSIVE` for unavailable, partial, or untrusted evidence.
+### Attestation observation binds
+- requested/observed attestation reference;
+- run/context/baseline;
+- attestation digest;
+- exact attestation content.
 
-## Anti-Laundering Rule
+The channels remain separately observable and separately classifiable.
 
-A fixture may demonstrate that correlation logic works. It may not set the trusted-adapter boundary by embedding `trusted=true` inside the package or observation.
+## Resolver Event States
 
-The correlation function accepts trust as a separate adapter receipt argument and labels deterministic receipts as test evidence only. Production `EXTERNAL_AUTHENTICITY_VERIFIED` remains unavailable until a real approved resolver adapter exists.
+- `FOUND` — evidence retrieved and comparable;
+- `UNAVAILABLE` — identified resolver could not retrieve the target;
+- `PARTIAL` — some evidence exists but comparison is incomplete.
+
+All states, including `UNAVAILABLE`/`PARTIAL`, require resolver ID, resolution ID and exact requested reference.
+
+`UNAVAILABLE != MISMATCH`.
+
+An identified negative retrieval is unresolved evidence, not direct contradiction.
+
+## Correlation Results
+
+- `CORRELATED` — applicable bindings match.
+- `MISMATCH` — direct incompatible reference/identity/digest/content/time evidence.
+- `UNAVAILABLE` — target could not be retrieved.
+- `INCONCLUSIVE` — partial/ambiguous evidence.
+
+Combined pure-correlation state can be:
+- `PACKAGE_NOT_ELIGIBLE`;
+- `EXTERNAL_EVIDENCE_MISMATCH`;
+- `EXTERNAL_EVIDENCE_UNAVAILABLE`;
+- `EXTERNAL_EVIDENCE_INCONCLUSIVE`;
+- `CORRELATED_UNTRUSTED`;
+- `CORRELATED_AWAITING_TRUSTED_ADAPTER`.
+
+It cannot be `EXTERNAL_AUTHENTICITY_VERIFIED`.
+
+## Resolver Receipt Boundary
+
+Receipt binding checks:
+- resolver ID;
+- resolution ID;
+- source reference;
+- exact observation digest.
+
+Result may be `RECEIPT_BOUND` or `RECEIPT_MISMATCH`, but pure code always records:
+
+`resolver_trust = UNAUTHENTICATED_BY_PURE_CORRELATION`.
+
+## D09 — Resolution Event Identity Is Not Evidence Identity
+
+Pre-CI review exposed a potential evidence-laundering loophole: if duplicate detection hashed the complete observation including `resolver_id` / `resolution_id`, copying the same underlying evidence and changing only resolution metadata would generate a different digest and could look independent.
+
+Correction introduces two separate hashes:
+
+1. `observation_digest` — complete resolver record, used to bind a receipt to one exact resolution event;
+2. `evidence_fingerprint` — same observation with `resolver_id` and `resolution_id` excluded, used to detect repeated underlying evidence.
+
+Reusable laws:
+
+`RESOLUTION EVENT IDENTITY != UNDERLYING EVIDENCE IDENTITY`.
+
+`NEW RESOLUTION_ID != NEW EVIDENCE`.
+
+`NEW RESOLVER_ID != NEW EVIDENCE` when the evidence fingerprint is unchanged.
+
+## Additional Pre-CI Hardening
+
+### D10 — Execution identity includes surface and time
+External participant observation now binds `execution_surface`, `execution_started_at`, and `execution_completed_at`; matching run ID alone is insufficient.
+
+### D11 — Unavailable evidence still needs resolver provenance
+`UNAVAILABLE` / `PARTIAL` without resolver/resolution identity is invalid as a resolver event. Absence claims cannot arrive from an unidentified observation surface.
+
+### D12 — Attestation content naming must reflect semantics
+The observation field is `attestation_content`, not the misleading `independence_dimensions`, because the compared object includes run/context/baseline plus independence dimensions.
+
+## Duplicate Evidence Boundary
+
+Duplicate detection separately exposes:
+- duplicate `(resolver_id, resolution_id)` events;
+- duplicate complete observation digests;
+- duplicate underlying evidence fingerprints.
+
+Multiplicity never establishes independent corroboration.
 
 ## Explicit Non-Claims
 
-- Resolver mechanics do not prove any external model run occurred.
-- A matching fixture is not external authenticity evidence.
-- A matching observation without trusted resolver provenance is not externally verified.
-- External authenticity, even when later verified, is not IGT transfer PASS by itself.
+- Resolver mechanics do not prove an external model run occurred.
+- Matching deterministic fixtures are not external authenticity evidence.
+- Matching receipts are not trusted-adapter provenance.
+- External authenticity remains unverified/inconclusive until a real approved resolver adapter supplies provenance through a boundary not controlled by package content.
 - No B0/L1/L2 participant row is populated by this transaction.
+- Even later external authenticity does not by itself establish IGT transfer PASS, broad generalization, model-weight change, learning promotion, or governance authority.
 
-## Verification Plan
+## Verification Gates
 
-1. Implement correlation/trust state machine.
-2. Implement adversarial tests including exact mismatches and unavailable distinctions.
-3. Read back and reconcile exact diff.
+1. Read back module, tests, contract, and matrix.
+2. Compare branch to exact base; require declared-only paths.
+3. Reconcile current main/open PR surface.
 4. Open draft PR.
-5. Require exact-head Full-Stack + Runtime/Integration CI and inspect test count/log evidence.
-6. Record any failure/repair.
-7. Final doc-head CI → freeze → expected-SHA squash merge → post-merge exact-main verification.
+5. Require exact-head Full-Stack + Runtime/Integration CI.
+6. Inspect actual checkout merge ref and integration test count.
+7. Record failures/repairs rather than suppressing them.
+8. Final documentation-head CI → freeze → expected-SHA squash merge → post-merge exact-main verification.
 
 ## Closure Boundary
 
@@ -125,5 +193,7 @@ while:
 `PRODUCTION TRUSTED RESOLVER ADAPTER = NOT IMPLEMENTED`.
 
 `EXTERNAL MODEL-RUN AUTHENTICITY = UNVERIFIED / INCONCLUSIVE`.
+
+`IGT PARTICIPANT EVIDENCE = UNSEEN`.
 
 `EXPERIENCE SPINE COGNITIVE EFFECT = INCONCLUSIVE`.
