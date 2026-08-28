@@ -47,17 +47,17 @@ def _set(value: Iterable[str] | str | None) -> set[str]:
 
 
 def validate_case_separation(case_id: str) -> dict:
-    """Verify hidden evaluator keys do not appear in participant-visible data."""
+    """Verify evaluator-only reasoning keys do not leak into participant data.
+
+    Candidate action labels may be participant-visible by design. Leakage is the
+    hidden mapping of which action/authority is correct, plus evaluator-only
+    invariants/non-claims—not the mere presence of a choice label.
+    """
     visible = participant_case(case_id)
     hidden = hidden_expectation(case_id)
     serialized_visible = repr(visible)
     leaked = []
-    for value in (
-        list(hidden["target_invariants"])
-        + list(hidden["accepted_authorities"])
-        + list(hidden["accepted_actions"])
-        + list(hidden["required_non_claims"])
-    ):
+    for value in list(hidden["target_invariants"]) + list(hidden["required_non_claims"]):
         if str(value) in serialized_visible:
             leaked.append(str(value))
     return {
@@ -97,7 +97,6 @@ def build_condition_payload(
             raise ValueError("PROVENANCE_ENVELOPE_REQUIRED")
         payload["provenance_envelope"] = deepcopy(provenance_envelope)
 
-    # Hidden expectations are intentionally never attached to participant input.
     return payload
 
 
@@ -162,6 +161,8 @@ def qualify_run(run: dict) -> dict:
         reasons.append("LEAKAGE_NOT_CLEARED")
     if not run.get("execution_context_id"):
         reasons.append("EXECUTION_CONTEXT_ID_MISSING")
+    if not run.get("independence_attestation_ref"):
+        reasons.append("INDEPENDENCE_ATTESTATION_REF_MISSING")
     if not run.get("case_id") or not run.get("condition"):
         reasons.append("RUN_IDENTITY_INCOMPLETE")
 
@@ -198,6 +199,8 @@ def evaluate_run(run: dict) -> dict:
         "case_id": case_id,
         "condition": condition,
         "participant_kind": run.get("participant_kind", "UNKNOWN"),
+        "participant_evidence_ref": run.get("participant_evidence_ref"),
+        "independence_attestation_ref": run.get("independence_attestation_ref"),
         "execution_context_id": run.get("execution_context_id"),
         "qualification": qualification,
         "scoring": scoring,
@@ -208,28 +211,38 @@ def evaluate_run(run: dict) -> dict:
 
 
 def compare_conditions(evaluated_runs: list[dict]) -> dict:
-    """Compare qualified condition scores while refusing causal overclaim."""
-    by_case: dict[str, dict[str, dict]] = {}
+    """Compare qualified condition scores without silently shadowing duplicate runs."""
+    grouped: dict[str, dict[str, list[dict]]] = {}
     for result in evaluated_runs:
         if result["qualification"]["evidence_state"] != "QUALIFIED":
             continue
-        by_case.setdefault(result["case_id"], {})[result["condition"]] = result
+        grouped.setdefault(result["case_id"], {}).setdefault(result["condition"], []).append(result)
 
     comparisons = []
-    for case_id, conditions in sorted(by_case.items()):
-        row = {"case_id": case_id, "conditions_present": sorted(conditions)}
-        if "B0" in conditions and "L1" in conditions:
-            row["L1_minus_B0"] = (
-                conditions["L1"]["scoring"]["score"] - conditions["B0"]["scoring"]["score"]
+    ambiguities = []
+    for case_id, conditions in sorted(grouped.items()):
+        duplicate_conditions = sorted(condition for condition, runs in conditions.items() if len(runs) > 1)
+        if duplicate_conditions:
+            ambiguities.append(
+                {
+                    "case_id": case_id,
+                    "duplicate_conditions": duplicate_conditions,
+                    "state": "AMBIGUOUS_MULTIPLE_QUALIFIED_RUNS",
+                }
             )
-        if "L1" in conditions and "L2" in conditions:
-            row["L2_minus_L1"] = (
-                conditions["L2"]["scoring"]["score"] - conditions["L1"]["scoring"]["score"]
-            )
+            continue
+
+        single = {condition: runs[0] for condition, runs in conditions.items()}
+        row = {"case_id": case_id, "conditions_present": sorted(single)}
+        if "B0" in single and "L1" in single:
+            row["L1_minus_B0"] = single["L1"]["scoring"]["score"] - single["B0"]["scoring"]["score"]
+        if "L1" in single and "L2" in single:
+            row["L2_minus_L1"] = single["L2"]["scoring"]["score"] - single["L1"]["scoring"]["score"]
         comparisons.append(row)
 
     return {
         "comparisons": comparisons,
+        "ambiguities": ambiguities,
         "interpretation_boundary": (
             "SCORE_DIFFERENCE_IS_DESCRIPTIVE_ONLY; evaluator output does not prove causal cognitive improvement"
         ),
@@ -244,6 +257,8 @@ def bounded_transfer_readiness(evaluated_runs: list[dict]) -> dict:
         for run in evaluated_runs
         if run["qualification"]["evidence_state"] == "QUALIFIED"
         and run.get("participant_kind") == "MODEL_RUN"
+        and bool(run.get("participant_evidence_ref"))
+        and bool(run.get("independence_attestation_ref"))
         and run["invariant_transfer"] in {"PASS", "FAIL"}
     ]
     case_ids = {run["case_id"] for run in qualified_model_runs}
@@ -254,6 +269,7 @@ def bounded_transfer_readiness(evaluated_runs: list[dict]) -> dict:
         "qualified_model_runs": len(qualified_model_runs),
         "materially_distinct_cases": len(case_ids),
         "distinct_execution_contexts": len(contexts),
+        "attestation_verification": "REQUIRED_OUTSIDE_STRUCTURAL_EVALUATOR",
         "promotion": "NONE",
         "broad_generalization": "UNPROVEN",
         "model_weight_change": "UNPROVEN",
