@@ -75,7 +75,7 @@ The following are deliberately limited to relationships established during repos
 | REL-006 | RUN-010 | ENG-002 | CONSUMES | Revalidated within inspected scope |
 | REL-007 | RUN-010 | ENG-004 | CONSUMES | Revalidated within inspected scope |
 | REL-008 | RUN-010 | ENG-006 | CONSUMES | Revalidated within inspected scope |
-| REL-009 | RUN-010 | SRV-009 | CONSUMES | **REVALIDATION REQUIRED** |
+| REL-009 | RUN-010 | SRV-009 | CONSUMES | **INTENTIONAL ONE-WAY / ISOLATED EXECUTION-OBSERVED / GOVERNED / NON-UNIVERSAL** |
 | REL-010 | MOD-011 | KNW-002 | DEPENDS_ON | Revalidation Required |
 | REL-011 | MOD-011 | KNW-003 | DEPENDS_ON | Revalidation Required |
 | REL-012 | MOD-011 | KNW-004 | DEPENDS_ON | Revalidation Required |
@@ -167,21 +167,43 @@ Historical P303 evidence is preserved below in repository history; this section 
 
 ### REL-009 executable boundary reconciliation
 
-`REL-009` is retained with its original source, target and `CONSUMES` relationship type, but its state is downgraded to `REVALIDATION REQUIRED`.
-
-Current evidence establishes:
+`REL-009` retains its canonical identity and controlled relationship type:
 
 ```text
-RUN-010 → SRV-009 = DOCUMENTED / CONTRACTUAL
+RUN-010 → SRV-009 = CONSUMES
 ```
 
-`RUN-010_RUNTIME_REFERENCE.md` describes the `RUN-010 → ENG-006 → SRV-009` path as a relationship description and explicitly does not claim that every runtime operation follows the path. The inspected connected execution spine records execution traces through the current entrypoint and remains simulation-only at the adapter boundary; it does not establish a callable `SRV-009` dispatch.
+Current evidence now supports a bounded intentional-directional disposition:
 
-**The executable consumer proof is not established. no executable `VERIFIED` state is added.**
+`INTENTIONAL ONE-WAY / ISOLATED EXECUTION-OBSERVED / GOVERNED / NON-UNIVERSAL`
 
-Therefore `REL-009` must not be treated as executable or verified coupling merely because the architectural sequence is documented.
+Evidence basis:
 
-This reconciliation does **not** delete the relationship, alter its direction, create a synthetic consumer, or mutate Runtime implementation. Executable promotion requires independent callable consumer evidence.
+- `Runtime/RUN-010_RUNTIME_REFERENCE.md` describes the governed execution relationship ending in `SRV-009 Controlled Mutation` while explicitly stating that the sequence is not a claim that every runtime operation follows that exact path.
+- current main contains a pure RUN-010 handoff contract plus an integration-only observation harness that composes the existing governed ENG-006/SRV-009 production adapter;
+- the observation preserves execution/task/session/source-trace identity and authorization identity and records an attributable SRV-009-targeted dispatch with post-read verification;
+- exact-main Full-Stack and Runtime/Integration CI verify the positive isolated observation and the negative normal connected-spine boundary together;
+- the normal connected spine remains simulation-oriented and contains no direct `SRV-009` dispatch;
+- provider-backed ENG-006/SRV-009 E2E evidence remains a separate evidence class from the isolated RUN-010 observation.
+
+Directionality boundary:
+
+- no `SRV-009 → RUN-010` dependency is created;
+- no reverse dependency is required merely to manufacture graph symmetry;
+- this state does not mean every RUN-010 operation invokes SRV-009;
+- this state does not convert the normal connected spine to production dispatch;
+- repository-wide graph closure is not implied.
+
+Current evidence checkpoints include:
+
+- P3 clean proof merged to main: `a538325bcde36d3a45f19583ca20d72d8f591e0a`;
+- P3 exact-main Full-Stack: `33196013636` — SUCCESS;
+- P3 exact-main Runtime/Integration: `33196013609` — SUCCESS;
+- P4 semantic reconciliation merged to main: `94a9bbb43432f3e098854571130778a498f76299`;
+- P4 exact-main Full-Stack: `33196750118` — SUCCESS;
+- P4 exact-main Runtime/Integration: `33196750113` — SUCCESS.
+
+Historical records that state executable consumer evidence was absent remain valid for their original checkpoint and are superseded only for current operational interpretation within this bounded relationship scope.
 
 ### REL-061 governance bootstrap relationship
 
