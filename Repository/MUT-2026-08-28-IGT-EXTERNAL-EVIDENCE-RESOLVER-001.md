@@ -4,7 +4,7 @@ Transaction ID: `MUT-2026-08-28-IGT-EXTERNAL-EVIDENCE-RESOLVER-001`
 Protocol: `GOV-013 / GOV-014 / GOV-015 + IGT + MI-IGT`
 Base: `main@069c7c0b4103c745e40c6b2aa54f47816b560418`
 Working branch: `hermuz/igt-external-evidence-resolver-20260828`
-Status: `SOURCE IMPLEMENTED / READ-BACK + EXACT-HEAD CI PENDING / PRODUCTION TRUSTED ADAPTER NOT IMPLEMENTED`
+Status: `SOURCE + READ-BACK + PRE-DOC-HEAD CI VERIFIED / FINAL DOC-HEAD CI REQUIRED / PRODUCTION TRUSTED ADAPTER NOT IMPLEMENTED`
 Authority: `NONE`
 
 ## Entry State
@@ -58,10 +58,10 @@ A future connector/adapter transaction must establish trusted acquisition proven
 
 | ID | Target | Result | Applied | Verified |
 |---|---|---|:---:|:---:|
-| C01 | `Quality/Integration/experience_spine_igt_external_resolver.py` | package eligibility; participant/attestation correlation; unavailable/partial/mismatch distinction; receipt binding; duplicate resolution/evidence fingerprint checks; no pure verification path | Y | source pending read-back |
-| C02 | `Quality/Integration/test_experience_spine_igt_external_resolver.py` | adversarial + positive regressions for identity, digests, execution surface/time, attestation content, unavailable/partial, trust receipts, package eligibility and duplicate evidence | Y | source pending read-back |
-| C03 | `Repository/IGT_EXTERNAL_EVIDENCE_RESOLVER_CONTRACT_2026-08-28.md` | correlation/trust contract, observation digest vs evidence fingerprint, explicit no-pure-verification boundary | Y | source pending read-back |
-| C04 | current integration suite | exact-head discovery/execution | Y | CI pending |
+| C01 | `Quality/Integration/experience_spine_igt_external_resolver.py` | package eligibility; participant/attestation correlation; unavailable/partial/mismatch distinction; receipt binding; duplicate resolution/evidence fingerprint checks; no pure verification path | Y | Y |
+| C02 | `Quality/Integration/test_experience_spine_igt_external_resolver.py` | adversarial + positive regressions for identity, digests, execution surface/time, attestation content, unavailable/partial, trust receipts, package eligibility and duplicate evidence | Y | Y |
+| C03 | `Repository/IGT_EXTERNAL_EVIDENCE_RESOLVER_CONTRACT_2026-08-28.md` | correlation/trust contract, observation digest vs evidence fingerprint, explicit no-pure-verification boundary | Y | Y |
+| C04 | current integration suite | exact-head discovery/execution | Y | Y on pre-documentation head; final documentation head required |
 
 ## Correlation Surfaces
 
@@ -162,6 +162,61 @@ Duplicate detection separately exposes:
 
 Multiplicity never establishes independent corroboration.
 
+## Read-Back / Diff Reconciliation
+
+Before PR creation, branch read-back confirmed the implemented module, regression suite, contract and this matrix.
+
+Compare against exact base `069c7c0b4103c745e40c6b2aa54f47816b560418` showed:
+- `ahead_by = 9`;
+- `behind_by = 0`;
+- exactly 4 changed paths;
+- all 4 paths were declared by this transaction;
+- no Runtime, Services, provider connector, workflow, or production adapter mutation.
+
+## Pre-Documentation-Head CI Evidence
+
+PR #79 was opened as Draft from exact base with head:
+
+`7fd83dc1ee17c597ca3c507e01c3c4536d0e3657`.
+
+Required CI associated with that head completed successfully:
+- Runtime/Prototype/Integration workflow `33205935668` — SUCCESS;
+- Full-Stack Repository Audit `33205935669` — SUCCESS.
+
+Integration job:
+- job `98966853067` — SUCCESS;
+- GitHub checkout ref `f9318cd46dfd6f5f5e72cc9e53e9bf47d9824b74`;
+- checkout identity explicitly logged as `Merge 7fd83dc1ee17c597ca3c507e01c3c4536d0e3657 into 069c7c0b4103c745e40c6b2aa54f47816b560418`;
+- command: `python -m pytest -q Quality/Integration`;
+- result: `350 passed, 1 warning, 11 subtests passed`.
+
+Current main baseline before this transaction was 331 integration tests. Therefore the PR run discovered/executed 19 additional resolver regressions:
+
+`350 - 331 = 19`.
+
+The existing P2 identity-scope warning remains unchanged and is not treated as a resolver defect.
+
+Interpretation boundary:
+
+`CI SUCCESS = RESOLVER CORRELATION MECHANICS VERIFIED ON THIS HEAD`.
+
+It does **not** mean:
+- a production trusted resolver exists;
+- external model execution is authenticated;
+- B0/L1/L2 participant evidence has been observed;
+- Experience Spine cognitive benefit is established.
+
+## Exact-Head Closure Rule
+
+This evidence update changes the branch head. Therefore `7fd83dc1...` CI is retained as valid pre-documentation execution evidence, but it is not the final merge gate.
+
+Required next gate:
+1. run Full-Stack + Runtime/Integration on the new documentation head;
+2. freeze all branch mutations after success;
+3. reconcile current `main`, PR #79 metadata, open-PR surface and exact four-path diff;
+4. merge only with expected head SHA protection;
+5. require post-merge exact-main Runtime/Integration + Full-Stack verification.
+
 ## Explicit Non-Claims
 
 - Resolver mechanics do not prove an external model run occurred.
@@ -173,20 +228,20 @@ Multiplicity never establishes independent corroboration.
 
 ## Verification Gates
 
-1. Read back module, tests, contract, and matrix.
-2. Compare branch to exact base; require declared-only paths.
-3. Reconcile current main/open PR surface.
-4. Open draft PR.
-5. Require exact-head Full-Stack + Runtime/Integration CI.
-6. Inspect actual checkout merge ref and integration test count.
-7. Record failures/repairs rather than suppressing them.
-8. Final documentation-head CI → freeze → expected-SHA squash merge → post-merge exact-main verification.
+1. Read back module, tests, contract, and matrix — PASS.
+2. Compare branch to exact base; require declared-only paths — PASS.
+3. Reconcile current main/open PR surface before PR creation — PASS.
+4. Open draft PR — PASS (#79).
+5. Require exact-head Full-Stack + Runtime/Integration CI — PASS on pre-documentation head `7fd83dc1...`.
+6. Inspect actual checkout merge ref and integration test count — PASS (`350`, +19 over baseline).
+7. Record failures/repairs rather than suppressing them — PASS; no CI failure occurred on the hardened pre-documentation head.
+8. Final documentation-head CI → freeze → expected-SHA squash merge → post-merge exact-main verification — PENDING.
 
 ## Closure Boundary
 
-Potential result:
+Current verified result:
 
-`EXTERNAL EVIDENCE RESOLVER CORRELATION GATE = EXECUTION-VERIFIED`.
+`EXTERNAL EVIDENCE RESOLVER CORRELATION GATE = SOURCE + READ-BACK + PRE-DOC-HEAD EXECUTION-VERIFIED`.
 
 while:
 
