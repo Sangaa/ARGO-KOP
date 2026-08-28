@@ -7,7 +7,7 @@ Base repository: `Sangaa/ARGO-KOP`
 Base branch: `main`
 Base HEAD: `94a9bbb43432f3e098854571130778a498f76299`
 Target branch: `horus/experience-spine-reentry-20260828`
-Status: `PREWRITE MATRIX / EXECUTION IN PROGRESS`
+Status: `EXECUTED / READ-BACK VERIFIED / REVIEW PENDING`
 Authority: `NONE`
 Promotion: `NOT AUTHORIZED`
 
@@ -56,23 +56,23 @@ This matrix does **not** claim that every historical EJR/session artifact body w
 
 ### Concurrent Experience Spine candidate
 
-PR #66 / `feature/experience-spine-p375` is an existing bounded implementation candidate. This mutation must not rewrite, rebase, merge, or duplicate that branch. Its implementation and tests may be analyzed as evidence only.
+PR #66 / `feature/experience-spine-p375` is an existing bounded implementation candidate. This mutation did not rewrite, rebase, merge, or duplicate that branch. Its implementation and tests were analyzed as evidence only.
 
 ## 5. Mutation matrix
 
-| MI | Target | Change | Risk | Authority impact | Prewrite decision |
-|---|---|---|---|---|---|
-| MI-001 | `Repository/MUT-2026-08-28-HORUS-EXPERIENCE-SPINE-REENTRY-001.md` | Create this prewrite/reconciliation record | Low | None | ALLOW |
-| MI-002 | `HORUS/03_ANALYSES/HORUS_EXPERIENCE_SPINE_REENTRY_ANALYSIS_2026-08-28.md` | Create bounded HORUS analytical synthesis | Low | None; HORUS-REPORTED only | ALLOW |
-| MI-003 | `main` | Direct mutation | High | Canonical risk | BLOCK |
-| MI-004 | PR #66 branch | Modify/rebase/merge concurrent candidate | High | Parallel-work collision | BLOCK |
-| MI-005 | historical HORUS v6 | Continue construction from stale base | High | Stale-state risk | BLOCK |
-| MI-006 | Governance / Core / Memory / Knowledge canonical files | Promote analytical conclusions now | High | Authority escalation | BLOCK |
-| MI-007 | Experience implementation | Add new store/database or runtime path | Medium/High | Architectural expansion | BLOCK pending validation |
+| MI | Target | Change | Risk | Authority impact | Prewrite decision | Execution |
+|---|---|---|---|---|---|---|
+| MI-001 | `Repository/MUT-2026-08-28-HORUS-EXPERIENCE-SPINE-REENTRY-001.md` | Create/update prewrite and closure record | Low | None | ALLOW | PASS |
+| MI-002 | `HORUS/03_ANALYSES/HORUS_EXPERIENCE_SPINE_REENTRY_ANALYSIS_2026-08-28.md` | Create bounded HORUS analytical synthesis | Low | None; HORUS-REPORTED only | ALLOW | PASS |
+| MI-003 | `main` | Direct mutation | High | Canonical risk | BLOCK | NOT PERFORMED |
+| MI-004 | PR #66 branch | Modify/rebase/merge concurrent candidate | High | Parallel-work collision | BLOCK | NOT PERFORMED |
+| MI-005 | historical HORUS v6 | Continue construction from stale base | High | Stale-state risk | BLOCK | NOT PERFORMED |
+| MI-006 | Governance / Core / Memory / Knowledge canonical files | Promote analytical conclusions now | High | Authority escalation | BLOCK | NOT PERFORMED |
+| MI-007 | Experience implementation | Add new store/database or runtime path | Medium/High | Architectural expansion | BLOCK pending validation | NOT PERFORMED |
 
 ## 6. Preservation boundary
 
-This mutation is documentation-only. It must not:
+This mutation is documentation-only. It did not:
 
 - change canonical governance, core, memory, knowledge, runtime, engine, or repository authority;
 - claim that Experience Spine improves cognition merely because retrieval tests pass;
@@ -81,19 +81,47 @@ This mutation is documentation-only. It must not:
 - modify PR #66;
 - close P4, REP-014 reconciliation, or the global Integrity Hold.
 
-## 7. Required post-write verification
+## 7. Post-write verification
 
-After MI-002 is written:
+### MI-001 initial persistence
 
-1. re-read both new files from the target branch;
-2. verify target branch HEAD and persisted blob identities;
-3. update this matrix with execution/read-back state;
-4. create a reviewable draft PR to `main` only if the branch remains documentation-only and authority-neutral;
-5. leave merge/promotion pending independent review.
+Initial matrix commit:
+`43cc0b84c4e2243df36f12f75139613a79b055ae`
 
-## 8. Expected analytical classification
+Initial matrix read-back:
+`PASS`
 
-The expected output must separately label:
+Read-back blob:
+`0deacfb127c5ea5fdf60550703963d1359c69cb5`
+
+### MI-002 analytical persistence
+
+HORUS analysis commit:
+`4a8381e13bf6e90cc894f01b222b3fa2b0b2fe56`
+
+HORUS analysis read-back:
+`PASS`
+
+HORUS analysis blob:
+`ae6d2b07b81f4ad7d0d4a790ece7a48289d42c6e`
+
+Branch HEAD observed after MI-002:
+`4a8381e13bf6e90cc894f01b222b3fa2b0b2fe56`
+
+The analysis read-back preserved the declared state:
+
+`HORUS-REPORTED / ANALYTICAL / NON-AUTHORITATIVE`
+
+and the closure boundary:
+
+`AUTHORITY = NONE`
+`GOVERNANCE = NOT PROMOTED`
+`MAIN = UNCHANGED`
+`RUNTIME = UNCHANGED`
+
+## 8. Analytical classification preserved
+
+The output explicitly separates:
 
 - `VERIFIED CURRENT-REPOSITORY FINDING`;
 - `HISTORICAL HORUS PROVENANCE`;
@@ -101,4 +129,30 @@ The expected output must separately label:
 - `UNPROVEN / REQUIRES IGT OR OTHER TEST`;
 - `NOT AUTHORIZED`.
 
-No category may be silently upgraded during documentation.
+No category was promoted during documentation.
+
+## 9. Transfer decision
+
+The reusable analytical conclusion is preserved for controlled review:
+
+> The Experience Spine should be a governed semantic projection over existing reusable knowledge, not a second memory authority.
+
+This conclusion remains `HORUS-REPORTED` until independently verified under the applicable ARGO controls.
+
+Recommended next verification owner:
+`HERMUZ`
+
+Recommended next safe sequence:
+
+`fresh-main re-entry → PR #66 documentation reconciliation → evidence-state/correlation/supersession tests → IGT cognitive comparison → promotion decision`
+
+## 10. Closure state
+
+`EXECUTION EVIDENCE = RECORDED`
+`READ-BACK = PASS`
+`LEARNING ASSESSMENT = RECORDED`
+`TRANSFER = HERMUZ VERIFICATION CANDIDATE`
+`AUTHORITY = NONE`
+`MAIN MUTATION = NONE`
+`MERGE = NOT PERFORMED`
+`PROMOTION = NOT PERFORMED`
