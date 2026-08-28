@@ -32,13 +32,11 @@ FORBIDDEN_KEYS = {
     "invariant_transfer",
     "cognitive_effect",
     "promotion_outcome",
-    "participant_evidence_ref",
     "independence_attestation_ref",
     "execution_context_id",
     "provider_request_id",
     "provider_response_id",
     "provider_execution_id",
-    "provider_receipt",
     "external_authenticity",
 }
 
@@ -63,17 +61,16 @@ def _walk_keys(value: Any) -> set[str]:
     return keys
 
 
-def _hidden_values(case_id: str) -> list[str]:
+def _strictly_hidden_values(case_id: str) -> list[str]:
+    """Return evaluator values that are never intentionally participant-visible.
+
+    Candidate actions/authorities and evidence labels may legitimately be visible
+    in a transformed case. What must stay hidden is the evaluator's target
+    invariants and required non-claims, plus all evaluator-only field names.
+    """
     hidden = hidden_expectation(case_id)
     values: list[str] = []
-    for key in (
-        "target_invariants",
-        "accepted_authorities",
-        "accepted_actions",
-        "required_scope",
-        "required_evidence",
-        "required_non_claims",
-    ):
+    for key in ("target_invariants", "required_non_claims"):
         raw = hidden.get(key, [])
         if isinstance(raw, (list, tuple, set)):
             values.extend(str(item) for item in raw if str(item))
@@ -88,9 +85,21 @@ def _assert_blind(case_id: str, package_without_digest: dict) -> None:
         raise ValueError("FORBIDDEN_EXPORT_KEYS:" + ",".join(present_forbidden))
 
     serialized = _canonical(package_without_digest)
-    leaked = sorted({value for value in _hidden_values(case_id) if value in serialized})
+    leaked = sorted({value for value in _strictly_hidden_values(case_id) if value in serialized})
     if leaked:
         raise ValueError("HIDDEN_EVALUATOR_VALUE_LEAK:" + "|".join(leaked))
+
+
+def _identity_material(package: dict) -> dict:
+    return {
+        "export_version": package["export_version"],
+        "experiment_id": package["experiment_id"],
+        "case_id": package["case_id"],
+        "condition": package["condition"],
+        "baseline_sha": package["baseline_sha"],
+        "participant_payload": package["participant_payload"],
+        "response_contract": package["response_contract"],
+    }
 
 
 def build_participant_export(
@@ -140,22 +149,11 @@ def build_participant_export(
         "claim_boundary": "PARTICIPANT_INPUT_ONLY",
     }
 
-    # The execution-evidence placeholders are intentionally present only as null
-    # boundary markers. They must not become claims or identities at export time.
-    forbidden_for_blind_check = deepcopy(body)
-    forbidden_for_blind_check["execution_evidence"] = {"state": "NOT_YET_EXECUTED"}
-    _assert_blind(case_id, forbidden_for_blind_check)
+    blindness_view = deepcopy(body)
+    blindness_view["execution_evidence"] = {"state": "NOT_YET_EXECUTED"}
+    _assert_blind(case_id, blindness_view)
 
-    identity_material = {
-        "export_version": body["export_version"],
-        "experiment_id": experiment_id,
-        "case_id": case_id,
-        "condition": condition,
-        "baseline_sha": baseline_sha,
-        "participant_payload": participant_payload,
-        "response_contract": body["response_contract"],
-    }
-    body["export_id"] = "IGT-EXP-" + _digest(identity_material)[:24]
+    body["export_id"] = "IGT-EXP-" + _digest(_identity_material(body))[:24]
     body["package_digest"] = _digest(body)
     return body
 
@@ -187,6 +185,8 @@ def verify_participant_export(package: dict) -> dict:
     baseline = str(package.get("baseline_sha", ""))
     if not FULL_SHA_RE.fullmatch(baseline):
         reasons.append("BASELINE_SHA_INVALID")
+    if package.get("export_version") != EXPORT_VERSION:
+        reasons.append("EXPORT_VERSION_INVALID")
     if package.get("export_state") != EXPORT_STATE:
         reasons.append("EXPORT_STATE_INVALID")
     if package.get("claim_boundary") != "PARTICIPANT_INPUT_ONLY":
@@ -203,10 +203,25 @@ def verify_participant_export(package: dict) -> dict:
         if execution.get("provider_receipt") is not None:
             reasons.append("PROVIDER_RECEIPT_PREMATURE")
 
-    if not reasons and package.get("case_id") and package.get("condition"):
+    identity_fields = (
+        "export_version",
+        "experiment_id",
+        "case_id",
+        "condition",
+        "baseline_sha",
+        "participant_payload",
+        "response_contract",
+    )
+    if all(field in package for field in identity_fields):
+        expected_export_id = "IGT-EXP-" + _digest(_identity_material(package))[:24]
+        if package.get("export_id") != expected_export_id:
+            reasons.append("EXPORT_ID_MISMATCH")
+
+    if package.get("case_id") and package.get("condition"):
         try:
             blindness_view = deepcopy(package)
             blindness_view.pop("package_digest", None)
+            blindness_view.pop("export_id", None)
             blindness_view["execution_evidence"] = {"state": "NOT_YET_EXECUTED"}
             _assert_blind(str(package["case_id"]), blindness_view)
         except (KeyError, ValueError) as exc:
