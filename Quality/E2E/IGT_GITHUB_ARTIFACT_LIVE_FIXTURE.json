@@ -1,0 +1,6 @@
+{
+  "artifact_type": "live-github-immutable-read-probe",
+  "claim_boundary": "ARTIFACT_PROVENANCE_ONLY",
+  "payload": "ARGO-KOP controlled read-only E2E fixture",
+  "model_execution_claim": "NONE"
+}
