@@ -12,6 +12,7 @@ from context_conflict_detector import detect
 from reasoning_hold import evaluate
 from decision_trace_producer import record_decision_trace
 from outcome_producer import record_execution_outcome
+from run010_handoff_contract import build_handoff_candidate
 
 
 def run(fixture: dict) -> dict:
@@ -78,6 +79,18 @@ def run(fixture: dict) -> dict:
             ],
         )
 
+    handoff_candidate = None
+    if execution.get("execution_trace_id") and authorization.get("status") == "AUTHORIZED":
+        handoff_candidate = build_handoff_candidate(
+            execution,
+            authorization,
+            path=f"Repository/_RUN010_HANDOFF_OBSERVATION_{fixture['task']['task_id']}.md",
+            content="# RUN-010 isolated handoff observation\n",
+            purpose="observe connected RUN-010 caller composition without dispatch",
+            necessity_evidence="P409 authorization identity owner + P410 caller construction",
+            commit_message="test: observe connected RUN-010 handoff composition",
+        )
+
     outcome = None
     if execution.get("execution_trace_id"):
         outcome_result = record_execution_outcome(
@@ -98,6 +111,7 @@ def run(fixture: dict) -> dict:
         "stages": [classified, reasoning, conflict, hold, proposal, authorization, plan, execution],
         "decision_trace": decision_trace,
         "execution": execution,
+        "handoff_candidate": handoff_candidate,
         "outcome": outcome,
         "final_status": "SIMULATED" if execution.get("execution_trace_id") else execution.get("status"),
     }
