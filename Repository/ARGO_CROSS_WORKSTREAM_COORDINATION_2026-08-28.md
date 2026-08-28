@@ -1,6 +1,6 @@
 # ARGO Cross-Workstream Coordination Record — 2026-08-28
 
-Status: `EXECUTION IN PROGRESS / NON-CANONICAL / NO PROMOTION`
+Status: `CLOSED / VERIFIED COORDINATION EVIDENCE / NON-CANONICAL / NO PROMOTION`
 
 Authority: `ANALYSIS / COORDINATION / INTEGRATION EVIDENCE ONLY`
 
@@ -184,6 +184,14 @@ Promotion-review implication:
 
 PR #65 should add or explicitly disposition focused direct tests for `build_handoff_candidate` before canonical promotion. The existing negative architecture guard and integration evidence must not be weakened.
 
+Exact-branch recheck:
+
+- a separate worktree at PR #65 head `499c3cf...` reproduced exactly one Full-Stack finding;
+- finding: `run010_handoff_contract.py = UNTESTED_CANDIDATE / HIGH`;
+- broken references: `0`;
+- orphan candidates: `0`;
+- this confirms F-002 is present on the HERMUZ candidate itself and was not introduced by the Experience Spine combined tree.
+
 ### F-003 — Full-stack process success is not a zero-gap claim
 
 The full-stack audit exited successfully while reporting one high-severity candidate gap. Its own contract states that candidate findings require architectural review and negative findings require independent verification.
@@ -213,6 +221,17 @@ Recovery:
 - remote Matrix commit: `8d971a6f7e15424a3ae27bded1adbb4628ecdde1`.
 
 The channel boundary is already represented in repository learning. This occurrence remains `SESSION-LEARNING / NO NEW PROMOTION`.
+
+### Additional contained tool incidents
+
+1. Initial PR-comment actions used incorrect connector argument names and were rejected during argument binding. No comment or repository state was created by the rejected calls. The connector schema was then read and the calls were retried successfully.
+2. An exact-branch audit worktree was initially created from the wrong relative working directory, placing the local worktree below `Quality/` and contaminating the audit root with duplicate files. The resulting four findings were invalidated, the exact temporary worktree was removed, generated cache files were removed, and the worktree was recreated at an absolute sibling path. The corrected audit produced only F-002.
+
+Classifications:
+
+- comment attempt: `TOOL_INVOCATION_ERROR / REJECTED BEFORE STATE CHANGE`;
+- worktree attempt: `MODEL_ASSUMPTION_FAILURE / WORKDIR-RELATIVE PATH ERROR / LOCAL ONLY`;
+- repository/branch effect: `NONE`.
 
 ## 10. Evidence Boundary
 
@@ -275,8 +294,12 @@ Promotion decision: `NO PROMOTION`. Preserve as review evidence and validate rec
 - Repository relationship state updated: `NO`.
 - Existing workstream files modified: `NO`.
 - New runtime/test mechanism added: `NO`.
-- Findings transferred to PR review surfaces: `PENDING`.
-- Coordination record and Matrix: `IN PROGRESS` until remote read-back and final current-state reconciliation.
+- Findings transferred to PR review surfaces: `COMPLETE`.
+- PR #65 comment ID: `5455669788`.
+- PR #66 comment ID: `5455669948`.
+- Coordination Draft PR: `#67`.
+- Coordination record remote read-back: `COMPLETE`.
+- Coordination Matrix remote read-back: `COMPLETE`.
 
 ## 14. Explicit Non-Claims
 
@@ -287,6 +310,41 @@ Promotion decision: `NO PROMOTION`. Preserve as review evidence and validate rec
 - No direct communication or shared internal state between models is claimed; GitHub evidence is the coordination surface.
 - No formatting change is represented as engineering capability.
 
-## 15. Next Safe Action
+## 15. Final Current-State Reconciliation
 
-`REMOTE TARGET WRITE → READ-BACK → TRANSFER F-001/F-002 TO OWNER PRS → RECHECK HEADS/CI → UPDATE MATRIX → FINAL READ-BACK → CLOSE`.
+Final observed state before closure:
+
+- `main`: `09b216e403fe99a6f1a4a35e3c3038831398f6a3` — unchanged;
+- PR #65: `499c3cfda8e1fff52e3f808cff9ab80ed36e39db` — implementation head unchanged;
+- PR #66: advanced from tested functional head `856cc5f...` to `6aaf42d42ddb53858044e650b25819e74986cefb` by adding pre-write Matrix `MUT-2026-08-28-HORUS-EXPERIENCE-SPINE-002`;
+- PR #66's new functional mutation is not complete at this closure and no combined compatibility claim is transferred to its future head;
+- HERMUZ roadmap branch advanced during the session, but the PR #65 executable surface did not change;
+- coordination branch pre-close head: `427e13ff7997da02a7631b2a3a6346759d7ab53a`.
+
+Coordination branch CI on `427e13f`:
+
+- Full-Stack Repository Audit run `33195141416`: `SUCCESS`;
+- Runtime Prototype and Integration Tests run `33195141443`: `SUCCESS`;
+- earlier push workflow on the same record head: `SUCCESS`;
+- Matrix-only Real Mutation Matrix Regression on `8d971a6`: `SUCCESS`.
+
+The CI results validate the coordination documentation branch within their exercised scope. They do not promote this record or either candidate.
+
+## 16. Closure Gate
+
+- Execution evidence: `COMPLETE`.
+- Verification: `COMPLETE` within declared local combined-tree and exact-branch scopes.
+- Documentation: `COMPLETE`.
+- Learning assessment: `COMPLETE / NO PROMOTION`.
+- Transfer decision: `COMPLETE` through PR #65/#66 comments and this record.
+- Canonical mutation: `NONE`.
+- Workstream mutation: `NONE`.
+- Merge: `NONE`.
+
+Closure state:
+
+`CLOSED / RESUME-SAFE / PARALLEL WORK CURRENTLY SAFE BUT SHA-BOUND / F-002 TRANSFERRED TO HERMUZ REVIEW / HORUS RECONCILIATION IN PROGRESS / NO PROMOTION`.
+
+## 17. Next Safe Action
+
+`WAIT FOR HORUS MI-002 CANDIDATE CLOSURE → RE-READ NEW PR #66 HEAD → RECOMPUTE OVERLAP AGAINST PR #65/NEW MAIN → RERUN AFFECTED COMBINED TESTS → VERIFY F-002 DISPOSITION → ONLY THEN ENTER ANY MERGE OR PROMOTION REVIEW`.
