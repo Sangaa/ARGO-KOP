@@ -11,13 +11,13 @@ This transaction extracts only the dependency-closed observation seam needed to 
 
 | Change ID | Target | Action | Expected Content | Applied | Verified |
 |---|---|---|---|---|---|
-| C01 | Services/ENG006_SRV009_PRODUCTION_ADAPTER.py | MODIFY | require explicit authorization identity before governed dispatch | Y | N |
-| C02 | Runtime/Execution/run010_handoff_contract.py | ADD | pure execution and authorization provenance handoff builder | Y | N |
-| C03 | Runtime/Execution/run010_srv009_observation.py | ADD | isolated observable RUN-010 to SRV-009 composition using existing adapter | Y | N |
-| C04 | Quality/Integration/test_eng006_srv009_production_adapter.py | MODIFY | preserve adapter regressions and fail closed without authorization identity | Y | N |
-| C05 | Quality/Integration/test_run010_eng006_handoff_contract.py | MODIFY | update existing candidate consumer for explicit authorization identity | Y | N |
-| C06 | Quality/Integration/test_rel009_run010_srv009_observation.py | ADD | positive attributable dispatch observation plus negative authorization controls | Y | N |
-| C07 | .github/workflows/p3-runtime-github-e2e.yml | MODIFY | keep real connector E2E compatible with authorization identity contract | Y | N |
+| C01 | Services/ENG006_SRV009_PRODUCTION_ADAPTER.py | MODIFY | require explicit authorization identity before governed dispatch | Y | Y |
+| C02 | Runtime/Execution/run010_handoff_contract.py | ADD | pure execution and authorization provenance handoff builder | Y | Y |
+| C03 | Runtime/Execution/run010_srv009_observation.py | ADD | isolated observable RUN-010 to SRV-009 composition using existing adapter | Y | Y |
+| C04 | Quality/Integration/test_eng006_srv009_production_adapter.py | MODIFY | preserve adapter regressions and fail closed without authorization identity | Y | Y |
+| C05 | Quality/Integration/test_run010_eng006_handoff_contract.py | MODIFY | update existing candidate consumer for explicit authorization identity | Y | Y |
+| C06 | Quality/Integration/test_rel009_run010_srv009_observation.py | ADD | positive attributable dispatch observation plus negative authorization controls | Y | Y |
+| C07 | .github/workflows/p3-runtime-github-e2e.yml | MODIFY | keep real connector E2E compatible with authorization identity contract | Y | Y |
 
 ## Preservation Controls
 
@@ -29,13 +29,24 @@ KEEP the existing governed `Tools/GOVERNED_WRITE_DISPATCH.py`, connector impleme
 
 Do not import the alternate `run010_eng006_srv009_consumer.py` from historical PR #64 because it duplicates lower-level connector dispatch rather than composing the existing governed adapter.
 
-Unexpected Changes: NONE EXPECTED.
+Unexpected Changes: NONE OBSERVED.
+
+## Post-Commit Reconciliation
+
+Functional commit: `5ba50b88d77de4ff15273d16d13da472e25c0f2f`.
+
+Post-commit read-back was completed for all seven target paths. Direct compare against base `09b216e403fe99a6f1a4a35e3c3038831398f6a3` reports:
+
+- status: `ahead`
+- ahead by: `1`
+- behind by: `0`
+- exactly eight changed files: the seven declared targets plus this mutation matrix.
+
+No unexpected path was observed.
 
 ## Verification Contract
 
-Post-commit read-back: REQUIRED for every target.
-
-After read-back, run exact-head governed CI through a pull-request observation surface. The REL-009 observation test must prove:
+Exact-head governed CI is still required through a pull-request observation surface. The REL-009 observation test must prove:
 
 1. originating runtime reference is RUN-010;
 2. explicit target is SRV-009;
@@ -49,6 +60,8 @@ After read-back, run exact-head governed CI through a pull-request observation s
 ## Promotion Boundary
 
 `SOURCE/APPLICATION != CI VERIFICATION != RELATIONSHIP PROMOTION`.
+
+Read-back verification is complete. CI verification and promotion review remain separate gates.
 
 Until exact-head CI and separate promotion review are complete:
 
