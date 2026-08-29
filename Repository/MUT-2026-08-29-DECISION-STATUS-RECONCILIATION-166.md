@@ -1,36 +1,39 @@
 # MUT-2026-08-29 — DECISION STATUS RECONCILIATION — 166
 
-State: PREWRITE / NOT CLOSED
+State: FINALIZED / AWAITING EXACT-HEAD VERIFICATION
 Role: HERMUZ via Room71
-Baseline: `a34902b1317bc265d6431b83235c06817dfde1ba`
-Scope: Decision folder status construction + DEC-010 stale module-status repair + bounded regression
+Prewrite baseline: `a34902b1317bc265d6431b83235c06817dfde1ba`
+Prewrite commit: `cd06d506e73f15c2056080ef8f1f3edd13be1f3b`
 
-## Evidence
+## Final Change
 
-Current Decision Git tree `d0b5c8b2eba1ba057a96ba1f52c603723beadab0` returned `truncated:false` and contains exactly 22 tracked files with no subdirectories.
+- create `Decision/_FOLDER_STATUS.md` from exact recursive Git-tree evidence (`truncated:false`, 22 tracked files, no subdirectories);
+- preserve DEC-001..010 as the Decision document/navigation family while separately representing boundary contracts, executable/support artifacts and tests;
+- update DEC-010 from stale `Module Status: Completed` to `INTEGRITY HOLD / LOCAL INVENTORY VERIFIED / CROSS-LAYER VALIDATION OPEN`;
+- replace DEC-010 placeholder `Last Updated: YYYY-MM-DD` with the actual semantic-review date `2026-08-29`;
+- preserve DEC-010 Document ID, Version and Owner;
+- preserve the Decision-versus-Decision-Memory authority boundary established in lease 144;
+- add a bounded regression in the same final change set.
 
-The tree contains:
-- canonical/navigation document family `DEC-001..DEC-010`;
-- authorization/decision contracts;
-- Python execution/support artifacts;
-- tests.
+## Authority / Claim Boundary
 
-`Decision/DEC-010_DECISION_INDEX.md` currently lists DEC-001..010 and declares `Module Status: Completed`, while lease 144 established that Decision has no current folder status and cross-layer validation remains open. DEC-010 also retains `Last Updated: YYYY-MM-DD`.
+`EXACT PHYSICAL INVENTORY != DECISION DOMAIN CERTIFICATION`
 
-## Intended Mutation
+`DECISION_MEMORY != DECISION AUTHORITY`
 
-- create `Decision/_FOLDER_STATUS.md` from exact current physical inventory;
-- preserve separation between DEC-001..010 document family and support/contracts/tests;
-- mark current Decision state `INTEGRITY HOLD / LOCAL INVENTORY VERIFIED / CROSS-LAYER VALIDATION OPEN`;
-- update DEC-010 module status from stale `Completed` to the same bounded current state;
-- replace placeholder last-updated date with the actual semantic review date 2026-08-29;
-- preserve DEC-010 identity/version/owner;
-- add regression preventing future return of unbounded `Completed` while cross-layer holds remain.
+`TEST PRESENCE != TEST EXECUTION`
 
-## Non-Claims
+Cross-layer, consumer and global Connected Baseline validation remain open.
 
-No global Decision certification, no authority transfer to Decision Memory, no execution proof for every Decision test/artifact, no Core136 mutation, no Room71 JSON rewrite, no Connected Baseline global closure.
+## Regression
+
+`Quality/Integrity/test_decision_folder_status_reconciliation.py` guards:
+- current Decision physical inventory representation;
+- 22-file exact-tree count;
+- bounded Integrity Hold language;
+- Decision-Memory authority separation;
+- removal of stale `Completed` and placeholder date from DEC-010.
 
 ## Close Gate
 
-Final status + repaired DEC-010 + regression + finalized Matrix must enter one Git tree/commit, followed by exact read-back and applicable exact-head CI.
+Final state becomes `CLOSED / EXECUTION-VERIFIED` only after status + DEC-010 + regression + this Matrix enter one final Git tree/commit, exact read-back succeeds, and applicable exact-head CI succeeds.
