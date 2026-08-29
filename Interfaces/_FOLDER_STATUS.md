@@ -4,7 +4,7 @@
 
 Platform: ARGO KOP (Knowledge Operating Platform)
 Folder: Interfaces/
-Version: 1.2.0
+Version: 1.2.1
 Status: INTEGRITY HOLD / LOCAL INVENTORY VERIFIED / CROSS-LAYER AND EXTERNAL-TRUST VALIDATION OPEN
 Canonical: Yes
 Priority: Critical
@@ -21,24 +21,32 @@ The Interfaces layer defines communication, ingestion, sensing, API and integrat
 
 # Current Exact Physical Inventory
 
-Current exact Git-tree enumeration returned `truncated:false` with exactly **12 tracked files** and no subdirectories:
+Current exact Git-tree enumeration returned `truncated:false` with exactly **12 tracked files** and no subdirectories.
 
-1. `INTF-001_INTERFACE_SPEC.md`
-2. `INTF-002_GITHUB.md`
-3. `INTF-003_DATABASE.md`
-4. `INTF-004_API.md`
-5. `INTF-005_LLM.md`
-6. `INTF-006_ENVIRONMENT_SENSING.md`
-7. `INTF-006_WEB.md`
-8. `INTF-007_USER_INTERFACE.md`
-9. `INTF-008_CONNECTORS.md`
-10. `INTF-009_IMPORT_EXPORT.md`
-11. `INTF-010_INTEGRATIONS.md`
-12. `_FOLDER_STATUS.md`
+| File Name | Document ID | Bounded Current Disposition |
+| :--- | :--- | :--- |
+| `INTF-001_INTERFACE_SPEC.md` | `INTF-001` | Physical artifact; previously revalidated canonical interface spec |
+| `INTF-002_GITHUB.md` | `INTF-002` | Physical artifact; authority not promoted by this status |
+| `INTF-003_DATABASE.md` | `INTF-003` | Physical artifact; authority not promoted by this status |
+| `INTF-004_API.md` | `INTF-004` | Current canonical API identity; Integrity Hold / Revalidated |
+| `INTF-005_LLM.md` | `INTF-005` | Physical artifact; authority not promoted by this status |
+| `INTF-006_ENVIRONMENT_SENSING.md` | `INTF-006` | Active canonical identity; Proposed / Integrity Hold |
+| `INTF-006_WEB.md` | `INT-006` | Legacy / Noncanonical / Integrity Hold provenance |
+| `INTF-007_USER_INTERFACE.md` | `INTF-007` | Physical artifact; authority not promoted by this status |
+| `INTF-008_CONNECTORS.md` | `INTF-008` | Physical artifact; authority not promoted by this status |
+| `INTF-009_IMPORT_EXPORT.md` | `INTF-009` | Physical artifact; authority not promoted by this status |
+| `INTF-010_INTEGRATIONS.md` | `INTF-010` | Validated / Revalidated / Integrity Hold connector boundary |
+| `_FOLDER_STATUS.md` | N/A | Current bounded audit/status surface |
 
 `INTERFACES_PHYSICAL_INVENTORY = CLOSED_FOR_CURRENT_EXACT_TREE`
 
 Physical inclusion records repository presence only. It does not promote every artifact to current canonical authority.
+
+# Audit Findings
+
+The previous folder status listed only five files although the current exact Git tree contains 12. The current status reconciles that physical inventory while preserving authority boundaries.
+
+The table form is intentionally retained because repository integrity tests consume the Interfaces status as a machine-checked identity surface. Therefore document structure here is not purely cosmetic: changing its shape requires consumer-impact validation.
 
 ---
 
@@ -112,6 +120,7 @@ Still open, where applicable:
 5. `EXTERNAL INPUT != VERIFIED FACT`.
 6. `LOCAL INTERFACE VALIDATION != GLOBAL REPOSITORY INTEGRITY`.
 7. Historical identity residue must remain distinguishable from current active authority.
+8. `DOCUMENT STRUCTURE WITH ACTIVE CONSUMERS = CONTRACT SURFACE`; consumer-impact checks are required before reshaping it.
 
 ---
 
