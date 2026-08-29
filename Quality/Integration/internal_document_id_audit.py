@@ -1,20 +1,10 @@
 """Current-tree internal Document ID and identity-family audit.
 
 GOV-004/GOV-006 define identity rules, while REP-001 defines the currently
-verified active inventory scope. This audit separates:
-- indexed active canonical artifacts;
-- canonical artifacts outside the current active inventory;
-- canonical artifacts inside domains explicitly deferred by domain authority;
-- legacy/non-canonical artifacts retained for provenance;
-- shadowed legacy identities where one canonical owner coexists with
-  explicit historical/non-canonical retained artifacts;
-- ambiguous duplicate explicit Document IDs;
-- heading-identity collisions that remain visible even when a document omits
-  a formal ``Document ID`` metadata field.
-
-It never promotes an unindexed artifact to active authority from its filename,
-heading, or internal Document ID alone. Heading collisions are candidate HOLD
-evidence, not automatic authority decisions.
+verified active inventory scope. This audit separates active/indexed identity,
+unindexed/candidate identity, historical identity and document-level heading
+collisions without mistaking arbitrary section headings or source-code comments
+for independent Governance documents.
 """
 
 from __future__ import annotations
@@ -30,22 +20,16 @@ NAMESPACE_PREFIXES = {
 }
 NAMESPACE_PATTERN = "|".join(sorted(NAMESPACE_PREFIXES, key=len, reverse=True))
 BASE_ID_PATTERN = rf"(?:{NAMESPACE_PATTERN})-\d{{3}}"
-# Current repository evidence includes explicit amendment identities such as
-# GOV-013A. The audit must be able to observe those identities even though
-# GOV-006 still requires a separate governance decision for numbering policy.
 ID_PATTERN = rf"{BASE_ID_PATTERN}[A-Z]?"
 ID_RE = re.compile(rf"(?<![A-Z])({ID_PATTERN})(?![A-Z0-9-])", re.I)
 INLINE_RE = re.compile(rf"^\s*Document ID\s*[:：]\s*`?({ID_PATTERN})`?\s*$", re.I | re.M)
 BLOCK_RE = re.compile(rf"^\s*Document ID\s*$\n\s*`?({ID_PATTERN})`?\s*$", re.I | re.M)
-HEADING_ID_RE = re.compile(
-    rf"^\s*#{{1,6}}\s*({ID_PATTERN})(?=\s|—|–|-|$)",
-    re.I | re.M,
-)
+DOCUMENT_HEADING_ID_RE = re.compile(rf"^\s*#\s+({ID_PATTERN})(?=\s|—|–|-|$)", re.I)
 CANONICAL_INLINE_RE = re.compile(r"^\s*Canonical\s*[:：]\s*(Yes|No|Pending)\s*$", re.I | re.M)
 CANONICAL_BLOCK_RE = re.compile(r"^\s*Canonical\s*$\n\s*(Yes|No|Pending)\s*$", re.I | re.M)
 STATUS_RE = re.compile(r"^\s*Status\s*[:：]?\s*(.+?)\s*$", re.I | re.M)
 TEXT_SUFFIXES = {".md", ".markdown", ".txt", ".rst", ".json", ".yaml", ".yml", ".toml", ".py"}
-LEGACY_TOKENS = ("legacy", "historical", "superseded", "archived", "noncanonical")
+LEGACY_TOKENS = ("legacy", "historical", "superseded", "archived", "noncanonical", "non-canonical")
 DEFERRED_DOMAIN_TOKENS = (
     "canonical pending",
     "pending consolidated validation",
@@ -116,8 +100,19 @@ def _extract_document_id(text: str) -> str | None:
 
 
 def _extract_heading_id(text: str) -> str | None:
-    match = HEADING_ID_RE.search(text)
-    return match.group(1).upper() if match else None
+    """Return only the document-level first H1 identity.
+
+    A later section like ``# GOV-011 Determination`` is not a second document,
+    and a Python comment is not a Markdown document heading. This function
+    intentionally examines only the first H1 encountered.
+    """
+    for line in text.splitlines():
+        stripped = line.strip()
+        if not stripped.startswith("# "):
+            continue
+        match = DOCUMENT_HEADING_ID_RE.match(stripped)
+        return match.group(1).upper() if match else None
+    return None
 
 
 def _extract_canonical(text: str) -> bool | None:
@@ -178,7 +173,11 @@ def scan(root: Path) -> dict:
             unreadable.append(relative)
             continue
 
-        heading_id = _extract_heading_id(text)
+        # Heading identity is a Markdown/RST document concern. Source-code
+        # comments and structured-data text must not manufacture heading IDs.
+        heading_id = None
+        if path.suffix.lower() in {".md", ".markdown", ".rst", ".txt"}:
+            heading_id = _extract_heading_id(text)
         if heading_id and not archived_path:
             heading_identities.setdefault(heading_id, []).append(relative)
 
@@ -256,11 +255,15 @@ def scan(root: Path) -> dict:
         for identity, paths in sorted(heading_identities.items())
         if len(paths) > 1
     }
-    governance_heading_identity_collisions = {
-        identity: paths
-        for identity, paths in heading_identity_collisions.items()
-        if any(path.startswith("Governance/") for path in paths)
-    }
+
+    # GOV-006 assigns GOV namespace ownership to Governance/. A template,
+    # tool note, mutation matrix or historical evidence elsewhere may mention
+    # the same GOV heading, but it is not a second Governance document owner.
+    governance_heading_identity_collisions: dict[str, list[str]] = {}
+    for identity, paths in heading_identities.items():
+        governance_paths = sorted(path for path in paths if path.startswith("Governance/"))
+        if identity.startswith("GOV-") and len(governance_paths) > 1:
+            governance_heading_identity_collisions[identity] = governance_paths
 
     return {
         "tracked_files_scanned": len(tracked),
