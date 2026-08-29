@@ -2,14 +2,14 @@
 
 Date: 2026-08-29  
 PR: #88  
-State: `MAINLINE DISPOSITION COMPLETE / BRANCH PRESERVED`  
+State: `CLOSED UNMERGED / MAINLINE DISPOSITION COMPLETE / BRANCH EVIDENCE PRESERVED`  
 Authority effect: none; this is branch/integration evidence classification.
 
 ## Decision
 
-PR #88 MUST NOT be merged wholesale. Its branch was built against an earlier current-state picture and contains a mix of valuable diagnoses, already-consumed repairs, stale identity choices, branch-specific state, and candidate semantics that require separate review.
+PR #88 was closed **without merge** after file-by-file semantic disposition. Its branch was built against an earlier current-state picture and contains a mix of valuable diagnoses, already-consumed repairs, stale identity choices, branch-specific state, and candidate semantics that require separate review.
 
-Mainline has independently re-derived and execution-verified the closable defects instead of importing the branch as authority.
+Mainline independently re-derived and execution-verified the closable defects instead of importing the branch as authority.
 
 ## Changed-file disposition
 
@@ -41,13 +41,19 @@ Only two PR topics remain intentionally open as candidate input rather than inte
 1. **GOV-015 operational semantics** — explicit work-lease fields, independence labels, handoff capsule, and collision classes. These overlap existing GOV-015/GOV-021/Room71 controls and must be reviewed for semantic gaps before any promotion.
 2. **REP-016 freshness** — current main queue contains historical state labels that may no longer represent recently completed harness/CI work. Refresh must be generated from current HEAD and synchronized with the current manifest if version/status changes.
 
-These residuals are now routed into current main workstreams; PR #88 is no longer required as an active merge vehicle.
+These residuals are routed into current main workstreams; PR #88 is no longer an active integration path.
 
 ## Branch hygiene classification
 
-`argo/control-plane-convergence-20260829 = SUPERSEDED / EVIDENCE-PRESERVED / DO_NOT_BULK-DELETE`
+`argo/control-plane-convergence-20260829 = SUPERSEDED / EVIDENCE-PRESERVED / PR-CLOSED-UNMERGED / DO-NOT-BULK-DELETE`
 
-The branch may remain for reconstruction/history. Deletion is a separate hygiene decision and is not required to close the PR as an integration path.
+The branch may remain for reconstruction/history. Deletion is a separate hygiene decision and is not required for this integration-path closure.
+
+## Closure evidence
+
+GitHub PR #88 state: `closed`, `merged=false` on 2026-08-29.
+
+`PR88-ACTIVE-INTEGRATION-PATH = CLOSED / SUPERSEDED-BY-MAIN / EVIDENCE-PRESERVED`.
 
 ## Continuous-improvement learning
 
