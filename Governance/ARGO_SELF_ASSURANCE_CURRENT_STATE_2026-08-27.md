@@ -1,8 +1,11 @@
 # ARGO Self-Assurance — Current State / Compass
 
-**Date:** 2026-08-27
-**Authority:** GOV-014
+**Date:** 2026-08-27  
+**Identity correction:** 2026-08-29  
+**Current Authority:** `GOV-017`  
 **Nature:** Current self-assessment; not a release certification
+
+> Historical note: this compass was originally created under a Self-Assurance artifact that incorrectly reused `GOV-014`. The assurance semantics are now governed by `Governance/GOV-017_ARGO_SELF_ASSURANCE_AND_CAPABILITY_EVALUATION_PROTOCOL.md`. Canonical `GOV-014` remains the controlled-document-mutation protocol.
 
 ## Current identity
 
