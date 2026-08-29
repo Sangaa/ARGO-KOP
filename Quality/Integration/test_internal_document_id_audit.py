@@ -24,21 +24,29 @@ def test_archive_records_are_reported_separately_from_active_identity():
     assert report["archived_records"] >= 0
 
 
-def test_current_tree_governance_identity_family_collisions_require_hold():
+def test_current_tree_governance_document_heading_identities_are_unique_after_migration():
     repo = Path(__file__).resolve().parents[2]
     report = scan(repo)
     collisions = report["governance_heading_identity_collisions"]
 
-    # These are current-tree observations, not an authority decision or a
-    # numbering migration. The audit must surface them rather than silently
-    # passing because some artifacts omit explicit Document ID metadata.
-    assert {"GOV-013A", "GOV-015", "GOV-016", "GOV-017"}.issubset(collisions)
-    assert report["governance_identity_hold_required"] is True
-    assert report["identity_scope_reconciled"] is False
+    # Document-level identity is evaluated only across Governance documents,
+    # not arbitrary section headings, source comments, templates or mutation
+    # evidence in other namespaces.
+    assert collisions == {}, collisions
+    assert report["governance_identity_hold_required"] is False
 
+    # Identity migration alone does not imply the whole repository identity
+    # scope is reconciled; unindexed canonical/candidate ownership may remain.
     governance_status = (repo / "Governance" / "_FOLDER_STATUS.md").read_text(encoding="utf-8")
-    assert "INTEGRITY WARNING / CURRENT IDENTITY RE-AUDIT" in governance_status
-    assert "Current result: **NOT CLOSED**" in governance_status
+    assert "IDENTITY MIGRATION" in governance_status
+
+
+def test_migrated_governance_ids_have_distinct_document_level_owners():
+    repo = Path(__file__).resolve().parents[2]
+    report = scan(repo)
+    collisions = report["heading_identity_collisions"]
+    for identity in ("GOV-013", "GOV-013A", "GOV-014", "GOV-015", "GOV-016", "GOV-017", "GOV-019", "GOV-020", "GOV-021", "GOV-022", "GOV-023", "GOV-024", "GOV-025", "GOV-026", "GOV-027"):
+        assert identity not in report["governance_heading_identity_collisions"]
 
 
 def test_current_tree_internal_id_audit_report_is_emitted():
