@@ -1,19 +1,49 @@
 # MUT-2026-08-29 — DECISION STATUS RECONCILIATION — 166
 
-State: FINALIZED / AWAITING EXACT-HEAD VERIFICATION
+State: REPAIR FINALIZED / AWAITING EXACT-HEAD VERIFICATION
 Role: HERMUZ via Room71
 Prewrite baseline: `a34902b1317bc265d6431b83235c06817dfde1ba`
 Prewrite commit: `cd06d506e73f15c2056080ef8f1f3edd13be1f3b`
+Initial functional commit: `80289ef8256ed48d9ed52100bbce8df3f66cdf4a`
 
-## Final Change
+## Intended Semantic Change — Preserved
 
-- create `Decision/_FOLDER_STATUS.md` from exact recursive Git-tree evidence (`truncated:false`, 22 tracked files, no subdirectories);
-- preserve DEC-001..010 as the Decision document/navigation family while separately representing boundary contracts, executable/support artifacts and tests;
-- update DEC-010 from stale `Module Status: Completed` to `INTEGRITY HOLD / LOCAL INVENTORY VERIFIED / CROSS-LAYER VALIDATION OPEN`;
-- replace DEC-010 placeholder `Last Updated: YYYY-MM-DD` with the actual semantic-review date `2026-08-29`;
-- preserve DEC-010 Document ID, Version and Owner;
-- preserve the Decision-versus-Decision-Memory authority boundary established in lease 144;
-- add a bounded regression in the same final change set.
+- `Decision/_FOLDER_STATUS.md` created from exact recursive Git-tree evidence (`truncated:false`, 22 tracked files, no subdirectories).
+- DEC-001..010 remain the Decision document/navigation family; contracts, Python support and tests remain distinct physical/support surfaces.
+- DEC-010 stale `Module Status: Completed` replaced by `INTEGRITY HOLD / LOCAL INVENTORY VERIFIED / CROSS-LAYER VALIDATION OPEN`.
+- placeholder `Last Updated: YYYY-MM-DD` replaced by `2026-08-29`.
+- Decision-versus-Decision-Memory authority boundary remains preserved.
+
+## Initial Exact-Head Failure
+
+At `80289ef8256ed48d9ed52100bbce8df3f66cdf4a`:
+- M2 succeeded.
+- Runtime/Integration failed only in `integrity-tests`; prototype and integration jobs succeeded.
+- pytest result: `112 passed, 1 failed`.
+- failing regression: `test_decision_folder_status_reconciliation.py`.
+- failure: `FileNotFoundError` for `Decision/_FOLDER_STATUS.md`.
+
+Root cause:
+
+`TEST_PATH_MODEL_FAILURE / PROCESS_CWD_ASSUMED_TO_BE_REPOSITORY_ROOT`
+
+The Decision status and DEC-010 read-backs were correct. The regression used `Path("Decision/...")`, which depended on process working directory rather than locating the repository from the test file.
+
+## Repair
+
+The semantic assertions are unchanged.
+
+The regression now anchors repository paths using:
+
+`ROOT = Path(__file__).resolve().parents[2]`
+
+and reads Decision targets relative to `ROOT`.
+
+## Learning
+
+`TEST REPOSITORY PATHS MUST BE ANCHORED TO A STABLE REPOSITORY ROOT, NOT PROCESS CWD`.
+
+A test that fails because of an unstated working-directory assumption is a test-model failure, not evidence that the target repository artifact is absent.
 
 ## Authority / Claim Boundary
 
@@ -25,15 +55,6 @@ Prewrite commit: `cd06d506e73f15c2056080ef8f1f3edd13be1f3b`
 
 Cross-layer, consumer and global Connected Baseline validation remain open.
 
-## Regression
-
-`Quality/Integrity/test_decision_folder_status_reconciliation.py` guards:
-- current Decision physical inventory representation;
-- 22-file exact-tree count;
-- bounded Integrity Hold language;
-- Decision-Memory authority separation;
-- removal of stale `Completed` and placeholder date from DEC-010.
-
 ## Close Gate
 
-Final state becomes `CLOSED / EXECUTION-VERIFIED` only after status + DEC-010 + regression + this Matrix enter one final Git tree/commit, exact read-back succeeds, and applicable exact-head CI succeeds.
+Final state becomes `CLOSED / EXECUTION-VERIFIED` only after this repaired regression + this Matrix enter the same repair commit, exact read-back succeeds, and Runtime/Integration, Full-Stack and M2 succeed on the repair head.

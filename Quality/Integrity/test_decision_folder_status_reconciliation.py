@@ -1,9 +1,11 @@
 from pathlib import Path
 
+ROOT = Path(__file__).resolve().parents[2]
+
 
 def test_decision_status_matches_current_inventory_and_hold_boundary():
-    status = Path("Decision/_FOLDER_STATUS.md").read_text(encoding="utf-8")
-    index = Path("Decision/DEC-010_DECISION_INDEX.md").read_text(encoding="utf-8")
+    status = (ROOT / "Decision/_FOLDER_STATUS.md").read_text(encoding="utf-8")
+    index = (ROOT / "Decision/DEC-010_DECISION_INDEX.md").read_text(encoding="utf-8")
 
     required_status_items = [
         "DEC-001_DECISION_MODEL.md",
