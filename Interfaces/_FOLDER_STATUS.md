@@ -4,69 +4,120 @@
 
 Platform: ARGO KOP (Knowledge Operating Platform)
 Folder: Interfaces/
-Version: 1.1.2
-Status: INTEGRITY HOLD
+Version: 1.2.0
+Status: INTEGRITY HOLD / LOCAL INVENTORY VERIFIED / CROSS-LAYER AND EXTERNAL-TRUST VALIDATION OPEN
 Canonical: Yes
 Priority: Critical
-Last Audit Date: 2026-08-16
-Review Method: Repository First / Evidence Based
+Current Review Date: 2026-08-29
+Review Method: Repository First / Exact Git-Tree Enumeration / Content Boundary Review
 
 ---
 
 # Folder Purpose
 
-The Interfaces layer defines communication protocols, context ingestion routines, API boundaries, environmental sensing boundaries, and integration contracts for ARGO KOP.
+The Interfaces layer defines communication, ingestion, sensing, API and integration boundaries between ARGO and external systems while preserving separation between transport access, evidence, authorization, runtime execution and canonical authority.
 
-# Verified Directory Inventory
+---
 
-| File Name | Document ID | Status | Canonical |
-| :--- | :--- | :--- | :--- |
-| `INTF-001_INTERFACE_SPEC.md` | `INTF-001` | Approved / Revalidated | Yes |
-| `INTF-004_API.md` | `INTF-004` | Integrity Hold / Revalidated | Yes |
-| `INTF-006_ENVIRONMENT_SENSING.md` | `INTF-006` | Proposed / Integrity Hold | Yes |
-| `INTF-010_INTEGRATIONS.md` | `INTF-010` | Validated / Revalidated / Integrity Hold | Yes |
-| `_FOLDER_STATUS.md` | N/A | Audit Record | Yes |
+# Current Exact Physical Inventory
 
-# Audit Findings
+Current exact Git-tree enumeration returned `truncated:false` with exactly **12 tracked files** and no subdirectories:
 
-The previous folder status declared the folder completed while only `INTF-001` was inventoried.
+1. `INTF-001_INTERFACE_SPEC.md`
+2. `INTF-002_GITHUB.md`
+3. `INTF-003_DATABASE.md`
+4. `INTF-004_API.md`
+5. `INTF-005_LLM.md`
+6. `INTF-006_ENVIRONMENT_SENSING.md`
+7. `INTF-006_WEB.md`
+8. `INTF-007_USER_INTERFACE.md`
+9. `INTF-008_CONNECTORS.md`
+10. `INTF-009_IMPORT_EXPORT.md`
+11. `INTF-010_INTEGRATIONS.md`
+12. `_FOLDER_STATUS.md`
 
-The current audit directly verified additional interface artifacts. Therefore the previous completion claim is no longer accepted as repository truth.
+`INTERFACES_PHYSICAL_INVENTORY = CLOSED_FOR_CURRENT_EXACT_TREE`
 
-`INTF-010_INTEGRATIONS.md` is a directly verified canonical integration artifact and is now included in the active inventory. Its indexing in `REP-001` and use by current interface/runtime contracts establishes that its prior omission from this folder inventory was an inventory-surface drift, not an artifact identity defect.
+Physical inclusion records repository presence only. It does not promote every artifact to current canonical authority.
 
-The new environment-sensing interface is intentionally marked `Proposed / Integrity Hold` until its cross-layer relationships and runtime integration are validated.
+---
 
-# Identity Reconciliation
+# INTF-006 Identity Boundary
 
-The current canonical API artifact is `INTF-004_API.md` with Document ID `INTF-004`.
+Two physical filenames begin with `INTF-006`, but current document content establishes different authority states:
 
-The prior `INT-004` metadata form was an identity-drift defect and is retained only as historical/reconciliation evidence in session records. It is not the active identity.
+- `INTF-006_ENVIRONMENT_SENSING.md` declares `Document ID: INTF-006`, `Canonical: Yes`, `Status: Proposed / Integrity Hold`. It is the active canonical owner of the INTF-006 identity while remaining under Integrity Hold for implementation/cross-layer claims.
+- `INTF-006_WEB.md` declares internal legacy identifier `INT-006`, `Status: Legacy / Noncanonical / Integrity Hold`, `Canonical: No`, and explicitly states that it is not an active canonical owner of `INTF-006`.
 
-A reconciled folder-inventory identity must be treated as a distinct evidence surface: correcting the artifact metadata alone is insufficient when a folder inventory independently repeats the identity.
+Bounded disposition:
 
-# Compliance Check
+`INTF006_FILENAME_DUPLICATION != ACTIVE_AUTHORITY_COLLISION`
 
-- Naming and identity must be verified against current repository evidence.
-- Metadata must remain consistent with Governance.
-- `REP-001` and `REP-002` must be synchronized after canonical inventory changes.
-- Interface semantics must remain independent of transport implementation.
-- Device availability does not imply permission to acquire or retain data.
+`INTF-006_ENVIRONMENT_SENSING = ACTIVE_CANONICAL_IDENTITY / PROPOSED / INTEGRITY HOLD`
 
-# Integrity Rules
+`INTF-006_WEB = LEGACY NONCANONICAL PROVENANCE / INTERNAL ID INT-006`
 
-1. Folder status is an evidence record, not proof of completion.
-2. A file is active only after identity, authority and relationships are verified.
-3. New interface contracts require cross-layer validation before completion.
-4. Local interface validation does not prove global repository integrity.
-5. Historical status claims do not override current repository evidence.
-6. Folder inventory identity must match the current canonical artifact identity.
-7. Identity reconciliation must check the canonical artifact, its filename, and every authoritative inventory surface that repeats its identity.
-8. Any directly verified canonical Interface artifact represented in the active master index must be reflected in this folder inventory or explicitly dispositioned as intentionally excluded.
+No rename, archive, deletion or migration is authorized by this classification.
 
-# Current State
+---
 
-**INTEGRITY HOLD** pending synchronization and cross-layer relationship validation.
+# Connector / External Trust Boundary
+
+`INTF-010_INTEGRATIONS.md` defines a provider-neutral connector boundary and explicitly separates technical access from authorization, external data from canonical truth, and requested actions from completed actions.
+
+This folder status therefore does not claim:
+
+- provider authenticity;
+- availability of an independently verifiable trust anchor;
+- successful authentication to any model/provider/system;
+- certification of a concrete connector implementation;
+- permission to acquire, retain or transmit data merely because a source is technically available;
+- completion of the external-evidence lifecycle.
+
+`INTERFACE CONTRACT != CONNECTOR IMPLEMENTATION`
+
+`TECHNICAL ACCESS != AUTHORIZATION`
+
+`EXTERNAL DATA != CANONICAL TRUTH`
+
+`REQUESTED ACTION != COMPLETED ACTION`
+
+---
+
+# Current Integrity State
+
+The Interfaces folder remains **INTEGRITY HOLD**.
+
+Closed for the current bounded state:
+- exact 12-file physical inventory;
+- INTF-006 active-versus-legacy identity classification;
+- transport/interface versus authority separation already explicit in INTF-006 and INTF-010.
+
+Still open, where applicable:
+- cross-layer relationship validation for individual interface artifacts;
+- runtime/connector implementation proof;
+- provider authentication capability and trust-anchor acquisition;
+- external-evidence authenticity and admission stages;
+- disposition/migration of legacy filename residue;
+- global Connected Baseline closure.
+
+---
+
+# Evidence Rules
+
+1. `EXACT PHYSICAL INVENTORY != INTERFACE DOMAIN CERTIFICATION`.
+2. `FILENAME DUPLICATION != AUTHORITY DUPLICATION`.
+3. `CANONICAL CONTRACT != IMPLEMENTATION AVAILABILITY`.
+4. `DEVICE OR CONNECTOR AVAILABILITY != PERMISSION`.
+5. `EXTERNAL INPUT != VERIFIED FACT`.
+6. `LOCAL INTERFACE VALIDATION != GLOBAL REPOSITORY INTEGRITY`.
+7. Historical identity residue must remain distinguishable from current active authority.
+
+---
+
+# Guiding Statement
+
+**Interfaces expose governed boundaries to the outside world; they do not convert access, transport, repetition or availability into authority, authenticity, permission or truth.**
 
 ---
 
