@@ -3,12 +3,13 @@
 Transaction ID: `MUT-2026-08-29-P6-QI-MAPPING-016`  
 Protocol: GOV-014 v1.0.1  
 Lease: `R71-20260829-P6-QI-MAPPING-016`  
-Pre-write baseline: `397adb88136d453094fc44610d07615a89626f92`
+Pre-write baseline: `397adb88136d453094fc44610d07615a89626f92`  
+Functional evidence SHA: `c01113447bf5688165ad390d072ef4849c65de79`
 
 | Change ID | Target | Action | Expected Content | Applied | Verified |
 |---|---|---|---|:---:|:---:|
-| QI-MAP-016-01 | `Repository/REP-020_DEPENDENCY_CONSUMER_IMPACT_MATRIX.md` | UPDATE | Add exact-path evidence mapping for `Quality/Integration/test_run010_eng006_handoff_contract.py` to the existing bounded RUN-010 → ENG-006/SRV-009 impact boundary; preserve `PARTIALLY_VERIFIED`, non-universal routing boundary, and non-authority status | Y | N |
-| QI-MAP-016-02 | `Quality/Integration/test_ci_impact_correlation.py` | UPDATE | Add canonical-repository regression proving the exact test path resolves `IN_SCOPE → MAPPED → NO_AUTO_PROMOTION` using current REP-020/REP-014/P6 scope artifacts | Y | N |
+| QI-MAP-016-01 | `Repository/REP-020_DEPENDENCY_CONSUMER_IMPACT_MATRIX.md` | UPDATE | Add exact-path evidence mapping for `Quality/Integration/test_run010_eng006_handoff_contract.py` to the existing bounded RUN-010 → ENG-006/SRV-009 impact boundary; preserve `PARTIALLY_VERIFIED`, non-universal routing boundary, and non-authority status | Y | Y |
+| QI-MAP-016-02 | `Quality/Integration/test_ci_impact_correlation.py` | UPDATE | Add canonical-repository regression proving the exact test path resolves `IN_SCOPE → MAPPED → NO_AUTO_PROMOTION` using current REP-020/REP-014/P6 scope artifacts | Y | Y |
 
 ## KEEP REQUIREMENT
 
@@ -25,12 +26,19 @@ Specifically this transaction MUST NOT:
 
 ## Execution Evidence
 
-- Pre-write authority/scope review completed against `Repository/P6_SCOPE_ELIGIBILITY_REGISTRY.md` v1.1.0.
-- Existing bounded impact evidence reviewed in `Repository/REP-020_DEPENDENCY_CONSUMER_IMPACT_MATRIX.md` v0.2.3.
-- Protected REP-020 update and Matrix finalization are packaged in the same changed-file set.
-- Canonical exact-path regression is included in the same functional change.
-- Post-write read-back and exact-head CI remain pending.
+- Protected REP-020 update, Matrix finalization, and canonical regression were packaged in the same functional change set `1f92593b... → c0111344...`.
+- Full-Stack run `33244385018` = SUCCESS.
+- Mutation Matrix preflight on that exact diff reported `changed_files=3`, `protected_changes=1`, `mutation_matrices=1`, `MUTATION_MATRIX_PREFLIGHT=PASS`.
+- `python Quality/Integration/test_ci_impact_correlation.py` reported `P6_CI_IMPACT_CORRELATION_REGRESSION=PASS`; that regression reads current REP-020, REP-014, and P6 scope and proves the target exact path is `IN_SCOPE → MAPPED → NO_AUTO_PROMOTION`.
+- Full-Stack audit reported `gap_count=0`, `untested_candidates=[]`, `orphan_candidates=[]`, `broken_reference_candidates=[]`.
+- Runtime/Integration run `33244385021` = SUCCESS across prototype, integration, and integrity jobs.
+- M2 run `33244385032` = SUCCESS.
+- REP-020 read-back at exact functional SHA confirms the exact path is present while `PARTIALLY_VERIFIED` and non-universal routing boundaries remain unchanged.
 - Unexpected Changes = 0 within the intended functional change set.
+
+## Separate policy observation
+
+The CI change-set correlator for the functional commit classified the transaction's own control surfaces separately: the Matrix path was `POLICY_UNRESOLVED`, while `REP-020` and `test_ci_impact_correlation.py` were `UNMAPPED` as changed paths. This does not invalidate the target-path mapping regression; it exposes a separate self/control-surface correlation-policy gap that must not be hidden by this closure.
 
 ## Packaging incident retained as learning
 
@@ -38,4 +46,4 @@ During transaction preparation an unintended temporary file `Repository/REP-020_
 
 ## Closure
 
-`MUT-2026-08-29-P6-QI-MAPPING-016 = APPLIED / VERIFICATION PENDING`.
+`MUT-2026-08-29-P6-QI-MAPPING-016 = CLOSED / EXECUTION-VERIFIED / TARGET EXACT-PATH MAPPED`.
