@@ -1,34 +1,34 @@
 # MUT-2026-08-29 — QUALITY STATUS INVENTORY SYNC — 156
 
-State: PREWRITE / NOT CLOSED
+State: FINALIZED / AWAITING EXACT-HEAD VERIFICATION
 Role: HERMUZ via Room71
-Baseline: `e514ce34001d5082d24c3d0d66b11e462f0b51cf`
-Scope: `Quality/_FOLDER_STATUS.md` top-level inventory truthfulness only + regression
+Prewrite baseline: `e514ce34001d5082d24c3d0d66b11e462f0b51cf`
+Prewrite commit: `2f2e4bee327bc54b7d967beca131be1836f134d3`
 
-## Gap
+## Corrected Status Semantics
 
-Current Quality status says its verified inventory contains only QLT-001 and `_FOLDER_STATUS.md`, and later says `Local inventory reconciled`.
+- preserves Quality Version `1.1.0` and `INTEGRITY HOLD`;
+- replaces the under-reported two-file inventory with the exact current top-level Quality surface;
+- distinguishes directories/files from capability/authority;
+- classifies QLT-002..005 as tracked zero-byte legacy placeholders with no capability promotion;
+- records QLT-001 semantic repair 155 without turning that bounded closure into global Quality certification;
+- keeps recursive inventory, cross-layer relationships, execution enforcement and Connected Baseline open.
 
-Current physical top-level Quality contents also contain:
-- directories `Integration/`, `Integrity/`, `P4/`, `P5/`, `Tests/`;
-- `P5_CONTROLLED_MUTATION_RECONCILIATION_HARNESS_TEST_MATRIX_2026-08-17.md`;
-- empty tracked placeholders `QLT-002..005`.
+## Regression
 
-Therefore the old status is a bounded under-reporting drift. Lease 153 already classified QLT-002..005 as empty legacy placeholders with no capability/authority established.
+`Quality/Integration/test_quality_folder_status_inventory.py` guards:
+- all known current top-level Quality entries are represented;
+- `INTEGRITY HOLD` and `TOP-LEVEL INVENTORY VERIFIED` remain explicit;
+- placeholder non-capability language remains;
+- top-level enumeration is not widened into recursive certification;
+- stale `Local inventory reconciled.` wording does not return without an explicit scope.
 
-## Intended Mutation
+## Learning
 
-- preserve Quality Version `1.1.0` and `INTEGRITY HOLD`;
-- distinguish exact current top-level physical inventory from reviewed/canonical capability inventory;
-- list QLT-002..005 as zero-byte legacy placeholders, not capabilities;
-- list current Quality subdirectories and P5 matrix without converting their existence into certification;
-- keep recursive/cross-layer/global Quality validation open;
-- add regression preventing future `Local inventory reconciled` wording from coexisting with omission of the known top-level surfaces.
+`INVENTORY RECONCILED` is unsafe language without an explicit enumeration boundary.
 
-## Non-Claims
-
-No Quality domain PASS, no QLT placeholder promotion, no recursive tree certification, no Core136 work, no Room71 JSON rewrite.
+`TOP-LEVEL PHYSICAL INVENTORY != RECURSIVE INVENTORY != CAPABILITY INVENTORY != EXECUTION CERTIFICATION`.
 
 ## Close Gate
 
-Status + regression + finalized Matrix must enter one final Git tree/commit and pass exact-head read-back/CI where available.
+Final state becomes `CLOSED / EXECUTION-VERIFIED` only after status + regression + this finalized Matrix enter one Git tree/commit, exact read-back succeeds, and applicable exact-head CI succeeds.
