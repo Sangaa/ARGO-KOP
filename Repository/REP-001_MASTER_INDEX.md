@@ -6,12 +6,12 @@
 
 Platform: ARGO KOP (Knowledge Operating Platform)
 Document ID: REP-001
-Version: 1.11.3
+Version: 1.11.4
 Status: Integrity Hold
 Category: Repository
 Canonical: Yes
 Priority: Critical
-Last Audit Date: Aug 16, 2026
+Last Audit Date: Aug 29, 2026
 Development Baseline: 3.2.1
 
 ---
@@ -67,8 +67,9 @@ Historical root naming-convention material is not active canonical inventory and
 - `Repository/REP-013_REPOSITORY_CONTENT_TREE.md`
 - `Repository/REP-014_REPOSITORY_RELATIONSHIP_REGISTRY.md`
 - `Repository/REP-015_CONTROL_PLANE_BOOTSTRAP_CHECKLIST.md`
+- `Repository/REP-016_PHASE1_PARTITION_WORK_QUEUE.md`
 
-`REP-011` through `REP-015` form the current repository control plane. They are mutually discoverable here and through REP-002. They remain subject to cross-registry reconciliation and do not grant domain semantic authority.
+`REP-011` through `REP-016` form the current repository control plane. They are mutually discoverable here and through the applicable repository map/checklist surfaces. They remain subject to cross-registry reconciliation and do not grant domain semantic authority. `REP-020` remains a provisional evidence surface and is not promoted here as canonical control-plane authority.
 
 ## 5. Governance Layer
 
@@ -81,7 +82,9 @@ Historical root naming-convention material is not active canonical inventory and
 - `Governance/GOV-013_HERMUZ_SESSION_BUILD_PROTOCOL.md`
 - `Governance/GOV-013A_HERMUZ_BOOTSTRAP_INTEGRITY_GATE.md`
 - `Governance/GOV-014_CONTROLLED_DOCUMENT_MUTATION_PROTOCOL.md`
+- `Governance/GOV-015_EXECUTION_DOCUMENTATION_AND_KNOWLEDGE_TRANSFER_PROTOCOL.md`
 - `Governance/GOV-016_FAILURE_TO_LEARNING_PROTOCOL.md`
+- `Governance/GOV-017_ARGO_SELF_ASSURANCE_AND_CAPABILITY_EVALUATION_PROTOCOL.md`
 - `Governance/_FOLDER_STATUS.md`
 
 `Governance/GOV-011_EXTERNAL_FEEDBACK_REPORT_STANDARD.md` exists as a proposed intake standard but is not active canonical authority until formally ratified.
@@ -89,6 +92,12 @@ Historical root naming-convention material is not active canonical inventory and
 `Governance/GOV-012_DOMAIN_RECONSTRUCTION_STANDARD.md` exists as a proposed reconstruction standard. It governs rebuilding legacy or immature domains but is not active canonical authority until formally ratified.
 
 `GOV-013` is the approved canonical HERMUZ session operating contract. `GOV-013A` is its approved canonical session-integrity addendum and establishes the mandatory pre-mutation bootstrap gate. Neither document overrides higher ARGO authority.
+
+`GOV-014` is the sole active controlled-document-mutation authority for that identity. A later Self-Assurance artifact that reused `GOV-014` was migrated on 2026-08-29 to `GOV-017` and its conflicting source preserved under `Archive/Governance-Legacy/`.
+
+`GOV-015` supplies the execution-documentation, work-lease, handoff and knowledge-transfer contract already referenced by `GOV-016`. It controls execution documentation and orchestration boundaries only; it does not create semantic, implementation, merge or promotion authority.
+
+`GOV-017` preserves the ARGO Self-Assurance / Capability Evaluation contract under a unique identity and keeps internal, external and independence evidence classes separate.
 
 ## 6. Runtime Layer
 
@@ -293,7 +302,7 @@ A domain is not considered complete merely because its folder exists or because 
 14. Legacy draft content must not be promoted solely because it is old, populated or previously referenced.
 15. Rebuilt domains must be revalidated as connected relationship graphs before active canonical promotion.
 16. Domains under reconstruction remain outside active canonical authority unless explicitly promoted after validation.
-17. Critical Repository Control artifacts (`REP-011` through `REP-015`) must remain mutually discoverable through both the master index and physical storage map while their cross-registry reconciliation remains open.
+17. Critical Repository Control artifacts (`REP-011` through `REP-016`) must remain mutually discoverable through the master index and applicable storage/bootstrap maps while their cross-registry reconciliation remains open.
 18. Registry membership is evidence of inventory only; review, allocation and relationship states are controlled by the respective registries.
 19. New Memory subdomains must be indexed when physically constructed and must remain capped by their verified scope until consolidated validation.
 20. New Decision Memory subdomains must be indexed when physically constructed and must remain capped by their verified scope until consolidated validation.
@@ -302,12 +311,13 @@ A domain is not considered complete merely because its folder exists or because 
 23. Directly verified Runtime target/prototype artifacts must be indexed when physically constructed while preserving their declared non-executable authority boundary.
 24. Master Index Runtime paths must match the current physical Runtime candidate paths; historical candidate names are not active inventory.
 25. Approved canonical Governance addenda that govern HERMUZ session integrity must be represented in the active Governance inventory and remain subordinate to higher ARGO authority.
+26. Execution/handoff governance and assurance governance must use unique identities and must not be conflated with mutation authority.
 
 ## 18. Integrity State
 
 Current repository state: **INTEGRITY HOLD**.
 
-The index is synchronized with the currently verified inventory within the inspected scope. Architecture, Lifecycle inventory, Plugin inventory, Memory cross-layer relationships, Runtime ↔ Engine integration and other staged reconstruction work remain open.
+The index is synchronized with the currently verified inventory within the inspected scope. Architecture, Lifecycle inventory, Plugin inventory, Memory cross-layer relationships, Runtime ↔ Engine integration, repository-wide duplicate-ID reconciliation and other staged reconstruction work remain open.
 
 ## 19. Verification Model
 
@@ -340,6 +350,18 @@ The active Core inventory therefore now explicitly includes:
 This mutation repairs an index-scope discrepancy; it does not promote `CORE-000_PLATFORM_IDENTITY.md`, whose own document states `Canonical: No / Legacy / Superseded`.
 
 P356 is an inventory/identity reconciliation only. Core remains under Integrity Hold and cross-layer validation.
+
+## 2026-08-29 Governance & Control-Plane Synchronization
+
+Current transaction `MUT-2026-08-29-CONTROL-PLANE-CONVERGENCE-001` re-read the complete pre-mutation REP-001 source and reconciled only the verified affected inventory:
+
+- `REP-016` is now explicitly discoverable as the active Phase-1/work-queue member required by `REP-015`;
+- canonical `GOV-014` ownership remains the controlled-document-mutation protocol;
+- the conflicting Self-Assurance GOV-014 identity is migrated to `GOV-017` with historical provenance archived;
+- the previously missing `GOV-015` execution-documentation / knowledge-transfer dependency named by `GOV-016` is now physically constructed and indexed;
+- a legacy active-path `GOV-004_TRACEABILITY_STANDARD.md` placement is archived rather than allowed to compete with canonical `GOV-004_DOCUMENT_METADATA.md`.
+
+This synchronization does **not** close the repository-wide duplicate-ID audit, Connected-Baseline audit, or global Integrity Hold.
 
 ---
 
