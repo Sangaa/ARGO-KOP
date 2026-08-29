@@ -9,7 +9,7 @@ Last Audit: 2026-08-29
 
 ## Purpose
 
-Convert the repository control plane into an ordered, recoverable Phase-1 execution queue. This file coordinates REP-011 through REP-016 and the provisional REP-020 evidence surface; it does not replace their authority.
+Convert the repository control plane into an ordered, recoverable Phase-1 execution queue. This file coordinates REP-011 through REP-015 and the provisional REP-020 evidence surface; it does not replace their authority.
 
 ## Active Ring
 
