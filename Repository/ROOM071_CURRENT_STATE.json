@@ -3,191 +3,33 @@
   "state_date": "2026-08-29",
   "canonical_branch": "main",
   "observed_functional_baseline_sha": "28e3ec16f1b0e6decee6623f77f48cda74e229c7",
-  "last_verified_control_plane_sha": "bfdfd2ee9f59965d9a1a185f584bc03940ed7e93",
+  "last_verified_control_plane_sha": "d90badb3f37b92bbd7df9d8e61d2f372ca507533",
   "control_plane_rule": "DISCOVER_CURRENT_HEAD_AT_REENTRY_DO_NOT_TRUST_STORED_SHA_AS_LIVE_HEAD",
-  "reentry_order": [
-    "DISCOVER_REPOSITORY_AND_LIVE_HEAD",
-    "READ_PROJECT_BOOTSTRAP",
-    "READ_CORE_003_AND_GOV_013",
-    "READ_EFFECTIVE_GOVERNANCE_AMENDMENTS",
-    "READ_ROOM071_CURRENT_STATE",
-    "READ_CURRENT_TRANSACTION_CHECKPOINTS_AND_RELEVANT_DOMAIN_CONTRACTS",
-    "INSPECT_CURRENT_CI_RUNTIME_EVIDENCE",
-    "DECLARE_ROLE_SCOPE_AND_WORK_LEASE",
-    "EXECUTE_MINIMAL_BOUNDED_MUTATION",
-    "RE_READ_AND_VALIDATE_RELATIONSHIPS",
-    "RUN_OR_OBSERVE_REQUIRED_CI",
-    "RECORD_LEARNING_AND_HANDOFF",
-    "CLOSE_LEASE_WITH_EXPLICIT_OPEN_GAPS"
-  ],
-  "authority_order": [
-    "PROJECT_BOOTSTRAP.md",
-    "Core/CORE-003_CONSTITUTION.md",
-    "Governance/GOV-013_HERMUZ_SESSION_BUILD_PROTOCOL.md",
-    "Governance/GOV-013_AMENDMENT_001_PROVENANCE_RECONSTRUCTION_2026-08-27.md",
-    "Governance/GOV-013A_REPOSITORY_FIRST_MULTI_INSTANCE_EXECUTION.md"
-  ],
-  "room": {
-    "id": 71,
-    "name": "ROOM 71",
-    "type": "HUMAN_CONTROL_ROOM",
-    "authority": "OPERATIONAL_COORDINATION_ONLY",
-    "entry_rule": "RECONSTRUCT_FROM_REPOSITORY_BEFORE_ASSIGNING_WORK"
-  },
+  "reentry_order": ["DISCOVER_REPOSITORY_AND_LIVE_HEAD","READ_PROJECT_BOOTSTRAP","READ_CORE_003_AND_GOV_013","READ_EFFECTIVE_GOVERNANCE_AMENDMENTS","READ_ROOM071_CURRENT_STATE","READ_CURRENT_TRANSACTION_CHECKPOINTS_AND_RELEVANT_DOMAIN_CONTRACTS","INSPECT_CURRENT_CI_RUNTIME_EVIDENCE","DECLARE_ROLE_SCOPE_AND_WORK_LEASE","EXECUTE_MINIMAL_BOUNDED_MUTATION","RE_READ_AND_VALIDATE_RELATIONSHIPS","RUN_OR_OBSERVE_REQUIRED_CI","RECORD_LEARNING_AND_HANDOFF","CLOSE_LEASE_WITH_EXPLICIT_OPEN_GAPS"],
+  "authority_order": ["PROJECT_BOOTSTRAP.md","Core/CORE-003_CONSTITUTION.md","Governance/GOV-013_HERMUZ_SESSION_BUILD_PROTOCOL.md","Governance/GOV-013_AMENDMENT_001_PROVENANCE_RECONSTRUCTION_2026-08-27.md","Governance/GOV-013A_REPOSITORY_FIRST_MULTI_INSTANCE_EXECUTION.md"],
+  "room": {"id":71,"name":"ROOM 71","type":"HUMAN_CONTROL_ROOM","authority":"OPERATIONAL_COORDINATION_ONLY","entry_rule":"RECONSTRUCT_FROM_REPOSITORY_BEFORE_ASSIGNING_WORK"},
   "roles": {
-    "HERMUZ": {
-      "primary": "BUILD_VERIFY_PROMOTE",
-      "default_write_scope": ["assigned implementation", "tests", "transaction evidence", "engineering journal"],
-      "restricted_without_explicit_lease": ["serialized control surfaces", "HORUS analytical workspace owned by another active transaction"]
-    },
-    "HORUS": {
-      "primary": "ANALYZE_META_LEARNING_AND_EVIDENCE",
-      "default_write_scope": ["HORUS/**", "explicit non-authoritative candidate learning"],
-      "forbidden_direct_write_scope": ["canonical governance", "runtime implementation", "canonical registries", "PROJECT_STATUS.md", "ROOM071_CURRENT_STATE.json"]
-    },
-    "MAAT": {
-      "primary": "COORDINATE_SCOPE_LEASES_HANDOFFS_CONFLICTS",
-      "default_write_scope": ["Room 71 coordination records", "lease state", "handoff/conflict records"],
-      "forbidden_direct_write_scope": ["runtime/product implementation", "canonical technical truth promotion"]
-    }
+    "HERMUZ":{"primary":"BUILD_VERIFY_PROMOTE","default_write_scope":["assigned implementation","tests","transaction evidence","engineering journal"],"restricted_without_explicit_lease":["serialized control surfaces","HORUS analytical workspace owned by another active transaction"]},
+    "HORUS":{"primary":"ANALYZE_META_LEARNING_AND_EVIDENCE","default_write_scope":["HORUS/**","explicit non-authoritative candidate learning"],"forbidden_direct_write_scope":["canonical governance","runtime implementation","canonical registries","PROJECT_STATUS.md","ROOM071_CURRENT_STATE.json"]},
+    "MAAT":{"primary":"COORDINATE_SCOPE_LEASES_HANDOFFS_CONFLICTS","default_write_scope":["Room 71 coordination records","lease state","handoff/conflict records"],"forbidden_direct_write_scope":["runtime/product implementation","canonical technical truth promotion"]}
   },
-  "serialized_control_surfaces": [
-    "PROJECT_BOOTSTRAP.md",
-    "PROJECT_STATUS.md",
-    "Repository/REP-001_MASTER_INDEX.md",
-    "Repository/REP-002_REPOSITORY_MAP.md",
-    "canonical Governance",
-    "canonical relationship registries and matrices",
-    "Repository/ROOM071_CURRENT_STATE.json"
-  ],
-  "active_leases": [],
+  "serialized_control_surfaces": ["PROJECT_BOOTSTRAP.md","PROJECT_STATUS.md","Repository/REP-001_MASTER_INDEX.md","Repository/REP-002_REPOSITORY_MAP.md","canonical Governance","canonical relationship registries and matrices","Repository/ROOM071_CURRENT_STATE.json"],
+  "active_leases": [{"lease_id":"R71-20260829-PROVIDER-AUTH-READINESS-004","execution_id":"CURRENT_SOLO_SESSION","role":"HERMUZ_EQUIVALENT_IGT_EXECUTOR","state":"ACTIVE","baseline_sha":"d90badb3f37b92bbd7df9d8e61d2f372ca507533","scope":"provider/source authentication trust-anchor readiness assessment only; no authenticity implementation or promotion","shared_files":["Repository/MUT-2026-08-29-PROVIDER-AUTHENTICATION-READINESS-004.md","Repository/IGT_PROVIDER_AUTHENTICATION_READINESS_2026-08-29.md","Repository/ROOM071_CURRENT_STATE.json"],"forbidden_scope":["provider authenticity promotion","authority promotion","canonical Governance","REP-001","REP-002","PROJECT_STATUS.md"],"required_revalidation":["multi-surface trust-anchor search","historical IGT boundary review","explicit unblock criteria","current-head CI","read-back"]}],
   "closed_leases": [
-    {
-      "lease_id": "R71-20260829-CONTROL-PLANE-001",
-      "execution_id": "CURRENT_SOLO_SESSION",
-      "role": "HERMUZ_EQUIVALENT_CONTROL_PLANE_EXECUTOR",
-      "state": "CLOSED",
-      "scope": "control-plane reconciliation, role boundaries, stale-status/index diagnosis, verification and closure",
-      "verified_control_plane_sha": "9a3215387d039f390e22dfb1c20f22142557c08b",
-      "ci": {"runtime_integration": "SUCCESS", "full_stack": "SUCCESS", "m2": "SUCCESS"},
-      "handoff": "Repository/MUT-2026-08-29-ROOM71-CONTROL-PLANE-001.md"
-    },
-    {
-      "lease_id": "R71-20260829-STATUS-GOV-RECON-002",
-      "execution_id": "CURRENT_SOLO_SESSION",
-      "role": "HERMUZ_EQUIVALENT_CONTROL_PLANE_EXECUTOR",
-      "state": "CLOSED",
-      "scope": "root status synchronization, Governance stale-status reopening, identity-audit observability repair, version-regression repair",
-      "verified_evidence_sha": "177191cd270c343b03a2d0d0b9a233ea4a8ffedf",
-      "ci": {"runtime_integration": "SUCCESS", "full_stack": "SUCCESS", "m2": "SUCCESS", "internal_id_audit_preclosure": "SUCCESS"},
-      "handoff": "Repository/MUT-2026-08-29-STATUS-GOVERNANCE-RECONCILIATION-002.md",
-      "remaining_hold": "GOVERNANCE-REP001-INVENTORY-RECONCILIATION"
-    },
-    {
-      "lease_id": "R71-20260829-EXT-EVIDENCE-RESOLUTION-003",
-      "execution_id": "CURRENT_SOLO_SESSION",
-      "role": "HERMUZ_EQUIVALENT_IGT_EXECUTOR",
-      "state": "CLOSED",
-      "scope": "bounded resolution of verified untrusted external evidence into resolved-but-unauthenticated evidence",
-      "verified_functional_sha": "bfdfd2ee9f59965d9a1a185f584bc03940ed7e93",
-      "ci": {"runtime_integration": "SUCCESS", "full_stack": "SUCCESS", "m2": "SUCCESS", "quality_integration": "483_PASS_11_SUBTESTS"},
-      "handoff": "Repository/MUT-2026-08-29-IGT-QUARANTINE-RESOLUTION-003.md",
-      "maximum_state": "RESOLVED_UNAUTHENTICATED",
-      "next_hold_question": "PROVIDER_AUTHENTICATION_TRUST_ANCHOR_READINESS"
-    }
+    {"lease_id":"R71-20260829-CONTROL-PLANE-001","state":"CLOSED","verified_control_plane_sha":"9a3215387d039f390e22dfb1c20f22142557c08b","ci":{"runtime_integration":"SUCCESS","full_stack":"SUCCESS","m2":"SUCCESS"},"handoff":"Repository/MUT-2026-08-29-ROOM71-CONTROL-PLANE-001.md"},
+    {"lease_id":"R71-20260829-STATUS-GOV-RECON-002","state":"CLOSED","verified_evidence_sha":"177191cd270c343b03a2d0d0b9a233ea4a8ffedf","ci":{"runtime_integration":"SUCCESS","full_stack":"SUCCESS","m2":"SUCCESS"},"handoff":"Repository/MUT-2026-08-29-STATUS-GOVERNANCE-RECONCILIATION-002.md","remaining_hold":"GOVERNANCE-REP001-INVENTORY-RECONCILIATION"},
+    {"lease_id":"R71-20260829-EXT-EVIDENCE-RESOLUTION-003","state":"CLOSED","verified_functional_sha":"bfdfd2ee9f59965d9a1a185f584bc03940ed7e93","ci":{"runtime_integration":"SUCCESS","full_stack":"SUCCESS","m2":"SUCCESS","quality_integration":"483_PASS_11_SUBTESTS"},"handoff":"Repository/MUT-2026-08-29-IGT-QUARANTINE-RESOLUTION-003.md","maximum_state":"RESOLVED_UNAUTHENTICATED"}
   ],
-  "verified_recent_chain": [
-    "P4_BOUNDED_REL009_CLOSED",
-    "EXPERIENCE_SPINE_ADVISORY_PROJECTION_BUILT",
-    "IGT_HARNESS_BUILT",
-    "MODEL_RUN_EVIDENCE_PACKAGE_GATE_BUILT",
-    "EXTERNAL_EVIDENCE_CORRELATION_BOUNDARY_BUILT",
-    "TRUSTED_RESOLVER_ADAPTER_BOUNDARY_BUILT",
-    "IMMUTABLE_GITHUB_EVIDENCE_RESOLVER_BUILT",
-    "BLIND_PARTICIPANT_EXPORT_BUILT",
-    "PARTICIPANT_RESPONSE_BINDING_BUILT",
-    "BINDING_AWARE_EVIDENCE_ADMISSION_BUILT",
-    "UNTRUSTED_EXTERNAL_EVIDENCE_INTAKE_BUILT",
-    "UNTRUSTED_EXTERNAL_EVIDENCE_INTAKE_FINAL_HEAD_GATE_CLOSED",
-    "IGT_QUARANTINE_RESOLUTION_GATE_BUILT",
-    "GITHUB_GENERIC_QUARANTINE_REACQUISITION_BUILT",
-    "ROOM71_RECONSTRUCTION_BOUNDED_PASS",
-    "REPOSITORY_FIRST_MULTI_INSTANCE_CONTROL_EFFECTIVE",
-    "ROOM71_ROLE_AND_LEASE_CONTROL_ESTABLISHED",
-    "ROOT_STATUS_SYNCHRONIZED_2026_08_29",
-    "GOVERNANCE_STALE_CLEAN_REOPENED_TO_IDENTITY_HOLD",
-    "IDENTITY_AUDIT_SUFFIX_AND_HEADING_BLIND_SPOT_REPAIRED",
-    "PROJECT_STATUS_VERSION_REGRESSION_REPAIRED"
-  ],
-  "closed_or_bounded_points": {
-    "P4": "CLOSED_FOR_LISTED_CRITICAL_EDGE_SET_ONLY",
-    "IGT_untrusted_external_evidence_intake_transaction": "CLOSED_WITH_POST_MERGE_MAIN_CI",
-    "EXT-EVIDENCE-RESOLUTION-SUBGATE": "CLOSED_EXECUTION_VERIFIED_MAX_RESOLVED_UNAUTHENTICATED",
-    "multi_instance_reconstruction_test": "BOUNDED_PASS",
-    "repository_first_multi_instance_control": "PROMOTED_EFFECTIVE",
-    "room71_solo_control_plane_reconciliation": "CLOSED",
-    "CONTROL-PLANE-ROOT-STATUS-SYNC": "CLOSED_FOR_CURRENT_2026_08_29_SNAPSHOT",
-    "GOVERNANCE-FOLDER-STALE-CLEAN-CLAIM": "CLOSED_BY_CURRENT_HOLD_RECLASSIFICATION",
-    "INTERNAL-DOCUMENT-ID-AUDIT-OBSERVABILITY": "CLOSED_WITH_REGRESSION_COVERAGE",
-    "PROJECT-STATUS-VERSION-REGRESSION": "CLOSED_WITH_GREEN_CI"
-  },
+  "verified_recent_chain": ["P4_BOUNDED_REL009_CLOSED","EXPERIENCE_SPINE_ADVISORY_PROJECTION_BUILT","IGT_HARNESS_BUILT","MODEL_RUN_EVIDENCE_PACKAGE_GATE_BUILT","EXTERNAL_EVIDENCE_CORRELATION_BOUNDARY_BUILT","TRUSTED_RESOLVER_ADAPTER_BOUNDARY_BUILT","IMMUTABLE_GITHUB_EVIDENCE_RESOLVER_BUILT","BLIND_PARTICIPANT_EXPORT_BUILT","PARTICIPANT_RESPONSE_BINDING_BUILT","BINDING_AWARE_EVIDENCE_ADMISSION_BUILT","UNTRUSTED_EXTERNAL_EVIDENCE_INTAKE_BUILT","UNTRUSTED_EXTERNAL_EVIDENCE_INTAKE_FINAL_HEAD_GATE_CLOSED","IGT_QUARANTINE_RESOLUTION_GATE_BUILT","GITHUB_GENERIC_QUARANTINE_REACQUISITION_BUILT","ROOM71_RECONSTRUCTION_BOUNDED_PASS","REPOSITORY_FIRST_MULTI_INSTANCE_CONTROL_EFFECTIVE","ROOM71_ROLE_AND_LEASE_CONTROL_ESTABLISHED","ROOT_STATUS_SYNCHRONIZED_2026_08_29","GOVERNANCE_STALE_CLEAN_REOPENED_TO_IDENTITY_HOLD","IDENTITY_AUDIT_SUFFIX_AND_HEADING_BLIND_SPOT_REPAIRED","PROJECT_STATUS_VERSION_REGRESSION_REPAIRED"],
+  "closed_or_bounded_points": {"P4":"CLOSED_FOR_LISTED_CRITICAL_EDGE_SET_ONLY","IGT_untrusted_external_evidence_intake_transaction":"CLOSED_WITH_POST_MERGE_MAIN_CI","EXT-EVIDENCE-RESOLUTION-SUBGATE":"CLOSED_EXECUTION_VERIFIED_MAX_RESOLVED_UNAUTHENTICATED","multi_instance_reconstruction_test":"BOUNDED_PASS","repository_first_multi_instance_control":"PROMOTED_EFFECTIVE","room71_solo_control_plane_reconciliation":"CLOSED","CONTROL-PLANE-ROOT-STATUS-SYNC":"CLOSED_FOR_CURRENT_2026_08_29_SNAPSHOT","GOVERNANCE-FOLDER-STALE-CLEAN-CLAIM":"CLOSED_BY_CURRENT_HOLD_RECLASSIFICATION","INTERNAL-DOCUMENT-ID-AUDIT-OBSERVABILITY":"CLOSED_WITH_REGRESSION_COVERAGE","PROJECT-STATUS-VERSION-REGRESSION":"CLOSED_WITH_GREEN_CI"},
   "open_points": [
-    {
-      "id": "GOVERNANCE-REP001-INVENTORY-RECONCILIATION",
-      "priority": 1,
-      "state": "OPEN_HARD_SEMANTIC_HOLD",
-      "next": "dedicated identity classification/migration for GOV-013A and reused GOV-014/015/016/017 families before REP-001 or REP-002 canonical inventory mutation"
-    },
-    {
-      "id": "PROVIDER-AUTHENTICATION-TRUST-ANCHOR-READINESS",
-      "priority": 2,
-      "state": "OPEN_DIAGNOSTIC",
-      "next": "search for real provider/source trust anchors and independently verifiable authentication material; never promote resolved evidence without one"
-    },
-    {
-      "id": "EXT-EVIDENCE-LIFECYCLE",
-      "priority": 3,
-      "state": "OPEN_AFTER_RESOLUTION",
-      "next": "provider-backed authentication or other governed authenticity evidence, then qualification and bounded authority decision"
-    },
-    {
-      "id": "CONNECTED-BASELINE-GLOBAL",
-      "priority": 4,
-      "state": "OPEN",
-      "next": "continue evidence-backed repository-wide critical relationship and authority validation; do not infer global closure from P4 bounded closure"
-    },
-    {
-      "id": "IGT-COGNITIVE-BENEFIT",
-      "priority": 5,
-      "state": "UNPROVEN",
-      "next": "controlled novel-case B0/L1/L2 capability experiment only after evidence lifecycle is sufficiently closed"
-    },
-    {
-      "id": "BRANCH-HYGIENE",
-      "priority": 6,
-      "state": "OPEN_NON_BLOCKING",
-      "next": "classify ACTIVE/HANDOFF/HISTORICAL/SUPERSEDED/MERGED-EVIDENCE-PRESERVED before deletion; never bulk-delete for cosmetic cleanup"
-    }
+    {"id":"GOVERNANCE-REP001-INVENTORY-RECONCILIATION","priority":1,"state":"OPEN_HARD_SEMANTIC_HOLD","next":"dedicated identity classification/migration before REP-001 or REP-002 canonical inventory mutation"},
+    {"id":"PROVIDER-AUTHENTICATION-TRUST-ANCHOR-READINESS","priority":2,"state":"ACTIVE_DIAGNOSTIC","next":"classify current repository trust-anchor readiness and explicit unblock criteria"},
+    {"id":"EXT-EVIDENCE-LIFECYCLE","priority":3,"state":"OPEN_AFTER_RESOLUTION","next":"provider-backed authentication or other governed authenticity evidence, then qualification and bounded authority decision"},
+    {"id":"CONNECTED-BASELINE-GLOBAL","priority":4,"state":"OPEN","next":"continue evidence-backed repository-wide critical relationship and authority validation"},
+    {"id":"IGT-COGNITIVE-BENEFIT","priority":5,"state":"UNPROVEN","next":"controlled novel-case B0/L1/L2 capability experiment only after evidence lifecycle is sufficiently closed"},
+    {"id":"BRANCH-HYGIENE","priority":6,"state":"OPEN_NON_BLOCKING","next":"classify branches before deletion; never bulk-delete for cosmetic cleanup"}
   ],
-  "priority_order": [
-    "KEEP_REQUIRED_CI_GREEN",
-    "DO_NOT_MUTATE_REP001_REP002_UNTIL_GOVERNANCE_IDENTITY_OWNERSHIP_IS_CLASSIFIED",
-    "VERIFY_PROVIDER_AUTHENTICATION_TRUST_ANCHOR_BEFORE_ANY_AUTHENTICITY_PROMOTION",
-    "CLOSE_EXTERNAL_EVIDENCE_LIFECYCLE_ONE_TRUST_STATE_AT_A_TIME",
-    "CONTINUE_CONNECTED_BASELINE_GLOBAL_VALIDATION",
-    "RUN_CONTROLLED_IGT_CAPABILITY_PROOF",
-    "CLASSIFY_BRANCHES_BEFORE_DELETION",
-    "ONLY_THEN_EXPAND_CAPABILITY_OR_AGENT_COUNT"
-  ],
-  "non_claims": [
-    "repository-wide connected baseline is not closed",
-    "cognitive improvement is not proven",
-    "Room 71 is not a governance authority above canonical rules",
-    "MAAT coordination does not decide technical truth",
-    "stored control-state SHA is not a substitute for live HEAD discovery",
-    "REP-001 and REP-002 Governance inventory are not reconciled while identity-family ownership remains ambiguous",
-    "RESOLVED_UNAUTHENTICATED is not provider authentication",
-    "external evidence resolution does not prove external delivery or model execution",
-    "branch population has not been declared obsolete or safe to delete"
-  ]
+  "priority_order": ["KEEP_REQUIRED_CI_GREEN","DO_NOT_MUTATE_REP001_REP002_UNTIL_GOVERNANCE_IDENTITY_OWNERSHIP_IS_CLASSIFIED","VERIFY_PROVIDER_AUTHENTICATION_TRUST_ANCHOR_BEFORE_ANY_AUTHENTICITY_PROMOTION","CLOSE_EXTERNAL_EVIDENCE_LIFECYCLE_ONE_TRUST_STATE_AT_A_TIME","CONTINUE_CONNECTED_BASELINE_GLOBAL_VALIDATION","RUN_CONTROLLED_IGT_CAPABILITY_PROOF","CLASSIFY_BRANCHES_BEFORE_DELETION","ONLY_THEN_EXPAND_CAPABILITY_OR_AGENT_COUNT"],
+  "non_claims": ["repository-wide connected baseline is not closed","cognitive improvement is not proven","Room 71 is not a governance authority above canonical rules","MAAT coordination does not decide technical truth","stored control-state SHA is not a substitute for live HEAD discovery","REP-001 and REP-002 Governance inventory are not reconciled while identity-family ownership remains ambiguous","RESOLVED_UNAUTHENTICATED is not provider authentication","external evidence resolution does not prove external delivery or model execution","branch population has not been declared obsolete or safe to delete"]
 }
