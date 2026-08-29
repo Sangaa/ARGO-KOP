@@ -1,40 +1,47 @@
 # MUT-2026-08-29 — QLT-001 SEMANTIC REPAIR — 155
 
-State: PREWRITE / NOT CLOSED
+State: FINALIZED / AWAITING EXACT-HEAD VERIFICATION
 Role: HERMUZ via Room71
-Baseline: `bef5889592e930b2697a4f0bdc48f58275720808`
-Scope: Quality/QLT-001 semantic correction + bounded regression only
+Prewrite baseline: `bef5889592e930b2697a4f0bdc48f58275720808`
+Prewrite commit: `16a00215c89dc7100c550e89cdb5379834cdc95b`
 
-## Trigger
+## Corrected Semantics
 
-Lease 154 classified three stale or over-wide semantics inside `Quality/QLT-001_QUALITY_ASSURANCE.md`:
+1. `GOV-005_DOCUMENT_LIFECYCLE_STANDARD.md` is removed as a stale pointer; current review authority is `Governance/GOV-005_REVIEW_STANDARD.md`.
+2. Quality validation failure is bounded to current service/runtime contracts: stop, reject attempted acceptance, or HOLD as applicable. QLT-001 no longer claims universal automatic SRV-009 rejection for every path.
+3. Traceability remains mandatory, but QLT-001 no longer converts the logging contract into proof that every event is stored as an immutable file under `Logs/`.
+4. The stale `Automated Rollback` claim is replaced by current `FAULT/HOLD + governed recovery` semantics aligned with RUN-001 and RUN-009.
+5. QLT-002..005 remain empty legacy placeholders with no capability promotion.
 
-1. an obsolete related-path name `Governance/GOV-005_DOCUMENT_LIFECYCLE_STANDARD.md`, while current canonical GOV-005 is `Governance/GOV-005_REVIEW_STANDARD.md`;
-2. wording that can be read as universal automatic rejection by SRV-009 although current SRV-009 establishes governed validation/hold behavior rather than proof that every Quality violation is automatically rejected in every execution path;
-3. an `Automated Rollback` claim tied to RUN-001, while current RUN-001/RUN-009 specify `FAULT/HOLD -> preserve evidence -> synchronize -> validate -> governed recovery`, not automatic repository rollback.
+## Authority Boundary
 
-The audit-log wording also exceeds current execution evidence if read as proof of immutable storage under `Logs/`.
+- QLT-001 identity and Version `1.0.0` are preserved.
+- No new Quality authority is created.
+- Quality cross-layer Integrity Hold remains open where execution/consumer evidence is incomplete.
+- Normative documents are not treated as execution proof.
 
-## Intended Mutation
+## Regression
 
-- preserve `QLT-001` identity and version unless separate version authority changes it;
-- preserve Quality `INTEGRITY HOLD` semantics;
-- correct GOV-005 path;
-- replace automatic rollback language with current governed FAULT/HOLD + recovery semantics;
-- bound SRV-009 rejection language to applicable validation/update controls;
-- bound logging language so traceability is required but storage immutability/path is not claimed without evidence;
-- add an executable regression guarding the corrected semantic boundaries.
+`Quality/Integration/test_qlt001_semantic_alignment.py` guards:
+- current GOV-005 path;
+- removal of automatic rollback wording;
+- RUN-009 recovery alignment;
+- traceability-versus-storage distinction;
+- non-promotion of QLT-002..005.
 
-## Non-Claims
+## Learning
 
-This transaction will not:
-- certify Quality globally;
-- promote QLT-002..005;
-- prove universal runtime enforcement;
-- prove immutable log storage;
-- close Connected Baseline globally;
-- modify Core 136, Room71 canonical JSON, or PR #89.
+`NORMATIVE CONTRACT != UNIVERSAL EXECUTION PROOF`
+
+`RECOVERY CONTRACT MUST OVERRIDE STALE AUTOMATIC-ROLLBACK WORDING`
+
+A canonical document can remain authoritative in purpose while carrying stale enforcement details; semantic repair should narrow the claim to what current authority and execution evidence actually support.
 
 ## Close Gate
 
-Finalized Matrix + QLT-001 + regression must enter one final Git tree/commit, followed by read-back and exact-head CI where available.
+Final state becomes `CLOSED / EXECUTION-VERIFIED` only after:
+- QLT-001 + regression + this finalized Matrix enter the same final Git tree/commit;
+- exact read-back succeeds;
+- applicable exact-head CI succeeds.
+
+Until then no CI or execution-verification claim is made.
