@@ -1,11 +1,52 @@
 {
-  "schema":"ARGO-ROOM071-CONTROL-STATE-1","state_date":"2026-08-29","canonical_branch":"main","last_verified_control_plane_sha":"60e5739a19ee673031ebfbffca40d9c9c852c288","control_plane_rule":"DISCOVER_CURRENT_HEAD_AT_REENTRY_DO_NOT_TRUST_STORED_SHA_AS_LIVE_HEAD",
+  "schema":"ARGO-ROOM071-CONTROL-STATE-1",
+  "state_date":"2026-08-29",
+  "canonical_branch":"main",
+  "last_verified_control_plane_sha":"2b6b43e7f76fc0a14c8d09d9cff153fc539a71ef",
+  "control_plane_rule":"DISCOVER_CURRENT_HEAD_AT_REENTRY_DO_NOT_TRUST_STORED_SHA_AS_LIVE_HEAD",
   "room":{"id":71,"name":"ROOM 71","type":"HUMAN_CONTROL_ROOM","authority":"OPERATIONAL_COORDINATION_ONLY"},
   "roles":{"HERMUZ":{"primary":"BUILD_VERIFY_PROMOTE"},"HORUS":{"primary":"ANALYZE_META_LEARNING_AND_EVIDENCE","default_write_scope":["HORUS/**"]},"MAAT":{"primary":"COORDINATE_SCOPE_LEASES_HANDOFFS_CONFLICTS"}},
   "serialized_control_surfaces":["PROJECT_BOOTSTRAP.md","PROJECT_STATUS.md","Repository/REP-001_MASTER_INDEX.md","Repository/REP-002_REPOSITORY_MAP.md","canonical Governance","canonical relationship registries and matrices","Repository/ROOM071_CURRENT_STATE.json"],
-  "active_leases":[{"lease_id":"R71-20260829-IGT-TRUST-TRANSITION-005","execution_id":"CURRENT_SOLO_SESSION","role":"HERMUZ_EQUIVALENT_IGT_EXECUTOR","state":"ACTIVE","baseline_sha":"60e5739a19ee673031ebfbffca40d9c9c852c288","scope":"fail-closed executable orchestration for currently legal IGT trust-state transitions only","shared_files":["Quality/Integration/experience_spine_igt_trust_state_transition_gate.py","Quality/Integration/test_experience_spine_igt_trust_state_transition_gate.py","Repository/IGT_TRUST_STATE_TRANSITION_CONTRACT_2026-08-29.md","Repository/MUT-2026-08-29-IGT-TRUST-STATE-TRANSITION-005.md","Repository/ROOM071_CURRENT_STATE.json"],"forbidden_scope":["provider authentication implementation","authority promotion","canonical Governance","REP-001","REP-002","PROJECT_STATUS.md"],"required_revalidation":["legal resolution transition invokes stage gate","illegal jumps rejected before unavailable stages","failure preserves source trust state","integration suite","full-stack","runtime","read-back"]}],
-  "closed_leases":[{"lease_id":"R71-20260829-CONTROL-PLANE-001","state":"CLOSED"},{"lease_id":"R71-20260829-STATUS-GOV-RECON-002","state":"CLOSED"},{"lease_id":"R71-20260829-EXT-EVIDENCE-RESOLUTION-003","state":"CLOSED","maximum_state":"RESOLVED_UNAUTHENTICATED"},{"lease_id":"R71-20260829-PROVIDER-AUTH-READINESS-004","state":"CLOSED","result":"ASSESSED_NOT_READY_HARD_TRUST_ANCHOR_HOLD"}],
-  "closed_or_bounded_points":{"P4":"CLOSED_FOR_LISTED_CRITICAL_EDGE_SET_ONLY","IGT_UNTRUSTED_EXTERNAL_EVIDENCE_INTAKE":"CLOSED_EXECUTION_VERIFIED","EXT-EVIDENCE-RESOLUTION-SUBGATE":"CLOSED_EXECUTION_VERIFIED_MAX_RESOLVED_UNAUTHENTICATED","PROVIDER-AUTHENTICATION-TRUST-ANCHOR-READINESS":"CLOSED_AS_ASSESSED_NOT_READY","CONTROL-PLANE-ROOT-STATUS-SYNC":"CLOSED","GOVERNANCE-FOLDER-STALE-CLEAN-CLAIM":"CLOSED_BY_HOLD_RECLASSIFICATION","INTERNAL-DOCUMENT-ID-AUDIT-OBSERVABILITY":"CLOSED_WITH_REGRESSION_COVERAGE","PROJECT-STATUS-VERSION-REGRESSION":"CLOSED_WITH_GREEN_CI"},
-  "open_points":[{"id":"GOVERNANCE-REP001-INVENTORY-RECONCILIATION","priority":1,"state":"OPEN_HARD_SEMANTIC_HOLD"},{"id":"PROVIDER-AUTHENTICATION-CAPABILITY","priority":2,"state":"HARD_EXTERNAL_TRUST_ANCHOR_HOLD"},{"id":"IGT-TRUST-STATE-TRANSITION-GUARD","priority":3,"state":"ACTIVE_BUILD"},{"id":"EXT-EVIDENCE-LIFECYCLE","priority":4,"state":"OPEN_AT_RESOLVED_UNAUTHENTICATED"},{"id":"CONNECTED-BASELINE-GLOBAL","priority":5,"state":"OPEN"},{"id":"IGT-COGNITIVE-BENEFIT","priority":6,"state":"UNPROVEN"},{"id":"BRANCH-HYGIENE","priority":7,"state":"OPEN_NON_BLOCKING"}],
-  "non_claims":["provider authentication unavailable without trust anchor","repository-wide connected baseline not closed","cognitive improvement not proven","REP-001/REP-002 Governance inventory unreconciled"]
+  "active_leases":[],
+  "closed_leases":[
+    {"lease_id":"R71-20260829-CONTROL-PLANE-001","state":"CLOSED"},
+    {"lease_id":"R71-20260829-STATUS-GOV-RECON-002","state":"CLOSED"},
+    {"lease_id":"R71-20260829-EXT-EVIDENCE-RESOLUTION-003","state":"CLOSED","maximum_state":"RESOLVED_UNAUTHENTICATED"},
+    {"lease_id":"R71-20260829-PROVIDER-AUTH-READINESS-004","state":"CLOSED","result":"ASSESSED_NOT_READY_HARD_TRUST_ANCHOR_HOLD"},
+    {"lease_id":"R71-20260829-IGT-TRUST-TRANSITION-005","state":"CLOSED","verified_functional_sha":"2b6b43e7f76fc0a14c8d09d9cff153fc539a71ef","ci":{"runtime_integration":"SUCCESS","full_stack":"SUCCESS","m2":"SUCCESS","quality_integration":"490_PASS_11_SUBTESTS"},"result":"EXPLICIT_EDGE_FAIL_CLOSED_ORCHESTRATION_VERIFIED","maximum_state":"RESOLVED_UNAUTHENTICATED","handoff":"Repository/MUT-2026-08-29-IGT-TRUST-STATE-TRANSITION-005.md"}
+  ],
+  "closed_or_bounded_points":{
+    "P4":"CLOSED_FOR_LISTED_CRITICAL_EDGE_SET_ONLY",
+    "IGT_UNTRUSTED_EXTERNAL_EVIDENCE_INTAKE":"CLOSED_EXECUTION_VERIFIED",
+    "EXT-EVIDENCE-RESOLUTION-SUBGATE":"CLOSED_EXECUTION_VERIFIED_MAX_RESOLVED_UNAUTHENTICATED",
+    "PROVIDER-AUTHENTICATION-TRUST-ANCHOR-READINESS":"CLOSED_AS_ASSESSED_NOT_READY",
+    "IGT-TRUST-STATE-TRANSITION-GUARD":"CLOSED_EXECUTION_VERIFIED_EXPLICIT_EDGE_ONLY",
+    "CONTROL-PLANE-ROOT-STATUS-SYNC":"CLOSED",
+    "GOVERNANCE-FOLDER-STALE-CLEAN-CLAIM":"CLOSED_BY_HOLD_RECLASSIFICATION",
+    "INTERNAL-DOCUMENT-ID-AUDIT-OBSERVABILITY":"CLOSED_WITH_REGRESSION_COVERAGE",
+    "PROJECT-STATUS-VERSION-REGRESSION":"CLOSED_WITH_GREEN_CI"
+  },
+  "open_points":[
+    {"id":"GOVERNANCE-REP001-INVENTORY-RECONCILIATION","priority":1,"state":"OPEN_HARD_SEMANTIC_HOLD","next":"classify Governance identity families and authority ownership before REP-001/REP-002 mutation"},
+    {"id":"PROVIDER-AUTHENTICATION-CAPABILITY","priority":2,"state":"HARD_EXTERNAL_TRUST_ANCHOR_HOLD","next":"requires concrete independently verifiable provider/source trust anchor"},
+    {"id":"EXT-EVIDENCE-LIFECYCLE","priority":3,"state":"OPEN_AT_RESOLVED_UNAUTHENTICATED","next":"resume only when a real authenticity earning stage exists; transition guard now prevents bypass"},
+    {"id":"CONNECTED-BASELINE-GLOBAL","priority":4,"state":"OPEN"},
+    {"id":"IGT-COGNITIVE-BENEFIT","priority":5,"state":"UNPROVEN"},
+    {"id":"BRANCH-HYGIENE","priority":6,"state":"OPEN_NON_BLOCKING"}
+  ],
+  "priority_order":[
+    "KEEP_REQUIRED_CI_GREEN",
+    "CLASSIFY_GOVERNANCE_IDENTITY_FAMILIES_BEFORE_REP001_REP002_MUTATION",
+    "DO_NOT_BYPASS_PROVIDER_AUTHENTICATION_TRUST_ANCHOR_HOLD",
+    "CONTINUE_CONNECTED_BASELINE_GLOBAL_VALIDATION_WHERE_INDEPENDENT_OF_BLOCKED_AUTHENTICATION",
+    "RUN_COGNITIVE_BENEFIT_PROOF_ONLY_WHEN_PREREQUISITES_ARE_SATISFIED",
+    "CLASSIFY_BRANCHES_BEFORE_DELETION"
+  ],
+  "non_claims":[
+    "provider authentication unavailable without trust anchor",
+    "repository-wide connected baseline not closed",
+    "cognitive improvement not proven",
+    "REP-001/REP-002 Governance inventory unreconciled",
+    "trust-state transition guard does not authorize disabled states"
+  ]
 }
