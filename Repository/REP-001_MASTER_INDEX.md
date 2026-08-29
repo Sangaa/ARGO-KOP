@@ -38,6 +38,8 @@ Historical root naming-convention material is not active canonical inventory and
 ## 3. Core Layer
 
 - `Core/CORE-000_PLATFORM_ARCHITECTURE.md`
+- `Core/CORE-001_ARGO_MANIFEST.md`
+- `Core/CORE-002_ARGO_IDENTITY.md`
 - `Core/CORE-003_CONSTITUTION.md`
 - `Core/CORE-004_CORE_PRINCIPLES.md`
 - `Core/CORE-005_COGNITIVE_MODEL.md`
@@ -49,6 +51,8 @@ Historical root naming-convention material is not active canonical inventory and
 - `Core/CORE-011_PLATFORM_CHARTER.md`
 - `Core/CORE-012_GENERATIVE_KNOWLEDGE_AND_SELF_DEVELOPMENT.md`
 - `Core/_FOLDER_STATUS.md`
+
+`CORE-001` and `CORE-002` were added to active inventory on 2026-08-29 after direct current-content verification and cross-check against `Core/_FOLDER_STATUS.md`, which identifies both as independently revalidated canonical Core artifacts. This closes their index discoverability gap only; Core cross-layer certification remains open.
 
 ## 4. Repository Layer
 

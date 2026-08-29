@@ -38,6 +38,8 @@ Historical root naming-convention material is excluded from active inventory and
 Path: `Core/`
 
 - `Core/CORE-000_PLATFORM_ARCHITECTURE.md`
+- `Core/CORE-001_ARGO_MANIFEST.md`
+- `Core/CORE-002_ARGO_IDENTITY.md`
 - `Core/CORE-003_CONSTITUTION.md`
 - `Core/CORE-004_CORE_PRINCIPLES.md`
 - `Core/CORE-005_COGNITIVE_MODEL.md`
@@ -48,6 +50,8 @@ Path: `Core/`
 - `Core/CORE-010_PLATFORM_ROADMAP.md`
 - `Core/CORE-011_PLATFORM_CHARTER.md`
 - `Core/_FOLDER_STATUS.md`
+
+`CORE-001` and `CORE-002` are mapped as active Core inventory after direct current-content verification and cross-check against `Core/_FOLDER_STATUS.md`, which identifies both as independently revalidated canonical Core artifacts. Mapping does not close Core cross-layer certification.
 
 ## 4. Repository Layer
 
@@ -299,17 +303,21 @@ Completion of individual files or reviewed subsets must not be interpreted as Ph
 
 ## P290 Current Governance Registration Reconciliation — 2026-08-16
 
-`GOV-013A_HERMUZ_BOOTSTRAP_INTEGRITY_GATE.md` is now physically mapped in the active Governance inventory and is synchronized with REP-001. Its status remains `Approved / Canonical Addendum`, subordinate to higher ARGO authority.
+`GOV-013A_HERMUZ_BOOTSTRAP_INTEGRITY_GATE.md` is now registered in the active Governance inventory. The addendum remains subordinate to higher ARGO authority and does not create independent semantic or architectural authority.
 
-This closes the REP-002 physical-map discoverability gap for `GOV-013A` within the inspected Governance/Repository scope.
+This registration closes the REP-002 discoverability gap for `GOV-013A` within the inspected Governance/Repository map scope.
 
-## P357 Current Canonical Core Map Reconciliation — 2026-08-17
+## P356 Current Canonical Core Inventory Reconciliation — 2026-08-17
 
-Current Core folder evidence explicitly identifies `Core/CORE-000_PLATFORM_ARCHITECTURE.md` as a known canonical Core artifact independently revalidated on 2026-08-10. The master index now includes this path as P356.
+Current Core folder evidence (`Core/_FOLDER_STATUS.md`) explicitly identifies `Core/CORE-000_PLATFORM_ARCHITECTURE.md` as a known canonical Core artifact independently revalidated on 2026-08-10. The artifact declares `Document ID: CORE-000` and `Canonical: Yes`.
 
-The physical storage map is synchronized to that same canonical Core path.
+The active Core map therefore now explicitly includes:
 
-This mutation repairs the REP-001 ↔ REP-002 discoverability gap and does not promote the legacy `CORE-000_PLATFORM_IDENTITY.md`, which remains noncanonical historical evidence.
+`Core/CORE-000_PLATFORM_ARCHITECTURE.md`
+
+This mapping repair does not promote `CORE-000_PLATFORM_IDENTITY.md`, which remains a legacy/superseded artifact by its own metadata.
+
+P356 is a physical-map reconciliation only. Core remains under Integrity Hold and cross-layer validation.
 
 ---
 
