@@ -2,15 +2,15 @@
 
 Platform: ARGO KOP (Knowledge Operating Platform)
 Folder: `Governance/`
-Status: `🟢 IDENTITY + REP-001/REP-002 INVENTORY SYNC VERIFIED / CONTENT REVIEW HOLDS REMAIN`
+Status: `🟢 IDENTITY + REP-001/REP-002 INVENTORY SYNC + CURRENT CANDIDATE SEMANTIC DISPOSITION VERIFIED / PROMOTION GATES REMAIN`
 Version: `1.7.0`
 Canonical: `Yes — evidence/status record only`
 Last Audit: `2026-08-29`
-Review Method: `Repository First / GOV-006 Identity Classification / Controlled Migration`
+Review Method: `Repository First / GOV-006 Identity Classification / Controlled Migration / Semantic Content Review`
 
 ## Purpose
 
-Record the current verified state of Governance identity and inventory alignment. This status record does not override Constitution, Bootstrap, canonical Governance, protocol-specific promotion requirements, or repository evidence.
+Record the current verified state of Governance identity, inventory alignment and the semantic disposition of the currently identified non-active Governance candidate set. This status record does not override Constitution, Bootstrap, canonical Governance, protocol-specific promotion requirements, or repository evidence.
 
 ## Identity Migration
 
@@ -44,16 +44,22 @@ Old colliding paths remain explicit non-authoritative compatibility/supersession
 
 ## Authority Preservation
 
-Identity repair did not promote content:
+Identity repair and semantic review did not promote content:
 
 - Canonical/Effective artifacts retained their prior authority under unique IDs;
 - Proposed/Candidate artifacts remain Proposed/Candidate;
 - compatibility records carry no independent authority;
-- neither former `GOV-017` proposal became canonical merely to preserve the old number.
+- neither former `GOV-017` proposal became canonical merely to preserve the old number;
+- semantic usefulness is not promotion authority.
 
 ## Audit Semantics Repair
 
-`Quality/Integration/internal_document_id_audit.py` now distinguishes document-level Governance identity from later section headings, source comments, templates, mutation records, and other support surfaces, while retaining independent checks for explicit internal Document ID duplication and filename alignment.
+`Quality/Integration/internal_document_id_audit.py` distinguishes document-level Governance identity from later section headings, source comments, templates, mutation records, and other support surfaces, while retaining independent checks for explicit internal Document ID duplication and filename alignment.
+
+The current candidate semantic review additionally verifies two authority-sensitive facts that identity checks alone cannot establish:
+
+1. candidate metadata using a development baseline must remain aligned with authoritative `Release/VERSION.md`;
+2. a superseded compatibility path must not be described by an active learning/model document as current governing authority.
 
 ## Verification Evidence
 
@@ -86,27 +92,60 @@ Repair verified head:
 - Full-Stack `33238320157` — SUCCESS
 - M2 `33238320141` — SUCCESS
 
+### Current candidate semantic review
+
+Current reviewed non-active set:
+
+- `GOV-011_EXTERNAL_FEEDBACK_REPORT_STANDARD.md`
+- `GOV-012_DOMAIN_RECONSTRUCTION_STANDARD.md`
+- `GOV-018_EVIDENCE_REASONING_AND_CONFLICT_RESOLUTION.md`
+- `GOV-023_HERMUZ_CONTROLLED_DIAGNOSTIC_EXPERIMENT_PROTOCOL.md`
+- `GOV-024_HERMUZ_SOLUTION_SIMULATION_AND_EFFECT_ANALYSIS_PROTOCOL.md`
+- `GOV-025_HERMUZ_CONNECTOR_SELF_LEARNING_PROTOCOL.md`
+- `GOV-026_HERMUZ_SOLUTION_EVOLUTION_AND_STABILITY_PROTOCOL.md`
+
+Disposition for the current reviewed set:
+
+`RETAINED NON-ACTIVE / PROMOTION GATES REMAIN`
+
+No candidate is promoted or rejected merely because its content is useful or overlapping with current authority.
+
+Two factual/authority drifts were identified and repaired without changing candidate authority:
+
+- `GOV-012` development baseline corrected from stale `3.3.0` to authoritative current `3.2.1`;
+- `CELM-001` no longer states that superseded `GOV-017_HERMUZ_CONNECTOR_SELF_LEARNING_PROTOCOL.md` governs the active training program; it now identifies `GOV-025` as the current Proposed candidate and preserves the compatibility path as non-authoritative reconstruction evidence.
+
+Transaction evidence:
+`Repository/MUT-2026-08-29-GOVERNANCE-CANDIDATE-SEMANTIC-REVIEW-117.md`
+
+Review evidence:
+`Repository/GOVERNANCE_CANDIDATE_SEMANTIC_REVIEW_2026-08-29.md`
+
+The document version remains `1.7.0`: content synchronization did not establish independent authority to increment the status-record version.
+
 ## Current Holds
 
 ### Governance identity/inventory
 
 `CLOSED FOR CURRENT MIGRATED SCOPE`.
 
-### Content authority / semantic review
+### Current identified candidate semantic disposition
 
-`OPEN WHERE EACH DOCUMENT'S OWN STATUS OR REVIEW GATE REQUIRES IT`.
+`CLOSED FOR CURRENT IDENTIFIED CANDIDATE SET / RETAINED NON-ACTIVE / PROMOTION GATES REMAIN`.
 
-Identity uniqueness and index membership do not prove substantive correctness. In particular, `GOV-011`, `GOV-012`, `GOV-018`, `GOV-023`, `GOV-024`, `GOV-025`, and `GOV-026` remain Proposed/Candidate/non-active according to their own state.
+This means the current content/status question has a bounded disposition. It does not pre-authorize future promotion. A candidate may be reopened for promotion only when new evidence satisfies its own promotion/review gate and applicable higher Governance.
 
 ### Repository-wide relationship integrity
 
 `OPEN`.
 
-This folder-level identity/index result does not close Connected Baseline globally or prove every Governance consumer/reference relationship repository-wide.
+Folder-level identity/index/candidate-semantic results do not close Connected Baseline globally or prove every Governance consumer/reference relationship repository-wide.
 
 ## Completion Result
 
 `GOVERNANCE IDENTITY + REP-001/REP-002 GOVERNANCE INVENTORY ALIGNMENT = VERIFIED / CLOSED FOR CURRENT MIGRATED SCOPE`.
+
+`CURRENT GOVERNANCE CANDIDATE SEMANTIC DISPOSITION = VERIFIED / CLOSED FOR CURRENT IDENTIFIED CANDIDATE SET / RETAIN NON-ACTIVE / PROMOTION GATES REMAIN`.
 
 ## Related Authority and Evidence
 
@@ -119,11 +158,14 @@ This folder-level identity/index result does not close Connected Baseline global
 - `Governance/GOV-021_REPOSITORY_FIRST_MULTI_INSTANCE_EXECUTION.md`
 - `Governance/GOV-027_PROVENANCE_PRESERVATION_AND_SESSION_RECONSTRUCTION_AMENDMENT.md`
 - `Repository/GOVERNANCE_IDENTITY_MIGRATION_MATRIX_2026-08-29.md`
+- `Repository/GOVERNANCE_CANDIDATE_SEMANTIC_REVIEW_2026-08-29.md`
 - `Repository/MUT-2026-08-29-REP001-REP002-GOVERNANCE-SYNC-007.md`
+- `Repository/MUT-2026-08-29-GOVERNANCE-CANDIDATE-SEMANTIC-REVIEW-117.md`
 - `Repository/REP-001_MASTER_INDEX.md`
 - `Repository/REP-002_REPOSITORY_MAP.md`
 - `Repository/REP-015_CONTROL_PLANE_BOOTSTRAP_CHECKLIST.md`
 - `Repository/ROOM071_CURRENT_STATE.json`
+- `Release/VERSION.md`
 
 ## Engineering Rule
 
@@ -132,3 +174,7 @@ This folder-level identity/index result does not close Connected Baseline global
 and for protected transactions:
 
 `PRE-WRITE MATRIX → PROTECTED CHANGE + FINALIZED MATRIX IN SAME CHANGE SET → READ-BACK → CI → CLOSE`.
+
+And for semantic content review:
+
+`IDENTITY CORRECTNESS ≠ CONTENT CORRECTNESS ≠ STATUS AUTHORITY ≠ VERSION/BASELINE FACT`.

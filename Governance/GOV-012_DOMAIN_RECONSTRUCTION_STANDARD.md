@@ -12,7 +12,7 @@ Version: 1.0.0
 Status: Proposed / Integrity Hold
 Category: Governance / Domain Reconstruction
 Canonical: No
-Development Baseline: 3.3.0
+Development Baseline: 3.2.1
 Last Audit: 2026-08-09
 
 ---

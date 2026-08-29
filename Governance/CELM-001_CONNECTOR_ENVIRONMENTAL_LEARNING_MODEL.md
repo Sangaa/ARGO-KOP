@@ -129,7 +129,9 @@ Operational learning may override a prior assumption only after the delta is cla
 
 ## 11. Current instantiation: GitHub
 
-GitHub is the first fully trained connector environment under this model. `GOV-017_HERMUZ_CONNECTOR_SELF_LEARNING_PROTOCOL.md` governs the active training program and `EJR-317_2026-08-23_GITHUB_CONNECTOR_SELF_TRAINING.md` stores the current behavioral observations.
+GitHub is the first fully trained connector environment under this model. `Governance/GOV-025_HERMUZ_CONNECTOR_SELF_LEARNING_PROTOCOL.md` is the current candidate connector self-learning protocol and remains `PROPOSED — GOVERNANCE REVIEW REQUIRED`; it may inform bounded connector-learning work but does not govern by canonical authority unless separately promoted. `EJR-317_2026-08-23_GITHUB_CONNECTOR_SELF_TRAINING.md` stores the current behavioral observations.
+
+`Governance/GOV-017_HERMUZ_CONNECTOR_SELF_LEARNING_PROTOCOL.md` is a superseded non-canonical compatibility path retained for reconstruction only and must not be treated as active authority.
 
 The current P6 investigation must use CELM knowledge before declaring an external boundary. In particular, GitHub Actions Run-ID discovery must be analyzed against all relevant connector layers and independent evidence surfaces rather than against a single Actions wrapper.
 
