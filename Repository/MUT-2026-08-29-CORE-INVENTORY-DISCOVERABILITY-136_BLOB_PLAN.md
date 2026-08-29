@@ -1,0 +1,1 @@
+Blob assembly only; no protected mutation yet.
