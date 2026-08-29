@@ -4,12 +4,12 @@ Transaction ID: `MUT-2026-08-29-PROVIDER-AUTHENTICATION-READINESS-004`
 Lease: `R71-20260829-PROVIDER-AUTH-READINESS-004`
 Entry baseline: `main@d90badb3f37b92bbd7df9d8e61d2f372ca507533`
 Protocol: `PROJECT_BOOTSTRAP + GOV-013 + Room71 repository-first execution + IGT trust-boundary contracts`
-Status: `DIAGNOSTIC COMPLETE / NOT READY / HARD TRUST-ANCHOR HOLD`
+Status: `CLOSED / ASSESSED NOT READY / HARD TRUST-ANCHOR HOLD`
 Authority: `NONE`
 
 ## Objective
 
-Determine whether current repository evidence is sufficient to implement provider/source authentication after the newly verified `RESOLVED_UNAUTHENTICATED` stage.
+Determine whether current repository evidence is sufficient to implement provider/source authentication after the verified `RESOLVED_UNAUTHENTICATED` stage.
 
 ## Search Evidence
 
@@ -64,12 +64,34 @@ Detailed criteria are recorded in:
 
 `Repository/IGT_PROVIDER_AUTHENTICATION_READINESS_2026-08-29.md`.
 
+## Execution / Closure Evidence
+
+Exact assessment-documentation head:
+
+`23887a229c0d1110f5d345af2ef3726bd2438f17`
+
+Observed GitHub Actions on that exact SHA:
+
+- `ARGO Runtime Prototype and Integration Tests` — run `33236977596` — `SUCCESS`;
+- `Full-Stack Repository Audit` — run `33236977594` — `SUCCESS`;
+- `M2 Multi-Channel Proposal Training` — run `33236977633` — `SUCCESS`.
+
+The readiness contract and this transaction were re-read after creation. No authenticity implementation was added.
+
 ## Learning
 
 1. **A missing trust anchor is an architectural state, not merely an unimplemented function.** Writing a generic `authenticate()` method without a real independently anchored verifier would create false epistemic capability.
 2. **Trust anchors require provenance outside the evidence being authenticated.** A key or provider name supplied inside the receipt cannot bootstrap its own authenticity.
 3. **Provider authentication is inherently mechanism-specific at the boundary.** The generic layer can define required outputs/failure states, but authenticity must be earned through a concrete verifiable provider/source mechanism.
 4. **A diagnostic HOLD can close ambiguity without closing capability.** `NOT READY` is a stronger and safer system state than an open-ended TODO that later models may accidentally bypass.
+
+## Closed Point
+
+`PROVIDER-AUTHENTICATION-TRUST-ANCHOR-READINESS = CLOSED_AS_ASSESSED_NOT_READY`
+
+The provider-authentication capability itself remains blocked by a hard trust-anchor hold. This distinction is intentional:
+
+`readiness assessment closed != authentication capability available`.
 
 ## Non-Claims
 
@@ -78,10 +100,6 @@ Detailed criteria are recorded in:
 - No provider-specific connector was implemented.
 - No authority, independence, delivery, model-execution or cognitive-effect claim is promoted.
 
-## Closure Gate
+## Final Disposition
 
-This assessment is ready to close after:
-
-1. exact current-head Runtime/Integration + Full-Stack + M2 remain green;
-2. readiness contract and transaction are re-read;
-3. Room71 records the assessment as closed and the provider-authentication capability itself as a hard external-evidence hold.
+The diagnostic transaction is closed. The external-evidence lifecycle remains at maximum implemented state `RESOLVED_UNAUTHENTICATED` until a concrete provider/source trust anchor is available.
