@@ -2,7 +2,7 @@
   "schema":"ARGO-ROOM071-CONTROL-STATE-1",
   "state_date":"2026-08-29",
   "canonical_branch":"main",
-  "last_verified_control_plane_sha":"1ba17f1fddae4ca7107ddbee7f1350b56f61ee42",
+  "last_verified_control_plane_sha":"0d11c48dc231d3830ed9b1ca0bebabfc8bb2908d",
   "control_plane_rule":"DISCOVER_CURRENT_HEAD_AT_REENTRY_DO_NOT_TRUST_STORED_SHA_AS_LIVE_HEAD",
   "room":{"id":71,"name":"ROOM 71","type":"HUMAN_CONTROL_ROOM","authority":"OPERATIONAL_COORDINATION_ONLY"},
   "roles":{"HERMUZ":{"primary":"BUILD_VERIFY_PROMOTE"},"HORUS":{"primary":"ANALYZE_META_LEARNING_AND_EVIDENCE","default_write_scope":["HORUS/**"]},"MAAT":{"primary":"COORDINATE_SCOPE_LEASES_HANDOFFS_CONFLICTS"}},
@@ -19,7 +19,8 @@
     {"lease_id":"R71-20260829-P6-EJR-SCOPE-009","state":"CLOSED","verified_functional_sha":"0ea193655f1c0b2448c39b18872ef7598eb0cfde","ci":{"runtime_integration":"SUCCESS","full_stack":"SUCCESS","m2":"SUCCESS"},"result":"P6_EJR_DIRECT_IMPACT_SCOPE_OUT_OF_SCOPE_EXECUTION_VERIFIED","issue_15":"CLOSED_COMPLETED","handoff":"Repository/MUT-2026-08-29-P6-EJR-SCOPE-RESOLUTION-009.md"},
     {"lease_id":"R71-20260829-CONTROL-MANIFEST-010","state":"CLOSED","verified_functional_sha":"d48252ecbfbbf2256cc2d711f3fb4a2c965e7e15","ci":{"runtime_integration":"SUCCESS","full_stack":"SUCCESS","m2":"SUCCESS"},"result":"CURRENT_CONTROL_PLANE_MANIFEST_FRESHNESS_CLOSED_EXECUTION_VERIFIED","handoff":"Repository/MUT-2026-08-29-CURRENT-CONTROL-PLANE-MANIFEST-REBIND-010.md"},
     {"lease_id":"R71-20260829-GOV-CONTENT-011","state":"CLOSED","verified_functional_sha":"aadc89f16f0aa154a23039a838a86fed7531b013","ci":{"runtime_integration":"SUCCESS","full_stack":"SUCCESS","m2":"SUCCESS"},"result":"SELF_ASSURANCE_COMPASS_AUTHORITY_POINTER_REPAIRED_TO_GOV022","handoff":"Repository/MUT-2026-08-29-SELF-ASSURANCE-COMPASS-AUTHORITY-REPAIR-011.md"},
-    {"lease_id":"R71-20260829-GOV-CONTENT-012","state":"CLOSED","verified_functional_sha":"1ba17f1fddae4ca7107ddbee7f1350b56f61ee42","ci":{"runtime_integration":"SUCCESS","full_stack":"SUCCESS","m2":"SUCCESS"},"result":"GOV004_LEGACY_ACTIVE_PLACEMENT_ARCHIVED_EXECUTION_VERIFIED","handoff":"Repository/MUT-2026-08-29-GOV004-LEGACY-PLACEMENT-RETIREMENT-012.md"}
+    {"lease_id":"R71-20260829-GOV-CONTENT-012","state":"CLOSED","verified_functional_sha":"1ba17f1fddae4ca7107ddbee7f1350b56f61ee42","ci":{"runtime_integration":"SUCCESS","full_stack":"SUCCESS","m2":"SUCCESS"},"result":"GOV004_LEGACY_ACTIVE_PLACEMENT_ARCHIVED_EXECUTION_VERIFIED","handoff":"Repository/MUT-2026-08-29-GOV004-LEGACY-PLACEMENT-RETIREMENT-012.md"},
+    {"lease_id":"R71-20260829-GOV-CONTENT-013","state":"CLOSED","verified_functional_sha":"0d11c48dc231d3830ed9b1ca0bebabfc8bb2908d","ci":{"runtime_integration":"SUCCESS","full_stack":"SUCCESS","m2":"SUCCESS"},"result":"GOV011_EMPTY_ACTIVE_PLACEHOLDER_ARCHIVED_EXECUTION_VERIFIED","handoff":"Repository/MUT-2026-08-29-GOV011-EMPTY-PLACEMENT-RETIREMENT-013.md"}
   ],
   "closed_or_bounded_points":{
     "P4":"CLOSED_FOR_LISTED_CRITICAL_EDGE_SET_ONLY",
@@ -35,17 +36,21 @@
     "CURRENT_CONTROL_PLANE_MANIFEST_FRESHNESS":"CLOSED_EXECUTION_VERIFIED",
     "SELF_ASSURANCE_COMPASS_AUTHORITY_POINTER":"CLOSED_GOV022_EXECUTION_VERIFIED",
     "GOV004_LEGACY_ACTIVE_PLACEMENT":"CLOSED_ARCHIVED_EXECUTION_VERIFIED",
+    "GOV011_EMPTY_ACTIVE_PLACEHOLDER":"CLOSED_ARCHIVED_EXECUTION_VERIFIED",
+    "PR88_ACTIVE_INTEGRATION_PATH":"CLOSED_UNMERGED_SUPERSEDED_BY_MAIN_EVIDENCE_PRESERVED",
+    "PR88_GOV015_WHOLE_DOCUMENT_CANDIDATE":"CLOSED_NOT_ADOPTED_DUPLICATION_AVOIDED",
     "CONTINUOUS_IMPROVEMENT_THREAT_OPPORTUNITY_CONTROL":"ESTABLISHED_NON_AUTHORITATIVE_OPERATIONAL_CONTROL"
   },
   "open_points":[
     {"id":"PROVIDER-AUTHENTICATION-CAPABILITY","priority":1,"state":"HARD_EXTERNAL_TRUST_ANCHOR_HOLD","next":"requires concrete independently verifiable provider/source trust anchor; do not simulate authenticity"},
     {"id":"EXT-EVIDENCE-LIFECYCLE","priority":2,"state":"OPEN_AT_RESOLVED_UNAUTHENTICATED","next":"resume only when a real authenticity earning stage exists; transition guard prevents bypass"},
     {"id":"CONNECTED-BASELINE-GLOBAL","priority":3,"state":"OPEN_PARTITIONABLE","next":"close evidence-backed partitions independently; KNW-001..010 remain deferred until consolidated canonical validation"},
-    {"id":"GOVERNANCE-CONTENT-SEMANTIC-REVIEW","priority":4,"state":"OPEN_NON_BLOCKING_BOUNDED_REPAIRS_STARTED","next":"continue claim-by-claim review; authority-pointer and active-placement defects are now regression-aware lessons"},
-    {"id":"BRANCH-HYGIENE","priority":5,"state":"CLASSIFICATION_REQUIRED_NO_DELETE","next":"PR #88 is mostly superseded/adapted; preserve unique GOV-015 candidate semantics and refresh REP-016 from current main before closing branch disposition"},
-    {"id":"IGT-COGNITIVE-BENEFIT","priority":6,"state":"UNPROVEN","next":"run controlled novel-case B0/L1/L2 experiment only when evidence-lifecycle prerequisites are satisfied"}
+    {"id":"GOVERNANCE-CONTENT-SEMANTIC-REVIEW","priority":4,"state":"OPEN_NON_BLOCKING_BOUNDED_REPAIRS_PROGRESSING","next":"continue active-namespace and claim-by-claim review; empty/implied identity surfaces now included in threat model"},
+    {"id":"BRANCH-HYGIENE","priority":5,"state":"PR88_SUBPOINT_CLOSED_GLOBAL_CLASSIFICATION_OPEN","next":"PR #88 closed unmerged and branch classified SUPERSEDED/EVIDENCE-PRESERVED; continue other branches before any deletion"},
+    {"id":"REP016-STATUS-FRESHNESS","priority":6,"state":"OPEN_NON_BLOCKING","next":"refresh stale priority labels from live main without truncating preserved queue history; synchronize current manifest if metadata changes"},
+    {"id":"IGT-COGNITIVE-BENEFIT","priority":7,"state":"UNPROVEN","next":"run controlled novel-case B0/L1/L2 experiment only when evidence-lifecycle prerequisites are satisfied"}
   ],
   "continuous_improvement_control":"Repository/CONTINUOUS_IMPROVEMENT_THREAT_OPPORTUNITY_CONTROL_2026-08-29.md",
-  "priority_order":["KEEP_REQUIRED_CI_GREEN","DO_NOT_BYPASS_PROVIDER_AUTHENTICATION_TRUST_ANCHOR_HOLD","CLOSE_CONNECTED_BASELINE_BY_BOUNDED_PARTITIONS","RUN_GOVERNANCE_CONTENT_SEMANTIC_REVIEW","CLASSIFY_BRANCHES_BEFORE_ANY_DELETE","RUN_COGNITIVE_BENEFIT_PROOF_ONLY_AFTER_PREREQUISITES","CAPTURE_FUTURE_OPPORTUNITIES_WITHOUT_AUTHORITY_PROMOTION"],
-  "non_claims":["provider authentication unavailable without trust anchor","repository-wide connected baseline not closed","cognitive improvement not proven","Governance identity/index closure does not prove protocol substantive correctness","KNW-001..010 are not promoted by Core index closure","P6 EJR OUT_OF_SCOPE means no direct impact correlation only; EJR evidence remains usable","branch population has not been declared obsolete or safe to delete","future opportunity plan is not canonical authority"]
+  "priority_order":["KEEP_REQUIRED_CI_GREEN","DO_NOT_BYPASS_PROVIDER_AUTHENTICATION_TRUST_ANCHOR_HOLD","CLOSE_CONNECTED_BASELINE_BY_BOUNDED_PARTITIONS","RUN_GOVERNANCE_CONTENT_SEMANTIC_REVIEW","REFRESH_REP016_WITH_CONTENT_PRESERVATION","CLASSIFY_BRANCHES_BEFORE_ANY_DELETE","RUN_COGNITIVE_BENEFIT_PROOF_ONLY_AFTER_PREREQUISITES","CAPTURE_FUTURE_OPPORTUNITIES_WITHOUT_AUTHORITY_PROMOTION"],
+  "non_claims":["provider authentication unavailable without trust anchor","repository-wide connected baseline not closed","cognitive improvement not proven","Governance identity/index closure does not prove protocol substantive correctness","KNW-001..010 are not promoted by Core index closure","P6 EJR OUT_OF_SCOPE means no direct impact correlation only; EJR evidence remains usable","PR #88 closure does not make all branches safe to delete","deferred PR #88 taxonomy is not canonical Governance","future opportunity plan is not canonical authority"]
 }
