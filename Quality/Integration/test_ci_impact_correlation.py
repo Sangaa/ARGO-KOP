@@ -1,8 +1,10 @@
 """Regression tests for the P6 CI-impact correlation helper.
 
-These are controlled synthetic tests. Canonical repository behavior is covered
-separately by test_p6_canonical_repository.py.
+These include controlled synthetic tests plus a bounded canonical-repository
+mapping regression for the RUN-010 handoff coverage seam.
 """
+
+from pathlib import Path
 
 from ci_impact_correlation import classify_execution_evidence, correlate_paths
 
@@ -76,45 +78,42 @@ def test_unknown_path_is_unresolved_not_an_implicit_mapping_failure() -> None:
 
 
 def test_successful_stale_run_is_valid_execution_not_execution_failure() -> None:
-    assert (
-        classify_execution_evidence("HEAD-NEW", "HEAD-OLD", "HEAD-OLD", True)
-        == "VALID_EXECUTION_STALE_BASELINE"
-    )
+    assert classify_execution_evidence("HEAD-NEW", "HEAD-OLD", "HEAD-OLD", True) == "VALID_EXECUTION_STALE_BASELINE"
 
 
 def test_successful_exact_sha_chain_is_current_execution() -> None:
-    assert (
-        classify_execution_evidence("HEAD", "HEAD", "HEAD", True)
-        == "VALID_CURRENT_EXECUTION"
-    )
+    assert classify_execution_evidence("HEAD", "HEAD", "HEAD", True) == "VALID_CURRENT_EXECUTION"
 
 
 def test_current_run_with_mismatched_artifact_is_not_current_execution() -> None:
-    assert (
-        classify_execution_evidence("HEAD", "HEAD", "ARTIFACT-OLD", True)
-        == "ARTIFACT_IDENTITY_MISMATCH"
-    )
+    assert classify_execution_evidence("HEAD", "HEAD", "ARTIFACT-OLD", True) == "ARTIFACT_IDENTITY_MISMATCH"
 
 
 def test_current_run_with_missing_artifact_evidence_is_explicit() -> None:
-    assert (
-        classify_execution_evidence("HEAD", "HEAD", "", True)
-        == "ARTIFACT_EVIDENCE_MISSING"
-    )
+    assert classify_execution_evidence("HEAD", "HEAD", "", True) == "ARTIFACT_EVIDENCE_MISSING"
 
 
 def test_missing_identity_evidence_is_not_execution_failure() -> None:
-    assert (
-        classify_execution_evidence("", "", "", True)
-        == "IDENTITY_EVIDENCE_MISSING"
-    )
+    assert classify_execution_evidence("", "", "", True) == "IDENTITY_EVIDENCE_MISSING"
 
 
 def test_failed_run_remains_execution_failure() -> None:
-    assert (
-        classify_execution_evidence("HEAD", "HEAD", "HEAD", False)
-        == "EXECUTION_FAILED"
-    )
+    assert classify_execution_evidence("HEAD", "HEAD", "HEAD", False) == "EXECUTION_FAILED"
+
+
+def test_current_repository_maps_run010_handoff_test_without_promotion() -> None:
+    root = Path(__file__).resolve().parents[2]
+    path = "Quality/Integration/test_run010_eng006_handoff_contract.py"
+    matrix = (root / "Repository/REP-020_DEPENDENCY_CONSUMER_IMPACT_MATRIX.md").read_text(encoding="utf-8")
+    registry = (root / "Repository/REP-014_REPOSITORY_RELATIONSHIP_REGISTRY.md").read_text(encoding="utf-8")
+    scope = (root / "Repository/P6_SCOPE_ELIGIBILITY_REGISTRY.md").read_text(encoding="utf-8")
+
+    record = correlate_paths([path], matrix, registry, scope)[0]
+
+    assert record["eligibility"] == "IN_SCOPE"
+    assert record["status"] == "MAPPED"
+    assert record["promotion"] == "NO_AUTO_PROMOTION"
+    assert record["matrix_evidence"]
 
 
 if __name__ == "__main__":
@@ -129,4 +128,5 @@ if __name__ == "__main__":
     test_current_run_with_missing_artifact_evidence_is_explicit()
     test_missing_identity_evidence_is_not_execution_failure()
     test_failed_run_remains_execution_failure()
+    test_current_repository_maps_run010_handoff_test_without_promotion()
     print("P6_CI_IMPACT_CORRELATION_REGRESSION=PASS")

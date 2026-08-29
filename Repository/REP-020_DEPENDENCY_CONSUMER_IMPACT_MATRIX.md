@@ -63,6 +63,23 @@ Current interpretation:
 - provider-backed ENG-006/SRV-009 E2E and the isolated RUN-010 observation remain distinct evidence classes;
 - no reverse `SRV-009 → RUN-010` dependency is implied.
 
+## P6 Quality / Integration exact-path correlation evidence — 2026-08-29
+
+The following in-scope regression path is explicitly bound to the already-existing bounded RUN-010 / ENG-006 / SRV-009 impact evidence so P6 correlation can discover it by exact repository-relative path:
+
+`Quality/Integration/test_run010_eng006_handoff_contract.py`
+
+Correlation meaning is intentionally narrow:
+
+- P6 scope eligibility: `IN_SCOPE`;
+- expected correlation state: `MAPPED`;
+- promotion: `NO_AUTO_PROMOTION`;
+- evidence role: direct regression coverage for the RUN-010 handoff contract and its bounded ENG-006/SRV-009 impact seam;
+- relationship state remains `PARTIALLY_VERIFIED`;
+- this mapping is not runtime reachability evidence and does not establish universal ordinary-runtime routing.
+
+This exact-path binding exists to make current test-impact evidence discoverable. It does not create a new relationship and does not widen the semantic authority of this provisional matrix.
+
 ## Control-Plane Reconciliation State
 
 - `Release/VERSION.md` remains authoritative for official release `1.0.0` and development baseline `3.2.1`.
