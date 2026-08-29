@@ -1,203 +1,120 @@
 # GOVERNANCE FOLDER STATUS
 
----
+Platform: ARGO KOP (Knowledge Operating Platform)
+Folder: `Governance/`
+Status: `🟠 IDENTITY MIGRATION APPLIED / VERIFICATION + INDEX SYNC HOLD`
+Version: `1.7.0`
+Canonical: `Yes — evidence/status record only`
+Last Audit: `2026-08-29`
+Review Method: `Repository First / GOV-006 Identity Classification / Controlled Migration`
 
-Platform
+## Purpose
 
-ARGO KOP (Knowledge Operating Platform)
+Record the current verified/awaiting-verification state of the Governance folder. This status record does not override Constitution, Bootstrap, canonical Governance or repository evidence.
 
-Folder
+## Identity Migration
 
-Governance
+The previous current-tree re-audit correctly discovered real identity collisions in `GOV-013`, `GOV-013A`, `GOV-014`, `GOV-015`, `GOV-016` and `GOV-017`, mixed with some heading-level false positives from support artifacts.
 
-Status
+The controlled classification/migration is specified by:
 
-🟠 INTEGRITY WARNING / CURRENT IDENTITY RE-AUDIT
+`Repository/GOVERNANCE_IDENTITY_MIGRATION_MATRIX_2026-08-29.md`
 
-Version
+Current retained owners:
 
-1.6.0
+- `GOV-013` → `Governance/GOV-013_HERMUZ_SESSION_BUILD_PROTOCOL.md`
+- `GOV-013A` → `Governance/GOV-013A_HERMUZ_BOOTSTRAP_INTEGRITY_GATE.md`
+- `GOV-014` → `Governance/GOV-014_CONTROLLED_DOCUMENT_MUTATION_PROTOCOL.md`
+- `GOV-015` → `Governance/GOV-015_EXECUTION_DOCUMENTATION_AND_KNOWLEDGE_TRANSFER.md`
+- `GOV-016` → `Governance/GOV-016_FAILURE_TO_LEARNING_PROTOCOL.md`
 
-Canonical
+Migrated distinct contracts/candidates:
 
-Yes — evidence record only
+- `GOV-019` → Observation & Side-Effect Gate
+- `GOV-020` → Session Workgroup Continuation Amendment
+- `GOV-021` → Repository-First Multi-Instance Execution Amendment
+- `GOV-022` → ARGO Self-Assurance & Capability Evaluation Protocol
+- `GOV-023` → Controlled Diagnostic Experiment candidate
+- `GOV-024` → Solution Simulation & Effect Analysis candidate
+- `GOV-025` → Connector Self-Learning candidate
+- `GOV-026` → Solution Evolution & Stability candidate
+- `GOV-027` → Provenance, Preservation & Session Reconstruction Amendment
 
-Last Audit
+The former lighter repository-first amendment is retained as an explicit superseded historical/compatibility record and is not a second active governance contract.
 
-2026-08-29
+The old colliding paths are preserved as non-authoritative compatibility records rather than silently deleted. Historical session/evidence records may still cite those paths as historical provenance; current operational consumers must use the migrated identities.
 
-Review Method
+## Authority Preservation
 
-Repository First / Evidence Based / Current-HEAD Reconciliation
+Identity migration did not promote content:
 
-Repository Baseline
+- documents already Canonical/Effective retain that authority under the new unique identity;
+- documents marked Proposed/Candidate remain Proposed/Candidate;
+- compatibility records carry no independent authority;
+- the former `GOV-017` collision did not cause either proposal to become canonical merely to preserve a number.
 
-Current working repository (`main`)
+## Audit Semantics Repair
 
----
+`Quality/Integration/internal_document_id_audit.py` was refined so Governance document-heading collision detection evaluates document-level first-H1 identities in `Governance/` rather than treating source-code comments, templates, mutation matrices or later section headings as independent Governance document identities.
 
-# Purpose
+This refinement narrows false positives without suppressing explicit `Document ID` duplication or real multiple-document Governance heading collisions.
 
-This document records the current verified state of the Governance folder.
+## Current Holds
 
-It is an evidence/status record. It does not override the repository, the Constitution, `PROJECT_BOOTSTRAP.md`, or canonical Governance documents.
+### Governance document identity
 
-The previous 2026-08-08 status recorded a clean Governance baseline for the then-inspected scope. That historical result is preserved as prior evidence but MUST NOT be reused as current proof after later Governance artifacts and amendments were added.
+`MIGRATED / CI VERIFICATION PENDING`.
 
-# Current Verified Baseline
+Required verification:
+- current identity audit reports no Governance document-heading collisions;
+- active duplicate/internal ID and filename alignment checks remain green;
+- Runtime/Integration and Full-Stack remain green.
 
-The following previously validated Governance artifacts remain directly present on current `main`:
+### Repository index/map alignment
 
-- `Governance/GOV-001_GOVERNANCE_FRAMEWORK.md`
-- `Governance/GOV-004_DOCUMENT_METADATA.md`
-- `Governance/GOV-005_REVIEW_STANDARD.md`
-- `Governance/GOV-006_NAMING_CONVENTION_STANDARD.md`
-- `Governance/GOV-009_REPOSITORY_POLICY.md`
-- `Governance/GOV-010_GOVERNANCE_MODEL.md`
-- `Governance/_FOLDER_STATUS.md`
+`OPEN / SERIALIZED CONTROL-SURFACE HOLD`.
 
-The current repository also contains later Governance/session-control artifacts that were not covered by the former clean-status evidence, including:
+`REP-001` and `REP-002` have not yet been mutated in this transaction. They may be synchronized only after the Governance migration passes identity/integration verification.
 
-- `Governance/GOV-013_HERMUZ_SESSION_BUILD_PROTOCOL.md`
-- `Governance/GOV-013_AMENDMENT_001_PROVENANCE_RECONSTRUCTION_2026-08-27.md`
-- `Governance/GOV-013A_HERMUZ_BOOTSTRAP_INTEGRITY_GATE.md`
-- `Governance/GOV-013A_HERMUZ_OBSERVATION_SIDE_EFFECT_GATE.md`
-- `Governance/GOV-013A_HERMUZ_SESSION_WORKGROUP_CONTINUATION_AMENDMENT.md`
-- `Governance/GOV-013A_REPOSITORY_FIRST_MULTI_INSTANCE_EXECUTION.md`
-- `Governance/GOV-013A_REPOSITORY_FIRST_MULTI_INSTANCE_EXECUTION_AMENDMENT.md`
-- `Governance/GOV-013B_HERMUZ_TOOL_SURFACE_DECISION_BOUNDARY.md`
-- `Governance/GOV-014_CONTROLLED_DOCUMENT_MUTATION_PROTOCOL.md`
-- `Governance/GOV-014A_HERMUZ_PREWRITE_MUTATION_MATRIX_GATE.md`
-- `Governance/GOV-014_ARGO_SELF_ASSURANCE_AND_CAPABILITY_EVALUATION_PROTOCOL.md`
-- `Governance/GOV-015_EXECUTION_DOCUMENTATION_AND_KNOWLEDGE_TRANSFER.md`
-- `Governance/GOV-015_HERMUZ_CONTROLLED_DIAGNOSTIC_EXPERIMENT_PROTOCOL.md`
-- `Governance/GOV-016_FAILURE_TO_LEARNING_PROTOCOL.md`
-- `Governance/GOV-016_HERMUZ_SOLUTION_SIMULATION_AND_EFFECT_ANALYSIS_PROTOCOL.md`
-- `Governance/GOV-017_HERMUZ_CONNECTOR_SELF_LEARNING_PROTOCOL.md`
-- `Governance/GOV-017_HERMUZ_SOLUTION_EVOLUTION_AND_STABILITY_PROTOCOL.md`
-- `Governance/GOV-018_EVIDENCE_REASONING_AND_CONFLICT_RESOLUTION.md`
-- current IGT / MI-IGT governance artifacts.
+### Content authority
 
-Physical presence is not equivalent to canonical authority. Each later artifact remains bounded by its own declared status and the applicable higher authority.
+`NOT IMPLIED BY IDENTITY REPAIR`.
 
-# Current Re-Audit Findings
+Identity uniqueness says nothing by itself about substantive correctness of each protocol. Proposed/Candidate documents remain pending their own review/promotion requirements.
 
-## Identity
+## GOV-011 Determination
 
-**OPEN / HOLD.**
+Current physical inventory includes Governance files under the `GOV-011` filename family, but this status section is not itself a `GOV-011` document. Any semantic/canonical determination for those files remains separate from the identity migration above.
 
-The `GOV-013A` prefix is currently used by multiple distinct artifacts.
+## Completion Gate
 
-Direct evidence establishes at minimum:
+Governance returns to a current identity/index-aligned PASS only after:
 
-- `GOV-013A_HERMUZ_BOOTSTRAP_INTEGRITY_GATE.md` explicitly declares `Document ID: GOV-013A` and `Approved / Canonical Addendum`;
-- `GOV-013A_HERMUZ_OBSERVATION_SIDE_EFFECT_GATE.md` uses the `GOV-013A` title and is `Proposed integration into GOV-013`;
-- `GOV-013A_HERMUZ_SESSION_WORKGROUP_CONTINUATION_AMENDMENT.md` uses the `GOV-013A` title and is an approved canonical/session amendment;
-- `GOV-013A_REPOSITORY_FIRST_MULTI_INSTANCE_EXECUTION.md` uses the `GOV-013A` title and is a canonical effective amendment.
+1. migrated document identities pass the current audit;
+2. current operational references are reconciled;
+3. `REP-001` and `REP-002` are synchronized without false promotion;
+4. affected tests and exact-head CI are green;
+5. post-write read-back verifies the resulting state.
 
-Until the family/identity semantics are reconciled, the Governance layer MUST NOT claim unique active logical IDs globally.
+Current result: **IDENTITY MIGRATION APPLIED; VERIFICATION/INDEX SYNC NOT YET CLOSED.**
 
-## Path / Filename Alignment
-
-**PARTIALLY VERIFIED.**
-
-The original validated set remains path-aligned. Later amendment families require dedicated identity/family reconciliation before a global PASS can be restored.
-
-## Canonical Ownership
-
-**OPEN / BOUNDED.**
-
-Canonical ownership remains clear for the earlier validated baseline. Later Governance additions must be classified as unique identities, amendment-family members, proposed artifacts, evidence records, or superseded artifacts before the full folder can be called clean.
-
-## Duplicate / Family Prefix Review
-
-**ACTIVE HOLD.**
-
-`GOV-013A` is the currently demonstrated collision/family ambiguity. Similar reused numeric prefixes in `GOV-014`, `GOV-015`, `GOV-016`, and `GOV-017` are visible in current physical inventory and require inspection of their internal identities/status before any global uniqueness claim.
-
-## References
-
-**RE-AUDIT REQUIRED FOR LATER ADDITIONS.**
-
-Previous reference repairs remain historical evidence. Current session-control and IGT additions must be evaluated against current consumers and indexes.
-
-## Repository Index / Map Alignment
-
-**OPEN.**
-
-`REP-001` reflects only part of the current Governance inventory and must not represent the folder as globally reconciled until the identity-family question is resolved.
-
-## Legacy Preservation
-
-Prior archived legacy preservation remains intact within the previously inspected scope. No deletion or bulk-normalization is authorized by this status update.
-
----
-
-# GOV-011 Determination
-
-The previous audit found no active canonical `GOV-011` authority. Current physical inventory now includes `Governance/GOV-011_EXTERNAL_FEEDBACK_REPORT_STANDARD.md` and an empty `Governance/GOV-011_VERIFIED_ASSESSMENT_PRINCIPLE.md`.
-
-Their physical presence does **not** automatically reverse the previous authority determination. Their current semantic/canonical status must be established from direct content and governed promotion evidence before either can be treated as active Governance authority.
-
----
-
-# Completion Gate
-
-The Governance layer can return to a current `VALIDATED / CLEAN` claim only after:
-
-1. current physical Governance inventory is classified;
-2. duplicate/family prefixes are reconciled against internal Document IDs and statuses;
-3. one active canonical owner is established for each logical identity where uniqueness is required;
-4. proposed/session/evidence artifacts are clearly distinguished from canonical authority;
-5. `REP-001` and `REP-002` are synchronized without false promotion;
-6. affected references and consumers are revalidated;
-7. post-mutation CI and repository read-back remain green.
-
-Current result: **NOT CLOSED**.
-
----
-
-# Scope Boundary
-
-This status update proves only that the previous Governance clean claim is stale for the current repository and identifies current reconciliation requirements.
-
-It does NOT:
-
-- invalidate the correctness of every Governance document;
-- establish that every reused prefix is a true Document-ID collision;
-- rename or renumber any Governance artifact;
-- certify the entire ARGO-KOP repository;
-- authorize deletion of apparently duplicated files.
-
----
-
-# Required Next Action
-
-`Classify current Governance identity families → reconcile internal IDs/status/authority → synchronize REP-001/REP-002 → re-run affected tests → close only the verified scope.`
-
----
-
-# Related Authority
+## Related Authority
 
 - `PROJECT_BOOTSTRAP.md`
 - `Core/CORE-003_CONSTITUTION.md`
 - `Governance/GOV-001_GOVERNANCE_FRAMEWORK.md`
+- `Governance/GOV-006_NAMING_CONVENTION_STANDARD.md`
 - `Governance/GOV-013_HERMUZ_SESSION_BUILD_PROTOCOL.md`
-- `Governance/GOV-013_AMENDMENT_001_PROVENANCE_RECONSTRUCTION_2026-08-27.md`
 - `Governance/GOV-013A_HERMUZ_BOOTSTRAP_INTEGRITY_GATE.md`
-- `Governance/GOV-013A_REPOSITORY_FIRST_MULTI_INSTANCE_EXECUTION.md`
 - `Governance/GOV-014_CONTROLLED_DOCUMENT_MUTATION_PROTOCOL.md`
+- `Governance/GOV-021_REPOSITORY_FIRST_MULTI_INSTANCE_EXECUTION.md`
+- `Governance/GOV-027_PROVENANCE_PRESERVATION_AND_SESSION_RECONSTRUCTION_AMENDMENT.md`
 - `Repository/REP-001_MASTER_INDEX.md`
+- `Repository/REP-002_REPOSITORY_MAP.md`
 - `Repository/ROOM071_CURRENT_STATE.json`
 
----
+## Engineering Rule
 
-# Engineering Rule
+`Repository Reality > Fresh Verified Evidence > Historical Status Claims > Conversation Memory`
 
-Repository Reality > Fresh Verified Evidence > Historical Status Claims > Conversation Memory
-
-A `CLEAN` result has a freshness dependency. Later mutations can reopen the audited scope without proving that the earlier audit was wrong.
-
----
-
-End of Document
+A prior CLEAN result has a freshness dependency. A migration is not closed until its consumers, indexes and CI are reconciled.
