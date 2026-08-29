@@ -3,7 +3,7 @@
   "state_date": "2026-08-29",
   "canonical_branch": "main",
   "observed_functional_baseline_sha": "28e3ec16f1b0e6decee6623f77f48cda74e229c7",
-  "last_verified_control_plane_sha": "78342410e9cc6c59cf238a0dc7df3118c29bc18d",
+  "last_verified_control_plane_sha": "bfdfd2ee9f59965d9a1a185f584bc03940ed7e93",
   "control_plane_rule": "DISCOVER_CURRENT_HEAD_AT_REENTRY_DO_NOT_TRUST_STORED_SHA_AS_LIVE_HEAD",
   "reentry_order": [
     "DISCOVER_REPOSITORY_AND_LIVE_HEAD",
@@ -60,19 +60,7 @@
     "canonical relationship registries and matrices",
     "Repository/ROOM071_CURRENT_STATE.json"
   ],
-  "active_leases": [
-    {
-      "lease_id": "R71-20260829-EXT-EVIDENCE-RESOLUTION-003",
-      "execution_id": "CURRENT_SOLO_SESSION",
-      "role": "HERMUZ_EQUIVALENT_IGT_EXECUTOR",
-      "state": "ACTIVE",
-      "baseline_sha": "78342410e9cc6c59cf238a0dc7df3118c29bc18d",
-      "scope": "bounded resolution of verified untrusted external evidence into resolved-but-unauthenticated evidence; no provider-authentication or authority promotion",
-      "shared_files": ["Quality/Integration/experience_spine_igt_*external*", "Quality/Integration/test_experience_spine_igt_*", "Repository/IGT_*", "Repository/MUT-2026-08-29-IGT-QUARANTINE-RESOLUTION-003.md", "Repository/ROOM071_CURRENT_STATE.json"],
-      "forbidden_scope": ["canonical Governance", "REP-001", "REP-002", "PROJECT_STATUS.md", "provider-authentication promotion", "authority promotion", "cognitive-effect promotion"],
-      "required_revalidation": ["intake verification", "resolver/result identity binding", "raw-evidence exact-match or digest proof", "adversarial mismatch/unavailable tests", "runtime/integration CI", "full-stack CI", "read-back"]
-    }
-  ],
+  "active_leases": [],
   "closed_leases": [
     {
       "lease_id": "R71-20260829-CONTROL-PLANE-001",
@@ -94,6 +82,18 @@
       "ci": {"runtime_integration": "SUCCESS", "full_stack": "SUCCESS", "m2": "SUCCESS", "internal_id_audit_preclosure": "SUCCESS"},
       "handoff": "Repository/MUT-2026-08-29-STATUS-GOVERNANCE-RECONCILIATION-002.md",
       "remaining_hold": "GOVERNANCE-REP001-INVENTORY-RECONCILIATION"
+    },
+    {
+      "lease_id": "R71-20260829-EXT-EVIDENCE-RESOLUTION-003",
+      "execution_id": "CURRENT_SOLO_SESSION",
+      "role": "HERMUZ_EQUIVALENT_IGT_EXECUTOR",
+      "state": "CLOSED",
+      "scope": "bounded resolution of verified untrusted external evidence into resolved-but-unauthenticated evidence",
+      "verified_functional_sha": "bfdfd2ee9f59965d9a1a185f584bc03940ed7e93",
+      "ci": {"runtime_integration": "SUCCESS", "full_stack": "SUCCESS", "m2": "SUCCESS", "quality_integration": "483_PASS_11_SUBTESTS"},
+      "handoff": "Repository/MUT-2026-08-29-IGT-QUARANTINE-RESOLUTION-003.md",
+      "maximum_state": "RESOLVED_UNAUTHENTICATED",
+      "next_hold_question": "PROVIDER_AUTHENTICATION_TRUST_ANCHOR_READINESS"
     }
   ],
   "verified_recent_chain": [
@@ -109,6 +109,8 @@
     "BINDING_AWARE_EVIDENCE_ADMISSION_BUILT",
     "UNTRUSTED_EXTERNAL_EVIDENCE_INTAKE_BUILT",
     "UNTRUSTED_EXTERNAL_EVIDENCE_INTAKE_FINAL_HEAD_GATE_CLOSED",
+    "IGT_QUARANTINE_RESOLUTION_GATE_BUILT",
+    "GITHUB_GENERIC_QUARANTINE_REACQUISITION_BUILT",
     "ROOM71_RECONSTRUCTION_BOUNDED_PASS",
     "REPOSITORY_FIRST_MULTI_INSTANCE_CONTROL_EFFECTIVE",
     "ROOM71_ROLE_AND_LEASE_CONTROL_ESTABLISHED",
@@ -120,6 +122,7 @@
   "closed_or_bounded_points": {
     "P4": "CLOSED_FOR_LISTED_CRITICAL_EDGE_SET_ONLY",
     "IGT_untrusted_external_evidence_intake_transaction": "CLOSED_WITH_POST_MERGE_MAIN_CI",
+    "EXT-EVIDENCE-RESOLUTION-SUBGATE": "CLOSED_EXECUTION_VERIFIED_MAX_RESOLVED_UNAUTHENTICATED",
     "multi_instance_reconstruction_test": "BOUNDED_PASS",
     "repository_first_multi_instance_control": "PROMOTED_EFFECTIVE",
     "room71_solo_control_plane_reconciliation": "CLOSED",
@@ -136,26 +139,32 @@
       "next": "dedicated identity classification/migration for GOV-013A and reused GOV-014/015/016/017 families before REP-001 or REP-002 canonical inventory mutation"
     },
     {
-      "id": "EXT-EVIDENCE-LIFECYCLE",
+      "id": "PROVIDER-AUTHENTICATION-TRUST-ANCHOR-READINESS",
       "priority": 2,
-      "state": "ACTIVE_BOUNDED_RESOLUTION_TRANSACTION",
-      "next": "implement and verify quarantine resolution without provider-authentication promotion"
+      "state": "OPEN_DIAGNOSTIC",
+      "next": "search for real provider/source trust anchors and independently verifiable authentication material; never promote resolved evidence without one"
+    },
+    {
+      "id": "EXT-EVIDENCE-LIFECYCLE",
+      "priority": 3,
+      "state": "OPEN_AFTER_RESOLUTION",
+      "next": "provider-backed authentication or other governed authenticity evidence, then qualification and bounded authority decision"
     },
     {
       "id": "CONNECTED-BASELINE-GLOBAL",
-      "priority": 3,
+      "priority": 4,
       "state": "OPEN",
       "next": "continue evidence-backed repository-wide critical relationship and authority validation; do not infer global closure from P4 bounded closure"
     },
     {
       "id": "IGT-COGNITIVE-BENEFIT",
-      "priority": 4,
+      "priority": 5,
       "state": "UNPROVEN",
       "next": "controlled novel-case B0/L1/L2 capability experiment only after evidence lifecycle is sufficiently closed"
     },
     {
       "id": "BRANCH-HYGIENE",
-      "priority": 5,
+      "priority": 6,
       "state": "OPEN_NON_BLOCKING",
       "next": "classify ACTIVE/HANDOFF/HISTORICAL/SUPERSEDED/MERGED-EVIDENCE-PRESERVED before deletion; never bulk-delete for cosmetic cleanup"
     }
@@ -163,6 +172,7 @@
   "priority_order": [
     "KEEP_REQUIRED_CI_GREEN",
     "DO_NOT_MUTATE_REP001_REP002_UNTIL_GOVERNANCE_IDENTITY_OWNERSHIP_IS_CLASSIFIED",
+    "VERIFY_PROVIDER_AUTHENTICATION_TRUST_ANCHOR_BEFORE_ANY_AUTHENTICITY_PROMOTION",
     "CLOSE_EXTERNAL_EVIDENCE_LIFECYCLE_ONE_TRUST_STATE_AT_A_TIME",
     "CONTINUE_CONNECTED_BASELINE_GLOBAL_VALIDATION",
     "RUN_CONTROLLED_IGT_CAPABILITY_PROOF",
@@ -176,7 +186,8 @@
     "MAAT coordination does not decide technical truth",
     "stored control-state SHA is not a substitute for live HEAD discovery",
     "REP-001 and REP-002 Governance inventory are not reconciled while identity-family ownership remains ambiguous",
-    "external evidence resolution does not equal provider authentication",
+    "RESOLVED_UNAUTHENTICATED is not provider authentication",
+    "external evidence resolution does not prove external delivery or model execution",
     "branch population has not been declared obsolete or safe to delete"
   ]
 }
