@@ -2,8 +2,9 @@
 
 Date: 2026-08-29
 Parent transaction: `R71-20260829-SERVICES-INVENTORY-118`
-Baseline: `main@6b3d1e25526f0af400227a288710576e2a7efaae`
-Status: `PREWRITE / CI-FAILURE REPAIR / NOT CLOSED`
+Prewrite baseline: `main@6b3d1e25526f0af400227a288710576e2a7efaae`
+Protected-change parent: `main@9e0f17dbe3d1a4bd5b7a54b98344ca05fbd4fc8e`
+Status: `FINALIZED / CI-FAILURE REPAIR / SAME-CHANGE-SET / CI PENDING`
 
 ## Exact-head failure evidence
 
@@ -12,61 +13,46 @@ At `6b3d1e25526f0af400227a288710576e2a7efaae`:
 - M2 run `33258323157` — SUCCESS;
 - Runtime/Integration run `33258323120` — FAILURE.
 
-Two jobs failed for two distinct reasons.
+### Failure A — observation-surface confusion
 
-### Integration failure — test observation surface error
+The new regression used `Path('Services').iterdir()` and asserted every runtime working-directory entry was a file. During pytest, generated `__pycache__/` directories can appear. That surface is not the committed Git inventory proven by Git tree `94088ae4ae54699ae267a32dda033463591573c8` (`truncated:false`).
 
-`Quality/Integration/test_services_exact_inventory.py::test_services_exact_current_physical_inventory` asserted that every entry returned by `Path('Services').iterdir()` was a file.
+Repair: regression now measures tracked repository paths using `git ls-files Services` and requires the exact 20-file set.
 
-During pytest execution Python creates runtime artifacts such as `Services/__pycache__/`, so the working directory is not equivalent to the committed Git tree. The authoritative enumeration evidence was the non-truncated Git tree, not a mutated test-process filesystem.
-
-Classification:
-`TEST-MODEL FAILURE / OBSERVATION-SURFACE CONFUSION`.
-
-Correct repair:
-use tracked Git paths (`git ls-files Services`) in the regression, so generated/untracked runtime artifacts cannot falsify repository inventory.
-
-Rule:
 `COMMITTED GIT TREE ≠ TEST-RUNTIME WORKING DIRECTORY`.
 
-### Integrity failure — stable semantic contract lost
+### Failure B — stable semantic wording lost
 
-Existing integrity tests require two still-true clauses in `Services/_FOLDER_STATUS.md`:
+Existing integrity contracts correctly require:
+- `` `SRV-001` through `SRV-010` `` for the logical active service catalog;
+- `Physical existence of a service artifact does not prove implementation or runtime execution.` for the no-promotion boundary.
 
-- `` `SRV-001` through `SRV-010` `` — the logical SRV catalog remains exactly SRV-001..010;
-- `Physical existence of a service artifact does not prove implementation or runtime execution.` — the no-promotion boundary remains valid.
+Both meanings remained true but were reworded by 118. Repair restores both exact stable clauses while retaining the new physical-tree evidence.
 
-Transaction 118 preserved their meaning but rewrote the wording. That broke tested compatibility without evidence that the old clauses were obsolete.
+## Repair changed set
 
-Classification:
-`CONTENT-PRESENTATION REGRESSION / STABLE CONTRACT MUST BE PRESERVED`.
+| Change | Target | Action | Result |
+|---|---|---|---|
+| R1 | `Services/_FOLDER_STATUS.md` | UPDATE | restore exact stable catalog and no-proof clauses; preserve exact 20-file tracked inventory and Integrity Hold |
+| R2 | `Quality/Integration/test_services_exact_inventory.py` | UPDATE | inspect tracked Git paths, not generated working-directory entries |
+| R3 | this Matrix | UPDATE | finalized with R1/R2 in same Git tree/commit |
 
-## Authorized repair
+No existing integrity test is weakened. No service, connector, Runtime, provider-authentication, REP-001/002 or relationship authority is widened.
 
-1. `Services/_FOLDER_STATUS.md`
-   - preserve the exact stable SRV catalog phrase;
-   - preserve the exact physical-existence non-proof sentence;
-   - retain the new exact 20-file physical inventory and Integrity Hold.
-2. `Quality/Integration/test_services_exact_inventory.py`
-   - replace runtime filesystem enumeration with tracked Git-path enumeration;
-   - continue checking exact 20-file set and status boundary.
-3. this Matrix
-   - finalize in same protected change set as 1–2.
+## Verification gate
 
-No service/connector/runtime/provider authority is widened. No REP-001/002 mutation. No existing integrity test is weakened.
+Required exact-head CI:
+- ARGO Runtime Prototype and Integration Tests;
+- Full-Stack Repository Audit;
+- M2 Multi-Channel Proposal Training;
+- Real Mutation Matrix Regression if emitted.
 
-## Verification
-
-`PREWRITE → STATUS + CORRECTED TEST + FINALIZED MATRIX SAME CHANGE SET → READ-BACK → EXACT-HEAD CI → CLOSE OR HOLD`.
+Until green CI, transaction 118 remains open.
 
 ## Learning
 
-Two independent distinctions emerged:
+A robust domain-inventory test must keep three evidence surfaces separate:
 
-`LOGICAL SERVICE CATALOG ≠ COMPLETE PHYSICAL SERVICE TREE`
+`LOGICAL CATALOG / TRACKED GIT TREE / RUNTIME WORKING DIRECTORY`.
 
-and
-
-`COMMITTED GIT TREE ≠ TEST-RUNTIME WORKING DIRECTORY`.
-
-A correct inventory control must preserve both distinctions at once.
+They may overlap, but they are not interchangeable.

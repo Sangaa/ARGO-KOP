@@ -23,9 +23,11 @@ Those completion claims remain withdrawn. Current evidence supports an exact phy
 
 # Exact Physical Inventory
 
-Exact Git tree `94088ae4ae54699ae267a32dda033463591573c8` returned `truncated: false` with exactly 20 files and no subdirectories.
+Exact Git tree `94088ae4ae54699ae267a32dda033463591573c8` returned `truncated: false` with exactly 20 tracked files and no tracked subdirectories.
 
-## Declared SRV catalog
+## Declared active service catalog
+
+The logical service catalog remains `SRV-001` through `SRV-010`:
 
 - `SRV-001_SERVICE_ARCHITECTURE.md`
 - `SRV-002_REPOSITORY_SERVICE.md`
@@ -54,7 +56,7 @@ Exact Git tree `94088ae4ae54699ae267a32dda033463591573c8` returned `truncated: f
 - `GITHUB_REPOSITORY_CONNECTOR.py`
 - `REPOSITORY_CONNECTOR_INTERFACE.py`
 
-The eight implementation/connector surfaces above are part of the current physical tree. Their presence does not make them separate canonical `SRV-*` identities and does not prove external/provider authenticity or universal runtime execution.
+The eight implementation/connector surfaces above are part of the current tracked physical tree. Their presence does not make them separate canonical `SRV-*` identities and does not prove external/provider authenticity or universal runtime execution.
 
 # Verified Scope
 
@@ -88,7 +90,7 @@ The folder remains on **INTEGRITY HOLD** until:
 
 1. `_FOLDER_STATUS.md` is status evidence, not proof of completion.
 2. A service contract is not valid solely because a referenced path is named.
-3. Physical existence of a service or implementation artifact does not prove implementation or runtime execution.
+3. Physical existence of a service artifact does not prove implementation or runtime execution.
 4. Service dependencies require target existence, content inspection, identity and authority validation.
 5. Successful file mutation does not prove service or repository integrity.
 6. A bounded validation result must not be promoted into repository-wide certification.
