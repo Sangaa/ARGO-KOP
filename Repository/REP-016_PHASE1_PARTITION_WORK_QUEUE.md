@@ -2,18 +2,20 @@
 
 Platform: ARGO KOP  
 Document ID: REP-016  
-Version: 1.3.0  
+Version: 1.4.0  
 Status: Active / Phase 1 Open / Integrity Hold  
 Development Baseline: 3.2.1  
-Last Audit: 2026-08-17
+Last Audit: 2026-08-29
 
 ## Purpose
 
-Convert the repository control plane into an ordered, recoverable Phase-1 execution queue. This file coordinates REP-011 through REP-015 and the provisional REP-020 evidence surface; it does not replace their authority.
+Convert the repository control plane into an ordered, recoverable Phase-1 execution queue. This file coordinates REP-011 through REP-016 and the provisional REP-020 evidence surface; it does not replace their authority.
 
 ## Active Ring
 
-**RING 0 — CONTROL PLANE**
+**RING 0 — CONTROL PLANE / CONNECTED-BASELINE INTEGRITY HOLD**
+
+Priority-1 control-plane reconciliation is closed within its bounded inspected scope, but the repository remains in Ring-0/Connected-Baseline integrity work while identity, relationship, observability and cross-domain evidence remain open.
 
 No promotion to a later ring is allowed until predecessor exit evidence, affected authority artifacts, dependencies/consumers, unresolved scope, and a recovery checkpoint are verified.
 
@@ -21,14 +23,14 @@ No promotion to a later ring is allowed until predecessor exit evidence, affecte
 
 | Priority | Partition / Workstream | Current State | Required Entry Point | Closure Authority |
 |---:|---|---|---|---|
-| 1 | Repository Control Plane reconciliation | **CLOSED** | REP-011..016 + REP-020 | REP-011 + explicit closure decision |
-| 2 | Exhaustive duplicate-ID audit | RELATIONSHIP_VALIDATION | REP-001 + full current tree/content | REP-011/014 + explicit identity decisions |
-| 3 | Executable relationship proof | RELATIONSHIP_VALIDATION | RUN-010 → ENG-006 → SRV-009 | REP-011/014 + Runtime/Engine/Service evidence |
-| 4 | Bidirectional critical graph validation | RELATIONSHIP_VALIDATION | REP-014 + critical edges | REP-014 + endpoint evidence |
-| 5 | Controlled mutation/reconciliation harness | NOT_STARTED | Current control-plane contract | REP-011/014 + mutation evidence |
-| 6 | CI ↔ impact-matrix observability | NOT_STARTED | REP-020 + workflow evidence | REP-011/020 evidence review |
+| 1 | Repository Control Plane reconciliation | **CLOSED / BOUNDED RING-0 CONTROL PLANE** | REP-011..016 + REP-020 | REP-011 + explicit closure decision |
+| 2 | Exhaustive duplicate-ID audit | **OPEN / ACTIVE** | REP-001 + full current tree/content | REP-011/014 + explicit identity decisions |
+| 3 | Executable relationship proof | **OPEN / BOUNDED EVIDENCE EXISTS** | RUN-010 → ENG-006 → SRV-009 | REP-011/014 + Runtime/Engine/Service evidence |
+| 4 | Bidirectional critical graph validation | **PARTIAL / BOUNDED CRITICAL-EDGE SET CLOSED** | REP-014 + critical edges | REP-014 + endpoint evidence |
+| 5 | Controlled mutation/reconciliation harness | **PARTIAL / GOVERNED / REPOSITORY-LEVEL TESTED** | GOV-014 + current control-plane contract | REP-011/014 + mutation evidence |
+| 6 | CI ↔ impact-matrix observability | **ACTIVE / POLICY PARTIALLY RESOLVED / CURRENT CI RECHECK REQUIRED** | P6 scope registry + REP-020 + workflow evidence | REP-011/020 + applicable Governance evidence review |
 | 7 | Core | INVENTORYING | Core/_FOLDER_STATUS.md + REP-013 | Domain authority + REP-011 |
-| 8 | Governance | INVENTORYING | Governance/_FOLDER_STATUS.md + REP-013 | Governance authority + REP-011 |
+| 8 | Governance | **RECONCILING / VERIFIED IDENTITY DEFECTS REPAIRED ON CURRENT TRANSACTION BRANCH** | Governance/_FOLDER_STATUS.md + REP-013 | Governance authority + REP-011 |
 | 9 | Architecture | RELATIONSHIP_VALIDATION | ARC_MAP + ARC-001..011 | Architecture authority + REP-011/014 |
 | 10 | Runtime | RELATIONSHIP_VALIDATION | Runtime/_FOLDER_STATUS.md + REP-013 | Runtime authority + REP-011/014 |
 | 11 | Interfaces | RELATIONSHIP_VALIDATION | INTF-001/004/006/010 | Interface authority + REP-011/014 |
@@ -37,7 +39,7 @@ No promotion to a later ring is allowed until predecessor exit evidence, affecte
 | 14 | Engine | RELATIONSHIP_VALIDATION | ENG-002/004/006/007 | Engine authority + REP-011/014 |
 | 15 | Services | INVENTORYING | SRV catalog + exact file enumeration | Service authority + REP-011/014 |
 | 16 | Plugins | RELATIONSHIP_VALIDATION | PLG-001 + plugin inventory | Plugin authority + REP-011/014 |
-| 17 | Memory | INVENTORYING | Engineering Journal + content tree | Memory authority + REP-011 |
+| 17 | Memory | INVENTORYING | Engineering Journal + current Memory/Experience inventory | Memory authority + REP-011 |
 | 18 | Specifications | INVENTORYING | SPEC-001 + exact enumeration | Specification authority + REP-011/014 |
 | 19 | Templates | INVENTORYING | Templates/README.md + exact physical enumeration + content review | Template authority + REP-011 |
 | 20 | Release | NOT_STARTED | Exact physical enumeration | Release authority + REP-011/014 |
@@ -62,19 +64,91 @@ Material mutation remains:
 
 `ONE MATERIAL CHANGE → COMMIT → RE-READ → RECORD EVIDENCE → NEXT CHANGE`
 
+Parallel material mutation additionally requires the `GOV-015` Work-Lease boundary before writing.
+
 ## Search Evidence Contract
 
-For every material search result, positive or negative, use two materially different retrieval methods before making an absence or current-state claim. For critical absence decisions, a third materially different confirmation should be used where the tooling permits it.
+For every material negative result, follow the current `GOV-013` search discipline: **three materially different searches/retrieval methods** before an absence claim, unless the available tooling makes one method genuinely impossible; that evidence limitation must then be explicit.
 
 For material negative results:
 
-`SEARCH-A → INDEPENDENT SEARCH-B → THIRD CONFIRMATION WHEN FEASIBLE → CONFIRM ABSENCE OR RECOVER → ANALYZE FAILURE → READ CURRENT AUTHORITY → RECORD`
+`SEARCH-A → INDEPENDENT SEARCH-B → MATERIALLY DIFFERENT SEARCH-C → CONFIRM ABSENCE OR RECOVER → ANALYZE FAILURE → READ CURRENT AUTHORITY → RECORD`
 
 For material positive results:
 
 `SEARCH RESULT → CAPTURE REF/SHA → COMPARE CURRENT REF → RE-READ CURRENT AUTHORITY → FRESH/STALE CLASSIFICATION → USE/DISCARD`
 
 A negative result is never an absence claim from one search. A positive result is never current-main evidence until its ref/SHA is reconciled with the current authoritative ref.
+
+---
+
+## 2026-08-29 Current Checkpoint — CP-2026-08-29-01
+
+Current re-entry base for the active convergence cycle:
+
+`main@28e3ec16f1b0e6decee6623f77f48cda74e229c7`
+
+Current controlled work branch:
+
+`argo/control-plane-convergence-20260829`
+
+Current transaction:
+
+`Repository/MUT-2026-08-29-CONTROL-PLANE-CONVERGENCE-001.md`
+
+### Current-main milestones reconciled into this queue
+
+1. `51374901bc03503f3e5d90192e0e0c2adc02d01e` closed the bounded REL-009/P4 critical-edge transaction while explicitly leaving broader Connected-Baseline work open.
+2. `a4cc96203b689338a50b7233b46c15eae8449f5a` established the clean advisory Experience Spine projection without authority/cognitive-benefit promotion.
+3. `eea81fb5df6e2b532dc3b5edda1cbcf4c0da1f78` established the governed IGT B0/L1/L2 harness while participant evidence remained unseen.
+4. Subsequent IGT work on current main built evidence package, correlation, resolver, blind export, response binding and admission boundaries.
+5. `28e3ec16f1b0e6decee6623f77f48cda74e229c7` established the untrusted external-evidence quarantine/intake boundary; provider authenticity and cognitive effect remain unproven.
+
+### Governance/control-plane defects found during current re-entry
+
+- Active `GOV-014` identity collision: controlled mutation vs Self-Assurance.
+- Missing `GOV-015` execution-documentation / knowledge-transfer dependency referenced by `GOV-016`.
+- Legacy active `Governance/GOV-004_TRACEABILITY_STANDARD.md` namespace placement competing with canonical GOV-004 ownership.
+- Governance `_FOLDER_STATUS.md`, REP-001/REP-002 and Control Room #71/MAAT were stale relative to current main.
+- REP-001/REP-002 did not explicitly expose REP-016 as a current control-plane member.
+- P6 EJR direct-impact policy remained unresolved under Issue #15.
+
+### Current branch dispositions
+
+The active convergence transaction has, subject to final branch/CI/promotion verification:
+
+- preserved canonical `GOV-014_CONTROLLED_DOCUMENT_MUTATION_PROTOCOL.md` ownership;
+- migrated Self-Assurance to `GOV-017` with pre-migration provenance archived;
+- created `GOV-015_EXECUTION_DOCUMENTATION_AND_KNOWLEDGE_TRANSFER_PROTOCOL.md` with deterministic activation, Work Leases, HERMUZ/HORUS/MAAT boundaries, independence labels, handoff capsule and collision handling;
+- archived the legacy GOV-004 traceability path and removed it from active Governance placement;
+- synchronized Governance status plus REP-001/REP-002 affected inventory;
+- rebuilt Control Room #71 and MAAT #74 around current repository truth and leased parallel mutation;
+- closed stale task issues #72/#73/#75 after current-main evidence superseded their activation assumptions;
+- resolved the P6 EJR policy at the policy layer as `OUT_OF_SCOPE` for direct P6 impact correlation, with no REP-020 mapping or correlator workaround, pending final CI evidence before Issue #15 closure.
+
+### Current open/HOLD boundaries
+
+- Repository-wide duplicate-ID/content-identity audit: **OPEN**.
+- Broader Connected-Baseline / graph validation: **OPEN**.
+- Exact current CI evidence for this convergence branch: **REQUIRED BEFORE PROMOTION**.
+- Issue #11 historical Actions-observability boundary: **RETEST ON CURRENT PR/HEAD BEFORE CLOSURE**.
+- P6 EJR policy Issue #15: **DECISION APPLIED ON BRANCH / CI VERIFICATION REQUIRED BEFORE CLOSURE**.
+- Provider-backed external authenticity: **HOLD_EXTERNAL**.
+- IGT cognitive benefit: **NOT PROVEN / CONTROLLED PARTICIPANT EVIDENCE REQUIRED**.
+- Global `BOOTED / INTEGRITY PASS`: **NOT CLAIMED**.
+
+### Current execution order after promotion of this transaction
+
+1. Continue repository-wide duplicate-ID/content-identity audit from current tree; the repaired Governance subset cannot stand in for repository-wide closure.
+2. Reconcile any remaining REP-011/REP-013/REP-014 status drift exposed by the identity audit.
+3. Close/reclassify current P6/CI observability issues only with exact current workflow evidence.
+4. Continue the external-evidence lifecycle from `UNTRUSTED_QUARANTINED` toward independent resolution/provider-backed authentication without collapsing trust states.
+5. Only after evidence-chain closure, execute controlled novel-case B0/L1/L2 participant experiments for cognitive-effect measurement.
+6. Resume later domain partitions according to evidence and dependency priority, not historical checkpoint momentum.
+
+This checkpoint supersedes P351 **as the current queue checkpoint only**. P351 and all earlier P-records remain preserved below as historical evidence.
+
+---
 
 ## P325 Priority-1 Closure-Claim Integrity Incident Synchronization — 2026-08-17
 
@@ -251,11 +325,11 @@ P261 also completed the direct registry reconciliation for `REL-005` in REP-014.
 
 No executable promotion is authorized without callable SRV-009 consumer evidence.
 
-## Current Checkpoint
+## Historical Checkpoint — P351 (superseded as current by CP-2026-08-29-01)
 
-`P351` is now the latest recorded checkpoint for this control-plane reconciliation cycle.
+`P351` was the latest recorded checkpoint for the prior control-plane reconciliation cycle.
 
-Current state:
+State recorded at that checkpoint:
 
 - Priority 1 Control Plane reconciliation: **CLOSED / RING-0 CONTROL-PLANE RECONCILED WITHIN CURRENT INSPECTED SCOPE**
 - Priority 2 exhaustive duplicate-ID audit: **OPEN**
@@ -265,6 +339,8 @@ Current state:
 - Priority 6 CI ↔ impact-matrix observability: **NOT_STARTED**
 - Integrity: **HOLD**
 - Global PASS: **NOT CLAIMED**
+
+P351 remains historical evidence; its `NOT_STARTED`/OPEN labels are not automatically current after later P4/Experience/IGT work.
 
 ## P350 Explicit Priority-1 Closure Decision — 2026-08-17
 
