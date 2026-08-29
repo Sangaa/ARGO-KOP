@@ -3,7 +3,7 @@
   "state_date": "2026-08-29",
   "canonical_branch": "main",
   "observed_functional_baseline_sha": "28e3ec16f1b0e6decee6623f77f48cda74e229c7",
-  "last_verified_control_plane_sha": "177191cd270c343b03a2d0d0b9a233ea4a8ffedf",
+  "last_verified_control_plane_sha": "78342410e9cc6c59cf238a0dc7df3118c29bc18d",
   "control_plane_rule": "DISCOVER_CURRENT_HEAD_AT_REENTRY_DO_NOT_TRUST_STORED_SHA_AS_LIVE_HEAD",
   "reentry_order": [
     "DISCOVER_REPOSITORY_AND_LIVE_HEAD",
@@ -60,7 +60,19 @@
     "canonical relationship registries and matrices",
     "Repository/ROOM071_CURRENT_STATE.json"
   ],
-  "active_leases": [],
+  "active_leases": [
+    {
+      "lease_id": "R71-20260829-EXT-EVIDENCE-RESOLUTION-003",
+      "execution_id": "CURRENT_SOLO_SESSION",
+      "role": "HERMUZ_EQUIVALENT_IGT_EXECUTOR",
+      "state": "ACTIVE",
+      "baseline_sha": "78342410e9cc6c59cf238a0dc7df3118c29bc18d",
+      "scope": "bounded resolution of verified untrusted external evidence into resolved-but-unauthenticated evidence; no provider-authentication or authority promotion",
+      "shared_files": ["Quality/Integration/experience_spine_igt_*external*", "Quality/Integration/test_experience_spine_igt_*", "Repository/IGT_*", "Repository/MUT-2026-08-29-IGT-QUARANTINE-RESOLUTION-003.md", "Repository/ROOM071_CURRENT_STATE.json"],
+      "forbidden_scope": ["canonical Governance", "REP-001", "REP-002", "PROJECT_STATUS.md", "provider-authentication promotion", "authority promotion", "cognitive-effect promotion"],
+      "required_revalidation": ["intake verification", "resolver/result identity binding", "raw-evidence exact-match or digest proof", "adversarial mismatch/unavailable tests", "runtime/integration CI", "full-stack CI", "read-back"]
+    }
+  ],
   "closed_leases": [
     {
       "lease_id": "R71-20260829-CONTROL-PLANE-001",
@@ -69,11 +81,7 @@
       "state": "CLOSED",
       "scope": "control-plane reconciliation, role boundaries, stale-status/index diagnosis, verification and closure",
       "verified_control_plane_sha": "9a3215387d039f390e22dfb1c20f22142557c08b",
-      "ci": {
-        "runtime_integration": "SUCCESS",
-        "full_stack": "SUCCESS",
-        "m2": "SUCCESS"
-      },
+      "ci": {"runtime_integration": "SUCCESS", "full_stack": "SUCCESS", "m2": "SUCCESS"},
       "handoff": "Repository/MUT-2026-08-29-ROOM71-CONTROL-PLANE-001.md"
     },
     {
@@ -83,12 +91,7 @@
       "state": "CLOSED",
       "scope": "root status synchronization, Governance stale-status reopening, identity-audit observability repair, version-regression repair",
       "verified_evidence_sha": "177191cd270c343b03a2d0d0b9a233ea4a8ffedf",
-      "ci": {
-        "runtime_integration": "SUCCESS",
-        "full_stack": "SUCCESS",
-        "m2": "SUCCESS",
-        "internal_id_audit_preclosure": "SUCCESS"
-      },
+      "ci": {"runtime_integration": "SUCCESS", "full_stack": "SUCCESS", "m2": "SUCCESS", "internal_id_audit_preclosure": "SUCCESS"},
       "handoff": "Repository/MUT-2026-08-29-STATUS-GOVERNANCE-RECONCILIATION-002.md",
       "remaining_hold": "GOVERNANCE-REP001-INVENTORY-RECONCILIATION"
     }
@@ -135,8 +138,8 @@
     {
       "id": "EXT-EVIDENCE-LIFECYCLE",
       "priority": 2,
-      "state": "OPEN",
-      "next": "implement bounded quarantine resolution gate before provider authentication; preserve separated resolve/authenticate/correlate/bind/qualify/authority states"
+      "state": "ACTIVE_BOUNDED_RESOLUTION_TRANSACTION",
+      "next": "implement and verify quarantine resolution without provider-authentication promotion"
     },
     {
       "id": "CONNECTED-BASELINE-GLOBAL",
