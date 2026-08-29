@@ -81,14 +81,28 @@ Historical root naming-convention material is not active canonical inventory and
 - `Governance/GOV-013_HERMUZ_SESSION_BUILD_PROTOCOL.md`
 - `Governance/GOV-013A_HERMUZ_BOOTSTRAP_INTEGRITY_GATE.md`
 - `Governance/GOV-014_CONTROLLED_DOCUMENT_MUTATION_PROTOCOL.md`
+- `Governance/GOV-015_EXECUTION_DOCUMENTATION_AND_KNOWLEDGE_TRANSFER.md`
 - `Governance/GOV-016_FAILURE_TO_LEARNING_PROTOCOL.md`
+- `Governance/GOV-019_HERMUZ_OBSERVATION_SIDE_EFFECT_GATE.md`
+- `Governance/GOV-020_HERMUZ_SESSION_WORKGROUP_CONTINUATION_AMENDMENT.md`
+- `Governance/GOV-021_REPOSITORY_FIRST_MULTI_INSTANCE_EXECUTION.md`
+- `Governance/GOV-022_ARGO_SELF_ASSURANCE_AND_CAPABILITY_EVALUATION_PROTOCOL.md`
+- `Governance/GOV-027_PROVENANCE_PRESERVATION_AND_SESSION_RECONSTRUCTION_AMENDMENT.md`
 - `Governance/_FOLDER_STATUS.md`
 
-`Governance/GOV-011_EXTERNAL_FEEDBACK_REPORT_STANDARD.md` exists as a proposed intake standard but is not active canonical authority until formally ratified.
+The following current Governance artifacts are present but remain outside active canonical inventory because their own status is Proposed/Candidate or otherwise pending promotion:
 
-`Governance/GOV-012_DOMAIN_RECONSTRUCTION_STANDARD.md` exists as a proposed reconstruction standard. It governs rebuilding legacy or immature domains but is not active canonical authority until formally ratified.
+- `Governance/GOV-011_EXTERNAL_FEEDBACK_REPORT_STANDARD.md`
+- `Governance/GOV-012_DOMAIN_RECONSTRUCTION_STANDARD.md`
+- `Governance/GOV-018_EVIDENCE_REASONING_AND_CONFLICT_RESOLUTION.md`
+- `Governance/GOV-023_HERMUZ_CONTROLLED_DIAGNOSTIC_EXPERIMENT_PROTOCOL.md`
+- `Governance/GOV-024_HERMUZ_SOLUTION_SIMULATION_AND_EFFECT_ANALYSIS_PROTOCOL.md`
+- `Governance/GOV-025_HERMUZ_CONNECTOR_SELF_LEARNING_PROTOCOL.md`
+- `Governance/GOV-026_HERMUZ_SOLUTION_EVOLUTION_AND_STABILITY_PROTOCOL.md`
 
-`GOV-013` is the approved canonical HERMUZ session operating contract. `GOV-013A` is its approved canonical session-integrity addendum and establishes the mandatory pre-mutation bootstrap gate. Neither document overrides higher ARGO authority.
+Identity-migration compatibility records under former colliding `GOV-013/013A/014/015/016/017` paths are historical reconstruction surfaces only and are not active authority.
+
+`GOV-013` remains the approved canonical HERMUZ session operating contract. `GOV-013A` remains its approved bootstrap-integrity addendum. `GOV-019`, `GOV-020`, `GOV-021`, `GOV-022`, and `GOV-027` retain the canonical/effective authority their predecessor content already held; their unique numbering is identity repair, not promotion. All Governance remains subordinate to higher ARGO authority where applicable.
 
 ## 6. Runtime Layer
 
