@@ -2,8 +2,9 @@
 
 Date: 2026-08-29
 Parent transaction: `R71-20260829-GOV-CONTENT-SEMANTIC-117`
-Baseline: `main@a9bde62b0762d51b39831a334f30b8eae8291e4c`
-Status: `PREWRITE / CI-FAILURE REPAIR / NOT CLOSED`
+Prewrite baseline: `main@a9bde62b0762d51b39831a334f30b8eae8291e4c`
+Protected-change parent: `main@024b6d64dfbae899e18bee942c2c67aa91ad0443`
+Status: `FINALIZED / CI-FAILURE REPAIR / SAME-CHANGE-SET / CI PENDING`
 
 ## Failure evidence
 
@@ -12,30 +13,49 @@ Exact-head Runtime/Integration run `33257449825` failed only in `integration-tes
 Failing contract:
 `Quality/Integration/test_internal_document_id_audit.py::test_current_tree_governance_document_heading_identities_are_unique_after_migration`
 
-The test correctly preserves the stable Governance status checkpoint phrase:
+The existing regression correctly requires the stable status phrase:
 `IDENTITY + REP-001/REP-002 INVENTORY SYNC VERIFIED`.
 
-Transaction 117 changed the status headline to insert new semantic-disposition wording before `VERIFIED`, breaking the stable checkpoint while not changing the underlying identity/inventory result.
+## Root cause
 
-## Classification
+Transaction 117 extended the Governance folder headline by inserting semantic-disposition wording before the word `VERIFIED`. The underlying identity/inventory state remained verified, but the stable machine-observed checkpoint string was broken.
 
+Classification:
 `CONTENT-PRESENTATION REGRESSION / EXISTING AUTHORITY CONTRACT PRESERVED`.
 
-The new semantic review is not invalidated. The existing test is not weakened. The smallest correct repair is to restore the exact stable identity/inventory phrase and append the new semantic-disposition state after it.
+## Repair changed set
 
-## Authorized repair
+| Change | Target | Action | Result |
+|---|---|---|---|
+| R1 | `Governance/_FOLDER_STATUS.md` | UPDATE | restore exact stable phrase, append candidate semantic disposition after it |
+| R2 | this Matrix | UPDATE | finalize with R1 in same Git tree/commit |
 
-- `Governance/_FOLDER_STATUS.md` — headline wording only: preserve exact `IDENTITY + REP-001/REP-002 INVENTORY SYNC VERIFIED`, then append current candidate semantic disposition and promotion holds.
-- this Matrix — finalize in same protected change set.
+No test is changed. No GOV-012/CELM semantic repair is reverted. No candidate authority/status is changed. No REP-001/002, Runtime, Services, release baseline, relationship authority or Room71 state is mutated.
 
-No candidate content/status authority, GOV-012, CELM, REP-001/002, Runtime, Services, tests, release baseline, relationship authority, or Room71 state is authorized to change in this repair.
+## Corrected status contract
 
-## Verification
+`IDENTITY + REP-001/REP-002 INVENTORY SYNC VERIFIED / CURRENT CANDIDATE SEMANTIC DISPOSITION VERIFIED / PROMOTION GATES REMAIN`
 
-`PREWRITE → PROTECTED STATUS + FINALIZED MATRIX SAME CHANGE SET → READ-BACK → EXACT-HEAD CI → CLOSE OR HOLD`.
+This preserves the historical verified clause and adds the new bounded semantic state without replacing it.
+
+## Same-change-set discipline
+
+R1 and this finalized Matrix are inserted into one Git tree and committed together after the prewrite checkpoint.
+
+## Verification gate
+
+Required exact-head CI after repair:
+- ARGO Runtime Prototype and Integration Tests;
+- Full-Stack Repository Audit;
+- M2 Multi-Channel Proposal Training;
+- Real Mutation Matrix Regression when emitted.
+
+Until exact-head CI is observed, parent transaction 117 remains open.
 
 ## Learning
 
-A status headline can itself be a tested compatibility surface. Extending status semantics must preserve stable machine-observed clauses when their underlying state remains true.
+A status headline can be both human-readable content and a tested compatibility contract.
 
 `SEMANTIC EXTENSION ≠ PERMISSION TO BREAK STABLE STATUS CONTRACT`.
+
+When the old state remains true, additive status wording should preserve the exact tested clause rather than rewrite it stylistically.
