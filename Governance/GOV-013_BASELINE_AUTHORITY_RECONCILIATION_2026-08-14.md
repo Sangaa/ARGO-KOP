@@ -1,8 +1,10 @@
-# GOV-013 — BASELINE AUTHORITY RECONCILIATION
+# Baseline Authority Reconciliation — GOV-013 Decision Evidence
 
 Date: 2026-08-14
 Platform: ARGO KOP
-Status: Decision Evidence / Integrity Hold
+Status: Decision Evidence / Historical Integrity-Hold Resolution
+Authority boundary: evidence record under `GOV-013`; not an independent Governance Document ID.
+Identity classification: `Repository/GOVERNANCE_IDENTITY_MIGRATION_MATRIX_2026-08-29.md`
 
 ## Question
 
@@ -25,21 +27,8 @@ The numerically higher value does not override an explicit authority declaration
 
 ## Mutation / Verification Result
 
-`REP-012` was corrected to `3.2.1` in its current main content. The resulting artifact was directly re-read after mutation and its header now records Version `1.0.7`, Status `Active Control / Integrity Hold / Phase 1 Population In Progress`, and Development Baseline `3.2.1`.
+`REP-012` was corrected to `3.2.1` in its current main content. The resulting artifact was directly re-read after mutation and its header records Version `1.0.7`, Status `Active Control / Integrity Hold / Phase 1 Population In Progress`, and Development Baseline `3.2.1`.
 
-## Test / Evidence Ledger
+## Evidence Boundary
 
-| TEST-ID | Result | Evidence |
-|---|---|---|
-| BASELINE-003 | PASS | `Release/VERSION.md` current main |
-| BASELINE-004 | PASS | `PROJECT_STATUS.md` current main |
-| BASELINE-005 | CONFLICT CONFIRMED → RESOLVED | Historical REP-012 declaration of 3.3.0 was replaced |
-| BASELINE-006 | PASS | Authority precedence established |
-| BASELINE-007 | PASS | REP-012 corrected to 3.2.1 and directly re-read |
-| BASELINE-008 | PASS | REP-001 / REP-002 / RUN-001 cross-check aligns to 3.2.1 within inspected scope |
-
-## Remaining Scope
-
-This reconciliation closes the specific REP-012 baseline conflict. It does **not** prove that every repository artifact declares 3.2.1, and any remaining 3.3.0 declaration must be evaluated independently for authority, history, or stale state.
-
-Repository remains **INTEGRITY HOLD** for other unresolved integrity blockers.
+This record preserves the historical reasoning and verified decision. It does not define a second `GOV-013` authority identity and must not be treated as a substitute for the current release/baseline authority surface.
