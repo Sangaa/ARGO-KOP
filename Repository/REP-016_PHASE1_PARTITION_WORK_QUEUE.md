@@ -5,7 +5,7 @@ Document ID: REP-016
 Version: 1.3.0  
 Status: Active / Phase 1 Open / Integrity Hold  
 Development Baseline: 3.2.1  
-Last Audit: 2026-08-17
+Last Audit: 2026-08-29
 
 ## Purpose
 
@@ -22,13 +22,13 @@ No promotion to a later ring is allowed until predecessor exit evidence, affecte
 | Priority | Partition / Workstream | Current State | Required Entry Point | Closure Authority |
 |---:|---|---|---|---|
 | 1 | Repository Control Plane reconciliation | **CLOSED** | REP-011..016 + REP-020 | REP-011 + explicit closure decision |
-| 2 | Exhaustive duplicate-ID audit | RELATIONSHIP_VALIDATION | REP-001 + full current tree/content | REP-011/014 + explicit identity decisions |
-| 3 | Executable relationship proof | RELATIONSHIP_VALIDATION | RUN-010 → ENG-006 → SRV-009 | REP-011/014 + Runtime/Engine/Service evidence |
-| 4 | Bidirectional critical graph validation | RELATIONSHIP_VALIDATION | REP-014 + critical edges | REP-014 + endpoint evidence |
-| 5 | Controlled mutation/reconciliation harness | NOT_STARTED | Current control-plane contract | REP-011/014 + mutation evidence |
-| 6 | CI ↔ impact-matrix observability | NOT_STARTED | REP-020 + workflow evidence | REP-011/020 evidence review |
+| 2 | Exhaustive duplicate-ID audit | RELATIONSHIP_VALIDATION / GLOBAL SCOPE OPEN | REP-001 + full current tree/content | REP-011/014 + explicit identity decisions |
+| 3 | Executable relationship proof | PARTIALLY_VERIFIED / ISOLATED EXECUTION OBSERVED / NON-UNIVERSAL | RUN-010 → ENG-006 → SRV-009 | REP-011/014 + Runtime/Engine/Service evidence |
+| 4 | Bidirectional critical graph validation | BOUNDED_CLOSED_FOR_LISTED_CRITICAL_EDGE_SET / GLOBAL OPEN | REP-014 + critical edges | REP-014 + endpoint evidence |
+| 5 | Controlled mutation/reconciliation harness | EXECUTION_VERIFIED / ACTIVE CONTROL | Current control-plane contract | REP-011/014 + mutation evidence |
+| 6 | CI ↔ impact-matrix observability | EXECUTION_VERIFIED / BOUNDED P6 OBSERVABILITY | REP-020 + workflow evidence | REP-011/020 evidence review |
 | 7 | Core | INVENTORYING | Core/_FOLDER_STATUS.md + REP-013 | Domain authority + REP-011 |
-| 8 | Governance | INVENTORYING | Governance/_FOLDER_STATUS.md + REP-013 | Governance authority + REP-011 |
+| 8 | Governance | INVENTORYING / BOUNDED SEMANTIC REPAIRS IN PROGRESS | Governance/_FOLDER_STATUS.md + REP-013 | Governance authority + REP-011 |
 | 9 | Architecture | RELATIONSHIP_VALIDATION | ARC_MAP + ARC-001..011 | Architecture authority + REP-011/014 |
 | 10 | Runtime | RELATIONSHIP_VALIDATION | Runtime/_FOLDER_STATUS.md + REP-013 | Runtime authority + REP-011/014 |
 | 11 | Interfaces | RELATIONSHIP_VALIDATION | INTF-001/004/006/010 | Interface authority + REP-011/014 |
@@ -251,11 +251,33 @@ P261 also completed the direct registry reconciliation for `REL-005` in REP-014.
 
 No executable promotion is authorized without callable SRV-009 consumer evidence.
 
-## Current Checkpoint
+## Current Checkpoint — 2026-08-29 Room71 Reconciliation
 
-`P351` is now the latest recorded checkpoint for this control-plane reconciliation cycle.
+This section supersedes the older P351 checkpoint **for current operational interpretation only**. Historical checkpoint text below remains preserved as evidence of what was known on 2026-08-17.
 
 Current state:
+
+- Priority 1 Control Plane reconciliation: **CLOSED / RING-0 CONTROL-PLANE RECONCILED WITHIN CURRENT INSPECTED SCOPE**.
+- Priority 2 exhaustive duplicate-ID audit: **OPEN / current migrated Governance scope repaired, repository-wide identity scope not reconciled**.
+- Priority 3 executable relationship proof: **PARTIALLY_VERIFIED / isolated governed RUN-010-attributed execution reaches ENG-006/SRV-009; ordinary connected-spine routing remains non-universal**.
+- Priority 4 bidirectional critical graph validation: **CLOSED FOR THE LISTED CRITICAL-EDGE SET ONLY / GLOBAL CONNECTED BASELINE OPEN**.
+- Priority 5 controlled mutation/reconciliation harness: **EXECUTION_VERIFIED / ACTIVE CONTROL**. Protected changes are enforced by same-change-set Mutation Matrix preflight plus semantic validation; this does not imply Phase-1 closure.
+- Priority 6 CI ↔ impact-matrix observability: **EXECUTION_VERIFIED / BOUNDED P6 OBSERVABILITY**. Current exact-head correlation can distinguish `MAPPED`, `NOT_APPLICABLE`, and policy states while preserving `NO_AUTO_PROMOTION`.
+- `REP-016` header version remains `1.3.0`; no cosmetic version promotion was performed.
+- Phase 1: **OPEN**.
+- Integrity: **HOLD**.
+- Global Connected Baseline: **OPEN**.
+- Global `BOOTED / INTEGRITY PASS`: **NOT CLAIMED**.
+
+Current evidence anchors include Room71 leases 015–017, Full-Stack exact-head evidence with zero current audit candidates, active Mutation Matrix gates, and P6 exact changed-set correlation at `667ec201940a09107706dafa469dbe34c2510d71` showing `mapped=3`, `not_applicable=1`, `unmapped=0`, `policy_unresolved=0`, `NO_AUTO_PROMOTION`.
+
+This refresh changes queue freshness only. It does not rewrite historical conclusions, promote relationships, close provider authentication, promote KNW-001..010, or claim cognitive benefit.
+
+## Historical P351 Checkpoint — 2026-08-17
+
+`P351` was the latest recorded checkpoint for the 2026-08-17 control-plane reconciliation cycle.
+
+State recorded at that time:
 
 - Priority 1 Control Plane reconciliation: **CLOSED / RING-0 CONTROL-PLANE RECONCILED WITHIN CURRENT INSPECTED SCOPE**
 - Priority 2 exhaustive duplicate-ID audit: **OPEN**
