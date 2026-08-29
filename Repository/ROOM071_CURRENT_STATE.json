@@ -60,7 +60,18 @@
     "canonical relationship registries and matrices",
     "Repository/ROOM071_CURRENT_STATE.json"
   ],
-  "active_leases": [],
+  "active_leases": [
+    {
+      "lease_id": "R71-20260829-STATUS-GOV-RECON-002",
+      "execution_id": "CURRENT_SOLO_SESSION",
+      "role": "HERMUZ_EQUIVALENT_CONTROL_PLANE_EXECUTOR",
+      "state": "ACTIVE",
+      "baseline_sha": "596600efd1f39f88b8991efeaeb99aaf16857180",
+      "scope": "root status synchronization, Governance status correction, REP-001 inventory diagnosis, closure of provable open points",
+      "shared_files": ["PROJECT_STATUS.md", "Governance/_FOLDER_STATUS.md", "Repository/REP-001_MASTER_INDEX.md", "Repository/ROOM071_CURRENT_STATE.json"],
+      "required_revalidation": ["post-write re-read", "identity collision review", "runtime/integration CI", "full-stack CI", "current HEAD reconciliation"]
+    }
+  ],
   "closed_leases": [
     {
       "lease_id": "R71-20260829-CONTROL-PLANE-001",
@@ -105,14 +116,14 @@
     {
       "id": "CONTROL-PLANE-ROOT-STATUS-SYNC",
       "priority": 1,
-      "state": "OPEN_BOUNDED_TRANSACTION_REQUIRED",
+      "state": "ACTIVE_RECONCILIATION",
       "next": "reconcile PROJECT_STATUS.md against current verified main without closing repository-wide holds"
     },
     {
       "id": "GOVERNANCE-REP001-INVENTORY-RECONCILIATION",
       "priority": 2,
-      "state": "OPEN_BOUNDED_TRANSACTION_REQUIRED",
-      "next": "reconcile actual current Governance identities and effective amendments against REP-001 before changing index claims"
+      "state": "ACTIVE_DIAGNOSIS",
+      "next": "resolve or explicitly bound GOV identity-family collisions before REP-001 can claim Governance inventory clean"
     },
     {
       "id": "EXT-EVIDENCE-LIFECYCLE",
@@ -154,7 +165,7 @@
     "Room 71 is not a governance authority above canonical rules",
     "MAAT coordination does not decide technical truth",
     "stored control-state SHA is not a substitute for live HEAD discovery",
-    "PROJECT_STATUS and REP-001 Governance inventory drift are diagnosed but not yet reconciled",
+    "PROJECT_STATUS and REP-001 Governance inventory drift are under active reconciliation",
     "branch population has not been declared obsolete or safe to delete"
   ]
 }
