@@ -2,7 +2,7 @@
   "schema":"ARGO-ROOM071-CONTROL-STATE-1",
   "state_date":"2026-08-29",
   "canonical_branch":"main",
-  "last_verified_control_plane_sha":"d48252ecbfbbf2256cc2d711f3fb4a2c965e7e15",
+  "last_verified_control_plane_sha":"aadc89f16f0aa154a23039a838a86fed7531b013",
   "control_plane_rule":"DISCOVER_CURRENT_HEAD_AT_REENTRY_DO_NOT_TRUST_STORED_SHA_AS_LIVE_HEAD",
   "room":{"id":71,"name":"ROOM 71","type":"HUMAN_CONTROL_ROOM","authority":"OPERATIONAL_COORDINATION_ONLY"},
   "roles":{"HERMUZ":{"primary":"BUILD_VERIFY_PROMOTE"},"HORUS":{"primary":"ANALYZE_META_LEARNING_AND_EVIDENCE","default_write_scope":["HORUS/**"]},"MAAT":{"primary":"COORDINATE_SCOPE_LEASES_HANDOFFS_CONFLICTS"}},
@@ -17,7 +17,8 @@
     {"lease_id":"R71-20260829-GOV-IDENTITY-CLASSIFY-006","state":"CLOSED","repair_verified_sha":"5e1a5db805fe2bdce8413b6d8bb9f327c6e39dc9","result":"GOVERNANCE_IDENTITY_AND_REP001_REP002_INVENTORY_SYNC_CLOSED_FOR_CURRENT_MIGRATED_SCOPE"},
     {"lease_id":"R71-20260829-CORE-INDEX-008","state":"CLOSED","verified_functional_sha":"e3c8fa9e88ff7e30d896cadbd0ddb3196be3adba","ci":{"runtime_integration":"SUCCESS","full_stack":"SUCCESS","m2":"SUCCESS"},"result":"CORE001_CORE002_INDEX_DISCOVERABILITY_CLOSED","handoff":"Repository/MUT-2026-08-29-CORE-INDEX-RECONCILIATION-008.md"},
     {"lease_id":"R71-20260829-P6-EJR-SCOPE-009","state":"CLOSED","verified_functional_sha":"0ea193655f1c0b2448c39b18872ef7598eb0cfde","ci":{"runtime_integration":"SUCCESS","full_stack":"SUCCESS","m2":"SUCCESS"},"result":"P6_EJR_DIRECT_IMPACT_SCOPE_OUT_OF_SCOPE_EXECUTION_VERIFIED","issue_15":"CLOSED_COMPLETED","handoff":"Repository/MUT-2026-08-29-P6-EJR-SCOPE-RESOLUTION-009.md"},
-    {"lease_id":"R71-20260829-CONTROL-MANIFEST-010","state":"CLOSED","verified_functional_sha":"d48252ecbfbbf2256cc2d711f3fb4a2c965e7e15","ci":{"runtime_integration":"SUCCESS","full_stack":"SUCCESS","m2":"SUCCESS"},"result":"CURRENT_CONTROL_PLANE_MANIFEST_FRESHNESS_CLOSED_EXECUTION_VERIFIED","handoff":"Repository/MUT-2026-08-29-CURRENT-CONTROL-PLANE-MANIFEST-REBIND-010.md"}
+    {"lease_id":"R71-20260829-CONTROL-MANIFEST-010","state":"CLOSED","verified_functional_sha":"d48252ecbfbbf2256cc2d711f3fb4a2c965e7e15","ci":{"runtime_integration":"SUCCESS","full_stack":"SUCCESS","m2":"SUCCESS"},"result":"CURRENT_CONTROL_PLANE_MANIFEST_FRESHNESS_CLOSED_EXECUTION_VERIFIED","handoff":"Repository/MUT-2026-08-29-CURRENT-CONTROL-PLANE-MANIFEST-REBIND-010.md"},
+    {"lease_id":"R71-20260829-GOV-CONTENT-011","state":"CLOSED","verified_functional_sha":"aadc89f16f0aa154a23039a838a86fed7531b013","ci":{"runtime_integration":"SUCCESS","full_stack":"SUCCESS","m2":"SUCCESS"},"result":"SELF_ASSURANCE_COMPASS_AUTHORITY_POINTER_REPAIRED_TO_GOV022","handoff":"Repository/MUT-2026-08-29-SELF-ASSURANCE-COMPASS-AUTHORITY-REPAIR-011.md"}
   ],
   "closed_or_bounded_points":{
     "P4":"CLOSED_FOR_LISTED_CRITICAL_EDGE_SET_ONLY",
@@ -31,13 +32,14 @@
     "CORE001_CORE002_INDEX_DISCOVERABILITY":"CLOSED_EXECUTION_VERIFIED",
     "P6_EJR_DOCUMENTATION_PATH_SCOPE":"CLOSED_OUT_OF_SCOPE_FOR_DIRECT_IMPACT_CORRELATION",
     "CURRENT_CONTROL_PLANE_MANIFEST_FRESHNESS":"CLOSED_EXECUTION_VERIFIED",
+    "SELF_ASSURANCE_COMPASS_AUTHORITY_POINTER":"CLOSED_GOV022_EXECUTION_VERIFIED",
     "CONTINUOUS_IMPROVEMENT_THREAT_OPPORTUNITY_CONTROL":"ESTABLISHED_NON_AUTHORITATIVE_OPERATIONAL_CONTROL"
   },
   "open_points":[
     {"id":"PROVIDER-AUTHENTICATION-CAPABILITY","priority":1,"state":"HARD_EXTERNAL_TRUST_ANCHOR_HOLD","next":"requires concrete independently verifiable provider/source trust anchor; do not simulate authenticity"},
     {"id":"EXT-EVIDENCE-LIFECYCLE","priority":2,"state":"OPEN_AT_RESOLVED_UNAUTHENTICATED","next":"resume only when a real authenticity earning stage exists; transition guard prevents bypass"},
     {"id":"CONNECTED-BASELINE-GLOBAL","priority":3,"state":"OPEN_PARTITIONABLE","next":"close evidence-backed partitions independently; KNW-001..010 remain deferred until consolidated canonical validation"},
-    {"id":"GOVERNANCE-CONTENT-SEMANTIC-REVIEW","priority":4,"state":"OPEN_NON_BLOCKING","next":"claim-by-claim content review against current executable evidence; identity correctness is not substantive correctness"},
+    {"id":"GOVERNANCE-CONTENT-SEMANTIC-REVIEW","priority":4,"state":"OPEN_NON_BLOCKING_BOUNDED_REPAIRS_STARTED","next":"continue claim-by-claim review; Self-Assurance compass authority pointer repaired to GOV-022"},
     {"id":"BRANCH-HYGIENE","priority":5,"state":"CLASSIFICATION_REQUIRED_NO_DELETE","next":"PR #88 is partially superseded but still contains unique unreviewed surfaces; classify before closure/deletion"},
     {"id":"IGT-COGNITIVE-BENEFIT","priority":6,"state":"UNPROVEN","next":"run controlled novel-case B0/L1/L2 experiment only when evidence-lifecycle prerequisites are satisfied"}
   ],
