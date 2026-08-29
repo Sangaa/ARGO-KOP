@@ -1,0 +1,116 @@
+{
+  "schema": "ARGO-ROOM071-CONTROL-STATE-1",
+  "state_date": "2026-08-29",
+  "canonical_branch": "main",
+  "observed_functional_baseline_sha": "28e3ec16f1b0e6decee6623f77f48cda74e229c7",
+  "control_plane_rule": "DISCOVER_CURRENT_HEAD_AT_REENTRY_DO_NOT_TRUST_STORED_SHA_AS_LIVE_HEAD",
+  "authority_order": [
+    "PROJECT_BOOTSTRAP.md",
+    "Core/CORE-003_CONSTITUTION.md",
+    "Governance/GOV-013_HERMUZ_SESSION_BUILD_PROTOCOL.md",
+    "Governance/GOV-013_AMENDMENT_001_PROVENANCE_RECONSTRUCTION_2026-08-27.md",
+    "Governance/GOV-013A_REPOSITORY_FIRST_MULTI_INSTANCE_EXECUTION.md"
+  ],
+  "room": {
+    "id": 71,
+    "name": "ROOM 71",
+    "type": "HUMAN_CONTROL_ROOM",
+    "authority": "OPERATIONAL_COORDINATION_ONLY",
+    "entry_rule": "RECONSTRUCT_FROM_REPOSITORY_BEFORE_ASSIGNING_WORK"
+  },
+  "roles": {
+    "HERMUZ": {
+      "primary": "BUILD_VERIFY_PROMOTE",
+      "default_write_scope": ["assigned implementation", "tests", "transaction evidence", "engineering journal"],
+      "restricted_without_explicit_lease": ["serialized control surfaces", "HORUS analytical workspace owned by another active transaction"]
+    },
+    "HORUS": {
+      "primary": "ANALYZE_META_LEARNING_AND_EVIDENCE",
+      "default_write_scope": ["HORUS/**", "explicit non-authoritative candidate learning"],
+      "forbidden_direct_write_scope": ["canonical governance", "runtime implementation", "canonical registries", "PROJECT_STATUS.md", "ROOM071_CURRENT_STATE.json"]
+    },
+    "MAAT": {
+      "primary": "COORDINATE_SCOPE_LEASES_HANDOFFS_CONFLICTS",
+      "default_write_scope": ["Room 71 coordination records", "lease state", "handoff/conflict records"],
+      "forbidden_direct_write_scope": ["runtime/product implementation", "canonical technical truth promotion"]
+    }
+  },
+  "serialized_control_surfaces": [
+    "PROJECT_BOOTSTRAP.md",
+    "PROJECT_STATUS.md",
+    "Repository/REP-001_MASTER_INDEX.md",
+    "Repository/REP-002_REPOSITORY_MAP.md",
+    "canonical Governance",
+    "canonical relationship registries and matrices",
+    "Repository/ROOM071_CURRENT_STATE.json"
+  ],
+  "active_leases": [
+    {
+      "lease_id": "R71-20260829-CONTROL-PLANE-001",
+      "execution_id": "CURRENT_SOLO_SESSION",
+      "role": "HERMUZ_EQUIVALENT_CONTROL_PLANE_EXECUTOR",
+      "state": "ACTIVE",
+      "scope": "control-plane reconciliation, role boundaries, stale status synchronization, verification and closure",
+      "shared_files": ["PROJECT_STATUS.md", "Repository/ROOM071_CURRENT_STATE.json"],
+      "required_revalidation": ["re-read", "affected GitHub Actions", "current HEAD reconciliation"]
+    }
+  ],
+  "verified_recent_chain": [
+    "P4_BOUNDED_REL009_CLOSED",
+    "EXPERIENCE_SPINE_ADVISORY_PROJECTION_BUILT",
+    "IGT_HARNESS_BUILT",
+    "MODEL_RUN_EVIDENCE_PACKAGE_GATE_BUILT",
+    "EXTERNAL_EVIDENCE_CORRELATION_BOUNDARY_BUILT",
+    "TRUSTED_RESOLVER_ADAPTER_BOUNDARY_BUILT",
+    "IMMUTABLE_GITHUB_EVIDENCE_RESOLVER_BUILT",
+    "BLIND_PARTICIPANT_EXPORT_BUILT",
+    "PARTICIPANT_RESPONSE_BINDING_BUILT",
+    "BINDING_AWARE_EVIDENCE_ADMISSION_BUILT",
+    "UNTRUSTED_EXTERNAL_EVIDENCE_INTAKE_BUILT"
+  ],
+  "closed_or_bounded_points": {
+    "P4": "CLOSED_FOR_LISTED_CRITICAL_EDGE_SET_ONLY",
+    "multi_instance_reconstruction_test": "BOUNDED_PASS",
+    "repository_first_multi_instance_control": "PROMOTED_EFFECTIVE"
+  },
+  "open_points": [
+    {
+      "id": "EXT-EVIDENCE-LIFECYCLE",
+      "priority": 1,
+      "state": "OPEN",
+      "next": "independent resolution/provider-backed authentication after quarantine; preserve separated resolve/authenticate/correlate/bind/qualify/authority gates"
+    },
+    {
+      "id": "CONNECTED-BASELINE-GLOBAL",
+      "priority": 2,
+      "state": "OPEN",
+      "next": "continue evidence-backed repository-wide critical relationship and authority validation; do not infer global closure from P4 bounded closure"
+    },
+    {
+      "id": "IGT-COGNITIVE-BENEFIT",
+      "priority": 3,
+      "state": "UNPROVEN",
+      "next": "controlled novel-case B0/L1/L2 capability experiment only after evidence lifecycle is sufficiently closed"
+    },
+    {
+      "id": "BRANCH-HYGIENE",
+      "priority": 4,
+      "state": "OPEN_NON_BLOCKING",
+      "next": "classify active/handoff/historical/superseded branches before any deletion; never delete for cosmetic cleanup"
+    }
+  ],
+  "priority_order": [
+    "KEEP_REQUIRED_CI_GREEN",
+    "CLOSE_EXTERNAL_EVIDENCE_LIFECYCLE_WITHOUT_COLLAPSING_TRUST_STATES",
+    "CONTINUE_CONNECTED_BASELINE_GLOBAL_VALIDATION",
+    "RUN_CONTROLLED_IGT_CAPABILITY_PROOF",
+    "ONLY_THEN_EXPAND_CAPABILITY_OR_AGENT_COUNT"
+  ],
+  "non_claims": [
+    "repository-wide connected baseline is not closed",
+    "cognitive improvement is not proven",
+    "Room 71 is not a governance authority above canonical rules",
+    "MAAT coordination does not decide technical truth",
+    "stored control-state SHA is not a substitute for live HEAD discovery"
+  ]
+}
