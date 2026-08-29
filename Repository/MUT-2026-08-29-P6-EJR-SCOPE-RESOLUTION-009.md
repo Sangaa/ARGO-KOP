@@ -1,9 +1,10 @@
 # MUT-2026-08-29 — P6 EJR SCOPE GOVERNANCE RESOLUTION — 009
 
-State: APPLIED / PENDING EXACT-HEAD CI
+State: CLOSED / EXECUTION-VERIFIED
 Lease: R71-20260829-P6-EJR-SCOPE-009
 Baseline: a661fcd63662fb979c027cc6ad21ae95a300566f
-Issue: #15
+Functional SHA: 0ea193655f1c0b2448c39b18872ef7598eb0cfde
+Issue: #15 — CLOSED / COMPLETED
 Scope: P6 eligibility policy + canonical regression only
 
 ## Decision
@@ -28,13 +29,17 @@ Engineering Journal artifacts remain valid provenance, failure/learning evidence
 | Repository/P6_SCOPE_ELIGIBILITY_REGISTRY.md | EJR/** = UNRESOLVED | EJR/** = OUT_OF_SCOPE for direct P6 correlation | policy resolution only; no relationship/runtime promotion |
 | Quality/Integration/test_p6_canonical_repository.py | asserts POLICY_UNRESOLVED | asserts NOT_APPLICABLE + NO_AUTO_PROMOTION + mixed-path independence | regression protection |
 
-## Required proof
+## Exact-head proof
 
-- EJR-only changed path returns `OUT_OF_SCOPE / NOT_APPLICABLE / NO_AUTO_PROMOTION`.
-- Injected mapping/relationship text cannot promote EJR to mapped.
-- Unknown paths remain `UNRESOLVED / POLICY_UNRESOLVED`.
-- Mixed EJR + in-scope implementation paths are evaluated independently.
-- Runtime/Integration, Full-Stack and M2 must be green at the exact functional SHA before Issue #15 closes.
+At `0ea193655f1c0b2448c39b18872ef7598eb0cfde`:
+
+- Full-Stack Repository Audit run `33239636423` — SUCCESS.
+- ARGO Runtime Prototype and Integration Tests run `33239636402` — SUCCESS; prototype, integrity and integration jobs all passed.
+- M2 Multi-Channel Proposal Training run `33239636453` — SUCCESS.
+- P6 canonical repository boundary regression — SUCCESS inside Full-Stack.
+- Mixed-path independence is regression-covered: EJR `NOT_APPLICABLE` cannot hide an independent in-scope path.
+
+Issue #15 was closed as `completed` only after exact-head verification.
 
 ## Non-claims
 
@@ -43,3 +48,11 @@ Engineering Journal artifacts remain valid provenance, failure/learning evidence
 - No runtime semantics changed.
 - No EJR evidence discarded.
 - No Connected Baseline global closure implied.
+
+## Continuous-improvement learning
+
+A documentation/evidence surface should not be forced into an implementation impact graph merely because a correlation mechanism accepts paths. Scope eligibility must be decided before correlation, and `OUT_OF_SCOPE` must preserve independent provenance/learning duties rather than mean `ignored`.
+
+## Closure
+
+`P6-EJR-DIRECT-IMPACT-SCOPE = CLOSED / OUT_OF_SCOPE / EXECUTION-VERIFIED`.
