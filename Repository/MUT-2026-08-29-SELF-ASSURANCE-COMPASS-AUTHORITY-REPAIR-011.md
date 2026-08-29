@@ -1,26 +1,34 @@
 # MUT-2026-08-29 — SELF-ASSURANCE COMPASS AUTHORITY REPAIR — 011
 
-State: APPLIED / PENDING EXACT-HEAD CI
+State: CLOSED / EXECUTION-VERIFIED
 Lease: R71-20260829-GOV-CONTENT-011
 Baseline: 7798688e221bb9b0cf7c66189e09263ff137a6c5
+Functional SHA: aadc89f16f0aa154a23039a838a86fed7531b013
 Scope: bounded Governance content-semantic review
 
 ## Finding
 
 `Governance/ARGO_SELF_ASSURANCE_CURRENT_STATE_2026-08-27.md` still declared `Authority: GOV-014` after the repository had repaired the Self-Assurance identity collision. Current canonical evidence assigns Self-Assurance to `GOV-022`; canonical `GOV-014` is the Controlled Document Mutation Protocol.
 
-PR #88 independently detected the stale `GOV-014` pointer, but proposed `GOV-017`. That proposal is now stale relative to current main because the later governed identity migration assigned Self-Assurance to `GOV-022`.
+PR #88 independently detected the stale `GOV-014` pointer, but proposed `GOV-017`. That proposal is stale relative to current main because the later governed identity migration assigned Self-Assurance to `GOV-022`.
 
 ## Mutation Matrix
 
 | Change ID | Target | Action | Expected Content | Applied | Verified |
 |---|---|---|---|:---:|:---:|
-| GCS-011-01 | `Governance/ARGO_SELF_ASSURANCE_CURRENT_STATE_2026-08-27.md` | UPDATE | authority pointer = GOV-022; preserve bounded self-assessment and non-market-proof limits | Y | N |
-| GCS-011-02 | `Repository/MUT-2026-08-29-SELF-ASSURANCE-COMPASS-AUTHORITY-REPAIR-011.md` | CREATE | evidence, non-claims and closure record | Y | N |
+| GCS-011-01 | `Governance/ARGO_SELF_ASSURANCE_CURRENT_STATE_2026-08-27.md` | UPDATE | authority pointer = GOV-022; preserve bounded self-assessment and non-market-proof limits | Y | Y |
+| GCS-011-02 | `Repository/MUT-2026-08-29-SELF-ASSURANCE-COMPASS-AUTHORITY-REPAIR-011.md` | CREATE | evidence, non-claims and closure record | Y | Y |
+
+## Exact-head verification
+
+At `aadc89f16f0aa154a23039a838a86fed7531b013`:
+- ARGO Runtime Prototype and Integration Tests run `33239957771` — SUCCESS.
+- Full-Stack Repository Audit run `33239957764` — SUCCESS.
+- M2 Multi-Channel Proposal Training run `33239957783` — SUCCESS.
 
 ## KEEP REQUIREMENT
 
-All substantive compass claims, weaknesses, red lines and success conditions remain unchanged. No Self-Assurance capability state is promoted. No Governance-wide semantic-review closure is claimed.
+All substantive compass claims, weaknesses, red lines and success conditions remained unchanged. No Self-Assurance capability state was promoted. No Governance-wide semantic-review closure is claimed.
 
 ## Continuous-improvement learning
 
@@ -31,3 +39,7 @@ Identity migration is incomplete if dependent prose still names the former autho
 - This is not a Self-Assurance promotion.
 - This does not close Governance content-semantic review globally.
 - This does not prove product readiness, market validation, or cognitive benefit.
+
+## Closure
+
+`SELF-ASSURANCE-COMPASS-AUTHORITY-POINTER = CLOSED / GOV-022 / EXECUTION-VERIFIED`.
