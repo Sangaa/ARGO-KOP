@@ -1,24 +1,30 @@
-# MUT-2026-08-29-REP001-REP002-GOVERNANCE-SYNC-007
+# REP-001 / REP-002 GOVERNANCE SYNC MUTATION MATRIX
 
+Transaction ID: `MUT-2026-08-29-REP001-REP002-GOVERNANCE-SYNC-007`
+Protocol: GOV-014 v1.0.1
 Parent lease: `R71-20260829-GOV-IDENTITY-CLASSIFY-006`
-Entry verified migration head: `main@030ff323212c430877f63e46cd10677517bbe9e4`
-Protocol: `GOV-014 controlled mutation + GOV-006 identity rules + REP-001/REP-002 serialization`
-Status: `PRE-WRITE MATRIX / AUTHORIZED AFTER IDENTITY CI PASS`
+Entry verified migration head: `030ff323212c430877f63e46cd10677517bbe9e4`
+Initial protected-change head: `34764880b27c9a4d689dc3d179be44ce8e42c248`
+Status: `PACKAGING REPAIR APPLIED / CI VERIFICATION PENDING`
 
-## Evidence Gate
+## Boundary
 
-Exact Governance migration head `030ff323...` passed:
-- Runtime / Prototype / Integration `33237957254` — SUCCESS;
-- Full-Stack `33237957253` — SUCCESS;
-- M2 `33237957259` — SUCCESS.
+Synchronize Governance identity migration into repository inventory without promoting Proposed/Candidate documents and without modifying unrelated control-plane content.
 
-The integration suite executed the post-migration identity tests and therefore established that the Governance document-heading collision HOLD is removed for the migrated scope.
+| Change ID | Target | Action | Expected Content | Applied | Verified |
+|---|---|---|---|:---:|:---:|
+| GOVSYNC-001 | `Repository/REP-001_MASTER_INDEX.md` | UPDATE | active Governance inventory reflects verified unique identities; candidates remain non-active | Y | Y |
+| GOVSYNC-002 | `Repository/REP-002_REPOSITORY_MAP.md` | UPDATE | physical Governance map mirrors REP-001 authority boundary | Y | Y |
+| GOVSYNC-003 | `Repository/REP-015_CONTROL_PLANE_BOOTSTRAP_CHECKLIST.md` | UPDATE | record same-change-set Mutation Matrix visibility rule learned from failed Full-Stack gate | Y | N |
+| GOVSYNC-004 | `Repository/MUT-2026-08-29-REP001-REP002-GOVERNANCE-SYNC-007.md` | UPDATE | canonical matrix shape plus failure/repair evidence visible in same protected change set | Y | N |
 
-## Objective
+## KEEP Requirement
 
-Synchronize only the Governance inventory surfaces of `REP-001` and `REP-002` with the verified identity migration, preserving all unrelated content byte-for-byte as far as the mutation mechanism permits.
+All content outside the explicitly listed changes is `KEEP`. No unrelated repository, runtime, governance-content, release/version, provider-authentication, or cognitive-effect mutation is authorized.
 
-## Active/Governed Paths to Add
+## Applied Inventory Decision
+
+Active/governed paths added to REP-001/REP-002:
 
 - `Governance/GOV-015_EXECUTION_DOCUMENTATION_AND_KNOWLEDGE_TRANSFER.md`
 - `Governance/GOV-019_HERMUZ_OBSERVATION_SIDE_EFFECT_GATE.md`
@@ -27,33 +33,72 @@ Synchronize only the Governance inventory surfaces of `REP-001` and `REP-002` wi
 - `Governance/GOV-022_ARGO_SELF_ASSURANCE_AND_CAPABILITY_EVALUATION_PROTOCOL.md`
 - `Governance/GOV-027_PROVENANCE_PRESERVATION_AND_SESSION_RECONSTRUCTION_AMENDMENT.md`
 
-Existing active owners remain:
-- GOV-001/004/005/006/009/010/013/013A/014/016.
+Existing active owners remain GOV-001/004/005/006/009/010/013/013A/014/016.
 
-## Candidate / Non-Active Paths
+Candidate/non-active physical paths remain outside active canonical authority:
 
-The following remain visible as candidate/proposed physical Governance artifacts but MUST NOT be promoted into active canonical inventory:
+- GOV-011, GOV-012, GOV-018, GOV-023, GOV-024, GOV-025, GOV-026.
 
-- `Governance/GOV-011_EXTERNAL_FEEDBACK_REPORT_STANDARD.md`
-- `Governance/GOV-012_DOMAIN_RECONSTRUCTION_STANDARD.md`
-- `Governance/GOV-018_EVIDENCE_REASONING_AND_CONFLICT_RESOLUTION.md`
-- `Governance/GOV-023_HERMUZ_CONTROLLED_DIAGNOSTIC_EXPERIMENT_PROTOCOL.md`
-- `Governance/GOV-024_HERMUZ_SOLUTION_SIMULATION_AND_EFFECT_ANALYSIS_PROTOCOL.md`
-- `Governance/GOV-025_HERMUZ_CONNECTOR_SELF_LEARNING_PROTOCOL.md`
-- `Governance/GOV-026_HERMUZ_SOLUTION_EVOLUTION_AND_STABILITY_PROTOCOL.md`
+Compatibility/superseded old identity paths remain historical reconstruction evidence only.
 
-Compatibility/superseded old paths are historical reconstruction surfaces and MUST NOT be indexed as active authority.
+## Execution Evidence
 
-## Mutation Safety
+### Identity migration prerequisite
 
-1. Use complete current blobs as sources.
-2. Change only Governance section/prose and directly related current Governance registration note.
-3. Keep document versions/statuses unchanged to avoid mixing index synchronization with release/version governance.
-4. Build both new blobs first.
-5. Create one tree from exact current base tree replacing only REP-001 and REP-002.
-6. Create one commit with exact current parent; fast-forward `main` only if parent is still current.
-7. Re-read both resulting files and compare the commit to ensure exactly two index/map paths changed.
-8. Run exact-head Runtime/Integration + Full-Stack + M2.
+Exact Governance migration head `030ff323212c430877f63e46cd10677517bbe9e4` passed Runtime/Integration, Full-Stack and M2.
+
+### Initial index synchronization
+
+Atomic commit `34764880b27c9a4d689dc3d179be44ce8e42c248` changed exactly:
+
+- `Repository/REP-001_MASTER_INDEX.md`
+- `Repository/REP-002_REPOSITORY_MAP.md`
+
+Post-write read-back verified both Governance sections and the commit diff confirmed no unrelated file mutation.
+
+Exact-head results:
+
+- Runtime/Integration — SUCCESS;
+- M2 — SUCCESS;
+- Internal Document-ID Audit — SUCCESS;
+- GOV-014 Controlled Document Mutation workflow — SUCCESS;
+- Full-Stack Repository Audit `33238163854` — FAILURE at `Enforce Mutation Matrix on current change set`.
+
+### Root cause
+
+The failure was not a REP-001/REP-002 semantic failure. The preflight gate evaluates `git diff BASE...HEAD` and requires a Matrix file in the **same changed-file set** whenever protected paths change.
+
+The pre-write matrix existed in parent commit `bb8fde56d4ee13f56fba35498269bff1cdaee880`; therefore the protected-change diff reported:
+
+`changed_files=2 / protected_changes=2 / mutation_matrices=0`.
+
+Classification: `TRANSACTION_PACKAGING_FAILURE`.
+
+The repair changes `REP-015` to encode this exact operational constraint and updates this Matrix in the same protected change set. The gate is not weakened.
+
+## Learned Control Rule
+
+`PRE-WRITE MATRIX EXISTS` is necessary but not sufficient for protected-change CI.
+
+For a protected atomic mutation, the governing Matrix must also be **visible in the same CI diff range** that contains the protected change, either because the protected mutation and finalized matrix are committed together or because the workflow's declared transaction range explicitly contains both.
+
+Current workflow uses the immediate push before/head range, so the safe repository rule is:
+
+`PROTECTED CHANGE + GOVERNING MATRIX VISIBILITY = SAME CHANGE SET`
+
+## Post-Commit Reconciliation
+
+After the repair commit:
+
+1. re-read REP-015 and this Matrix;
+2. verify changed-file set contains the protected REP-015 path and this Matrix;
+3. require Mutation Matrix preflight PASS;
+4. require Matrix semantic validation PASS;
+5. require Runtime/Integration + Full-Stack + M2 PASS on exact repair head;
+6. only then close the Governance REP-001/REP-002 synchronization point.
+
+Post-write read-back: `PENDING` until commit exists.
+Unexpected Changes = 0 required.
 
 ## Non-Claims
 

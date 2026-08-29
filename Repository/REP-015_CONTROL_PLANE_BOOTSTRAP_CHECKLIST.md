@@ -222,6 +222,25 @@ Reason for Current Work:
 
 If identity or state cannot be resolved, stop promotion and perform repository reconciliation first.
 
+## Mutation Matrix Same-Change-Set Gate
+
+When the intended mutation touches a protected canonical path covered by the Mutation Matrix preflight (including `Repository/REP-*`, Runtime, Engine, Services, Interfaces and other protected prefixes), the governing Matrix must satisfy **both** conditions:
+
+1. it exists before the protected mutation is executed; and
+2. it is visible in the same CI changed-file set as the protected mutation.
+
+Current workflow behavior evaluates the immediate `BASE...HEAD` diff. Therefore a Matrix committed only in the parent commit is not sufficient evidence for the subsequent protected-change commit.
+
+Required operational pattern:
+
+`PRE-WRITE MATRIX → PROTECTED CHANGE + FINALIZED MATRIX IN SAME CHANGE SET → READ-BACK → CI PREFLIGHT/SEMANTICS → CLOSE`
+
+If the Matrix exists but is absent from the protected-change diff:
+
+`STOP / HOLD → PRESERVE FAILED CI → CLASSIFY AS TRANSACTION_PACKAGING_FAILURE → REPAIR WITHOUT WEAKENING THE GATE`
+
+This rule was learned from Full-Stack run `33238163854` on 2026-08-29, where `REP-001/REP-002` content synchronization was otherwise healthy but the Matrix lived only in the parent commit, causing `protected_changes=2 / mutation_matrices=0`.
+
 ## Mutation Gate
 
 A material mutation requires:
