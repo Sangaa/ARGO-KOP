@@ -1,13 +1,15 @@
 """Executable gate for the current Phase-1 control-plane evidence boundary.
 
-The gate reads the current session boundary manifest rather than hard-coding
-historical artifact versions. It verifies identity/status drift while leaving
-semantic closure decisions to the authoritative control-plane records.
+The gate reads the stable current boundary manifest rather than hard-coding a
+historical checkpoint. Historical manifests remain immutable evidence while the
+current manifest is refreshed when a listed control-plane identity/status/version
+changes. Semantic closure decisions remain with the authoritative control-plane
+records.
 """
 
 from pathlib import Path
 
-MANIFEST = "Repository/REP-020_SESSION_DELTA_2026-08-17_P339.md"
+MANIFEST = "Repository/REP-020_CURRENT_CONTROL_PLANE_BOUNDARY_MANIFEST.md"
 
 
 def _field(text: str, name: str) -> str | None:
@@ -58,10 +60,16 @@ def evaluate(root: Path) -> dict:
     rows = _manifest_rows(manifest_text)
 
     if len(rows) < 7:
-        mismatches.append(f"P339 manifest rows={len(rows)!r}; expected at least 7")
+        mismatches.append(f"current manifest rows={len(rows)!r}; expected at least 7")
 
-    if "Priority 1 is still OPEN" not in manifest_text:
-        mismatches.append("P339 does not explicitly preserve the current Priority-1 OPEN boundary")
+    required_current_boundaries = (
+        "Phase 1 repository work: `OPEN`",
+        "Global integrity: `HOLD`",
+        "Global `BOOTED / INTEGRITY PASS`: `NOT CLAIMED`",
+    )
+    for boundary in required_current_boundaries:
+        if boundary not in manifest_text:
+            mismatches.append(f"current manifest missing boundary: {boundary}")
 
     for expected in rows:
         path = root / expected["path"]
@@ -85,9 +93,12 @@ def evaluate(root: Path) -> dict:
                 f"{expected['path']}: Status={status!r}; manifest requires={expected['status']!r}"
             )
 
-    queue_text = (root / "Repository/REP-016_PHASE1_PARTITION_WORK_QUEUE.md").read_text(
-        encoding="utf-8", errors="ignore"
-    ) if (root / "Repository/REP-016_PHASE1_PARTITION_WORK_QUEUE.md").is_file() else ""
+    queue_path = root / "Repository/REP-016_PHASE1_PARTITION_WORK_QUEUE.md"
+    queue_text = (
+        queue_path.read_text(encoding="utf-8", errors="ignore")
+        if queue_path.is_file()
+        else ""
+    )
     if "Priority 1" not in queue_text or "Phase 1 Open" not in queue_text:
         mismatches.append("REP-016 does not visibly preserve the open Phase-1 boundary")
 
@@ -101,4 +112,5 @@ def evaluate(root: Path) -> dict:
 
 if __name__ == "__main__":
     import json
+
     print(json.dumps(evaluate(Path(__file__).resolve().parents[2]), indent=2, sort_keys=True))
