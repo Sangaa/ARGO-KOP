@@ -18,9 +18,13 @@ Canonical State
 
 Under re-audit
 
-Last Audit Date
+Historical Audit Date
 
 2026-08-08
+
+Current Revalidation
+
+2026-08-29
 
 Review Method
 
@@ -47,13 +51,20 @@ The lifecycle artifact was migrated to `LIF-001` and the conflicting active path
 
 `LIF-001` is authoritative only for the lifecycle state of document artifacts. Other lifecycle documents remain authoritative within their own domains.
 
-# Required Validation
+# Revalidation Progress
 
-1. Register `LIF-001` in the active repository index/map.
-2. Verify all references to the retired `Lifecycle/GOV-005_DOCUMENT_LIFECYCLE.md` path.
-3. Verify all active `GOV-005` references resolve to the Governance review standard where intended.
-4. Validate lifecycle interactions across Core, Repository, Knowledge, Decision, Projects and Memory.
-5. Re-audit the folder after index synchronization.
+1. `LIF-001` registration in active REP-001/REP-002 inventory: **CLOSED / CURRENT REPOSITORY VERIFIED**.
+2. Retired `Lifecycle/GOV-005_DOCUMENT_LIFECYCLE.md` active-path removal: **CLOSED / TEST-ENFORCED / HISTORICAL REFERENCE PRESERVED**.
+3. Active `GOV-005` reference-intent audit across consumers: **OPEN**.
+4. Cross-domain lifecycle interaction validation across Core, Repository, Knowledge, Decision, Projects and Memory: **OPEN**.
+5. Consolidated Lifecycle certification: **OPEN / INTEGRITY HOLD**.
+
+# Evidence
+
+- REP-001 explicitly maps `Lifecycle/LIF-001_DOCUMENT_LIFECYCLE.md`.
+- REP-002 explicitly maps `Lifecycle/LIF-001_DOCUMENT_LIFECYCLE.md`.
+- `Quality/Integrity/test_critical_graph_bidirectional_boundaries.py` requires the retired Lifecycle GOV-005 path to remain absent while preserving historical provenance in LIF-001.
+- Current exact Lifecycle Git tree contains only `LIF-001_DOCUMENT_LIFECYCLE.md` and `_FOLDER_STATUS.md`.
 
 # Rules
 
@@ -63,6 +74,7 @@ The lifecycle artifact was migrated to `LIF-001` and the conflicting active path
 4. Historical artifacts must not compete with active authority.
 5. A lifecycle status must remain scoped to the artifact class it governs.
 6. No `PASS` claim is made until cross-domain references are validated.
+7. Closure of index registration and retired-path cleanup does not close consumer-intent or cross-domain validation.
 
 ---
 
