@@ -35,16 +35,17 @@ def test_current_tree_governance_document_heading_identities_are_unique_after_mi
     assert collisions == {}, collisions
     assert report["governance_identity_hold_required"] is False
 
-    # Identity migration alone does not imply the whole repository identity
-    # scope is reconciled; unindexed canonical/candidate ownership may remain.
+    # Assert a stable post-migration semantic checkpoint, not transient wording
+    # from an earlier migration-in-progress state. Whole-repository identity
+    # scope may still remain open independently of Governance identity closure.
     governance_status = (repo / "Governance" / "_FOLDER_STATUS.md").read_text(encoding="utf-8")
-    assert "IDENTITY MIGRATION" in governance_status
+    assert "IDENTITY + REP-001/REP-002 INVENTORY SYNC VERIFIED" in governance_status
+    assert "CONTENT REVIEW HOLDS REMAIN" in governance_status
 
 
 def test_migrated_governance_ids_have_distinct_document_level_owners():
     repo = Path(__file__).resolve().parents[2]
     report = scan(repo)
-    collisions = report["heading_identity_collisions"]
     for identity in ("GOV-013", "GOV-013A", "GOV-014", "GOV-015", "GOV-016", "GOV-017", "GOV-019", "GOV-020", "GOV-021", "GOV-022", "GOV-023", "GOV-024", "GOV-025", "GOV-026", "GOV-027"):
         assert identity not in report["governance_heading_identity_collisions"]
 
