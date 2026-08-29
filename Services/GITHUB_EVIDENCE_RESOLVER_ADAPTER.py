@@ -3,6 +3,10 @@
 This adapter can establish acquisition of an exact JSON artifact at an exact
 GitHub commit/path. It cannot authenticate the model/provider claims contained
 inside that artifact and performs no repository writes.
+
+Participant/attestation observations retain their existing structured behavior.
+Generic quarantine re-acquisition returns the decoded JSON value under
+``evidence_content`` without laundering its fields into resolver control state.
 """
 from __future__ import annotations
 
@@ -149,7 +153,7 @@ class GitHubEvidenceResolverAdapter:
             raise EvidenceResolverAdapterError(f"GITHUB_EVIDENCE_RESOLVER_UNAVAILABLE:{exc}") from exc
 
     @staticmethod
-    def _decode_json_artifact(payload: dict[str, Any], reference: GitHubArtifactReference) -> tuple[dict, str]:
+    def _decode_json_value(payload: dict[str, Any], reference: GitHubArtifactReference) -> tuple[Any, str]:
         if not isinstance(payload, dict) or payload.get("type") != "file":
             raise EvidenceResolverAdapterError("GITHUB_EVIDENCE_TARGET_NOT_FILE")
         blob_sha = str(payload.get("sha", ""))
@@ -163,9 +167,13 @@ class GitHubEvidenceResolverAdapter:
         except (ValueError, UnicodeDecodeError) as exc:
             raise EvidenceResolverAdapterError("GITHUB_EVIDENCE_CONTENT_DECODE_FAILED") from exc
         try:
-            observation = json.loads(raw)
+            return json.loads(raw), blob_sha
         except json.JSONDecodeError as exc:
             raise EvidenceResolverAdapterError("GITHUB_EVIDENCE_JSON_INVALID") from exc
+
+    @classmethod
+    def _decode_json_artifact(cls, payload: dict[str, Any], reference: GitHubArtifactReference) -> tuple[dict, str]:
+        observation, blob_sha = cls._decode_json_value(payload, reference)
         if not isinstance(observation, dict):
             raise EvidenceResolverAdapterError("GITHUB_EVIDENCE_JSON_NOT_OBJECT")
         injected = RESERVED_OBSERVATION_KEYS.intersection(observation)
@@ -180,6 +188,18 @@ class GitHubEvidenceResolverAdapter:
         observation["github_artifact_path"] = reference.path
         observation["github_artifact_blob_sha"] = blob_sha
         return observation, blob_sha
+
+    def _unavailable(self, evidence_ref: str, channel: str, started: str) -> ResolverAcquisition:
+        return ResolverAcquisition(
+            adapter_id=self.identity.adapter_id,
+            adapter_kind=self.identity.adapter_kind,
+            acquisition_id=self._next_acquisition_id(channel),
+            acquisition_surface="github-contents-api-immutable-ref",
+            started_at=started,
+            completed_at=self._utc_now(),
+            requested_ref=evidence_ref,
+            observation={"status": "UNAVAILABLE", "observed_ref": None},
+        )
 
     def _acquire(self, evidence_ref: str, channel: str) -> ResolverAcquisition:
         reference = parse_github_artifact_reference(evidence_ref)
@@ -212,6 +232,51 @@ class GitHubEvidenceResolverAdapter:
             completed_at=completed,
             requested_ref=evidence_ref,
             observation=observation,
+        )
+
+    def acquire_external(self, evidence_ref: str) -> ResolverAcquisition:
+        """Re-acquire one immutable JSON value for quarantine correlation.
+
+        The decoded value is nested under ``evidence_content`` so arbitrary
+        external keys cannot become resolver control fields. Successful access
+        proves only technical re-acquisition from the immutable GitHub ref.
+        """
+        reference = parse_github_artifact_reference(evidence_ref)
+        acquisition_id = self._next_acquisition_id("EXTERNAL")
+        started = self._utc_now()
+        try:
+            payload = self._request(reference)
+        except FileNotFoundError:
+            return ResolverAcquisition(
+                adapter_id=self.identity.adapter_id,
+                adapter_kind=self.identity.adapter_kind,
+                acquisition_id=acquisition_id,
+                acquisition_surface="github-contents-api-immutable-ref",
+                started_at=started,
+                completed_at=self._utc_now(),
+                requested_ref=evidence_ref,
+                observation={"status": "UNAVAILABLE", "observed_ref": None},
+            )
+
+        evidence_content, blob_sha = self._decode_json_value(payload, reference)
+        return ResolverAcquisition(
+            adapter_id=self.identity.adapter_id,
+            adapter_kind=self.identity.adapter_kind,
+            acquisition_id=acquisition_id,
+            acquisition_surface="github-contents-api-immutable-ref",
+            started_at=started,
+            completed_at=self._utc_now(),
+            requested_ref=evidence_ref,
+            observation={
+                "status": "FOUND",
+                "observed_ref": evidence_ref,
+                "evidence_content": evidence_content,
+                "github_artifact_owner": reference.owner,
+                "github_artifact_repo": reference.repo,
+                "github_artifact_commit_sha": reference.commit_sha,
+                "github_artifact_path": reference.path,
+                "github_artifact_blob_sha": blob_sha,
+            },
         )
 
     def acquire_participant(self, evidence_ref: str) -> ResolverAcquisition:
