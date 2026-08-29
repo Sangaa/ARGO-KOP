@@ -4,7 +4,7 @@ Date: 2026-08-29
 Lease: `R71-20260829-ROOM071-SYNC-057`
 Protected surface: `Repository/ROOM071_CURRENT_STATE.json`
 Baseline: `main@d782a424b2aaa92c3a5422a747b21765581342a8`
-Status: `PREWRITE MATRIX / FINALIZATION PENDING SAME CHANGE SET`
+Status: `FINALIZED / SAME-CHANGE-SET`
 
 ## Scope
 
@@ -15,16 +15,24 @@ Synchronize Room71 with:
 
 ## Mutation boundary
 
-Only Room71 state synchronization is authorized. No Governance, Runtime, Services, branch deletion, project status, or relationship-registry mutation is authorized.
+Only:
+- `Repository/ROOM071_CURRENT_STATE.json`
+- this finalized mutation matrix.
 
-## Intended result
+No Governance, Runtime, Services, branch deletion, project status, or relationship-registry mutation is authorized.
 
-- record leases 048, 049, 051-056 CLOSED;
-- record sync lease 057 CLOSED;
-- advance branch-hygiene freshness through 056;
-- advance classified branch count to thirty-four;
-- preserve all current holds and non-claims.
+## Result
 
-## Finalization rule
+- leases 048, 049, 051-056 recorded CLOSED;
+- sync lease 057 recorded CLOSED;
+- branch-hygiene freshness advanced through 056;
+- classified branch count advanced to thirty-four;
+- all current holds and non-claims preserved.
 
-This PREWRITE file is not closure evidence. It must be finalized in the same commit that mutates `Repository/ROOM071_CURRENT_STATE.json`.
+## Same-change-set rule
+
+This finalized matrix and the protected Room71 state are committed in the same Git tree/commit.
+
+## Non-claims
+
+This synchronization does not execution-verify historical branches, authorize deletion, establish global Connected Baseline, promote self-audit/mandate content, or relax provider-authentication/cognitive-effect holds.
