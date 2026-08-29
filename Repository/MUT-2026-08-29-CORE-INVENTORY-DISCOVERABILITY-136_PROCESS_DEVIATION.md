@@ -1,0 +1,3 @@
+# Transaction 136 process-deviation note
+
+Before the protected mutation, two non-authoritative staging artifacts were accidentally committed and immediately removed: a regression test staged outside the final same-change-set and a temporary assembly/transfer note. No protected Core/REP surface changed in those staging commits. The final transaction must therefore re-create the regression inside the same atomic tree as REP-001, REP-002, Core status and the finalized Matrix. These deviations are provenance only and do not satisfy the final transaction gate.
