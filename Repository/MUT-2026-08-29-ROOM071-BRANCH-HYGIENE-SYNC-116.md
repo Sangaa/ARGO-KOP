@@ -3,45 +3,58 @@
 Date: 2026-08-29
 Lease: `R71-20260829-ROOM071-SYNC-116`
 Protected surface: `Repository/ROOM071_CURRENT_STATE.json`
-Baseline: `main@b4438f8542ada8d2f56fda5c885cbbb4938b8866`
-Status: `PREWRITE / NOT CLOSED`
+Prewrite baseline: `main@b4438f8542ada8d2f56fda5c885cbbb4938b8866`
+Protected-change parent: `main@4c700ddcd4a4055219dfe71902fc6d1ede7ef3a3`
+Status: `FINALIZED / SAME-CHANGE-SET`
 
 ## Scope
 
-Synchronize Room71 with branch classifications 058–115 and the live branch inventory observed after those classifications.
+Synchronize Room71 with branch classifications 058–115 and close Branch Hygiene Classification for the currently observed branch set.
 
-Current inventory observation:
+Inventory evidence immediately before finalization:
 - total refs returned: 93;
 - canonical `main`: 1;
-- non-main branches: 92;
-- every currently observed non-main branch has a documented disposition from the accumulated branch-hygiene records through lease 115.
+- non-main refs: 92;
+- all 92 currently observed non-main refs have a documented disposition across the accumulated branch-hygiene records through lease 115.
 
-## Intended bounded closure
+## Closure result
 
-Close **Branch Hygiene Classification** for the currently observed 92 non-main branch set only.
+`BRANCH_HYGIENE_CLASSIFICATION = CLOSED_FOR_CURRENT_92_NON_MAIN_BRANCH_SET / NO_DELETE_AUTHORIZED`
 
-This does not authorize branch deletion. A newly created or newly discovered branch reopens classification coverage for that new surface.
+This is a bounded current-set closure. Any newly created or newly discovered non-main branch requires fresh classification before deletion consideration.
 
 ## Mutation boundary
 
-Only:
+This protected transaction changes only:
 - `Repository/ROOM071_CURRENT_STATE.json`;
-- this matrix, finalized in the same protected change set.
+- this finalized mutation matrix.
 
-No Governance, Runtime, Services, relationship registry, project status, branch deletion, knowledge promotion, provider-authentication, or cognitive-effect mutation is authorized.
+No Governance, Runtime, Services, relationship registry, project status, branch ref, branch deletion, knowledge promotion, provider-authentication, or cognitive-effect mutation is included.
 
-## Preserved holds
+## Preserved holds / non-claims
 
-- provider authentication remains on external trust-anchor HOLD;
+- provider authentication remains unavailable without an independently verifiable trust anchor;
 - external evidence lifecycle remains at `RESOLVED_UNAUTHENTICATED`;
-- repository-wide Connected Baseline remains open/partitionable;
+- repository-wide Connected Baseline remains open and partitionable;
 - Governance content semantic review remains open;
 - IGT cognitive benefit remains unproven;
 - KNW-001..010 remain unpromoted;
-- classification does not grant deletion authority.
+- classification of all current branches does not authorize deleting any branch;
+- historical analytical/training evidence is not automatically current authority;
+- Room71 sync 031 process deviation remains preserved.
 
-## Finalization gate
+## Same-change-set proof
 
-`PREWRITE → RE-READ LIVE HEAD → FINALIZED MATRIX + ROOM071 STATE IN SAME GIT TREE/COMMIT → READ-BACK → CLOSE`
+The finalized form of this matrix and the new `Repository/ROOM071_CURRENT_STATE.json` blob are inserted into one Git tree and committed as one protected change set.
 
-No CI/execution-verification claim is made by this documentation/control-state transaction.
+## CI boundary
+
+This is a documentation/control-state classification transaction with no functional implementation mutation. No CI/execution-verification claim is created by this closure. The existing `last_verified_control_plane_sha` is intentionally preserved rather than upgraded.
+
+## Learning
+
+Branch hygiene has two independent axes:
+
+`CLASSIFICATION / MERGE DISPOSITION` and `DELETION AUTHORITY`.
+
+Completing the first does not grant the second. Likewise, historical commit value, current tree delta, functional succession, and authority must be evaluated separately; a useful historical branch can be safely classified without being merged, deleted, or promoted.
