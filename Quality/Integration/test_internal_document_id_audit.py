@@ -24,6 +24,23 @@ def test_archive_records_are_reported_separately_from_active_identity():
     assert report["archived_records"] >= 0
 
 
+def test_current_tree_governance_identity_family_collisions_require_hold():
+    repo = Path(__file__).resolve().parents[2]
+    report = scan(repo)
+    collisions = report["governance_heading_identity_collisions"]
+
+    # These are current-tree observations, not an authority decision or a
+    # numbering migration. The audit must surface them rather than silently
+    # passing because some artifacts omit explicit Document ID metadata.
+    assert {"GOV-013A", "GOV-015", "GOV-016", "GOV-017"}.issubset(collisions)
+    assert report["governance_identity_hold_required"] is True
+    assert report["identity_scope_reconciled"] is False
+
+    governance_status = (repo / "Governance" / "_FOLDER_STATUS.md").read_text(encoding="utf-8")
+    assert "INTEGRITY WARNING / CURRENT IDENTITY RE-AUDIT" in governance_status
+    assert "Current result: **NOT CLOSED**" in governance_status
+
+
 def test_current_tree_internal_id_audit_report_is_emitted():
     report = scan(Path(__file__).resolve().parents[2])
     warnings.warn(
