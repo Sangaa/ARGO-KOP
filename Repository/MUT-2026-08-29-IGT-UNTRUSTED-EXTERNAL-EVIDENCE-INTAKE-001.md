@@ -4,7 +4,7 @@ Transaction ID: `MUT-2026-08-29-IGT-UNTRUSTED-EXTERNAL-EVIDENCE-INTAKE-001`
 Base: `main@949acd74d65751786bc732a65902fbb00271d685`
 Branch: `hermuz/igt-untrusted-external-evidence-intake-20260829`
 Protocol: `GOV-013 / GOV-014 / GOV-015 + IGT`
-Status: `SOURCE IMPLEMENTED / READ-BACK RECONCILED / CI PENDING`
+Status: `SOURCE VERIFIED / READ-BACK VERIFIED / PR-CI VERIFIED / FINAL-HEAD CI PENDING`
 Authority: `NONE`
 
 ## Entry Evidence
@@ -42,20 +42,39 @@ The intake boundary:
 
 | ID | Target | Purpose | Applied | Verified |
 |---|---|---|:---:|:---:|
-| C01 | `Quality/Integration/experience_spine_igt_external_evidence_intake.py` | deterministic untrusted evidence envelope + verifier | Y | Y source/read-back |
-| C02 | `Quality/Integration/test_experience_spine_igt_external_evidence_intake.py` | positive/adversarial regressions | Y | Y source/read-back; CI pending |
-| C03 | `Repository/IGT_UNTRUSTED_EXTERNAL_EVIDENCE_INTAKE_CONTRACT_2026-08-29.md` | semantic and non-claim contract | Y | Y source/read-back |
+| C01 | `Quality/Integration/experience_spine_igt_external_evidence_intake.py` | deterministic untrusted evidence envelope + verifier | Y | Y source/read-back/CI |
+| C02 | `Quality/Integration/test_experience_spine_igt_external_evidence_intake.py` | positive/adversarial regressions | Y | Y source/read-back/CI |
+| C03 | `Repository/IGT_UNTRUSTED_EXTERNAL_EVIDENCE_INTAKE_CONTRACT_2026-08-29.md` | semantic and non-claim contract | Y | Y source/read-back/CI |
 | C04 | this matrix | source/read-back/CI/closure evidence | Y | Y source/read-back |
 
 ## Exact Diff Reconciliation
 
-From exact base `949acd74d65751786bc732a65902fbb00271d685` before this documentation update:
+From exact base `949acd74d65751786bc732a65902fbb00271d685` before the final documentation commit:
 - ahead = 4;
 - behind = 0;
 - merge base = exact canonical base;
 - exactly four changed paths;
 - all changed paths are declared above;
 - no Runtime, Services, provider connector, workflow, cognition, memory or authority surface changed.
+
+## PR CI Evidence
+
+Draft PR: `#86`.
+
+Verified candidate head before final documentation: `0c2ba2c5b24384bb0abe266c409e981177368961`.
+
+GitHub PR merge-ref observed by integration job:
+`fab50d027759d038d10d2f2c47fe947335d508df = Merge 0c2ba2c5b24384bb0abe266c409e981177368961 into 949acd74d65751786bc732a65902fbb00271d685`.
+
+Results:
+- Prototype = SUCCESS;
+- Integrity = SUCCESS;
+- Integration = SUCCESS;
+- Full-Stack Repository Audit = SUCCESS;
+- integration discovery = `462 passed, 1 warning, 11 subtests passed`;
+- warning remains the pre-existing P2 identity/index scope warning and is not modified by this transaction.
+
+No CI defect was observed in this candidate cycle.
 
 ## Explicit Non-Claims
 
@@ -82,6 +101,13 @@ while:
 
 `COGNITIVE EFFECT = NOT ESTABLISHED`
 
-## Verification Plan
+## Final Gate
 
-`SOURCE → READ-BACK → EXACT DIFF → DRAFT PR → EXACT-HEAD CI → FAILURE ANALYSIS/REPAIR → FINAL-HEAD CI → CONCURRENCY RECHECK → EXPECTED-SHA SQUASH MERGE → POST-MERGE EXACT-MAIN CI`
+The branch is frozen after this documentation commit except for defect repair.
+
+Required next:
+1. exact-head Runtime/Integration + Full-Stack CI on this documentation head;
+2. re-read current `main` and PR #86 head/base/diff;
+3. verify no concurrent semantic/path conflict;
+4. mark ready and merge only with exact expected head SHA;
+5. post-merge exact-main CI and read-back.
