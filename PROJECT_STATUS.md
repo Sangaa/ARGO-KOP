@@ -2,7 +2,7 @@
 
 Platform: ARGO KOP (Knowledge Operating Platform)
 Document ID: PROJECT_STATUS
-Version: 3.4.0
+Version: 3.3.7
 Status: INTEGRITY WARNING / CONNECTED-BASELINE AUDIT
 Category: Root Baseline
 Canonical: Yes
