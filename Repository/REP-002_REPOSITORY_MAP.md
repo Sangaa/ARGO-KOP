@@ -2,12 +2,12 @@
 
 Platform: ARGO KOP (Knowledge Operating Platform)
 Document ID: REP-002
-Version: 1.7.4
+Version: 1.7.5
 Status: Integrity Hold
 Category: Repository
 Canonical: Yes
 Priority: Critical
-Last Audit Date: Aug 16, 2026
+Last Audit Date: Aug 29, 2026
 Development Baseline: 3.2.1
 
 ---
@@ -47,6 +47,7 @@ Path: `Core/`
 - `Core/CORE-009_PLATFORM_LIFECYCLE.md`
 - `Core/CORE-010_PLATFORM_ROADMAP.md`
 - `Core/CORE-011_PLATFORM_CHARTER.md`
+- `Core/CORE-012_GENERATIVE_KNOWLEDGE_AND_SELF_DEVELOPMENT.md`
 - `Core/_FOLDER_STATUS.md`
 
 ## 4. Repository Layer
@@ -68,8 +69,9 @@ Path: `Repository/`
 - `Repository/REP-013_REPOSITORY_CONTENT_TREE.md`
 - `Repository/REP-014_REPOSITORY_RELATIONSHIP_REGISTRY.md`
 - `Repository/REP-015_CONTROL_PLANE_BOOTSTRAP_CHECKLIST.md`
+- `Repository/REP-016_PHASE1_PARTITION_WORK_QUEUE.md`
 
-The REP-011–015 artifacts form the current repository control plane. They remain subject to cross-registry reconciliation and do not grant domain semantic authority.
+The REP-011–016 artifacts form the current repository control plane. They remain subject to cross-registry reconciliation and do not grant domain semantic authority. `REP-020` remains a provisional evidence surface and is not promoted to canonical map authority.
 
 ## 5. Governance Layer
 
@@ -84,6 +86,9 @@ Path: `Governance/`
 - `Governance/GOV-013_HERMUZ_SESSION_BUILD_PROTOCOL.md`
 - `Governance/GOV-013A_HERMUZ_BOOTSTRAP_INTEGRITY_GATE.md`
 - `Governance/GOV-014_CONTROLLED_DOCUMENT_MUTATION_PROTOCOL.md`
+- `Governance/GOV-015_EXECUTION_DOCUMENTATION_AND_KNOWLEDGE_TRANSFER_PROTOCOL.md`
+- `Governance/GOV-016_FAILURE_TO_LEARNING_PROTOCOL.md`
+- `Governance/GOV-017_ARGO_SELF_ASSURANCE_AND_CAPABILITY_EVALUATION_PROTOCOL.md`
 - `Governance/_FOLDER_STATUS.md`
 
 `Governance/GOV-011_EXTERNAL_FEEDBACK_REPORT_STANDARD.md` exists and is verified as `Proposed / Integrity Hold`; it is not active canonical authority until formally ratified.
@@ -91,6 +96,10 @@ Path: `Governance/`
 `Governance/GOV-012_DOMAIN_RECONSTRUCTION_STANDARD.md` exists as a proposed reconstruction standard. It is not active canonical authority until formally ratified.
 
 `GOV-013` is the approved canonical HERMUZ session operating contract. `GOV-013A` is its approved canonical session-integrity addendum and establishes the mandatory pre-mutation bootstrap gate. Neither document overrides higher ARGO authority.
+
+`GOV-014` remains the sole active controlled-document-mutation identity. The later Self-Assurance protocol that reused `GOV-014` was migrated to `GOV-017`; its pre-migration source is historical/non-canonical under `Archive/Governance-Legacy/`.
+
+`GOV-015` is the execution-documentation, work-lease, handoff and knowledge-transfer contract referenced by `GOV-016`. `GOV-017` is the current Self-Assurance / Capability Evaluation protocol. Neither creates implementation or promotion authority by mapping alone.
 
 ## 6. Runtime Layer
 
@@ -263,7 +272,7 @@ These domains are not assumed complete or architecturally authoritative from fol
 13. A mapped file is not considered reviewed or complete solely because it appears in this map; review state must be taken from REP-011.
 14. A folder/domain remains open until its Phase 1 completion is explicitly recorded; reviewed subsets must not imply completion of the remaining contents.
 15. If a reviewed file changes, or a dependency/authority/consumer changes materially, its prior review state must be revalidated.
-16. Critical Repository Control artifacts (`REP-011` through `REP-015`) must remain mutually discoverable through the active repository map while their cross-registry reconciliation remains open.
+16. Critical Repository Control artifacts (`REP-011` through `REP-016`) must remain mutually discoverable through the active repository map while their cross-registry reconciliation remains open.
 17. New Memory subdomains must be mapped when physically constructed and must remain capped by their verified scope until consolidated validation.
 18. New Decision Memory, Historical Memory and Project Memory subdomains must be mapped when physically constructed and must remain capped by their verified scope until consolidated validation.
 19. Memory mapping establishes physical inventory only; it does not grant Memory authority or certify cross-layer consumers.
@@ -271,12 +280,13 @@ These domains are not assumed complete or architecturally authoritative from fol
 21. Directly verified Runtime target/prototype artifacts must be mapped when physically constructed while preserving their declared non-executable authority boundary.
 22. Runtime candidate paths in the physical map must match the current `Runtime/` repository paths; historical candidate names are not active inventory.
 23. Approved canonical Governance addenda that govern HERMUZ session integrity must appear in both the master index and physical storage map while remaining subordinate to higher ARGO authority.
+24. Execution/handoff Governance and Self-Assurance Governance must retain separate unique identities from controlled-mutation authority.
 
 ## 18. Integrity State
 
 Current repository state: **INTEGRITY HOLD**.
 
-The map is synchronized with the current declared Core, Governance, Repository control-plane, Runtime, Architecture, Lifecycle, Interfaces, Models, Plugins and Build-01 Memory inventory within the inspected scope. Runtime ↔ Engine relationship validation remains open.
+The map is synchronized with the current declared Core, Governance, Repository control-plane, Runtime, Architecture, Lifecycle, Interfaces, Models, Plugins and Build-01 Memory inventory within the inspected scope. Runtime ↔ Engine relationship validation, repository-wide duplicate-ID reconciliation and broader Connected-Baseline work remain open.
 
 Completion of individual files or reviewed subsets must not be interpreted as Phase 1 repository completion. REP-011 is the binding review/completion evidence ledger until an explicit Phase 1 closure decision is recorded.
 
@@ -295,6 +305,18 @@ Current Core folder evidence explicitly identifies `Core/CORE-000_PLATFORM_ARCHI
 The physical storage map is synchronized to that same canonical Core path.
 
 This mutation repairs the REP-001 ↔ REP-002 discoverability gap and does not promote the legacy `CORE-000_PLATFORM_IDENTITY.md`, which remains noncanonical historical evidence.
+
+## 2026-08-29 Governance & Control-Plane Map Synchronization
+
+Current transaction `MUT-2026-08-29-CONTROL-PLANE-CONVERGENCE-001` re-read the complete pre-mutation REP-002 source and synchronized only directly verified affected paths:
+
+- `REP-016_PHASE1_PARTITION_WORK_QUEUE.md` is now explicitly mapped as the queue required by the control-plane bootstrap checklist;
+- `Core/CORE-012_GENERATIVE_KNOWLEDGE_AND_SELF_DEVELOPMENT.md` is restored to map alignment with the already indexed Core inventory;
+- `GOV-015_EXECUTION_DOCUMENTATION_AND_KNOWLEDGE_TRANSFER_PROTOCOL.md` and `GOV-017_ARGO_SELF_ASSURANCE_AND_CAPABILITY_EVALUATION_PROTOCOL.md` are mapped;
+- canonical `GOV-014` remains the controlled-document-mutation path;
+- the conflicting Self-Assurance GOV-014 source and the legacy active-path GOV-004 traceability artifact are preserved under Archive and removed from active Governance mapping.
+
+This map synchronization does not certify the full Governance folder, repository-wide identity uniqueness, or global repository integrity.
 
 ---
 
