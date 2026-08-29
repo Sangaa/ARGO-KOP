@@ -4,7 +4,7 @@ Transaction ID: `MUT-2026-08-29-STATUS-GOVERNANCE-RECONCILIATION-002`
 Baseline: `main@596600efd1f39f88b8991efeaeb99aaf16857180`
 Lease: `R71-20260829-STATUS-GOV-RECON-002`
 Protocol: `PROJECT_BOOTSTRAP + GOV-013 + GOV-014 + GOV-013A repository-first multi-instance execution`
-Status: `ACTIVE / BOUNDED RECONCILIATION`
+Status: `CLOSED / ROOT STATUS SYNCHRONIZED / GOVERNANCE IDENTITY HOLD EXPLICIT`
 Authority: `NONE BEYOND APPLICABLE GOVERNANCE`
 
 ## Objective
@@ -34,7 +34,7 @@ Current Room 71 state showed no active lease and ranked:
 
 `PROJECT_STATUS.md` was last audited 2026-08-25 and still described the file-local seam scanner as the latest checkpoint, while main now contains bounded P4 closure, Experience Spine advisory projection, IGT experiment/evidence chain, untrusted external-evidence intake, and Room 71 multi-instance control.
 
-`Governance/_FOLDER_STATUS.md` was last audited 2026-08-08 and claims `GOVERNANCE BASELINE CLEAN`, but current Governance contains later effective/proposed/session amendments and multiple `GOV-013A`-prefixed artifacts not represented by that evidence record.
+`Governance/_FOLDER_STATUS.md` was last audited 2026-08-08 and claimed `GOVERNANCE BASELINE CLEAN`, but current Governance contains later effective/proposed/session amendments and multiple reused Governance identity prefixes not represented by that evidence record.
 
 ## Identity Finding
 
@@ -44,13 +44,13 @@ The following current paths were directly observed:
 - `Governance/GOV-013A_HERMUZ_OBSERVATION_SIDE_EFFECT_GATE.md` — title uses `GOV-013A`, proposed integration into GOV-013;
 - `Governance/GOV-013A_HERMUZ_SESSION_WORKGROUP_CONTINUATION_AMENDMENT.md` — title uses `GOV-013A`, Approved Session Operating Amendment / Canonical Addendum;
 - `Governance/GOV-013A_REPOSITORY_FIRST_MULTI_INSTANCE_EXECUTION.md` — title uses `GOV-013A`, Canonical Amendment / Effective;
-- `Governance/GOV-013A_REPOSITORY_FIRST_MULTI_INSTANCE_EXECUTION_AMENDMENT.md` — separately present and not yet reconciled in this transaction.
+- `Governance/GOV-013A_REPOSITORY_FIRST_MULTI_INSTANCE_EXECUTION_AMENDMENT.md` — separately present and not yet reconciled.
 
 Further direct review confirmed heading-family collisions for `GOV-015`, `GOV-016`, and `GOV-017`, where active and/or proposed documents currently share the same numeric heading identity. `GOV-014` also has more than one current governance artifact using the same numeric family, and prior REP-001/REP-002 tests establish only `Governance/GOV-014_CONTROLLED_DOCUMENT_MUTATION_PROTOCOL.md` as the indexed GOV-014 path.
 
-Therefore the previous folder-level statement `active Governance artifacts have unique logical Document IDs` is not reusable as current proof.
+Therefore the former folder-level statement `active Governance artifacts have unique logical Document IDs` is not reusable as current proof.
 
-This transaction does **not** invent a new numbering convention or rename these artifacts without a dedicated identity migration analysis.
+This transaction does **not** invent a numbering convention or rename these artifacts without a dedicated identity migration analysis.
 
 ## Audit Blind-Spot Repair
 
@@ -73,18 +73,18 @@ This detector does not decide which artifact is canonical and does not authorize
 
 ## Controlled Mutation Matrix
 
-| Change | Target | Action | Boundary |
+| Change | Target | Action | Result |
 |---|---|---|---|
-| C1 | `Repository/ROOM071_CURRENT_STATE.json` | UPDATE | open serialized lease only |
-| C2 | this transaction record | ADD/UPDATE | evidence / handoff only |
-| C3 | `Governance/_FOLDER_STATUS.md` | UPDATE | replace stale clean claim with current bounded warning and observed collision |
-| C4 | `PROJECT_STATUS.md` | UPDATE | synchronize recent verified chain and current queue without global-clean claim |
-| C5 | `REP-001_MASTER_INDEX.md` | HOLD | no inventory promotion while identity-family ownership remains ambiguous |
-| C6 | `Quality/Integration/internal_document_id_audit.py` | UPDATE | repair observable identity-family audit blind spot without changing authority |
-| C7 | `Quality/Integration/test_internal_document_id_audit.py` | UPDATE | regression guard for current HOLD detection |
-| C8 | Room 71 | UPDATE | close only after read-back + CI evidence |
+| C1 | `Repository/ROOM071_CURRENT_STATE.json` | UPDATE | lease opened and will be closed after final control-state write |
+| C2 | this transaction record | ADD/UPDATE | evidence and failure-to-learning recorded |
+| C3 | `Governance/_FOLDER_STATUS.md` | UPDATE | stale CLEAN claim reopened as current identity re-audit HOLD |
+| C4 | `PROJECT_STATUS.md` | UPDATE | recent verified chain synchronized; global holds preserved |
+| C5 | `REP-001_MASTER_INDEX.md` | HOLD / NO MUTATION | no inventory promotion while identity-family ownership remains ambiguous |
+| C6 | `Quality/Integration/internal_document_id_audit.py` | UPDATE | current identity-family blind spot repaired without authority promotion |
+| C7 | `Quality/Integration/test_internal_document_id_audit.py` | UPDATE | regression guard established |
+| C8 | Room 71 | UPDATE | close lease with bounded handoff |
 
-All unrelated sections are `KEEP`.
+All unrelated sections remained `KEEP`.
 
 ## Failure-to-Learning Record
 
@@ -112,7 +112,7 @@ Both require `Version: 3.3.7` in `PROJECT_STATUS.md` while separately verifying 
 
 `MODEL_ASSUMPTION_FAILURE + IMPLEMENTATION_FAILURE`.
 
-The status content required synchronization; the document-version promotion did not follow from that requirement.
+The status content required synchronization; document-version promotion did not follow from that requirement.
 
 ### Corrective Pattern
 
@@ -120,22 +120,58 @@ The status content required synchronization; the document-version promotion did 
 
 When a governed status document has a version protected by explicit regression tests, content reconciliation must preserve that version unless a separate version-change transaction establishes why the version itself should advance and updates all governing evidence consistently.
 
-The correct repair was to restore `PROJECT_STATUS.md` to `Version: 3.3.7` while preserving the verified Aug 29 content update. Commit: `50befc922bb9c9b68409cb258ede2bc2ced8b428`.
+The repair restored `PROJECT_STATUS.md` to `Version: 3.3.7` while preserving the verified Aug 29 content update. Repair commit: `50befc922bb9c9b68409cb258ede2bc2ced8b428`.
 
-The failed test was not weakened or rewritten to accept the accidental version bump.
+The failed tests were not weakened or rewritten to accept the accidental version bump.
+
+## Closure Evidence
+
+Exact verification head after repair and transaction learning capture:
+
+`177191cd270c343b03a2d0d0b9a233ea4a8ffedf`
+
+Observed GitHub Actions on that exact SHA:
+
+- `ARGO Runtime Prototype and Integration Tests` — run `33236457769` — `SUCCESS`;
+- `Full-Stack Repository Audit` — run `33236457710` — `SUCCESS`;
+- `M2 Multi-Channel Proposal Training` — run `33236457723` — `SUCCESS`.
+
+The current Governance status was re-read and shows `INTEGRITY WARNING / CURRENT IDENTITY RE-AUDIT`, not CLEAN.
+
+The current root status was re-read and now reflects P4 bounded closure, Experience Spine/IGT/Room71 evolution, external-evidence lifecycle boundaries and the Governance identity HOLD while preserving release/baseline authority.
+
+## Closed Points
+
+- `CONTROL-PLANE-ROOT-STATUS-SYNC` — `CLOSED` for the current Aug 29 verified snapshot.
+- `GOVERNANCE-FOLDER-STALE-CLEAN-CLAIM` — `CLOSED` by replacing stale CLEAN reuse with a current bounded HOLD.
+- `INTERNAL-DOCUMENT-ID-AUDIT-HEADING/SUFFIX-BLIND-SPOT` — `CLOSED` with executable regression coverage.
+- `PROJECT-STATUS-VERSION-REGRESSION` — `CLOSED` after restoring governed document version and observing green CI.
+
+## Explicit Remaining HOLD
+
+`GOVERNANCE-REP001-INVENTORY-RECONCILIATION` remains **OPEN / HARD SEMANTIC HOLD**.
+
+Reason: `REP-001` cannot safely promote or normalize Governance inventory while current identity-family ownership/status semantics are unresolved. The next legal work is a dedicated Governance identity classification/migration transaction, not cosmetic index editing.
 
 ## Non-Claims
 
-- Governance identity family is not yet globally reconciled.
+- Governance identity family is not globally reconciled.
 - Repository-wide connected baseline is not closed.
 - Experience Spine cognitive benefit is not proven.
 - External evidence authenticity is not proven by quarantine or local resolver mechanics.
 - Branches are not safe to bulk-delete.
 - A heading collision alone does not decide canonical ownership.
 
-## Learning Candidates
+## Learning Candidates Promoted as Session Evidence
 
-1. A folder-status evidence record can become **dangerously stale even when its original audit was correct**. The existence of later governance amendments is sufficient to invalidate reuse of a historical `CLEAN` claim as current proof. Status freshness must therefore be treated as a dependency of the claim, not metadata decoration.
-2. A family prefix such as `GOV-013A` can evolve from one addendum into multiple semantically distinct addenda. Once that happens, inventory reconciliation must distinguish **family membership** from **unique logical identity**; silently treating filenames as unique identities bypasses the repository's own canonicalization rule.
-3. Metadata-only identity audits are insufficient when live repository documents express identity in headings or filenames without complete metadata. Detection and authority must remain separate: broaden observation without silently broadening canonical authority.
-4. Content synchronization is not permission to increment a governed document version. Version changes are independent mutations when regression gates or version-authority contracts bind them.
+1. A folder-status evidence record can become dangerously stale even when its original audit was correct. Freshness is a dependency of a CLEAN claim.
+2. A shared amendment prefix can evolve into identity-family ambiguity; family membership and unique logical identity are separate concepts.
+3. Metadata-only identity audits are insufficient when live repository documents express identity in headings or filenames without complete metadata. Detection and authority must remain separate.
+4. Content synchronization is not permission to increment a governed document version. Version changes are independent mutations when regression or authority contracts bind them.
+5. A failed CI can reveal a hidden authority contract that is stronger than the status prose itself; the correct response is to reconcile the mutation to that contract, not weaken the test.
+
+## Final Disposition
+
+This transaction is `CLOSED` for root-status synchronization, stale Governance-status reopening, audit-observability repair and the version-regression correction.
+
+It intentionally hands off unresolved Governance canonical identity ownership as a separate transaction.
