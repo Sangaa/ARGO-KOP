@@ -2,20 +2,23 @@
   "schema":"ARGO-ROOM071-CONTROL-STATE-1",
   "state_date":"2026-08-29",
   "canonical_branch":"main",
-  "last_verified_control_plane_sha":"d4b4c7854c3c9859bf712bcf727cba4788b2516f",
+  "last_verified_control_plane_sha":"5e1a5db805fe2bdce8413b6d8bb9f327c6e39dc9",
   "control_plane_rule":"DISCOVER_CURRENT_HEAD_AT_REENTRY_DO_NOT_TRUST_STORED_SHA_AS_LIVE_HEAD",
   "room":{"id":71,"name":"ROOM 71","type":"HUMAN_CONTROL_ROOM","authority":"OPERATIONAL_COORDINATION_ONLY"},
-  "roles":{"HERMUZ":{"primary":"BUILD_VERIFY_PROMOTE"},"HORUS":{"primary":"ANALYZE_META_LEARNING_AND_EVIDENCE","default_write_scope":["HORUS/**"]},"MAAT":{"primary":"COORDINATE_SCOPE_LEASES_HANDOFFS_CONFLICTS"}},
+  "roles":{
+    "HERMUZ":{"primary":"BUILD_VERIFY_PROMOTE"},
+    "HORUS":{"primary":"ANALYZE_META_LEARNING_AND_EVIDENCE","default_write_scope":["HORUS/**"]},
+    "MAAT":{"primary":"COORDINATE_SCOPE_LEASES_HANDOFFS_CONFLICTS"}
+  },
   "serialized_control_surfaces":["PROJECT_BOOTSTRAP.md","PROJECT_STATUS.md","Repository/REP-001_MASTER_INDEX.md","Repository/REP-002_REPOSITORY_MAP.md","canonical Governance","canonical relationship registries and matrices","Repository/ROOM071_CURRENT_STATE.json"],
-  "active_leases":[
-    {"lease_id":"R71-20260829-GOV-IDENTITY-CLASSIFY-006","execution_id":"CURRENT_SOLO_SESSION","role":"HERMUZ_EQUIVALENT_GOVERNANCE_RECONCILER","state":"ACTIVE","baseline_sha":"d4b4c7854c3c9859bf712bcf727cba4788b2516f","scope":"classify current Governance identity collisions and produce an evidence-backed migration decision before any REP-001/REP-002 mutation","shared_files":["Governance/GOV-013A*","Governance/GOV-014*","Governance/GOV-015*","Governance/GOV-016*","Governance/GOV-017*","Repository/MUT-2026-08-29-GOVERNANCE-IDENTITY-CLASSIFICATION-006.md","Repository/GOVERNANCE_IDENTITY_MIGRATION_MATRIX_2026-08-29.md","Repository/ROOM071_CURRENT_STATE.json"],"forbidden_scope":["REP-001 mutation before classification gate","REP-002 mutation before classification gate","provider authentication","unrelated runtime/product mutation"],"required_revalidation":["GOV-006 identity rules","status/metadata/provenance comparison","reference impact","identity-audit observability","full-stack","runtime/integration","read-back"]}
-  ],
+  "active_leases":[],
   "closed_leases":[
     {"lease_id":"R71-20260829-CONTROL-PLANE-001","state":"CLOSED"},
     {"lease_id":"R71-20260829-STATUS-GOV-RECON-002","state":"CLOSED"},
     {"lease_id":"R71-20260829-EXT-EVIDENCE-RESOLUTION-003","state":"CLOSED","maximum_state":"RESOLVED_UNAUTHENTICATED"},
     {"lease_id":"R71-20260829-PROVIDER-AUTH-READINESS-004","state":"CLOSED","result":"ASSESSED_NOT_READY_HARD_TRUST_ANCHOR_HOLD"},
-    {"lease_id":"R71-20260829-IGT-TRUST-TRANSITION-005","state":"CLOSED","verified_functional_sha":"2b6b43e7f76fc0a14c8d09d9cff153fc539a71ef","ci":{"runtime_integration":"SUCCESS","full_stack":"SUCCESS","m2":"SUCCESS","quality_integration":"490_PASS_11_SUBTESTS"},"result":"EXPLICIT_EDGE_FAIL_CLOSED_ORCHESTRATION_VERIFIED","maximum_state":"RESOLVED_UNAUTHENTICATED","handoff":"Repository/MUT-2026-08-29-IGT-TRUST-STATE-TRANSITION-005.md"}
+    {"lease_id":"R71-20260829-IGT-TRUST-TRANSITION-005","state":"CLOSED","verified_functional_sha":"2b6b43e7f76fc0a14c8d09d9cff153fc539a71ef","ci":{"runtime_integration":"SUCCESS","full_stack":"SUCCESS","m2":"SUCCESS","quality_integration":"490_PASS_11_SUBTESTS"},"result":"EXPLICIT_EDGE_FAIL_CLOSED_ORCHESTRATION_VERIFIED","maximum_state":"RESOLVED_UNAUTHENTICATED","handoff":"Repository/MUT-2026-08-29-IGT-TRUST-STATE-TRANSITION-005.md"},
+    {"lease_id":"R71-20260829-GOV-IDENTITY-CLASSIFY-006","state":"CLOSED","scope":"Governance identity classification/migration plus REP-001/REP-002 Governance inventory reconciliation","identity_verified_sha":"030ff323212c430877f63e46cd10677517bbe9e4","index_sync_sha":"34764880b27c9a4d689dc3d179be44ce8e42c248","repair_verified_sha":"5e1a5db805fe2bdce8413b6d8bb9f327c6e39dc9","ci":{"runtime_integration":"SUCCESS","full_stack":"SUCCESS","m2":"SUCCESS","mutation_matrix_preflight":"SUCCESS","mutation_matrix_semantics":"SUCCESS"},"result":"GOVERNANCE_IDENTITY_AND_REP001_REP002_INVENTORY_SYNC_CLOSED_FOR_CURRENT_MIGRATED_SCOPE","handoff":"Repository/MUT-2026-08-29-GOVERNANCE-IDENTITY-CLASSIFICATION-006.md"}
   ],
   "closed_or_bounded_points":{
     "P4":"CLOSED_FOR_LISTED_CRITICAL_EDGE_SET_ONLY",
@@ -26,16 +29,34 @@
     "CONTROL-PLANE-ROOT-STATUS-SYNC":"CLOSED",
     "GOVERNANCE-FOLDER-STALE-CLEAN-CLAIM":"CLOSED_BY_HOLD_RECLASSIFICATION",
     "INTERNAL-DOCUMENT-ID-AUDIT-OBSERVABILITY":"CLOSED_WITH_REGRESSION_COVERAGE",
-    "PROJECT-STATUS-VERSION-REGRESSION":"CLOSED_WITH_GREEN_CI"
+    "PROJECT-STATUS-VERSION-REGRESSION":"CLOSED_WITH_GREEN_CI",
+    "GOVERNANCE-IDENTITY-FAMILY-COLLISIONS":"CLOSED_FOR_CURRENT_MIGRATED_SCOPE",
+    "GOVERNANCE-REP001-INVENTORY-RECONCILIATION":"CLOSED_FOR_CURRENT_MIGRATED_SCOPE",
+    "MUTATION-MATRIX-SAME-CHANGE-SET-PACKAGING-DEFECT":"CLOSED_WITH_REP015_CONTROL_RULE_AND_GREEN_FULL_STACK"
   },
   "open_points":[
-    {"id":"GOVERNANCE-REP001-INVENTORY-RECONCILIATION","priority":1,"state":"ACTIVE_CLASSIFICATION_TRANSACTION","next":"classify ownership/supersession/candidate status for Governance identity families; migration only after matrix"},
-    {"id":"PROVIDER-AUTHENTICATION-CAPABILITY","priority":2,"state":"HARD_EXTERNAL_TRUST_ANCHOR_HOLD","next":"requires concrete independently verifiable provider/source trust anchor"},
-    {"id":"EXT-EVIDENCE-LIFECYCLE","priority":3,"state":"OPEN_AT_RESOLVED_UNAUTHENTICATED","next":"resume only when a real authenticity earning stage exists; transition guard prevents bypass"},
-    {"id":"CONNECTED-BASELINE-GLOBAL","priority":4,"state":"OPEN"},
-    {"id":"IGT-COGNITIVE-BENEFIT","priority":5,"state":"UNPROVEN"},
-    {"id":"BRANCH-HYGIENE","priority":6,"state":"OPEN_NON_BLOCKING"}
+    {"id":"PROVIDER-AUTHENTICATION-CAPABILITY","priority":1,"state":"HARD_EXTERNAL_TRUST_ANCHOR_HOLD","next":"requires concrete independently verifiable provider/source trust anchor; do not simulate authenticity"},
+    {"id":"EXT-EVIDENCE-LIFECYCLE","priority":2,"state":"OPEN_AT_RESOLVED_UNAUTHENTICATED","next":"resume only when a real authenticity earning stage exists; transition guard prevents bypass"},
+    {"id":"CONNECTED-BASELINE-GLOBAL","priority":3,"state":"OPEN","next":"continue evidence-backed relationship/authority validation without inferring global closure from bounded P4"},
+    {"id":"GOVERNANCE-CONTENT-SEMANTIC-REVIEW","priority":4,"state":"OPEN_NON_BLOCKING","next":"review protocol content/substance separately from identity/provenance; Proposed/Candidate documents remain unpromoted"},
+    {"id":"IGT-COGNITIVE-BENEFIT","priority":5,"state":"UNPROVEN","next":"run controlled novel-case B0/L1/L2 experiment only when evidence-lifecycle prerequisites are satisfied"},
+    {"id":"BRANCH-HYGIENE","priority":6,"state":"OPEN_NON_BLOCKING","next":"classify ACTIVE/HANDOFF/HISTORICAL/SUPERSEDED/MERGED-EVIDENCE-PRESERVED before deletion"}
   ],
-  "priority_order":["KEEP_REQUIRED_CI_GREEN","CLASSIFY_GOVERNANCE_IDENTITY_FAMILIES_BEFORE_REP001_REP002_MUTATION","DO_NOT_BYPASS_PROVIDER_AUTHENTICATION_TRUST_ANCHOR_HOLD","CONTINUE_CONNECTED_BASELINE_GLOBAL_VALIDATION_WHERE_INDEPENDENT_OF_BLOCKED_AUTHENTICATION","RUN_COGNITIVE_BENEFIT_PROOF_ONLY_WHEN_PREREQUISITES_ARE_SATISFIED","CLASSIFY_BRANCHES_BEFORE_DELETION"],
-  "non_claims":["provider authentication unavailable without trust anchor","repository-wide connected baseline not closed","cognitive improvement not proven","REP-001/REP-002 Governance inventory unreconciled","trust-state transition guard does not authorize disabled states"]
+  "priority_order":[
+    "KEEP_REQUIRED_CI_GREEN",
+    "DO_NOT_BYPASS_PROVIDER_AUTHENTICATION_TRUST_ANCHOR_HOLD",
+    "CONTINUE_CONNECTED_BASELINE_GLOBAL_VALIDATION_WHERE_INDEPENDENT_OF_BLOCKED_AUTHENTICATION",
+    "SEPARATE_GOVERNANCE_CONTENT_REVIEW_FROM_IDENTITY_CORRECTNESS",
+    "RUN_COGNITIVE_BENEFIT_PROOF_ONLY_WHEN_PREREQUISITES_ARE_SATISFIED",
+    "CLASSIFY_BRANCHES_BEFORE_DELETION"
+  ],
+  "non_claims":[
+    "provider authentication unavailable without trust anchor",
+    "repository-wide connected baseline not closed",
+    "cognitive improvement not proven",
+    "Governance identity/index closure does not prove protocol substantive correctness",
+    "Proposed/Candidate Governance documents remain unpromoted",
+    "trust-state transition guard does not authorize disabled states",
+    "branch population has not been declared obsolete or safe to delete"
+  ]
 }
