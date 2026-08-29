@@ -1,1 +1,0 @@
-Transaction 136 will use full-file blob reconstruction from current complete GitHub blob reads. This is an execution note only; protected surfaces remain unchanged until the final atomic commit.
