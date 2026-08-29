@@ -2,9 +2,10 @@
 
 Transaction ID: `MUT-2026-08-29-IGT-UNTRUSTED-EXTERNAL-EVIDENCE-INTAKE-001`
 Base: `main@949acd74d65751786bc732a65902fbb00271d685`
+Merged Main Commit: `28e3ec16f1b0e6decee6623f77f48cda74e229c7`
 Branch: `hermuz/igt-untrusted-external-evidence-intake-20260829`
-Protocol: `GOV-013 / GOV-014 / GOV-015 + IGT`
-Status: `SOURCE VERIFIED / READ-BACK VERIFIED / PR-CI VERIFIED / FINAL-HEAD CI PENDING`
+Protocol: `GOV-013 / applicable Governance + IGT`
+Status: `CLOSED / POST-MERGE MAIN CI VERIFIED`
 Authority: `NONE`
 
 ## Entry Evidence
@@ -15,7 +16,7 @@ Current canonical chain can verify and correlate:
 - structurally qualified model-run evidence package;
 - binding-aware local evidence admission.
 
-Current canonical contract explicitly keeps `external_delivery`, `model_execution authenticity`, and `provider_authenticity` unproven.
+The canonical contract explicitly keeps `external_delivery`, `model_execution authenticity`, and `provider_authenticity` unproven.
 
 Three prior materially different repository searches found no implemented delivery receipt / transport ID / external-delivery observation surface. `INTF-004` defines transport capability but not observable delivery proof.
 
@@ -66,7 +67,7 @@ Verified candidate head before final documentation: `0c2ba2c5b24384bb0abe266c409
 GitHub PR merge-ref observed by integration job:
 `fab50d027759d038d10d2f2c47fe947335d508df = Merge 0c2ba2c5b24384bb0abe266c409e981177368961 into 949acd74d65751786bc732a65902fbb00271d685`.
 
-Results:
+Candidate results:
 - Prototype = SUCCESS;
 - Integrity = SUCCESS;
 - Integration = SUCCESS;
@@ -75,6 +76,22 @@ Results:
 - warning remains the pre-existing P2 identity/index scope warning and is not modified by this transaction.
 
 No CI defect was observed in this candidate cycle.
+
+## Post-Merge Main Closure Evidence
+
+Exact merged main commit inspected: `28e3ec16f1b0e6decee6623f77f48cda74e229c7`.
+
+GitHub Actions observed for that exact SHA:
+
+- `ARGO Runtime Prototype and Integration Tests` — run `33232623143` — `SUCCESS`;
+- `Full-Stack Repository Audit` — run `33232623137` — `SUCCESS`;
+- `M2 Multi-Channel Proposal Training` — run `33232623139` — `SUCCESS`.
+
+The merged implementation and transaction artifacts were re-read from current repository evidence before this closure update.
+
+Therefore the previously open `FINAL-HEAD CI PENDING` condition is now satisfied for the exact merged functional commit.
+
+This closure remains bounded to this transaction and does not imply repository-wide integrity.
 
 ## Explicit Non-Claims
 
@@ -85,7 +102,7 @@ No CI defect was observed in this candidate cycle.
 - A locally stored receipt is not proof the provider created it.
 - Quarantine admission grants no authority and no cognitive-effect claim.
 
-## Maximum Candidate State
+## Maximum Verified State
 
 `VERIFIED_UNTRUSTED_EXTERNAL_EVIDENCE_INTAKE`
 
@@ -101,13 +118,12 @@ while:
 
 `COGNITIVE EFFECT = NOT ESTABLISHED`
 
-## Final Gate
+## Closure
 
-The branch is frozen after this documentation commit except for defect repair.
+Transaction state: `CLOSED`.
 
-Required next:
-1. exact-head Runtime/Integration + Full-Stack CI on this documentation head;
-2. re-read current `main` and PR #86 head/base/diff;
-3. verify no concurrent semantic/path conflict;
-4. mark ready and merge only with exact expected head SHA;
-5. post-merge exact-main CI and read-back.
+Next legal continuation is downstream of quarantine only:
+
+`QUARANTINE → INDEPENDENT RESOLUTION / PROVIDER-BACKED AUTHENTICATION → CORRELATION → BINDING → QUALIFICATION → BOUNDED AUTHORITY DECISION`.
+
+No stage may be collapsed or inferred from receipt presence alone.
