@@ -1,40 +1,37 @@
 # MUT-2026-08-29 — COGNITION STATUS RECONCILIATION — 168
 
-State: PREWRITE / NOT CLOSED
+State: FINALIZED / AWAITING EXACT-HEAD VERIFICATION
 Role: HERMUZ via Room71
-Baseline: `1fb81c444c1c08512f4427b4b90d6c00d8409129`
-Scope: create bounded `Cognition/_FOLDER_STATUS.md` + regression only
+Prewrite baseline: `1fb81c444c1c08512f4427b4b90d6c00d8409129`
+Prewrite commit: `155f1cab74e02f99ba10a256c17cd734299f2477`
 
-## Evidence
+## Final Change
 
-Lease 145 enumerated the current Cognition Git tree with `truncated:false`: 35 tracked files and no folder status.
+- create `Cognition/_FOLDER_STATUS.md` from exact 35-file Git-tree evidence already established in lease 145;
+- distinguish COG document surfaces, relationship/session contracts, Python support and tests;
+- preserve current state `INTEGRITY HOLD / LOCAL INVENTORY VERIFIED / CROSS-LAYER VALIDATION OPEN`;
+- classify the two COG-010 filenames without promoting either into a new authority:
+  - `COG-010_REASONING_PIPELINE_BOUNDARY.md` = explicit `COG-010`, Candidate / Integrity Hold, not promoted;
+  - `COG-010_INTELLIGENCE_LAYER.md` = legacy thin explanatory surface without a competing current Document-ID block;
+- preserve COG-009 learning handoff versus automatic-canonicalization boundary;
+- add a repository-root-anchored regression.
 
-The tree includes:
-- `COG-001..COG-009` historical/document family;
-- two filenames beginning `COG-010`;
-- multiple relationship/session/context contracts;
-- Python support/execution artifacts;
-- tests.
+## Bounded Rules
 
-Semantic review established:
-- `COG-010_REASONING_PIPELINE_BOUNDARY.md` explicitly declares `Document ID: COG-010` and `Status: Candidate / Integrity Hold`;
-- `COG-010_INTELLIGENCE_LAYER.md` is a thin legacy explanatory file with no current metadata/Document ID block establishing it as the active COG-010 authority;
-- COG-009 explicitly separates learning handoff from automatic canonical truth.
+`EXACT PHYSICAL INVENTORY != COGNITION DOMAIN CERTIFICATION`
 
-## Intended Mutation
+`FILENAME DUPLICATION != AUTHORITY DUPLICATION`
 
-Create a status surface that:
-- records exact current physical inventory count and categories;
-- preserves `INTEGRITY HOLD / LOCAL INVENTORY VERIFIED / CROSS-LAYER VALIDATION OPEN`;
-- records the bounded COG-010 identity ambiguity without promoting the Candidate;
-- distinguishes documents/contracts/code/tests;
-- preserves COG-009 learning/authority boundary;
-- adds regression anchored to repository root.
+`CANDIDATE CONTRACT != CANONICAL EXECUTION ARCHITECTURE`
 
-## Non-Claims
+`LEARNING HANDOFF != AUTOMATIC CANONICAL TRUTH`
 
-No COG-010 promotion, no Intelligence authority transfer, no cognitive-benefit proof, no global Cognition certification, no Core136 mutation, no Room71 JSON rewrite.
+`SEMANTIC/MECHANICAL COGNITION EVIDENCE != COGNITIVE BENEFIT PROOF`
+
+## Regression
+
+`Quality/Integrity/test_cognition_folder_status_reconciliation.py` guards exact inventory representation and the authority/cognitive-benefit boundaries above.
 
 ## Close Gate
 
-Status + regression + finalized Matrix must enter one final Git tree/commit and pass exact read-back plus applicable exact-head CI.
+Final state becomes `CLOSED / EXECUTION-VERIFIED` only after status + regression + this Matrix enter one final Git tree/commit, exact read-back succeeds, and applicable exact-head CI succeeds.
