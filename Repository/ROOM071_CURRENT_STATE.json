@@ -2,7 +2,7 @@
   "schema":"ARGO-ROOM071-CONTROL-STATE-1",
   "state_date":"2026-08-29",
   "canonical_branch":"main",
-  "last_verified_control_plane_sha":"e3c8fa9e88ff7e30d896cadbd0ddb3196be3adba",
+  "last_verified_control_plane_sha":"0ea193655f1c0b2448c39b18872ef7598eb0cfde",
   "control_plane_rule":"DISCOVER_CURRENT_HEAD_AT_REENTRY_DO_NOT_TRUST_STORED_SHA_AS_LIVE_HEAD",
   "room":{"id":71,"name":"ROOM 71","type":"HUMAN_CONTROL_ROOM","authority":"OPERATIONAL_COORDINATION_ONLY"},
   "roles":{"HERMUZ":{"primary":"BUILD_VERIFY_PROMOTE"},"HORUS":{"primary":"ANALYZE_META_LEARNING_AND_EVIDENCE","default_write_scope":["HORUS/**"]},"MAAT":{"primary":"COORDINATE_SCOPE_LEASES_HANDOFFS_CONFLICTS"}},
@@ -15,7 +15,8 @@
     {"lease_id":"R71-20260829-PROVIDER-AUTH-READINESS-004","state":"CLOSED","result":"ASSESSED_NOT_READY_HARD_TRUST_ANCHOR_HOLD"},
     {"lease_id":"R71-20260829-IGT-TRUST-TRANSITION-005","state":"CLOSED","verified_functional_sha":"2b6b43e7f76fc0a14c8d09d9cff153fc539a71ef","result":"EXPLICIT_EDGE_FAIL_CLOSED_ORCHESTRATION_VERIFIED","maximum_state":"RESOLVED_UNAUTHENTICATED"},
     {"lease_id":"R71-20260829-GOV-IDENTITY-CLASSIFY-006","state":"CLOSED","repair_verified_sha":"5e1a5db805fe2bdce8413b6d8bb9f327c6e39dc9","result":"GOVERNANCE_IDENTITY_AND_REP001_REP002_INVENTORY_SYNC_CLOSED_FOR_CURRENT_MIGRATED_SCOPE"},
-    {"lease_id":"R71-20260829-CORE-INDEX-008","state":"CLOSED","verified_functional_sha":"e3c8fa9e88ff7e30d896cadbd0ddb3196be3adba","ci":{"runtime_integration":"SUCCESS","full_stack":"SUCCESS","m2":"SUCCESS"},"result":"CORE001_CORE002_INDEX_DISCOVERABILITY_CLOSED","handoff":"Repository/MUT-2026-08-29-CORE-INDEX-RECONCILIATION-008.md"}
+    {"lease_id":"R71-20260829-CORE-INDEX-008","state":"CLOSED","verified_functional_sha":"e3c8fa9e88ff7e30d896cadbd0ddb3196be3adba","ci":{"runtime_integration":"SUCCESS","full_stack":"SUCCESS","m2":"SUCCESS"},"result":"CORE001_CORE002_INDEX_DISCOVERABILITY_CLOSED","handoff":"Repository/MUT-2026-08-29-CORE-INDEX-RECONCILIATION-008.md"},
+    {"lease_id":"R71-20260829-P6-EJR-SCOPE-009","state":"CLOSED","verified_functional_sha":"0ea193655f1c0b2448c39b18872ef7598eb0cfde","ci":{"runtime_integration":"SUCCESS","full_stack":"SUCCESS","m2":"SUCCESS"},"result":"P6_EJR_DIRECT_IMPACT_SCOPE_OUT_OF_SCOPE_EXECUTION_VERIFIED","issue_15":"CLOSED_COMPLETED","handoff":"Repository/MUT-2026-08-29-P6-EJR-SCOPE-RESOLUTION-009.md"}
   ],
   "closed_or_bounded_points":{
     "P4":"CLOSED_FOR_LISTED_CRITICAL_EDGE_SET_ONLY",
@@ -27,6 +28,7 @@
     "GOVERNANCE-REP001-INVENTORY-RECONCILIATION":"CLOSED_FOR_CURRENT_MIGRATED_SCOPE",
     "MUTATION-MATRIX-SAME-CHANGE-SET-PACKAGING-DEFECT":"CLOSED_WITH_REP015_CONTROL_RULE_AND_GREEN_FULL_STACK",
     "CORE001_CORE002_INDEX_DISCOVERABILITY":"CLOSED_EXECUTION_VERIFIED",
+    "P6_EJR_DOCUMENTATION_PATH_SCOPE":"CLOSED_OUT_OF_SCOPE_FOR_DIRECT_IMPACT_CORRELATION",
     "CONTINUOUS_IMPROVEMENT_THREAT_OPPORTUNITY_CONTROL":"ESTABLISHED_NON_AUTHORITATIVE_OPERATIONAL_CONTROL"
   },
   "open_points":[
@@ -34,10 +36,10 @@
     {"id":"EXT-EVIDENCE-LIFECYCLE","priority":2,"state":"OPEN_AT_RESOLVED_UNAUTHENTICATED","next":"resume only when a real authenticity earning stage exists; transition guard prevents bypass"},
     {"id":"CONNECTED-BASELINE-GLOBAL","priority":3,"state":"OPEN_PARTITIONABLE","next":"close evidence-backed partitions independently; KNW-001..010 remain deferred until consolidated canonical validation"},
     {"id":"GOVERNANCE-CONTENT-SEMANTIC-REVIEW","priority":4,"state":"OPEN_NON_BLOCKING","next":"claim-by-claim content review against current executable evidence; identity correctness is not substantive correctness"},
-    {"id":"BRANCH-HYGIENE","priority":5,"state":"CLASSIFICATION_REQUIRED_NO_DELETE","next":"branch API shows historical and recent diverged branches; classify ancestry/evidence before deletion; no bulk delete"},
+    {"id":"BRANCH-HYGIENE","priority":5,"state":"CLASSIFICATION_REQUIRED_NO_DELETE","next":"PR #88 is partially superseded but still contains unique unreviewed surfaces; classify before closure/deletion"},
     {"id":"IGT-COGNITIVE-BENEFIT","priority":6,"state":"UNPROVEN","next":"run controlled novel-case B0/L1/L2 experiment only when evidence-lifecycle prerequisites are satisfied"}
   ],
   "continuous_improvement_control":"Repository/CONTINUOUS_IMPROVEMENT_THREAT_OPPORTUNITY_CONTROL_2026-08-29.md",
   "priority_order":["KEEP_REQUIRED_CI_GREEN","DO_NOT_BYPASS_PROVIDER_AUTHENTICATION_TRUST_ANCHOR_HOLD","CLOSE_CONNECTED_BASELINE_BY_BOUNDED_PARTITIONS","RUN_GOVERNANCE_CONTENT_SEMANTIC_REVIEW","CLASSIFY_BRANCHES_BEFORE_ANY_DELETE","RUN_COGNITIVE_BENEFIT_PROOF_ONLY_AFTER_PREREQUISITES","CAPTURE_FUTURE_OPPORTUNITIES_WITHOUT_AUTHORITY_PROMOTION"],
-  "non_claims":["provider authentication unavailable without trust anchor","repository-wide connected baseline not closed","cognitive improvement not proven","Governance identity/index closure does not prove protocol substantive correctness","KNW-001..010 are not promoted by Core index closure","branch population has not been declared obsolete or safe to delete","future opportunity plan is not canonical authority"]
+  "non_claims":["provider authentication unavailable without trust anchor","repository-wide connected baseline not closed","cognitive improvement not proven","Governance identity/index closure does not prove protocol substantive correctness","KNW-001..010 are not promoted by Core index closure","P6 EJR OUT_OF_SCOPE means no direct impact correlation only; EJR evidence remains usable","branch population has not been declared obsolete or safe to delete","future opportunity plan is not canonical authority"]
 }
