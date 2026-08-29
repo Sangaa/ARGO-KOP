@@ -1,17 +1,20 @@
-"""Current-tree internal Document ID audit.
+"""Current-tree internal Document ID and identity-family audit.
 
-GOV-004 defines identity rules, while REP-001 defines the currently verified
-active inventory scope. This audit separates:
+GOV-004/GOV-006 define identity rules, while REP-001 defines the currently
+verified active inventory scope. This audit separates:
 - indexed active canonical artifacts;
 - canonical artifacts outside the current active inventory;
 - canonical artifacts inside domains explicitly deferred by domain authority;
 - legacy/non-canonical artifacts retained for provenance;
 - shadowed legacy identities where one canonical owner coexists with
   explicit historical/non-canonical retained artifacts;
-- ambiguous duplicate IDs that require an explicit identity decision.
+- ambiguous duplicate explicit Document IDs;
+- heading-identity collisions that remain visible even when a document omits
+  a formal ``Document ID`` metadata field.
 
-It never promotes an unindexed artifact to active authority from its filename
-or internal Document ID alone.
+It never promotes an unindexed artifact to active authority from its filename,
+heading, or internal Document ID alone. Heading collisions are candidate HOLD
+evidence, not automatic authority decisions.
 """
 
 from __future__ import annotations
@@ -26,10 +29,18 @@ NAMESPACE_PREFIXES = {
     "LIF", "MEM", "MOD", "PLG", "REP", "RUN", "SPEC", "SRV",
 }
 NAMESPACE_PATTERN = "|".join(sorted(NAMESPACE_PREFIXES, key=len, reverse=True))
-ID_PATTERN = rf"(?:{NAMESPACE_PATTERN})-\d{{3}}"
+BASE_ID_PATTERN = rf"(?:{NAMESPACE_PATTERN})-\d{{3}}"
+# Current repository evidence includes explicit amendment identities such as
+# GOV-013A. The audit must be able to observe those identities even though
+# GOV-006 still requires a separate governance decision for numbering policy.
+ID_PATTERN = rf"{BASE_ID_PATTERN}[A-Z]?"
 ID_RE = re.compile(rf"(?<![A-Z])({ID_PATTERN})(?![A-Z0-9-])", re.I)
 INLINE_RE = re.compile(rf"^\s*Document ID\s*[:：]\s*`?({ID_PATTERN})`?\s*$", re.I | re.M)
 BLOCK_RE = re.compile(rf"^\s*Document ID\s*$\n\s*`?({ID_PATTERN})`?\s*$", re.I | re.M)
+HEADING_ID_RE = re.compile(
+    rf"^\s*#{{1,6}}\s*({ID_PATTERN})(?=\s|—|–|-|$)",
+    re.I | re.M,
+)
 CANONICAL_INLINE_RE = re.compile(r"^\s*Canonical\s*[:：]\s*(Yes|No|Pending)\s*$", re.I | re.M)
 CANONICAL_BLOCK_RE = re.compile(r"^\s*Canonical\s*$\n\s*(Yes|No|Pending)\s*$", re.I | re.M)
 STATUS_RE = re.compile(r"^\s*Status\s*[:：]?\s*(.+?)\s*$", re.I | re.M)
@@ -104,6 +115,11 @@ def _extract_document_id(text: str) -> str | None:
     return match.group(1).upper() if match else None
 
 
+def _extract_heading_id(text: str) -> str | None:
+    match = HEADING_ID_RE.search(text)
+    return match.group(1).upper() if match else None
+
+
 def _extract_canonical(text: str) -> bool | None:
     match = CANONICAL_INLINE_RE.search(text) or CANONICAL_BLOCK_RE.search(text)
     if not match:
@@ -149,27 +165,33 @@ def scan(root: Path) -> dict:
     tracked = _git_files(root)
     active_index = _master_index_paths(root)
     folder_status_cache: dict[str, bool] = {}
+    heading_identities: dict[str, list[str]] = {}
 
     for path in tracked:
         if path.suffix.lower() not in TEXT_SUFFIXES:
             continue
+        relative = path.relative_to(root).as_posix()
+        archived_path = relative == "Archive" or relative.startswith("Archive/")
         try:
             text = path.read_text(encoding="utf-8", errors="ignore")
         except OSError:
-            unreadable.append(path.relative_to(root).as_posix())
+            unreadable.append(relative)
             continue
+
+        heading_id = _extract_heading_id(text)
+        if heading_id and not archived_path:
+            heading_identities.setdefault(heading_id, []).append(relative)
+
         document_id = _extract_document_id(text)
         if not document_id:
             continue
-        relative = path.relative_to(root).as_posix()
         relative_path = Path(relative)
-        archived = relative == "Archive" or relative.startswith("Archive/")
         records.append(
             ArtifactRecord(
                 path=relative,
                 document_id=document_id,
                 canonical=_extract_canonical(text),
-                archived=archived,
+                archived=archived_path,
                 indexed_active=relative in active_index,
                 filename_prefix=_filename_prefix(relative_path),
                 status=_extract_status(text),
@@ -229,6 +251,17 @@ def scan(root: Path) -> dict:
             continue
         ambiguous_duplicate_ids[document_id] = sorted(record.path for record in group)
 
+    heading_identity_collisions = {
+        identity: sorted(paths)
+        for identity, paths in sorted(heading_identities.items())
+        if len(paths) > 1
+    }
+    governance_heading_identity_collisions = {
+        identity: paths
+        for identity, paths in heading_identity_collisions.items()
+        if any(path.startswith("Governance/") for path in paths)
+    }
+
     return {
         "tracked_files_scanned": len(tracked),
         "master_index_paths": len(active_index),
@@ -243,12 +276,19 @@ def scan(root: Path) -> dict:
         "duplicate_active_ids": duplicate_active_ids,
         "shadowed_legacy_ids": {key: sorted(value) for key, value in sorted(shadowed_legacy_ids.items())},
         "ambiguous_duplicate_ids": {key: sorted(value) for key, value in sorted(ambiguous_duplicate_ids.items())},
+        "heading_identity_collisions": heading_identity_collisions,
+        "governance_heading_identity_collisions": governance_heading_identity_collisions,
         "filename_internal_id_mismatches": filename_mismatches,
         "unindexed_id_records_by_id": unindexed_ids,
         "unreadable": sorted(unreadable),
         "active_duplicate_pass": not duplicate_active_ids and not unreadable,
         "filename_alignment_pass": not filename_mismatches,
-        "identity_scope_reconciled": not canonical_unindexed and not ambiguous_duplicate_ids,
+        "identity_scope_reconciled": (
+            not canonical_unindexed
+            and not ambiguous_duplicate_ids
+            and not governance_heading_identity_collisions
+        ),
+        "governance_identity_hold_required": bool(governance_heading_identity_collisions),
     }
 
 
