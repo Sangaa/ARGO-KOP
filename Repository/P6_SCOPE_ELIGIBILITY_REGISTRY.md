@@ -49,6 +49,7 @@ The only valid P6 scope states are:
 | `Repository/REP-020*` | `IN_SCOPE` | GOV-013 / REP-020 evidence role | `REP-020` current control artifact | Correlate as evidence/control-plane impact; do not infer authority |
 | `Repository/REP-014*` | `IN_SCOPE` | GOV-013 / REP-014 canonical relationship role | `REP-014` current control artifact | Correlate as relationship evidence; do not infer authority |
 | `Repository/P6_*` | `IN_SCOPE` | Current P6 control contract | Current P6 artifacts | Correlate as P6 control-plane evidence |
+| `Repository/MUT-*_MUTATION_MATRIX.md` | `OUT_OF_SCOPE` | GOV-014 controlled-mutation boundary + dedicated Mutation Matrix preflight/semantics gates | Mutation Matrix is transaction control/evidence, independently validated by its own CI gates | Return `NOT_APPLICABLE` for direct P6 impact correlation; retain Matrix as mutation provenance/control evidence |
 | `EJR/**` | `OUT_OF_SCOPE` | GOV-015 execution/knowledge-transfer boundary + GOV-016 learning-promotion boundary | Issue #15, EJR-284, Mutation Matrix preflight treatment, current learning/authority separation | Return `NOT_APPLICABLE` for the EJR changed path; retain EJR as provenance/learning evidence; do not invent mapping/relationship authority |
 | Other repository paths | `UNRESOLVED` unless an explicit governed registry entry exists | Applicable ARGO authority | Current repository evidence required | Do not infer scope from path existence or neighboring mappings |
 
@@ -79,7 +80,7 @@ The following states are independent and MUST NOT be implicitly promoted into on
 `CANONICAL_MAPPING_VERIFIED`  
 `RELATIONSHIP_VERIFIED`
 
-A CI PASS, runtime evidence artifact, fixture result, controlled synthetic result, Engineering Journal entry, or documentation record cannot by itself create canonical mapping or relationship authority.
+A CI PASS, runtime evidence artifact, fixture result, controlled synthetic result, Engineering Journal entry, documentation record, or Mutation Matrix cannot by itself create canonical relationship authority.
 
 Evidence maturity remains bounded by the strongest actually exercised layer:
 
@@ -101,27 +102,29 @@ Lower-level evidence MUST NOT promote a higher-level state automatically.
 4. Issue #15 prohibited manufacturing `REP-020` mappings or classifier exceptions solely to convert EJR documentation changes to PASS.
 5. P6 separates policy from correlation so the policy can be resolved here without hard-coding the result into the correlator.
 
-### Meaning
-
 For an EJR-only changed path:
 
 `EJR/** → OUT_OF_SCOPE → NOT_APPLICABLE → NO_AUTO_PROMOTION`.
 
-This does **not** mean EJR is ignored.
+EJR remains usable as provenance, session evidence, failure/learning evidence, historical context, and candidate input to later governed promotion or decision.
 
-EJR remains usable as:
+---
 
-- provenance;
-- session evidence;
-- failure/learning evidence;
-- historical context;
-- a candidate input to later governed promotion or decision.
+## 6A. Mutation Matrix direct-impact decision — 2026-08-29
 
-If a transaction changes both an EJR and an in-scope implementation/control/relationship artifact, each changed path is evaluated independently. The EJR classification cannot suppress or promote the in-scope path.
+`Repository/MUT-*_MUTATION_MATRIX.md` is explicitly `OUT_OF_SCOPE` for **direct P6 implementation/relationship impact correlation**.
 
-No EJR relationship, `REP-020` mapping, runtime semantic claim, or authority is created by this scope decision.
+Reason:
 
-Issue #15 may close after canonical regression verifies this state.
+1. A Mutation Matrix is the GOV-014 transaction-control and mutation-provenance surface for a change; it is not the implementation/relationship artifact whose impact it governs.
+2. Full-Stack already has dedicated `Mutation Matrix preflight` and `Mutation Matrix semantic` gates that validate its presence and structure independently.
+3. Treating the Matrix as an unresolved P6 implementation path creates self-referential noise without adding relationship evidence.
+4. `OUT_OF_SCOPE` here does not exempt the Matrix from GOV-014, preflight, semantic validation, provenance, read-back, or closure duties.
+5. The policy is kept in the canonical P6 scope registry rather than hard-coded in `ci_impact_correlation.py`.
+
+For a Mutation Matrix changed path:
+
+`Repository/MUT-*_MUTATION_MATRIX.md → OUT_OF_SCOPE → NOT_APPLICABLE → NO_AUTO_PROMOTION`.
 
 ---
 
@@ -135,7 +138,7 @@ Issue #15 may close after canonical regression verifies this state.
 6. Execution evidence cannot override this registry.
 7. Synthetic evidence cannot override this registry.
 8. Any future change to an eligibility state requires explicit authority and fresh current-HEAD validation.
-9. EJR evidence remains governed by its applicable provenance/learning/transfer controls even when P6 direct impact correlation is not applicable.
+9. EJR and Mutation Matrix evidence retain their independent provenance/control duties even when P6 direct impact correlation is not applicable.
 
 ---
 
@@ -148,7 +151,8 @@ Any P6 implementation consuming this registry MUST have canonical repository tes
 - mapping/relationship text cannot promote an `OUT_OF_SCOPE` path to `MAPPED`;
 - an `UNRESOLVED` path remains `POLICY_UNRESOLVED`;
 - `UNRESOLVED` cannot be promoted by correlation or execution evidence;
-- execution evidence remains distinct from mapping/relationship verification.
+- execution evidence remains distinct from mapping/relationship verification;
+- a Mutation Matrix remains `NOT_APPLICABLE` for direct P6 impact even if its exact path appears in evidence text.
 
 ---
 
@@ -156,7 +160,8 @@ Any P6 implementation consuming this registry MUST have canonical repository tes
 
 `P6 EJR SCOPE GOVERNANCE = RESOLVED / OUT_OF_SCOPE FOR DIRECT IMPACT CORRELATION`.
 
-No REP-020 mapping was added to suppress the historical gap.  
+`P6 MUTATION MATRIX DIRECT-IMPACT SCOPE = RESOLVED / OUT_OF_SCOPE / DEDICATED GOV-014 GATES RETAINED`.
+
 No relationship was promoted.  
 No runtime semantics were changed.  
 No correlator hard-code was added.  

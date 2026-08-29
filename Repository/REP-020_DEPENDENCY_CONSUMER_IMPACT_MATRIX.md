@@ -49,36 +49,43 @@ Authoritative isolated E2E evidence remains `Repository/P3_EXECUTABLE_PROOF_CLOS
 
 ## SERVICE_DISPATCH — RUN-010 → SRV-009 Evidence Boundary
 
-`SERVICE_DISPATCH` now records the bounded evidence actually observed. It is no longer an absence marker.
-
 | Evidence ID | Relationship | Evidence Scope | Current State | Boundary |
 |---|---|---|---|---|
 | SERVICE_DISPATCH | RUN-010 → SRV-009 | An isolated governed observation starts from RUN-010-attributed execution context, preserves authorization/provenance, and reaches the existing ENG-006/SRV-009 adapter with post-read verification | PARTIALLY_VERIFIED | Intentional directional consumption is observed in isolated integration; ordinary connected-spine routing remains unproven and no universal runtime claim is allowed |
 
 Current interpretation:
 
-- callable/dispatch evidence now exists in the isolated integration boundary;
+- callable/dispatch evidence exists in the isolated integration boundary;
 - exact-main Full-Stack and Runtime/Integration CI verify the positive observation together with the negative connected-spine guard;
-- `PARTIALLY_VERIFIED` here expresses scope, not lack of evidence: the ordinary connected spine remains simulation-oriented and is not claimed to route every runtime operation through SRV-009;
-- provider-backed ENG-006/SRV-009 E2E and the isolated RUN-010 observation remain distinct evidence classes;
+- `PARTIALLY_VERIFIED` expresses scope, not lack of evidence;
+- provider-backed ENG-006/SRV-009 E2E and isolated RUN-010 observation remain distinct evidence classes;
 - no reverse `SRV-009 → RUN-010` dependency is implied.
 
 ## P6 Quality / Integration exact-path correlation evidence — 2026-08-29
 
-The following in-scope regression path is explicitly bound to the already-existing bounded RUN-010 / ENG-006 / SRV-009 impact evidence so P6 correlation can discover it by exact repository-relative path:
+The following in-scope regression path is explicitly bound to the already-existing bounded RUN-010 / ENG-006 / SRV-009 impact evidence:
 
 `Quality/Integration/test_run010_eng006_handoff_contract.py`
 
-Correlation meaning is intentionally narrow:
+Correlation meaning:
 
 - P6 scope eligibility: `IN_SCOPE`;
 - expected correlation state: `MAPPED`;
 - promotion: `NO_AUTO_PROMOTION`;
-- evidence role: direct regression coverage for the RUN-010 handoff contract and its bounded ENG-006/SRV-009 impact seam;
 - relationship state remains `PARTIALLY_VERIFIED`;
 - this mapping is not runtime reachability evidence and does not establish universal ordinary-runtime routing.
 
-This exact-path binding exists to make current test-impact evidence discoverable. It does not create a new relationship and does not widen the semantic authority of this provisional matrix.
+## P6 control-surface exact-path correlation evidence — 2026-08-29
+
+The following current P6 control/verification surfaces are explicitly discoverable as evidence/control-plane impact and grant no relationship authority:
+
+- `Repository/REP-020_DEPENDENCY_CONSUMER_IMPACT_MATRIX.md` — self-impact/control-evidence surface; `IN_SCOPE → MAPPED → NO_AUTO_PROMOTION`.
+- `Repository/P6_SCOPE_ELIGIBILITY_REGISTRY.md` — P6 scope-policy control surface; `IN_SCOPE → MAPPED → NO_AUTO_PROMOTION`.
+- `Quality/Integration/test_ci_impact_correlation.py` — P6 correlation regression/control implementation; `IN_SCOPE → MAPPED → NO_AUTO_PROMOTION`.
+
+Mutation Matrix files are intentionally not mapped here for direct P6 impact. Their direct-impact scope is governed as `OUT_OF_SCOPE → NOT_APPLICABLE` in `Repository/P6_SCOPE_ELIGIBILITY_REGISTRY.md`, while their independent GOV-014 preflight/semantic/provenance duties remain mandatory.
+
+This section prevents control-surface self-correlation from becoming recursive policy noise. It does not create new runtime or relationship semantics.
 
 ## Control-Plane Reconciliation State
 
@@ -86,7 +93,6 @@ This exact-path binding exists to make current test-impact evidence discoverable
 - `PROJECT_STATUS.md` remains the canonical summary surface but is not itself authority for repository-wide integrity.
 - `REP-001` remains the canonical inventory index within its inspected scope.
 - `VERIFIED_SEAM_EVIDENCE_REGISTRY.md` remains the evidence-backed seam admission surface.
-- P3/P4 current evidence supersedes the older REL-009 absence claim only within the declared bounded execution scope.
 - Global integrity remains `INTEGRITY HOLD` pending broader relationship/domain gates.
 
 ## Current Bounded Next Work
