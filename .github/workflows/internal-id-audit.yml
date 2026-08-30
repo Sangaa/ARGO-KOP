@@ -31,7 +31,16 @@ jobs:
           PYTHONPATH: ${{ github.workspace }}/Quality/Integration
         run: python -m pytest -q Quality/Integration/test_internal_document_id_audit.py
 
-      - name: Re-run audit as deterministic report
+      - name: Emit deterministic audit report
+        if: always()
         env:
           PYTHONPATH: ${{ github.workspace }}/Quality/Integration
-        run: python Quality/Integration/internal_document_id_audit.py
+        run: python Quality/Integration/internal_document_id_audit.py > internal-document-id-audit-report.json
+
+      - name: Upload deterministic audit report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: internal-document-id-audit-report
+          path: internal-document-id-audit-report.json
+          if-no-files-found: error
