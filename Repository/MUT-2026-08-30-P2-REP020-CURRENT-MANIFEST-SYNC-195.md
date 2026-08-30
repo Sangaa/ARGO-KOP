@@ -3,53 +3,82 @@
 Transaction ID: `MUT-2026-08-30-P2-REP020-CURRENT-MANIFEST-SYNC-195`
 Lease: `R71-20260830-P2-REP020-MANIFEST-SYNC-195`
 Protocol: HERMUZ / GOV-014
-Status: `OPEN / PREWRITE / FUNCTIONAL MUTATION NOT YET APPLIED`
+Status: `CLOSED / EXECUTION-VERIFIED / RESUME-SAFE`
 Entry head: `855089a454ceab145d0c1c7bd0fb31014218c9d9`
+Prewrite head: `33d983a9edb1c09f85277020f915a38829474d2e`
+Functional head: `6bfd767d436eb29c1812f362035b7cfdaa193544`
 
 ## Bounded purpose
 
-Repair the fail-closed cross-artifact synchronization gap revealed by Lease 194 by rebinding the current control-plane boundary manifest to the now-current REP-012 version `1.0.10`.
+Repair the fail-closed cross-artifact synchronization gap revealed by Lease 194 by rebinding the current control-plane boundary manifest to the current REP-012 version `1.0.10`.
 
-The manifest is evidence, not semantic authority. This lease does not modify the REP-012 contract and does not weaken the reconciliation gate.
+The manifest remains evidence, not semantic authority. This lease did not modify the REP-012 contract and did not weaken the reconciliation gate.
 
 ## Evidence basis
 
-- REP-012 at the entry head is `Version: 1.0.10`.
-- `Repository/REP-020_CURRENT_CONTROL_PLANE_BOUNDARY_MANIFEST.md` still records REP-012 as `1.0.9`.
-- the manifest refresh rule requires synchronization when a listed artifact materially changes identity, version, or status;
-- `Quality/Integration/test_control_plane_current_manifest.py` requires the current manifest to produce no missing artifacts or mismatches and to pass its boundary gate;
-- Runtime exact-head run `33310995949` failed only in the integration job while prototype and integrity jobs passed.
+At the Lease-194 functional head:
 
-## Authorized functional scope
+- REP-012 was `Version: 1.0.10`;
+- `Repository/REP-020_CURRENT_CONTROL_PLANE_BOUNDARY_MANIFEST.md` still recorded REP-012 as `1.0.9`;
+- the manifest refresh rule required synchronization after a listed identity/version/status mutation;
+- `Quality/Integration/test_control_plane_current_manifest.py` correctly required zero mismatches and `boundary_pass = True`;
+- Runtime run `33310995949` therefore failed closed in the integration job while prototype and integrity jobs passed.
+
+Classification:
+
+`CROSS-ARTIFACT CURRENT-MANIFEST SYNCHRONIZATION GAP / CORRECT FAIL-CLOSED DETECTION`.
+
+## Applied functional scope
+
+Exactly two paths changed at `6bfd767d436eb29c1812f362035b7cfdaa193544`:
 
 1. `Repository/REP-020_CURRENT_CONTROL_PLANE_BOUNDARY_MANIFEST.md`
 2. `Repository/MUT-2026-08-30-P2-REP020-CURRENT-MANIFEST-SYNC-195_MUTATION_MATRIX.md`
 
-Expected manifest changes are narrowly limited to:
+Source current-manifest blob: `41fd422abb52ca97471089db0da06fdb14d01991`.
+Candidate/current manifest blob: `fe628c365a932cc1e8847813dbf928d6c9c7e9af`.
 
-- rebinding `Verified source baseline` to the Lease-194 functional head;
-- changing only the REP-012 manifest row version from `1.0.9` to `1.0.10`;
-- preserving all status, boundary, closure, and global-hold semantics.
+The manifest change was limited to:
 
-All unrelated manifest content is `KEEP`.
+- `Verified source baseline` → `main@855089a454ceab145d0c1c7bd0fb31014218c9d9`;
+- REP-012 row version `1.0.9` → `1.0.10`;
+- all status, boundary, closure, and global-hold semantics preserved unchanged.
 
-## Forbidden scope
+## Exact-head verification
 
-- no REP-012 semantic change;
+At functional head `6bfd767d436eb29c1812f362035b7cfdaa193544`:
+
+- Full-Stack Repository Audit `33314345499` — `SUCCESS`.
+- ARGO Runtime Prototype and Integration Tests `33314345432` — `SUCCESS`.
+- M2 Multi-Channel Proposal Training `33314345448` — `SUCCESS`.
+- Real Mutation Matrix Regression `33314345446` — `SUCCESS`.
+
+The previously failing Runtime/Integration path turned green without any REP-012 rollback, gate weakening, or test weakening.
+
+## Lease 194 disposition
+
+Lease 194 is accepted and closed through this governed corrective successor. Its original Runtime failure is retained as evidence of the synchronization gap rather than erased or reinterpreted.
+
+Disposition:
+
+`LEASE 194 FUNCTIONAL CONTRACT ACCEPTED / LEASE 195 MANIFEST CONSUMER SYNCHRONIZED / ORIGINAL FAIL-CLOSED EVIDENCE PRESERVED`.
+
+## Learned rule
+
+**A material identity/version/status mutation of an artifact listed in the current control-plane manifest is not verification-complete until the manifest consumer is synchronized in a governed change and the manifest-driven gate passes.**
+
+This is a synchronization obligation, not permission to weaken the gate or downgrade the mutated source.
+
+## Preserved boundaries
+
+- no REP-012 semantic change in Lease 195;
 - no gate/test weakening;
 - no EJR migration, rename, delete, reassignment, or ambiguity suppression;
-- no REP-016 change;
-- no Release Priority 20 reopening;
-- no authority promotion;
-- no Priority 2, Phase 1, Connected Baseline, or global closure.
-
-## Closure conditions
-
-- Mutation Matrix exists before functional write;
-- complete current manifest source is preserved;
-- functional compare contains only the two authorized paths;
-- final live parent is rechecked before `force=false` fast-forward;
-- post-write read-back proves REP-012 `1.0.10` and preserved hold semantics;
-- exact-head Runtime/Integration, Full-Stack, M2, and Real Matrix evidence is observed;
-- Lease 194 disposition is explicitly reconciled through this corrective successor;
-- session checkpoint is persisted as CLOSED / RESUME-SAFE only after verification succeeds.
+- REP-016 unchanged;
+- Release Priority 20 remains `CLOSED_FOR_PHASE_1`;
+- Priority 2 historical/provenance identity scope remains `OPEN`;
+- Phase 1 remains `OPEN`;
+- Global Connected Baseline remains `OPEN`;
+- Provider Authentication remains `HARD HOLD` where no trust anchor exists;
+- Memory full-folder integrity remains `NOT CERTIFIED`;
+- Global `BOOTED / INTEGRITY PASS` remains `NOT CLAIMED`.

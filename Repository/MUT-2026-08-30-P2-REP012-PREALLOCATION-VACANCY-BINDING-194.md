@@ -3,8 +3,10 @@
 Transaction ID: `MUT-2026-08-30-P2-REP012-PREALLOCATION-VACANCY-BINDING-194`
 Lease: `R71-20260830-P2-REP012-PREALLOCATION-VACANCY-BINDING-194`
 Protocol: HERMUZ / GOV-014
-Status: `OPEN / PREWRITE / FUNCTIONAL MUTATION NOT YET APPLIED`
+Status: `CLOSED / FUNCTIONAL ACCEPTED VIA CORRECTIVE SUCCESSOR 195 / RESUME-SAFE`
 Entry head: `b2eb68d7bb2dd5831ac5009103faba66b4922f6f`
+Functional head: `855089a454ceab145d0c1c7bd0fb31014218c9d9`
+Corrective successor functional head: `6bfd767d436eb29c1812f362035b7cfdaa193544`
 
 ## Bounded purpose
 
@@ -16,45 +18,58 @@ This lease is control-plane binding only.
 
 Lease 193 established an execution-verified vacancy gate with decisions `OCCUPIED`, `HISTORY_INCOMPLETE`, and `VACANT` across qualified Document ID metadata, first-H1 identity, filename prefix, and all locally reachable Git history.
 
-Current REP-012 v1.0.9 still begins its material mutation sequence with:
+REP-012 v1.0.9 previously began its material mutation sequence with:
 
 `ALLOCATE → READ → VERIFY IDENTITY → ...`
 
-That sequence lacks an explicit pre-allocation vacancy proof for new EJR identities.
+That sequence lacked an explicit pre-allocation vacancy proof for new EJR identities.
 
-## Authorized functional scope
+## Applied functional scope
+
+Exactly two paths changed at `855089a454ceab145d0c1c7bd0fb31014218c9d9`:
 
 1. `Repository/REP-012_REPOSITORY_ALLOCATION_REGISTRY.md`
 2. `Repository/MUT-2026-08-30-P2-REP012-PREALLOCATION-VACANCY-BINDING-194_MUTATION_MATRIX.md`
 
-Expected REP-012 changes are narrowly limited to:
+REP-012 advanced to `1.0.10` and now requires vacancy proof before allocation for new EJR identity candidates, with fail-closed `HISTORY_INCOMPLETE` semantics and bounded locally reachable-history scope.
 
-- version increment for the governed contract amendment;
-- replacement of the Section 14 material-mutation sequence with an explicit EJR candidate vacancy-proof stage before `ALLOCATE`;
-- explicit fail-closed semantics for `HISTORY_INCOMPLETE`;
-- explicit occupancy surfaces and bounded reachable-history scope;
-- reference to the execution-verified gate implementation and Lease 193 evidence.
+## Verification history and corrective disposition
 
-All unrelated REP-012 content is `KEEP` and must be preserved.
+Original exact-head evidence at `855089a454ceab145d0c1c7bd0fb31014218c9d9`:
 
-## Forbidden scope
+- Full-Stack `33310995932` — SUCCESS.
+- M2 `33310995989` — SUCCESS.
+- Real Matrix `33310995957` — SUCCESS.
+- Runtime/Integration `33310995949` — FAILURE in the integration job only.
+
+The failure was preserved and diagnosed. It was caused by `Repository/REP-020_CURRENT_CONTROL_PLANE_BOUNDARY_MANIFEST.md` still recording REP-012 as `1.0.9`; the current-manifest reconciliation gate correctly failed closed.
+
+Lease 195 synchronized that required consumer without modifying REP-012 or weakening the gate. Exact-head evidence at corrective successor `6bfd767d436eb29c1812f362035b7cfdaa193544`:
+
+- Full-Stack `33314345499` — SUCCESS.
+- Runtime/Integration `33314345432` — SUCCESS.
+- M2 `33314345448` — SUCCESS.
+- Real Matrix `33314345446` — SUCCESS.
+
+Disposition:
+
+`LEASE 194 FUNCTIONAL CONTRACT ACCEPTED / ORIGINAL FAILURE RETAINED AS CROSS-ARTIFACT SYNCHRONIZATION EVIDENCE / CLOSED VIA GOVERNED CORRECTIVE SUCCESSOR 195`.
+
+## Learned rule
+
+**A material identity/version/status mutation of an artifact listed in the current control-plane manifest is not verification-complete until the manifest consumer is synchronized in a governed change and the manifest-driven gate passes.**
+
+This is a synchronization obligation, not permission to weaken the gate or downgrade the mutated source.
+
+## Preserved boundaries
 
 - no EJR content/path/identity migration;
 - no rename, delete, reassignment, or replacement EJR allocation;
 - no ambiguity suppression or detector-membership reduction;
-- no REP-016 change;
-- no Release Priority 20 reopening;
+- REP-016 unchanged;
+- Release Priority 20 not reopened;
 - no authority promotion;
-- no claim that unreachable external history was inspected;
-- no Priority 2 or global closure.
-
-## Closure conditions
-
-- Mutation Matrix exists before the functional repository write;
-- exact source REP-012 blob is read completely;
-- candidate preserves all non-target content;
-- functional compare contains only authorized paths;
-- final live parent is rechecked before `force=false` fast-forward;
-- post-write REP-012 read-back matches the candidate blob;
-- exact-head CI/integrity evidence is observed and recorded;
-- session checkpoint is persisted as CLOSED / RESUME-SAFE.
+- Priority 2 historical/provenance scope remains OPEN;
+- Phase 1 remains OPEN;
+- Global Connected Baseline remains OPEN;
+- Global `BOOTED / INTEGRITY PASS` remains NOT CLAIMED.
