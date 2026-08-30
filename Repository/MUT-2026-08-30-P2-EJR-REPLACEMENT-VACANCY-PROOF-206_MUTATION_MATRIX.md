@@ -1,13 +1,13 @@
 # MUT-2026-08-30-P2-EJR-REPLACEMENT-VACANCY-PROOF-206 — MUTATION MATRIX
 
-Status: PREWRITE / EVIDENCE-ONLY / CORRECTED PACKAGING
+Status: FUNCTIONAL / EVIDENCE-ONLY
 Lease: R71-20260830-P2-EJR-REPLACEMENT-VACANCY-PROOF-206
-Baseline: a622ae60dd4c19420cbd60c55e6dc3c3ccac401f
-Prewrite packaging note: the lease file landed one commit before this matrix because the contents API was mistakenly used instead of the prepared atomic tree. No functional path had been mutated. This corrective commit restores the governed prewrite pair before any functional workflow change.
+Baseline: 92a0d4fa3da630b9762e5d3685819775309ca309
+Prewrite packaging note: the lease file landed one commit before the matrix because the contents API was mistakenly used instead of the prepared atomic tree. No functional path had been mutated. Corrective commit `92a0d4fa3da630b9762e5d3685819775309ca309` restored the governed prewrite pair before this functional change.
 
 ## Authorized functional paths
 - `.github/workflows/ejr-replacement-vacancy-proof-206.yml`
-- this matrix only for final evidence synchronization
+- this matrix
 
 ## Read-only dependencies
 - `Quality/Integration/ejr_allocation_vacancy_gate.py`
@@ -23,8 +23,9 @@ Prewrite packaging note: the lease file landed one commit before this matrix bec
 - Priority 2 / Phase 1 / Connected Baseline closure
 
 ## Validation
-1. workflow uses `actions/checkout` with `fetch-depth: 0`;
-2. verify `git rev-parse --is-shallow-repository` returns false;
-3. run `python Quality/Integration/ejr_allocation_vacancy_gate.py EJR-400`;
-4. preserve JSON as artifact;
-5. only `VACANT` authorizes opening a later repair-execution lease.
+1. workflow uses `actions/checkout@v4` with `fetch-depth: 0`;
+2. workflow verifies `git rev-parse --is-shallow-repository == false`;
+3. workflow runs the unchanged Lease-193 gate for `EJR-400`;
+4. JSON evidence is uploaded as `ejr-400-vacancy-proof`;
+5. workflow fails unless decision is exactly `VACANT`;
+6. only a successful exact-head run plus inspected JSON authorizes a later repair-execution lease.
