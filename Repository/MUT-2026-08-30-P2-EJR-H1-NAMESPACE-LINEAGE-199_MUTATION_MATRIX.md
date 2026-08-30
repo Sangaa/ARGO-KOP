@@ -1,21 +1,31 @@
 # MUTATION MATRIX — P2 EJR H1 NAMESPACE LINEAGE 199
 
-State: `FUNCTIONAL CANDIDATE / VERIFICATION PENDING`
-Baseline prewrite head: `f28d19d48f5b33ccd642af54b46360a79868b0ee`
+State: `CLOSED / VERIFIED / EXECUTION COMPLETE`
+Functional head: `7599d7e1ded350ae72665e737e0033c9a5a3316d`
 
-| Path | Operation | Expected result |
+| Path | Operation | Result |
 |---|---|---|
-| `Quality/Integration/ejr_h1_namespace_lineage.py` | ADD | Evidence-only namespace lineage classifier |
-| `Quality/Integration/test_ejr_h1_namespace_lineage.py` | ADD | Synthetic direction/same-surface/multi-transition/shallow-history coverage |
-| `.github/workflows/internal-id-audit.yml` | MODIFY | Run test + emit/upload deterministic namespace-lineage artifact |
+| `Quality/Integration/ejr_h1_namespace_lineage.py` | ADD | Evidence-only namespace-lineage classifier active |
+| `Quality/Integration/test_ejr_h1_namespace_lineage.py` | ADD | Synthetic direction/same-surface/multi-transition/shallow-history coverage PASS |
+| `.github/workflows/internal-id-audit.yml` | MODIFY | Exact-head test/report/artifact execution PASS |
 | this Matrix | MODIFY | Same-change-set governance evidence synchronized |
 
-Semantic boundaries:
-- H1-only groups only; explicit-ID MIXED groups excluded.
-- complete locally reachable Git history required.
-- exact-path first-seen ancestry + namespace surface are provenance signals, not ownership authority.
-- non-total ancestry, same-first-seen, missing history, or shallow history fail closed / remain unresolved.
+Exact-head functional workflows:
+- Internal Document-ID Audit `33318991190` — SUCCESS.
+- Full-Stack Repository Audit `33318991036` — SUCCESS.
+- ARGO Runtime Prototype and Integration Tests `33318990918` — SUCCESS.
+- M2 Multi-Channel Proposal Training `33318990948` — SUCCESS.
+- Real Mutation Matrix Regression `33318990950` — SUCCESS.
 
-Forbidden: no EJR mutation, migration, rename, delete, reassignment, normalization, suppression, allocation, scanner-semantic change, REP-012/016/020 mutation, authority promotion, P2/Phase1/global closure.
+Artifact `9734326330`, digest `sha256:a199bb24f415c0c5f4d843c4660a92d85114c470236c1aad4bd7313d103d0f36`.
 
-Functional verification pending exact-head compare, read-back, Actions, and report artifact inspection.
+Observed `115` H1-only groups:
+- `42` SAME_SURFACE_ROOT_EJR
+- `29` SAME_SURFACE_MEMORY_EJR
+- `36` MEMORY_TO_ROOT_EJR
+- `4` ROOT_TO_MEMORY_EJR
+- `4` MULTI_NAMESPACE_TRANSITION
+
+Classification complete under complete locally reachable Git history. Provenance evidence only; no ownership, rename-lineage, migration, or authority conclusion authorized.
+
+Protected boundaries preserved: no EJR mutation; scanner semantics unchanged; REP-012/016/020 untouched; MIXED groups separate; Priority 2 and global holds remain open.
