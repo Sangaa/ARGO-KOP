@@ -4,7 +4,7 @@ Date: 2026-08-30
 Lease: `R71-20260830-P2-IDENTITY-OWNER-CLASSIFICATION-183`
 Execution role: HERMUZ
 Entry baseline: `main@d6b8059bb12d15e53d09fb9bc93ae94ee5b9a474`
-Status: `PREWRITE / LEASE ACTIVE / P2 AMBIGUITY CLASSIFICATION`
+Status: `CLOSED / NON-EJR CLASSIFICATION COMPLETE / NO IDENTITY MUTATION`
 
 ## Trigger evidence
 
@@ -52,7 +52,7 @@ The remaining question is therefore not simply token equality. It is:
 
 Build a classification layer for the current 145 `ambiguous_duplicate_ids` before any identity mutation.
 
-The first bounded pass will separate at least:
+The first bounded pass separates at least:
 
 1. `PROVED_TRUE_DUPLICATE` — multiple artifacts genuinely claiming the same identity with no authoritative disposition.
 2. `INDEXED_OWNER_WITH_EVIDENCE_TITLE_SHADOWS` — one indexed/current owner plus records whose artifact class/title references that owner but does not establish independent ownership.
@@ -62,26 +62,16 @@ The first bounded pass will separate at least:
 
 ## First-pass scope
 
-Prioritize the 23 non-EJR ambiguous IDs because many have clear cross-artifact-class structure and can test the classification contract without rewriting historical journals.
+The bounded pass inspected all 23 non-EJR ambiguous IDs from artifact `9728177701`.
 
-Representative groups to inspect:
-
-- `GOV-015`, `GOV-016`
-- `GEN-001`
-- `KRS-001`, `KRS-002`
-- `QLT-001`
-- `REL-009`
-- `RUN-010`
-- `REP-001`, `REP-002`, `REP-011`, `REP-012`, `REP-014`, `REP-016`, `REP-020` and other reported REP groups
-
-EJR identities remain read-only under this lease except for evidence classification. No EJR rename/delete/reassignment is authorized.
+EJR identities remained read-only under this lease. No EJR rename/delete/reassignment was authorized or performed.
 
 ## Allowed paths
 
 - `Quality/Integration/internal_document_id_audit.py` only if a classification-only detector enhancement is proved necessary
 - `Quality/Integration/test_internal_document_id_audit.py` only for regression coverage of proved classification semantics
 - this Lease 183 record
-- new bounded Repository evidence/closure record for classification results
+- bounded Repository evidence/closure record for classification results
 
 ## Forbidden paths
 
@@ -107,27 +97,57 @@ EJR identities remain read-only under this lease except for evidence classificat
 ## C1-C6 collision gate
 
 - **C1 path collision:** PASS — Lease 183 path is unique.
-- **C2 semantic collision:** PASS — classification precedes identity mutation; no owner is changed.
-- **C3 authority collision:** PASS — prior canonical/index authority remains untouched.
-- **C4 promotion collision:** PASS — classification cannot promote P2 to CLOSED by itself.
-- **C5 evidence collision:** PASS — artifact `9728177701` is deterministic exact-head evidence; EJR-013 proves at least one real duplicate class exists.
-- **C6 handoff collision:** PASS — 179-182 are closed tooling repairs; 183 consumes their newly visible findings without reopening those repairs.
+- **C2 semantic collision:** PASS — classification precedes identity mutation; no owner was changed.
+- **C3 authority collision:** PASS — prior canonical/index authority remained untouched.
+- **C4 promotion collision:** PASS — classification did not promote P2 to CLOSED.
+- **C5 evidence collision:** PASS — artifact `9728177701` plus direct current-owner/artifact-class reads support the bounded disposition.
+- **C6 handoff collision:** PASS — 179-182 remain closed tooling repairs; 183 consumed their findings without reopening them.
 
-## Stop conditions
+## Closure evidence
 
-HOLD rather than mutate if:
+Detailed classification record:
 
-- artifact class cannot be proven from current repository evidence;
-- more than one plausible current identity owner remains;
-- a cross-reference may depend on the exact historical identity;
-- classification would require inventing a new ID or authority;
-- detector changes would hide a true duplicate merely to reduce the ambiguity count.
+`Repository/P2_IDENTITY_OWNER_CLASSIFICATION_NON_EJR_183_2026-08-30.md`
 
-## Learning candidate
+Classification counts across all 23 non-EJR ambiguity keys:
+
+- `INDEXED_OWNER_WITH_EVIDENCE_TITLE_SHADOWS = 10`
+- `REGISTRY_RELATIONSHIP_ID_WITH_EVIDENCE_TITLE_SHADOWS = 1`
+- `SERIES_WITH_EXPLICIT_SUCCESSION = 1`
+- `PARENT_SERIES_WITH_ADDENDA / NOT_AUTHORITY = 1`
+- `SERIES_OR_CHILD_IDENTITY_UNRESOLVED = 10`
+- `PROVED_TRUE_DUPLICATE = 0` within this non-EJR pass
+
+No raw detector suppression was introduced because a generic rule that automatically discounts H1-only peers is not yet proved safe repository-wide. EJR-013 independently proves that a legacy H1-only pair can be a real unresolved duplicate.
+
+## Closed result
+
+`P2_IDENTITY_OWNER_CLASSIFICATION_183 = CLOSED / NON-EJR PASS / EVIDENCE-CLASSIFIED`
+
+`PRIORITY_2_REPOSITORY_WIDE_IDENTITY_RECONCILIATION = OPEN`
+
+Remaining major populations:
+
+- 122 EJR ambiguous keys requiring journal-specific stratification;
+- 15 canonical-unindexed records;
+- series/child identity normalization remains unresolved for the bounded non-EJR series classes.
+
+## Learning retained
 
 `TITLE TOKEN MATCH != IDENTITY OWNERSHIP.`
 
 `DUPLICATE-ID RECONCILIATION REQUIRES ARTIFACT-CLASS AND OWNER EVIDENCE, NOT TOKEN EQUALITY ALONE.`
 
-Initial state:
-`P2_IDENTITY_OWNER_CLASSIFICATION_183 = IN_PROGRESS / NO IDENTITY MUTATION AUTHORIZED`.
+`CLASSIFICATION PRECEDES SUPPRESSION.`
+
+`ADDENDUM / MUTATION / CLOSURE / TEMPLATE / TEST SURFACES MUST NOT SILENTLY BECOME PEER AUTHORITY OWNERS.`
+
+## Next legal action
+
+Open a fresh bounded EJR stratification lease.
+
+The EJR pass is read-only and must distinguish at minimum:
+
+`PROVED_TRUE_DUPLICATE / EXPLICITLY_NONCANONICAL_PAIR / JOURNAL_SERIES_OR_SESSION_VARIANT / HISTORICAL_SHADOW / UNRESOLVED`.
+
+No EJR rename, delete, reassignment, archive move, or synthetic suffix is authorized by this closure.
