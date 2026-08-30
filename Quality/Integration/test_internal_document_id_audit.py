@@ -55,10 +55,6 @@ def test_current_tree_identity_discovery_is_not_limited_by_namespace_allowlist()
     report = scan(repo)
     identities = report["document_ids_by_path"]
 
-    # These current repository identities were outside the previous fixed
-    # namespace allowlist or depend on first-H1 fallback. Their presence proves
-    # that the detector observes the document rather than a preselected prefix
-    # inventory.
     assert identities["Cognition/COG-009_COGNITIVE_SESSION.md"] == "COG-009"
     assert identities["Decision/DEC-009_DECISION_GOVERNANCE.md"] == "DEC-009"
     assert identities["Release/RELEASE_MANIFEST.md"] == "REL-001"
@@ -66,10 +62,10 @@ def test_current_tree_identity_discovery_is_not_limited_by_namespace_allowlist()
     assert identities["PROJECT_STATUS.md"] == "PROJECT_STATUS"
 
 
-def test_explicit_document_id_and_first_h1_do_not_silently_disagree():
+def test_current_tree_has_no_conflicting_qualified_metadata_document_ids():
     report = scan(Path(__file__).resolve().parents[2])
-    assert report["explicit_heading_identity_conflicts"] == [], (
-        f"identity_conflicts={report['explicit_heading_identity_conflicts']}"
+    assert report["metadata_document_id_conflicts"] == [], (
+        f"metadata_conflicts={report['metadata_document_id_conflicts']}"
     )
 
 
@@ -79,7 +75,7 @@ def test_human_h1_title_does_not_override_explicit_document_identity(tmp_path, m
         "`PROJECT_STATUS.md`\n", encoding="utf-8"
     )
     (tmp_path / "PROJECT_STATUS.md").write_text(
-        "# ARGO KOP — Current Project Status\n\nDocument ID: PROJECT_STATUS\n",
+        "# ARGO KOP — Current Project Status\n\nDocument ID: PROJECT_STATUS\nStatus: Integrity Warning\n",
         encoding="utf-8",
     )
     monkeypatch.setattr(
@@ -89,7 +85,8 @@ def test_human_h1_title_does_not_override_explicit_document_identity(tmp_path, m
 
     report = scan(tmp_path)
     assert report["document_ids_by_path"]["PROJECT_STATUS.md"] == "PROJECT_STATUS"
-    assert report["explicit_heading_identity_conflicts"] == []
+    assert report["identity_sources_by_path"]["PROJECT_STATUS.md"] == "DOCUMENT_ID_FIELD"
+    assert report["metadata_document_id_conflicts"] == []
 
 
 def test_structural_h1_fallback_accepts_unseen_namespace_without_allowlist(tmp_path, monkeypatch):
@@ -113,6 +110,79 @@ def test_structural_h1_fallback_accepts_unseen_namespace_without_allowlist(tmp_p
     report = scan(tmp_path)
     assert report["document_ids_by_path"]["Novel/NOVEL-321_EXAMPLE.md"] == "NOVEL-321"
     assert report["identity_sources_by_path"]["Novel/NOVEL-321_EXAMPLE.md"] == "FIRST_H1_FALLBACK"
+
+
+def test_body_document_id_reference_does_not_override_referencing_document_identity(tmp_path, monkeypatch):
+    (tmp_path / "Repository").mkdir()
+    (tmp_path / "Repository" / "REP-001_MASTER_INDEX.md").write_text("", encoding="utf-8")
+    (tmp_path / "Memory").mkdir()
+    journal = tmp_path / "Memory" / "EJR-288_EXAMPLE.md"
+    journal.write_text(
+        "# EJR-288 — Repair step\n\n"
+        "## Status\nCLOSED\n\n"
+        "## Action Executed\nCreated another artifact.\n\n"
+        "Document ID: `P6-SCOPE-001`\n",
+        encoding="utf-8",
+    )
+    monkeypatch.setattr(
+        "internal_document_id_audit._git_files",
+        lambda root: [root / "Repository/REP-001_MASTER_INDEX.md", journal],
+    )
+
+    report = scan(tmp_path)
+    assert report["document_ids_by_path"]["Memory/EJR-288_EXAMPLE.md"] == "EJR-288"
+    assert report["identity_sources_by_path"]["Memory/EJR-288_EXAMPLE.md"] == "FIRST_H1_FALLBACK"
+    assert report["metadata_document_id_conflicts"] == []
+
+
+def test_explicit_child_identity_may_coexist_with_parent_series_h1(tmp_path, monkeypatch):
+    (tmp_path / "Repository").mkdir()
+    index = tmp_path / "Repository" / "REP-001_MASTER_INDEX.md"
+    delta = tmp_path / "Repository" / "REP-020_SESSION_DELTA_P24.md"
+    index.write_text("", encoding="utf-8")
+    delta.write_text(
+        "# REP-020 — SESSION DELTA P24\n\n"
+        "Platform: ARGO KOP\n"
+        "Document ID: REP-020-P24-DELTA\n"
+        "Status: Evidence Addendum / Non-Authority\n\n"
+        "## Purpose\nEvidence only.\n",
+        encoding="utf-8",
+    )
+    monkeypatch.setattr(
+        "internal_document_id_audit._git_files",
+        lambda root: [index, delta],
+    )
+
+    report = scan(tmp_path)
+    assert report["document_ids_by_path"]["Repository/REP-020_SESSION_DELTA_P24.md"] == "REP-020-P24-DELTA"
+    assert report["identity_sources_by_path"]["Repository/REP-020_SESSION_DELTA_P24.md"] == "DOCUMENT_ID_FIELD"
+    assert report["metadata_document_id_conflicts"] == []
+
+
+def test_multiple_qualified_metadata_document_ids_are_a_real_conflict(tmp_path, monkeypatch):
+    (tmp_path / "Repository").mkdir()
+    index = tmp_path / "Repository" / "REP-001_MASTER_INDEX.md"
+    artifact = tmp_path / "Repository" / "NOVEL-321_EXAMPLE.md"
+    index.write_text("", encoding="utf-8")
+    artifact.write_text(
+        "# NOVEL-321 — Example\n\n"
+        "Platform: ARGO KOP\n"
+        "Document ID: NOVEL-321\n"
+        "Status: Draft\n"
+        "Document ID: NOVEL-322\n\n"
+        "## Purpose\nSynthetic conflict.\n",
+        encoding="utf-8",
+    )
+    monkeypatch.setattr(
+        "internal_document_id_audit._git_files",
+        lambda root: [index, artifact],
+    )
+
+    report = scan(tmp_path)
+    assert report["metadata_document_id_conflicts"] == [
+        "Repository/NOVEL-321_EXAMPLE.md => metadata IDs NOVEL-321, NOVEL-322"
+    ]
+    assert report["identity_scope_reconciled"] is False
 
 
 def test_current_tree_internal_id_audit_report_is_emitted():

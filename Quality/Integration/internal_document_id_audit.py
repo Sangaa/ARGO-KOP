@@ -1,14 +1,16 @@
 """Current-tree internal Document ID and document-level identity audit.
 
-GOV-004/GOV-006 define identity rules, while REP-001 defines the currently
-verified active inventory scope. The audit deliberately discovers identity from
-the document itself instead of a fixed namespace allowlist: an explicit
-``Document ID`` field is primary and a document-level first-H1 identity is the
-fallback for older artifacts that do not carry metadata fields.
+GOV-004/GOV-006 define the current metadata/naming constraints, while REP-001
+defines the currently indexed active inventory scope. Identity discovery is
+repository-observed rather than namespace-allowlisted: qualified metadata
+``Document ID`` is primary, and a structural first-H1 identity is a fallback for
+older artifacts that do not carry document metadata.
 
-This separates active/indexed identity, unindexed/candidate identity, historical
-identity and document-level heading collisions without mistaking arbitrary later
-section headings or source-code comments for independent documents.
+A ``Document ID`` mentioned inside the body of a journal, evidence record, or
+other document is not the identity of the referencing document. Likewise, when
+qualified metadata exists, a human/series/relationship H1 is not a second
+identity authority. The audit therefore detects conflicting metadata IDs within
+the document preamble instead of requiring metadata/H1 equality.
 """
 
 from __future__ import annotations
@@ -18,10 +20,6 @@ import subprocess
 from dataclasses import dataclass
 from pathlib import Path
 
-# The value of an explicit ``Document ID`` field is intentionally not restricted
-# to a hard-coded namespace list. The repository already contains legitimate
-# identity families such as COG, DEC, REL and BOOTSTRAP, and future governed
-# families must not become invisible merely because this audit was not edited.
 DOCUMENT_ID_INLINE_RE = re.compile(r"^\s*Document ID\s*[:：]\s*(.+?)\s*$", re.I | re.M)
 DOCUMENT_ID_BLOCK_RE = re.compile(r"^\s*Document ID\s*$\n\s*(.+?)\s*$", re.I | re.M)
 # H1 fallback is generic by grammar, not unconstrained by surface text. A human
@@ -37,6 +35,7 @@ NUMERIC_FILENAME_ID_RE = re.compile(
 CANONICAL_INLINE_RE = re.compile(r"^\s*Canonical\s*[:：]\s*(Yes|No|Pending)\s*$", re.I | re.M)
 CANONICAL_BLOCK_RE = re.compile(r"^\s*Canonical\s*$\n\s*(Yes|No|Pending)\s*$", re.I | re.M)
 STATUS_RE = re.compile(r"^\s*Status\s*[:：]?\s*(.+?)\s*$", re.I | re.M)
+HEADING_RE = re.compile(r"^(#{1,6})\s+(.+?)\s*$")
 TEXT_SUFFIXES = {".md", ".markdown", ".txt", ".rst", ".json", ".yaml", ".yml", ".toml", ".py"}
 LEGACY_TOKENS = ("legacy", "historical", "superseded", "archived", "noncanonical", "non-canonical")
 DEFERRED_DOMAIN_TOKENS = (
@@ -111,13 +110,74 @@ def _clean_document_id(raw: str) -> str | None:
     return value.upper()
 
 
+def _metadata_preamble(text: str) -> str:
+    """Return the document-title/metadata band before substantive sections.
+
+    ARGO documents use several historical layouts: some have one H1 title, some
+    have an ID H1 followed by an uppercase title H1, and newer records often
+    start substantive content at H2. The first heading is always treated as the
+    document title. Additional H1 headings remain in the preamble only when they
+    are a structural ID heading or an all-uppercase title. The first H2+ or first
+    later human section H1 ends the metadata band.
+
+    This prevents a body sentence such as ``Document ID: P6-SCOPE-001`` in an
+    EJR describing another artifact from becoming the EJR's own identity.
+    """
+    lines = text.splitlines()
+    seen_heading = False
+    cutoff = len(lines)
+
+    for index, line in enumerate(lines):
+        stripped = line.strip()
+        match = HEADING_RE.match(stripped)
+        if not match:
+            continue
+
+        level = len(match.group(1))
+        heading_text = match.group(2).strip()
+
+        if not seen_heading:
+            seen_heading = True
+            continue
+
+        if level > 1:
+            cutoff = index
+            break
+
+        if DOCUMENT_HEADING_ID_RE.match(stripped):
+            continue
+
+        letters = "".join(char for char in heading_text if char.isalpha())
+        if letters and letters == letters.upper():
+            continue
+
+        cutoff = index
+        break
+
+    return "\n".join(lines[:cutoff])
+
+
+def _extract_metadata_document_ids(text: str) -> list[str]:
+    """Return distinct qualified Document IDs from the document preamble."""
+    preamble = _metadata_preamble(text)
+    values: list[str] = []
+
+    for regex in (DOCUMENT_ID_INLINE_RE, DOCUMENT_ID_BLOCK_RE):
+        for match in regex.finditer(preamble):
+            value = _clean_document_id(match.group(1))
+            if value and value not in values:
+                values.append(value)
+
+    return values
+
+
 def _extract_document_id(text: str) -> str | None:
-    match = DOCUMENT_ID_INLINE_RE.search(text) or DOCUMENT_ID_BLOCK_RE.search(text)
-    return _clean_document_id(match.group(1)) if match else None
+    values = _extract_metadata_document_ids(text)
+    return values[0] if values else None
 
 
 def _extract_heading_id(text: str) -> str | None:
-    """Return only a document-level first-H1 identity token.
+    """Return only a document-level first-H1 fallback identity token.
 
     A later section such as ``# GOV-011 Determination`` is not a second document,
     and a Python comment is not a Markdown document heading. Only the first H1 is
@@ -178,7 +238,7 @@ def scan(root: Path) -> dict:
     active_index = _master_index_paths(root)
     folder_status_cache: dict[str, bool] = {}
     heading_identities: dict[str, list[str]] = {}
-    explicit_heading_identity_conflicts: list[str] = []
+    metadata_document_id_conflicts: list[str] = []
 
     for path in tracked:
         if path.suffix.lower() not in TEXT_SUFFIXES:
@@ -197,12 +257,15 @@ def scan(root: Path) -> dict:
         if heading_id and not archived_path:
             heading_identities.setdefault(heading_id, []).append(relative)
 
-        explicit_document_id = _extract_document_id(text)
-        if explicit_document_id and heading_id and explicit_document_id != heading_id:
-            explicit_heading_identity_conflicts.append(
-                f"{relative} => explicit {explicit_document_id} / first-H1 {heading_id}"
+        explicit_document_ids = _extract_metadata_document_ids(text)
+        if len(explicit_document_ids) > 1:
+            metadata_document_id_conflicts.append(
+                f"{relative} => metadata IDs {', '.join(explicit_document_ids)}"
             )
+        explicit_document_id = explicit_document_ids[0] if explicit_document_ids else None
 
+        # Qualified metadata is authoritative for identity discovery. H1 is only
+        # the fallback for older artifacts without qualified metadata.
         document_id = explicit_document_id or heading_id
         if not document_id:
             continue
@@ -304,7 +367,7 @@ def scan(root: Path) -> dict:
         "document_id_records": len(records),
         "document_ids_by_path": document_ids_by_path,
         "identity_sources_by_path": identity_sources_by_path,
-        "explicit_heading_identity_conflicts": sorted(explicit_heading_identity_conflicts),
+        "metadata_document_id_conflicts": sorted(metadata_document_id_conflicts),
         "active_indexed_canonical_records": len(active),
         "canonical_unindexed_records": len(canonical_unindexed),
         "canonical_unindexed_paths": sorted(record.path for record in canonical_unindexed),
@@ -326,7 +389,7 @@ def scan(root: Path) -> dict:
             not canonical_unindexed
             and not ambiguous_duplicate_ids
             and not governance_heading_identity_collisions
-            and not explicit_heading_identity_conflicts
+            and not metadata_document_id_conflicts
         ),
         "governance_identity_hold_required": bool(governance_heading_identity_collisions),
     }
