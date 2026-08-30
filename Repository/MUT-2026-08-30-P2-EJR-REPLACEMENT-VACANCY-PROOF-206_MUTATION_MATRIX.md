@@ -1,31 +1,36 @@
 # MUT-2026-08-30-P2-EJR-REPLACEMENT-VACANCY-PROOF-206 — MUTATION MATRIX
 
-Status: FUNCTIONAL / EVIDENCE-ONLY
+Status: CLOSED / VERIFIED / EVIDENCE COMPLETE
 Lease: R71-20260830-P2-EJR-REPLACEMENT-VACANCY-PROOF-206
-Baseline: 92a0d4fa3da630b9762e5d3685819775309ca309
-Prewrite packaging note: the lease file landed one commit before the matrix because the contents API was mistakenly used instead of the prepared atomic tree. No functional path had been mutated. Corrective commit `92a0d4fa3da630b9762e5d3685819775309ca309` restored the governed prewrite pair before this functional change.
+Functional head: `2f3e139c2f9e096c058ae317db878efaa825e01f`
 
-## Authorized functional paths
+## Functional scope executed
 - `.github/workflows/ejr-replacement-vacancy-proof-206.yml`
 - this matrix
 
-## Read-only dependencies
-- `Quality/Integration/ejr_allocation_vacancy_gate.py`
-- `Quality/Integration/internal_document_id_audit.py`
-- `Repository/REP-012_REPOSITORY_ALLOCATION_REGISTRY.md`
-- `Repository/P2_EJR_CONTROLLED_IDENTITY_REPAIR_PLAN_204.md`
+## Evidence
+- Full history checkout and non-shallow assertion passed.
+- Existing Lease-193 gate ran unchanged for `EJR-400`.
+- Decision: `VACANT`.
+- Artifact ID: `9737186617`.
+- Artifact digest: `sha256:89bac3857098024d48256135d112292f13cad0866368c57a8ea2df3e3db8cfc1`.
+- Current claims: none.
+- Historical claims: none.
+- History complete: true.
+- History scope: all locally reachable refs.
 
-## Forbidden
-- any EJR content/path/identity mutation
-- any scanner/gate semantics change
-- REP-012 / REP-016 / REP-020 mutation
-- authority promotion
-- Priority 2 / Phase 1 / Connected Baseline closure
+## Exact-head checks
+- Vacancy Proof `33329388744` — SUCCESS.
+- Full-Stack `33329388713` — SUCCESS.
+- Runtime `33329388749` — SUCCESS.
+- M2 `33329388725` — SUCCESS.
+- Real Mutation Matrix `33329388724` — SUCCESS.
 
-## Validation
-1. workflow uses `actions/checkout@v4` with `fetch-depth: 0`;
-2. workflow verifies `git rev-parse --is-shallow-repository == false`;
-3. workflow runs the unchanged Lease-193 gate for `EJR-400`;
-4. JSON evidence is uploaded as `ejr-400-vacancy-proof`;
-5. workflow fails unless decision is exactly `VACANT`;
-6. only a successful exact-head run plus inspected JSON authorizes a later repair-execution lease.
+## Packaging defect
+A lease-only prewrite commit landed through the contents API before the Matrix. No functional mutation existed at that point. The governed pair was restored at `92a0d4fa3da630b9762e5d3685819775309ca309` before functional execution.
+
+Rule retained:
+`PREPARED ATOMIC TREE MUST BE ATTACHED WITH UPDATE_REF; CONTENTS-API FILE WRITE IS NOT A SUBSTITUTE FOR ATOMIC PREWRITE ATTACHMENT.`
+
+## Preserved
+No EJR identity/content/path mutation occurred. No REP-012/016/020 mutation. No authority promotion. Priority 2 / Phase 1 / Connected Baseline remain open.
