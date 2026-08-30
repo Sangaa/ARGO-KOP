@@ -40,7 +40,7 @@ No promotion to a later ring is allowed until predecessor exit evidence, affecte
 | 17 | Memory | INVENTORYING | Engineering Journal + content tree | Memory authority + REP-011 |
 | 18 | Specifications | INVENTORYING | SPEC-001 + exact enumeration | Specification authority + REP-011/014 |
 | 19 | Templates | INVENTORYING | Templates/README.md + exact physical enumeration + content review | Template authority + REP-011 |
-| 20 | Release | BOUNDED_IN_PROGRESS / EXACT ENUMERATION + FOUNDATION SCOPE + 174–175 SUBGATES CLOSED / PARTITION OPEN | Release evidence + REL-001..005 + VERSION | Release authority + REP-011/014 |
+| 20 | Release | CLOSED_FOR_PHASE_1 / BOUNDED RELEASE PARTITION RECONCILED / GLOBAL PHASE 1 REMAINS OPEN | Release evidence + REL-001..005 + VERSION | Release authority + REP-011/014 |
 | 21 | Projects | NOT_STARTED | Exact physical enumeration | Project authority + REP-011/014 |
 | 22 | Docs | NOT_STARTED | Exact physical enumeration | Documentation authority + REP-011 |
 | 23 | Examples | NOT_STARTED | Exact physical enumeration | Example scope decision + REP-011 |
@@ -297,6 +297,36 @@ Current continuation after these bounded closures:
 Learning carried forward:
 
 `STATUS DRIFT MUST NOT REOPEN CLOSED REALITY` and `TEXT CAN CLOSE CONTRACT SEMANTICS; TEXT CANNOT EARN EXECUTION OR AUTHENTICITY`.
+
+## Current Checkpoint — 2026-08-30 Release Phase-1 Closure Sync 190
+
+This checkpoint extends the bounded Release lineage after Leases 178–189 and does not alter unrelated global holds.
+
+Evidence reconciled:
+
+- Release exact physical enumeration and Foundation semantic-time classification are closed for the inspected partition.
+- REL-001..005 remain historical/Foundation support according to their verified semantic roles and are not promoted into current-development authority.
+- `Release/VERSION.md` is the active current release/development-baseline authority.
+- Lease 189 closed the outstanding REP-001/REP-002 active-authority discoverability gap with exact-head successful Full-Stack, Runtime/Integration, M2, Internal-ID, GOV-014 and Real Mutation Matrix evidence.
+- No additional REP-014 relationship promotion is required merely to manufacture closure symmetry; relationship claims remain bounded by existing registry evidence.
+
+Explicit bounded decision:
+
+`RELEASE PARTITION = CLOSED_FOR_PHASE_1 / BOUNDED RELEASE PARTITION RECONCILED`.
+
+This decision closes only Priority 20 Release for Phase-1 partition accounting. It does not close Phase 1 overall, Priority 2 global identity/provenance scope, Provider Authentication, Global Connected Baseline, or global `BOOTED / INTEGRITY PASS`.
+
+Current continuation:
+
+1. Priority 2 historical/provenance identity scope remains OPEN;
+2. repository-wide reference/consumer/bidirectional graph validation remains OPEN beyond bounded closures;
+3. provider authentication remains HARD HOLD pending a real trust anchor;
+4. unresolved domain/global certification holds remain unchanged;
+5. Phase 1 overall remains OPEN.
+
+Learning applied:
+
+`PARTITION CLOSURE MUST BE EXPLICITLY BOUND TO THE QUEUE; A CLOSED SUBGATE OR GREEN CI HEADLINE ALONE DOES NOT CLOSE THE PARTITION.`
 
 ## Historical P351 Checkpoint — 2026-08-17
 
