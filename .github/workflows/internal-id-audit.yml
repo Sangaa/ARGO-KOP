@@ -10,6 +10,8 @@ on:
       - 'Quality/Integration/test_ejr_allocation_vacancy_gate.py'
       - 'Quality/Integration/ejr_ambiguity_source_signature_census.py'
       - 'Quality/Integration/test_ejr_ambiguity_source_signature_census.py'
+      - 'Quality/Integration/ejr_h1_pair_chronology.py'
+      - 'Quality/Integration/test_ejr_h1_pair_chronology.py'
       - 'Repository/REP-001_MASTER_INDEX.md'
       - '.github/workflows/internal-id-audit.yml'
 
@@ -24,7 +26,7 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Verify complete history for vacancy proof
+      - name: Verify complete history for vacancy proof and chronology
         run: test "$(git rev-parse --is-shallow-repository)" = "false"
 
       - name: Set up Python
@@ -35,7 +37,7 @@ jobs:
       - name: Install test runner
         run: python -m pip install --upgrade pytest
 
-      - name: Run internal Document-ID, vacancy-gate, and ambiguity-census tests
+      - name: Run internal Document-ID, vacancy-gate, ambiguity-census, and chronology tests
         env:
           PYTHONPATH: ${{ github.workspace }}/Quality/Integration
         run: >-
@@ -43,6 +45,7 @@ jobs:
           Quality/Integration/test_internal_document_id_audit.py
           Quality/Integration/test_ejr_allocation_vacancy_gate.py
           Quality/Integration/test_ejr_ambiguity_source_signature_census.py
+          Quality/Integration/test_ejr_h1_pair_chronology.py
 
       - name: Emit deterministic audit report
         if: always()
@@ -55,6 +58,12 @@ jobs:
         env:
           PYTHONPATH: ${{ github.workspace }}/Quality/Integration
         run: python Quality/Integration/ejr_ambiguity_source_signature_census.py > ejr-ambiguity-source-signature-census.json
+
+      - name: Emit deterministic EJR H1-pair chronology report
+        if: always()
+        env:
+          PYTHONPATH: ${{ github.workspace }}/Quality/Integration
+        run: python Quality/Integration/ejr_h1_pair_chronology.py > ejr-h1-pair-chronology.json
 
       - name: Upload deterministic audit report
         if: always()
@@ -70,4 +79,12 @@ jobs:
         with:
           name: ejr-ambiguity-source-signature-census
           path: ejr-ambiguity-source-signature-census.json
+          if-no-files-found: error
+
+      - name: Upload deterministic EJR H1-pair chronology report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: ejr-h1-pair-chronology
+          path: ejr-h1-pair-chronology.json
           if-no-files-found: error
