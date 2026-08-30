@@ -2,8 +2,9 @@
 
 Transaction: `MUT-2026-08-30-P2-EJR-REVERSE-PROVENANCE-CENSUS-201`
 Lease: `R71-20260830-P2-EJR-REVERSE-PROVENANCE-CENSUS-201`
-State: `PREWRITE / OPEN`
+State: `FUNCTIONAL CANDIDATE`
 Baseline: `62b08f67af7f1f58e23236f8563d590b4d24cf04`
+Prewrite head: `041459ae60bcabeb53610af0d91b52da0c5d5f60`
 
 | Path | Operation | Authorized purpose | Content preservation / boundary |
 |---|---|---|---|
@@ -11,6 +12,14 @@ Baseline: `62b08f67af7f1f58e23236f8563d590b4d24cf04`
 | `Quality/Integration/test_ejr_reverse_provenance_census.py` | ADD | fail-closed and heterogeneous-cardinality regression coverage | synthetic evidence only |
 | `.github/workflows/internal-id-audit.yml` | MODIFY | run tests, emit report, upload artifact | preserve all existing jobs/steps/gates |
 | `Repository/MUT-2026-08-30-P2-EJR-REVERSE-PROVENANCE-CENSUS-201_MUTATION_MATRIX.md` | MODIFY | synchronized same-change evidence | no other repository authority mutation |
+
+## Functional contract
+- expected current cardinalities are fixed evidence guards: EJR-178=3, EJR-189=2, EJR-222=4, EJR-338=2;
+- identity source must remain only `FIRST_H1_FALLBACK` for every current member;
+- shallow history => `HISTORY_INCOMPLETE`;
+- missing/drifted membership => `PARTIAL`;
+- complete expected membership => content/reference census only;
+- no owner/canonical/migration/rename/delete/reassignment/suppression/allocation/authority field is emitted.
 
 ## Explicitly forbidden
 - EJR content/path/identity mutation;

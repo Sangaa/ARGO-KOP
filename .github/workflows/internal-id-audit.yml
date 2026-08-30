@@ -18,6 +18,8 @@ on:
       - 'Quality/Integration/test_ejr_h1_namespace_lineage.py'
       - 'Quality/Integration/ejr_nonmonotonic_provenance_census.py'
       - 'Quality/Integration/test_ejr_nonmonotonic_provenance_census.py'
+      - 'Quality/Integration/ejr_reverse_provenance_census.py'
+      - 'Quality/Integration/test_ejr_reverse_provenance_census.py'
       - 'Repository/REP-001_MASTER_INDEX.md'
       - '.github/workflows/internal-id-audit.yml'
 
@@ -55,6 +57,7 @@ jobs:
           Quality/Integration/test_ejr_h1_multi_chronology.py
           Quality/Integration/test_ejr_h1_namespace_lineage.py
           Quality/Integration/test_ejr_nonmonotonic_provenance_census.py
+          Quality/Integration/test_ejr_reverse_provenance_census.py
 
       - name: Emit deterministic audit report
         if: always()
@@ -91,6 +94,12 @@ jobs:
         env:
           PYTHONPATH: ${{ github.workspace }}/Quality/Integration
         run: python Quality/Integration/ejr_nonmonotonic_provenance_census.py > ejr-nonmonotonic-provenance-census.json
+
+      - name: Emit deterministic EJR reverse-direction provenance census
+        if: always()
+        env:
+          PYTHONPATH: ${{ github.workspace }}/Quality/Integration
+        run: python Quality/Integration/ejr_reverse_provenance_census.py > ejr-reverse-provenance-census.json
 
       - name: Upload deterministic audit report
         if: always()
@@ -138,4 +147,12 @@ jobs:
         with:
           name: ejr-nonmonotonic-provenance-census
           path: ejr-nonmonotonic-provenance-census.json
+          if-no-files-found: error
+
+      - name: Upload deterministic EJR reverse-direction provenance census
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: ejr-reverse-provenance-census
+          path: ejr-reverse-provenance-census.json
           if-no-files-found: error
