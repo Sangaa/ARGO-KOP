@@ -8,6 +8,8 @@ on:
       - 'Quality/Integration/test_internal_document_id_audit.py'
       - 'Quality/Integration/ejr_allocation_vacancy_gate.py'
       - 'Quality/Integration/test_ejr_allocation_vacancy_gate.py'
+      - 'Quality/Integration/ejr_ambiguity_source_signature_census.py'
+      - 'Quality/Integration/test_ejr_ambiguity_source_signature_census.py'
       - 'Repository/REP-001_MASTER_INDEX.md'
       - '.github/workflows/internal-id-audit.yml'
 
@@ -33,13 +35,14 @@ jobs:
       - name: Install test runner
         run: python -m pip install --upgrade pytest
 
-      - name: Run internal Document-ID and EJR vacancy-gate tests
+      - name: Run internal Document-ID, vacancy-gate, and ambiguity-census tests
         env:
           PYTHONPATH: ${{ github.workspace }}/Quality/Integration
         run: >-
           python -m pytest -q
           Quality/Integration/test_internal_document_id_audit.py
           Quality/Integration/test_ejr_allocation_vacancy_gate.py
+          Quality/Integration/test_ejr_ambiguity_source_signature_census.py
 
       - name: Emit deterministic audit report
         if: always()
@@ -47,10 +50,24 @@ jobs:
           PYTHONPATH: ${{ github.workspace }}/Quality/Integration
         run: python Quality/Integration/internal_document_id_audit.py > internal-document-id-audit-report.json
 
+      - name: Emit deterministic EJR ambiguity source-signature census
+        if: always()
+        env:
+          PYTHONPATH: ${{ github.workspace }}/Quality/Integration
+        run: python Quality/Integration/ejr_ambiguity_source_signature_census.py > ejr-ambiguity-source-signature-census.json
+
       - name: Upload deterministic audit report
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: internal-document-id-audit-report
           path: internal-document-id-audit-report.json
+          if-no-files-found: error
+
+      - name: Upload deterministic EJR ambiguity source-signature census
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: ejr-ambiguity-source-signature-census
+          path: ejr-ambiguity-source-signature-census.json
           if-no-files-found: error
