@@ -24,8 +24,12 @@ from pathlib import Path
 # families must not become invisible merely because this audit was not edited.
 DOCUMENT_ID_INLINE_RE = re.compile(r"^\s*Document ID\s*[:：]\s*(.+?)\s*$", re.I | re.M)
 DOCUMENT_ID_BLOCK_RE = re.compile(r"^\s*Document ID\s*$\n\s*(.+?)\s*$", re.I | re.M)
+# H1 fallback is generic by grammar, not unconstrained by surface text. A human
+# title such as ``# ARGO KOP`` must not become identity ``ARGO`` merely because
+# its first token is uppercase. Governed fallback identities use the repository's
+# structural namespace + numeric sequence shape (for example REL-001/GOV-013A).
 DOCUMENT_HEADING_ID_RE = re.compile(
-    r"^\s*#\s+([A-Z][A-Z0-9_-]{1,63})(?=\s|—|–|$)", re.I
+    r"^\s*#\s+([A-Z][A-Z0-9_]{1,31}-\d{3}[A-Z]?)(?=\s|—|–|$)", re.I
 )
 NUMERIC_FILENAME_ID_RE = re.compile(
     r"^([A-Z][A-Z0-9]{1,31}-\d{3}[A-Z]?)(?:_|\.|$)", re.I
