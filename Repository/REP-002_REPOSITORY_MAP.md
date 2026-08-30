@@ -37,8 +37,6 @@ Historical root naming-convention material is excluded from active inventory and
 
 Path: `Core/`
 
-- `Core/ARGO_KERNEL.md`
-- `Core/Core.md`
 - `Core/CORE-000_PLATFORM_ARCHITECTURE.md`
 - `Core/CORE-001_ARGO_MANIFEST.md`
 - `Core/CORE-002_ARGO_IDENTITY.md`
@@ -54,8 +52,6 @@ Path: `Core/`
 - `Core/_FOLDER_STATUS.md`
 
 `CORE-001` and `CORE-002` are mapped as active Core inventory after direct current-content verification and cross-check against `Core/_FOLDER_STATUS.md`, which identifies both as independently revalidated canonical Core artifacts. Mapping does not close Core cross-layer certification.
-
-`CORE-KERNEL` (`Core/ARGO_KERNEL.md`) and `CORE-INDEX` (`Core/Core.md`) are mapped as current reviewed Core coordination/inventory surfaces after Lease 185 classified their missing REP-001/REP-002 discoverability as a real gap. Mapping closes discoverability only and does not close Core Integrity Hold or cross-layer certification.
 
 ## 4. Repository Layer
 
@@ -266,12 +262,6 @@ Build-01 is physically constructed and re-read. The artifacts remain `Candidate 
 ## 16. Other Repository Domains
 
 Current `SYSTEM_MAP.md` also identifies Knowledge, Memory, Decision, AI, Services, Intelligence, Quality, Projects, Release, Logs, Examples and Future as physical repository domains/groupings.
-
-Current Quality discoverability within this inspected map scope includes:
-
-- `Quality/QLT-001_QUALITY_ASSURANCE.md`
-
-This mapping closes the classified QLT-001 discoverability gap only. Quality remains `INTEGRITY HOLD / CROSS-LAYER VALIDATION OPEN`; physical mapping does not certify the Quality domain or universal execution enforcement.
 
 These domains are not assumed complete or architecturally authoritative from folder names alone. Their active inventories and relationships remain under connected-baseline validation and are tracked through REP-011 review evidence.
 
