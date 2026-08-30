@@ -3,19 +3,19 @@
 Date: 2026-08-30
 Lease: `R71-20260830-P2-DISCOVERABILITY-SYNC-186`
 Protocol: GOV-014 controlled mutation
-State: `PREWRITE / PROTECTED CHANGE NOT EXECUTED`
+State: `CLOSED VIA 187 RECOVERY / ORIGINAL TRANSACTION REJECTED / FUNCTIONAL SCOPE VERIFIED`
 
 ## Authorized changes
 
 | Change | Protected target | Exact semantic action | Expected result | Applied | Verified |
 |---|---|---|---|:---:|:---:|
-| 186-A | `Repository/REP-001_MASTER_INDEX.md` | add active discoverability entries for `Core/ARGO_KERNEL.md`, `Core/Core.md`, `Quality/QLT-001_QUALITY_ASSURANCE.md` only; preserve all existing content and holds | three classified active paths discoverable in master index without domain promotion | N | N |
-| 186-B | `Repository/REP-002_REPOSITORY_MAP.md` | add corresponding physical mappings for the same three paths only; preserve all existing content and holds | physical map synchronized to REP-001 for the classified scope | N | N |
-| 186-C | this Mutation Matrix | close with actual parent/commit/changed-set/read-back/CI evidence in the protected transaction or immediately governed closure unit | transaction evidence complete | N | N |
+| 186-A | `Repository/REP-001_MASTER_INDEX.md` | add active discoverability entries for `Core/ARGO_KERNEL.md`, `Core/Core.md`, `Quality/QLT-001_QUALITY_ASSURANCE.md` only; preserve all existing content and holds | three classified active paths discoverable in master index without domain promotion | Y | Y via 187B |
+| 186-B | `Repository/REP-002_REPOSITORY_MAP.md` | add corresponding physical mappings for the same three paths only; preserve all existing content and holds | physical map synchronized to REP-001 for the classified scope | Y | Y via 187B |
+| 186-C | Mutation Matrix evidence | bind protected mutation to exact same-change-set enforcement | protected transaction accepted by executable GOV-014 preflight | Y | Y via 187A/187B |
 
 ## Explicit exclusions
 
-No change is authorized for:
+No change was authorized or performed for:
 
 - Knowledge/KNW-001..010
 - Architecture/README.md
@@ -26,48 +26,101 @@ No change is authorized for:
 - relationship state
 - domain certification
 
-## Expected changed-file set
+## Original execution — rejected
 
-At functional protected mutation:
+The first protected semantic commit was:
 
-1. `Repository/REP-001_MASTER_INDEX.md`
-2. `Repository/REP-002_REPOSITORY_MAP.md`
-3. `Repository/MUT-2026-08-30-P2-DISCOVERABILITY-SYNC-186_MUTATION_MATRIX.md` if closure metadata is committed in the same protected transaction
+`3cc385c9ae0a509d2c9d18a0070978f5462a9ea9`
 
-Any additional changed path = `UNEXPECTED CHANGE / HARD HOLD`.
+Its changed-set was content-correct and additions-only for REP-001/REP-002, but Full-Stack run `33303097603`, job `99234728687`, correctly rejected it because the Mutation Matrix was not changed in the exact same protected commit:
 
-## Preflight evidence
+```text
+changed_files=2
+protected_changes=2
+mutation_matrices=0
+MUTATION_MATRIX_PREFLIGHT=FAIL
+```
 
-Lease 185 classification proves:
+That commit is preserved as failed execution evidence. It is not retroactively called verified.
 
-- `CORE-KERNEL = SHOULD-BE-INDEXED`
-- `CORE-INDEX = SHOULD-BE-INDEXED`
-- `QLT-001 = SHOULD-BE-INDEXED`
-- other 12 canonical-unindexed paths = explicitly excluded from active-index synchronization in this lease.
+## Governed recovery and verified reapplication
 
-## Content-preservation requirement
+Lease 187 / 187A repaired the transaction using exact trusted Git blobs rather than reconstructing large protected documents.
 
-REP-001 and REP-002 must be mutated from complete current contents at a freshly rediscovered live parent. Truncated rendered snippets are insufficient source material for a protected replacement.
+### Stage A — controlled rollback
 
-No write is legal until:
+Commit:
+`e2c18a18619853fddc3651b0f27afed33ecf64c0`
 
-`COMPLETE SOURCE → MINIMAL EDIT → COMPLETE CANDIDATE → FRESH PARENT CHECK → ATOMIC REF BINDING`.
+Exact changed set:
 
-## Required post-write evidence
+1. REP-001 restored to trusted pre-186 blob `75d01dc51b998b0b839db217afb73e17027d79c4`;
+2. REP-002 restored to trusted pre-186 blob `93c758eeb7241231f42063313719ce237d1d4181`;
+3. 187 recovery Mutation Matrix created in the same change set.
 
-- exact parent SHA;
-- candidate commit SHA;
-- `force=false` ref update;
-- compare confirms only expected files;
-- exact REP-001/REP-002 read-back;
-- Internal Document-ID Audit SUCCESS;
-- Full-Stack Repository Audit SUCCESS;
-- Runtime/Integration SUCCESS;
-- M2 SUCCESS;
-- no global/domain promotion.
+Unexpected paths: `0`.
 
-## Current disposition
+Stage-A verification included:
 
-`READY / NOT EXECUTED / RESUME-SAFE`.
+- GOV-014 Controlled Document Mutation `33303362401` — SUCCESS;
+- Real Mutation Matrix Regression `33303362388` — SUCCESS;
+- Internal Document-ID Audit `33303362399` — SUCCESS;
+- Full-Stack Repository Audit `33303362384` — SUCCESS;
+- M2 `33303362393` — SUCCESS.
 
-This matrix authorizes no partial or contents-API rewrite from incomplete source text.
+### Stage B — controlled reapply
+
+Commit:
+`91c259c04a22f72109fdd9dab75c30be6eebc22b`
+
+Exact changed set:
+
+1. REP-001 → desired additions-only blob `17b432f27426d3692f9067ebf668d41f18e575b0`;
+2. REP-002 → desired additions-only blob `b02d2c1622845e5b9dd46907934ecaad547f050d`;
+3. 187 recovery Mutation Matrix updated in the same change set.
+
+Unexpected paths: `0`.
+
+Exact-head required gates:
+
+- Internal Document-ID Audit `33303432377` — SUCCESS;
+- Full-Stack Repository Audit `33303432370` — SUCCESS;
+- ARGO Runtime Prototype and Integration Tests `33303432385` — SUCCESS;
+- M2 `33303432375` — SUCCESS;
+- Real Mutation Matrix Regression `33303432382` — SUCCESS.
+
+## Functional audit impact
+
+The Stage-B Internal Document-ID report artifact is `9729674196` and is bound to exact head `91c259c04a22f72109fdd9dab75c30be6eebc22b`.
+
+Compared with the pre-186 report:
+
+- `canonical_unindexed_records: 15 → 12`;
+- the three intended paths no longer appear in `canonical_unindexed_paths`;
+- `ambiguous_duplicate_ids: 145 → 144` due the separate EJR-013 evidence reconciliation from Lease 184;
+- `active_duplicate_pass = true`;
+- `filename_alignment_pass = true`;
+- metadata conflicts = `[]`;
+- Governance heading identity collisions = `{}`;
+- unreadable files = `[]`;
+- repository-wide `identity_scope_reconciled = false` remains, because the remaining classified/non-authoritative traceability populations are not erased by this local discoverability repair.
+
+## Closure
+
+`P2_DISCOVERABILITY_SYNC_186 = CLOSED / EXECUTION-VERIFIED VIA 187B`.
+
+`ORIGINAL_3CC_TRANSACTION = REJECTED / PRESERVED AS FAILURE EVIDENCE`.
+
+`CORE_GLOBAL_CERTIFICATION = NOT_CLOSED`.
+
+`QUALITY_GLOBAL_CERTIFICATION = NOT_CLOSED`.
+
+`PRIORITY_2_GLOBAL_SCOPE = NOT_CLOSED`.
+
+## Learning
+
+`PREWRITE MATRIX PRESENCE != SAME-CHANGE-SET MATRIX BINDING.`
+
+`FAILED PROTECTED EXECUTION MUST BE REPAIRED BY A NEW GOVERNED TRANSACTION, NOT RETROACTIVELY DECLARED VALID.`
+
+`WHEN EXACT TRUSTED BLOBS EXIST, RECOVERY SHOULD PREFER GIT OBJECT IDENTITY OVER RECONSTRUCTING LARGE PROTECTED TEXT.`
