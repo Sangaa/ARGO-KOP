@@ -3,7 +3,7 @@
 Date: 2026-08-30
 Lease: `R71-20260830-RELEASE-VERSION-DISCOVERABILITY-189`
 Execution role: HERMUZ
-Status: `PREWRITE / PROTECTED TRANSACTION READY / NOT EXECUTED`
+Status: `CLOSED / EXECUTION-VERIFIED`
 
 ## Proven gap
 
@@ -14,70 +14,63 @@ Status: `PREWRITE / PROTECTED TRANSACTION READY / NOT EXECUTED`
 - the separation between released version and development baseline;
 - release/version compatibility and upgrade planning.
 
-The current Release closure evidence (`Repository/RELEASE_PARTITION_CLOSURE_REVIEW_2026-08-30.md`) independently established:
+The Release closure evidence established:
 
 `RELEASE_VERSION_ACTIVE_AUTHORITY_INDEX/MAP GAP = OPEN`.
 
-It also established the exact legal correction:
+The authorized correction was bounded to registering only `Release/VERSION.md` in REP-001 and REP-002, without promoting historical Foundation support artifacts `REL-001..005`.
 
-- register **only** `Release/VERSION.md` as active Release authority in REP-001 and REP-002;
-- do not bulk-promote historical Foundation support artifacts `REL-001..005` merely for symmetry.
+## Executed transaction
 
-## Objective
+Protected commit:
 
-Perform one protected same-change-set transaction that adds only:
+`5b6b6001aca99367e20425db68cabdfb81050c71`
 
-`Release/VERSION.md`
+Parent:
 
-to the active Release discoverability surfaces in:
+`264944f3827fdcb1a802d0444525fdfa96f40c18`
+
+Exact compare proves one commit ahead and exactly these three changed paths:
 
 1. `Repository/REP-001_MASTER_INDEX.md`;
 2. `Repository/REP-002_REPOSITORY_MAP.md`;
-3. a Mutation Matrix modified in that exact protected change set.
+3. `Repository/MUT-2026-08-30-RELEASE-VERSION-DISCOVERABILITY-189_MUTATION_MATRIX.md`.
 
-## Semantic boundary
+Unexpected changed paths: `0`.
 
-The transaction may state:
+Post-write protected blobs:
 
-- `Release/VERSION.md` = active current version authority;
-- official release = 1.0.0 Foundation;
-- development baseline = 3.2.1;
-- discoverability/mapping only.
+- REP-001 = `f6271483be89ee1b7ce35ad5a1441e38e209cde3`;
+- REP-002 = `c9cd69054a862e3d2287c2eda2ed05fde26073c6`.
 
-It must not:
+## Exact-head verification
 
-- promote `REL-001..005` into current-development authority;
-- change version numbers;
-- close Release automatically;
-- claim current consumers for historical Foundation support where semantic role does not require them;
-- change REP-014/REP-016 unless separately authorized;
-- claim Global PASS.
+All observed push workflows for exact head `5b6b6001aca99367e20425db68cabdfb81050c71` completed successfully:
 
-## Required protected procedure
+- GOV-014 Controlled Document Mutation — run `33303930551` — SUCCESS;
+- M2 Multi-Channel Proposal Training — run `33303930561` — SUCCESS;
+- Real Mutation Matrix Regression — run `33303930594` — SUCCESS;
+- ARGO Runtime Prototype and Integration Tests — run `33303930548` — SUCCESS;
+- Full-Stack Repository Audit — run `33303930567` — SUCCESS;
+- Internal Document-ID Audit — run `33303930560` — SUCCESS.
 
-`FRESH MAIN → COMPLETE REP-001/002 SOURCE → MINIMAL ADDITIVE CANDIDATE → MATRIX IN SAME CHANGE SET → FINAL PARENT RECHECK → FORCE=FALSE FAST-FORWARD → EXACT COMPARE → READ-BACK → EXACT-HEAD CI`.
+Internal-ID artifact:
 
-No protected write is valid merely because a prewrite Matrix already exists. The Matrix must be visible in the exact protected change set enforced by CI.
+- artifact ID `9729833996`;
+- name `internal-document-id-audit-report`;
+- digest `sha256:7a91c9477eab6e7134eee50c37aaa62d712018a2e6dc6314164298c63b7b0af4`;
+- exact head `5b6b6001aca99367e20425db68cabdfb81050c71`.
 
-## C1-C6
+## Evidence-search note
 
-- C1 PASS — unique Lease 189 path.
-- C2 PASS — one live authority path only; no historical Release document promotion.
-- C3 PASS — authority already exists in `Release/VERSION.md`; transaction only repairs discoverability.
-- C4 PASS — mapping cannot auto-close Release or global integrity.
-- C5 PASS — direct VERSION read + Lease 178 closure review independently establish the gap.
-- C6 PASS — P2 repair 187 is closed; this is an independent Release partition continuation.
+The commit-associated workflow wrapper returned an empty set because that wrapper is limited to pull-request-triggered runs. Direct `actions/runs?head_sha=...` retrieval recovered the six push runs above. This is classified as a tool-coverage limitation already anticipated by GOV-013 search-recheck rules, not a repository defect.
 
-## Stop conditions
+## Closed scope
 
-HOLD if:
+`RELEASE_VERSION_DISCOVERABILITY_189 = CLOSED / EXECUTION-VERIFIED`.
 
-- live REP-001/REP-002 already changed to include `Release/VERSION.md`;
-- main moves after final parent check;
-- candidate changes any path beyond REP-001, REP-002, and same-change-set Matrix;
-- Full-Stack preflight reports protected change without Matrix;
-- any exact-head required workflow fails.
+The closure proves only the bounded active-authority discoverability repair. It does not automatically close the Release partition, Priority 2, the Connected Baseline, or global integrity.
 
-Initial state:
+## Next legal action
 
-`RELEASE_VERSION_DISCOVERABILITY_189 = READY / NOT EXECUTED`.
+Perform explicit Release Phase-1 control-plane closure synchronization. `REP-016` still records Release as partition-open and must be reconciled through a fresh protected transaction before claiming `Release = CLOSED_FOR_PHASE_1`.
