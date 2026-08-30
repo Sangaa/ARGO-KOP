@@ -4,6 +4,7 @@ on:
   workflow_dispatch:
   push:
     paths:
+      - 'EJR/**'
       - 'Quality/Integration/internal_document_id_audit.py'
       - 'Quality/Integration/test_internal_document_id_audit.py'
       - 'Quality/Integration/ejr_allocation_vacancy_gate.py'
