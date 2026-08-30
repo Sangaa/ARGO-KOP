@@ -73,6 +73,48 @@ def test_explicit_document_id_and_first_h1_do_not_silently_disagree():
     )
 
 
+def test_human_h1_title_does_not_override_explicit_document_identity(tmp_path, monkeypatch):
+    (tmp_path / "Repository").mkdir()
+    (tmp_path / "Repository" / "REP-001_MASTER_INDEX.md").write_text(
+        "`PROJECT_STATUS.md`\n", encoding="utf-8"
+    )
+    (tmp_path / "PROJECT_STATUS.md").write_text(
+        "# ARGO KOP — Current Project Status\n\nDocument ID: PROJECT_STATUS\n",
+        encoding="utf-8",
+    )
+    monkeypatch.setattr(
+        "internal_document_id_audit._git_files",
+        lambda root: [root / "Repository/REP-001_MASTER_INDEX.md", root / "PROJECT_STATUS.md"],
+    )
+
+    report = scan(tmp_path)
+    assert report["document_ids_by_path"]["PROJECT_STATUS.md"] == "PROJECT_STATUS"
+    assert report["explicit_heading_identity_conflicts"] == []
+
+
+def test_structural_h1_fallback_accepts_unseen_namespace_without_allowlist(tmp_path, monkeypatch):
+    (tmp_path / "Repository").mkdir()
+    (tmp_path / "Repository" / "REP-001_MASTER_INDEX.md").write_text(
+        "`Novel/NOVEL-321_EXAMPLE.md`\n", encoding="utf-8"
+    )
+    (tmp_path / "Novel").mkdir()
+    (tmp_path / "Novel" / "NOVEL-321_EXAMPLE.md").write_text(
+        "# NOVEL-321 — Example governed artifact\n",
+        encoding="utf-8",
+    )
+    monkeypatch.setattr(
+        "internal_document_id_audit._git_files",
+        lambda root: [
+            root / "Repository/REP-001_MASTER_INDEX.md",
+            root / "Novel/NOVEL-321_EXAMPLE.md",
+        ],
+    )
+
+    report = scan(tmp_path)
+    assert report["document_ids_by_path"]["Novel/NOVEL-321_EXAMPLE.md"] == "NOVEL-321"
+    assert report["identity_sources_by_path"]["Novel/NOVEL-321_EXAMPLE.md"] == "FIRST_H1_FALLBACK"
+
+
 def test_current_tree_internal_id_audit_report_is_emitted():
     report = scan(Path(__file__).resolve().parents[2])
     warnings.warn(
