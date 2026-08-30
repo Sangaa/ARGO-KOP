@@ -2,7 +2,7 @@
 
 Platform: ARGO KOP
 Document ID: REP-012
-Version: 1.0.9
+Version: 1.0.10
 Status: Active Control / Integrity Hold / Phase 1 Population In Progress
 Category: Repository Control
 Canonical: Yes
@@ -366,9 +366,30 @@ The session must not assume that an older handoff is current without checking re
 
 ## 14. Mutation Protocol
 
-For a material mutation:
+For a material mutation of an already allocated artifact:
 
-`ALLOCATE → READ → VERIFY IDENTITY → VERIFY AUTHORITY → CHECK DEPENDENCIES → CHECK CONSUMERS → MUTATE → COMMIT → RE-READ → UPDATE REP-013 → UPDATE REP-014 → UPDATE REP-011 → UPDATE REP-012 → RECONCILE → CHECKPOINT IF WARRANTED`
+`READ → VERIFY IDENTITY → VERIFY AUTHORITY → CHECK DEPENDENCIES → CHECK CONSUMERS → MUTATE → COMMIT → RE-READ → UPDATE REP-013 → UPDATE REP-014 → UPDATE REP-011 → UPDATE REP-012 → RECONCILE → CHECKPOINT IF WARRANTED`
+
+For a new EJR identity candidate, allocation is forbidden until vacancy is proven:
+
+`CANDIDATE → PROVE VACANCY → ALLOCATE → READ → VERIFY IDENTITY → VERIFY AUTHORITY → CHECK DEPENDENCIES → CHECK CONSUMERS → MUTATE → COMMIT → RE-READ → UPDATE REP-013 → UPDATE REP-014 → UPDATE REP-011 → UPDATE REP-012 → RECONCILE → CHECKPOINT IF WARRANTED`
+
+The EJR vacancy proof MUST evaluate, at minimum:
+
+1. qualified `Document ID` metadata claims;
+2. document-level first-H1 identity claims;
+3. filename identity prefixes;
+4. complete locally reachable Git history for qualifying historical content or filename claims.
+
+Decision semantics are fail-closed:
+
+- `OCCUPIED` → allocation is prohibited;
+- `HISTORY_INCOMPLETE` → allocation is prohibited because vacancy is not proven;
+- `VACANT` → allocation may proceed to the remaining mutation gates.
+
+Current-tree absence is not vacancy evidence by itself. A shallow or otherwise incomplete reachable-history view MUST NOT be interpreted as `VACANT`.
+
+The execution-verified reference implementation is `Quality/Integration/ejr_allocation_vacancy_gate.py`, established by Lease `R71-20260830-P2-EJR-COLLISION-SAFE-ALLOCATION-GATE-193`. Its historical evidence scope is bounded to all locally reachable refs and does not claim knowledge of unreachable external history.
 
 If post-mutation re-read fails, the artifact remains `DIRTY` or `REVALIDATION_REQUIRED` and must not be marked complete.
 
