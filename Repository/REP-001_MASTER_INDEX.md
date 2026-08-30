@@ -37,6 +37,8 @@ Historical root naming-convention material is not active canonical inventory and
 
 ## 3. Core Layer
 
+- `Core/ARGO_KERNEL.md`
+- `Core/Core.md`
 - `Core/CORE-000_PLATFORM_ARCHITECTURE.md`
 - `Core/CORE-001_ARGO_MANIFEST.md`
 - `Core/CORE-002_ARGO_IDENTITY.md`
@@ -53,6 +55,8 @@ Historical root naming-convention material is not active canonical inventory and
 - `Core/_FOLDER_STATUS.md`
 
 `CORE-001` and `CORE-002` were added to active inventory on 2026-08-29 after direct current-content verification and cross-check against `Core/_FOLDER_STATUS.md`, which identifies both as independently revalidated canonical Core artifacts. This closes their index discoverability gap only; Core cross-layer certification remains open.
+
+`CORE-KERNEL` (`Core/ARGO_KERNEL.md`) and `CORE-INDEX` (`Core/Core.md`) are indexed as current reviewed Core coordination/inventory surfaces after Lease 185 classified their missing REP-001/REP-002 discoverability as a real gap. Their index membership closes discoverability only and does not close Core Integrity Hold or cross-layer certification.
 
 ## 4. Repository Layer
 
@@ -261,6 +265,12 @@ The following Intelligence artifacts are directly verified as Approved and Canon
 - `Intelligence/INT-001_INTELLIGENCE_LAYER.md`
 - `Intelligence/INT-002_PATTERN_EXTRACTION.md`
 - `Intelligence/INT-003_ANOMALY_DETECTOR.md`
+
+The current Quality status identifies the following current canonical Quality specification for discoverability:
+
+- `Quality/QLT-001_QUALITY_ASSURANCE.md`
+
+This index entry closes the classified QLT-001 discoverability gap only. Quality remains `INTEGRITY HOLD / CROSS-LAYER VALIDATION OPEN`; index membership is not global Quality certification or universal execution proof.
 
 The current audit also identifies physical domains requiring staged reconstruction or re-audit, including:
 
