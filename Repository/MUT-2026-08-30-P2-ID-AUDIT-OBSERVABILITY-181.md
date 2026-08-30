@@ -1,16 +1,16 @@
 # MUT-2026-08-30-P2-ID-AUDIT-OBSERVABILITY-181
 
-**Status:** PREWRITE / LEASE ACTIVE / DIAGNOSTIC OBSERVABILITY
+**Status:** CLOSED / EXECUTION-VERIFIED / FAILURE-EVIDENCE PRESERVATION VERIFIED
 **Baseline:** `main@c17a05fd169d94d0a472aebae484f1ca94ddbef5`
 **Parent evidence:** `Repository/MUT-2026-08-30-P2-ID-AUDIT-COVERAGE-179.md`, `Repository/MUT-2026-08-30-P2-ID-AUDIT-PARSER-180.md`
 
 ## Gap proved before mutation
 
-Lease 180 repaired the proved first-H1 parser overreach, but the exact-head Internal Document-ID Audit run `33292104449` remains failed at job `99205415647` while Full-Stack and M2 succeeded on the same HEAD. Multiple direct attempts to retrieve a usable failed-job log did not yield the failing assertion through the available connector surface.
+Lease 180 repaired the proved first-H1 parser overreach, but the exact-head Internal Document-ID Audit run `33292104449` remained failed at job `99205415647` while Full-Stack and M2 succeeded on the same HEAD. Multiple direct attempts to retrieve a usable failed-job log did not yield the failing assertion through the available connector surface.
 
-The current workflow `.github/workflows/internal-id-audit.yml` runs `pytest` before deterministic report generation/upload. Therefore any pytest failure prevents the report artifact from being generated and uploaded, hiding the exact audit findings needed by the required HARD-HOLD root-cause procedure.
+The workflow `.github/workflows/internal-id-audit.yml` ran `pytest` before deterministic report generation/upload. Therefore a pytest failure prevented the report artifact from being generated and uploaded, hiding the exact audit findings needed by the required HARD-HOLD root-cause procedure.
 
-This is an evidence-observability defect. It is not evidence that the detector is correct or incorrect, and it is not permission to weaken the detector or change repository identities.
+This was classified as an evidence-observability defect, not evidence that the detector itself was correct or incorrect.
 
 ## Allowed paths
 
@@ -41,12 +41,12 @@ This is an evidence-observability defect. It is not evidence that the detector i
 
 ## C1-C6 collision gate
 
-- **C1 path collision:** PASS — new transaction record is unique and the workflow path already exists.
-- **C2 semantic collision:** PASS — audit rules and identities are explicitly forbidden from mutation.
-- **C3 authority collision:** PASS — no canonical/governance/release authority is changed.
-- **C4 promotion collision:** PASS — no audit result or domain state is promoted by this lease.
-- **C5 evidence collision:** PASS — the change exists only to preserve deterministic failure evidence that current step ordering suppresses.
-- **C6 handoff collision:** PASS — 179/180 remain HARD HOLD until the real failing findings are exposed and resolved.
+- **C1 path collision:** PASS — transaction record is unique and the workflow path already existed.
+- **C2 semantic collision:** PASS — audit rules and identities were forbidden from mutation under 181.
+- **C3 authority collision:** PASS — no canonical/governance/release authority changed.
+- **C4 promotion collision:** PASS — no audit result or domain state was promoted.
+- **C5 evidence collision:** PASS — the change exists only to preserve deterministic failure evidence.
+- **C6 handoff collision:** PASS — the preserved evidence handed the actual defect to Lease 182.
 
 ## Minimal repair contract
 
@@ -58,8 +58,21 @@ This is an evidence-observability defect. It is not evidence that the detector i
 6. After merge, inspect the exact-head run and retrieve the deterministic report artifact or equivalent workflow evidence.
 7. Treat any exposed identity finding as new evidence requiring its own root-cause classification; do not auto-repair identities.
 
-## Learning candidate
+## Verification and closure evidence
+
+The observability repair succeeded at its intended purpose. Exact-head run `33298252068` on `0ce5d667ac9ff1f4af48281a7474041172d1b1b2` remained correctly failed but produced artifact `internal-document-id-audit-report` (`9728089302`). That artifact exposed the previously hidden failure family: 18 `explicit_heading_identity_conflicts`.
+
+Those findings were not suppressed or cosmetically cleared. They were transferred into Lease 182, where direct representative inspection proved a detector identity-source defect.
+
+After Lease 182 repair, exact-head Internal Document-ID Audit run `33298557071` on `e04b073f268aa1291bbb747429d92ac69d83e9ec` completed `SUCCESS` and produced artifact `9728177701`, proving the workflow continues to emit deterministic audit evidence in the successful case as well.
+
+Lease 181 therefore closes only the diagnostic observability defect. It does not close Priority 2 identity reconciliation.
+
+## Learning
 
 `A FAILING AUDIT MUST PRESERVE ITS FAILURE EVIDENCE.`
 
-A quality gate that suppresses its deterministic diagnostic output on failure weakens root-cause verification even when the gate correctly remains red.
+`OBSERVABILITY IS PART OF VERIFIABILITY: A RED GATE WITHOUT RETAINED DIAGNOSTICS CAN BLOCK CORRECT ROOT-CAUSE GOVERNANCE.`
+
+Final lease state:
+`P2_ID_AUDIT_OBSERVABILITY_181 = CLOSED / EXECUTION-VERIFIED`.
