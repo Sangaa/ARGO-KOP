@@ -1,14 +1,12 @@
 # MUTATION MATRIX — P2 EJR H1 MULTI CHRONOLOGY 198
 
-State: `OPEN / PREWRITE`
+State: `FUNCTIONAL CANDIDATE`
 
-| Path | Operation | Reason | Content preservation |
+| Path | Operation | Reason | Verification target |
 |---|---|---|---|
-| `Quality/Integration/ejr_h1_multi_chronology.py` | ADD | Evidence-only generalized chronology classifier for H1-only EJR ambiguity groups with >2 members | New companion analyzer only |
-| `Quality/Integration/test_ejr_h1_multi_chronology.py` | ADD | Synthetic ancestry/partial-order/fail-closed verification | New tests only |
-| `.github/workflows/internal-id-audit.yml` | MODIFY | Execute and artifact the new classifier under complete history | Existing workflow semantics preserved; append coverage only |
-| this Matrix | MODIFY | Same-change governance evidence | Preserve lease boundaries |
+| `Quality/Integration/ejr_h1_multi_chronology.py` | ADD | Evidence-only generalized chronology classifier for H1-only EJR ambiguity groups with >2 members | Synthetic tests + exact-head execution |
+| `Quality/Integration/test_ejr_h1_multi_chronology.py` | ADD | Total-chain, same-commit, missing-history, shallow-history coverage | Pytest PASS |
+| `.github/workflows/internal-id-audit.yml` | MODIFY | Execute and artifact the classifier under complete history | Internal-ID workflow PASS |
+| this Matrix | MODIFY | Same-change governance evidence | Exact diff contains only authorized paths |
 
-Forbidden paths: all EJR artifacts, REP-012, REP-016, REP-020, and the internal Document-ID scanner.
-
-Prewrite verification: N/A until functional commit exists.
+Protected boundaries: no EJR artifact mutation; no internal Document-ID scanner change; REP-012, REP-016, REP-020 untouched; no ownership inference; no Priority-2/global closure.

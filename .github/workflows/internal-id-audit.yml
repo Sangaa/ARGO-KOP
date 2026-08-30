@@ -12,6 +12,8 @@ on:
       - 'Quality/Integration/test_ejr_ambiguity_source_signature_census.py'
       - 'Quality/Integration/ejr_h1_pair_chronology.py'
       - 'Quality/Integration/test_ejr_h1_pair_chronology.py'
+      - 'Quality/Integration/ejr_h1_multi_chronology.py'
+      - 'Quality/Integration/test_ejr_h1_multi_chronology.py'
       - 'Repository/REP-001_MASTER_INDEX.md'
       - '.github/workflows/internal-id-audit.yml'
 
@@ -46,6 +48,7 @@ jobs:
           Quality/Integration/test_ejr_allocation_vacancy_gate.py
           Quality/Integration/test_ejr_ambiguity_source_signature_census.py
           Quality/Integration/test_ejr_h1_pair_chronology.py
+          Quality/Integration/test_ejr_h1_multi_chronology.py
 
       - name: Emit deterministic audit report
         if: always()
@@ -64,6 +67,12 @@ jobs:
         env:
           PYTHONPATH: ${{ github.workspace }}/Quality/Integration
         run: python Quality/Integration/ejr_h1_pair_chronology.py > ejr-h1-pair-chronology.json
+
+      - name: Emit deterministic EJR H1-multi chronology report
+        if: always()
+        env:
+          PYTHONPATH: ${{ github.workspace }}/Quality/Integration
+        run: python Quality/Integration/ejr_h1_multi_chronology.py > ejr-h1-multi-chronology.json
 
       - name: Upload deterministic audit report
         if: always()
@@ -87,4 +96,12 @@ jobs:
         with:
           name: ejr-h1-pair-chronology
           path: ejr-h1-pair-chronology.json
+          if-no-files-found: error
+
+      - name: Upload deterministic EJR H1-multi chronology report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: ejr-h1-multi-chronology
+          path: ejr-h1-multi-chronology.json
           if-no-files-found: error
