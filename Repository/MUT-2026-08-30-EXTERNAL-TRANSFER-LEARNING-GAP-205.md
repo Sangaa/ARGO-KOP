@@ -2,42 +2,48 @@
 
 Transaction: `MUT-2026-08-30-EXTERNAL-TRANSFER-LEARNING-GAP-205`
 Lease: `R71-20260830-EXTERNAL-TRANSFER-LEARNING-GAP-205`
-Status: `PREWRITE / OPEN / REVIEW-BOUNDED`
-Baseline: `main@eea3937fbf60dbae995b1ac7eefab42c55a50037`
+Status: `PREWRITE REFINED / OPEN / REVIEW-BOUNDED`
+Baseline after initial prewrite: `main@a7b370c67c6b389cbfd50da4875954979b19fbb7`
 
 ## Candidate input
 User-supplied `ARGO External Transfer Task Learning Amendment` was received as `CANDIDATE / NON-AUTHORITATIVE / REVIEW REQUIRED`.
 
 ## Gap finding
-Current `GOV-013` already governs prior-learning retrieval, transferable-learning classification, and learning promotion. It does not explicitly govern ordinary non-repository chat/practical tasks as transfer-learning opportunities, does not state that user need precedes reflection, does not separate domain-specific learning from cross-domain reasoning learning in this context, and does not state a no-forced-documentation rule for ordinary external tasks.
+Current `GOV-013` already governs prior-learning retrieval, transferable-learning classification, and learning promotion. Current `GOV-015` is the active governed standard for execution documentation and knowledge transfer and already defines `SESSION-LEARNING → REUSABLE-LEARNING → GOVERNANCE-RULE → DEFAULT-PRACTICE`.
 
-Three materially different searches for an existing external-transfer-task rule did not locate an adequate current rule. Current `CORE-003` and `GOV-013` support the proposed evidence/authority boundaries but do not fully cover the operating behavior.
+The missing behavior is not a new role and does not require a parallel doctrine. The smallest adequate integration surface is `GOV-015`, because it lacks an explicit rule for ordinary practical tasks whose primary objective is outside direct ARGO-KOP construction.
 
-## Authorized scope
+Three materially different searches did not locate an adequate current external-transfer-task rule. Existing evidence/authority controls support the candidate boundaries but do not fully specify this operating behavior.
+
+## Refined authorized functional scope
 Functional change may modify exactly:
-1. `Governance/GOV-013_HERMUZ_SESSION_BUILD_PROTOCOL.md`
+1. `Governance/GOV-015_EXECUTION_DOCUMENTATION_AND_KNOWLEDGE_TRANSFER.md`
 2. `Repository/MUT-2026-08-30-EXTERNAL-TRANSFER-LEARNING-GAP-205_MUTATION_MATRIX.md`
 
+The initial GOV-013 target is withdrawn before functional mutation. `GOV-013` remains unchanged.
+
 ## Intended minimal integration
-Add a bounded `External Transfer Task Gate` inside `GOV-013` that establishes:
-- task context, not user identity, determines external-task classification;
-- solve the user's task first;
-- silent reflection is allowed when useful and must not degrade the answer;
+Add a bounded `External Transfer Task Learning` section to `GOV-015` establishing:
+- `EXTERNAL_TRANSFER_TASK` is determined by task context, not user identity;
+- solve the user need first;
+- background/silent reflection is allowed when useful but must not degrade or distort the answer and need not be narrated as training;
 - separate domain-specific learning from transferable reasoning learning;
-- no automatic canonical promotion;
-- no `EVERY CHAT → NEW FILE` behavior;
-- capture only material reusable learning through the existing Learning Promotion Gate;
-- no new role is created;
-- after external work, repository construction priority resumes unchanged.
+- external experience does not become canonical knowledge automatically;
+- no `EVERY CHAT → NEW FILE` behavior; only significant reusable learning deserves bounded capture;
+- sensitive personal data, credentials, secrets, or unnecessary identifying details must not be preserved as learning artifacts;
+- existing GOV-013/GOV-015 promotion gates remain authoritative;
+- no new permanent role is created;
+- after bounded external work/reflection, current repository construction priority remains unchanged.
 
 ## Forbidden
 - no automatic logging of every chat;
-- no inference of user identity for training classification;
-- no secret claim that every interaction created durable learning;
-- no promotion of external experience to canonical authority without existing review gates;
-- no change to Priority 2, Phase 1, Connected Baseline, or global integrity state;
+- no identity inference for training classification;
+- no claim that every interaction creates durable learning;
+- no storage of secrets/sensitive personal information as training artifacts;
+- no automatic promotion of external experience to canonical authority;
+- no Priority 2 / Phase 1 / Connected Baseline / global integrity change;
 - no Model creation;
-- no REP-012/016/020 mutation.
+- no GOV-013, REP-012, REP-016, or REP-020 mutation.
 
 ## Verification
 Re-read exact changed paths, compare exact functional diff, run applicable exact-head workflows, then close with Room 71 checkpoint or HOLD if verification fails.
