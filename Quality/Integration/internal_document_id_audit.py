@@ -322,6 +322,7 @@ def scan(root: Path) -> dict:
             records_by_id.setdefault(record.document_id, []).append(record)
 
     ambiguous_duplicate_ids: dict[str, list[str]] = {}
+    ambiguous_duplicate_records: dict[str, list[dict[str, object]]] = {}
     shadowed_legacy_ids: dict[str, list[str]] = {}
     for document_id, group in records_by_id.items():
         if len(group) < 2:
@@ -336,6 +337,18 @@ def scan(root: Path) -> dict:
         if all(record.explicit_historical_or_noncanonical for record in group):
             continue
         ambiguous_duplicate_ids[document_id] = sorted(record.path for record in group)
+        ambiguous_duplicate_records[document_id] = [
+            {
+                "path": record.path,
+                "identity_source": record.identity_source,
+                "canonical": record.canonical,
+                "indexed_active": record.indexed_active,
+                "status": record.status,
+                "deferred_domain": record.deferred_domain,
+                "filename_prefix": record.filename_prefix,
+            }
+            for record in sorted(group, key=lambda item: item.path)
+        ]
 
     heading_identity_collisions = {
         identity: sorted(paths)
@@ -378,6 +391,9 @@ def scan(root: Path) -> dict:
         "duplicate_active_ids": duplicate_active_ids,
         "shadowed_legacy_ids": {key: sorted(value) for key, value in sorted(shadowed_legacy_ids.items())},
         "ambiguous_duplicate_ids": {key: sorted(value) for key, value in sorted(ambiguous_duplicate_ids.items())},
+        "ambiguous_duplicate_records": {
+            key: value for key, value in sorted(ambiguous_duplicate_records.items())
+        },
         "heading_identity_collisions": heading_identity_collisions,
         "governance_heading_identity_collisions": governance_heading_identity_collisions,
         "filename_internal_id_mismatches": filename_mismatches,

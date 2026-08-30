@@ -185,6 +185,43 @@ def test_multiple_qualified_metadata_document_ids_are_a_real_conflict(tmp_path, 
     assert report["identity_scope_reconciled"] is False
 
 
+def test_ambiguity_observability_preserves_legacy_membership_and_exposes_identity_sources(tmp_path, monkeypatch):
+    (tmp_path / "Repository").mkdir()
+    index = tmp_path / "Repository" / "REP-001_MASTER_INDEX.md"
+    explicit = tmp_path / "Repository" / "EJR-777_EXPLICIT.md"
+    fallback = tmp_path / "Repository" / "EJR-777_FALLBACK.md"
+    index.write_text("", encoding="utf-8")
+    explicit.write_text(
+        "# EJR-777 — Explicit journal record\n\n"
+        "Document ID: EJR-777\n"
+        "Status: Evidence / Traceability Hold\n",
+        encoding="utf-8",
+    )
+    fallback.write_text(
+        "# EJR-777 — Historical journal record\n\n"
+        "Status: Evidence / Traceability Hold\n",
+        encoding="utf-8",
+    )
+    monkeypatch.setattr(
+        "internal_document_id_audit._git_files",
+        lambda root: [index, explicit, fallback],
+    )
+
+    report = scan(tmp_path)
+
+    assert report["ambiguous_duplicate_ids"]["EJR-777"] == [
+        "Repository/EJR-777_EXPLICIT.md",
+        "Repository/EJR-777_FALLBACK.md",
+    ]
+    members = report["ambiguous_duplicate_records"]["EJR-777"]
+    assert [member["path"] for member in members] == report["ambiguous_duplicate_ids"]["EJR-777"]
+    assert [member["identity_source"] for member in members] == [
+        "DOCUMENT_ID_FIELD",
+        "FIRST_H1_FALLBACK",
+    ]
+    assert report["identity_scope_reconciled"] is False
+
+
 def test_current_tree_internal_id_audit_report_is_emitted():
     report = scan(Path(__file__).resolve().parents[2])
     warnings.warn(
