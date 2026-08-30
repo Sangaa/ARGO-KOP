@@ -5,6 +5,7 @@ Lease: `R71-20260830-P2-EJR-SOURCE-SIGNATURE-CENSUS-196`
 Protocol: HERMUZ / GOV-014
 Status: `OPEN / PREWRITE / FUNCTIONAL MUTATION NOT YET APPLIED`
 Entry head: `afe52f71cef0041e7f58218d6846f9182c868f83`
+Prewrite head: `9ee7028b868b896a86cf7784b51ec286a067fa5a`
 
 ## Bounded purpose
 
@@ -18,13 +19,14 @@ The existing internal-ID gate already exposes every required member attribute. T
 
 `internal_document_id_audit.scan() → ejr_ambiguity_source_signature_census.summarize() → evidence JSON`
 
-This preserves gate semantics and keeps census policy outside identity discovery.
+The Internal-ID workflow is an affected consumer because new companion code must be triggered, tested, and emitted as deterministic evidence. Workflow synchronization is therefore included before the functional write.
 
 ## Authorized functional scope
 
 1. `Quality/Integration/ejr_ambiguity_source_signature_census.py`
 2. `Quality/Integration/test_ejr_ambiguity_source_signature_census.py`
-3. `Repository/MUT-2026-08-30-P2-EJR-SOURCE-SIGNATURE-CENSUS-196_MUTATION_MATRIX.md`
+3. `.github/workflows/internal-id-audit.yml`
+4. `Repository/MUT-2026-08-30-P2-EJR-SOURCE-SIGNATURE-CENSUS-196_MUTATION_MATRIX.md`
 
 ## Required behavior
 
@@ -34,6 +36,7 @@ This preserves gate semantics and keeps census policy outside identity discovery
 - expose counts by source signature and group cardinality;
 - expose EJR-only group IDs and counts while leaving scanner grammar generic;
 - executable CLI emits JSON from the current repository scan;
+- workflow triggers on companion source/test changes, runs companion tests, emits the census JSON, and uploads it as evidence;
 - tests prove metadata-only, H1-only, mixed, unknown-source visibility, cardinality counting, and source-report immutability.
 
 ## Forbidden scope
@@ -47,8 +50,8 @@ This preserves gate semantics and keeps census policy outside identity discovery
 ## Closure conditions
 
 - Mutation Matrix exists before functional write;
-- functional compare contains exactly the three authorized paths;
+- functional compare contains exactly the four authorized paths;
 - current ambiguity membership is not filtered or reduced at the source gate;
 - companion tests and exact-head workflows pass;
-- current EJR census is recorded as evidence only;
+- current EJR census artifact is captured and recorded as evidence only;
 - Room71 checkpoint is persisted `CLOSED / RESUME-SAFE` or `HOLD / RESUME-SAFE` according to evidence.
