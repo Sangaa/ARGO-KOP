@@ -273,6 +273,12 @@ Current Quality discoverability within this inspected map scope includes:
 
 This mapping closes the classified QLT-001 discoverability gap only. Quality remains `INTEGRITY HOLD / CROSS-LAYER VALIDATION OPEN`; physical mapping does not certify the Quality domain or universal execution enforcement.
 
+Current Release authority mapping within this inspected scope includes:
+
+- `Release/VERSION.md`
+
+`Release/VERSION.md` is mapped as the live authority for the latest official release (`1.0.0 Foundation`) versus the current development baseline (`3.2.1`). This is a discoverability/mapping repair only. Historical Foundation support artifacts REL-001..005 are not promoted into current-development authority, and Release Phase-1 closure remains subject to explicit post-sync review.
+
 These domains are not assumed complete or architecturally authoritative from folder names alone. Their active inventories and relationships remain under connected-baseline validation and are tracked through REP-011 review evidence.
 
 ## 17. Mapping Rules

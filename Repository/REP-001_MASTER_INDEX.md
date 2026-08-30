@@ -272,6 +272,12 @@ The current Quality status identifies the following current canonical Quality sp
 
 This index entry closes the classified QLT-001 discoverability gap only. Quality remains `INTEGRITY HOLD / CROSS-LAYER VALIDATION OPEN`; index membership is not global Quality certification or universal execution proof.
 
+The current Release authority classification identifies the following live current version authority for active discoverability:
+
+- `Release/VERSION.md`
+
+`Release/VERSION.md` is the authoritative reference for the latest official release (`1.0.0 Foundation`) versus the current development baseline (`3.2.1`). This index entry repairs current-authority discoverability only. Historical Foundation support artifacts REL-001..005 remain in their bounded historical/support roles and are not promoted into current-development authority by this registration. Release Phase-1 closure remains subject to explicit post-sync review.
+
 The current audit also identifies physical domains requiring staged reconstruction or re-audit, including:
 
 - `Templates/`
