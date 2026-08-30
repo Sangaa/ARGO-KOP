@@ -1,14 +1,18 @@
-# EJR-013 — Duplicate Identity Conflict Record
+# Duplicate Identity Conflict Record — Historical EJR-013
 
 Date: 2026-08-17
-Status: Open Identity Conflict / Integrity Hold
+Current Reconciliation: 2026-08-30
+Status: Historical Identity Conflict / CURRENT-MAIN RESOLVED / Evidence Retained
+Artifact class: Repository conflict-evidence record; not an EJR identity owner
 
-## Conflicting Artifacts
+## Historical Conflicting Artifacts
+
+At the time this record was created, the conflict was between:
 
 1. `Memory/Engineering_Journal/EJR-013_2026-08-10_RUNTIME_EXECUTION_GRAPH_REVALIDATION.md`
 2. `Memory/Engineering_Journal/EJR-013_2026-08-10_RUNTIME_GRAPH_STATUS_RECONCILIATION.md`
 
-Both currently declare:
+Both historical records declared:
 
 - Document ID: `EJR-013`
 - Version: `1.0.0`
@@ -16,43 +20,57 @@ Both currently declare:
 - Canonical: `No`
 - Date: `2026-08-10`
 
-## Evidence Distinction
+## Historical Evidence Distinction
 
 The first record documents Runtime execution graph revalidation and a RUN-010 documentation repair.
 
-The second record documents the reconciliation after a prior conversation claim that an EJR-013 artifact existed but could not be located; it explicitly records the repository-first recreation of that evidence.
+The second record documented the reconciliation after a prior conversation claim that an EJR-013 artifact existed but could not be located; it explicitly recorded the repository-first recreation of that evidence.
 
-The two artifacts therefore have different purposes/content despite sharing the same Document ID.
+The two artifacts therefore had different purposes/content despite sharing the same Document ID.
 
-## Authority Review
+## Historical Decision
 
-`Memory/Engineering_Journal/_FOLDER_STATUS.md` establishes that:
+On 2026-08-17 this record correctly classified the then-current state as a true unresolved duplicate identity and prohibited uncontrolled rename/deletion/reassignment.
 
-- `ENG-*` records in the Journal are legacy/noncanonical;
-- new Journal records use `EJR-*`;
-- global active identity uniqueness remains uncertified;
-- cross-reference integrity remains open.
+That historical conclusion is preserved here as provenance. It is no longer the current-main disposition.
 
-`SESSION_INDEX.md` is a navigation artifact and explicitly states that index entries do not prove session existence or artifact truth.
+## Current-Main Reconstruction — 2026-08-30
 
-No current authoritative artifact was found that explicitly marks one of the two EJR-013 records as superseded, replacement, or canonical owner.
+Current repository reconstruction under Lease 184 established that the second historical EJR-013 artifact is no longer present on `main`.
 
-## Decision
+Current absence was confirmed through materially different retrieval surfaces:
 
-This is a **true unresolved duplicate identity**, not a shadowed legacy artifact.
+1. direct current-path fetch of `Memory/Engineering_Journal/EJR-013_2026-08-10_RUNTIME_GRAPH_STATUS_RECONCILIATION.md` returned 404;
+2. repository code search for `RUNTIME_GRAPH_STATUS_RECONCILIATION` returned no current result;
+3. direct current `Memory/Engineering_Journal` directory enumeration did not contain that path.
 
-No rename, deletion, reassignment, or synthetic suffix is applied.
+Git path history then supplied the authoritative disposition:
 
-## Required Resolution
+- creation commit: `da23da7229739ff181e3bd79208416aef85a8fbc` — `docs: record runtime graph status reconciliation`;
+- disposition commit: `226be7f9027bf90300a0c0888bc6d4878eece3c9` — `P2: remove superseded EJR-013 duplicate after EJR-181 preservation`.
 
-An explicit repository-authoritative decision must determine whether:
+The remaining current EJR owner/evidence record is:
 
-- one record becomes the canonical `EJR-013` and the other receives a new EJR identity;
-- both receive distinct corrected EJR identities;
-- or one is formally superseded while preserving historical evidence.
+`Memory/Engineering_Journal/EJR-013_2026-08-10_RUNTIME_EXECUTION_GRAPH_REVALIDATION.md`
 
-Resolution must preserve both historical contents and cross-reference traceability.
+It still explicitly declares `Document ID: EJR-013`, `Canonical: No`, and `Status: Active Session Evidence / Integrity Hold`.
+
+## Current Classification
+
+`HISTORICAL_TRUE_DUPLICATE_RESOLVED / STALE_CONFLICT_EVIDENCE_RECONCILED`
+
+This Repository record does not claim EJR-013 identity. Its prior structural H1 was a description of the conflict subject and must not be interpreted as a current EJR document owner.
 
 ## P2 Impact
 
-P2 remains OPEN until this identity conflict and the remaining canonical-unindexed scope are reconciled.
+The historical EJR-013 duplicate must not be reopened as a current duplicate merely because this conflict-evidence record mentions or titles the subject identity.
+
+This correction closes only the stale EJR-013 conflict-evidence state. It does not certify global Journal identity uniqueness, does not close the remaining EJR ambiguity population, and does not close Priority 2.
+
+## Learning
+
+`STATUS DRIFT MUST NOT REOPEN CLOSED REALITY.`
+
+`A CONFLICT RECORD CAN BECOME A FALSE CONFLICT IF ITS TITLE IS PARSED AS THE IDENTITY IT DESCRIBES.`
+
+`HISTORICAL DUPLICATE != CURRENT DUPLICATE AFTER EXPLICIT DISPOSITION.`
