@@ -1,17 +1,19 @@
 # MUTATION MATRIX — P2 EJR PATH-BOUND AUTHORITY REVIEW 203
 
 Transaction: MUT-2026-08-30-P2-EJR-PATH-BOUND-AUTHORITY-REVIEW-203
-State: PREWRITE / OPEN
-Baseline: main@ab0046baa80b45e36fc87c48df63393172ae01c1
+State: FUNCTIONAL CANDIDATE
+Baseline: main@fd5f54b12039a73b59da9077eea2c66030accf48
 
-| Path | Intended action | Protected semantic effect | Allowed |
-|---|---|---|---|
-| Repository/P2_EJR_PATH_BOUND_AUTHORITY_REVIEW_203.md | CREATE | Record bounded authority/disposition evidence for five identity groups | Y |
-| Repository/MUT-2026-08-30-P2-EJR-PATH-BOUND-AUTHORITY-REVIEW-203_MUTATION_MATRIX.md | UPDATE | Reconcile this transaction | Y |
-| Any EJR/* or Memory/Engineering_Journal/* | NONE | No identity/content mutation | N |
-| REP-012 / REP-016 / REP-020 | NONE | Preserve allocation, queue, and control-plane state | N |
-| Quality/Integration/* | NONE | Preserve scanner/gate semantics | N |
+| Path | Action | Result |
+|---|---|---|
+| Repository/P2_EJR_PATH_BOUND_AUTHORITY_REVIEW_203.md | CREATE | Five reviewed groups classified as distinct legitimate ID collisions with contextual referents recovered |
+| Repository/MUT-2026-08-30-P2-EJR-PATH-BOUND-AUTHORITY-REVIEW-203_MUTATION_MATRIX.md | UPDATE | Functional scope reconciled |
+| Any EJR/* or Memory/Engineering_Journal/* | NONE | Preserved |
+| REP-012 / REP-016 / REP-020 | NONE | Preserved |
+| Quality/Integration/* | NONE | Preserved |
 
-Prewrite gate: COMPLETE.
-Functional verification: PENDING.
+Unexpected paths: 0 expected.
+Identity mutation authorization: NONE.
+Priority-2/global closure authorization: NONE.
+Functional verification: PENDING exact-head workflows.
 Closure verification: PENDING.
