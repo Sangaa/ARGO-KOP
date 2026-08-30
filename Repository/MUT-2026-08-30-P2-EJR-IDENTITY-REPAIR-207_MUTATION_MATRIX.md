@@ -1,8 +1,8 @@
 # MUT-2026-08-30-P2-EJR-IDENTITY-REPAIR-207 — MUTATION MATRIX
 
-Status: PREWRITE
+Status: FUNCTIONAL / ONE-RECORD REPAIR
 Lease: `R71-20260830-P2-EJR-IDENTITY-REPAIR-207`
-Baseline: `c03b05ab21859adbe6e18518f60385e376cc798b`
+Baseline: `42c3233a0424417447e873e368f5357b9f7d9989`
 
 ## Authorized functional paths
 - delete `EJR/EJR-214_P2_SESSION_CLOSURE_2026-08-17.md`
@@ -13,21 +13,21 @@ Baseline: `c03b05ab21859adbe6e18518f60385e376cc798b`
 Lease206 / run `33329388744` / artifact `9737186617` proves `EJR-400 = VACANT`, history_complete=true, no current or historical claims in all locally reachable refs.
 
 ## Consumer disposition
-Three materially different current searches were used around exact path, semantic ID, and control-plane surfaces. No current operational consumer was established. References in Leases/Rooms/census/repair-plan surfaces remain provenance describing the pre-repair state and are not rewritten to falsify history.
+Current exact-path, semantic-ID, and control-plane-targeted searches established no current operational consumer requiring synchronous rewrite. References in Leases/Rooms/census/repair-plan surfaces remain provenance describing the pre-repair state and are intentionally preserved.
 
 ## Preservation rule
-The target record body is preserved exactly except:
+The target record body is byte-for-byte semantically preserved except the first H1 identity:
 `# EJR-214 — P2 Session Closure`
 becomes
 `# EJR-400 — P2 Session Closure`.
 
-Date, Status, Scope, baseline, integrity state, work-completed evidence, P2 disposition, learning/error correction, and next safe action remain unchanged.
+All date/status/scope/baseline/integrity/work-completed/P2-disposition/learning/next-action content remains unchanged.
 
 ## Required checks
-- no unauthorized path in functional diff;
-- current old path absent; new path readable;
-- Internal Document-ID Audit must trigger and pass;
-- EJR-214 ambiguity must lose the displaced root member;
-- EJR-400 must not appear ambiguous;
+- functional diff contains only old path deletion, new path addition, and this Matrix;
+- old path absent and new path readable at exact head;
+- Internal Document-ID Audit exact-head SUCCESS;
+- EJR-214 ambiguity loses the displaced root member;
+- EJR-400 remains unique;
 - Full-Stack / Runtime / M2 / Real Matrix applicable exact-head checks pass;
-- no broad P2 closure claim.
+- Priority 2 remains OPEN.

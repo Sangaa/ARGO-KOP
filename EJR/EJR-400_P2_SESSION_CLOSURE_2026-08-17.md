@@ -1,4 +1,4 @@
-# EJR-214 — P2 Session Closure
+# EJR-400 — P2 Session Closure
 
 Date: 2026-08-17
 Status: RECORDED / SESSION-CLOSABLE / P2 CONTINUATION READY
