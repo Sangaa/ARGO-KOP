@@ -1,12 +1,9 @@
 # MUTATION MATRIX — LEASE 204 — P2 EJR CONTROLLED IDENTITY-REPAIR PLAN
 
-State: `FUNCTIONAL PLAN / NO IDENTITY EXECUTION`
+State: `CLOSED / PLAN VERIFIED / EXECUTION NOT AUTHORIZED`
 Lease: `R71-20260830-P2-EJR-CONTROLLED-IDENTITY-REPAIR-PLAN-204`
 Prewrite head: `89c46c600550fb1d70054c6a2089c0507fb51681`
-
-## Functional paths
-- `Repository/P2_EJR_CONTROLLED_IDENTITY_REPAIR_PLAN_204.md`
-- `Repository/MUT-2026-08-30-P2-EJR-CONTROLLED-IDENTITY-REPAIR-PLAN-204_MUTATION_MATRIX.md`
+Functional head: `106a6c0e5e25d4cada45bbed4f26b13f5b2b675e`
 
 ## Disposition assertions
 | ID | Retained record | Displaced records | Replacement allocation |
@@ -25,7 +22,15 @@ Prewrite head: `89c46c600550fb1d70054c6a2089c0507fb51681`
 - displaced GT-041 record: REP-022 exact-path consumer rewrite required.
 - displaced P221 CI-decision record: GOV-013B semantic provenance rewrite required if identity is repaired/retained in that context.
 
-## Functional assertions
+## Verification
+| Gate | Run | Result |
+|---|---:|---|
+| Full-Stack Repository Audit | 33327837601 | SUCCESS |
+| ARGO Runtime Prototype and Integration Tests | 33327837569 | SUCCESS |
+| M2 Multi-Channel Proposal Training | 33327837623 | SUCCESS |
+| Real Mutation Matrix Regression | 33327837648 | SUCCESS |
+
+## Closed assertions
 | Assertion | Result |
 |---|---|
 | First-valid-allocation retention rule explicit | Y |
@@ -41,7 +46,4 @@ Prewrite head: `89c46c600550fb1d70054c6a2089c0507fb51681`
 | No P2/Phase1/global closure claim | Y |
 
 ## Forbidden scope confirmed
-No `EJR/**`, `Memory/Engineering_Journal/**`, Governance consumer, REP control-plane artifact, scanner, gate or workflow is modified by this functional plan.
-
-## Verification
-`PENDING EXACT-HEAD WORKFLOWS`
+No `EJR/**`, `Memory/Engineering_Journal/**`, Governance consumer, REP control-plane artifact, scanner, gate or workflow was modified by Lease 204.

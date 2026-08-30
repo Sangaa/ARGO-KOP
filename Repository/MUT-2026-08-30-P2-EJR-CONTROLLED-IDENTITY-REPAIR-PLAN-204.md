@@ -1,46 +1,69 @@
 # MUT-2026-08-30 — P2 EJR CONTROLLED IDENTITY-REPAIR PLAN — LEASE 204
 
-Status: `PREWRITE / PLANNING ONLY / NO IDENTITY MUTATION AUTHORIZED`
+Status: `CLOSED / PLAN VERIFIED / RESUME-SAFE / NO IDENTITY EXECUTION`
 Lease: `R71-20260830-P2-EJR-CONTROLLED-IDENTITY-REPAIR-PLAN-204`
 Baseline: `main@329a7700f9d880674ed7ae317c1464be785ce2f8`
+Prewrite head: `89c46c600550fb1d70054c6a2089c0507fb51681`
+Functional head: `106a6c0e5e25d4cada45bbed4f26b13f5b2b675e`
 
 ## Trigger
-Lease 203 proved that EJR-211, EJR-214, EJR-219, EJR-301 and EJR-302 are distinct legitimate identity-reuse collisions with recoverable contextual referents. The next legal action is to produce a governed repair plan before any EJR renumbering or path mutation.
+Lease 203 proved that EJR-211, EJR-214, EJR-219, EJR-301 and EJR-302 are distinct legitimate identity-reuse collisions with recoverable contextual referents. Lease 204 produced the governed repair plan required before any EJR renumbering or path mutation.
 
-## Objective
-Define a deterministic retention/displacement rule, identify the exact records that would retain the reused identifiers, identify records requiring future replacement identities, enumerate consumer/provenance rewrite obligations, and require Lease-193 complete-history vacancy proof before any replacement allocation.
+## Closed result
+The bounded retention rule is:
 
-## Governing retention rule under review
-Default rule:
+`FIRST VALID HISTORICAL ALLOCATION RETAINS THE REUSED ID UNLESS STRONGER EVIDENCE PROVES THAT FIRST ALLOCATION WAS INVALID, UNAUTHORIZED, OR NEVER CONSTITUTED AN IDENTITY ALLOCATION.`
 
-`FIRST VALID HISTORICAL ALLOCATION RETAINS THE REUSED ID UNLESS STRONGER EVIDENCE PROVES THAT FIRST ALLOCATION WAS ITSELF INVALID, UNAUTHORIZED, OR NEVER CONSTITUTED AN IDENTITY ALLOCATION.`
+No such invalidating evidence was established for the first allocations in these five groups.
 
-A later governed consumer may prove which record it means, but it does not retroactively transfer ownership of an already-used identifier.
+Therefore the plan retains the earlier Memory allocations for EJR-211, EJR-214, EJR-219, EJR-301 and EJR-302 and classifies six later legitimate records as future displaced records requiring collision-safe replacement identities. EJR-302 accounts for two of those six displaced records.
 
-## Evidence already established
-- EJR-211 Memory P29 record predates the later Root P2 record; Memory creation commit `eb9fd770e0b4c52f86e813341a92da2fc6063b67` is 2026-08-14 and Root creation commit `e54fb22f9f582b4e3bf164aa05e4a3a97a0f8950` is 2026-08-17.
-- EJR-214 Memory P31 record is dated 2026-08-14; later Root P2 closure creation commit `7207214ace7a44dc80bbbc0b0a34d771858988c5` is 2026-08-17.
-- EJR-219 Memory P36 record is dated 2026-08-14; competing Root record is dated 2026-08-17.
-- EJR-301 Memory P6 record creation commit `079d7042583e01e8c831bf0f9592bbf6cf3fd648` is 2026-08-22; Root GT-040 creation commit `cc90f7822460ccbfb60e3e083c3189b04a3ed4eb` is 2026-08-24.
-- EJR-302 Memory current-head record creation commit `9e8a73a8bd52b30f632569348b513e7ec2f2f77e` is 2026-08-22; Root GT-041 creation commit `3b6ecfb236bc1baa2592fd083b0eb6fcb6156add` is 2026-08-24; Root CI-decision-boundary record creation commit `eb1c200740c6c5fac4380c5d42ced6c0584f67d9` is 2026-08-25.
+No replacement number was allocated. Every future replacement remains blocked until the Lease-193 complete-history vacancy gate returns `VACANT`.
 
-## Planning boundaries
-This lease may create planning/evidence documents only. It MUST NOT:
-- rename, move, delete or modify any EJR record;
-- allocate any replacement EJR number;
-- rewrite any consumer;
-- modify REP-012, REP-016 or REP-020;
-- suppress ambiguity groups;
-- claim Priority 2, Phase 1, Connected Baseline, or global integrity closure.
+## Consumer/provenance obligations
+The plan preserves both record content and referent edges. In particular:
+- GT-040 displaced record requires consistent REP-021 exact-path/identity rewrite;
+- GT-041 displaced record requires consistent REP-022 exact-path/identity rewrite;
+- P221 CI-decision-boundary displaced record requires consistent GOV-013B learning-provenance rewrite if that record is retained under a new identity;
+- retained Memory provenance edges remain protected.
 
-## Required functional deliverable
-A repair plan that, for every record in the five collision groups:
-1. records retention/displacement disposition under the rule above;
-2. lists exact current consumers/provenance edges already proven by Lease 203;
-3. states future rewrite obligations for displaced records;
-4. marks replacement ID as `UNALLOCATED / VACANCY PROOF REQUIRED` until Lease-193 gate returns `VACANT`;
-5. preserves chronology and semantic content;
-6. separates identity repair from canonical promotion.
+## Exact-head functional verification
+At `106a6c0e5e25d4cada45bbed4f26b13f5b2b675e`:
+- Full-Stack Repository Audit `33327837601` — `SUCCESS`.
+- ARGO Runtime Prototype and Integration Tests `33327837569` — `SUCCESS`.
+- M2 Multi-Channel Proposal Training `33327837623` — `SUCCESS`.
+- Real Mutation Matrix Regression `33327837648` — `SUCCESS`.
 
-## Verification
-Functional verification requires exact-head repository workflows. Planning-only closure must remain resume-safe even if no identity mutation is authorized.
+No standalone Internal Document-ID run is claimed for this Repository-doc-only functional scope because none was observed at the exact head.
+
+## Learned rules
+1. `FIRST VALID ALLOCATION IS THE DEFAULT RETENTION ANCHOR; LATER CONSUMER AUTHORITY RECOVERS REFERENTS BUT DOES NOT RETROACTIVELY TRANSFER AN ALREADY-USED ID.`
+2. `IDENTITY REPAIR IS INCOMPLETE IF A RECORD MOVES BUT A GOVERNED CONSUMER STILL NAMES THE OLD ID OR OLD PATH.`
+3. `A TRIPLE COLLISION REQUIRES INDEPENDENT REPLACEMENT VACANCY PROOFS FOR EACH DISPLACED LEGITIMATE RECORD.`
+4. `LEGITIMATE CONTENT MUST SURVIVE IDENTITY REPAIR; THE DEFECT IS THE REUSED ID, NOT THE ENGINEERING EVIDENCE.`
+5. `REPAIR PLANNING AND REPAIR EXECUTION ARE DISTINCT GOVERNED STATES.`
+
+## Preserved boundaries
+- no EJR mutation, migration, rename, delete, reassignment, normalization, suppression, replacement allocation, or canonical promotion;
+- REP-012, REP-016, REP-020 unchanged;
+- scanner/gate/workflow semantics unchanged;
+- Priority 2 historical/provenance identity scope remains `OPEN`;
+- active indexed canonical uniqueness remains previously `CLOSED/PASS`;
+- Phase 1 remains `OPEN`;
+- Release Priority 20 remains `CLOSED_FOR_PHASE_1`;
+- Global Connected Baseline remains `OPEN`;
+- Provider Authentication remains `HARD HOLD` where no trust anchor exists;
+- Memory full-folder integrity remains `NOT CERTIFIED`;
+- Global `BOOTED / INTEGRITY PASS` remains `NOT CLAIMED`.
+
+## Resume target
+Rediscover live `main`, re-enter from Room 204, then choose exactly one of the six displaced records for a separate execution lease. The first execution target should minimize rewrite risk while having sufficiently explicit consumers to verify repair.
+
+Before any identity mutation:
+1. discover a replacement candidate;
+2. prove it `VACANT` through the Lease-193 complete-history gate;
+3. enumerate exact ID/path consumers and registry/index/manifest obligations;
+4. prewrite lease + Mutation Matrix;
+5. mutate one displaced record and its required consumers as one governed functional unit;
+6. read back and run exact-head verification;
+7. close resume-safe.
