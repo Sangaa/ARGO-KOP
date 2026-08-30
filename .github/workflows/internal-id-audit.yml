@@ -6,6 +6,8 @@ on:
     paths:
       - 'Quality/Integration/internal_document_id_audit.py'
       - 'Quality/Integration/test_internal_document_id_audit.py'
+      - 'Quality/Integration/ejr_allocation_vacancy_gate.py'
+      - 'Quality/Integration/test_ejr_allocation_vacancy_gate.py'
       - 'Repository/REP-001_MASTER_INDEX.md'
       - '.github/workflows/internal-id-audit.yml'
 
@@ -17,6 +19,11 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+
+      - name: Verify complete history for vacancy proof
+        run: test "$(git rev-parse --is-shallow-repository)" = "false"
 
       - name: Set up Python
         uses: actions/setup-python@v6
@@ -26,10 +33,13 @@ jobs:
       - name: Install test runner
         run: python -m pip install --upgrade pytest
 
-      - name: Run internal Document-ID audit
+      - name: Run internal Document-ID and EJR vacancy-gate tests
         env:
           PYTHONPATH: ${{ github.workspace }}/Quality/Integration
-        run: python -m pytest -q Quality/Integration/test_internal_document_id_audit.py
+        run: >-
+          python -m pytest -q
+          Quality/Integration/test_internal_document_id_audit.py
+          Quality/Integration/test_ejr_allocation_vacancy_gate.py
 
       - name: Emit deterministic audit report
         if: always()
