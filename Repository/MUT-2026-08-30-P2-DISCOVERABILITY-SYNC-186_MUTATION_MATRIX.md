@@ -3,7 +3,7 @@
 Date: 2026-08-30
 Lease: `R71-20260830-P2-DISCOVERABILITY-SYNC-186`
 Protocol: GOV-014 controlled mutation
-State: `CLOSED VIA 187 RECOVERY / ORIGINAL TRANSACTION REJECTED / FUNCTIONAL SCOPE VERIFIED`
+State: `CLOSED VIA 187 RECOVERY / ORIGINAL TRANSACTION REJECTED / EXECUTION-VERIFIED`
 
 ## Authorized changes
 
@@ -16,7 +16,6 @@ State: `CLOSED VIA 187 RECOVERY / ORIGINAL TRANSACTION REJECTED / FUNCTIONAL SCO
 ## Explicit exclusions
 
 No change was authorized or performed for:
-
 - Knowledge/KNW-001..010
 - Architecture/README.md
 - Templates/README.md
@@ -28,11 +27,9 @@ No change was authorized or performed for:
 
 ## Original execution — rejected
 
-The first protected semantic commit was:
+First semantic commit: `3cc385c9ae0a509d2c9d18a0070978f5462a9ea9`.
 
-`3cc385c9ae0a509d2c9d18a0070978f5462a9ea9`
-
-Its changed-set was content-correct and additions-only for REP-001/REP-002, but Full-Stack run `33303097603`, job `99234728687`, correctly rejected it because the Mutation Matrix was not changed in the exact same protected commit:
+Its REP-001/REP-002 content was within the authorized semantic scope, but Full-Stack run `33303097603`, job `99234728687`, correctly rejected the protected transaction because the Mutation Matrix was absent from that exact change set:
 
 ```text
 changed_files=2
@@ -41,69 +38,67 @@ mutation_matrices=0
 MUTATION_MATRIX_PREFLIGHT=FAIL
 ```
 
-That commit is preserved as failed execution evidence. It is not retroactively called verified.
+The failed commit remains historical failure evidence and is not retroactively declared valid.
 
-## Governed recovery and verified reapplication
+## Governed recovery
 
-Lease 187 / 187A repaired the transaction using exact trusted Git blobs rather than reconstructing large protected documents.
+Lease 187 / 187A used trusted Git object identity rather than reconstructing large protected documents.
 
 ### Stage A — controlled rollback
 
-Commit:
-`e2c18a18619853fddc3651b0f27afed33ecf64c0`
+Commit: `e2c18a18619853fddc3651b0f27afed33ecf64c0`.
 
 Exact changed set:
-
-1. REP-001 restored to trusted pre-186 blob `75d01dc51b998b0b839db217afb73e17027d79c4`;
-2. REP-002 restored to trusted pre-186 blob `93c758eeb7241231f42063313719ce237d1d4181`;
+1. REP-001 → trusted pre-186 blob `75d01dc51b998b0b839db217afb73e17027d79c4`;
+2. REP-002 → trusted pre-186 blob `93c758eeb7241231f42063313719ce237d1d4181`;
 3. 187 recovery Mutation Matrix created in the same change set.
 
 Unexpected paths: `0`.
 
-Stage-A verification included:
-
-- GOV-014 Controlled Document Mutation `33303362401` — SUCCESS;
-- Real Mutation Matrix Regression `33303362388` — SUCCESS;
-- Internal Document-ID Audit `33303362399` — SUCCESS;
-- Full-Stack Repository Audit `33303362384` — SUCCESS;
-- M2 `33303362393` — SUCCESS.
+Stage-A verification:
+- GOV-014 Controlled Document Mutation `33303362401` — SUCCESS
+- Real Mutation Matrix Regression `33303362388` — SUCCESS
+- Internal Document-ID Audit `33303362399` — SUCCESS
+- Full-Stack Repository Audit `33303362384` — SUCCESS
+- ARGO Runtime Prototype and Integration Tests `33303362395` — SUCCESS
+- M2 `33303362393` — SUCCESS
 
 ### Stage B — controlled reapply
 
-Commit:
-`91c259c04a22f72109fdd9dab75c30be6eebc22b`
+Commit: `91c259c04a22f72109fdd9dab75c30be6eebc22b`.
 
 Exact changed set:
-
 1. REP-001 → desired additions-only blob `17b432f27426d3692f9067ebf668d41f18e575b0`;
 2. REP-002 → desired additions-only blob `b02d2c1622845e5b9dd46907934ecaad547f050d`;
 3. 187 recovery Mutation Matrix updated in the same change set.
 
 Unexpected paths: `0`.
 
-Exact-head required gates:
-
-- Internal Document-ID Audit `33303432377` — SUCCESS;
-- Full-Stack Repository Audit `33303432370` — SUCCESS;
-- ARGO Runtime Prototype and Integration Tests `33303432385` — SUCCESS;
-- M2 `33303432375` — SUCCESS;
-- Real Mutation Matrix Regression `33303432382` — SUCCESS.
+Exact-head verification on `91c259c04a22f72109fdd9dab75c30be6eebc22b`:
+- Internal Document-ID Audit `33303432377` — SUCCESS
+- Full-Stack Repository Audit `33303432465` — SUCCESS
+- ARGO Runtime Prototype and Integration Tests `33303432385` — SUCCESS
+- M2 Multi-Channel Proposal Training `33303432378` — SUCCESS
+- GOV-014 Controlled Document Mutation `33303432485` — SUCCESS
+- Real Mutation Matrix Regression `33303432387` — SUCCESS
 
 ## Functional audit impact
 
-The Stage-B Internal Document-ID report artifact is `9729674196` and is bound to exact head `91c259c04a22f72109fdd9dab75c30be6eebc22b`.
+Stage-B Internal Document-ID artifact:
+- artifact ID `9729674196`
+- digest `sha256:8ec9c359cd14c2839c85fcccfdca6df943e21fd4e87376ccf655daf9100a8b40`
+- exact head `91c259c04a22f72109fdd9dab75c30be6eebc22b`
 
-Compared with the pre-186 report:
-
+Verified result:
 - `canonical_unindexed_records: 15 → 12`;
-- the three intended paths no longer appear in `canonical_unindexed_paths`;
-- `ambiguous_duplicate_ids: 145 → 144` due the separate EJR-013 evidence reconciliation from Lease 184;
+- remaining 12 are exactly `Architecture/README.md`, `Knowledge/KNW-001..010`, and `Templates/README.md`;
+- `ambiguous_duplicate_ids = 144`;
 - `active_duplicate_pass = true`;
 - `filename_alignment_pass = true`;
 - metadata conflicts = `[]`;
 - Governance heading identity collisions = `{}`;
 - unreadable files = `[]`;
-- repository-wide `identity_scope_reconciled = false` remains, because the remaining classified/non-authoritative traceability populations are not erased by this local discoverability repair.
+- `identity_scope_reconciled = false` remains correctly open.
 
 ## Closure
 
