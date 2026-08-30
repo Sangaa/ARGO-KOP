@@ -1,10 +1,14 @@
-"""Current-tree internal Document ID and identity-family audit.
+"""Current-tree internal Document ID and document-level identity audit.
 
 GOV-004/GOV-006 define identity rules, while REP-001 defines the currently
-verified active inventory scope. This audit separates active/indexed identity,
-unindexed/candidate identity, historical identity and document-level heading
-collisions without mistaking arbitrary section headings or source-code comments
-for independent Governance documents.
+verified active inventory scope. The audit deliberately discovers identity from
+the document itself instead of a fixed namespace allowlist: an explicit
+``Document ID`` field is primary and a document-level first-H1 identity is the
+fallback for older artifacts that do not carry metadata fields.
+
+This separates active/indexed identity, unindexed/candidate identity, historical
+identity and document-level heading collisions without mistaking arbitrary later
+section headings or source-code comments for independent documents.
 """
 
 from __future__ import annotations
@@ -14,17 +18,18 @@ import subprocess
 from dataclasses import dataclass
 from pathlib import Path
 
-NAMESPACE_PREFIXES = {
-    "AI", "ARC", "AS", "CORE", "EJR", "ENG", "GOV", "INT", "INTF", "KNW",
-    "LIF", "MEM", "MOD", "PLG", "REP", "RUN", "SPEC", "SRV",
-}
-NAMESPACE_PATTERN = "|".join(sorted(NAMESPACE_PREFIXES, key=len, reverse=True))
-BASE_ID_PATTERN = rf"(?:{NAMESPACE_PATTERN})-\d{{3}}"
-ID_PATTERN = rf"{BASE_ID_PATTERN}[A-Z]?"
-ID_RE = re.compile(rf"(?<![A-Z])({ID_PATTERN})(?![A-Z0-9-])", re.I)
-INLINE_RE = re.compile(rf"^\s*Document ID\s*[:：]\s*`?({ID_PATTERN})`?\s*$", re.I | re.M)
-BLOCK_RE = re.compile(rf"^\s*Document ID\s*$\n\s*`?({ID_PATTERN})`?\s*$", re.I | re.M)
-DOCUMENT_HEADING_ID_RE = re.compile(rf"^\s*#\s+({ID_PATTERN})(?=\s|—|–|-|$)", re.I)
+# The value of an explicit ``Document ID`` field is intentionally not restricted
+# to a hard-coded namespace list. The repository already contains legitimate
+# identity families such as COG, DEC, REL and BOOTSTRAP, and future governed
+# families must not become invisible merely because this audit was not edited.
+DOCUMENT_ID_INLINE_RE = re.compile(r"^\s*Document ID\s*[:：]\s*(.+?)\s*$", re.I | re.M)
+DOCUMENT_ID_BLOCK_RE = re.compile(r"^\s*Document ID\s*$\n\s*(.+?)\s*$", re.I | re.M)
+DOCUMENT_HEADING_ID_RE = re.compile(
+    r"^\s*#\s+([A-Z][A-Z0-9_-]{1,63})(?=\s|—|–|$)", re.I
+)
+NUMERIC_FILENAME_ID_RE = re.compile(
+    r"^([A-Z][A-Z0-9]{1,31}-\d{3}[A-Z]?)(?:_|\.|$)", re.I
+)
 CANONICAL_INLINE_RE = re.compile(r"^\s*Canonical\s*[:：]\s*(Yes|No|Pending)\s*$", re.I | re.M)
 CANONICAL_BLOCK_RE = re.compile(r"^\s*Canonical\s*$\n\s*(Yes|No|Pending)\s*$", re.I | re.M)
 STATUS_RE = re.compile(r"^\s*Status\s*[:：]?\s*(.+?)\s*$", re.I | re.M)
@@ -43,6 +48,7 @@ DEFERRED_DOMAIN_TOKENS = (
 class ArtifactRecord:
     path: str
     document_id: str
+    identity_source: str
     canonical: bool | None
     archived: bool
     indexed_active: bool
@@ -94,17 +100,25 @@ def _master_index_paths(root: Path) -> set[str]:
     return paths
 
 
+def _clean_document_id(raw: str) -> str | None:
+    value = raw.strip().strip("`").strip().strip("*").strip()
+    if not value:
+        return None
+    return value.upper()
+
+
 def _extract_document_id(text: str) -> str | None:
-    match = INLINE_RE.search(text) or BLOCK_RE.search(text)
-    return match.group(1).upper() if match else None
+    match = DOCUMENT_ID_INLINE_RE.search(text) or DOCUMENT_ID_BLOCK_RE.search(text)
+    return _clean_document_id(match.group(1)) if match else None
 
 
 def _extract_heading_id(text: str) -> str | None:
-    """Return only the document-level first H1 identity.
+    """Return only a document-level first-H1 identity token.
 
-    A later section like ``# GOV-011 Determination`` is not a second document,
-    and a Python comment is not a Markdown document heading. This function
-    intentionally examines only the first H1 encountered.
+    A later section such as ``# GOV-011 Determination`` is not a second document,
+    and a Python comment is not a Markdown document heading. Only the first H1 is
+    inspected; if that H1 is a normal title rather than an identity, there is no
+    heading fallback identity.
     """
     for line in text.splitlines():
         stripped = line.strip()
@@ -129,8 +143,7 @@ def _extract_status(text: str) -> str | None:
 
 
 def _filename_prefix(path: Path) -> str | None:
-    stem = path.stem.upper()
-    match = re.match(rf"^({ID_PATTERN})(?:_|\.|$)", stem, re.I)
+    match = NUMERIC_FILENAME_ID_RE.match(path.stem.upper())
     return match.group(1).upper() if match else None
 
 
@@ -161,6 +174,7 @@ def scan(root: Path) -> dict:
     active_index = _master_index_paths(root)
     folder_status_cache: dict[str, bool] = {}
     heading_identities: dict[str, list[str]] = {}
+    explicit_heading_identity_conflicts: list[str] = []
 
     for path in tracked:
         if path.suffix.lower() not in TEXT_SUFFIXES:
@@ -173,22 +187,28 @@ def scan(root: Path) -> dict:
             unreadable.append(relative)
             continue
 
-        # Heading identity is a Markdown/RST document concern. Source-code
-        # comments and structured-data text must not manufacture heading IDs.
         heading_id = None
         if path.suffix.lower() in {".md", ".markdown", ".rst", ".txt"}:
             heading_id = _extract_heading_id(text)
         if heading_id and not archived_path:
             heading_identities.setdefault(heading_id, []).append(relative)
 
-        document_id = _extract_document_id(text)
+        explicit_document_id = _extract_document_id(text)
+        if explicit_document_id and heading_id and explicit_document_id != heading_id:
+            explicit_heading_identity_conflicts.append(
+                f"{relative} => explicit {explicit_document_id} / first-H1 {heading_id}"
+            )
+
+        document_id = explicit_document_id or heading_id
         if not document_id:
             continue
+
         relative_path = Path(relative)
         records.append(
             ArtifactRecord(
                 path=relative,
                 document_id=document_id,
+                identity_source="DOCUMENT_ID_FIELD" if explicit_document_id else "FIRST_H1_FALLBACK",
                 canonical=_extract_canonical(text),
                 archived=archived_path,
                 indexed_active=relative in active_index,
@@ -265,10 +285,22 @@ def scan(root: Path) -> dict:
         if identity.startswith("GOV-") and len(governance_paths) > 1:
             governance_heading_identity_collisions[identity] = governance_paths
 
+    document_ids_by_path = {
+        record.path: record.document_id
+        for record in sorted(records, key=lambda item: item.path)
+    }
+    identity_sources_by_path = {
+        record.path: record.identity_source
+        for record in sorted(records, key=lambda item: item.path)
+    }
+
     return {
         "tracked_files_scanned": len(tracked),
         "master_index_paths": len(active_index),
         "document_id_records": len(records),
+        "document_ids_by_path": document_ids_by_path,
+        "identity_sources_by_path": identity_sources_by_path,
+        "explicit_heading_identity_conflicts": sorted(explicit_heading_identity_conflicts),
         "active_indexed_canonical_records": len(active),
         "canonical_unindexed_records": len(canonical_unindexed),
         "canonical_unindexed_paths": sorted(record.path for record in canonical_unindexed),
@@ -290,6 +322,7 @@ def scan(root: Path) -> dict:
             not canonical_unindexed
             and not ambiguous_duplicate_ids
             and not governance_heading_identity_collisions
+            and not explicit_heading_identity_conflicts
         ),
         "governance_identity_hold_required": bool(governance_heading_identity_collisions),
     }
