@@ -7,7 +7,7 @@ Status: INTEGRITY WARNING / CONNECTED-BASELINE AUDIT
 Category: Root Baseline
 Canonical: Yes
 Priority: Critical
-Last Audit Date: Aug 29, 2026
+Last Audit Date: Aug 30, 2026
 
 ---
 
@@ -24,10 +24,13 @@ Since the previous Aug 25 status snapshot, current `main` has advanced through s
 - IGT experiment/evidence infrastructure was built across blind participant export, response binding, model-run evidence packaging, correlation, trusted resolver execution boundaries, immutable GitHub evidence resolution, binding-aware local admission and untrusted external-evidence intake.
 - the untrusted external-evidence intake transaction completed its post-merge main CI gate.
 - Room 71 repository-first multi-instance control was established, including explicit HERMUZ/HORUS/MAAT mutation boundaries and serialized shared-file leases.
+- Governance identity migration and `REP-001` / `REP-002` Governance inventory synchronization were closed for the current migrated scope; repository-wide relationship integrity remains open.
+- Release exact enumeration, Foundation semantic-time classification, REL-003/REL-004 freshness disposition and current `Release/VERSION.md` authority/consumer evidence were closed as bounded subgates; the Release partition remains open.
+- Lease 176 completed a substantive critical-chain review and closed six contract-level semantic subgates without promoting runtime, provider-authentication or global-integrity claims.
 
 The current build can receive externally supplied evidence into deterministic quarantine without promoting delivery, model-execution authenticity, provider authenticity, independence, authority or cognitive-effect claims. The legal continuation remains downstream of quarantine: independent resolution / provider-backed authentication → correlation → binding → qualification → bounded authority decision.
 
-Current repository evidence also invalidates reuse of the Aug 8 Governance-folder `CLEAN` claim as present proof: later Governance/session-control artifacts now exist, and the `GOV-013A` prefix is used across multiple distinct current artifacts. Governance identity-family reconciliation is therefore open and must be resolved before `REP-001` can claim current Governance uniqueness/cleanliness.
+The historical Aug 8 Governance-folder `CLEAN` claim remains freshness-bounded and cannot be reused as current proof. Later identity collisions were real, but current repository evidence now records their controlled migration and Governance inventory synchronization as **closed for the current migrated scope**. This bounded closure does not establish repository-wide identity cleanliness or complete Governance consumer/reference integrity.
 
 The repository MUST NOT be declared globally clean until critical identities, references, dependencies, authority paths, indexes, status claims and cross-layer relationships have been validated against current repository evidence.
 
@@ -38,7 +41,8 @@ The repository MUST NOT be declared globally clean until critical identities, re
 * **Control Plane:** ROOM 71 repository-first multi-instance coordination established / bounded
 * **Experience Spine:** advisory projection implemented / cognitive benefit unproven
 * **IGT External Evidence:** untrusted intake verified / full authenticity-to-authority lifecycle open
-* **Governance Inventory:** RE-AUDIT OPEN / identity-family reconciliation required
+* **Governance Inventory:** IDENTITY + REP-001/REP-002 SYNC CLOSED FOR CURRENT MIGRATED SCOPE / REPOSITORY-WIDE RELATIONSHIPS OPEN
+* **Critical Semantic Chain:** SIX CONTRACT-LEVEL SUBGATES CLOSED / EXECUTION, AUTHENTICITY AND GLOBAL CERTIFICATION REMAIN SEPARATE
 * **Primary Repository Source of Truth:** `Sangaa/ARGO-KOP` on `main`
 * **Historical / External Sources:** May provide evidence or proposed content, but do not override verified repository reality without an explicit governed decision.
 
@@ -145,26 +149,26 @@ Only after this gate passes may the project move from **Connected Baseline Stabi
 
 | Finding | Status |
 | :--- | :--- |
-| Root Bootstrap / Status alignment | CURRENT STATUS RECONCILED 2026-08-29 / GLOBAL HOLDS PRESERVED |
+| Root Bootstrap / Status alignment | CURRENT STATUS RECONCILED 2026-08-30 / GLOBAL HOLDS PRESERVED |
 | Root README / START_HERE alignment | UPDATED / VERIFIED FOR CURRENT SCOPE |
-| Repository index/map synchronization | OPEN / GOVERNANCE INVENTORY DRIFT CONFIRMED |
-| Governance folder status | REOPENED / IDENTITY-FAMILY RE-AUDIT ACTIVE |
-| Governance `GOV-013A` family | OPEN / MULTIPLE DISTINCT CURRENT ARTIFACTS REQUIRE IDENTITY RECONCILIATION |
+| Repository index/map synchronization | GOVERNANCE MIGRATED SCOPE SYNCHRONIZED / REPOSITORY-WIDE RELATIONSHIP + OTHER DOMAIN SYNC OPEN |
+| Governance folder status | IDENTITY + REP-001/REP-002 SYNC CLOSED FOR CURRENT MIGRATED SCOPE / RELATIONSHIP INTEGRITY OPEN |
+| Governance `GOV-013A` family | CURRENT MIGRATED IDENTITY SCOPE RECONCILED / CANONICAL ADDENDUM OWNER RETAINED / GLOBAL CONSUMER-RELATIONSHIP COVERAGE OPEN |
 | Repository-wide duplicate ID audit | OPEN |
 | Repository-wide version authority audit | OPEN |
 | Repository-wide folder status audit | OPEN |
 | Repository-wide reference resolution | OPEN |
 | Bidirectional relationship validation | ACTIVE / OPEN |
 | Conflict propagation analysis | ACTIVE / OPEN |
-| Architecture cross-layer validation | OPEN / RE-AUDIT AFTER IDENTITY CORRECTION |
+| Architecture cross-layer validation | OPEN / EXACT INVENTORY BOUNDEDLY VERIFIED / SEMANTIC + CROSS-LAYER CERTIFICATION OPEN |
 | Architecture map identity collision | RESOLVED / POST-CHANGE VALIDATION REQUIRED |
 | Lifecycle identity collision | RESOLVED BY MIGRATION TO `LIF-001`; CONSUMER VALIDATION OPEN |
-| Knowledge cross-layer validation | OPEN / INTEGRITY HOLD |
-| Memory cross-layer validation | OPEN / INTEGRITY HOLD |
-| Runtime/Engine/AI/Services validation | OPEN / PARTIALLY REVALIDATED |
+| Knowledge cross-layer validation | BOUNDED SOURCE/PROJECT-MEMORY/LEARNING SEMANTICS CLOSED / DOMAIN INTEGRITY HOLD REMAINS |
+| Memory cross-layer validation | PROJECT-MEMORY PROMOTION SEMANTICS BOUNDEDLY CLOSED / CONSOLIDATED DOMAIN HOLD REMAINS |
+| Runtime/Engine/AI/Services validation | CONTRACT SEMANTICS PARTIALLY REVALIDATED / ISOLATED EXECUTION EVIDENCE EXISTS / GLOBAL EXECUTION OPEN |
 | Runtime baseline alignment | REVALIDATED FOR RUN-005 / RUN-006 / RUN-010 |
 | Integration connector boundary | REVALIDATED / ARCHITECTURE PASS FOR CURRENT SCOPE |
-| Environment sensing boundary | PROPOSED / INTEGRITY HOLD / CROSS-LAYER VALIDATION OPEN |
+| Environment sensing boundary | CONTRACT-LEVEL SEMANTIC ALIGNMENT CLOSED / IMPLEMENTATION, PERMISSION, PROVIDER + RUNTIME EVIDENCE OPEN |
 | Services inventory/reference | REVALIDATED / GLOBAL SERVICE VALIDATION OPEN |
 | Session learning handoff | REVALIDATED / PROMOTION REMAINS GOVERNED |
 | Verified seam evidence loader | HARDENED / REPOSITORY-RELATIVE FILE BOUNDARY TESTED |
@@ -178,17 +182,17 @@ Only after this gate passes may the project move from **Connected Baseline Stabi
 | IGT response binding / correlation | BUILT / LOCAL BINDING DOES NOT PROVE PROVIDER EXECUTION |
 | IGT trusted resolver / immutable GitHub resolver | BUILT / RESOLUTION DOES NOT EQUAL PROVIDER AUTHENTICATION |
 | IGT untrusted external-evidence intake | CLOSED FOR IMPLEMENTED TRANSACTION / `UNTRUSTED_QUARANTINED` BOUNDARY VERIFIED |
-| External evidence authenticity-to-authority lifecycle | OPEN / NEXT HIGH-VALUE IMPLEMENTATION GATE |
+| External evidence authenticity-to-authority lifecycle | OPEN / REAL TRUST-AUTHENTICATION STAGE REQUIRED |
 | Room 71 control plane | ESTABLISHED / REPOSITORY-FIRST / ROLE-BOUNDED / LEASE-SERIALIZED |
 | HERMUZ / HORUS / MAAT parallel boundaries | ESTABLISHED FOR CURRENT CONTROL-PLANE SCOPE |
 | Full-stack runtime test coverage detection | HARDENED / TESTS ADDED |
 | Integration CI execution path | VERIFIED ON RECENT MAINLINE TRANSACTIONS / EACH NEW HEAD STILL REQUIRES ITS OWN OBSERVED RESULT |
 | Actual candidate seam population | OPEN / NO SEAM PROMOTED WITHOUT COMPLETE EVIDENCE |
 | Full Repository Connectivity / End-to-End Audit | OPEN / P4 BOUNDED CLOSURE DOES NOT CLOSE GLOBAL AUDIT |
-| GAP MAP | PENDING CONNECTIVITY AUDIT OUTPUT |
+| GAP MAP | BOUNDED CRITICAL SEMANTIC GAP MAP PERSISTED / FULL CONNECTIVITY GAP MAP OPEN |
 | Models/Lifecycle/Blueprints validation | OPEN / INTEGRITY HOLD |
-| Projects/Release validation | OPEN |
-| Changelog / Version authority alignment | UPDATED / REVALIDATION REQUIRED |
+| Projects/Release validation | PROJECTS OPEN / RELEASE BOUNDED SUBGATES CLOSED, PARTITION OPEN |
+| Changelog / Version authority alignment | UPDATED / `Release/VERSION.md` AUTHORITY CURRENTLY VERIFIED / BROADER VERSION AUDIT OPEN |
 | Evidence coverage for complete repository | NOT YET CERTIFIED |
 | Tool-limited evidence coverage | ACTIVE CONSTRAINT WHEN RESULTS ARE TRUNCATED OR INCOMPLETE |
 | Post-mutation validation | MANDATORY BEFORE COMPLETION CLAIM |
@@ -197,7 +201,7 @@ Only after this gate passes may the project move from **Connected Baseline Stabi
 
 # 7. Current Engineering Queue
 
-**Current Target:** reconcile current Governance identity/inventory drift, then continue the external-evidence lifecycle from deterministic quarantine toward independently resolved or provider-backed authenticated evidence without collapsing trust states; continue the repository-wide Connected Baseline in parallel only through non-conflicting bounded transactions.
+**Current Target:** expand repository-wide identity/reference/consumer proof from the already-reconciled bounded control and semantic scopes, while preserving the provider-authentication HARD HOLD until a real independently verifiable trust anchor exists. Continue Release and cross-layer domain closure only through non-conflicting bounded transactions.
 
 Required sequence:
 
@@ -215,21 +219,18 @@ The scanner can establish only a `PARTIAL` candidate from same-file textual co-o
 
 ### Immediate next targets
 
-1. Classify the current `GOV-013A` family and other reused Governance prefixes against internal Document IDs/status/authority before changing canonical ownership.
-2. Reconcile `REP-001` and `REP-002` only after the Governance identity classification is sufficient to avoid false promotion.
-3. Implement the next external-evidence lifecycle boundary after `UNTRUSTED_QUARANTINED`: independent resolution and/or provider-backed authentication with explicit failure/unavailable/mismatch states.
-4. Preserve exact separation among resolution, authentication, correlation, binding, qualification and authority.
-5. Add adversarial tests for illegal trust jumps, replay, stale binding, wrong-request attestation, resolver spoofing, digest mismatch and revoked/superseded evidence.
-6. Expand from the canonical spine into repository-wide connectivity / end-to-end proof.
-7. Produce a GAP MAP based only on verified evidence.
-8. Fix the highest-value missing or broken seams.
-9. Run regression tests and re-run the audit before closing the checkpoint.
-10. Continue the bounded `Services → Runtime Consumers → Repository / Index Services` relationship enumeration where it intersects the canonical spine.
-11. Reconcile `SRV-001` through `SRV-009` contracts against the current Validation Engine and their declared consumers/dependencies.
-12. Reconcile remaining runtime/engine/AI declarations against the authoritative baseline.
-13. Revisit `INTF-006` environment-sensing boundary and its relationship to governance, memory and runtime.
-14. Synchronize root/index status claims after subsequent bounded mutations.
-15. Continue into Projects/Release and then Global Cross-Layer Validation only after affected relationship gates are satisfied.
+1. Continue the exhaustive repository-wide duplicate-ID audit beyond the already-repaired Governance migrated scope.
+2. Expand bidirectional reference/consumer validation from the verified critical spine into the highest-value unresolved cross-layer relationships.
+3. Continue `Release/REL-001..005` dependency, consumer and reference validation and perform an explicit Release partition closure review only when sufficient.
+4. Continue the bounded `Services → Runtime Consumers → Repository / Index Services` relationship enumeration where it intersects the canonical spine.
+5. Reconcile `SRV-001` through `SRV-009` contracts against the current Validation Engine and actual consumers/dependencies.
+6. Reconcile remaining Runtime / Engine / AI declarations against current implementations and the authoritative baseline.
+7. Continue Models → Knowledge → Memory cross-layer validation from the six Lease-176 semantic closures toward actual consumer/execution evidence without re-reviewing already-closed semantics absent contradictory evidence.
+8. Preserve Provider Authentication as `HARD HOLD` until a real independently verifiable trust anchor or provider-backed attestation mechanism exists; do not manufacture authenticity from local resolution/binding.
+9. Preserve exact separation among resolution, authentication, correlation, binding, qualification and authority in all future external-evidence work.
+10. Expand from the canonical spine into repository-wide connectivity / end-to-end proof and produce the full connectivity GAP MAP from verified evidence only.
+11. Run the smallest sufficient regression/integration set after each material mutation, then re-run the appropriate broader audit before promotion.
+12. Synchronize root/index/queue status only from newer verified evidence; stale summary text must not reopen already-closed reality.
 
 No feature expansion is justified merely because the seam loader, scanner, Experience Spine or IGT evidence tooling is implemented.
 
@@ -330,6 +331,10 @@ A development baseline is not an official release.
 44. A control-state SHA is a historical checkpoint, not live repository truth; re-entry must discover current HEAD before assignment.
 45. Coordination authority and technical truth authority are separate; MAAT may coordinate conflicts but cannot decide semantic truth or promote evidence.
 46. Local resolution of an external artifact is not provider authentication, and local binding is not proof of external model execution.
+47. Canonical identity and operational authority are separate: a canonical path can remain Proposed, Integrity Hold or Revalidation Required.
+48. A cross-layer HOLD can contain independently closable semantic, consumer, implementation, runtime, authentication and global-certification subgates; closing one must not erase the others.
+49. Status drift must not reopen closed reality: synchronize the stale summary from fresher evidence instead of rerunning completed work without contradictory evidence.
+50. Substantive text review can close contract-level semantic compatibility, but text alone cannot earn runtime execution, provider authenticity or observed cognitive benefit.
 
 ---
 
@@ -354,6 +359,7 @@ A development baseline is not an official release.
 17. Room 71 is an operational coordination surface, not a governance authority above canonical rules.
 18. HERMUZ, HORUS and MAAT must obey declared mutation boundaries and serialized shared-file leases during parallel operation.
 19. Quarantined evidence carries no automatic authenticity, authority, independence or cognitive-effect promotion.
+20. When a root or queue summary lags behind a newer bounded domain closure, the summary must be synchronized without reopening the closed domain unless new contradictory evidence exists.
 
 ---
 

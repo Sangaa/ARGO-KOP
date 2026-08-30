@@ -5,7 +5,7 @@ Document ID: REP-016
 Version: 1.3.0  
 Status: Active / Phase 1 Open / Integrity Hold  
 Development Baseline: 3.2.1  
-Last Audit: 2026-08-29
+Last Audit: 2026-08-30
 
 ## Purpose
 
@@ -40,7 +40,7 @@ No promotion to a later ring is allowed until predecessor exit evidence, affecte
 | 17 | Memory | INVENTORYING | Engineering Journal + content tree | Memory authority + REP-011 |
 | 18 | Specifications | INVENTORYING | SPEC-001 + exact enumeration | Specification authority + REP-011/014 |
 | 19 | Templates | INVENTORYING | Templates/README.md + exact physical enumeration + content review | Template authority + REP-011 |
-| 20 | Release | NOT_STARTED | Exact physical enumeration | Release authority + REP-011/014 |
+| 20 | Release | BOUNDED_IN_PROGRESS / EXACT ENUMERATION + FOUNDATION SCOPE + 174–175 SUBGATES CLOSED / PARTITION OPEN | Release evidence + REL-001..005 + VERSION | Release authority + REP-011/014 |
 | 21 | Projects | NOT_STARTED | Exact physical enumeration | Project authority + REP-011/014 |
 | 22 | Docs | NOT_STARTED | Exact physical enumeration | Documentation authority + REP-011 |
 | 23 | Examples | NOT_STARTED | Exact physical enumeration | Example scope decision + REP-011 |
@@ -272,6 +272,31 @@ Current state:
 Current evidence anchors include Room71 leases 015–017, Full-Stack exact-head evidence with zero current audit candidates, active Mutation Matrix gates, and P6 exact changed-set correlation at `667ec201940a09107706dafa469dbe34c2510d71` showing `mapped=3`, `not_applicable=1`, `unmapped=0`, `policy_unresolved=0`, `NO_AUTO_PROMOTION`.
 
 This refresh changes queue freshness only. It does not rewrite historical conclusions, promote relationships, close provider authentication, promote KNW-001..010, or claim cognitive benefit.
+
+## Current Checkpoint — 2026-08-30 Room71 Leases 174–176 Reconciliation
+
+This section extends the 2026-08-29 current checkpoint for newer bounded work only. It does not supersede or rewrite the historical P351/P350/P348 evidence below.
+
+Current additional evidence:
+
+- Priority 20 Release is no longer `NOT_STARTED`: exact physical enumeration and Foundation semantic-time classification were already closed; Lease 174 closed REL-003/REL-004 freshness disposition with no Release mutation; Lease 175 verified the active current authority/consumer role of `Release/VERSION.md`. The Release partition remains **OPEN** for remaining REL-001..005 dependency/consumer/reference coverage and explicit closure review.
+- Lease 176 directly reviewed the critical semantic chain and closed six contract-level subgates: constitutional compatibility; Knowledge ↔ Source Model; Knowledge ↔ Project Memory; Knowledge/Memory ↔ Learning Engine; RUN-010 → ENG-006 → SRV-009 contract semantics; and INTF-006 environment-sensing semantics.
+- The Lease-176 semantic closures do **not** establish universal runtime routing, provider authentication, global domain certification, Knowledge promotion, IGT cognitive benefit or Global Connected Baseline closure.
+- `PROJECT_STATUS.md` and this queue were identified as freshness surfaces that must reflect newer bounded evidence without reopening completed work or upgrading unresolved global claims.
+
+Current continuation after these bounded closures:
+
+1. repository-wide duplicate-ID scope remains OPEN beyond the migrated Governance scope;
+2. repository-wide reference/consumer/bidirectional graph validation remains OPEN;
+3. provider authentication remains HARD HOLD pending a real independently verifiable trust anchor;
+4. ordinary universal RUN-010 connected-spine routing remains OPEN beyond isolated governed evidence;
+5. Core/Models/Knowledge/Memory/Interfaces global certifications remain HOLD where explicitly recorded;
+6. Release remains BOUNDED_IN_PROGRESS / PARTITION OPEN;
+7. Global Connected Baseline remains OPEN and Global `BOOTED / INTEGRITY PASS` is NOT CLAIMED.
+
+Learning carried forward:
+
+`STATUS DRIFT MUST NOT REOPEN CLOSED REALITY` and `TEXT CAN CLOSE CONTRACT SEMANTICS; TEXT CANNOT EARN EXECUTION OR AUTHENTICITY`.
 
 ## Historical P351 Checkpoint — 2026-08-17
 
