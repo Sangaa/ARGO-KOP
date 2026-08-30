@@ -3,13 +3,14 @@
 Date: 2026-08-30
 Lease: `R71-20260830-RELEASE-FRESHNESS-174`
 Execution role: HERMUZ
-Baseline: `main@98c23b2489fab5684a3cbdd791402dbcbe2d5423`
+Re-entry baseline: `main@98c23b2489fab5684a3cbdd791402dbcbe2d5423`
+Prewrite checkpoint: `main@86c6969d863e24b45db9f0c7a20623a7cbe1b332`
 Protocol: `PROJECT_BOOTSTRAP + CORE-003 + GOV-013 + GOV-013A + GOV-014 + GOV-021 + GOV-027`
-Status: `PREWRITE / LEASE ACTIVE / MUTATION NOT YET AUTHORIZED`
+Status: `CLOSED / EVIDENCE-VERIFIED / BOUNDED / NO RELEASE MUTATION`
 
 ## Re-entry proof
 
-Live `main` was rediscovered at `98c23b2489fab5684a3cbdd791402dbcbe2d5423`; the latest commit is the Room71 reconstruction supplement through Lease/partition 173. No repository movement after that supplement was observed in current main history.
+Live `main` was independently rediscovered at `98c23b2489fab5684a3cbdd791402dbcbe2d5423` before this lease. That commit is the Room71 reconstruction supplement through Lease/partition 173, and current history showed no repository movement after it before this session began.
 
 Current control evidence was re-read from `REP-001`, `REP-002`, `REP-013`, `REP-012`, `REP-011`, `REP-014`, `REP-015`, `REP-016`, Room71 current state, and the 170–173 reconstruction supplement.
 
@@ -19,67 +20,83 @@ Preserved holds include Core 136, provider authentication, external evidence at 
 
 `REP-016` keeps Release as an open partition. `Repository/CONNECTED_BASELINE_RELEASE_PARTITION_ENUMERATION_2026-08-29.md` already closes exact physical enumeration and Foundation-scope classification, but explicitly leaves current-content usability/freshness review for `Release/INSTALLATION.md` and `Release/QUICK_START.md` open.
 
-Direct current reads establish a bounded freshness gap:
+Direct current reads established:
 
-- `Release/INSTALLATION.md` is `REL-003 / 1.0.0 / Approved` and says installation is repository/document preparation rather than executable software deployment. It also instructs initial verification of root `VERSION.md` and `CHANGELOG.md`, while current repository authority locates these as `Release/VERSION.md` and `Logs/CHANGELOG.md`.
-- `Release/QUICK_START.md` is `REL-004 / 1.0.0 / Approved` and presents a generic repository-reading workflow. It does not direct a current engineering/AI session through mandatory `PROJECT_BOOTSTRAP.md` before work, despite current Bootstrap/README making that gate mandatory.
-- `Release/VERSION.md` explicitly separates Official Release `1.0.0` from Development Baseline `3.2.1`; therefore Foundation-release historical truth must not be overwritten merely to describe current development main.
+- `Release/INSTALLATION.md` is `REL-003 / 1.0.0 / Approved` and explicitly describes repository/document preparation rather than executable deployment. Its initial-verification text uses root-style `VERSION.md` and `CHANGELOG.md` labels, while current repository paths are `Release/VERSION.md` and `Logs/CHANGELOG.md`.
+- `Release/QUICK_START.md` is `REL-004 / 1.0.0 / Approved` and provides a Foundation-era first-user navigation flow. It does not include the later mandatory engineering/AI bootstrap gate.
+- current `START_HERE.md`, `README.md` and `PROJECT_BOOTSTRAP.md` provide the current development/session onboarding path and explicitly require repository-first bootstrap before engineering mutation.
+- `Release/VERSION.md` explicitly separates Official Release `1.0.0` from Development Baseline `3.2.1`.
+- `Logs/CHANGELOG.md` likewise separates the latest official release from the current development baseline.
 
-This is a usability/freshness review gap, not evidence that REL-003/004 should be silently rewritten as development-baseline documents.
+## Prior-learning / search reconciliation
 
-## Work Lease
+Three materially different checks were used around the observed reference/freshness gap:
+
+1. direct current-path reads of REL-003/REL-004 and current onboarding authorities;
+2. repository search for Release freshness / REL-003 / REL-004 evidence;
+3. direct-path verification of the current VERSION and CHANGELOG locations after search did not establish alternate active paths.
+
+The negative search for a current `GOV-003_VERSIONING_POLICY` reference used by the old compatibility material was not converted into a destructive or architectural decision; the Release partition remains bounded by the stronger current `Release/VERSION.md` authority.
+
+## Lease and collision gate
 
 Semantic scope: determine the correct current disposition of REL-003/REL-004 without conflating Foundation Release 1.0.0 with development baseline 3.2.1.
 
-Allowed write paths for this lease:
-- `Repository/MUT-2026-08-30-RELEASE-FRESHNESS-174.md`
-- a new Release evidence/disposition record under `Repository/` if justified by the review
-- `Release/INSTALLATION.md` and/or `Release/QUICK_START.md` only if current authority proves an in-place correction is semantically legal and does not rewrite historical release truth
+Allowed mutation scope was limited to this transaction record, a new bounded evidence record if needed, and REL-003/REL-004 only if current authority proved in-place correction semantically legal. Core, Runtime, Engine, Services, Interfaces, Knowledge, canonical Governance, REP-001, REP-002, REP-014, Room71 current JSON and branch refs were forbidden.
 
-Forbidden paths:
-- `Core/**`
-- `Runtime/**`
-- `Engine/**`
-- `Services/**`
-- `Interfaces/**`
-- `Knowledge/**`
-- canonical Governance
-- `Repository/REP-001_MASTER_INDEX.md`
-- `Repository/REP-002_REPOSITORY_MAP.md`
-- `Repository/REP-014_REPOSITORY_RELATIONSHIP_REGISTRY.md`
-- `Repository/ROOM071_CURRENT_STATE.json`
-- branch deletion or branch ref mutation
+Collision result:
+- C1 file: PASS — unique transaction path; no Release target write.
+- C2 semantic: PASS — Foundation-release semantics kept separate from current development onboarding.
+- C3 baseline: PASS — official release 1.0.0 and development baseline 3.2.1 remain distinct.
+- C4 authority: PASS — no release promotion/new-release authority asserted.
+- C5 evidence: PASS — historical release statements retained as snapshot-scoped evidence.
+- C6 handoff: PASS — no active Room71 lease was recorded at re-entry; latest supplement closed through 173.
 
-Required checks before any protected mutation:
-- re-read live HEAD and every intended target;
-- preserve Foundation Release 1.0.0 scope;
-- verify current paths/consumers for VERSION/CHANGELOG/Bootstrap references;
-- same-change-set Mutation Matrix if a protected Release file is mutated;
-- read-back;
-- smallest sufficient relevant checks, then Full-Stack / Runtime-Integration / M2 when the protected mutation gate requires them.
+## Disposition
 
-Handoff destination: resume-safe Release partition evidence plus next legal action; no global promotion.
+The strongest supported result is:
 
-## Collision gate C1–C6
+`REL003_REL004_CURRENT_DEVELOPMENT_ONBOARDING = SUPERSEDED_FOR_CURRENT_SESSION_USE_BY_START_HERE_README_PROJECT_BOOTSTRAP`
 
-- C1 file collision: PASS for this prewrite; new unique transaction path, no target Release mutation yet.
-- C2 semantic collision: PASS WITH BOUNDARY; Foundation release semantics and current development onboarding semantics are explicitly separated.
-- C3 baseline collision: PASS; authoritative development baseline remains 3.2.1 and official release remains 1.0.0.
-- C4 authority collision: PASS FOR REVIEW ONLY; this lease grants no release promotion or new official release authority.
-- C5 evidence collision: PASS; historical Release claims remain evidence for 1.0.0 and are not converted into present development claims.
-- C6 handoff collision: PASS; no active Room71 lease is recorded on current control state, and the latest supplement closes through 173.
+while simultaneously:
 
-## Current decision
+`REL003_REL004_FOUNDATION_1_0_0_SCOPE = RETAINED / HISTORICAL_OFFICIAL_RELEASE_SUPPORTING_DOCUMENTATION`.
 
-`RELEASE_FRESHNESS_174 = LEASED / REVIEW IN PROGRESS`.
+Therefore no in-place Release mutation is justified in this lease. Rewriting REL-003/REL-004 to describe current development main would risk erasing or conflating historical official-release semantics. The stale root-style reference labels are bounded usability debt inside Foundation-supporting documentation, not sufficient authority for silent semantic modernization.
 
-No Release-file mutation is authorized merely from the observed drift. The next step is to classify whether the correct solution is historical-scope retention plus a current onboarding pointer/evidence record, or a bounded in-place correction that preserves 1.0.0 semantics.
+## Verification
 
-## Non-claims
+- prewrite persisted at `86c6969d863e24b45db9f0c7a20623a7cbe1b332` and was read back successfully;
+- current main after prewrite was independently re-read and matched that checkpoint;
+- `Logs/CHANGELOG.md` was directly verified at its current path;
+- no protected Release artifact was mutated;
+- no Runtime/Engine/Services/Interfaces/Knowledge or canonical authority surface was changed;
+- no CI/runtime semantic promotion is claimed from this evidence-only closure.
 
-- no new release;
+## Bounded closure
+
+`RELEASE_REL003_REL004_FRESHNESS_DISPOSITION_174 = CLOSED / EVIDENCE-VERIFIED / NO RELEASE MUTATION`.
+
+Release partition remains OPEN because dependency/consumer validation, relationship authority and explicit whole-partition closure remain unresolved.
+
+## Preserved non-claims / holds
+
+- no new official release;
 - no Release partition closure;
 - no Connected Baseline closure;
-- no authority promotion;
-- no capability expansion;
+- no provider-authentication proof;
+- no external-evidence promotion beyond `RESOLVED_UNAUTHENTICATED`;
+- no IGT cognitive-benefit claim;
+- no Architecture/Engine/Services/Interfaces global certification;
+- no KNW-001..010 promotion;
 - no branch deletion.
+
+## Resume-safe next legal action
+
+Continue the Release partition only from fresh live-main evidence. The next bounded question is Release dependency/consumer and authority reconciliation: determine which REL-001..005/current VERSION surfaces are consumed by current repository artifacts, which references are historical-only, and whether that evidence justifies a Release relationship/status record or a whole-partition closure review. Do not update REP-001/REP-002 or REL-003/REL-004 unless a fresh gap and authority are independently proven.
+
+## Learning
+
+`HISTORICAL RELEASE DOCUMENT ≠ CURRENT DEVELOPMENT ONBOARDING CONTRACT`.
+
+A stale-looking statement inside official-release supporting documentation is not automatically a mutation target. First align the semantic time/snapshot; preserve historical truth and route current use through current authority when that is the smaller, safer solution.
