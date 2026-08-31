@@ -1,4 +1,4 @@
-# EJR-240 — GOV-014 Mutation Matrix Semantic Validation
+# EJR-430 — GOV-014 Mutation Matrix Semantic Validation
 
 Date: 2026-08-17
 Status: `CLOSED / CI-VERIFIED / REUSABLE-LEARNING`

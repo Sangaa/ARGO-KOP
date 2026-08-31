@@ -7,7 +7,7 @@ Status: `EXECUTION-PENDING / WORKFLOW-LOAD REVALIDATION`
 Repeat validation of the GOV-014 semantic gate against multiple real Mutation Matrix variants.
 
 ## Prior Evidence
-- EJR-240 established semantic validation on a real repository Matrix.
+- EJR-430 established semantic validation on a real repository Matrix.
 - A subsequent CI change attempted to validate three real Matrix variants in one regression step.
 - Run `32052399930` created no jobs and failed at workflow-load level; therefore no semantic result may be inferred from that run.
 
@@ -18,7 +18,7 @@ Repeat validation of the GOV-014 semantic gate against multiple real Mutation Ma
 
 ## Proven / Not Proven
 ### Proven
-- The semantic gate passed on the first real Matrix in EJR-240.
+- The semantic gate passed on the first real Matrix in EJR-430.
 - The multi-variant workflow version is present in current `main`.
 
 ### Not Proven
