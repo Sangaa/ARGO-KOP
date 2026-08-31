@@ -1,4 +1,4 @@
-# EJR-208 — P2 REL-003 Controlled Mutation Preparation
+# EJR-407 — P2 REL-003 Controlled Mutation Preparation
 
 Date: 2026-08-17  
 Status: RECORDED / SESSION-CLOSABLE / MUTATION READY — NOT EXECUTED  
