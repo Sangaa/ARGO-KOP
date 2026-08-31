@@ -17,7 +17,7 @@ from internal_document_id_audit import TEXT_SUFFIXES, scan
 from ejr_h1_namespace_lineage import current_repository_namespace_lineage
 
 TARGET_CLASS = "MEMORY_TO_ROOT_EJR"
-EXPECTED_GROUP_COUNT = 15
+EXPECTED_GROUP_COUNT = 14
 SELF_GENERATED_PATHS = {
     "Quality/Integration/ejr_memory_to_root_provenance_census.py",
     "Quality/Integration/test_ejr_memory_to_root_provenance_census.py",
