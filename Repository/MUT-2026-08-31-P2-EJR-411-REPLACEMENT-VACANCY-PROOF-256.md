@@ -1,6 +1,6 @@
 # MUT-2026-08-31-P2-EJR-411-REPLACEMENT-VACANCY-PROOF-256
 
-Status: PREWRITE / VACANCY PROOF PENDING
+Status: CLOSED / EXECUTION-VERIFIED / RESUME-SAFE
 Scope: Candidate replacement identity EJR-411 only.
 
 ## Trigger
@@ -10,11 +10,23 @@ Disposition255 classified the later root EJR-217 as displaced and eligible for a
 - Current repository search for `EJR-411` found only the Checkpoint254 resume instruction warning not to assume vacancy.
 - Commit search for `EJR-411` returned no matching commits.
 
-These are discovery signals only. They do not establish vacancy.
+These were discovery signals only and were not treated as vacancy proof.
 
-## Authorized action
-Run the existing complete-history vacancy gate against EJR-411 from a dedicated workflow using `fetch-depth: 0`, upload the deterministic JSON artifact, and enforce `decision=VACANT`.
+## Execution evidence
+Dedicated workflow `EJR Replacement Vacancy Proof 256`, run `33368058506`, executed from prewrite head `a120a03ea0015190e7584c565344049940261396` with complete checkout history and concluded SUCCESS.
 
-No identity repair, rename, delete, H1 rewrite, consumer rewrite, allocation, baseline mutation, or global promotion is authorized inside Lease256.
+Artifact `9748981322`, digest `sha256:9685d00ce7a4312b1a3c9d068ea467c48b0405da35ab03789327d289bf0dedcd`, proved:
+- candidate=`EJR-411`
+- current_claims=[]
+- historical_claims=[]
+- history_complete=true
+- history_scope=`all locally reachable refs`
+- occupied=false
+- vacant=true
+- decision=`VACANT`
 
-Priority 2 remains OPEN. Current MEMORY_TO_ROOT baseline remains 26. Global Integrity remains HOLD.
+## Decision
+EJR-411 is authorized for exactly one bounded replacement allocation for the displaced root EJR-217 record under the next separate identity-repair lease.
+
+## Boundaries
+No identity repair, rename, delete, H1 rewrite, consumer rewrite, baseline mutation, or global promotion occurred inside Lease256. Priority 2 remains OPEN. Current MEMORY_TO_ROOT baseline remains 26. Global Integrity remains HOLD.
