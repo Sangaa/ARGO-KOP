@@ -1,9 +1,10 @@
 # MUT-2026-08-31-P2-EJR-412-REPLACEMENT-VACANCY-PROOF-261
 
-Status: OPEN / EXECUTION-PENDING
+Status: CLOSED / EXECUTION-VERIFIED / RESUME-SAFE
 Scope: Candidate replacement identity EJR-412 only.
 Opening main: `5f0af85e41e439854f6ac78d192e065ca109b01d`
 Source disposition: `MUT-2026-08-31-P2-EJR-232-DISPOSITION-AUTHORIZATION-260.md`
+Workflow commit: `e3ea184fd6fb094f9ea468912c68dc28111991c7`
 
 ## Trigger
 
@@ -11,35 +12,42 @@ Lease260 retained the earlier Memory EJR-232 allocation and classified the later
 
 ## Candidate discovery
 
-- Current `EJR/` directory listing contains no EJR-412 allocation.
-- Repository search for `EJR-412` currently returns only the Session259 instruction explicitly warning that EJR-412 must not be assumed vacant.
-- These signals establish only that EJR-412 is a reasonable next candidate. They do not prove historical vacancy.
+- Current `EJR/` directory listing contained no EJR-412 allocation before proof execution.
+- Repository search for `EJR-412` surfaced only the Session259 warning not to assume vacancy.
+- These signals were used only for candidate discovery, not as absence proof.
 
-## Required proof
+## Execution evidence
 
-A dedicated workflow must:
-1. checkout complete repository history with `fetch-depth: 0`,
-2. verify the repository is not shallow,
-3. run `Quality/Integration/ejr_allocation_vacancy_gate.py EJR-412`,
-4. upload the JSON evidence artifact even if the candidate is occupied,
-5. fail unless the decision is exactly `VACANT`.
+Dedicated workflow `EJR Replacement Vacancy Proof 261`, run `33370689585`, executed from commit `e3ea184fd6fb094f9ea468912c68dc28111991c7` with complete checkout history and concluded SUCCESS.
 
-The execution-verified Lease256 workflow for EJR-411 is the directly applicable precedent.
+Artifact `9749915855`, digest `sha256:911733c87a5879dc4805fd27509d1e156cfdc3879342ff4b46fb8ae590a162e7`, proved:
+- candidate=`EJR-412`
+- current_claims=[]
+- historical_claims=[]
+- history_complete=true
+- history_scope=`all locally reachable refs`
+- occupied=false
+- vacant=true
+- decision=`VACANT`
+
+The workflow also explicitly verified the checkout was not shallow and failed unless the decision was exactly `VACANT`.
+
+## Integration evidence
+
+The same workflow commit passed Full-Stack Repository Audit run `33370689532` / run number 2350 with all audit, mutation-matrix, runtime-evidence, and CI-correlation steps SUCCESS.
+
+M2 Multi-Channel Proposal Training run `33370689524` also completed SUCCESS.
+
+## Decision
+
+EJR-412 is authorized for exactly one bounded replacement allocation for the displaced root EJR-232 record under the next separate identity-repair lease.
 
 ## Boundaries
 
-No rename, delete, move, EJR-412 allocation, EJR-232 body/H1 rewrite, consumer rewrite, census baseline mutation, Plan204 expansion, or global integrity promotion is permitted in Lease261.
+Lease261 performed no rename, delete, move, EJR-412 allocation, EJR-232 body/H1 rewrite, consumer rewrite, census baseline mutation, Plan204 expansion, or global integrity promotion.
 
 Priority 2 remains OPEN. Phase 1 remains OPEN. Global Integrity remains HOLD.
 
-## Closure condition
+## Next safe entry
 
-Lease261 may close as `VACANT / AUTHORIZED FOR ONE BOUNDED ALLOCATION` only if the dedicated complete-history gate succeeds and the artifact proves:
-- `current_claims=[]`,
-- `historical_claims=[]`,
-- `history_complete=true`,
-- `occupied=false`,
-- `vacant=true`,
-- `decision=VACANT`.
-
-If any condition fails, Lease261 closes BLOCKED and EJR-412 must not be allocated.
+Open a separate EJR-232 → EJR-412 identity-repair lease with its own pre-write mutation matrix. Re-read the current source record and enumerate current consumer obligations before the atomic identity mutation. Do not consume EJR-412 for any other purpose.
