@@ -1,8 +1,17 @@
 # MUT-2026-08-31-P2-EJR-MEMORY-TO-ROOT-COHORT-BASELINE-233
 
-Status: PREWRITE / BASELINE-ONLY SUCCESSOR
+Status: CLOSED / EXECUTION-VERIFIED / RESUME-SAFE
 Predecessor: Lease232 repair `EJR-173 → EJR-406`
 
-Repair-head Internal-ID run `33361053387` failed only at `Emit deterministic EJR memory-to-root provenance census`; all prior tests/analyzers passed. Artifact `9746702793`, digest `sha256:841c5fa6b705703e3c095014d3a26db9b4611476d2f116577894cb0304eae857`, proved `expected_group_count=31`, `observed_group_count=30`, `history_complete=true`, `classification_complete=false`, `decision=PARTIAL`, `incomplete_group_ids=["__COHORT_COUNT_DRIFT__"]`, with neither EJR-173 nor EJR-406 in the cohort.
+Repair-head evidence authorized one baseline-only mutation. Functional head `b29d29379598f1554c518461503bbe998d8037b1` changed only `EXPECTED_GROUP_COUNT = 31`→`30` in `Quality/Integration/ejr_memory_to_root_provenance_census.py`. Compare `c13fe3b898863e113e1a082531e6b4984aa65053`→`b29d293...` proved one file with one addition and one deletion only.
 
-Authorized functional mutation: change only `EXPECTED_GROUP_COUNT = 31` to `30` in `Quality/Integration/ejr_memory_to_root_provenance_census.py`. No classifier/scanner/evidence-boundary/test/workflow/EJR/consumer semantics may change.
+Exact functional-head verification:
+- Internal-ID `33361269760`: SUCCESS;
+- Full-Stack `33361269731`: SUCCESS;
+- Runtime `33361269737`: SUCCESS;
+- M2 `33361269738`: SUCCESS;
+- Real Matrix: NOT APPLICABLE to the census-only functional diff because its path filter did not trigger.
+
+Census artifact `9746770011`, digest `sha256:52705bdb43b64ae11760d9bacf22c832aa7f19aefebe68287ac2e52d3f89eb8a`, proved expected=30, observed=30, history_complete=true, classification_complete=true, decision=CENSUSED, incomplete=[].
+
+No classifier/scanner/evidence-boundary/test/workflow/EJR/consumer semantics changed. Current controlled MEMORY_TO_ROOT baseline is 30.

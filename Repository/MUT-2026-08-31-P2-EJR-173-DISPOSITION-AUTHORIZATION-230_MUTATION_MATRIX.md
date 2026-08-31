@@ -1,16 +1,16 @@
 # MUTATION MATRIX — LEASE 230
 
 Lease: `MUT-2026-08-31-P2-EJR-173-DISPOSITION-AUTHORIZATION-230`
-State: PREWRITE
+State: CLOSED / RESUME-SAFE
 
-| Surface | Planned effect |
+| Surface | Final effect |
 |---|---|
-| EJR owners | NONE |
-| Memory EJR-173 | READ-ONLY / retained candidate |
-| Root EJR-173 | READ-ONLY / displaced candidate |
-| Consumers | NONE |
-| Census baseline | NONE |
+| Memory EJR-173 | READ-ONLY / retained allocation |
+| Root EJR-173 | classified displaced; mutation delegated to Lease232 |
+| Consumers | NONE in Lease230 |
+| Census baseline | NONE in Lease230 |
 | Tests/workflows | NONE |
-| Governance/REP authority | NONE |
+| Governance/REP authority | no global promotion |
+| Tool incident | empty `fac710...` commit preserved/documented; no tree change |
 
-Allowed successor: independent replacement vacancy proof only. Any repair requires a separate lease after `VACANT` evidence.
+Successors: Lease231 vacancy proof, Lease232 bounded repair, Lease233 cohort successor.
