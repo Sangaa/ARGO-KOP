@@ -1,14 +1,14 @@
 # MUTATION MATRIX — EJR-215 DISPOSITION AUTHORIZATION 250
 
-Status: PREWRITE / AUTHORIZATION ONLY
+Status: CLOSED / SUCCESSOR-VERIFIED
 
-| Surface | Before | Authorized disposition | Mutation in this lease |
-|---|---|---|---|
-| Memory EJR-215 | earlier valid allocation | RETAIN | NONE |
-| Root EJR-215 | later reused allocation | DISPLACED | NONE |
-| Replacement ID | unallocated | separate complete-history vacancy proof required | NONE |
-| Exact consumers | deterministic census = zero ID/path consumers | recheck before repair | NONE |
-| MEMORY_TO_ROOT baseline | 27 | preserve | NONE |
-| Global integrity | HOLD | HOLD | NONE |
+| Surface | Final state |
+|---|---|
+| Memory EJR-215 | retained as earlier valid allocation |
+| Root EJR-215 | displaced and repaired by Lease252 |
+| Replacement identity | EJR-410 / vacancy-proven by Lease251 |
+| Direct consumers | zero established; no rewrite required |
+| MEMORY_TO_ROOT baseline | successor-verified at 26 |
+| Global integrity | HOLD |
 
-Exit condition: a replacement candidate may be considered only after this authorization is committed and live `main` is rechecked. Candidate discovery is not vacancy proof.
+This authorization is closed and resume-safe. Reopen only on contradictory evidence.

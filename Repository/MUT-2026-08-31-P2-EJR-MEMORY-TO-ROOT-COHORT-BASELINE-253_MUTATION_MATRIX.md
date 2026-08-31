@@ -1,14 +1,17 @@
 # MUTATION MATRIX — MEMORY_TO_ROOT COHORT BASELINE 253
 
-Status: PREWRITE / SUCCESSOR MUTATION PENDING
+Status: CLOSED / EXECUTION-VERIFIED
 
-| Surface | Before | Authorized after |
-|---|---:|---:|
-| EXPECTED_GROUP_COUNT | 27 | 26 |
-| Observed deterministic cohort | 26 | 26 |
-| Classifier logic | unchanged | unchanged |
-| Tests/workflows | unchanged | unchanged |
-| EJR/Memory/GOV/REP/history | unchanged | unchanged |
-| Global integrity | HOLD | HOLD |
+| Surface | Final state |
+|---|---|
+| EXPECTED_GROUP_COUNT | 26 |
+| Observed deterministic cohort | 26 |
+| History completeness | true |
+| Classification completeness | true |
+| Census decision | CENSUSED |
+| Incomplete groups | [] |
+| Classifier logic | unchanged |
+| EJR/Memory/GOV/REP/history | unchanged |
+| Global integrity | HOLD |
 
-Evidence source: Repair252 census artifact `9748220566` with history complete and sole incompleteness `__COHORT_COUNT_DRIFT__`.
+Successor253 is closed and resume-safe.
