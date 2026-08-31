@@ -1,9 +1,10 @@
 # MUT-2026-08-31-P2-EJR-235-DISPOSITION-AUTHORIZATION-268
 
-Status: OPEN / AUTHORIZATION RECORDED / VERIFICATION PENDING
+Status: CLOSED / EXECUTION-VERIFIED / RESUME-SAFE
 Scope: Disposition-only classification for the current two-member EJR-235 MEMORY_TO_ROOT group.
 Opening main: `5110931da7780972b920a6bf35c211e204b04da7`
 Pre-write Matrix268: `1b696932ba9643402ec3442a4f462266c08402a3`
+Authorization commit: `33d8b6dfebc09c186d3d773757fc7c75b3c10e7e`
 
 ## Evidence
 
@@ -22,14 +23,19 @@ The two records have materially different session subjects and bodies. This is a
 - No current consumer rewrite obligation is established by the verified census.
 - No replacement identity is selected here.
 
+## Validation
+
+Pre-write Matrix268 passed Full-Stack #2380 / run `33376982878` with all repository-audit steps successful.
+Authorization commit passed Full-Stack #2381 / run `33377042503` with all repository-audit steps successful.
+
 ## Boundaries
 
-This record authorizes disposition only. It does not authorize rename, content mutation, replacement-number allocation, vacancy claim, consumer rewrite, census-baseline change, or integrity promotion.
+Lease268 performed no rename, content mutation, replacement-number allocation, vacancy claim, consumer rewrite, census-baseline change, or integrity promotion.
 
 A separate successor lease must prove a candidate replacement identity vacant across complete reachable history before any repair is authorized.
 
 Priority 2 remains OPEN. Phase 1 remains OPEN. Global Integrity remains HOLD.
 
-## Next safe step
+## Resume
 
-After this authorization commit passes repository gates, close Lease268 and open a separate replacement-vacancy proof. Candidate selection must be re-derived from current state; apparent absence is not vacancy proof.
+Open a separate replacement-vacancy proof. Candidate selection must be re-derived from current state; apparent absence is not vacancy proof.
