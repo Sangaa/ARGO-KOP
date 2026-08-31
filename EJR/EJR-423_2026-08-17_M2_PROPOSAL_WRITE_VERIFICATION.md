@@ -1,4 +1,4 @@
-# EJR-246 — M2 Proposal-Write Verification
+# EJR-423 — M2 Proposal-Write Verification
 
 Date: 2026-08-17
 Status: `CLOSED / EXECUTION-VERIFIED / REUSABLE-LEARNING`
