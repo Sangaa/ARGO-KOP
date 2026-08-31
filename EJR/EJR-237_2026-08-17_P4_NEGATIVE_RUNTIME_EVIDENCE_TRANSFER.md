@@ -1,4 +1,4 @@
-# EJR-431 — P4 Negative Runtime Evidence & Knowledge Transfer
+# EJR-237 — P4 Negative Runtime Evidence & Knowledge Transfer
 
 Date: 2026-08-17
 Status: `CLOSED / EXECUTION-VERIFIED / REUSABLE-LEARNING`

@@ -91,9 +91,9 @@ Applied the reusable `Templates/GOV-015_EXECUTION_RECORD_TEMPLATE.md` to this bo
 
 This check does not promote the template to a new governance rule; it validates the existing GOV-015 implementation support and identifies fields to observe in subsequent mutation and reconciliation sessions.
 
-## EJR-431 Negative Runtime Evidence — Current Connected Spine
+## EJR-237 Negative Runtime Evidence — Current Connected Spine
 
-The inspected current runtime seam was revalidated through `EJR-431`.
+The inspected current runtime seam was revalidated through `EJR-237`.
 
 Evidence:
 
