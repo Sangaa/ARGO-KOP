@@ -1,5 +1,5 @@
 # MUTATION MATRIX — Lease238 Cohort Baseline Successor
 
-Status: OPEN / PREWRITE
+Status: CLOSED / EXECUTION-VERIFIED / RESUME-SAFE
 
-Only allowed functional mutation: `EXPECTED_GROUP_COUNT = 30` → `29` in the MEMORY_TO_ROOT provenance census. No other code, test, workflow, identity, consumer, or authority change is permitted. Repair-head failure remains historical evidence and must not be rewritten.
+Only `EXPECTED_GROUP_COUNT` changed from 30 to 29. Exact-head Internal-ID, Full-Stack, Runtime, and M2 passed; deterministic census artifact 9747038968 proved 29/29 with complete history and no incomplete groups. The repair-head 30→29 failure remains preserved as prior evidence.

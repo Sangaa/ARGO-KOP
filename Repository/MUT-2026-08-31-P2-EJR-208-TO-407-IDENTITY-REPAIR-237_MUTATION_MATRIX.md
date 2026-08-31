@@ -1,12 +1,5 @@
 # MUTATION MATRIX — Lease237 EJR-208 → EJR-407
 
-Status: OPEN / PREWRITE
+Status: CLOSED / SUCCESSOR-VERIFIED / RESUME-SAFE
 
-| Surface | Allowed | Forbidden |
-|---|---|---|
-| Root EJR-208 | rename/identity rewrite to proven-vacant EJR-407 | semantic rewrite |
-| Memory EJR-208 | preserve | modify/delete |
-| Consumers | none required by deterministic zero-consumer evidence | speculative rewrites |
-| Census | preserve baseline 30 | rebaseline inside repair |
-| Verification | exact-head Internal-ID/Full-Stack/Runtime/M2 | suppress legitimate failure |
-| Global state | no change | global PASS/BOOTED claim |
+The bounded repair touched only the displaced root EJR-208 identity and preserved the retained Memory EJR-208. No consumer rewrite was required by deterministic evidence. Baseline 30 was intentionally preserved in the repair; the resulting 30→29 guard failure was preserved and resolved only through separate Lease238. No scanner/classifier/test/workflow weakening occurred.

@@ -1,11 +1,24 @@
 # MUT-2026-08-31-P2-EJR-MEMORY-TO-ROOT-COHORT-BASELINE-238
 
-Status: OPEN / PREWRITE
-Scope: Separate successor after EJR-208→EJR-407 repair.
-Parent repair: Lease237 functional head `070d11f6e4f8b19815485dabbf384d144c87802d`.
+Status: CLOSED / EXECUTION-VERIFIED / RESUME-SAFE
+Scope: separate cohort baseline successor after EJR-208→EJR-407 repair.
 
-Repair-head deterministic census artifact `9746992753`, digest `sha256:fd28f7ed37dd863da865a98744545c116c79cdfb8b6dd8869151b4b9b7a1f4f4`, proves expected_group_count=30, observed_group_count=29, history_complete=true, decision=PARTIAL solely because `__COHORT_COUNT_DRIFT__`; neither EJR-208 nor EJR-407 remains in the cohort.
+Prewrite: `927a851309359b93603107e62f11e4bfa8741555`.
+Functional head: `c25874dddb57c0adcbddce51f2bbe40f6115f972`.
 
-Authorized functional change: in `Quality/Integration/ejr_memory_to_root_provenance_census.py`, change only `EXPECTED_GROUP_COUNT = 30` to `29`.
+Authorized functional change only:
+`Quality/Integration/ejr_memory_to_root_provenance_census.py`
+`EXPECTED_GROUP_COUNT = 30` → `29`.
 
-Forbidden: classifier/scanner/evidence-boundary/test/workflow/EJR/consumer semantics changes. Exact-head Internal-ID + Full-Stack + Runtime + M2 verification and deterministic census artifact are required after rebaseline.
+Compare proved one file / one addition / one deletion; classifier, scanner, evidence boundary, tests, workflows, EJR records, consumers, and authority semantics were unchanged.
+
+Exact functional-head verification:
+- Internal-ID `33362098103`: SUCCESS;
+- Full-Stack `33362098152`: SUCCESS;
+- Runtime `33362098072`: SUCCESS;
+- M2 `33362098095`: SUCCESS;
+- Real Mutation Matrix: NOT APPLICABLE to the census-only diff.
+
+Deterministic census artifact `9747038968`, digest `sha256:6c0384953491f06e88d50f37bb39e14fe8dd3d1ae5e60ff640f47d85caa80005`, proved expected_group_count=29, observed_group_count=29, history_complete=true, classification_complete=true, decision=CENSUSED, incomplete_group_ids=[], with EJR-208 and EJR-407 absent from the remaining cohort.
+
+Current governed MEMORY_TO_ROOT baseline after this successor is 29.

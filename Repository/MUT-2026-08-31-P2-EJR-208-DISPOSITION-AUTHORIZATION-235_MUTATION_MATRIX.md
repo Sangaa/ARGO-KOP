@@ -1,13 +1,5 @@
 # MUTATION MATRIX — Lease235 EJR-208 Disposition Authorization
 
-Status: OPEN / PREWRITE
+Status: CLOSED / DISPOSITION-VERIFIED / RESUME-SAFE
 
-| Surface | Allowed | Forbidden |
-|---|---|---|
-| EJR-208 disposition evidence | classify earlier Memory as retained; later root as displaced | rename/delete/rewrite EJR record |
-| Replacement allocation | none | assign candidate without vacancy proof |
-| Consumers | enumerate only | rewrite absent functional repair |
-| Census | preserve baseline 30 | classifier/scanner/baseline changes |
-| Global authority | none | global PASS/BOOTED claim |
-
-Expected functional mutation in Lease235: documentation-only authorization. A separate vacancy lease and repair lease are mandatory.
+Authorization remained documentation-only. No EJR record, consumer, scanner, classifier, test, workflow, or census baseline was changed by Lease235. The later root EJR-208 was bounded as displaced; all functional work occurred in separately governed Lease236/237/238 successors.
