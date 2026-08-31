@@ -1,28 +1,31 @@
 # Lease 316 — MEMORY_TO_ROOT_EJR Cohort Baseline Normalization 8 → 7
 
-Status: OPEN / BASELINE-ONLY
+Status: CLOSED / EXECUTION-VERIFIED / RESUME-SAFE
 Date: 2026-08-31
 
 ## Trigger
-Repair315 removed one resolved EJR-234 ambiguity from the deterministic MEMORY_TO_ROOT_EJR cohort.
+Repair315 resolved EJR-234 and reduced the deterministic MEMORY_TO_ROOT_EJR cohort from 8 to 7. Repair-head evidence showed the only incomplete marker was `__COHORT_COUNT_DRIFT__`.
 
-Repair-head evidence:
-- expected_group_count: 8
+## Executed mutation
+Functional head `4532c480c8bc77373999ccdfc33a963d8c90fe8d` changed only:
+`Quality/Integration/ejr_memory_to_root_provenance_census.py`
+
+`EXPECTED_GROUP_COUNT = 8` → `7`.
+
+Exact compare: one file, +1/-1 only.
+
+## Final verification
+Internal Document-ID Audit run `33419819450`: SUCCESS.
+Final census artifact:
+- expected_group_count: 7
 - observed_group_count: 7
 - history_complete: true
-- incomplete_group_ids: [`__COHORT_COUNT_DRIFT__`]
-- Full-Stack Repository Audit: SUCCESS
+- classification_complete: true
+- decision: CENSUSED
+- incomplete_group_ids: []
+- target_ids: EJR-165, EJR-237, EJR-240, EJR-293, EJR-294, EJR-295, EJR-296
 
-## Authorized mutation
-Change only `EXPECTED_GROUP_COUNT` in `Quality/Integration/ejr_memory_to_root_provenance_census.py` from `8` to `7`.
+Full-Stack Repository Audit run `33419819414`: SUCCESS.
 
-No membership rule, lineage classifier, identity, content, authority, or relationship logic may change under this lease.
-
-## Validation
-After normalization require:
-- compare = one file, one-line value replacement only;
-- Internal Document-ID Audit = SUCCESS;
-- census = expected 7 / observed 7 / `CENSUSED` / `incomplete_group_ids=[]`;
-- Full-Stack Repository Audit = SUCCESS.
-
-Global Integrity remains HOLD.
+## Outcome
+Baseline normalization is verified. No membership rule, classifier, identity, authority, or relationship logic changed. Priority2 and Phase1 remain OPEN. Global Integrity remains HOLD.

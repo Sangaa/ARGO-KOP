@@ -2,19 +2,19 @@
 
 Transaction ID: MUT-2026-08-31-P2-EJR-234-DISPOSITION-AND-429-VACANCY-PROOF-314
 Protocol: GOV-014
-Status: OPEN
+Status: CLOSED / VERIFIED / RESUME-SAFE
 
 | Change ID | Target | Action | Expected Content | Applied | Verified |
 |---|---|---|---|---|---|
 | 314-01 | Lease 314 record | CREATE | evidence-only disposition and hard vacancy gate | Y | Y |
-| 314-02 | `.github/workflows/ejr-replacement-vacancy-proof-314.yml` | CREATE | complete-history proof for EJR-429 | N | N |
+| 314-02 | `.github/workflows/ejr-replacement-vacancy-proof-314.yml` | CREATE | complete-history proof for EJR-429 | Y | Y |
 | 314-03 | EJR-234 members | KEEP | no identity mutation before VACANT artifact | Y | Y |
 
 ## KEEP REQUIREMENT
-Preserve both current EJR-234 member files byte-for-byte while Lease314 is evidence-only. Do not rename, delete, suppress, or reassign either identity until the complete-history vacancy decision is verified.
+Both EJR-234 members were preserved during the evidence-only gate. No rename/delete/reassignment occurred until EJR-429 was proven VACANT.
 
 ## Execution Evidence
-Opening HEAD is the current main lineage after baseline 313. Memory chronology precedes root chronology. Current search found no EJR-429 allocation, but current search absence is explicitly insufficient for vacancy.
+Vacancy run `33419331465`: SUCCESS. Artifact proved complete history, zero current claims, zero historical claims, decision VACANT. Full-Stack run `33419331474`: SUCCESS.
 
 ## Closure
-Lease314 may close only after the complete-history vacancy workflow and Full-Stack validation are inspected. If EJR-429 is not VACANT, no identity repair is authorized.
+PASS. Repair315 was authorized only after the vacancy gate completed. Global Integrity remains HOLD.

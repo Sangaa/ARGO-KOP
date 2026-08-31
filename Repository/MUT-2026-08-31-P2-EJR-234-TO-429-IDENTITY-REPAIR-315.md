@@ -1,27 +1,27 @@
 # Repair 315 — Root EJR-234 to EJR-429 Identity Repair
 
-Status: OPEN / AUTHORIZED BY LEASE 314
+Status: CLOSED / EXECUTION-VERIFIED / RESUME-SAFE
 Date: 2026-08-31
 
 ## Authorization
-Lease314 complete-history proof established EJR-429 as VACANT. First-valid historical allocation retains EJR-234 for the earlier Memory journal. The later root journal is authorized for displacement only.
+Lease314 proved EJR-429 VACANT on complete history. First-valid allocation retained EJR-234 for the earlier Memory journal.
 
-## Mutation scope
-Atomically:
-1. create `EJR/EJR-429_2026-08-17_GOV-015_FIRST_RECONCILIATION_FIELD_VALIDATION.md` from the current root EJR-234 content;
-2. change only the first H1 identity from `EJR-234` to `EJR-429`;
-3. remove `EJR/EJR-234_2026-08-17_GOV-015_FIRST_RECONCILIATION_FIELD_VALIDATION.md` in the same Git tree;
-4. keep `Memory/Engineering_Journal/EJR-234_2026-08-14_P52_SESSION_CLOSURE.md` byte-for-byte unchanged.
+## Executed mutation
+Atomic repair commit `d5cbab03e2664d7f9f4c58aa73114ab451a33e63`:
+- created `EJR/EJR-429_2026-08-17_GOV-015_FIRST_RECONCILIATION_FIELD_VALIDATION.md`;
+- deleted the old root EJR-234 path in the same tree;
+- changed only the successor document's first H1 identity;
+- retained historical narrative inside the displaced record;
+- retained Memory EJR-234 byte-for-byte at blob `a37eac099f38c2d0dba29e760ecef83d2079eae4`.
 
-## Preservation boundary
-Historical narrative and embedded execution references inside the displaced root record are not cosmetically rewritten. No authority promotion, governance-policy change, or consumer claim is implied.
+Successor blob: `29862b640e0ec9d7d81b74d6d862ef4e5b352273`.
 
-## Validation gate
-After the atomic repair:
-- old root path must be absent;
-- successor root path must exist with identical body except H1;
-- Memory EJR-234 blob must remain unchanged;
-- Full-Stack must succeed;
-- Internal Document-ID census may fail only for deterministic cohort-count drift; any other failure stops the chain.
+## Verification
+- old root path: absent;
+- successor path: present;
+- Memory EJR-234 blob: unchanged;
+- Full-Stack run `33419609465`: SUCCESS;
+- Internal-ID repair-head census: expected 8 / observed 7, with only `__COHORT_COUNT_DRIFT__` incomplete.
 
-Global Integrity remains HOLD.
+## Outcome
+Repair315 is functionally correct. The deterministic count drift was isolated to separate Lease316. Priority2 and Phase1 remain OPEN. Global Integrity remains HOLD.
