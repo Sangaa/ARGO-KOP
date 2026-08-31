@@ -1,21 +1,29 @@
 # Lease 324 — EJR-431 Complete-History Vacancy Proof
 
-Status: OPEN / EVIDENCE-ONLY / NO ALLOCATION
+Status: CLOSED / EXECUTION-VERIFIED / RESUME-SAFE
 Date: 2026-08-31
 Parent: Lease323
 
 ## Candidate
-`EJR-431` is a successor candidate for the displaced root EJR-237 only. Search absence is discovery evidence, not vacancy proof.
+`EJR-431` is the verified successor candidate for the displaced root EJR-237. Search absence was discovery evidence only; allocation authority comes from complete-history execution.
 
-## Hard gate
-No EJR-237 identity mutation is authorized until the dedicated complete-history workflow proves all of:
+## Complete-history proof
+Workflow `EJR-431 Vacancy Proof 324`, run `33426371329`, executed at head `7db1eaa45d0a86b64a19cc1b9f693d0eb02b1808` and completed SUCCESS.
+
+Execution evidence:
 - candidate = EJR-431
-- history_complete = true
 - current_claims = []
 - historical_claims = []
+- history_complete = true
+- history_scope = all locally reachable refs
+- occupied = false
+- vacant = true
 - decision = VACANT
 
-## Preservation boundary
-EJR-237 members, current MEMORY_TO_ROOT cohort, baseline 6, current evidence consumers, 317 and 318 remain unchanged during this proof lease.
+Artifact `9770873918`, uploaded digest `sha256:2316b9f56376531d5248ea676326cc5d2bd374db5206d1427c7677421b8f3d12`, preserves the vacancy report.
 
-Priority 2 remains OPEN.
+## Preservation boundary
+No EJR-237 identity mutation, consumer rewrite, cohort rebaseline, 317/318 change, or priority promotion occurred under this proof lease.
+
+## Outcome
+EJR-431 is authorized as a vacant replacement candidate for one bounded identity repair of the displaced root EJR-237 record. Priority 2 remains OPEN.
