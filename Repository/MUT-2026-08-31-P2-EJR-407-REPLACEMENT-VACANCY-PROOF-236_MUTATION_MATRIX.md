@@ -1,12 +1,5 @@
 # MUTATION MATRIX — Lease236 EJR-407 Vacancy Proof
 
-Status: OPEN / PREWRITE
+Status: CLOSED / EXECUTION-VERIFIED / RESUME-SAFE
 
-| Surface | Allowed | Forbidden |
-|---|---|---|
-| Candidate EJR-407 | complete-history evidence only | allocation before VACANT |
-| EJR records | none | rename/delete/rewrite |
-| Vacancy gate | execute unchanged gate | weaken history/occupancy logic |
-| Census baseline | preserve 30 | rebaseline |
-
-Closure requires deterministic artifact with complete history and VACANT decision.
+Allowed evidence-only vacancy execution completed. No EJR record, consumer, scanner, classifier, or cohort baseline was mutated. Workflow 33361829696 and artifact 9746936355 prove EJR-407 VACANT with complete history.

@@ -1,11 +1,11 @@
 # MUT-2026-08-31-P2-EJR-407-REPLACEMENT-VACANCY-PROOF-236
 
-Status: OPEN / PREWRITE
-Scope: Complete-history vacancy proof for candidate EJR-407 only.
+Status: CLOSED / EXECUTION-VERIFIED / VACANT / RESUME-SAFE
+Scope: Complete-history vacancy proof for EJR-407 only.
 Parent authorization: Lease235 / EJR-208 disposition.
 
-Code search and commit search returned no EJR-407 claim. Those negative searches are discovery evidence only and do not allocate the ID.
+Discovery searches found no EJR-407 claim but were not authoritative. Dedicated workflow `33361829696` succeeded on `8723febea9f2569fcc4347290996a2c26a63f68e`.
 
-Allocation is blocked unless the dedicated complete-history workflow executes `Quality/Integration/ejr_allocation_vacancy_gate.py EJR-407` with full history and returns `decision=VACANT`.
+Artifact `9746936355`, digest `sha256:91a8065e6c99013a388ad16476b0ee9d3ac885cbb7cafc34c611d39ad75da5ad`, proved: candidate=EJR-407, current_claims=[], historical_claims=[], history_complete=true, history_scope=`all locally reachable refs`, occupied=false, vacant=true, decision=VACANT.
 
-No EJR identity, consumer, scanner, classifier, or cohort baseline mutation is authorized in this lease.
+EJR-407 is therefore authorized as replacement candidate for the bounded EJR-208 displaced-root repair only. This lease performed no EJR mutation and no census change.
