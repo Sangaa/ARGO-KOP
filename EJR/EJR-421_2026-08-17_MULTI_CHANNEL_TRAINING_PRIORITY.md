@@ -1,4 +1,4 @@
-# EJR-244 — Multi-Channel / Multi-Task Training Priority
+# EJR-421 — Multi-Channel / Multi-Task Training Priority
 
 Date: 2026-08-17  
 Status: `CLOSED / ARCHITECTURE-PRIORITIZED / FIRST SAFE SCOPE DEFINED`
