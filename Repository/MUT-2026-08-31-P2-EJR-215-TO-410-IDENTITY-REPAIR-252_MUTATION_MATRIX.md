@@ -1,16 +1,16 @@
 # MUTATION MATRIX — EJR-215 → EJR-410 IDENTITY REPAIR 252
 
-Status: PREWRITE / FUNCTIONAL MUTATION PENDING
+Status: FUNCTIONAL APPLIED / VERIFICATION PENDING
 
-| Surface | Before | Authorized after |
-|---|---|---|
-| Memory EJR-215 | earlier valid allocation | unchanged / retained |
-| Root EJR-215 | displaced later allocation | removed from old path |
-| Root EJR-410 | absent / vacancy-proven | created with preserved body/date/chronology |
-| Root H1 | EJR-215 | EJR-410 |
-| Exact consumers | zero established | no rewrite |
-| MEMORY_TO_ROOT baseline | 27 | 27 inside repair |
-| Classifier logic/tests/workflows | unchanged | unchanged |
-| Global integrity | HOLD | HOLD |
+| Surface | Final functional state |
+|---|---|
+| Memory EJR-215 | retained earlier allocation / unchanged |
+| Root EJR-215 | deleted |
+| Root EJR-410 | created with preserved semantic body/date/chronology |
+| Root H1 | EJR-410 |
+| Exact consumers | none rewritten; no obligation established |
+| MEMORY_TO_ROOT baseline | 27 / intentionally unchanged inside repair lease |
+| Classifier logic/tests/workflows | unchanged |
+| Global integrity | HOLD |
 
-Functional completion requires exact diff/readback and post-mutation CI/artifact evidence.
+Verification pending: exact diff/readback, Internal-ID plus deterministic census artifact, Full-Stack, and all other applicable triggered workflows.

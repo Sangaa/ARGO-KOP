@@ -1,4 +1,4 @@
-# EJR-215 — P2 Index Scope Mutation Scaffold
+# EJR-410 — P2 Index Scope Mutation Scaffold
 
 Date: 2026-08-17
 Status: RECORDED / SESSION-CLOSABLE / SCAFFOLD READY
