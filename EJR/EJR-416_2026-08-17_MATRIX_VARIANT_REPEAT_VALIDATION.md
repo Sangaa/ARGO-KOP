@@ -1,4 +1,4 @@
-# EJR-241 — Mutation Matrix Variant Repeat-Validation Boundary
+# EJR-416 — Mutation Matrix Variant Repeat-Validation Boundary
 
 Date: 2026-08-17
 Status: `EXECUTION-PENDING / WORKFLOW-LOAD REVALIDATION`
