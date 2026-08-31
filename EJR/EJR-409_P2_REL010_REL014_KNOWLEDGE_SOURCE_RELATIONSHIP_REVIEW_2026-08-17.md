@@ -1,4 +1,4 @@
-# EJR-213 — P2 REL-010..REL-014 Knowledge-Source Relationship Review
+# EJR-409 — P2 REL-010..REL-014 Knowledge-Source Relationship Review
 
 Date: 2026-08-17
 Status: RECORDED / SESSION-CLOSABLE / EVIDENCE-BOUND
