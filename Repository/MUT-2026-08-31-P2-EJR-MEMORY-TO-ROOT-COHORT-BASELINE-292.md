@@ -1,9 +1,10 @@
 # MUT-2026-08-31-P2-EJR-MEMORY-TO-ROOT-COHORT-BASELINE-292
 
-Status: OPEN / DETERMINISTIC NORMALIZATION
+Status: CLOSED / EXECUTION-VERIFIED / RESUME-SAFE
 Scope: deterministic MEMORY_TO_ROOT cohort baseline normalization after Repair291.
 Opening repair head: `7e0fbe49cc337070985bd646b2a12a884f9ff11a`
 Pre-write Matrix292: `48251aa024d29747eb69b93241da2e255c1d0b2a`
+Functional normalization head: `d481a4169a37ac086125b3853675c32f9aed8e14`
 
 ## Trigger
 
@@ -13,12 +14,20 @@ Repair-head Internal Document-ID run `33397181051` produced census artifact `975
 
 Repair-head Full-Stack run `33397181070`: SUCCESS.
 
-## Authorized normalization
+## Executed normalization
 
-Change only `EXPECTED_GROUP_COUNT = 16` to `EXPECTED_GROUP_COUNT = 15` in `Quality/Integration/ejr_memory_to_root_provenance_census.py`.
+Changed only `EXPECTED_GROUP_COUNT = 16` to `EXPECTED_GROUP_COUNT = 15` in `Quality/Integration/ejr_memory_to_root_provenance_census.py`.
 
-No classifier/membership/test/workflow/EJR/Memory/GOV/REP/consumer/historical reference/authority/Global Integrity mutation is authorized under this lease.
+Exact compare from Lease292 open head `1ef37ba8cac1b3900b1e2f62bad0221b156e8b32` to normalization head `d481a4169a37ac086125b3853675c32f9aed8e14` shows one modified file with one addition and one deletion.
 
-Closure requires exact-head Full-Stack success and exact census expected=15, observed=15, history_complete=true, classification_complete=true, decision=CENSUSED, incomplete_group_ids=[].
+## Verification
+
+- Full-Stack Repository Audit run `33397585419`: SUCCESS.
+- Internal Document-ID Audit run `33397585341`: SUCCESS.
+- final census artifact `9759944326`, digest `sha256:a2a09aff7d6f6177b0abb0936807cc0b91764bd1d57331b9a04460aaa48f3612`.
+- final census: expected_group_count=15, observed_group_count=15, history_complete=true, classification_complete=true, decision=CENSUSED, incomplete_group_ids=[].
+- final target cohort: EJR-165, EJR-174, EJR-218, EJR-234, EJR-237, EJR-240, EJR-245, EJR-246, EJR-247, EJR-248, EJR-293, EJR-294, EJR-295, EJR-296, EJR-297.
+
+No classifier/membership/test/workflow/EJR/Memory/GOV/REP/consumer/historical reference/authority/Global Integrity mutation occurred under this lease.
 
 Priority 2 remains OPEN. Phase 1 remains OPEN. Global Integrity remains HOLD.
