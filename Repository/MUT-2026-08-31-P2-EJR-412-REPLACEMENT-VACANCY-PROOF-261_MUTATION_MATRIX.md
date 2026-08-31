@@ -1,44 +1,54 @@
 # MUTATION MATRIX — EJR-412 REPLACEMENT VACANCY PROOF 261
 
-Status: PREWRITE / VACANCY-UNPROVEN
+Status: CLOSED / EXECUTION-VERIFIED / RESUME-SAFE
 Transaction ID: MUT-2026-08-31-P2-EJR-412-REPLACEMENT-VACANCY-PROOF-261
 Opening main: `d0d1d7a528f14cb3706e7fc3dc6ea642b1835e91`
+Pre-write matrix commit: `5f0af85e41e439854f6ac78d192e065ca109b01d`
+Lease opening commit: `fbd75ebf162917b1042d9ce5055931acf8dd8158`
+Workflow commit: `e3ea184fd6fb094f9ea468912c68dc28111991c7`
+Lease closure commit: `ab486dd6e273ee7d46f4afc2e14f3d3162a890cf`
 Candidate: `EJR-412`
 Source disposition: `MUT-2026-08-31-P2-EJR-232-DISPOSITION-AUTHORIZATION-260.md`
 
-## Pre-write evidence
+## Proof result
 
-- Lease260 is CLOSED / AUTHORIZATION-VERIFIED / RESUME-SAFE.
-- Current deterministic MEMORY_TO_ROOT baseline is 25.
-- Current `EJR/` directory listing contains no EJR-412 allocation.
-- Repository search for `EJR-412` currently surfaces only the Session259 warning not to assume vacancy.
-- These current-state signals are candidate-discovery evidence only; they are NOT historical vacancy proof.
-- Prior Lease256 is DIRECTLY APPLICABLE: complete checkout history + `ejr_allocation_vacancy_gate.py` + artifact + enforced `VACANT` decision are required before any allocation.
+Dedicated complete-history run `33370689585` completed SUCCESS. Artifact `9749915855`, digest `sha256:911733c87a5879dc4805fd27509d1e156cfdc3879342ff4b46fb8ae590a162e7`, proved:
+- `current_claims=[]`
+- `historical_claims=[]`
+- `history_complete=true`
+- `occupied=false`
+- `vacant=true`
+- `decision=VACANT`
 
-## Mutation specification
+The proof workflow verified a non-shallow checkout and enforced `VACANT` as a hard condition.
+
+## Mutation reconciliation
 
 | Surface | Action in Lease261 | Expected state before proof | Post-proof |
 |---|---|---|---|
-| EJR-412 allocation | PROVE ONLY | unknown / unproven | PENDING |
-| Complete history | READ/ANALYZE | required | PENDING |
-| Vacancy artifact | CREATE BY CI | absent | PENDING |
-| Root EJR-232 | KEEP | displaced by Lease260 | PENDING |
-| Memory EJR-232 | KEEP | retained by Lease260 | PENDING |
-| Identity mutation | NONE | forbidden in Lease261 | PENDING |
-| MEMORY_TO_ROOT baseline | KEEP | 25 | PENDING |
-| Global integrity | KEEP | HOLD | PENDING |
+| EJR-412 allocation | PROVE ONLY | unknown / unproven | VERIFIED VACANT; one bounded future allocation authorized |
+| Complete history | READ/ANALYZE | required | VERIFIED COMPLETE |
+| Vacancy artifact | CREATE BY CI | absent | VERIFIED artifact 9749915855 |
+| Root EJR-232 | KEEP | displaced by Lease260 | VERIFIED unchanged |
+| Memory EJR-232 | KEEP | retained by Lease260 | VERIFIED unchanged |
+| Identity mutation | NONE | forbidden in Lease261 | VERIFIED none |
+| MEMORY_TO_ROOT baseline | KEEP | 25 | VERIFIED unchanged |
+| Global integrity | KEEP | HOLD | VERIFIED HOLD |
 
-## Permitted material changes
+## CI / integration evidence
 
-Lease261 may create only:
-1. this pre-write matrix,
-2. the Lease261 vacancy-proof record,
-3. a dedicated GitHub Actions vacancy-proof workflow adapted from the execution-verified Lease256 pattern for candidate EJR-412.
+- Pre-write matrix commit passed Full-Stack run 2348 and Runtime run 2124.
+- Lease opening commit passed Full-Stack run 2349 and Runtime run 2125.
+- Workflow commit passed dedicated vacancy run `33370689585`, Full-Stack run `33370689532` / 2350, and M2 run `33370689524`.
+- Lease closure commit `ab486dd6e273ee7d46f4afc2e14f3d3162a890cf` passed Full-Stack run `33370830647` / 2351, Runtime run `33370830255` / 2126, and M2 run `33370830233`.
+- The closed Lease261 record was re-read from current main after write.
 
-It MUST NOT rename, delete, move, rewrite either EJR-232 member, allocate EJR-412, rewrite consumers, change the census expected count, expand Plan204, or promote global integrity.
+## Closure
 
-## Pre-write decision
+`LEASE261 = CLOSED / EJR-412 VACANT / EXECUTION-VERIFIED / RESUME-SAFE`
 
-`PREWRITE GATE = PASS`
+EJR-412 is reserved for exactly one bounded replacement allocation for the displaced root EJR-232 record in the next separate identity-repair lease.
 
-Next: re-read this matrix from current main and require normal push CI success before creating the Lease261 proof record or dedicated proof workflow.
+Priority 2 remains OPEN. Phase 1 remains OPEN. Global Integrity remains HOLD.
+
+Next legal action: open a separate EJR-232 → EJR-412 identity-repair lease with a pre-write mutation matrix; re-read the current source and enumerate current consumer obligations before the atomic identity mutation.
