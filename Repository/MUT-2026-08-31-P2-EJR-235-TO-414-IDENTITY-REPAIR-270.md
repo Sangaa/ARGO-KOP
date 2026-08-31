@@ -1,56 +1,46 @@
 # MUT-2026-08-31-P2-EJR-235-TO-414-IDENTITY-REPAIR-270
 
-Status: OPEN / EXECUTION-PENDING
+Status: CLOSED / EXECUTION-VERIFIED / RESUME-SAFE
 Scope: One-record Priority-2 identity repair: displaced root EJR-235 → EJR-414.
 Opening main: `3e462e1bb03924b7112fc4c540a90ce54957a4f8`
 Pre-write Matrix270: `96e4e66648b8331eb03886e9807cd5277518cbc6`
+Execution lease: `14d3918cd270db6dbcdbe24802d6de683fd6663c`
+Functional repair head: `ad7fd5642941a398f915dad5c299e009346c38a7`
+Successor baseline lease: 271
 
-## Authority
+## Authority and execution
 
-- Lease268 retained the earlier Memory EJR-235 and classified the later root EJR-235 allocation displaced.
-- Lease269 is CLOSED / EXECUTION-VERIFIED / RESUME-SAFE and proves EJR-414 VACANT across complete reachable history; artifact `9752355789` proves `current_claims=[]`, `historical_claims=[]`, `history_complete=true`, `occupied=false`, `vacant=true`, `decision=VACANT`.
-- EJR-414 is reserved for exactly one bounded replacement allocation: this repair.
+Lease268 retained the earlier Memory EJR-235 allocation and classified the later root EJR-235 allocation displaced. Lease269 proved EJR-414 VACANT across complete reachable history and reserved it for this bounded repair.
 
-## Fresh source evidence
+Repair270 then atomically:
+- retained `Memory/Engineering_Journal/EJR-235_2026-08-14_P53_SESSION_CLOSURE.md` unchanged;
+- removed `EJR/EJR-235_2026-08-17_GOV-015_FIXTURE_TEST_FIELD_VALIDATION.md`;
+- created `EJR/EJR-414_2026-08-17_GOV-015_FIXTURE_TEST_FIELD_VALIDATION.md`;
+- changed only the root H1 identity from EJR-235 to EJR-414;
+- preserved body/date/chronology and historical footer text including `End of EJR-235`;
+- performed zero executable-consumer rewrites.
 
-Current displaced source:
-`EJR/EJR-235_2026-08-17_GOV-015_FIXTURE_TEST_FIELD_VALIDATION.md`
+Exact compare from execution lease to repair head classified the EJR change as a rename with +1/-1 and showed only the EJR rename plus Matrix270 update.
 
-Source blob at pre-write read:
-`a326b6195ecd66b26d8b379706c8965e78bde153`
+## Repair-head verification
 
-Retained Memory member:
-`Memory/Engineering_Journal/EJR-235_2026-08-14_P53_SESSION_CLOSURE.md`
-blob `28216a14168c44875273f7edd5747dfd54e92f3d`.
+- Full-Stack #2390 / run `33380217985`: SUCCESS.
+- Internal Document-ID Audit #61 / run `33380217984` was clean through all stages except the expected MEMORY_TO_ROOT baseline drift.
+- Repair-head census artifact `9753468588`, digest `sha256:f0897d8869170a12046b836abc5b0ce2c0325402522b41826d455c499e97e6dc`, proved expected=23 / observed=22 with sole incompleteness `__COHORT_COUNT_DRIFT__`.
 
-The source H1 is `# EJR-235 — GOV-015 Fixture/Test Field Validation`. Historical body/footer text ends with `End of EJR-235` and must remain preserved.
+## Successor normalization and closure proof
 
-## Consumer obligations
+Lease271 changed only the deterministic expected cohort baseline 23→22.
 
-Fresh search for the exact old member filename/path surfaced Lease268 historical disposition evidence only. These references remain unchanged because they describe the historical path/identity accurately.
+- Internal Document-ID Audit #62 / run `33380575170`: SUCCESS.
+- Full-Stack #2392 / run `33380575158`: SUCCESS.
+- Final census artifact `9753598303`, digest `sha256:dbf33fba9269544b7f48cbddd32ad19084b68331a0b717b37855ca44cd27bee7`.
+- Final census: expected=22, observed=22, history_complete=true, classification_complete=true, decision=CENSUSED, incomplete_group_ids=[].
 
-No direct executable/operational consumer requiring rewrite has been established. Repair270 therefore performs zero consumer rewrites unless a fresh executable consumer appears before execution.
+## Closure boundary
 
-## Pre-write validation
-
-Matrix270 commit `96e4e66648b8331eb03886e9807cd5277518cbc6` passed Full-Stack Repository Audit #2388 / run `33379925915` with every repository-audit step successful.
-
-## Authorized atomic mutation
-
-One functional tree mutation may:
-1. retain `Memory/Engineering_Journal/EJR-235_2026-08-14_P53_SESSION_CLOSURE.md` unchanged;
-2. remove `EJR/EJR-235_2026-08-17_GOV-015_FIXTURE_TEST_FIELD_VALIDATION.md`;
-3. create `EJR/EJR-414_2026-08-17_GOV-015_FIXTURE_TEST_FIELD_VALIDATION.md`;
-4. preserve root semantic body/date/chronology byte-for-byte except H1 identity `EJR-235` → `EJR-414`;
-5. preserve historical footer/body text including `End of EJR-235`;
-6. update Matrix270 in the same functional commit to `FUNCTIONAL MUTATION APPLIED / VERIFICATION PENDING`.
-
-## Baseline boundary
-
-`EXPECTED_GROUP_COUNT = 23` must remain unchanged inside Repair270. An exact repair-head result `expected=23 / observed=22` is acceptable only when the sole incompleteness is `__COHORT_COUNT_DRIFT__`; any correction belongs to a separate successor lease.
-
-## Hard gate
-
-Immediately before mutation, re-discover live main and re-read the source, retained Memory member, target absence, and consumer state. Abort if main is not this lease commit, if either source blob changed, if the EJR-414 target path exists, or if a new executable consumer is established.
+Repair270 is CLOSED / EXECUTION-VERIFIED / RESUME-SAFE. No governance rule is promoted from this transaction; it confirms the already established Repair→separate baseline-successor pattern.
 
 Priority 2 remains OPEN. Phase 1 remains OPEN. Global Integrity remains HOLD.
+
+Next safe entry: choose the next target from the current 22-group MEMORY_TO_ROOT census using fresh risk, consumer, and chronology evidence.
