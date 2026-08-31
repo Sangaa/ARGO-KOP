@@ -1,4 +1,4 @@
-# EJR-248 — 2026-08-18 Today Build Plan & Session Closure Contract
+# EJR-428 — 2026-08-18 Today Build Plan & Session Closure Contract
 
 Date: 2026-08-18
 Status: `ACTIVE / EXECUTION PLAN / CLOSURE-PROTECTED`
@@ -57,4 +57,4 @@ If the session reaches a tool or context limit before all priorities are complet
 
 ---
 
-End of EJR-248
+End of EJR-428
