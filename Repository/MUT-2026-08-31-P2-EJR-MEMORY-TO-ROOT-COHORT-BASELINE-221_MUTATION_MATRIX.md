@@ -1,16 +1,18 @@
 # Mutation Matrix — Lease221
 
-Status: OPEN / PREWRITE
+Status: CLOSED / EXECUTION-VERIFIED / RESUME-SAFE
 Lease: `Repository/MUT-2026-08-31-P2-EJR-MEMORY-TO-ROOT-COHORT-BASELINE-221.md`
 Baseline: `a78bf0dd8760b036656515c39378261a1c0a2a09`
+Prewrite: `a17f6109283387a29f1eca79babd8d5d5e41eaaa`
+Functional head: `bab2d672773a633e404213d02f6ed9bf458d1c78`
 
-| Surface | Before | Authorized after | Boundary |
-|---|---|---|---|
-| memory→root census baseline | expected 33 / observed 32 | expected 32 / observed 32 | one-line rebaseline only |
-| classifier-derived membership | 32 observed groups | unchanged | dynamic selection preserved |
-| drift failure semantics | fail when observed != expected | unchanged | must remain fail-closed |
-| EJR-301/EJR-403 + REP-021 | Lease220 post-repair state | unchanged | no identity/consumer mutation |
-| tests / scanner / workflow logic | current | unchanged | no weakening |
-| REP authority surfaces | current | unchanged | no promotion |
+| Surface | Executed | Result |
+|---|---|---|
+| memory→root census baseline | yes | expected 33→32 only |
+| classifier-derived membership | NO | 32 groups dynamically selected |
+| drift failure semantics | NO | fail-closed behavior preserved |
+| EJR-301/EJR-403 + REP-021 | NO | Lease220 post-repair state preserved |
+| tests/scanner/workflow logic | NO | unchanged |
+| REP authority | NO | no promotion |
 
-Exit requires exact-head Internal-ID SUCCESS and deterministic 32/32 CENSUSED artifact plus applicable regressions. Real Matrix path-filter non-trigger on census-only diff is NOT APPLICABLE, not PASS/FAIL.
+Exact-head Internal-ID `33357346467`, Full-Stack `33357346484`, Runtime `33357346422`, and M2 `33357346457` all succeeded. Artifact `9745556033` proves 32/32, CENSUSED, history/classification complete, incomplete=[]. Real Matrix is NOT APPLICABLE to the census-only functional diff; closure Matrix synchronization is its applicable regression point.
