@@ -1,16 +1,16 @@
 # MUTATION MATRIX — Lease228 MEMORY_TO_ROOT cohort baseline 32→31
 
-Status: OPEN / PREWRITE
+Status: CLOSED / EXECUTION-VERIFIED
 Baseline: `a7434269d28c2f4bf5510497091291a2579feb74`
+Prewrite: `2413ec8a164a1551e82043398bef3953f3f9cef2`
+Functional: `1972ebe9fd5b32e3eaf5703866e671d697e27975`
 
-| Surface | Authorized change |
-|---|---|
-| cohort census constant | `EXPECTED_GROUP_COUNT = 32` → `31` |
-| classifier logic | NONE |
-| tests/workflows | NONE |
-| EJR/GOV/REP/Memory | NONE |
-| Lease227 repair history | NONE |
+| Surface | Authorized change | Result |
+|---|---|---|
+| cohort census constant | EXPECTED_GROUP_COUNT 32→31 | DONE |
+| classifier logic | NONE | UNCHANGED |
+| tests/workflows | NONE | UNCHANGED |
+| EJR/GOV/REP/Memory | NONE | UNCHANGED |
+| Lease227 history | NONE | UNCHANGED |
 
-Evidence authority: run `33359946109`, artifact `9746355744`, digest `sha256:5cf5e30dc15fbd91dadddf810bb102e352ece47e99d4a9b2572435ef6ef05c51` proved complete deterministic cohort 31 after Lease227.
-
-Verification: bounded compare plus exact-head Internal-ID census, Full-Stack, Runtime, M2. Real Matrix non-trigger from a census-only diff is NOT APPLICABLE.
+Evidence: repair-head artifact `9746355744` proved drift 32→31. Successor artifact `9746432334` proved 31/31, complete, CENSUSED. Internal-ID, Full-Stack, Runtime and M2 passed at exact functional head. Real Matrix was NOT APPLICABLE to the census-only diff.
