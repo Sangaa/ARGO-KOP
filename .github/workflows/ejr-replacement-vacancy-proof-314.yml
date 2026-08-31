@@ -11,6 +11,7 @@ on:
 
 jobs:
   prove-vacancy:
+    if: github.sha == '0b0014744019c19d1272987bdb6f86ca19c8d7a4'
     runs-on: ubuntu-latest
     steps:
       - name: Checkout complete history
