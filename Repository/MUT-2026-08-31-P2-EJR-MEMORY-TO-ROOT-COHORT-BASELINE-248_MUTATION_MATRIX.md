@@ -1,13 +1,15 @@
 # MUTATION MATRIX — MEMORY_TO_ROOT COHORT BASELINE 248
 
-Status: PREWRITE / FUNCTIONAL MUTATION PENDING
+Status: CLOSED / EXECUTION-VERIFIED
 
-| Surface | Before | Authorized after |
-|---|---:|---:|
-| EXPECTED_GROUP_COUNT | 28 | 27 |
-| Observed deterministic cohort | 27 | 27 |
-| Classifier logic | unchanged | unchanged |
-| EJR/Memory/GOV/REP content | unchanged | unchanged |
-| Global integrity | HOLD | HOLD |
-
-Verification must prove exact-head Internal-ID success and a CENSUSED 27/27 artifact.
+| Surface | Final state |
+|---|---|
+| EXPECTED_GROUP_COUNT | 27 |
+| Observed deterministic cohort | 27 |
+| Classification | complete / CENSUSED |
+| Classifier logic | unchanged |
+| EJR/Memory/GOV/REP content | unchanged by successor |
+| Exact-head Internal-ID | SUCCESS |
+| Full-Stack / Runtime / M2 | SUCCESS / SUCCESS / SUCCESS |
+| Real Matrix | NOT APPLICABLE to census-only diff |
+| Global integrity | HOLD |
