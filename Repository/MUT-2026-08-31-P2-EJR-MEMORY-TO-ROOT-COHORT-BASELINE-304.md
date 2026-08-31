@@ -1,20 +1,24 @@
 # Lease 304 — MEMORY_TO_ROOT Cohort Baseline 12→11
 
-Status: OPEN / BASELINE-ONLY
+Status: CLOSED / EXECUTION-VERIFIED / RESUME-SAFE
 Date: 2026-08-31
 
-Repair303 removed one verified ambiguity member from the MEMORY_TO_ROOT cohort without introducing any additional incomplete group. The deterministic census on the repair head reports:
-- expected_group_count: 12;
-- observed_group_count: 11;
-- incomplete_group_ids: [`__COHORT_COUNT_DRIFT__`].
+## Mutation
+Functional head: `4290ad4ff0b1b3f814bf24c5f12b5ee892344489`.
+Only `Quality/Integration/ejr_memory_to_root_provenance_census.py` changed:
+`EXPECTED_GROUP_COUNT = 12` → `EXPECTED_GROUP_COUNT = 11`.
 
-## Allowed Mutation
-Update only `Quality/Integration/ejr_memory_to_root_provenance_census.py` from `EXPECTED_GROUP_COUNT = 12` to `EXPECTED_GROUP_COUNT = 11`.
+Exact compare from lease opening head showed one modified file, +1/-1.
 
-## Required Closure
-- exact single-file +1/-1 diff;
-- Full-Stack Repository Audit SUCCESS;
-- Internal Document-ID Audit SUCCESS;
-- final census `11/11`, `classification_complete=true`, `decision=CENSUSED`, no incomplete IDs.
+## Validation
+- Full-Stack run `33412869607`: SUCCESS.
+- Internal Document-ID Audit run `33412869597`: SUCCESS.
+- Final census artifact:
+  - expected_group_count: 11;
+  - observed_group_count: 11;
+  - classification_complete: true;
+  - decision: `CENSUSED`;
+  - incomplete_group_ids: [].
 
-No identity mutation and no Global Integrity promotion are authorized by this lease.
+## Closure
+Baseline normalization verified. Current MEMORY_TO_ROOT cohort size: 11. Global Integrity remains HOLD.
