@@ -1,4 +1,4 @@
-# EJR-219 — REP-016 Resynchronization and P5 Boundary
+# EJR-402 — REP-016 Resynchronization and P5 Boundary
 
 Date: 2026-08-17  
 Status: RECORDED / SESSION-CLOSABLE  

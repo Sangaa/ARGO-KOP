@@ -1,16 +1,17 @@
 # Mutation Matrix — Lease 216
 
-Status: OPEN / PREWRITE
+Status: FUNCTIONAL MUTATION APPLIED / VERIFICATION PENDING
 Baseline: `fc1661ad027954b2d6bc462e8089a777fcbb683c`
+Prewrite: `c645f7a616560a0a0110ffedb8bb899cf6841089`
 
-| Surface | Authorized | Constraint |
+| Surface | Executed | Constraint/result |
 |---|---|---|
-| Lease216 + Matrix | yes | authority/evidence only |
-| root EJR-219 source | delete as part of identity move | semantic content preserved |
-| root EJR-402 destination | create | H1 identity only changes |
+| Lease216 + Matrix | yes | authority precedes mutation |
+| root EJR-219 source | deleted | identity move only |
+| root EJR-402 destination | created | H1 identity changed; body otherwise preserved |
 | Memory EJR-219 | NO | retained historical allocation |
-| Consumers | only if newly proven operational obligation | none presently established |
-| Census/analyzers | NO | preserve expected 34 and drift semantics |
+| Consumers | NO | no operational synchronous obligation established |
+| Census/analyzers | NO | expected 34 preserved intentionally |
 | REP authority surfaces | NO | no cosmetic sync |
 
-Functional change set must contain the one root move plus Matrix synchronization only.
+Verification must determine whether the preserved drift guard reports 34→33. Any rebaseline requires separate successor authority.
