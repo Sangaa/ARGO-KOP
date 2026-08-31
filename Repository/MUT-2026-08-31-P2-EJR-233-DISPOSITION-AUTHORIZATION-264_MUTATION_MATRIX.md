@@ -1,21 +1,21 @@
 # MUTATION MATRIX — EJR-233 DISPOSITION AUTHORIZATION 264
 
-Status: PREWRITE / DISPOSITION-ONLY
+Status: CLOSED / EXECUTION-VERIFIED
 
-| Surface | Current evidence | Authorized disposition |
+| Surface | Proven current state | Final disposition |
 |---|---|---|
-| Memory EJR-233 | `Memory/Engineering_Journal/EJR-233_2026-08-14_P51_SESSION_CLOSURE.md`; first path commit `a57e245489dd8519884615d53b7873610e48d67e` on 2026-08-14 | retain current EJR-233 identity |
-| Root EJR-233 | `EJR/EJR-233_2026-08-17_GOV-015_FIRST_EXECUTION_APPLICATION.md`; first path commit `768c49a18f67749ac8730527f245ff6d97342f86` on 2026-08-17 | classify as later displaced allocation only after this disposition lease is verified |
+| Memory EJR-233 | `Memory/Engineering_Journal/EJR-233_2026-08-14_P51_SESSION_CLOSURE.md`; first path commit `a57e245489dd8519884615d53b7873610e48d67e` on 2026-08-14 | RETAIN EJR-233 identity |
+| Root EJR-233 | `EJR/EJR-233_2026-08-17_GOV-015_FIRST_EXECUTION_APPLICATION.md`; first path commit `768c49a18f67749ac8730527f245ff6d97342f86` on 2026-08-17 | LATER DISPLACED allocation |
 | Current cohort evidence | 24/24 CENSUSED after Lease263 | unchanged |
-| External exact-ID refs | 0 in final Lease263 census artifact | unchanged |
-| Exact member-path refs | 0 in final Lease263 census artifact | unchanged |
-| Record content | distinct bodies/H1 semantics | unchanged |
-| Rename/reassignment | none authorized | none |
-| Vacancy allocation | none authorized | none |
+| External exact-ID refs | 0 | unchanged |
+| Exact member-path refs | 0 | unchanged |
+| Record bodies | distinct | unchanged |
+| Rename/reassignment | none | none authorized |
+| Vacancy allocation | none | none authorized |
 | Global integrity | HOLD | HOLD |
 
-Evidence boundary: this Matrix authorizes classification/disposition only. It does not authorize a rename, delete, replacement ID, vacancy claim, consumer rewrite, or baseline update.
+Pre-write Matrix commit: `93454a3d66af1df88debb51b59ccab93c69e8719` passed Full-Stack #2361, Runtime #2136, Real Mutation Matrix #201, and M2 #1018.
 
-Selection evidence comes from final Lease263 artifact `9750922890` (`sha256:1948d5e7ea91d7dc416a88d99180e4f04ad0ef4426c66178da7f645d577a29be`), which reports EJR-233 as an expected two-member MEMORY_EJR → ROOT_EJR group with zero external exact-ID references and zero exact member-path references.
+Disposition record commit `35d0a533c022aec90ed52893bfc762e51c485741` passed Full-Stack #2362, Runtime #2137, and M2 #1019. No functional EJR mutation occurred.
 
-Any later repair requires a separate complete-history vacancy proof and a separate repair lease.
+Next authorized class of work is a separate complete-history replacement-vacancy proof. A rename, delete, replacement ID, consumer rewrite, cohort update, or integrity promotion remains outside Lease264.
