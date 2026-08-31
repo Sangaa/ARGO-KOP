@@ -1,27 +1,23 @@
 # MUT-2026-08-31-P2-EJR-217-DISPOSITION-AUTHORIZATION-255
 
-Status: PREWRITE / AUTHORIZATION ESTABLISHED / NO IDENTITY MUTATION YET
+Status: CLOSED / EXECUTION-CONSUMED / RESUME-SAFE
 Scope: Priority-2 disposition authorization for EJR-217 only.
 
 ## Evidence
-Current deterministic MEMORY_TO_ROOT census is complete at 26/26 and classifies EJR-217 as a two-member Memory→Root ambiguity with distinct semantic bodies, zero external exact-ID references, and zero exact-member-path consumers.
+The complete deterministic MEMORY_TO_ROOT census at the opening baseline classified EJR-217 as a two-member Memory→Root ambiguity with distinct semantic bodies and zero direct exact-ID/exact-member-path consumer obligations.
 
-Current members were re-read directly:
-- `Memory/Engineering_Journal/EJR-217_2026-08-14_P34_SESSION_CLOSURE.md` — P34 closure record.
-- `EJR/EJR-217_CURRENT_BUILD_RECONCILIATION_POST_P3_2026-08-17.md` — later post-P3 build reconciliation record.
+Current-member chronology was independently established:
+- `Memory/Engineering_Journal/EJR-217_2026-08-14_P34_SESSION_CLOSURE.md` first allocated on 2026-08-14 by `515549daf2580494b7a75f23c30d5752f2731796`.
+- `EJR/EJR-217_CURRENT_BUILD_RECONCILIATION_POST_P3_2026-08-17.md` first allocated on 2026-08-17 by `f7716b1446cf5c7ee3fb2ba39a27754e8d6d0986`.
 
-Git path history independently proves chronology:
-- Memory path created by `515549daf2580494b7a75f23c30d5752f2731796` on 2026-08-14.
-- Root path created by `f7716b1446cf5c7ee3fb2ba39a27754e8d6d0986` on 2026-08-17.
+Because EJR-217 was outside Plan204's original five collision groups, Lease255 explicitly authorized the disposition rather than silently extending Plan204.
 
-Fresh repository search for `EJR-217` returned no indexed results and is treated only as secondary discovery evidence; absence authority comes from the complete deterministic census, not search-index silence.
+## Closed disposition
+- RETAIN the earlier Memory EJR-217 allocation.
+- CLASSIFY the later root EJR-217 as displaced.
+- Permit a fresh replacement identity only after a separate complete-history vacancy proof.
 
-No reviewed evidence invalidates the earlier Memory allocation. Both records remain legitimate engineering evidence.
+Lease256 subsequently proved EJR-411 vacant, and Repair257 consumed this authorization by moving only the displaced root record to EJR-411. The Memory allocation remained unchanged.
 
-## Disposition
-Apply the same bounded first-valid-allocation rule used by Plan204, as an explicit disposition outside Plan204's original five collision groups:
-- RETAIN `Memory/Engineering_Journal/EJR-217_2026-08-14_P34_SESSION_CLOSURE.md` as the surviving EJR-217 allocation.
-- CLASSIFY `EJR/EJR-217_CURRENT_BUILD_RECONCILIATION_POST_P3_2026-08-17.md` as displaced and eligible for a fresh replacement identity only after a separate complete-history vacancy proof.
-
-## Boundaries
-This lease authorizes disposition only. It performs no rename, delete, replacement allocation, H1 rewrite, consumer rewrite, baseline change, or global promotion. Current MEMORY_TO_ROOT baseline remains 26. Priority 2 remains OPEN; Phase 1 remains OPEN; Global Integrity remains HOLD.
+## Boundary
+Lease255 itself performed no rename, delete, replacement allocation, H1 rewrite, consumer rewrite, baseline mutation, or global promotion. Priority 2 remains OPEN; Phase 1 remains OPEN; Global Integrity remains HOLD.

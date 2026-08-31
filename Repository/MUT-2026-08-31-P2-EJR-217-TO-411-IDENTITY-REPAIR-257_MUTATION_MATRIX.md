@@ -1,17 +1,19 @@
 # MUTATION MATRIX — EJR-217 → EJR-411 IDENTITY REPAIR 257
 
-Status: FUNCTIONAL MUTATION APPLIED / VERIFICATION PENDING
+Status: CLOSED / SUCCESSOR-VERIFIED
 
-| Surface | Before | Applied state |
-|---|---|---|
-| Memory EJR-217 | earlier valid allocation | unchanged / retained |
-| Root EJR-217 | displaced later allocation | removed from old path |
-| Root EJR-411 | absent / vacancy-proven | created with preserved body/date/chronology |
-| Root H1 | EJR-217 | EJR-411 |
-| Exact-ID consumers | zero established | no rewrite |
-| Exact-path consumers | zero established | no rewrite |
-| MEMORY_TO_ROOT baseline | 26 | 26 inside repair |
-| Classifier logic/tests/workflows | unchanged | unchanged |
-| Global integrity | HOLD | HOLD |
+| Surface | Final verified state |
+|---|---|
+| Memory EJR-217 | retained unchanged |
+| Root EJR-217 | removed from displaced old path |
+| Root EJR-411 | created with preserved body/date/chronology and H1 identity EJR-411 |
+| Direct exact-ID consumers | zero / no rewrite |
+| Direct exact-path consumers | zero / no rewrite |
+| Repair-head baseline | 26 preserved |
+| Repair-head census | expected 26 / observed 25 / legitimate cohort drift |
+| Successor baseline | 25 |
+| Successor census | 25/25 / CENSUSED / complete |
+| Classifier logic/tests | unchanged |
+| Global integrity | HOLD |
 
-Functional completion now requires exact diff/readback and post-mutation CI/artifact evidence.
+Repair257 and Successor258 remain separate evidence transactions; the repair-head census failure is preserved, not retroactively rewritten.

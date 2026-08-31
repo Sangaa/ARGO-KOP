@@ -1,15 +1,15 @@
 # MUTATION MATRIX — EJR-217 DISPOSITION AUTHORIZATION 255
 
-Status: PREWRITE / DISPOSITION ONLY / NO FUNCTIONAL IDENTITY MUTATION
+Status: CLOSED / EXECUTION-CONSUMED
 
-| Surface | Current state | Authorized disposition |
-|---|---|---|
-| Memory EJR-217 | earlier valid allocation | RETAIN |
-| Root EJR-217 | later valid evidence reusing ID | DISPLACED / replacement eligible after vacancy proof |
-| Exact-ID consumers | zero by deterministic census | no rewrite authorized in this lease |
-| Exact-path consumers | zero by deterministic census | no rewrite authorized in this lease |
-| Replacement ID | none allocated | separate vacancy proof required |
-| MEMORY_TO_ROOT baseline | 26 | 26 |
-| Global integrity | HOLD | HOLD |
+| Surface | Closed state |
+|---|---|
+| Memory EJR-217 | earlier allocation retained |
+| Root EJR-217 | later allocation classified displaced and subsequently repaired |
+| Replacement allocation | EJR-411, only after Lease256 vacancy proof |
+| Direct consumer obligations | zero established |
+| Disposition mutation | none inside Lease255 |
+| MEMORY_TO_ROOT baseline | unchanged inside Lease255 at 26 |
+| Global integrity | HOLD |
 
-No rename, delete, H1 rewrite, replacement allocation, baseline mutation, or global promotion is part of Lease255.
+Lease255 was consumed by the separately governed Vacancy256 → Repair257 chain; it did not itself perform identity mutation.
