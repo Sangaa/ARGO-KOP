@@ -88,7 +88,7 @@ General Rule:
 Additional rule:
 `Matrix Presence Gate ≠ Matrix Semantic Validation`
 
-Classification: `REUSABLE-LEARNING`.
+Classification: `REUSABLE-LEARNING`
 
 ## 9. Knowledge Transfer
 Transferred into:
