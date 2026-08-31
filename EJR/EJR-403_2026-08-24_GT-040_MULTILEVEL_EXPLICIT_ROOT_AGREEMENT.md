@@ -1,4 +1,4 @@
-# EJR-301 — GT-040 Multilevel Explicit Root Agreement
+# EJR-403 — GT-040 Multilevel Explicit Root Agreement
 
 Date: 2026-08-24
 Status: VERIFIED BY CONTROLLED REGRESSION / CI EXECUTION PENDING
