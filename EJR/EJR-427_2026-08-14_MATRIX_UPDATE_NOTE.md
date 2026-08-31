@@ -1,4 +1,4 @@
-# EJR-174 — REP-020 Matrix Update Note
+# EJR-427 — REP-020 Matrix Update Note
 
 This note records the latest revalidation event for REP-020 because the matrix itself must be preserved as a complete canonical working document when edited.
 
