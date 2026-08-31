@@ -1,25 +1,14 @@
 # Mutation Matrix — Repair 309 — EJR-174 → EJR-427
 
 Date: 2026-08-31
-Status: OPEN
+Status: CLOSED
 
-## Allowed mutation
-One atomic Git-tree identity repair:
-- delete root `EJR/EJR-174_2026-08-14_MATRIX_UPDATE_NOTE.md`;
-- add root `EJR/EJR-427_2026-08-14_MATRIX_UPDATE_NOTE.md` with preserved substantive content and successor H1.
+## Closure evidence
+- Atomic delete/add identity mutation completed at `96c0794a2b7f40a0e8eaee6fa5144f1b9e43f4d2`.
+- No intermediate duplicate state.
+- Memory EJR-174 remained byte-identical.
+- Full-Stack `33417186770`: SUCCESS.
+- Only accepted Internal-ID delta was cohort count drift 10→9; no member-specific gap.
+- Baseline repair delegated to Lease 310.
 
-## Protected boundaries
-- Memory EJR-174 must remain byte-identical.
-- No historical narrative references are cosmetically rewritten.
-- No REP/GOV/Architecture promotion.
-- No cohort-baseline normalization in Repair 309.
-
-## Required evidence
-1. Live-main re-entry immediately before ref mutation.
-2. Atomic tree/commit/ref update; no intermediate duplicate identity state.
-3. Exact post-state path checks.
-4. Full-Stack SUCCESS.
-5. Internal-ID artifact inspection; only expected 10→9 cohort drift is acceptable.
-
-## Closure rule
-If the only remaining failure is deterministic cohort-count drift, close the repair evidence and open a separate baseline-normalization lease. Otherwise stop.
+No historical narrative cleanup or authority promotion was performed.
