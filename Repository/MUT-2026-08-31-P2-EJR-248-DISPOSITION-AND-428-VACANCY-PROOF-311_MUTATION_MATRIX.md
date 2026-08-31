@@ -2,18 +2,18 @@
 
 Transaction ID: MUT-2026-08-31-P2-EJR-248-311
 Protocol: GOV-014
-Status: OPEN
+Status: CLOSED / VERIFIED
 
 | Change ID | Target | Action | Expected Content | Applied | Verified |
 |---|---|---|---|---|---|
 | 311-A | Lease 311 record | CREATE | Evidence-only disposition and proof requirement | Y | Y |
-| 311-B | Vacancy workflow | CREATE | Complete-history EJR-428 vacancy proof | N | N |
+| 311-B | Vacancy workflow | CREATE | Complete-history EJR-428 vacancy proof | Y | Y |
 
 ## KEEP REQUIREMENT
-Keep both current EJR-248 members unchanged until the vacancy gate returns VACANT. Preserve all unrelated repository content byte-for-byte.
+Both EJR-248 members were preserved until the vacancy gate returned VACANT. No identity mutation occurred inside this lease.
 
 ## Execution Evidence
-Current main was re-read before mutation. Current code search returned no EJR-428 allocation, but this is explicitly treated as discovery only.
+Complete-history artifact proved EJR-428 VACANT with no current or historical claims.
 
 ## Closure
-Close only after the complete-history workflow and artifact are inspected. If EJR-428 is not VACANT, stop without identity mutation.
+PASS. Repair 312 was the only authorized successor action.

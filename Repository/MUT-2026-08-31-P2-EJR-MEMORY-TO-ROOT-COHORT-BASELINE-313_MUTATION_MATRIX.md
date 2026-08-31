@@ -2,17 +2,17 @@
 
 Transaction ID: MUT-2026-08-31-P2-EJR-BASELINE-313
 Protocol: GOV-014
-Status: OPEN
+Status: CLOSED / VERIFIED
 
 | Change ID | Target | Action | Expected Content | Applied | Verified |
 |---|---|---|---|---|---|
-| 313-A | `Quality/Integration/ejr_memory_to_root_provenance_census.py` | MODIFY | `EXPECTED_GROUP_COUNT = 8` only | N | N |
+| 313-A | `Quality/Integration/ejr_memory_to_root_provenance_census.py` | MODIFY | `EXPECTED_GROUP_COUNT = 8` only | Y | Y |
 
 ## KEEP REQUIREMENT
-Preserve all classifier logic, cohort-member evidence logic, tests, authority boundaries, and unrelated files unchanged.
+All classifier logic, tests, authority boundaries, cohort-member evidence logic, and unrelated files were preserved.
 
 ## Execution Evidence
-Repair 312 post-state artifact identified only deterministic cohort-count drift 9→8; no member-specific incomplete IDs were present.
+Exact compare showed one file with one-line value change (+1/-1). Internal-ID SUCCESS; provenance artifact 8/8 CENSUSED with no incomplete IDs; Full-Stack SUCCESS.
 
 ## Closure
-Close only after exact compare, Internal Document-ID SUCCESS, 8/8 CENSUSED artifact, and Full-Stack SUCCESS.
+PASS. Current deterministic baseline = 8. Global Integrity remains HOLD.

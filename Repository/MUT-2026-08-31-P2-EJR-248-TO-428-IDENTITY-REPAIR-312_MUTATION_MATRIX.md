@@ -2,19 +2,19 @@
 
 Transaction ID: MUT-2026-08-31-P2-EJR-248-TO-428-312
 Protocol: GOV-014
-Status: OPEN
+Status: CLOSED / VERIFIED
 
 | Change ID | Target | Action | Expected Content | Applied | Verified |
 |---|---|---|---|---|---|
-| 312-A | Root EJR-248 path | DELETE/REPLACE ATOMICALLY | No intermediate duplicate identity | N | N |
-| 312-B | Root EJR-428 path | CREATE ATOMICALLY | Same journal content under successor identity | N | N |
-| 312-C | Memory EJR-248 | KEEP | First-valid allocation unchanged | N | N |
+| 312-A | Root EJR-248 path | DELETE/REPLACE ATOMICALLY | No intermediate duplicate identity | Y | Y |
+| 312-B | Root EJR-428 path | CREATE ATOMICALLY | Same journal content under successor identity | Y | Y |
+| 312-C | Memory EJR-248 | KEEP | First-valid allocation unchanged | Y | Y |
 
 ## KEEP REQUIREMENT
-Memory EJR-248 content and all unrelated repository artifacts must remain unchanged. Historical narrative references remain historical unless executable/canonical consumers prove otherwise.
+Memory EJR-248 remained unchanged. Historical narrative references were not cosmetically rewritten.
 
 ## Execution Evidence
-Lease 311 complete-history artifact returned EJR-428 = VACANT with no current or historical claims.
+Atomic repair head `7c1553619a1b26dd006c91d008d03f817caf47b8`; Full-Stack SUCCESS; post-repair provenance evidence showed only cohort count drift 9→8.
 
 ## Closure
-Close only after post-state read-back, Internal Document-ID evidence, Full-Stack success, and provenance-artifact inspection. Any deterministic cohort-count drift is handled in a separate lease.
+PASS. Deterministic baseline normalization delegated to Lease 313.

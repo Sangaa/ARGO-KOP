@@ -1,23 +1,20 @@
 # Lease 313 — MEMORY_TO_ROOT_EJR Cohort Baseline Normalization
 
-Status: OPEN / BASELINE-ONLY
+Status: CLOSED / VERIFIED / RESUME-SAFE
 Date: 2026-08-31
-Scope: deterministic provenance census expectation only
 
-## Trigger evidence
-Repair 312 removed EJR-248 from the MEMORY_TO_ROOT_EJR ambiguity cohort by preserving the first-valid Memory allocation and moving the later root journal to EJR-428.
+## Trigger
+Repair 312 reduced the deterministic MEMORY_TO_ROOT_EJR ambiguity cohort from 9 to 8 with no member-specific incomplete IDs.
 
-Post-repair artifact evidence:
-- expected_group_count: 9
-- observed_group_count: 8
-- incomplete_group_ids: [`__COHORT_COUNT_DRIFT__`]
-- no member-specific incomplete IDs
-- Full-Stack Repository Audit: SUCCESS
+## Executed mutation
+Changed only `EXPECTED_GROUP_COUNT = 9` → `EXPECTED_GROUP_COUNT = 8` in `Quality/Integration/ejr_memory_to_root_provenance_census.py`.
+Exact compare: one file, +1/-1.
 
-## Authorized mutation
-Change only `EXPECTED_GROUP_COUNT = 9` → `EXPECTED_GROUP_COUNT = 8` in `Quality/Integration/ejr_memory_to_root_provenance_census.py`.
+## Verification
+Functional baseline head: `79553ce51075f711a2e5b16de663d3b30b0b26d4`.
+Internal Document-ID Audit: SUCCESS.
+Provenance artifact: expected=8, observed=8, classification_complete=true, decision=CENSUSED, incomplete_group_ids=[].
+Full-Stack Repository Audit: SUCCESS.
 
-## Validation
-Require exact compare proving a one-line value change, then Internal Document-ID Audit SUCCESS, provenance artifact `expected=8 / observed=8 / CENSUSED / incomplete=[]`, and Full-Stack SUCCESS.
-
-Global Integrity remains HOLD.
+## Outcome
+Current deterministic cohort baseline is 8. Priority 2 and Phase 1 remain OPEN. Global Integrity remains HOLD.
