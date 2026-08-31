@@ -1,4 +1,4 @@
-# EJR-234 — GOV-015 First Reconciliation Field Validation
+# EJR-429 — GOV-015 First Reconciliation Field Validation
 
 Date: 2026-08-17
 Status: `CLOSED / GOV-015-APPLIED / CI-VERIFIED`
