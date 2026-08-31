@@ -1,4 +1,4 @@
-# EJR-173 — Current-main Revalidation Handoff
+# EJR-406 — Current-main Revalidation Handoff
 
 ## Result
 
