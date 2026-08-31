@@ -2,7 +2,7 @@
 
 Transaction ID: MUT-2026-08-31-P2-EJR-237-TO-431-IDENTITY-REPAIR-325
 Protocol: GOV-013 / GOV-014A
-Status: OPEN / CI-HARD-HOLD / CONTROLLED ROLLBACK
+Status: OPEN / REEXECUTION PREWRITE / SAME-CHANGE-SET BINDING
 Date: 2026-08-31
 
 | Change ID | Target | Action | Expected Content | Applied | Verified |
@@ -13,13 +13,16 @@ Date: 2026-08-31
 | 325-04 | `Repository/REP-020_RECONCILIATION_ADDENDUM_2026-08-17_P322.md` | UPDATE | move root-negative-runtime evidence heading/reference EJR-237 → EJR-431 only | N | N |
 | 325-05 | `Memory/Engineering_Journal/EJR-237_2026-08-15_P55_SESSION_CLOSURE.md` | KEEP | retained earlier allocation byte-for-byte | Y | N |
 | 325-06 | census expected baseline | KEEP | remain 6 during repair; expected drift failure must be preserved for separate rebaseline | Y | Y |
-| 325-R1 | first functional attempt `423170ca485bb8693b23fd1044d573b989e49c9f` | ROLLBACK | restore all three functional surfaces to pre-attempt state because protected REP-020 changed without a Matrix in the same CI diff | N | N |
+| 325-R1 | rejected attempt `423170ca485bb8693b23fd1044d573b989e49c9f` | ROLLBACK | controlled rollback restored pre-attempt functional state | Y | Y |
+| 325-R2 | compliant reexecution | REEXECUTE | identical bounded repair with this Matrix changed in the same atomic functional commit | N | N |
 
 ## KEEP REQUIREMENT
-Preserve the original repair scope and evidence. The first functional attempt is not accepted as closure evidence because Full-Stack run `33426813721` failed at current-change Mutation Matrix enforcement: `protected_changes=1`, `mutation_matrices=0`, protected path `Repository/REP-020_RECONCILIATION_ADDENDUM_2026-08-17_P322.md`. The pre-write Matrix existed in the parent, but the CI gate requires a Matrix inside the same changed-file set. No semantic or runtime failure was observed. Roll back the root rename and both semantic consumer rewrites atomically, with this Matrix changed in the same rollback commit, before re-executing the identical bounded repair with the Matrix in that same functional commit.
+Preserve the original bounded repair scope. The rejected first attempt is historical evidence only. Rollback head `0f7273e0b0fdbf155bdf693afa9f746ac186b5d3` restored the functional tree and passed Full-Stack `33427024520`, Internal-ID `33427024464`, Real Mutation Matrix `33427024471`, and Runtime/Integration `33427024517`. Reexecute only the same root rename/H1 and the two already-identified live semantic consumer rewrites. Include this Matrix in the same functional commit because the current-change CI gate evaluates only that changed-file set. Preserve Memory EJR-237 byte-for-byte, baseline 6, historical P2 evidence, 317/318, Runtime implementation, and REP-016 ordering.
 
 ## Execution Evidence
-Lease323 retained Memory EJR-237. Lease324 run `33426371329` proved EJR-431 VACANT. First functional attempt `423170ca485bb8693b23fd1044d573b989e49c9f` had the intended exact semantic diff and P4 safety gates passed, but Full-Stack run `33426813721` HARD-HOLD failed solely at `Enforce Mutation Matrix on current change set`. This is classified as a same-change-set governance binding defect, not a semantic repair defect.
+Lease323 retained Memory EJR-237; Lease324 run `33426371329` proved EJR-431 VACANT. First attempt `423170ca485bb8693b23fd1044d573b989e49c9f` was semantically bounded but governance-rejected because Full-Stack run `33426813721` reported `protected_changes=1`, `mutation_matrices=0` for protected REP-020. Atomic rollback `0f7273e0b0fdbf155bdf693afa9f746ac186b5d3` restored all functional surfaces; compare against pre-attempt head leaves only this Matrix changed, and rollback verification passed.
+
+Reusable learning candidate: `PRE-WRITE MATRIX EXISTENCE ≠ SAME-CHANGE-SET MATRIX BINDING FOR PROTECTED CI ENFORCEMENT.`
 
 ## Closure
-Do not close Repair325. First complete and verify the atomic rollback, then re-execute the same bounded repair with this Matrix included in the same functional commit. Preserve baseline 6 throughout. Any non-Matrix failure blocks continuation.
+Do not close until the compliant reexecution passes current-change Matrix enforcement and Full-Stack. Inspect Internal-ID independently. If it fails only at MEMORY_TO_ROOT expected=6/observed=5 with `__COHORT_COUNT_DRIFT__`, preserve that failure and rebaseline only in a separate lease. Any other failure is a HARD HOLD.
