@@ -1,0 +1,46 @@
+name: EJR Replacement Vacancy Proof 305
+
+on:
+  push:
+    paths:
+      - '.github/workflows/ejr-replacement-vacancy-proof-305.yml'
+      - 'Repository/MUT-2026-08-31-P2-EJR-247-DISPOSITION-AND-426-VACANCY-PROOF-305.md'
+      - 'Repository/MUT-2026-08-31-P2-EJR-247-DISPOSITION-AND-426-VACANCY-PROOF-305_MUTATION_MATRIX.md'
+      - 'Quality/Integration/ejr_allocation_vacancy_gate.py'
+      - 'Quality/Integration/internal_document_id_audit.py'
+
+jobs:
+  prove-vacancy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout complete history
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Verify complete history
+        run: test "$(git rev-parse --is-shallow-repository)" = "false"
+      - name: Prove EJR-426 vacancy
+        id: vacancy
+        shell: bash
+        run: |
+          set +e
+          python Quality/Integration/ejr_allocation_vacancy_gate.py EJR-426 > ejr-426-vacancy.json
+          code=$?
+          cat ejr-426-vacancy.json
+          echo "exit_code=$code" >> "$GITHUB_OUTPUT"
+          decision=$(python - <<'PY'
+          import json
+          with open('ejr-426-vacancy.json', encoding='utf-8') as f:
+              print(json.load(f).get('decision', 'UNKNOWN'))
+          PY
+          )
+          echo "decision=$decision" >> "$GITHUB_OUTPUT"
+          exit 0
+      - name: Upload vacancy evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: ejr-426-vacancy-proof
+          path: ejr-426-vacancy.json
+      - name: Enforce vacancy decision
+        shell: bash
+        run: test "${{ steps.vacancy.outputs.decision }}" = "VACANT"
