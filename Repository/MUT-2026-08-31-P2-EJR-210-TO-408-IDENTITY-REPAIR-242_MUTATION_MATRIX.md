@@ -1,16 +1,16 @@
 # MUTATION MATRIX — EJR-210 TO EJR-408 IDENTITY REPAIR 242
 
-Status: FUNCTIONAL APPLIED / VERIFICATION PENDING
+Status: CLOSED / SUCCESSOR-VERIFIED
 
-| Surface | Before | Current functional state |
-|---|---|---|
-| Memory EJR-210 | valid earlier allocation | unchanged / retained |
-| Root EJR-210 | displaced later reuse | removed |
-| Root EJR-408 | absent / vacancy-proven | created from displaced root |
-| Exact-ID consumers | 0 | no rewrite |
-| Exact-path consumers | 0 | no rewrite |
-| Semantic body | legitimate engineering evidence | preserved |
-| MEMORY_TO_ROOT baseline | 29 | preserved during repair |
-| Global integrity | HOLD | HOLD |
-
-Post-repair verification is pending. Any legitimate cohort drift must be handled only in a separate successor lease.
+| Surface | Final state |
+|---|---|
+| Memory EJR-210 | unchanged / retained |
+| Root EJR-210 | removed |
+| Root EJR-408 | created from displaced root |
+| Exact-ID consumers | 0 / no rewrite |
+| Exact-path consumers | 0 / no rewrite |
+| Semantic body | preserved |
+| Repair-head baseline | 29 preserved |
+| Repair-head census | expected 29 / observed 28 / drift-only |
+| Successor baseline | 28 verified by Lease243 |
+| Global integrity | HOLD |

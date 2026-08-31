@@ -1,16 +1,19 @@
 # MUT-2026-08-31-P2-EJR-MEMORY-TO-ROOT-COHORT-BASELINE-243
 
-Status: OPEN / PREWRITTEN / SUCCESSOR-ONLY
-Scope: reconcile deterministic MEMORY_TO_ROOT cohort drift exposed by Repair242.
+Status: CLOSED / EXECUTION-VERIFIED / RESUME-SAFE
+Scope: deterministic MEMORY_TO_ROOT cohort successor after Repair242.
 
-Repair242 exact-head Internal-ID run `33363043188` failed only at the deterministic MEMORY_TO_ROOT census after all prior audit/chronology/lineage/provenance stages passed. Artifact `9747340901`, digest `sha256:8c24177282fbbf7933f1460aa27c7c158568ba00b739123d1bd4d791335deafe`, proved:
-- expected_group_count=29
-- observed_group_count=28
-- history_complete=true
-- classification_complete=false solely due `__COHORT_COUNT_DRIFT__`
-- EJR-210 absent from target_ids
-- EJR-408 absent from target_ids
+Repair-head artifact `9747340901` proved legitimate cohort drift from expected 29 to observed 28 with complete history and no incomplete group except `__COHORT_COUNT_DRIFT__`.
 
-This successor authorizes exactly one functional change: `EXPECTED_GROUP_COUNT = 29` → `28` in `Quality/Integration/ejr_memory_to_root_provenance_census.py`.
+Prewrite `3fde3dae61e92b7656214747145c776db230b1d1`. Functional successor `9749752230c7168c45eb915b752926a16054f534` changed only `EXPECTED_GROUP_COUNT = 29` to `28` in `Quality/Integration/ejr_memory_to_root_provenance_census.py`. Compare proved one file, one addition, one deletion.
 
-No classifier logic, tests, workflows, EJR identities, governance, repository reports, Memory records, history, or global integrity state may change in this successor.
+Exact functional-head verification:
+- Internal-ID `33363248873`: SUCCESS
+- Full-Stack `33363248793`: SUCCESS
+- Runtime `33363248796`: SUCCESS
+- M2 `33363248807`: SUCCESS
+- Real Matrix: NOT APPLICABLE to census-only diff
+
+Final census artifact `9747405796`, digest `sha256:fb511ebad6ce5ac4a645aa69a1e1ffc7ab535be162b9a66689d5aa6f22c92083`, proved expected=28, observed=28, history_complete=true, classification_complete=true, decision=CENSUSED, incomplete=[]. EJR-210 and EJR-408 are absent from the target cohort.
+
+Lease243 is CLOSED / EXECUTION-VERIFIED. Current governed MEMORY_TO_ROOT baseline is 28.
