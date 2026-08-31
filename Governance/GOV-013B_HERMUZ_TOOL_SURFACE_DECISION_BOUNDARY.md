@@ -7,7 +7,7 @@
 **Category:** Governance / Engineering Operating Protocol
 **Authority:** Supplements GOV-013; does not replace higher ARGO authority
 **Date:** 2026-08-25
-**Learning Provenance:** EJR-302 / P221
+**Learning Provenance:** EJR-405 / P221
 
 ## 1. Purpose
 

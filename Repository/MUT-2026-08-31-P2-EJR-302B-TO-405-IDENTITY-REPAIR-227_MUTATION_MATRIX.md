@@ -1,7 +1,8 @@
 # MUTATION MATRIX — Lease227 EJR-302B→EJR-405
 
-Status: OPEN / PREWRITE
+Status: FUNCTIONAL WRITE EXECUTED / VERIFICATION PENDING
 Baseline: `d93c23a8df6d3c09b450aba97f44de0ea33324e7`
+Prewrite: `d37219b06403b3420b93991a09d62e3e626a318a`
 
 | Surface | Authorized change |
 |---|---|
@@ -13,4 +14,4 @@ Baseline: `d93c23a8df6d3c09b450aba97f44de0ea33324e7`
 | census baseline | NONE inside repair lease |
 | analyzers/tests/workflows | NONE |
 
-Verification: direct read-back, old-path absence, retained Memory read-back, GOV provenance read-back, compare, Internal-ID artifact, Full-Stack, Runtime, M2, Real Mutation Matrix. Any proven cohort drift is handled only by a separate successor lease.
+Verification pending: direct read-back, old-path absence, retained Memory read-back, GOV provenance read-back, compare, Internal-ID artifact, Full-Stack, Runtime, M2, Real Mutation Matrix. Any proven cohort drift is handled only by a separate successor lease.

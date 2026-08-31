@@ -1,4 +1,4 @@
-# EJR-302 — CI Decision Boundary and GitHub Tool-Surface Learning
+# EJR-405 — CI Decision Boundary and GitHub Tool-Surface Learning
 
 **Date:** 2026-08-25
 **Protocol:** GOV-013 HERMUZ Session Build Protocol
