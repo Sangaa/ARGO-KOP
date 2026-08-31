@@ -1,4 +1,4 @@
-# EJR-302 — GT-041 Deep Provenance Root Conflict
+# EJR-404 — GT-041 Deep Provenance Root Conflict
 
 Date: 2026-08-24
 Status: CONTROLLED REGRESSION RECORDED / CI EXECUTION PENDING

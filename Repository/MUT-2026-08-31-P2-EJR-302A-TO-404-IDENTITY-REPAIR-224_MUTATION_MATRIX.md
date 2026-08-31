@@ -1,7 +1,8 @@
 # MUTATION MATRIX — Lease224 EJR-302A→EJR-404
 
-Status: OPEN / PREWRITE
+Status: FUNCTIONAL MUTATION APPLIED / VERIFYING
 Baseline: `6639e061fdff9d838a86567b0044e6a75df0dd4f`
+Prewrite: `b9918d1462845d7f11bd17cb2c103d408e1abbe5`
 
 | Surface | Authorized change |
 |---|---|

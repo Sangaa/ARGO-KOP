@@ -31,7 +31,7 @@ not `CONTRADICTION`.
 ## Documentation
 
 Test commit: `bee06140ba6c36fe6964bac63d311b589be24639`
-Learning record: `EJR/EJR-302_2026-08-24_GT-041_DEEP_ROOT_CONFLICT.md`
+Learning record: `EJR/EJR-404_2026-08-24_GT-041_DEEP_ROOT_CONFLICT.md`
 Documentation commit: `3b6ecfb236bc1baa2592fd083b0eb6fcb6156add`
 
 ## Verification boundary
