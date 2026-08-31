@@ -8,6 +8,7 @@ on:
       - '.github/workflows/p3-runtime-github-e2e.yml'
       - 'Services/**'
       - 'Runtime/**'
+      - 'Decision/**'
       - 'Tools/**'
       - 'Quality/E2E/**'
       - 'Quality/Integration/**'
@@ -33,7 +34,7 @@ jobs:
       - name: Install test runner
         run: python -m pip install --upgrade pytest
 
-      - name: Execute ENG-006 -> SRV-009 runtime E2E
+      - name: Execute RUN-010 -> ENG-006 -> SRV-009 runtime E2E
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GITHUB_REPOSITORY: ${{ github.repository }}
@@ -45,8 +46,11 @@ jobs:
           import os
           import urllib.parse
           import urllib.request
+
+          from Decision.authorization_gate import authorize
+          from Runtime.Execution.execution_entrypoint import execute
+          from Quality.Integration.rel009_run010_srv009_observation import observe_run010_srv009_dispatch
           from Services.GITHUB_REPOSITORY_CONNECTOR import GitHubConnectorConfig, GitHubRepositoryConnector
-          from Services.ENG006_SRV009_PRODUCTION_ADAPTER import ProductionExecutionCandidate, execute_update
 
           owner, repo = os.environ['GITHUB_REPOSITORY'].split('/', 1)
           branch = os.environ['GITHUB_REF_NAME']
@@ -56,45 +60,61 @@ jobs:
           config = GitHubConnectorConfig(owner=owner, repo=repo, token=token, branch=branch)
           connector = GitHubRepositoryConnector(config, timeout=30.0)
 
-          create_candidate = ProductionExecutionCandidate(
-              execution_id='E2E-P3-RUNTIME-001-CREATE',
-              task_id='E2E-P3-RUNTIME-001',
-              session_id='E2E-P3-2026-08-17',
-              source_trace_id='E2E-SOURCE-TRACE-001',
-              path=path,
-              content='# P3 Runtime SRV-009 Live Probe\n\nState: CREATED\n',
-              purpose='Isolated runtime verification only; non-canonical artifact.',
-              necessity_evidence='P3 executable proof requires runtime invocation over real connector.',
-              commit_message='P3 E2E runtime create probe',
-              authorized=True,
-              authorization_id='AUTH-P3-E2E-RUNTIME-001',
+          authorization = authorize(
+              {'status': 'PROPOSAL_READY'},
+              {
+                  'approved': True,
+                  'authorized_by': 'P318-RUN010-PRODUCTION-E2E',
+                  'authorization_id': 'AUTH-P318-RUN010-PRODUCTION-E2E',
+              },
           )
-          create_result = execute_update(create_candidate, connector=connector)
-          assert create_result['status'] == 'UPDATE_ACCEPTED', create_result
-          assert create_result['execution']['trace']['final_status'] == 'UPDATE_ACCEPTED', create_result
+          assert authorization['status'] == 'AUTHORIZED', authorization
 
-          update_candidate = ProductionExecutionCandidate(
-              execution_id='E2E-P3-RUNTIME-001-UPDATE',
-              task_id='E2E-P3-RUNTIME-001',
-              session_id='E2E-P3-2026-08-17',
-              source_trace_id=create_result['execution']['execution_trace_id'],
-              path=path,
-              content='# P3 Runtime SRV-009 Live Probe\n\nState: UPDATED\n\nRuntime Adapter: VERIFIED\n',
-              purpose='Isolated runtime verification only; non-canonical artifact.',
-              necessity_evidence='Update must use observed current SHA and post-write read-back.',
-              commit_message='P3 E2E runtime update probe',
+          execution = execute(
+              execution_id='EXEC-P318-RUN010-PRODUCTION-E2E',
+              task_id='RUN-010',
+              session_id='SESSION-P318-2026-08-31',
+              source_trace_id='DEC-P318-RUN010-PRODUCTION-E2E',
               authorized=True,
-              authorization_id='AUTH-P3-E2E-RUNTIME-001',
+              final_status='SIMULATED',
+              side_effect=False,
+              stages=[{'stage': 'RUN-010_PRODUCTION_INVOCATION_PRECONDITION', 'status': 'PASS'}],
           )
-          update_result = execute_update(update_candidate, connector=connector)
-          assert update_result['status'] == 'UPDATE_ACCEPTED', update_result
-          assert update_result['execution']['trace']['final_status'] == 'UPDATE_ACCEPTED', update_result
+
+          observed = observe_run010_srv009_dispatch(
+              execution,
+              authorization,
+              connector=connector,
+              path=path,
+              content='# P318 RUN-010 Production Invocation Probe\n\nState: CREATED\n',
+              purpose='Isolated proof of RUN-010 handoff reaching governed SRV-009 dispatch over the real GitHub connector.',
+              necessity_evidence='P318 closes the explicit production invocation evidence gap without changing production wiring.',
+              commit_message='P318 RUN-010 production invocation probe',
+          )
+
+          event = observed['event']
+          result = observed['result']
+          assert event['runtime_reference'] == 'RUN-010', event
+          assert event['target'] == 'SRV-009', event
+          assert event['callable_boundary'] == 'Services.ENG006_SRV009_PRODUCTION_ADAPTER.execute_update', event
+          assert event['execution_id'] == execution['execution_id'], event
+          assert event['task_id'] == execution['task_id'], event
+          assert event['session_id'] == execution['session_id'], event
+          assert event['source_trace_id'] == execution['source_trace_id'], event
+          assert event['authorization_id'] == authorization['authorization_id'], event
+          assert event['dispatch_status'] == 'UPDATE_ACCEPTED', event
+          assert event['post_read_verified'] is True, event
+          assert result['execution']['trace']['side_effect'] is True, result
 
           persisted = connector.read_back(path)
-          assert 'State: UPDATED' in persisted.content
+          assert 'State: CREATED' in persisted.content
           print(json.dumps({
-              'create': create_result['execution']['execution_trace_id'],
-              'update': update_result['execution']['execution_trace_id'],
+              'run010_execution_id': execution['execution_id'],
+              'run010_execution_trace_id': execution['execution_trace_id'],
+              'downstream_execution_trace_id': event['downstream_execution_trace_id'],
+              'authorization_id': event['authorization_id'],
+              'dispatch_status': event['dispatch_status'],
+              'post_read_verified': event['post_read_verified'],
               'persisted_sha': persisted.sha,
               'branch': branch,
               'path': path,
@@ -102,12 +122,12 @@ jobs:
 
           encoded = urllib.parse.quote(path, safe='')
           url = f'https://api.github.com/repos/{owner}/{repo}/contents/{encoded}?ref={urllib.parse.quote(branch)}'
-          payload = json.dumps({'message': 'P3 E2E cleanup', 'sha': persisted.sha, 'branch': branch}).encode()
+          payload = json.dumps({'message': 'P318 E2E cleanup', 'sha': persisted.sha, 'branch': branch}).encode()
           request = urllib.request.Request(url, data=payload, method='DELETE')
           request.add_header('Accept', 'application/vnd.github+json')
           request.add_header('Authorization', f'Bearer {token}')
           request.add_header('X-GitHub-Api-Version', '2022-11-28')
-          request.add_header('User-Agent', 'ARGO-KOP-P3-Runtime-E2E')
+          request.add_header('User-Agent', 'ARGO-KOP-P318-RUN010-E2E')
           with urllib.request.urlopen(request, timeout=30) as response:
               assert response.status in (200, 201)
 
@@ -116,7 +136,7 @@ jobs:
           except Exception as exc:
               assert 'GITHUB_READ_BACK_MISSING' in str(exc), str(exc)
           else:
-              raise AssertionError('E2E cleanup did not remove the probe artifact')
+              raise AssertionError('P318 E2E cleanup did not remove the probe artifact')
           PY
 
       - name: Runtime E2E cleanup guard
