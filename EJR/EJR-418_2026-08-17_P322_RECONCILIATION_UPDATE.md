@@ -17,13 +17,13 @@ Status: `CLOSED / CI-VERIFIED / REUSABLE-LEARNING`
 - P322 reconciliation boundary.
 
 ## 3. Change Executed
-Updated the existing P322 reconciliation addendum using the current SHA and complete-content replacement to transfer the EJR-237 negative runtime evidence into the existing evidence record.
+Updated the existing P322 reconciliation addendum using the current SHA and complete-content replacement to transfer the EJR-431 negative runtime evidence into the existing evidence record.
 
 No canonical relationship registry, Runtime execution code, or production adapter was modified.
 
 ## 4. Preserved Boundary
 The existing P322 content was preserved and extended only with:
-- EJR-237 connected-spine negative runtime evidence;
+- EJR-431 connected-spine negative runtime evidence;
 - Full-Stack CI evidence for the negative runtime gate;
 - explicit statement that this is negative evidence for the inspected seam, not global absence proof.
 
