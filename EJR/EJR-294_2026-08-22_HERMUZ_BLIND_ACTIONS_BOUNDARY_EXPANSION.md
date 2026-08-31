@@ -7,13 +7,13 @@ Production impact: NONE
 
 ## Trigger
 
-Following EJR-293, HERMUZ was instructed to search beyond the previously assumed GitHub connector boundary rather than treating the exercised surface as the full environment.
+Following EJR-432, HERMUZ was instructed to search beyond the previously assumed GitHub connector boundary rather than treating the exercised surface as the full environment.
 
 ## Prior-learning check
 
 Relevant prior evidence was retrieved before new reasoning:
 - EJR-279: Actions evidence boundary was previously identified.
-- EJR-293: GOV-013 now requires Prior-Learning Retrieval before new solution work.
+- EJR-432: GOV-013 now requires Prior-Learning Retrieval before new solution work.
 - Issue #11: dispatch is not exposed through the connected surface; historical retry returned 403; commit-run helper was limited to PR-triggered discovery.
 - Issue #21: repository access and CI evidence were classified as distinct surfaces.
 

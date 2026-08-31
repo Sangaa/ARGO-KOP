@@ -13,7 +13,7 @@ Test the hypothesis that the previously exercised GitHub Actions observation fra
 
 Before experimentation, prior evidence was reviewed:
 - EJR-279: prior Actions evidence boundary.
-- EJR-293: mandatory prior-learning retrieval gate.
+- EJR-432: mandatory prior-learning retrieval gate.
 - EJR-294: blind Actions boundary expansion; exact-ID run/job/log observation was proven on a public control repository.
 
 ## Controlled experiment

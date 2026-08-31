@@ -12,7 +12,7 @@ Test the hypothesis that observable GitHub phenomena may leave evidence outside 
 ## Prior-learning gate
 
 Prior evidence reviewed before new reasoning:
-- EJR-293: mandatory prior-learning retrieval gate.
+- EJR-432: mandatory prior-learning retrieval gate.
 - EJR-294: blind Actions boundary expansion and ID-dependent observation.
 - EJR-295: controlled PR state experiment and run-identity boundary.
 - Issue #11: historical connector boundary and Actions evidence constraint.

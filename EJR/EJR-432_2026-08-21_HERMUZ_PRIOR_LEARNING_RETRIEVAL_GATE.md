@@ -1,4 +1,4 @@
-# EJR-293 — HERMUZ Prior-Learning Retrieval Gate
+# EJR-432 — HERMUZ Prior-Learning Retrieval Gate
 
 Date: 2026-08-21
 Status: CLOSED / GOVERNANCE INTEGRATED
