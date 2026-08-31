@@ -1,18 +1,29 @@
 # MUTATION MATRIX — MEMORY_TO_ROOT COHORT BASELINE 267
 
-Status: PREWRITE / FUNCTIONAL MUTATION PENDING
+Status: CLOSED / EXECUTION-VERIFIED
 
-| Surface | Before | Authorized after |
+| Surface | Before | Final verified state |
 |---|---:|---:|
 | EXPECTED_GROUP_COUNT | 24 | 23 |
-| Observed deterministic cohort | 23 at Repair266 head | 23 |
+| Observed deterministic cohort | 23 | 23 |
 | History complete | true | true |
-| Classification complete | false only due cohort drift | true if no other defect appears |
+| Classification complete | false at Repair266 head | true |
+| Decision | PARTIAL at Repair266 head | CENSUSED |
 | Classifier logic | unchanged | unchanged |
 | Tests/workflows | unchanged | unchanged |
 | EJR/Memory/GOV/REP/history | unchanged | unchanged |
 | Global integrity | HOLD | HOLD |
 
-Authority: Repair266 exact-head Internal-ID run `33374581005` passed every identity/chronology/lineage/provenance stage and failed only at MEMORY_TO_ROOT census. Artifact `9751379903`, digest `sha256:4d71b41256ea0d308769d61f10145efecb1ba07eee6067218f77f7f1c055abf8`, proves expected=24, observed=23, history_complete=true, classification_complete=false, decision=PARTIAL, incomplete_group_ids=[`__COHORT_COUNT_DRIFT__`], with EJR-233 and EJR-413 absent from target_ids.
+Functional successor: `338732cd880a8f6d1a12672aa2e2980c26b49fa6`.
+Exact compare from lease-open commit `3df51d4354bdd633bce1d36f43629bc895c61b64` proved exactly one modified file with one-line replacement (`+1/-1`). Read-back proved `EXPECTED_GROUP_COUNT = 23`.
 
-This lease authorizes one deterministic one-line constant update only. Any additional failure is a HARD HOLD and is not authorized for opportunistic repair here.
+Exact-head verification:
+- Internal Document-ID Audit #60 / run `33374897233`: SUCCESS
+- Full-Stack Repository Audit #2375 / run `33374897260`: SUCCESS
+- ARGO Runtime Prototype and Integration #2149 / run `33374897257`: SUCCESS
+- M2 #1032 / run `33374897254`: SUCCESS
+
+Final census artifact: `9751501145` / `sha256:d83115ddec53c17e030f985affe8d7b251db38432d18037ebb77dcce2a4330b1`.
+Artifact evidence: expected=23, observed=23, history_complete=true, classification_complete=true, decision=CENSUSED, incomplete_group_ids=[].
+
+The verified target_ids are: EJR-165, EJR-174, EJR-212, EJR-218, EJR-234, EJR-235, EJR-236, EJR-237, EJR-238, EJR-239, EJR-240, EJR-241, EJR-243, EJR-244, EJR-245, EJR-246, EJR-247, EJR-248, EJR-293, EJR-294, EJR-295, EJR-296, EJR-297.
