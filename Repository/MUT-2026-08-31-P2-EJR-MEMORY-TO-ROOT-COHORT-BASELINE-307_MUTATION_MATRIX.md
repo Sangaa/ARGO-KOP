@@ -1,25 +1,22 @@
 # Mutation Matrix — Lease 307 — MEMORY_TO_ROOT Baseline 11 → 10
 
-Status: OPEN / PRE-MUTATION
+Status: CLOSED / VALIDATED
 Date: 2026-08-31
 
-| Path | Mutation | Protected impact | Reversible |
-|---|---|---:|---:|
-| `Quality/Integration/ejr_memory_to_root_provenance_census.py` | `EXPECTED_GROUP_COUNT = 11` → `10` | evidence-tool baseline only | yes |
+## Executed Scope
 
-## Preconditions
+Only `Quality/Integration/ejr_memory_to_root_provenance_census.py` changed:
+`EXPECTED_GROUP_COUNT = 11` → `10`.
 
-- Repair306 post-state verified.
-- Full-Stack SUCCESS on repair head.
-- Census artifact inspected: observed=10; only `__COHORT_COUNT_DRIFT__` incomplete marker.
+Functional head: `55571fa0cef3eccb533d17fe39815a23b385a0fd`.
+Compare against parent `85dc141723fa856b3a87a2cdda443b9422855083`: exactly one file, +1/-1.
 
-## Guardrails
+## Validation
 
-- No identity mutation.
-- No workflow-policy mutation.
-- No relationship/authority promotion.
-- Exact compare required after write.
+- Internal Document-ID Audit `33413985956`: SUCCESS.
+- Full-Stack Repository Audit `33413985972`: SUCCESS.
+- artifact: expected=10, observed=10, `classification_complete=true`, `decision=CENSUSED`, `incomplete_group_ids=[]`.
 
-## Rollback
+No identity, workflow-policy, Runtime, Core, Governance, relationship, or authority mutation occurred in this lease.
 
-Restore expected count to 11 if validation shows any non-drift inconsistency.
+Closed. Global Integrity remains HOLD.

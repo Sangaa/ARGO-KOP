@@ -1,37 +1,28 @@
 # MUT-2026-08-31-P2 — EJR-247 → EJR-426 Identity Repair — Lease 306
 
-Status: OPEN / AUTHORIZED BY CLOSED VACANCY GATE 305
+Status: CLOSED / EXECUTION-VERIFIED
 Date: 2026-08-31
 Scope: Priority 2 deterministic MEMORY_TO_ROOT_EJR ambiguity cohort.
 
-## Authorization Basis
+## Executed Repair
 
-Lease305 established:
+Atomic repair commit: `957b2b710c821d48cbf285b9e0c1d4b739c4fa2a`.
 
-- Memory `EJR-247` is the earlier first-valid constituted allocation;
-- root `EJR-247` is the later displaced allocation;
-- complete-history gate proved `EJR-426 = VACANT`;
-- Full-Stack passed on the proof head.
-
-## Authorized Mutation
-
-Atomically:
-
-1. remove `EJR/EJR-247_2026-08-17_MULTI_CHANNEL_TRAINING_COMPLETION.md`;
-2. create `EJR/EJR-426_2026-08-17_MULTI_CHANNEL_TRAINING_COMPLETION.md` with identical body except first H1 identity changes from `EJR-247` to `EJR-426`;
-3. preserve `Memory/Engineering_Journal/EJR-247_2026-08-15_P66_SESSION_CLOSURE.md` unchanged.
-
-Historical narrative references to EJR-247 are not cosmetically rewritten.
+- removed displaced root `EJR/EJR-247_2026-08-17_MULTI_CHANNEL_TRAINING_COMPLETION.md`;
+- created successor root `EJR/EJR-426_2026-08-17_MULTI_CHANNEL_TRAINING_COMPLETION.md`;
+- preserved `Memory/Engineering_Journal/EJR-247_2026-08-15_P66_SESSION_CLOSURE.md` unchanged;
+- successor body preserved with only first-H1 identity changed.
 
 ## Validation
 
-- exact post-state read-back of old root/new root/Memory;
-- Internal Document-ID Audit;
-- MEMORY_TO_ROOT provenance census artifact inspection;
-- Full-Stack Repository Audit.
+Post-state:
+- old root: absent;
+- successor root: present, blob `1c7fc2ea333a515cf8191b992a9797b4d6b75454`;
+- Memory EJR-247 preserved, blob `57e7928eed5ff4c3dd7d1e2583f9544571349276`.
 
-Expected deterministic consequence: cohort 11 → 10, requiring a separate baseline-only normalization lease if and only if the only failure is `__COHORT_COUNT_DRIFT__`.
+Full-Stack run `33413681805`: SUCCESS.
+Internal-ID census observed cohort 10 against expected 11, with the sole incomplete marker `__COHORT_COUNT_DRIFT__`.
 
-## Non-Claims
+## Closure
 
-No Global Integrity promotion. No content-authority promotion. No automatic resolution of other cohort members.
+Repair306 is CLOSED. No non-baseline defect was found. Baseline drift was delegated to separate Lease307. No Global Integrity promotion.

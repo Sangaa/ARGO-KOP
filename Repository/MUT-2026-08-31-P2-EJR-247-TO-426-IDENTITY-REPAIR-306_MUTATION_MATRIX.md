@@ -1,22 +1,25 @@
 # Mutation Matrix — Lease 306 — EJR-247 → EJR-426 Identity Repair
 
-Status: OPEN / PRE-MUTATION
+Status: CLOSED / VALIDATED
 Date: 2026-08-31
 
-| Surface | Mutation | Protected impact | Reversible |
-|---|---|---:|---:|
-| `EJR/EJR-247_2026-08-17_MULTI_CHANNEL_TRAINING_COMPLETION.md` | delete displaced root allocation | journal identity | yes via parent |
-| `EJR/EJR-426_2026-08-17_MULTI_CHANNEL_TRAINING_COMPLETION.md` | create successor identity | journal identity | yes via parent |
-| `Memory/Engineering_Journal/EJR-247_2026-08-15_P66_SESSION_CLOSURE.md` | preserve unchanged | none | n/a |
+## Executed Mutation
 
-## Guardrails
+| Surface | Result |
+|---|---|
+| old root EJR-247 | removed atomically |
+| successor root EJR-426 | created atomically |
+| Memory EJR-247 | preserved unchanged |
 
-- Successor vacancy proof is already complete and artifact-inspected under Lease305.
-- Atomic Git tree/commit/ref mutation required; no intermediate duplicate state.
-- Body preservation required; only first H1 identity changes in successor root.
-- Historical narrative references remain untouched.
-- No Runtime/Core/Governance semantic mutation.
+Atomic repair commit: `957b2b710c821d48cbf285b9e0c1d4b739c4fa2a`.
+Successor vacancy was pre-proven under Lease305.
 
-## Rollback
+## Validation
 
-Return `main` to the repair parent if atomic post-state or audits reveal a non-baseline defect.
+- old root read-back: 404;
+- successor blob: `1c7fc2ea333a515cf8191b992a9797b4d6b75454`;
+- preserved Memory blob: `57e7928eed5ff4c3dd7d1e2583f9544571349276`;
+- Full-Stack `33413681805`: SUCCESS;
+- only deterministic follow-up was cohort baseline drift 11 → 10.
+
+No Runtime/Core/Governance semantic mutation. Closed with baseline normalization delegated to Lease307.

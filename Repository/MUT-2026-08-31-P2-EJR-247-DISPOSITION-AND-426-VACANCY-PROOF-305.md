@@ -1,42 +1,30 @@
 # MUT-2026-08-31-P2 — EJR-247 Disposition and EJR-426 Vacancy Proof — Lease 305
 
-Status: OPEN / EVIDENCE-GATED / NO IDENTITY MUTATION YET
+Status: CLOSED / EVIDENCE-VERIFIED
 Date: 2026-08-31
 Scope: Priority 2 deterministic MEMORY_TO_ROOT_EJR ambiguity cohort.
 
-## Current Evidence
+## Disposition
 
-- Current cohort baseline: 11.
-- `EJR-247` current namespace sequence: `MEMORY_EJR → ROOT_EJR`.
-- Memory allocation: `Memory/Engineering_Journal/EJR-247_2026-08-15_P66_SESSION_CLOSURE.md`.
-- Root allocation: `EJR/EJR-247_2026-08-17_MULTI_CHANNEL_TRAINING_COMPLETION.md`.
-- Memory allocation is historically earlier and is a constituted closed journal identity.
-- Root allocation is a distinct later record.
-- Current evidence therefore selects Memory as the retained first-valid allocation and root as the displaced allocation, subject to successor vacancy proof.
+- Memory `EJR-247` was the earlier first-valid constituted allocation and retains identity `EJR-247`.
+- Root `EJR-247` was the later displaced allocation.
+- Candidate successor `EJR-426` was tested using complete non-shallow history.
 
-## Successor Candidate
+## Vacancy Evidence
 
-`EJR-426`
+Proof head: `feec2779eb800dadd3bf4b45be61c824c25dfa40`
+Vacancy workflow: `33413495915` — SUCCESS.
+Full-Stack Repository Audit: `33413495838` — SUCCESS.
 
-Search absence is discovery evidence only and is NOT sufficient vacancy proof.
+Artifact decision:
+- `candidate = EJR-426`
+- `history_complete = true`
+- `current_claims = []`
+- `historical_claims = []`
+- `decision = VACANT`
 
-## Hard Gate
+## Closure
 
-The dedicated complete-history workflow must prove:
+Vacancy gate PASSED. Successor allocation was therefore authorized only through separate Repair306. No Global Integrity promotion.
 
-- repository checkout is non-shallow;
-- current claim count for `EJR-426` = 0;
-- historical allocation claim count for `EJR-426` = 0;
-- decision = `VACANT`.
-
-No rename, delete, reassignment, or successor allocation is authorized until this gate passes.
-
-## Non-Claims
-
-- No claim that all remaining cohort members share the same disposition.
-- No Global Integrity promotion.
-- No authority promotion of either journal content.
-
-## Next Safe Action
-
-Run and inspect the complete-history `EJR-426` vacancy proof. If and only if it returns `VACANT`, close this lease and open a separate governed identity-repair lease.
+Next chain: Repair306 → baseline normalization Lease307.
