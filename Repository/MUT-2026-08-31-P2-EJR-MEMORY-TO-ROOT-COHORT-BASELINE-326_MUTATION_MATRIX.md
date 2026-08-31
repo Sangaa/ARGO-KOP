@@ -2,20 +2,27 @@
 
 Transaction ID: MUT-2026-08-31-P2-EJR-MEMORY-TO-ROOT-COHORT-BASELINE-326
 Protocol: GOV-013 / GOV-014A
-Status: OPEN / PRE-WRITE / BASELINE-ONLY
+Status: CLOSED / VERIFIED / RESUME-SAFE
 Date: 2026-08-31
 
 | Change ID | Target | Action | Expected Content | Applied | Verified |
 |---|---|---|---|---|---|
-| 326-01 | `Quality/Integration/ejr_memory_to_root_provenance_census.py` | UPDATE | change only `EXPECTED_GROUP_COUNT = 6` → `5` | N | N |
+| 326-01 | `Quality/Integration/ejr_memory_to_root_provenance_census.py` | UPDATE | change only `EXPECTED_GROUP_COUNT = 6` → `5` | Y | Y |
 | 326-02 | classifier/membership logic | KEEP | no lineage, membership, identity, consumer, authority or selection logic change | Y | Y |
 | 326-03 | EJR/Memory content, REP-016, 317/318 | KEEP | no identity/runtime/priority mutation under rebaseline | Y | Y |
 
 ## KEEP REQUIREMENT
-Normalize only the deterministic expected cohort count proven by Repair325. Do not change target derivation, lineage classifier, scan/audit logic, EJR/Memory identities or content, consumer references, authority artifacts, REP-016 ordering, 317/318, or Priority-2 closure state.
+The accepted rebaseline normalized only the deterministic expected cohort count proven by Repair325. Target derivation, lineage classifier, scan/audit logic, EJR/Memory identities and content, consumer references, authority artifacts, REP-016 ordering, Runtime implementation, 317/318, and Priority-2 closure state were preserved.
 
 ## Execution Evidence
-Accepted Repair325 head `49680f1eddd29a4a18336261ae5aec594087d3a0` passed Full-Stack `33427225861` and Runtime/Integration `33427225759`. Internal-ID `33427225894` failed only at MEMORY_TO_ROOT census emission. Artifact `9771215241`, digest `sha256:abf5b10e02459cad33d05944542549e6d3cf33760ea7fb48ab68155487c13df9`, proves expected=6, observed=5, history_complete=true, decision=PARTIAL, incomplete_group_ids=[`__COHORT_COUNT_DRIFT__`] only, target_ids=EJR-165/EJR-293/EJR-294/EJR-295/EJR-296.
+Functional head `455de2b480cbef9b61459134450820a2a4284072` compared against prewrite `741180a5eb58c0b206a4389ef05c44ae3c2027b6` proves exactly one modified file and one line replacement: `EXPECTED_GROUP_COUNT = 6` → `5`.
+
+Exact-head verification:
+- Internal-ID `33427530380`: SUCCESS.
+- Full-Stack `33427530398`: SUCCESS.
+- Runtime/Integration `33427530477`: SUCCESS.
+- M2 `33427530360`: SUCCESS.
+- Census artifact `9771331682`, digest `sha256:f4a8ad4fd6f2d56ec41ddab34c4c50fc74da816bb1e87c5a2708bd24eb083db2`: expected=5, observed=5, history_complete=true, classification_complete=true, decision=CENSUSED, incomplete=[], target_ids=EJR-165/EJR-293/EJR-294/EJR-295/EJR-296.
 
 ## Closure
-Close only if exact compare proves a single one-line baseline replacement and exact-head Internal-ID succeeds with expected=5/observed=5, classification_complete=true, decision=CENSUSED, incomplete=[]; Full-Stack must also succeed. Any other result is a HARD HOLD.
+Lease326 is CLOSED / VERIFIED / RESUME-SAFE. Current deterministic MEMORY_TO_ROOT baseline is 5. Priority 2 remains OPEN and no queue promotion is authorized by this local closure.
