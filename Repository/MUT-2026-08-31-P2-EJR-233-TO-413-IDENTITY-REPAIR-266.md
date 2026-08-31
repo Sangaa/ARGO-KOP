@@ -1,56 +1,54 @@
 # MUT-2026-08-31-P2-EJR-233-TO-413-IDENTITY-REPAIR-266
 
-Status: OPEN / EXECUTION-PENDING
+Status: CLOSED / EXECUTION-VERIFIED / RESUME-SAFE
 Scope: One-record Priority-2 identity repair: displaced root EJR-233 → EJR-413.
 Opening main: `c35d939f56dcc173f976f247d51fbb60816de1ea`
 Pre-write Matrix266: `1c8acaa26282f9901cb54863b0c539ed1bc2b542`
+Execution lease commit: `af8a6027cdf5d6227f6dd8c703b160ccfcd6dcb7`
+Functional repair head: `a47c20d9b065533107f47cecc1e82e92bf8847f6`
+Normalized successor: Lease267 / functional head `338732cd880a8f6d1a12672aa2e2980c26b49fa6` / closure `4dad24937cf4e4bc1702e3e6302cadd2b6bae0b3`.
 
-## Authority
+## Authority and disposition
 
-- Lease264 retained the earlier Memory EJR-233 and classified the later root EJR-233 allocation displaced.
-- Lease265 is CLOSED / EXECUTION-VERIFIED / RESUME-SAFE and proves EJR-413 VACANT across complete reachable history; artifact `9751158049` proves `current_claims=[]`, `historical_claims=[]`, `history_complete=true`, `occupied=false`, `vacant=true`, `decision=VACANT`.
-- EJR-413 is reserved for exactly one bounded replacement allocation: this repair.
+- Lease264 retained the earlier Memory EJR-233 and classified the later root allocation displaced.
+- Lease265 proved EJR-413 VACANT across complete reachable history and reserved it for exactly one bounded replacement allocation.
+- Repair266 retained `Memory/Engineering_Journal/EJR-233_2026-08-14_P51_SESSION_CLOSURE.md`, removed the displaced root EJR-233 path, created `EJR/EJR-413_2026-08-17_GOV-015_FIRST_EXECUTION_APPLICATION.md`, changed only the root H1 identity EJR-233 → EJR-413, and preserved semantic body/date/chronology and historical footer `End of EJR-233`.
+- No direct executable/operational consumer requiring rewrite was established; historical disposition references remain unchanged as provenance evidence.
 
-## Fresh source evidence
+## Exact repair-head verification
 
-Current displaced source:
-`EJR/EJR-233_2026-08-17_GOV-015_FIRST_EXECUTION_APPLICATION.md`
+The Repair266 functional head preserved `EXPECTED_GROUP_COUNT = 24`. Identity, chronology, lineage, provenance, Full-Stack, Runtime, Mutation Matrix and M2 evidence were clean; the Internal-ID channel failed only at deterministic MEMORY_TO_ROOT cohort drift.
 
-Source blob at pre-write read:
-`f78a69c14793fb8331fe0096e656bfd1957a94a7`
+Repair266 census artifact `9751379903`, digest `sha256:4d71b41256ea0d308769d61f10145efecb1ba07eee6067218f77f7f1c055abf8`, proved:
+- expected_group_count=24
+- observed_group_count=23
+- history_complete=true
+- classification_complete=false
+- decision=PARTIAL
+- sole incompleteness=`__COHORT_COUNT_DRIFT__`
 
-The source H1 is `# EJR-233 — GOV-015 First Execution Application`. Historical body/footer text ends with `End of EJR-233` and must remain preserved.
+This was classified as bounded post-repair baseline drift, not a repair defect.
 
-## Consumer obligations
+## Normalized successor
 
-Fresh searches for the exact old path and EJR-233 surfaced historical Lease264 disposition evidence. These references remain unchanged because they describe the historical path/identity accurately.
+Lease267 executed the separate established baseline-successor pattern. Only `Quality/Integration/ejr_memory_to_root_provenance_census.py` changed from `EXPECTED_GROUP_COUNT = 24` to `23`; no classifier logic, tests, workflows, EJR/Memory/GOV/REP/history or Global Integrity state changed.
 
-No direct executable/operational consumer requiring rewrite has been established. Lease263 deterministic census had established zero external exact-ID and zero exact-member-path refs for the group before governance evidence was added. Repair266 therefore performs zero consumer rewrites unless a fresh executable consumer appears before execution.
+Lease267 exact-head verification:
+- Internal Document-ID Audit #60 / run `33374897233`: SUCCESS
+- Full-Stack Repository Audit #2375 / run `33374897260`: SUCCESS
+- ARGO Runtime Prototype and Integration #2149 / run `33374897257`: SUCCESS
+- M2 #1032 / run `33374897254`: SUCCESS
 
-## Pre-write validation
+Final census artifact `9751501145`, digest `sha256:d83115ddec53c17e030f985affe8d7b251db38432d18037ebb77dcce2a4330b1`, proves expected=23, observed=23, history_complete=true, classification_complete=true, decision=CENSUSED, incomplete_group_ids=[].
 
-Matrix266 commit `1c8acaa26282f9901cb54863b0c539ed1bc2b542` passed:
-- Full-Stack Repository Audit #2370 / run `33374290784`: SUCCESS
-- ARGO Runtime Prototype and Integration #2144 / run `33374290786`: SUCCESS
-- Real Mutation Matrix Regression #205 / run `33374290791`: SUCCESS
-- M2 #1027 / run `33374290897`: SUCCESS
+## Learning / transfer disposition
 
-## Authorized atomic mutation
+No new governance rule is promoted. This is another execution-confirmed application of the existing Repair → separate deterministic cohort-baseline successor pattern already proven by Leases258 and 263.
 
-One functional tree mutation may:
-1. retain `Memory/Engineering_Journal/EJR-233_2026-08-14_P51_SESSION_CLOSURE.md` unchanged;
-2. remove `EJR/EJR-233_2026-08-17_GOV-015_FIRST_EXECUTION_APPLICATION.md`;
-3. create `EJR/EJR-413_2026-08-17_GOV-015_FIRST_EXECUTION_APPLICATION.md`;
-4. preserve root semantic body/date/chronology byte-for-byte except H1 identity `EJR-233` → `EJR-413`;
-5. preserve historical footer/body text including `End of EJR-233`;
-6. update Matrix266 in the same functional commit to `FUNCTIONAL MUTATION APPLIED / VERIFICATION PENDING`.
+## Final boundary and resume
 
-## Baseline boundary
-
-`EXPECTED_GROUP_COUNT = 24` must remain unchanged inside Repair266. An exact repair-head result `expected=24 / observed=23` is acceptable only when the sole incompleteness is `__COHORT_COUNT_DRIFT__`; any correction belongs to a separate successor lease.
-
-## Hard gate
-
-Immediately before mutation, re-discover live main and re-read the source. Abort if main is not this lease commit, if source blob is not `f78a69c14793fb8331fe0096e656bfd1957a94a7`, if the EJR-413 target path exists, or if a new executable consumer is established.
+Repair266 and normalized successor Lease267 are CLOSED / EXECUTION-VERIFIED / RESUME-SAFE.
 
 Priority 2 remains OPEN. Phase 1 remains OPEN. Global Integrity remains HOLD.
+
+Next safe entry: after validating this closure commit, select the next Priority-2 target from the current verified 23-group MEMORY_TO_ROOT census using fresh consumer/risk/chronology evidence. Do not assume historical ordering.

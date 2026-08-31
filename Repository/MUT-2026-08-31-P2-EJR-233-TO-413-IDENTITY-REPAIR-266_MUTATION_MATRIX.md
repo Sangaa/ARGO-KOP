@@ -1,46 +1,33 @@
 # MUTATION MATRIX — EJR-233 → EJR-413 IDENTITY REPAIR 266
 
-Status: FUNCTIONAL MUTATION APPLIED / VERIFICATION PENDING
+Status: CLOSED / EXECUTION-VERIFIED / RESUME-SAFE
 Transaction ID: MUT-2026-08-31-P2-EJR-233-TO-413-IDENTITY-REPAIR-266
-Opening main: `c35d939f56dcc173f976f247d51fbb60816de1ea`
-Pre-write Matrix commit: `1c8acaa26282f9901cb54863b0c539ed1bc2b542`
-Execution lease commit: `af8a6027cdf5d6227f6dd8c703b160ccfcd6dcb7`
-Source disposition: `MUT-2026-08-31-P2-EJR-233-DISPOSITION-AUTHORIZATION-264.md`
-Vacancy authority: `MUT-2026-08-31-P2-EJR-413-REPLACEMENT-VACANCY-PROOF-265.md`
+Functional repair head: `a47c20d9b065533107f47cecc1e82e92bf8847f6`
+Normalized successor: Lease267 / `338732cd880a8f6d1a12672aa2e2980c26b49fa6`
 
-## Pre-write evidence retained
-
-- Lease264 retained the earlier Memory EJR-233 and classified the later root EJR-233 allocation displaced.
-- Lease265 proved EJR-413 VACANT across complete reachable history and reserved it for exactly one bounded replacement allocation.
-- Immediately before mutation, main remained `af8a6027cdf5d6227f6dd8c703b160ccfcd6dcb7`; the source re-read at blob `f78a69c14793fb8331fe0096e656bfd1957a94a7`, and the exact successor path returned 404.
-- Fresh consumer recheck established no direct executable/operational consumer requiring rewrite. Historical Lease264/265 references remain unchanged as provenance evidence.
-
-## Functional mutation reconciliation
-
-| Surface | Before | Applied Lease266 state |
+| Surface | Before | Final verified state |
 |---|---|---|
 | Memory EJR-233 | earlier retained allocation | unchanged / retained |
-| Root old path | `EJR/EJR-233_2026-08-17_GOV-015_FIRST_EXECUTION_APPLICATION.md` | removed in atomic repair tree |
-| Root successor path | absent / vacancy-proven | created as `EJR/EJR-413_2026-08-17_GOV-015_FIRST_EXECUTION_APPLICATION.md` |
-| Root H1 | `# EJR-233 — ...` | changed to `# EJR-413 — ...` |
-| Root semantic body/date/chronology | source blob `f78a69c14793fb8331fe0096e656bfd1957a94a7` | preserved byte-for-byte except H1 identity |
+| Root old path | displaced EJR-233 | removed |
+| Root successor path | vacancy-proven EJR-413 | created as EJR-413 |
+| Root H1 | EJR-233 | EJR-413 |
+| Root semantic body/date/chronology | source state | preserved except H1 identity |
 | Historical footer | `End of EJR-233` | preserved |
-| Historical disposition/path references | provenance evidence | unchanged |
+| Historical disposition/path refs | provenance evidence | unchanged |
 | Direct executable consumers | zero established | zero rewrites |
-| MEMORY_TO_ROOT expected baseline | 24 | unchanged at 24 inside Repair266 |
-| Classifier/audit logic | current | unchanged |
+| MEMORY_TO_ROOT baseline at repair head | 24 | preserved inside Repair266 |
+| Repair-head observed cohort | 23 | deterministic drift only |
+| Successor baseline Lease267 | 24 | 23 |
+| Final observed cohort | 23 | 23 |
+| History complete | true | true |
+| Classification complete | false at repair head | true after Lease267 |
+| Decision | PARTIAL at repair head | CENSUSED after Lease267 |
+| Classifier logic/tests/workflows | unchanged | unchanged |
 | Global integrity | HOLD | HOLD |
 
-## Expected repair-head validation behavior
+Repair266 artifact: `9751379903` / `sha256:4d71b41256ea0d308769d61f10145efecb1ba07eee6067218f77f7f1c055abf8`.
+Lease267 final artifact: `9751501145` / `sha256:d83115ddec53c17e030f985affe8d7b251db38432d18037ebb77dcce2a4330b1`.
 
-The repair resolves one MEMORY_TO_ROOT ambiguity while Repair266 intentionally preserves baseline 24. Therefore the exact repair-head census may report deterministic drift `expected=24 / observed=23`. This is acceptable only if identity/chronology/provenance stages are otherwise clean and the sole incompleteness is `__COHORT_COUNT_DRIFT__`. Baseline correction belongs to a separate successor lease.
+Lease267 final gates: Internal-ID #60 SUCCESS; Full-Stack #2375 SUCCESS; Runtime #2149 SUCCESS; M2 #1032 SUCCESS.
 
-## Verification pending
-
-Functional completion now requires:
-1. exact post-write read-back of old path absence, successor path/H1/body, and retained Memory EJR-233;
-2. exact commit diff confirmation;
-3. post-mutation CI and audit evidence;
-4. classification of any expected cohort-count drift before opening a separate baseline-sync successor lease.
-
-Priority 2 remains OPEN. Phase 1 remains OPEN. Global Integrity remains HOLD.
+Closure reconciliation is documentation-only. No EJR, Memory, census code, tests, workflows, GOV/REP, history, or Global Integrity state is modified by this closure.
