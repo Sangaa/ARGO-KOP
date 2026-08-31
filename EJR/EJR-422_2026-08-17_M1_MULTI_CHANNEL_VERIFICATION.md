@@ -1,4 +1,4 @@
-# EJR-245 — M1 Multi-Channel Training Verification
+# EJR-422 — M1 Multi-Channel Training Verification
 
 Date: 2026-08-17
 Status: `CLOSED / EXECUTION-VERIFIED / REUSABLE-LEARNING`
