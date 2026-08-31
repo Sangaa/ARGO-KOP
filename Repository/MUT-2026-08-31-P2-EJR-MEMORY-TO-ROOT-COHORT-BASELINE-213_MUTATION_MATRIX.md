@@ -1,14 +1,14 @@
 # MUT-2026-08-31-P2-EJR-MEMORY-TO-ROOT-COHORT-BASELINE-213 — MUTATION MATRIX
 
-Status: PREWRITE / CORRECTIVE
+Status: FUNCTIONAL / CORRECTIVE
 Lease: `R71-20260831-P2-EJR-MEMORY-TO-ROOT-COHORT-BASELINE-213`
-Baseline: `89c51d6aff95f86652a01153f2d842f4db0e7960`
+Baseline: `ecd9616a11a1e6026c52983196876aeb93c0d43e`
 
 ## Authorized functional paths
 - `Quality/Integration/ejr_memory_to_root_provenance_census.py`
 - this Matrix
 
-## Exact permitted change
+## Exact functional change
 - `EXPECTED_GROUP_COUNT = 35` → `EXPECTED_GROUP_COUNT = 34`
 
 ## Evidence basis
@@ -18,16 +18,16 @@ Baseline: `89c51d6aff95f86652a01153f2d842f4db0e7960`
 - audit artifact `9744649112`: EJR-211 and EJR-401 are not ambiguous.
 
 ## Preserved semantics
-- dynamic target selection classifier-derived;
+- dynamic target selection remains classifier-derived;
 - count drift still fails PARTIAL;
 - incomplete history still fails closed;
 - identity-source/cardinality checks unchanged;
 - evidence-only/no-authority boundary unchanged;
 - no EJR record changed.
 
-## Validation
+## Required postwrite validation
 - compare limited to baseline constant + Matrix;
 - exact-head Internal-ID SUCCESS;
-- deterministic census 34/34 CENSUSED;
+- deterministic census expected=34 / observed=34 / CENSUSED;
 - EJR-211/EJR-401 remain non-ambiguous;
 - standard regression workflows PASS.
