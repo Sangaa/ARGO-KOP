@@ -1,49 +1,46 @@
 # MUTATION MATRIX — EJR-233 → EJR-413 IDENTITY REPAIR 266
 
-Status: PREWRITE / FUNCTIONAL MUTATION PENDING
+Status: FUNCTIONAL MUTATION APPLIED / VERIFICATION PENDING
 Transaction ID: MUT-2026-08-31-P2-EJR-233-TO-413-IDENTITY-REPAIR-266
 Opening main: `c35d939f56dcc173f976f247d51fbb60816de1ea`
+Pre-write Matrix commit: `1c8acaa26282f9901cb54863b0c539ed1bc2b542`
+Execution lease commit: `af8a6027cdf5d6227f6dd8c703b160ccfcd6dcb7`
 Source disposition: `MUT-2026-08-31-P2-EJR-233-DISPOSITION-AUTHORIZATION-264.md`
 Vacancy authority: `MUT-2026-08-31-P2-EJR-413-REPLACEMENT-VACANCY-PROOF-265.md`
 
-## Fresh source evidence
+## Pre-write evidence retained
 
-Current displaced source:
-`EJR/EJR-233_2026-08-17_GOV-015_FIRST_EXECUTION_APPLICATION.md`
+- Lease264 retained the earlier Memory EJR-233 and classified the later root EJR-233 allocation displaced.
+- Lease265 proved EJR-413 VACANT across complete reachable history and reserved it for exactly one bounded replacement allocation.
+- Immediately before mutation, main remained `af8a6027cdf5d6227f6dd8c703b160ccfcd6dcb7`; the source re-read at blob `f78a69c14793fb8331fe0096e656bfd1957a94a7`, and the exact successor path returned 404.
+- Fresh consumer recheck established no direct executable/operational consumer requiring rewrite. Historical Lease264/265 references remain unchanged as provenance evidence.
 
-Current source blob before this Matrix:
-`f78a69c14793fb8331fe0096e656bfd1957a94a7`
+## Functional mutation reconciliation
 
-Lease264 retained the earlier Memory EJR-233 and classified this later root allocation displaced. Lease265 proved EJR-413 VACANT across complete reachable history and reserved it for exactly one bounded replacement allocation.
+| Surface | Before | Applied Lease266 state |
+|---|---|---|
+| Memory EJR-233 | earlier retained allocation | unchanged / retained |
+| Root old path | `EJR/EJR-233_2026-08-17_GOV-015_FIRST_EXECUTION_APPLICATION.md` | removed in atomic repair tree |
+| Root successor path | absent / vacancy-proven | created as `EJR/EJR-413_2026-08-17_GOV-015_FIRST_EXECUTION_APPLICATION.md` |
+| Root H1 | `# EJR-233 — ...` | changed to `# EJR-413 — ...` |
+| Root semantic body/date/chronology | source blob `f78a69c14793fb8331fe0096e656bfd1957a94a7` | preserved byte-for-byte except H1 identity |
+| Historical footer | `End of EJR-233` | preserved |
+| Historical disposition/path references | provenance evidence | unchanged |
+| Direct executable consumers | zero established | zero rewrites |
+| MEMORY_TO_ROOT expected baseline | 24 | unchanged at 24 inside Repair266 |
+| Classifier/audit logic | current | unchanged |
+| Global integrity | HOLD | HOLD |
 
-## Current consumer obligations
+## Expected repair-head validation behavior
 
-Fresh current searches for the exact old member path and `EJR-233` surfaced the Lease264 disposition records. Those references are historical provenance/evidence and must remain historically accurate.
+The repair resolves one MEMORY_TO_ROOT ambiguity while Repair266 intentionally preserves baseline 24. Therefore the exact repair-head census may report deterministic drift `expected=24 / observed=23`. This is acceptable only if identity/chronology/provenance stages are otherwise clean and the sole incompleteness is `__COHORT_COUNT_DRIFT__`. Baseline correction belongs to a separate successor lease.
 
-The final Lease263 census established zero external exact-ID references and zero exact-member-path references for the EJR-233 ambiguity group before the later governance records were added. No direct executable/operational consumer requiring rewrite has been established after fresh recheck.
+## Verification pending
 
-Therefore Repair266 authorizes zero consumer rewrites. Any newly discovered executable consumer before mutation is a HARD HOLD requiring Matrix revision.
-
-## Authorized atomic mutation
-
-One functional tree mutation may:
-1. retain `Memory/Engineering_Journal/EJR-233_2026-08-14_P51_SESSION_CLOSURE.md` unchanged;
-2. remove `EJR/EJR-233_2026-08-17_GOV-015_FIRST_EXECUTION_APPLICATION.md`;
-3. create `EJR/EJR-413_2026-08-17_GOV-015_FIRST_EXECUTION_APPLICATION.md`;
-4. preserve the root record semantic body/date/chronology byte-for-byte except the H1 record identity `EJR-233` → `EJR-413`;
-5. preserve historical body/footer text including `End of EJR-233`;
-6. update this Repair266 Mutation Matrix in the same functional commit to record the applied repair-head state.
-
-## Baseline boundary
-
-Repair266 MUST preserve `EXPECTED_GROUP_COUNT = 24` at the functional repair head.
-
-Because this repair should resolve one MEMORY_TO_ROOT group, exact repair-head census may legitimately become `expected=24 / observed=23`. Such drift is acceptable only if identity/chronology/provenance stages are otherwise clean and the sole incompleteness is deterministic `__COHORT_COUNT_DRIFT__`. Any baseline update belongs to a separate successor lease.
-
-## Hard boundaries
-
-No mutation to retained Memory EJR-233, historical Lease264/265 evidence, GOV-015 semantics/templates, census classifier logic/tests, workflow logic, unrelated identities, or Global Integrity state is authorized here.
+Functional completion now requires:
+1. exact post-write read-back of old path absence, successor path/H1/body, and retained Memory EJR-233;
+2. exact commit diff confirmation;
+3. post-mutation CI and audit evidence;
+4. classification of any expected cohort-count drift before opening a separate baseline-sync successor lease.
 
 Priority 2 remains OPEN. Phase 1 remains OPEN. Global Integrity remains HOLD.
-
-Functional execution is forbidden until this pre-write Matrix commit passes the applicable repository gates and a separate Repair266 execution record is opened and validated.
