@@ -1,4 +1,4 @@
-# EJR-247 — Multi-Channel Training Track Completion
+# EJR-426 — Multi-Channel Training Track Completion
 
 Date: 2026-08-17
 Status: `CLOSED / EXECUTION-VERIFIED / REUSABLE-LEARNING`
