@@ -1,8 +1,8 @@
 # MUTATION MATRIX — EJR-217 → EJR-411 IDENTITY REPAIR 257
 
-Status: PREWRITE / FUNCTIONAL MUTATION PENDING
+Status: FUNCTIONAL MUTATION APPLIED / VERIFICATION PENDING
 
-| Surface | Before | Authorized after |
+| Surface | Before | Applied state |
 |---|---|---|
 | Memory EJR-217 | earlier valid allocation | unchanged / retained |
 | Root EJR-217 | displaced later allocation | removed from old path |
@@ -14,4 +14,4 @@ Status: PREWRITE / FUNCTIONAL MUTATION PENDING
 | Classifier logic/tests/workflows | unchanged | unchanged |
 | Global integrity | HOLD | HOLD |
 
-Functional completion requires exact diff/readback and post-mutation CI/artifact evidence.
+Functional completion now requires exact diff/readback and post-mutation CI/artifact evidence.
