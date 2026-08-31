@@ -1,31 +1,30 @@
 # MUTATION MATRIX — EJR-297 DISPOSITION + EJR-424 VACANCY PROOF 299
 
-Status: OPEN / PRE-WRITE GATE
+Status: CLOSED / EXECUTION-VERIFIED / RESUME-SAFE
 Transaction ID: MUT-2026-08-31-P2-EJR-297-DISPOSITION-AND-424-VACANCY-PROOF-299
 Opening main: `2981ed42ed8c48a93ce659d5d7ba7fe0ee068ba8`
 Execution role: HERMUZ
+Proof head: `7ce6cbec0a21567e22834c48f972a32e0817451b`
 
 ## Selection and disposition evidence
 
-Final 13-member MEMORY_TO_ROOT census selects EJR-297 as the lowest-exposure current ambiguity: 3 external exact-ID references and zero exact-member-path consumers for either member.
+Final 13-member MEMORY_TO_ROOT census selected EJR-297 as the lowest-exposure current ambiguity: 3 external exact-ID references and zero exact-member-path consumers for either member.
 
-Chronology proves Memory allocation `edf6f4d2586ac2449b2b46cac3d94d2738144ce0` at 2026-08-21T16:20:41Z predates root allocation `ae7955021133b8e31c85e8b2a7915349f257b0ea` at 2026-08-22T02:01:56Z. Both current records were directly read and are legitimate independent content. The root record is diagnostic learning and explicitly states that no P6 logic, relationship, runtime evidence, or governance state was promoted. Under the first-valid historical allocation rule, Memory EJR-297 is RETAINED and root EJR-297 is DISPLACED legitimate content.
+Chronology proves Memory allocation `edf6f4d2586ac2449b2b46cac3d94d2738144ce0` at 2026-08-21T16:20:41Z predates root allocation `ae7955021133b8e31c85e8b2a7915349f257b0ea` at 2026-08-22T02:01:56Z. Both records were directly read and are legitimate independent content. The root record is diagnostic learning and explicitly states that no P6 logic, relationship, runtime evidence, or governance state was promoted. Under the first-valid historical allocation rule, Memory EJR-297 is RETAINED and root EJR-297 is DISPLACED legitimate content.
 
-## Allowed action under Lease299
+## Executed evidence gate
 
-Evidence-only successor-vacancy proof for candidate `EJR-424` using complete repository history.
+Dedicated workflow used complete checkout history and `Quality/Integration/ejr_allocation_vacancy_gate.py EJR-424`.
 
-Allowed changes:
-- this Mutation Matrix;
-- the Lease299 disposition/vacancy record;
-- one dedicated GitHub Actions vacancy-proof workflow for EJR-424.
+- vacancy workflow run `33410673926`: SUCCESS;
+- artifact `9764977768`, digest `sha256:68d1f7e5ea2cf9590f9477376c15edeaccd1cbeb5f4782057b5f907acadf5230`;
+- decision=VACANT;
+- current_claims=[];
+- historical_claims=[];
+- history_complete=true;
+- history_scope=`all locally reachable refs`;
+- proof-head Full-Stack run `33410673865`: SUCCESS.
 
-Forbidden until the vacancy artifact proves `VACANT` with complete history:
-- rename or delete of either current EJR-297 member;
-- creation of EJR-424 identity content;
-- cohort-baseline normalization;
-- consumer rewrite;
-- governance/REP promotion;
-- Global Integrity promotion.
+EJR-424 is reserved solely for displaced root EJR-297. No identity repair, cohort normalization, consumer rewrite, governance promotion, REP promotion, or Global Integrity change was executed under Lease299.
 
 Priority 2 remains OPEN. Phase 1 remains OPEN. Global Integrity remains HOLD.
