@@ -3,46 +3,56 @@
 Transaction: `MUT-2026-09-01-P7-CORE-KERNEL-RUN009-REL070-O`
 Work Lease: `HERMUZ-P7-O-REL070-20260901`
 Priority: `7 — Core cross-layer validation / relationship reconciliation`
-State: `MATERIAL-CANDIDATE / CI-PENDING / LEASE ACTIVE`
+State: `FUNCTIONAL-CLOSED / CI-VERIFIED / RESUME-SAFE / PRIORITY-7-OPEN`
 Entry HEAD: `fba9db310c17f3e3745db7062ee16a32b43182b2`
 Pre-write Matrix HEAD: `9699e4859d6d1e60b04ce234d542ff1322e30ba2`
+Material candidate HEAD: `5714fcbebb445f12cafa4ae07965038bf5725445`
 Protocol: `PROJECT_BOOTSTRAP / CORE-003 / GOV-013 / GOV-013A / GOV-014 / GOV-014A / GOV-015 / GOV-016`
 
-## Reconstructed action
+## Closed result
 
-Transaction N exact-head validated `CORE-KERNEL → RUN-009 = REFERENCES / INTENTIONAL ONE-WAY / RECOVERY-HANDOFF-ALIGNED / NON-DEPENDENCY`. Live REP-014 v1.2.12 remained unsynchronized while current Core status explicitly requires relationship reconciliation where evidence requires. O synchronizes only that proven seam.
+Transaction N's exact-head validation was synchronized into the active relationship/control/status surfaces as:
 
-## Prior learning applied
-
-N, K, M and E are directly applicable. M/R1 test-drift learning is explicitly applied by preserving N's source assertions verbatim and changing only the registry expectation.
+`REL-070 | CORE-KERNEL | RUN-009 | REFERENCES | INTENTIONAL ONE-WAY / RECOVERY-HANDOFF-ALIGNED / NON-DEPENDENCY`
 
 ## Atomic material change set
 
 | ID | Path | Action | Applied | Verified |
 |---|---|---|:---:|:---:|
-| O-01 | `Repository/REP-014_REPOSITORY_RELATIONSHIP_REGISTRY.md` | v1.2.12→v1.2.13; add REL-070 only | Y | PENDING CI |
-| O-02 | `Repository/REP-020_CURRENT_CONTROL_PLANE_BOUNDARY_MANIFEST.md` | sync REP-014 v1.2.13 / O refresh | Y | PENDING CI |
-| O-03 | `Core/_FOLDER_STATUS.md` | v1.3.9→v1.3.10; record seventh bounded seam | Y | PENDING CI |
-| O-04 | `Quality/Integrity/test_core_kernel_run009_recovery_boundary.py` | enforce exact unique REL-070; retain anti-overpromotion | Y | PENDING CI |
-| O-05 | `Repository/P7_CORE_KERNEL_RUN009_REL070_RECONCILIATION_2026-09-01_O.md` | create evidence record | Y | PENDING CI |
-| O-06 | this Matrix | same-change-set rebind | Y | PENDING CI |
+| O-01 | `Repository/REP-014_REPOSITORY_RELATIONSHIP_REGISTRY.md` | v1.2.12→v1.2.13; REL-070 only | Y | Y |
+| O-02 | `Repository/REP-020_CURRENT_CONTROL_PLANE_BOUNDARY_MANIFEST.md` | REP-014 v1.2.13 / O refresh | Y | Y |
+| O-03 | `Core/_FOLDER_STATUS.md` | v1.3.9→v1.3.10; seventh bounded seam | Y | Y |
+| O-04 | `Quality/Integrity/test_core_kernel_run009_recovery_boundary.py` | exact unique REL-070 enforcement | Y | Y |
+| O-05 | `Repository/P7_CORE_KERNEL_RUN009_REL070_RECONCILIATION_2026-09-01_O.md` | evidence record | Y | Y |
+| O-06 | this Matrix | same-change-set rebind | Y | Y |
 
-Candidate must be exactly one commit after the pre-write Matrix HEAD and exactly these six paths. Unexpected path expansion must equal `0`.
+Pre-write→candidate comparison proved exactly one commit and exactly six authorized paths. Unexpected path expansion = `0`.
 
-## Semantic boundary
+REP-014 preservation check showed only the authorized version increment, REL-070 row and bounded recovery-handoff evidence section; prior registry content was retained.
 
-Registered relationship:
+## Exact-head candidate verification
 
-`REL-070 | CORE-KERNEL | RUN-009 | REFERENCES | INTENTIONAL ONE-WAY / RECOVERY-HANDOFF-ALIGNED / NON-DEPENDENCY`
+On `5714fcbebb445f12cafa4ae07965038bf5725445`:
 
-No reverse edge and no `DEPENDS_ON`, `IMPLEMENTS`, `CONSUMES`, `GOVERNS` or executable-reachability promotion is authorized.
+- Full-Stack Repository Audit — `33523444573` — SUCCESS. Repository-audit and all reported steps succeeded, including exact checkout SHA, Mutation Matrix preflight, semantic regression, same-change-set enforcement, repository-wide audit and evidence emission/upload.
+- ARGO Runtime Prototype and Integration Tests — `33523444784` — SUCCESS. Integrity, prototype and integration jobs all succeeded.
+- Real Mutation Matrix Regression — `33523444619` — SUCCESS.
+- M2 Multi-Channel Proposal Training — `33523444671` — SUCCESS.
 
-## KEEP / non-authority
+Result: `4/4 REQUIRED WORKFLOWS SUCCESS`.
 
-CORE-KERNEL and RUN-009 sources remain unchanged. Phase 1 remains OPEN. Core remains CROSS-LAYER VALIDATION OPEN with Folder Certification pending. Connected Baseline, repository-wide graph closure and Global PASS remain unclaimed.
+## Semantic KEEP boundary
 
-## Verification contract
+- CORE-KERNEL and RUN-009 sources unchanged.
+- No reverse RUN-009→CORE-KERNEL edge.
+- No DEPENDS_ON, IMPLEMENTS, CONSUMES, GOVERNS or executable-reachability promotion.
+- Core remains `CROSS-LAYER VALIDATION OPEN`; Folder Certification remains pending.
+- Phase 1 remains OPEN; global integrity remains HOLD; Global PASS remains unclaimed.
 
-`EXACT-HEAD READ-BACK → PREWRITE→CANDIDATE = ONE COMMIT / SIX AUTHORIZED PATHS / ZERO EXPANSION → REGISTRY PRESERVATION CHECK → FOUR REQUIRED WORKFLOWS → LEARNING ASSESSMENT → CLOSURE COMMIT → CLOSURE-HEAD FOUR-WORKFLOW VERIFICATION`
+## Learning assessment
 
-Any failure is preserved under GOV-016 and cannot be hidden by weakening evidence assertions.
+N→O confirms the established validation-first synchronization discipline: direct source validation can close independently, but once exact-head evidence proves a bounded seam and the active folder status requires registry reconciliation, synchronization becomes the next local obligation before unrelated exploration. This is already covered by existing HERMUZ/GOV-014 relationship discipline and does not warrant a new governance rule.
+
+Work Lease: `CLOSED / RESUME-SAFE`.
+
+Future work must rediscover live main and recompute Priority 7. This closed Matrix grants no authority for a subsequent relationship or Core certification decision.
