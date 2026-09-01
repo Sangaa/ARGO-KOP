@@ -2,10 +2,10 @@
 
 Platform: ARGO KOP  
 Document ID: REP-013  
-Version: 1.1.2  
+Version: 1.1.3  
 Status: Active / Phase 1 Population In Progress  
 Development Baseline: 3.2.1  
-Last Audit: 2026-08-16
+Last Audit: 2026-09-01
 
 ## Purpose
 
@@ -328,6 +328,13 @@ Plugins/
 
 ```text
 Core/
+├── ARGO_KERNEL.md
+├── Core.md
+├── CORE-000_PLATFORM_ARCHITECTURE.md
+├── CORE-000_PLATFORM_IDENTITY.md
+├── CORE-000A_PLATFORM_GLOSSARY.md
+├── CORE-001_ARGO_MANIFEST.md
+├── CORE-002_ARGO_IDENTITY.md
 ├── CORE-003_CONSTITUTION.md
 ├── CORE-004_CORE_PRINCIPLES.md
 ├── CORE-005_COGNITIVE_MODEL.md
@@ -337,8 +344,11 @@ Core/
 ├── CORE-009_PLATFORM_LIFECYCLE.md
 ├── CORE-010_PLATFORM_ROADMAP.md
 ├── CORE-011_PLATFORM_CHARTER.md
+├── CORE-012_GENERATIVE_KNOWLEDGE_AND_SELF_DEVELOPMENT.md
 └── _FOLDER_STATUS.md
 ```
+
+P337 reconciles this section to the exact 18-file top-level `Core/` inventory already independently established by P336. This is physical content representation only: `CORE-000_PLATFORM_IDENTITY.md` remains `Canonical: No / Legacy / Superseded`, and listing it here does not promote it. `CORE-000A_PLATFORM_GLOSSARY.md` and `CORE-012_GENERATIVE_KNOWLEDGE_AND_SELF_DEVELOPMENT.md` are represented because they are physically present current Core artifacts. REP-001/REP-002 active/mapped Core reconciliation remains separately open after P337.
 
 ### Assets/Diagrams/
 
@@ -413,7 +423,7 @@ Until then the folder remains **OPEN**.
 
 Current repository state: **INTEGRITY HOLD**.
 
-The content tree is synchronized with the current inspected repository baseline and records the canonical physical path for the Knowledge Organization specification and `SRV-010_SERVICE_REFERENCE.md`. `GOV-013A` is now represented in the Governance inventory. Runtime `RUN-011..015` and `Runtime/Prototype/` are explicitly represented from current repository evidence; exhaustive Runtime and broader cross-layer relationship validation remain open.
+The content tree is synchronized with the current inspected repository baseline and records the canonical physical path for the Knowledge Organization specification and `SRV-010_SERVICE_REFERENCE.md`. `GOV-013A` is represented in the Governance inventory. Runtime `RUN-011..015` and `Runtime/Prototype/` are explicitly represented from current repository evidence. P337 reconciles only the exact top-level Core physical inventory in REP-013; REP-001/REP-002 Core representation, exhaustive Runtime and broader cross-layer relationship validation remain open.
 
 ## Verification Model
 
@@ -457,6 +467,19 @@ Disposition:
 This is an evidence-binding result only. It does **not** promote the control plane to `RECONCILED`, does not set `CLOSED_FOR_PHASE_1`, and does not close Priority 1.
 
 The cross-registry state remains open until the corresponding `REP-014/015/016/020` evidence is reconciled to the same current checkpoint.
+
+## P337 Core Physical Inventory Reconciliation — 2026-09-01
+
+P337 re-read the exact live `Core/` top-level inventory and the P336 local Core reconciliation, then reconciled the `### Core/` content-tree section to the same physical 18-file set.
+
+Boundary:
+
+- this is a REP-013 physical inventory repair only;
+- active/canonical inventory semantics remain controlled by each artifact and REP-001/REP-002;
+- the legacy `CORE-000_PLATFORM_IDENTITY.md` remains noncanonical/superseded;
+- REP-001 and REP-002 Core reconciliation remains open;
+- Core dependency/consumer, GOV-006 naming/path disposition and folder certification remain open;
+- no Priority-7, Phase-1, Connected-Baseline or global integrity closure is claimed.
 
 ## Governing Rule
 
