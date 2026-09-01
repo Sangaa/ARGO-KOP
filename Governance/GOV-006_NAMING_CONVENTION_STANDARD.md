@@ -8,12 +8,12 @@
 
 Platform: ARGO KOP (Knowledge Operating Platform)  
 Document ID: GOV-006  
-Version: 1.3.0  
+Version: 1.3.1  
 Status: Proposed / Audit-Derived Update  
 Category: Governance / Standards  
 Canonical: Yes  
 Priority: Critical  
-Last Audit Date: Aug 08, 2026  
+Last Audit Date: Sep 01, 2026  
 
 ---
 
@@ -29,7 +29,7 @@ The repository is the operational source of truth for active paths. Historical o
 
 | Prefix | Domain Layer | Canonical Parent Directory | Example Path |
 | :--- | :--- | :--- | :--- |
-| **`CORE`** | Platform Identity & Constitution | `Architecture/` | `Architecture/CORE-003_CONSTITUTION.md` |
+| **`CORE`** | Platform Identity & Constitution | `Core/` | `Core/CORE-003_CONSTITUTION.md` |
 | **`GOV`** | Governance Framework & Standards | `Governance/` | `Governance/GOV-001_GOVERNANCE_FRAMEWORK.md` |
 | **`REP`** | Repository Index & Mapping | `Repository/` | `Repository/REP-001_MASTER_INDEX.md` |
 | **`RUN`** | Runtime Pipeline & Life-cycle | `Runtime/` | `Runtime/RUN-001_BOOT_SEQUENCE.md` |
@@ -37,6 +37,12 @@ The repository is the operational source of truth for active paths. Historical o
 | **`SRV`** | Service Operations | `Services/` | `Services/SRV-005_VALIDATION_SERVICE.md` |
 | **`MOD`** | Data & Knowledge Models | `Models/` | `Models/MOD-002_ENTITY_MODEL.md` |
 | **`EJR`** | Engineering Journal Records | `Memory/Engineering_Journal/` | `Memory/Engineering_Journal/EJR-001_SELF_ASSESSMENT_AND_MARKET_FEEDBACK.md` |
+
+## P7 Core Parent Reconciliation — 2026-09-01
+
+Current repository evidence places the canonical Core authority set under `Core/`, not `Architecture/`. The prior `Architecture/CORE-003_CONSTITUTION.md` example was a stale historical naming example preserved through earlier GOV-006 canonicalization; it is not a current repository path.
+
+This correction aligns the factual path matrix with current repository reality. It does **not** promote this document beyond its current `Proposed / Audit-Derived Update` status and does not itself certify the Core layer or any broader relationship graph.
 
 ---
 
