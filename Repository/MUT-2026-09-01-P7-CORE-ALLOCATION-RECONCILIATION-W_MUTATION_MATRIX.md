@@ -3,79 +3,59 @@
 Transaction: `MUT-2026-09-01-P7-CORE-ALLOCATION-RECONCILIATION-W`
 Work Lease: `HERMUZ-P7-W-CORE-ALLOCATION-20260901`
 Priority: `7 — Core`
-State: `PRE-WRITE MATRIX REFINED / VALIDATION-FIRST / LEASE ACTIVE`
+State: `MATERIAL CANDIDATE PREPARED / W-B CONTROLLING / CI PENDING / LEASE ACTIVE`
 Entry HEAD: `911f51d3a0881728125b36bfc09d266214730154`
 Initial Matrix HEAD: `f2543f809e1058c576c59de372354bf17ee2cdb1`
+W-A pre-write amendment: `73026147ae2a084f7be89c4c43ef70faab39fbdd`
+Refined Matrix HEAD: `2a82218d8faf47ceea81d9e72a3edb00f0897007`
+W-B pre-write amendment HEAD: `f0f564b68cd6e0f957327839db40316ea73c22cf`
 Protocol: `PROJECT_BOOTSTRAP / CORE-003 / GOV-013 / GOV-013A / GOV-014 / GOV-014A / GOV-015 / GOV-016 / REP-011 / REP-012 / REP-013 / REP-014 / REP-015 / REP-016`
 
-## Why W exists
+## Current controlling plan
 
-Explicit Core Certification Review V established a current closure blocker: REP-013 requires every known file to have an allocation record before a folder can become `CLOSED_FOR_PHASE_1`, while current REP-012 v1.0.10 contains only the initial control-plane allocation set plus DIAG-001 and no Core artifact allocation records.
+V established the missing Core allocation prerequisite. Exact current Core inventory remains 18 top-level files and `Core/Core.md` independently lists the other 17 members.
 
-This transaction returns to the missing evidence gate. It does not weaken REP-013 and does not certify Core.
+W-A correctly detected manifest synchronization if canonical REP-012 were version-mutated and required durable regression. Deeper pre-material inspection then established content-preservation risk from rewriting the long REP-012 body merely to append bounded records.
 
-## Direct current evidence
+W-B supersedes only the direct REP-012/REP-020 write surface. It preserves W-A's focused regression requirement and records Core allocation in a non-replacing REP-012 addendum subordinate to canonical REP-012.
 
-- exact current Core enumeration remains 18 top-level files;
-- `Core/Core.md` independently lists the other 17 members and intentionally self-excludes;
-- `CORE-000_PLATFORM_IDENTITY.md` remains physical provenance / legacy / noncanonical;
-- Core readiness remains PASS but certification is blocked;
-- REP-012 remains `Phase 1 Population In Progress`;
-- REP-013 Completion Rule requires an allocation record for every known file before folder closure.
+## Authorized material change set — exactly 7 paths
 
-## Pre-write refinement finding
+1. `Repository/REP-012_CORE_ALLOCATION_ADDENDUM_2026-09-01_W.md`
+2. `Quality/Integrity/test_core_allocation_registry_coverage.py`
+3. `Repository/P7_CORE_ALLOCATION_RECONCILIATION_2026-09-01_W.md`
+4. `Repository/P7_CORE_EXPLICIT_CERTIFICATION_REVIEW_2026-09-01_V.md`
+5. this W Matrix
+6. `Repository/MUT-2026-09-01-P7-CORE-ALLOCATION-RECONCILIATION-W-A_AMENDMENT_MATRIX.md`
+7. `Repository/MUT-2026-09-01-P7-CORE-ALLOCATION-RECONCILIATION-W-B_CONTENT_PRESERVATION_AMENDMENT.md`
 
-Before any material allocation write, direct inspection of the full current REP-012 showed a long historical/control-plane evidence body whose preservation is itself material. A proposed full-file replacement surface would create unnecessary content-preservation risk and could repeat the historical abbreviated-replacement class already documented elsewhere in the control plane.
-
-No such replacement blob is authorized or published.
-
-Under the repository simplicity/reviewability principle, W therefore narrows the write surface: the Core allocation population will be recorded in a bounded REP-012 allocation addendum rather than rewriting the long canonical REP-012 body merely to append one partition population. The addendum is allocation evidence subordinate to and governed by REP-012; it does not replace REP-012 or claim repository-wide allocation completeness.
-
-A fresh Explicit Core Certification Review must decide whether the verified bounded addendum satisfies the REP-013 per-known-file allocation prerequisite. W itself does not pre-decide certification.
+Candidate must be exactly one commit after W-B pre-write HEAD `f0f564b68cd6e0f957327839db40316ea73c22cf`, exactly seven paths, unexpected expansion `0`.
 
 ## Allocation semantics
 
-W may record the exact current physical Core artifact set as `ALLOCATED` records bounded to Core partition/path ownership. Allocation does not mean canonical promotion, semantic review completion, relationship completion, certification, or Phase-1 closure.
+`ALLOCATED = valid Core domain/path assignment only`.
 
-The legacy `CORE-000_PLATFORM_IDENTITY.md` record must explicitly preserve `Canonical: No / Legacy / Superseded` provenance and must not be interpreted as a second active CORE-000 authority.
-
-## Authorized material change set — exactly 4 paths
-
-1. `Repository/REP-012_CORE_ALLOCATION_ADDENDUM_2026-09-01_W.md`
-   - bounded REP-012 allocation evidence for all 18 current top-level Core files;
-   - explicitly subordinate to REP-012 and non-replacing;
-   - preserve repository-wide `Phase 1 Population In Progress` boundary.
-2. `Repository/P7_CORE_ALLOCATION_RECONCILIATION_2026-09-01_W.md`
-   - record exact scope, allocation evidence, content-preservation decision, non-promotion boundaries and verification.
-3. `Repository/P7_CORE_EXPLICIT_CERTIFICATION_REVIEW_2026-09-01_V.md`
-   - preserve V blocker and bind its corrective handoff to W; V remains blocked until W is verified and a fresh certification review occurs.
-4. this Matrix
-   - bind candidate and verification evidence.
-
-Candidate after this refined pre-write Matrix must be exactly one commit and exactly these four paths. Unexpected path expansion = `0`.
+Legacy `Core/CORE-000_PLATFORM_IDENTITY.md` remains `Canonical: No / Legacy / Superseded` and is allocated only because it is a known physical Core file.
 
 ## Explicitly forbidden
 
-- no mutation of canonical `Repository/REP-012_REPOSITORY_ALLOCATION_REGISTRY.md` in W;
-- no Core source mutation;
-- no `Core/_FOLDER_STATUS.md` mutation in W;
-- no REP-013 completion-rule weakening;
+- no canonical REP-012 body mutation;
+- no REP-020 mutation because canonical REP-012 identity/version/status remain unchanged;
+- no Core source/status mutation;
+- no REP-013 weakening;
 - no REP-014 relationship mutation;
-- no REP-016 Priority-7 closure;
-- no Core certification or `CLOSED_FOR_PHASE_1` promotion;
-- no canonical promotion of legacy CORE-000 identity;
-- no claim that allocation equals review or semantic validity;
-- no claim that W itself proves the addendum is sufficient for certification;
+- no REP-016 closure mutation;
+- no Core certification / `CLOSED_FOR_PHASE_1` / Priority-7 closure;
 - no Phase-1 / Connected Baseline / repository-wide graph / Global PASS claim.
 
 ## Verification contract
 
-`REFINED PRE-WRITE MATRIX → EXACT CORE INVENTORY RECHECK → ONE-COMMIT/FOUR-PATH COMPARE → LIVE-PARENT RECHECK → NON-FORCE FAST-FORWARD → EXACT-HEAD READ-BACK → FOUR REQUIRED WORKFLOWS → FULL-STACK/RUNTIME JOB REVIEW → FAILURE/LEARNING ASSESSMENT → DOCUMENTATION-ONLY W CLOSURE → CLOSURE-HEAD FOUR-WORKFLOW VERIFICATION`.
+`ONE-COMMIT/SEVEN-PATH COMPARE → LIVE-PARENT RECHECK → NON-FORCE FAST-FORWARD → EXACT-HEAD READ-BACK → FOUR REQUIRED WORKFLOWS → FULL-STACK/RUNTIME JOB REVIEW → FAILURE/LEARNING ASSESSMENT → DOCUMENTATION-ONLY W/W-A/W-B CLOSURE → CLOSURE-HEAD FOUR-WORKFLOW VERIFICATION`.
 
-After W closure, rediscover live main and reopen a fresh Explicit Core Certification Review. Certification is not automatic.
+After W closure: fresh Explicit Core Certification Review is mandatory. No automatic certification.
 
 ## Learning retained
 
 `ALLOCATION COMPLETENESS IS A CLOSURE PREREQUISITE, NOT A SUBSTITUTE FOR REVIEW, RELATIONSHIP VALIDATION OR CERTIFICATION.`
 
-`DO NOT REWRITE A LARGE CONTROL-PLANE ARTIFACT MERELY TO APPEND BOUNDED EVIDENCE WHEN A GOVERNED NON-REPLACING ADDENDUM CAN PRESERVE THE SAME TRACEABILITY WITH LOWER CONTENT-PRESERVATION RISK.`
+`BOUNDED ADDITIVE EVIDENCE SHOULD NOT FORCE A HIGH-RISK WHOLE-FILE REWRITE OF A LARGE CONTROL-PLANE HISTORY.`
