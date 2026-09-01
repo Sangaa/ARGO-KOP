@@ -1,7 +1,7 @@
 # P6 — CI ↔ IMPACT-MATRIX OBSERVABILITY MATRIX
 
 Date: `2026-09-01`
-Status: `BUILD-03 / P6-08+P6-09 IMPLEMENTED / EXECUTION-VERIFICATION-PENDING`
+Status: `CLOSED_FOR_PHASE_1 / EXECUTION-VERIFIED / BOUNDED OBSERVABILITY + NON-AUTHORITATIVE RECONCILIATION`
 Authority: `GOV-013 + GOV-014 + REP-020`
 Scope: CI invocation evidence correlated with repository impact/relationship scope.
 
@@ -11,25 +11,11 @@ Define and implement the minimum evidence contract required to connect CI execut
 
 ## Core Testing Decision
 
-P6 is a layered control, not a single atomic assertion. Its verification MUST preserve first-failure boundaries instead of collapsing observation, identity, artifact and classification failures into one P6 failure.
+P6 is a layered control, not a single atomic assertion. Its verification preserves first-failure boundaries instead of collapsing observation, identity, artifact and classification failures into one P6 failure.
 
 Required layered chain:
 
 `P6-A Functional → P6-B Observation → P6-C Identity → P6-D Artifact → P6-E Classification/Reconciliation`
-
-Each layer must have an explicit result and regression coverage.
-
-### Layer contracts
-
-| Layer | Question | Allowed result |
-|---|---|---|
-| P6-A | Did the functional logic execute correctly? | `PASS / FAIL` |
-| P6-B | Is the expected CI run/job observable? | `PRESENT / MISSING / INVALID` |
-| P6-C | Does execution bind to the intended baseline/HEAD? | `CURRENT / STALE / MISMATCH` |
-| P6-D | Does artifact evidence exist and bind to the run? | `VALID / INVALID / MISSING` |
-| P6-E | What state is justified after all available evidence? | explicit classification |
-
-A layer failure MUST NOT be relabeled as another layer's failure.
 
 ## Evidence Classification
 
@@ -41,15 +27,14 @@ A connector/query returning zero observations is `NO_OBSERVATION`; it is not evi
 
 | Evidence Source | State | Boundary |
 |---|---|---|
-| `.github/workflows/full-stack-audit.yml` | active | executes P6 correlation + layered regressions and uploads CI-impact evidence |
-| `Quality/Integration/ci_impact_correlation.py` | implemented Build-03 | deterministic path correlation + bounded reconciliation candidate + read-back result |
-| `Quality/Integration/p6_matrix_reconciliation_candidate.py` | implemented Build-03 | non-authoritative candidate construction + source-hash read-back verification |
-| `Quality/Integration/test_ci_impact_correlation.py` | implemented | mapping/classification + Build-03 candidate/read-back regression |
-| `Quality/Integration/test_p6_matrix_reconciliation_candidate.py` | implemented | fail-closed identity, drift and no-auto-promotion regressions |
-| `Quality/Integration/test_p6_layered_boundaries.py` | implemented | first-boundary isolation across P6-A..P6-E |
-| `Quality/Integration/p6_reconciliation.py` | implemented | deterministic observation/identity/artifact reconciliation engine |
-| `Quality/Integration/test_p6_runtime_lineage_adapter.py` | implemented / CI-bound | controlled runtime-lineage compatibility boundary |
-| `Quality/Integration/emit_ci_runtime_evidence.py` | active | runtime-produced evidence artifact |
+| `.github/workflows/full-stack-audit.yml` | active / exact-head verified | executes P6 correlation + layered regressions and uploads CI-impact evidence |
+| `Quality/Integration/ci_impact_correlation.py` | Build-03 execution-verified | deterministic path correlation + bounded reconciliation candidate + read-back result |
+| `Quality/Integration/p6_matrix_reconciliation_candidate.py` | Build-03 execution-verified | non-authoritative candidate construction + source-hash read-back verification |
+| `Quality/Integration/test_ci_impact_correlation.py` | exact-head regression verified | mapping/classification + candidate/read-back regression |
+| `Quality/Integration/test_p6_matrix_reconciliation_candidate.py` | integration-suite verified | fail-closed identity, drift and no-auto-promotion regressions |
+| `Quality/Integration/test_p6_layered_boundaries.py` | exact-head CI verified | first-boundary isolation across P6-A..P6-E |
+| `Quality/Integration/p6_reconciliation.py` | exact-head CI verified | deterministic observation/identity/artifact reconciliation engine |
+| `Quality/Integration/test_p6_runtime_lineage_adapter.py` | exact-head CI verified | controlled runtime-lineage compatibility boundary |
 | `Repository/REP-020_DEPENDENCY_CONSUMER_IMPACT_MATRIX.md` | provisional/current | impact lookup surface; never auto-mutated by P6 |
 | `Repository/REP-014_REPOSITORY_RELATIONSHIP_REGISTRY.md` | canonical/active | relationship identity/state/evidence; never auto-mutated by P6 |
 
@@ -59,10 +44,9 @@ A connector/query returning zero observations is `NO_OBSERVATION`; it is not evi
 
 ## P6-08 / P6-09 Safety Architecture
 
-P6 Build-03 deliberately does **not** allow CI to write REP-020, REP-014 or another canonical authority.
+P6 does **not** allow CI to write REP-020, REP-014 or another canonical authority.
 
 Instead:
-
 1. the existing CI-impact report builds a deterministic `P6-MATRIX-RECONCILIATION-CANDIDATE/v1` candidate;
 2. every candidate record is derived from an already-classified correlation record;
 3. `MAPPED` becomes candidate `OBSERVED_IMPACT`, never `VERIFIED`;
@@ -70,26 +54,10 @@ Instead:
 5. policy-unresolved and not-applicable states remain unchanged in meaning;
 6. candidate authority is always `NON_AUTHORITATIVE_EVIDENCE_CANDIDATE`;
 7. promotion is always `NO_AUTO_PROMOTION`;
-8. REP-020 and REP-014 source hashes are captured before candidate creation and re-read from the checked-out repository after candidate construction;
+8. REP-020 and REP-014 source hashes are captured and re-read from the checked-out repository after candidate construction;
 9. any HEAD mismatch, source drift or attempted auto-promotion fails closed.
 
 Canonical mutation remains a separate governed action under applicable GOV-014/GOV-014A controls.
-
-## Minimum Evidence Record
-
-Every CI-to-impact observation should capture, where available:
-
-- workflow name and run identifier;
-- triggering and checkout commit SHA;
-- base commit SHA where applicable;
-- changed paths and scope eligibility;
-- matrix/relationship correlation evidence;
-- result and evidence classification;
-- bounded candidate state;
-- candidate authority / no-auto-promotion marker;
-- REP-020 and REP-014 source hashes;
-- post-CI repository read-back result;
-- checkpoint.
 
 ## P6 Gates
 
@@ -100,35 +68,51 @@ Every CI-to-impact observation should capture, where available:
 | P6-03 | REP-020 impact/consumer matrix inspected | VERIFIED |
 | P6-04 | CI result distinguished from semantic relationship verification | VERIFIED |
 | P6-05 | Commit/HEAD available as correlation key | VERIFIED |
-| P6-06 | Changed-path → impact-matrix correlation | IMPLEMENTED / REGRESSION-VERIFIED |
-| P6-07 | Workflow-run / exact CI HEAD → affected relationship correlation | IMPLEMENTED / EXECUTION-OBSERVED via Full-Stack path; exact Build-03 verification pending |
-| P6-08 | Automated matrix-state update from CI evidence | IMPLEMENTED as bounded non-authoritative reconciliation candidate; exact Build-03 verification pending |
-| P6-09 | Post-CI repository read-back / reconciliation | IMPLEMENTED as exact-HEAD + REP-020/REP-014 source-hash read-back; exact Build-03 verification pending |
-| P6-10 | Failure first-boundary preservation | IMPLEMENTED / CI-REGRESSION |
-| P6-11 | Model-independent control path | IMPLEMENTED in correlator + candidate/read-back component |
+| P6-06 | Changed-path → impact-matrix correlation | EXECUTION-VERIFIED |
+| P6-07 | Workflow-run / exact CI HEAD → affected relationship correlation | EXECUTION-VERIFIED at functional HEAD `9e6a5c25f0a18985e2163080059985cbd95addbc` |
+| P6-08 | Automated matrix-state update from CI evidence | EXECUTION-VERIFIED as bounded non-authoritative reconciliation candidate |
+| P6-09 | Post-CI repository read-back / reconciliation | EXECUTION-VERIFIED; REP-020 and REP-014 read-back `VERIFIED_UNCHANGED` |
+| P6-10 | Failure first-boundary preservation | EXECUTION-VERIFIED / CI-REGRESSION |
+| P6-11 | Model-independent control path | EXECUTION-VERIFIED in correlator + candidate/read-back component |
+
+## Exact-head P335 Evidence
+
+Functional HEAD: `9e6a5c25f0a18985e2163080059985cbd95addbc`.
+
+- Full-Stack Repository Audit `33464500515` — SUCCESS, including P6 correlation, canonical repository boundary, layered boundaries, reconciliation boundaries, runtime-lineage adapter, Mutation Matrix enforcement, repository-wide audit and CI-impact artifact upload.
+- Runtime Prototype and Integration Tests `33464500542` — SUCCESS across prototype, integrity and integration jobs.
+- Real Mutation Matrix Regression `33464500603` — SUCCESS.
+- M2 Multi-Channel Proposal Training `33464500521` — SUCCESS.
+- CI-impact artifact ID `9784359327`, digest `sha256:2ebda6c2c285a8590ea76b8f6704f690124c6c5c57025e676361dfb4895ca35e`, bound to the same functional HEAD.
+
+Artifact read-back proved:
+- schema `P6-CI-IMPACT-CORRELATION/v5`;
+- candidate schema `P6-MATRIX-RECONCILIATION-CANDIDATE/v1`;
+- candidate authority `NON_AUTHORITATIVE_EVIDENCE_CANDIDATE`;
+- promotion `NO_AUTO_PROMOTION`;
+- post-CI read-back status `VERIFIED`;
+- REP-020 read-back `VERIFIED_UNCHANGED`;
+- REP-014 read-back `VERIFIED_UNCHANGED`.
+
+The artifact also correctly surfaced `REVALIDATION_REQUIRED` for in-scope unmapped paths and `POLICY_UNRESOLVED` for paths without an explicit P6 scope decision. Those states are valid fail-closed observations, not CI failures and not grounds for invented mappings.
 
 ## Safety Rules
 
 1. CI success never upgrades a relationship above evidence actually exercised by the workflow.
-2. Runtime evidence emission does not prove downstream service dispatch.
-3. Changed-path correlation is impact evidence, not relationship proof.
-4. Candidate output is evidence, not repository authority.
-5. P6 MUST NOT write REP-020 or REP-014 automatically.
-6. Ambiguous correlation remains `REVALIDATION_REQUIRED` or `POLICY_UNRESOLVED` as applicable.
-7. No observation is not equivalent to no execution.
-8. Historical success is never relabeled as execution failure solely because it is stale.
-9. Source read-back mismatch is a hard verification failure, never an invitation to overwrite the source.
-10. Layered tests preserve the first failing boundary for review and debugging.
-
-## Current Verification Boundary
-
-Build-03 implementation is prepared under P335 with pre-write Mutation Matrix control. Promotion of P6 to closed/execution-verified requires exact functional diff plus exact-head Full-Stack, Runtime/Integration, Real Mutation Matrix and M2 success. Until that evidence is recorded, this document remains execution-verification-pending.
+2. Changed-path correlation is impact evidence, not relationship proof.
+3. Candidate output is evidence, not repository authority.
+4. P6 MUST NOT write REP-020 or REP-014 automatically.
+5. Ambiguous correlation remains `REVALIDATION_REQUIRED` or `POLICY_UNRESOLVED` as applicable.
+6. Source read-back mismatch is a hard verification failure, never an invitation to overwrite the source.
+7. Layered tests preserve the first failing boundary for review and debugging.
 
 ## Current Disposition
 
-`P6 = BUILD-03 / BOUNDED OBSERVABILITY + RECONCILIATION CANDIDATE / EXECUTION-VERIFICATION-PENDING / NO-AUTO-PROMOTION`.
+`PRIORITY 6 = CLOSED_FOR_PHASE_1 / EXECUTION-VERIFIED / BOUNDED OBSERVABILITY + NON-AUTHORITATIVE RECONCILIATION`.
 
-No P3/P4 relationship is promoted or closed by P6, and Global Connected Baseline remains separately open.
+This closes the bounded Priority-6 build workstream. Ongoing CI evidence collection, impact mapping maintenance and future scope decisions continue as operational work and do not reopen Priority 6 unless they expose a defect in the P6 method or invalidate its declared control boundary.
+
+No P3/P4 relationship is promoted by P6. Phase 1 overall remains OPEN. Repository-wide graph validation and Global Connected Baseline remain OPEN / NOT CERTIFIED. Global `BOOTED / INTEGRITY PASS` is not claimed.
 
 ---
 
