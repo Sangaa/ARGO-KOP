@@ -14,39 +14,32 @@ CORE006 = ROOT / "Core" / "CORE-006_SYSTEM_PHILOSOPHY.md"
 CORE007 = ROOT / "Core" / "CORE-007_DESIGN_PRINCIPLES.md"
 CORE008 = ROOT / "Core" / "CORE-008_ARCHITECTURAL_LAWS.md"
 CORE010 = ROOT / "Core" / "CORE-010_PLATFORM_ROADMAP.md"
+QUEUE_ADDENDUM = ROOT / "Repository" / "REP-016_PRIORITY7_CORE_CLOSURE_ADDENDUM_2026-09-01_X.md"
 
 
 def read(path: Path) -> str:
     return path.read_text(encoding="utf-8")
 
 
-def test_core_certification_readiness_is_explicitly_not_certification():
+def test_core_certification_readiness_was_consumed_by_separate_explicit_certification():
     status = read(CORE_STATUS)
     index = read(CORE_INDEX)
+    queue = read(QUEUE_ADDENDUM)
 
-    assert "Version\n\n1.3.13" in status
-    assert "INTEGRITY HOLD — CONTROL PLANE RECONCILED" in status
-    assert "CROSS-LAYER VALIDATION OPEN" in status
-    assert "CERTIFICATION REVIEW READY" in status
-    assert "Certification Readiness\n\n🟢 PASS — EXPLICIT CORE CERTIFICATION REVIEW MAY OPEN / CORE STILL INTEGRITY HOLD / NOT CERTIFIED" in status
-    assert "Folder Certification\n\n⏳ Pending — requires a separate explicit Core certification decision" in status
-    assert "CERTIFICATION READINESS != FOLDER CERTIFICATION" in status
-    assert "CERTIFICATION REVIEW READY != CROSS-LAYER VALIDATION CLOSED" in status
-    assert "Priority 7 remains OPEN" in status
+    assert "Version\n\n1.3.14" in status
+    assert "CLOSED_FOR_PHASE_1" in status
+    assert "BOUNDED CROSS-LAYER VALIDATION CLOSED FOR CORE CERTIFICATION SCOPE" in status
+    assert "Certification Readiness\n\n🟢 PASS — CONSUMED BY TRANSACTION X / EXPLICIT CORE CERTIFICATION REVIEW COMPLETED" in status
+    assert "Folder Certification\n\n🟢 CLOSED_FOR_PHASE_1 — EXPLICITLY CERTIFIED WITHIN BOUNDED PRIORITY-7 CORE SCOPE" in status
+    assert "CORE CLOSED_FOR_PHASE_1 != PHASE 1 CLOSED" in status
+    assert "CORE CERTIFIED != REPOSITORY-WIDE GRAPH COMPLETE" in status
     assert "18 top-level files" in status
     assert "17 member files" in status
     assert "CORE-000_PLATFORM_IDENTITY.md" in index
     assert "Canonical: No" in status
 
-    forbidden_completion_claims = (
-        "CORE CERTIFIED",
-        "Priority 7 = CLOSED",
-        "PRIORITY 7 — Core = CLOSED",
-        "Phase 1 = CLOSED",
-        "Global PASS",
-    )
-    for marker in forbidden_completion_claims:
-        assert marker not in status
+    assert "PRIORITY 7 = CLOSED_FOR_PHASE_1" in queue
+    assert "GLOBAL PHASE 1 REMAINS OPEN" in queue
 
 
 def test_run002_core003_remains_validated_but_not_forced_into_registry():
@@ -89,11 +82,13 @@ def test_remaining_core_members_preserve_non_coupling_boundaries():
     assert "A roadmap dependency is a planning relationship until the underlying technical or governance relationship is verified." in roadmap
 
 
-def test_readiness_scope_is_bounded_and_reversible_on_new_evidence():
+def test_certification_scope_remains_bounded_and_reversible_on_new_evidence():
     status = read(CORE_STATUS)
+    registry = read(REP014)
 
     assert "no additional direct material external coupling requiring REP-014 registration was established" in status
     assert "bounded current-evidence conclusion, not a repository-wide complete-graph claim" in status
-    assert "if the certification review finds a material unresolved seam, return to validation/reconciliation instead of forcing closure" in status
-    assert "OPEN EXPLICIT CORE CERTIFICATION REVIEW" in status
-    assert "READINESS MAY OPEN THE NEXT REVIEW WITHOUT CLOSING THE CURRENT VALIDATION GATE." in status
+    assert "repository-wide relationship/consumer graph" in status
+    assert "Global Connected Baseline" in status
+    assert "Global integrity HOLD" in status
+    assert "This is **not** a complete graph." in registry

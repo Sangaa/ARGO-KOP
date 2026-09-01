@@ -33,9 +33,10 @@ def test_core000_preserves_archive_boundary():
     assert "Layer 8 Archive" not in normalized
 
 
-def test_core_status_keeps_priority7_open():
+def test_core_status_records_bounded_priority7_closure():
     status = read_text("Core/_FOLDER_STATUS.md")
     assert "CORE-000 Canonical-Architecture Reconciliation" in status
-    assert "Priority 7 remains OPEN" in status
+    assert "CORE = CLOSED_FOR_PHASE_1 / BOUNDED CORE PARTITION CERTIFIED" in status
     assert "Folder Certification" in status
-    assert "Pending" in status
+    assert "🟢 CLOSED_FOR_PHASE_1" in status
+    assert "CORE CERTIFIED != REPOSITORY-WIDE GRAPH COMPLETE" in status

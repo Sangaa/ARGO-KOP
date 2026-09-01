@@ -20,7 +20,6 @@ def test_core003_arc011_authority_boundary_is_direct_and_not_overpromoted():
     assert "Constitution / applicable Governance authority" in architecture
     assert "Canonical Architecture Model" in architecture
 
-    # Transaction M registers exactly the two independently validated directions.
     assert registry.count("| REL-068 | CORE-003 | ARC-011 | GOVERNS |") == 1
     assert registry.count("| REL-069 | ARC-011 | CORE-003 | REFERENCES |") == 1
 
@@ -36,5 +35,6 @@ def test_core003_arc011_authority_boundary_is_direct_and_not_overpromoted():
     for marker in forbidden:
         assert marker not in registry
 
-    assert "CROSS-LAYER VALIDATION OPEN" in status
-    assert "Folder Certification\n\n⏳ Pending" in status
+    assert "BOUNDED CROSS-LAYER VALIDATION CLOSED FOR CORE CERTIFICATION SCOPE" in status
+    assert "Folder Certification\n\n🟢 CLOSED_FOR_PHASE_1" in status
+    assert "CORE CERTIFIED != REPOSITORY-WIDE GRAPH COMPLETE" in status

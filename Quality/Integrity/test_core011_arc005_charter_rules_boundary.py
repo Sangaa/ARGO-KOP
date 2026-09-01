@@ -35,6 +35,6 @@ def test_arc005_core011_reference_is_bounded_and_one_way():
     for marker in forbidden:
         assert marker not in registry
 
-    assert "CROSS-LAYER VALIDATION OPEN" in status
-    assert "Folder Certification\n\n⏳ Pending" in status
+    assert "BOUNDED CROSS-LAYER VALIDATION CLOSED FOR CORE CERTIFICATION SCOPE" in status
+    assert "Folder Certification\n\n🟢 CLOSED_FOR_PHASE_1" in status
     assert "Phase 1 remains OPEN" in registry or "broader Core cross-layer validation and certification remain open" in registry

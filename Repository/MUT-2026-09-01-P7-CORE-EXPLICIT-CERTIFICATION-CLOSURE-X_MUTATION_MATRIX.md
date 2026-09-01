@@ -3,135 +3,122 @@
 Transaction: `MUT-2026-09-01-P7-CORE-EXPLICIT-CERTIFICATION-CLOSURE-X`
 Work Lease: `HERMUZ-P7-X-CORE-CERTIFICATION-CLOSURE-20260901`
 Priority: `7 — Core`
-State: `PRE-WRITE MATRIX / EXPLICIT CERTIFICATION REVIEW / LEASE ACTIVE`
+State: `MATERIAL CANDIDATE / X-A CONTROLS FINAL SCOPE / PRE-PUBLICATION CHECKS PASS / CI PENDING`
 Entry HEAD: `4fd7d71d7e1320b643e229093a6910e18965b279`
-Protocol: `PROJECT_BOOTSTRAP / CORE-003 / GOV-013 / GOV-013A / GOV-014 / GOV-014A / GOV-015 / GOV-016 / REP-011 / REP-012 + W ADDENDUM / REP-013 / REP-014 / REP-015 / REP-016 / REP-020 / ARC-006 / ARC-011`
+Initial Matrix HEAD: `1d4c198c4780c49f72fcde01d6118946f6073edd`
+Controlling amendment pre-write HEAD: `8431d600e14e31a3cbeb21e4b1c9e347725304a6`
+Protocol: `PROJECT_BOOTSTRAP / CORE-003 / GOV-013 / GOV-013A / GOV-014 / GOV-014A / GOV-015 / GOV-016 / REP-011 / REP-012 + W ADDENDUM / REP-013 / REP-014 / REP-015 / REP-016 + CURRENT ADDENDA / REP-020 / ARC-006 / ARC-011`
 
 ## Review question
 
 Can `Core/` now be explicitly certified `CLOSED_FOR_PHASE_1` within the bounded Core partition after Transaction W closed the allocation prerequisite found by Explicit Certification Review V?
 
-## Current direct evidence before write
+## Current direct evidence before material write
 
-1. live `main` at entry is `4fd7d71d7e1320b643e229093a6910e18965b279`, W closure, and W closure HEAD passed the required four workflows;
-2. current `Core/` physical inventory is still exactly 18 top-level files and `Core/Core.md` remains the 17-member self-excluding inventory surface;
-3. W establishes `18/18` bounded Core allocation records without canonical promotion of legacy `CORE-000_PLATFORM_IDENTITY.md`;
-4. REP-013 Completion Rule requires inventory reconciliation, allocation, review state, dependency/consumer assessment, material relationship disposition, unresolved-item recording, and explicit closure decision;
-5. REP-011 permits reuse of prior review evidence when content identity is unchanged, bindings remain consistent, scope remains sufficient, and current-fitness conditions are still satisfied;
-6. compare from T-C2 semantic candidate `f63c7b3c1838ef7643d7f2d842e0d699304ac9d0` to X entry HEAD contains no `Core/` path mutation; later changes are CI/Quality/Repository evidence and W allocation evidence;
-7. current Core status records Transaction T's direct sweep of remaining canonical members and no additional material external coupling requiring REP-014 registration within bounded readiness scope;
-8. current REP-014 v1.2.14 records the material registered/reconciled Core seams and explicitly remains a non-complete graph; `RUN-002 → CORE-003 = REFERENCES` remains `VALIDATED-NOT-REGISTERED / INTENTIONAL ONE-WAY / NON-DEPENDENCY`;
-9. prior Release partition closure demonstrates the directly applicable rule that partition closure must be explicitly bound to REP-016 and cannot be inferred from green CI or closed subgates.
+1. X entered from live W closure HEAD `4fd7d71d7e1320b643e229093a6910e18965b279`.
+2. X-A pre-write HEAD remained live immediately before candidate construction.
+3. Direct current Core enumeration remained exactly 18 top-level files; source blob identities remained unchanged from X entry.
+4. W addendum still records exactly 18/18 current Core paths as allocated and preserves legacy CORE-000 noncanonical provenance.
+5. REP-014 remains v1.2.14 / `Relationship Enumeration In Progress` / explicitly not a complete graph.
+6. Compare from T-C2 semantic candidate `f63c7b3c1838ef7643d7f2d842e0d699304ac9d0` to X entry contains no Core-path mutation; later changes are CI/Quality/Repository evidence plus W allocation evidence.
+7. REP-011 re-review avoidance therefore permits reuse of sufficient unchanged current review evidence; X does not fabricate new source audit dates.
+8. V's established blocker was allocation completeness; W closed that blocker and no new blocking Core contradiction/material seam was established by X re-entry.
+9. Current Priority-2 closure addendum P331 proves the smaller current-operational queue-addendum pattern and supersedes stale older OPEN wording without rewriting historical REP-016 content.
 
-## Certification disposition authorized for candidate
+## Controlling scope
 
-If the exact pre-publication checks remain unchanged, X may record:
+X-A supersedes the original direct REP-016/REP-020 mutation plan. No X material mutation occurred before X-A.
 
-`CORE = CLOSED_FOR_PHASE_1 / BOUNDED CORE PARTITION CERTIFIED`
+The material candidate is authorized to change exactly these 21 paths:
 
-and:
+1. `Core/_FOLDER_STATUS.md`
+2. `Repository/REP-016_PRIORITY7_CORE_CLOSURE_ADDENDUM_2026-09-01_X.md`
+3. `Repository/REP-011_PRIORITY7_CORE_CLOSURE_ADDENDUM_2026-09-01_X.md`
+4. `Repository/REP-013_PRIORITY7_CORE_CLOSURE_ADDENDUM_2026-09-01_X.md`
+5. `Repository/P7_CORE_EXPLICIT_CERTIFICATION_CLOSURE_2026-09-01_X.md`
+6. `Quality/Integration/test_core_p7_status_sync.py`
+7. `Quality/Integrity/test_core_certification_readiness_boundary.py`
+8. `Quality/Integration/test_core_local_inventory_reconciliation.py`
+9. `Quality/Integrity/test_core003_arc011_authority_boundary.py`
+10. `Quality/Integrity/test_arc006_core003_authority_boundary.py`
+11. `Quality/Integrity/test_core_kernel_run009_recovery_boundary.py`
+12. `Quality/Integrity/test_core011_arc005_charter_rules_boundary.py`
+13. `Quality/Integrity/test_core012_gov016_learning_boundary.py`
+14. `Quality/Integrity/test_core003_run003_authority_boundary.py`
+15. `Quality/Integrity/test_core_allocation_registry_coverage.py`
+16. `Quality/Integrity/test_run002_core003_initialization_authority_reference.py`
+17. `Quality/Integrity/test_core009_lif001_lifecycle_boundary.py`
+18. `Quality/Integrity/test_core000_canonical_architecture_boundary.py`
+19. `Quality/Integrity/test_architecture_readme_authority_boundary.py`
+20. this Matrix
+21. `Repository/MUT-2026-09-01-P7-CORE-EXPLICIT-CERTIFICATION-CLOSURE-X-A_QUEUE_ADDENDUM_AMENDMENT.md`
+
+Candidate binding: `THIS MATERIAL COMMIT`; exact SHA is bound by compare/read-back and will be recorded in the documentation-only X closure after successful CI.
+
+## Certification disposition in candidate
+
+`CORE = CLOSED_FOR_PHASE_1 / BOUNDED CORE PARTITION CERTIFIED`.
 
 `PRIORITY 7 = CLOSED_FOR_PHASE_1 / BOUNDED CORE PARTITION CERTIFIED / GLOBAL PHASE 1 REMAINS OPEN`.
 
-This closes the Core-specific `CROSS-LAYER VALIDATION OPEN` certification gate only within the bounded Priority-7 evidence scope. It does not claim repository-wide graph completion or that all external domains are certified.
-
-## Authorized material change set — exactly 20 paths
-
-### Current state / queue / evidence surfaces
-1. `Core/_FOLDER_STATUS.md`
-   - v1.3.13 → v1.3.14;
-   - record explicit bounded Core certification / `CLOSED_FOR_PHASE_1`;
-   - preserve all historical failure/recovery evidence and all seam semantics;
-   - preserve global Integrity Hold / Phase 1 open boundary.
-2. `Repository/REP-016_PHASE1_PARTITION_WORK_QUEUE.md`
-   - preserve full history and version/header;
-   - change Priority 7 Core row only to bounded `CLOSED_FOR_PHASE_1` state;
-   - append X closure checkpoint; Priority 8 remains the next queue row, not automatically started.
-3. `Repository/REP-020_CURRENT_CONTROL_PLANE_BOUNDARY_MANIFEST.md`
-   - refresh current queue/closure binding to X while preserving listed control-plane versions/statuses, Phase 1 OPEN and Global HOLD.
-4. `Repository/REP-011_PRIORITY7_CORE_CLOSURE_ADDENDUM_2026-09-01_X.md`
-   - create bounded review/traceability closure evidence under REP-011.
-5. `Repository/REP-013_PRIORITY7_CORE_CLOSURE_ADDENDUM_2026-09-01_X.md`
-   - create explicit REP-013 Completion Rule 1–7 satisfaction mapping for Core only.
-6. `Repository/P7_CORE_EXPLICIT_CERTIFICATION_CLOSURE_2026-09-01_X.md`
-   - create the explicit certification/closure decision and non-claims.
-
-### Current-state regression transition
-7. `Quality/Integration/test_core_p7_status_sync.py`
-8. `Quality/Integrity/test_core_certification_readiness_boundary.py`
-9. `Quality/Integration/test_core_local_inventory_reconciliation.py`
-10. `Quality/Integrity/test_core003_arc011_authority_boundary.py`
-11. `Quality/Integrity/test_arc006_core003_authority_boundary.py`
-12. `Quality/Integrity/test_core_kernel_run009_recovery_boundary.py`
-13. `Quality/Integrity/test_core011_arc005_charter_rules_boundary.py`
-14. `Quality/Integrity/test_core012_gov016_learning_boundary.py`
-15. `Quality/Integrity/test_core003_run003_authority_boundary.py`
-16. `Quality/Integrity/test_core_allocation_registry_coverage.py`
-17. `Quality/Integrity/test_run002_core003_initialization_authority_reference.py`
-18. `Quality/Integrity/test_core009_lif001_lifecycle_boundary.py`
-19. `Quality/Integrity/test_core000_canonical_architecture_boundary.py`
-20. `Quality/Integrity/test_architecture_readme_authority_boundary.py`
-
-### Matrix binding
-21. this Matrix.
-
-**Correction:** the enumerated candidate set is exactly **21 paths**, not 20; the numbered list is authoritative and this correction is part of the pre-write Matrix itself. Candidate comparison must show exactly 21 changed paths and unexpected expansion = `0`.
+This closes only the Core-specific certification gate. It does not certify external domains or complete the repository-wide graph.
 
 ## Regression transition rule
 
-The test changes are not permission to weaken prior failure-detection logic. They may change only the transient current-state assertions that previously required:
+The Quality changes modify only transient current-state assertions that previously required Core Priority-7 OPEN / Folder Certification Pending / pre-certification readiness state.
 
-- `CROSS-LAYER VALIDATION OPEN` for Core;
-- `Folder Certification = Pending`;
-- `Priority 7 remains OPEN`;
-- readiness-but-not-certification wording.
+Durable checks remain mandatory:
 
-All durable assertions MUST remain intact, including:
-
-- exact 18-file / 17-member Core inventory;
-- legacy CORE-000 `Canonical: No / Legacy / Superseded`;
-- exact REL-062..072 relationship direction/type and anti-overpromotion checks;
-- `RUN-002 → CORE-003` remains unregistered and non-dependency;
-- REP-014 remains explicitly not a complete graph;
-- Architecture/Lifecycle/Runtime external-domain holds remain independent;
-- W allocation evidence remains non-promotional by itself;
+- exact 18-file / 17-member inventory;
+- legacy CORE-000 noncanonical provenance;
+- exact registered relationship directions/types and anti-overpromotion checks;
+- RUN-002→CORE-003 remains validated-not-registered / non-dependency;
+- REP-014 remains not a complete graph;
+- Architecture/Lifecycle/Runtime/Governance external-domain holds remain independent;
+- W allocation remains non-promotional by itself;
 - Phase 1 overall remains OPEN;
-- Connected Baseline / repository-wide graph remain OPEN;
-- Global integrity remains HOLD and Global PASS is NOT CLAIMED.
+- Global Connected Baseline/repository-wide graph remain OPEN;
+- global integrity remains HOLD and Global PASS is NOT CLAIMED.
 
-No test may pass merely because historical text still contains an old open-state literal. Current-state tests must assert the new explicit X closure markers.
+No test is allowed to pass merely because historical text still contains an old open-state literal; current-state assertions bind explicit X closure markers.
 
 ## Explicitly forbidden
 
 - no Core source-authority mutation other than `Core/_FOLDER_STATUS.md`;
+- no canonical REP-016 body rewrite under X-A;
+- no REP-020 mutation under X-A;
 - no REP-014 mutation or REL-073 fabrication;
-- no forced registration of RUN-002→CORE-003;
-- no Architecture, Runtime, Lifecycle, Governance, Services, Engine, AI or other-domain certification;
+- no forced RUN-002→CORE-003 registration;
+- no external-domain certification;
 - no Phase-1 closure;
 - no Connected Baseline closure;
 - no repository-wide graph completion claim;
 - no Global `BOOTED / INTEGRITY PASS`;
-- no deletion/rewrite of historical T/T-C1/T-C2/T-C3/V/W failure or blocker evidence;
+- no deletion/rewrite of historical T/T-C1/T-C2/T-C3/V/W evidence;
 - no weakening of REP-013 Completion Rule;
 - no inference that allocation alone certifies Core.
 
-## Pre-publication fail-closed checks
+## Pre-publication checks
 
-Before moving `main` to the candidate:
+`PASS` at candidate construction boundary:
 
-1. re-read current live `main` and require it still equals this Matrix HEAD;
-2. re-enumerate `Core/` and require exactly the same 18-file set;
-3. require no Core source mutation since T-C2 semantic candidate other than the planned X status mutation;
-4. require W allocation addendum still matches the exact 18-file set;
-5. require REP-014 remains v1.2.14 and no new material Core relationship evidence appeared;
-6. compare Matrix HEAD → candidate: exactly one commit, exactly 21 authorized paths, no others.
+- live main = X-A pre-write HEAD;
+- current Core inventory = unchanged exact 18-file set;
+- W allocation = unchanged 18/18;
+- REP-014 = unchanged v1.2.14 / non-complete graph;
+- no new material relationship evidence discovered;
+- no Core source-authority file is in candidate except `_FOLDER_STATUS.md`.
 
-Any contradiction or divergence aborts X and returns to the affected gate.
+Required candidate compare remains:
+
+`X-A PRE-WRITE HEAD → ONE MATERIAL COMMIT → EXACTLY 21 AUTHORIZED PATHS → UNEXPECTED EXPANSION 0`.
 
 ## Verification contract
 
-`PRE-WRITE MATRIX → LIVE RECHECK → EXACT INVENTORY/ALLOCATION/RELATIONSHIP RECHECK → ONE-COMMIT/21-PATH COMPARE → LIVE-PARENT RECHECK → NON-FORCE FAST-FORWARD → EXACT-HEAD READ-BACK → FOUR REQUIRED WORKFLOWS → FULL-STACK/RUNTIME JOB REVIEW → FAILURE/LEARNING ASSESSMENT → DOCUMENTATION-ONLY X CLOSURE → CLOSURE-HEAD FOUR-WORKFLOW VERIFICATION → REDISCOVER LIVE MAIN → RECOMPUTE GLOBAL QUEUE`.
+`PRE-WRITE MATRIX → X-A → LIVE RECHECK → EXACT INVENTORY/ALLOCATION/RELATIONSHIP RECHECK → ONE-COMMIT/21-PATH COMPARE → LIVE-PARENT RECHECK → NON-FORCE FAST-FORWARD → EXACT-HEAD READ-BACK → FOUR REQUIRED WORKFLOWS → FULL-STACK/RUNTIME JOB REVIEW → FAILURE/LEARNING ASSESSMENT → DOCUMENTATION-ONLY X CLOSURE → CLOSURE-HEAD FOUR-WORKFLOW VERIFICATION → REDISCOVER LIVE MAIN → RECOMPUTE GLOBAL QUEUE`.
 
-## Learning target
+## Learning
 
 `A CERTIFICATION TRANSITION MUST UPDATE THE TESTS THAT GUARDED THE PRE-CERTIFICATION STATE WITHOUT WEAKENING THE DURABLE SEMANTIC BOUNDARIES THOSE TESTS PROVED.`
+
+`WHEN A CURRENT QUEUE ALREADY HAS A PROVEN CLOSURE-ADDENDUM PATTERN, REUSE IT INSTEAD OF REWRITING A LARGE HISTORICAL QUEUE BODY.`

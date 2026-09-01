@@ -54,8 +54,9 @@ def test_registry_records_one_way_reference_only() -> None:
     ]]
 
 
-def test_core_priority7_broader_hold_remains_open() -> None:
+def test_core_priority7_closure_is_bounded_not_global() -> None:
     status = CORE_STATUS.read_text(encoding="utf-8", errors="ignore")
-    assert "CROSS-LAYER VALIDATION OPEN" in status
-    assert "Priority 7 remains OPEN" in status
-    assert "Folder Certification\n\n⏳ Pending" in status
+    assert "BOUNDED CROSS-LAYER VALIDATION CLOSED FOR CORE CERTIFICATION SCOPE" in status
+    assert "CORE = CLOSED_FOR_PHASE_1 / BOUNDED CORE PARTITION CERTIFIED" in status
+    assert "Folder Certification\n\n🟢 CLOSED_FOR_PHASE_1" in status
+    assert "Global integrity HOLD" in status

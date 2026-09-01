@@ -3,6 +3,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
 STATUS = ROOT / "Core" / "_FOLDER_STATUS.md"
+QUEUE_ADDENDUM = ROOT / "Repository" / "REP-016_PRIORITY7_CORE_CLOSURE_ADDENDUM_2026-09-01_X.md"
 
 
 def test_closed_p7_control_plane_gaps_are_not_still_listed_as_open() -> None:
@@ -18,17 +19,18 @@ def test_closed_p7_control_plane_gaps_are_not_still_listed_as_open() -> None:
     assert "protected control-plane reconciliation for current Core representation" not in text
 
 
-def test_remaining_priority7_boundary_tracks_current_readiness_state() -> None:
+def test_priority7_current_state_is_explicit_bounded_closure() -> None:
     text = STATUS.read_text(encoding="utf-8")
+    queue = QUEUE_ADDENDUM.read_text(encoding="utf-8")
 
-    assert "CROSS-LAYER VALIDATION OPEN" in text
-    assert "CERTIFICATION REVIEW READY" in text
+    assert "CLOSED_FOR_PHASE_1" in text
+    assert "BOUNDED CROSS-LAYER VALIDATION CLOSED FOR CORE CERTIFICATION SCOPE" in text
+    assert "CORE CERTIFIED" in text
     assert "VALIDATED-NOT-REGISTERED" in text
-    assert "not a complete graph" in text
-    assert "explicit final Core certification decision" in text
-    assert "Priority 7 remains OPEN" in text
-    assert "No Phase-1 closure, repository-wide graph completion, or Global Connected Baseline PASS is implied" in text
+    assert "not a repository-wide complete-graph claim" in text
+    assert "CORE CLOSED_FOR_PHASE_1 != PHASE 1 CLOSED" in text
+    assert "CORE CERTIFIED != REPOSITORY-WIDE GRAPH COMPLETE" in text
 
-    # Pre-readiness remaining-work literals must not be treated as permanent closure gates.
-    assert "continued dependency and consumer validation for remaining material Core authority relationships" not in text
-    assert "REP-014 relationship-registry reconciliation" not in text
+    assert "PRIORITY 7 = CLOSED_FOR_PHASE_1" in queue
+    assert "GLOBAL PHASE 1 REMAINS OPEN" in queue
+    assert "does not auto-start Priority 8" in queue

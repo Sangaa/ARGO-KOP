@@ -37,8 +37,6 @@ def test_architecture_readme_uses_current_authority_boundary():
 def test_architecture_readme_matches_current_primary_arc_review_set():
     readme = README.read_text(encoding="utf-8")
 
-    # ARC-011 is intentionally referenced in the higher authority section before
-    # the inventory. Validate ordering inside the primary-review-set section only.
     primary_section = readme.split("## 2. Current Primary Architecture Review Set", 1)[1]
     primary_section = primary_section.split("### Supporting navigation / control surfaces", 1)[0]
 
@@ -66,7 +64,7 @@ def test_architecture_readme_matches_current_primary_arc_review_set():
     assert "physical presence does not make its historical four-layer/five-component model current Architecture authority" in readme
 
 
-def test_architecture_readme_repair_preserves_hold_and_registry_boundary():
+def test_core_closure_does_not_promote_architecture_or_registry_relationships():
     readme = README.read_text(encoding="utf-8")
     status = ARCH_STATUS.read_text(encoding="utf-8")
     registry = REP014.read_text(encoding="utf-8")
@@ -78,7 +76,6 @@ def test_architecture_readme_repair_preserves_hold_and_registry_boundary():
     assert "BOUNDED CONSUMER ALIGNMENT PASS IN TRANSACTION S" in status
     assert "BOUNDED CONSUMER ALIGNMENT != ARCHITECTURE CERTIFICATION" in status
 
-    # S is a content reconciliation. It must not manufacture relationship-registry rows.
     forbidden_registry_markers = (
         "| ARCHITECTURE_README | CORE-000 |",
         "| ARCHITECTURE_README | CORE-003 |",
@@ -90,6 +87,7 @@ def test_architecture_readme_repair_preserves_hold_and_registry_boundary():
     for marker in forbidden_registry_markers:
         assert marker not in registry
 
-    assert "Priority 7 remains OPEN" in core_status
+    assert "CORE = CLOSED_FOR_PHASE_1 / BOUNDED CORE PARTITION CERTIFIED" in core_status
     assert "Folder Certification" in core_status
-    assert "Pending" in core_status
+    assert "🟢 CLOSED_FOR_PHASE_1" in core_status
+    assert "external-domain certifications including Governance, Architecture, Runtime and Lifecycle" in core_status

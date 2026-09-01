@@ -26,7 +26,6 @@ def test_run002_core003_initialization_authority_reference_is_bounded():
     assert "- `Core/CORE-003_CONSTITUTION.md`" in runtime
     assert "It MUST NOT imply that the entire repository is globally clean." in runtime
 
-    # Transaction R is validation-first. Registration, if still warranted after fresh recomputation, is separate.
     assert "| RUN-002 | CORE-003 | REFERENCES |" not in registry
     assert "| CORE-003 | RUN-002 | GOVERNS |" not in registry
 
@@ -43,5 +42,7 @@ def test_run002_core003_initialization_authority_reference_is_bounded():
     for marker in forbidden:
         assert marker not in registry
 
-    assert "CROSS-LAYER VALIDATION OPEN" in status
-    assert "Folder Certification\n\n⏳ Pending" in status
+    assert "RUN-002 → CORE-003 = REFERENCES" in status
+    assert "VALIDATED-NOT-REGISTERED" in status
+    assert "BOUNDED CROSS-LAYER VALIDATION CLOSED FOR CORE CERTIFICATION SCOPE" in status
+    assert "Folder Certification\n\n🟢 CLOSED_FOR_PHASE_1" in status

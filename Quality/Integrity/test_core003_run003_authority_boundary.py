@@ -41,7 +41,7 @@ def test_core003_run003_authority_boundary_is_direct_and_not_overpromoted():
     for marker in forbidden:
         assert marker not in registry
 
-    assert "CROSS-LAYER VALIDATION OPEN" in status
-    assert "Folder Certification\n\n⏳ Pending" in status
+    assert "BOUNDED CROSS-LAYER VALIDATION CLOSED FOR CORE CERTIFICATION SCOPE" in status
+    assert "Folder Certification\n\n🟢 CLOSED_FOR_PHASE_1" in status
     assert "CORE-003 → RUN-003 = GOVERNS" in status
     assert "RUN-003 → CORE-003 = REFERENCES" in status

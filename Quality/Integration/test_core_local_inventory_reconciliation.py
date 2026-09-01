@@ -1,7 +1,9 @@
 """P336 regression for exact Core-local inventory reconciliation.
 
 This test validates local physical inventory synchronization only. It does not
-certify Core cross-layer relationships or repository-wide integrity.
+by itself certify Core cross-layer relationships or repository-wide integrity.
+Transaction X may consume this inventory evidence only as one prerequisite of
+an independent explicit certification review.
 """
 
 from pathlib import Path
@@ -33,13 +35,14 @@ def test_core_local_index_matches_exact_top_level_physical_inventory() -> None:
     assert CORE012 in indexed
 
 
-def test_core_status_records_exact_inventory_and_keeps_certification_open() -> None:
+def test_core_status_records_exact_inventory_after_separate_certification() -> None:
     status = CORE_STATUS.read_text(encoding="utf-8")
     assert "Exact top-level physical inventory reconciled — 18 files" in status
-    assert "CROSS-LAYER VALIDATION OPEN" in status
+    assert "BOUNDED CROSS-LAYER VALIDATION CLOSED FOR CORE CERTIFICATION SCOPE" in status
     assert CORE012 in status
-    assert "Folder Certification\n\n⏳ Pending" in status
-    assert "Core MUST NOT be marked clean merely because local inventory" in status
+    assert "Folder Certification\n\n🟢 CLOSED_FOR_PHASE_1" in status
+    assert "Core was not marked clean merely because local inventory" in status
+    assert "CORE CLOSED_FOR_PHASE_1 != PHASE 1 CLOSED" in status
 
 
 def test_legacy_core000_remains_noncanonical_provenance() -> None:
@@ -52,6 +55,6 @@ def test_legacy_core000_remains_noncanonical_provenance() -> None:
 
 if __name__ == "__main__":
     test_core_local_index_matches_exact_top_level_physical_inventory()
-    test_core_status_records_exact_inventory_and_keeps_certification_open()
+    test_core_status_records_exact_inventory_after_separate_certification()
     test_legacy_core000_remains_noncanonical_provenance()
     print("P336_CORE_LOCAL_INVENTORY_RECONCILIATION=PASS")

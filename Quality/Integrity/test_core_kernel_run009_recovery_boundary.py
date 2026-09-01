@@ -13,7 +13,6 @@ def test_core_kernel_run009_recovery_boundary_is_direct_and_not_overpromoted():
     registry = REP014.read_text(encoding="utf-8")
     status = CORE_STATUS.read_text(encoding="utf-8")
 
-    # Preserve Transaction N's exact proven source assertions.
     assert "Document ID\nCORE-KERNEL" in kernel
     assert "Recovery follows the applicable governed recovery flow." in kernel
     assert "`Runtime/RUN-009_RECOVERY.md`" in kernel
@@ -42,5 +41,5 @@ def test_core_kernel_run009_recovery_boundary_is_direct_and_not_overpromoted():
     for marker in forbidden:
         assert marker not in registry
 
-    assert "CROSS-LAYER VALIDATION OPEN" in status
-    assert "Folder Certification\n\n⏳ Pending" in status
+    assert "BOUNDED CROSS-LAYER VALIDATION CLOSED FOR CORE CERTIFICATION SCOPE" in status
+    assert "Folder Certification\n\n🟢 CLOSED_FOR_PHASE_1" in status

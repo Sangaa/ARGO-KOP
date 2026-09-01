@@ -61,10 +61,10 @@ def test_relationship_registry_records_only_documentary_lifecycle_seam() -> None
     assert all(row[3] not in forbidden for row in seam_rows)
 
 
-def test_broader_core_and_lifecycle_certification_remain_open() -> None:
+def test_core_closure_does_not_close_lifecycle_partition() -> None:
     core_status = CORE_STATUS.read_text(encoding="utf-8", errors="ignore")
     lifecycle_status = LIF_STATUS.read_text(encoding="utf-8", errors="ignore")
-    assert "CROSS-LAYER VALIDATION OPEN" in core_status
-    assert "Priority 7 remains OPEN" in core_status
+    assert "BOUNDED CROSS-LAYER VALIDATION CLOSED FOR CORE CERTIFICATION SCOPE" in core_status
+    assert "CORE = CLOSED_FOR_PHASE_1 / BOUNDED CORE PARTITION CERTIFIED" in core_status
     assert "Consolidated Lifecycle certification: **OPEN / INTEGRITY HOLD**" in lifecycle_status
     assert "No `PASS` claim is made until cross-domain references are validated" in lifecycle_status

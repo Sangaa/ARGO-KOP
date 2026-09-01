@@ -58,11 +58,11 @@ def test_legacy_core000_identity_is_allocated_without_canonical_promotion():
     assert "not second active CORE-000 authority" in legacy_row
 
 
-def test_allocation_evidence_does_not_promote_core_certification():
+def test_allocation_evidence_remains_non_promotional_even_after_separate_certification():
     addendum = ADDENDUM.read_text(encoding="utf-8")
     status = STATUS.read_text(encoding="utf-8")
     assert "Phase 1 Population In Progress" in addendum
     assert "ALLOCATION COMPLETE WITHIN CURRENT CORE PHYSICAL SET ≠ CORE CERTIFIED" in addendum
-    assert "CROSS-LAYER VALIDATION OPEN" in status
-    assert "CERTIFICATION REVIEW READY" in status
-    assert "Folder Certification\n\n⏳ Pending" in status
+    assert "Transaction X is the separate explicit final review" in status
+    assert "Folder Certification\n\n🟢 CLOSED_FOR_PHASE_1" in status
+    assert "CORE CLOSED_FOR_PHASE_1 != PHASE 1 CLOSED" in status
