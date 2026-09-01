@@ -17,7 +17,7 @@ Status
 
 Version
 
-1.3.2
+1.3.3
 
 Last Repository Re-Audit
 
@@ -41,7 +41,7 @@ Core physical inventory, local index consistency, identity/authority sampling, c
 
 Repository Baseline
 
-Priority 7 current `main` evidence through GOV-006 factual reconciliation closure
+Priority 7 current `main` evidence through first bounded Core cross-layer relationship reconciliation
 
 ---
 
@@ -109,7 +109,7 @@ Control-Plane Review
 
 Cross-Layer Review
 
-🟡 In Progress — material Core dependency/consumer validation remains open; REP-014 reconciliation is required where relationship evidence changes or is incomplete
+🟡 In Progress — first bounded seam `CORE-KERNEL → RUN-001` reconciled as one-way `REFERENCES / RUNTIME-CONTRACT-ALIGNED / NON-DEPENDENCY`; broader material Core dependency/consumer validation remains open and REP-014 reconciliation continues where evidence requires
 
 Folder Certification
 
@@ -121,7 +121,7 @@ Folder Certification
 
 The previous `2026-08-08` authority audit and `2026-08-10` targeted Core re-audits remain historical evidence. They are not silently relabeled as the current Priority-7 review.
 
-The `2026-09-01` P336 repository re-audit applies to exact top-level Core inventory, local index/status consistency, current-content sampling and discrepancy classification. Subsequent bounded Priority-7 transactions reconciled REP-013, REP-001, REP-002 and the GOV-006 factual Core parent/example drift. These later transactions do **not** assert that every Core document received a new full semantic certification on that date.
+The `2026-09-01` P336 repository re-audit applies to exact top-level Core inventory, local index/status consistency, current-content sampling and discrepancy classification. Subsequent bounded Priority-7 transactions reconciled REP-013, REP-001, REP-002, the GOV-006 factual Core parent/example drift, and one bounded `CORE-KERNEL → RUN-001` relationship seam. These later transactions do **not** assert that every Core document received a new full semantic certification on that date.
 
 A document's `Last Audit` advances only when that document itself undergoes the applicable review.
 
@@ -202,11 +202,21 @@ These closures do not certify Core semantics or cross-layer execution relationsh
 
 ---
 
+# Validated Priority-7 Cross-Layer Seams
+
+Current bounded evidence validates:
+
+1. `CORE-KERNEL → RUN-001 = REFERENCES` — `INTENTIONAL ONE-WAY / RUNTIME-CONTRACT-ALIGNED / NON-DEPENDENCY`.
+
+The seam is documentary/contract alignment only. It is not executable proof, does not invert `ARC-006`, and does not create a reverse `RUN-001 → CORE-KERNEL` edge without direct evidence.
+
+---
+
 # Remaining P7 Gaps
 
 Priority 7 remains OPEN. Current evidence still requires:
 
-1. dependency and consumer validation for material Core authority relationships;
+1. continued dependency and consumer validation for remaining material Core authority relationships;
 2. REP-014 relationship-registry reconciliation where current evidence requires addition, correction, strengthening, weakening or explicit unresolved classification;
 3. explicit final Core certification decision only after those gates are satisfied.
 
@@ -216,7 +226,7 @@ No Phase-1 closure, repository-wide graph completion, or Global Connected Baseli
 
 # Certification Rule
 
-Core MUST NOT be marked clean merely because local inventory and control-plane representation are now reconciled.
+Core MUST NOT be marked clean merely because local inventory, control-plane representation, and one bounded cross-layer seam are now reconciled.
 
 Required progression remains:
 
@@ -226,7 +236,7 @@ Required progression remains:
 
 # Next Action
 
-`Validate material Core authority dependencies/consumers bidirectionally → reconcile REP-014 where evidence requires → Core certification review`
+`Continue material Core authority dependency/consumer validation bidirectionally → reconcile REP-014 only where evidence requires → Core certification review`
 
 ---
 
