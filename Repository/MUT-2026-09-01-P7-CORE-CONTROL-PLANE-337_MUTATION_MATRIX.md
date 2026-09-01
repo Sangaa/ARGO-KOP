@@ -2,15 +2,16 @@
 
 Transaction ID: MUT-2026-09-01-P7-CORE-CONTROL-PLANE-337
 Protocol: GOV-013 / GOV-014 / GOV-014A
-Status: FIX-FORWARD-FUNCTIONAL / CI-PENDING
+Status: CLOSED / EXECUTION-VERIFIED / RESUME-SAFE
 Date: 2026-09-01
 Entry baseline before incident: `bbcf9845415ba68446da7f88405ae7ed68c2d19b`
 Verified original pre-functional HEAD: `a0a1b0c6de9c208846a24e53d5019988849cfa80`
-Functional HEAD under diagnosis: `1b525f184ab688608555e43043be1402543b6d39`
+Initial functional HEAD: `1b525f184ab688608555e43043be1402543b6d39`
 Fix-forward prewrite HEAD: `a7e9ab16b5faa9a6c712916786251ea74ccc3219`
+Execution-verified fix-forward HEAD: `11043dbe698b6d85182bad28cc95339fd8505192`
 
 ## Entry-order incident
-The initial P337 Matrix was written before live-main rediscovery completed. GitHub accepted that write, so it is a real repository mutation and is not represented as compliant execution. Two additional Matrix-only commits followed while the incident was being made explicit, including one unnecessary same-content commit. Compare from the prior resume-safe P336 head `bbcf9845...` to `a0a1b0c6...` proves the net repository change across those four commits is this Matrix only. No functional/control-plane target changed.
+The initial P337 Matrix was written before live-main rediscovery completed. GitHub accepted that write, so it is a real repository mutation and is not represented as compliant execution. Two additional Matrix-only commits followed while the incident was being made explicit, including one unnecessary same-content commit. Compare from the prior resume-safe P336 head `bbcf9845...` to `a0a1b0c6...` proved the net repository change across those four commits was this Matrix only. No functional/control-plane target changed.
 
 The incident is retained as negative execution evidence. Exact-head CI on `a0a1b0c6...` was green, so the functional transaction proceeded from that verified state without rewriting history or force-updating refs.
 
@@ -27,38 +28,48 @@ The original intent was to reconcile REP-001, REP-002 and REP-013 in one P337 tr
 ## Observed REP-013 defect
 The pre-P337 REP-013 Core content inventory began at CORE-003 and omitted current physical members including `ARGO_KERNEL.md`, `Core.md`, both physical CORE-000 paths, `CORE-000A`, `CORE-001`, `CORE-002`, and `CORE-012`. This contradicted the exact current Core enumeration and P336 local reconciliation.
 
-## Functional mutation already applied
+## Functional mutation
 Functional commit `1b525f184ab688608555e43043be1402543b6d39` applied the bounded REP-013 repair and its direct regression/progress records. Read-back confirmed the intended 18-file Core physical inventory and preserved the legacy/noncanonical CORE-000 identity boundary.
 
-Exact-head CI on `1b525f184ab688608555e43043be1402543b6d39` produced a HARD HOLD: Full-Stack, Real Mutation Matrix, M2, Runtime prototype and Runtime integrity passed, while Runtime `integration-tests` failed in `Run integration quality suite`.
+Exact-head CI on that initial functional head produced a HARD HOLD: Full-Stack, Real Mutation Matrix, M2, Runtime prototype and Runtime integrity passed, while Runtime `integration-tests` failed in `Run integration quality suite`.
 
-## HARD-HOLD diagnosis
-The new P337 regression is consistent with current REP-013 content. Independent inspection identified the failing cross-artifact condition instead: `Repository/REP-020_CURRENT_CONTROL_PLANE_BOUNDARY_MANIFEST.md` still recorded REP-013 version `1.1.2`, while P337 advanced REP-013 to `1.1.3`.
+## HARD-HOLD diagnosis and repair
+The new P337 regression was consistent with current REP-013 content. Independent inspection identified the failing cross-artifact condition: `Repository/REP-020_CURRENT_CONTROL_PLANE_BOUNDARY_MANIFEST.md` still recorded REP-013 version `1.1.2`, while P337 advanced REP-013 to `1.1.3`.
 
-`Quality/Integration/control_plane_reconciliation_gate.py` explicitly compares each current-manifest row to the live artifact and fails closed on version mismatch. `Quality/Integration/test_control_plane_current_manifest.py` requires zero mismatches and `boundary_pass=True`. Therefore the correct fix-forward is to synchronize the non-authoritative current manifest; weakening the gate or reverting the valid REP-013 inventory repair is prohibited.
+`Quality/Integration/control_plane_reconciliation_gate.py` explicitly compares each current-manifest row to the live artifact and fails closed on version mismatch. `Quality/Integration/test_control_plane_current_manifest.py` requires zero mismatches and `boundary_pass=True`. The gate therefore worked as intended.
 
-## Authorized functional change set
+Fix-forward commit `11043dbe698b6d85182bad28cc95339fd8505192` changed exactly two authorized paths relative to prewrite `a7e9ab16...`:
+1. this Matrix;
+2. `Repository/REP-020_CURRENT_CONTROL_PLANE_BOUNDARY_MANIFEST.md`.
+
+The manifest refresh changed only its current date/checkpoint/source-baseline fields and the REP-013 version row `1.1.2 → 1.1.3`. Semantic closure boundaries remained unchanged. No test was weakened and the valid REP-013 repair was not reverted.
+
+## Authorized functional change set — final state
 | Change | Target | Action | Applied | Verified |
 |---|---|---|---:|---:|
-| 337-01 | `Repository/REP-013_REPOSITORY_CONTENT_TREE.md` | UPDATE exact Core physical inventory, metadata audit/version, bounded integrity wording, and append P337 reconciliation section | Y | read-back Y / final CI pending |
-| 337-02 | `Quality/Integration/test_core_rep013_control_plane_reconciliation.py` | CREATE exact physical-inventory regression | Y | source/read-back Y / final CI pending |
-| 337-03 | `Repository/P7_CORE_REP013_CONTROL_PLANE_RECONCILIATION_337_2026-09-01.md` | CREATE bounded P7 progress record | Y | read-back Y / final CI pending |
-| 337-04 | `Repository/REP-016_PRIORITY7_PROGRESS_ADDENDUM_2026-09-01_P337.md` | CREATE operational progress addendum | Y | read-back Y / final CI pending |
-| 337-05 | `Repository/REP-011_PRIORITY7_PROGRESS_ADDENDUM_2026-09-01_P337.md` | CREATE traceability addendum | Y | read-back Y / final CI pending |
-| 337-06 | this Matrix | UPDATE in functional change set and fix-forward change set | Y | final CI pending |
-| 337-07 | `Repository/REP-020_CURRENT_CONTROL_PLANE_BOUNDARY_MANIFEST.md` | FIX-FORWARD current REP-013 row from version 1.1.2 to 1.1.3 and refresh current evidence checkpoint/baseline only; preserve all semantic boundaries | Y | final CI pending |
+| 337-01 | `Repository/REP-013_REPOSITORY_CONTENT_TREE.md` | UPDATE exact Core physical inventory, metadata audit/version, bounded integrity wording, and append P337 reconciliation section | Y | Y |
+| 337-02 | `Quality/Integration/test_core_rep013_control_plane_reconciliation.py` | CREATE exact physical-inventory regression | Y | Y |
+| 337-03 | `Repository/P7_CORE_REP013_CONTROL_PLANE_RECONCILIATION_337_2026-09-01.md` | CREATE bounded P7 progress record | Y | Y |
+| 337-04 | `Repository/REP-016_PRIORITY7_PROGRESS_ADDENDUM_2026-09-01_P337.md` | CREATE operational progress addendum | Y | Y |
+| 337-05 | `Repository/REP-011_PRIORITY7_PROGRESS_ADDENDUM_2026-09-01_P337.md` | CREATE traceability addendum | Y | Y |
+| 337-06 | this Matrix | UPDATE across functional/fix-forward/closure stages | Y | Y |
+| 337-07 | `Repository/REP-020_CURRENT_CONTROL_PLANE_BOUNDARY_MANIFEST.md` | FIX-FORWARD REP-013 current row `1.1.2 → 1.1.3` and refresh evidence checkpoint/baseline only | Y | Y |
 
-## Fix-forward pre-write validation
-Authorized fix-forward paths are exactly:
-1. `Repository/REP-020_CURRENT_CONTROL_PLANE_BOUNDARY_MANIFEST.md`;
-2. this Matrix in the same functional fix-forward change set.
+## Exact-head CI evidence — `11043dbe698b6d85182bad28cc95339fd8505192`
+- Full-Stack Repository Audit — run `33467361704` — SUCCESS.
+- ARGO Runtime Prototype and Integration Tests — run `33467361742` — SUCCESS. This resolves the prior integration HARD HOLD.
+- Real Mutation Matrix Regression — run `33467361713` — SUCCESS.
+- M2 Multi-Channel Proposal Training — run `33467361732` — SUCCESS.
 
-KEEP unchanged during fix-forward: REP-013 content, the new P337 regression, REP-001, REP-002, REP-011/014/016 canonical bodies, all Core authority documents, Governance, Architecture, Runtime, Engine, Services, Interfaces, relationship direction/type, Phase-1/global status, and the executable control-plane gate itself.
-
-The manifest is evidence-only and already declares that it must be refreshed after a listed identity/version/status mutation. The fix-forward changes only its date/current checkpoint/verified source baseline and REP-013 version row; no closure boundary is promoted.
+Read-back after CI confirms the current manifest records REP-013 v1.1.3 while preserving `Phase 1 OPEN`, global integrity `HOLD`, and global `BOOTED / INTEGRITY PASS` as `NOT CLAIMED`.
 
 ## Candidate validation history
 An unreferenced Git candidate commit `b702a7386c32faa6e416bd45e2f8b09aae5f4610` was built from the complete REP-013 source. Its compare showed only intended REP-013 semantic areas plus one unintended final-newline deletion. That candidate was REJECTED. The corrected functional candidate preserved the original trailing newline before main ref movement.
 
-## Closure boundary
-P337 may close only the REP-013 Core physical control-plane inventory subgate after the fix-forward reaches exact-head green CI. Priority 7 remains OPEN. REP-001/REP-002 Core representation, GOV-006 disposition, Core dependency/consumer validation, Core certification, Phase 1 and Global Connected Baseline remain open.
+## Closure decision
+`P337 = CLOSED / EXECUTION-VERIFIED / RESUME-SAFE` for the REP-013 Core physical control-plane inventory subgate only.
+
+Priority 7 remains OPEN. REP-001/REP-002 Core representation, GOV-006 disposition, Core dependency/consumer validation, Core certification, Phase 1 and Global Connected Baseline remain open. No repository-wide or global integrity closure is claimed.
+
+## Resume instruction
+Next session must rediscover live `main` and current CI before action. Continue Priority 7 from current evidence, treating REP-001 and REP-002 Core control-plane reconciliation as independent bounded transactions unless newer repository evidence changes the dependency order. Do not reopen P337 merely because broader Priority-7 or global work remains open.
