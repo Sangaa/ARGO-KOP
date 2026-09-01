@@ -3,46 +3,57 @@
 Transaction: `MUT-2026-09-01-P7-CORE-KERNEL-RUN009-VALIDATION-N`
 Work Lease: `HERMUZ-P7-N-CORE-KERNEL-RUN009-20260901`
 Priority: `7 — Core cross-layer validation`
-State: `MATERIAL-CANDIDATE / CI-PENDING / LEASE ACTIVE / VALIDATION-FIRST`
+State: `FUNCTIONAL-CLOSED / CI-VERIFIED / RESUME-SAFE / PRIORITY-7-OPEN`
 Entry HEAD: `6c22cc9d9d04f8d62f1b44e2f6cbac3175b12cea`
 Pre-write Matrix HEAD: `a940b5b526e17517b54669a904e78d87b96e13cf`
+Material candidate HEAD: `dc21040815434219933cae974cf79d61812904bb`
 Protocol: `PROJECT_BOOTSTRAP / CORE-003 / GOV-013 / GOV-013A / GOV-014 / GOV-014A / GOV-015 / GOV-016`
 
-## Boot-proof and legal action
+## Closed finding
 
-Current `main`, bootstrap, control-plane, Core status and exact-head CI were re-proven before the first write. Priority 7 remains open. Direct source evidence supports only:
+Direct current evidence validates only:
 
 `CORE-KERNEL → RUN-009 = REFERENCES / INTENTIONAL ONE-WAY / RECOVERY-HANDOFF-ALIGNED / NON-DEPENDENCY`
 
-Transaction E is directly applicable prior learning; J/L validation-first discipline and M failure/test-drift learning are transferable.
+The Kernel explicitly hands recovery to the applicable governed recovery flow and lists RUN-009 as Related Authority, while its dependency boundary explicitly prohibits treating a listed name as dependency proof. RUN-009 does not provide direct reverse CORE-KERNEL dependency/consumer/implementation/governance evidence.
 
 ## Material change set
 
 | Change ID | Target | Action | Applied | Verified |
 |---|---|---|:---:|:---:|
-| N-01 | `Quality/Integrity/test_core_kernel_run009_recovery_boundary.py` | CREATE | Y | PENDING CI |
-| N-02 | `Repository/P7_CORE_KERNEL_RUN009_RECOVERY_SEAM_2026-09-01_N.md` | CREATE | Y | PENDING CI |
-| N-03 | this Matrix | UPDATE IN SAME CHANGE SET | Y | PENDING CI |
+| N-01 | `Quality/Integrity/test_core_kernel_run009_recovery_boundary.py` | CREATE | Y | Y |
+| N-02 | `Repository/P7_CORE_KERNEL_RUN009_RECOVERY_SEAM_2026-09-01_N.md` | CREATE | Y | Y |
+| N-03 | this Matrix | UPDATE IN SAME CHANGE SET | Y | Y |
 
-Candidate must be exactly one commit from the pre-write Matrix HEAD and exactly these three paths. Unexpected path expansion must equal `0`.
+Candidate comparison from pre-write Matrix HEAD to material candidate proved exactly one commit and exactly three authorized paths. Unexpected path expansion = `0`.
 
-## Required evidence boundary
+## Exact-head verification
 
-The focused regression preserves exact current source assertions:
+Required workflows on `dc21040815434219933cae974cf79d61812904bb`:
 
-- Kernel recovery-handoff wording and RUN-009 Related Authority entry;
-- Kernel warning that listed names do not themselves establish dependency;
-- RUN-009 canonical recovery identity and safe-resume semantics;
-- REP-014 absence of this pair during validation-first N;
-- prohibition on reverse edge and stronger dependency/consumer/implementation/governance semantics;
-- Core status remains cross-layer validation open / certification pending.
+- Full-Stack Repository Audit — `33522126057` — SUCCESS. Repository-audit job and all reported steps succeeded, including exact checkout SHA binding, Mutation Matrix preflight, Matrix semantic regression, same-change-set enforcement, repository-wide audit and evidence emission.
+- ARGO Runtime Prototype and Integration Tests — `33522126161` — SUCCESS. Integrity, prototype and integration jobs all succeeded.
+- Real Mutation Matrix Regression — `33522126125` — SUCCESS.
+- M2 Multi-Channel Proposal Training — `33522126025` — SUCCESS.
+
+Result: `4/4 REQUIRED WORKFLOWS SUCCESS`.
+
+No material failure occurred in N.
 
 ## KEEP / non-authority
 
-No mutation to CORE-KERNEL, RUN-009, REP-014, REP-020 or Core status. No executable/dependency promotion. No certification, Phase-1 closure, Connected Baseline closure, repository-wide graph closure or Global PASS.
+- CORE-KERNEL and RUN-009 source content unchanged.
+- REP-014 unchanged by N; no relationship row is registered yet.
+- REP-020 and Core status unchanged by N.
+- No reverse RUN-009 → CORE-KERNEL edge.
+- No DEPENDS_ON, IMPLEMENTS, CONSUMES, GOVERNS or executable-reachability promotion.
+- No Core/Runtime certification.
+- No Phase-1 closure, Connected Baseline closure, repository-wide graph closure or Global PASS.
 
-## Verification contract
+## Learning assessment
 
-`EXACT-HEAD READ-BACK → DIFF SCOPE = 3 AUTHORIZED PATHS / ONE COMMIT → FOUR REQUIRED WORKFLOWS → LEARNING ASSESSMENT → CLOSURE COMMIT → CLOSURE-HEAD FOUR-WORKFLOW VERIFICATION`
+The useful lesson is an application of already-validated Transaction-E discipline: an explicit runtime recovery handoff plus Related Authority can justify a bounded documentary reference while the source's own dependency warning blocks automatic dependency promotion. This does not warrant a new governance rule.
 
-Failure is preserved and governed under GOV-016; test/source semantics are not weakened to manufacture PASS.
+Work Lease: `CLOSED / RESUME-SAFE`.
+
+A future continuation must rediscover live main and recompute Priority 7. REP-014 synchronization of this validated seam is only a candidate and receives no mutation authority from this record.
