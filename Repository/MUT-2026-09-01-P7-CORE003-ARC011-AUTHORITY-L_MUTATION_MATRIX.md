@@ -3,8 +3,9 @@
 Transaction: `MUT-2026-09-01-P7-CORE003-ARC011-AUTHORITY-L`
 Work Lease: `HERMUZ-P7-L-CORE003-ARC011-20260901`
 Priority: `7 — Core cross-layer validation`
-State: `PRE-WRITE AUTHORIZED / LEASE ACTIVE / VALIDATION-FIRST MUTATION PENDING`
+State: `MATERIAL CANDIDATE / LEASE ACTIVE / EXACT-HEAD VERIFICATION PENDING`
 Entry HEAD: `42133637e8f672dd1c6c2d1ce1be78ccfc00ba5b`
+Pre-write Matrix HEAD: `bfca2ab112aa6950bdf5717f42b976488bae5a3a`
 Protocol: `GOV-013 / GOV-013A / GOV-014A / GOV-015 / GOV-016`
 
 ## Reconstructed legal action
@@ -35,13 +36,13 @@ The reverse `REFERENCES` candidate is semantic/documentary reference to the uniq
 | Transaction I CORE-000 content repair | NOT APPLICABLE | No source-content defect is established in L. |
 | Historical broad architecture compliance claims | STALE | Provenance only; current sources control. |
 
-## Authorized material change set
+## Material change set
 
 | Change ID | Target | Action | Expected result | Applied | Verified |
 |---|---|---|---|:---:|:---:|
-| L-01 | `Quality/Integrity/test_core003_arc011_authority_boundary.py` | CREATE | Assert current two-direction authority/reference evidence and prohibit unsupported dependency/implementation/consumer semantics. | N | N |
-| L-02 | `Repository/P7_CORE003_ARC011_AUTHORITY_SEAM_2026-09-01_L.md` | CREATE | Preserve finding, evidence classification, non-claims and verification state. | N | N |
-| L-03 | this Matrix | UPDATE IN SAME CHANGE SET | Rebind prewrite authority in material diff and record result. | N | N |
+| L-01 | `Quality/Integrity/test_core003_arc011_authority_boundary.py` | CREATE | Assert current two-direction authority/reference evidence and prohibit unsupported dependency/implementation/consumer semantics. | Y | PENDING EXACT-HEAD |
+| L-02 | `Repository/P7_CORE003_ARC011_AUTHORITY_SEAM_2026-09-01_L.md` | CREATE | Preserve finding, evidence classification, non-claims and verification state. | Y | PENDING EXACT-HEAD |
+| L-03 | this Matrix | UPDATE IN SAME CHANGE SET | Rebind prewrite authority in material diff and record result. | Y | PENDING EXACT-HEAD |
 
 ## KEEP / non-authority requirements
 
@@ -57,9 +58,10 @@ The reverse `REFERENCES` candidate is semantic/documentary reference to the uniq
 - Live main rediscovered after K closure: PASS.
 - K closure-head 4/4 required workflows: PASS.
 - ARC-011 direct current read: PASS; canonical, subordinate to Constitution/Governance, explicit authority chain.
-- CORE-003 current evidence: PASS; higher authority and repository-component compliance rule.
+- CORE-003 direct current read: PASS; highest governing rules and repository-component compliance rule.
 - Existing REP-014 CORE-003/RUN-001 GOVERNS+REFERENCES pattern retrieved: DIRECTLY APPLICABLE.
 - Current repository search found no existing ARC-011↔CORE-003 registry row.
 - Search/index results were treated as discovery only; direct current source reads remain authority.
+- Pre-write Matrix existed before material mutation at `bfca2ab112aa6950bdf5717f42b976488bae5a3a` and is rebound in this same material change set.
 
-Decision: `AUTHORIZED FOR VALIDATION-FIRST SAME-CHANGE-SET MATERIAL UNIT ONLY`.
+Material-candidate decision: `AUTHORIZED / EXACT-HEAD READ-BACK + REQUIRED CI PENDING`.
