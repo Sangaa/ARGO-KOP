@@ -13,11 +13,11 @@ Core
 
 Status
 
-🟡 INTEGRITY HOLD — CONTROL PLANE RECONCILED / CERTIFICATION REVIEW READY
+🟡 INTEGRITY HOLD — CONTROL PLANE RECONCILED / CROSS-LAYER VALIDATION OPEN / CERTIFICATION REVIEW READY
 
 Version
 
-1.3.12
+1.3.13
 
 Last Repository Re-Audit
 
@@ -41,7 +41,7 @@ Core physical inventory, local index consistency, identity/authority sampling, c
 
 Repository Baseline
 
-Priority 7 current `main` evidence through eight registered/reconciled cross-layer seams, one additional validated-not-registered Runtime/Core seam, bounded CORE-000 canonical-architecture content reconciliation, and Transaction-T direct Core member sweep
+Priority 7 current `main` evidence through eight registered/reconciled cross-layer seams, one additional validated-not-registered Runtime/Core seam, bounded CORE-000 canonical-architecture content reconciliation, Transaction-T direct Core member sweep, and T-C1 state-transition correction
 
 ---
 
@@ -113,7 +113,7 @@ Control-Plane Review
 
 Cross-Layer Review
 
-🟢 Bounded Priority-7 material sweep complete for current certification-readiness scope — registered/reconciled seams include `CORE-KERNEL → RUN-001`, `CORE-KERNEL → RUN-009`, `CORE-009 ↔ LIF-001`, `CORE-012 → GOV-016`, `ARC-005 → CORE-011`, `ARC-006 → CORE-003`, `CORE-003 ↔ ARC-011`, and `CORE-003 ↔ RUN-003`; Transaction R additionally validates `RUN-002 → CORE-003 = REFERENCES` as `VALIDATED-NOT-REGISTERED / INTENTIONAL ONE-WAY / NON-DEPENDENCY`; Transaction T direct current-content sweep of the remaining canonical Core members identifies no additional material external coupling that must be registered before explicit certification review
+🟡 CROSS-LAYER VALIDATION OPEN — bounded Priority-7 material sweep is sufficient for certification-readiness review, but this gate remains explicitly open until the separate Explicit Core Certification Review closes or redirects it. Registered/reconciled seams include `CORE-KERNEL → RUN-001`, `CORE-KERNEL → RUN-009`, `CORE-009 ↔ LIF-001`, `CORE-012 → GOV-016`, `ARC-005 → CORE-011`, `ARC-006 → CORE-003`, `CORE-003 ↔ ARC-011`, and `CORE-003 ↔ RUN-003`; Transaction R additionally validates `RUN-002 → CORE-003 = REFERENCES` as `VALIDATED-NOT-REGISTERED / INTENTIONAL ONE-WAY / NON-DEPENDENCY`; Transaction T direct current-content sweep of the remaining canonical Core members identifies no additional material external coupling that must be registered before explicit certification review
 
 Certification Readiness
 
@@ -129,7 +129,7 @@ Folder Certification
 
 The previous `2026-08-08` authority audit and `2026-08-10` targeted Core re-audits remain historical evidence. They are not silently relabeled as the current Priority-7 review.
 
-The `2026-09-01` P336 repository re-audit applies to exact top-level Core inventory, local index/status consistency, current-content sampling and discrepancy classification. Subsequent bounded Priority-7 transactions reconciled REP-013, REP-001, REP-002, the GOV-006 factual Core parent/example drift, `CORE-KERNEL → RUN-001`, `CORE-KERNEL → RUN-009`, the `CORE-009 ↔ LIF-001` lifecycle authority seam, `CORE-012 → GOV-016`, `ARC-005 → CORE-011`, `ARC-006 → CORE-003`, `CORE-003 ↔ ARC-011`, `CORE-003 ↔ RUN-003`, and the substantive CORE-000 canonical-architecture content drift. Transaction R subsequently validated `RUN-002 → CORE-003 = REFERENCES` without automatically registering it. Transaction T directly re-read the remaining canonical Core members for material external-coupling semantics and changes only this status/readiness evidence, not their historical `Last Audit` dates.
+The `2026-09-01` P336 repository re-audit applies to exact top-level Core inventory, local index/status consistency, current-content sampling and discrepancy classification. Subsequent bounded Priority-7 transactions reconciled REP-013, REP-001, REP-002, the GOV-006 factual Core parent/example drift, `CORE-KERNEL → RUN-001`, `CORE-KERNEL → RUN-009`, the `CORE-009 ↔ LIF-001` lifecycle authority seam, `CORE-012 → GOV-016`, `ARC-005 → CORE-011`, `ARC-006 → CORE-003`, `CORE-003 ↔ ARC-011`, `CORE-003 ↔ RUN-003`, and the substantive CORE-000 canonical-architecture content drift. Transaction R subsequently validated `RUN-002 → CORE-003 = REFERENCES` without automatically registering it. Transaction T directly re-read the remaining canonical Core members for material external-coupling semantics and changes only this status/readiness evidence, not their historical `Last Audit` dates. T-C1 restores the still-open cross-layer marker after T exact-head Runtime verification demonstrated that readiness did not itself close that gate.
 
 The CORE-009 and CORE-000 transactions included direct semantic corrections; CORE-KERNEL/RUN-001, CORE-KERNEL/RUN-009, CORE-012/GOV-016, ARC-005/CORE-011, ARC-006/CORE-003, CORE-003/ARC-011 and CORE-003/RUN-003 required registry reconciliation only. Transaction R was validation-first and remains intentionally unregistered absent separate material registration justification. These transactions still do **not** assert that every Core document received a new full semantic certification on 2026-09-01.
 
@@ -284,14 +284,26 @@ Within this declared readiness scope, no additional direct material external cou
 
 ---
 
+# T-C1 State-Transition Correction
+
+T candidate `8d01a3cd19e0f7d630bf6c60fc62b05460b82b1d` passed Full-Stack, Real Mutation Matrix and M2 verification but failed the exact-head Runtime workflow. The Runtime failure showed that pre-existing Priority-7 tests still correctly require the literal open-gate marker `CROSS-LAYER VALIDATION OPEN` until a separate explicit certification decision closes that gate.
+
+T-C1 therefore retains the bounded readiness conclusion while restoring the open-gate marker. No pre-existing test is weakened, no relationship is manufactured, and no certification is claimed.
+
+Retained state rule:
+
+`READINESS MAY OPEN THE NEXT REVIEW WITHOUT CLOSING THE CURRENT VALIDATION GATE.`
+
+---
+
 # Remaining P7 Gate
 
-Priority 7 remains OPEN, but current bounded evidence is now sufficient to open the explicit Core certification review.
+Priority 7 remains OPEN, and current bounded evidence is sufficient to open the explicit Core certification review, while `CROSS-LAYER VALIDATION OPEN` remains explicit until that review closes or redirects the gate.
 
 Still required:
 
 1. explicit final Core certification decision under current live evidence;
-2. confirmation that no new drift or blocking relationship/consumer evidence appeared since Transaction T candidate;
+2. confirmation that no new drift or blocking relationship/consumer evidence appeared since Transaction T/T-C1;
 3. if the certification review finds a material unresolved seam, return to validation/reconciliation instead of forcing closure.
 
 No Phase-1 closure, repository-wide graph completion, or Global Connected Baseline PASS is implied.
@@ -306,7 +318,7 @@ Required progression remains:
 
 `Exact Local Inventory → Control-Plane Reconciliation → Content / Cross-Layer Validation → Relationship Reconciliation → Explicit Core Certification Review`
 
-Transaction T reaches the **entry gate** to the final step only.
+Transaction T/T-C1 reaches the **entry gate** to the final step only; it does not close `CROSS-LAYER VALIDATION OPEN` by itself.
 
 ---
 
@@ -321,6 +333,8 @@ Transaction T reaches the **entry gate** to the final step only.
 Repository Reality > Previous Status Claims > Conversation Memory
 
 `CERTIFICATION READINESS != FOLDER CERTIFICATION`
+
+`CERTIFICATION REVIEW READY != CROSS-LAYER VALIDATION CLOSED`
 
 ---
 

@@ -1,140 +1,122 @@
 # Priority 7 — Core Certification Readiness — Transaction T
 
 Date: 2026-09-01
-State: `MATERIAL-CANDIDATE / CI-PENDING / CERTIFICATION-READINESS-ONLY / PRIORITY 7 OPEN`
+State: `FAILED MATERIAL CANDIDATE PRESERVED / T-C1 CORRECTIVE CANDIDATE PREPARED / CERTIFICATION-READINESS-ONLY / PRIORITY 7 OPEN`
 Transaction: `MUT-2026-09-01-P7-CORE-CERTIFICATION-READINESS-T`
+Corrective Transaction: `MUT-2026-09-01-P7-CORE-CERTIFICATION-READINESS-T-C1`
 Work Lease: `HERMUZ-P7-T-CORE-CERTIFICATION-READINESS-20260901`
+Corrective Lease: `HERMUZ-P7-T-C1-CORE-READINESS-20260901`
 Entry HEAD: `6570329ad77acf5e78a7d6a329e3cdd356d2cc83`
 Pre-write Matrix HEAD: `f11f62ea4d67d5c91d398a555c3f258607a05944`
+Failed T candidate: `8d01a3cd19e0f7d630bf6c60fc62b05460b82b1d`
+T-C1 pre-write Matrix HEAD: `110eab997d9027f575cb306d9175565834098e82`
 
 ## Question reviewed
 
 Does current bounded Priority-7 Core evidence support opening the explicit Core certification review, without equating readiness with certification and without manufacturing relationship-registry completeness?
 
-## Current progression reviewed
+## Bounded readiness evidence
 
-`Exact Local Inventory → Control-Plane Reconciliation → Content / Cross-Layer Validation → Relationship Reconciliation → Explicit Core Certification Review`
+Current live Core evidence establishes:
 
-Current live Core evidence already establishes exact local inventory/index synchronization, control-plane reconciliation, bounded CORE-000 semantic reconciliation and eight registered/reconciled cross-layer seams. Folder Certification remains pending.
+- exact local Core inventory/index synchronization;
+- Core control-plane representation reconciliation;
+- bounded CORE-000 canonical-architecture reconciliation;
+- eight registered/reconciled cross-layer seams;
+- Transaction R validation of `RUN-002 → CORE-003 = REFERENCES` as `INTENTIONAL ONE-WAY / INITIALIZATION-AUTHORITY-RESOLUTION-ALIGNED / NON-DEPENDENCY / VALIDATED-NOT-REGISTERED`;
+- a direct current-content sweep of the remaining canonical Core members that found no additional material external coupling requiring REP-014 registration before explicit certification review.
 
-Transaction R subsequently validated a ninth bounded seam:
+REP-014 explicitly states that its relationship list is not a complete graph. T therefore does not create REL-073 merely for visual completeness.
 
-`RUN-002 → CORE-003 = REFERENCES`
+## Direct current-content Core sweep retained
 
-Disposition:
+T directly re-read the canonical Core members not already represented by a specific material Priority-7 seam:
 
-`INTENTIONAL ONE-WAY / INITIALIZATION-AUTHORITY-RESOLUTION-ALIGNED / NON-DEPENDENCY / VALIDATED-NOT-REGISTERED`.
+- `CORE-000A` — glossary/listing does not prove implementation, architecture, process, capability or authority;
+- `CORE-001` — Manifest does not define governance, architecture or implementation authority;
+- `CORE-002` — Identity does not define governance, implementation, workflows or architecture;
+- `CORE-004` — principles are not execution permissions and remain subordinate to higher applicable authority;
+- `CORE-005` — execution remains governed by Architecture/Governance/Runtime controls and reasoning does not itself grant action authority;
+- `CORE-006` — philosophy does not grant bypass authority;
+- `CORE-007` — design principles do not override Constitution/Governance/Canonical Architecture and do not authorize repository mutation;
+- `CORE-008` — reference/name/location does not prove a relationship and material relationships require direct verification;
+- `CORE-010` — roadmap ordering/dependency remains planning until the underlying relationship is independently verified.
 
-REP-014 explicitly states that its current relationship list is not a complete graph. T therefore does not treat the absence of a RUN-002/CORE-003 row as an automatic registry defect and does not create REL-073 merely for visual completeness.
+Within this bounded scope, no additional direct material external coupling requiring REP-014 registration was established.
 
-## Direct current-content Core sweep
+## Failed T candidate — evidence preserved
 
-T directly re-read the canonical Core members not already represented by a specific material Priority-7 seam and classified their external-scope semantics.
+T material candidate `8d01a3cd19e0f7d630bf6c60fc62b05460b82b1d` satisfied its structural one-commit/five-path mutation boundary, but exact-head CI did **not** fully pass.
 
-### CORE-000A — Platform Glossary
+Workflow evidence on that exact SHA:
 
-The glossary contains cross-domain Related Documents, but its own rules explicitly prevent terminology/listing from proving implementation, architecture, process or capability merely because an item is named. It also forbids the glossary from silently replacing higher-authority meaning.
+- Full-Stack Repository Audit — run `33534072084` — `SUCCESS`;
+- Real Mutation Matrix Regression — run `33534071888` — `SUCCESS`;
+- M2 Multi-Channel Proposal Training — run `33534072032` — `SUCCESS`;
+- ARGO Runtime Prototype and Integration Tests — run `33534072160` — `FAILURE`.
 
-Classification: `REFERENCE/NAVIGATION CONTEXT / NO MATERIAL COUPLING PROVEN BY LISTING`.
+Runtime job evidence:
 
-### CORE-001 — Manifest
+- `integrity-tests` — `FAILURE`;
+- `prototype-tests` — `SUCCESS`;
+- `integration-tests` — `FAILURE`.
 
-The Manifest explicitly states that it introduces platform identity/intent and does not define governance, architecture or implementation authority.
+The failure converged on one state-transition defect: T replaced the established open-gate marker `CROSS-LAYER VALIDATION OPEN` with `CERTIFICATION REVIEW READY` before a separate Explicit Core Certification Review had actually closed cross-layer validation.
 
-Classification: `IDENTITY/INTENT BOUNDARY / NO MATERIAL EXTERNAL ARTIFACT COUPLING ESTABLISHED`.
+The readiness evidence itself was not disproven. The invalid step was the state-label replacement.
 
-### CORE-002 — Platform Identity
+Classification:
 
-Identity explicitly states that it does not define governance, implementation, workflows or architecture.
+`MATERIAL_CANDIDATE_CI_FAILURE / SEMANTIC STATE-TRANSITION REGRESSION / READINESS EVIDENCE RETAINED`.
 
-Classification: `IDENTITY BOUNDARY / NO MATERIAL EXTERNAL ARTIFACT COUPLING ESTABLISHED`.
+No rerun-only bypass is allowed and the failed candidate remains provenance.
 
-### CORE-004 — Core Principles
+## T-C1 corrective decision
 
-Principles explicitly are not execution permissions and remain subordinate to higher applicable constitutional/governance/architecture authority.
+T-C1 preserves both truths at the same time:
 
-Classification: `PRINCIPLE BOUNDARY / NO EXECUTION OR RELATIONSHIP PROMOTION`.
+1. `CROSS-LAYER VALIDATION OPEN` remains explicit until the separate explicit certification review closes or redirects that gate;
+2. `CERTIFICATION REVIEW READY` may remain explicit because the bounded evidence is sufficient to open the review.
 
-### CORE-005 — Cognitive Model
+Corrected status semantics:
 
-The model says execution is governed by applicable Architecture, Governance and Runtime controls and separates reasoning/decision from authority to act.
+`INTEGRITY HOLD — CONTROL PLANE RECONCILED / CROSS-LAYER VALIDATION OPEN / CERTIFICATION REVIEW READY`
 
-Classification: `PROCESS/CONTROL SEMANTICS / NO SPECIFIC NEW ARTIFACT EDGE ESTABLISHED`.
+Readiness disposition remains:
 
-### CORE-006 — System Philosophy
+`CORE CERTIFICATION READINESS = PASS / EXPLICIT CORE CERTIFICATION REVIEW MAY OPEN / CORE STILL INTEGRITY HOLD / FOLDER CERTIFICATION PENDING`.
 
-Philosophy explicitly does not grant permission to bypass Constitution, Governance, Architecture or Runtime validation.
+## Test disposition
 
-Classification: `PHILOSOPHICAL GUIDANCE / NO BYPASS OR COUPLING AUTHORITY`.
+All pre-existing Priority-7 tests that detected the T failure remain unchanged. They correctly encode the current state-transition boundary.
 
-### CORE-007 — Design Principles
+Only the T-focused readiness test is corrected because its own new exact status assertion embodied T's premature replacement. It must assert independently that both `CROSS-LAYER VALIDATION OPEN` and `CERTIFICATION REVIEW READY` are present, while retaining anti-promotion, R-seam, and direct-source checks.
 
-Design principles explicitly do not override Constitution, Governance or Canonical Architecture and cannot themselves authorize repository changes.
+## Corrective material boundary
 
-Classification: `DESIGN GUIDANCE / NO MATERIAL CHANGE OR RELATIONSHIP AUTHORITY`.
+T-C1 is limited to exactly six paths:
 
-### CORE-008 — Architectural Laws
+1. `Core/_FOLDER_STATUS.md`;
+2. `Quality/Integrity/test_core_certification_readiness_boundary.py`;
+3. this T evidence record;
+4. `Repository/REP-016_PRIORITY7_CERTIFICATION_READINESS_ADDENDUM_2026-09-01_T.md`;
+5. `Repository/MUT-2026-09-01-P7-CORE-CERTIFICATION-READINESS-T_MUTATION_MATRIX.md`;
+6. `Repository/MUT-2026-09-01-P7-CORE-CERTIFICATION-READINESS-T-C1_CORRECTIVE_MATRIX.md`.
 
-CORE-008 explicitly states that a reference, filename, numeric sequence, folder location or naming convention does not by itself prove an architectural relationship, and material relationships require source/target/authority verification.
+No canonical Core source, REP-014, REP-020, relationship registry row, pre-existing failure-detecting test, Core certification, Priority-7 closure, Phase-1 closure, Connected Baseline closure, repository-wide graph completion, or Global PASS is authorized.
 
-Classification: `ANTI-INFERENCE BOUNDARY / NO NEW EDGE FROM REFERENCE ALONE`.
+## Learning retained
 
-### CORE-010 — Platform Roadmap
+`READINESS MAY OPEN THE NEXT REVIEW WITHOUT CLOSING THE CURRENT VALIDATION GATE.`
 
-Roadmap dependency/order is explicitly planning relationship until underlying technical or governance relationship is independently verified.
+`A STATE LABEL MUST NOT REMOVE AN OPEN-GATE MARKER UNTIL THE GOVERNED CLOSURE DECISION HAS ACTUALLY OCCURRED.`
 
-Classification: `PLANNING BOUNDARY / NO ARCHITECTURAL DEPENDENCY PROMOTION`.
-
-## Readiness conclusion candidate
-
-Within this declared Priority-7 Core certification-readiness scope, the direct sweep establishes no additional material external coupling that must be registered before the explicit certification review may open.
-
-This is deliberately bounded:
-
-- not a complete repository graph claim;
-- not proof that all downstream consumers in every partition are aligned;
-- not a claim that every Core source received a new full audit on 2026-09-01;
-- not a Core certification decision;
-- not Priority-7 closure.
-
-Candidate readiness disposition:
-
-`CORE CERTIFICATION READINESS = PASS / EXPLICIT CERTIFICATION REVIEW MAY OPEN / CORE STILL INTEGRITY HOLD / FOLDER CERTIFICATION PENDING`.
-
-## R seam registry disposition
-
-T preserves R's validated result without registry inflation. The absence of a REP-014 row is not converted into a defect solely because REP-014 is a registry; the registry's own current authority says it is not a complete graph.
-
-If a future explicit certification review finds that RUN-002/CORE-003 registration is materially required for Core certification, that finding must be justified and handled as a separate controlled registry transaction. T does not pre-authorize it.
-
-## Authorized material change set
-
-Exactly five paths:
-
-1. `Core/_FOLDER_STATUS.md`
-2. `Quality/Integrity/test_core_certification_readiness_boundary.py`
-3. this evidence record
-4. `Repository/REP-016_PRIORITY7_CERTIFICATION_READINESS_ADDENDUM_2026-09-01_T.md`
-5. T Mutation Matrix
-
-No canonical Core source, REP-014, REP-020 or other authority artifact is modified.
-
-## Learning / failure disposition
-
-No T failure has occurred at candidate preparation time. No new Governance rule is warranted.
-
-The substantive retained reasoning rule is an application of existing protocol:
-
-`READINESS REQUIRES BOUNDED EVIDENCE SUFFICIENCY; CERTIFICATION REQUIRES A SEPARATE EXPLICIT DECISION.`
+No new Governance rule is warranted; this is an application of existing evidence/state discipline.
 
 ## Verification contract
 
-Before this readiness result becomes authoritative:
+T-C1 must satisfy:
 
-`ONE-COMMIT/FIVE-PATH DIFF → EXACT-HEAD READ-BACK → FOUR REQUIRED WORKFLOWS → FULL-STACK JOB/STEP REVIEW → RUNTIME JOB REVIEW → FAILURE/LEARNING ASSESSMENT → DOCUMENTATION-ONLY CLOSURE → CLOSURE-HEAD FOUR-WORKFLOW VERIFICATION`.
+`ONE-COMMIT/SIX-PATH COMPARE → LIVE-PARENT RECHECK → NON-FORCE FAST-FORWARD → EXACT-HEAD READ-BACK → FOUR REQUIRED WORKFLOWS → FULL-STACK SHA/MATRIX/AUDIT STEP REVIEW → RUNTIME INTEGRITY/PROTOTYPE/INTEGRATION REVIEW → FAILURE/LEARNING ASSESSMENT → DOCUMENTATION-ONLY T/T-C1 CLOSURE → CLOSURE-HEAD FOUR-WORKFLOW VERIFICATION`.
 
-If candidate or closure verification fails, T returns to HOLD and the failure remains evidence.
-
-## Continuation boundary
-
-Even if T closes green, it authorizes only a fresh live-main recomputation whose strongest expected candidate is the explicit Core certification review. It does not itself certify Core or close Priority 7.
+Until that succeeds, readiness remains a corrected candidate state rather than a resume-safe closure.

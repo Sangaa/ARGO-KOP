@@ -24,11 +24,14 @@ def test_core_certification_readiness_is_explicitly_not_certification():
     status = read(CORE_STATUS)
     index = read(CORE_INDEX)
 
-    assert "Version\n\n1.3.12" in status
-    assert "INTEGRITY HOLD — CONTROL PLANE RECONCILED / CERTIFICATION REVIEW READY" in status
+    assert "Version\n\n1.3.13" in status
+    assert "INTEGRITY HOLD — CONTROL PLANE RECONCILED" in status
+    assert "CROSS-LAYER VALIDATION OPEN" in status
+    assert "CERTIFICATION REVIEW READY" in status
     assert "Certification Readiness\n\n🟢 PASS — EXPLICIT CORE CERTIFICATION REVIEW MAY OPEN / CORE STILL INTEGRITY HOLD / NOT CERTIFIED" in status
     assert "Folder Certification\n\n⏳ Pending — requires a separate explicit Core certification decision" in status
     assert "CERTIFICATION READINESS != FOLDER CERTIFICATION" in status
+    assert "CERTIFICATION REVIEW READY != CROSS-LAYER VALIDATION CLOSED" in status
     assert "Priority 7 remains OPEN" in status
     assert "18 top-level files" in status
     assert "17 member files" in status
@@ -93,3 +96,4 @@ def test_readiness_scope_is_bounded_and_reversible_on_new_evidence():
     assert "bounded current-evidence conclusion, not a repository-wide complete-graph claim" in status
     assert "if the certification review finds a material unresolved seam, return to validation/reconciliation instead of forcing closure" in status
     assert "OPEN EXPLICIT CORE CERTIFICATION REVIEW" in status
+    assert "READINESS MAY OPEN THE NEXT REVIEW WITHOUT CLOSING THE CURRENT VALIDATION GATE." in status

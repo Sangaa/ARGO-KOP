@@ -3,96 +3,75 @@
 Transaction: `MUT-2026-09-01-P7-CORE-CERTIFICATION-READINESS-T`
 Work Lease: `HERMUZ-P7-T-CORE-CERTIFICATION-READINESS-20260901`
 Priority: `7 — Core`
-State: `MATERIAL-CANDIDATE / CI-PENDING / CERTIFICATION-READINESS-ONLY / LEASE ACTIVE`
+State: `FAILED MATERIAL CANDIDATE PRESERVED / CORRECTIVE HANDOFF TO T-C1 / LEASE SUPERSEDED BY CORRECTIVE LEASE`
 Entry HEAD: `6570329ad77acf5e78a7d6a329e3cdd356d2cc83`
 Pre-write Matrix HEAD: `f11f62ea4d67d5c91d398a555c3f258607a05944`
+Failed candidate: `8d01a3cd19e0f7d630bf6c60fc62b05460b82b1d`
+Corrective Transaction: `MUT-2026-09-01-P7-CORE-CERTIFICATION-READINESS-T-C1`
+Corrective pre-write Matrix HEAD: `110eab997d9027f575cb306d9175565834098e82`
 Protocol: `PROJECT_BOOTSTRAP / CORE-003 / GOV-013 / GOV-013A / GOV-014 / GOV-014A / GOV-015 / GOV-016 / REP-011 / REP-014 / REP-016 / ARC-006 / ARC-011`
 
-## Bounded readiness decision candidate
+## Original bounded readiness decision
 
-Current evidence supports only:
+Current evidence supported only:
 
 `CORE CERTIFICATION READINESS = PASS / EXPLICIT CERTIFICATION REVIEW MAY OPEN / CORE STILL INTEGRITY HOLD / FOLDER CERTIFICATION PENDING`.
 
-This is not Core certification and does not close Priority 7.
+That conclusion remains bounded and is not itself Core certification or Priority-7 closure.
 
-## Evidence basis
+## Original authorized material change set
 
-The current Core evidence chain establishes:
+T candidate was limited to exactly five paths:
 
-- exact local inventory and Core index reconciliation;
-- control-plane representation reconciliation;
-- bounded CORE-000 canonical architecture repair;
-- eight registered/reconciled material cross-layer seams;
-- Transaction R validation of `RUN-002 → CORE-003 = REFERENCES` as one-way/non-dependency without automatic REP-014 registration;
-- direct current-content sweep of remaining canonical Core members whose own semantics prevent principle/planning/reference/listing language from being silently promoted into implementation, dependency, authority or relationship edges.
+1. `Core/_FOLDER_STATUS.md`;
+2. `Quality/Integrity/test_core_certification_readiness_boundary.py`;
+3. `Repository/P7_CORE_CERTIFICATION_READINESS_2026-09-01_T.md`;
+4. `Repository/REP-016_PRIORITY7_CERTIFICATION_READINESS_ADDENDUM_2026-09-01_T.md`;
+5. this Matrix.
 
-REP-014 explicitly states that its current verified/revalidated list is not a complete graph. T therefore does not manufacture REL-073 or any other row merely to create visual completeness.
+The candidate structurally satisfied that boundary.
 
-## Authorized material change set — exactly 5 paths
+## Exact-head CI disposition
 
-| ID | Target | Action | Applied | Verified |
-|---|---|---|:---:|:---:|
-| T-01 | `Core/_FOLDER_STATUS.md` | UPDATE readiness/status evidence only; keep Integrity Hold and Folder Certification Pending | Y | PENDING CI |
-| T-02 | `Quality/Integrity/test_core_certification_readiness_boundary.py` | CREATE focused readiness / anti-promotion regression | Y | PENDING CI |
-| T-03 | `Repository/P7_CORE_CERTIFICATION_READINESS_2026-09-01_T.md` | CREATE bounded readiness evidence record | Y | PENDING CI |
-| T-04 | `Repository/REP-016_PRIORITY7_CERTIFICATION_READINESS_ADDENDUM_2026-09-01_T.md` | CREATE operational queue addendum; Priority 7 remains IN_PROGRESS | Y | PENDING CI |
-| T-05 | this Matrix | UPDATE/rebind in same material change set | Y | PENDING CI |
+T candidate `8d01a3cd19e0f7d630bf6c60fc62b05460b82b1d` is retained as failed evidence.
 
-Candidate must be exactly one commit after the pre-write Matrix HEAD, exactly these five paths, unexpected path expansion `0`.
+- Full-Stack Repository Audit `33534072084` — `SUCCESS`;
+- Real Mutation Matrix Regression `33534071888` — `SUCCESS`;
+- M2 Multi-Channel Proposal Training `33534072032` — `SUCCESS`;
+- ARGO Runtime Prototype and Integration Tests `33534072160` — `FAILURE`.
 
-## Direct-sweep classification retained
+Runtime jobs:
 
-- CORE-000A — glossary/listing does not prove implementation/capability/authority;
-- CORE-001 — Manifest does not define governance, architecture or implementation authority;
-- CORE-002 — Identity does not define governance, implementation, workflows or architecture;
-- CORE-004 — principles are not execution permissions and remain subordinate to higher authority;
-- CORE-005 — execution is governed by Architecture/Governance/Runtime and reasoning does not itself grant authority to act;
-- CORE-006 — philosophy does not grant bypass authority;
-- CORE-007 — design principles neither override higher authority nor authorize repository change;
-- CORE-008 — reference/name/location does not prove relationship and material edges require direct verification;
-- CORE-010 — roadmap dependency/order is planning until independently verified.
+- integrity-tests — `FAILURE`;
+- prototype-tests — `SUCCESS`;
+- integration-tests — `FAILURE`.
 
-No additional direct material external coupling requiring REP-014 registration was established within this readiness scope.
+The semantic defect was a premature state transition: T replaced `CROSS-LAYER VALIDATION OPEN` with `CERTIFICATION REVIEW READY` before a separate Explicit Core Certification Review had closed the open gate.
 
-## R seam disposition
+Classification:
 
-Validated current evidence retained:
+`MATERIAL_CANDIDATE_CI_FAILURE / SEMANTIC STATE-TRANSITION REGRESSION / READINESS EVIDENCE NOT INVALIDATED`.
 
-`RUN-002 → CORE-003 = REFERENCES`
+## Corrective handoff
 
-`INTENTIONAL ONE-WAY / INITIALIZATION-AUTHORITY-RESOLUTION-ALIGNED / NON-DEPENDENCY / VALIDATED-NOT-REGISTERED`.
+T-C1 is the only authorized continuation of this failed material candidate. It must preserve the failed T evidence, restore `CROSS-LAYER VALIDATION OPEN`, retain readiness as a separate review-entry state, and leave the pre-existing failure-detecting tests unchanged.
 
-No `DEPENDS_ON`, reverse edge, or registration is authorized by T.
+T-C1 may correct the new T-focused test because its own exact status assertion encoded the premature replacement.
 
-## KEEP / non-authority
+## Non-authority preserved
 
-- no canonical Core source mutation except the status/evidence surface `Core/_FOLDER_STATUS.md`;
-- no REP-014 mutation;
-- no REP-020 mutation;
-- no new relationship edge;
-- no Last Audit advancement for reread-only source documents;
+- no canonical Core source mutation beyond `Core/_FOLDER_STATUS.md` as status/evidence surface;
+- no REP-014 or REP-020 mutation;
+- no REL-073 or other registry mutation;
+- no dependency/authority edge promotion;
 - no Core certification;
 - no Priority-7 closure;
-- no Phase-1 closure;
-- no Connected Baseline/repository-wide graph/Global PASS claim.
+- no Phase-1 / Connected Baseline / repository-wide graph / Global PASS claim.
 
-## Verification contract
+## Learning retained
 
-`EXACT-HEAD READ-BACK → ONE-COMMIT/FIVE-PATH DIFF → FOUR REQUIRED WORKFLOWS → FULL-STACK SHA/MATRIX/AUDIT STEP REVIEW → RUNTIME INTEGRITY/PROTOTYPE/INTEGRATION REVIEW → FAILURE/LEARNING ASSESSMENT → DOCUMENTATION-ONLY CLOSURE → CLOSURE-HEAD FOUR-WORKFLOW VERIFICATION`.
+`READINESS MAY OPEN THE NEXT REVIEW WITHOUT CLOSING THE CURRENT VALIDATION GATE.`
 
-A green candidate proves only the bounded readiness state. A separate explicit Core certification review remains mandatory.
+`A STATE LABEL MUST NOT REMOVE AN OPEN-GATE MARKER UNTIL THE GOVERNED CLOSURE DECISION HAS ACTUALLY OCCURRED.`
 
-## Failure / learning boundary
-
-No material T failure has occurred at candidate preparation time. Any later failure remains evidence and may not be bypassed by weakening readiness semantics.
-
-Retained rule application:
-
-`READINESS REQUIRES EVIDENCE SUFFICIENCY; CERTIFICATION REQUIRES A SEPARATE EXPLICIT DECISION.`
-
-No new Governance rule is created by T.
-
-## Post-close continuation boundary
-
-After verified T closure, rediscover live main and freshly recompute Priority 7. An explicit Core certification review is a candidate only; it is not pre-authorized if new drift or a blocking seam appears.
+No new Governance rule is created; T-C1 applies existing evidence/state-transition discipline.
