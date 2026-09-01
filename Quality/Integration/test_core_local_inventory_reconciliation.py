@@ -35,10 +35,11 @@ def test_core_local_index_matches_exact_top_level_physical_inventory() -> None:
 
 def test_core_status_records_exact_inventory_and_keeps_certification_open() -> None:
     status = CORE_STATUS.read_text(encoding="utf-8")
-    assert "LOCAL INVENTORY RECONCILED / CROSS-LAYER VALIDATION OPEN" in status
+    assert "Exact top-level physical inventory reconciled — 18 files" in status
+    assert "CROSS-LAYER VALIDATION OPEN" in status
     assert CORE012 in status
     assert "Folder Certification\n\n⏳ Pending" in status
-    assert "Core MUST NOT be marked clean merely because local inventory is now exact." in status
+    assert "Core MUST NOT be marked clean merely because local inventory" in status
 
 
 def test_legacy_core000_remains_noncanonical_provenance() -> None:
