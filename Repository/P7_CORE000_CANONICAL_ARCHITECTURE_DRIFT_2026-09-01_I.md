@@ -1,11 +1,13 @@
 # Priority 7 — CORE-000 Canonical Architecture Drift — I
 
 Date: 2026-09-01
-State: `FUNCTIONAL-CLOSED / CI-VERIFIED / RESUME-SAFE CLOSURE PENDING FINAL-HEAD CI / PRIORITY 7 OPEN`
+State: `FUNCTIONAL-CLOSED / CI-VERIFIED / RESUME-SAFE / PRIORITY 7 OPEN`
 Transaction: `MUT-2026-09-01-P7-CORE000-CANONICAL-ARCHITECTURE-DRIFT-I`
 Entry HEAD: `f8fc6d4e26518ed09e0227ff458337bbbd68712d`
 Atomic candidate HEAD: `4aaac161186f9e517d35c27ee0692c3693918cb1`
 Candidate tree: `fde3682266fe2d59b54d55969a245495f411b665`
+Verified closure-lineage HEAD: `407465c3b1e5e1d767b15aa406915df6d89cc2cf`
+Closure-lineage tree: `b5cfab54fa40daca4f04718d1a2c5fee448b6a58`
 
 ## Finding
 
@@ -43,6 +45,8 @@ Candidate commit `4aaac161...` is exactly one commit ahead of entry HEAD and cha
 
 Direct exact-head read-back succeeded for all candidate surfaces. Unexpected path expansion = `0`.
 
+The closure-lineage commit `407465c3...` changed only this record and the Transaction-I mutation matrix. It introduced no new material engineering scope.
+
 ## Candidate Exact-Head CI
 
 Exact candidate HEAD `4aaac161186f9e517d35c27ee0692c3693918cb1`:
@@ -54,9 +58,20 @@ Exact candidate HEAD `4aaac161186f9e517d35c27ee0692c3693918cb1`:
 
 Candidate result: `4/4 REQUIRED WORKFLOWS SUCCESS`.
 
+## Closure-Lineage Exact-Head CI
+
+Exact closure-lineage HEAD `407465c3b1e5e1d767b15aa406915df6d89cc2cf`:
+
+- Real Mutation Matrix Regression — run `33507338054` — `SUCCESS`;
+- M2 Multi-Channel Proposal Training — run `33507337884` — `SUCCESS`;
+- Full-Stack Repository Audit — run `33507338026` — `SUCCESS`;
+- ARGO Runtime Prototype and Integration Tests — run `33507338014` — `SUCCESS`.
+
+Closure-lineage result: `4/4 REQUIRED WORKFLOWS SUCCESS`.
+
 ## Closure Boundary
 
-Transaction I is functionally complete. This closure update records evidence only; it does not widen the material scope.
+Transaction I is `FUNCTIONAL-CLOSED / CI-VERIFIED / RESUME-SAFE`.
 
 Still not claimed:
 
@@ -69,8 +84,10 @@ Still not claimed:
 
 Priority 7 remains OPEN.
 
-## Resume-Safe Condition
+This final reconciliation is evidence-only inside Transaction I. No new transaction was opened.
 
-This record and the I mutation matrix are being closed together in one atomic documentation commit. Transaction I becomes fully `RESUME-SAFE / CLOSED` only after the exact closure HEAD itself passes the same four required workflows.
+## Resume-Safe Checkpoint
 
-No new transaction is authorized before that final-head verification.
+A future session must rediscover live `main` before any action. Transaction I itself requires no further functional mutation unless new repository evidence invalidates this closure.
+
+No next Priority-7 transaction is selected or authorized by this record.

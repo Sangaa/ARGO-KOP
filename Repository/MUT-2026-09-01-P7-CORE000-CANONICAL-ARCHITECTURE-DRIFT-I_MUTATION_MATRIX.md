@@ -2,12 +2,14 @@
 
 Transaction: `MUT-2026-09-01-P7-CORE000-CANONICAL-ARCHITECTURE-DRIFT-I`
 Priority: 7 — Core cross-layer validation
-State: `FUNCTIONAL-CLOSED / CANDIDATE-CI-VERIFIED / FINAL-CLOSURE-HEAD-CI-PENDING / PRIORITY-7-OPEN`
+State: `FUNCTIONAL-CLOSED / CI-VERIFIED / RESUME-SAFE / PRIORITY-7-OPEN`
 Original Entry HEAD: `c9b7488732aef02fd53aa45d1fb608a24dbd019f`
 Post-H rebind commit: `3443681aab4463c61ef99e5994053f1041515f8f`
 Scope-minimization HEAD: `f8fc6d4e26518ed09e0227ff458337bbbd68712d`
 Atomic candidate HEAD: `4aaac161186f9e517d35c27ee0692c3693918cb1`
 Candidate tree: `fde3682266fe2d59b54d55969a245495f411b665`
+Verified closure-lineage HEAD: `407465c3b1e5e1d767b15aa406915df6d89cc2cf`
+Closure-lineage tree: `b5cfab54fa40daca4f04718d1a2c5fee448b6a58`
 Date: 2026-09-01
 
 ## Problem Definition and Decision
@@ -29,14 +31,14 @@ Classification: `CORE ARCHITECTURAL-CONTENT DRIFT / SUPERSEDED STRUCTURAL MODEL 
 - EJR-179 semantic-boundary regression rule — `TRANSFERABLE`.
 - Transaction E same-change-set atomicity rule — `DIRECTLY APPLICABLE`.
 
-## Authorized Surface and Final Candidate State
+## Authorized Surface and Final State
 
-| ID | Path | Final Candidate Result | Verified |
+| ID | Path | Final Result | Verified |
 |---|---|---|---|
 | I-01 | `Core/CORE-000_PLATFORM_ARCHITECTURE.md` | v3.1.0 → v3.2.0; current nine-boundary structural model; Archive preservation-domain boundary; audit 2026-09-01 | YES |
 | I-02 | `Core/_FOLDER_STATUS.md` | v1.3.6 → v1.3.7; bounded CORE-000 content reconciliation recorded; P7 OPEN / certification pending | YES |
 | I-03 | `Quality/Integrity/test_core000_canonical_architecture_boundary.py` | Semantic regression added for boundary order and Archive classification | YES |
-| I-04 | `Repository/P7_CORE000_CANONICAL_ARCHITECTURE_DRIFT_2026-09-01_I.md` | Evidence and closure record created | YES |
+| I-04 | `Repository/P7_CORE000_CANONICAL_ARCHITECTURE_DRIFT_2026-09-01_I.md` | Evidence and resume-safe closure record | YES |
 | I-05 | this matrix | Atomic lineage and exact-head CI evidence bound | YES |
 
 Explicitly untouched in I:
@@ -46,7 +48,7 @@ Explicitly untouched in I:
 
 ## Atomic Candidate Evidence
 
-Candidate was created through Git objects from live-main parent `f8fc6d4e...`:
+Candidate was created through Git objects from parent `f8fc6d4e...`:
 
 - CORE-000 blob `fdb2313fdeabc6b506258815d39e8ed99c17ca27`;
 - Core status blob `805e026b3e298a709a0cd0e99709abcbc21782da`;
@@ -65,6 +67,8 @@ All five candidate surfaces were fetched directly at exact candidate HEAD `4aaac
 
 Read-back result: `PASS`.
 
+The closure-lineage commit `407465c3...` changed only I-04 and I-05 and was also read back directly. No new material scope was introduced.
+
 ## Candidate Exact-Head CI
 
 Exact candidate HEAD `4aaac161186f9e517d35c27ee0692c3693918cb1`:
@@ -76,7 +80,18 @@ Exact candidate HEAD `4aaac161186f9e517d35c27ee0692c3693918cb1`:
 
 Required candidate CI result: `4/4 SUCCESS`.
 
-No GOV-013 §9B HARD HOLD remains on candidate head.
+## Closure-Lineage Exact-Head CI
+
+Exact closure-lineage HEAD `407465c3b1e5e1d767b15aa406915df6d89cc2cf`:
+
+- Real Mutation Matrix Regression — `33507338054` — `SUCCESS`;
+- M2 Multi-Channel Proposal Training — `33507337884` — `SUCCESS`;
+- Full-Stack Repository Audit — `33507338026` — `SUCCESS`;
+- ARGO Runtime Prototype and Integration Tests — `33507338014` — `SUCCESS`.
+
+Required closure-lineage CI result: `4/4 SUCCESS`.
+
+No GOV-013 §9B HARD HOLD remains in Transaction I lineage.
 
 ## Preservation and Non-Claims
 
@@ -95,14 +110,10 @@ Not claimed:
 - repository-wide graph closure;
 - Global Connected Baseline PASS.
 
-## Closure Procedure
+## Final Closure
 
-The final I documentation update consists only of I-04 and I-05 and must be committed atomically on top of candidate HEAD. This is evidence reconciliation inside the already-open Transaction I, not a new transaction.
+Transaction I is `FUNCTIONAL-CLOSED / CI-VERIFIED / RESUME-SAFE`.
 
-Closure is fully resume-safe only when:
+This final evidence reconciliation modifies only I-04 and I-05 within the existing Transaction I. It does not open a new transaction or select the next Priority-7 seam.
 
-`CANDIDATE 4/4 GREEN → ATOMIC CLOSURE RECORD+MATRIX COMMIT → EXACT CLOSURE-HEAD READ-BACK → EXACT CLOSURE-HEAD 4/4 GREEN`.
-
-Until the final closure-head checks pass, State remains `FINAL-CLOSURE-HEAD-CI-PENDING`.
-
-No new Priority-7 transaction may be opened before this gate is complete.
+A future session must rediscover live `main` before continuation. No further I mutation is required unless new repository evidence invalidates this closure.
