@@ -96,6 +96,16 @@ The harness is model-independent. A model may select the mutation, but the repos
 
 P5 execution verification validates the harness, its fixture/default path, the traditional compatibility path, dispatcher races, and canonical-artifact immutability. It does not authorize or certify any new mutation of a canonical artifact.
 
+## P334 Queue Closure Synchronization — 2026-09-01
+
+Priority-5 queue closure is being reconciled against this already execution-verified harness without changing harness implementation or authority semantics.
+
+`PRIORITY 5 = CLOSED_FOR_PHASE_1 / BUILD AND VERIFICATION COMPLETE / ACTIVE CONTROL PRESERVED`
+
+This synchronization intentionally modifies this matrix so `.github/workflows/p5-controlled-mutation-harness.yml` executes on the exact P334 functional HEAD. Final P334 closure is valid only after that exact-head P5 workflow and the required repository-wide CI gates succeed.
+
+The harness remains an active control after Priority-5 build closure. Fixture success still does not authorize canonical writes, and GOV-014/GOV-014A controls remain mandatory.
+
 ---
 
 End of P5 Harness Matrix
