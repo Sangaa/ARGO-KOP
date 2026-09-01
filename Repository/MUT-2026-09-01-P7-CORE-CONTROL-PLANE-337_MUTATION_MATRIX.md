@@ -8,6 +8,8 @@ Date: 2026-09-01
 ## Entry-order incident
 The prewrite file was created before live-main rediscovery was completed in this session. This violated the required re-entry order. The write was accepted by GitHub and therefore is treated as a real repository mutation, not a no-op. Before any functional mutation, the session must now: (1) rediscover live `main`; (2) verify this prewrite commit is the sole new mainline mutation from the prior resume-safe head; (3) verify relevant exact-head CI; (4) read current authority/evidence; and (5) abort or rebase the transaction if any conflict or parallel mutation is discovered. This incident is retained as execution learning and cannot be silently normalized.
 
+Additional execution-side incident: after recording the incident, the same Matrix content was submitted once more with the correct current blob SHA, creating an unnecessary Matrix-only commit with no content change. This is also retained as a control-discipline defect. No functional/control-plane target was touched by either prewrite incident.
+
 ## Objective
 Reconcile Priority-7 Core representation across `REP-001_MASTER_INDEX.md`, `REP-002_REPOSITORY_MAP.md`, and `REP-013_REPOSITORY_CONTENT_TREE.md` against the live Core inventory already reconciled by P336, without changing Core authority semantics, relationship direction, Governance contracts, or any runtime/implementation code.
 
