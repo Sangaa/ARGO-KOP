@@ -2,7 +2,7 @@
 
 Platform: ARGO KOP  
 Document ID: REP-014  
-Version: 1.2.11  
+Version: 1.2.12  
 Status: Active / Relationship Enumeration In Progress  
 Development Baseline: 3.2.1  
 Last Audit: 2026-09-01
@@ -134,6 +134,8 @@ The following are deliberately limited to relationships established during repos
 | REL-065 | CORE-012 | GOV-016 | REFERENCES | **INTENTIONAL ONE-WAY / FAILURE-LEARNING-ALIGNED / NON-DEPENDENCY** |
 | REL-066 | ARC-005 | CORE-011 | REFERENCES | **INTENTIONAL ONE-WAY / CHARTER-BOUNDARY-ALIGNED / NON-DEPENDENCY** |
 | REL-067 | ARC-006 | CORE-003 | REFERENCES | **INTENTIONAL ONE-WAY / CONSTITUTION-AUTHORITY-ALIGNED / NON-DEPENDENCY** |
+| REL-068 | CORE-003 | ARC-011 | GOVERNS | **CONSTITUTION-AUTHORITY / DIRECT-SOURCE-VALIDATED / NON-DEPENDENCY** |
+| REL-069 | ARC-011 | CORE-003 | REFERENCES | **SUBORDINATE-ARCHITECTURE / DIRECT-SOURCE-VALIDATED / NON-DEPENDENCY** |
 
 ## Current Review-Cycle Reconciliation — 2026-08-17
 
@@ -479,6 +481,35 @@ Boundary:
 - no architectural dependency is inferred from the Related Documents reference;
 - no constitutional or architectural authority promotion is implied;
 - broader Core cross-layer validation and certification remain open.
+
+## P7 CORE-003 ↔ ARC-011 Constitutional Authority Reconciliation — 2026-09-01
+
+Current Priority-7 review validates and registers the bounded constitutional authority/reference pair:
+
+```text
+CORE-003 ──governs──> ARC-011
+ARC-011  ──references──> CORE-003
+```
+
+Evidence basis:
+
+- `Core/CORE-003_CONSTITUTION.md` defines the highest governing rules for ARGO KOP and requires repository components to comply within applicable scope;
+- `Architecture/ARC-011_CANONICAL_ARCHITECTURE_MODEL.md` declares itself subordinate to the Constitution and applicable Governance and explicitly places `Constitution / applicable Governance authority` above the Canonical Architecture Model;
+- ARC-011 directly lists `Core/CORE-003_CONSTITUTION.md` under Related Documents;
+- Transaction L validated both directions against current source text and preserved the semantic distinction between authority subordination and dependency;
+- the existing REL-037/038 Core-to-Runtime pair provides a controlled-type precedent, but does not itself establish this pair.
+
+Disposition:
+
+- `REL-068 = CONSTITUTION-AUTHORITY / DIRECT-SOURCE-VALIDATED / NON-DEPENDENCY`.
+- `REL-069 = SUBORDINATE-ARCHITECTURE / DIRECT-SOURCE-VALIDATED / NON-DEPENDENCY`.
+
+Boundary:
+
+- CORE-003 and ARC-011 source content remain unchanged;
+- no `DEPENDS_ON`, `IMPLEMENTS`, `CONSUMES` or runtime/executable edge is inferred;
+- no reverse `ARC-011 → CORE-003 = GOVERNS` edge is manufactured;
+- this bounded reconciliation does not certify Core, Architecture or the repository-wide graph.
 
 ## Control-Plane Graph
 

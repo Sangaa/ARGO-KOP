@@ -17,7 +17,7 @@ Status
 
 Version
 
-1.3.8
+1.3.9
 
 Last Repository Re-Audit
 
@@ -41,7 +41,7 @@ Core physical inventory, local index consistency, identity/authority sampling, c
 
 Repository Baseline
 
-Priority 7 current `main` evidence through five bounded cross-layer relationship reconciliations plus bounded CORE-000 canonical-architecture content reconciliation
+Priority 7 current `main` evidence through six bounded cross-layer relationship reconciliations plus bounded CORE-000 canonical-architecture content reconciliation
 
 ---
 
@@ -61,7 +61,7 @@ Manifest Review
 
 Constitution Review
 
-🟢 Current content re-read in P336; prior 2026-08-10 targeted audit provenance preserved; Priority-7 relationship revalidation confirms `ARC-006 → CORE-003` as a one-way documentary reference without dependency promotion
+🟢 Current content re-read in P336; prior 2026-08-10 targeted audit provenance preserved; Priority-7 relationship revalidation confirms `ARC-006 → CORE-003` as a one-way documentary reference without dependency promotion and `CORE-003 → ARC-011 = GOVERNS` / `ARC-011 → CORE-003 = REFERENCES` as a bounded constitutional-authority seam without dependency promotion
 
 Principles Review
 
@@ -113,7 +113,7 @@ Control-Plane Review
 
 Cross-Layer Review
 
-🟡 In Progress — bounded seams include `CORE-KERNEL → RUN-001`, `CORE-009 ↔ LIF-001`, `CORE-012 → GOV-016`, `ARC-005 → CORE-011`, and `ARC-006 → CORE-003`; CORE-000 canonical-architecture content drift is reconciled without adding a relationship edge in Transaction I; broader material Core dependency/consumer validation remains open and REP-014 reconciliation continues where evidence requires
+🟡 In Progress — bounded seams include `CORE-KERNEL → RUN-001`, `CORE-009 ↔ LIF-001`, `CORE-012 → GOV-016`, `ARC-005 → CORE-011`, `ARC-006 → CORE-003`, and `CORE-003 ↔ ARC-011`; CORE-000 canonical-architecture content drift is reconciled without adding a relationship edge in Transaction I; broader material Core dependency/consumer validation remains open and REP-014 reconciliation continues where evidence requires
 
 Folder Certification
 
@@ -125,7 +125,7 @@ Folder Certification
 
 The previous `2026-08-08` authority audit and `2026-08-10` targeted Core re-audits remain historical evidence. They are not silently relabeled as the current Priority-7 review.
 
-The `2026-09-01` P336 repository re-audit applies to exact top-level Core inventory, local index/status consistency, current-content sampling and discrepancy classification. Subsequent bounded Priority-7 transactions reconciled REP-013, REP-001, REP-002, the GOV-006 factual Core parent/example drift, `CORE-KERNEL → RUN-001`, the `CORE-009 ↔ LIF-001` lifecycle authority seam, `CORE-012 → GOV-016`, `ARC-005 → CORE-011`, `ARC-006 → CORE-003`, and the substantive CORE-000 canonical-architecture content drift. The CORE-009 and CORE-000 transactions included direct semantic corrections; CORE-012/GOV-016, ARC-005/CORE-011 and ARC-006/CORE-003 required registry reconciliation only. These transactions still do **not** assert that every Core document received a new full semantic certification on that date.
+The `2026-09-01` P336 repository re-audit applies to exact top-level Core inventory, local index/status consistency, current-content sampling and discrepancy classification. Subsequent bounded Priority-7 transactions reconciled REP-013, REP-001, REP-002, the GOV-006 factual Core parent/example drift, `CORE-KERNEL → RUN-001`, the `CORE-009 ↔ LIF-001` lifecycle authority seam, `CORE-012 → GOV-016`, `ARC-005 → CORE-011`, `ARC-006 → CORE-003`, `CORE-003 ↔ ARC-011`, and the substantive CORE-000 canonical-architecture content drift. The CORE-009 and CORE-000 transactions included direct semantic corrections; CORE-012/GOV-016, ARC-005/CORE-011, ARC-006/CORE-003 and CORE-003/ARC-011 required registry reconciliation only. These transactions still do **not** assert that every Core document received a new full semantic certification on that date.
 
 A document's `Last Audit` advances only when that document itself undergoes the applicable review.
 
@@ -231,6 +231,7 @@ Current bounded evidence validates:
 3. `CORE-012 → GOV-016 = REFERENCES` — `INTENTIONAL ONE-WAY / FAILURE-LEARNING-ALIGNED / NON-DEPENDENCY`.
 4. `ARC-005 → CORE-011 = REFERENCES` — `INTENTIONAL ONE-WAY / CHARTER-BOUNDARY-ALIGNED / NON-DEPENDENCY`.
 5. `ARC-006 → CORE-003 = REFERENCES` — `INTENTIONAL ONE-WAY / CONSTITUTION-AUTHORITY-ALIGNED / NON-DEPENDENCY`.
+6. `CORE-003 → ARC-011 = GOVERNS` and `ARC-011 → CORE-003 = REFERENCES` — `BIDIRECTIONAL-AUTHORITY/DOCUMENTARY / CONSTITUTION-SUBORDINATION-ALIGNED / NON-DEPENDENCY`.
 
 The first seam is documentary/contract alignment only and does not invert `ARC-006` or create a reverse edge without direct evidence.
 
@@ -241,6 +242,8 @@ The third seam records CORE-012's explicit “works together with GOV-016” lea
 The fourth seam records ARC-005's explicit Related Documents reference to CORE-011. CORE-011 does not directly name ARC-005, so no reverse edge is manufactured and no architectural dependency is inferred from the documentary reference.
 
 The fifth seam records ARC-006's explicit Related Documents reference to CORE-003. CORE-003 does not directly name ARC-006; ARC-006 itself warns that a textual path reference is not sufficient to establish a dependency, so REL-067 remains documentary and one-way.
+
+The sixth seam records the Constitution's governing authority over the subordinate Canonical Architecture Model and ARC-011's explicit constitutional reference. The two directions have different controlled semantics; subordination is not promoted to `DEPENDS_ON`, and no reverse governing edge is manufactured.
 
 ---
 

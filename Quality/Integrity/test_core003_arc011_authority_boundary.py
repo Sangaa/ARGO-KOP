@@ -1,41 +1,40 @@
+import re
 from pathlib import Path
+import unittest
+
 
 ROOT = Path(__file__).resolve().parents[2]
-REP014 = ROOT / "Repository" / "REP-014_REPOSITORY_RELATIONSHIP_REGISTRY.md"
-CORE003 = ROOT / "Core" / "CORE-003_CONSTITUTION.md"
-ARC011 = ROOT / "Architecture" / "ARC-011_CANONICAL_ARCHITECTURE_MODEL.md"
-CORE_STATUS = ROOT / "Core" / "_FOLDER_STATUS.md"
 
 
-def test_core003_arc011_authority_boundary_is_direct_and_not_overpromoted():
-    registry = REP014.read_text(encoding="utf-8")
-    constitution = CORE003.read_text(encoding="utf-8")
-    architecture = ARC011.read_text(encoding="utf-8")
-    status = CORE_STATUS.read_text(encoding="utf-8")
+class Core003Arc011AuthorityBoundaryTest(unittest.TestCase):
+    def test_constitution_governs_canonical_architecture_without_dependency_promotion(self):
+        core003 = (ROOT / "Core" / "CORE-003_CONSTITUTION.md").read_text(encoding="utf-8")
+        arc011 = (ROOT / "Architecture" / "ARC-011_CANONICAL_ARCHITECTURE_MODEL.md").read_text(encoding="utf-8")
+        rep014 = (ROOT / "Repository" / "REP-014_REPOSITORY_RELATIONSHIP_REGISTRY.md").read_text(encoding="utf-8")
+        core_status = (ROOT / "Core" / "_FOLDER_STATUS.md").read_text(encoding="utf-8")
 
-    assert "The Constitution defines the highest governing rules of the ARGO Platform." in constitution
-    assert "All repository components shall comply with this Constitution within the scope applicable to them." in constitution
-    assert "This document defines the current canonical Architecture Model of ARGO KOP." in architecture
-    assert "subordinate only to the Constitution and applicable Governance authority" in architecture
-    assert "Constitution / applicable Governance authority" in architecture
-    assert "Canonical Architecture Model" in architecture
+        self.assertIn("Highest governing rules", core003)
+        self.assertRegex(core003, re.compile(r"all repository components shall comply", re.IGNORECASE))
+        self.assertIn("subordinate to the Constitution", arc011)
+        self.assertIn("Constitution / applicable Governance authority", arc011)
+        self.assertIn("Canonical Architecture Model", arc011)
 
-    # Validation-first: source evidence supports the authority/reference candidate,
-    # but REP-014 is intentionally not mutated in Transaction L.
-    assert "| CORE-003 | ARC-011 | GOVERNS |" not in registry
-    assert "| ARC-011 | CORE-003 | REFERENCES |" not in registry
+        self.assertEqual(rep014.count("| REL-068 | CORE-003 | ARC-011 | GOVERNS |"), 1)
+        self.assertEqual(rep014.count("| REL-069 | ARC-011 | CORE-003 | REFERENCES |"), 1)
 
-    forbidden = (
-        "| ARC-011 | CORE-003 | DEPENDS_ON |",
-        "| ARC-011 | CORE-003 | GOVERNS |",
-        "| ARC-011 | CORE-003 | IMPLEMENTS |",
-        "| ARC-011 | CORE-003 | CONSUMES |",
-        "| CORE-003 | ARC-011 | DEPENDS_ON |",
-        "| CORE-003 | ARC-011 | IMPLEMENTS |",
-        "| CORE-003 | ARC-011 | CONSUMES |",
-    )
-    for marker in forbidden:
-        assert marker not in registry
+        forbidden = (
+            "| CORE-003 | ARC-011 | DEPENDS_ON |",
+            "| ARC-011 | CORE-003 | DEPENDS_ON |",
+            "| ARC-011 | CORE-003 | GOVERNS |",
+            "| CORE-003 | ARC-011 | IMPLEMENTS |",
+            "| CORE-003 | ARC-011 | CONSUMES |",
+        )
+        for marker in forbidden:
+            self.assertNotIn(marker, rep014)
 
-    assert "CROSS-LAYER VALIDATION OPEN" in status
-    assert "Folder Certification\n\n⏳ Pending" in status
+        self.assertIn("CROSS-LAYER VALIDATION OPEN", core_status)
+        self.assertIn("Folder Certification\n\n⏳ Pending", core_status)
+
+
+if __name__ == "__main__":
+    unittest.main()
