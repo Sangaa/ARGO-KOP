@@ -13,7 +13,7 @@ Core
 
 Status
 
-🟡 INTEGRITY HOLD — RE-AUDIT IN PROGRESS
+🟡 INTEGRITY HOLD — LOCAL INVENTORY RECONCILED / CROSS-LAYER VALIDATION OPEN
 
 Version
 
@@ -21,7 +21,7 @@ Version
 
 Last Repository Re-Audit
 
-2026-08-10
+2026-09-01
 
 Historical Core Authority Audit
 
@@ -29,19 +29,19 @@ Historical Core Authority Audit
 
 Reviewer
 
-ARGO Architecture
+HERMUZ / ARGO Architecture
 
 Review Method
 
-Repository First / Evidence Based
+Repository First / Evidence Based / Exact Top-Level Enumeration
 
 Review Scope
 
-Core authority, identity and cross-layer consistency
+Core physical inventory, local index consistency, identity/authority sampling, and cross-layer discrepancy classification
 
 Repository Baseline
 
-Current Working Repository
+P336 exact current `main` evidence
 
 ---
 
@@ -49,59 +49,63 @@ Current Working Repository
 
 Inventory
 
-🟢 Completed for known canonical Core artifacts
+🟢 Exact top-level physical inventory reconciled — 18 files including `Core.md`; 17 member files synchronized in the self-excluding Core index
 
 Identity Review
 
-🟢 Completed
+🟢 Current Core identity sampling revalidated; legacy `CORE-000_PLATFORM_IDENTITY.md` remains explicitly noncanonical
 
 Manifest Review
 
-🟢 Completed
+🟢 Completed / prior targeted review retained
 
 Constitution Review
 
-🟢 Explicitly revalidated on 2026-08-10
+🟢 Current content re-read in P336; prior 2026-08-10 targeted audit provenance preserved
 
 Principles Review
 
-🟢 Completed
+🟢 Current content re-read in P336; prior targeted review retained
 
 Cognitive Model Review
 
-🟢 Completed
+🟢 Current content re-read in P336; prior targeted review retained
 
 System Philosophy Review
 
-🟢 Explicitly revalidated on 2026-08-10
+🟢 Current content re-read in P336; prior targeted review retained
 
 Design Principles Review
 
-🟢 Explicitly revalidated on 2026-08-10
+🟢 Current content re-read in P336; prior targeted review retained
 
 Architectural Laws Review
 
-🟢 Completed
+🟢 Current content re-read in P336; prior targeted review retained
 
 Platform Lifecycle Review
 
-🟢 Completed
+🟢 Current content re-read in P336; prior targeted review retained
 
 Platform Roadmap Review
 
-🟢 Completed
+🟢 Current content re-read in P336; prior targeted review retained
 
 Platform Charter Review
 
-🟢 Completed
+🟢 Current content re-read in P336; prior targeted review retained
+
+Generative Knowledge / Self-Development Review
+
+🟢 Located, read, provenance-verified as legitimate `CORE-012`; local inventory synchronized
 
 Core Index Review
 
-🟢 Completed / synchronized with repository evidence
+🟢 Exact local member inventory synchronized by P336
 
 Cross-Layer Review
 
-🟡 In Progress
+🟡 In Progress — control-plane inventory drift and Governance naming/path discrepancy remain open
 
 Folder Certification
 
@@ -111,90 +115,107 @@ Folder Certification
 
 # Temporal Evidence Rule
 
-The previous `2026-08-08` audit remains historical evidence. It must not be silently relabeled as a `2026-08-10` audit.
+The previous `2026-08-08` authority audit and `2026-08-10` targeted Core re-audits remain historical evidence. They are not silently relabeled as the P336 review.
 
-The current `2026-08-10` repository re-audit records that Core is being revalidated against the newer control-plane state. It does **not** certify that every Core authority artifact has been re-audited.
+The `2026-09-01` P336 repository re-audit applies to exact top-level Core inventory, local index/status consistency, current-content sampling and discrepancy classification. It does **not** assert that every Core document received a new full semantic certification on that date.
 
-A document's `Last Audit` advances only when that document itself has undergone the applicable review.
+A document's `Last Audit` advances only when that document itself undergoes the applicable review.
 
-This distinction is intentional:
+This distinction remains intentional:
 
 ```text
 Historical Audit
       ≠
-Current Re-Audit
+Current Local Inventory Re-Audit
       ≠
-Certification
+Cross-Layer Validation
+      ≠
+Folder Certification
 ```
 
 ---
 
-# Key Finding Resolved
+# Exact Current Core Inventory — P336
 
-## CORE-AUDIT-001 — Constitutional Write Rule Drift
+Direct current-repository enumeration establishes 18 top-level files:
 
-The previous Constitution prohibited partial repository updates unconditionally, while the current governed Runtime model permits a partial update when its content, target state, scope and resulting integrity are verified.
+- `ARGO_KERNEL.md`
+- `CORE-000_PLATFORM_ARCHITECTURE.md`
+- `CORE-000_PLATFORM_IDENTITY.md` — physical provenance artifact / `Canonical: No`
+- `CORE-000A_PLATFORM_GLOSSARY.md`
+- `CORE-001_ARGO_MANIFEST.md`
+- `CORE-002_ARGO_IDENTITY.md`
+- `CORE-003_CONSTITUTION.md`
+- `CORE-004_CORE_PRINCIPLES.md`
+- `CORE-005_COGNITIVE_MODEL.md`
+- `CORE-006_SYSTEM_PHILOSOPHY.md`
+- `CORE-007_DESIGN_PRINCIPLES.md`
+- `CORE-008_ARCHITECTURAL_LAWS.md`
+- `CORE-009_PLATFORM_LIFECYCLE.md`
+- `CORE-010_PLATFORM_ROADMAP.md`
+- `CORE-011_PLATFORM_CHARTER.md`
+- `CORE-012_GENERATIVE_KNOWLEDGE_AND_SELF_DEVELOPMENT.md`
+- `Core.md` — canonical local inventory surface
+- `_FOLDER_STATUS.md`
 
-The Constitution was revised so that complete-file replacement remains preferred when practical and safe, while controlled partial updates are permitted under explicit validation and authority gates.
-
-This restores the required hierarchy:
-
-Constitution
-
-↓
-
-Architecture / Governance
-
-↓
-
-Runtime
-
-without leaving Runtime behavior in conflict with Core authority.
-
----
-
-# Current Core Baseline
-
-Known canonical Core artifacts currently evidenced or listed by the repository include:
-
-- `CORE-000_PLATFORM_ARCHITECTURE.md` — independently revalidated 2026-08-10
-- `CORE-000A_PLATFORM_GLOSSARY.md` — independently revalidated 2026-08-10
-- `CORE-001_ARGO_MANIFEST.md` — independently revalidated 2026-08-10
-- `CORE-002_ARGO_IDENTITY.md` — independently revalidated 2026-08-10
-- `CORE-003_CONSTITUTION.md` — independently revalidated 2026-08-10
-- `CORE-004_CORE_PRINCIPLES.md` — current document already carries 2026-08-10 targeted review
-- `CORE-005_COGNITIVE_MODEL.md` — current document already carries 2026-08-10 targeted review
-- `CORE-006_SYSTEM_PHILOSOPHY.md` — independently located and revalidated 2026-08-10
-- `CORE-007_DESIGN_PRINCIPLES.md` — independently located and revalidated 2026-08-10
-- `CORE-008_ARCHITECTURAL_LAWS.md` — independently revalidated 2026-08-10
-- `CORE-009_PLATFORM_LIFECYCLE.md` — independently revalidated 2026-08-10
-- `CORE-010_PLATFORM_ROADMAP.md` — independently revalidated 2026-08-10
-- `CORE-011_PLATFORM_CHARTER.md` — independently revalidated 2026-08-10
-- `ARGO_KERNEL.md` — independently revalidated 2026-08-10
-
-A listed artifact is not treated as physically present, canonical, current or validated until the relevant evidence is inspected.
+`Core/Core.md` intentionally excludes itself from its member list; therefore the expected local index member set contains the other 17 physical files exactly.
 
 ---
 
-# Registry / Index Integrity Rule
+# Identity Finding Preserved
 
-Core indexes and folder-status documents are evidence summaries. They must reflect observed repository state but do not create authority for artifacts that they list.
+`CORE-000_PLATFORM_IDENTITY.md` is retained for provenance and historical continuity. Its own current metadata classifies it `Legacy / Superseded` and `Canonical: No`.
 
-A discrepancy between an index and the actual repository shall be recorded and resolved through evidence rather than by changing the index to make the discrepancy disappear.
+Active ownership remains:
 
-Missing numeric entries shall not be filled by invention.
+- `Core/CORE-000_PLATFORM_ARCHITECTURE.md` — active canonical CORE-000 architecture owner;
+- `Core/CORE-002_ARGO_IDENTITY.md` — active canonical platform-identity owner.
+
+The physical legacy file must not be interpreted as a second active CORE-000 authority.
+
+---
+
+# CORE-012 Provenance Finding
+
+`CORE-012_GENERATIVE_KNOWLEDGE_AND_SELF_DEVELOPMENT.md` is not a newly invented gap-filler. Git history establishes its 2026-08-18 creation as the repair for a duplicate CORE-011 identity, followed by removal of the colliding duplicate and correction of downstream CORE-012 authority references.
+
+P336 therefore synchronizes discoverability only; it does not newly promote CORE-012.
+
+---
+
+# Remaining P7 Gaps
+
+Local inventory reconciliation does not close Priority 7. Current evidence still requires at least:
+
+1. protected control-plane reconciliation for current Core representation in `REP-001`, `REP-002`, and `REP-013` using whole-file-safe GOV-014 transactions;
+2. explicit review/disposition of the current GOV-006 Core parent-directory/example mismatch against the actual governed Core structure;
+3. dependency and consumer validation for material Core authority relationships;
+4. relationship-registry reconciliation where required;
+5. explicit final Core certification decision only after those gates are satisfied.
+
+Known current control-plane drift includes:
+
+- current REP-001 active Core list does not visibly include `CORE-000A_PLATFORM_GLOSSARY.md`;
+- current REP-002 Core map does not include `CORE-000A_PLATFORM_GLOSSARY.md` or `CORE-012_GENERATIVE_KNOWLEDGE_AND_SELF_DEVELOPMENT.md`;
+- current REP-013 Core content inventory is materially older than the exact physical Core inventory.
+
+These findings are preserved as next-work evidence; P336 does not rewrite those protected surfaces.
 
 ---
 
 # Certification Rule
 
-Core MUST NOT be marked clean until the remaining canonical Core artifacts and their cross-layer references have been revalidated against the current Constitution and repository baseline.
+Core MUST NOT be marked clean merely because local inventory is now exact.
+
+Required progression remains:
+
+`Exact Local Inventory → Control-Plane Reconciliation → Cross-Layer Dependency/Consumer Validation → Relationship Reconciliation → Explicit Core Certification Review`
 
 ---
 
 # Next Action
 
-`Locate and revalidate remaining Core artifacts → validate cross-layer references → reconcile Core indexes/registries → Core Re-Audit → Certification`
+`Whole-file-safe REP-001/REP-002/REP-013 Core inventory reconciliation → cross-layer GOV-006/consumer validation → Core certification review`
 
 ---
 
