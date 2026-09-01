@@ -2,7 +2,7 @@
 
 Platform: ARGO KOP  
 Document ID: REP-014  
-Version: 1.2.13  
+Version: 1.2.14  
 Status: Active / Relationship Enumeration In Progress  
 Development Baseline: 3.2.1  
 Last Audit: 2026-09-01
@@ -137,6 +137,8 @@ The following are deliberately limited to relationships established during repos
 | REL-068 | CORE-003 | ARC-011 | GOVERNS | **CONSTITUTION-AUTHORITY / DIRECT-SOURCE-VALIDATED / NON-DEPENDENCY** |
 | REL-069 | ARC-011 | CORE-003 | REFERENCES | **SUBORDINATE-ARCHITECTURE / DIRECT-SOURCE-VALIDATED / NON-DEPENDENCY** |
 | REL-070 | CORE-KERNEL | RUN-009 | REFERENCES | **INTENTIONAL ONE-WAY / RECOVERY-HANDOFF-ALIGNED / NON-DEPENDENCY** |
+| REL-071 | CORE-003 | RUN-003 | GOVERNS | **CONSTITUTION-AUTHORITY / RUNTIME-CONFIGURATION-NON-OVERRIDE / NON-DEPENDENCY** |
+| REL-072 | RUN-003 | CORE-003 | REFERENCES | **CRITICAL-RUNTIME-CONFIGURATION / DIRECT-SOURCE-VALIDATED / NON-DEPENDENCY** |
 
 ## Current Review-Cycle Reconciliation — 2026-08-17
 
@@ -539,6 +541,37 @@ Boundary:
 - no `DEPENDS_ON`, `IMPLEMENTS`, `CONSUMES`, `GOVERNS` or executable-reachability relationship is inferred;
 - broader Core cross-layer validation and certification remain open;
 - this reconciliation does not certify Runtime or the repository-wide graph.
+
+## P7 CORE-003 ↔ RUN-003 Runtime Configuration Authority Reconciliation — 2026-09-01
+
+Current Priority-7 review validates and registers the bounded constitutional authority/reference pair:
+
+```text
+CORE-003 ──governs──> RUN-003
+RUN-003  ──references──> CORE-003
+```
+
+Evidence basis:
+
+- `Core/CORE-003_CONSTITUTION.md` defines the highest governing rules for ARGO KOP and requires repository components to comply within applicable scope;
+- `Runtime/RUN-003_CONFIGURATION.md` is canonical and critical, controls runtime behavior without modifying repository architecture or authority, and explicitly states that Runtime configuration does not override `Core/CORE-003_CONSTITUTION.md`;
+- RUN-003 directly lists CORE-003 under Related Documents and states that repository authority remains above runtime assumptions;
+- Transaction P validated both directions against current source text, enforced absence of premature registry rows, prohibited stronger dependency/consumer/implementation semantics, and passed all required exact-head candidate and closure workflows;
+- REL-037/038 CORE-003↔RUN-001 is an existing controlled-type precedent but does not itself establish the RUN-003 pair.
+
+Disposition:
+
+- `REL-071 = CONSTITUTION-AUTHORITY / RUNTIME-CONFIGURATION-NON-OVERRIDE / NON-DEPENDENCY`.
+- `REL-072 = CRITICAL-RUNTIME-CONFIGURATION / DIRECT-SOURCE-VALIDATED / NON-DEPENDENCY`.
+
+Boundary:
+
+- CORE-003 and RUN-003 source content remain unchanged;
+- no `DEPENDS_ON`, `IMPLEMENTS`, `CONSUMES` or executable-reachability edge is inferred;
+- no reverse `RUN-003 → CORE-003 = GOVERNS` edge is manufactured;
+- Runtime configuration remains subordinate to constitutional/repository authority without becoming an architectural dependency;
+- broader Core cross-layer validation and certification remain open;
+- this bounded reconciliation does not certify Runtime or the repository-wide graph.
 
 ## Control-Plane Graph
 

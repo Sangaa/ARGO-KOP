@@ -24,9 +24,10 @@ def test_core003_run003_authority_boundary_is_direct_and_not_overpromoted():
     assert "- `Core/CORE-003_CONSTITUTION.md`" in runtime
     assert "repository authority remains above runtime assumptions." in runtime
 
-    # Transaction P is validation-first: registry synchronization is intentionally deferred.
-    assert "| CORE-003 | RUN-003 | GOVERNS |" not in registry
-    assert "| RUN-003 | CORE-003 | REFERENCES |" not in registry
+    governs = "| REL-071 | CORE-003 | RUN-003 | GOVERNS | **CONSTITUTION-AUTHORITY / RUNTIME-CONFIGURATION-NON-OVERRIDE / NON-DEPENDENCY** |"
+    references = "| REL-072 | RUN-003 | CORE-003 | REFERENCES | **CRITICAL-RUNTIME-CONFIGURATION / DIRECT-SOURCE-VALIDATED / NON-DEPENDENCY** |"
+    assert registry.count(governs) == 1
+    assert registry.count(references) == 1
 
     forbidden = (
         "| RUN-003 | CORE-003 | DEPENDS_ON |",
@@ -42,3 +43,5 @@ def test_core003_run003_authority_boundary_is_direct_and_not_overpromoted():
 
     assert "CROSS-LAYER VALIDATION OPEN" in status
     assert "Folder Certification\n\n⏳ Pending" in status
+    assert "CORE-003 → RUN-003 = GOVERNS" in status
+    assert "RUN-003 → CORE-003 = REFERENCES" in status
