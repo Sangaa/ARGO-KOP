@@ -2,11 +2,12 @@
 
 Transaction ID: MUT-2026-09-01-P7-CORE-CONTROL-PLANE-337
 Protocol: GOV-013 / GOV-014 / GOV-014A
-Status: HARD-HOLD-DIAGNOSED / FIX-FORWARD-PREWRITE
+Status: FIX-FORWARD-FUNCTIONAL / CI-PENDING
 Date: 2026-09-01
 Entry baseline before incident: `bbcf9845415ba68446da7f88405ae7ed68c2d19b`
 Verified original pre-functional HEAD: `a0a1b0c6de9c208846a24e53d5019988849cfa80`
 Functional HEAD under diagnosis: `1b525f184ab688608555e43043be1402543b6d39`
+Fix-forward prewrite HEAD: `a7e9ab16b5faa9a6c712916786251ea74ccc3219`
 
 ## Entry-order incident
 The initial P337 Matrix was written before live-main rediscovery completed. GitHub accepted that write, so it is a real repository mutation and is not represented as compliant execution. Two additional Matrix-only commits followed while the incident was being made explicit, including one unnecessary same-content commit. Compare from the prior resume-safe P336 head `bbcf9845...` to `a0a1b0c6...` proves the net repository change across those four commits is this Matrix only. No functional/control-plane target changed.
@@ -32,20 +33,20 @@ Functional commit `1b525f184ab688608555e43043be1402543b6d39` applied the bounded
 Exact-head CI on `1b525f184ab688608555e43043be1402543b6d39` produced a HARD HOLD: Full-Stack, Real Mutation Matrix, M2, Runtime prototype and Runtime integrity passed, while Runtime `integration-tests` failed in `Run integration quality suite`.
 
 ## HARD-HOLD diagnosis
-The new P337 regression is consistent with current REP-013 content. Independent inspection identified the failing cross-artifact condition instead: `Repository/REP-020_CURRENT_CONTROL_PLANE_BOUNDARY_MANIFEST.md` still records REP-013 version `1.1.2`, while P337 advanced REP-013 to `1.1.3`.
+The new P337 regression is consistent with current REP-013 content. Independent inspection identified the failing cross-artifact condition instead: `Repository/REP-020_CURRENT_CONTROL_PLANE_BOUNDARY_MANIFEST.md` still recorded REP-013 version `1.1.2`, while P337 advanced REP-013 to `1.1.3`.
 
 `Quality/Integration/control_plane_reconciliation_gate.py` explicitly compares each current-manifest row to the live artifact and fails closed on version mismatch. `Quality/Integration/test_control_plane_current_manifest.py` requires zero mismatches and `boundary_pass=True`. Therefore the correct fix-forward is to synchronize the non-authoritative current manifest; weakening the gate or reverting the valid REP-013 inventory repair is prohibited.
 
 ## Authorized functional change set
 | Change | Target | Action | Applied | Verified |
 |---|---|---|---:|---:|
-| 337-01 | `Repository/REP-013_REPOSITORY_CONTENT_TREE.md` | UPDATE exact Core physical inventory, metadata audit/version, bounded integrity wording, and append P337 reconciliation section | Y | read-back Y / CI HOLD |
-| 337-02 | `Quality/Integration/test_core_rep013_control_plane_reconciliation.py` | CREATE exact physical-inventory regression | Y | source/read-back Y / CI HOLD |
-| 337-03 | `Repository/P7_CORE_REP013_CONTROL_PLANE_RECONCILIATION_337_2026-09-01.md` | CREATE bounded P7 progress record | Y | read-back Y / CI HOLD |
-| 337-04 | `Repository/REP-016_PRIORITY7_PROGRESS_ADDENDUM_2026-09-01_P337.md` | CREATE operational progress addendum | Y | read-back Y / CI HOLD |
-| 337-05 | `Repository/REP-011_PRIORITY7_PROGRESS_ADDENDUM_2026-09-01_P337.md` | CREATE traceability addendum | Y | read-back Y / CI HOLD |
-| 337-06 | this Matrix | UPDATE in functional change set and fix-forward change set | Y | OPEN |
-| 337-07 | `Repository/REP-020_CURRENT_CONTROL_PLANE_BOUNDARY_MANIFEST.md` | FIX-FORWARD current REP-013 row from version 1.1.2 to 1.1.3 and refresh current evidence checkpoint/baseline only; preserve all semantic boundaries | N | N |
+| 337-01 | `Repository/REP-013_REPOSITORY_CONTENT_TREE.md` | UPDATE exact Core physical inventory, metadata audit/version, bounded integrity wording, and append P337 reconciliation section | Y | read-back Y / final CI pending |
+| 337-02 | `Quality/Integration/test_core_rep013_control_plane_reconciliation.py` | CREATE exact physical-inventory regression | Y | source/read-back Y / final CI pending |
+| 337-03 | `Repository/P7_CORE_REP013_CONTROL_PLANE_RECONCILIATION_337_2026-09-01.md` | CREATE bounded P7 progress record | Y | read-back Y / final CI pending |
+| 337-04 | `Repository/REP-016_PRIORITY7_PROGRESS_ADDENDUM_2026-09-01_P337.md` | CREATE operational progress addendum | Y | read-back Y / final CI pending |
+| 337-05 | `Repository/REP-011_PRIORITY7_PROGRESS_ADDENDUM_2026-09-01_P337.md` | CREATE traceability addendum | Y | read-back Y / final CI pending |
+| 337-06 | this Matrix | UPDATE in functional change set and fix-forward change set | Y | final CI pending |
+| 337-07 | `Repository/REP-020_CURRENT_CONTROL_PLANE_BOUNDARY_MANIFEST.md` | FIX-FORWARD current REP-013 row from version 1.1.2 to 1.1.3 and refresh current evidence checkpoint/baseline only; preserve all semantic boundaries | Y | final CI pending |
 
 ## Fix-forward pre-write validation
 Authorized fix-forward paths are exactly:
@@ -54,7 +55,7 @@ Authorized fix-forward paths are exactly:
 
 KEEP unchanged during fix-forward: REP-013 content, the new P337 regression, REP-001, REP-002, REP-011/014/016 canonical bodies, all Core authority documents, Governance, Architecture, Runtime, Engine, Services, Interfaces, relationship direction/type, Phase-1/global status, and the executable control-plane gate itself.
 
-The manifest is evidence-only and already declares that it must be refreshed after a listed identity/version/status mutation. The fix-forward may update only its date/current checkpoint/verified source baseline fields as needed and the REP-013 version row; no closure boundary may be promoted.
+The manifest is evidence-only and already declares that it must be refreshed after a listed identity/version/status mutation. The fix-forward changes only its date/current checkpoint/verified source baseline and REP-013 version row; no closure boundary is promoted.
 
 ## Candidate validation history
 An unreferenced Git candidate commit `b702a7386c32faa6e416bd45e2f8b09aae5f4610` was built from the complete REP-013 source. Its compare showed only intended REP-013 semantic areas plus one unintended final-newline deletion. That candidate was REJECTED. The corrected functional candidate preserved the original trailing newline before main ref movement.
