@@ -1,58 +1,87 @@
 # Priority 7 — CORE-003 ↔ RUN-003 REL-071/072 Reconciliation — Transaction Q
 
 Date: 2026-09-01
-State: `MATERIAL-CANDIDATE / CI-PENDING / PRIORITY 7 OPEN`
+State: `FUNCTIONAL-CLOSED / CI-VERIFIED / RESUME-SAFE / PRIORITY 7 OPEN`
 Transaction: `MUT-2026-09-01-P7-CORE003-RUN003-REL071-072-Q`
 Work Lease: `HERMUZ-P7-Q-REL071-072-20260901`
 Entry HEAD: `194b23856a5f5b45c00bdb27a9c28c43288acf11`
 Pre-write Matrix HEAD: `9ac7dc336f07673a5fb666915bb6673bcc3aaf01`
+Material candidate HEAD: `9c5e8655800c74103fcf854d25e310525ba979f5`
 
-## Finding
+## Closed synchronization
 
-Transaction P already validated, on exact-head CI, the bounded pair:
+Transaction P independently validated the bounded pair:
 
 `CORE-003 → RUN-003 = GOVERNS`
 
 `RUN-003 → CORE-003 = REFERENCES`
 
-with disposition `BIDIRECTIONAL-AUTHORITY/DOCUMENTARY / RUNTIME-CONFIGURATION-NON-OVERRIDE / NON-DEPENDENCY`.
+Disposition:
 
-Fresh post-P current-state recomputation found REP-014 v1.2.13 still ending at REL-070 and therefore not yet synchronized to that material validated seam. Q performs only that synchronization.
+`BIDIRECTIONAL-AUTHORITY/DOCUMENTARY / RUNTIME-CONFIGURATION-NON-OVERRIDE / NON-DEPENDENCY`.
 
-## Registry change
+Fresh post-P recomputation established that REP-014 v1.2.13 still ended at REL-070 and omitted this material validated seam. Q therefore synchronized the already-proven pair without introducing new semantics.
 
-Register exactly:
+## Registered relationship rows
 
-`REL-071 | CORE-003 | RUN-003 | GOVERNS | CONSTITUTION-AUTHORITY / RUNTIME-CONFIGURATION-NON-OVERRIDE / NON-DEPENDENCY`
+- `REL-071 | CORE-003 | RUN-003 | GOVERNS | CONSTITUTION-AUTHORITY / RUNTIME-CONFIGURATION-NON-OVERRIDE / NON-DEPENDENCY`
+- `REL-072 | RUN-003 | CORE-003 | REFERENCES | CRITICAL-RUNTIME-CONFIGURATION / DIRECT-SOURCE-VALIDATED / NON-DEPENDENCY`
 
-`REL-072 | RUN-003 | CORE-003 | REFERENCES | CRITICAL-RUNTIME-CONFIGURATION / DIRECT-SOURCE-VALIDATED / NON-DEPENDENCY`
-
-REP-014 advances only from v1.2.13 to v1.2.14.
-
-## Evidence boundary
-
-Direct source semantics remain unchanged from P:
-
-- CORE-003 defines the highest governing rules and requires repository components to comply within applicable scope;
-- RUN-003 is canonical/critical Runtime configuration;
-- RUN-003 controls runtime behavior without modifying repository architecture or authority;
-- RUN-003 explicitly states Runtime configuration does not override CORE-003;
-- RUN-003 directly lists CORE-003 and keeps repository authority above runtime assumptions.
-
-Q does not infer dependency from authority ordering.
+REP-014 advanced from v1.2.13 to v1.2.14 only.
 
 ## Synchronized control surfaces
 
-- current control-plane manifest binds REP-014 v1.2.14 and Q refresh while preserving Phase 1 OPEN, Global integrity HOLD and Global PASS NOT CLAIMED;
-- Core status adds the validated/registered seam as an eighth bounded Priority-7 seam while preserving cross-layer validation open and Folder Certification pending;
-- the focused P regression changes from validation-first absence assertions to exact unique REL-071/072 assertions while retaining all direct-source and forbidden stronger-semantics checks.
+- `Repository/REP-020_CURRENT_CONTROL_PLANE_BOUNDARY_MANIFEST.md` now binds REP-014 v1.2.14 and the Q same-change-set refresh while preserving Phase 1 OPEN, Integrity HOLD and Global PASS NOT CLAIMED.
+- `Core/_FOLDER_STATUS.md` advanced from v1.3.10 to v1.3.11 and records `CORE-003 ↔ RUN-003` as the eighth bounded Priority-7 seam while preserving `CROSS-LAYER VALIDATION OPEN` and Folder Certification pending.
+- `Quality/Integrity/test_core003_run003_authority_boundary.py` now requires exact unique REL-071/072 registration while preserving direct-source assertions and forbidden stronger-semantics checks.
 
-## Forbidden promotion
+## Atomicity / preservation
 
-No `DEPENDS_ON`, `IMPLEMENTS`, `CONSUMES`, reverse RUN-003→CORE-003 GOVERNS, executable reachability, Runtime certification, Core certification, Priority-7 closure, Phase-1 closure, Connected Baseline closure, repository-wide graph completion or Global PASS is claimed.
+Candidate `9c5e8655800c74103fcf854d25e310525ba979f5` is exactly one commit after pre-write Matrix HEAD `9ac7dc336f07673a5fb666915bb6673bcc3aaf01` and changes exactly six authorized paths. Unexpected path expansion = `0`.
 
-## Verification contract
+Pre-publish compare showed:
 
-Candidate must be exactly one commit after pre-write Matrix HEAD, touch exactly six authorized paths, preserve all prior REP-014 content except the bounded version/rows/evidence addition, and pass all four required exact-head workflows before closure.
+- REP-014: `+34 / -1` only, matching version bump + two rows + bounded Q evidence section;
+- Core status: 13 changed lines;
+- current manifest: 4 changed lines;
+- focused test: 9 changed lines;
+- Q record and Matrix only within authorized scope.
 
-Work Lease remains `OPEN` until candidate verification and closure-head verification complete.
+Direct candidate read-back confirmed REP-014 v1.2.14, preserved prior REL-001..REL-070 table content in the inspected range, exact REL-071/072 rows, and Core status v1.3.11 with hold/certification boundaries retained.
+
+## Exact-head verification
+
+Required workflows on material candidate `9c5e8655800c74103fcf854d25e310525ba979f5`:
+
+- Full-Stack Repository Audit — run `33526263644` — SUCCESS. `repository-audit` and all reported steps succeeded, including exact checkout SHA binding, Mutation Matrix preflight, Matrix semantic regression, same-change-set enforcement, repository-wide audit and evidence emission.
+- ARGO Runtime Prototype and Integration Tests — run `33526263538` — SUCCESS. `integrity-tests`, `prototype-tests` and `integration-tests` all succeeded with all reported steps successful.
+- Real Mutation Matrix Regression — run `33526263608` — SUCCESS.
+- M2 Multi-Channel Proposal Training — run `33526263559` — SUCCESS.
+
+Result: `4/4 REQUIRED WORKFLOWS SUCCESS`.
+
+No material failure occurred in Q.
+
+## Forbidden promotion retained
+
+Q does not support or claim:
+
+- `RUN-003 → CORE-003 = DEPENDS_ON`;
+- reverse `RUN-003 → CORE-003 = GOVERNS`;
+- `IMPLEMENTS` or `CONSUMES` in either direction;
+- executable/runtime reachability proof;
+- Runtime folder certification;
+- Core folder certification;
+- Priority-7 closure;
+- Phase-1 closure;
+- Connected Baseline closure;
+- repository-wide graph completion;
+- Global PASS.
+
+## Learning assessment
+
+Q is successful reuse of already-established ARGO discipline: validate material semantics first, synchronize the relationship registry only after exact-head proof, and preserve the distinction between authority ordering and dependency. No new governance rule is warranted.
+
+Work Lease: `CLOSED / RESUME-SAFE`.
+
+A future continuation must independently rediscover live `main` and recompute Priority 7. This record grants no future mutation authority and does not pre-authorize any next relationship or certification decision.
