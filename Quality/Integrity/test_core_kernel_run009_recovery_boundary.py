@@ -13,6 +13,7 @@ def test_core_kernel_run009_recovery_boundary_is_direct_and_not_overpromoted():
     registry = REP014.read_text(encoding="utf-8")
     status = CORE_STATUS.read_text(encoding="utf-8")
 
+    # Preserve Transaction N's exact proven source assertions.
     assert "Document ID\nCORE-KERNEL" in kernel
     assert "Recovery follows the applicable governed recovery flow." in kernel
     assert "`Runtime/RUN-009_RECOVERY.md`" in kernel
@@ -23,8 +24,9 @@ def test_core_kernel_run009_recovery_boundary_is_direct_and_not_overpromoted():
     assert "Resume only when:" in recovery
     assert "Recovery restores the last safe validated execution context" in recovery
 
-    # Validation-first: N proves the bounded one-way reference candidate but does not mutate REP-014.
-    assert "| CORE-KERNEL | RUN-009 | REFERENCES |" not in registry
+    registered = "| REL-070 | CORE-KERNEL | RUN-009 | REFERENCES | **INTENTIONAL ONE-WAY / RECOVERY-HANDOFF-ALIGNED / NON-DEPENDENCY** |"
+    assert registered in registry
+    assert registry.count(registered) == 1
 
     forbidden = (
         "| CORE-KERNEL | RUN-009 | DEPENDS_ON |",

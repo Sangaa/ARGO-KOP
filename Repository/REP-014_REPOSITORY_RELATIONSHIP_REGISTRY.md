@@ -2,7 +2,7 @@
 
 Platform: ARGO KOP  
 Document ID: REP-014  
-Version: 1.2.12  
+Version: 1.2.13  
 Status: Active / Relationship Enumeration In Progress  
 Development Baseline: 3.2.1  
 Last Audit: 2026-09-01
@@ -136,6 +136,7 @@ The following are deliberately limited to relationships established during repos
 | REL-067 | ARC-006 | CORE-003 | REFERENCES | **INTENTIONAL ONE-WAY / CONSTITUTION-AUTHORITY-ALIGNED / NON-DEPENDENCY** |
 | REL-068 | CORE-003 | ARC-011 | GOVERNS | **CONSTITUTION-AUTHORITY / DIRECT-SOURCE-VALIDATED / NON-DEPENDENCY** |
 | REL-069 | ARC-011 | CORE-003 | REFERENCES | **SUBORDINATE-ARCHITECTURE / DIRECT-SOURCE-VALIDATED / NON-DEPENDENCY** |
+| REL-070 | CORE-KERNEL | RUN-009 | REFERENCES | **INTENTIONAL ONE-WAY / RECOVERY-HANDOFF-ALIGNED / NON-DEPENDENCY** |
 
 ## Current Review-Cycle Reconciliation — 2026-08-17
 
@@ -510,6 +511,34 @@ Boundary:
 - no `DEPENDS_ON`, `IMPLEMENTS`, `CONSUMES` or runtime/executable edge is inferred;
 - no reverse `ARC-011 → CORE-003 = GOVERNS` edge is manufactured;
 - this bounded reconciliation does not certify Core, Architecture or the repository-wide graph.
+
+## P7 CORE-KERNEL → RUN-009 Recovery Handoff Reconciliation — 2026-09-01
+
+Current Priority-7 review validates and registers one additional bounded Core-to-Runtime documentary seam:
+
+```text
+CORE-KERNEL ──references──> RUN-009
+```
+
+Evidence basis:
+
+- `Core/ARGO_KERNEL.md` explicitly states that recovery follows the applicable governed recovery flow;
+- the same canonical Kernel artifact directly lists `Runtime/RUN-009_RECOVERY.md` under Related Authority;
+- the Kernel explicitly warns that a name appearing in the document does not establish dependency merely by being listed;
+- `Runtime/RUN-009_RECOVERY.md` defines the canonical governed Runtime recovery mechanism and safe-resume conditions but does not directly identify CORE-KERNEL as a reverse dependency, consumer, implementation or governing source;
+- Transaction N validation-first evidence passed all required exact-head candidate and closure workflows before this registry synchronization.
+
+Disposition:
+
+`REL-070 = INTENTIONAL ONE-WAY / RECOVERY-HANDOFF-ALIGNED / NON-DEPENDENCY`.
+
+Boundary:
+
+- CORE-KERNEL and RUN-009 source content remain unchanged;
+- no reverse `RUN-009 → CORE-KERNEL` edge is manufactured;
+- no `DEPENDS_ON`, `IMPLEMENTS`, `CONSUMES`, `GOVERNS` or executable-reachability relationship is inferred;
+- broader Core cross-layer validation and certification remain open;
+- this reconciliation does not certify Runtime or the repository-wide graph.
 
 ## Control-Plane Graph
 
