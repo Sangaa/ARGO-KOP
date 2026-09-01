@@ -4,12 +4,15 @@ Transaction: `MUT-2026-09-01-P7-CORE-CERTIFICATION-READINESS-T-C1`
 Parent Transaction: `MUT-2026-09-01-P7-CORE-CERTIFICATION-READINESS-T`
 Work Lease: `HERMUZ-P7-T-C1-CORE-READINESS-20260901`
 Priority: `7 — Core`
-State: `CORRECTIVE MATERIAL CANDIDATE PREPARED / CI PENDING / LEASE ACTIVE`
+State: `FAILED MATERIAL CANDIDATE PRESERVED / INTEGRITY DEFECT REPAIRED / HANDOFF TO T-C2`
 Entry HEAD: `8d01a3cd19e0f7d630bf6c60fc62b05460b82b1d`
 Pre-write Matrix HEAD: `110eab997d9027f575cb306d9175565834098e82`
+Failed T-C1 candidate: `bf7e640772310b2af9be939d56535f8cf20cc0c1`
+Corrective successor: `MUT-2026-09-01-P7-CORE-CERTIFICATION-READINESS-T-C2`
+T-C2 pre-write Matrix HEAD: `1477828c46ca65d1e32779ecb43d2ead4da50716`
 Protocol: `PROJECT_BOOTSTRAP / CORE-003 / GOV-013 / GOV-013A / GOV-014 / GOV-014A / GOV-015 / GOV-016 / REP-011 / REP-014 / REP-016 / ARC-006 / ARC-011`
 
-## Why T-C1 exists
+## Why T-C1 existed
 
 Parent T candidate `8d01a3cd19e0f7d630bf6c60fc62b05460b82b1d` structurally satisfied its one-commit/five-path authorization and passed Full-Stack, Real Mutation Matrix and M2, but exact-head Runtime verification failed.
 
@@ -20,73 +23,74 @@ Exact T workflow evidence:
 - M2 Multi-Channel Proposal Training `33534072032` — `SUCCESS`;
 - ARGO Runtime Prototype and Integration Tests `33534072160` — `FAILURE`.
 
-Runtime job evidence:
+Runtime jobs:
 
-- `integrity-tests` — `FAILURE`;
-- `prototype-tests` — `SUCCESS`;
-- `integration-tests` — `FAILURE`.
+- integrity-tests — `FAILURE`;
+- prototype-tests — `SUCCESS`;
+- integration-tests — `FAILURE`.
 
-The failures converge on one established semantic contract: current Core status must still contain `CROSS-LAYER VALIDATION OPEN` until the separate Explicit Core Certification Review actually closes or redirects that gate.
+The primary defect was a premature state transition: T removed `CROSS-LAYER VALIDATION OPEN` before a separate Explicit Core Certification Review closed or redirected the gate.
 
-T changed the top status from `INTEGRITY HOLD — CONTROL PLANE RECONCILED / CROSS-LAYER VALIDATION OPEN` to `INTEGRITY HOLD — CONTROL PLANE RECONCILED / CERTIFICATION REVIEW READY`. The readiness conclusion did not itself prove that cross-layer validation had been formally closed. This was a premature state transition.
+## T-C1 corrective semantic decision
 
-Classification:
-
-`MATERIAL_CANDIDATE_CI_FAILURE / SEMANTIC STATE-TRANSITION REGRESSION / READINESS EVIDENCE NOT INVALIDATED`.
-
-The failed candidate remains evidence. A green Full-Stack run does not override failed Runtime verification.
-
-## Corrective semantic decision
-
-T-C1 preserves both truths simultaneously:
+T-C1 preserved both truths simultaneously:
 
 - `CROSS-LAYER VALIDATION OPEN` remains explicit until the separate certification review closes or redirects it;
 - `CERTIFICATION REVIEW READY` remains explicit because bounded evidence is sufficient to open that review.
 
-Target status semantics:
+Target status semantics were correctly restored as:
 
-`INTEGRITY HOLD — CONTROL PLANE RECONCILED / CROSS-LAYER VALIDATION OPEN / CERTIFICATION REVIEW READY`
+`INTEGRITY HOLD — CONTROL PLANE RECONCILED / CROSS-LAYER VALIDATION OPEN / CERTIFICATION REVIEW READY`.
 
-Certification Readiness remains:
+## T-C1 exact-head result
 
-`PASS / EXPLICIT CORE CERTIFICATION REVIEW MAY OPEN / CORE STILL INTEGRITY HOLD / NOT CERTIFIED`.
+T-C1 candidate `bf7e640772310b2af9be939d56535f8cf20cc0c1` did not fully pass CI and remains failed evidence.
 
-Folder Certification remains Pending and Priority 7 remains OPEN.
+- Full-Stack Repository Audit `33535169972` — `SUCCESS`;
+- Real Mutation Matrix Regression `33535170174` — `SUCCESS`;
+- M2 Multi-Channel Proposal Training `33535170346` — `SUCCESS`;
+- ARGO Runtime Prototype and Integration Tests `33535170040` — `FAILURE`.
 
-## Test disposition
+Runtime jobs:
 
-The pre-existing Priority-7 tests that require `CROSS-LAYER VALIDATION OPEN` are retained unchanged. They correctly encode the current state-transition boundary.
+- integrity-tests — `SUCCESS`;
+- prototype-tests — `SUCCESS`;
+- integration-tests — `FAILURE`.
 
-Only the new T-focused readiness test is corrected because its original exact top-status assertion embodied T's premature replacement. The corrected T test asserts independently that both `CROSS-LAYER VALIDATION OPEN` and `CERTIFICATION REVIEW READY` are present while preserving all anti-promotion and direct-source assertions.
+This split is material evidence: T-C1 repaired the original Integrity/open-marker defect. The remaining failure is a distinct Integration contract defect.
 
-## Authorized corrective material change set — exactly 6 paths
+## T-C2 handoff finding
 
-| ID | Target | Action | Applied | Verified |
-|---|---|---|:---:|:---:|
-| C1-01 | `Core/_FOLDER_STATUS.md` | restore explicit `CROSS-LAYER VALIDATION OPEN` while retaining readiness PASS / review-ready state | Y | PENDING CI |
-| C1-02 | `Quality/Integrity/test_core_certification_readiness_boundary.py` | correct only the new T test's premature status-transition assertion; preserve all other checks | Y | PENDING CI |
-| C1-03 | `Repository/P7_CORE_CERTIFICATION_READINESS_2026-09-01_T.md` | preserve T failure and T-C1 correction provenance | Y | PENDING CI |
-| C1-04 | `Repository/REP-016_PRIORITY7_CERTIFICATION_READINESS_ADDENDUM_2026-09-01_T.md` | reconcile operational readiness wording with still-open cross-layer gate | Y | PENDING CI |
-| C1-05 | `Repository/MUT-2026-09-01-P7-CORE-CERTIFICATION-READINESS-T_MUTATION_MATRIX.md` | bind failed T candidate to T-C1 | Y | PENDING CI |
-| C1-06 | this Matrix | update/rebind corrective candidate state in same change set | Y | PENDING CI |
+Direct inspection of `Quality/Integration/test_core_p7_status_sync.py` shows its remaining-boundary test still encodes two pre-readiness statements as unconditional current requirements:
 
-Candidate must be exactly one commit after pre-write Matrix HEAD `110eab997d9027f575cb306d9175565834098e82` and exactly these six paths. Unexpected path expansion = `0`.
+- `continued dependency and consumer validation for remaining material Core authority relationships`;
+- `REP-014 relationship-registry reconciliation`.
 
-## Explicitly forbidden
+Those statements were valid before Transaction T's direct bounded Core-member sweep. They are stale as permanent requirements now because T established no additional material external coupling requiring registration before explicit certification review, Transaction R intentionally preserves one validated-not-registered seam, and REP-014 states its list is not a complete graph.
 
-- no modification of any pre-existing test that detected the T failure;
-- no mutation of canonical Core source files;
+The valid parts of that integration boundary remain authoritative and must be preserved by T-C2:
+
+- `CROSS-LAYER VALIDATION OPEN`;
+- explicit final Core certification decision;
+- Priority 7 OPEN;
+- no Phase-1 / repository-wide graph / Connected Baseline promotion.
+
+Classification:
+
+`T-C1 MATERIAL CANDIDATE CI FAILURE / PRIMARY STATE-MARKER REPAIR VERIFIED BY INTEGRITY SUCCESS / REMAINING STALE INTEGRATION STATE CONTRACT HANDOFF TO T-C2`.
+
+## Original T-C1 material boundary
+
+T-C1 changed exactly six authorized paths and did not modify the pre-existing failure-detecting tests. Its atomicity evidence remains preserved.
+
+## Non-authority preserved
+
+- no canonical Core source mutation beyond the status/evidence surface already authorized in T-C1;
 - no REP-014 or REP-020 mutation;
-- no REL-073 or other relationship registration;
-- no removal/weakening of readiness direct-source evidence;
+- no REL-073 or other registry mutation;
 - no Core certification;
 - no Priority-7 closure;
-- no Phase-1 / Connected Baseline / repository-wide graph / Global PASS claim;
-- no rerun-only bypass of the failed candidate.
-
-## Verification contract
-
-`GIT-DATA OBJECT PREPARATION → ONE-COMMIT/SIX-PATH COMPARE → LIVE-PARENT RECHECK → NON-FORCE FAST-FORWARD → EXACT-HEAD READ-BACK → FOUR REQUIRED WORKFLOWS → FULL-STACK SHA/MATRIX/AUDIT STEP REVIEW → RUNTIME INTEGRITY/PROTOTYPE/INTEGRATION REVIEW → FAILURE/LEARNING ASSESSMENT → DOCUMENTATION-ONLY T/T-C1 CLOSURE → CLOSURE-HEAD FOUR-WORKFLOW VERIFICATION`.
+- no Phase-1 / Connected Baseline / repository-wide graph / Global PASS claim.
 
 ## Learning retained
 
@@ -94,4 +98,6 @@ Candidate must be exactly one commit after pre-write Matrix HEAD `110eab997d9027
 
 `A STATE LABEL MUST NOT REMOVE AN OPEN-GATE MARKER UNTIL THE GOVERNED CLOSURE DECISION HAS ACTUALLY OCCURRED.`
 
-This is an application of existing evidence/state discipline; no new Governance rule is warranted from T-C1 alone.
+`A FAILED CORRECTIVE CANDIDATE CAN STILL PROVE THAT ONE FAILURE CLASS WAS REPAIRED WHEN THE EXACT-HEAD JOB SPLIT CHANGES FROM FAILURE TO SUCCESS.`
+
+No new Governance rule is created; T-C2 continues under existing failure/evidence discipline.

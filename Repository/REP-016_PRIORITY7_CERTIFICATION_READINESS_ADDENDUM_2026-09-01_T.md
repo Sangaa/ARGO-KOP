@@ -1,10 +1,10 @@
-# REP-016 PRIORITY-7 CERTIFICATION READINESS ADDENDUM — TRANSACTION T / T-C1
+# REP-016 PRIORITY-7 CERTIFICATION READINESS ADDENDUM — TRANSACTION T / T-C1 / T-C2
 
 Date: 2026-09-01
 Applies to: `Repository/REP-016_PHASE1_PARTITION_WORK_QUEUE.md`
-State: `CURRENT OPERATIONAL ADDENDUM / PRIORITY 7 IN PROGRESS / CROSS-LAYER VALIDATION OPEN / CERTIFICATION-READINESS CORRECTIVE CANDIDATE`
+State: `CURRENT OPERATIONAL ADDENDUM / PRIORITY 7 IN PROGRESS / CROSS-LAYER VALIDATION OPEN / T-C2 CORRECTIVE CANDIDATE`
 Parent Transaction: `MUT-2026-09-01-P7-CORE-CERTIFICATION-READINESS-T`
-Corrective Transaction: `MUT-2026-09-01-P7-CORE-CERTIFICATION-READINESS-T-C1`
+Corrective Transactions: `T-C1`, `T-C2`
 
 ## Current operational interpretation
 
@@ -12,9 +12,9 @@ Corrective Transaction: `MUT-2026-09-01-P7-CORE-CERTIFICATION-READINESS-T-C1`
 
 Current bounded evidence supports opening the explicit Core certification review, but does not close the current cross-layer validation gate merely by reaching readiness.
 
-Corrected operational state:
+Current operational state:
 
-`CROSS-LAYER VALIDATION OPEN / CORE CERTIFICATION READINESS = PASS SUBJECT TO T-C1 EXACT-HEAD CI / CORE STILL INTEGRITY HOLD / FOLDER CERTIFICATION PENDING`.
+`CROSS-LAYER VALIDATION OPEN / CORE CERTIFICATION READINESS = PASS SUBJECT TO T-C2 EXACT-HEAD CI / CORE STILL INTEGRITY HOLD / FOLDER CERTIFICATION PENDING`.
 
 ## Evidence boundary
 
@@ -31,15 +31,25 @@ Current Priority-7 Core evidence includes:
 
 REP-014 itself states its current relationship list is not a complete graph; registry visual completeness is therefore not a closure criterion by itself.
 
-## T exact-head failure retained
+## Failure chain retained
 
-T candidate `8d01a3cd19e0f7d630bf6c60fc62b05460b82b1d` passed Full-Stack, Real Mutation Matrix and M2, but failed Runtime exact-head verification. The failure showed that the established marker `CROSS-LAYER VALIDATION OPEN` must remain present until the separate Explicit Core Certification Review actually closes or redirects that gate.
+T candidate `8d01a3cd19e0f7d630bf6c60fc62b05460b82b1d` failed Runtime because it prematurely removed `CROSS-LAYER VALIDATION OPEN`.
 
-Therefore T-C1 corrects the state transition instead of weakening the pre-existing tests or rerunning around the failure.
+T-C1 candidate `bf7e640772310b2af9be939d56535f8cf20cc0c1` restored that marker. Its exact-head Runtime run `33535170040` then produced:
 
-## What T/T-C1 may close
+- integrity-tests — `SUCCESS`;
+- prototype-tests — `SUCCESS`;
+- integration-tests — `FAILURE`.
 
-If T-C1 candidate and closure verification succeed, T/T-C1 may close only:
+Full-Stack `33535169972`, Real Mutation Matrix `33535170174`, and M2 `33535170346` succeeded on the same T-C1 candidate.
+
+Direct inspection of `Quality/Integration/test_core_p7_status_sync.py` identified the remaining Integration failure source: two pre-readiness literals were still encoded as unconditional remaining work even though T's bounded sweep superseded that description.
+
+T-C2 updates that stale Integration state contract while preserving the valid safety boundaries: `CROSS-LAYER VALIDATION OPEN`, explicit final Core certification decision, Priority 7 OPEN, and no Phase-1/Connected-Baseline promotion.
+
+## What T/T-C1/T-C2 may close
+
+If T-C2 candidate and closure verification succeed, this chain may close only:
 
 `CORE CERTIFICATION READINESS = PASS`.
 
@@ -68,6 +78,6 @@ This authorizes opening a fresh explicit Core certification review. It does **no
 
 No REL-073 or other registry mutation is authorized by this addendum.
 
-## Next legal action after verified T/T-C1 closure
+## Next legal action after verified T-C2 closure
 
 Freshly rediscover live `main` and recompute Priority 7. If no blocking drift or unresolved material seam appears, open a separate **Explicit Core Certification Review**. If a blocker appears, return to the affected validation/reconciliation gate instead of forcing certification.

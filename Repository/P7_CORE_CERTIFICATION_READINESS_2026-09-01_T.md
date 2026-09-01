@@ -1,15 +1,16 @@
 # Priority 7 — Core Certification Readiness — Transaction T
 
 Date: 2026-09-01
-State: `FAILED MATERIAL CANDIDATE PRESERVED / T-C1 CORRECTIVE CANDIDATE PREPARED / CERTIFICATION-READINESS-ONLY / PRIORITY 7 OPEN`
+State: `T FAILED / T-C1 FAILED WITH INTEGRITY REPAIRED / T-C2 CORRECTIVE CANDIDATE PREPARED / CERTIFICATION-READINESS-ONLY / PRIORITY 7 OPEN`
 Transaction: `MUT-2026-09-01-P7-CORE-CERTIFICATION-READINESS-T`
-Corrective Transaction: `MUT-2026-09-01-P7-CORE-CERTIFICATION-READINESS-T-C1`
+Corrective Transactions: `T-C1`, `T-C2`
 Work Lease: `HERMUZ-P7-T-CORE-CERTIFICATION-READINESS-20260901`
-Corrective Lease: `HERMUZ-P7-T-C1-CORE-READINESS-20260901`
 Entry HEAD: `6570329ad77acf5e78a7d6a329e3cdd356d2cc83`
-Pre-write Matrix HEAD: `f11f62ea4d67d5c91d398a555c3f258607a05944`
+T pre-write Matrix HEAD: `f11f62ea4d67d5c91d398a555c3f258607a05944`
 Failed T candidate: `8d01a3cd19e0f7d630bf6c60fc62b05460b82b1d`
 T-C1 pre-write Matrix HEAD: `110eab997d9027f575cb306d9175565834098e82`
+Failed T-C1 candidate: `bf7e640772310b2af9be939d56535f8cf20cc0c1`
+T-C2 pre-write Matrix HEAD: `1477828c46ca65d1e32779ecb43d2ead4da50716`
 
 ## Question reviewed
 
@@ -46,64 +47,84 @@ Within this bounded scope, no additional direct material external coupling requi
 
 ## Failed T candidate — evidence preserved
 
-T material candidate `8d01a3cd19e0f7d630bf6c60fc62b05460b82b1d` satisfied its structural one-commit/five-path mutation boundary, but exact-head CI did **not** fully pass.
+T material candidate `8d01a3cd19e0f7d630bf6c60fc62b05460b82b1d` passed Full-Stack, Real Mutation Matrix and M2 but failed Runtime exact-head verification.
 
-Workflow evidence on that exact SHA:
+- Full-Stack `33534072084` — `SUCCESS`;
+- Real Mutation Matrix `33534071888` — `SUCCESS`;
+- M2 `33534072032` — `SUCCESS`;
+- Runtime `33534072160` — `FAILURE`.
 
-- Full-Stack Repository Audit — run `33534072084` — `SUCCESS`;
-- Real Mutation Matrix Regression — run `33534071888` — `SUCCESS`;
-- M2 Multi-Channel Proposal Training — run `33534072032` — `SUCCESS`;
-- ARGO Runtime Prototype and Integration Tests — run `33534072160` — `FAILURE`.
+Runtime jobs:
 
-Runtime job evidence:
+- integrity-tests — `FAILURE`;
+- prototype-tests — `SUCCESS`;
+- integration-tests — `FAILURE`.
 
-- `integrity-tests` — `FAILURE`;
-- `prototype-tests` — `SUCCESS`;
-- `integration-tests` — `FAILURE`.
-
-The failure converged on one state-transition defect: T replaced the established open-gate marker `CROSS-LAYER VALIDATION OPEN` with `CERTIFICATION REVIEW READY` before a separate Explicit Core Certification Review had actually closed cross-layer validation.
-
-The readiness evidence itself was not disproven. The invalid step was the state-label replacement.
+Root cause: T prematurely removed the established `CROSS-LAYER VALIDATION OPEN` marker when introducing `CERTIFICATION REVIEW READY`.
 
 Classification:
 
 `MATERIAL_CANDIDATE_CI_FAILURE / SEMANTIC STATE-TRANSITION REGRESSION / READINESS EVIDENCE RETAINED`.
 
-No rerun-only bypass is allowed and the failed candidate remains provenance.
+## T-C1 corrective result — partial repair, candidate still failed
 
-## T-C1 corrective decision
+T-C1 restored the open-gate marker while retaining readiness:
 
-T-C1 preserves both truths at the same time:
+`INTEGRITY HOLD — CONTROL PLANE RECONCILED / CROSS-LAYER VALIDATION OPEN / CERTIFICATION REVIEW READY`.
 
-1. `CROSS-LAYER VALIDATION OPEN` remains explicit until the separate explicit certification review closes or redirects that gate;
-2. `CERTIFICATION REVIEW READY` may remain explicit because the bounded evidence is sufficient to open the review.
+Exact-head verification on failed T-C1 candidate `bf7e640772310b2af9be939d56535f8cf20cc0c1`:
 
-Corrected status semantics:
+- Full-Stack `33535169972` — `SUCCESS`;
+- Real Mutation Matrix `33535170174` — `SUCCESS`;
+- M2 `33535170346` — `SUCCESS`;
+- Runtime `33535170040` — `FAILURE`.
 
-`INTEGRITY HOLD — CONTROL PLANE RECONCILED / CROSS-LAYER VALIDATION OPEN / CERTIFICATION REVIEW READY`
+Runtime jobs:
 
-Readiness disposition remains:
+- integrity-tests — `SUCCESS`;
+- prototype-tests — `SUCCESS`;
+- integration-tests — `FAILURE`.
 
-`CORE CERTIFICATION READINESS = PASS / EXPLICIT CORE CERTIFICATION REVIEW MAY OPEN / CORE STILL INTEGRITY HOLD / FOLDER CERTIFICATION PENDING`.
+This is material evidence that T-C1 repaired the original Integrity/state-marker defect. The remaining failure is a distinct Integration contract issue.
 
-## Test disposition
+## T-C2 diagnosis
 
-All pre-existing Priority-7 tests that detected the T failure remain unchanged. They correctly encode the current state-transition boundary.
+Direct inspection of `Quality/Integration/test_core_p7_status_sync.py` shows that its remaining-boundary test still requires two pre-readiness literals:
 
-Only the T-focused readiness test is corrected because its own new exact status assertion embodied T's premature replacement. It must assert independently that both `CROSS-LAYER VALIDATION OPEN` and `CERTIFICATION REVIEW READY` are present, while retaining anti-promotion, R-seam, and direct-source checks.
+- `continued dependency and consumer validation for remaining material Core authority relationships`;
+- `REP-014 relationship-registry reconciliation`.
 
-## Corrective material boundary
+Those literals describe the work queue before T's bounded direct Core-member sweep. They are no longer valid as unconditional current-state requirements because:
 
-T-C1 is limited to exactly six paths:
+1. the direct sweep found no additional material external coupling requiring registration before explicit certification review;
+2. Transaction R intentionally leaves `RUN-002 → CORE-003` validated but unregistered;
+3. REP-014 says its list is not a complete graph;
+4. the valid safety boundary is still preserved independently by `CROSS-LAYER VALIDATION OPEN`, Priority 7 OPEN, Folder Certification Pending, and the explicit final certification decision.
 
-1. `Core/_FOLDER_STATUS.md`;
-2. `Quality/Integrity/test_core_certification_readiness_boundary.py`;
-3. this T evidence record;
-4. `Repository/REP-016_PRIORITY7_CERTIFICATION_READINESS_ADDENDUM_2026-09-01_T.md`;
-5. `Repository/MUT-2026-09-01-P7-CORE-CERTIFICATION-READINESS-T_MUTATION_MATRIX.md`;
-6. `Repository/MUT-2026-09-01-P7-CORE-CERTIFICATION-READINESS-T-C1_CORRECTIVE_MATRIX.md`.
+T-C2 therefore updates the stale Integration state contract instead of reverting verified readiness evidence or manufacturing a registry edge.
 
-No canonical Core source, REP-014, REP-020, relationship registry row, pre-existing failure-detecting test, Core certification, Priority-7 closure, Phase-1 closure, Connected Baseline closure, repository-wide graph completion, or Global PASS is authorized.
+The revised test must preserve closed control-plane assertions and require:
+
+- `CROSS-LAYER VALIDATION OPEN`;
+- `CERTIFICATION REVIEW READY`;
+- `VALIDATED-NOT-REGISTERED`;
+- `not a complete graph`;
+- explicit final Core certification decision;
+- Priority 7 OPEN;
+- no Phase-1 / repository-wide / Connected Baseline promotion.
+
+It also ensures the two superseded pre-readiness literals are no longer present as permanent remaining-work gates.
+
+## Non-authority preserved
+
+T/T-C1/T-C2 do **not** authorize:
+
+- Core certification;
+- closure of `CROSS-LAYER VALIDATION OPEN`;
+- Priority-7 closure;
+- REL-073 or forced RUN-002→CORE-003 registration;
+- REP-014 or REP-020 mutation;
+- Phase-1, Connected Baseline, repository-wide graph, or Global PASS claims.
 
 ## Learning retained
 
@@ -111,12 +132,14 @@ No canonical Core source, REP-014, REP-020, relationship registry row, pre-exist
 
 `A STATE LABEL MUST NOT REMOVE AN OPEN-GATE MARKER UNTIL THE GOVERNED CLOSURE DECISION HAS ACTUALLY OCCURRED.`
 
-No new Governance rule is warranted; this is an application of existing evidence/state discipline.
+`A REGRESSION TEST MAY PRESERVE A VALID SAFETY BOUNDARY WHILE STILL CONTAINING A STALE DESCRIPTION OF THE WORK REQUIRED TO REACH THAT BOUNDARY.`
+
+No new Governance rule is warranted; these are applications of existing evidence/state discipline.
 
 ## Verification contract
 
-T-C1 must satisfy:
+T-C2 must satisfy:
 
-`ONE-COMMIT/SIX-PATH COMPARE → LIVE-PARENT RECHECK → NON-FORCE FAST-FORWARD → EXACT-HEAD READ-BACK → FOUR REQUIRED WORKFLOWS → FULL-STACK SHA/MATRIX/AUDIT STEP REVIEW → RUNTIME INTEGRITY/PROTOTYPE/INTEGRATION REVIEW → FAILURE/LEARNING ASSESSMENT → DOCUMENTATION-ONLY T/T-C1 CLOSURE → CLOSURE-HEAD FOUR-WORKFLOW VERIFICATION`.
+`ONE-COMMIT/FIVE-PATH COMPARE → LIVE-PARENT RECHECK → NON-FORCE FAST-FORWARD → EXACT-HEAD READ-BACK → FOUR REQUIRED WORKFLOWS → FULL-STACK SHA/MATRIX/AUDIT STEP REVIEW → RUNTIME INTEGRITY/PROTOTYPE/INTEGRATION REVIEW → FAILURE/LEARNING ASSESSMENT → DOCUMENTATION-ONLY T/T-C1/T-C2 CLOSURE → CLOSURE-HEAD FOUR-WORKFLOW VERIFICATION`.
 
-Until that succeeds, readiness remains a corrected candidate state rather than a resume-safe closure.
+Until that succeeds, readiness remains a corrective candidate state rather than a resume-safe closure.

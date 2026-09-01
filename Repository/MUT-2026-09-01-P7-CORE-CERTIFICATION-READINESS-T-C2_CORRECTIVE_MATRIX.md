@@ -5,8 +5,9 @@ Parent Transaction: `MUT-2026-09-01-P7-CORE-CERTIFICATION-READINESS-T-C1`
 Root Transaction: `MUT-2026-09-01-P7-CORE-CERTIFICATION-READINESS-T`
 Work Lease: `HERMUZ-P7-T-C2-CORE-READINESS-INTEGRATION-20260901`
 Priority: `7 — Core`
-State: `PRE-WRITE MATRIX / LEASE ACTIVE / NO CORRECTIVE MATERIAL WRITE YET`
+State: `CORRECTIVE MATERIAL CANDIDATE PREPARED / CI PENDING / LEASE ACTIVE`
 Entry HEAD: `bf7e640772310b2af9be939d56535f8cf20cc0c1`
+Pre-write Matrix HEAD: `1477828c46ca65d1e32779ecb43d2ead4da50716`
 Protocol: `PROJECT_BOOTSTRAP / CORE-003 / GOV-013 / GOV-013A / GOV-014 / GOV-014A / GOV-015 / GOV-016 / REP-011 / REP-014 / REP-016 / ARC-006 / ARC-011`
 
 ## Why T-C2 exists
@@ -46,23 +47,34 @@ Therefore the integration test is stale in **what it names as mandatory remainin
 
 Classification:
 
-`STALE INTEGRATION STATE CONTRACT / CURRENT READINESS TRANSITION EVIDENCE SUPERSEDES OLD REMAINING-WORK LITERALS / TEST MUST BE UPDATED WITHOUT WEAKENING OPEN-GATE OR ANTI-PROMOTION GUARDS`.
+`STALE INTEGRATION STATE CONTRACT / CURRENT READINESS TRANSITION EVIDENCE SUPERSEDES OLD REMAINING-WORK LITERALS / TEST UPDATED WITHOUT WEAKENING OPEN-GATE OR ANTI-PROMOTION GUARDS`.
 
 ## Authorized corrective material change set — exactly 5 paths
 
-1. `Quality/Integration/test_core_p7_status_sync.py`
-   - preserve the closed-control-plane assertions;
-   - replace only the two stale mandatory remaining-work literals with current bounded readiness/open-gate assertions;
-   - continue requiring `CROSS-LAYER VALIDATION OPEN`, explicit final Core certification decision, Priority 7 OPEN, and no Phase-1/Connected-Baseline promotion;
-   - require `VALIDATED-NOT-REGISTERED` / non-complete-graph boundary so registry completeness cannot be manufactured.
-2. `Repository/P7_CORE_CERTIFICATION_READINESS_2026-09-01_T.md`
-   - preserve T and T-C1 failures and record T-C2 diagnosis/candidate state.
-3. `Repository/REP-016_PRIORITY7_CERTIFICATION_READINESS_ADDENDUM_2026-09-01_T.md`
-   - bind current operational readiness to T-C2 verification while keeping Priority 7 and cross-layer gate open.
-4. `Repository/MUT-2026-09-01-P7-CORE-CERTIFICATION-READINESS-T-C1_CORRECTIVE_MATRIX.md`
-   - preserve failed T-C1 exact-head evidence and hand off to T-C2.
-5. this T-C2 Matrix
-   - bind the corrective candidate in the same material change set.
+| ID | Target | Action | Applied | Verified |
+|---|---|---|:---:|:---:|
+| C2-01 | `Quality/Integration/test_core_p7_status_sync.py` | replace stale pre-readiness remaining-work literals with current readiness/open-gate assertions; retain closed-control-plane and anti-promotion checks | Y | PENDING CI |
+| C2-02 | `Repository/P7_CORE_CERTIFICATION_READINESS_2026-09-01_T.md` | preserve T/T-C1 failures and bind T-C2 diagnosis/candidate | Y | PENDING CI |
+| C2-03 | `Repository/REP-016_PRIORITY7_CERTIFICATION_READINESS_ADDENDUM_2026-09-01_T.md` | bind operational readiness to T-C2 verification while Priority 7 and cross-layer gate remain open | Y | PENDING CI |
+| C2-04 | `Repository/MUT-2026-09-01-P7-CORE-CERTIFICATION-READINESS-T-C1_CORRECTIVE_MATRIX.md` | preserve failed T-C1 exact-head evidence and handoff | Y | PENDING CI |
+| C2-05 | this Matrix | bind T-C2 candidate in same material change set | Y | PENDING CI |
+
+Candidate must be exactly one commit after pre-write Matrix HEAD `1477828c46ca65d1e32779ecb43d2ead4da50716` and exactly these five paths. Unexpected path expansion = `0`.
+
+## Updated test contract
+
+The revised Integration test preserves:
+
+- all closed Priority-7 control-plane reconciliation assertions;
+- `CROSS-LAYER VALIDATION OPEN`;
+- `CERTIFICATION REVIEW READY`;
+- `VALIDATED-NOT-REGISTERED`;
+- REP-014 `not a complete graph` boundary;
+- explicit final Core certification decision;
+- Priority 7 OPEN;
+- no Phase-1 / repository-wide graph / Connected Baseline promotion.
+
+It additionally requires the two superseded pre-readiness remaining-work literals to be absent, preventing old queue language from becoming a permanent certification blocker.
 
 ## Explicitly forbidden
 
@@ -77,10 +89,6 @@ Classification:
 - no Priority-7 closure;
 - no Phase-1 / Connected Baseline / repository-wide graph / Global PASS claim;
 - no rerun-only bypass of T-C1 failure.
-
-## Atomicity contract
-
-After this pre-write Matrix commit, the T-C2 material candidate must be exactly one commit and exactly the five authorized paths above. Unexpected path expansion = `0`.
 
 ## Verification contract
 
