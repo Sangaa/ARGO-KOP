@@ -2,7 +2,7 @@
 
 Transaction ID: `MUT-2026-09-01-P7-CORE-KERNEL-RUN001-RELATIONSHIP-E`
 Protocol: `GOV-013 / GOV-014A`
-Status: `CI-HARD-HOLD / FOURTH-ROOT-CAUSE-CLASSIFIED / E-07B-ATOMIC-RECOVERY-AUTHORIZED / P7-OPEN`
+Status: `ATOMIC-RECOVERY-CANDIDATE / E-07B-APPLIED / CI-PENDING / P7-OPEN`
 Date: 2026-09-01
 Entry HEAD: `5f56a732feba08f9c808dfe2672560d6b59625e5`
 Prewrite Matrix HEAD: `b7218350659b18bdb24a315879ef5a9faa9b19ee`
@@ -14,6 +14,7 @@ Initial Matrix Candidate HEAD: `9f03dc9567f881a7899110b7650fb7b304bfd693`
 First Repair HEAD: `cf42f7a19e61438227987c8d1725974b484c4fbb`
 Second Repair HEAD: `a97bbad064ec7b02e8a5e9a23b9ab3abc07b9523`
 Third Repair Content HEAD: `521dfcaa8da50543b6dceb44de1bc8aa2ec5c8a2`
+E-07B Authorization HEAD: `2271d130d7bb3583a695d0bd4e4bddac8e235818`
 
 ## Problem / change definition
 
@@ -53,7 +54,7 @@ Applied relationship candidate:
 | E-05 | this Matrix | UPDATE | record hard holds, repairs, exact CI and closure evidence | Y | in progress |
 | E-06 | `Quality/Integration/test_core_p7_status_sync.py` | UPDATE | preserve durable P7 remaining-work boundary while accepting current truthful `continued ... remaining material Core authority relationships` state | Y | source-revalidated |
 | E-07 | `Repository/REP-020_CURRENT_CONTROL_PLANE_BOUNDARY_MANIFEST.md` | UPDATE | refresh REP-014 listed version `1.2.6 → 1.2.7` and source baseline, preserving all open/HOLD/non-authority semantics | Y | content-valid / same-change-set binding failed |
-| E-07B | `Repository/REP-020_CURRENT_CONTROL_PLANE_BOUNDARY_MANIFEST.md` + this Matrix | ATOMIC REBIND | issue one Git-object commit containing the current manifest and this Matrix together; refresh manifest verification/recovery metadata without changing REP-014 `1.2.7` or any closure semantics, thereby binding the full current manifest artifact to the Matrix in the exact enforced change set | N | pending |
+| E-07B | `Repository/REP-020_CURRENT_CONTROL_PLANE_BOUNDARY_MANIFEST.md` + this Matrix | ATOMIC REBIND | issue one Git-object commit containing the current manifest and this Matrix together; preserve REP-014 `1.2.7`, add bounded recovery-binding evidence, and bind the protected current manifest to this Matrix in the exact enforced change set | Y | candidate / exact-head CI pending |
 
 ## KEEP requirements
 
@@ -64,7 +65,7 @@ Applied relationship candidate:
 - E-06 must not weaken the P7 hold: remaining material dependency/consumer validation, REP-014 reconciliation, explicit final Core certification, and no Phase-1/global closure must still be asserted.
 - E-07/E-07B are current-evidence operations only: do not rewrite historical manifests, do not alter REP-014 to fit the manifest, do not change semantic authority, and do not close Phase 1, P7, broader graph work, or global integrity.
 - The failed E-07 commit remains failure evidence and is not retroactively promoted.
-- E-07B must use one atomic Git commit where the changed-file set visibly contains both the protected current manifest and this Matrix.
+- E-07B uses one atomic Git commit where the changed-file set visibly contains both the protected current manifest and this Matrix.
 - Priority 7 remains OPEN.
 
 ## CI hard hold #1
@@ -118,15 +119,17 @@ The enforcer computes the exact Git diff for the pushed change set and requires 
 
 Root cause: `SAME-CHANGE-SET MATRIX BINDING VIOLATION / WRITE-SURFACE ATOMICITY GAP`.
 
-The protected manifest content is semantically correct, but the E-07 commit is not execution-verified and will not be retroactively promoted. Prior recovery 187 is directly applicable.
+The protected manifest content is semantically correct, but the E-07 commit is not execution-verified and is not retroactively promoted. Prior recovery 187 is directly applicable.
 
-## E-07B atomic recovery rule
+## E-07B atomic recovery candidate
 
-Use Git blob/tree/commit operations to create exactly one recovery commit whose changed-file set contains:
-1. `Repository/REP-020_CURRENT_CONTROL_PLANE_BOUNDARY_MANIFEST.md` — preserve REP-014 `1.2.7`; refresh its verified source baseline to the E-07 content head and add bounded recovery-binding evidence only;
-2. this Matrix — mark E-07B applied and record the recovery commit lineage while preserving P7 OPEN and all KEEP boundaries.
+E-07B was pre-authorized at exact main `2271d130d7bb3583a695d0bd4e4bddac8e235818`.
 
-No other path is authorized. Move `main` by `force=false` fast-forward only.
+The recovery candidate is constructed through Git blob/tree/commit objects from that authorization parent. Its exact changed-file set is required to contain only:
+1. `Repository/REP-020_CURRENT_CONTROL_PLANE_BOUNDARY_MANIFEST.md` — REP-014 remains `1.2.7`; verified source baseline points to E-07 content HEAD `521dfcaa8da50543b6dceb44de1bc8aa2ec5c8a2`; bounded same-change-set recovery evidence is added while all OPEN/HOLD/non-authority boundaries remain unchanged;
+2. this Matrix — E-07B is recorded as applied/candidate with CI pending.
+
+The atomic recovery commit SHA is intentionally not self-embedded in this candidate blob. It is recorded after commit creation and exact-head CI in the E-05 evidence update. No other path is authorized. `main` may move only by `force=false` fast-forward from the authorization HEAD.
 
 ## Validation pending
 

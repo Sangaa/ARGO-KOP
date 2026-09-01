@@ -4,7 +4,8 @@ Date: 2026-09-01
 Status: `Current Evidence Manifest / Integrity Hold / Not Semantic Authority`  
 Manifest family: `REP-020 evidence surface`  
 Current queue checkpoint: `P337-REP013-FIX-FORWARD`  
-Verified source baseline: `main@a97bbad064ec7b02e8a5e9a23b9ab3abc07b9523`
+Verified source baseline: `main@521dfcaa8da50543b6dceb44de1bc8aa2ec5c8a2`  
+Recovery binding: `E-07B / SAME-CHANGE-SET REBIND / authorized at main@2271d130d7bb3583a695d0bd4e4bddac8e235818`
 
 This is the stable **current** manifest consumed by the executable control-plane reconciliation gate.
 
@@ -41,6 +42,7 @@ Historical manifests such as `REP-020_SESSION_DELTA_2026-08-17_P339.md` remain i
 5. The executable gate must fail closed on a missing listed artifact or identity/version/status mismatch.
 6. Current closure semantics must preserve `Phase 1 Open`, `Integrity Hold`, and `Global PASS NOT CLAIMED` boundaries.
 7. Changing this manifest does not itself close an open workstream.
+8. A failed same-change-set Matrix binding is preserved as failure evidence; recovery requires a new exact-change-set binding rather than retroactive promotion.
 
 ## Refresh rule
 
