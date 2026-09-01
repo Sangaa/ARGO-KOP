@@ -2,10 +2,10 @@
 
 Platform: ARGO KOP  
 Document ID: REP-014  
-Version: 1.2.6  
+Version: 1.2.7  
 Status: Active / Relationship Enumeration In Progress  
 Development Baseline: 3.2.1  
-Last Audit: 2026-08-17
+Last Audit: 2026-09-01
 
 ---
 
@@ -128,6 +128,7 @@ The following are deliberately limited to relationships established during repos
 | REL-059 | RUN-014 | RUN-011 | VALIDATES | Revalidated within current learning-promotion test scope |
 | REL-060 | RUN-015 | RUN-011 | VALIDATES | Revalidated within current CI validation scope |
 | REL-061 | GOV-013A | GOV-013 | REFERENCES | **INTENTIONAL ONE-WAY / GOVERNANCE-REVALIDATED** |
+| REL-062 | CORE-KERNEL | RUN-001 | REFERENCES | **INTENTIONAL ONE-WAY / RUNTIME-CONTRACT-ALIGNED / NON-DEPENDENCY** |
 
 ## Current Review-Cycle Reconciliation — 2026-08-17
 
@@ -332,6 +333,34 @@ RUN-001 ──references──> CORE-003
 The reverse `REFERENCES` relationship is not inferred merely because a `GOVERNS` relationship exists; it is recorded because RUN-001 explicitly names CORE-003 as related authority.
 
 This reconciliation does not certify the complete Core-to-Runtime graph. Other Core, Governance, Architecture and Runtime relationships remain subject to scoped verification.
+
+## P7 Core-Kernel → RUN-001 Relationship Reconciliation — 2026-09-01
+
+Current Priority-7 review validates one additional bounded Core-to-Runtime contract seam:
+
+```text
+CORE-KERNEL ──references──> RUN-001
+```
+
+Evidence basis:
+
+- `Core/ARGO_KERNEL.md` is canonical, identifies itself as `Core / Runtime Contract`, and explicitly states that the current canonical runtime lifecycle is defined by `Runtime/RUN-001_BOOT_SEQUENCE.md`;
+- the Kernel states that it does not duplicate or supersede the Runtime lifecycle definition and lists `RUN-001` under Related Authority;
+- direct inspection of `RUN-001` confirms the canonical boot/runtime contract but does not identify `CORE-KERNEL` as a specific required dependency or consumer;
+- current reverse searches do not establish a `RUN-001 → CORE-KERNEL` dependency/consumer edge;
+- `Architecture/ARC-006_DEPENDENCY_MODEL.md` states that Core has no architectural-layer dependency on lower layers, so the forward edge must not be promoted to `DEPENDS_ON` merely because the Kernel aligns to the Runtime contract.
+
+Disposition:
+
+`REL-062 = INTENTIONAL ONE-WAY / RUNTIME-CONTRACT-ALIGNED / NON-DEPENDENCY`
+
+Boundary:
+
+- this is documentary/contract alignment, not executable proof;
+- no `CORE-KERNEL → RUN-001 = DEPENDS_ON` edge is created;
+- no `RUN-001 → CORE-KERNEL` edge is manufactured for symmetry;
+- existing `REL-037/038` remain unchanged;
+- broader Core cross-layer validation and certification remain open.
 
 ## Control-Plane Graph
 
