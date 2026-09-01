@@ -2,7 +2,7 @@
 
 Platform: ARGO KOP  
 Document ID: REP-014  
-Version: 1.2.8  
+Version: 1.2.9  
 Status: Active / Relationship Enumeration In Progress  
 Development Baseline: 3.2.1  
 Last Audit: 2026-09-01
@@ -131,6 +131,7 @@ The following are deliberately limited to relationships established during repos
 | REL-062 | CORE-KERNEL | RUN-001 | REFERENCES | **INTENTIONAL ONE-WAY / RUNTIME-CONTRACT-ALIGNED / NON-DEPENDENCY** |
 | REL-063 | CORE-009 | LIF-001 | REFERENCES | **DOCUMENT-LIFECYCLE-BOUNDARY / BIDIRECTIONAL-DOCUMENTARY / NON-DEPENDENCY** |
 | REL-064 | LIF-001 | CORE-009 | REFERENCES | **PLATFORM-LIFECYCLE-BOUNDARY / BIDIRECTIONAL-DOCUMENTARY / NON-DEPENDENCY** |
+| REL-065 | CORE-012 | GOV-016 | REFERENCES | **INTENTIONAL ONE-WAY / FAILURE-LEARNING-ALIGNED / NON-DEPENDENCY** |
 
 ## Current Review-Cycle Reconciliation — 2026-08-17
 
@@ -393,6 +394,34 @@ Boundary:
 - `CORE-009` remains platform-lifecycle authority only;
 - `LIF-001` remains document-lifecycle authority only;
 - broader Core and Lifecycle cross-domain validation and certification remain open.
+
+## P7 CORE-012 → GOV-016 Failure/Learning Reconciliation — 2026-09-01
+
+Current Priority-7 review validates one bounded Core-to-Governance learning-control seam:
+
+```text
+CORE-012 ──references──> GOV-016
+```
+
+Evidence basis:
+
+- `Core/CORE-012_GENERATIVE_KNOWLEDGE_AND_SELF_DEVELOPMENT.md` explicitly states that its Failure-as-Generative-Training rule works together with `GOV-016_FAILURE_TO_LEARNING_PROTOCOL.md`;
+- current `Governance/GOV-016_FAILURE_TO_LEARNING_PROTOCOL.md` is ACTIVE / MANDATORY and defines failure classification, root-cause analysis, regression, reuse and knowledge transfer;
+- direct target inspection does not name `CORE-012` as a dependency or required source, so no reverse registry edge is established;
+- historical EJR-251 provenance shows CORE-012 and GOV-016 were introduced together in governed inventory reconciliation, but co-introduction and later co-authority usage do not independently create a reverse relationship;
+- historical GOV-016 path reconciliation preserved its semantics and did not change Core authority or relationships.
+
+Disposition:
+
+`REL-065 = INTENTIONAL ONE-WAY / FAILURE-LEARNING-ALIGNED / NON-DEPENDENCY`.
+
+Boundary:
+
+- CORE-012 and GOV-016 source content remain unchanged;
+- no `GOV-016 → CORE-012` edge is manufactured for symmetry;
+- no `CORE-012 → GOV-016 = DEPENDS_ON` edge is inferred from the phrase “works together”;
+- no authority promotion is implied;
+- broader Core cross-layer validation and certification remain open.
 
 ## Control-Plane Graph
 

@@ -17,7 +17,7 @@ Status
 
 Version
 
-1.3.4
+1.3.5
 
 Last Repository Re-Audit
 
@@ -41,7 +41,7 @@ Core physical inventory, local index consistency, identity/authority sampling, c
 
 Repository Baseline
 
-Priority 7 current `main` evidence through second bounded Core cross-layer relationship reconciliation
+Priority 7 current `main` evidence through third bounded Core cross-layer relationship reconciliation
 
 ---
 
@@ -97,7 +97,7 @@ Platform Charter Review
 
 Generative Knowledge / Self-Development Review
 
-🟢 Located, read, provenance-verified as legitimate `CORE-012`; local inventory synchronized
+🟢 Current relationship revalidation confirms `CORE-012 → GOV-016` as a one-way failure/learning documentary reference; CORE-012 source content remains unchanged
 
 Core Index Review
 
@@ -109,7 +109,7 @@ Control-Plane Review
 
 Cross-Layer Review
 
-🟡 In Progress — bounded seams now include `CORE-KERNEL → RUN-001` one-way runtime-contract reference and `CORE-009 ↔ LIF-001` bidirectional documentary lifecycle references; broader material Core dependency/consumer validation remains open and REP-014 reconciliation continues where evidence requires
+🟡 In Progress — bounded seams now include `CORE-KERNEL → RUN-001`, `CORE-009 ↔ LIF-001`, and `CORE-012 → GOV-016`; broader material Core dependency/consumer validation remains open and REP-014 reconciliation continues where evidence requires
 
 Folder Certification
 
@@ -121,7 +121,7 @@ Folder Certification
 
 The previous `2026-08-08` authority audit and `2026-08-10` targeted Core re-audits remain historical evidence. They are not silently relabeled as the current Priority-7 review.
 
-The `2026-09-01` P336 repository re-audit applies to exact top-level Core inventory, local index/status consistency, current-content sampling and discrepancy classification. Subsequent bounded Priority-7 transactions reconciled REP-013, REP-001, REP-002, the GOV-006 factual Core parent/example drift, `CORE-KERNEL → RUN-001`, and the `CORE-009 ↔ LIF-001` lifecycle authority seam. The CORE-009 seam includes a direct semantic revalidation of CORE-009 because its active document-lifecycle identity/path required correction. These later transactions still do **not** assert that every Core document received a new full semantic certification on that date.
+The `2026-09-01` P336 repository re-audit applies to exact top-level Core inventory, local index/status consistency, current-content sampling and discrepancy classification. Subsequent bounded Priority-7 transactions reconciled REP-013, REP-001, REP-002, the GOV-006 factual Core parent/example drift, `CORE-KERNEL → RUN-001`, the `CORE-009 ↔ LIF-001` lifecycle authority seam, and `CORE-012 → GOV-016`. The CORE-009 seam included a direct semantic correction because its active document-lifecycle identity/path was stale. The CORE-012/GOV-016 seam required registry reconciliation only; neither source document was rewritten. These transactions still do **not** assert that every Core document received a new full semantic certification on that date.
 
 A document's `Last Audit` advances only when that document itself undergoes the applicable review.
 
@@ -185,20 +185,20 @@ The physical legacy file must not be interpreted as a second active CORE-000 aut
 
 `CORE-012_GENERATIVE_KNOWLEDGE_AND_SELF_DEVELOPMENT.md` is not a newly invented gap-filler. Git history establishes its 2026-08-18 creation as the repair for a duplicate CORE-011 identity, followed by removal of the colliding duplicate and correction of downstream CORE-012 authority references.
 
-P336 therefore synchronized discoverability only; it did not newly promote CORE-012.
+P336 synchronized discoverability only. Priority-7 relationship review now additionally validates its explicit one-way documentary link to `Governance/GOV-016_FAILURE_TO_LEARNING_PROTOCOL.md`; this does not newly promote CORE-012 or change GOV-016 authority.
 
 ---
 
 # Closed Priority-7 Control-Plane Gaps
 
-Current repository evidence now closes the previously recorded local/control-plane factual gaps:
+Current repository evidence closes the previously recorded local/control-plane factual gaps:
 
 1. `REP-013` Core physical inventory representation — reconciled;
 2. `REP-001` active Core inventory representation — reconciled;
 3. `REP-002` Core physical map representation — reconciled;
 4. `GOV-006` Core canonical parent/example — reconciled factually to `Core/` while preserving its existing authority status.
 
-These closures do not certify Core semantics or cross-layer execution relationships.
+These closures do not certify Core semantics or all cross-layer execution relationships.
 
 ---
 
@@ -208,10 +208,13 @@ Current bounded evidence validates:
 
 1. `CORE-KERNEL → RUN-001 = REFERENCES` — `INTENTIONAL ONE-WAY / RUNTIME-CONTRACT-ALIGNED / NON-DEPENDENCY`.
 2. `CORE-009 ↔ LIF-001 = REFERENCES` — `BIDIRECTIONAL-DOCUMENTARY / CROSS-LIFECYCLE-AUTHORITY-ALIGNED / NON-DEPENDENCY`.
+3. `CORE-012 → GOV-016 = REFERENCES` — `INTENTIONAL ONE-WAY / FAILURE-LEARNING-ALIGNED / NON-DEPENDENCY`.
 
-The first seam is documentary/contract alignment only. It is not executable proof, does not invert `ARC-006`, and does not create a reverse `RUN-001 → CORE-KERNEL` edge without direct evidence.
+The first seam is documentary/contract alignment only and does not invert `ARC-006` or create a reverse edge without direct evidence.
 
-The second seam corrects a stale active authority identity/path in CORE-009 and records the two directly evidenced documentary directions. It does not merge platform and document lifecycle authority, revive the retired Lifecycle GOV-005 path, or promote either direction to a stronger relationship type.
+The second seam corrected a stale active authority identity/path in CORE-009 and records the two directly evidenced documentary directions without merging lifecycle authority.
+
+The third seam records CORE-012's explicit “works together with GOV-016” learning-control reference. GOV-016 does not directly name CORE-012, so no reverse edge is manufactured; historical co-introduction/co-authority usage is provenance, not reverse-edge authority.
 
 ---
 

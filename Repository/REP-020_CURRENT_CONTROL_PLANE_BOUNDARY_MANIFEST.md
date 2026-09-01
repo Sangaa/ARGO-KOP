@@ -4,9 +4,9 @@ Date: 2026-09-01
 Status: `Current Evidence Manifest / Integrity Hold / Not Semantic Authority`  
 Manifest family: `REP-020 evidence surface`  
 Current queue checkpoint: `P337-REP013-FIX-FORWARD`  
-Verified source baseline: `main@253e8c6d21558781d7c6f8e06489caf3b9ac966c`  
+Verified source baseline: `main@7b66a6f871819967d0857ae5f4e59f1f70455aa4`  
 Recovery binding: `E-07B / SAME-CHANGE-SET REBIND / authorized at main@2271d130d7bb3583a695d0bd4e4bddac8e235818`  
-Current refresh binding: `F / CORE-009↔LIF-001 LIFECYCLE SEAM / atomic same-change-set candidate from main@253e8c6d21558781d7c6f8e06489caf3b9ac966c`
+Current refresh binding: `G / CORE-012→GOV-016 LEARNING SEAM / atomic same-change-set candidate from main@7b66a6f871819967d0857ae5f4e59f1f70455aa4`
 
 This is the stable **current** manifest consumed by the executable control-plane reconciliation gate.
 
@@ -19,7 +19,7 @@ Historical manifests such as `REP-020_SESSION_DELTA_2026-08-17_P339.md` remain i
 | REP-011 | Repository/REP-011_REVIEW_TRACEABILITY_LEDGER.md | 1.1.2 | Active / Integrity Hold | REVIEW EVIDENCE / INTEGRITY HOLD |
 | REP-012 | Repository/REP-012_REPOSITORY_ALLOCATION_REGISTRY.md | 1.0.10 | Active Control / Integrity Hold / Phase 1 Population In Progress | ALLOCATION / RECOVERY CONTROL |
 | REP-013 | Repository/REP-013_REPOSITORY_CONTENT_TREE.md | 1.1.3 | Active / Phase 1 Population In Progress | CURRENT INVENTORY / NOT CLOSURE |
-| REP-014 | Repository/REP-014_REPOSITORY_RELATIONSHIP_REGISTRY.md | 1.2.8 | Active / Relationship Enumeration In Progress | CURRENT RELATIONSHIP EVIDENCE / BROADER GRAPH OPEN |
+| REP-014 | Repository/REP-014_REPOSITORY_RELATIONSHIP_REGISTRY.md | 1.2.9 | Active / Relationship Enumeration In Progress | CURRENT RELATIONSHIP EVIDENCE / BROADER GRAPH OPEN |
 | REP-015 | Repository/REP-015_CONTROL_PLANE_BOOTSTRAP_CHECKLIST.md | 1.0.7 | Active / Phase 1 Open / Integrity Hold | CURRENT BOOTSTRAP SCOPE |
 | REP-016 | Repository/REP-016_PHASE1_PARTITION_WORK_QUEUE.md | 1.3.0 | Active / Phase 1 Open / Integrity Hold | PRIORITY 1 CLOSED / PHASE 1 OPEN |
 | REP-020 | Repository/REP-020_DEPENDENCY_CONSUMER_IMPACT_MATRIX.md | 0.2.3 | Provisional / Phase-1 Seed / Not Authority | CURRENT IMPACT EVIDENCE / NOT CLOSURE AUTHORITY |
