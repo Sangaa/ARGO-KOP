@@ -17,7 +17,7 @@ Status
 
 Version
 
-1.3.3
+1.3.4
 
 Last Repository Re-Audit
 
@@ -41,7 +41,7 @@ Core physical inventory, local index consistency, identity/authority sampling, c
 
 Repository Baseline
 
-Priority 7 current `main` evidence through first bounded Core cross-layer relationship reconciliation
+Priority 7 current `main` evidence through second bounded Core cross-layer relationship reconciliation
 
 ---
 
@@ -85,7 +85,7 @@ Architectural Laws Review
 
 Platform Lifecycle Review
 
-🟢 Current content re-read in P336; prior targeted review retained
+🟢 Priority-7 semantic revalidation corrected the retired Lifecycle `GOV-005` identity/path to canonical `LIF-001` while preserving separate platform/document lifecycle authority
 
 Platform Roadmap Review
 
@@ -109,7 +109,7 @@ Control-Plane Review
 
 Cross-Layer Review
 
-🟡 In Progress — first bounded seam `CORE-KERNEL → RUN-001` reconciled as one-way `REFERENCES / RUNTIME-CONTRACT-ALIGNED / NON-DEPENDENCY`; broader material Core dependency/consumer validation remains open and REP-014 reconciliation continues where evidence requires
+🟡 In Progress — bounded seams now include `CORE-KERNEL → RUN-001` one-way runtime-contract reference and `CORE-009 ↔ LIF-001` bidirectional documentary lifecycle references; broader material Core dependency/consumer validation remains open and REP-014 reconciliation continues where evidence requires
 
 Folder Certification
 
@@ -121,7 +121,7 @@ Folder Certification
 
 The previous `2026-08-08` authority audit and `2026-08-10` targeted Core re-audits remain historical evidence. They are not silently relabeled as the current Priority-7 review.
 
-The `2026-09-01` P336 repository re-audit applies to exact top-level Core inventory, local index/status consistency, current-content sampling and discrepancy classification. Subsequent bounded Priority-7 transactions reconciled REP-013, REP-001, REP-002, the GOV-006 factual Core parent/example drift, and one bounded `CORE-KERNEL → RUN-001` relationship seam. These later transactions do **not** assert that every Core document received a new full semantic certification on that date.
+The `2026-09-01` P336 repository re-audit applies to exact top-level Core inventory, local index/status consistency, current-content sampling and discrepancy classification. Subsequent bounded Priority-7 transactions reconciled REP-013, REP-001, REP-002, the GOV-006 factual Core parent/example drift, `CORE-KERNEL → RUN-001`, and the `CORE-009 ↔ LIF-001` lifecycle authority seam. The CORE-009 seam includes a direct semantic revalidation of CORE-009 because its active document-lifecycle identity/path required correction. These later transactions still do **not** assert that every Core document received a new full semantic certification on that date.
 
 A document's `Last Audit` advances only when that document itself undergoes the applicable review.
 
@@ -207,8 +207,11 @@ These closures do not certify Core semantics or cross-layer execution relationsh
 Current bounded evidence validates:
 
 1. `CORE-KERNEL → RUN-001 = REFERENCES` — `INTENTIONAL ONE-WAY / RUNTIME-CONTRACT-ALIGNED / NON-DEPENDENCY`.
+2. `CORE-009 ↔ LIF-001 = REFERENCES` — `BIDIRECTIONAL-DOCUMENTARY / CROSS-LIFECYCLE-AUTHORITY-ALIGNED / NON-DEPENDENCY`.
 
-The seam is documentary/contract alignment only. It is not executable proof, does not invert `ARC-006`, and does not create a reverse `RUN-001 → CORE-KERNEL` edge without direct evidence.
+The first seam is documentary/contract alignment only. It is not executable proof, does not invert `ARC-006`, and does not create a reverse `RUN-001 → CORE-KERNEL` edge without direct evidence.
+
+The second seam corrects a stale active authority identity/path in CORE-009 and records the two directly evidenced documentary directions. It does not merge platform and document lifecycle authority, revive the retired Lifecycle GOV-005 path, or promote either direction to a stronger relationship type.
 
 ---
 
@@ -226,7 +229,7 @@ No Phase-1 closure, repository-wide graph completion, or Global Connected Baseli
 
 # Certification Rule
 
-Core MUST NOT be marked clean merely because local inventory, control-plane representation, and one bounded cross-layer seam are now reconciled.
+Core MUST NOT be marked clean merely because local inventory, control-plane representation, and bounded cross-layer seams are now reconciled.
 
 Required progression remains:
 

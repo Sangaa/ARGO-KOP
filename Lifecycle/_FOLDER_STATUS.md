@@ -24,7 +24,7 @@ Historical Audit Date
 
 Current Revalidation
 
-2026-08-29
+2026-09-01
 
 Review Method
 
@@ -55,9 +55,10 @@ The lifecycle artifact was migrated to `LIF-001` and the conflicting active path
 
 1. `LIF-001` registration in active REP-001/REP-002 inventory: **CLOSED / CURRENT REPOSITORY VERIFIED**.
 2. Retired `Lifecycle/GOV-005_DOCUMENT_LIFECYCLE.md` active-path removal: **CLOSED / TEST-ENFORCED / HISTORICAL REFERENCE PRESERVED**.
-3. Active `GOV-005` reference-intent audit across consumers: **OPEN**.
-4. Cross-domain lifecycle interaction validation across Core, Repository, Knowledge, Decision, Projects and Memory: **OPEN**.
-5. Consolidated Lifecycle certification: **OPEN / INTEGRITY HOLD**.
+3. `CORE-009 ↔ LIF-001` current lifecycle-authority seam: **CLOSED / BIDIRECTIONAL DOCUMENTARY REFERENCES / NON-DEPENDENCY**.
+4. Active `GOV-005` reference-intent audit across remaining consumers: **OPEN**.
+5. Cross-domain lifecycle interaction validation across remaining Repository, Knowledge, Decision, Projects and Memory surfaces: **OPEN**.
+6. Consolidated Lifecycle certification: **OPEN / INTEGRITY HOLD**.
 
 # Evidence
 
@@ -65,6 +66,7 @@ The lifecycle artifact was migrated to `LIF-001` and the conflicting active path
 - REP-002 explicitly maps `Lifecycle/LIF-001_DOCUMENT_LIFECYCLE.md`.
 - `Quality/Integrity/test_critical_graph_bidirectional_boundaries.py` requires the retired Lifecycle GOV-005 path to remain absent while preserving historical provenance in LIF-001.
 - Current exact Lifecycle Git tree contains only `LIF-001_DOCUMENT_LIFECYCLE.md` and `_FOLDER_STATUS.md`.
+- Priority-7 direct revalidation establishes that CORE-009 now names canonical `LIF-001`, while LIF-001 explicitly describes its interaction with CORE-009; the relationship remains documentary and does not merge their authority scopes.
 
 # Rules
 
@@ -74,7 +76,7 @@ The lifecycle artifact was migrated to `LIF-001` and the conflicting active path
 4. Historical artifacts must not compete with active authority.
 5. A lifecycle status must remain scoped to the artifact class it governs.
 6. No `PASS` claim is made until cross-domain references are validated.
-7. Closure of index registration and retired-path cleanup does not close consumer-intent or cross-domain validation.
+7. Closure of index registration, retired-path cleanup, and one Core/Lifecycle seam does not close remaining consumer-intent or cross-domain validation.
 
 ---
 

@@ -3,7 +3,7 @@
 Document ID
 CORE-009
 Version
-1.4.0
+1.4.1
 Status
 Validated / Integrity Hold / Revalidated
 Category
@@ -11,9 +11,9 @@ Core
 Canonical
 Yes
 Last Audit
-2026-08-10
+2026-09-01
 Review Type
-Repository Re-Audit / Targeted Platform Lifecycle Review
+Repository Re-Audit / Priority-7 Cross-Lifecycle Authority Reconciliation
 
 ---
 
@@ -120,7 +120,7 @@ The platform lifecycle is the **outer operating lifecycle**.
 
 Within it, other lifecycles may execute according to their scope:
 
-- `GOV-005` — document lifecycle.
+- `LIF-001` — document lifecycle.
 - `REP-006` — repository artifact lifecycle.
 - `KNW-004` — knowledge-object lifecycle.
 
@@ -153,7 +153,7 @@ A status file, lifecycle label, commit or model conclusion alone cannot establis
 
 A historical audit date records an actual completed review event. It shall not be advanced merely because another Core artifact or the repository was reviewed.
 
-This document was specifically re-audited on 2026-08-10. The review does not certify the entire Core folder or repository.
+This document was specifically re-audited on 2026-08-10. Priority-7 cross-layer review on 2026-09-01 corrected the current document-lifecycle identity/path from the retired Lifecycle `GOV-005` artifact to canonical `LIF-001`; that correction does not expand CORE-009 authority or certify the entire Core folder or repository.
 
 # Continuity
 
@@ -167,7 +167,7 @@ Reopening a stage preserves the historical transition evidence; it does not eras
 
 - `PROJECT_BOOTSTRAP.md`
 - `Core/CORE-003_CONSTITUTION.md`
-- `Lifecycle/GOV-005_DOCUMENT_LIFECYCLE.md`
+- `Lifecycle/LIF-001_DOCUMENT_LIFECYCLE.md`
 - `Repository/REP-006_REPOSITORY_LIFECYCLE.md`
 - `Knowledge/KNW-004_KNOWLEDGE_LIFECYCLE.md`
 - `Engine/ENG-004_VALIDATION_ENGINE.md`

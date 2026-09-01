@@ -2,7 +2,7 @@
 
 Platform: ARGO KOP  
 Document ID: REP-014  
-Version: 1.2.7  
+Version: 1.2.8  
 Status: Active / Relationship Enumeration In Progress  
 Development Baseline: 3.2.1  
 Last Audit: 2026-09-01
@@ -129,6 +129,8 @@ The following are deliberately limited to relationships established during repos
 | REL-060 | RUN-015 | RUN-011 | VALIDATES | Revalidated within current CI validation scope |
 | REL-061 | GOV-013A | GOV-013 | REFERENCES | **INTENTIONAL ONE-WAY / GOVERNANCE-REVALIDATED** |
 | REL-062 | CORE-KERNEL | RUN-001 | REFERENCES | **INTENTIONAL ONE-WAY / RUNTIME-CONTRACT-ALIGNED / NON-DEPENDENCY** |
+| REL-063 | CORE-009 | LIF-001 | REFERENCES | **DOCUMENT-LIFECYCLE-BOUNDARY / BIDIRECTIONAL-DOCUMENTARY / NON-DEPENDENCY** |
+| REL-064 | LIF-001 | CORE-009 | REFERENCES | **PLATFORM-LIFECYCLE-BOUNDARY / BIDIRECTIONAL-DOCUMENTARY / NON-DEPENDENCY** |
 
 ## Current Review-Cycle Reconciliation — 2026-08-17
 
@@ -361,6 +363,36 @@ Boundary:
 - no `RUN-001 → CORE-KERNEL` edge is manufactured for symmetry;
 - existing `REL-037/038` remain unchanged;
 - broader Core cross-layer validation and certification remain open.
+
+## P7 CORE-009 ↔ LIF-001 Lifecycle Authority Reconciliation — 2026-09-01
+
+Current Priority-7 review validates a bounded bidirectional documentary seam between platform lifecycle and document lifecycle authority:
+
+```text
+CORE-009 ──references──> LIF-001
+LIF-001  ──references──> CORE-009
+```
+
+Evidence basis:
+
+- `Core/CORE-009_PLATFORM_LIFECYCLE.md` defines platform evolution while explicitly preserving separate lifecycle authority for individual document artifacts;
+- current `Lifecycle/LIF-001_DOCUMENT_LIFECYCLE.md` is canonical for document lifecycle and explicitly describes its interaction with `CORE-009` without inheriting platform-lifecycle authority;
+- the former `Lifecycle/GOV-005_DOCUMENT_LIFECYCLE.md` identity/path is retired provenance after collision with active `Governance/GOV-005_REVIEW_STANDARD.md`;
+- Priority-7 correction changes only the stale document-lifecycle identity/path inside CORE-009; it does not merge the two lifecycle authorities;
+- neither inspected source establishes a `DEPENDS_ON`, `GOVERNS`, `IMPLEMENTS`, or `CONSUMES` relationship between these two lifecycle artifacts.
+
+Disposition:
+
+- `REL-063 = DOCUMENT-LIFECYCLE-BOUNDARY / BIDIRECTIONAL-DOCUMENTARY / NON-DEPENDENCY`.
+- `REL-064 = PLATFORM-LIFECYCLE-BOUNDARY / BIDIRECTIONAL-DOCUMENTARY / NON-DEPENDENCY`.
+
+Boundary:
+
+- these are documentary reference relationships, not executable proof;
+- no stronger relationship type is inferred from related lifecycle semantics;
+- `CORE-009` remains platform-lifecycle authority only;
+- `LIF-001` remains document-lifecycle authority only;
+- broader Core and Lifecycle cross-domain validation and certification remain open.
 
 ## Control-Plane Graph
 
