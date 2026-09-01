@@ -2,7 +2,7 @@
 
 Platform: ARGO KOP  
 Document ID: REP-014  
-Version: 1.2.10  
+Version: 1.2.11  
 Status: Active / Relationship Enumeration In Progress  
 Development Baseline: 3.2.1  
 Last Audit: 2026-09-01
@@ -133,6 +133,7 @@ The following are deliberately limited to relationships established during repos
 | REL-064 | LIF-001 | CORE-009 | REFERENCES | **PLATFORM-LIFECYCLE-BOUNDARY / BIDIRECTIONAL-DOCUMENTARY / NON-DEPENDENCY** |
 | REL-065 | CORE-012 | GOV-016 | REFERENCES | **INTENTIONAL ONE-WAY / FAILURE-LEARNING-ALIGNED / NON-DEPENDENCY** |
 | REL-066 | ARC-005 | CORE-011 | REFERENCES | **INTENTIONAL ONE-WAY / CHARTER-BOUNDARY-ALIGNED / NON-DEPENDENCY** |
+| REL-067 | ARC-006 | CORE-003 | REFERENCES | **INTENTIONAL ONE-WAY / CONSTITUTION-AUTHORITY-ALIGNED / NON-DEPENDENCY** |
 
 ## Current Review-Cycle Reconciliation — 2026-08-17
 
@@ -449,6 +450,34 @@ Boundary:
 - no reverse edge is manufactured for symmetry;
 - no architectural dependency is inferred from the Related Documents reference;
 - no Core or Architecture authority promotion is implied;
+- broader Core cross-layer validation and certification remain open.
+
+## P7 ARC-006 → CORE-003 Constitution/Dependency Reconciliation — 2026-09-01
+
+Current Priority-7 review validates one bounded Architecture-to-Core documentary authority seam:
+
+```text
+ARC-006 ──references──> CORE-003
+```
+
+Evidence basis:
+
+- `Architecture/ARC-006_DEPENDENCY_MODEL.md` explicitly lists `Core/CORE-003_CONSTITUTION.md` under Related Documents;
+- ARC-006 states Architecture may depend on Core/Governance, but also explicitly states that a textual reference to a file path does not by itself establish an architectural dependency;
+- `Core/CORE-003_CONSTITUTION.md` is the highest current constitutional authority and does not directly name ARC-006;
+- Transaction J validated the direct source direction, preserved the absence of reverse/stronger registry semantics, and passed all required exact-head CI before this registration;
+- current reverse/search checks do not establish a direct `CORE-003 → ARC-006` registry edge or stronger `DEPENDS_ON`, `GOVERNS`, `IMPLEMENTS`, or `CONSUMES` semantics.
+
+Disposition:
+
+`REL-067 = INTENTIONAL ONE-WAY / CONSTITUTION-AUTHORITY-ALIGNED / NON-DEPENDENCY`.
+
+Boundary:
+
+- ARC-006 and CORE-003 source content remain unchanged;
+- no reverse edge is manufactured for symmetry;
+- no architectural dependency is inferred from the Related Documents reference;
+- no constitutional or architectural authority promotion is implied;
 - broader Core cross-layer validation and certification remain open.
 
 ## Control-Plane Graph

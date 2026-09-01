@@ -13,6 +13,9 @@ def test_arc006_core003_authority_reference_is_direct_bounded_and_not_promoted()
     arc006 = ARC006.read_text(encoding="utf-8")
     status = CORE_STATUS.read_text(encoding="utf-8")
 
+    row = "| REL-067 | ARC-006 | CORE-003 | REFERENCES | **INTENTIONAL ONE-WAY / CONSTITUTION-AUTHORITY-ALIGNED / NON-DEPENDENCY** |"
+    assert registry.count(row) == 1
+
     assert "Core/CORE-003_CONSTITUTION.md" in arc006
     assert "ARC-006" not in core003
 
@@ -22,7 +25,6 @@ def test_arc006_core003_authority_reference_is_direct_bounded_and_not_promoted()
     assert "May depend on: Core, Governance." in arc006
     assert "A textual reference to a file path does not by itself establish an architectural dependency." in arc006
 
-    # Validation-first boundary: current direct evidence is documentary only.
     forbidden = (
         "| ARC-006 | CORE-003 | DEPENDS_ON |",
         "| CORE-003 | ARC-006 | DEPENDS_ON |",
@@ -36,3 +38,4 @@ def test_arc006_core003_authority_reference_is_direct_bounded_and_not_promoted()
 
     assert "CROSS-LAYER VALIDATION OPEN" in status
     assert "Folder Certification\n\n⏳ Pending" in status
+    assert "ARC-006 → CORE-003" in status
