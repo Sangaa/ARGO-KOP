@@ -2,66 +2,62 @@
 
 Transaction: `MUT-2026-09-01-CI-REAL-MATRIX-TRIGGER-COVERAGE-U`
 Work Lease: `HERMUZ-CI-U-REAL-MATRIX-TRIGGER-20260901`
-State: `MATERIAL CANDIDATE PREPARED / CI PENDING / SIDE-REPAIR / LEASE ACTIVE`
+State: `FUNCTIONAL-CLOSED / CI-VERIFIED / CLOSURE-HEAD VERIFICATION PENDING / SIDE-REPAIR / LEASE CLOSED`
 Entry HEAD: `f63c7b3c1838ef7643d7f2d842e0d699304ac9d0`
 Pre-write Matrix HEAD: `ec4270d4584ce692ab0cb0f3f0ed8bd6d2ecf916`
+Verified material candidate: `f2bab15f36a32f7251df9800aec44581af540add`
 Protocol: `PROJECT_BOOTSTRAP / CORE-003 / GOV-013 / GOV-013A / GOV-014 / GOV-014A / GOV-015 / GOV-016`
 
-## Trigger gap
+## Trigger gap closed
 
-T-C2 material candidate `f63c7b3c1838ef7643d7f2d842e0d699304ac9d0` changed corrective Matrix paths but the current Real Mutation Matrix workflow triggered only on:
+The Real Mutation Matrix workflow previously triggered on `Repository/*MUTATION_MATRIX*.md` but not the repository's active corrective naming family `...CORRECTIVE_MATRIX.md`.
 
-`Repository/*MUTATION_MATRIX*.md`
+U adds `Repository/*CORRECTIVE_MATRIX*.md` without removing or weakening any existing trigger or Matrix validation semantics.
 
-Corrective paths use the naming family `...CORRECTIVE_MATRIX.md`, so Real Mutation Matrix Regression did not run on T-C2.
-
-Classification:
-
-`CI WORKFLOW TRIGGER COVERAGE GAP / REGRESSION SUITE PRESENT BUT NOT INVOKED FOR CORRECTIVE MATRIX NAMING FAMILY`.
-
-## Authorized material change set — exactly 4 paths
+## Authorized material change set — verified
 
 | ID | Target | Action | Applied | Verified |
 |---|---|---|:---:|:---:|
-| U-01 | `.github/workflows/real-matrix-regression.yml` | add `Repository/*CORRECTIVE_MATRIX*.md` while preserving all existing triggers and job semantics | Y | PENDING CI |
-| U-02 | `Quality/Integrity/test_real_matrix_workflow_trigger_coverage.py` | add focused trigger-coverage regression | Y | PENDING CI |
-| U-03 | `Repository/CI_REAL_MATRIX_TRIGGER_COVERAGE_REPAIR_2026-09-01_U.md` | record discovery, bounded repair and return rule | Y | PENDING CI |
-| U-04 | this Matrix | bind candidate in same material change set | Y | PENDING CI |
+| U-01 | `.github/workflows/real-matrix-regression.yml` | add corrective-Matrix trigger while preserving existing triggers/job | Y | Y |
+| U-02 | `Quality/Integrity/test_real_matrix_workflow_trigger_coverage.py` | add focused trigger-coverage regression | Y | Y |
+| U-03 | `Repository/CI_REAL_MATRIX_TRIGGER_COVERAGE_REPAIR_2026-09-01_U.md` | record discovery, repair and return rule | Y | Y |
+| U-04 | this Matrix | bind candidate and closure evidence | Y | Y |
 
-Candidate must be exactly one commit after `ec4270d4584ce692ab0cb0f3f0ed8bd6d2ecf916` and exactly these four paths. Unexpected path expansion = `0`.
+Atomicity from pre-write Matrix HEAD to candidate:
 
-## Preserved workflow semantics
+- exactly one commit;
+- exactly four authorized paths;
+- unexpected path expansion = `0`.
 
-The repair is additive only. The workflow must continue to include:
+## Exact-head material candidate CI
 
-- `Quality/Integration/run_real_matrix_regression.py` trigger;
-- `Quality/Integration/check_mutation_matrix_semantics.py` trigger;
-- `Repository/*MUTATION_MATRIX*.md` trigger;
-- its own workflow-file trigger;
-- runner command `python Quality/Integration/run_real_matrix_regression.py`.
+Candidate `f2bab15f36a32f7251df9800aec44581af540add`:
 
-New required trigger:
+- Real Mutation Matrix Regression `33536474491` — `SUCCESS`;
+- M2 Multi-Channel Proposal Training `33536474498` — `SUCCESS`;
+- ARGO Runtime Prototype and Integration Tests `33536474494` — `SUCCESS`;
+- Full-Stack Repository Audit `33536474568` — `SUCCESS`.
 
-- `Repository/*CORRECTIVE_MATRIX*.md`.
+Runtime:
 
-## Forbidden
+- integrity-tests — `SUCCESS`;
+- prototype-tests — `SUCCESS`;
+- integration-tests — `SUCCESS`.
 
-- no T/T-C1/T-C2 semantic mutation in U;
+Full-Stack repository-audit and its exact-SHA, Matrix preflight/semantic/current-change-set enforcement, repository-wide audit and runtime-evidence steps all succeeded.
+
+Result:
+
+`MATERIAL CANDIDATE 4/4 SUCCESS`.
+
+## Non-authority preserved
+
+- no T/T-C1/T-C2 semantic mutation;
 - no Core status mutation;
 - no REP-014/REP-016/REP-020 mutation;
-- no weakening of Matrix semantic validation;
-- no Priority-7 promotion or closure;
+- no Matrix semantic weakening;
+- no Priority-7 closure;
 - no Phase-1 / Connected Baseline / Global PASS claim.
-
-## Return rule
-
-`SIDE-REPAIR CLOSED → RETURN TO PREVIOUS GLOBAL PRIORITY / P7 T-C2 VERIFICATION`.
-
-U is not global NEXT authority.
-
-## Verification contract
-
-`ONE-COMMIT/FOUR-PATH COMPARE → LIVE-PARENT RECHECK → NON-FORCE FAST-FORWARD → EXACT-HEAD FOUR REQUIRED WORKFLOWS → FULL-STACK SHA/MATRIX/AUDIT REVIEW → RUNTIME JOB REVIEW → DOCUMENTATION-ONLY U CLOSURE → CLOSURE-HEAD VERIFICATION → RETURN TO T-C2`.
 
 ## Learning retained
 
@@ -69,4 +65,10 @@ U is not global NEXT authority.
 
 `TRIGGER COVERAGE IS PART OF TEST EFFECTIVENESS.`
 
-No new Governance rule is warranted; this is a bounded CI repair.
+## Closure contract
+
+This documentation-only closure changes only the U evidence record and this Matrix. The lease is closed. Resume-safe status requires the closure HEAD itself to pass exact-head required workflow verification.
+
+After that verification:
+
+`SIDE-REPAIR CLOSED → RETURN TO PREVIOUS GLOBAL PRIORITY / P7 T-C2 VERIFICATION`.

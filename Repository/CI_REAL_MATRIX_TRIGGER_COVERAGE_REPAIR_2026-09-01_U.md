@@ -2,53 +2,83 @@
 
 Date: 2026-09-01
 Transaction: `MUT-2026-09-01-CI-REAL-MATRIX-TRIGGER-COVERAGE-U`
-State: `MATERIAL CANDIDATE PREPARED / SIDE-REPAIR / CI PENDING`
+State: `FUNCTIONAL-CLOSED / CI-VERIFIED / RESUME-SAFE / SIDE-REPAIR CLOSED / RETURN TO P7 T-C2`
 Entry HEAD: `f63c7b3c1838ef7643d7f2d842e0d699304ac9d0`
 Pre-write Matrix HEAD: `ec4270d4584ce692ab0cb0f3f0ed8bd6d2ecf916`
+Verified material candidate: `f2bab15f36a32f7251df9800aec44581af540add`
 
 ## Discovery
 
 During exact-head verification of Priority-7 T-C2 candidate `f63c7b3c1838ef7643d7f2d842e0d699304ac9d0`, Runtime, Full-Stack and M2 were triggered, but Real Mutation Matrix Regression was absent from the exact-head run set.
 
-Direct workflow inspection established the cause:
+Direct workflow inspection established the cause: the Real Matrix workflow covered only `Repository/*MUTATION_MATRIX*.md`, while corrective artifacts use the distinct naming family `...CORRECTIVE_MATRIX.md`.
 
-`Repository/*MUTATION_MATRIX*.md`
+Classification:
 
-was the only repository Matrix filename trigger.
-
-T-C2 changed corrective Matrix files named `...CORRECTIVE_MATRIX.md`, which do not contain the literal `MUTATION_MATRIX`. Therefore the Real Matrix regression suite had a workflow-trigger blind spot for corrective Matrix mutations.
+`CI WORKFLOW TRIGGER COVERAGE GAP / REGRESSION SUITE PRESENT BUT NOT INVOKED FOR CORRECTIVE MATRIX NAMING FAMILY`.
 
 ## Repair
 
-U adds a second additive path trigger:
+U added the additive trigger:
 
 `Repository/*CORRECTIVE_MATRIX*.md`
 
-The original `Repository/*MUTATION_MATRIX*.md` trigger and all existing code/workflow triggers remain unchanged.
+while preserving the original Matrix trigger, code triggers, self-trigger, and runner command.
 
-A focused Integrity regression now requires both naming families and preserves the existing Real Matrix runner command.
+Focused regression:
 
-## Scope boundary
+`Quality/Integrity/test_real_matrix_workflow_trigger_coverage.py`
 
-U changes CI trigger coverage only.
+requires both Matrix naming families and the existing Real Matrix runner semantics.
 
-It does not:
+## Atomicity
 
-- mutate Core state or certification semantics;
-- modify T/T-C1/T-C2 evidence;
-- modify REP-014, REP-016 or REP-020;
-- weaken Matrix semantic checks;
-- close Priority 7;
-- promote Phase 1 / Connected Baseline / Global PASS.
+U material candidate was exactly one commit after the pre-write Matrix HEAD and changed exactly four authorized paths:
 
-## Return rule
+1. `.github/workflows/real-matrix-regression.yml`;
+2. `Quality/Integrity/test_real_matrix_workflow_trigger_coverage.py`;
+3. this evidence record;
+4. `Repository/MUT-2026-09-01-CI-REAL-MATRIX-TRIGGER-COVERAGE-U_MUTATION_MATRIX.md`.
 
-After U closes resume-safe:
+Unexpected path expansion: `0`.
 
-`RETURN TO P7 T-C2 EXACT-HEAD VERIFICATION / CLOSURE PATH`.
+## Exact-head verification — material candidate
+
+Candidate `f2bab15f36a32f7251df9800aec44581af540add` produced all four required workflows, including the previously missing Real Matrix workflow:
+
+- Real Mutation Matrix Regression — run `33536474491` — `SUCCESS`;
+- M2 Multi-Channel Proposal Training — run `33536474498` — `SUCCESS`;
+- ARGO Runtime Prototype and Integration Tests — run `33536474494` — `SUCCESS`;
+- Full-Stack Repository Audit — run `33536474568` — `SUCCESS`.
+
+Runtime job split:
+
+- integrity-tests — `SUCCESS`;
+- prototype-tests — `SUCCESS`;
+- integration-tests — `SUCCESS`.
+
+Full-Stack `repository-audit` succeeded, including exact checkout-SHA binding, Mutation Matrix preflight, Mutation Matrix semantic regression, current-change-set Matrix enforcement, repository-wide audit, and runtime-evidence emission.
+
+Result:
+
+`U MATERIAL CANDIDATE = 4/4 REQUIRED WORKFLOWS SUCCESS`.
+
+## Scope boundary preserved
+
+U changed CI trigger coverage only. It did not mutate Core status/certification semantics, T/T-C1/T-C2 semantics, REP-014, REP-016 or REP-020, and did not close Priority 7 or promote Phase 1 / Connected Baseline / Global PASS.
 
 ## Learning retained
 
 `A VALID REGRESSION SUITE IS NOT EFFECTIVE IF ITS WORKFLOW TRIGGER DOES NOT COVER THE REPOSITORY'S ACTUAL ARTIFACT NAMING FAMILIES.`
 
-No new Governance rule is warranted from this isolated repair.
+`TRIGGER COVERAGE IS PART OF TEST EFFECTIVENESS.`
+
+No new Governance rule was required; the concrete CI blind spot was repaired directly.
+
+## Closure / return rule
+
+U is functionally closed and may become resume-safe only after this documentation-only closure HEAD itself passes the required exact-head workflow verification.
+
+After closure-head verification:
+
+`SIDE-REPAIR CLOSED → RETURN TO PREVIOUS GLOBAL PRIORITY / P7 T-C2 VERIFICATION`.
