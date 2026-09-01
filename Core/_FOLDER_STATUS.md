@@ -13,11 +13,11 @@ Core
 
 Status
 
-🟡 INTEGRITY HOLD — CONTROL PLANE RECONCILED / CROSS-LAYER VALIDATION OPEN
+🟡 INTEGRITY HOLD — CONTROL PLANE RECONCILED / CERTIFICATION REVIEW READY
 
 Version
 
-1.3.11
+1.3.12
 
 Last Repository Re-Audit
 
@@ -33,15 +33,15 @@ HERMUZ / ARGO Architecture
 
 Review Method
 
-Repository First / Evidence Based / Exact Top-Level Enumeration
+Repository First / Evidence Based / Exact Top-Level Enumeration / Bounded Direct-Content Consumer Sweep
 
 Review Scope
 
-Core physical inventory, local index consistency, identity/authority sampling, control-plane reconciliation, canonical-architecture content reconciliation, and cross-layer discrepancy classification
+Core physical inventory, local index consistency, identity/authority sampling, control-plane reconciliation, canonical-architecture content reconciliation, bounded cross-layer relationship validation, direct current-content sweep of remaining canonical Core members, and certification-readiness classification
 
 Repository Baseline
 
-Priority 7 current `main` evidence through eight bounded cross-layer relationship reconciliations plus bounded CORE-000 canonical-architecture content reconciliation
+Priority 7 current `main` evidence through eight registered/reconciled cross-layer seams, one additional validated-not-registered Runtime/Core seam, bounded CORE-000 canonical-architecture content reconciliation, and Transaction-T direct Core member sweep
 
 ---
 
@@ -61,7 +61,7 @@ Manifest Review
 
 Constitution Review
 
-🟢 Current content re-read in P336; prior 2026-08-10 targeted audit provenance preserved; Priority-7 relationship revalidation confirms `ARC-006 → CORE-003` as a one-way documentary reference without dependency promotion, `CORE-003 → ARC-011 = GOVERNS` / `ARC-011 → CORE-003 = REFERENCES` as a bounded constitutional-authority seam without dependency promotion, and `CORE-003 → RUN-003 = GOVERNS` / `RUN-003 → CORE-003 = REFERENCES` as a bounded Runtime-configuration constitutional non-override seam without dependency promotion
+🟢 Current content re-read in P336; prior 2026-08-10 targeted audit provenance preserved; Priority-7 relationship revalidation confirms `ARC-006 → CORE-003` as a one-way documentary reference without dependency promotion, `CORE-003 → ARC-011 = GOVERNS` / `ARC-011 → CORE-003 = REFERENCES` as a bounded constitutional-authority seam without dependency promotion, `CORE-003 → RUN-003 = GOVERNS` / `RUN-003 → CORE-003 = REFERENCES` as a bounded Runtime-configuration constitutional non-override seam without dependency promotion, and Transaction R validates `RUN-002 → CORE-003 = REFERENCES` as a one-way initialization-authority documentary seam without dependency promotion or automatic registry promotion
 
 Principles Review
 
@@ -93,7 +93,7 @@ Platform Lifecycle Review
 
 Platform Roadmap Review
 
-🟢 Current content re-read in P336; prior targeted review retained
+🟢 Current content re-read in Transaction T confirms roadmap phase/dependency language remains planning authority rather than implementation or architectural dependency proof
 
 Platform Charter Review
 
@@ -113,11 +113,15 @@ Control-Plane Review
 
 Cross-Layer Review
 
-🟡 In Progress — bounded seams include `CORE-KERNEL → RUN-001`, `CORE-KERNEL → RUN-009`, `CORE-009 ↔ LIF-001`, `CORE-012 → GOV-016`, `ARC-005 → CORE-011`, `ARC-006 → CORE-003`, `CORE-003 ↔ ARC-011`, and `CORE-003 ↔ RUN-003`; CORE-000 canonical-architecture content drift is reconciled without adding a relationship edge in Transaction I; broader material Core dependency/consumer validation remains open and REP-014 reconciliation continues where evidence requires
+🟢 Bounded Priority-7 material sweep complete for current certification-readiness scope — registered/reconciled seams include `CORE-KERNEL → RUN-001`, `CORE-KERNEL → RUN-009`, `CORE-009 ↔ LIF-001`, `CORE-012 → GOV-016`, `ARC-005 → CORE-011`, `ARC-006 → CORE-003`, `CORE-003 ↔ ARC-011`, and `CORE-003 ↔ RUN-003`; Transaction R additionally validates `RUN-002 → CORE-003 = REFERENCES` as `VALIDATED-NOT-REGISTERED / INTENTIONAL ONE-WAY / NON-DEPENDENCY`; Transaction T direct current-content sweep of the remaining canonical Core members identifies no additional material external coupling that must be registered before explicit certification review
+
+Certification Readiness
+
+🟢 PASS — EXPLICIT CORE CERTIFICATION REVIEW MAY OPEN / CORE STILL INTEGRITY HOLD / NOT CERTIFIED
 
 Folder Certification
 
-⏳ Pending
+⏳ Pending — requires a separate explicit Core certification decision
 
 ---
 
@@ -125,7 +129,9 @@ Folder Certification
 
 The previous `2026-08-08` authority audit and `2026-08-10` targeted Core re-audits remain historical evidence. They are not silently relabeled as the current Priority-7 review.
 
-The `2026-09-01` P336 repository re-audit applies to exact top-level Core inventory, local index/status consistency, current-content sampling and discrepancy classification. Subsequent bounded Priority-7 transactions reconciled REP-013, REP-001, REP-002, the GOV-006 factual Core parent/example drift, `CORE-KERNEL → RUN-001`, `CORE-KERNEL → RUN-009`, the `CORE-009 ↔ LIF-001` lifecycle authority seam, `CORE-012 → GOV-016`, `ARC-005 → CORE-011`, `ARC-006 → CORE-003`, `CORE-003 ↔ ARC-011`, `CORE-003 ↔ RUN-003`, and the substantive CORE-000 canonical-architecture content drift. The CORE-009 and CORE-000 transactions included direct semantic corrections; CORE-KERNEL/RUN-001, CORE-KERNEL/RUN-009, CORE-012/GOV-016, ARC-005/CORE-011, ARC-006/CORE-003, CORE-003/ARC-011 and CORE-003/RUN-003 required registry reconciliation only. These transactions still do **not** assert that every Core document received a new full semantic certification on that date.
+The `2026-09-01` P336 repository re-audit applies to exact top-level Core inventory, local index/status consistency, current-content sampling and discrepancy classification. Subsequent bounded Priority-7 transactions reconciled REP-013, REP-001, REP-002, the GOV-006 factual Core parent/example drift, `CORE-KERNEL → RUN-001`, `CORE-KERNEL → RUN-009`, the `CORE-009 ↔ LIF-001` lifecycle authority seam, `CORE-012 → GOV-016`, `ARC-005 → CORE-011`, `ARC-006 → CORE-003`, `CORE-003 ↔ ARC-011`, `CORE-003 ↔ RUN-003`, and the substantive CORE-000 canonical-architecture content drift. Transaction R subsequently validated `RUN-002 → CORE-003 = REFERENCES` without automatically registering it. Transaction T directly re-read the remaining canonical Core members for material external-coupling semantics and changes only this status/readiness evidence, not their historical `Last Audit` dates.
+
+The CORE-009 and CORE-000 transactions included direct semantic corrections; CORE-KERNEL/RUN-001, CORE-KERNEL/RUN-009, CORE-012/GOV-016, ARC-005/CORE-011, ARC-006/CORE-003, CORE-003/ARC-011 and CORE-003/RUN-003 required registry reconciliation only. Transaction R was validation-first and remains intentionally unregistered absent separate material registration justification. These transactions still do **not** assert that every Core document received a new full semantic certification on 2026-09-01.
 
 A document's `Last Audit` advances only when that document itself undergoes the applicable review.
 
@@ -141,6 +147,8 @@ Control-Plane Reconciliation
 Bounded Content Reconciliation
       ≠
 Cross-Layer Validation
+      ≠
+Certification Readiness
       ≠
 Folder Certification
 ```
@@ -218,7 +226,7 @@ Current repository evidence closes the previously recorded local/control-plane f
 3. `REP-002` Core physical map representation — reconciled;
 4. `GOV-006` Core canonical parent/example — reconciled factually to `Core/` while preserving its existing authority status.
 
-These closures do not certify Core semantics or all cross-layer execution relationships.
+These closures do not independently certify Core semantics or repository-wide execution relationships.
 
 ---
 
@@ -234,6 +242,7 @@ Current bounded evidence validates:
 6. `CORE-003 → ARC-011 = GOVERNS` and `ARC-011 → CORE-003 = REFERENCES` — `BIDIRECTIONAL-AUTHORITY/DOCUMENTARY / CONSTITUTION-SUBORDINATION-ALIGNED / NON-DEPENDENCY`.
 7. `CORE-KERNEL → RUN-009 = REFERENCES` — `INTENTIONAL ONE-WAY / RECOVERY-HANDOFF-ALIGNED / NON-DEPENDENCY`.
 8. `CORE-003 → RUN-003 = GOVERNS` and `RUN-003 → CORE-003 = REFERENCES` — `BIDIRECTIONAL-AUTHORITY/DOCUMENTARY / RUNTIME-CONFIGURATION-NON-OVERRIDE / NON-DEPENDENCY`.
+9. `RUN-002 → CORE-003 = REFERENCES` — `INTENTIONAL ONE-WAY / INITIALIZATION-AUTHORITY-RESOLUTION-ALIGNED / NON-DEPENDENCY / VALIDATED-NOT-REGISTERED`.
 
 The first seam is documentary/contract alignment only and does not create a reverse RUN-001→CORE-KERNEL edge or a lower-layer dependency.
 
@@ -251,15 +260,39 @@ The seventh seam records the Kernel's explicit governed recovery handoff and dir
 
 The eighth seam records the Constitution's governing authority over canonical critical Runtime configuration and RUN-003's explicit constitutional non-override/reference boundary. Runtime configuration authority remains subordinate to repository constitutional authority; no `DEPENDS_ON`, reverse governing edge or executable coupling is inferred.
 
+The ninth seam was validated by Transaction R from RUN-002's critical initialization/authority-resolution contract and direct CORE-003 listing. R does not register the seam automatically because REP-014 explicitly states its current list is not a complete graph and registration must remain evidence/materiality driven.
+
 ---
 
-# Remaining P7 Gaps
+# Transaction-T Direct Core Member Sweep
 
-Priority 7 remains OPEN. Current evidence still requires:
+Transaction T directly re-reads current canonical Core members not already represented by a specific material seam and classifies their external-scope language before certification review.
 
-1. continued dependency and consumer validation for remaining material Core authority relationships;
-2. REP-014 relationship-registry reconciliation where current evidence requires addition, correction, strengthening, weakening or explicit unresolved classification;
-3. explicit final Core certification decision only after those gates are satisfied.
+Current evidence confirms:
+
+- `CORE-000A` explicitly prevents glossary definitions/related terminology from proving implementation or authority and prevents a glossary entry from proving a named capability exists;
+- `CORE-001` explicitly states that the Manifest does not define governance, architecture or implementation authority;
+- `CORE-002` explicitly states that Identity does not define governance, implementation, workflows or architecture;
+- `CORE-004` states principles are not execution permissions and higher applicable authority prevails;
+- `CORE-005` states execution is governed by applicable Architecture, Governance and Runtime controls and separates decision from authority to act;
+- `CORE-006` states philosophy does not grant permission to bypass Constitution, Governance, Architecture or Runtime validation;
+- `CORE-007` states design principles do not override Constitution, Governance or Canonical Architecture and cannot themselves authorize repository change;
+- `CORE-008` states reference/name/location does not prove a relationship and requires material relationship verification against source and target;
+- `CORE-010` states roadmap ordering/dependency is planning until the underlying technical or governance relationship is verified.
+
+Within this declared readiness scope, no additional direct material external coupling requiring REP-014 registration was established by those source documents. This is a bounded current-evidence conclusion, not a repository-wide complete-graph claim.
+
+---
+
+# Remaining P7 Gate
+
+Priority 7 remains OPEN, but current bounded evidence is now sufficient to open the explicit Core certification review.
+
+Still required:
+
+1. explicit final Core certification decision under current live evidence;
+2. confirmation that no new drift or blocking relationship/consumer evidence appeared since Transaction T candidate;
+3. if the certification review finds a material unresolved seam, return to validation/reconciliation instead of forcing closure.
 
 No Phase-1 closure, repository-wide graph completion, or Global Connected Baseline PASS is implied.
 
@@ -267,23 +300,27 @@ No Phase-1 closure, repository-wide graph completion, or Global Connected Baseli
 
 # Certification Rule
 
-Core MUST NOT be marked clean merely because local inventory, control-plane representation, bounded content correction, and bounded cross-layer seams are now reconciled.
+Core MUST NOT be marked clean merely because local inventory, control-plane representation, bounded content correction, cross-layer seams and readiness review are reconciled.
 
 Required progression remains:
 
 `Exact Local Inventory → Control-Plane Reconciliation → Content / Cross-Layer Validation → Relationship Reconciliation → Explicit Core Certification Review`
 
+Transaction T reaches the **entry gate** to the final step only.
+
 ---
 
 # Next Action
 
-`Continue material Core authority dependency/consumer validation bidirectionally → reconcile REP-014 only where evidence requires → Core certification review`
+`OPEN EXPLICIT CORE CERTIFICATION REVIEW → re-read current live evidence → certify only if no blocking contradiction/drift is present; otherwise return to the affected validation gate`
 
 ---
 
 # Engineering Rule
 
 Repository Reality > Previous Status Claims > Conversation Memory
+
+`CERTIFICATION READINESS != FOLDER CERTIFICATION`
 
 ---
 
