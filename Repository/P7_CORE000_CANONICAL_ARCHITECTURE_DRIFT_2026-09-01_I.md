@@ -1,34 +1,39 @@
 # Priority 7 — CORE-000 Canonical Architecture Drift — I
 
 Date: 2026-09-01
-State: `ATOMIC CANDIDATE / CI PENDING / PRIORITY 7 OPEN`
+State: `FUNCTIONAL-CLOSED / CI-VERIFIED / RESUME-SAFE CLOSURE PENDING FINAL-HEAD CI / PRIORITY 7 OPEN`
 Transaction: `MUT-2026-09-01-P7-CORE000-CANONICAL-ARCHITECTURE-DRIFT-I`
 Entry HEAD: `f8fc6d4e26518ed09e0227ff458337bbbd68712d`
+Atomic candidate HEAD: `4aaac161186f9e517d35c27ee0692c3693918cb1`
+Candidate tree: `fde3682266fe2d59b54d55969a245495f411b665`
 
 ## Finding
 
-Direct live-main review confirmed that `Core/CORE-000_PLATFORM_ARCHITECTURE.md` still carried a superseded structural model: eight primary architectural components and `Archive` as active Layer 8.
+Direct live-main review confirmed that `Core/CORE-000_PLATFORM_ARCHITECTURE.md` carried a superseded structural model: eight primary architectural components and `Archive` as active Layer 8.
 
-Current canonical Architecture authority independently converges on the nine-boundary model:
+Current canonical Architecture authority independently converges on:
 
 `Identity/Core → Governance → Architecture → Repository → Knowledge/Specifications/Standards → Memory → Cognition/Engine → Runtime/Services/AI → Projects/Applied Artifacts`.
 
 `Archive` is a repository preservation domain and is not an active dependency layer.
 
-## Candidate Repair
+## Repair Applied
 
-Transaction I performs one bounded material correction:
+Transaction I performed one bounded material correction:
 
-- reconcile CORE-000 structural-boundary content to the current ARC-011-aligned model;
-- preserve Core-level platform architecture intent without creating a competing structural authority;
-- advance CORE-000 review metadata because CORE-000 itself is materially revalidated;
-- synchronize `Core/_FOLDER_STATUS.md` without promoting Core certification;
-- add a semantic regression that checks the nine-boundary order and Archive boundary without freezing incidental prose;
-- preserve REP-014 and the current control-plane manifest unchanged.
+- CORE-000 v3.1.0 → v3.2.0;
+- structural boundaries aligned to the current ARC-011 model;
+- Archive removed from active dependency-layer status and retained as preservation domain;
+- physical folders explicitly prevented from silently defining layer authority;
+- CORE-000 review metadata advanced to 2026-09-01 because the document itself was materially revalidated;
+- Core status v1.3.6 → v1.3.7, while Priority 7 and Folder Certification remain open;
+- semantic regression added for current nine-boundary order and Archive boundary.
 
-## Atomicity
+No REP-014 relationship and no control-plane manifest mutation occurred in I.
 
-The candidate is constructed through Git objects and must contain exactly these I surfaces in one commit:
+## Atomicity and Read-Back
+
+Candidate commit `4aaac161...` is exactly one commit ahead of entry HEAD and changes exactly five authorized I paths:
 
 1. `Core/CORE-000_PLATFORM_ARCHITECTURE.md`
 2. `Core/_FOLDER_STATUS.md`
@@ -36,25 +41,36 @@ The candidate is constructed through Git objects and must contain exactly these 
 4. `Repository/P7_CORE000_CANONICAL_ARCHITECTURE_DRIFT_2026-09-01_I.md`
 5. `Repository/MUT-2026-09-01-P7-CORE000-CANONICAL-ARCHITECTURE-DRIFT-I_MUTATION_MATRIX.md`
 
-## Validation Boundary
+Direct exact-head read-back succeeded for all candidate surfaces. Unexpected path expansion = `0`.
 
-Candidate closure requires exact-head success for:
+## Candidate Exact-Head CI
 
-- Runtime/Integration;
-- Full-Stack;
-- M2;
-- Real Mutation Matrix Regression.
+Exact candidate HEAD `4aaac161186f9e517d35c27ee0692c3693918cb1`:
 
-Any required failure reopens GOV-013 §9B HARD HOLD and blocks closure.
+- M2 Multi-Channel Proposal Training — run `33507052948` — `SUCCESS`;
+- Real Mutation Matrix Regression — run `33507052965` — `SUCCESS`;
+- Full-Stack Repository Audit — run `33507053027` — `SUCCESS`;
+- ARGO Runtime Prototype and Integration Tests — run `33507053039` — `SUCCESS`.
 
-## Explicit Non-Claims
+Candidate result: `4/4 REQUIRED WORKFLOWS SUCCESS`.
 
-- Priority 7 remains OPEN.
-- Core certification is not claimed.
-- Architecture certification is not claimed.
-- No REP-014 relationship is registered by I.
-- Phase 1 and Global Connected Baseline remain OPEN.
+## Closure Boundary
 
-## Resume-Safe Rule
+Transaction I is functionally complete. This closure update records evidence only; it does not widen the material scope.
 
-After exact-head CI succeeds, this record and the mutation matrix must be closed against the verified candidate lineage before any new Priority-7 transaction is opened.
+Still not claimed:
+
+- Core certification;
+- Architecture certification;
+- a new `CORE-000 → ARC-011` REP-014 relationship;
+- Phase-1 closure;
+- repository-wide graph closure;
+- Global Connected Baseline PASS.
+
+Priority 7 remains OPEN.
+
+## Resume-Safe Condition
+
+This record and the I mutation matrix are being closed together in one atomic documentation commit. Transaction I becomes fully `RESUME-SAFE / CLOSED` only after the exact closure HEAD itself passes the same four required workflows.
+
+No new transaction is authorized before that final-head verification.
