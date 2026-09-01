@@ -13,6 +13,8 @@ import subprocess
 from pathlib import Path
 from typing import Iterable
 
+from p6_matrix_reconciliation_candidate import build_candidate, verify_readback
+
 
 REPO_ROOT = Path(__file__).resolve().parents[2]
 DEFAULT_MATRIX = REPO_ROOT / "Repository/REP-020_DEPENDENCY_CONSUMER_IMPACT_MATRIX.md"
@@ -148,7 +150,7 @@ def build_report(base: str, head: str) -> dict[str, object]:
     else:
         overall = "MAPPED"
     return {
-        "schema": "P6-CI-IMPACT-CORRELATION/v4",
+        "schema": "P6-CI-IMPACT-CORRELATION/v5",
         "base": base,
         "head": head,
         "changed_path_count": len(paths),
@@ -162,16 +164,43 @@ def build_report(base: str, head: str) -> dict[str, object]:
     }
 
 
+def attach_reconciliation_candidate(
+    report: dict[str, object], execution_identity: dict[str, object]
+) -> dict[str, object]:
+    matrix_text = DEFAULT_MATRIX.read_text(encoding="utf-8")
+    registry_text = DEFAULT_REGISTRY.read_text(encoding="utf-8")
+    candidate = build_candidate(report, execution_identity, matrix_text, registry_text)
+    readback = verify_readback(
+        candidate,
+        str(execution_identity.get("checkout_sha") or ""),
+        DEFAULT_MATRIX.read_text(encoding="utf-8"),
+        DEFAULT_REGISTRY.read_text(encoding="utf-8"),
+    )
+    report["reconciliation_candidate"] = candidate
+    report["post_ci_repository_readback"] = readback
+    return report
+
+
 def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("base")
     parser.add_argument("head")
     parser.add_argument("--output", default="ci-impact-correlation.json")
+    parser.add_argument("--identity", default="ci-execution-identity.json")
     args = parser.parse_args()
 
     report = build_report(args.base, args.head)
+    identity_path = Path(args.identity)
+    if not identity_path.exists():
+        raise FileNotFoundError(f"P6 execution identity missing: {identity_path}")
+    execution_identity = json.loads(identity_path.read_text(encoding="utf-8"))
+    report = attach_reconciliation_candidate(report, execution_identity)
+
     output = Path(args.output)
     output.write_text(json.dumps(report, indent=2, sort_keys=True), encoding="utf-8")
+    reread = json.loads(output.read_text(encoding="utf-8"))
+    if reread.get("post_ci_repository_readback", {}).get("status") != "VERIFIED":
+        raise ValueError("P6_POST_CI_READBACK_NOT_VERIFIED")
     print(json.dumps(report, sort_keys=True))
     return 0
 

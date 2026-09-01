@@ -6,7 +6,11 @@ regressions for implementation and control-surface policy.
 
 from pathlib import Path
 
-from ci_impact_correlation import classify_execution_evidence, correlate_paths
+from ci_impact_correlation import (
+    attach_reconciliation_candidate,
+    classify_execution_evidence,
+    correlate_paths,
+)
 
 
 SYNTHETIC_SCOPE = """
@@ -118,6 +122,28 @@ def test_mutation_matrix_is_not_applicable_to_direct_p6_impact_even_if_mentioned
     assert record["promotion"] == "NO_AUTO_PROMOTION"
 
 
+def test_reconciliation_candidate_is_embedded_and_readback_verified() -> None:
+    report = {
+        "schema": "P6-CI-IMPACT-CORRELATION/v5",
+        "base": "BASE",
+        "head": "HEAD",
+        "overall": "MAPPED",
+        "records": [{"path": "Engine/ENG-006_EXECUTION_ENGINE.md", "eligibility": "IN_SCOPE", "status": "MAPPED"}],
+    }
+    identity = {
+        "workflow": "Full-Stack Repository Audit",
+        "run_id": "TEST-RUN",
+        "github_sha": "HEAD",
+        "checkout_sha": "HEAD",
+    }
+    enriched = attach_reconciliation_candidate(report, identity)
+    assert enriched["reconciliation_candidate"]["candidate_authority"] == "NON_AUTHORITATIVE_EVIDENCE_CANDIDATE"
+    assert enriched["reconciliation_candidate"]["promotion"] == "NO_AUTO_PROMOTION"
+    assert enriched["post_ci_repository_readback"]["status"] == "VERIFIED"
+    assert enriched["post_ci_repository_readback"]["matrix_readback"] == "VERIFIED_UNCHANGED"
+    assert enriched["post_ci_repository_readback"]["relationship_readback"] == "VERIFIED_UNCHANGED"
+
+
 if __name__ == "__main__":
     test_direct_matrix_mapping_is_reported_without_promotion()
     test_in_scope_without_mapping_remains_unmapped()
@@ -133,4 +159,5 @@ if __name__ == "__main__":
     test_current_repository_maps_run010_handoff_test_without_promotion()
     test_current_repository_maps_p6_control_surfaces_without_promotion()
     test_mutation_matrix_is_not_applicable_to_direct_p6_impact_even_if_mentioned()
+    test_reconciliation_candidate_is_embedded_and_readback_verified()
     print("P6_CI_IMPACT_CORRELATION_REGRESSION=PASS")
