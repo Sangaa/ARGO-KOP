@@ -3,65 +3,52 @@
 Transaction: `MUT-2026-09-01-P7-CORE-EXPLICIT-CERTIFICATION-REVIEW-V`
 Work Lease: `HERMUZ-P7-V-CORE-EXPLICIT-CERTIFICATION-REVIEW-20260901`
 Priority: `7 — Core`
-State: `PRE-WRITE MATRIX / VALIDATION-FIRST / LEASE ACTIVE`
+State: `MATERIAL REVIEW CANDIDATE PREPARED / CERTIFICATION BLOCKED / CI PENDING / LEASE ACTIVE`
 Entry HEAD: `b10e9e5733fe1586a7f15f1bb2f7f54df8df31c5`
+Pre-write Matrix HEAD: `456a8c11ba88a32b083a2f3ba9733f495aeb4d0c`
 Protocol: `PROJECT_BOOTSTRAP / CORE-003 / REP-011 / REP-012 / REP-013 / REP-014 / REP-016 / GOV-013 / GOV-013A / GOV-014 / GOV-014A / GOV-015 / GOV-016 / ARC-006 / ARC-011`
 
-## Question
+## Review result
 
-May the current Core partition be explicitly certified and closed for Phase 1 under current live evidence, or does a material control/evidence gap require routing back to an earlier reconciliation gate?
+Current Core certification readiness remains PASS, but the explicit certification review found a current closure blocker.
 
-## Current evidence entering review
+`REP-013` requires every known file to have an allocation record before a folder can become `CLOSED_FOR_PHASE_1`.
 
-- Certification-readiness chain T/T-C1/T-C2/T-C3 is closed Resume-Safe.
-- Closure HEAD `b10e9e5733fe1586a7f15f1bb2f7f54df8df31c5` passed all four required workflows.
-- Runtime closure jobs integrity/prototype/integration all succeeded.
-- Core status remains `INTEGRITY HOLD / CROSS-LAYER VALIDATION OPEN / CERTIFICATION REVIEW READY / NOT CERTIFIED`.
-- Direct compare from T-C2 semantic candidate `f63c7b3c1838ef7643d7f2d842e0d699304ac9d0` to current entry HEAD shows no `Core/` path changes; intervening changes are CI/Quality/Repository evidence only.
-- Exact live `Core/` enumeration remains 18 top-level files; `Core/Core.md` still lists the corresponding 17 self-excluding members.
+Current `REP-012` v1.0.10 is still `Phase 1 Population In Progress` and contains no per-Core artifact allocation records. This was confirmed by current-path read and independent direct Git-blob read (`3e87704439759eca533ae118e36facc51e3eb5eb`).
 
-## Material blocker candidate discovered during explicit review
+No intervening Core source change invalidates the bounded readiness evidence: compare from `f63c7b3c1838ef7643d7f2d842e0d699304ac9d0` to V entry HEAD contains no `Core/` path mutation, and live Core inventory remains 18 top-level files with 17 self-excluding members in `Core/Core.md`.
 
-Current `REP-013` Completion Rule requires, before a folder may become `CLOSED_FOR_PHASE_1`, that every known file have an allocation record.
+## Disposition
 
-Current `REP-012` v1.0.10 is still `Phase 1 Population In Progress`; its directly readable current content and direct current Git blob show allocation rows only for the initial control-plane set plus DIAG-001, and contain no Core artifact allocation records such as `CORE-003` or `Core/` paths.
+`CERTIFICATION REVIEW = BLOCKED`
 
-This candidate blocker must be preserved as a certification-review finding rather than bypassed by readiness evidence.
+`CORE NOT CERTIFIED`
 
-## Review decision rule
+`RETURN TO REP-012 CORE ALLOCATION RECONCILIATION`
 
-If current evidence confirms missing Core allocation records under REP-012 while REP-013 retains the explicit per-known-file allocation prerequisite, V must close as:
-
-`CERTIFICATION REVIEW = BLOCKED / CORE NOT CERTIFIED / RETURN TO REP-012 CORE ALLOCATION RECONCILIATION`.
-
-If contrary current evidence is discovered before material commit, V must record that evidence and recompute disposition rather than forcing the expected blocker.
+Readiness PASS is retained; it is not downgraded merely because the explicit closure review discovered an additional closure prerequisite.
 
 ## Authorized material change set — exactly 2 paths
 
-1. `Repository/P7_CORE_EXPLICIT_CERTIFICATION_REVIEW_2026-09-01_V.md`
-   - record current certification review evidence, freshness proof, blocker classification and bounded disposition.
-2. this Matrix
-   - bind the review candidate and verification evidence.
+1. `Repository/P7_CORE_EXPLICIT_CERTIFICATION_REVIEW_2026-09-01_V.md` — add review evidence and blocker disposition.
+2. this Matrix — bind review outcome and candidate.
+
+Candidate must be exactly one commit after pre-write Matrix HEAD and exactly these two paths. Unexpected path expansion = `0`.
 
 ## Explicitly forbidden
 
-- no mutation of `Core/_FOLDER_STATUS.md` in V;
+- no `Core/_FOLDER_STATUS.md` mutation in V;
 - no Core certification or `CLOSED_FOR_PHASE_1` promotion;
-- no mutation of REP-012, REP-013, REP-014, REP-016 or REP-020 in V;
-- no relationship creation/registration;
-- no Phase-1, Connected Baseline, repository-wide graph or Global PASS claim;
-- no weakening of REP-013 Completion Rule to make certification pass;
-- no treating readiness PASS as certification authority.
+- no REP-012/013/014/016/020 mutation in V;
+- no relationship mutation;
+- no weakening of REP-013 completion rules;
+- no Phase-1 / Connected Baseline / repository-wide graph / Global PASS claim.
 
-## Atomicity and verification contract
+## Verification contract
 
-After this pre-write Matrix commit, V material candidate must be exactly one commit and exactly the two authorized paths. Unexpected path expansion = `0`.
+`ONE-COMMIT/TWO-PATH COMPARE → LIVE-PARENT RECHECK → NON-FORCE FAST-FORWARD → EXACT-HEAD FOUR REQUIRED WORKFLOWS → FULL-STACK JOB REVIEW → RUNTIME JOB REVIEW → DOCUMENTATION-ONLY V CLOSURE → CLOSURE-HEAD FOUR-WORKFLOW VERIFICATION`.
 
-Then:
-
-`LIVE-PARENT RECHECK → NON-FORCE FAST-FORWARD → EXACT-HEAD READ-BACK → FOUR REQUIRED WORKFLOWS → FULL-STACK JOB REVIEW → RUNTIME JOB REVIEW → DOCUMENTATION-ONLY CLOSURE → CLOSURE-HEAD FOUR-WORKFLOW VERIFICATION`.
-
-## Learning target
+## Learning retained
 
 `READINESS IS A LICENSE TO REVIEW, NOT A LICENSE TO CERTIFY.`
 
