@@ -2,7 +2,7 @@
 
 Platform: ARGO KOP  
 Document ID: REP-014  
-Version: 1.2.9  
+Version: 1.2.10  
 Status: Active / Relationship Enumeration In Progress  
 Development Baseline: 3.2.1  
 Last Audit: 2026-09-01
@@ -132,6 +132,7 @@ The following are deliberately limited to relationships established during repos
 | REL-063 | CORE-009 | LIF-001 | REFERENCES | **DOCUMENT-LIFECYCLE-BOUNDARY / BIDIRECTIONAL-DOCUMENTARY / NON-DEPENDENCY** |
 | REL-064 | LIF-001 | CORE-009 | REFERENCES | **PLATFORM-LIFECYCLE-BOUNDARY / BIDIRECTIONAL-DOCUMENTARY / NON-DEPENDENCY** |
 | REL-065 | CORE-012 | GOV-016 | REFERENCES | **INTENTIONAL ONE-WAY / FAILURE-LEARNING-ALIGNED / NON-DEPENDENCY** |
+| REL-066 | ARC-005 | CORE-011 | REFERENCES | **INTENTIONAL ONE-WAY / CHARTER-BOUNDARY-ALIGNED / NON-DEPENDENCY** |
 
 ## Current Review-Cycle Reconciliation — 2026-08-17
 
@@ -421,6 +422,33 @@ Boundary:
 - no `GOV-016 → CORE-012` edge is manufactured for symmetry;
 - no `CORE-012 → GOV-016 = DEPENDS_ON` edge is inferred from the phrase “works together”;
 - no authority promotion is implied;
+- broader Core cross-layer validation and certification remain open.
+
+## P7 ARC-005 → CORE-011 Charter/Rules Reconciliation — 2026-09-01
+
+Current Priority-7 review validates one bounded Architecture-to-Core documentary seam:
+
+```text
+ARC-005 ──references──> CORE-011
+```
+
+Evidence basis:
+
+- `Architecture/ARC-005_ARCHITECTURE_RULES.md` explicitly lists `Core/CORE-011_PLATFORM_CHARTER.md` under Related Documents;
+- `Core/CORE-011_PLATFORM_CHARTER.md` defines platform scope, responsibilities and authority boundaries but does not directly name ARC-005;
+- `Architecture/ARC-006_DEPENDENCY_MODEL.md` preserves the architectural rule that Core depends on none while Architecture may depend on Core/Governance; the documentary reference therefore must not be inverted or promoted merely for symmetry;
+- independent repository search found no direct current evidence for a reverse `CORE-011 → ARC-005` registry edge or for stronger `DEPENDS_ON`, `GOVERNS`, `IMPLEMENTS`, or `CONSUMES` semantics.
+
+Disposition:
+
+`REL-066 = INTENTIONAL ONE-WAY / CHARTER-BOUNDARY-ALIGNED / NON-DEPENDENCY`.
+
+Boundary:
+
+- CORE-011 and ARC-005 source content remain unchanged;
+- no reverse edge is manufactured for symmetry;
+- no architectural dependency is inferred from the Related Documents reference;
+- no Core or Architecture authority promotion is implied;
 - broader Core cross-layer validation and certification remain open.
 
 ## Control-Plane Graph

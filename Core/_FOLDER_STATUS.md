@@ -17,7 +17,7 @@ Status
 
 Version
 
-1.3.5
+1.3.6
 
 Last Repository Re-Audit
 
@@ -41,7 +41,7 @@ Core physical inventory, local index consistency, identity/authority sampling, c
 
 Repository Baseline
 
-Priority 7 current `main` evidence through third bounded Core cross-layer relationship reconciliation
+Priority 7 current `main` evidence through fourth bounded Core cross-layer relationship reconciliation
 
 ---
 
@@ -93,7 +93,7 @@ Platform Roadmap Review
 
 Platform Charter Review
 
-🟢 Current content re-read in P336; prior targeted review retained
+🟢 Current relationship revalidation confirms `ARC-005 → CORE-011` as a one-way documentary reference; CORE-011 and ARC-005 source content remain unchanged
 
 Generative Knowledge / Self-Development Review
 
@@ -109,7 +109,7 @@ Control-Plane Review
 
 Cross-Layer Review
 
-🟡 In Progress — bounded seams now include `CORE-KERNEL → RUN-001`, `CORE-009 ↔ LIF-001`, and `CORE-012 → GOV-016`; broader material Core dependency/consumer validation remains open and REP-014 reconciliation continues where evidence requires
+🟡 In Progress — bounded seams now include `CORE-KERNEL → RUN-001`, `CORE-009 ↔ LIF-001`, `CORE-012 → GOV-016`, and `ARC-005 → CORE-011`; broader material Core dependency/consumer validation remains open and REP-014 reconciliation continues where evidence requires
 
 Folder Certification
 
@@ -121,7 +121,7 @@ Folder Certification
 
 The previous `2026-08-08` authority audit and `2026-08-10` targeted Core re-audits remain historical evidence. They are not silently relabeled as the current Priority-7 review.
 
-The `2026-09-01` P336 repository re-audit applies to exact top-level Core inventory, local index/status consistency, current-content sampling and discrepancy classification. Subsequent bounded Priority-7 transactions reconciled REP-013, REP-001, REP-002, the GOV-006 factual Core parent/example drift, `CORE-KERNEL → RUN-001`, the `CORE-009 ↔ LIF-001` lifecycle authority seam, and `CORE-012 → GOV-016`. The CORE-009 seam included a direct semantic correction because its active document-lifecycle identity/path was stale. The CORE-012/GOV-016 seam required registry reconciliation only; neither source document was rewritten. These transactions still do **not** assert that every Core document received a new full semantic certification on that date.
+The `2026-09-01` P336 repository re-audit applies to exact top-level Core inventory, local index/status consistency, current-content sampling and discrepancy classification. Subsequent bounded Priority-7 transactions reconciled REP-013, REP-001, REP-002, the GOV-006 factual Core parent/example drift, `CORE-KERNEL → RUN-001`, the `CORE-009 ↔ LIF-001` lifecycle authority seam, `CORE-012 → GOV-016`, and `ARC-005 → CORE-011`. The CORE-009 seam included a direct semantic correction because its active document-lifecycle identity/path was stale. The CORE-012/GOV-016 and ARC-005/CORE-011 seams required registry reconciliation only; their source documents were not rewritten. These transactions still do **not** assert that every Core document received a new full semantic certification on that date.
 
 A document's `Last Audit` advances only when that document itself undergoes the applicable review.
 
@@ -209,12 +209,15 @@ Current bounded evidence validates:
 1. `CORE-KERNEL → RUN-001 = REFERENCES` — `INTENTIONAL ONE-WAY / RUNTIME-CONTRACT-ALIGNED / NON-DEPENDENCY`.
 2. `CORE-009 ↔ LIF-001 = REFERENCES` — `BIDIRECTIONAL-DOCUMENTARY / CROSS-LIFECYCLE-AUTHORITY-ALIGNED / NON-DEPENDENCY`.
 3. `CORE-012 → GOV-016 = REFERENCES` — `INTENTIONAL ONE-WAY / FAILURE-LEARNING-ALIGNED / NON-DEPENDENCY`.
+4. `ARC-005 → CORE-011 = REFERENCES` — `INTENTIONAL ONE-WAY / CHARTER-BOUNDARY-ALIGNED / NON-DEPENDENCY`.
 
 The first seam is documentary/contract alignment only and does not invert `ARC-006` or create a reverse edge without direct evidence.
 
 The second seam corrected a stale active authority identity/path in CORE-009 and records the two directly evidenced documentary directions without merging lifecycle authority.
 
 The third seam records CORE-012's explicit “works together with GOV-016” learning-control reference. GOV-016 does not directly name CORE-012, so no reverse edge is manufactured; historical co-introduction/co-authority usage is provenance, not reverse-edge authority.
+
+The fourth seam records ARC-005's explicit Related Documents reference to CORE-011. CORE-011 does not directly name ARC-005, so no reverse edge is manufactured and no architectural dependency is inferred from the documentary reference.
 
 ---
 
