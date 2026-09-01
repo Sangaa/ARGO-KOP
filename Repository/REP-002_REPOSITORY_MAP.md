@@ -2,12 +2,12 @@
 
 Platform: ARGO KOP (Knowledge Operating Platform)
 Document ID: REP-002
-Version: 1.7.4
+Version: 1.7.5
 Status: Integrity Hold
 Category: Repository
 Canonical: Yes
 Priority: Critical
-Last Audit Date: Aug 16, 2026
+Last Audit Date: Sep 1, 2026
 Development Baseline: 3.2.1
 
 ---
@@ -40,6 +40,7 @@ Path: `Core/`
 - `Core/ARGO_KERNEL.md`
 - `Core/Core.md`
 - `Core/CORE-000_PLATFORM_ARCHITECTURE.md`
+- `Core/CORE-000A_PLATFORM_GLOSSARY.md`
 - `Core/CORE-001_ARGO_MANIFEST.md`
 - `Core/CORE-002_ARGO_IDENTITY.md`
 - `Core/CORE-003_CONSTITUTION.md`
@@ -51,11 +52,14 @@ Path: `Core/`
 - `Core/CORE-009_PLATFORM_LIFECYCLE.md`
 - `Core/CORE-010_PLATFORM_ROADMAP.md`
 - `Core/CORE-011_PLATFORM_CHARTER.md`
+- `Core/CORE-012_GENERATIVE_KNOWLEDGE_AND_SELF_DEVELOPMENT.md`
 - `Core/_FOLDER_STATUS.md`
 
 `CORE-001` and `CORE-002` are mapped as active Core inventory after direct current-content verification and cross-check against `Core/_FOLDER_STATUS.md`, which identifies both as independently revalidated canonical Core artifacts. Mapping does not close Core cross-layer certification.
 
 `CORE-KERNEL` (`Core/ARGO_KERNEL.md`) and `CORE-INDEX` (`Core/Core.md`) are mapped as current reviewed Core coordination/inventory surfaces after Lease 185 classified their missing REP-001/REP-002 discoverability as a real gap. Mapping closes discoverability only and does not close Core Integrity Hold or cross-layer certification.
+
+`CORE-000A` (`Core/CORE-000A_PLATFORM_GLOSSARY.md`) and `CORE-012` (`Core/CORE-012_GENERATIVE_KNOWLEDGE_AND_SELF_DEVELOPMENT.md`) are mapped from the exact current Core inventory established by P336 and cross-checked against current REP-013 physical representation. This closes their REP-002 mapping drift only. It does not promote legacy `Core/CORE-000_PLATFORM_IDENTITY.md`, certify Core semantics, or close dependency/consumer validation.
 
 ## 4. Repository Layer
 
@@ -334,6 +338,12 @@ The active Core map therefore now explicitly includes:
 This mapping repair does not promote `CORE-000_PLATFORM_IDENTITY.md`, which remains a legacy/superseded artifact by its own metadata.
 
 P356 is a physical-map reconciliation only. Core remains under Integrity Hold and cross-layer validation.
+
+## P7 Current Core REP-002 Mapping Reconciliation B — 2026-09-01
+
+P336 established the exact current Core inventory and identified `CORE-000A_PLATFORM_GLOSSARY.md` and `CORE-012_GENERATIVE_KNOWLEDGE_AND_SELF_DEVELOPMENT.md` as missing from REP-002. Both paths are now explicitly mapped from current repository evidence.
+
+This is a bounded physical-map reconciliation only. It does not promote the legacy `CORE-000_PLATFORM_IDENTITY.md`, close GOV-006 disposition, certify Core dependencies/consumers, close relationship reconciliation, or establish Core/Phase-1/global integrity PASS.
 
 ---
 
