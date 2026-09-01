@@ -1,50 +1,88 @@
 # R RECOVERY V2 MUTATION MATRIX
 
 Transaction: `MUT-2026-09-01-R-RECOVERY-V2`
-State: `MATERIAL-RECOVERY-CANDIDATE / CI-PENDING / LEASE ACTIVE`
+State: `FUNCTIONAL-CLOSED / CI-VERIFIED / RECOVERY-COMPLETE / RETURN-TO-R`
 Entry HEAD: `86d4ea5cf392fd28f777f7f13affadd64d04b8d0`
 Pre-write V2 Matrix HEAD: `28ddda52577cbffaa24d0f43ba01f3ac49ea698b`
+Material recovery candidate: `fad267c623c181aaa792a085f0d921105c034074`
 Original incident: `c38783c38962063a7fc38f6c99adad3547e4e6fd`
 Recovery V1 Matrix: `671123cc83655bc35e8d07b60e0c416eb5b396e9`
 V1 sequencing deviation: `86d4ea5cf392fd28f777f7f13affadd64d04b8d0`
 
-## Recovery state
+## Recovery result
 
-The unintended empty file `Repository/INVALID_SHOULD_NOT_CREATE.tmp` is authorized for removal in this V2 material candidate. The existing incident record, V1 Matrix, Transaction-R candidate paths, REP-014, Core status, and all canonical authority sources are KEEP.
+The unintended empty artifact `Repository/INVALID_SHOULD_NOT_CREATE.tmp` is absent from the material recovery candidate.
 
-## Authorized remaining corrective change set — exactly 2 paths
+Absence/effect evidence is independently supported by:
+
+1. direct exact-head fetch at `fad267c6...` -> `404 Not Found`;
+2. compare `28ddda52... -> fad267c6...` -> exactly one commit, exactly two paths, temp artifact `removed`, this Matrix `modified`;
+3. exact candidate commit metadata -> only the temp path and this Matrix appear in the commit file set.
+
+The incident commit remains preserved in Git history. Recovery V1 sequencing failure also remains preserved. No reset, force push, concealment, or history rewrite was used.
+
+## Authorized V2 material change-set result
 
 | ID | Target | Action | Applied | Verified |
 |---|---|---|:---:|:---:|
-| RV2-01 | `Repository/INVALID_SHOULD_NOT_CREATE.tmp` | REMOVE unintended empty artifact | Y | PENDING CI |
-| RV2-02 | this Matrix | UPDATE/rebind V2 candidate state | Y | PENDING CI |
+| RV2-01 | `Repository/INVALID_SHOULD_NOT_CREATE.tmp` | REMOVE unintended empty artifact | Y | Y |
+| RV2-02 | this Matrix | UPDATE/rebind V2 candidate state | Y | Y |
 
-Candidate must be exactly one commit after `28ddda52577cbffaa24d0f43ba01f3ac49ea698b` and exactly these two paths. Unexpected path expansion = `0`.
+Atomicity: `1 commit / 2 authorized paths / unexpected path expansion 0`.
 
-## Preservation boundary
+## Candidate CI / integration evidence
 
-- no history rewrite, reset, or force push;
-- preserve original incident commit, V1 Matrix, and incident record;
-- preserve all Transaction-R semantic/test/evidence paths unchanged;
-- preserve REP-014 v1.2.14 and REL-001..072 unchanged;
-- preserve Core status v1.3.11 and Priority 7 OPEN;
-- no Core/Runtime/Architecture source mutation;
-- no certification, Phase-1, Connected-Baseline, repository-wide-graph, or Global-PASS promotion.
+Exact candidate: `fad267c623c181aaa792a085f0d921105c034074`
 
-## Failure classification retained
+Triggered workflows observed on this exact head:
 
-1. Original accidental direct write: `IMPLEMENTATION_FAILURE / ORIGINAL WRITE NON-COMPLIANT`.
-2. Recovery V1 split write: `IMPLEMENTATION_FAILURE / MATRIX-SEQUENCING NON-COMPLIANCE`.
-3. First recovery-Matrix tool attempt blocked before write: `INFRASTRUCTURE/TOOLING LIMITATION`, no repository mutation.
+- Full-Stack Repository Audit — run `33528942741` — `SUCCESS`.
+  - checkout-SHA binding — SUCCESS;
+  - Mutation Matrix preflight — SUCCESS;
+  - Mutation Matrix semantic regression — SUCCESS;
+  - current-change-set Matrix enforcement — SUCCESS;
+  - repository-wide audit — SUCCESS;
+  - runtime evidence emission — SUCCESS.
+- ARGO Runtime Prototype and Integration Tests — run `33528942723` — `SUCCESS`.
+  - integrity-tests — SUCCESS;
+  - prototype-tests — SUCCESS;
+  - integration-tests — SUCCESS.
+- M2 Multi-Channel Proposal Training — run `33528942717` — `SUCCESS`.
+- Real Mutation Matrix Regression — `NOT TRIGGERED ON THIS CHANGE SET`; no run is invented and no PASS is claimed for a nonexistent run.
 
-Existing GOV-014/014A controls are sufficient to classify the execution failures. No new governance rule is promoted from this single incident chain.
+The triggered candidate verification surface is green. Full-Stack and Runtime/Integration, the mandatory checkpoint evidence specified by V2, both passed.
 
-## Verification contract
+## Failure chain retained
 
-`EXACT-HEAD READ-BACK -> ONE-COMMIT/TWO-PATH DIFF -> TEMP ABSENCE DIRECT CHECK -> FOUR REQUIRED WORKFLOWS WHEN TRIGGERED/APPLICABLE -> JOB/STEP REVIEW -> FAILURE/LEARNING ASSESSMENT -> V2 CLOSURE -> RETURN TO R`.
+1. `c38783c3...` — `IMPLEMENTATION_FAILURE / ORIGINAL WRITE NON-COMPLIANT`: wrong repository write action created an unauthorized empty temp path outside the R Matrix.
+2. First recovery-Matrix attempt — `INFRASTRUCTURE/TOOLING LIMITATION`: connector blocked the request before repository mutation.
+3. `86d4ea5c...` — `IMPLEMENTATION_FAILURE / MATRIX-SEQUENCING NON-COMPLIANCE`: the authorized incident record was written separately, violating Recovery V1 atomicity.
+4. V2 corrected the remaining repository state using a pre-write Matrix and an atomic two-path Git Data material commit.
 
-If workflow trigger count differs because this recovery change does not touch a workflow-specific trigger surface, inspect the workflows that actually trigger and do not invent missing run evidence. Full-Stack and Runtime/Integration remain mandatory checkpoint evidence before returning to R.
+## What did not change
 
-## Learning
+- Transaction-R semantic finding and focused test remain unchanged.
+- RUN-002 and CORE-003 source content remain unchanged.
+- REP-014 remains v1.2.14 with REL-001..072 unchanged.
+- Core status remains v1.3.11 / Priority 7 OPEN.
+- No relationship, dependency, authority, certification, Phase-1, Connected-Baseline, repository-wide-graph, or Global-PASS promotion occurred.
 
-The current session supports a bounded `SESSION-LEARNING`: before every write-capable invocation, verify both **authorization** and **transaction boundary/atomicity**. This is application/refinement of GOV-014/014A, not a new rule.
+## Learning disposition
+
+Existing GOV-014 and GOV-014A were sufficient authority to identify both execution failures. Therefore no new governance document/rule is justified.
+
+Retained `SESSION-LEARNING`:
+
+`BEFORE WRITE-CAPABLE INVOCATION -> VERIFY ACTION TYPE -> EXACT PATH(S) -> MATRIX AUTHORIZATION -> REQUIRED ATOMICITY -> WHETHER MAIN MOVES`.
+
+A second bounded observation also exists: the unauthorized `.tmp` incident commit passed the triggered Full-Stack/Runtime/M2 workflows. This proves only that green CI is not equivalent to transaction-scope authorization proof for that exact incident. Whether CI should gain a new generic regression for this mechanism remains a future candidate requiring separate scope/evidence; V2 does not promote that candidate.
+
+## Closure boundary
+
+V2 is a side-repair only. On successful exact-head verification of the closure commit containing this Matrix, the legal continuation is:
+
+`SIDE-REPAIR CLOSED -> RETURN TO PREVIOUS GLOBAL PRIORITY -> RESUME TRANSACTION R`.
+
+This closure does not itself close R or Priority 7.
+
+The state declared at the top of this file is effective only when the exact closure HEAD itself passes the applicable triggered verification surface. If closure-head verification fails, V2 returns to `OPEN/HOLD` and the failure must be preserved under GOV-016.
