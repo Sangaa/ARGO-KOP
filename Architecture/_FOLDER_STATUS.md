@@ -36,7 +36,7 @@ Exact Architecture inventory, known identity/path evidence, active Architecture 
 
 Repository Baseline
 
-Current main branch repository state through Priority-7 Transaction S candidate
+Current main branch repository state through Priority-7 Transaction S / S-C1 corrective validation
 
 ---
 
@@ -62,7 +62,7 @@ Repository Alignment
 
 Cross-Reference Review
 
-🟡 Open. Transaction S closes one bounded README authority/inventory drift only. New evidence must still be checked for stale Governance, Repository, Knowledge, Memory, Runtime, AI and Interface references across the active Architecture set.
+🟡 Open. Transaction S closes one bounded README authority/inventory drift only after S-C1 compatibility verification. New evidence must still be checked for stale Governance, Repository, Knowledge, Memory, Runtime, AI and Interface references across the active Architecture set.
 
 ---
 
@@ -124,18 +124,20 @@ The following artifacts form the primary architecture review set:
 5. Repository-first status — PASS FOR INSPECTED SCOPE
 6. Layer boundary consistency — OPEN
 7. Dependency direction consistency — OPEN
-8. Canonical Architecture Model alignment — OPEN / `Architecture/README.md` BOUNDED CONSUMER ALIGNMENT PASS IN TRANSACTION S; CONSOLIDATED ACTIVE-ARC ALIGNMENT STILL REQUIRED
+8. Canonical Architecture Model alignment — OPEN / `Architecture/README.md` BOUNDED CONSUMER ALIGNMENT PASS IN TRANSACTION S SUBJECT TO S-C1 EXACT-HEAD VERIFICATION; CONSOLIDATED ACTIVE-ARC ALIGNMENT STILL REQUIRED
 9. Information Flow alignment — OPEN
 10. Evolution Model alignment — OPEN
 11. Known stale references — OPEN / RE-AUDIT
 12. Architecture ↔ Knowledge / Memory boundary — OPEN
-13. Architecture ↔ Runtime / Interface / AI boundary — OPEN
+13. Architecture ↔ Runtime / Interface boundary — OPEN
+
+AI remains included in the broader cross-reference review scope; restoring the exact Runtime / Interface gate marker preserves the established regression contract and does not close AI review.
 
 Architecture is **not globally certified**. Any previous global cleanliness claim remains withdrawn until the expanded inventory and cross-layer relationships are revalidated.
 
 ---
 
-# Bounded Priority-7 Consumer Reconciliation — Transaction S
+# Bounded Priority-7 Consumer Reconciliation — Transaction S / S-C1
 
 Direct current-content comparison identified `Architecture/README.md` as a stale canonical consumer of Core/Architecture authority after the 2026-09-01 CORE-000 reconciliation.
 
@@ -149,7 +151,11 @@ Transaction S corrects only the README's bounded authority/inventory semantics:
 - preserves `01-System-Overview.md` as foundation/legacy material without authority promotion;
 - replaces unsupported `globally locked` / `Anti-Patch Policy` wording with current controlled-mutation governance.
 
-This is a bounded consumer-content correction only. It does not register a new REP-014 relationship and does not close the broader Architecture re-audit.
+The first published S material candidate `c51ffc4efec9eaded777eeb4f97311386cc0a289` failed Runtime verification because two established compatibility assertions were unnecessarily broken: the exact Runtime/Interface open-gate marker and the canonical relative CORE-000 link in the README.
+
+S-C1 restores those compatibility contracts without altering S authority semantics and without modifying the tests that detected the regressions.
+
+This remains a bounded consumer-content correction only. It does not register a new REP-014 relationship and does not close the broader Architecture re-audit.
 
 ---
 
@@ -157,7 +163,7 @@ This is a bounded consumer-content correction only. It does not register a new R
 
 This status certifies only the evidence inspected so far. It does not certify Runtime, Core, AI, Services, Knowledge, Memory, Projects, Release or the entire repository.
 
-Transaction S does not certify the Architecture folder. It records one bounded canonical-consumer alignment while the remaining Architecture gates stay open.
+Transaction S/S-C1 does not certify the Architecture folder. It records one bounded canonical-consumer alignment while the remaining Architecture gates stay open.
 
 ---
 

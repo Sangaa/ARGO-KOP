@@ -4,63 +4,66 @@ Transaction: `MUT-2026-09-01-P7-ARCHITECTURE-README-S-C1`
 Parent Transaction: `MUT-2026-09-01-P7-ARCHITECTURE-README-AUTHORITY-DRIFT-S`
 Work Lease: `HERMUZ-P7-S-C1-ARCHITECTURE-README-20260901`
 Priority: `7 — Core cross-layer dependency/consumer validation`
-State: `PRE-WRITE / CORRECTIVE / LEASE ACTIVE`
+State: `CORRECTIVE MATERIAL CANDIDATE / CI-PENDING / LEASE ACTIVE`
 Entry HEAD: `c51ffc4efec9eaded777eeb4f97311386cc0a289`
+Pre-write Matrix HEAD: `b6cb16fc31637f336f57b6b3d0cf5b1592ea4ed3`
 Protocol: `PROJECT_BOOTSTRAP / CORE-003 / GOV-013 / GOV-013A / GOV-014 / GOV-014A / GOV-015 / GOV-016 / GOV-019 / GOV-020 / ARC-011 / ARC-006`
 
-## Why S-C1 exists
+## Failure evidence requiring correction
 
-Transaction S published material candidate `c51ffc4efec9eaded777eeb4f97311386cc0a289`. The candidate preserved its intended authority repair, but exact-head Runtime verification failed.
+Parent S candidate `c51ffc4e...` preserved the intended authority repair but failed Runtime workflow `33530617715`.
 
-The first meaningful failure evidence identifies two compatibility regressions caused by S wording/link-format changes, not by the repaired authority semantics:
+First meaningful integrity failure evidence:
 
-1. existing `test_architecture_folder_inventory_reconciliation.py` requires the exact open-gate marker `Architecture ↔ Runtime / Interface boundary — OPEN`; S changed that marker to include `/ AI`, creating an unnecessary textual compatibility break while the gate remained semantically open;
-2. existing `test_canonical_reference_regressions.py` requires the canonical relative link `../Core/CORE-000_PLATFORM_ARCHITECTURE.md` inside `Architecture/README.md`; S retained the authoritative Core path semantically but rendered it as code text rather than the previously protected relative link.
+1. `test_architecture_folder_inventory_reconciliation.py` requires exact marker `Architecture ↔ Runtime / Interface boundary — OPEN`; S unnecessarily changed that established marker to include `/ AI`.
+2. `test_canonical_reference_regressions.py` requires `../Core/CORE-000_PLATFORM_ARCHITECTURE.md` in `Architecture/README.md`; S retained the same target semantically but lost the protected relative-link representation.
+
+The integrity suite reported `2 failed, 136 passed`; prototype tests succeeded. Full-Stack workflow `33530617711` succeeded but does not override Runtime failure.
 
 Classification: `MATERIAL_CANDIDATE_CI_FAILURE / BACKWARD-COMPATIBILITY REGRESSION / AUTHORITY-SEMANTICS NOT INVALIDATED`.
 
-The failed candidate remains evidence. No rerun is authorized before correction.
+## Corrective material decision
 
-## Corrective decision
+Restore only the two proven compatibility contracts while retaining S authority semantics:
 
-Restore the two established compatibility contracts without weakening S authority repair:
+- restore a Markdown reference whose target is exactly `../Core/CORE-000_PLATFORM_ARCHITECTURE.md`;
+- restore the exact open-gate marker `Architecture ↔ Runtime / Interface boundary — OPEN`;
+- preserve AI in the broader cross-reference-review narrative without changing that established gate marker;
+- preserve Constitution/Governance → ARC-011 → other Architecture → repository/implementation;
+- preserve CORE-000 as Core-level intent aligned to ARC-011, not a competing authority;
+- preserve Architecture Integrity Hold and all broader open gates.
 
-- restore the exact status marker `Architecture ↔ Runtime / Interface boundary — OPEN`;
-- restore a valid Markdown link to `../Core/CORE-000_PLATFORM_ARCHITECTURE.md` in the README while preserving the statement that CORE-000 is Core-level intent aligned to ARC-011 and is not a competing Architecture authority.
+## Authorized corrective change set — exactly 5 paths
 
-Existing tests are evidence of current compatibility contracts and SHALL NOT be modified by S-C1.
+| ID | Target | Action | Applied | Verified |
+|---|---|---|:---:|:---:|
+| C1-01 | `Architecture/README.md` | restore canonical relative CORE-000 Markdown link only; retain S semantics | Y | PENDING CI |
+| C1-02 | `Architecture/_FOLDER_STATUS.md` | restore exact Runtime/Interface open marker; record S-C1; retain broader Hold/Open state | Y | PENDING CI |
+| C1-03 | `Repository/P7_ARCHITECTURE_README_AUTHORITY_ALIGNMENT_2026-09-01_S.md` | preserve failed-candidate and corrective provenance | Y | PENDING CI |
+| C1-04 | `Repository/MUT-2026-09-01-P7-ARCHITECTURE-README-AUTHORITY-DRIFT-S_MUTATION_MATRIX.md` | bind parent S to failed candidate and S-C1 | Y | PENDING CI |
+| C1-05 | this Matrix | bind corrective candidate state | Y | PENDING CI |
 
-## Authorized corrective material change set — exactly 5 paths
-
-| ID | Target | Action |
-|---|---|---|
-| C1-01 | `Architecture/README.md` | UPDATE only as needed to restore canonical relative CORE-000 link while preserving S authority semantics |
-| C1-02 | `Architecture/_FOLDER_STATUS.md` | UPDATE only as needed to restore exact Runtime/Interface open-gate marker and record S-C1 compatibility repair |
-| C1-03 | `Repository/P7_ARCHITECTURE_README_AUTHORITY_ALIGNMENT_2026-09-01_S.md` | UPDATE S failure/correction evidence and state |
-| C1-04 | `Repository/MUT-2026-09-01-P7-ARCHITECTURE-README-AUTHORITY-DRIFT-S_MUTATION_MATRIX.md` | UPDATE parent S failure/correction binding |
-| C1-05 | this Matrix | UPDATE/rebind corrective candidate state in same material change set |
-
-Unexpected path expansion = `0`.
+Candidate must be exactly one commit after `b6cb16fc...`, exactly these five paths, unexpected path expansion `0`.
 
 ## Explicitly forbidden
 
 - no change to `Quality/Integrity/test_architecture_readme_authority_boundary.py`;
-- no change to the two pre-existing tests that detected the regressions;
-- no mutation of CORE-000, CORE-003, ARC-011, ARC-006, REP-014 or Core status;
-- no weakening/removal of the S authority hierarchy;
+- no change to either pre-existing regression that detected the failure;
+- no CORE-000/CORE-003/ARC-011/ARC-006/REP-014/Core-status mutation;
+- no removal or weakening of S authority hierarchy;
 - no Architecture/Core certification or Priority-7/Phase-1/global closure;
-- no CI rerun used as substitute for material correction.
+- no rerun as substitute for material correction.
 
 ## Verification contract
 
-`PRE-WRITE MATRIX → GIT-DATA OBJECT PREPARATION → ONE-COMMIT/FIVE-PATH COMPARE → LIVE-PARENT RECHECK → NON-FORCE FAST-FORWARD → EXACT-HEAD READ-BACK → REQUIRED WORKFLOW SET → FULL-STACK JOB/STEP REVIEW → RUNTIME INTEGRITY/PROTOTYPE/INTEGRATION REVIEW → FAILURE/LEARNING ASSESSMENT → PARENT-S CLOSURE ONLY IF GREEN → CLOSURE-HEAD VERIFICATION`.
+`GIT-DATA PREP → ONE-COMMIT/FIVE-PATH COMPARE → LIVE-PARENT RECHECK → NON-FORCE FAST-FORWARD → EXACT-HEAD READ-BACK → REQUIRED WORKFLOW SET → FULL-STACK SHA/MATRIX/AUDIT STEP REVIEW → RUNTIME INTEGRITY/PROTOTYPE/INTEGRATION REVIEW → FAILURE/LEARNING ASSESSMENT`.
 
-The correction is successful only if the previously failing compatibility assertions pass while the S focused authority regression remains unchanged and passes.
+The corrective candidate succeeds only if the previously failing assertions pass while the unchanged S focused authority regression also passes.
+
+If candidate verification succeeds, S-C1 still requires a documentation/control closure and exact closure-head verification before the parent S lease can become Resume-Safe.
 
 ## Learning boundary
 
-Retained bounded lesson:
-
 `SEMANTIC REPAIR MUST PRESERVE ESTABLISHED INTERFACE/TEST CONTRACTS UNLESS THOSE CONTRACTS ARE THEMSELVES PROVEN STALE OR WRONG.`
 
-No new Governance rule is claimed from this incident alone.
+Existing Governance already requires evidence-based validation and controlled mutation; no new Governance rule is created here.

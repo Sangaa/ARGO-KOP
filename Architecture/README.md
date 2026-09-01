@@ -41,7 +41,7 @@ Repository and implementation artifacts
 
 `ARC-011` is the current authoritative architectural reference for structural boundaries and dependency direction, subordinate to the Constitution and applicable Governance authority.
 
-`Core/CORE-000_PLATFORM_ARCHITECTURE.md` preserves Core-level platform architecture intent and must remain aligned with that governed Architecture-control boundary. CORE-000 does not establish a competing Architecture model merely because it is a Core artifact or because another document references it.
+[`Core/CORE-000_PLATFORM_ARCHITECTURE.md`](../Core/CORE-000_PLATFORM_ARCHITECTURE.md) preserves Core-level platform architecture intent and must remain aligned with that governed Architecture-control boundary. CORE-000 does not establish a competing Architecture model merely because it is a Core artifact or because another document references it.
 
 Implementation must remain compatible with the applicable Architecture authority; implementation evidence does not silently redefine Architecture.
 
@@ -85,7 +85,7 @@ Physical inventory, canonical authority, relationship semantics and certificatio
 
 ## 3. Core-Level Architecture Alignment
 
-`Core/CORE-000_PLATFORM_ARCHITECTURE.md` expresses Core-level platform architecture intent.
+[`Core/CORE-000_PLATFORM_ARCHITECTURE.md`](../Core/CORE-000_PLATFORM_ARCHITECTURE.md) expresses Core-level platform architecture intent.
 
 For current structural boundaries and dependency direction, CORE-000 is aligned with the current canonical Architecture authority rather than replacing it:
 
@@ -146,7 +146,7 @@ The authoritative current domain state remains the evidence-backed `Architecture
 
 - `PROJECT_BOOTSTRAP.md`
 - `Core/CORE-003_CONSTITUTION.md`
-- `Core/CORE-000_PLATFORM_ARCHITECTURE.md`
+- [`Core/CORE-000_PLATFORM_ARCHITECTURE.md`](../Core/CORE-000_PLATFORM_ARCHITECTURE.md)
 - `Architecture/ARC-011_CANONICAL_ARCHITECTURE_MODEL.md`
 - `Architecture/ARC-006_DEPENDENCY_MODEL.md`
 - `Architecture/ARC_MAP.md`
