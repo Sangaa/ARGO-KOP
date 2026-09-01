@@ -18,7 +18,7 @@ def test_core_kernel_references_run001_without_dependency_inversion():
     )
     assert expected in registry
     assert "Runtime/RUN-001_BOOT_SEQUENCE.md" in kernel
-    assert "current canonical runtime sequence defined by `Runtime/RUN-001_BOOT_SEQUENCE.md`" in kernel
+    assert "This Kernel document does not duplicate or supersede the Runtime lifecycle definition." in kernel
     assert "Core/CORE-003_CONSTITUTION.md" in runtime
     assert "## Core\n\nDepends on: None at the architectural layer level." in dependency_model
 
