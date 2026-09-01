@@ -21,7 +21,7 @@ def test_closed_p7_control_plane_gaps_are_not_still_listed_as_open() -> None:
 def test_remaining_priority7_boundary_is_preserved() -> None:
     text = STATUS.read_text(encoding="utf-8")
 
-    assert "dependency and consumer validation for material Core authority relationships" in text
+    assert "continued dependency and consumer validation for remaining material Core authority relationships" in text
     assert "REP-014 relationship-registry reconciliation" in text
     assert "explicit final Core certification decision" in text
     assert "Priority 7 remains OPEN" in text
