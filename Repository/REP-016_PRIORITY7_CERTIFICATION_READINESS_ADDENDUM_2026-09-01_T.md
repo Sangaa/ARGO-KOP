@@ -2,20 +2,21 @@
 
 Date: 2026-09-01
 Applies to: `Repository/REP-016_PHASE1_PARTITION_WORK_QUEUE.md`
-State: `CURRENT OPERATIONAL ADDENDUM / PRIORITY 7 IN PROGRESS / CROSS-LAYER VALIDATION OPEN / T-C3 VERIFICATION PENDING`
+State: `CURRENT OPERATIONAL ADDENDUM / PRIORITY 7 IN PROGRESS / CROSS-LAYER VALIDATION OPEN / CORE CERTIFICATION READINESS PASS / CLOSURE-HEAD VERIFICATION PENDING`
 Root Transaction: `MUT-2026-09-01-P7-CORE-CERTIFICATION-READINESS-T`
 Corrective chain: `T-C1 → T-C2 → T-C3`
 Side repair: `MUT-2026-09-01-CI-REAL-MATRIX-TRIGGER-COVERAGE-U` — `CLOSED / CI-VERIFIED`
+T-C3 verified candidate: `a66fdd1ab3cde679246b7a7db6bb3ce86f468984`
 
 ## Current operational interpretation
 
 `PRIORITY 7 — Core = IN_PROGRESS`.
 
-Current bounded evidence supports opening the separate Explicit Core Certification Review, but readiness does not close the current cross-layer validation gate and does not certify Core.
+Current bounded evidence supports opening a separate Explicit Core Certification Review. Readiness does not close the current cross-layer validation gate and does not certify Core.
 
-Current state under T-C3 verification is unchanged:
+Current state:
 
-`CROSS-LAYER VALIDATION OPEN / CERTIFICATION REVIEW READY / CORE CERTIFICATION READINESS = PASS SUBJECT TO T-C3 EXACT-HEAD 4/4 / CORE STILL INTEGRITY HOLD / FOLDER CERTIFICATION PENDING`.
+`CROSS-LAYER VALIDATION OPEN / CERTIFICATION REVIEW READY / CORE CERTIFICATION READINESS = PASS / CORE STILL INTEGRITY HOLD / FOLDER CERTIFICATION PENDING`.
 
 ## Evidence boundary
 
@@ -27,18 +28,19 @@ The direct sweep established no additional direct material external coupling tha
 
 - T failed Runtime after prematurely removing `CROSS-LAYER VALIDATION OPEN`.
 - T-C1 restored the marker; Integrity became green while Integration exposed a separate stale state-contract assertion.
-- T-C2 updated that stale Integration contract; Runtime integrity/prototype/integration, Full-Stack and M2 all succeeded on `f63c7b3c1838ef7643d7f2d842e0d699304ac9d0`.
-- Real Mutation Matrix did not trigger on that SHA because the workflow did not yet cover corrective Matrix filenames.
-- Side-repair U added `Repository/*CORRECTIVE_MATRIX*.md` trigger coverage and passed 4/4 on material candidate `f2bab15f36a32f7251df9800aec44581af540add` and closure HEAD `663565bbca94a5dbda4a4f7c7f6d93d33cfbab00`.
-- T-C3 now rebinds the unchanged readiness semantics to a fresh exact HEAD under the repaired four-workflow environment.
+- T-C2 updated that stale Integration contract; Runtime integrity/prototype/integration, Full-Stack and M2 succeeded on `f63c7b3c1838ef7643d7f2d842e0d699304ac9d0`; Real Mutation Matrix was not triggered.
+- Side-repair U added `Repository/*CORRECTIVE_MATRIX*.md` trigger coverage and passed 4/4 on material candidate and closure HEAD.
+- T-C3 rebound unchanged readiness semantics to fresh exact HEAD `a66fdd1ab3cde679246b7a7db6bb3ce86f468984`.
 
-## What successful T-C3 may close
+T-C3 exact-head results:
+- Full-Stack `33537550704` — `SUCCESS`;
+- Runtime `33537550689` — `SUCCESS`, with integrity/prototype/integration all `SUCCESS`;
+- Real Mutation Matrix `33537550654` — `SUCCESS`;
+- M2 `33537550782` — `SUCCESS`.
 
-Only:
+Thus the bounded readiness question is closed as:
 
-`CORE CERTIFICATION READINESS = PASS / RESUME-SAFE`.
-
-This permits a fresh recomputation and, if no blocker appears, opening a separate Explicit Core Certification Review.
+`CORE CERTIFICATION READINESS = PASS`.
 
 ## What remains open
 
@@ -63,6 +65,8 @@ This permits a fresh recomputation and, if no blocker appears, opening a separat
 
 No REL-073 or other relationship mutation is authorized by this addendum.
 
-## Next legal action after verified T-C3 closure
+## Closure and next legal action
 
-Rediscover live `main` and recompute Priority 7. If no blocking drift or unresolved material seam appears, the strongest current candidate is a separate Explicit Core Certification Review. This addendum is not pre-authority to certify.
+This addendum is being closed documentation-only. The closure HEAD itself must pass all four required workflows before the readiness chain is Resume-Safe.
+
+After closure-head verification, rediscover live `main` and recompute Priority 7. If no blocking drift or unresolved material seam appears, the strongest current candidate is a separate Explicit Core Certification Review. This addendum is not pre-authority to certify.
