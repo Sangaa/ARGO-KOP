@@ -5,6 +5,7 @@ on:
       - 'Quality/Integration/run_real_matrix_regression.py'
       - 'Quality/Integration/check_mutation_matrix_semantics.py'
       - 'Repository/*MUTATION_MATRIX*.md'
+      - 'Repository/*CORRECTIVE_MATRIX*.md'
       - '.github/workflows/real-matrix-regression.yml'
 jobs:
   real-matrix-regression:
