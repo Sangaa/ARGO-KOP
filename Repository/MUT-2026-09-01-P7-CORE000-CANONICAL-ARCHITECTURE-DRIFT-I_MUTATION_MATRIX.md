@@ -2,16 +2,17 @@
 
 Transaction: `MUT-2026-09-01-P7-CORE000-CANONICAL-ARCHITECTURE-DRIFT-I`
 Priority: 7 — Core cross-layer validation
-State: `PREWRITE-REVALIDATED / SCOPE-MINIMIZED / OPEN`
+State: `ATOMIC-CANDIDATE-PREPARED / CI-PENDING / OPEN`
 Original Entry HEAD: `c9b7488732aef02fd53aa45d1fb608a24dbd019f`
 Post-H rebind commit: `3443681aab4463c61ef99e5994053f1041515f8f`
+Scope-minimization HEAD: `f8fc6d4e26518ed09e0227ff458337bbbd68712d`
 Date: 2026-09-01
 
 ## Problem Definition
 
 `Core/CORE-000_PLATFORM_ARCHITECTURE.md` still declares a platform component/layer model that conflicts materially with current canonical Architecture authority.
 
-Observed live CORE-000 state:
+Observed live CORE-000 state at scope-minimization HEAD:
 - Version `3.1.0`;
 - eight primary components: CORE, ENGINE, MEMORY, KNOWLEDGE, PROJECTS, RUNTIME, INTERFACES, ARCHIVE;
 - layer order begins `Governance → Core → Engine → Memory → Knowledge → Projects → Runtime → Interfaces → Archive`;
@@ -26,11 +27,11 @@ Evidence sources:
 - `Architecture/ARC_MAP.md` — same model and explicit `Archive = preservation domain / not active dependency layer`;
 - `Architecture/ARC-001_PLATFORM_ARCHITECTURE.md` — same dependency direction.
 
-This is substantive canonical-content drift inside an active Core authority artifact.
+Result: `CONTENT DRIFT CONFIRMED / HIGH CONFIDENCE`.
 
 ## Constitutional Classification
 
-Per `CORE-003` Laws 1, 2, 3, 5, 9 and the Cross-Layer Consistency Rule, the discrepancy is a **Core architectural-content defect / superseded architectural model**. Architecture does not silently override Core; the conflict is explicitly classified and the Core artifact is governedly reconciled while Constitution/Governance remain higher authority.
+Per `CORE-003` and current Architecture authority, the discrepancy is classified as a Core architectural-content defect / superseded structural model. Architecture does not silently override Core; the conflict is explicitly classified and CORE-000 is governedly reconciled while Constitution/Governance remain higher authority.
 
 ## Prior-Learning Retrieval
 
@@ -41,76 +42,76 @@ Per `CORE-003` Laws 1, 2, 3, 5, 9 and the Cross-Layer Consistency Rule, the disc
 - EJR-179 semantic-boundary regression principle: `TRANSFERABLE`.
 - Transaction E same-change-set recovery: `DIRECTLY APPLICABLE`.
 
-## Independent Evidence Gate
-
-1. Direct CORE-000 inspection confirms the old model.
-2. Direct ARC-011 inspection confirms the authoritative current model.
-3. ARC-004, ARC_MAP and ARC-001 independently corroborate the ARC-011 model.
-4. No inspected current authority grants the older CORE-000 model precedence over ARC-011 in structural-boundary/dependency scope.
-
-Result: `CONTENT DRIFT CONFIRMED / HIGH CONFIDENCE`.
-
-## Intervening Transaction H Revalidation
-
-H closed after the original I prewrite and changed `REP-014`, Core status and the current control-plane manifest. H did not change CORE-000 and its final closure HEAD `dca9829c...` is green on all four required workflows.
-
-The I baseline was therefore rebound after H before protected mutation.
-
 ## Scope-Minimization Decision
 
-The first rebound I design considered combining two material concerns:
-1. repair CORE-000 substantive architecture drift;
-2. register a new `CORE-000 → ARC-011` relationship in REP-014.
+Transaction I contains one material concern only: repair CORE-000 substantive architecture drift and bind direct evidence surfaces.
 
-That combination is unnecessary for proving the content correction and would widen the protected mutation surface. Under the one-material-change discipline, Transaction I is narrowed to the **CORE-000 content correction and its direct evidence surfaces only**.
-
-Relationship registration is explicitly deferred to the next Priority-7 relationship seam after I succeeds. This is not an absence claim and not a rejection of the relationship; it is controlled sequencing.
-
-Because REP-014 is not mutated in I, `REP-020_CURRENT_CONTROL_PLANE_BOUNDARY_MANIFEST.md` also requires no I mutation.
-
-## Current Target Baseline
-
-- `CORE-000`: v`3.1.0`, blob `22c03130cc74a4ac619fa177168ae3b6fcf3bd45`.
-- Core status: v`1.3.6`.
-- REP-014 remains v`1.2.10` and is outside I mutation scope.
-- Current manifest keeps REP-014 v`1.2.10` and is outside I mutation scope.
+Relationship registration is deferred and is not an absence claim. REP-014 and the current control-plane manifest are explicitly outside I mutation scope.
 
 ## Authorized Mutation Surface
 
-| ID | Path | Planned Change | Boundary |
+| ID | Path | Planned Change | Candidate State |
 |---|---|---|---|
-| I-01 | `Core/CORE-000_PLATFORM_ARCHITECTURE.md` | Reconcile component/layer description to current ARC-011 model; advance this document's version/audit metadata because this document itself is materially revalidated | Preserve Integrity Hold |
-| I-02 | `Core/_FOLDER_STATUS.md` | Record bounded CORE-000 canonical-architecture content reconciliation | P7 remains OPEN |
-| I-03 | `Quality/Integrity/test_core000_canonical_architecture_boundary.py` | Add durable semantic regression for layer order, Archive boundary and rejection of the old competing model | No prose-format freezing |
-| I-04 | `Repository/P7_CORE000_CANONICAL_ARCHITECTURE_DRIFT_2026-09-01_I.md` | Record evidence, decision, candidate CI and deferred relationship follow-up | No certification |
-| I-05 | this matrix | Bind exact atomic change set and candidate/closure evidence | Same-change-set required |
+| I-01 | `Core/CORE-000_PLATFORM_ARCHITECTURE.md` | Reconcile structural-boundary content to current ARC-011 model; v3.1.0 → v3.2.0; audit 2026-09-01 | APPLIED / READ-BACK PENDING |
+| I-02 | `Core/_FOLDER_STATUS.md` | Record bounded CORE-000 content reconciliation; v1.3.6 → v1.3.7 | APPLIED / READ-BACK PENDING |
+| I-03 | `Quality/Integrity/test_core000_canonical_architecture_boundary.py` | Add durable semantic regression for nine-boundary order and Archive boundary | APPLIED / READ-BACK PENDING |
+| I-04 | `Repository/P7_CORE000_CANONICAL_ARCHITECTURE_DRIFT_2026-09-01_I.md` | Record candidate scope, evidence and closure gate | APPLIED / READ-BACK PENDING |
+| I-05 | this matrix | Bind exact atomic change set and candidate/closure evidence | APPLIED / READ-BACK PENDING |
 
-Explicitly **not mutated in I**:
+Explicitly not mutated in I:
 - `Repository/REP-014_REPOSITORY_RELATIONSHIP_REGISTRY.md`;
 - `Repository/REP-020_CURRENT_CONTROL_PLANE_BOUNDARY_MANIFEST.md`;
 - Architecture source artifacts.
 
+## Preservation Requirements
+
+- Keep `CORE-000` as the active canonical CORE-000 owner.
+- Preserve Core Integrity Hold and Priority 7 OPEN state.
+- Preserve legacy `CORE-000_PLATFORM_IDENTITY.md` as noncanonical provenance; do not promote it.
+- Preserve implementation/completeness claims as evidence-dependent.
+- Do not create a new relationship edge in I.
+- Do not claim Core, Architecture, Phase-1 or Global Connected Baseline certification.
+
 ## Candidate Design Boundary
 
-CORE-000 remains the active canonical `CORE-000` owner, but shall not compete with the Architecture layer on structural boundary authority. The repaired document will:
-- preserve Core-level platform identity/foundational architecture intent;
-- explicitly align structural boundaries and dependency direction to `ARC-011` under Constitution/Governance;
-- use the current nine-boundary model;
-- classify Archive as a preservation domain, not an active dependency layer;
-- state that physical repository domains do not automatically create architectural layers;
-- keep implementation/completeness claims evidence-dependent.
+The repaired CORE-000:
+- preserves Core-level platform architecture intent;
+- explicitly aligns current structural boundaries and dependency direction to `ARC-011` under Constitution/Governance;
+- uses the current nine-boundary model;
+- classifies Archive as a preservation domain, not an active dependency layer;
+- states that physical repository domains do not automatically create architectural layers;
+- keeps implementation/completeness claims evidence-dependent.
 
-## Mutation Method
+## Atomic Mutation Method
 
-Protected I mutation MUST be committed atomically with this matrix using Git-object multi-file commit (`create_blob → create_tree → create_commit → update_ref force=false`). Separate Contents-API commits for protected I targets are prohibited.
+The protected candidate MUST use one Git-object commit containing exactly the five authorized I paths:
 
-Before candidate ref update:
-1. rediscover live `main`;
-2. require `main` to equal this matrix-only scope-minimization commit or inspect/rebind any divergence;
-3. construct one atomic candidate containing Matrix + CORE-000 + Core status + regression + progress record;
-4. re-read exact candidate files;
-5. run exact-head Runtime/Integration, Full-Stack, M2 and Real Mutation Matrix Regression;
-6. any required failure triggers GOV-013 §9B HARD HOLD.
+`create_blob → create_tree(base live-main tree) → create_commit(parent live main) → recheck main → update_ref(force=false)`.
+
+Separate Contents-API commits are prohibited for the candidate.
+
+## Candidate Pre-Write Validation
+
+- Live main rediscovered: `f8fc6d4e26518ed09e0227ff458337bbbd68712d`.
+- Live main message: `P7: minimize Transaction I to CORE-000 content drift`.
+- CORE-000 source blob: `22c03130cc74a4ac619fa177168ae3b6fcf3bd45`.
+- Core status source blob: `a48959e7e66b3698c5d344b1c490cb332216c537`.
+- Candidate CORE-000 blob: `fdb2313fdeabc6b506258815d39e8ed99c17ca27`.
+- Candidate Core status blob: `805e026b3e298a709a0cd0e99709abcbc21782da`.
+- Candidate regression blob: `5d5191b0ef3b5c96d37c002dee82d52930cbfbe1`.
+- Candidate progress-record blob: `798cc23448adc472a8f16fefe43ed128f0941642`.
+- Candidate matrix blob: self / bound by resulting atomic tree.
+- Unexpected authorized-path expansion: `0`.
+
+Pre-write result: `PASS / READY FOR ATOMIC TREE`.
+
+## Required Post-Write Validation
+
+1. Re-read all five candidate files from exact candidate HEAD.
+2. Confirm REP-014 and current manifest are unchanged from parent.
+3. Run exact-head Runtime/Integration, Full-Stack, M2 and Real Mutation Matrix Regression.
+4. Any required failure triggers GOV-013 §9B HARD HOLD.
+5. Only after all required checks succeed may I be closed resume-safe.
 
 ## Explicit Non-Claims
 
@@ -121,6 +122,8 @@ Before candidate ref update:
 - No Global Connected Baseline PASS.
 - No relationship registration completed by I.
 
-## Post-I Legal Follow-Up
+## Closure Gate
 
-If I succeeds, recompute live Priority-7 ordering. The directly evidenced `CORE-000 → ARC-011` documentary/alignment relationship becomes a candidate relationship-registration seam, but it must still be revalidated from the then-current repository before REP-014 mutation.
+`ATOMIC COMMIT → EXACT READ-BACK → REQUIRED EXACT-HEAD CI SUCCESS → CLOSURE RECORD/MATRIX UPDATE → FINAL CLOSURE-HEAD REVALIDATION`.
+
+No new Priority-7 transaction may be opened before this gate is complete.

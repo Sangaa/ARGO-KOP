@@ -17,7 +17,7 @@ Status
 
 Version
 
-1.3.6
+1.3.7
 
 Last Repository Re-Audit
 
@@ -37,11 +37,11 @@ Repository First / Evidence Based / Exact Top-Level Enumeration
 
 Review Scope
 
-Core physical inventory, local index consistency, identity/authority sampling, control-plane reconciliation, and cross-layer discrepancy classification
+Core physical inventory, local index consistency, identity/authority sampling, control-plane reconciliation, canonical-architecture content reconciliation, and cross-layer discrepancy classification
 
 Repository Baseline
 
-Priority 7 current `main` evidence through fourth bounded Core cross-layer relationship reconciliation
+Priority 7 current `main` evidence through four bounded cross-layer relationship reconciliations plus bounded CORE-000 canonical-architecture content reconciliation
 
 ---
 
@@ -83,6 +83,10 @@ Architectural Laws Review
 
 🟢 Current content re-read in P336; prior targeted review retained
 
+Platform Architecture Review
+
+🟢 Priority-7 Transaction I reconciles CORE-000 from the superseded eight-component / Archive-as-active-layer model to the current ARC-011-aligned nine-boundary model while preserving Core Integrity Hold
+
 Platform Lifecycle Review
 
 🟢 Priority-7 semantic revalidation corrected the retired Lifecycle `GOV-005` identity/path to canonical `LIF-001` while preserving separate platform/document lifecycle authority
@@ -109,7 +113,7 @@ Control-Plane Review
 
 Cross-Layer Review
 
-🟡 In Progress — bounded seams now include `CORE-KERNEL → RUN-001`, `CORE-009 ↔ LIF-001`, `CORE-012 → GOV-016`, and `ARC-005 → CORE-011`; broader material Core dependency/consumer validation remains open and REP-014 reconciliation continues where evidence requires
+🟡 In Progress — bounded seams include `CORE-KERNEL → RUN-001`, `CORE-009 ↔ LIF-001`, `CORE-012 → GOV-016`, and `ARC-005 → CORE-011`; CORE-000 canonical-architecture content drift is reconciled without adding a relationship edge in Transaction I; broader material Core dependency/consumer validation remains open and REP-014 reconciliation continues where evidence requires
 
 Folder Certification
 
@@ -121,7 +125,7 @@ Folder Certification
 
 The previous `2026-08-08` authority audit and `2026-08-10` targeted Core re-audits remain historical evidence. They are not silently relabeled as the current Priority-7 review.
 
-The `2026-09-01` P336 repository re-audit applies to exact top-level Core inventory, local index/status consistency, current-content sampling and discrepancy classification. Subsequent bounded Priority-7 transactions reconciled REP-013, REP-001, REP-002, the GOV-006 factual Core parent/example drift, `CORE-KERNEL → RUN-001`, the `CORE-009 ↔ LIF-001` lifecycle authority seam, `CORE-012 → GOV-016`, and `ARC-005 → CORE-011`. The CORE-009 seam included a direct semantic correction because its active document-lifecycle identity/path was stale. The CORE-012/GOV-016 and ARC-005/CORE-011 seams required registry reconciliation only; their source documents were not rewritten. These transactions still do **not** assert that every Core document received a new full semantic certification on that date.
+The `2026-09-01` P336 repository re-audit applies to exact top-level Core inventory, local index/status consistency, current-content sampling and discrepancy classification. Subsequent bounded Priority-7 transactions reconciled REP-013, REP-001, REP-002, the GOV-006 factual Core parent/example drift, `CORE-KERNEL → RUN-001`, the `CORE-009 ↔ LIF-001` lifecycle authority seam, `CORE-012 → GOV-016`, `ARC-005 → CORE-011`, and the substantive CORE-000 canonical-architecture content drift. The CORE-009 and CORE-000 transactions included direct semantic corrections; CORE-012/GOV-016 and ARC-005/CORE-011 required registry reconciliation only. These transactions still do **not** assert that every Core document received a new full semantic certification on that date.
 
 A document's `Last Audit` advances only when that document itself undergoes the applicable review.
 
@@ -133,6 +137,8 @@ Historical Audit
 Current Local Inventory Re-Audit
       ≠
 Control-Plane Reconciliation
+      ≠
+Bounded Content Reconciliation
       ≠
 Cross-Layer Validation
       ≠
@@ -178,6 +184,20 @@ Active ownership remains:
 - `Core/CORE-002_ARGO_IDENTITY.md` — active canonical platform-identity owner.
 
 The physical legacy file must not be interpreted as a second active CORE-000 authority.
+
+---
+
+# CORE-000 Canonical-Architecture Reconciliation
+
+Transaction I confirms that the prior CORE-000 eight-component model and `Archive` active Layer-8 representation had drifted from current canonical Architecture authority.
+
+The repaired CORE-000 now aligns structural boundaries and dependency direction to the current ARC-011 model:
+
+`Identity/Core → Governance → Architecture → Repository → Knowledge/Specifications/Standards → Memory → Cognition/Engine → Runtime/Services/AI → Projects/Applied Artifacts`.
+
+`Archive` is preserved as a repository preservation domain and is not an active dependency layer.
+
+This is a bounded Core content correction. Transaction I does not register a new REP-014 relationship and does not certify Architecture or Core globally.
 
 ---
 
@@ -235,11 +255,11 @@ No Phase-1 closure, repository-wide graph completion, or Global Connected Baseli
 
 # Certification Rule
 
-Core MUST NOT be marked clean merely because local inventory, control-plane representation, and bounded cross-layer seams are now reconciled.
+Core MUST NOT be marked clean merely because local inventory, control-plane representation, bounded content correction, and bounded cross-layer seams are now reconciled.
 
 Required progression remains:
 
-`Exact Local Inventory → Control-Plane Reconciliation → Cross-Layer Dependency/Consumer Validation → Relationship Reconciliation → Explicit Core Certification Review`
+`Exact Local Inventory → Control-Plane Reconciliation → Content / Cross-Layer Validation → Relationship Reconciliation → Explicit Core Certification Review`
 
 ---
 

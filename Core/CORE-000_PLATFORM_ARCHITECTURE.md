@@ -5,7 +5,7 @@ CORE-000
 Title
 Platform Architecture
 Version
-3.1.0
+3.2.0
 Status
 Released / Revalidated / Integrity Hold
 Classification
@@ -15,19 +15,19 @@ Yes
 Repository
 ARGO OS
 Last Audit
-2026-08-10
+2026-09-01
 Review Type
-Repository Re-Audit / Targeted Platform Architecture Review
+Priority-7 Canonical Architecture Content Reconciliation
 
 --------------------------------------------------
 
 ## Purpose
 
-This document defines the canonical architecture of the ARGO Platform.
+This document defines the Core-level canonical platform architecture intent of ARGO.
 
-It describes the platform structure, architectural layers, major components, responsibilities, and declared relationships.
+It describes the platform purpose, foundational structural expectations, major responsibility boundaries, and the evidence rules that prevent implementation or repository layout from silently redefining architecture.
 
-Architectural authority is established by this document together with applicable Governance and architecture-control mechanisms. Implementation documents must conform to it where applicable.
+For current structural boundaries and dependency direction, this Core authority is aligned with `Architecture/ARC-011_CANONICAL_ARCHITECTURE_MODEL.md`, subordinate to the Constitution and applicable Governance authority.
 
 An architectural declaration is not, by itself, evidence that the corresponding component, relationship or capability is implemented or operational.
 
@@ -75,90 +75,83 @@ This continuous cycle describes the intended evolution of ARGO. It does not cert
 
 --------------------------------------------------
 
-## Platform Components
+## Canonical Structural Boundaries
 
-The platform is composed of eight primary architectural components:
+The current platform boundary model is:
 
-CORE
+1. Identity / Core
+2. Governance
+3. Architecture
+4. Repository
+5. Knowledge / Specifications / Standards
+6. Memory
+7. Cognition / Engine
+8. Runtime / Services / AI
+9. Projects / Applied Artifacts
 
-Defines identity, constitutional principles, and architectural constraints.
+These are logical architectural boundaries. Physical folders or implementation groupings do not automatically create additional top-level layers.
 
-ENGINE
+`Archive` is a repository preservation domain and is not an active dependency layer.
 
-Provides governed reasoning, analysis, decision and validation capabilities.
+The canonical dependency direction follows the same order from Identity / Core toward Projects / Applied Artifacts. Reverse dependency requires explicit governed architectural authorization.
 
-MEMORY
+--------------------------------------------------
 
-Preserves experience, history, and organizational intelligence.
+## Responsibility Boundary
 
-KNOWLEDGE
+The structural model establishes responsibility boundaries rather than equating every repository folder with a platform layer.
 
-Contains reusable structured knowledge.
+Core preserves identity, constitutional principles and foundational constraints.
 
-PROJECTS
+Governance defines applicable rules and controls.
 
-Contains implementations and project-specific material built on the platform.
+Architecture defines structural boundaries and dependency direction.
 
-RUNTIME
+Repository preserves canonical persisted engineering state and navigation evidence.
 
-Defines how the platform starts, operates, and coordinates execution.
+Knowledge / Specifications / Standards carry governed reusable knowledge and specifications.
 
-INTERFACES
+Memory preserves working, decision, project and historical memory without silently overriding canonical knowledge.
 
-Connects the platform with external systems under controlled authority boundaries.
+Cognition / Engine provides reasoning, analysis, decision support and cognitive processing.
 
-ARCHIVE
+Runtime / Services / AI provides controlled execution, service boundaries and AI integration.
 
-Preserves historical knowledge and artifacts according to governed retention rules.
+Projects / Applied Artifacts extend approved platform capabilities without redefining foundations.
 
-Component declarations define architectural scope. Current implementation status must be established from repository evidence and the applicable component authority.
+Component or domain implementation status must be established from current repository evidence and applicable authority; this document does not certify completeness.
 
 --------------------------------------------------
 
 ## Architectural Rule
 
-Folders represent Platform Components where the repository structure adopts this architectural model.
+Repository folders are physical storage locations and may represent domains or implementation groupings, but physical placement alone does not establish architectural authority, layer membership or dependency direction.
 
-Folders do not automatically establish authority for every file they contain.
+Every active canonical artifact remains subject to applicable Governance, Repository registration, identity and relationship controls.
 
-Every component may own documentation, standards, specifications, and implementation guidance according to the applicable Governance and Registry rules.
-
-A path, filename, or folder location alone does not prove an architectural relationship.
+A path, filename, folder location, textual reference or numeric sequence alone does not prove an architectural relationship.
 
 --------------------------------------------------
 
-## Architectural Layers
+## Architecture Authority Alignment
 
-Layer 0
-Governance
+Current structural-boundary and dependency-direction interpretation is controlled by the applicable authority hierarchy:
 
-Layer 1
-Core
+Constitution / applicable Governance authority
 
-Layer 2
-Engine
+↓
 
-Layer 3
-Memory
+`Architecture/ARC-011_CANONICAL_ARCHITECTURE_MODEL.md`
 
-Layer 4
-Knowledge
+↓
 
-Layer 5
-Projects
+Other applicable Architecture controls
 
-Layer 6
-Runtime
+↓
 
-Layer 7
-Interfaces
+Repository and implementation artifacts
 
-Layer 8
-Archive
-
-Governance applies across all layers.
-
-Layer numbering expresses architectural position; it does not by itself establish dependency authority or implementation completeness.
+CORE-000 preserves Core-level platform architecture intent while remaining aligned to that governed architecture-control boundary. It must not establish a competing lower-fidelity structural model.
 
 --------------------------------------------------
 
@@ -192,17 +185,17 @@ Impact Reviewed
 Re-read
 ```
 
-Where the repository relationship registry is applicable, it is part of the evidence set but does not replace reading and validating the source and target artifacts.
+Where the repository relationship registry is applicable, it is part of the evidence set but does not replace reading and validating source and target artifacts.
 
 --------------------------------------------------
 
 ## Architectural Change Boundary
 
-A material change to layers, components, authority, dependencies or declared relationships requires the applicable architectural review and revalidation.
+A material change to structural boundaries, authority, dependencies or declared relationships requires the applicable architectural review and revalidation.
 
 Implementation cannot silently redefine this architecture.
 
-If implementation evidence conflicts with this architecture, the conflict must be classified before either side is changed.
+If implementation evidence conflicts with current architectural authority, the conflict must be classified before either side is changed.
 
 --------------------------------------------------
 
@@ -216,15 +209,15 @@ This objective is architectural intent, not a completion certificate.
 
 ## Historical and Review Provenance
 
-A historical audit date records an actual completed review event. It shall not be advanced merely because another Core artifact was reviewed.
+The 2026-08-10 targeted review remains historical evidence of the prior CORE-000 state.
 
-This document was specifically re-audited on 2026-08-10. The review does not certify the entire Core folder or repository.
+On 2026-09-01, Priority 7 revalidated this document against current canonical Architecture authority and corrected the superseded eight-component / Archive-as-active-layer structural model. This review is bounded to CORE-000 and does not certify the entire Core or Architecture domains.
 
 ## Integrity Status
 
-CORE-000 is revalidated at the scope of this targeted review.
+CORE-000 is revalidated for the canonical structural-boundary content reconciled in this review.
 
-Core remains under `INTEGRITY HOLD` until the remaining canonical Core artifacts and relevant cross-layer relationships are revalidated.
+Core remains under `INTEGRITY HOLD` while broader Priority-7 dependency/consumer validation, relationship reconciliation where required, and explicit Core certification remain open.
 
 --------------------------------------------------
 
