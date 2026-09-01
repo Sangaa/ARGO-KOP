@@ -2,23 +2,26 @@
 
 Transaction ID: MUT-2026-09-01-P7-GOV006-CORE-PARENT-RECONCILIATION-C
 Protocol: GOV-013 / GOV-014 / GOV-014A
-Status: FUNCTIONAL-CANDIDATE / CI-PENDING
+Status: FUNCTIONAL-CLOSED / CI-VERIFIED / P7-OPEN
 Date: 2026-09-01
 Entry HEAD: `0fc456381e623fae971c5c025df4db6d0db33452`
 Initial prewrite HEAD: `6baa803aa33334029e5c37ed6f5a90ded4328537`
 Refined pre-functional HEAD: `26940126ad132030123888ce013f4b5651b24acf`
+Initial functional HEAD: `fa7a85d538c0e111596f277dc82bb7569dcd3bf1`
+CI recovery HEAD: `f19f7af8b86c8fdddaf9ff640eecdfacba0bb2f5`
 
 ## Problem / change definition
-Priority 7 Core local inventory and REP-001/REP-002/REP-013 representation are reconciled. Current `Governance/GOV-006_NAMING_CONVENTION_STANDARD.md` still declares the CORE prefix canonical parent as `Architecture/` and uses `Architecture/CORE-003_CONSTITUTION.md` as its example, while current repository reality, the exact P336 Core inventory, and current consumers consistently use `Core/CORE-003_CONSTITUTION.md`.
+Priority 7 Core local inventory and REP-001/REP-002/REP-013 representation are reconciled. Current `Governance/GOV-006_NAMING_CONVENTION_STANDARD.md` still declared the CORE prefix canonical parent as `Architecture/` and used `Architecture/CORE-003_CONSTITUTION.md` as its example, while current repository reality, the exact P336 Core inventory, and current consumers consistently use `Core/CORE-003_CONSTITUTION.md`.
 
-The stale Architecture parent originates in the historical GOV-006 canonicalization line and is not supported by current repository paths. This is a factual naming/path drift, not evidence that the Core layer should move.
+The stale Architecture parent originated in the historical GOV-006 canonicalization line and was not supported by current repository paths. This was factual naming/path drift, not evidence that the Core layer should move.
 
 ## Prior-learning retrieval
 - P336 explicitly recorded the GOV-006 Core parent/example mismatch as a remaining Priority 7 gap.
 - P337 and the subsequent REP-001 / REP-002 transactions established the actual current Core representation under `Core/`.
-- Exact repository search for `Architecture/CORE-003_CONSTITUTION.md` recovers only GOV-006 itself, while independent search for `Core/CORE-003_CONSTITUTION.md` recovers multiple current consumers across Runtime, AI, Architecture and Core.
-- Historical commit `1fa61fc58309122e14781a5fd391213b1cd74ecb` shows the stale Architecture example was preserved into GOV-006 during 2026-08-08 canonicalization rather than proven by current Core structure.
-- GOV-014A requires this Matrix before protected mutation.
+- Exact repository search for `Architecture/CORE-003_CONSTITUTION.md` recovered GOV-006 historical/current text, while independent search for `Core/CORE-003_CONSTITUTION.md` recovered multiple current consumers across Runtime, AI, Architecture and Core.
+- Historical commit `1fa61fc58309122e14781a5fd391213b1cd74ecb` showed the stale Architecture example was preserved into GOV-006 during 2026-08-08 canonicalization rather than proven by current Core structure.
+- After the initial CI failure, prior-learning retrieval recovered `Memory/Engineering_Journal/EJR-179_2026-08-16_FOLDER_INVENTORY_IDENTITY_DRIFT_LEARNING.md` as DIRECTLY APPLICABLE. Its durable rule requires integrity assertions to target the semantic authority boundary rather than treating historical explanatory text as active metadata.
+- GOV-014A required this Matrix before protected mutation.
 
 ## Authority boundary
 This transaction repairs repository-fact alignment only. It MUST NOT promote GOV-006 from `Proposed / Audit-Derived Update` to Approved, expand its authority, or reinterpret references to GOV-006 as independent proof of active governance authority. Status/authority disposition remains a separate governance decision.
@@ -29,37 +32,40 @@ The initial Matrix included `Core/_FOLDER_STATUS.md` as a same-transaction synch
 ## Authorized functional change set
 | Change | Target | Action | Expected change | Applied | Verified |
 |---|---|---|---|---:|---:|
-| C-01 | `Governance/GOV-006_NAMING_CONVENTION_STANDARD.md` | UPDATE | Change CORE canonical parent/example from `Architecture/` to `Core/`; advance bounded version/audit metadata; add explicit repository-reality reconciliation note; preserve status/authority | Y | candidate |
-| C-02 | `Quality/Integration/test_gov006_core_parent_reconciliation.py` | CREATE | Regression proving CORE parent/example use `Core/` and the stale Architecture CORE-003 example is absent; verify status remains Proposed | Y | candidate |
-| C-03 | `Repository/P7_GOV006_CORE_PARENT_RECONCILIATION_2026-09-01_C.md` | CREATE | Bounded progress/evidence record | Y | candidate |
-| C-04 | this Matrix | UPDATE | Same-change-set execution state and exact target accounting | Y | candidate |
+| C-01 | `Governance/GOV-006_NAMING_CONVENTION_STANDARD.md` | UPDATE | Change active CORE canonical parent/example from `Architecture/` to `Core/`; advance bounded version/audit metadata; add explicit repository-reality reconciliation note; preserve status/authority | Y | Y |
+| C-02 | `Quality/Integration/test_gov006_core_parent_reconciliation.py` | CREATE + REPAIR | Regression proving the active CORE authority row uses `Core/`, the stale Architecture authority row is absent, historical explanatory provenance remains permitted, and status remains Proposed | Y | Y |
+| C-03 | `Repository/P7_GOV006_CORE_PARENT_RECONCILIATION_2026-09-01_C.md` | CREATE + CLOSEOUT UPDATE | Bounded progress/evidence and CI-recovery record | Y | Y |
+| C-04 | this Matrix | UPDATE | Execution, failure-recovery and closure accounting | Y | Y |
 
 ## KEEP requirements
 KEEP unchanged: `Core/_FOLDER_STATUS.md`, REP-001, REP-002, REP-013, REP-011/014/015/016 canonical bodies, REP-020 current manifest, all Core authority documents, Architecture authority files, Runtime/Engine/Services/Interfaces code and authority, relationship direction/type, Phase-1 status, Connected-Baseline status and global integrity claims.
 
 Preserve GOV-006 `Document ID`, `Canonical: Yes`, `Priority`, legacy namespace boundary, canonical identity rules, canonicalization history, and current `Status: Proposed / Audit-Derived Update` unless a separate governed promotion transaction explicitly changes authority.
 
-## Candidate validation
-The prepared GOV-006 candidate changes only version/audit metadata, the CORE parent/example row, and a bounded P7 reconciliation note. It preserves all existing naming rules, legacy-namespace handling, canonicalization history and current Proposed authority state.
+## Functional execution and CI failure boundary
+Initial functional HEAD `fa7a85d538c0e111596f277dc82bb7569dcd3bf1` correctly repaired the GOV-006 active CORE row and added a direct integration regression, but exact-head Runtime run `33469880999` failed in job `integration-tests`, step `Run integration quality suite`.
 
-The functional candidate contains exactly four authorized paths: GOV-006, one direct integration regression, one bounded progress record and this Matrix.
+The first meaningful failure was contained in `test_gov006_core_parent_matches_current_repository_reality`: the regression required the literal string `Architecture/CORE-003_CONSTITUTION.md` to be absent from the entire document while the same functional change intentionally preserved that literal inside the historical reconciliation narrative.
 
-## Pre-write validation
-- Live main rediscovered at `0fc456381e623fae971c5c025df4db6d0db33452` immediately before initial Matrix creation.
-- Closure-head Runtime run `33469303593` completed SUCCESS with integration, integrity and prototype jobs all successful.
-- Direct GOV-006 read confirms current stale CORE parent/example.
-- Independent exact-path searches establish `Architecture/CORE-003_CONSTITUTION.md` only in GOV-006 and widespread current use of `Core/CORE-003_CONSTITUTION.md`.
-- P336 Core status explicitly lists GOV-006 disposition as an open Priority 7 gate.
-- `REP-020_CURRENT_CONTROL_PLANE_BOUNDARY_MANIFEST.md` directly lists REP-011/012/013/014/015/016/020 only; GOV-006 is not a manifest row, so no manifest expansion or version synchronization is authorized.
-- Full current GOV-006 source was re-read from initial prewrite head before candidate construction.
+Classification: `TEST DEFECT / SEMANTIC AUTHORITY BOUNDARY TOO BROAD`.
 
-## Functional validation required
-1. Compare exact candidate diff before ref movement and require exactly four authorized paths.
-2. Re-read live main immediately before ref movement and require `26940126ad132030123888ce013f4b5651b24acf`.
-3. Fast-forward only (`force=false`).
-4. Re-read changed artifacts.
-5. Require relevant exact-head CI including Full-Stack, Runtime/Integration, Real Matrix, M2, GOV-014 and any triggered identity/quality gates.
-6. Close this Matrix only after green CI.
+The GOV-006 factual repair itself was not reverted. The test was narrowed to the active table row boundary and a separate assertion explicitly preserves historical explanatory provenance.
 
-## Closure boundary
-This transaction may close only the GOV-006 factual Core parent/example mismatch. Priority 7 remains OPEN. Core status-record synchronization for this closed fact, material dependency/consumer validation, relationship-registry reconciliation, GOV-006 authority/promotion disposition, explicit Core certification, Phase 1, repository-wide graph and Global Connected Baseline remain OPEN / not certified.
+## CI recovery validation
+Recovery commit: `f19f7af8b86c8fdddaf9ff640eecdfacba0bb2f5`.
+
+Exact-head evidence:
+- ARGO Runtime Prototype and Integration Tests `33475437864`: SUCCESS.
+- Full-Stack Repository Audit `33475437728`: SUCCESS.
+- M2 Multi-Channel Proposal Training `33475437912`: SUCCESS.
+- Runtime workflow jobs include prototype, integrity and integration success after the semantic-boundary correction.
+
+The changed regression was re-read after mutation and matches the directly applicable EJR-179 rule. No novel learning rule is promoted because the required durable control already exists.
+
+## Closure result
+The bounded GOV-006 Core parent/example factual mismatch is CLOSED and CI-VERIFIED.
+
+Priority 7 remains OPEN. This closure does not certify Core globally and does not close material dependency/consumer validation, `Core/_FOLDER_STATUS.md` synchronization, REP-014 relationship reconciliation, GOV-006 authority/promotion disposition, explicit Core certification, Phase 1, repository-wide graph validation or Global Connected Baseline.
+
+## Next legal boundary
+Select the next Priority 7 action only from current live-main evidence after this closure commit is revalidated. The known deferred candidate `Core/_FOLDER_STATUS.md` synchronization must not be assumed to be next until current Priority 7 evidence confirms it is the highest-value legal gap.
