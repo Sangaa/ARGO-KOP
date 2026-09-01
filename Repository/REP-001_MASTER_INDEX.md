@@ -6,12 +6,12 @@
 
 Platform: ARGO KOP (Knowledge Operating Platform)
 Document ID: REP-001
-Version: 1.11.3
+Version: 1.11.4
 Status: Integrity Hold
 Category: Repository
 Canonical: Yes
 Priority: Critical
-Last Audit Date: Aug 16, 2026
+Last Audit Date: Sep 1, 2026
 Development Baseline: 3.2.1
 
 ---
@@ -40,6 +40,7 @@ Historical root naming-convention material is not active canonical inventory and
 - `Core/ARGO_KERNEL.md`
 - `Core/Core.md`
 - `Core/CORE-000_PLATFORM_ARCHITECTURE.md`
+- `Core/CORE-000A_PLATFORM_GLOSSARY.md`
 - `Core/CORE-001_ARGO_MANIFEST.md`
 - `Core/CORE-002_ARGO_IDENTITY.md`
 - `Core/CORE-003_CONSTITUTION.md`
@@ -57,6 +58,8 @@ Historical root naming-convention material is not active canonical inventory and
 `CORE-001` and `CORE-002` were added to active inventory on 2026-08-29 after direct current-content verification and cross-check against `Core/_FOLDER_STATUS.md`, which identifies both as independently revalidated canonical Core artifacts. This closes their index discoverability gap only; Core cross-layer certification remains open.
 
 `CORE-KERNEL` (`Core/ARGO_KERNEL.md`) and `CORE-INDEX` (`Core/Core.md`) are indexed as current reviewed Core coordination/inventory surfaces after Lease 185 classified their missing REP-001/REP-002 discoverability as a real gap. Their index membership closes discoverability only and does not close Core Integrity Hold or cross-layer certification.
+
+`CORE-000A` (`Core/CORE-000A_PLATFORM_GLOSSARY.md`) is indexed as the current official/revalidated Core terminology reference established by direct current-content review and the P336 exact Core inventory. This closes its REP-001 discoverability gap only; glossary membership does not promote the legacy `CORE-000_PLATFORM_IDENTITY.md`, close Core certification, or establish cross-layer semantic validity by itself.
 
 ## 4. Repository Layer
 
@@ -374,6 +377,12 @@ The active Core inventory therefore now explicitly includes:
 This mutation repairs an index-scope discrepancy; it does not promote `CORE-000_PLATFORM_IDENTITY.md`, whose own document states `Canonical: No / Legacy / Superseded`.
 
 P356 is an inventory/identity reconciliation only. Core remains under Integrity Hold and cross-layer validation.
+
+## P7 Core REP-001 Reconciliation — 2026-09-01
+
+Current Core evidence establishes `Core/CORE-000A_PLATFORM_GLOSSARY.md` as a present official/revalidated Core reference and P336 explicitly classified its absence from the active REP-001 Core list as a control-plane discoverability gap.
+
+REP-001 now indexes `CORE-000A` without adding the legacy/superseded `CORE-000_PLATFORM_IDENTITY.md` to active inventory. This is a bounded discoverability repair only. REP-002 mapping drift, Core dependency/consumer validation, GOV-006 disposition, relationship reconciliation and Core certification remain open.
 
 ---
 
