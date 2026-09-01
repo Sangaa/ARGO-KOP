@@ -1,43 +1,52 @@
 # Priority 7 — CORE-003 ↔ ARC-011 Authority Seam — Transaction L
 
 Date: 2026-09-01
-State: `CANDIDATE / VALIDATION-FIRST / EXACT-HEAD VERIFICATION PENDING`
+State: `FUNCTIONAL-CLOSED / CI-VERIFIED / RESUME-SAFE / PRIORITY 7 OPEN`
 Transaction: `MUT-2026-09-01-P7-CORE003-ARC011-AUTHORITY-L`
 Work Lease: `HERMUZ-P7-L-CORE003-ARC011-20260901`
 Entry HEAD: `42133637e8f672dd1c6c2d1ce1be78ccfc00ba5b`
 Pre-write Matrix HEAD: `bfca2ab112aa6950bdf5717f42b976488bae5a3a`
+Material candidate HEAD: `6f818976889da9267f8004c8f0bf8ae540f6094c`
 
-## Reconstructed decision
+## Result
 
-After Transaction K closed resume-safe, Priority 7 remained open. The next highest-value Core authority boundary is Constitution ↔ Canonical Architecture because ARC-011 is the repository's canonical architecture model and explicitly declares its authority subordinate to the Constitution and applicable Governance.
-
-Current direct source evidence supports a bounded candidate pair:
+Current direct source evidence validates the bounded authority/reference candidate:
 
 `CORE-003 → ARC-011 = GOVERNS`
 
 `ARC-011 → CORE-003 = REFERENCES`
 
-The first direction is supported by CORE-003's highest-governing-rules and repository-component compliance language together with ARC-011's explicit subordination. The reverse is documentary/semantic reference to the Constitution in ARC-011's own authority model. No dependency is inferred.
+CORE-003 defines the highest governing rules and requires repository components to comply within applicable scope. ARC-011 declares itself the canonical Architecture Model, subordinate to the Constitution and applicable Governance, and explicitly places `Constitution / applicable Governance authority` above `Canonical Architecture Model` in its authority boundary.
 
-## Prior learning
+Subordination is not promoted to `DEPENDS_ON`. No stronger implementation/consumer/runtime relationship is claimed.
 
-- REL-037/038 CORE-003↔RUN-001 — DIRECTLY APPLICABLE pattern: independently evidenced GOVERNS plus reverse REFERENCES.
-- J/K ARC-006→CORE-003 — TRANSFERABLE: relationship type must follow evidence, not layer adjacency.
-- H ARC-005→CORE-011 — TRANSFERABLE: no graph symmetry or stronger semantics by convenience.
-- I CORE-000 repair — NOT APPLICABLE: no source drift is established here.
+## Material unit and read-back
 
-## Material unit
+L changed exactly three authorized paths in one material commit: focused integrity regression, this transaction record and rebound pre-write Matrix. CORE-003, ARC-011 and REP-014 remained unchanged. Unexpected path expansion = `0`.
 
-Transaction L is deliberately validation-first. It adds one focused integrity regression, this evidence record and the rebound Matrix only. It does not mutate CORE-003, ARC-011, REP-014, Core status, Architecture status, or any canonical authority source.
+Exact-head read-back passed.
+
+## Candidate exact-head CI
+
+On `6f818976889da9267f8004c8f0bf8ae540f6094c`:
+
+- Full-Stack Repository Audit — `33518055686` — SUCCESS; repository-audit job and all reported steps SUCCESS.
+- ARGO Runtime Prototype and Integration Tests — `33518055707` — SUCCESS.
+- Real Mutation Matrix Regression — `33518055666` — SUCCESS.
+- M2 Multi-Channel Proposal Training — `33518055708` — SUCCESS.
+
+Result: `4/4 REQUIRED WORKFLOWS SUCCESS`. No Hard Hold was triggered.
+
+## Learning retained
+
+Authority subordination and dependency are separate semantics. Higher constitutional authority plus explicit subordinate acknowledgement supports a bounded governing seam without manufacturing a dependency edge. This remains an application of existing HERMUZ relationship discipline rather than a new governance rule.
 
 ## Non-claims
 
-- No registry relationship is created in L.
-- No `ARC-011 → CORE-003 = DEPENDS_ON` claim.
-- No executable/runtime semantics.
-- No Core or Architecture certification.
-- No Phase-1, repository graph, Connected Baseline or Global PASS claim.
+No REP-014 mutation; no dependency promotion; no Core/Architecture certification; no Phase-1 closure; no repository-wide graph/Connected Baseline closure; no Global PASS.
 
-## Verification state
+## Session close / resume-safe checkpoint
 
-Exact-head read-back and required CI are pending at candidate construction time. If validated, a future transaction may reconcile REP-014, but L itself grants no authority for that future write.
+Transaction L is `FUNCTIONAL-CLOSED / CI-VERIFIED / RESUME-SAFE`. Work Lease CLOSED. Priority 7 remains OPEN.
+
+A future continuation must rediscover live main and recompute the Priority-7 queue. REP-014 reconciliation of the validated authority/reference pair is a candidate only, not future mutation authority.
