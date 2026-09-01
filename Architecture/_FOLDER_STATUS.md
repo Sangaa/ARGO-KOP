@@ -16,7 +16,7 @@ Status
 
 Version
 
-1.5.1
+1.5.2
 
 Canonical
 
@@ -24,15 +24,19 @@ Yes — evidence record only
 
 Last Audit
 
-2026-08-29
+2026-09-01
 
 Review Method
 
-Repository First / Evidence Based / Exact Git-Tree Enumeration
+Repository First / Evidence Based / Exact Git-Tree Enumeration / Bounded Consumer Reconciliation
+
+Review Scope
+
+Exact Architecture inventory, known identity/path evidence, active Architecture semantic re-audit, and bounded Priority-7 consumer alignment of `Architecture/README.md` with current CORE-000 / CORE-003 / ARC-011 authority semantics
 
 Repository Baseline
 
-Current main branch repository state
+Current main branch repository state through Priority-7 Transaction S candidate
 
 ---
 
@@ -50,15 +54,15 @@ Identity / Path Alignment
 
 Architecture Consistency
 
-🟡 Re-audit required across Layer Model, Dependency Model, Integration Model, Canonical Architecture Model and their consumers.
+🟡 Re-audit required across Layer Model, Dependency Model, Integration Model, Canonical Architecture Model and their consumers. Priority-7 Transaction S reconciles only the canonical `Architecture/README.md` consumer/handbook with current CORE-000 / CORE-003 / ARC-011 authority boundaries and the current primary ARC review set.
 
 Repository Alignment
 
-🟡 REP-001 Architecture inventory is synchronized for the currently promoted set; REP-002 and relationship registries require consolidated reconciliation.
+🟡 REP-001 Architecture inventory is synchronized for the currently promoted set; REP-002 and relationship registries require consolidated reconciliation where evidence requires.
 
 Cross-Reference Review
 
-🟡 Open. New evidence must be checked for stale Governance, Repository, Knowledge, Memory, Runtime and Interface references.
+🟡 Open. Transaction S closes one bounded README authority/inventory drift only. New evidence must still be checked for stale Governance, Repository, Knowledge, Memory, Runtime, AI and Interface references across the active Architecture set.
 
 ---
 
@@ -86,6 +90,8 @@ The current Architecture tree contains exactly these 15 tracked files:
 
 Physical presence is evidence of repository membership only; it is not automatic evidence of authority, semantic correctness or runtime implementation.
 
+`01-System-Overview.md` remains earlier foundation material. Its physical presence does not promote its historical structural model into current Architecture authority.
+
 ---
 
 # Current Architecture Core
@@ -107,6 +113,8 @@ The following artifacts form the primary architecture review set:
 
 `ARC-006` and `ARC-007` explicitly preserve dependency direction, integration boundaries, provenance, external execution uncertainty, and the Memory/Learning promotion boundary. They are architecture contracts, not runtime implementations.
 
+`ARC-011` remains the current canonical Architecture Model for structural boundaries and dependency direction, subordinate to the Constitution and applicable Governance authority.
+
 # Current Validation Gate
 
 1. Exact current physical Architecture inventory — PASS / 15 FILES / NO SUBDIRECTORIES
@@ -116,14 +124,32 @@ The following artifacts form the primary architecture review set:
 5. Repository-first status — PASS FOR INSPECTED SCOPE
 6. Layer boundary consistency — OPEN
 7. Dependency direction consistency — OPEN
-8. Canonical Architecture Model alignment — OPEN
+8. Canonical Architecture Model alignment — OPEN / `Architecture/README.md` BOUNDED CONSUMER ALIGNMENT PASS IN TRANSACTION S; CONSOLIDATED ACTIVE-ARC ALIGNMENT STILL REQUIRED
 9. Information Flow alignment — OPEN
 10. Evolution Model alignment — OPEN
 11. Known stale references — OPEN / RE-AUDIT
 12. Architecture ↔ Knowledge / Memory boundary — OPEN
-13. Architecture ↔ Runtime / Interface boundary — OPEN
+13. Architecture ↔ Runtime / Interface / AI boundary — OPEN
 
 Architecture is **not globally certified**. Any previous global cleanliness claim remains withdrawn until the expanded inventory and cross-layer relationships are revalidated.
+
+---
+
+# Bounded Priority-7 Consumer Reconciliation — Transaction S
+
+Direct current-content comparison identified `Architecture/README.md` as a stale canonical consumer of Core/Architecture authority after the 2026-09-01 CORE-000 reconciliation.
+
+Transaction S corrects only the README's bounded authority/inventory semantics:
+
+- removes the stale `CORE-000 = ultimate guiding text` interpretation;
+- binds current structural-boundary/dependency-direction interpretation to `ARC-011`, subordinate to Constitution/applicable Governance;
+- preserves CORE-000 as Core-level platform architecture intent aligned to ARC-011 rather than a competing Architecture model;
+- aligns the README's primary ARC review set with current Architecture status instead of implying its old partial list was exhaustive;
+- distinguishes ARC documents from ARC_MAP / README / folder-status navigation/control surfaces;
+- preserves `01-System-Overview.md` as foundation/legacy material without authority promotion;
+- replaces unsupported `globally locked` / `Anti-Patch Policy` wording with current controlled-mutation governance.
+
+This is a bounded consumer-content correction only. It does not register a new REP-014 relationship and does not close the broader Architecture re-audit.
 
 ---
 
@@ -131,11 +157,13 @@ Architecture is **not globally certified**. Any previous global cleanliness clai
 
 This status certifies only the evidence inspected so far. It does not certify Runtime, Core, AI, Services, Knowledge, Memory, Projects, Release or the entire repository.
 
+Transaction S does not certify the Architecture folder. It records one bounded canonical-consumer alignment while the remaining Architecture gates stay open.
+
 ---
 
 # Required Next Action
 
-`Validate active ARC semantics → validate cross-layer references → reconcile Repository registries where required → Architecture Re-Audit`
+`Validate active ARC semantics → validate remaining cross-layer references/consumers → reconcile Repository registries where required → Architecture Re-Audit`
 
 No `100% CLEAN` repository claim is authorized from this document alone.
 
@@ -145,8 +173,11 @@ No `100% CLEAN` repository claim is authorized from this document alone.
 
 - `PROJECT_BOOTSTRAP.md`
 - `Core/CORE-003_CONSTITUTION.md`
+- `Core/CORE-000_PLATFORM_ARCHITECTURE.md`
 - `Governance/GOV-005_REVIEW_STANDARD.md`
 - `Governance/GOV-006_NAMING_CONVENTION_STANDARD.md`
+- `Governance/GOV-014_CONTROLLED_DOCUMENT_MUTATION_PROTOCOL.md`
+- `Governance/GOV-014A_HERMUZ_PREWRITE_MUTATION_MATRIX_GATE.md`
 - `Repository/REP-001_MASTER_INDEX.md`
 - `Repository/REP-002_REPOSITORY_MAP.md`
 - `Architecture/ARC_MAP.md`
@@ -156,6 +187,7 @@ No `100% CLEAN` repository claim is authorized from this document alone.
 - `Architecture/ARC-007_INTEGRATION_MODEL.md`
 - `Architecture/ARC-008_REPOSITORY_LAYOUT.md`
 - `Architecture/ARC-011_CANONICAL_ARCHITECTURE_MODEL.md`
+- `Architecture/README.md`
 
 ---
 
@@ -164,6 +196,8 @@ No `100% CLEAN` repository claim is authorized from this document alone.
 Repository Reality > Previous Status Claims > Conversation Memory
 
 `EXACT PHYSICAL INVENTORY != ARCHITECTURE DOMAIN CERTIFICATION`
+
+`BOUNDED CONSUMER ALIGNMENT != ARCHITECTURE CERTIFICATION`
 
 ---
 
