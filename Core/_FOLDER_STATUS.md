@@ -13,11 +13,11 @@ Core
 
 Status
 
-🟡 INTEGRITY HOLD — LOCAL INVENTORY RECONCILED / CROSS-LAYER VALIDATION OPEN
+🟡 INTEGRITY HOLD — CONTROL PLANE RECONCILED / CROSS-LAYER VALIDATION OPEN
 
 Version
 
-1.3.1
+1.3.2
 
 Last Repository Re-Audit
 
@@ -37,11 +37,11 @@ Repository First / Evidence Based / Exact Top-Level Enumeration
 
 Review Scope
 
-Core physical inventory, local index consistency, identity/authority sampling, and cross-layer discrepancy classification
+Core physical inventory, local index consistency, identity/authority sampling, control-plane reconciliation, and cross-layer discrepancy classification
 
 Repository Baseline
 
-P336 exact current `main` evidence
+Priority 7 current `main` evidence through GOV-006 factual reconciliation closure
 
 ---
 
@@ -103,9 +103,13 @@ Core Index Review
 
 🟢 Exact local member inventory synchronized by P336
 
+Control-Plane Review
+
+🟢 Current Core representation reconciled across REP-013, REP-001 and REP-002; GOV-006 factual Core parent/example drift reconciled to `Core/` / `Core/CORE-003_CONSTITUTION.md` without authority promotion
+
 Cross-Layer Review
 
-🟡 In Progress — control-plane inventory drift and Governance naming/path discrepancy remain open
+🟡 In Progress — material Core dependency/consumer validation remains open; REP-014 reconciliation is required where relationship evidence changes or is incomplete
 
 Folder Certification
 
@@ -115,9 +119,9 @@ Folder Certification
 
 # Temporal Evidence Rule
 
-The previous `2026-08-08` authority audit and `2026-08-10` targeted Core re-audits remain historical evidence. They are not silently relabeled as the P336 review.
+The previous `2026-08-08` authority audit and `2026-08-10` targeted Core re-audits remain historical evidence. They are not silently relabeled as the current Priority-7 review.
 
-The `2026-09-01` P336 repository re-audit applies to exact top-level Core inventory, local index/status consistency, current-content sampling and discrepancy classification. It does **not** assert that every Core document received a new full semantic certification on that date.
+The `2026-09-01` P336 repository re-audit applies to exact top-level Core inventory, local index/status consistency, current-content sampling and discrepancy classification. Subsequent bounded Priority-7 transactions reconciled REP-013, REP-001, REP-002 and the GOV-006 factual Core parent/example drift. These later transactions do **not** assert that every Core document received a new full semantic certification on that date.
 
 A document's `Last Audit` advances only when that document itself undergoes the applicable review.
 
@@ -127,6 +131,8 @@ This distinction remains intentional:
 Historical Audit
       ≠
 Current Local Inventory Re-Audit
+      ≠
+Control-Plane Reconciliation
       ≠
 Cross-Layer Validation
       ≠
@@ -179,33 +185,38 @@ The physical legacy file must not be interpreted as a second active CORE-000 aut
 
 `CORE-012_GENERATIVE_KNOWLEDGE_AND_SELF_DEVELOPMENT.md` is not a newly invented gap-filler. Git history establishes its 2026-08-18 creation as the repair for a duplicate CORE-011 identity, followed by removal of the colliding duplicate and correction of downstream CORE-012 authority references.
 
-P336 therefore synchronizes discoverability only; it does not newly promote CORE-012.
+P336 therefore synchronized discoverability only; it did not newly promote CORE-012.
+
+---
+
+# Closed Priority-7 Control-Plane Gaps
+
+Current repository evidence now closes the previously recorded local/control-plane factual gaps:
+
+1. `REP-013` Core physical inventory representation — reconciled;
+2. `REP-001` active Core inventory representation — reconciled;
+3. `REP-002` Core physical map representation — reconciled;
+4. `GOV-006` Core canonical parent/example — reconciled factually to `Core/` while preserving its existing authority status.
+
+These closures do not certify Core semantics or cross-layer execution relationships.
 
 ---
 
 # Remaining P7 Gaps
 
-Local inventory reconciliation does not close Priority 7. Current evidence still requires at least:
+Priority 7 remains OPEN. Current evidence still requires:
 
-1. protected control-plane reconciliation for current Core representation in `REP-001`, `REP-002`, and `REP-013` using whole-file-safe GOV-014 transactions;
-2. explicit review/disposition of the current GOV-006 Core parent-directory/example mismatch against the actual governed Core structure;
-3. dependency and consumer validation for material Core authority relationships;
-4. relationship-registry reconciliation where required;
-5. explicit final Core certification decision only after those gates are satisfied.
+1. dependency and consumer validation for material Core authority relationships;
+2. REP-014 relationship-registry reconciliation where current evidence requires addition, correction, strengthening, weakening or explicit unresolved classification;
+3. explicit final Core certification decision only after those gates are satisfied.
 
-Known current control-plane drift includes:
-
-- current REP-001 active Core list does not visibly include `CORE-000A_PLATFORM_GLOSSARY.md`;
-- current REP-002 Core map does not include `CORE-000A_PLATFORM_GLOSSARY.md` or `CORE-012_GENERATIVE_KNOWLEDGE_AND_SELF_DEVELOPMENT.md`;
-- current REP-013 Core content inventory is materially older than the exact physical Core inventory.
-
-These findings are preserved as next-work evidence; P336 does not rewrite those protected surfaces.
+No Phase-1 closure, repository-wide graph completion, or Global Connected Baseline PASS is implied.
 
 ---
 
 # Certification Rule
 
-Core MUST NOT be marked clean merely because local inventory is now exact.
+Core MUST NOT be marked clean merely because local inventory and control-plane representation are now reconciled.
 
 Required progression remains:
 
@@ -215,7 +226,7 @@ Required progression remains:
 
 # Next Action
 
-`Whole-file-safe REP-001/REP-002/REP-013 Core inventory reconciliation → cross-layer GOV-006/consumer validation → Core certification review`
+`Validate material Core authority dependencies/consumers bidirectionally → reconcile REP-014 where evidence requires → Core certification review`
 
 ---
 
