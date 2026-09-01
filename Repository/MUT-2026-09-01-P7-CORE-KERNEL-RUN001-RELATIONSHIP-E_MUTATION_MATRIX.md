@@ -2,20 +2,20 @@
 
 Transaction ID: `MUT-2026-09-01-P7-CORE-KERNEL-RUN001-RELATIONSHIP-E`
 Protocol: `GOV-013 / GOV-014A`
-Status: `CLOSURE-CANDIDATE / RECOVERY-CI-VERIFIED / EXACT-CLOSURE-HEAD-CI-PENDING / P7-OPEN`
+Status: `FUNCTIONAL-CLOSED / CI-VERIFIED / P7-OPEN`
 Date: 2026-09-01
 Entry HEAD: `5f56a732feba08f9c808dfe2672560d6b59625e5`
 Prewrite Matrix HEAD: `b7218350659b18bdb24a315879ef5a9faa9b19ee`
 Relationship Candidate HEAD: `edac3f8451dbaf8b38f73e067c095caca177e8de`
 Regression HEAD: `960a3edddf5d7d04fc65d308ece5b90176ec2f09`
 Status Sync HEAD: `33d617e9f60ef5db9d1842e2a8d084fc09c565b7`
-Progress Record HEAD: `e050ee80972f69882f075cfcbd8d0f0f71030ad9`
 Initial Matrix Candidate HEAD: `9f03dc9567f881a7899110b7650fb7b304bfd693`
 First Repair HEAD: `cf42f7a19e61438227987c8d1725974b484c4fbb`
 Second Repair HEAD: `a97bbad064ec7b02e8a5e9a23b9ab3abc07b9523`
 Third Repair Content HEAD: `521dfcaa8da50543b6dceb44de1bc8aa2ec5c8a2`
 E-07B Authorization HEAD: `2271d130d7bb3583a695d0bd4e4bddac8e235818`
 Atomic Recovery HEAD: `5e3020fe8c1bea33479edd1382c592aac3a7e64a`
+Closure-Lineage HEAD: `adf8a10774ab8cf20b05aef2c66296b1f1054d6d`
 
 ## Problem / relationship result
 
@@ -23,7 +23,7 @@ Priority 7 remains open. This bounded transaction reconciles only:
 
 `CORE-KERNEL → RUN-001 = REFERENCES / INTENTIONAL ONE-WAY / RUNTIME-CONTRACT-ALIGNED / NON-DEPENDENCY`
 
-ARC-006 prevents promotion to Core → Runtime architectural dependency. Direct reverse review did not prove a specific RUN-001 → CORE-KERNEL dependency/consumer edge, so no reverse edge was manufactured for symmetry.
+ARC-006 prevents promotion to a Core → Runtime architectural dependency. Direct reverse review did not prove a specific `RUN-001 → CORE-KERNEL` dependency/consumer edge, so no reverse edge was manufactured for symmetry.
 
 ## Prior-learning retrieval
 
@@ -38,14 +38,14 @@ ARC-006 prevents promotion to Core → Runtime architectural dependency. Direct 
 
 | ID | Target | Action | Expected change | Applied | Verified |
 |---|---|---|---|---:|---:|
-| E-01 | `Repository/REP-014_REPOSITORY_RELATIONSHIP_REGISTRY.md` | UPDATE | add only evidence-backed REL-062 one-way REFERENCES row and bounded reconciliation note | Y | recovery-CI verified |
-| E-02 | `Quality/Integrity/test_core_kernel_run001_relationship_boundary.py` | CREATE/REPAIR | direct seam regression; durable semantic boundary after brittle assertion repair | Y | recovery-CI verified |
-| E-03 | `Core/_FOLDER_STATUS.md` | UPDATE | record one validated bounded seam while preserving remaining P7/certification hold | Y | recovery-CI verified |
-| E-04 | `Repository/P7_CORE_KERNEL_RUN001_RELATIONSHIP_2026-09-01_E.md` | CREATE/UPDATE | bounded progress, learning, recovery and closure evidence | Y | closure update pending exact-head CI |
-| E-05 | this Matrix | UPDATE | record hard holds, repairs, recovery and closure evidence | Y | closure update pending exact-head CI |
-| E-06 | `Quality/Integration/test_core_p7_status_sync.py` | UPDATE | accept truthful bounded progress wording while preserving P7-open/certification/no-global-close guards | Y | recovery-CI verified |
+| E-01 | `Repository/REP-014_REPOSITORY_RELATIONSHIP_REGISTRY.md` | UPDATE | add only evidence-backed REL-062 one-way REFERENCES row and bounded reconciliation note | Y | CI-verified |
+| E-02 | `Quality/Integrity/test_core_kernel_run001_relationship_boundary.py` | CREATE/REPAIR | direct seam regression; durable semantic boundary after brittle assertion repair | Y | CI-verified |
+| E-03 | `Core/_FOLDER_STATUS.md` | UPDATE | record one validated bounded seam while preserving remaining P7/certification hold | Y | CI-verified |
+| E-04 | `Repository/P7_CORE_KERNEL_RUN001_RELATIONSHIP_2026-09-01_E.md` | CREATE/UPDATE | bounded progress, learning, recovery and closure evidence | Y | CI-verified |
+| E-05 | this Matrix | UPDATE | record hard holds, repairs, recovery and closure evidence | Y | CI-verified |
+| E-06 | `Quality/Integration/test_core_p7_status_sync.py` | UPDATE | accept truthful bounded-progress wording while preserving P7-open/certification/no-global-close guards | Y | CI-verified |
 | E-07 | `Repository/REP-020_CURRENT_CONTROL_PLANE_BOUNDARY_MANIFEST.md` | UPDATE | refresh REP-014 `1.2.6 → 1.2.7` | Y | content valid; original commit same-change-set binding failed |
-| E-07B | current manifest + this Matrix | ATOMIC REBIND | bind protected manifest and Matrix in one exact Git change set | Y | recovery-CI verified |
+| E-07B | current manifest + this Matrix | ATOMIC REBIND | bind protected manifest and Matrix in one exact Git change set | Y | CI-verified |
 
 ## KEEP requirements
 
@@ -91,11 +91,8 @@ Root cause: `SAME-CHANGE-SET MATRIX BINDING VIOLATION / WRITE-SURFACE ATOMICITY 
 
 The protected manifest was semantically correct, but its single-file Contents commit did not include the Matrix in the exact diff. Following directly applicable recovery 187, E-07B used Git blob/tree/commit operations and `force=false` fast-forward from authorization HEAD `2271d130d7bb3583a695d0bd4e4bddac8e235818`.
 
-Atomic Recovery HEAD:
-`5e3020fe8c1bea33479edd1382c592aac3a7e64a`
-
-Exact diff contained only:
-1. `Repository/MUT-2026-09-01-P7-CORE-KERNEL-RUN001-RELATIONSHIP-E_MUTATION_MATRIX.md`;
+Atomic Recovery HEAD `5e3020fe8c1bea33479edd1382c592aac3a7e64a` changed exactly:
+1. this Matrix;
 2. `Repository/REP-020_CURRENT_CONTROL_PLANE_BOUNDARY_MANIFEST.md`.
 
 Unexpected paths: `0`.
@@ -103,24 +100,27 @@ Unexpected paths: `0`.
 ## Recovery CI evidence
 
 Exact recovery HEAD `5e3020fe8c1bea33479edd1382c592aac3a7e64a`:
-
 - Runtime/Integration `33485141412` — SUCCESS.
 - Full-Stack Repository Audit `33485141368` — SUCCESS.
-- M2 Multi-Channel Proposal Training `33485141342` — SUCCESS.
+- M2 `33485141342` — SUCCESS.
 - Real Mutation Matrix Regression `33485141435` — SUCCESS.
 
-Therefore all four discovered failure causes are repaired on the recovery head without authority promotion or P7/global closure.
+## Closure-lineage CI evidence
 
-## Formal closure-lineage rule
+Exact closure-lineage HEAD `adf8a10774ab8cf20b05aef2c66296b1f1054d6d`:
+- Runtime/Integration `33485367772` — SUCCESS.
+- Full-Stack Repository Audit `33485367631` — SUCCESS.
+- M2 `33485367723` — SUCCESS.
+- Real Mutation Matrix Regression `33485367670` — SUCCESS.
 
-This Matrix and the progress record are now being advanced together as the formal closure-lineage candidate. Recovery CI being green is necessary but not sufficient: Transaction E closes only if the exact closure-lineage HEAD itself passes every triggered required CI gate.
+All four discovered failure causes are repaired without authority promotion or P7/global closure.
 
-If the closure-lineage HEAD is green:
+## Closure decision
 
 `TRANSACTION E = FUNCTIONAL-CLOSED / CI-VERIFIED / P7-OPEN`.
 
-If any required closure-head gate fails, the transaction returns immediately to GOV-013 §9B HARD HOLD and no next Core seam may start.
+This closure applies only to the bounded `CORE-KERNEL → RUN-001` relationship reconciliation transaction. It does not certify Core or close Priority 7.
 
-## Resume after closure
+## Next legal action
 
-Re-read live main, then recompute the next material Core authority dependency/consumer seam from current evidence. Reconcile REP-014 only where evidence requires. Do not claim Core certification, Phase-1 closure, repository-wide graph closure, or Global Connected Baseline PASS.
+Re-read live main and recompute the next material Core authority dependency/consumer seam from current repository evidence. Reconcile REP-014 only where evidence requires. Do not claim Core certification, Phase-1 closure, repository-wide graph closure, or Global Connected Baseline PASS.

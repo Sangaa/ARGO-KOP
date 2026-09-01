@@ -1,58 +1,60 @@
 # Priority 7 — Core Kernel → RUN-001 Relationship E
 
 Date: 2026-09-01
-State: `CLOSURE CANDIDATE / RECOVERY CI VERIFIED / PRIORITY 7 OPEN`
+State: `FUNCTIONAL-CLOSED / CI-VERIFIED / PRIORITY 7 OPEN`
 Transaction: `MUT-2026-09-01-P7-CORE-KERNEL-RUN001-RELATIONSHIP-E`
-Recovery HEAD: `5e3020fe8c1bea33479edd1382c592aac3a7e64a`
+Atomic Recovery HEAD: `5e3020fe8c1bea33479edd1382c592aac3a7e64a`
+Closure-Lineage HEAD: `adf8a10774ab8cf20b05aef2c66296b1f1054d6d`
 
 ## Finding
 
-`CORE-KERNEL` is a canonical Core/Runtime Contract surface that explicitly aligns its runtime lifecycle to `Runtime/RUN-001_BOOT_SEQUENCE.md`, but the relationship registry did not represent that bounded documentary seam.
+`CORE-KERNEL` explicitly aligns its runtime lifecycle to `Runtime/RUN-001_BOOT_SEQUENCE.md`. The strongest justified registry state is:
 
-## Relationship classification
+`CORE-KERNEL → RUN-001 = REFERENCES / INTENTIONAL ONE-WAY / RUNTIME-CONTRACT-ALIGNED / NON-DEPENDENCY`
 
-`CORE-KERNEL → RUN-001 = REFERENCES`
-
-Disposition:
-
-`INTENTIONAL ONE-WAY / RUNTIME-CONTRACT-ALIGNED / NON-DEPENDENCY`
-
-`Architecture/ARC-006_DEPENDENCY_MODEL.md` keeps Core free of lower-layer architectural dependencies. Direct reverse review did not prove a specific `RUN-001 → CORE-KERNEL` dependency/consumer edge, so no reverse relationship was manufactured for symmetry.
+ARC-006 keeps Core free of lower-layer architectural dependencies. Direct reverse review did not prove a specific `RUN-001 → CORE-KERNEL` dependency/consumer edge, so no reverse edge was manufactured for symmetry.
 
 ## Applied construction
 
 - `REP-014` advanced to v1.2.7 and added `REL-062` only.
-- Added the focused `test_core_kernel_run001_relationship_boundary.py` regression.
-- `Core/_FOLDER_STATUS.md` advanced to v1.3.3 while preserving the cross-layer/certification hold.
-- Current control-plane manifest was refreshed to REP-014 v1.2.7 and rebound atomically to the governing Matrix after same-change-set enforcement exposed the write-surface gap.
+- Added focused seam regression `Quality/Integrity/test_core_kernel_run001_relationship_boundary.py`.
+- `Core/_FOLDER_STATUS.md` advanced to v1.3.3 while preserving cross-layer validation and certification HOLD.
+- Current control-plane manifest was refreshed to REP-014 v1.2.7.
+- Same-change-set enforcement recovery atomically rebound the protected current manifest and Transaction E Matrix.
 
-## CI root-cause learning
+## Captured failure learning
 
-1. `BRITTLE REGRESSION / PROSE-LEVEL STRING OVERREACH` — repaired by protecting the durable Kernel semantic boundary rather than incidental prose.
-2. `STALE REGRESSION / TRANSIENT STATUS-WORDING OVERREACH` — repaired while retaining remaining P7, REP-014, certification and no-global-close guards.
-3. `REAL COMPANION EVIDENCE DRIFT / CURRENT-MANIFEST FRESHNESS VIOLATION` — REP-014 v1.2.7 required refresh of the executable current control-plane manifest.
-4. `SAME-CHANGE-SET MATRIX BINDING VIOLATION / WRITE-SURFACE ATOMICITY GAP` — prewrite Matrix presence was insufficient when a later single-file protected commit omitted the Matrix from the exact Git change set; recovery used one atomic Git-object commit with manifest + Matrix.
+1. `BRITTLE REGRESSION / PROSE-LEVEL STRING OVERREACH` — protect durable semantics, not incidental prose.
+2. `STALE REGRESSION / TRANSIENT STATUS-WORDING OVERREACH` — preserve semantic HOLD boundaries while allowing truthful bounded progress wording.
+3. `REAL COMPANION EVIDENCE DRIFT / CURRENT-MANIFEST FRESHNESS VIOLATION` — refresh executable current evidence when a listed artifact version changes.
+4. `SAME-CHANGE-SET MATRIX BINDING VIOLATION / WRITE-SURFACE ATOMICITY GAP` — prewrite authorization does not replace exact-change-set Matrix binding; atomic Git-object recovery is required where the write surface otherwise splits protected mutation from its Matrix.
 
-Directly reused prior learning: EJR-179, Current Control-Plane Manifest Rebind-010, and Matrix Same-Changeset Repair-187.
+Prior learning reused: EJR-179, Current Control-Plane Manifest Rebind-010, Matrix Same-Changeset Repair-187.
 
-## Recovery verification
+## Recovery CI
 
-Exact recovery HEAD `5e3020fe8c1bea33479edd1382c592aac3a7e64a`:
-
+Exact atomic recovery HEAD `5e3020fe8c1bea33479edd1382c592aac3a7e64a`:
 - Runtime/Integration `33485141412` — SUCCESS.
-- Full-Stack Repository Audit `33485141368` — SUCCESS.
+- Full-Stack `33485141368` — SUCCESS.
 - M2 `33485141342` — SUCCESS.
 - Real Mutation Matrix Regression `33485141435` — SUCCESS.
-- Atomic recovery diff from authorization HEAD contained exactly two paths: this transaction Matrix and `REP-020_CURRENT_CONTROL_PLANE_BOUNDARY_MANIFEST.md`; unexpected paths = `0`.
+
+## Closure-lineage CI
+
+Exact closure-lineage HEAD `adf8a10774ab8cf20b05aef2c66296b1f1054d6d`:
+- Runtime/Integration `33485367772` — SUCCESS.
+- Full-Stack `33485367631` — SUCCESS.
+- M2 `33485367723` — SUCCESS.
+- Real Mutation Matrix Regression `33485367670` — SUCCESS.
+
+Therefore Transaction E is functionally closed and CI-verified.
 
 ## Boundary
 
-This transaction does not modify `CORE-KERNEL`, `RUN-001`, `CORE-003`, or `ARC-006` authority text. It does not claim executable coupling, complete Core-to-Runtime graph validation, Core certification, Phase-1 closure, repository-wide graph closure, or Global Connected Baseline PASS.
+Transaction E does not modify `CORE-KERNEL`, `RUN-001`, `CORE-003`, or `ARC-006` authority text and does not claim executable coupling, complete Core graph validation, Core certification, Phase-1 closure, repository-wide graph closure, or Global Connected Baseline PASS.
 
-## Closure discipline
+Priority 7 remains OPEN.
 
-Recovery CI is green, but Transaction E becomes closed only after the formal closure-lineage commit itself passes exact-head required CI. Priority 7 remains OPEN regardless of E closure.
+## Next legal action
 
-## Resume point
-
-After exact closure-head CI, recompute the next material Core authority dependency/consumer seam from live repository evidence and reconcile REP-014 only where evidence requires.
+Rediscover live `main`, then recompute the next material Core authority dependency/consumer seam from current repository evidence. Reconcile REP-014 only where evidence requires; do not create graph symmetry without evidence.
