@@ -3,62 +3,70 @@
 Date: 2026-09-01  
 Priority: 7  
 Transaction: `F`  
-Status: `CANDIDATE / CI-PENDING / PRIORITY 7 OPEN`
+Status: `FUNCTIONAL-CLOSED / CI-VERIFIED / PRIORITY 7 OPEN`
 
-## Entry evidence
+## Entry and candidate lineage
 
-- Transaction-E final closure head was re-read before continuation and current `main` was rediscovered.
-- Transaction-F prewrite authority head: `253e8c6d21558781d7c6f8e06489caf3b9ac966c`.
-- `Core/CORE-009_PLATFORM_LIFECYCLE.md` at entry was v1.4.0 and still named the document lifecycle as `GOV-005` plus retired path `Lifecycle/GOV-005_DOCUMENT_LIFECYCLE.md`.
-- `Lifecycle/LIF-001_DOCUMENT_LIFECYCLE.md` is the current canonical document lifecycle and records the former Lifecycle GOV-005 identity/path as retired collision provenance.
-- `Lifecycle/_FOLDER_STATUS.md` independently confirms active LIF-001 and retired active-path cleanup.
+- Entry closure baseline: `3e67f960e90f5f2c3ea56fcb73fc487de16c51e7`.
+- Transaction-F prewrite authorization HEAD: `253e8c6d21558781d7c6f8e06489caf3b9ac966c`.
+- Atomic candidate HEAD: `c6befc13a1c4f9a7563af6a45132aaaed8d1b459`.
+- Candidate change set: exactly one commit containing the eight governed Transaction-F files and no unrelated path.
 
-## Classification
+## Finding closed
 
-`CURRENT CORE SEMANTIC / AUTHORITY-PATH DRIFT`.
+Entry `Core/CORE-009_PLATFORM_LIFECYCLE.md` correctly separated platform lifecycle authority from document lifecycle authority but still identified the active document lifecycle as `GOV-005` and `Lifecycle/GOV-005_DOCUMENT_LIFECYCLE.md`.
 
-The stale CORE-009 identity/path is not retained as current authority merely because it is historical text. Current repository evidence requires canonical LIF-001.
+Current repository evidence establishes `Lifecycle/LIF-001_DOCUMENT_LIFECYCLE.md` as the active canonical document lifecycle. The former Lifecycle GOV-005 identity/path is retired provenance after collision with the active governance artifact `Governance/GOV-005_REVIEW_STANDARD.md`.
 
-## Relationship result
+Final classification:
 
-Direct source evidence supports two documentary directions:
+`CURRENT CORE SEMANTIC / AUTHORITY-PATH DRIFT — RECONCILED`.
+
+## Final relationship result
+
+Direct source evidence establishes two documentary directions:
 
 ```text
 CORE-009 → LIF-001 = REFERENCES
 LIF-001  → CORE-009 = REFERENCES
 ```
 
-No evidence supports promotion of this seam to `DEPENDS_ON`, `GOVERNS`, `IMPLEMENTS`, or `CONSUMES`.
+Final registry records:
 
-Planned registry dispositions:
+- `REL-063`: `DOCUMENT-LIFECYCLE-BOUNDARY / BIDIRECTIONAL-DOCUMENTARY / NON-DEPENDENCY`.
+- `REL-064`: `PLATFORM-LIFECYCLE-BOUNDARY / BIDIRECTIONAL-DOCUMENTARY / NON-DEPENDENCY`.
 
-- `REL-063`: `DOCUMENT-LIFECYCLE-BOUNDARY / BIDIRECTIONAL-DOCUMENTARY / NON-DEPENDENCY`
-- `REL-064`: `PLATFORM-LIFECYCLE-BOUNDARY / BIDIRECTIONAL-DOCUMENTARY / NON-DEPENDENCY`
+No `DEPENDS_ON`, `GOVERNS`, `IMPLEMENTS`, or `CONSUMES` relationship was inferred.
 
-## Candidate mutation
+## Candidate exact-head CI
 
-The governed candidate is designed as one atomic Git change set containing:
+Candidate HEAD: `c6befc13a1c4f9a7563af6a45132aaaed8d1b459`
 
-- CORE-009 semantic identity/path correction and v1.4.1;
-- REP-014 v1.2.8 with REL-063/064;
-- current control-plane manifest refresh for REP-014 v1.2.8;
-- Core and Lifecycle bounded status synchronization;
-- focused lifecycle-boundary regression;
-- this evidence record;
-- Transaction-F Mutation Matrix binding.
+- Real Mutation Matrix Regression — run `33491244392` — `SUCCESS`.
+- M2 Multi-Channel Proposal Training — run `33491244402` — `SUCCESS`.
+- Full-Stack Repository Audit — run `33491244439` — `SUCCESS`.
+- ARGO Runtime Prototype and Integration Tests — run `33491244448` — `SUCCESS`.
 
-The candidate preserves:
+No `GOV-013 §9B` Hard Hold occurred in Transaction F.
 
-- separate platform/document lifecycle authority;
-- active `Governance/GOV-005_REVIEW_STANDARD.md` identity;
-- historical provenance of retired Lifecycle GOV-005 without recreating that active path;
-- Core and Lifecycle certification holds;
-- Phase-1/global/Connected-Baseline open boundaries.
+## Bounded closure
 
-## CI gate
+Transaction F closes only the inspected CORE-009 ↔ LIF-001 lifecycle authority-path and documentary relationship seam.
 
-Required exact-head validation remains pending. Any required workflow failure reopens `GOV-013 §9B HARD HOLD` before further construction.
+Still OPEN:
 
-## Resume-safe boundary
+- remaining material Priority-7 Core authority dependency/consumer validation;
+- REP-014 reconciliation where current evidence requires it;
+- explicit Core folder certification;
+- remaining Lifecycle consumer-intent/cross-domain validation and consolidated Lifecycle certification;
+- Phase 1 repository work;
+- repository-wide graph / Connected Baseline validation;
+- Global integrity PASS.
 
-If candidate CI is green, close Transaction F with exact workflow evidence. If any required check fails, diagnose first meaningful failure and repair only under governed matrix authorization.
+No Phase-1 closure, Core certification, Lifecycle certification, repository-wide graph completion, Connected Baseline PASS, or Global `BOOTED / INTEGRITY PASS` is claimed.
+
+## Resume-safe next action
+
+Rediscover live `main` first, then recompute the highest-value remaining Priority-7 material Core authority seam from current repository evidence. Do not treat this record, the Core status `Next Action`, or prior chat memory as ordering authority.
+
+Any new protected mutation requires a new prewrite Mutation Matrix and exact same-change-set binding.
