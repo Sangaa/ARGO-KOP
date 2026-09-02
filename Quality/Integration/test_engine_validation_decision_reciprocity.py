@@ -27,5 +27,5 @@ def test_eng002_execution_boundary_is_explicit():
 
     assert "Execution" in eng002
     assert "ENG-002" in eng006
-    assert "REL-004 | ENG-002 | ENG-006" in registry
+    # REP-014 records the downstream executor as the decision-output consumer.\n    assert "REL-004 | ENG-006 | ENG-002 | CONSUMES" in registry
     assert "Execution authority remains subject to validation, authorization" in eng002

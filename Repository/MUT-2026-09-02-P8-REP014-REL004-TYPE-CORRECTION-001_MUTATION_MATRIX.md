@@ -2,9 +2,9 @@
 
 Transaction ID: `MUT-2026-09-02-P8-REP014-REL004-TYPE-CORRECTION-001`
 Priority: `8 — Governance`
-State: `PRE-WRITE / READY`
+State: `TYPE-CORRECTED MATERIAL CANDIDATE / CI PENDING`
 Entry HEAD: `727bceb502462cb1f651eadf58f4d5ebe4118cac`
-Pre-write Matrix HEAD: `PENDING`
+Pre-write Matrix HEAD: `086d3264f45a3b147f1e5f4038d366ff031623e3`
 Targets: `Repository/REP-014_REPOSITORY_RELATIONSHIP_REGISTRY.md` + `Quality/Integration/test_engine_validation_decision_reciprocity.py`
 REP-014 source blob: `4f4c2dd8ba068a5ee19df1406e98fc3d6349347c`
 Protocols: `PROJECT_BOOTSTRAP / CORE-003 / GOV-013 / GOV-014 / GOV-014A / REP-003 / REP-014 / ENG-002 / ENG-006`
@@ -31,14 +31,14 @@ Authorized row: `REL-004 | ENG-006 | ENG-002 | CONSUMES | Revalidated within ins
 
 | Change ID | Target | Action | Expected Content | Applied | Verified |
 |---|---|---|---|---:|---:|
-| P8-REL004-01 | REP-014 REL-004 row | UPDATE | reverse direction, change `DEPENDS_ON → CONSUMES`, set bounded revalidated state | N | N |
-| P8-REL004-02 | reciprocity guard | UPDATE | assert corrected exact tuple and retain decision/execution authority checks | N | N |
-| P8-REL004-03 | all other content | KEEP | no unrelated semantic or test change | N | N |
-| P8-REL004-04 | ENG-002 / ENG-006 | KEEP | no endpoint mutation or promotion | N | N |
-| P8-REL004-05 | this Matrix | UPDATE | bind material compare, read-back and verification | N | N |
+| P8-REL004-01 | REP-014 REL-004 row | UPDATE | reverse direction, change `DEPENDS_ON → CONSUMES`, set bounded revalidated state | Y | PENDING CI |
+| P8-REL004-02 | reciprocity guard | UPDATE | assert corrected exact tuple and retain decision/execution authority checks | Y | PENDING CI |
+| P8-REL004-03 | all other content | KEEP | no unrelated semantic or test change | Y | Y |
+| P8-REL004-04 | ENG-002 / ENG-006 | KEEP | no endpoint mutation or promotion | Y | Y |
+| P8-REL004-05 | this Matrix | UPDATE | bind material compare, read-back and verification | Y | PENDING CI |
 
 Atomicity: exactly one material commit after the pre-write Matrix HEAD, exactly REP-014 + the targeted guard + this Matrix, unexpected paths `0`.
 
 Forbidden: no executable-connectivity claim, no endpoint/folder promotion, no P8/Phase-1/global closure, no repository-wide graph claim and no guard weakening.
 
-Closure requires exact authorized diffs, immutable read-back, exact-head four-workflow success with Runtime job split reviewed, Matrix reconciliation and closure-head verification.
+Closure requires exact authorized diffs, immutable read-back, exact-head four-workflow success with Runtime job split reviewed, Matrix reconciliation and closure-head verification.\n\nPre-write Matrix HEAD verification: Full-Stack `33685472627`, Runtime/Integration `33685472688`, Real Mutation Matrix `33685472617`, and M2 `33685472789` all succeeded.

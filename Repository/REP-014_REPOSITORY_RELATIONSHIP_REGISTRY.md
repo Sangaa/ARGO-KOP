@@ -70,7 +70,7 @@ The following are deliberately limited to relationships established during repos
 | REL-001 | SPEC-001-KNOWLEDGE-ORGANIZATION | MOD-001 | DEPENDS_ON | Revalidated within inspected authority scope |
 | REL-002 | MOD-001 | SRV-004 | CONSUMES | Revalidated within inspected scope |
 | REL-003 | SRV-005 | ENG-004 | CONSUMES | Revalidated within inspected scope |
-| REL-004 | ENG-002 | ENG-006 | DEPENDS_ON | Revalidation Required |
+| REL-004 | ENG-006 | ENG-002 | CONSUMES | Revalidated within inspected scope |
 | REL-005 | ENG-006 | SRV-009 | IMPLEMENTS | **BIDIRECTIONAL / EXECUTABLE-VERIFIED / GOVERNED / ISOLATED E2E** |
 | REL-006 | RUN-010 | ENG-002 | CONSUMES | Revalidated within inspected scope |
 | REL-007 | RUN-010 | ENG-004 | CONSUMES | Revalidated within inspected scope |
