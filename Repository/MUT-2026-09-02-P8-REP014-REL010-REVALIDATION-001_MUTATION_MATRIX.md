@@ -2,7 +2,7 @@
 
 Transaction ID: `MUT-2026-09-02-P8-REP014-REL010-REVALIDATION-001`
 Priority: `8 — Governance`
-State: `RESUMED / TYPE CORRECTION PRE-WRITE / AUTHORIZED SCOPE ONLY`
+State: `TYPE-CORRECTED MATERIAL CANDIDATE / CI PENDING`
 Entry HEAD: `4354a16f4abc7c3311c9810d8c7cbf6a5f53634a`
 Protocol: `PROJECT_BOOTSTRAP / CORE-003 / GOV-013 / GOV-014 / REP-014`
 
@@ -62,6 +62,7 @@ Priority 8 remains OPEN.
 ## Resume Phase — 2026-09-02
 
 Resume HEAD: `dab69686a6100e63bb9323decb75451bf2e955b0`
+Resume pre-write Matrix HEAD: `451f22c1af638e6d8915630b49fdd91c25c9d358`
 Current REP-014 source blob: `5e0de8fc8ed0c9f28d9ef6e95315ae8f9e956dfc`
 Resolved prerequisite: `MUT-2026-09-02-P8-MOD011-SEMANTIC-REVALIDATION-001` plus exact-head Runtime stale-guard side repair `MUT-2026-09-02-P8-MOD011-RUNTIME-STALE-GUARD-SR1`.
 
@@ -88,13 +89,15 @@ Authorized corrected row:
 
 | Change ID | Target | Action | Expected Content | Applied | Verified |
 |---|---|---|---|---:|---:|
-| P8-REL010-R1 | REP-014 REL-010 row | UPDATE | reverse direction to `KNW-002 → MOD-011`, replace `DEPENDS_ON` with `CONSUMES`, set bounded revalidated state | N | N |
-| P8-REL010-R2 | all other REP-014 content | KEEP | byte-for-byte/content-equivalent | N | N |
+| P8-REL010-R1 | REP-014 REL-010 row | UPDATE | reverse direction to `KNW-002 → MOD-011`, replace `DEPENDS_ON` with `CONSUMES`, set bounded revalidated state | Y | PENDING CI |
+| P8-REL010-R2 | all other REP-014 content | KEEP | byte-for-byte/content-equivalent | Y | Y |
 | P8-REL010-R3 | MOD-011 / KNW-002 | KEEP | no endpoint mutation or promotion | Y | Y |
-| P8-REL010-R4 | this Matrix | UPDATE | bind material compare, read-back, CI and closure evidence | N | N |
+| P8-REL010-R4 | this Matrix | UPDATE | bind material compare, read-back, CI and closure evidence | Y | PENDING CI |
 
 Material transaction atomicity: exactly one commit after this pre-write Matrix HEAD, exactly `2` changed paths (REP-014 + this Matrix), unexpected paths `0`.
 
 Forbidden: no reverse companion edge, no endpoint maturity promotion, no Models/Knowledge folder certification, no Priority-8/Phase-1/global closure, no global graph or integrity PASS.
 
 Closure requires immutable read-back, one-row REP-014 diff, four required exact-head workflows with full Runtime job split reviewed, Matrix reconciliation and closure-head verification.
+
+Pre-write Matrix HEAD verification: Full-Stack `33682201838`, Runtime/Integration `33682201859`, Real Mutation Matrix `33682201952`, and M2 `33682201844` all succeeded; Runtime jobs `integration-tests`, `integrity-tests`, and `prototype-tests` all succeeded.

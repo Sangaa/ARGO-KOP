@@ -76,7 +76,7 @@ The following are deliberately limited to relationships established during repos
 | REL-007 | RUN-010 | ENG-004 | CONSUMES | Revalidated within inspected scope |
 | REL-008 | RUN-010 | ENG-006 | CONSUMES | Revalidated within inspected scope |
 | REL-009 | RUN-010 | SRV-009 | CONSUMES | **INTENTIONAL ONE-WAY / ISOLATED EXECUTION-OBSERVED / GOVERNED / NON-UNIVERSAL** |
-| REL-010 | MOD-011 | KNW-002 | DEPENDS_ON | Revalidation Required |
+| REL-010 | KNW-002 | MOD-011 | CONSUMES | Revalidated within inspected scope |
 | REL-011 | MOD-011 | KNW-003 | DEPENDS_ON | Revalidation Required |
 | REL-012 | MOD-011 | KNW-004 | DEPENDS_ON | Revalidation Required |
 | REL-013 | MOD-011 | KNW-008 | DEPENDS_ON | Revalidation Required |
