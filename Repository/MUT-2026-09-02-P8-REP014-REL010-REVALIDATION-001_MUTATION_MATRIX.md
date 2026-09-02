@@ -2,7 +2,7 @@
 
 Transaction ID: `MUT-2026-09-02-P8-REP014-REL010-REVALIDATION-001`
 Priority: `8 — Governance`
-State: `HARD HOLD / PRE-MATERIAL ABORT / RESUME-SAFE`
+State: `RESUMED / TYPE CORRECTION PRE-WRITE / AUTHORIZED SCOPE ONLY`
 Entry HEAD: `4354a16f4abc7c3311c9810d8c7cbf6a5f53634a`
 Protocol: `PROJECT_BOOTSTRAP / CORE-003 / GOV-013 / GOV-014 / REP-014`
 
@@ -58,3 +58,43 @@ Resume REL-010 only after current repository evidence independently revalidates 
 `P8 REL-010 = HARD HOLD / PRE-MATERIAL ABORT / RESUME-SAFE`.
 
 Priority 8 remains OPEN.
+
+## Resume Phase — 2026-09-02
+
+Resume HEAD: `dab69686a6100e63bb9323decb75451bf2e955b0`
+Current REP-014 source blob: `5e0de8fc8ed0c9f28d9ef6e95315ae8f9e956dfc`
+Resolved prerequisite: `MUT-2026-09-02-P8-MOD011-SEMANTIC-REVALIDATION-001` plus exact-head Runtime stale-guard side repair `MUT-2026-09-02-P8-MOD011-RUNTIME-STALE-GUARD-SR1`.
+
+The former endpoint-provisional blocker is resolved only within MOD-011's inspected source/provenance semantic scope. MOD-011 remains `Proposed / Future-Ready`; Models-folder and repository-wide certification remain unchanged.
+
+### Required relationship evidence
+
+| Gate | Result | Evidence-bounded determination |
+|---|---|---|
+| SOURCE AUTHORITY | PASS / BOUNDED | `KNW-002` is Canonical / Integrity Hold / Revalidated and owns Knowledge Classification semantics |
+| TARGET AUTHORITY | PASS / BOUNDED | `MOD-011` is Canonical / Proposed / Future-Ready / Revalidated and owns the inspected external-source/provenance semantic boundary |
+| SEMANTIC DIRECTION | CURRENT ROW FAIL | KNW-002 explicitly says classification consumes MOD-011 source/evidence semantics; the necessary direction is `KNW-002 → MOD-011`, not the reverse |
+| DEPENDENCY NECESSITY | PASS FOR CORRECTED EDGE | KNW-002's connected-source classification boundary relies on MOD-011 definitions; MOD-011 remains understandable without KNW-002 and names it as a downstream review/related surface |
+| CONSUMER / IMPACT | PASS / BOUNDED | direct exact-row, semantic reverse, historical and Quality/Tools searches found no executable consumer of the old direction; impact is confined to REP-014 and this transaction record |
+| TYPE FIT | `CONSUMES` | exact source wording is “Classification consumes those source and evidence semantics”; `REFERENCES` is too weak, generic `DEPENDS_ON` is less precise, and no `IMPLEMENTS/GOVERNS/VALIDATES` relation is supported |
+
+Disposition: `TYPE CORRECTION REQUIRED`.
+
+Authorized corrected row:
+
+`REL-010 | KNW-002 | MOD-011 | CONSUMES | Revalidated within inspected scope`
+
+### Resume Mutation Matrix
+
+| Change ID | Target | Action | Expected Content | Applied | Verified |
+|---|---|---|---|---:|---:|
+| P8-REL010-R1 | REP-014 REL-010 row | UPDATE | reverse direction to `KNW-002 → MOD-011`, replace `DEPENDS_ON` with `CONSUMES`, set bounded revalidated state | N | N |
+| P8-REL010-R2 | all other REP-014 content | KEEP | byte-for-byte/content-equivalent | N | N |
+| P8-REL010-R3 | MOD-011 / KNW-002 | KEEP | no endpoint mutation or promotion | Y | Y |
+| P8-REL010-R4 | this Matrix | UPDATE | bind material compare, read-back, CI and closure evidence | N | N |
+
+Material transaction atomicity: exactly one commit after this pre-write Matrix HEAD, exactly `2` changed paths (REP-014 + this Matrix), unexpected paths `0`.
+
+Forbidden: no reverse companion edge, no endpoint maturity promotion, no Models/Knowledge folder certification, no Priority-8/Phase-1/global closure, no global graph or integrity PASS.
+
+Closure requires immutable read-back, one-row REP-014 diff, four required exact-head workflows with full Runtime job split reviewed, Matrix reconciliation and closure-head verification.
