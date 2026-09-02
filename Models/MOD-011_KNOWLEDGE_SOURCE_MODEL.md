@@ -6,19 +6,19 @@
 
 Platform: ARGO KOP
 Document ID: MOD-011
-Version: 1.1.2
-Status: Proposed / Future-Ready / Revalidation Required
+Version: 1.1.3
+Status: Proposed / Future-Ready / Revalidated
 Category: Models
 Canonical: Yes
 Development Baseline: 3.2.1
-Last Audit: 2026-08-10
-Audit Boundary: This audit revalidates metadata, authority boundaries, and selected relationships. It does not certify the full pre-failure semantic mutation.
+Last Audit: 2026-09-02
+Audit Boundary: Independent semantic revalidation completed on 2026-09-02 against exact mutation history and current governed consumers. This validates the retained source/provenance semantics within the inspected scope; it does not promote the model beyond Proposed / Future-Ready or certify unrelated Models-domain or repository-wide integrity.
 
 ---
 
 # Temporal / Provenance Boundary
 
-This model was materially mutated during the 2026-08-09 pre-failure session window identified by `EJR-015`. Therefore its current semantic content is retained provisionally and remains subject to independent revalidation. Current metadata correction does not retroactively validate the earlier semantic mutation.
+This model was materially mutated during the 2026-08-09 pre-failure session window identified by `EJR-015`. Independent revalidation on 2026-09-02 reconstructed the exact material mutation at `7ffd8b2877dda11dc040f292a213036a336c043a` and compared the retained semantics against current Knowledge, Memory, Learning, AI-adapter, Runtime, external-feedback, provenance/authority and security boundaries. The reviewed semantic additions remain CURRENTLY VALID within that inspected scope. The historical pre-failure provenance remains preserved as evidence, but it no longer leaves the current semantic content provisional. This does not promote model maturity, Models-folder integrity, unrelated consumers, or repository-wide integrity.
 
 # Purpose
 
