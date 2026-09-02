@@ -2,9 +2,10 @@
 
 Transaction ID: `MUT-2026-09-02-P8-REP014-REL001-REVALIDATION-001`
 Priority: `8 — Governance`
-State: `HARD HOLD / PRE-MATERIAL ABORT / RESUME-SAFE`
+State: `RESUMED / COMPLETE SOURCE ACQUIRED / MATERIAL MUTATION PENDING`
 Entry HEAD: `2c3596691ba501453a8e69ef6769bad61dc41f99`
 Pre-write Matrix HEAD: `237a28f3624f86f82a4e4a8fa588b5ae8115b70f`
+Hard-Hold checkpoint: `979a394188be157acac6719937b8331fd6eca423`
 Protocol: `PROJECT_BOOTSTRAP / CORE-003 / GOV-013 / GOV-014 / REP-014 / CURRENT P8 CLOSURE EVIDENCE`
 
 ## Legal-entry proof
@@ -40,28 +41,28 @@ Source checkpoints at entry:
 | S03 | Current relationship table — REL-002..REL-072 | KEEP | byte/content-equivalent |
 | S04 | Identity Drift Reconciliation — REL-001 | UPDATE | replace stale unresolved rationale with current bounded source-evidence reconciliation |
 | S05 | All other reconciliation/history/evidence sections | KEEP | content-equivalent |
-| S06 | This Matrix | UPDATE | record abort evidence and resume-safe state |
+| S06 | This Matrix | UPDATE | finalize material/read-back/test evidence and closure |
 
 ## Mutation Matrix
 
 | Change ID | Target | Original evidence | Action | Expected Content | Applied | Verified | Notes |
 |---|---|---|---|---|---:|---:|---|
-| P8-REL001-01 | `REP-014` REL-001 table row | REP-014 blob `addee302...` | UPDATE | `Revalidated within inspected authority scope` | N | N | BLOCKED before material write |
-| P8-REL001-02 | `REP-014` REL-001 reconciliation section | current Identity Drift section | UPDATE | record direct SPEC/MOD identity + authority evidence and bounded disposition | N | N | BLOCKED before material write |
-| P8-REL001-03 | all other REP-014 content | REP-014 blob `addee302...` | KEEP | content-equivalent preservation | N | N | zero-touch cannot be proven with truncated full-body retrieval |
-| P8-REL001-04 | this Matrix | pre-write artifact | UPDATE | record abort evidence and resume-safe closure | Y | Y | this record only |
+| P8-REL001-01 | `REP-014` REL-001 table row | REP-014 blob `addee302...` | UPDATE | `Revalidated within inspected authority scope` | N | N | no relationship type/direction change |
+| P8-REL001-02 | `REP-014` REL-001 reconciliation section | current Identity Drift section | UPDATE | record direct SPEC/MOD identity + authority evidence and bounded disposition | N | N | no global graph claim |
+| P8-REL001-03 | all other REP-014 content | REP-014 blob `addee302...` | KEEP | content-equivalent preservation | N | N | complete source now retrievable |
+| P8-REL001-04 | this Matrix | current transaction record | UPDATE | record material SHA/read-back/tests/closure | N | N | required before closure |
 
-## HARD HOLD evidence
+## HOLD resolution evidence
 
-GOV-014 requires complete source segmentation, candidate reconstruction, and proof that every `KEEP` section is preserved with `Unexpected Changes = 0` before a material repository write.
+The earlier HOLD was caused only by response-surface truncation during whole-file retrieval. It is now resolved without changing the governed requirement:
 
-The available connector successfully establishes the targeted REL-001 row and source semantics, but retrieval of the large REP-014 body is response-truncated in the current execution surface. That prevents complete candidate reconstruction and independent Zero-Touch proof for all untouched sections.
+- REP-014 was read in contiguous bounded line ranges through `End of REP-014`, all reporting the same source blob `addee302fad2bf2271b914bc47619392c4ad4509`;
+- the same blob was then retrieved directly by blob SHA as one complete source object;
+- therefore complete-source candidate reconstruction and Zero-Touch comparison are available before material write.
 
-GOV-014 abort conditions therefore apply: incomplete source read/candidate preservation proof at the execution surface. No REP-014 material mutation was attempted.
+The semantic evidence and mutation scope are unchanged from the original pre-write Matrix.
 
-This is a tooling/execution-surface HOLD, not a semantic contradiction in REL-001 evidence.
-
-## Forbidden / HOLD boundaries
+## Forbidden boundaries
 
 - no queue promotion;
 - no Priority 8 closure claim;
@@ -69,21 +70,19 @@ This is a tooling/execution-surface HOLD, not a semantic contradiction in REL-00
 - no source mutation to SPEC-001 or MOD-001;
 - no new reverse relationship;
 - no change from `DEPENDS_ON` without contradictory source evidence;
-- no unrelated REP-014 relationship/status edits;
-- no bypass of GOV-014 by reconstructing an incomplete large document.
+- no unrelated REP-014 relationship/status edits.
 
-## Verification / closure
+## Verification contract
 
-Pre-write Matrix persistence verified at `237a28f3624f86f82a4e4a8fa588b5ae8115b70f`.
+`COMPLETE SOURCE → MATERIAL COMMIT → EXACT PATH/DIFF CHECK → POST-COMMIT READ-BACK → EXACT-HEAD REQUIRED CI → CLOSE OR HARD HOLD`
 
-Material REP-014 write: `NOT ATTEMPTED`.
-Material tests: `NOT APPLICABLE — PRE-MATERIAL ABORT`.
-Unexpected repository content mutation: `0`.
+Required conditions:
 
-Transaction disposition: `HARD HOLD / PRE-MATERIAL ABORT / RESUME-SAFE`.
-
-Priority 8 remains OPEN. The legal next action is to resume this same bounded REL-001 transaction only when the execution surface can obtain/preserve the complete REP-014 source for Zero-Touch candidate construction; do not skip to another relationship merely to evade this gate.
+- unexpected changes = `0`;
+- REL-001 only is materially altered in REP-014;
+- all KEEP sections preserved;
+- Full-Stack, Runtime/Integration, M2 and Real Mutation Matrix checks remain green when triggered for the material HEAD.
 
 ## Learning
 
-A small semantic change inside a large controlled document is still a large-document mutation risk. Evidence sufficiency for the changed row does not waive complete-source preservation evidence for untouched rows. When the execution surface cannot prove Zero-Touch, abort before material mutation and preserve the exact resume point.
+A large-document HOLD caused by response truncation can be resolved safely by stable-blob chunking/direct blob retrieval; the control must be satisfied, not bypassed.
