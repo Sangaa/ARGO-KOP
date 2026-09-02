@@ -5,138 +5,121 @@ Parent Transaction: `MUT-2026-09-01-P7-CORE-EXPLICIT-CERTIFICATION-CLOSURE-X`
 Preceding blocker side-repair: `MUT-2026-09-02-P7-X-INTEGRATION-MARKDOWN-GUARD-SR1`
 Work Lease: `HERMUZ-P7-X-C1-INTEGRITY-STATE-GUARD-20260902`
 Priority: `7 — Core / Transaction X corrective continuation`
-State: `PRE-WRITE MATRIX / LEASE ACTIVE / X HARD HOLD / INTEGRITY CORRECTION ONLY`
+State: `MATERIAL CANDIDATE PREPARED / CI PENDING / X HARD HOLD`
 Entry HEAD: `9758fddafc82ebecb1ff7c8a91f863b48f4711ee`
+Pre-write Matrix HEAD: `344b3546342e36ef7a0eb00e0b18ece1d435c8ce`
 Original X candidate: `43820d41728e39edbacb5b37de4d2ffc51063dda`
 Historical failed X Runtime run: `33542068223`
 SR1 exact-head Runtime run: `33607627279`
 Protocol: `PROJECT_BOOTSTRAP / CORE-003 / GOV-013 / GOV-013A / applicable Governance / REP-011 / REP-012 + W ADDENDUM / REP-013 / REP-014 / REP-015 / REP-016 + X ADDENDUM`
 
-## Why X-C1 is now legal
+## Legal entry into X-C1
 
-Original X candidate `43820d41728e39edbacb5b37de4d2ffc51063dda` failed required Runtime verification in two independently classified jobs.
+Original X had two independently classified Runtime failures.
 
-### Integration failure — already isolated and functionally repaired by SR1
-
-Historical Integration failure:
-
-`Quality/Integration/test_core_p7_status_sync.py::test_priority7_current_state_is_explicit_bounded_closure`
-
-`assert "does not auto-start Priority 8" in queue`
-
-Root cause: the durable queue invariant existed as `does **not** auto-start Priority 8`; raw Markdown emphasis made the unformatted substring assertion fail.
-
-Classification:
+Integration classification:
 
 `REAL SEMANTIC / IMPLEMENTATION DEFECT — TEST IMPLEMENTATION DEFECT / MARKDOWN-FORMATTING-SENSITIVE SEMANTIC ASSERTION`.
 
-SR1 candidate `9758fddafc82ebecb1ff7c8a91f863b48f4711ee` then produced this exact-head evidence:
+SR1 candidate `9758fddafc82ebecb1ff7c8a91f863b48f4711ee` proved the Integration repair by exact-head job split:
 
-- Full-Stack Repository Audit `33607627223` — SUCCESS;
-- Real Mutation Matrix Regression `33607627357` — SUCCESS;
-- M2 Multi-Channel Proposal Training `33607627283` — SUCCESS;
-- Runtime `33607627279` — FAILURE only because Integrity remained red;
+- Full-Stack `33607627223` — SUCCESS;
+- Real Mutation Matrix `33607627357` — SUCCESS;
+- M2 `33607627283` — SUCCESS;
+- Runtime `33607627279` — FAILURE only at Integrity;
   - integration-tests `100175144281` — SUCCESS;
   - prototype-tests `100175144759` — SUCCESS;
   - integrity-tests `100175144669` — FAILURE.
 
-This exact job split proves the SR1 Integration repair functionally removed its classified failure while preserving the historical failed X run. It does not relabel SR1 or X as 4/4.
+No run is retroactively relabeled.
 
-### Integrity failure — current X-C1 boundary
-
-Historical X Integrity first failure and fresh SR1 Integrity first failure are identical:
-
-`Quality/Integrity/test_core_inventory_consistency.py::test_core_index_inventory_files_exist_without_promoting_folder_status`
+Integrity first failure, both historically and after SR1:
 
 `assert "INTEGRITY HOLD" in status`
 
-Historical X result: `1 failed, 147 passed`.
-Fresh SR1 result on `9758fddafc82ebecb1ff7c8a91f863b48f4711ee`: `1 failed, 147 passed`.
+at `Quality/Integrity/test_core_inventory_consistency.py::test_core_index_inventory_files_exist_without_promoting_folder_status`.
 
 Classification:
 
 `STALE PRE-CERTIFICATION STATE GUARD`.
 
-Direct source review shows the same test contains two immediately downstream literals after the first failing assertion:
+Direct source review identifies the immediately downstream `Folder Certification` and `Pending` assertions as the same source-level transient guard cohort; they are not claimed as executed historical failures.
 
-- `assert "Folder Certification" in status`
-- `assert "Pending" in status`
+## Prior-learning disposition
 
-They were not reached in the historical or fresh failed run because pytest stopped at the first assertion. They are therefore not recorded as historical failing assertions. They are classified as the same source-proven downstream stale current-state guard cohort because X's own certification record explicitly states that Quality current-state assertions transition from `Folder Certification pending` and pre-certification/open state to bounded Core closure.
+- T-C1 — DIRECTLY APPLICABLE exact-head job-split proof and handoff discipline.
+- T-C2 — DIRECTLY APPLICABLE stale state-contract correction while retaining durable semantics.
+- U/SR1 — DIRECTLY APPLICABLE pre-write Matrix, atomic repair, failed-evidence preservation and fresh verification sequence.
 
-The inventory list and file-existence loop preceding this cohort passed and remain durable.
+## Material correction
 
-## Prior-learning retrieval
+The inventory proof remains unchanged. X-C1 changes only the stale state tail.
 
-1. T-C1 — DIRECTLY APPLICABLE: exact-head job split may prove one corrective failure class repaired while a distinct failure remains, without relabeling the overall candidate successful.
-2. T-C2 — DIRECTLY APPLICABLE: stale current-state test contracts may be updated only when new verified state evidence exists and durable semantics remain preserved.
-3. Side-repair U / SR1 — DIRECTLY APPLICABLE sequencing: preserve failure provenance, use pre-write Matrix and atomic bounded repair, then fresh exact-head verification.
-
-## X-C1 semantic decision
-
-X-C1 changes only the obsolete current-state tail of `test_core_inventory_consistency.py`.
-
-The exact inventory list and loop remain unchanged.
-
-The obsolete pre-certification cohort:
+Removed obsolete current-state requirements:
 
 - `INTEGRITY HOLD`;
 - `Folder Certification`;
-- `Pending`;
+- `Pending`.
 
-is replaced by explicit current bounded closure markers that also retain anti-overpromotion:
+Required current bounded-state guards after correction:
 
 - `CLOSED_FOR_PHASE_1`;
 - `CORE CERTIFIED`;
 - `CORE CLOSED_FOR_PHASE_1 != PHASE 1 CLOSED`;
 - `CORE CERTIFIED != REPOSITORY-WIDE GRAPH COMPLETE`.
 
-This does not make global integrity pass. It only stops this Core-local inventory test from requiring a superseded Core folder state after X's explicit certification decision.
+Global integrity HOLD remains an independent repository-level state; this Core-local test does not assert or clear it.
 
 ## Authorized material change set — exactly 3 paths
 
-1. `Quality/Integrity/test_core_inventory_consistency.py`
-   - preserve imports, expected inventory list, index-membership checks and physical-file checks;
-   - replace only the three stale pre-certification current-state literals with four explicit bounded closure/anti-overpromotion assertions.
-2. `Repository/P7_X_INTEGRITY_STATE_GUARD_CORRECTION_2026-09-02_X-C1.md`
-   - record historical/fresh failure provenance, cohort classification, repair boundary, non-authority and verification evidence.
-3. this Matrix
-   - bind X-C1 candidate and verification state in the same atomic material commit.
+| ID | Target | Action | Applied | Verified |
+|---|---|---|:---:|:---:|
+| X-C1-01 | `Quality/Integrity/test_core_inventory_consistency.py` | preserve exact inventory checks; replace only stale pre-certification state cohort with bounded closure/anti-overpromotion guards | Y | PENDING CI |
+| X-C1-02 | `Repository/P7_X_INTEGRITY_STATE_GUARD_CORRECTION_2026-09-02_X-C1.md` | bind failure provenance, cohort classification, correction and non-authority | Y | PENDING CI |
+| X-C1-03 | this Matrix | bind material candidate and exact-head verification | Y | PENDING CI |
+
+Candidate binding: `THIS MATERIAL COMMIT`.
+
+Required atomicity: exactly one commit after `344b3546342e36ef7a0eb00e0b18ece1d435c8ce`, exactly these three authorized paths, unexpected path expansion `0`.
+
+## Durable boundaries preserved
+
+- exact Core expected-name list unchanged;
+- index membership assertions unchanged;
+- physical file existence assertions unchanged;
+- Core closure does not imply Phase-1 closure;
+- Core certification does not imply repository-wide graph completion;
+- SR1 no-auto-start-P8 invariant remains unchanged;
+- REP-014 remains not a complete-graph claim;
+- no relationship or provenance promotion;
+- historical X/SR1 failed evidence remains preserved.
 
 ## Forbidden
 
-- no mutation to `Core/_FOLDER_STATUS.md`;
-- no change to the inventory list or file-existence loop;
-- no deletion of inventory integrity coverage;
-- no SR1 Integration-test mutation in X-C1;
-- no REP-016 queue-addendum mutation;
-- no REP-014/REP-012/REP-013 mutation;
-- no relationship/provenance/authority weakening;
+- no `Core/_FOLDER_STATUS.md` mutation;
+- no inventory list or file-existence mutation;
+- no test deletion;
+- no SR1 Integration-test mutation;
+- no REP-012/REP-013/REP-014/REP-016 mutation;
 - no Phase-1 closure;
 - no Priority-8 start;
 - no Connected Baseline closure;
 - no repository-wide graph completion claim;
-- no Global `BOOTED / INTEGRITY PASS` claim;
-- no reinterpretation of historical failed run `33542068223` or SR1 3/4 candidate as 4/4.
-
-## Atomicity contract
-
-After this pre-write Matrix commit, X-C1 material candidate MUST be exactly one commit changing exactly the three authorized paths. Unexpected path expansion = `0`.
+- no Global `BOOTED / INTEGRITY PASS`;
+- no relabeling historical X or SR1 candidates as 4/4.
 
 ## Verification contract
 
-`PRE-WRITE MATRIX → LIVE-PARENT RECHECK → ONE-COMMIT/THREE-PATH MATERIAL CANDIDATE → EXACT-HEAD READ-BACK/COMPARE → FOUR REQUIRED WORKFLOWS → RUNTIME JOB REVIEW → IF 4/4 SUCCESS, PREPARE DOCUMENTATION-ONLY X CLOSURE → CLOSURE-HEAD FOUR-WORKFLOW VERIFICATION → REDISCOVER MAIN → RECOMPUTE GLOBAL QUEUE`.
-
-X-C1 is not complete merely because the Integrity test becomes green. All four required workflows must succeed on the same exact material candidate HEAD before X may enter documentation-only closure.
+`ONE-COMMIT/THREE-PATH COMPARE → LIVE-PARENT RECHECK → NON-FORCE FAST-FORWARD → EXACT-HEAD READ-BACK → FOUR REQUIRED WORKFLOWS → FULL-STACK/RUNTIME JOB REVIEW → ONLY IF 4/4: DOCUMENTATION-ONLY X CLOSURE → CLOSURE-HEAD FOUR-WORKFLOW VERIFICATION → REDISCOVER MAIN → RECOMPUTE GLOBAL QUEUE`.
 
 ## Preserved global limits
 
-- Phase 1 overall remains OPEN;
-- repository-wide relationship graph remains not independently closed;
-- Global Connected Baseline remains not independently proved;
+- Phase 1 overall OPEN;
+- repository-wide graph not independently closed;
+- Global Connected Baseline not independently proved;
 - global integrity remains HOLD;
-- Global `BOOTED / INTEGRITY PASS` is NOT CLAIMED;
-- Priority 8 is not automatically started.
+- Global `BOOTED / INTEGRITY PASS` NOT CLAIMED;
+- Priority 8 not automatically started.
 
 ## Learning candidate
 

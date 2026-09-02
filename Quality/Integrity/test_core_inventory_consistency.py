@@ -27,6 +27,7 @@ def test_core_index_inventory_files_exist_without_promoting_folder_status():
         assert name in index, name
         assert (root / "Core" / name).is_file(), name
 
-    assert "INTEGRITY HOLD" in status
-    assert "Folder Certification" in status
-    assert "Pending" in status
+    assert "CLOSED_FOR_PHASE_1" in status
+    assert "CORE CERTIFIED" in status
+    assert "CORE CLOSED_FOR_PHASE_1 != PHASE 1 CLOSED" in status
+    assert "CORE CERTIFIED != REPOSITORY-WIDE GRAPH COMPLETE" in status
