@@ -2,7 +2,7 @@
 
 Transaction ID: `MUT-2026-09-02-P8-REP014-REL012-REVALIDATION-001`
 Priority: `8 — Governance`
-State: `REVALIDATED MATERIAL CANDIDATE / CI PENDING`
+State: `CLOSED / REVALIDATED / VERIFIED / RESUME-SAFE`
 Entry HEAD: `72f3f1d9f131b4cd87cd618e98eb6a4e339e2eb7`
 Pre-write Matrix HEAD: `57b25661bb17361b1d6e7f95a0d8a30fed110da4`
 Target: `Repository/REP-014_REPOSITORY_RELATIONSHIP_REGISTRY.md`
@@ -32,10 +32,10 @@ Authorized row: `REL-012 | MOD-011 | KNW-004 | DEPENDS_ON | Revalidated within i
 
 | Change ID | Target | Action | Expected Content | Applied | Verified |
 |---|---|---|---|---:|---:|
-| P8-REL012-01 | REP-014 REL-012 row | UPDATE | retain direction/type; set bounded revalidated state | Y | PENDING CI |
+| P8-REL012-01 | REP-014 REL-012 row | UPDATE | retain direction/type; set bounded revalidated state | Y | Y |
 | P8-REL012-02 | all other REP-014 content | KEEP | byte-for-byte/content-equivalent | Y | Y |
 | P8-REL012-03 | MOD-011 / KNW-004 | KEEP | no endpoint mutation or promotion | Y | Y |
-| P8-REL012-04 | this Matrix | UPDATE | bind material compare, read-back and verification | Y | PENDING CI |
+| P8-REL012-04 | this Matrix | UPDATE | bind material compare, read-back and verification | Y | Y |
 
 Atomicity: exactly one material commit after the pre-write Matrix HEAD, exactly REP-014 + this Matrix, unexpected paths `0`.
 
@@ -44,3 +44,17 @@ Forbidden: no type/direction invention, endpoint promotion, Models/Knowledge cer
 Closure requires one-row REP-014 diff, immutable read-back, exact-head four-workflow success with Runtime job split reviewed, Matrix reconciliation and closure-head verification.
 
 Pre-write Matrix HEAD verification: Full-Stack `33684157816`, Runtime/Integration `33684157837`, Real Mutation Matrix `33684157838`, and M2 `33684157752` all succeeded.
+
+## Material verification and closure
+
+- material HEAD: `d4f83fc55e1538346707f124495c4a7dc82e1bce`;
+- material compare: exactly `1` commit / `2` authorized paths / unexpected paths `0`;
+- REP-014 material blob: `052e811421d2c02fc6cd5031187a2860bb46b469`;
+- REP-014 diff from the pre-write HEAD: one REL-012 state replacement only;
+- immutable read-back: `REL-012 | MOD-011 | KNW-004 | DEPENDS_ON | Revalidated within inspected scope`;
+- Full-Stack `33684362983`, Runtime/Integration `33684363003`, Real Mutation Matrix `33684363025`, and M2 `33684363049` — SUCCESS;
+- Runtime jobs `integrity-tests`, `prototype-tests`, and `integration-tests` — SUCCESS.
+
+The existing lifecycle dependency is supported at the inspected contract boundary and is revalidated without endpoint or broader state promotion.
+
+`P8 REL-012 = CLOSED / REVALIDATED / VERIFIED / RESUME-SAFE`.
