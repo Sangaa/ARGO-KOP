@@ -3,10 +3,12 @@
 Transaction: `MUT-2026-09-01-P7-CORE-EXPLICIT-CERTIFICATION-CLOSURE-X`
 Work Lease: `HERMUZ-P7-X-CORE-CERTIFICATION-CLOSURE-20260901`
 Priority: `7 — Core`
-State: `MATERIAL CANDIDATE / X-A CONTROLS FINAL SCOPE / PRE-PUBLICATION CHECKS PASS / CI PENDING`
+State: `FUNCTIONAL-CLOSED / REPAIRED CANDIDATE 4-OF-4 / DOCUMENTATION-ONLY CLOSURE / RESUME-SAFE IFF THIS CLOSURE COMMIT PASSES 4-OF-4`
 Entry HEAD: `4fd7d71d7e1320b643e229093a6910e18965b279`
 Initial Matrix HEAD: `1d4c198c4780c49f72fcde01d6118946f6073edd`
 Controlling amendment pre-write HEAD: `8431d600e14e31a3cbeb21e4b1c9e347725304a6`
+Original failed X candidate: `43820d41728e39edbacb5b37de4d2ffc51063dda`
+Repaired verified candidate: `cf150608a2677c7c5fe0402149295e8954802255`
 Protocol: `PROJECT_BOOTSTRAP / CORE-003 / GOV-013 / GOV-013A / GOV-014 / GOV-014A / GOV-015 / GOV-016 / REP-011 / REP-012 + W ADDENDUM / REP-013 / REP-014 / REP-015 / REP-016 + CURRENT ADDENDA / REP-020 / ARC-006 / ARC-011`
 
 ## Review question
@@ -29,7 +31,7 @@ Can `Core/` now be explicitly certified `CLOSED_FOR_PHASE_1` within the bounded 
 
 X-A supersedes the original direct REP-016/REP-020 mutation plan. No X material mutation occurred before X-A.
 
-The material candidate is authorized to change exactly these 21 paths:
+The material candidate was authorized to change exactly these 21 paths:
 
 1. `Core/_FOLDER_STATUS.md`
 2. `Repository/REP-016_PRIORITY7_CORE_CLOSURE_ADDENDUM_2026-09-01_X.md`
@@ -53,9 +55,9 @@ The material candidate is authorized to change exactly these 21 paths:
 20. this Matrix
 21. `Repository/MUT-2026-09-01-P7-CORE-EXPLICIT-CERTIFICATION-CLOSURE-X-A_QUEUE_ADDENDUM_AMENDMENT.md`
 
-Candidate binding: `THIS MATERIAL COMMIT`; exact SHA is bound by compare/read-back and will be recorded in the documentation-only X closure after successful CI.
+The original X material commit satisfied its bounded structural scope but failed Runtime verification; that failure is preserved and is not backfilled.
 
-## Certification disposition in candidate
+## Certification disposition
 
 `CORE = CLOSED_FOR_PHASE_1 / BOUNDED CORE PARTITION CERTIFIED`.
 
@@ -65,7 +67,7 @@ This closes only the Core-specific certification gate. It does not certify exter
 
 ## Regression transition rule
 
-The Quality changes modify only transient current-state assertions that previously required Core Priority-7 OPEN / Folder Certification Pending / pre-certification readiness state.
+Quality changes may modify only transient current-state assertions that previously required Core Priority-7 OPEN / Folder Certification Pending / pre-certification readiness state.
 
 Durable checks remain mandatory:
 
@@ -80,45 +82,116 @@ Durable checks remain mandatory:
 - Global Connected Baseline/repository-wide graph remain OPEN;
 - global integrity remains HOLD and Global PASS is NOT CLAIMED.
 
-No test is allowed to pass merely because historical text still contains an old open-state literal; current-state assertions bind explicit X closure markers.
+## Original X failure evidence — preserved
 
-## Explicitly forbidden
+Required Runtime run `33542068223` on original X candidate `43820d41728e39edbacb5b37de4d2ffc51063dda` failed two independent boundaries.
 
-- no Core source-authority mutation other than `Core/_FOLDER_STATUS.md`;
-- no canonical REP-016 body rewrite under X-A;
-- no REP-020 mutation under X-A;
-- no REP-014 mutation or REL-073 fabrication;
-- no forced RUN-002→CORE-003 registration;
-- no external-domain certification;
-- no Phase-1 closure;
-- no Connected Baseline closure;
-- no repository-wide graph completion claim;
-- no Global `BOOTED / INTEGRITY PASS`;
-- no deletion/rewrite of historical T/T-C1/T-C2/T-C3/V/W evidence;
-- no weakening of REP-013 Completion Rule;
-- no inference that allocation alone certifies Core.
+### Integrity
 
-## Pre-publication checks
+Exact first failure:
 
-`PASS` at candidate construction boundary:
+`Quality/Integrity/test_core_inventory_consistency.py::test_core_index_inventory_files_exist_without_promoting_folder_status`
 
-- live main = X-A pre-write HEAD;
-- current Core inventory = unchanged exact 18-file set;
-- W allocation = unchanged 18/18;
-- REP-014 = unchanged v1.2.14 / non-complete graph;
-- no new material relationship evidence discovered;
-- no Core source-authority file is in candidate except `_FOLDER_STATUS.md`.
+`assert "INTEGRITY HOLD" in status`
 
-Required candidate compare remains:
+Classification:
 
-`X-A PRE-WRITE HEAD → ONE MATERIAL COMMIT → EXACTLY 21 AUTHORIZED PATHS → UNEXPECTED EXPANSION 0`.
+`STALE PRE-CERTIFICATION STATE GUARD`.
 
-## Verification contract
+The adjacent source assertions `Folder Certification` and `Pending` were source-proven downstream members of the same stale state cohort but are not misrepresented as historical runtime failures because execution stopped at the first assertion.
 
-`PRE-WRITE MATRIX → X-A → LIVE RECHECK → EXACT INVENTORY/ALLOCATION/RELATIONSHIP RECHECK → ONE-COMMIT/21-PATH COMPARE → LIVE-PARENT RECHECK → NON-FORCE FAST-FORWARD → EXACT-HEAD READ-BACK → FOUR REQUIRED WORKFLOWS → FULL-STACK/RUNTIME JOB REVIEW → FAILURE/LEARNING ASSESSMENT → DOCUMENTATION-ONLY X CLOSURE → CLOSURE-HEAD FOUR-WORKFLOW VERIFICATION → REDISCOVER LIVE MAIN → RECOMPUTE GLOBAL QUEUE`.
+### Integration
 
-## Learning
+Exact failure:
+
+`Quality/Integration/test_core_p7_status_sync.py::test_priority7_current_state_is_explicit_bounded_closure`
+
+`assert "does not auto-start Priority 8" in queue`
+
+The queue evidence already contained `does **not** auto-start Priority 8`.
+
+Classification:
+
+`REAL SEMANTIC / IMPLEMENTATION DEFECT — TEST IMPLEMENTATION DEFECT / MARKDOWN-FORMATTING-SENSITIVE SEMANTIC ASSERTION`.
+
+## Corrective chain
+
+### SR1 — Integration blocker side-repair
+
+Pre-write: `7df9530775e7a4244dd54e901bc867d05f11af5c`
+Material candidate: `9758fddafc82ebecb1ff7c8a91f863b48f4711ee`
+
+SR1 changed only the local test semantic view so Markdown bold emphasis did not become part of the invariant contract.
+
+Exact-head SR1 evidence:
+
+- Full-Stack `33607627223` — SUCCESS;
+- Real Mutation Matrix `33607627357` — SUCCESS;
+- M2 `33607627283` — SUCCESS;
+- Runtime `33607627279` — FAILURE;
+  - Integration `100175144281` — SUCCESS;
+  - Prototype `100175144759` — SUCCESS;
+  - Integrity `100175144669` — FAILURE on the unchanged stale X Integrity guard.
+
+This exact job split proves SR1 repaired the Integration defect. SR1 is not retroactively called 4/4.
+
+### X-C1 — stale Integrity state-guard correction
+
+Pre-write: `344b3546342e36ef7a0eb00e0b18ece1d435c8ce`
+Material candidate: `cf150608a2677c7c5fe0402149295e8954802255`
+
+Atomic compare:
+
+`1 commit / exactly 3 authorized paths / unexpected expansion 0`.
+
+The durable inventory list, index-membership loop and physical-file checks remained unchanged. Only the three obsolete pre-certification state literals were replaced with bounded closure and anti-overpromotion assertions.
+
+## Repaired candidate exact-head verification — PASS 4/4
+
+On exact candidate `cf150608a2677c7c5fe0402149295e8954802255`:
+
+- Full-Stack Repository Audit `33608184326` — SUCCESS;
+- ARGO Runtime Prototype and Integration Tests `33608184342` — SUCCESS;
+  - integrity-tests `100176911921` — SUCCESS;
+  - integration-tests `100176912204` — SUCCESS;
+  - prototype-tests `100176912256` — SUCCESS;
+- Real Mutation Matrix Regression `33608184346` — SUCCESS;
+- M2 Multi-Channel Proposal Training `33608184467` — SUCCESS.
+
+Therefore the repaired X material state has exact-head 4/4 verification and may enter documentation-only closure.
+
+## Documentation-only closure contract
+
+This closure changes documentation/evidence only. No Core source, Quality test, relationship registry, REP-012/013/014/016 semantic surface, or queue state is materially changed by the closure commit.
+
+`THIS CLOSURE COMMIT` is operationally `RESUME-SAFE` **if and only if** the same four required workflows all succeed against its exact SHA and Runtime jobs are reviewed as all-success.
+
+If any required closure-head workflow fails, X returns immediately to HARD HOLD and this document must not be interpreted as Resume-Safe closure.
+
+If closure-head 4/4 succeeds:
+
+- Core = `CLOSED_FOR_PHASE_1 / BOUNDED CORE PARTITION CERTIFIED`;
+- Priority 7 = `CLOSED_FOR_PHASE_1`;
+- Work Lease closes;
+- original failed run `33542068223` remains failure evidence;
+- rediscover live main;
+- recompute the global queue from REP-016 plus current operational addenda;
+- do not auto-start Priority 8.
+
+## Explicitly preserved non-claims
+
+- Phase 1 overall is OPEN;
+- repository-wide relationship graph is not independently complete;
+- Global Connected Baseline is OPEN/not independently proved;
+- Architecture/Governance/Runtime/Lifecycle are not certified by Core closure;
+- global integrity remains HOLD even though the bounded Integrity workflow is green;
+- Global `BOOTED / INTEGRITY PASS` is NOT CLAIMED;
+- Priority 8 is NOT automatically started.
+
+## Learning retained
 
 `A CERTIFICATION TRANSITION MUST UPDATE THE TESTS THAT GUARDED THE PRE-CERTIFICATION STATE WITHOUT WEAKENING THE DURABLE SEMANTIC BOUNDARIES THOSE TESTS PROVED.`
 
-`WHEN A CURRENT QUEUE ALREADY HAS A PROVEN CLOSURE-ADDENDUM PATTERN, REUSE IT INSTEAD OF REWRITING A LARGE HISTORICAL QUEUE BODY.`
+`A SEMANTIC TEST OVER MARKDOWN MUST NOT ACCIDENTALLY MAKE PRESENTATION EMPHASIS PART OF THE SEMANTIC CONTRACT.`
+
+`A FAILED MULTI-JOB RUN MAY STILL PROVE ONE INDEPENDENT CORRECTIVE BOUNDARY REPAIRED WHEN THE EXACT-HEAD JOB SPLIT CHANGES; THE FAILED RUN ITSELF REMAINS FAILED EVIDENCE.`
