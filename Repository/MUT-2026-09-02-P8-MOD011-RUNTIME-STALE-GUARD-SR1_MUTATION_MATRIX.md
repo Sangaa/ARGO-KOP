@@ -3,7 +3,7 @@
 Transaction ID: `MUT-2026-09-02-P8-MOD011-RUNTIME-STALE-GUARD-SR1`
 Parent Transaction: `MUT-2026-09-02-P8-MOD011-SEMANTIC-REVALIDATION-001`
 Priority: `8 — Governance`
-State: `MATERIAL CANDIDATE PREPARED / CI PENDING / HARD HOLD`
+State: `CLOSED / VERIFIED / RESUME-SAFE`
 Entry HEAD: `e4a6b872df41c80965004066e76a23a51a1cb940`
 Pre-write Matrix HEAD: `dfebe425618eea06b8393f58f1656e537505f8bd`
 Failed run: `33677822288`
@@ -48,9 +48,9 @@ Preserve the test and its durable checks. Replace only obsolete MOD-011 provisio
 
 | Change ID | Target | Action | Expected Content | Applied | Verified |
 |---|---|---|---|---:|---:|
-| SR1-01 | target Integrity test | UPDATE | replace only stale MOD-011 state guards with current bounded-state and anti-overpromotion guards | Y | PENDING CI |
+| SR1-01 | target Integrity test | UPDATE | replace only stale MOD-011 state guards with current bounded-state and anti-overpromotion guards | Y | Y |
 | SR1-02 | all unrelated tests/source/control surfaces | KEEP | no mutation | Y | Y |
-| SR1-03 | this Matrix | UPDATE | bind material and exact-head verification evidence | Y | PENDING CI |
+| SR1-03 | this Matrix | UPDATE | bind material and exact-head verification evidence | Y | Y |
 
 ## Atomicity and forbidden boundaries
 
@@ -62,8 +62,24 @@ No historical failed run is relabeled. No guard may be deleted merely to obtain 
 
 Pre-write Matrix HEAD workflows: Full-Stack, Real Mutation Matrix and M2 succeeded; Runtime repeated the already-classified two stale assertions only (`2 failed, 146 passed`). This is preserved repair-entry evidence, not a new root cause and not a closure result.
 
+## Material verification
+
+- material HEAD: `9f27b02323adc3d2a738451f77c073c7a6ca7142`;
+- material change set: exactly `2` authorized paths / unexpected paths `0`;
+- target blob: `f4cd4ae22ff17bff13a073dd386c380faf95fa7f`;
+- immutable target read-back and candidate-blob match: PASS;
+- local targeted semantic execution: PASS;
+- Full-Stack Repository Audit `33681706102` — SUCCESS (`repository-audit` SUCCESS);
+- ARGO Runtime Prototype and Integration Tests `33681705449` — SUCCESS (`integrity-tests`, `integration-tests`, `prototype-tests` all SUCCESS);
+- Real Mutation Matrix Regression `33681705489` — SUCCESS;
+- M2 Multi-Channel Proposal Training `33681705396` — SUCCESS.
+
+The repair changed only the stale test state cohort. MOD-011 and AI-006 source content, relationship state, folder status and queue state remained unchanged.
+
 ## Verification contract
 
 `PRE-WRITE MATRIX COMMIT → EXACT-HEAD CHECK → TWO-PATH MATERIAL COMMIT → READ-BACK/COMPARE → TARGETED SEMANTIC EXECUTION → FOUR REQUIRED WORKFLOWS + JOB REVIEW → MATRIX CLOSURE → CLOSURE-HEAD FOUR-WORKFLOW VERIFICATION → RETURN TO REL-010`.
 
-`P8 MOD-011 parent transaction = HARD HOLD until this side repair is closed by fresh exact-head evidence`.
+Material repair evidence is verified. This Matrix closure remains subject to closure-HEAD four-workflow verification; after that, return to REL-010 without auto-promoting it.
+
+`P8 MOD-011 Runtime stale-guard side repair = CLOSED / VERIFIED / RESUME-SAFE`.
