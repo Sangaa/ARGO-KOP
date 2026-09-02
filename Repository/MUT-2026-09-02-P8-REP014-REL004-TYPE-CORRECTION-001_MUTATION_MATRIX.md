@@ -2,7 +2,7 @@
 
 Transaction ID: `MUT-2026-09-02-P8-REP014-REL004-TYPE-CORRECTION-001`
 Priority: `8 — Governance`
-State: `TYPE-CORRECTED MATERIAL CANDIDATE / CI PENDING`
+State: `CORRECTIVE GUARD REPAIR CANDIDATE / CI PENDING`
 Entry HEAD: `727bceb502462cb1f651eadf58f4d5ebe4118cac`
 Pre-write Matrix HEAD: `086d3264f45a3b147f1e5f4038d366ff031623e3`
 Targets: `Repository/REP-014_REPOSITORY_RELATIONSHIP_REGISTRY.md` + `Quality/Integration/test_engine_validation_decision_reciprocity.py`
@@ -42,3 +42,11 @@ Atomicity: exactly one material commit after the pre-write Matrix HEAD, exactly 
 Forbidden: no executable-connectivity claim, no endpoint/folder promotion, no P8/Phase-1/global closure, no repository-wide graph claim and no guard weakening.
 
 Closure requires exact authorized diffs, immutable read-back, exact-head four-workflow success with Runtime job split reviewed, Matrix reconciliation and closure-head verification.\n\nPre-write Matrix HEAD verification: Full-Stack `33685472627`, Runtime/Integration `33685472688`, Real Mutation Matrix `33685472617`, and M2 `33685472789` all succeeded.
+
+## Failed material attempt and corrective boundary
+
+Material attempt `1066c7119eaeb03a84ece3552c9256277119be3a` changed exactly the three authorized paths and all four workflows succeeded (`33685648364`, `33685648348`, `33685648325`, `33685648323`). Immutable read-back nevertheless found that the intended newline between the guard comment and assertion was materialized as the literal characters `\\n`. The assertion therefore remained inside the comment and was not executed.
+
+Classification: `MATERIALIZATION DEFECT / GUARD ACCIDENTALLY DISABLED / CI GREEN BUT SEMANTIC READ-BACK FAILED / MATERIAL ATTEMPT NOT ACCEPTED`.
+
+The failure is preserved. Corrective scope is exactly this Matrix plus the targeted guard; the corrected REP-014 row remains unchanged. Closure is forbidden until the repaired assertion is read back as a separate executable line and exact-head workflows pass.
