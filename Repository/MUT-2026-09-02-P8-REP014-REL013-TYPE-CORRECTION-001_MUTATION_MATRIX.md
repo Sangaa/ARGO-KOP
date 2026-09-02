@@ -2,9 +2,9 @@
 
 Transaction ID: `MUT-2026-09-02-P8-REP014-REL013-TYPE-CORRECTION-001`
 Priority: `8 — Governance`
-State: `PRE-WRITE / READY`
+State: `TYPE-CORRECTED MATERIAL CANDIDATE / CI PENDING`
 Entry HEAD: `6ec2bd8b6fe461e3ccfd24469e0f0c7c783b3d7a`
-Pre-write Matrix HEAD: `PENDING`
+Pre-write Matrix HEAD: `f7948195a2b18a162681df31f8e527ceb7a68131`
 Target: `Repository/REP-014_REPOSITORY_RELATIONSHIP_REGISTRY.md`
 Source blob: `052e811421d2c02fc6cd5031187a2860bb46b469`
 Protocols: `PROJECT_BOOTSTRAP / CORE-003 / GOV-013 / GOV-014 / GOV-014A / REP-003 / REP-014 / KNW-008`
@@ -32,13 +32,15 @@ Authorized row: `REL-013 | MOD-011 | KNW-008 | REFERENCES | Revalidated within i
 
 | Change ID | Target | Action | Expected Content | Applied | Verified |
 |---|---|---|---|---:|---:|
-| P8-REL013-01 | REP-014 REL-013 row | UPDATE | retain direction, change `DEPENDS_ON → REFERENCES`, set bounded revalidated state | N | N |
-| P8-REL013-02 | all other REP-014 content | KEEP | byte-for-byte/content-equivalent | N | N |
-| P8-REL013-03 | MOD-011 / KNW-008 | KEEP | no endpoint mutation or promotion | N | N |
-| P8-REL013-04 | this Matrix | UPDATE | bind material compare, read-back and verification | N | N |
+| P8-REL013-01 | REP-014 REL-013 row | UPDATE | retain direction, change `DEPENDS_ON → REFERENCES`, set bounded revalidated state | Y | PENDING CI |
+| P8-REL013-02 | all other REP-014 content | KEEP | byte-for-byte/content-equivalent | Y | Y |
+| P8-REL013-03 | MOD-011 / KNW-008 | KEEP | no endpoint mutation or promotion | Y | Y |
+| P8-REL013-04 | this Matrix | UPDATE | bind material compare, read-back and verification | Y | PENDING CI |
 
 Atomicity: exactly one material commit after the pre-write Matrix HEAD, exactly REP-014 + this Matrix, unexpected paths `0`.
 
 Forbidden: no companion edge, endpoint promotion, Models/Knowledge certification, P8/Phase-1/global closure, repository-wide graph claim or global integrity PASS.
 
 Closure requires one-row REP-014 diff, immutable read-back, exact-head four-workflow success with Runtime job split reviewed, Matrix reconciliation and closure-head verification.
+
+Pre-write Matrix HEAD verification: Full-Stack `33684734856`, Runtime/Integration `33684734657`, Real Mutation Matrix `33684734676`, and M2 `33684734806` all succeeded.
