@@ -278,12 +278,27 @@ Governance/
 ├── GOV-012_DOMAIN_RECONSTRUCTION_STANDARD.md
 ├── GOV-013_HERMUZ_SESSION_BUILD_PROTOCOL.md
 ├── GOV-013A_HERMUZ_BOOTSTRAP_INTEGRITY_GATE.md
+├── GOV-014_CONTROLLED_DOCUMENT_MUTATION_PROTOCOL.md
+├── GOV-015_EXECUTION_DOCUMENTATION_AND_KNOWLEDGE_TRANSFER.md
+├── GOV-016_FAILURE_TO_LEARNING_PROTOCOL.md
+├── GOV-018_EVIDENCE_REASONING_AND_CONFLICT_RESOLUTION.md
+├── GOV-019_HERMUZ_OBSERVATION_SIDE_EFFECT_GATE.md
+├── GOV-020_HERMUZ_SESSION_WORKGROUP_CONTINUATION_AMENDMENT.md
+├── GOV-021_REPOSITORY_FIRST_MULTI_INSTANCE_EXECUTION.md
+├── GOV-022_ARGO_SELF_ASSURANCE_AND_CAPABILITY_EVALUATION_PROTOCOL.md
+├── GOV-023_HERMUZ_CONTROLLED_DIAGNOSTIC_EXPERIMENT_PROTOCOL.md
+├── GOV-024_HERMUZ_SOLUTION_SIMULATION_AND_EFFECT_ANALYSIS_PROTOCOL.md
+├── GOV-025_HERMUZ_CONNECTOR_SELF_LEARNING_PROTOCOL.md
+├── GOV-026_HERMUZ_SOLUTION_EVOLUTION_AND_STABILITY_PROTOCOL.md
+├── GOV-027_PROVENANCE_PRESERVATION_AND_SESSION_RECONSTRUCTION_AMENDMENT.md
 └── _FOLDER_STATUS.md
 ```
 
-`GOV-011` and `GOV-012` are mapped as proposed artifacts and are not active canonical authority until ratified.
+`GOV-011`, `GOV-012`, `GOV-018`, and `GOV-023..026` remain non-active Proposed/Candidate artifacts; inventory presence does not promote them.
 
-`GOV-013A` is `Approved / Canonical Addendum` to `GOV-013`. It establishes a mandatory pre-mutation bootstrap integrity gate and does not override higher ARGO authority.
+`GOV-013A`, `GOV-014`, `GOV-015`, `GOV-016`, `GOV-019`, `GOV-020`, `GOV-021`, `GOV-022`, and `GOV-027` retain their current authority/status only as established by their own metadata and current Governance evidence. The old colliding `GOV-013A`, `GOV-014`, `GOV-015`, `GOV-016`, and `GOV-017` compatibility paths are intentionally excluded from this known-mapped current-identity list because `_FOLDER_STATUS.md` classifies them as non-authoritative historical reconstruction records.
+
+This is a **known-mapped current-identity reconciliation**, not exhaustive Governance physical enumeration or Governance partition closure. Broader content-review and repository-wide relationship holds remain open.
 
 ### Architecture/
 
