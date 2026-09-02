@@ -2,7 +2,7 @@
 
 Transaction ID: `MUT-2026-09-02-P8-MOD011-SEMANTIC-REVALIDATION-001`
 Priority: `8 — Governance`
-State: `PRE-WRITE / AUTHORIZED SCOPE ONLY`
+State: `CLOSED / VERIFIED / RESUME-SAFE`
 Entry HEAD: `407efaf2d8aa2626c67da74b8e76058ec648d2ef`
 Target: `Models/MOD-011_KNOWLEDGE_SOURCE_MODEL.md`
 Source blob: `a2eed11742cab05e44159b301a8c09f9e8245d79`
@@ -10,11 +10,11 @@ Protocols: `PROJECT_BOOTSTRAP / CORE-003 / GOV-013 / GOV-014 / GOV-014A / GOV-02
 
 ## Problem / legal-entry definition
 
-`REL-010` is preserved at `HARD HOLD / PRE-MATERIAL ABORT / RESUME-SAFE` because MOD-011 explicitly retained its semantic content as provisional pending independent revalidation.
+`REL-010` was preserved at `HARD HOLD / PRE-MATERIAL ABORT / RESUME-SAFE` because MOD-011 explicitly retained its semantic content as provisional pending independent revalidation.
 
 The existing REL-010 matrix permits resume only after current repository evidence independently revalidates the applicable MOD-011 semantic boundary, or stronger governed evidence resolves the relationship without over-certifying MOD-011.
 
-This transaction therefore targets the blocker itself. It does not mutate REP-014 and does not promote any relationship.
+This transaction therefore targeted the blocker itself. It did not mutate REP-014 and did not promote any relationship.
 
 ## Reconstructed provenance
 
@@ -62,9 +62,9 @@ Direct current evidence re-read at the entry HEAD:
 | downstream revalidation after material semantic mutation | CURRENTLY VALID | Consistent with GOV-014/014A and current Models reconstruction rules |
 | GOV-012 reconstruction reference | CURRENTLY VALID AS BOUNDED REFERENCE | Current MOD-011 already states GOV-012 is proposed guidance only |
 | historical Development Baseline 3.3.0 introduced in `7ffd8b28` | STALE / ALREADY REPAIRED | Current MOD-011 baseline is 3.2.1; no semantic repair remains |
-| current provisional semantic hold | REQUIRES NARROW REPAIR | Exact history + current comparators now bound the uncertainty; retaining an unresolved semantic hold would no longer describe current evidence |
+| provisional semantic hold | NARROW REPAIR COMPLETED | Exact history + current comparators bound the uncertainty; bounded audit/provenance metadata was corrected without rewriting semantic-body content |
 
-No inspected block is `CONTRADICTED`. No semantic-body rewrite is authorized.
+No inspected block is `CONTRADICTED`. No semantic-body rewrite was performed.
 
 ## Section Matrix
 
@@ -98,9 +98,9 @@ Source Git blob: `a2eed11742cab05e44159b301a8c09f9e8245d79`
 
 | Change ID | Section | Action | Expected candidate state | Applied | Verified |
 |---|---|---|---|---:|---:|
-| MOD011-RV-01 | S02 metadata | UPDATE | patch version; remove only `Revalidation Required` maturity qualifier; set 2026-09-02 audit; replace obsolete audit-boundary sentence with bounded completed revalidation statement | N | N |
-| MOD011-RV-02 | S03 Temporal / Provenance Boundary | UPDATE | preserve pre-failure provenance while recording exact independent revalidation result and ending only the semantic-provisional condition | N | N |
-| MOD011-RV-03 | S01, S04-S20 | KEEP | byte-for-byte/content-equivalent | N | N |
+| MOD011-RV-01 | S02 metadata | UPDATE | patch version; remove only `Revalidation Required` maturity qualifier; set 2026-09-02 audit; replace obsolete audit-boundary sentence with bounded completed revalidation statement | Y | Y |
+| MOD011-RV-02 | S03 Temporal / Provenance Boundary | UPDATE | preserve pre-failure provenance while recording exact independent revalidation result and ending only the semantic-provisional condition | Y | Y |
+| MOD011-RV-03 | S01, S04-S20 | KEEP | byte-for-byte/content-equivalent | Y | Y |
 | MOD011-RV-04 | REP-014 | KEEP | no relationship mutation in this transaction | Y | Y |
 | MOD011-RV-05 | Models folder status | KEEP | `INTEGRITY HOLD / STAGED RECONSTRUCTION` remains unchanged | Y | Y |
 
@@ -112,7 +112,7 @@ Authorized metadata state:
 - `Status: Proposed / Future-Ready / Revalidated`
 - `Development Baseline: 3.2.1` unchanged
 - `Last Audit: 2026-09-02`
-- audit language MUST explicitly bound revalidation to the inspected semantic/source-provenance scope and MUST NOT claim Models-domain or repository-wide integrity.
+- audit language explicitly bounds revalidation to the inspected semantic/source-provenance scope and does not claim Models-domain or repository-wide integrity.
 
 Authorized provenance-boundary change:
 
@@ -140,7 +140,21 @@ Authorized provenance-boundary change:
 
 Pre-write result: `PASS / TARGET MUTATION AUTHORIZED WITHIN MATRIX ONLY`.
 
-## Forbidden boundaries
+## Post-write verification
+
+- target commit: `af85a7e2fcb2d3bfeb2a2720dafa1a00f3e753b2`
+- target blob: `f3b58ec7660a11b39fc0a99cff7110d311e803c3`
+- immutable target read-back: PASS
+- resulting Git blob matched precomputed candidate blob: PASS
+- S01 and S04-S20 zero-touch preservation: PASS
+- S02/S03 bounded mutation only: PASS
+- unexpected changes: `0`
+- REP-014 unchanged by this transaction: PASS
+- Models folder status unchanged: PASS
+- Full-Stack Repository Audit run `33677575331`: SUCCESS
+- M2 Multi-Channel Proposal Training run `33677575353`: SUCCESS
+
+## Forbidden boundaries preserved
 
 - no REP-014 mutation under this transaction;
 - no automatic REL-010..REL-014 promotion;
@@ -150,10 +164,10 @@ Pre-write result: `PASS / TARGET MUTATION AUTHORIZED WITHIN MATRIX ONLY`.
 - no removal of historical pre-failure provenance;
 - no Priority-8 closure or queue promotion.
 
-## Post-write closure requirements
+## Final reconciliation
 
-`Target write → immutable read-back → source/target section reconciliation → required CI/status inspection → Matrix reconciliation → only then relationship re-evaluation`.
+The exact pre-failure semantic mutation was reconstructed and independently compared with current governed Knowledge, Memory, Learning, AI, Runtime, feedback, provenance/authority and security surfaces. The retained MOD-011 semantic body is currently valid within the inspected scope. Only the obsolete provisional audit/status boundary was repaired.
 
-Until those requirements pass:
+The former MOD-011 semantic-provisional blocker is therefore resolved for relationship re-evaluation. This result does not itself prove any specific `DEPENDS_ON` edge; each REL-010..REL-014 record must still satisfy its own source→target dependency evidence and endpoint-authority checks.
 
-`MUT-2026-09-02-P8-MOD011-SEMANTIC-REVALIDATION-001 = PRE-WRITE / RESUME-SAFE`.
+`MUT-2026-09-02-P8-MOD011-SEMANTIC-REVALIDATION-001 = CLOSED / VERIFIED / RESUME-SAFE`.
