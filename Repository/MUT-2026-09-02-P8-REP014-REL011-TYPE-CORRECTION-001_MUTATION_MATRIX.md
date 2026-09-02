@@ -2,7 +2,7 @@
 
 Transaction ID: `MUT-2026-09-02-P8-REP014-REL011-TYPE-CORRECTION-001`
 Priority: `8 — Governance`
-State: `TYPE-CORRECTED MATERIAL CANDIDATE / CI PENDING`
+State: `CLOSED / TYPE-CORRECTED / RETAINED REVALIDATION REQUIRED / RESUME-SAFE`
 Entry HEAD: `892793eb125989c68c25f1c37d93c45f2743cb6b`
 Pre-write Matrix HEAD: `db8250eba384fe5dedc12cb64692ae982e5efb4d`
 Target: `Repository/REP-014_REPOSITORY_RELATIONSHIP_REGISTRY.md`
@@ -32,10 +32,10 @@ Authorized row: `REL-011 | MOD-011 | KNW-003 | REFERENCES | Revalidation Require
 
 | Change ID | Target | Action | Expected Content | Applied | Verified |
 |---|---|---|---|---:|---:|
-| P8-REL011-01 | REP-014 REL-011 row | UPDATE | `DEPENDS_ON → REFERENCES`; preserve source, target and `Revalidation Required` | Y | PENDING CI |
+| P8-REL011-01 | REP-014 REL-011 row | UPDATE | `DEPENDS_ON → REFERENCES`; preserve source, target and `Revalidation Required` | Y | Y |
 | P8-REL011-02 | all other REP-014 content | KEEP | byte-for-byte/content-equivalent | Y | Y |
 | P8-REL011-03 | MOD-011 / KNW-003 | KEEP | no endpoint mutation or promotion | Y | Y |
-| P8-REL011-04 | this Matrix | UPDATE | bind material compare, read-back and verification | Y | PENDING CI |
+| P8-REL011-04 | this Matrix | UPDATE | bind material compare, read-back and verification | Y | Y |
 
 Atomicity: exactly one material commit after the pre-write Matrix HEAD, exactly REP-014 + this Matrix, unexpected paths `0`.
 
@@ -44,3 +44,17 @@ Forbidden: no direction reversal, companion edge, endpoint revalidation, relatio
 Closure requires one-row REP-014 diff, immutable read-back, exact-head four-workflow success with Runtime job split reviewed, Matrix reconciliation and closure-head verification.
 
 Pre-write Matrix HEAD verification: Full-Stack `33682799466`, Runtime/Integration `33682799430`, Real Mutation Matrix `33682799436`, and M2 `33682799447` all succeeded.
+
+## Material verification and closure
+
+- material HEAD: `bc736cb6a442fd66088c406309012b564063d908`;
+- material compare: exactly `1` commit / `2` authorized paths / unexpected paths `0`;
+- REP-014 material blob: `58feb2db2bf13047f2837b6834d6f1163dc18cf2`;
+- REP-014 diff from the pre-write HEAD: one REL-011 row replacement only;
+- immutable read-back: `REL-011 | MOD-011 | KNW-003 | REFERENCES | Revalidation Required`;
+- Full-Stack `33682966419`, Runtime/Integration `33682966381`, Real Mutation Matrix `33682966229`, and M2 `33682966455` — SUCCESS;
+- Runtime jobs `prototype-tests`, `integrity-tests`, and `integration-tests` — SUCCESS.
+
+The over-certified dependency type is removed while KNW-003's own revalidation hold is preserved. No endpoint or broader state is promoted.
+
+`P8 REL-011 = CLOSED / TYPE-CORRECTED TO REFERENCES / REVALIDATION REQUIRED RETAINED / RESUME-SAFE`.
