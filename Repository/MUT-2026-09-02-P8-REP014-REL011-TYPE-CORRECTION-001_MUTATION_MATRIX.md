@@ -2,8 +2,9 @@
 
 Transaction ID: `MUT-2026-09-02-P8-REP014-REL011-TYPE-CORRECTION-001`
 Priority: `8 — Governance`
-State: `PRE-WRITE / AUTHORIZED SCOPE ONLY`
+State: `TYPE-CORRECTED MATERIAL CANDIDATE / CI PENDING`
 Entry HEAD: `892793eb125989c68c25f1c37d93c45f2743cb6b`
+Pre-write Matrix HEAD: `db8250eba384fe5dedc12cb64692ae982e5efb4d`
 Target: `Repository/REP-014_REPOSITORY_RELATIONSHIP_REGISTRY.md`
 Source blob: `0a076c273462e88f6f8be68bc415b208109cd48c`
 Protocols: `PROJECT_BOOTSTRAP / CORE-003 / GOV-013 / GOV-014 / GOV-014A / REP-003 / REP-014 / KNW-003`
@@ -31,13 +32,15 @@ Authorized row: `REL-011 | MOD-011 | KNW-003 | REFERENCES | Revalidation Require
 
 | Change ID | Target | Action | Expected Content | Applied | Verified |
 |---|---|---|---|---:|---:|
-| P8-REL011-01 | REP-014 REL-011 row | UPDATE | `DEPENDS_ON → REFERENCES`; preserve source, target and `Revalidation Required` | N | N |
-| P8-REL011-02 | all other REP-014 content | KEEP | byte-for-byte/content-equivalent | N | N |
+| P8-REL011-01 | REP-014 REL-011 row | UPDATE | `DEPENDS_ON → REFERENCES`; preserve source, target and `Revalidation Required` | Y | PENDING CI |
+| P8-REL011-02 | all other REP-014 content | KEEP | byte-for-byte/content-equivalent | Y | Y |
 | P8-REL011-03 | MOD-011 / KNW-003 | KEEP | no endpoint mutation or promotion | Y | Y |
-| P8-REL011-04 | this Matrix | UPDATE | bind material compare, read-back and verification | N | N |
+| P8-REL011-04 | this Matrix | UPDATE | bind material compare, read-back and verification | Y | PENDING CI |
 
 Atomicity: exactly one material commit after the pre-write Matrix HEAD, exactly REP-014 + this Matrix, unexpected paths `0`.
 
 Forbidden: no direction reversal, companion edge, endpoint revalidation, relationship promotion, folder/domain certification, P8/Phase-1/global closure or global integrity PASS.
 
 Closure requires one-row REP-014 diff, immutable read-back, exact-head four-workflow success with Runtime job split reviewed, Matrix reconciliation and closure-head verification.
+
+Pre-write Matrix HEAD verification: Full-Stack `33682799466`, Runtime/Integration `33682799430`, Real Mutation Matrix `33682799436`, and M2 `33682799447` all succeeded.
