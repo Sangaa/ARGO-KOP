@@ -3,8 +3,9 @@
 Transaction ID: `MUT-2026-09-02-P8-MOD011-RUNTIME-STALE-GUARD-SR1`
 Parent Transaction: `MUT-2026-09-02-P8-MOD011-SEMANTIC-REVALIDATION-001`
 Priority: `8 — Governance`
-State: `PRE-WRITE / HARD HOLD / RESUME-SAFE`
+State: `MATERIAL CANDIDATE PREPARED / CI PENDING / HARD HOLD`
 Entry HEAD: `e4a6b872df41c80965004066e76a23a51a1cb940`
+Pre-write Matrix HEAD: `dfebe425618eea06b8393f58f1656e537505f8bd`
 Failed run: `33677822288`
 Failed job: `integrity-tests / 100406823050`
 Target: `Quality/Integrity/test_ai_006_mod_011_revalidation_dependency.py`
@@ -47,9 +48,9 @@ Preserve the test and its durable checks. Replace only obsolete MOD-011 provisio
 
 | Change ID | Target | Action | Expected Content | Applied | Verified |
 |---|---|---|---|---:|---:|
-| SR1-01 | target Integrity test | UPDATE | replace only stale MOD-011 state guards with current bounded-state and anti-overpromotion guards | N | N |
+| SR1-01 | target Integrity test | UPDATE | replace only stale MOD-011 state guards with current bounded-state and anti-overpromotion guards | Y | PENDING CI |
 | SR1-02 | all unrelated tests/source/control surfaces | KEEP | no mutation | Y | Y |
-| SR1-03 | this Matrix | UPDATE | bind material and exact-head verification evidence | N | N |
+| SR1-03 | this Matrix | UPDATE | bind material and exact-head verification evidence | Y | PENDING CI |
 
 ## Atomicity and forbidden boundaries
 
@@ -58,6 +59,8 @@ Material change set: exactly this Matrix plus the target Integrity test; unexpec
 No MOD-011, AI-006, REP-014, queue, folder-status, relationship, model-maturity, Models-domain, Priority-8, Connected-Baseline, Phase-1 or global integrity mutation/promotion is authorized.
 
 No historical failed run is relabeled. No guard may be deleted merely to obtain green CI.
+
+Pre-write Matrix HEAD workflows: Full-Stack, Real Mutation Matrix and M2 succeeded; Runtime repeated the already-classified two stale assertions only (`2 failed, 146 passed`). This is preserved repair-entry evidence, not a new root cause and not a closure result.
 
 ## Verification contract
 
