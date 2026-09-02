@@ -2,7 +2,7 @@
 
 Transaction ID: `MUT-2026-09-02-P8-REP014-REL013-TYPE-CORRECTION-001`
 Priority: `8 — Governance`
-State: `TYPE-CORRECTED MATERIAL CANDIDATE / CI PENDING`
+State: `CLOSED / TYPE-CORRECTED / VERIFIED / RESUME-SAFE`
 Entry HEAD: `6ec2bd8b6fe461e3ccfd24469e0f0c7c783b3d7a`
 Pre-write Matrix HEAD: `f7948195a2b18a162681df31f8e527ceb7a68131`
 Target: `Repository/REP-014_REPOSITORY_RELATIONSHIP_REGISTRY.md`
@@ -32,10 +32,10 @@ Authorized row: `REL-013 | MOD-011 | KNW-008 | REFERENCES | Revalidated within i
 
 | Change ID | Target | Action | Expected Content | Applied | Verified |
 |---|---|---|---|---:|---:|
-| P8-REL013-01 | REP-014 REL-013 row | UPDATE | retain direction, change `DEPENDS_ON → REFERENCES`, set bounded revalidated state | Y | PENDING CI |
+| P8-REL013-01 | REP-014 REL-013 row | UPDATE | retain direction, change `DEPENDS_ON → REFERENCES`, set bounded revalidated state | Y | Y |
 | P8-REL013-02 | all other REP-014 content | KEEP | byte-for-byte/content-equivalent | Y | Y |
 | P8-REL013-03 | MOD-011 / KNW-008 | KEEP | no endpoint mutation or promotion | Y | Y |
-| P8-REL013-04 | this Matrix | UPDATE | bind material compare, read-back and verification | Y | PENDING CI |
+| P8-REL013-04 | this Matrix | UPDATE | bind material compare, read-back and verification | Y | Y |
 
 Atomicity: exactly one material commit after the pre-write Matrix HEAD, exactly REP-014 + this Matrix, unexpected paths `0`.
 
@@ -44,3 +44,17 @@ Forbidden: no companion edge, endpoint promotion, Models/Knowledge certification
 Closure requires one-row REP-014 diff, immutable read-back, exact-head four-workflow success with Runtime job split reviewed, Matrix reconciliation and closure-head verification.
 
 Pre-write Matrix HEAD verification: Full-Stack `33684734856`, Runtime/Integration `33684734657`, Real Mutation Matrix `33684734676`, and M2 `33684734806` all succeeded.
+
+## Material verification and closure
+
+- material HEAD: `a78eba525dbc99153bb8da4d8c1043597de69ced`;
+- material compare: exactly `1` commit / `2` authorized paths / unexpected paths `0`;
+- REP-014 material blob: `4f4c2dd8ba068a5ee19df1406e98fc3d6349347c`;
+- REP-014 diff from the pre-write HEAD: one REL-013 type/state replacement only;
+- immutable read-back: `REL-013 | MOD-011 | KNW-008 | REFERENCES | Revalidated within inspected scope`;
+- Full-Stack `33684950650`, Runtime/Integration `33684951679`, Real Mutation Matrix `33684950789`, and M2 `33684950652` — SUCCESS;
+- Runtime jobs `integrity-tests`, `prototype-tests`, and `integration-tests` — SUCCESS.
+
+The unsupported dependency classification is replaced by the explicit documentary reference. No endpoint or broader state is promoted.
+
+`P8 REL-013 = CLOSED / TYPE-CORRECTED / VERIFIED / RESUME-SAFE`.
