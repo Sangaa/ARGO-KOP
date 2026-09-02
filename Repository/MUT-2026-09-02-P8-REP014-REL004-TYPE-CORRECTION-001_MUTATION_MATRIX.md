@@ -2,7 +2,7 @@
 
 Transaction ID: `MUT-2026-09-02-P8-REP014-REL004-TYPE-CORRECTION-001`
 Priority: `8 — Governance`
-State: `CORRECTIVE GUARD REPAIR CANDIDATE / CI PENDING`
+State: `CLOSED / TYPE-CORRECTED / GUARD-REPAIRED / VERIFIED / RESUME-SAFE`
 Entry HEAD: `727bceb502462cb1f651eadf58f4d5ebe4118cac`
 Pre-write Matrix HEAD: `086d3264f45a3b147f1e5f4038d366ff031623e3`
 Targets: `Repository/REP-014_REPOSITORY_RELATIONSHIP_REGISTRY.md` + `Quality/Integration/test_engine_validation_decision_reciprocity.py`
@@ -31,11 +31,11 @@ Authorized row: `REL-004 | ENG-006 | ENG-002 | CONSUMES | Revalidated within ins
 
 | Change ID | Target | Action | Expected Content | Applied | Verified |
 |---|---|---|---|---:|---:|
-| P8-REL004-01 | REP-014 REL-004 row | UPDATE | reverse direction, change `DEPENDS_ON → CONSUMES`, set bounded revalidated state | Y | PENDING CI |
-| P8-REL004-02 | reciprocity guard | UPDATE | assert corrected exact tuple and retain decision/execution authority checks | Y | PENDING CI |
+| P8-REL004-01 | REP-014 REL-004 row | UPDATE | reverse direction, change `DEPENDS_ON → CONSUMES`, set bounded revalidated state | Y | Y |
+| P8-REL004-02 | reciprocity guard | UPDATE | assert corrected exact tuple and retain decision/execution authority checks | Y | Y |
 | P8-REL004-03 | all other content | KEEP | no unrelated semantic or test change | Y | Y |
 | P8-REL004-04 | ENG-002 / ENG-006 | KEEP | no endpoint mutation or promotion | Y | Y |
-| P8-REL004-05 | this Matrix | UPDATE | bind material compare, read-back and verification | Y | PENDING CI |
+| P8-REL004-05 | this Matrix | UPDATE | bind material compare, read-back and verification | Y | Y |
 
 Atomicity: exactly one material commit after the pre-write Matrix HEAD, exactly REP-014 + the targeted guard + this Matrix, unexpected paths `0`.
 
@@ -50,3 +50,19 @@ Material attempt `1066c7119eaeb03a84ece3552c9256277119be3a` changed exactly the 
 Classification: `MATERIALIZATION DEFECT / GUARD ACCIDENTALLY DISABLED / CI GREEN BUT SEMANTIC READ-BACK FAILED / MATERIAL ATTEMPT NOT ACCEPTED`.
 
 The failure is preserved. Corrective scope is exactly this Matrix plus the targeted guard; the corrected REP-014 row remains unchanged. Closure is forbidden until the repaired assertion is read back as a separate executable line and exact-head workflows pass.
+
+
+## Accepted corrective verification and closure
+
+- corrected registry material first appeared at failed-read-back head `1066c7119eaeb03a84ece3552c9256277119be3a`; REP-014 blob `c94a00edd63d63d9686ac95fe2b3c4ed1c1ef035`;
+- corrective functional HEAD: `1de7fa8d816456380fa50f415f1c5ce77cfd0606`;
+- corrective compare: exactly `1` commit / `2` authorized paths (targeted guard + this Matrix) / unexpected paths `0`; REP-014 unchanged;
+- targeted guard blob: `e294c0fb312a254b8714cdbea79586c3560abd6d`;
+- immutable read-back confirms the comment and `assert "REL-004 | ENG-006 | ENG-002 | CONSUMES" in registry` are separate lines;
+- immutable registry read-back: `REL-004 | ENG-006 | ENG-002 | CONSUMES | Revalidated within inspected scope`;
+- Full-Stack `33685820669`, Runtime/Integration `33685820913`, Real Mutation Matrix `33685820605`, and M2 `33685820621` — SUCCESS;
+- Runtime jobs `integrity-tests`, `prototype-tests`, and `integration-tests` — SUCCESS.
+
+The relationship is corrected only at the documentary consumer-contract boundary. No runtime reachability, universal execution or endpoint/folder certification is inferred.
+
+`P8 REL-004 = CLOSED / TYPE-CORRECTED / GUARD-REPAIRED / VERIFIED / RESUME-SAFE`.
