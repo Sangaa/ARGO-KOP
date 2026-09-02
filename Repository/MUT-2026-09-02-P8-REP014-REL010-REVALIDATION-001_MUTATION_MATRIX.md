@@ -2,7 +2,7 @@
 
 Transaction ID: `MUT-2026-09-02-P8-REP014-REL010-REVALIDATION-001`
 Priority: `8 — Governance`
-State: `TYPE-CORRECTED MATERIAL CANDIDATE / CI PENDING`
+State: `CLOSED / TYPE-CORRECTED / VERIFIED / RESUME-SAFE`
 Entry HEAD: `4354a16f4abc7c3311c9810d8c7cbf6a5f53634a`
 Protocol: `PROJECT_BOOTSTRAP / CORE-003 / GOV-013 / GOV-014 / REP-014`
 
@@ -89,10 +89,10 @@ Authorized corrected row:
 
 | Change ID | Target | Action | Expected Content | Applied | Verified |
 |---|---|---|---|---:|---:|
-| P8-REL010-R1 | REP-014 REL-010 row | UPDATE | reverse direction to `KNW-002 → MOD-011`, replace `DEPENDS_ON` with `CONSUMES`, set bounded revalidated state | Y | PENDING CI |
+| P8-REL010-R1 | REP-014 REL-010 row | UPDATE | reverse direction to `KNW-002 → MOD-011`, replace `DEPENDS_ON` with `CONSUMES`, set bounded revalidated state | Y | Y |
 | P8-REL010-R2 | all other REP-014 content | KEEP | byte-for-byte/content-equivalent | Y | Y |
 | P8-REL010-R3 | MOD-011 / KNW-002 | KEEP | no endpoint mutation or promotion | Y | Y |
-| P8-REL010-R4 | this Matrix | UPDATE | bind material compare, read-back, CI and closure evidence | Y | PENDING CI |
+| P8-REL010-R4 | this Matrix | UPDATE | bind material compare, read-back, CI and closure evidence | Y | Y |
 
 Material transaction atomicity: exactly one commit after this pre-write Matrix HEAD, exactly `2` changed paths (REP-014 + this Matrix), unexpected paths `0`.
 
@@ -101,3 +101,20 @@ Forbidden: no reverse companion edge, no endpoint maturity promotion, no Models/
 Closure requires immutable read-back, one-row REP-014 diff, four required exact-head workflows with full Runtime job split reviewed, Matrix reconciliation and closure-head verification.
 
 Pre-write Matrix HEAD verification: Full-Stack `33682201838`, Runtime/Integration `33682201859`, Real Mutation Matrix `33682201952`, and M2 `33682201844` all succeeded; Runtime jobs `integration-tests`, `integrity-tests`, and `prototype-tests` all succeeded.
+
+### Material verification and closure
+
+- material HEAD: `6db417811ddadc38b5fc2cc62bcdcdb108686155`;
+- material compare from pre-write Matrix HEAD: exactly `1` commit / exactly `2` authorized paths / unexpected paths `0`;
+- REP-014 source blob: `5e0de8fc8ed0c9f28d9ef6e95315ae8f9e956dfc`;
+- REP-014 material blob: `0a076c273462e88f6f8be68bc415b208109cd48c`;
+- REP-014 diff: exactly `1` row deletion / `1` row addition, confined to REL-010;
+- immutable material read-back: `REL-010 | KNW-002 | MOD-011 | CONSUMES | Revalidated within inspected scope`;
+- Full-Stack Repository Audit `33682402295` — SUCCESS;
+- ARGO Runtime Prototype and Integration Tests `33682402252` — SUCCESS (`integration-tests`, `integrity-tests`, `prototype-tests` all SUCCESS);
+- Real Mutation Matrix Regression `33682402255` — SUCCESS;
+- M2 Multi-Channel Proposal Training `33682402296` — SUCCESS.
+
+REL-010 is therefore closed as a bounded relationship type/direction correction. This does not certify either endpoint beyond its own state and does not close Priority 8.
+
+`P8 REL-010 = CLOSED / TYPE-CORRECTED / VERIFIED / RESUME-SAFE`.
