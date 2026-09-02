@@ -80,7 +80,7 @@ The following are deliberately limited to relationships established during repos
 | REL-011 | MOD-011 | KNW-003 | REFERENCES | Revalidation Required |
 | REL-012 | MOD-011 | KNW-004 | DEPENDS_ON | Revalidation Required |
 | REL-013 | MOD-011 | KNW-008 | DEPENDS_ON | Revalidation Required |
-| REL-014 | MOD-011 | KNW-009 | DEPENDS_ON | Revalidation Required |
+| REL-014 | KNW-009 | MOD-011 | CONSUMES | Revalidated within inspected scope |
 | REL-015 | REP-011 | REP-012 | DEPENDS_ON | Verified |
 | REL-016 | REP-013 | REP-011 | DEPENDS_ON | Verified |
 | REL-017 | REP-013 | REP-012 | DEPENDS_ON | Verified |
