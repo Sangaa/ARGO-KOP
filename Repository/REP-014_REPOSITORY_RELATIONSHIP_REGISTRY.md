@@ -67,7 +67,7 @@ The following are deliberately limited to relationships established during repos
 
 | ID | Source | Target | Type | State |
 |---|---|---|---|---|
-| REL-001 | SPEC-001-KNOWLEDGE-ORGANIZATION | MOD-001 | DEPENDS_ON | Revalidated within inspected authority scope |
+| REL-001 | SPEC-001-KNOWLEDGE-ORGANIZATION | MOD-001 | DEPENDS_ON | Revalidation Required |
 | REL-002 | MOD-001 | SRV-004 | CONSUMES | Revalidated within inspected scope |
 | REL-003 | SRV-005 | ENG-004 | CONSUMES | Revalidation Required |
 | REL-004 | ENG-002 | ENG-006 | DEPENDS_ON | Revalidation Required |
@@ -240,18 +240,9 @@ These state corrections are evidence reconciliation only. They do not authorize 
 
 `REL-001` was reclassified because the inspected target artifact identifies itself as `SPEC-001-KNOWLEDGE-ORGANIZATION`, not the abbreviated `SPEC-001` identifier previously recorded in this registry.
 
-The target artifact exists at `Specifications/01-Knowledge-Organization.md` and is the artifact referenced by `MOD-001`.
+The target artifact exists at `Specifications/01-Knowledge-Organization.md` and is the artifact referenced by `MOD-001`. The relationship is therefore retained but marked `Revalidation Required` until the canonical identity mapping is independently reconciled across the applicable repository indexes.
 
-Current direct source re-read establishes the bounded authority relationship without changing its controlled type:
-
-- `Specifications/01-Knowledge-Organization.md` identifies itself as `SPEC-001-KNOWLEDGE-ORGANIZATION`, places canonical Models above the Specification in its authority boundary, and requires dependency authority checks;
-- `Models/MOD-001_KNOWLEDGE_MODEL.md` is canonical and explicitly names the Specification as an active operational specification while stating that it does not override the canonical knowledge model.
-
-Therefore `REL-001` remains `DEPENDS_ON` and is now `Revalidated within inspected authority scope`.
-
-This disposition is intentionally bounded: it does not certify the complete Specifications or Models layers, does not create a reverse edge, and does not promote repository-wide graph integrity.
-
-This avoids silently treating identity correction or authority evidence as broader certification.
+This avoids silently treating an abbreviated identifier as an authoritative document identity.
 
 ## Operational Memory Build-01 Reconciliation — 2026-08-11
 

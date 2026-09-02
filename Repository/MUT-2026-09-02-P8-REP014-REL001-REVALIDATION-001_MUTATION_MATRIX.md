@@ -2,87 +2,59 @@
 
 Transaction ID: `MUT-2026-09-02-P8-REP014-REL001-REVALIDATION-001`
 Priority: `8 — Governance`
-State: `RESUMED / COMPLETE SOURCE ACQUIRED / MATERIAL MUTATION PENDING`
+State: `BOUNDARY REPAIR / ATOMIC REVERT TO SOURCE`
 Entry HEAD: `2c3596691ba501453a8e69ef6769bad61dc41f99`
 Pre-write Matrix HEAD: `237a28f3624f86f82a4e4a8fa588b5ae8115b70f`
 Hard-Hold checkpoint: `979a394188be157acac6719937b8331fd6eca423`
+Hold-resolution checkpoint: `937f4c7fa3a4df7958f223cc3991c9ae5e3ed5fc`
+Failed material checkpoint: `a1c0857fef8f6b8330442c19567bef214bcf9c36`
+Failed Full-Stack run: `33637504242`
 Protocol: `PROJECT_BOOTSTRAP / CORE-003 / GOV-013 / GOV-014 / REP-014 / CURRENT P8 CLOSURE EVIDENCE`
 
 ## Legal-entry proof
 
-Priority 8 is already proven as the first legal open Priority by the immediately preceding P8 transaction. That transaction is `CLOSED / VERIFIED / RESUME-SAFE` but explicitly leaves Priority 8 OPEN because repository-wide relationship integrity remains OPEN and authorizes no queue promotion.
+Priority 8 remains OPEN. This is the same bounded REL-001 transaction; queue reconstruction is not reopened.
 
-This transaction does not reopen queue reconstruction.
+## Selected material gap
 
-## Smallest material gap selected
-
-`REP-014` still records `REL-001` as `Revalidation Required`:
+`REP-014` REL-001 is the only governed target:
 
 `SPEC-001-KNOWLEDGE-ORGANIZATION → MOD-001 = DEPENDS_ON`
 
-Current direct source evidence is sufficient for a bounded semantic revalidation:
+Expected bounded state: `Revalidated within inspected authority scope`.
 
-- `Specifications/01-Knowledge-Organization.md` identifies itself as `SPEC-001-KNOWLEDGE-ORGANIZATION`, states that canonical Models outrank the Specification, and requires reference/dependency authority checking.
-- `Models/MOD-001_KNOWLEDGE_MODEL.md` is canonical and explicitly names `Specifications/01-Knowledge-Organization.md` as an active operational specification that provides guidance but does not override the canonical knowledge model.
-- The model preserves a bounded evidence caveat: the exact authority relationship remains bounded until the Specifications layer is fully audited. Therefore this transaction MUST NOT promote REL-001 to an unqualified global `Verified` state.
+Source checkpoints:
 
-Source checkpoints at entry:
-
-- REP-014 blob: `addee302fad2bf2271b914bc47619392c4ad4509`
+- REP-014 source blob: `addee302fad2bf2271b914bc47619392c4ad4509`
+- desired bounded candidate blob already materialized once: `4e52e20d70c44244ad13acd7ebf139b64dc1ded4`
 - SPEC source blob: `60f2dde6d8632662e411d560f9007dd1eb644965`
 - MOD source blob: `7c90c7a8fdcd292237ca1689a8be597d3bd94d23`
 
-## Section Matrix
+## Section / Mutation Matrix
 
-| Section ID | Semantic section | Action | Preservation rule |
-|---|---|---|---|
-| S01 | Header / Purpose / Critical Rule / Record schema / controlled types | KEEP | content-equivalent |
-| S02 | Current relationship table — REL-001 row only | UPDATE | change only bounded review state |
-| S03 | Current relationship table — REL-002..REL-072 | KEEP | byte/content-equivalent |
-| S04 | Identity Drift Reconciliation — REL-001 | UPDATE | replace stale unresolved rationale with current bounded source-evidence reconciliation |
-| S05 | All other reconciliation/history/evidence sections | KEEP | content-equivalent |
-| S06 | This Matrix | UPDATE | finalize material/read-back/test evidence and closure |
+| Change ID | Target | Action | Expected Content | Applied | Verified | Notes |
+|---|---|---|---|---:|---:|---|
+| P8-REL001-01 | `REP-014` REL-001 table row | UPDATE | bounded revalidation state | N | N | desired blob `4e52e20...` |
+| P8-REL001-02 | `REP-014` REL-001 reconciliation section | UPDATE | direct SPEC/MOD authority evidence + bounded disposition | N | N | desired blob `4e52e20...` |
+| P8-REL001-03 | all other REP-014 content | KEEP | content-equivalent preservation | N | N | Zero-Touch required |
+| P8-REL001-04 | this Matrix | UPDATE | travel with protected change in same change set | Y | Y | boundary repair |
 
-## Mutation Matrix
+## Failure diagnosis
 
-| Change ID | Target | Original evidence | Action | Expected Content | Applied | Verified | Notes |
-|---|---|---|---|---|---:|---:|---|
-| P8-REL001-01 | `REP-014` REL-001 table row | REP-014 blob `addee302...` | UPDATE | `Revalidated within inspected authority scope` | N | N | no relationship type/direction change |
-| P8-REL001-02 | `REP-014` REL-001 reconciliation section | current Identity Drift section | UPDATE | record direct SPEC/MOD identity + authority evidence and bounded disposition | N | N | no global graph claim |
-| P8-REL001-03 | all other REP-014 content | REP-014 blob `addee302...` | KEEP | content-equivalent preservation | N | N | complete source now retrievable |
-| P8-REL001-04 | this Matrix | current transaction record | UPDATE | record material SHA/read-back/tests/closure | N | N | required before closure |
+The semantic material commit `a1c0857...` changed exactly one protected path and the diff was confined to REL-001, but Full-Stack preflight failed because the push change set contained `mutation_matrices=0`.
 
-## HOLD resolution evidence
+The Matrix existed on the parent, but the current CI contract requires a Mutation Matrix path in the same protected change set. The test is correct; the transaction boundary was wrong.
 
-The earlier HOLD was caused only by response-surface truncation during whole-file retrieval. It is now resolved without changing the governed requirement:
+## Atomic boundary repair
 
-- REP-014 was read in contiguous bounded line ranges through `End of REP-014`, all reporting the same source blob `addee302fad2bf2271b914bc47619392c4ad4509`;
-- the same blob was then retrieved directly by blob SHA as one complete source object;
-- therefore complete-source candidate reconstruction and Zero-Touch comparison are available before material write.
+This commit intentionally returns REP-014 to its exact source blob `addee302...` while updating this Matrix in the same commit. It is not a semantic rollback of the decision; it restores a clean governed base so the identical desired candidate blob can be reapplied atomically with this Matrix in the next commit.
 
-The semantic evidence and mutation scope are unchanged from the original pre-write Matrix.
-
-## Forbidden boundaries
-
-- no queue promotion;
-- no Priority 8 closure claim;
-- no repository-wide graph or integrity PASS claim;
-- no source mutation to SPEC-001 or MOD-001;
-- no new reverse relationship;
-- no change from `DEPENDS_ON` without contradictory source evidence;
-- no unrelated REP-014 relationship/status edits.
+Forbidden: changing semantic scope, weakening CI, skipping Matrix enforcement, queue promotion, or claiming P8 closure.
 
 ## Verification contract
 
-`COMPLETE SOURCE → MATERIAL COMMIT → EXACT PATH/DIFF CHECK → POST-COMMIT READ-BACK → EXACT-HEAD REQUIRED CI → CLOSE OR HARD HOLD`
-
-Required conditions:
-
-- unexpected changes = `0`;
-- REL-001 only is materially altered in REP-014;
-- all KEEP sections preserved;
-- Full-Stack, Runtime/Integration, M2 and Real Mutation Matrix checks remain green when triggered for the material HEAD.
+`ATOMIC SOURCE RESTORE + MATRIX → VERIFY → ATOMIC CANDIDATE + MATRIX → EXACT DIFF → READ-BACK → REQUIRED CI → CLOSE OR HOLD`
 
 ## Learning
 
-A large-document HOLD caused by response truncation can be resolved safely by stable-blob chunking/direct blob retrieval; the control must be satisfied, not bypassed.
+Pre-write Matrix existence and same-change-set Matrix visibility are distinct controls. A valid Matrix on the parent does not satisfy a CI contract that explicitly verifies protected mutation and Matrix together in one change set.
