@@ -22,6 +22,7 @@ def test_closed_p7_control_plane_gaps_are_not_still_listed_as_open() -> None:
 def test_priority7_current_state_is_explicit_bounded_closure() -> None:
     text = STATUS.read_text(encoding="utf-8")
     queue = QUEUE_ADDENDUM.read_text(encoding="utf-8")
+    queue_semantic = queue.replace("**", "")
 
     assert "CLOSED_FOR_PHASE_1" in text
     assert "BOUNDED CROSS-LAYER VALIDATION CLOSED FOR CORE CERTIFICATION SCOPE" in text
@@ -33,4 +34,4 @@ def test_priority7_current_state_is_explicit_bounded_closure() -> None:
 
     assert "PRIORITY 7 = CLOSED_FOR_PHASE_1" in queue
     assert "GLOBAL PHASE 1 REMAINS OPEN" in queue
-    assert "does not auto-start Priority 8" in queue
+    assert "does not auto-start Priority 8" in queue_semantic
