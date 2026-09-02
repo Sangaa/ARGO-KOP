@@ -2,9 +2,10 @@
 
 Transaction ID: `MUT-2026-09-02-P8-GOVERNANCE-REP013-INVENTORY-001`
 Priority: `8 — Governance`
-State: `MATERIAL APPLIED / POST-COMMIT READ-BACK + CI PENDING`
+State: `CLOSED / MATERIAL HEAD 4-OF-4 GREEN / RESUME-SAFE`
 Entry HEAD: `c99fe4482a8f216ac61b3df4fd4f6d6e0cfa2c7e`
 Pre-write Matrix HEAD: `5013c5c4b79202d6295c069a6103c0b6f2c8eb0e`
+Material HEAD: `0bacff644fec0f656e7c8e2c42d1afaf139defb9`
 Protocol: `PROJECT_BOOTSTRAP / CORE-003 / GOV-013 / GOV-014 / REP-011 / REP-013 / REP-016 + CURRENT ADDENDA`
 
 ## Legal-entry proof
@@ -26,7 +27,7 @@ This transaction reconciles only the **known-mapped Governance inventory surface
 
 - REP-013 source blob at entry: `011422383f7646630a47885fb911a40949f607e3`
 - Governance status source blob at entry: `55e56d210d34dd4150ec59b4a83305db356e2332`
-- Candidate REP-013 blob: `2b612272c1edba9a414bbf2a59115900e5ec588f`
+- Material REP-013 blob: `2b612272c1edba9a414bbf2a59115900e5ec588f`
 - Target section: `REP-013 → Domain Content Inventory → Governance/`
 - All REP-013 sections outside the Governance subsection are `KEEP`.
 
@@ -34,9 +35,9 @@ This transaction reconciles only the **known-mapped Governance inventory surface
 
 | Change ID | Target | Action | Expected Content | Applied | Verified |
 |---|---|---|---|---:|---:|
-| P8-001 | `REP-013` Governance subsection | UPDATE | reconcile known-mapped Governance identities to current `_FOLDER_STATUS` evidence while preserving authority distinctions | Y | N |
-| P8-002 | all other `REP-013` sections | KEEP | content-equivalent preservation; no unrelated queue/domain/status change | Y | N |
-| P8-003 | this Matrix | UPDATE | finalize exact applied scope in same material change set | Y | N |
+| P8-001 | `REP-013` Governance subsection | UPDATE | reconcile known-mapped Governance identities to current `_FOLDER_STATUS` evidence while preserving authority distinctions | Y | Y |
+| P8-002 | all other `REP-013` sections | KEEP | content-equivalent preservation; no unrelated queue/domain/status change | Y | Y |
+| P8-003 | this Matrix | UPDATE | finalize exact applied scope in same material change set | Y | Y |
 
 ## Applied scope
 
@@ -44,21 +45,36 @@ Current known-mapped list adds the current uniquely identified Governance paths 
 
 Non-active candidate status remains explicit for `GOV-011`, `GOV-012`, `GOV-018`, and `GOV-023..026`. Superseded/colliding compatibility paths are not promoted into the current-identity list merely because they remain physically present.
 
-REP-013 header version/date are intentionally unchanged: this bounded subsection synchronization does not independently justify a control-plane version promotion, and avoiding an unjustified version change also avoids creating a REP-020 manifest mismatch unrelated to the actual P8 gap.
+REP-013 header version/date remain unchanged: this bounded subsection synchronization does not independently justify a control-plane version promotion and does not create a REP-020 manifest mismatch.
 
-## KEEP / forbidden
+## Verification evidence
 
-No mutation to Governance source authorities, REP-016 canonical body, REP-014 relationship semantics, candidate authority/status, Room71 state, Core, Architecture, Runtime, or global integrity claims.
+Material compare `5013c5c4... → 0bacff644...`:
 
-No stale physical path may be promoted merely because it exists. No candidate becomes canonical through inventory synchronization.
+- exactly `1` commit;
+- exactly `2` paths changed;
+- changed paths = this Matrix + `Repository/REP-013_REPOSITORY_CONTENT_TREE.md`;
+- unexpected expansion = `0`;
+- REP-013 diff is confined to the Governance subsection.
 
-## Verification contract
+Post-commit read-back confirmed REP-013 material blob `2b612272c1edba9a414bbf2a59115900e5ec588f` and finalized material Matrix blob `9f7d92c55b9db1efe578ed3acdf1f20c5046aaf0`.
 
-`MATERIAL COMMIT → EXACT TWO-PATH COMPARE → REP-013 + MATRIX READ-BACK → EXACT-HEAD CI → CLOSE OR HARD HOLD`.
+Exact material-head workflows on `0bacff644fec0f656e7c8e2c42d1afaf139defb9`:
 
-Required: unexpected changes `0`; Full-Stack, Runtime/Integration, Real Mutation Matrix and M2 must remain green when triggered.
+- Full-Stack Repository Audit `33634414881` — SUCCESS;
+- ARGO Runtime Prototype and Integration Tests `33634414882` — SUCCESS;
+- M2 Multi-Channel Proposal Training `33634414884` — SUCCESS;
+- Real Mutation Matrix Regression `33634415002` — SUCCESS.
 
-Until read-back and CI complete, this transaction is not closed and P8 remains open.
+Result: `MATERIAL HEAD = 4-OF-4 GREEN`.
+
+## Closure
+
+`P8-001 = CLOSED / VERIFIED / RESUME-SAFE`.
+
+This closes only the bounded REP-013 known-mapped Governance inventory reconciliation. Priority 8 itself remains OPEN because `_FOLDER_STATUS.md` still records broader `CONTENT REVIEW HOLDS REMAIN` and repository-wide relationship integrity remains OPEN.
+
+No queue promotion is authorized by this closure. Next session/action must rediscover live main and select the next smallest legal unresolved P8 gap.
 
 ## Learning
 
