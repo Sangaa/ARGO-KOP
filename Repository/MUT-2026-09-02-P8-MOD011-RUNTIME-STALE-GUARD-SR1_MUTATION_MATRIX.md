@@ -1,0 +1,66 @@
+# P8 MOD-011 Exact-Head Runtime Stale-Guard Side Repair — Pre-Write Mutation Matrix
+
+Transaction ID: `MUT-2026-09-02-P8-MOD011-RUNTIME-STALE-GUARD-SR1`
+Parent Transaction: `MUT-2026-09-02-P8-MOD011-SEMANTIC-REVALIDATION-001`
+Priority: `8 — Governance`
+State: `PRE-WRITE / HARD HOLD / RESUME-SAFE`
+Entry HEAD: `e4a6b872df41c80965004066e76a23a51a1cb940`
+Failed run: `33677822288`
+Failed job: `integrity-tests / 100406823050`
+Target: `Quality/Integrity/test_ai_006_mod_011_revalidation_dependency.py`
+Source blob: `da7568a7ef961dce75782bc59bfd679d314c0e6a`
+Protocols: `PROJECT_BOOTSTRAP / CORE-003 / GOV-013 / GOV-013A / GOV-013B / GOV-014A / GOV-015 / GOV-016 / GOV-027`
+
+## Failure boundary
+
+Exact-head verification at the parent transaction closure HEAD produced three successful workflows and one failed required workflow:
+
+- Full-Stack Repository Audit `33677822263` — SUCCESS;
+- Real Mutation Matrix Regression `33677822254` — SUCCESS;
+- M2 Multi-Channel Proposal Training `33677822291` — SUCCESS;
+- ARGO Runtime Prototype and Integration Tests `33677822288` — FAILURE.
+
+The Runtime workflow split was Integration SUCCESS, Prototype SUCCESS, Integrity FAILURE. The first meaningful failures were two assertions in the target test that still required MOD-011 to contain `Revalidation Required` and the former audit-boundary sentence after the governed MOD-011 transaction had replaced those exact transient state markers with bounded revalidation evidence.
+
+Classification: `TEST DEFECT / STALE PRE-REVALIDATION STATE GUARD`.
+
+The MOD-011 semantic result is not invalidated by this test defect, but the parent transaction remains `HARD HOLD / EXACT-HEAD VERIFICATION FAILED` until fresh repair evidence passes.
+
+## Prior-learning disposition
+
+- P7 X-C1 stale pre-certification state-guard repair: `DIRECTLY APPLICABLE` for updating only transient state assertions while retaining durable boundary proof.
+- P7 SR1 side-repair sequencing: `DIRECTLY APPLICABLE` for preserving the failed run, opening a pre-write Matrix, verifying a bounded repair, and returning to the interrupted transaction.
+- Existing AI-006/MOD-011 guard: `HISTORICAL / NOW PARTLY STALE`; its durable source-boundary and non-authority checks remain valid.
+
+## Authorized repair
+
+Preserve the test and its durable checks. Replace only obsolete MOD-011 provisional-state assertions with current bounded-state assertions that prove:
+
+- MOD-011 is `Proposed / Future-Ready / Revalidated`, not maturity-promoted;
+- independent revalidation is explicitly scoped and does not certify Models-domain or repository-wide integrity;
+- the historical pre-failure provenance remains preserved;
+- AI-006 still consumes the MOD-011 semantic boundary;
+- AI-006 itself remains `Integrity Hold / Revalidation Required` and is not promoted by the MOD-011 result;
+- adapter transport or model output does not become canonical authority.
+
+## Mutation Matrix
+
+| Change ID | Target | Action | Expected Content | Applied | Verified |
+|---|---|---|---|---:|---:|
+| SR1-01 | target Integrity test | UPDATE | replace only stale MOD-011 state guards with current bounded-state and anti-overpromotion guards | N | N |
+| SR1-02 | all unrelated tests/source/control surfaces | KEEP | no mutation | Y | Y |
+| SR1-03 | this Matrix | UPDATE | bind material and exact-head verification evidence | N | N |
+
+## Atomicity and forbidden boundaries
+
+Material change set: exactly this Matrix plus the target Integrity test; unexpected paths `0`.
+
+No MOD-011, AI-006, REP-014, queue, folder-status, relationship, model-maturity, Models-domain, Priority-8, Connected-Baseline, Phase-1 or global integrity mutation/promotion is authorized.
+
+No historical failed run is relabeled. No guard may be deleted merely to obtain green CI.
+
+## Verification contract
+
+`PRE-WRITE MATRIX COMMIT → EXACT-HEAD CHECK → TWO-PATH MATERIAL COMMIT → READ-BACK/COMPARE → TARGETED SEMANTIC EXECUTION → FOUR REQUIRED WORKFLOWS + JOB REVIEW → MATRIX CLOSURE → CLOSURE-HEAD FOUR-WORKFLOW VERIFICATION → RETURN TO REL-010`.
+
+`P8 MOD-011 parent transaction = HARD HOLD until this side repair is closed by fresh exact-head evidence`.
