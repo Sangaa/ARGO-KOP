@@ -16,7 +16,7 @@ Status
 
 Version
 
-1.5.7
+1.5.8
 
 Canonical
 
@@ -32,11 +32,11 @@ Repository First / Evidence Based / Exact Git-Tree Enumeration / Bounded Consume
 
 Review Scope
 
-Exact Architecture inventory, known identity/path evidence, active Architecture semantic re-audit, bounded Priority-7 consumer alignment, and Priority-9 canonical-path, canonical-model, layer/dependency, information-flow, evolution and active-reference validation of the current primary ARC set and Architecture navigation/control surfaces
+Exact Architecture inventory, known identity/path evidence, active Architecture semantic re-audit, bounded Priority-7 consumer alignment, and Priority-9 canonical-path, canonical-model, layer/dependency, information-flow, evolution, active-reference and Knowledge/Memory-boundary validation of the current primary ARC set and Architecture navigation/control surfaces
 
 Repository Baseline
 
-Current main branch repository state through Priority-9 Gates 4 and 6–11 bounded closure
+Current main branch repository state through Priority-9 Gates 4 and 6–12 bounded closure
 
 ---
 
@@ -54,7 +54,7 @@ Identity / Path Alignment
 
 Architecture Consistency
 
-🟡 Re-audit remains open across cross-layer gates. Priority-9 bounded evidence now closes canonical-path uniqueness, canonical-model, layer/dependency, information-flow, evolution and current active-reference reconciliation for the current primary Architecture scope only; this does not close the broader Architecture re-audit.
+🟡 Re-audit remains open across the Runtime/Interface boundary and broader repository reconciliation gates. Priority-9 bounded evidence now closes canonical-path uniqueness, canonical-model, layer/dependency, information-flow, evolution, current active-reference reconciliation and the inspected Knowledge/Memory semantic boundary for the current primary Architecture scope only; this does not close the broader Architecture re-audit.
 
 Repository Alignment
 
@@ -62,7 +62,7 @@ Repository Alignment
 
 Cross-Reference Review
 
-🟡 Bounded active-reference reconciliation is complete for Gate 11. Priority-7 Transaction S/S-C1 and Priority-9 canonical/path/consistency/flow-evolution/reference work close known current-Architecture drifts within the inspected set only. Architecture ↔ Knowledge/Memory and Architecture ↔ Runtime/Interface semantic boundary validation remains open under Gates 12–13.
+🟡 Bounded active-reference reconciliation is complete for Gate 11 and the inspected Architecture↔Knowledge/Memory semantic boundary is complete for Gate 12. Priority-7 Transaction S/S-C1 and Priority-9 canonical/path/consistency/flow-evolution/reference/boundary work close known current-Architecture drifts within the inspected set only. Architecture ↔ Runtime/Interface semantic boundary validation remains open under Gate 13.
 
 ---
 
@@ -128,7 +128,7 @@ The following artifacts form the primary architecture review set:
 9. Information Flow alignment — PASS FOR CURRENT PRIMARY ARCHITECTURE FLOW MODEL / BOUNDED PRIORITY-9 EVIDENCE
 10. Evolution Model alignment — PASS FOR CURRENT ARCHITECTURE DECISION/EVOLUTION LIFECYCLE / BOUNDED PRIORITY-9 EVIDENCE
 11. Known stale references — PASS FOR CURRENT ACTIVE ARCHITECTURE REFERENCE SET / BOUNDED PRIORITY-9 EVIDENCE
-12. Architecture ↔ Knowledge / Memory boundary — OPEN
+12. Architecture ↔ Knowledge / Memory boundary — PASS FOR INSPECTED CROSS-LAYER SEMANTIC BOUNDARY / BOUNDED PRIORITY-9 EVIDENCE
 13. Architecture ↔ Runtime / Interface boundary — OPEN
 
 AI remains included in the broader cross-reference review scope; retaining the exact Runtime / Interface gate marker preserves the established regression contract and does not close AI review.
@@ -245,6 +245,28 @@ This does not establish repository-wide stale-reference exhaustion. Historical/a
 
 ---
 
+# Bounded Priority-9 Architecture ↔ Knowledge / Memory Boundary — Gate 12
+
+The current Architecture information, dependency and integration contracts were reconciled against the current Knowledge and Memory semantic control surfaces to determine whether learning feedback reverses architectural authority or bypasses canonical-promotion gates.
+
+Evidence boundary:
+
+- `ARC-003` allows information/evidence to move across components but explicitly states that information flow does not create dependency, transfer ownership or override ARC-011 authority;
+- `ARC-006` preserves `Knowledge / Specifications / Standards → Memory` in canonical dependency direction, prohibits Memory rewriting Architecture without a governed decision, and requires learned experience to pass governance and validation before canonical platform promotion;
+- `ARC-007` preserves the same responsibility/dependency direction while allowing non-linear runtime interaction and Memory/Learning feedback without authority transfer;
+- `ARC-011` states that Memory supports reasoning without silently overriding canonical knowledge;
+- `KNW-001`, `KNW-004`, `KNW-005` and `KNW-009` distinguish evidence/validation from authorization/canonical publication and require explicit scope, provenance, Architecture/Governance/Repository and authority checks for cross-domain promotion;
+- `KNW-003` explicitly states that relationships and references do not transfer canonical authority, requires architecture alignment across relationships, and remains `Approved / Revalidation Required` without promotion;
+- `MEM-001`, `MEM-004`, `MEM-005` and `MEM-009` keep Platform Memory distinct from user/session/project/deployment experience and require explicit evidence, scope, contradiction, Architecture/Governance/Repository and authority gates before shared learning becomes canonical platform memory/knowledge;
+- `MEM-003` is older/thinner but does not establish a competing authority model: it preserves ownership, prohibits duplicate repository authority and requires Architecture/Governance alignment;
+- `Knowledge/_FOLDER_STATUS.md` and `Memory/_FOLDER_STATUS.md` remain on `INTEGRITY HOLD` with cross-layer/consolidated validation work still explicit.
+
+The resulting boundary is consistent: learning and operational experience may flow upward as evidence or a promotion candidate, but that information flow does not reverse the architectural dependency direction and does not silently acquire authority to modify Architecture, Repository or canonical platform knowledge.
+
+No inspected Knowledge or Memory source requires a material edit before this bounded Gate-12 closure. The separate `KNW-003 Revalidation Required` state, Knowledge/Memory partition holds, repository relationship gaps and the observed duplicate `MEM-008` identity remain outside this bounded architectural semantic claim.
+
+---
+
 # Bounded Priority-7 Consumer Reconciliation — Transaction S / S-C1
 
 Direct current-content comparison identified `Architecture/README.md` as a stale canonical consumer of Core/Architecture authority after the 2026-09-01 CORE-000 reconciliation.
@@ -271,13 +293,13 @@ This remains a bounded consumer-content correction only. It does not register a 
 
 This status certifies only the evidence inspected so far. It does not certify Runtime, Core, AI, Services, Knowledge, Memory, Projects, Release or the entire repository.
 
-Gates 4 and 6–11 bounded closure does not certify the Architecture folder. Cross-layer Gates 12–13 remain open.
+Gates 4 and 6–12 bounded closure does not certify the Architecture folder. Cross-layer Gate 13 remains open.
 
 ---
 
 # Required Next Action
 
-`Validate Architecture↔Knowledge/Memory + Runtime/Interface boundaries → reconcile Repository registries where required → Architecture Re-Audit`
+`Validate Architecture↔Runtime/Interface boundary → reconcile Repository registries where required → Architecture Re-Audit`
 
 No `100% CLEAN` repository claim is authorized from this document alone.
 
@@ -324,6 +346,8 @@ Repository Reality > Previous Status Claims > Conversation Memory
 `BOUNDED FLOW/EVOLUTION ALIGNMENT != CROSS-LAYER CERTIFICATION`
 
 `BOUNDED ACTIVE-REFERENCE RECONCILIATION != REPOSITORY-WIDE STALE-REFERENCE EXHAUSTION`
+
+`BOUNDED ARCHITECTURE↔KNOWLEDGE/MEMORY ALIGNMENT != KNOWLEDGE OR MEMORY PARTITION CERTIFICATION`
 
 ---
 
