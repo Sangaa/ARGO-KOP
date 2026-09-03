@@ -16,7 +16,7 @@ Status
 
 Version
 
-1.5.2
+1.5.3
 
 Canonical
 
@@ -24,7 +24,7 @@ Yes — evidence record only
 
 Last Audit
 
-2026-09-01
+2026-09-03
 
 Review Method
 
@@ -32,11 +32,11 @@ Repository First / Evidence Based / Exact Git-Tree Enumeration / Bounded Consume
 
 Review Scope
 
-Exact Architecture inventory, known identity/path evidence, active Architecture semantic re-audit, and bounded Priority-7 consumer alignment of `Architecture/README.md` with current CORE-000 / CORE-003 / ARC-011 authority semantics
+Exact Architecture inventory, known identity/path evidence, active Architecture semantic re-audit, bounded Priority-7 consumer alignment, and Priority-9 canonical-model alignment of the current primary ARC set and Architecture navigation/control surfaces
 
 Repository Baseline
 
-Current main branch repository state through Priority-7 Transaction S / S-C1 corrective validation
+Current main branch repository state through Priority-9 Transaction H plus bounded Gate-8 closure review
 
 ---
 
@@ -54,7 +54,7 @@ Identity / Path Alignment
 
 Architecture Consistency
 
-🟡 Re-audit required across Layer Model, Dependency Model, Integration Model, Canonical Architecture Model and their consumers. Priority-7 Transaction S reconciles only the canonical `Architecture/README.md` consumer/handbook with current CORE-000 / CORE-003 / ARC-011 authority boundaries and the current primary ARC review set.
+🟡 Re-audit remains open across the remaining layer, dependency, information-flow, evolution and cross-layer gates. Priority-9 Transactions A/C/D/F/G/H and the pre-existing aligned ARC-009/ARC-010/ARC-011 surfaces establish bounded canonical-model alignment of the current primary ARC set; this closes Gate 8 only and does not close the broader Architecture re-audit.
 
 Repository Alignment
 
@@ -62,7 +62,7 @@ Repository Alignment
 
 Cross-Reference Review
 
-🟡 Open. Transaction S closes one bounded README authority/inventory drift only after S-C1 compatibility verification. New evidence must still be checked for stale Governance, Repository, Knowledge, Memory, Runtime, AI and Interface references across the active Architecture set.
+🟡 Open. Priority-7 Transaction S/S-C1 and Priority-9 canonical alignment work close bounded authority/consumer drifts only. New evidence must still be checked for stale Governance, Repository, Knowledge, Memory, Runtime, AI and Interface references across the active Architecture set.
 
 ---
 
@@ -124,7 +124,7 @@ The following artifacts form the primary architecture review set:
 5. Repository-first status — PASS FOR INSPECTED SCOPE
 6. Layer boundary consistency — OPEN
 7. Dependency direction consistency — OPEN
-8. Canonical Architecture Model alignment — OPEN / `Architecture/README.md` BOUNDED CONSUMER ALIGNMENT PASS IN TRANSACTION S SUBJECT TO S-C1 EXACT-HEAD VERIFICATION; CONSOLIDATED ACTIVE-ARC ALIGNMENT STILL REQUIRED
+8. Canonical Architecture Model alignment — PASS FOR CURRENT PRIMARY ARC SET + ARC_MAP/README CONTROL SURFACES / BOUNDED PRIORITY-9 EVIDENCE
 9. Information Flow alignment — OPEN
 10. Evolution Model alignment — OPEN
 11. Known stale references — OPEN / RE-AUDIT
@@ -134,6 +134,27 @@ The following artifacts form the primary architecture review set:
 AI remains included in the broader cross-reference review scope; restoring the exact Runtime / Interface gate marker preserves the established regression contract and does not close AI review.
 
 Architecture is **not globally certified**. Any previous global cleanliness claim remains withdrawn until the expanded inventory and cross-layer relationships are revalidated.
+
+---
+
+# Bounded Priority-9 Canonical Model Alignment — Transactions A/C/D/F/G/H + Gate 8
+
+Priority-9 current-content review established that the primary Architecture surfaces either already respected or were boundedly corrected to respect the current ARC-011 authority boundary.
+
+The bounded alignment evidence includes:
+
+- `ARC-001` explicitly aligned to ARC-011 while preserving platform-architecture semantics;
+- `ARC-002`, `ARC-003` and `ARC-004` explicitly aligned to ARC-011 without changing their component, information-flow or layer semantics;
+- `ARC-005` Rule 5 now identifies ARC-011 as the canonical dependency-direction authority without changing the rule set;
+- `ARC-006` explicitly binds canonical dependency direction to ARC-011;
+- `ARC-007` binds its responsibility/dependency flow to ARC-011 while retaining ARC-006 as the dependency contract;
+- `ARC-008` no longer treats ARC-001 as the active canonical Architecture Model and correctly identifies ARC-011 while retaining ARC-001 as an active platform architecture surface;
+- `ARC-009` and `ARC-010` already include ARC-011 and preserve the Architecture authority/evolution boundary without a competing structural model;
+- `ARC_MAP.md` reproduces the same nine-layer model and includes ARC-011 in related authority without claiming higher architectural authority;
+- `Architecture/README.md` already identifies ARC-011 as authoritative for structural boundaries/dependency direction;
+- `01-System-Overview.md` remains explicitly legacy/foundation material outside current authority promotion.
+
+This evidence closes only Validation Gate 8. It does not close canonical-path uniqueness, layer/dependency consistency as independent consolidated gates, information-flow/evolution certification, stale-reference exhaustion or cross-layer boundaries.
 
 ---
 
@@ -163,13 +184,13 @@ This remains a bounded consumer-content correction only. It does not register a 
 
 This status certifies only the evidence inspected so far. It does not certify Runtime, Core, AI, Services, Knowledge, Memory, Projects, Release or the entire repository.
 
-Transaction S/S-C1 does not certify the Architecture folder. It records one bounded canonical-consumer alignment while the remaining Architecture gates stay open.
+Gate-8 closure does not certify the Architecture folder. It records bounded canonical-model alignment while the remaining Architecture gates stay open.
 
 ---
 
 # Required Next Action
 
-`Validate active ARC semantics → validate remaining cross-layer references/consumers → reconcile Repository registries where required → Architecture Re-Audit`
+`Validate independent layer/dependency consistency gates → validate information-flow/evolution gates → validate remaining cross-layer references/consumers → reconcile Repository registries where required → Architecture Re-Audit`
 
 No `100% CLEAN` repository claim is authorized from this document alone.
 
@@ -203,7 +224,7 @@ Repository Reality > Previous Status Claims > Conversation Memory
 
 `EXACT PHYSICAL INVENTORY != ARCHITECTURE DOMAIN CERTIFICATION`
 
-`BOUNDED CONSUMER ALIGNMENT != ARCHITECTURE CERTIFICATION`
+`BOUNDED CANONICAL ALIGNMENT != ARCHITECTURE CERTIFICATION`
 
 ---
 
