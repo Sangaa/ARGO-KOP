@@ -2,9 +2,10 @@
 
 Transaction ID: `MUT-2026-09-03-P10-RUNTIME-REL059-LEARNING-PROMOTION-D`
 Priority: `10 — Runtime`
-State: `MATERIAL CHANGE SET / CI PENDING`
+State: `CORRECTIVE PRE-WRITE / HOLD`
 Entry HEAD: `1cf7111b5d5b53716f2d73ca412dfb46c2ce4492`
 Pre-write HEAD: `335a142afba14efdbb02fe5791d6dd5fbb8e86f5`
+Material HEAD: `6d7c3d700c08d4025f141c09be93cb17aba02364`
 Protocol: `PROJECT_BOOTSTRAP / CORE-003 / GOV-013 / GOV-014 / GOV-014A / REP-011 / REP-014 / REP-016`
 
 ## Failure preserved and classified
@@ -30,6 +31,9 @@ Classification: `REAL TRACKED RUNTIME CONSUMER + FAIL-CLOSED VALIDATION GAP`. Th
 | P10-D-06 | `Repository/REP-020_CURRENT_CONTROL_PLANE_BOUNDARY_MANIFEST.md` | UPDATE | synchronize REP-014 version binding in the same material change set | every other manifest row/status/non-claim | PASS | PASS |
 | P10-D-07 | `Repository/REP-011_PRIORITY10_RUNTIME_REL059_LEARNING_ADDENDUM_2026-09-03_D.md` | CREATE | record repaired gap, evidence and semantic limit | historical REP-011 and prior deltas unchanged | PASS | PASS |
 | P10-D-08 | this Matrix | UPDATE IN MATERIAL CHANGE SET | bind pre-write and material evidence | scope and non-claims | PASS | PASS |
+| P10-D-C1-01 | `Knowledge/Learning/promotion_gate_adapter.py` | UPDATE AFTER CORRECTIVE PRE-WRITE | reconcile the tracked evidence consumer by materializing its bounded no-conflict default into the now fail-closed gate input | existing evidence mapping and separate authority argument | PASS | PENDING |
+| P10-D-C1-02 | `Knowledge/Learning/test_promotion_gate_adapter.py` | UPDATE AFTER CORRECTIVE PRE-WRITE | prove existing allow/hold behavior and explicit governing-conflict hold through the consumer | current integration contract | PASS | PENDING |
+| P10-D-C1-03 | this Matrix | UPDATE IN CORRECTIVE CHANGE SET | preserve failure evidence and bind the smallest consumer repair | original material changes and non-claims | PASS | PENDING |
 
 ## Non-claims
 
@@ -41,3 +45,11 @@ Classification: `REAL TRACKED RUNTIME CONSUMER + FAIL-CLOSED VALIDATION GAP`. Th
 
 Validation:
 `pre-write matrix → smallest code/test/registry/manifest/addendum repair → read-back → targeted tests → exact-head four-family CI → close or HOLD`.
+
+## Preserved material-head failure
+
+- Material Real Mutation Matrix `33745593291`, Full-Stack `33745593254`, and M2 `33745593239` — SUCCESS.
+- Material Runtime/Integration `33745593285` — FAILURE only in `integration-tests`; `prototype-tests` and `integrity-tests` are SUCCESS.
+- Exact failing tracked consumer: `Knowledge/Learning/promotion_gate_adapter.py` builds the promotion-gate candidate but did not materialize the new `governing_conflict` field.
+- Exact failures: both cases in `Quality/Integration/test_readiness_to_promotion_gate_boundary.py`; absent field produced `CANDIDATE_INCOMPLETE` before the expected authority decision.
+- The Runtime gate and its new tests passed. The assertions remain unchanged. Corrective scope is the real adapter plus its direct tests and this Matrix.
