@@ -20,7 +20,7 @@ ARC-006
 
 Version
 
-1.3.1
+1.3.2
 
 Status
 
@@ -40,15 +40,17 @@ Latest Official Release
 
 Last Audit
 
-2026-08-13
+2026-09-03
 
 ---
 
 # Purpose
 
-Defines the dependency model of ARGO KOP. It governs logical dependency direction, ownership and qualification rather than physical folder layout.
+Defines the dependency model of ARGO KOP. It governs logical dependency direction, ownership and qualification rather than physical folder layout. Its structural-boundary and dependency-direction interpretation is subordinate to the Constitution and applicable Governance and aligned with the current canonical Architecture Model in `Architecture/ARC-011_CANONICAL_ARCHITECTURE_MODEL.md`.
 
 # Canonical Dependency Direction
+
+The canonical dependency direction below is the dependency interpretation of `Architecture/ARC-011_CANONICAL_ARCHITECTURE_MODEL.md`:
 
 Identity / Core
 
@@ -219,6 +221,7 @@ Validation failure blocks acceptance until corrected or explicitly dispositioned
 - `Architecture/ARC-004_LAYER_MODEL.md`
 - `Architecture/ARC-007_INTEGRATION_MODEL.md`
 - `Architecture/ARC-009_ARCHITECTURE_DECISIONS.md`
+- `Architecture/ARC-011_CANONICAL_ARCHITECTURE_MODEL.md`
 - `Core/CORE-003_CONSTITUTION.md`
 - `Governance/GOV-009_REPOSITORY_POLICY.md`
 - `Repository/REP-001_MASTER_INDEX.md`
