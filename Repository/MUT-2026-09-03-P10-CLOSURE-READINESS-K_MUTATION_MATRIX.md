@@ -2,8 +2,9 @@
 
 Transaction ID: `MUT-2026-09-03-P10-CLOSURE-READINESS-K`
 Priority: `10 — Runtime`
-State: `PRE-WRITE / OPEN`
+State: `MATERIAL CHANGE SET / CI PENDING`
 Entry HEAD: `33d1dfe8187bc92bdc29a3c325d0b04d06451136`
+Pre-write HEAD: `0b3bda9777e15156dc30a5752e28447f98d4f8fa`
 Protocol: `PROJECT_BOOTSTRAP / CORE-003 / GOV-013 / GOV-014 / GOV-014A / GOV-016 / REP-011 / REP-016 / RUN-013 / RUN-015`
 
 ## Current evidence
@@ -22,10 +23,10 @@ Classification: `P10 NOT CLOSURE-READY / GATE-15 LOCAL EXECUTABLE-PROMOTION HOLD
 
 | Change ID | Target | Action | Purpose | Pre-write | Post-write |
 |---|---|---|---|:---:|:---:|
-| P10-K-01 | `Runtime/_FOLDER_STATUS.md` | UPDATE | replace stale J-verification pointer with Gate-15 next boundary | PASS | PENDING |
-| P10-K-02 | `Quality/Integrity/test_runtime_p10_closure_readiness.py` | CREATE | bind closed bounded gates to explicit Gate-15/P10 hold | PASS | PENDING |
-| P10-K-03 | `Repository/REP-011_PRIORITY10_RUNTIME_CLOSURE_READINESS_ADDENDUM_2026-09-03_K.md` | CREATE | record hold basis and non-claims | PASS | PENDING |
-| P10-K-04 | this Matrix | UPDATE | material/CI/closure evidence | PASS | PENDING |
+| P10-K-01 | `Runtime/_FOLDER_STATUS.md` | UPDATE | replace stale J-verification pointer with Gate-15 next boundary | PASS | PASS |
+| P10-K-02 | `Quality/Integrity/test_runtime_p10_closure_readiness.py` | CREATE | bind closed bounded gates to explicit Gate-15/P10 hold | PASS | PASS |
+| P10-K-03 | `Repository/REP-011_PRIORITY10_RUNTIME_CLOSURE_READINESS_ADDENDUM_2026-09-03_K.md` | CREATE | record hold basis and non-claims | PASS | PASS |
+| P10-K-04 | this Matrix | UPDATE | material/CI/closure evidence | PASS | PASS |
 
 ## Non-claims
 
