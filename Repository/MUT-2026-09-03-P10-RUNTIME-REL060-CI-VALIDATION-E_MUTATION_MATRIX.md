@@ -2,9 +2,10 @@
 
 Transaction ID: `MUT-2026-09-03-P10-RUNTIME-REL060-CI-VALIDATION-E`
 Priority: `10 — Runtime`
-State: `MATERIAL CHANGE SET / CI PENDING`
+State: `CLOSED / VERIFIED / RESUME-SAFE`
 Entry HEAD: `ef090fdacd64b80ca239e156dffd5db210783d09`
 Pre-write HEAD: `9cca2291a5723c85537c54e1b2b32934d32c6c52`
+Material HEAD: `e306b3abb728912c6accc6450ae5c4490eba4153`
 Protocol: `PROJECT_BOOTSTRAP / CORE-003 / GOV-013 / GOV-014 / GOV-014A / REP-011 / REP-014 / REP-016`
 
 ## Evidence retrieval
@@ -39,3 +40,15 @@ The type remains bounded validation, not authority, implementation, dependency o
 
 Validation:
 `pre-write matrix → atomic source/registry/manifest/guard/addendum/matrix change set → read-back → targeted checks → exact-head four-family CI → close or HOLD`.
+
+## Verification
+
+- Local deterministic guard: 2 checks passed; canonical acceptance runner: 3 scenarios passed.
+- Exact-head Real Mutation Matrix Regression `33746406176` — SUCCESS.
+- Exact-head Full-Stack Repository Audit `33746406190` — SUCCESS.
+- Exact-head ARGO Runtime Prototype and Integration Tests `33746406252` — SUCCESS.
+- Exact-head M2 Multi-Channel Proposal Training `33746406174` — SUCCESS.
+- RUN-015 v1.0.2, REP-014 v1.2.18 and its manifest binding agree within the tested material head.
+
+Closure:
+`P10 TRANSACTION E = CLOSED / VERIFIED / RESUME-SAFE`.
