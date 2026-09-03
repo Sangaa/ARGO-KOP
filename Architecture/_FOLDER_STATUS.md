@@ -16,7 +16,7 @@ Status
 
 Version
 
-1.5.3
+1.5.4
 
 Canonical
 
@@ -32,11 +32,11 @@ Repository First / Evidence Based / Exact Git-Tree Enumeration / Bounded Consume
 
 Review Scope
 
-Exact Architecture inventory, known identity/path evidence, active Architecture semantic re-audit, bounded Priority-7 consumer alignment, and Priority-9 canonical-model alignment of the current primary ARC set and Architecture navigation/control surfaces
+Exact Architecture inventory, known identity/path evidence, active Architecture semantic re-audit, bounded Priority-7 consumer alignment, and Priority-9 canonical-model plus layer/dependency consistency validation of the current primary ARC set and Architecture navigation/control surfaces
 
 Repository Baseline
 
-Current main branch repository state through Priority-9 Transaction H plus bounded Gate-8 closure review
+Current main branch repository state through Priority-9 Gate-8 closure plus bounded Gates-6/7 consistency review
 
 ---
 
@@ -54,7 +54,7 @@ Identity / Path Alignment
 
 Architecture Consistency
 
-🟡 Re-audit remains open across the remaining layer, dependency, information-flow, evolution and cross-layer gates. Priority-9 Transactions A/C/D/F/G/H and the pre-existing aligned ARC-009/ARC-010/ARC-011 surfaces establish bounded canonical-model alignment of the current primary ARC set; this closes Gate 8 only and does not close the broader Architecture re-audit.
+🟡 Re-audit remains open across canonical-path uniqueness, information-flow, evolution, stale-reference and cross-layer gates. Priority-9 bounded evidence now closes canonical-model alignment plus independent layer-boundary and dependency-direction consistency for the current primary ARC set and Architecture control surfaces only; this does not close the broader Architecture re-audit.
 
 Repository Alignment
 
@@ -62,7 +62,7 @@ Repository Alignment
 
 Cross-Reference Review
 
-🟡 Open. Priority-7 Transaction S/S-C1 and Priority-9 canonical alignment work close bounded authority/consumer drifts only. New evidence must still be checked for stale Governance, Repository, Knowledge, Memory, Runtime, AI and Interface references across the active Architecture set.
+🟡 Open. Priority-7 Transaction S/S-C1 and Priority-9 canonical/consistency work close bounded authority and primary-Architecture consistency drifts only. New evidence must still be checked for stale Governance, Repository, Knowledge, Memory, Runtime, AI and Interface references across the active Architecture set.
 
 ---
 
@@ -122,8 +122,8 @@ The following artifacts form the primary architecture review set:
 3. Filename / internal ID alignment — PASS FOR KNOWN ARC ARTIFACTS
 4. Canonical path uniqueness — OPEN / CONSOLIDATED CHECK REQUIRED
 5. Repository-first status — PASS FOR INSPECTED SCOPE
-6. Layer boundary consistency — OPEN
-7. Dependency direction consistency — OPEN
+6. Layer boundary consistency — PASS FOR CURRENT PRIMARY ARC SET + ARC_MAP/README / BOUNDED PRIORITY-9 EVIDENCE
+7. Dependency direction consistency — PASS FOR CURRENT PRIMARY ARC SET + ARC_MAP/README / BOUNDED PRIORITY-9 EVIDENCE
 8. Canonical Architecture Model alignment — PASS FOR CURRENT PRIMARY ARC SET + ARC_MAP/README CONTROL SURFACES / BOUNDED PRIORITY-9 EVIDENCE
 9. Information Flow alignment — OPEN
 10. Evolution Model alignment — OPEN
@@ -131,7 +131,7 @@ The following artifacts form the primary architecture review set:
 12. Architecture ↔ Knowledge / Memory boundary — OPEN
 13. Architecture ↔ Runtime / Interface boundary — OPEN
 
-AI remains included in the broader cross-reference review scope; restoring the exact Runtime / Interface gate marker preserves the established regression contract and does not close AI review.
+AI remains included in the broader cross-reference review scope; retaining the exact Runtime / Interface gate marker preserves the established regression contract and does not close AI review.
 
 Architecture is **not globally certified**. Any previous global cleanliness claim remains withdrawn until the expanded inventory and cross-layer relationships are revalidated.
 
@@ -154,7 +154,28 @@ The bounded alignment evidence includes:
 - `Architecture/README.md` already identifies ARC-011 as authoritative for structural boundaries/dependency direction;
 - `01-System-Overview.md` remains explicitly legacy/foundation material outside current authority promotion.
 
-This evidence closes only Validation Gate 8. It does not close canonical-path uniqueness, layer/dependency consistency as independent consolidated gates, information-flow/evolution certification, stale-reference exhaustion or cross-layer boundaries.
+This evidence closes Validation Gate 8 only for canonical-model authority alignment; it remains bounded and does not itself prove the remaining cross-layer gates.
+
+---
+
+# Bounded Priority-9 Layer / Dependency Consistency — Gates 6–7
+
+Independent consistency review of the active primary Architecture set established one common current boundary model and dependency direction:
+
+`Identity / Core → Governance → Architecture → Repository → Knowledge / Specifications / Standards → Memory → Cognition / Engine → Runtime / Services / AI → Projects / Applied Artifacts`
+
+Evidence boundary:
+
+- `ARC-001`, `ARC-004`, `ARC-006`, `ARC-007`, `ARC-008`, `ARC-011` and `ARC_MAP` express this same nine-layer ordering;
+- `ARC-002` requires component dependencies to remain compatible with ARC-004, ARC-006 and ARC-011 and does not establish a competing top-level layer;
+- `ARC-003` explicitly separates information flow from dependency/authority transfer and is aligned to ARC-011;
+- `ARC-005` Rule 5 binds dependency direction to ARC-011;
+- `ARC-008` classifies additional repository folders as domains/groupings unless governed otherwise and keeps Archive outside the active dependency layer model;
+- `ARC-009` and `ARC-010` preserve decision/evolution controls without declaring competing layer or dependency structures;
+- `README` and `ARC_MAP` remain navigation/control surfaces and do not outrank ARC-011;
+- `01-System-Overview.md` remains legacy/foundation material and is not promoted into current authority.
+
+No inspected active primary Architecture artifact introduces a reverse dependency or a competing top-level layer model. This closes Gates 6 and 7 only for the current primary Architecture scope. It does not certify every repository consumer, every cross-layer relationship or the repository-wide graph.
 
 ---
 
@@ -184,13 +205,13 @@ This remains a bounded consumer-content correction only. It does not register a 
 
 This status certifies only the evidence inspected so far. It does not certify Runtime, Core, AI, Services, Knowledge, Memory, Projects, Release or the entire repository.
 
-Gate-8 closure does not certify the Architecture folder. It records bounded canonical-model alignment while the remaining Architecture gates stay open.
+Gates 6–8 bounded closure does not certify the Architecture folder. Canonical-path uniqueness, information-flow/evolution, stale-reference and cross-layer gates remain open.
 
 ---
 
 # Required Next Action
 
-`Validate independent layer/dependency consistency gates → validate information-flow/evolution gates → validate remaining cross-layer references/consumers → reconcile Repository registries where required → Architecture Re-Audit`
+`Validate information-flow/evolution gates → validate canonical path uniqueness and remaining stale/cross-layer references → reconcile Repository registries where required → Architecture Re-Audit`
 
 No `100% CLEAN` repository claim is authorized from this document alone.
 
@@ -209,6 +230,7 @@ No `100% CLEAN` repository claim is authorized from this document alone.
 - `Repository/REP-002_REPOSITORY_MAP.md`
 - `Architecture/ARC_MAP.md`
 - `Architecture/ARC-001_PLATFORM_ARCHITECTURE.md`
+- `Architecture/ARC-004_LAYER_MODEL.md`
 - `Architecture/ARC-005_ARCHITECTURE_RULES.md`
 - `Architecture/ARC-006_DEPENDENCY_MODEL.md`
 - `Architecture/ARC-007_INTEGRATION_MODEL.md`
@@ -224,7 +246,7 @@ Repository Reality > Previous Status Claims > Conversation Memory
 
 `EXACT PHYSICAL INVENTORY != ARCHITECTURE DOMAIN CERTIFICATION`
 
-`BOUNDED CANONICAL ALIGNMENT != ARCHITECTURE CERTIFICATION`
+`BOUNDED PRIMARY-ARCHITECTURE CONSISTENCY != REPOSITORY-WIDE GRAPH CERTIFICATION`
 
 ---
 
