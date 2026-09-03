@@ -20,7 +20,7 @@ ARC-004
 
 Version
 
-1.3.0
+1.3.1
 
 Status
 
@@ -40,13 +40,13 @@ Latest Official Release
 
 Last Audit
 
-2026-08-08
+2026-09-03
 
 ---
 
 # Purpose
 
-Defines the logical layer model of ARGO KOP. It is subordinate to the Constitution and aligned with the canonical Architecture Map and Repository authority.
+Defines the logical layer model of ARGO KOP. It is subordinate to the Constitution and applicable Governance and aligned with the canonical Architecture Map, Repository authority, and the current canonical structural/dependency interpretation in `Architecture/ARC-011_CANONICAL_ARCHITECTURE_MODEL.md`.
 
 Repository folders are physical storage locations and MUST NOT be interpreted as architectural layers automatically.
 
@@ -150,7 +150,7 @@ Layers communicate through documented contracts, interfaces and references. A re
 
 # Integrity Rules
 
-1. This model MUST remain aligned with `Architecture/ARC_MAP.md`.
+1. This model MUST remain aligned with `Architecture/ARC-011_CANONICAL_ARCHITECTURE_MODEL.md` for structural boundaries and dependency direction and with `Architecture/ARC_MAP.md` for Architecture navigation.
 2. Changes to layer boundaries require architectural review.
 3. Folder creation or renaming MUST NOT redefine architecture implicitly.
 4. Dependency claims MUST be traceable to current repository artifacts or interfaces.
@@ -166,6 +166,7 @@ Layers communicate through documented contracts, interfaces and references. A re
 - `Architecture/ARC-006_DEPENDENCY_MODEL.md`
 - `Architecture/ARC-007_INTEGRATION_MODEL.md`
 - `Architecture/ARC-009_ARCHITECTURE_DECISIONS.md`
+- `Architecture/ARC-011_CANONICAL_ARCHITECTURE_MODEL.md`
 - `Core/CORE-003_CONSTITUTION.md`
 - `Governance/GOV-010_GOVERNANCE_MODEL.md`
 - `Repository/REP-001_MASTER_INDEX.md`
