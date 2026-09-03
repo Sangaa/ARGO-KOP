@@ -13,7 +13,7 @@ Knowledge Operating Platform
 Document ID
 ARC-001
 Version
-1.3.0
+1.3.1
 Status
 Validated / Integrity Hold
 Category
@@ -23,7 +23,7 @@ Repository Development Baseline
 Latest Official Release
 1.0.0
 Last Audit
-2026-08-08
+2026-09-03
 
 ---
 
@@ -31,7 +31,7 @@ Last Audit
 
 Defines the high-level architecture of ARGO KOP, its logical domains, responsibilities and dependency boundaries.
 
-This document is subordinate to the Constitution and Governance and remains aligned with the canonical Repository Map and Architecture Map.
+This document is subordinate to the Constitution and applicable Governance. Its structural-boundary and dependency-direction interpretation is aligned with the current canonical Architecture Model in `Architecture/ARC-011_CANONICAL_ARCHITECTURE_MODEL.md` and remains aligned with the canonical Repository Map and Architecture Map.
 
 # Architectural Philosophy
 
@@ -120,6 +120,7 @@ Architecture remains under consolidated audit until all active architectural art
 - `Architecture/ARC-004_LAYER_MODEL.md`
 - `Architecture/ARC-006_DEPENDENCY_MODEL.md`
 - `Architecture/ARC-007_INTEGRATION_MODEL.md`
+- `Architecture/ARC-011_CANONICAL_ARCHITECTURE_MODEL.md`
 
 ---
 
