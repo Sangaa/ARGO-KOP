@@ -28,6 +28,6 @@ def test_rep002_does_not_promote_legacy_core000_identity() -> None:
 def test_rep002_reconciliation_keeps_bounded_integrity_state() -> None:
     text = REP002.read_text(encoding="utf-8")
 
-    assert "Version: 1.7.5" in text
+    assert "Version: 1.7.6" in text
     assert "Status: Integrity Hold" in text
     assert "This is a bounded physical-map reconciliation only." in text

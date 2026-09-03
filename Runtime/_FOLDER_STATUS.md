@@ -10,10 +10,10 @@ Folder
 Runtime
 
 Version
-1.5.5
+1.6.0
 
 Status
-🟡 VALIDATED / CROSS-LAYER INTEGRATION HOLD
+🟢 CLOSED_FOR_PHASE_1 / BOUNDED RUNTIME PARTITION CERTIFIED / GLOBAL HOLDS REMAIN
 
 Canonical
 Yes — folder status is an evidence record, not independent authority
@@ -87,7 +87,9 @@ Transaction L materially hardens the pre-existing `Runtime/Execution/` boundary 
 
 Transaction M re-counted the current Git-tracked Runtime surface: `118` paths = `17` top-level + Context `4` + Decision `12` + Execution `41` + Integration `2` + Learning `17` + Prototype `25`. REP-013 explicitly limits its Runtime representation to known audited members and says it is not exhaustive; REP-012 allocates only the earlier named candidate cohort. This is the remaining Runtime-specific material closure blocker.
 
-Transaction N reconciles that exact path set through a one-record-per-path REP-012 allocation manifest, REP-013 exact-inventory binding and deterministic drift guard. The canonical sorted-path digest is `a5db51a6d6cbf7dbf22bdb971fc0d2238d2bdef6627caadc4ee2b1933dad4438`; allocation role has `NONE_BY_ALLOCATION` authority effect. This removes the physical inventory/allocation blocker subject to exact-head CI, but does not itself close Priority 10.
+Transaction N reconciles that exact path set through a one-record-per-path REP-012 allocation manifest, REP-013 exact-inventory binding and deterministic drift guard. The canonical sorted-path digest is `a5db51a6d6cbf7dbf22bdb971fc0d2238d2bdef6627caadc4ee2b1933dad4438`; allocation role has `NONE_BY_ALLOCATION` authority effect. Material HEAD `f2b9bc3248743e458d6e613b221e9871da997de1` and evidence HEAD `868f0662766153a097c954e618e7e284807eca62` each passed all four required workflow families.
+
+Transaction O performs the separate explicit closure decision. No current Runtime-specific authority contradiction, inventory/identity drift, material relationship misclassification, required bounded consumer/implementation defect or invalid Gate evidence remains in the certified scope.
 
 # Key Finding
 
@@ -97,15 +99,15 @@ The tracked Runtime↔Knowledge/Memory seams are boundedly reconciled through pe
 
 # Integrity Decision
 
-Runtime remains **validated at the folder-contract level**, with Gates 12, 13, 14 and 15 boundedly verified for their named tracked seams. Exact Runtime physical inventory/allocation is materially reconciled by Transaction N subject to exact-head CI. global Runtime certification remains intentionally capped at `CROSS-LAYER INTEGRATION HOLD` pending a separate explicit bounded closure-readiness decision; live provider trust is also not inferred.
+Runtime is **closed for the bounded Phase-1 Runtime partition scope**, with Gates 12, 13, 14 and 15 boundedly verified for their named tracked seams and exact Runtime physical inventory/allocation reconciled by Transaction N. `BOUNDED RUNTIME PARTITION CLOSURE != GLOBAL RUNTIME CERTIFICATION`; live provider trust is not inferred.
 
-`RUN-013` still defines controlled handoff as a safety checkpoint that must not return `EXECUTED`, and `RUN-015` explicitly states that prototype CI does not certify full Runtime or executable promotion. `EXECUTABLE PROMOTION HOLD` remains an independent non-blocking non-claim; Gate-15 bounded closure does not clear it. Priority 10 remains OPEN pending a separate explicit bounded closure-readiness decision.
+`RUN-013` still defines controlled handoff as a safety checkpoint that must not return `EXECUTED`, and `RUN-015` explicitly states that prototype CI does not certify full Runtime or executable promotion. `EXECUTABLE PROMOTION HOLD` remains an independent non-blocking non-claim; Gate-15 and partition closure do not clear it. Priority 10 is `CLOSED_FOR_PHASE_1 / BOUNDED RUNTIME PARTITION CERTIFIED / GLOBAL HOLDS REMAIN`.
 
 This status does not invalidate the Runtime contracts. It prevents bounded local/cross-layer validation from being mistaken for production/provider authenticity, executable promotion, repository-wide graph completion or global integrity proof.
 
 # Next Construction Boundary
 
-After exact-head verification of Transaction N, perform one bounded Priority-10 closure-readiness reconciliation. Do not reopen Gates 12–15 absent contradictory evidence, and do not convert allocation or implementation presence into canonical authority.
+After exact-head verification of Transaction O, rediscover live `main` and recompute the first legal open successor from current REP-016/addenda and governing evidence. Do not assume Priority 11, reopen Gates 12–15 absent contradictory evidence, or convert allocation/implementation presence into canonical authority.
 
 # Engineering Rule
 

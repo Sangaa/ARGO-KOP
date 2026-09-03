@@ -50,10 +50,11 @@ def test_runtime_status_agrees_with_current_candidate_scope_and_authority_bounda
     status = RUNTIME_STATUS.read_text(encoding="utf-8")
     for run_id in CURRENT_RUNTIME_CANDIDATES:
         assert run_id in status
-    assert "CROSS-LAYER INTEGRATION HOLD" in status
+    assert "CLOSED_FOR_PHASE_1 / BOUNDED RUNTIME PARTITION CERTIFIED" in status
     assert "prototype evidence" in status
-    assert "global Runtime certification" in status
+    assert "do not promote them to canonical executable Runtime authority" in status
+    assert "BOUNDED RUNTIME PARTITION CLOSURE != GLOBAL RUNTIME CERTIFICATION" in status
 
 
 # Bounded guard only. It does not certify repository-wide inventory completeness,
-# Runtime implementation, or Phase 1 closure.
+# Runtime production implementation, provider authenticity, or Phase 1 closure.

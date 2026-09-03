@@ -2,12 +2,12 @@
 
 Platform: ARGO KOP (Knowledge Operating Platform)
 Document ID: REP-002
-Version: 1.7.5
+Version: 1.7.6
 Status: Integrity Hold
 Category: Repository
 Canonical: Yes
 Priority: Critical
-Last Audit Date: Sep 1, 2026
+Last Audit Date: Sep 3, 2026
 Development Baseline: 3.2.1
 
 ---
@@ -144,7 +144,7 @@ Path: `Runtime/`
 - `Runtime/Prototype/PROTOTYPE_INTEGRATION_CONTRACT.md`
 - `Runtime/_FOLDER_STATUS.md`
 
-The `RUN-011..015` and `Runtime/Prototype/` paths are directly verified physical inventory from the current Runtime reconciliation. They remain `CROSS-LAYER INTEGRATION HOLD` and are not promoted to executable Runtime authority by mapping alone.
+The `RUN-011..015` and `Runtime/Prototype/` paths are directly verified physical inventory inside the bounded Phase-1 Runtime partition closure. Their candidate/Integrity-Hold status remains separate, and mapping or partition closure does not promote executable Runtime authority, provider authenticity or production execution.
 
 ## 7. Architecture Domain
 

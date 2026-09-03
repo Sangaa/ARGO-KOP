@@ -35,6 +35,7 @@ def test_runtime_folder_status_declares_the_same_candidate_scope():
 
 def test_runtime_candidate_identity_guard_does_not_promote_prototype_authority():
     text = FOLDER_STATUS.read_text(encoding="utf-8")
-    assert "CROSS-LAYER INTEGRATION HOLD" in text
+    assert "CLOSED_FOR_PHASE_1 / BOUNDED RUNTIME PARTITION CERTIFIED" in text
     assert "prototype evidence" in text
-    assert "not globally certified" in text or "global Runtime certification" in text
+    assert "do not promote them to canonical executable Runtime authority" in text
+    assert "BOUNDED RUNTIME PARTITION CLOSURE != GLOBAL RUNTIME CERTIFICATION" in text

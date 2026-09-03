@@ -6,12 +6,12 @@
 
 Platform: ARGO KOP (Knowledge Operating Platform)
 Document ID: REP-001
-Version: 1.11.4
+Version: 1.11.5
 Status: Integrity Hold
 Category: Repository
 Canonical: Yes
 Priority: Critical
-Last Audit Date: Sep 1, 2026
+Last Audit Date: Sep 3, 2026
 Development Baseline: 3.2.1
 
 ---
@@ -138,7 +138,7 @@ Identity-migration compatibility records under former colliding `GOV-013/013A/01
 - `Runtime/Prototype/PROTOTYPE_INTEGRATION_CONTRACT.md`
 - `Runtime/_FOLDER_STATUS.md`
 
-`RUN-011..015` and `Runtime/Prototype/` are directly verified current Runtime inventory, but remain bounded by `CROSS-LAYER INTEGRATION HOLD`. Their presence does not establish executable Runtime authority.
+`RUN-011..015` and `Runtime/Prototype/` are directly verified current Runtime inventory inside the bounded Phase-1 Runtime partition closure. Their candidate/Integrity-Hold status remains separate; index presence and partition closure do not establish executable Runtime authority, provider authenticity or production execution.
 
 ## 7. Architecture Domain
 

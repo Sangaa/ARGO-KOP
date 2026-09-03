@@ -52,4 +52,5 @@ def test_gate14_bounded_result_preserves_independent_runtime_holds():
     assert "13. Runtime ↔ Interfaces / external connectors — BOUNDED VERIFIED FOR PROVIDER-NEUTRAL HANDOFF" in status
     assert "LIVE PROVIDER AUTHENTICITY, AUTHORIZATION AND AVAILABILITY HOLD" in status
     assert "EXECUTABLE PROMOTION HOLD" in status
-    assert "🟡 VALIDATED / CROSS-LAYER INTEGRATION HOLD" in status
+    assert "🟢 CLOSED_FOR_PHASE_1 / BOUNDED RUNTIME PARTITION CERTIFIED / GLOBAL HOLDS REMAIN" in status
+    assert "not for exhaustive Runtime/control-plane coverage" in status

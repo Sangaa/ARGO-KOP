@@ -25,12 +25,13 @@ def test_gate15_contracts_still_forbid_executable_promotion_claim():
     assert "executable promotion and consolidated cross-layer Runtime validation remain on HOLD" in run015
 
 
-def test_runtime_status_closes_gate15_boundedly_and_keeps_p10_open_on_exact_inventory():
+def test_runtime_status_closes_p10_boundedly_after_exact_inventory():
     status = STATUS.read_text(encoding="utf-8")
-    assert "🟡 VALIDATED / CROSS-LAYER INTEGRATION HOLD" in status
+    assert "🟢 CLOSED_FOR_PHASE_1 / BOUNDED RUNTIME PARTITION CERTIFIED / GLOBAL HOLDS REMAIN" in status
     assert "15. Runtime ↔ Engine cognitive-loop prototype seam — BOUNDED VERIFIED" in status
-    assert "Exact Runtime physical inventory/allocation is materially reconciled by Transaction N subject to exact-head CI." in status
-    assert "Priority 10 remains OPEN pending a separate explicit bounded closure-readiness decision." in status
-    assert "After exact-head verification of Transaction N, perform one bounded Priority-10 closure-readiness reconciliation." in status
+    assert "Priority 10 is `CLOSED_FOR_PHASE_1 / BOUNDED RUNTIME PARTITION CERTIFIED / GLOBAL HOLDS REMAIN`." in status
+    assert "BOUNDED RUNTIME PARTITION CLOSURE != GLOBAL RUNTIME CERTIFICATION" in status
+    assert "After exact-head verification of Transaction O, rediscover live `main`" in status
     assert "118` paths" in status
-    assert "global Runtime certification remains intentionally capped" in status
+    assert "live provider trust is not inferred" in status
+    assert "EXECUTABLE PROMOTION HOLD" in status

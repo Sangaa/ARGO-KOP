@@ -52,5 +52,6 @@ def test_runtime_handoff_is_provider_neutral_and_does_not_claim_authenticity():
 def test_gate15_and_global_runtime_hold_remain_independent():
     runtime = RUNTIME_STATUS.read_text(encoding="utf-8")
     assert "EXECUTABLE PROMOTION HOLD" in runtime
-    assert "🟡 VALIDATED / CROSS-LAYER INTEGRATION HOLD" in runtime
-    assert "global Runtime certification remains intentionally capped" in runtime
+    assert "🟢 CLOSED_FOR_PHASE_1 / BOUNDED RUNTIME PARTITION CERTIFIED / GLOBAL HOLDS REMAIN" in runtime
+    assert "BOUNDED RUNTIME PARTITION CLOSURE != GLOBAL RUNTIME CERTIFICATION" in runtime
+    assert "live provider trust is not inferred" in runtime

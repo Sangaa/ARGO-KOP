@@ -2,8 +2,9 @@
 
 Transaction ID: `MUT-2026-09-03-P10-RUNTIME-BOUNDED-CLOSURE-O`
 Priority: `10 — Runtime`
-State: `PRE-WRITE / MATERIAL NOT YET APPLIED`
+State: `MATERIAL CANDIDATE / ATOMIC BOUNDED CLOSURE APPLIED / EXACT-HEAD CI PENDING`
 Entry HEAD: `868f0662766153a097c954e618e7e284807eca62`
+Pre-write HEAD: `3a0fbb5d3b5c31c523d62b4889a0d252d794ba2d`
 Protocol: `PROJECT_BOOTSTRAP / CORE-003 / GOV-013 / GOV-014 / GOV-014A / GOV-015 / GOV-016 / REP-011 / REP-012 / REP-013 / REP-014 / REP-016 / Transactions M-N`
 
 ## Bounded closure-readiness decision
@@ -52,3 +53,14 @@ The first full Integration run of the local material candidate preserved two add
 Priority 10 reopens only for new Runtime-specific evidence: physical/allocation drift; current Runtime identity or authority collision; material unreviewed Runtime source mutation affecting the bounded contract; contradiction in Gates 12–15; material Runtime relationship misclassification; required bounded consumer/implementation defect; or invalidation of exact-head verification. Independent global/provider/production/downstream holds alone do not reopen it.
 
 Validation: `pre-write → atomic material → read-back → parent compare → exact paths → local deterministic suites → four-family exact-head CI → close or HOLD / RESUME-SAFE`.
+
+## Material read-back and local validation
+
+- Exact authorized material set: `20` paths (P10-O-01 through P10-O-20), with no path outside this Matrix.
+- Immutable read-back confirms exact inventory/allocation basis, Gates 12–15, REL-055..060 scope, explicit bounded closure, global/provider/production/promotion non-claims and precise reopen conditions.
+- Targeted P10 closure tests: `21 passed` before the full-suite run.
+- Integrity: `187 passed`.
+- Integration: `588 passed / 11 subtests passed`, with one pre-existing internal document-ID audit RuntimeWarning.
+- Runtime Prototype: `23 passed`; acceptance scenarios: `3 passed`.
+- `git diff --check`: PASS.
+- Exact-head four-family CI: PENDING. Commit title and local success do not close P10 until all four required workflow families pass on the same material HEAD.

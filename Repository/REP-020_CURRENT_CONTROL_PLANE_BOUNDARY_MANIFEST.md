@@ -3,10 +3,10 @@
 Date: 2026-09-03
 Status: `Current Evidence Manifest / Integrity Hold / Not Semantic Authority`  
 Manifest family: `REP-020 evidence surface`  
-Current queue checkpoint: `P10-N-RUNTIME-EXACT-INVENTORY-ALLOCATION`
-Verified source baseline: `main@3174d31c842df235269a0f82c47ab7d059237b22`
+Current queue checkpoint: `P10-O-RUNTIME-BOUNDED-CLOSURE`
+Verified source baseline: `main@d318daef65ca1d7d14224a1a7f66acefe151dd67`
 Recovery binding: `E-07B / SAME-CHANGE-SET REBIND / authorized at main@2271d130d7bb3583a695d0bd4e4bddac8e235818`  
-Current refresh binding: `P10-N / RUNTIME EXACT INVENTORY-ALLOCATION / atomic same-change-set candidate from main@3174d31c842df235269a0f82c47ab7d059237b22`
+Current refresh binding: `P10-O / BOUNDED RUNTIME PARTITION CLOSURE / atomic same-change-set candidate from main@d318daef65ca1d7d14224a1a7f66acefe151dd67`
 
 This is the stable **current** manifest consumed by the executable control-plane reconciliation gate.
 

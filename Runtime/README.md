@@ -6,8 +6,8 @@
 
 Platform: ARGO KOP (Knowledge Operating Platform)
 Document ID: RUNTIME_README
-Version: 3.3.1
-Status: Validated / Integrity Hold
+Version: 3.4.0
+Status: CLOSED_FOR_PHASE_1 / Bounded Runtime Partition Certified / Global Holds Remain
 Category: Runtime
 Canonical: Yes
 Priority: High
@@ -58,7 +58,7 @@ All actions inside this folder follow the applicable Governance standards, inclu
 
 The `RUN-` prefix is canonical for current Runtime document identities, but physical presence or numeric identity does not automatically grant executable or platform authority.
 
-`RUN-011` through `RUN-015` and `Runtime/Prototype/` are part of the current Runtime evidence/navigation scope. They remain candidate/prototype surfaces under their own status and the Runtime folder `CROSS-LAYER INTEGRATION HOLD`; successful prototype evidence does not promote them into canonical executable Runtime authority.
+`RUN-011` through `RUN-015` and `Runtime/Prototype/` are part of the current Runtime evidence/navigation scope. They remain candidate/prototype surfaces under their own Integrity Hold status; bounded Runtime partition closure and successful prototype evidence do not promote them into canonical executable Runtime authority.
 
 File presence and inventory are determined from current repository evidence, not from assumed numeric ranges.
 

@@ -15,7 +15,7 @@ def _core_layer(text: str) -> str:
 def test_rep001_indexes_current_core000a_reference():
     text = REP001.read_text(encoding="utf-8")
     core = _core_layer(text)
-    assert "Version: 1.11.4" in text
+    assert "Version: 1.11.5" in text
     assert "Core/CORE-000A_PLATFORM_GLOSSARY.md" in core
 
 

@@ -75,7 +75,7 @@ def test_every_runtime_path_has_a_bounded_allocation_role_without_authority_prom
     assert directory_counts == Counter(EXPECTED_DIRECTORIES)
 
 
-def test_control_surfaces_bind_the_exact_manifest_but_do_not_close_p10_implicitly():
+def test_control_surfaces_bind_exact_manifest_to_explicit_bounded_closure_only():
     rep012 = REP012.read_text(encoding="utf-8")
     rep013 = REP013.read_text(encoding="utf-8")
     status = STATUS.read_text(encoding="utf-8")
@@ -85,4 +85,6 @@ def test_control_surfaces_bind_the_exact_manifest_but_do_not_close_p10_implicitl
     assert MANIFEST.name in rep012
     assert MANIFEST.name in rep013
     assert "NONE_BY_ALLOCATION" in rep012
-    assert "Priority 10 remains OPEN pending a separate explicit bounded closure-readiness decision." in status
+    assert "Priority 10 is `CLOSED_FOR_PHASE_1 / BOUNDED RUNTIME PARTITION CERTIFIED / GLOBAL HOLDS REMAIN`." in status
+    assert "NONE_BY_ALLOCATION" in status
+    assert "do not promote them to canonical executable Runtime authority" in status
