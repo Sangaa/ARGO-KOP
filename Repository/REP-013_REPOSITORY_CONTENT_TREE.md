@@ -185,6 +185,8 @@ Runtime/
 
 `RUN-011..015` and `Runtime/Prototype/` are directly verified current Runtime inventory. Their presence does not establish executable Runtime authority; cross-layer integration remains under `INTEGRITY HOLD`.
 
+The five listed RUN-011..015 filenames are the current tracked candidate paths and agree with REP-001, REP-002, Runtime navigation and current identity guards. Earlier names ending in `COGNITIVE_EXECUTION_TARGET`, `COGNITIVE_CONTEXT_HANDOFF`, `COGNITIVE_DECISION_GATE`, `COGNITIVE_TRACE_TARGET` and `COGNITIVE_ACCEPTANCE_TARGET` are not current Runtime inventory. This correction remains bounded to known mapped candidates and is not an exhaustive Runtime/Prototype inventory claim.
+
 ### AI/
 
 Known audited members include:

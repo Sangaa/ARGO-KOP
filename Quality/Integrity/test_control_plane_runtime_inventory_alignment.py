@@ -23,7 +23,7 @@ STALE_RUNTIME_PATHS = {
 }
 
 
-def test_current_runtime_candidate_paths_are_present_in_both_control_plane_surfaces():
+def test_current_runtime_candidate_paths_are_present_in_all_control_plane_surfaces():
     index = INDEX.read_text(encoding="utf-8")
     mapping = MAP.read_text(encoding="utf-8")
     content_tree = CONTENT_TREE.read_text(encoding="utf-8")
