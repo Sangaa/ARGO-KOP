@@ -16,7 +16,7 @@ Status
 
 Version
 
-1.5.6
+1.5.7
 
 Canonical
 
@@ -32,11 +32,11 @@ Repository First / Evidence Based / Exact Git-Tree Enumeration / Bounded Consume
 
 Review Scope
 
-Exact Architecture inventory, known identity/path evidence, active Architecture semantic re-audit, bounded Priority-7 consumer alignment, and Priority-9 canonical-path, canonical-model, layer/dependency, information-flow and evolution validation of the current primary ARC set and Architecture navigation/control surfaces
+Exact Architecture inventory, known identity/path evidence, active Architecture semantic re-audit, bounded Priority-7 consumer alignment, and Priority-9 canonical-path, canonical-model, layer/dependency, information-flow, evolution and active-reference validation of the current primary ARC set and Architecture navigation/control surfaces
 
 Repository Baseline
 
-Current main branch repository state through Priority-9 Gates 4 and 6–10 bounded closure
+Current main branch repository state through Priority-9 Gates 4 and 6–11 bounded closure
 
 ---
 
@@ -54,7 +54,7 @@ Identity / Path Alignment
 
 Architecture Consistency
 
-🟡 Re-audit remains open across stale-reference and cross-layer gates. Priority-9 bounded evidence now closes canonical-path uniqueness, canonical-model, layer/dependency, information-flow and evolution alignment for the current primary Architecture scope only; this does not close the broader Architecture re-audit.
+🟡 Re-audit remains open across cross-layer gates. Priority-9 bounded evidence now closes canonical-path uniqueness, canonical-model, layer/dependency, information-flow, evolution and current active-reference reconciliation for the current primary Architecture scope only; this does not close the broader Architecture re-audit.
 
 Repository Alignment
 
@@ -62,7 +62,7 @@ Repository Alignment
 
 Cross-Reference Review
 
-🟡 Open. Priority-7 Transaction S/S-C1 and Priority-9 canonical/path/consistency/flow-evolution work close bounded current-Architecture drifts only. New evidence must still be checked for stale Governance, Repository, Knowledge, Memory, Runtime, AI and Interface references across the active Architecture set.
+🟡 Bounded active-reference reconciliation is complete for Gate 11. Priority-7 Transaction S/S-C1 and Priority-9 canonical/path/consistency/flow-evolution/reference work close known current-Architecture drifts within the inspected set only. Architecture ↔ Knowledge/Memory and Architecture ↔ Runtime/Interface semantic boundary validation remains open under Gates 12–13.
 
 ---
 
@@ -127,7 +127,7 @@ The following artifacts form the primary architecture review set:
 8. Canonical Architecture Model alignment — PASS FOR CURRENT PRIMARY ARC SET + ARC_MAP/README CONTROL SURFACES / BOUNDED PRIORITY-9 EVIDENCE
 9. Information Flow alignment — PASS FOR CURRENT PRIMARY ARCHITECTURE FLOW MODEL / BOUNDED PRIORITY-9 EVIDENCE
 10. Evolution Model alignment — PASS FOR CURRENT ARCHITECTURE DECISION/EVOLUTION LIFECYCLE / BOUNDED PRIORITY-9 EVIDENCE
-11. Known stale references — OPEN / RE-AUDIT
+11. Known stale references — PASS FOR CURRENT ACTIVE ARCHITECTURE REFERENCE SET / BOUNDED PRIORITY-9 EVIDENCE
 12. Architecture ↔ Knowledge / Memory boundary — OPEN
 13. Architecture ↔ Runtime / Interface boundary — OPEN
 
@@ -226,6 +226,25 @@ This closes Gate 4 only for the current active Architecture canonical set. Histo
 
 ---
 
+# Bounded Priority-9 Stale Reference Reconciliation — Gate 11
+
+Current active Architecture references were re-read and reconciled against the live repository rather than inferred from historical names.
+
+Evidence boundary:
+
+- `ARC-001` through `ARC-011` were inspected as the current primary Architecture authority/reference set;
+- named current external paths used by those contracts were verified in Core, Governance, Repository, Runtime and Interfaces, including `CORE-003`, `CORE-011`, applicable `GOV-001/005/006/009/010/011`, `REP-001`, `REP-002`, `RUN-005/007/008/009`, and `INTF-001/006_ENVIRONMENT_SENSING/010`;
+- previously repaired stale authority phrases `ultimate guiding text`, `globally locked` and `Anti-Patch Policy` have no current default-branch code-search hits;
+- the superseded `GOV-017_HERMUZ_CONNECTOR_SELF_LEARNING_PROTOCOL.md` consumer path has no current default-branch code-search hit;
+- `GOV-011_EXTERNAL_FEEDBACK_REPORT_STANDARD.md` remains `Proposed / Integrity Hold`, `Canonical: No`, and Governance records it as `RETAINED NON-ACTIVE / PROMOTION GATES REMAIN`; ARC-011 is therefore correct to preserve a non-promotion boundary and must not be cosmetically upgraded;
+- `REP-001` and `REP-002` remain canonical Repository control surfaces on Integrity Hold and do not convert inventory/path evidence into relationship or global certification.
+
+No inspected current active Architecture reference requires a further source mutation before this bounded Gate-11 closure.
+
+This does not establish repository-wide stale-reference exhaustion. Historical/archive/support surfaces outside the active Architecture review set remain outside this claim, and cross-layer semantic conformance remains separately open under Gates 12–13.
+
+---
+
 # Bounded Priority-7 Consumer Reconciliation — Transaction S / S-C1
 
 Direct current-content comparison identified `Architecture/README.md` as a stale canonical consumer of Core/Architecture authority after the 2026-09-01 CORE-000 reconciliation.
@@ -252,13 +271,13 @@ This remains a bounded consumer-content correction only. It does not register a 
 
 This status certifies only the evidence inspected so far. It does not certify Runtime, Core, AI, Services, Knowledge, Memory, Projects, Release or the entire repository.
 
-Gates 4 and 6–10 bounded closure does not certify the Architecture folder. Stale-reference and cross-layer gates remain open.
+Gates 4 and 6–11 bounded closure does not certify the Architecture folder. Cross-layer Gates 12–13 remain open.
 
 ---
 
 # Required Next Action
 
-`Validate stale references → validate Architecture↔Knowledge/Memory + Runtime/Interface boundaries → reconcile Repository registries where required → Architecture Re-Audit`
+`Validate Architecture↔Knowledge/Memory + Runtime/Interface boundaries → reconcile Repository registries where required → Architecture Re-Audit`
 
 No `100% CLEAN` repository claim is authorized from this document alone.
 
@@ -303,6 +322,8 @@ Repository Reality > Previous Status Claims > Conversation Memory
 `BOUNDED PRIMARY-ARCHITECTURE CONSISTENCY != REPOSITORY-WIDE GRAPH CERTIFICATION`
 
 `BOUNDED FLOW/EVOLUTION ALIGNMENT != CROSS-LAYER CERTIFICATION`
+
+`BOUNDED ACTIVE-REFERENCE RECONCILIATION != REPOSITORY-WIDE STALE-REFERENCE EXHAUSTION`
 
 ---
 
