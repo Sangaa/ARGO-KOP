@@ -3,8 +3,9 @@
 Transaction ID: `MUT-2026-09-03-P10-GATE13-RUNTIME-CONNECTOR-HANDOFF-J`
 Priority: `10 — Runtime`
 Gate: `13 — Runtime ↔ Interfaces / external connectors`
-State: `PRE-WRITE / OPEN`
+State: `MATERIAL CHANGE SET / CI PENDING`
 Entry HEAD: `c075232894a68130c431ab6c3886262c0a89b477`
+Pre-write HEAD: `ca7725bdee7130b0a3270d507b37cdc8973c0652`
 Protocol: `PROJECT_BOOTSTRAP / CORE-003 / GOV-013 / GOV-014 / GOV-014A / GOV-016 / INTF-010 / REP-011 / REP-016`
 
 ## Current tracked gap
@@ -17,27 +18,19 @@ Classification: `REAL TRACKED GATE-13 UPSTREAM HANDOFF IMPLEMENTATION GAP`.
 
 ## Smallest governed repair
 
-Create one provider-neutral Runtime integration seam that:
-
-- validates stable request identity, operation, target and payload before dispatch;
-- requires explicit boolean authorization before invoking any injected executor;
-- delegates through an injected connector/executor callable rather than importing provider-specific code;
-- preserves connector-reported failure/partial/success states;
-- maps malformed/unknown connector results to `EXECUTION_STATUS_UNKNOWN`, never success;
-- records dispatch/result evidence locally without claiming provider authenticity;
-- does not modify Gate-15 executable-promotion authority.
+A provider-neutral Runtime integration seam now validates stable request identity, explicit boolean authorization and payload structure before dispatch. It delegates through an injected callable, preserves a connector-reported status as reported evidence, and maps malformed/exceptional results to timeout or unknown states rather than success.
 
 ## Authorized surface
 
 | Change ID | Target | Action | Purpose | Pre-write | Post-write |
 |---|---|---|---|:---:|:---:|
-| P10-J-01 | `Runtime/Integration/runtime_connector_handoff.py` | CREATE | provider-neutral fail-closed handoff seam | PASS | PENDING |
-| P10-J-02 | `Runtime/Integration/test_runtime_connector_handoff.py` | CREATE | positive/negative/unknown-status coverage | PASS | PENDING |
-| P10-J-03 | `Runtime/_FOLDER_STATUS.md` | UPDATE | record bounded Gate-13 material state only after proof | PASS | PENDING |
-| P10-J-04 | `Interfaces/_FOLDER_STATUS.md` | UPDATE | distinguish bounded handoff proof from provider/authenticity holds | PASS | PENDING |
-| P10-J-05 | `Quality/Integrity/test_runtime_p10_gate13_connector_handoff.py` | CREATE | bind INTF-010 semantics to Runtime seam and independent holds | PASS | PENDING |
-| P10-J-06 | `Repository/REP-011_PRIORITY10_RUNTIME_GATE13_CONNECTOR_HANDOFF_ADDENDUM_2026-09-03_J.md` | CREATE | evidence/non-claims | PASS | PENDING |
-| P10-J-07 | this Matrix | UPDATE | material/CI/closure evidence | PASS | PENDING |
+| P10-J-01 | `Runtime/Integration/runtime_connector_handoff.py` | CREATE | provider-neutral fail-closed handoff seam | PASS | PASS |
+| P10-J-02 | `Runtime/Integration/test_runtime_connector_handoff.py` | CREATE | positive/negative/unknown-status coverage | PASS | PASS |
+| P10-J-03 | `Runtime/_FOLDER_STATUS.md` | UPDATE | bounded Gate-13 material state | PASS | PASS |
+| P10-J-04 | `Interfaces/_FOLDER_STATUS.md` | UPDATE | distinguish bounded handoff proof from provider/authenticity holds | PASS | PASS |
+| P10-J-05 | `Quality/Integrity/test_runtime_p10_gate13_connector_handoff.py` | CREATE | bind INTF-010 semantics to Runtime seam and independent holds | PASS | PASS |
+| P10-J-06 | `Repository/REP-011_PRIORITY10_RUNTIME_GATE13_CONNECTOR_HANDOFF_ADDENDUM_2026-09-03_J.md` | CREATE | evidence/non-claims | PASS | PASS |
+| P10-J-07 | this Matrix | UPDATE | material/CI/closure evidence | PASS | PASS |
 
 ## Non-claims
 

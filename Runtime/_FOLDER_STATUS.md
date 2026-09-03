@@ -65,7 +65,7 @@ The active Runtime set was re-reviewed with emphasis on:
 10. Architecture dependency boundary — PASS FOR REVIEWED CONTRACTS
 11. Architecture integration boundary — PASS FOR REVIEWED CONTRACTS
 12. Runtime ↔ Knowledge / Memory integration — BOUNDED VERIFIED FOR TRACKED PERSISTENCE, CORRECTION/REVIEW, AND NO-SILENT-PROMOTION SEAMS / BROADER GLOBAL-GRAPH HOLD
-13. Runtime ↔ Interfaces / external connectors — OPEN / IMPLEMENTATION VALIDATION REQUIRED
+13. Runtime ↔ Interfaces / external connectors — BOUNDED VERIFIED FOR PROVIDER-NEUTRAL HANDOFF AND REPORTED-STATUS PRESERVATION / LIVE PROVIDER AUTHENTICITY, AUTHORIZATION AND AVAILABILITY HOLD
 14. Runtime ↔ Repository control plane — BOUNDED VERIFIED FOR RUN-011..015 + REL-055..060 / BROADER CONTROL-PLANE HOLD
 15. Runtime ↔ Engine cognitive-loop prototype seam — VERIFIED FOR PROTOTYPE, HANDOFF, LEARNING AND CI EVIDENCE / EXECUTABLE PROMOTION HOLD
 
@@ -81,21 +81,23 @@ Priority-10 Transactions A–E reconcile the tracked RUN-011..015 inventory and 
 
 Priority-10 Transaction G closes the tracked Runtime→Memory explicit persistence seam: incomplete execution-trace identity/status or unknown side-effect state fails closed before test-target materialization, and valid traces preserve minimum identity through re-read. Transaction H closes the tracked Runtime→Knowledge contradiction-review seam: unsupported evidence, identity, source state or contradiction signal now returns `HOLD` before a demotion review can open. The current Runtime learning pipeline remains readiness-only and `RUN-014` preserves the no-silent-promotion invariant. Together these provide a bounded Gate-12 closure for the currently tracked Runtime↔Knowledge/Memory seams while preserving Gate 15 as the independent executable/canonical promotion hold.
 
+Transaction J adds a provider-neutral Runtime connector handoff that validates stable request identity, explicit boolean authorization and payload structure before invoking an injected executor. It preserves connector-reported status without converting requests, malformed results or executor failures into success. This bounds Gate 13 at the Runtime/interface seam without claiming live provider authenticity, credentials, availability or external side effects.
+
 # Key Finding
 
 `RUN-004_CONTEXT_LOADING` and `RUN-005_RUNTIME_WORKFLOW` remain strong Runtime contracts. The newly reviewed `RUN-011..015` extend the Runtime evidence into a bounded cognitive-loop prototype and validation path, but they explicitly preserve the boundary between target contracts, prototype evidence and canonical executable runtime.
 
-The tracked Runtime↔Knowledge/Memory seams are now boundedly reconciled through persistence fail-closed behavior, Knowledge-owned correction/review validation, and the existing no-silent-promotion boundary. The remaining cross-layer construction gap is Runtime ↔ Interfaces / external connectors, plus the independent executable-promotion hold. The bounded RUN-011..015 inventory and REL-055..060 control-plane reconciliation remains closed for Gate 14.
+The tracked Runtime↔Knowledge/Memory seams are boundedly reconciled through persistence fail-closed behavior, Knowledge-owned correction/review validation, and the existing no-silent-promotion boundary. The provider-neutral Runtime↔Interface handoff is now materially bounded, while live provider authenticity/authorization/availability remain independent external-trust holds. The bounded RUN-011..015 inventory and REL-055..060 control-plane reconciliation remains closed for Gate 14.
 
 # Integrity Decision
 
-Runtime remains **validated at the folder-contract level**, with Gate 12 boundedly verified for the currently tracked Runtime↔Knowledge/Memory seams and the cognitive-loop prototype evidence verified for its tested state. global Runtime certification remains intentionally capped at `CROSS-LAYER INTEGRATION HOLD` because Gate 13 is open and Gate 15 retains executable promotion hold.
+Runtime remains **validated at the folder-contract level**, with Gate 12 boundedly verified for the currently tracked Runtime↔Knowledge/Memory seams, Gate 13 materially bounded at the provider-neutral handoff seam, and the cognitive-loop prototype evidence verified for its tested state. global Runtime certification remains intentionally capped at `CROSS-LAYER INTEGRATION HOLD` because live provider trust is not inferred and Gate 15 retains executable promotion hold.
 
 This status does not invalidate the Runtime contracts. It prevents bounded local/cross-layer validation from being mistaken for production/provider authenticity, executable promotion, repository-wide graph completion or global integrity proof.
 
 # Next Construction Boundary
 
-Proceed with the still-open Runtime ↔ Interfaces / connector boundary (Gate 13). Do not reopen Gate 12, the bounded RUN-011..015 + REL-055..060 Gate-14 result, or Transaction G/H unless contradictory current evidence appears.
+Verify Transaction J on its exact material head. If it passes, recompute Priority-10 closure readiness without reopening Gate 12 or Gate 14. Gate 15 remains an independent hold unless current authority explicitly permits bounded Runtime partition closure with that hold preserved.
 
 The next review should test the chain:
 

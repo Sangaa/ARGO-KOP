@@ -8,7 +8,7 @@ Version: 1.2.1
 Status: INTEGRITY HOLD / LOCAL INVENTORY VERIFIED / CROSS-LAYER AND EXTERNAL-TRUST VALIDATION OPEN
 Canonical: Yes
 Priority: Critical
-Current Review Date: 2026-08-29
+Current Review Date: 2026-09-03
 Review Method: Repository First / Exact Git-Tree Enumeration / Content Boundary Review
 
 ---
@@ -73,12 +73,14 @@ No rename, archive, deletion or migration is authorized by this classification.
 
 `INTF-010_INTEGRATIONS.md` defines a provider-neutral connector boundary and explicitly separates technical access from authorization, external data from canonical truth, and requested actions from completed actions.
 
+Transaction J materially instantiates the provider-neutral Runtime handoff portion of this contract through an injected executor. That local seam does not authenticate, select or certify a concrete provider and does not transform a reported connector result into canonical truth.
+
 This folder status therefore does not claim:
 
 - provider authenticity;
 - availability of an independently verifiable trust anchor;
 - successful authentication to any model/provider/system;
-- certification of a concrete connector implementation;
+- certification of every concrete connector implementation;
 - permission to acquire, retain or transmit data merely because a source is technically available;
 - completion of the external-evidence lifecycle.
 
@@ -99,11 +101,12 @@ The Interfaces folder remains **INTEGRITY HOLD**.
 Closed for the current bounded state:
 - exact 12-file physical inventory;
 - INTF-006 active-versus-legacy identity classification;
-- transport/interface versus authority separation already explicit in INTF-006 and INTF-010.
+- transport/interface versus authority separation already explicit in INTF-006 and INTF-010;
+- provider-neutral Runtime handoff implementation semantics, pending exact-head Transaction-J verification.
 
 Still open, where applicable:
-- cross-layer relationship validation for individual interface artifacts;
-- runtime/connector implementation proof;
+- cross-layer relationship validation for individual interface artifacts beyond the bounded Runtime handoff;
+- concrete provider/connector implementation proof beyond separately evidenced downstream cases;
 - provider authentication capability and trust-anchor acquisition;
 - external-evidence authenticity and admission stages;
 - disposition/migration of legacy filename residue;
