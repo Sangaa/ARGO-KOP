@@ -2,7 +2,7 @@
 
 Date: 2026-09-03
 Applies to: `Repository/REP-011_REVIEW_TRACEABILITY_LEDGER.md`
-State: `CURRENT BOUNDED REVIEW ADDENDUM / MATERIAL CI PENDING`
+State: `CURRENT BOUNDED REVIEW ADDENDUM / CLOSED / VERIFIED / RESUME-SAFE`
 Transaction: `MUT-2026-09-03-P10-RUNTIME-GATE14-CONTROL-PLANE-F`
 
 ## Decision
@@ -14,3 +14,5 @@ This supersedes the prior Gate-14 statement `OPEN / CONSOLIDATED REGISTRY CHECK 
 ## Controlling holds
 
 Runtime Gates 12 and 13 remain OPEN for Knowledge/Memory and Interfaces/connector integration. Gate 15 retains executable-promotion hold. Runtime and Priority 10 therefore remain `OPEN / CROSS-LAYER INTEGRATION HOLD`. Phase 1 and Global Connected Baseline remain OPEN; Global Integrity remains HOLD and no global PASS is claimed.
+
+Material HEAD `3dd9a1786eca2d11152a403306d782bb815f485c` passed all four required exact-head workflow families. Transaction F is closed and Resume-Safe within its bounded Gate-14 scope.

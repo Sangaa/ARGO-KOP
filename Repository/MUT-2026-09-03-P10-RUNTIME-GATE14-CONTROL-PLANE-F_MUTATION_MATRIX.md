@@ -2,9 +2,10 @@
 
 Transaction ID: `MUT-2026-09-03-P10-RUNTIME-GATE14-CONTROL-PLANE-F`
 Priority: `10 — Runtime`
-State: `MATERIAL CHANGE SET / CI PENDING`
+State: `CLOSED / VERIFIED / RESUME-SAFE`
 Entry HEAD: `1044bb2e5715561069b3abf8018120ede90ce9d2`
 Pre-write HEAD: `8e6719a1d55964aaaf7913159f14a1dbe8511a7d`
+Material HEAD: `3dd9a1786eca2d11152a403306d782bb815f485c`
 Protocol: `PROJECT_BOOTSTRAP / CORE-003 / GOV-013 / GOV-014 / GOV-014A / REP-011 / REP-012 / REP-013 / REP-014 / REP-016`
 
 ## Entry evidence
@@ -38,3 +39,15 @@ This is sufficient to resolve Gate 14 only for `RUN-011..015 + REL-055..060`. It
 
 Validation:
 `pre-write matrix → atomic status/guard/addendum/matrix change set → read-back → targeted checks → exact-head four-family CI → close or HOLD`.
+
+## Verification
+
+- Local deterministic Gate-14 guard: 3 checks passed.
+- Exact-head Real Mutation Matrix Regression `33746878280` — SUCCESS.
+- Exact-head Full-Stack Repository Audit `33746878285` — SUCCESS.
+- Exact-head ARGO Runtime Prototype and Integration Tests `33746878347` — SUCCESS.
+- Exact-head M2 Multi-Channel Proposal Training `33746878338` — SUCCESS.
+- Runtime Gate 14 is bounded verified only for RUN-011..015 + REL-055..060; independent holds remain controlling.
+
+Closure:
+`P10 TRANSACTION F = CLOSED / VERIFIED / RESUME-SAFE`.
