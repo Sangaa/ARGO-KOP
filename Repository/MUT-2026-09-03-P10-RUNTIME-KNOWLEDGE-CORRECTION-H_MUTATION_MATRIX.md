@@ -3,9 +3,10 @@
 Transaction ID: `MUT-2026-09-03-P10-RUNTIME-KNOWLEDGE-CORRECTION-H`
 Priority: `10 — Runtime`
 Gate: `12 — Runtime ↔ Knowledge / Memory`
-State: `MATERIAL CHANGE SET / CI PENDING`
+State: `CLOSED / VERIFIED / RESUME-SAFE`
 Entry HEAD: `406cc2a1349467a4d26bf2fe871e3de50e38c15a`
 Pre-write HEAD: `9f548026d23b20609983d65e1453ba4322091a3a`
+Material HEAD: `81df349430effd5251998a39e489fc8af44f129e`
 Protocol: `PROJECT_BOOTSTRAP / CORE-003 / GOV-013 / GOV-014 / GOV-014A / GOV-016 / REP-011 / REP-016`
 
 ## Preserved failure finding
@@ -16,7 +17,7 @@ This did not directly mutate Knowledge, but it opened a governed state-change re
 
 Classification: `REAL TRACKED RUNTIME→KNOWLEDGE FAIL-CLOSED REVIEW-GATE GAP`.
 
-Transaction-ID sanity check: the pre-write Matrix body used shortened `MUT-3-P10-RUNTIME-KNOWLEDGE-CORRECTION-H`; canonical filename, scope and recovery identity were unaffected. Classification: `A — harmless textual metadata typo`; normalized here because this Matrix is already in the material closure set.
+Transaction-ID sanity check: the pre-write Matrix body used shortened `MUT-3-P10-RUNTIME-KNOWLEDGE-CORRECTION-H`; canonical filename, scope and recovery identity were unaffected. Classification: `A — harmless textual metadata typo`; normalized here because this Matrix was already in the material closure set.
 
 ## Authorized mutation
 
@@ -39,3 +40,16 @@ Transaction-ID sanity check: the pre-write Matrix body used shortened `MUT-3-P10
 
 Validation:
 `pre-write matrix → atomic contract/code/test/addendum/matrix repair → immutable read-back → targeted local tests → exact-head four-family CI → close or HOLD`.
+
+## Verification
+
+- Immutable material read-back confirmed the Knowledge-owned fail-closed gate at `81df349430effd5251998a39e489fc8af44f129e`.
+- Targeted deterministic local seam execution: 9 checks passed across Knowledge correction and Runtime consumer tests.
+- Exact-head Real Mutation Matrix Regression `33750904689` — SUCCESS.
+- Exact-head Full-Stack Repository Audit `33750904683` — SUCCESS.
+- Exact-head ARGO Runtime Prototype and Integration Tests `33750904707` — SUCCESS; integration, integrity and prototype jobs passed.
+- Exact-head M2 Multi-Channel Proposal Training `33750904800` — SUCCESS.
+- No stale tracked consumer failure remained at the material head.
+
+Closure:
+`P10 TRANSACTION H = CLOSED / VERIFIED / RESUME-SAFE`.
