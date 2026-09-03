@@ -2,10 +2,10 @@
 
 Platform: ARGO KOP  
 Document ID: REP-014  
-Version: 1.2.14  
+Version: 1.2.15
 Status: Active / Relationship Enumeration In Progress  
 Development Baseline: 3.2.1  
-Last Audit: 2026-09-01
+Last Audit: 2026-09-03
 
 ---
 
@@ -122,7 +122,7 @@ The following are deliberately limited to relationships established during repos
 | REL-053 | OPM-003 | OPM-002 | DEPENDS_ON | Verified within current Operational-Memory build scope |
 | REL-054 | OPM-004 | OPM-003 | DEPENDS_ON | Verified within current Operational-Memory build scope |
 | REL-055 | RUN-011 | ENG-013 | REFERENCES | Revalidated within current Runtime prototype scope |
-| REL-056 | RUN-011 | ENG-014 | REFERENCES | Revalidated within current Runtime validation scope |
+| REL-056 | ENG-014 | RUN-011 | REFERENCES | **RUNTIME VALIDATION CONTRACT / DIRECT-SOURCE-VALIDATED / NON-DEPENDENCY** |
 | REL-057 | RUN-012 | RUN-011 | VALIDATES | Revalidated within current Runtime test scope |
 | REL-058 | RUN-013 | RUN-011 | VALIDATES | Revalidated within current controlled-handoff scope |
 | REL-059 | RUN-014 | RUN-011 | VALIDATES | Revalidated within current learning-promotion test scope |
@@ -642,6 +642,19 @@ Disposition:
 This is an evidence-binding result only. It does **not** promote any unresolved relationship to `VERIFIED`, does not promote the control plane to `RECONCILED`, does not set `CLOSED_FOR_PHASE_1`, and does not close Priority 1.
 
 The cross-registry state remains open until the corresponding `REP-015/016/020` evidence is reconciled to the same current checkpoint.
+
+## P10 REL-056 Runtime Validation Direction Reconciliation — 2026-09-03
+
+Current-source revalidation corrects the stable REL-056 row from the historical `RUN-011 → ENG-014` direction to `ENG-014 → RUN-011`.
+
+Evidence basis:
+
+- `Engine/ENG-014_COGNITIVE_LOOP_INTEGRATION_VALIDATION.md` directly lists `Runtime/RUN-011_COGNITIVE_LOOP_PROTOTYPE.md` under Related Contracts;
+- `Runtime/RUN-011_COGNITIVE_LOOP_PROTOTYPE.md` does not list ENG-014;
+- the pair remains documentary/contractual and establishes no dependency, consumption, implementation, validation execution or authority transfer;
+- REL-056 retains its stable registry ID and controlled `REFERENCES` type; REL-055 and REL-057..060 remain unchanged.
+
+The earlier P75 direction remains historical evidence and is superseded only for current REL-056 interpretation. This bounded repair does not certify Runtime Gate 15, Priority 10 or the repository-wide graph.
 
 ---
 

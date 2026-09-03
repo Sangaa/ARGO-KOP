@@ -1,0 +1,20 @@
+# REP-011 Priority-10 Runtime REL-056 Direction Addendum — Transaction B
+
+Date: 2026-09-03
+Applies to: `Repository/REP-011_REVIEW_TRACEABILITY_LEDGER.md`
+State: `CURRENT BOUNDED REVIEW ADDENDUM / MATERIAL CI PENDING`
+Transaction: `MUT-2026-09-03-P10-RUNTIME-REL056-DIRECTION-B`
+
+## Review result
+
+Direct current-source review proves that REL-056's controlled `REFERENCES` edge exists in the reverse of the historical P75 registry direction:
+
+`ENG-014 → RUN-011 = REFERENCES`.
+
+ENG-014 directly lists `Runtime/RUN-011_COGNITIVE_LOOP_PROTOTYPE.md` under Related Contracts. RUN-011 does not list ENG-014. Search across current source and consumers establishes no stronger dependency, consumption, implementation, executable validation or authority relationship for this pair.
+
+The P75 ledger entry remains preserved as historical evidence. This addendum supersedes only its current direction interpretation and does not rewrite the historical review body.
+
+## Boundary
+
+REL-056 keeps its stable ID and `REFERENCES` type. REL-055 and REL-057..060 remain unchanged. Runtime and Engine source contracts remain unchanged. Priority 10, Runtime Gate 15, Phase 1, the repository-wide graph, Global Connected Baseline and Global Integrity remain open.
