@@ -8,14 +8,14 @@ Platform: ARGO KOP
 Knowledge Operating Platform
 
 Document ID: RUN-010
-Version: 1.4.0
+Version: 1.4.1
 Status: Validated / Integrity Hold / Revalidated
 Category: Runtime
 Canonical: Yes
 Priority: Critical
 Development Baseline: 3.2.1
 Latest Official Release: 1.0.0
-Last Audit: 2026-08-11
+Last Audit: 2026-09-03
 
 ---
 
@@ -27,6 +27,8 @@ This reference does not override the authority of the Constitution, Governance, 
 
 # Runtime Documents
 
+## Core Runtime contracts
+
 - `RUN-001_BOOT_SEQUENCE.md` — Boot Sequence
 - `RUN-002_INITIALIZATION.md` — Initialization
 - `RUN-003_CONFIGURATION.md` — Configuration
@@ -37,8 +39,17 @@ This reference does not override the authority of the Constitution, Governance, 
 - `RUN-008_RUNTIME_STATE.md` — Runtime State
 - `RUN-009_RECOVERY.md` — Recovery
 - `RUN-010_RUNTIME_REFERENCE.md` — Runtime Reference
-- `RUN-011_COGNITIVE_LOOP_PROTOTYPE.md` — Cognitive Loop Prototype
-- `RUN-012_COGNITIVE_LOOP_TEST_MATRIX.md` — Cognitive Loop Acceptance Matrix
+
+## Candidate / prototype evidence surfaces
+
+- `RUN-011_COGNITIVE_LOOP_PROTOTYPE.md` — Candidate Cognitive Loop Prototype
+- `RUN-012_COGNITIVE_LOOP_TEST_MATRIX.md` — Candidate Cognitive Loop Acceptance Matrix
+- `RUN-013_CONTROLLED_HANDOFF.md` — Candidate Controlled Handoff Safety Boundary
+- `RUN-014_LEARNING_PROMOTION_TEST.md` — Candidate Learning Promotion Test
+- `RUN-015_RUNTIME_PROTOTYPE_CI_VALIDATION.md` — Candidate Runtime Prototype CI-Evidence Contract
+- `Runtime/Prototype/` — Executable Prototype/Test Evidence Surface
+
+These candidate/prototype surfaces are part of the current Runtime evidence/navigation scope. Their presence or successful bounded prototype CI does not promote them into canonical executable Runtime authority.
 
 # Runtime Execution Pipeline
 
@@ -112,6 +123,8 @@ The prototype target is:
 
 This is a controlled prototype boundary, not a claim that the complete loop is already executable.
 
+`RUN-013` preserves the controlled handoff as a safety checkpoint rather than execution proof. `RUN-014` preserves the learning-promotion gate so a runtime lesson remains a candidate until applicable authority approves promotion. `RUN-015` preserves the distinction between real prototype CI evidence and full Runtime certification.
+
 # Decision / Validation / Execution Boundary
 
 Where the operation requires decision and execution services, the runtime relationship is interpreted as:
@@ -174,6 +187,7 @@ See `RUN-008_RUNTIME_STATE.md` for transition authority.
 - Repository Reality is authoritative.
 - Repository synchronization is mandatory where current state matters.
 - Applicable Architecture and Governance validation is mandatory.
+- `ARC-011` is the current canonical Architecture authority for structural boundaries and dependency direction; Runtime does not redefine it.
 - Interface contracts are resolved before dependent execution.
 - Authorization is distinct from authentication and connector availability.
 - Provenance must remain distinguishable from interpretation.
@@ -183,6 +197,7 @@ See `RUN-008_RUNTIME_STATE.md` for transition authority.
 - Conditional continuation only.
 - Governed recovery only.
 - Runtime does not redefine higher authority.
+- Prototype/CI evidence remains scope-bound and does not create executable promotion.
 
 # Memory / Learning Boundary
 
@@ -203,6 +218,7 @@ Runtime enters `HOLD` / `FAULT` when required evidence, authority, dependency, i
 - `Repository/`
 - applicable Knowledge / Memory context
 - applicable Engine / Services / AI interfaces
+- `Architecture/ARC-011_CANONICAL_ARCHITECTURE_MODEL.md`
 - `Interfaces/INTF-001_INTERFACE_SPEC.md`
 - `Interfaces/INTF-006_ENVIRONMENT_SENSING.md`
 - `Interfaces/INTF-010_INTEGRATIONS.md`
@@ -220,6 +236,10 @@ Dependencies are resolved from current repository evidence, not assumed from num
 - `Runtime/RUN-009_RECOVERY.md`
 - `Runtime/RUN-011_COGNITIVE_LOOP_PROTOTYPE.md`
 - `Runtime/RUN-012_COGNITIVE_LOOP_TEST_MATRIX.md`
+- `Runtime/RUN-013_CONTROLLED_HANDOFF.md`
+- `Runtime/RUN-014_LEARNING_PROMOTION_TEST.md`
+- `Runtime/RUN-015_RUNTIME_PROTOTYPE_CI_VALIDATION.md`
+- `Runtime/Prototype/`
 - `Engine/ENG-002_DECISION_ENGINE.md`
 - `Engine/ENG-004_VALIDATION_ENGINE.md`
 - `Engine/ENG-006_EXECUTION_ENGINE.md`
@@ -228,6 +248,7 @@ Dependencies are resolved from current repository evidence, not assumed from num
 - `Services/SRV-005_VALIDATION_SERVICE.md`
 - `Services/SRV-009_UPDATE_SERVICE.md`
 - `Architecture/ARC-006_DEPENDENCY_MODEL.md`
+- `Architecture/ARC-011_CANONICAL_ARCHITECTURE_MODEL.md`
 - `Repository/REP-001_MASTER_INDEX.md`
 - `Interfaces/INTF-001_INTERFACE_SPEC.md`
 - `Interfaces/INTF-006_ENVIRONMENT_SENSING.md`
