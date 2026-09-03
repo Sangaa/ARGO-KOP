@@ -2,11 +2,12 @@
 
 Transaction ID: `MUT-2026-09-03-P10-RUNTIME-REL059-LEARNING-PROMOTION-D`
 Priority: `10 — Runtime`
-State: `CORRECTIVE CHANGE SET / CI PENDING`
+State: `CLOSED / VERIFIED / RESUME-SAFE`
 Entry HEAD: `1cf7111b5d5b53716f2d73ca412dfb46c2ce4492`
 Pre-write HEAD: `335a142afba14efdbb02fe5791d6dd5fbb8e86f5`
 Material HEAD: `6d7c3d700c08d4025f141c09be93cb17aba02364`
 Corrective pre-write HEAD: `b849379ea2543cc360952c1deb736655f2b07dea`
+Corrective HEAD: `864934fc729dfefabce33a0a2035a15446164517`
 Protocol: `PROJECT_BOOTSTRAP / CORE-003 / GOV-013 / GOV-014 / GOV-014A / REP-011 / REP-014 / REP-016`
 
 ## Failure preserved and classified
@@ -54,3 +55,15 @@ Validation:
 - Exact failing tracked consumer: `Knowledge/Learning/promotion_gate_adapter.py` builds the promotion-gate candidate but did not materialize the new `governing_conflict` field.
 - Exact failures: both cases in `Quality/Integration/test_readiness_to_promotion_gate_boundary.py`; absent field produced `CANDIDATE_INCOMPLETE` before the expected authority decision.
 - The Runtime gate and its new tests passed. The assertions remain unchanged. Corrective scope is the real adapter plus its direct tests and this Matrix.
+
+## Corrective verification
+
+- Local deterministic execution: 20 checks passed across Runtime promotion, edge cases, Knowledge adapter, integration consumer and REL-059 integrity guard.
+- Corrective Real Mutation Matrix Regression `33745855516` — SUCCESS.
+- Corrective Full-Stack Repository Audit `33745855538` — SUCCESS.
+- Corrective ARGO Runtime Prototype and Integration Tests `33745855608` — SUCCESS.
+- Corrective M2 Multi-Channel Proposal Training `33745855476` — SUCCESS.
+- The exact tracked consumer now materializes the gate field and preserves distinct promotion authority/conflict inputs.
+
+Closure:
+`P10 TRANSACTION D = CLOSED / VERIFIED / RESUME-SAFE`.

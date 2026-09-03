@@ -2,7 +2,7 @@
 
 Date: 2026-09-03
 Applies to: `Repository/REP-011_REVIEW_TRACEABILITY_LEDGER.md`
-State: `CURRENT BOUNDED REVIEW ADDENDUM / MATERIAL CI PENDING`
+State: `CURRENT BOUNDED REVIEW ADDENDUM / CLOSED / VERIFIED / RESUME-SAFE`
 Transaction: `MUT-2026-09-03-P10-RUNTIME-REL059-LEARNING-PROMOTION-D`
 
 ## Review result
@@ -16,3 +16,5 @@ The first material head preserved a Runtime/integration failure after the gate b
 ## Boundary
 
 `PROMOTION_ELIGIBLE` does not perform knowledge mutation. REL-059 retains its stable ID, direction and `VALIDATES` type. No dependency, consumption, implementation or governance edge is inferred. RUN-011 and RUN-014 remain `Candidate / Integrity Hold`; Runtime Gate 15, Priority 10, Phase 1, the repository-wide graph, Global Connected Baseline and Global Integrity remain open.
+
+Corrective HEAD `864934fc729dfefabce33a0a2035a15446164517` passed all four required exact-head workflow families after the material failure was preserved. Transaction D is closed and Resume-Safe within this bounded learning-promotion scope.
