@@ -2,10 +2,13 @@
 
 Transaction ID: `MUT-2026-09-03-P9-ARCHITECTURE-GATE13-RUNTIME-INTERFACE-BOUNDARY-R`
 Priority: `9 — Architecture`
-State: `CLOSED / VERIFIED / RESUME-SAFE`
+State: `CLOSED / VERIFIED / RESUME-SAFE — R-C1 REPAIRED`
 Entry HEAD: `4466bfd3d15571ea78238d764859065ab37daea2`
 Pre-write HEAD: `b0e830154993d0e953161fc6f89731c766b25dd0`
 Material HEAD: `970e2127d9c719196006f48adc985da3baa4d6f8`
+Initial Closure HEAD: `0d7c5dd3784c272f9bb696520e6b26afe7dce346`
+Side Repair: `R-C1 / MUT-2026-09-03-P9-GATE13-RUNTIME-REGRESSION-R-C1`
+Side-Repair Material HEAD: `5b899671a5b3c7e7e3f87b210526f1ec622de5ea`
 Target: `Architecture/_FOLDER_STATUS.md`
 Protocol: `GOV-013 / GOV-014 / GOV-014A / GOV-015 / GOV-016`
 
@@ -57,6 +60,30 @@ No further Runtime or Interface source mutation is justified before bounded Gate
 - Material exact-head M2 `33722762665` — SUCCESS.
 - The previous S/S-C1 compatibility history was preserved as evidence while the obsolete exact OPEN gate state was legitimately replaced by bounded Gate-13 PASS; current Full-Stack validation accepted the bounded replacement without weakening tests.
 
+## Initial closure-head failure and side repair
+
+Initial closure HEAD `0d7c5dd3784c272f9bb696520e6b26afe7dce346` did not satisfy final 4/4 closure even though the Gate-13 material semantics remained valid:
+
+- Full-Stack `33722857210` — SUCCESS.
+- Real Mutation Matrix `33722857183` — SUCCESS.
+- M2 `33722857204` — SUCCESS.
+- Runtime/Integration `33722857181` — FAILURE only in `integrity-tests`; its `integration-tests` and `prototype-tests` jobs were SUCCESS.
+
+The failing assertion was a stale regression contract in `Quality/Integrity/test_architecture_folder_inventory_reconciliation.py` that still required literal `Architecture ↔ Runtime / Interface boundary — OPEN` after the evidence-backed bounded PASS transition.
+
+R-C1 repaired only that stale expectation and strengthened the preserved safety invariant by requiring `BOUNDED ARCHITECTURE↔RUNTIME/INTERFACE ALIGNMENT != RUNTIME OR INTERFACE IMPLEMENTATION CERTIFICATION` while retaining `Architecture is **not globally certified**`.
+
+R-C1 material HEAD `5b899671a5b3c7e7e3f87b210526f1ec622de5ea` verified cleanly:
+
+- immutable test read-back blob `9b4c964113b938897d8ba418b8a998279062416e`;
+- exact compare from R-C1 pre-write HEAD changes one test file only (`2 additions / 1 deletion`);
+- Full-Stack `33723336981` — SUCCESS;
+- Runtime/Integration `33723336949` — SUCCESS;
+- M2 `33723336942` — SUCCESS;
+- Real Mutation Matrix was not dispatched for the test-only material change.
+
+No Architecture, Runtime or Interface semantic source was changed by R-C1.
+
 ## Non-claims
 
 - Gate 13 PASS does not certify Runtime implementation or production readiness.
@@ -67,4 +94,4 @@ No further Runtime or Interface source mutation is justified before bounded Gate
 - Transaction B / REL-073 remains a separate local Registry hold.
 
 Closure:
-`CLOSED / VERIFIED / RESUME-SAFE`, subject to exact closure-head workflow verification before the next material transaction.
+`CLOSED / VERIFIED / RESUME-SAFE — R-C1 REPAIRED`, subject to exact closure-head workflow verification of this atomic parent/side-repair documentation commit.
