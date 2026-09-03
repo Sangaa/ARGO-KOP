@@ -3,6 +3,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[2]
 INDEX = ROOT / "Repository/REP-001_MASTER_INDEX.md"
 MAP = ROOT / "Repository/REP-002_REPOSITORY_MAP.md"
+CONTENT_TREE = ROOT / "Repository/REP-013_REPOSITORY_CONTENT_TREE.md"
 RUNTIME_STATUS = ROOT / "Runtime/_FOLDER_STATUS.md"
 
 CURRENT_RUNTIME_CANDIDATES = {
@@ -25,10 +26,12 @@ STALE_RUNTIME_PATHS = {
 def test_current_runtime_candidate_paths_are_present_in_both_control_plane_surfaces():
     index = INDEX.read_text(encoding="utf-8")
     mapping = MAP.read_text(encoding="utf-8")
+    content_tree = CONTENT_TREE.read_text(encoding="utf-8")
     for run_id, path in CURRENT_RUNTIME_CANDIDATES.items():
         assert (ROOT / path).is_file(), f"missing physical Runtime candidate: {path}"
         assert path in index, f"missing current Runtime path from REP-001: {path}"
         assert path in mapping, f"missing current Runtime path from REP-002: {path}"
+        assert path.removeprefix("Runtime/") in content_tree, f"missing current Runtime path from REP-013: {path}"
         assert run_id in index
         assert run_id in mapping
 
@@ -36,9 +39,11 @@ def test_current_runtime_candidate_paths_are_present_in_both_control_plane_surfa
 def test_known_stale_runtime_candidate_paths_are_not_active_control_plane_inventory():
     index = INDEX.read_text(encoding="utf-8")
     mapping = MAP.read_text(encoding="utf-8")
+    content_tree = CONTENT_TREE.read_text(encoding="utf-8")
     for stale_path in STALE_RUNTIME_PATHS:
         assert stale_path not in index, f"stale Runtime path remains in REP-001: {stale_path}"
         assert stale_path not in mapping, f"stale Runtime path remains in REP-002: {stale_path}"
+        assert stale_path.removeprefix("Runtime/") not in content_tree, f"stale Runtime path remains in REP-013: {stale_path}"
 
 
 def test_runtime_status_agrees_with_current_candidate_scope_and_authority_boundary():
