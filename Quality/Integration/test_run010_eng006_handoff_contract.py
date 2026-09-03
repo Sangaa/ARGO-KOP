@@ -103,7 +103,7 @@ def test_handoff_contract_rejects_missing_trace_identity():
             side_effect=False,
         )
     except ValueError as exc:
-        assert str(exc) == "SOURCE_TRACE_REQUIRED"
+        assert str(exc) == "EXECUTION_IDENTITY_REQUIRED: source_trace_id"
     else:
         raise AssertionError("missing source trace must fail closed")
 
@@ -120,7 +120,7 @@ def test_handoff_contract_rejects_unauthorized_execution():
             side_effect=False,
         )
     except ExecutionDenied as exc:
-        assert str(exc) == "EXECUTION_NOT_AUTHORIZED"
+        assert str(exc) == "EXECUTION_NOT_EXPLICITLY_AUTHORIZED"
     else:
         raise AssertionError("unauthorized execution must fail closed")
 

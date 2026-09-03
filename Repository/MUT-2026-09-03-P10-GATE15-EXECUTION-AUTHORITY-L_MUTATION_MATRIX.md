@@ -3,7 +3,7 @@
 Transaction ID: `MUT-2026-09-03-P10-GATE15-EXECUTION-AUTHORITY-L`
 Priority: `10 — Runtime`
 Gate: `15 — Runtime ↔ Engine executable boundary`
-State: `MATERIAL CHANGE SET / FINAL EXACT-HEAD CI PENDING`
+State: `MATERIAL STALE-CONSUMER REPAIR / FINAL EXACT-HEAD CI PENDING`
 Entry HEAD: `16d2efca91d1f7507cc23474c23a284002684dd5`
 Pre-write HEAD: `78fb6a597b6492316ffeb449d749319ecfdc869b`
 Initial Material HEAD: `5d94dfc26bf886b36d04ea75b92f60937707add0`
@@ -68,11 +68,13 @@ Authorized bounded repair:
 
 | Change ID | Target | Action | Expected change | KEEP requirements | Pre-write | Post-write |
 |---|---|---|---|---|:---:|:---:|
-| P10-L-09 | `Quality/Integration/test_authorization_to_execution_canonical_seam_certification.py` | UPDATE | require the current explicit-authorization rejection code | unauthorized execution remains blocked; exception type unchanged; no source/status mutation | PASS | PENDING |
-| P10-L-10 | `Quality/Integration/test_run010_eng006_handoff_contract.py` | UPDATE | require current explicit-authorization and stable-identity rejection codes | missing trace and unauthorized execution remain fail-closed; successful handoff assertions unchanged | PASS | PENDING |
-| P10-L-11 | this Matrix | UPDATE | bind repair/read-back/test/exact-head evidence | retain all prior failure evidence and non-claims | PASS | PENDING |
+| P10-L-09 | `Quality/Integration/test_authorization_to_execution_canonical_seam_certification.py` | UPDATE | require the current explicit-authorization rejection code | unauthorized execution remains blocked; exception type unchanged; no source/status mutation | PASS | PASS |
+| P10-L-10 | `Quality/Integration/test_run010_eng006_handoff_contract.py` | UPDATE | require current explicit-authorization and stable-identity rejection codes | missing trace and unauthorized execution remain fail-closed; successful handoff assertions unchanged | PASS | PASS |
+| P10-L-11 | this Matrix | UPDATE | bind repair/read-back/test/exact-head evidence | retain all prior failure evidence and non-claims | PASS | PASS |
 
 This authorization does not permit another `Runtime/_FOLDER_STATUS.md` mutation, Runtime source relaxation, exception swallowing, provider claim or executable promotion. The repair must change diagnostic expectations only and then rerun the targeted tests plus all four exact-head workflow families.
+
+Immutable local read-back confirms that only the three obsolete exact-string expectations changed. Targeted Gate-15 tests pass `32/32`; the integration suite under the tracked workflow `PYTHONPATH` passes `585/585` with `11` subtests and one existing audit warning. Exact-head workflow evidence remains pending and this material state does not close Gate 15.
 
 Validation:
 `pre-write → bounded hardening → immutable read-back → preserved CI failures → authority-baseline restoration → additive compatibility repair → exact-head four workflow families → classify Gate15 close/hold Resume-Safe`.

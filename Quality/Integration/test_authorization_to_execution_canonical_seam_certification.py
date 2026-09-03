@@ -48,6 +48,6 @@ def test_unauthorized_execution_remains_blocked():
             stages=[{"name": "execution", "status": "SIMULATED"}],
         )
     except ExecutionDenied as exc:
-        assert str(exc) == "EXECUTION_NOT_AUTHORIZED"
+        assert str(exc) == "EXECUTION_NOT_EXPLICITLY_AUTHORIZED"
     else:
         raise AssertionError("unauthorized execution must remain blocked")
