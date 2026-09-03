@@ -23,3 +23,8 @@ def test_candidate_becomes_promotion_eligible_with_authority():
     result = evaluate_evidence(evidence(), authority=True)
     assert result["status"] == "PROMOTION_ELIGIBLE"
     assert result["promote"] is True
+
+
+def test_governing_conflict_remains_held_with_authority():
+    result = evaluate_evidence(evidence(), authority=True, governing_conflict=True)
+    assert result == {"status": "HOLD", "reason": "GOVERNING_CONFLICT"}

@@ -5,7 +5,12 @@ from typing import Any, Dict
 from Runtime.Prototype.learning_promotion_gate import evaluate
 
 
-def build_candidate(evidence: Dict[str, Any], *, authority: bool = False) -> Dict[str, Any]:
+def build_candidate(
+    evidence: Dict[str, Any],
+    *,
+    authority: bool = False,
+    governing_conflict: bool = False,
+) -> Dict[str, Any]:
     """Map an evidence package into the minimal promotion-gate candidate."""
     return {
         "task_id": evidence["task_id"],
@@ -16,8 +21,20 @@ def build_candidate(evidence: Dict[str, Any], *, authority: bool = False) -> Dic
         "confidence": evidence["confidence"],
         "validation": evidence["validation"],
         "promotion_authority": authority,
+        "governing_conflict": governing_conflict,
     }
 
 
-def evaluate_evidence(evidence: Dict[str, Any], *, authority: bool = False) -> Dict[str, Any]:
-    return evaluate(build_candidate(evidence, authority=authority))
+def evaluate_evidence(
+    evidence: Dict[str, Any],
+    *,
+    authority: bool = False,
+    governing_conflict: bool = False,
+) -> Dict[str, Any]:
+    return evaluate(
+        build_candidate(
+            evidence,
+            authority=authority,
+            governing_conflict=governing_conflict,
+        )
+    )
