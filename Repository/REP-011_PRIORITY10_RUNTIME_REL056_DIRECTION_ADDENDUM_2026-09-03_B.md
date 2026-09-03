@@ -2,7 +2,7 @@
 
 Date: 2026-09-03
 Applies to: `Repository/REP-011_REVIEW_TRACEABILITY_LEDGER.md`
-State: `CURRENT BOUNDED REVIEW ADDENDUM / CORRECTIVE CI PENDING`
+State: `CURRENT BOUNDED REVIEW ADDENDUM / CLOSED / VERIFIED / RESUME-SAFE`
 Transaction: `MUT-2026-09-03-P10-RUNTIME-REL056-DIRECTION-B`
 
 ## Review result
@@ -16,6 +16,8 @@ ENG-014 directly lists `Runtime/RUN-011_COGNITIVE_LOOP_PROTOTYPE.md` under Relat
 The P75 ledger entry remains preserved as historical evidence. This addendum supersedes only its current direction interpretation and does not rewrite the historical review body.
 
 The first material head passed the semantic registry guard, Full-Stack, Real Mutation Matrix and M2, but Runtime/Integration exposed a deterministic control-plane consumer mismatch: the current manifest still bound REP-014 v1.2.14. Transaction B-C1 therefore updates that exact manifest binding to v1.2.15 in the same corrective change set as the controlling Matrix.
+
+Corrective HEAD `95558851199302eec14384661d5a49368c13be06` passed all four exact-head workflow families. REL-056 direction and the v1.2.15 manifest binding are therefore current and verified within this bounded scope.
 
 ## Boundary
 
