@@ -2,7 +2,7 @@
 
 Transaction ID: `MUT-2026-09-03-P10-GATE15-CLOSURE-READINESS-M`
 Priority: `10 — Runtime`
-State: `PRE-WRITE / AUTHORIZED / MATERIAL CHANGE PENDING`
+State: `MATERIAL CHANGE APPLIED / EXACT-HEAD CI PENDING`
 Entry HEAD: `bd2daf831fbff70c82d4c5f76a831aa8143cea2c`
 Protocol: `PROJECT_BOOTSTRAP / CORE-003 / GOV-013 / GOV-014 / GOV-014A / RUN-013 / RUN-015 / REP-011 / REP-012 / REP-013 / REP-014 / REP-016`
 
@@ -24,13 +24,13 @@ Priority 10 cannot yet close. Current Git evidence contains `118` tracked Runtim
 
 | Change ID | Target | Action | Expected change | KEEP requirements | Pre-write | Post-write |
 |---|---|---|---|---|:---:|:---:|
-| P10-M-01 | `Runtime/_FOLDER_STATUS.md` | UPDATE | mark Gate 15 bounded verified; retain overall hold for exact inventory/allocation | Gates 12–14; all provider/production/global non-claims; no candidate promotion | PASS | PENDING |
-| P10-M-02 | `Quality/Integrity/test_runtime_p10_gate15_execution_authority.py` | UPDATE | bind final exact-head Gate-15 evidence and bounded closure marker | fail-closed source assertions and non-promotion guards | PASS | PENDING |
-| P10-M-03 | `Quality/Integrity/test_runtime_p10_closure_readiness.py` | UPDATE | replace superseded Gate-15-next assertions with exact-inventory blocker guards | RUN-013/RUN-015 safety invariants; P10 stays open | PASS | PENDING |
-| P10-M-04 | `Repository/REP-011_PRIORITY10_RUNTIME_GATE15_EXECUTION_AUTHORITY_ADDENDUM_2026-09-03_L.md` | UPDATE | bind final exact-head success and bounded Gate-15 disposition | all L findings and non-claims | PASS | PENDING |
-| P10-M-05 | `Repository/MUT-2026-09-03-P10-GATE15-EXECUTION-AUTHORITY-L_MUTATION_MATRIX.md` | UPDATE | close L from exact-head evidence | preserve every failed-head record and stale-consumer classification | PASS | PENDING |
-| P10-M-06 | `Repository/REP-011_PRIORITY10_RUNTIME_GATE15_CLOSURE_READINESS_ADDENDUM_2026-09-03_M.md` | CREATE | record Gate-15 bounded closure and P10 exact-inventory hold | no global or executable-promotion overclaim | PASS | PENDING |
-| P10-M-07 | this Matrix | UPDATE | bind material/read-back/tests/CI state | exact path set and blocker classification | PASS | PENDING |
+| P10-M-01 | `Runtime/_FOLDER_STATUS.md` | UPDATE | mark Gate 15 bounded verified; retain overall hold for exact inventory/allocation | Gates 12–14; all provider/production/global non-claims; no candidate promotion | PASS | PASS |
+| P10-M-02 | `Quality/Integrity/test_runtime_p10_gate15_execution_authority.py` | UPDATE | bind final exact-head Gate-15 evidence and bounded closure marker | fail-closed source assertions and non-promotion guards | PASS | PASS |
+| P10-M-03 | `Quality/Integrity/test_runtime_p10_closure_readiness.py` | UPDATE | replace superseded Gate-15-next assertions with exact-inventory blocker guards | RUN-013/RUN-015 safety invariants; P10 stays open | PASS | PASS |
+| P10-M-04 | `Repository/REP-011_PRIORITY10_RUNTIME_GATE15_EXECUTION_AUTHORITY_ADDENDUM_2026-09-03_L.md` | UPDATE | bind final exact-head success and bounded Gate-15 disposition | all L findings and non-claims | PASS | PASS |
+| P10-M-05 | `Repository/MUT-2026-09-03-P10-GATE15-EXECUTION-AUTHORITY-L_MUTATION_MATRIX.md` | UPDATE | close L from exact-head evidence | preserve every failed-head record and stale-consumer classification | PASS | PASS |
+| P10-M-06 | `Repository/REP-011_PRIORITY10_RUNTIME_GATE15_CLOSURE_READINESS_ADDENDUM_2026-09-03_M.md` | CREATE | record Gate-15 bounded closure and P10 exact-inventory hold | no global or executable-promotion overclaim | PASS | PASS |
+| P10-M-07 | this Matrix | UPDATE | bind material/read-back/tests/CI state | exact path set and blocker classification | PASS | PASS |
 
 ## Non-claims
 
@@ -38,6 +38,10 @@ Priority 10 cannot yet close. Current Git evidence contains `118` tracked Runtim
 - Priority 10, Phase 1, repository-wide graph, Global Connected Baseline and Global Integrity remain OPEN/HOLD.
 - Provider authenticity, authorization and availability are not established.
 - The exact inventory gap is not solved by describing the existing partial control-plane surface as complete.
+
+## Material read-back and local validation
+
+Immutable read-back confirms the seven authorized paths only. Runtime source, Engine source, provider adapters, REP-012, REP-013 and REP-014 are unchanged. Workflow-equivalent local validation passes: Integrity `184/184`; Integration `585/585` plus `11` subtests; Runtime Prototype `23/23`; acceptance scenarios `3/3`. Exact-head remote verification remains pending.
 
 Validation:
 `pre-write → atomic material → immutable read-back → exact parent compare → targeted tests → four-family exact-head CI → close M or HOLD / RESUME-SAFE`.

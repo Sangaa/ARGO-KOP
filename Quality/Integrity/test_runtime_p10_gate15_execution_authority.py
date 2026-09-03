@@ -33,5 +33,6 @@ def test_gate15_hardening_does_not_promote_controlled_handoff_or_production_exec
     matrix = MATRIX.read_text(encoding="utf-8")
     assert "It must not return `EXECUTED`." in run013
     assert "does not certify the full Runtime" in run015
-    assert "GATE-15 AUTHORIZATION HARDENING MATERIAL / EXACT-HEAD CI PENDING" in status
+    assert "Gate 15 is therefore boundedly verified for this tracked fail-closed seam" in status
+    assert "33776295841" in matrix
     assert "no external API/email/production mutation" in matrix

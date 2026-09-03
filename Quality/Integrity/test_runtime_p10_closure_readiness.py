@@ -25,10 +25,11 @@ def test_gate15_contracts_still_forbid_executable_promotion_claim():
     assert "executable promotion and consolidated cross-layer Runtime validation remain on HOLD" in run015
 
 
-def test_runtime_status_keeps_p10_open_and_points_to_gate15():
+def test_runtime_status_closes_gate15_boundedly_and_keeps_p10_open_on_exact_inventory():
     status = STATUS.read_text(encoding="utf-8")
     assert "🟡 VALIDATED / CROSS-LAYER INTEGRATION HOLD" in status
-    assert "15. Runtime ↔ Engine cognitive-loop prototype seam — VERIFIED FOR PROTOTYPE, HANDOFF, LEARNING AND CI EVIDENCE / EXECUTABLE PROMOTION HOLD" in status
-    assert "Therefore Priority 10 is not closure-ready on current authority." in status
-    assert "Proceed to the explicit Gate-15 executable-promotion authority/evidence boundary." in status
+    assert "15. Runtime ↔ Engine cognitive-loop prototype seam — BOUNDED VERIFIED" in status
+    assert "Therefore Priority 10 is not closure-ready while exact Runtime physical inventory/allocation remains unreconciled." in status
+    assert "Proceed to exact Runtime physical inventory/allocation reconciliation" in status
+    assert "118` paths" in status
     assert "global Runtime certification remains intentionally capped" in status

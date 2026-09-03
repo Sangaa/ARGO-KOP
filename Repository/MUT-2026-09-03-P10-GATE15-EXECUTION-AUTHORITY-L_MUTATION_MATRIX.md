@@ -3,7 +3,7 @@
 Transaction ID: `MUT-2026-09-03-P10-GATE15-EXECUTION-AUTHORITY-L`
 Priority: `10 — Runtime`
 Gate: `15 — Runtime ↔ Engine executable boundary`
-State: `MATERIAL STALE-CONSUMER REPAIR / FINAL EXACT-HEAD CI PENDING`
+State: `CLOSED / VERIFIED / RESUME-SAFE`
 Entry HEAD: `16d2efca91d1f7507cc23474c23a284002684dd5`
 Pre-write HEAD: `78fb6a597b6492316ffeb449d749319ecfdc869b`
 Initial Material HEAD: `5d94dfc26bf886b36d04ea75b92f60937707add0`
@@ -11,6 +11,7 @@ First Status Repair HEAD: `a5c2ea19ff85de2decd94b0eb6b6e19728179d99`
 Authority-Baseline Repair HEAD: `d6ef08f5879606642db761e653e9101d67853235`
 Final Status Compatibility HEAD: `0c9797bb36e71ca76bd055ff3768e25f6fff006a`
 Final Exact-Head Validation HEAD: `c32b8de1a55798f82612f6b0a17a69ed0868005f`
+Material Stale-Consumer Repair HEAD: `bd2daf831fbff70c82d4c5f76a831aa8143cea2c`
 Protocol: `PROJECT_BOOTSTRAP / CORE-003 / GOV-013 / GOV-014 / GOV-014A / GOV-016 / ENG-006 / RUN-013 / RUN-015 / Runtime Execution contracts / REP-011 / REP-016`
 
 ## Independently verified tracked defects
@@ -74,7 +75,9 @@ Authorized bounded repair:
 
 This authorization does not permit another `Runtime/_FOLDER_STATUS.md` mutation, Runtime source relaxation, exception swallowing, provider claim or executable promotion. The repair must change diagnostic expectations only and then rerun the targeted tests plus all four exact-head workflow families.
 
-Immutable local read-back confirms that only the three obsolete exact-string expectations changed. Targeted Gate-15 tests pass `32/32`; the integration suite under the tracked workflow `PYTHONPATH` passes `585/585` with `11` subtests and one existing audit warning. Exact-head workflow evidence remains pending and this material state does not close Gate 15.
+Immutable local read-back confirmed that only the three obsolete exact-string expectations changed. Targeted Gate-15 tests passed `32/32`; the integration suite under the tracked workflow `PYTHONPATH` passed `585/585` with `11` subtests and one existing audit warning. At that pre-verification point exact-head workflow evidence remained pending and Gate 15 remained open; the final evidence below supersedes only that disposition, not the preserved checkpoint.
+
+Final material exact-head evidence: Full-Stack `33776295695` — SUCCESS; Runtime `33776295841` — SUCCESS; M2 `33776295756` — SUCCESS; Real Matrix `33776295741` — SUCCESS. Exact compare contains only P10-L-09..11. `GATE 15 = BOUNDED CLOSED FOR THE TRACKED SIDE-EFFECT-FREE AUTHORIZATION / IDENTITY EXECUTION SEAM`; provider/production execution and candidate/canonical executable promotion remain unclaimed.
 
 Validation:
 `pre-write → bounded hardening → immutable read-back → preserved CI failures → authority-baseline restoration → additive compatibility repair → exact-head four workflow families → classify Gate15 close/hold Resume-Safe`.
