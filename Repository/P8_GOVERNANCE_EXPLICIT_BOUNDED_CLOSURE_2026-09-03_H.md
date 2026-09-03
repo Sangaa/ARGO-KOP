@@ -1,10 +1,12 @@
 # Priority 8 — Explicit Governance Bounded Closure — Transaction H
 
 Date: 2026-09-03
-State: `MATERIAL CANDIDATE / CLOSED_FOR_PHASE_1 SUBJECT TO EXACT-HEAD VERIFICATION`
+State: `FUNCTIONAL CLOSED / CORRECTIVE HEAD 4-OF-4 GREEN / RESUME-SAFE IFF DOCUMENTATION HEAD PASSES`
 Transaction: `MUT-2026-09-03-P8-GOVERNANCE-EXPLICIT-CLOSURE-H`
 Entry/pre-write HEAD: `f5c0f004ec1efeaff433d46fd12528f377012798`
-Material HEAD: `THIS MATERIAL COMMIT`
+Failed material HEAD: `dca489a5b3e4fdf3ad6b7b38eb730ad5650851ef`
+Corrective verified HEAD: `fcdac6cc6bf85d6288a25ad60b9f90b5ea460822`
+Documentation closure HEAD: `THIS DOCUMENTATION COMMIT`
 
 ## Decision
 
@@ -14,7 +16,22 @@ Current evidence supports:
 
 `PRIORITY 8 = CLOSED_FOR_PHASE_1 / GLOBAL PHASE 1 REMAINS OPEN`.
 
-This becomes operationally Resume-Safe only after immutable material read-back and exact-head required workflow success.
+This becomes operationally Resume-Safe only after the documentation closure HEAD also satisfies exact-head required workflow verification.
+
+## Failure / recovery
+
+The first closure candidate failed Runtime/Integration because it removed a stable identity/inventory milestone phrase that remained semantically true. The failing test was not weakened. H-C1 restored the milestone in the folder status while preserving the bounded closure state and every global/nonblocking boundary.
+
+Failed evidence: Runtime `33712767948`, Integration job `100515577102`.
+
+Corrective HEAD `fcdac6cc6bf85d6288a25ad60b9f90b5ea460822` then passed:
+
+- Full-Stack `33713086422`;
+- Runtime `33713086476`, all three jobs successful;
+- Real Matrix `33713086441`;
+- M2 `33713086431`.
+
+Immutable read-back and exact parent compare proved only the three authorized corrective paths changed.
 
 ## Closure basis
 

@@ -2,10 +2,11 @@
 
 Transaction ID: `MUT-2026-09-03-P8-GOVERNANCE-CLOSURE-STATUS-H-C1`
 Parent transaction: `MUT-2026-09-03-P8-GOVERNANCE-EXPLICIT-CLOSURE-H`
-State: `CORRECTIVE CANDIDATE / LOCAL READ-BACK PASS / EXACT-HEAD CI PENDING`
+State: `CLOSED / CORRECTIVE HEAD 4-OF-4 GREEN / RESUME-SAFE IFF DOCUMENTATION HEAD PASSES`
 Failed HEAD: `dca489a5b3e4fdf3ad6b7b38eb730ad5650851ef`
 Pre-write Matrix HEAD: `00d762f5a97eaf5196c7d1cab1dde5faa4e640d2`
-Corrective HEAD: `THIS MATERIAL COMMIT`
+Corrective HEAD: `fcdac6cc6bf85d6288a25ad60b9f90b5ea460822`
+Documentation closure HEAD: `THIS DOCUMENTATION COMMIT`
 Protocol: GOV-014 / `GOV-013 / GOV-014A / GOV-015 / GOV-016`
 
 ## Failure boundary
@@ -64,4 +65,15 @@ H-C1 and parent H close only after immutable read-back and all required workflow
 - Mutation Matrix semantic validation: PASS;
 - `git diff --check`: PASS.
 
-Required exact-head workflows remain pending. No success is claimed before they complete.
+## Exact-head workflow evidence
+
+Corrective HEAD `fcdac6cc6bf85d6288a25ad60b9f90b5ea460822`:
+
+- Full-Stack Repository Audit `33713086422` — SUCCESS;
+- ARGO Runtime Prototype and Integration Tests `33713086476` — SUCCESS, with Integration, Prototype and Integrity jobs all successful;
+- Real Mutation Matrix Regression `33713086441` — SUCCESS;
+- M2 Multi-Channel Proposal Training `33713086431` — SUCCESS.
+
+## Closure
+
+H-C1 is functionally closed. It is operationally Resume-Safe iff this documentation-only closure HEAD also passes all four required workflow families. The original failed H evidence remains unchanged in the parent Matrix.

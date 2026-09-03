@@ -2,11 +2,12 @@
 
 Transaction ID: `MUT-2026-09-03-P8-GOVERNANCE-EXPLICIT-CLOSURE-H`
 Priority: `8 — Governance`
-State: `CORRECTIVE CANDIDATE / H-C1 LOCAL READ-BACK PASS / EXACT-HEAD CI PENDING`
+State: `CLOSED / H-C1 CORRECTIVE HEAD 4-OF-4 GREEN / RESUME-SAFE IFF DOCUMENTATION HEAD PASSES`
 Entry HEAD: `0cc15ecfa8c8580ada844d23b61c363f3245ea43`
 Pre-write Matrix HEAD: `f5c0f004ec1efeaff433d46fd12528f377012798`
 Failed material HEAD: `dca489a5b3e4fdf3ad6b7b38eb730ad5650851ef`
-Corrective HEAD: `THIS H-C1 MATERIAL COMMIT`
+Corrective HEAD: `fcdac6cc6bf85d6288a25ad60b9f90b5ea460822`
+Documentation closure HEAD: `THIS DOCUMENTATION COMMIT`
 Protocol: GOV-014 / `PROJECT_BOOTSTRAP / CORE-003 / GOV-013 / GOV-013A / GOV-014A / GOV-015 / GOV-016 / REP-011 / REP-012 + G / REP-013 + G / REP-014 / REP-016`
 
 ## Dedicated Priority-8 closure review
@@ -118,3 +119,21 @@ Failure: `test_current_tree_governance_document_heading_identities_are_unique_af
 Classification: `STATUS MATERIALIZATION REGRESSION / STALE PRESENTATION TRANSITION, NOT STALE TEST`.
 
 The test is preserved unchanged. Isolated corrective transaction H-C1 restores the still-true stable milestone. H remains unclosed until immutable exact-head read-back and all required workflows pass.
+
+## Corrective exact-head verification
+
+Corrective HEAD `fcdac6cc6bf85d6288a25ad60b9f90b5ea460822`:
+
+- Full-Stack Repository Audit `33713086422` — SUCCESS;
+- ARGO Runtime Prototype and Integration Tests `33713086476` — SUCCESS;
+  - integration-tests `100516524863` — SUCCESS;
+  - prototype-tests `100516524994` — SUCCESS;
+  - integrity-tests `100516525089` — SUCCESS;
+- Real Mutation Matrix Regression `33713086441` — SUCCESS;
+- M2 Multi-Channel Proposal Training `33713086431` — SUCCESS.
+
+Immutable read-back matched all three corrective blobs and compare proved exactly one commit, three authorized paths and Unexpected Changes = `0`.
+
+## Closure
+
+The failed H candidate remains preserved. H is functionally closed by H-C1 and becomes operationally Resume-Safe iff this documentation-only closure HEAD passes all four required workflow families.
