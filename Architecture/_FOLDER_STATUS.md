@@ -16,7 +16,7 @@ Status
 
 Version
 
-1.5.8
+1.5.9
 
 Canonical
 
@@ -32,11 +32,11 @@ Repository First / Evidence Based / Exact Git-Tree Enumeration / Bounded Consume
 
 Review Scope
 
-Exact Architecture inventory, known identity/path evidence, active Architecture semantic re-audit, bounded Priority-7 consumer alignment, and Priority-9 canonical-path, canonical-model, layer/dependency, information-flow, evolution, active-reference and Knowledge/Memory-boundary validation of the current primary ARC set and Architecture navigation/control surfaces
+Exact Architecture inventory, known identity/path evidence, active Architecture semantic re-audit, bounded Priority-7 consumer alignment, and Priority-9 canonical-path, canonical-model, layer/dependency, information-flow, evolution, active-reference, Knowledge/Memory-boundary and Runtime/Interface-boundary validation of the current primary ARC set and Architecture navigation/control surfaces
 
 Repository Baseline
 
-Current main branch repository state through Priority-9 Gates 4 and 6–12 bounded closure
+Current main branch repository state through Priority-9 Gates 4 and 6–13 bounded closure
 
 ---
 
@@ -54,7 +54,7 @@ Identity / Path Alignment
 
 Architecture Consistency
 
-🟡 Re-audit remains open across the Runtime/Interface boundary and broader repository reconciliation gates. Priority-9 bounded evidence now closes canonical-path uniqueness, canonical-model, layer/dependency, information-flow, evolution, current active-reference reconciliation and the inspected Knowledge/Memory semantic boundary for the current primary Architecture scope only; this does not close the broader Architecture re-audit.
+🟡 Re-audit remains open across broader repository reconciliation and final Architecture disposition. Priority-9 bounded evidence now closes canonical-path uniqueness, canonical-model, layer/dependency, information-flow, evolution, current active-reference reconciliation, the inspected Knowledge/Memory semantic boundary and the inspected Runtime/Interface semantic contract boundary for the current primary Architecture scope only; this does not close the broader Architecture re-audit.
 
 Repository Alignment
 
@@ -62,7 +62,7 @@ Repository Alignment
 
 Cross-Reference Review
 
-🟡 Bounded active-reference reconciliation is complete for Gate 11 and the inspected Architecture↔Knowledge/Memory semantic boundary is complete for Gate 12. Priority-7 Transaction S/S-C1 and Priority-9 canonical/path/consistency/flow-evolution/reference/boundary work close known current-Architecture drifts within the inspected set only. Architecture ↔ Runtime/Interface semantic boundary validation remains open under Gate 13.
+🟡 Bounded active-reference reconciliation is complete for Gate 11; the inspected Architecture↔Knowledge/Memory semantic boundary is complete for Gate 12; and the inspected Architecture↔Runtime/Interface semantic contract boundary is complete for Gate 13. Priority-7 Transaction S/S-C1 and Priority-9 canonical/path/consistency/flow-evolution/reference/boundary work close known current-Architecture drifts within the inspected set only. Runtime/Interface implementation, provider and external-trust validation remains under the applicable downstream domain holds.
 
 ---
 
@@ -129,9 +129,9 @@ The following artifacts form the primary architecture review set:
 10. Evolution Model alignment — PASS FOR CURRENT ARCHITECTURE DECISION/EVOLUTION LIFECYCLE / BOUNDED PRIORITY-9 EVIDENCE
 11. Known stale references — PASS FOR CURRENT ACTIVE ARCHITECTURE REFERENCE SET / BOUNDED PRIORITY-9 EVIDENCE
 12. Architecture ↔ Knowledge / Memory boundary — PASS FOR INSPECTED CROSS-LAYER SEMANTIC BOUNDARY / BOUNDED PRIORITY-9 EVIDENCE
-13. Architecture ↔ Runtime / Interface boundary — OPEN
+13. Architecture ↔ Runtime / Interface boundary — PASS FOR INSPECTED RUNTIME / INTERFACE SEMANTIC CONTRACT BOUNDARY / BOUNDED PRIORITY-9 EVIDENCE
 
-AI remains included in the broader cross-reference review scope; retaining the exact Runtime / Interface gate marker preserves the established regression contract and does not close AI review.
+AI remains included in the broader cross-reference review scope. Bounded Runtime/Interface Gate-13 closure does not certify AI consumers, providers, implementations or the repository-wide AI graph.
 
 Architecture is **not globally certified**. Any previous global cleanliness claim remains withdrawn until the expanded inventory and cross-layer relationships are revalidated.
 
@@ -200,7 +200,7 @@ Evolution evidence:
 - `ARC-010` explicitly does not override Constitution, Governance, Canonical Architecture Model, Repository or Release authority;
 - Runtime/external execution uncertainty and Memory/Learning promotion boundaries remain explicit rather than being converted into architectural success.
 
-This closes Gates 9 and 10 only for the current primary Architecture flow/evolution model. It does not certify downstream Knowledge/Memory consumers, Runtime/Interface integrations, stale-reference exhaustion, release completeness, or repository-wide graph integrity.
+This closes Gates 9 and 10 only for the current primary Architecture flow/evolution model. It does not certify downstream Knowledge/Memory consumers, Runtime/Interface implementations, external integrations, release completeness, or repository-wide graph integrity.
 
 ---
 
@@ -241,7 +241,7 @@ Evidence boundary:
 
 No inspected current active Architecture reference requires a further source mutation before this bounded Gate-11 closure.
 
-This does not establish repository-wide stale-reference exhaustion. Historical/archive/support surfaces outside the active Architecture review set remain outside this claim, and cross-layer semantic conformance remains separately open under Gates 12–13.
+This does not establish repository-wide stale-reference exhaustion. Historical/archive/support surfaces outside the active Architecture review set remain outside this claim; semantic cross-layer boundaries are separately bounded by Gates 12–13 and do not expand this stale-reference claim.
 
 ---
 
@@ -264,6 +264,47 @@ Evidence boundary:
 The resulting boundary is consistent: learning and operational experience may flow upward as evidence or a promotion candidate, but that information flow does not reverse the architectural dependency direction and does not silently acquire authority to modify Architecture, Repository or canonical platform knowledge.
 
 No inspected Knowledge or Memory source requires a material edit before this bounded Gate-12 closure. The separate `KNW-003 Revalidation Required` state, Knowledge/Memory partition holds, repository relationship gaps and the observed duplicate `MEM-008` identity remain outside this bounded architectural semantic claim.
+
+---
+
+# Bounded Priority-9 Architecture ↔ Runtime / Interface Boundary — Gate 13
+
+The current Architecture dependency/integration contracts were reconciled against the current Runtime workflow/security/state/recovery contracts and the current Interface/interoperability, sensing and connector boundaries.
+
+Evidence boundary:
+
+- `ARC-006` and `ARC-011` preserve canonical dependency direction: Runtime/Services/AI consume upstream governed contracts and cannot redefine Architecture authority;
+- `ARC-007` defines external integration as a governed boundary and permits non-linear operational interaction without reversing dependency or authority direction;
+- `RUN-005` requires interface/dependency resolution, validation and authorization before applicable execution;
+- `RUN-007` preserves least authority, interface/authentication/authorization/provenance ordering, `UNKNOWN != SUCCESS`, governed recovery and no automatic learning promotion. Transaction P repaired its isolated development-baseline drift to authoritative `3.2.1` without changing these security semantics;
+- `RUN-008` keeps external execution outcomes separate from Runtime state and does not convert unknown external state into success;
+- `RUN-009` requires evidence-preserving recovery and forbids recovery from bypassing authority or blindly repeating uncertain external effects;
+- Transaction Q reconciled Runtime navigation through RUN-015 + `Runtime/Prototype/`, corrected stale RUN-015 CI-evidence state, and preserved Candidate / Integrity Hold and executable-promotion boundaries;
+- `INTF-001` defines deterministic interface/interoperability contracts, traceability and the rule that source/device availability does not imply authorization;
+- `INTF-006_ENVIRONMENT_SENSING` remains `Proposed / Integrity Hold` even though its identity is canonical for the sensing contract. It separates contract canonicality from implementation readiness, observation from verified fact, availability from permission, and sensing from authority over Memory/Knowledge/Governance/Architecture/Execution;
+- `INTF-010_INTEGRATIONS` defines connectors as provider-neutral integration mechanisms rather than cognitive authority; technical access is not permission, requested action is not completed action, and actual execution state must be reported rather than inferred;
+- `Runtime/_FOLDER_STATUS.md` remains `VALIDATED / CROSS-LAYER INTEGRATION HOLD`; Runtime↔Interfaces implementation validation and Runtime↔Repository control-plane gates remain open;
+- `Interfaces/_FOLDER_STATUS.md` remains `INTEGRITY HOLD / LOCAL INVENTORY VERIFIED / CROSS-LAYER AND EXTERNAL-TRUST VALIDATION OPEN`; interface contract remains distinct from connector implementation;
+- direct live directory evidence confirms there is no `Interfaces/README.md`; no navigation artifact is invented merely for symmetry.
+
+The inspected semantic boundary is therefore consistent:
+
+`Architecture contract → Runtime governed consumption → Interface contract → authorized connector/external execution → explicit result/evidence`
+
+Inbound information may return as evidence/context and learning candidates, but connectors, sensing, transport availability, authentication, runtime success and prototype CI do not acquire authority to redefine Architecture or canonical knowledge.
+
+The following distinctions remain preserved:
+
+- `INTERFACE CONTRACT != CONNECTOR IMPLEMENTATION`
+- `TECHNICAL ACCESS != AUTHORIZATION`
+- `AUTHENTICATION != AUTHORIZATION`
+- `REQUESTED ACTION != COMPLETED ACTION`
+- `UNKNOWN != SUCCESS`
+- `PROTOTYPE CI PASS != EXECUTABLE AUTHORITY PROMOTION`
+
+No further Runtime or Interface source mutation is justified before this bounded Gate-13 closure.
+
+This Gate-13 PASS does not certify Runtime implementation, Interface/connector implementations, external providers, hardware, permissions, security/privacy/legal compliance, production readiness or repository-wide integration. The applicable Runtime, Interfaces, AI and Repository holds remain independently controlling.
 
 ---
 
@@ -293,13 +334,13 @@ This remains a bounded consumer-content correction only. It does not register a 
 
 This status certifies only the evidence inspected so far. It does not certify Runtime, Core, AI, Services, Knowledge, Memory, Projects, Release or the entire repository.
 
-Gates 4 and 6–12 bounded closure does not certify the Architecture folder. Cross-layer Gate 13 remains open.
+Gates 4 and 6–13 bounded closure does not certify the Architecture folder. Repository registry/control-plane reconciliation and final Architecture re-audit disposition remain open.
 
 ---
 
 # Required Next Action
 
-`Validate Architecture↔Runtime/Interface boundary → reconcile Repository registries where required → Architecture Re-Audit`
+`Reconcile Repository registries where required → Architecture Re-Audit`
 
 No `100% CLEAN` repository claim is authorized from this document alone.
 
@@ -348,6 +389,8 @@ Repository Reality > Previous Status Claims > Conversation Memory
 `BOUNDED ACTIVE-REFERENCE RECONCILIATION != REPOSITORY-WIDE STALE-REFERENCE EXHAUSTION`
 
 `BOUNDED ARCHITECTURE↔KNOWLEDGE/MEMORY ALIGNMENT != KNOWLEDGE OR MEMORY PARTITION CERTIFICATION`
+
+`BOUNDED ARCHITECTURE↔RUNTIME/INTERFACE ALIGNMENT != RUNTIME OR INTERFACE IMPLEMENTATION CERTIFICATION`
 
 ---
 
