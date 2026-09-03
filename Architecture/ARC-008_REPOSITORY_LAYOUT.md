@@ -16,7 +16,7 @@ ARC-008
 
 Version
 
-1.2.0
+1.2.1
 
 Status
 
@@ -36,7 +36,7 @@ Latest Official Release
 
 Last Audit
 
-2026-08-08
+2026-09-03
 
 ---
 
@@ -54,11 +54,13 @@ The repository must therefore be read as a relationship graph as well as a stora
 
 # Canonical Relationship
 
-The active architecture is represented by:
+The current canonical Architecture Model for structural boundaries and dependency direction is represented by:
 
-`Architecture/ARC-001_PLATFORM_ARCHITECTURE.md`
+`Architecture/ARC-011_CANONICAL_ARCHITECTURE_MODEL.md`
 
-and navigated through:
+`Architecture/ARC-001_PLATFORM_ARCHITECTURE.md` remains a platform architecture surface aligned to that canonical model, not a competing canonical Architecture Model.
+
+Architecture navigation is provided through:
 
 `Architecture/ARC_MAP.md`
 
@@ -176,6 +178,7 @@ Reviews should verify together:
 - `Repository/REP-001_MASTER_INDEX.md`
 - `Repository/REP-002_REPOSITORY_MAP.md`
 - `Architecture/ARC-001_PLATFORM_ARCHITECTURE.md`
+- `Architecture/ARC-011_CANONICAL_ARCHITECTURE_MODEL.md`
 - `Architecture/ARC_MAP.md`
 - `Architecture/ARC-004_LAYER_MODEL.md`
 - `Architecture/ARC-006_DEPENDENCY_MODEL.md`
