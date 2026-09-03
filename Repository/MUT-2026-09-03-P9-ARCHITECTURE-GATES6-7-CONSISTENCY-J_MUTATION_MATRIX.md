@@ -2,28 +2,30 @@
 
 Transaction ID: `MUT-2026-09-03-P9-ARCHITECTURE-GATES6-7-CONSISTENCY-J`
 Priority: `9 — Architecture`
-State: `PRE-WRITE / TARGET MUTATIONS NOT YET APPLIED`
+State: `FUNCTIONAL CLOSED / REPAIRED COMPATIBILITY MARKER / RESUME-SAFE IFF THIS CLOSURE HEAD PASSES`
 Entry HEAD: `52d738c97bf3d29c50cca4023eaa20240ffcd65e`
+Pre-write Matrix HEAD: `895655a7e815a31f515400da44a1f65dceef5535`
+Initial Material HEAD: `a7dd7366265a832ae7d2f98dce647d5e6476e8e4`
+Final Material HEAD: `a9ca17d56af4505bda0f5f78979d0db00a60d4a1`
 Targets:
 - `Architecture/_FOLDER_STATUS.md`
 - `Quality/Integrity/test_architecture_folder_inventory_reconciliation.py`
 Protocol: `GOV-013 / GOV-014 / GOV-014A / GOV-015 / GOV-016`
 
 | Gate / Target | Expected change | KEEP / preservation | Pre-write | Post-write |
-|---|---|---|---|---|
-| Gate 6 — Layer boundary consistency | Promote OPEN → bounded PASS for current primary ARC set + ARC_MAP/README | Gate 4,9,10,11,12,13 remain OPEN; Architecture HOLD/global non-certification | PASS | PENDING |
-| Gate 7 — Dependency direction consistency | Promote OPEN → bounded PASS for current primary ARC set + ARC_MAP/README | No reverse-dependency/global completeness claim; cross-layer gates remain OPEN | PASS | PENDING |
-| Architecture inventory regression test | Advance only stale exact Gate-6 OPEN assertion to bounded PASS marker | 15-file inventory, Gate13 OPEN, global-not-certified, exact-inventory-not-domain-certification assertions retained | PASS | PENDING |
+|---|---|---|---|---|---|
+| Gate 6 — Layer boundary consistency | Promote OPEN → bounded PASS for current primary ARC set + ARC_MAP/README | Gate 4,9,10,11,12,13 remain OPEN; Architecture HOLD/global non-certification | PASS | PASS |
+| Gate 7 — Dependency direction consistency | Promote OPEN → bounded PASS for current primary ARC set + ARC_MAP/README | No reverse-dependency/global completeness claim; cross-layer gates remain OPEN | PASS | PASS |
+| Architecture inventory regression test | Advance only stale exact Gate-6 OPEN assertion to bounded PASS marker and add Gate-7 bounded PASS assertion | 15-file inventory, Gate13 OPEN, global-not-certified, exact-inventory-not-domain-certification assertions retained | PASS | PASS |
 
-Evidence boundary:
-- `ARC-001`, `ARC-004`, `ARC-006`, `ARC-007`, `ARC-008`, `ARC-011` and `ARC_MAP` express the same nine-layer boundary/direction: Core → Governance → Architecture → Repository → Knowledge/Specifications/Standards → Memory → Cognition/Engine → Runtime/Services/AI → Projects.
-- `ARC-002` component dependencies are explicitly required to remain compatible with ARC-004/ARC-006/ARC-011; no inspected component rule introduces an extra top-level layer or reverse architectural dependency.
-- `ARC-003` states information flow does not create dependency/transfer authority and is aligned to ARC-011.
-- `ARC-005` Rule 5 binds dependency direction to ARC-011.
-- `ARC-008` explicitly classifies additional physical domains as groupings rather than new architectural layers and Archive as preservation, not an active dependency layer.
-- `ARC-009`/`ARC-010` preserve the decision/evolution authority boundary without competing layer/dependency models.
-- `README` and `ARC_MAP` do not outrank ARC-011; `01-System-Overview.md` remains legacy/foundation evidence outside active authority.
-- Gate 6/7 bounded closure does not establish canonical path uniqueness, information-flow/evolution certification, stale-reference exhaustion, or Architecture↔Knowledge/Memory / Runtime/Interface closure.
+Verification / failure handling:
+- Initial material read-back: status blob `3b97b55b2893114d6d72f24dc3dd51cc0db4264f`; test blob `9d98a3abfc6b24d7fafb2363cc5dc2dfd5029e0a`.
+- Exact compare `895655a7… → a7dd7366…`: exactly two intended targets; status 34 additions / 12 deletions; test 2 additions / 1 deletion.
+- Initial material Runtime run `33717493138` = FAILURE only in `integrity-tests`; prototype/integration jobs passed. M2 `33717493122` = SUCCESS.
+- Failure classification: the Gate-6/7 evidence was not contradicted. The status rewrite had unnecessarily removed the established compatibility marker `BOUNDED CANONICAL ALIGNMENT != ARCHITECTURE CERTIFICATION`, which the already-valid Gate-8 regression contract intentionally preserves.
+- Smallest repair: restore that compatibility marker while retaining the new stronger `BOUNDED PRIMARY-ARCHITECTURE CONSISTENCY != REPOSITORY-WIDE GRAPH CERTIFICATION` marker; no test weakening and no gate rollback.
+- Final material HEAD `a9ca17d5…`: Full-Stack `33717586001` = SUCCESS; M2 `33717586005` = SUCCESS. Runtime did not dispatch for the status-only repair, so closure-head Runtime verification remains mandatory.
+- Gates 4,9,10,11,12,13 remain OPEN; Architecture remains INTEGRITY HOLD and not globally certified.
 
-Validation plan:
-`status + test immutable read-back → exact matrix-head/final-material compare → exact-head required CI → close or preserve failure`.
+Disposition:
+`GATES 6–7 CLOSED / FAILURE PRESERVED AND SMALLEST COMPATIBILITY REPAIR APPLIED / CLOSURE-HEAD 4-FAMILY VERIFICATION REQUIRED`.
