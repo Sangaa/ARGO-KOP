@@ -2,14 +2,16 @@
 
 Transaction ID: `MUT-2026-09-03-P9-ARCHITECTURE-GATE13-RUNTIME-INTERFACE-BOUNDARY-R`
 Priority: `9 — Architecture`
-State: `PRE-WRITE / STATUS MUTATION NOT YET APPLIED`
+State: `CLOSED / VERIFIED / RESUME-SAFE`
 Entry HEAD: `4466bfd3d15571ea78238d764859065ab37daea2`
+Pre-write HEAD: `b0e830154993d0e953161fc6f89731c766b25dd0`
+Material HEAD: `970e2127d9c719196006f48adc985da3baa4d6f8`
 Target: `Architecture/_FOLDER_STATUS.md`
 Protocol: `GOV-013 / GOV-014 / GOV-014A / GOV-015 / GOV-016`
 
 | Gate / Target | Expected change | KEEP / preservation | Pre-write | Post-write |
 |---|---|---|---|---|
-| Gate 13 — Architecture ↔ Runtime / Interface boundary | `OPEN` → bounded PASS for the inspected semantic contract boundary | Architecture remains Integrity Hold; Runtime remains `CROSS-LAYER INTEGRATION HOLD`; Interfaces remain cross-layer/external-trust HOLD; implementation/executable/provider/hardware certification remains OPEN; AI broader review remains not certified; Transaction B / REL-073 remains separate local Registry hold | PASS | PENDING |
+| Gate 13 — Architecture ↔ Runtime / Interface boundary | `OPEN` → bounded PASS for the inspected semantic contract boundary | Architecture remains Integrity Hold; Runtime remains `CROSS-LAYER INTEGRATION HOLD`; Interfaces remain cross-layer/external-trust HOLD; implementation/executable/provider/hardware certification remains OPEN; AI broader review remains not certified; Transaction B / REL-073 remains separate local Registry hold | PASS | PASS |
 
 ## Pre-write evidence
 
@@ -47,14 +49,22 @@ The following distinctions remain mandatory:
 
 No further Runtime or Interface source mutation is justified before bounded Gate-13 status closure.
 
+## Material verification
+
+- Immutable read-back at material HEAD confirms `Architecture/_FOLDER_STATUS.md` Version `1.5.9`, Gate 13 bounded PASS, Architecture overall Integrity Hold retained, and Repository registry/re-audit work still open; blob `8ee2a192e286e87877a5931ce08027cfa2b9b5dc`.
+- Exact compare `b0e830154993d0e953161fc6f89731c766b25dd0 → 970e2127d9c719196006f48adc985da3baa4d6f8` changes exactly one file: `Architecture/_FOLDER_STATUS.md` (`54 additions / 11 deletions`).
+- Material exact-head Full-Stack `33722762570` — SUCCESS.
+- Material exact-head M2 `33722762665` — SUCCESS.
+- The previous S/S-C1 compatibility history was preserved as evidence while the obsolete exact OPEN gate state was legitimately replaced by bounded Gate-13 PASS; current Full-Stack validation accepted the bounded replacement without weakening tests.
+
 ## Non-claims
 
-- Gate 13 PASS will not certify Runtime implementation or production readiness.
-- Gate 13 PASS will not certify Interface/connector implementations, providers, hardware, permissions, security/privacy/legal compliance or external systems.
-- Gate 13 PASS will not clear Runtime or Interfaces folder holds.
-- Gate 13 PASS will not close AI broader review, repository registries/control-plane reconciliation, or repository-wide graph integrity.
+- Gate 13 PASS does not certify Runtime implementation or production readiness.
+- Gate 13 PASS does not certify Interface/connector implementations, providers, hardware, permissions, security/privacy/legal compliance or external systems.
+- Gate 13 PASS does not clear Runtime or Interfaces folder holds.
+- Gate 13 PASS does not close AI broader review, repository registries/control-plane reconciliation, or repository-wide graph integrity.
 - Architecture remains on Integrity Hold pending the remaining Priority-9 reconciliation/re-audit disposition.
 - Transaction B / REL-073 remains a separate local Registry hold.
 
-Validation plan:
-`status mutation → immutable read-back → exact parent compare → exact-head required CI → close or preserve failure`.
+Closure:
+`CLOSED / VERIFIED / RESUME-SAFE`, subject to exact closure-head workflow verification before the next material transaction.
