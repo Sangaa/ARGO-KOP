@@ -48,7 +48,7 @@ def test_gate14_named_relationship_cohort_is_complete():
 def test_gate14_bounded_result_preserves_independent_runtime_holds():
     status = STATUS.read_text(encoding="utf-8")
     assert "14. Runtime ↔ Repository control plane — BOUNDED VERIFIED FOR RUN-011..015 + REL-055..060 / BROADER CONTROL-PLANE HOLD" in status
-    assert "12. Runtime ↔ Knowledge / Memory integration — OPEN / CONSOLIDATED VALIDATION REQUIRED" in status
+    assert "12. Runtime ↔ Knowledge / Memory integration — BOUNDED VERIFIED" in status
     assert "13. Runtime ↔ Interfaces / external connectors — OPEN / IMPLEMENTATION VALIDATION REQUIRED" in status
     assert "EXECUTABLE PROMOTION HOLD" in status
     assert "🟡 VALIDATED / CROSS-LAYER INTEGRATION HOLD" in status

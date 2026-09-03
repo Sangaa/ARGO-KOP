@@ -89,7 +89,7 @@ The tracked Runtime↔Knowledge/Memory seams are now boundedly reconciled throug
 
 # Integrity Decision
 
-Runtime remains **validated at the folder-contract level**, with Gate 12 boundedly verified for the currently tracked Runtime↔Knowledge/Memory seams and the cognitive-loop prototype evidence verified for its tested state. Global Runtime certification remains intentionally capped at `CROSS-LAYER INTEGRATION HOLD` because Gate 13 is open and Gate 15 retains executable promotion hold.
+Runtime remains **validated at the folder-contract level**, with Gate 12 boundedly verified for the currently tracked Runtime↔Knowledge/Memory seams and the cognitive-loop prototype evidence verified for its tested state. global Runtime certification remains intentionally capped at `CROSS-LAYER INTEGRATION HOLD` because Gate 13 is open and Gate 15 retains executable promotion hold.
 
 This status does not invalidate the Runtime contracts. It prevents bounded local/cross-layer validation from being mistaken for production/provider authenticity, executable promotion, repository-wide graph completion or global integrity proof.
 
