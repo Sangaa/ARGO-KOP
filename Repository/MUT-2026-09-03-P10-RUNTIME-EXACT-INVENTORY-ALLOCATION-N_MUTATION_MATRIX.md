@@ -30,6 +30,18 @@ Directory counts: top-level `17`, Context `4`, Decision `12`, Execution `41`, In
 
 Role counts: canonical Runtime contract `10`, candidate Runtime contract `5`, supporting contract `24`, implementation `36`, test `36`, navigation `2`, status evidence `1`, evidence report `1`, schema `1`, test fixture `1`, test configuration `1`.
 
+## Preserved pre-material stale-consumer failure
+
+After the exact inventory/status candidate was assembled locally, the Integrity suite produced one failure (`1 failed / 186 passed`): `test_runtime_p10_closure_readiness.py` still required the superseded M-era statement that exact inventory was unreconciled. The current safety invariant is that Priority 10 remains OPEN pending a separate explicit closure decision; the old blocker text is no longer valid after exact manifest reconciliation.
+
+Primary classification: `STALE_CONSUMER`.
+
+Additional authorized path:
+
+| Change ID | Target | Action | Expected change | KEEP requirements | Pre-write | Post-write |
+|---|---|---|---|---|:---:|:---:|
+| P10-N-08 | `Quality/Integrity/test_runtime_p10_closure_readiness.py` | UPDATE | require exact-inventory reconciliation plus separate P10 closure decision | Gate-15 bounded closure; P10 remains OPEN; global/provider non-claims | PASS | PENDING |
+
 ## Non-claims
 
 - Allocation records do not certify semantic correctness, canonical authority, executable promotion, provider authenticity or production readiness.
