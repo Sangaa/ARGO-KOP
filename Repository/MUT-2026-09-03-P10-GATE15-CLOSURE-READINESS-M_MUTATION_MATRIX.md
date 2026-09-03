@@ -2,8 +2,9 @@
 
 Transaction ID: `MUT-2026-09-03-P10-GATE15-CLOSURE-READINESS-M`
 Priority: `10 — Runtime`
-State: `MATERIAL CHANGE APPLIED / EXACT-HEAD CI PENDING`
+State: `CLOSED / VERIFIED / RESUME-SAFE`
 Entry HEAD: `bd2daf831fbff70c82d4c5f76a831aa8143cea2c`
+Material HEAD: `9573fc4ae720ae84e6aa849155aadbb072318484`
 Protocol: `PROJECT_BOOTSTRAP / CORE-003 / GOV-013 / GOV-014 / GOV-014A / RUN-013 / RUN-015 / REP-011 / REP-012 / REP-013 / REP-014 / REP-016`
 
 ## Verified entry evidence
@@ -42,6 +43,14 @@ Priority 10 cannot yet close. Current Git evidence contains `118` tracked Runtim
 ## Material read-back and local validation
 
 Immutable read-back confirms the seven authorized paths only. Runtime source, Engine source, provider adapters, REP-012, REP-013 and REP-014 are unchanged. Workflow-equivalent local validation passes: Integrity `184/184`; Integration `585/585` plus `11` subtests; Runtime Prototype `23/23`; acceptance scenarios `3/3`. Exact-head remote verification remains pending.
+
+## Exact-head verification and closure
+
+Material HEAD `9573fc4ae720ae84e6aa849155aadbb072318484` passed all required workflow families: Full-Stack `33777196263`, Runtime `33777196281`, M2 `33777196231`, Real Matrix `33777196262`. The exact parent compare contains only P10-M-01..07 and no unexpected path.
+
+`GATE 15 = BOUNDED CLOSED / VERIFIED / RESUME-SAFE`.
+
+`PRIORITY 10 = OPEN / EXACT RUNTIME PHYSICAL INVENTORY-ALLOCATION HOLD / RESUME-SAFE`.
 
 Validation:
 `pre-write → atomic material → immutable read-back → exact parent compare → targeted tests → four-family exact-head CI → close M or HOLD / RESUME-SAFE`.
