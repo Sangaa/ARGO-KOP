@@ -10,7 +10,7 @@ Folder
 Runtime
 
 Version
-1.5.1
+1.5.2
 
 Status
 🟡 VALIDATED / CROSS-LAYER INTEGRATION HOLD
@@ -19,7 +19,7 @@ Canonical
 Yes — folder status is an evidence record, not independent authority
 
 Last Audit
-2026-08-15
+2026-09-03
 
 Review Method
 Repository First / Evidence Based / HERMUZ multi-search revalidation
@@ -66,8 +66,8 @@ The active Runtime set was re-reviewed with emphasis on:
 11. Architecture integration boundary — PASS FOR REVIEWED CONTRACTS
 12. Runtime ↔ Knowledge / Memory integration — OPEN / CONSOLIDATED VALIDATION REQUIRED
 13. Runtime ↔ Interfaces / external connectors — OPEN / IMPLEMENTATION VALIDATION REQUIRED
-14. Runtime ↔ Repository control plane — OPEN / CONSOLIDATED REGISTRY CHECK REQUIRED
-15. Runtime ↔ Engine cognitive-loop prototype seam — VERIFIED FOR PROTOTYPE EVIDENCE / EXECUTABLE PROMOTION HOLD
+14. Runtime ↔ Repository control plane — BOUNDED VERIFIED FOR RUN-011..015 + REL-055..060 / BROADER CONTROL-PLANE HOLD
+15. Runtime ↔ Engine cognitive-loop prototype seam — VERIFIED FOR PROTOTYPE, HANDOFF, LEARNING AND CI EVIDENCE / EXECUTABLE PROMOTION HOLD
 
 # Current Runtime Inventory Finding
 
@@ -77,11 +77,13 @@ Current repository evidence directly locates `RUN-011` through `RUN-015` and the
 
 These artifacts remain Candidate / Integrity Hold according to their own declarations. Their presence and successful prototype CI evidence do not promote them to canonical executable Runtime authority.
 
+Priority-10 Transactions A–E reconcile the tracked RUN-011..015 inventory and the bounded REL-055..060 cognitive-loop relationship cohort. REP-001, REP-002 and REP-013 agree on the five current contract paths; REP-012 maps them under Integrity Hold; REP-014 records the six relationships. This closes Gate 14 only for that named cohort, not for exhaustive Runtime/control-plane coverage.
+
 # Key Finding
 
 `RUN-004_CONTEXT_LOADING` and `RUN-005_RUNTIME_WORKFLOW` remain strong Runtime contracts. The newly reviewed `RUN-011..015` extend the Runtime evidence into a bounded cognitive-loop prototype and validation path, but they explicitly preserve the boundary between target contracts, prototype evidence and canonical executable runtime.
 
-The remaining gap is not additional Runtime prose. It is proving that the Runtime contracts are consumed consistently by actual Interfaces, connectors, Engines/AI and repository control mechanisms, and reconciling the expanded Runtime inventory into the canonical repository control plane.
+The remaining gaps are proving that Runtime contracts are consumed consistently across Knowledge/Memory and actual Interfaces/connectors, and resolving the executable-promotion hold. The bounded RUN-011..015 inventory and REL-055..060 control-plane reconciliation is no longer an open Gate-14 prerequisite.
 
 # Integrity Decision
 
@@ -91,7 +93,7 @@ This status does not invalidate the Runtime contracts. It prevents prototype/fol
 
 # Next Construction Boundary
 
-Proceed with canonical control-plane reconciliation for the expanded Runtime inventory, then validate the Runtime ↔ Engine relationship seam through `REP-014` without promoting prototype contracts to executable authority.
+Proceed with the still-open Runtime ↔ Knowledge/Memory and Runtime ↔ Interfaces/connector boundaries. Do not reopen the bounded RUN-011..015 + REL-055..060 control-plane result without contradictory current evidence.
 
 The next review should test the chain:
 

@@ -2,8 +2,9 @@
 
 Transaction ID: `MUT-2026-09-03-P10-RUNTIME-GATE14-CONTROL-PLANE-F`
 Priority: `10 — Runtime`
-State: `PRE-WRITE / OPEN`
+State: `MATERIAL CHANGE SET / CI PENDING`
 Entry HEAD: `1044bb2e5715561069b3abf8018120ede90ce9d2`
+Pre-write HEAD: `8e6719a1d55964aaaf7913159f14a1dbe8511a7d`
 Protocol: `PROJECT_BOOTSTRAP / CORE-003 / GOV-013 / GOV-014 / GOV-014A / REP-011 / REP-012 / REP-013 / REP-014 / REP-016`
 
 ## Entry evidence
@@ -22,10 +23,10 @@ This is sufficient to resolve Gate 14 only for `RUN-011..015 + REL-055..060`. It
 
 | Change ID | Target | Action | Expected change | KEEP / preservation | Pre-write | Post-write |
 |---|---|---|---|---|:---:|:---:|
-| P10-F-01 | `Runtime/_FOLDER_STATUS.md` | UPDATE | mark Gate 14 bounded verified for RUN-011..015 + REL-055..060; refresh current findings/version | overall cross-layer HOLD; Gates 12/13 open; Gate 15 promotion hold | PASS | PENDING |
-| P10-F-02 | `Quality/Integrity/test_runtime_p10_gate14_control_plane.py` | CREATE | enforce five-way inventory/allocation and six-edge registry agreement plus preserved holds | no exhaustive/global inference | PASS | PENDING |
-| P10-F-03 | `Repository/REP-011_PRIORITY10_RUNTIME_GATE14_ADDENDUM_2026-09-03_F.md` | CREATE | record bounded Gate 14 decision and controlling non-claims | historical REP-011/012/013/014 bodies unchanged | PASS | PENDING |
-| P10-F-04 | this Matrix | UPDATE IN MATERIAL CHANGE SET | bind material evidence and same-change-set enforcement | pre-write scope/non-claims | PASS | PENDING |
+| P10-F-01 | `Runtime/_FOLDER_STATUS.md` | UPDATE | mark Gate 14 bounded verified for RUN-011..015 + REL-055..060; refresh current findings/version | overall cross-layer HOLD; Gates 12/13 open; Gate 15 promotion hold | PASS | PASS |
+| P10-F-02 | `Quality/Integrity/test_runtime_p10_gate14_control_plane.py` | CREATE | enforce five-way inventory/allocation and six-edge registry agreement plus preserved holds | no exhaustive/global inference | PASS | PASS |
+| P10-F-03 | `Repository/REP-011_PRIORITY10_RUNTIME_GATE14_ADDENDUM_2026-09-03_F.md` | CREATE | record bounded Gate 14 decision and controlling non-claims | historical REP-011/012/013/014 bodies unchanged | PASS | PASS |
+| P10-F-04 | this Matrix | UPDATE IN MATERIAL CHANGE SET | bind material evidence and same-change-set enforcement | pre-write scope/non-claims | PASS | PASS |
 
 ## Non-claims
 
