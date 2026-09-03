@@ -21,6 +21,7 @@ def test_connected_spine_trace_can_be_materialized_and_reread(tmp_path):
     assert reread_result["record_type"] == "EXECUTION_TRACE"
     assert reread_result["task_id"] == result["task_id"]
     assert reread_result["session_id"] == fixture["context"]["session_id"]
+    assert reread_result["final_status"] == trace["final_status"]
     assert reread_result["side_effect"] is False
     assert result["outcome"]["execution_trace_ids"] == [trace["trace_id"]]
     assert result["outcome"]["evidence_trace_ids"] == [trace["trace_id"]]

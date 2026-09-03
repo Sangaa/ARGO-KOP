@@ -35,6 +35,14 @@ Every persisted execution result must retain, where available:
 - side-effect status;
 - source runtime result.
 
+For an `EXECUTION_TRACE` persistence candidate, the minimum fail-closed identity is stricter than the broader "where available" record list:
+
+- `trace_id`, `task_id`, `session_id`, and `final_status` must be populated non-empty strings;
+- `side_effect` must be an explicit boolean and must be `false` for this prototype adapter;
+- absent or unknown safety state must not be interpreted as side-effect-free.
+
+An incomplete candidate remains unpersisted. Re-read must return the same minimum identity and status before the artifact can become context-eligible.
+
 ## Prototype Safety Rules
 
 1. The mock executor may produce a persistence candidate but must not silently mutate canonical Memory.

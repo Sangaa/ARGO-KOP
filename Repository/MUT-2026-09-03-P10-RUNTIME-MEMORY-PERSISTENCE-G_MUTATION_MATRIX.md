@@ -3,8 +3,9 @@
 Transaction ID: `MUT-2026-09-03-P10-RUNTIME-MEMORY-PERSISTENCE-G`
 Priority: `10 — Runtime`
 Gate: `12 — Runtime ↔ Knowledge / Memory`
-State: `PRE-WRITE / OPEN`
+State: `MATERIAL CHANGE SET / CI PENDING`
 Entry HEAD: `efd88c25ebb43f6c560949cc9ece0b24841490bc`
+Pre-write HEAD: `c9d1cb848f9cbea546394c8be7ad903f8c1b1486`
 Protocol: `PROJECT_BOOTSTRAP / CORE-003 / GOV-013 / GOV-014 / GOV-014A / GOV-016 / REP-011 / REP-016`
 
 ## Preserved failure finding
@@ -22,13 +23,13 @@ Classification: `REAL TRACKED RUNTIME→MEMORY FAIL-CLOSED CORRECTNESS GAP`.
 
 | Change ID | Target | Action | Expected change | KEEP / preservation | Pre-write | Post-write |
 |---|---|---|---|---|:---:|:---:|
-| P10-G-01 | `Memory/Execution/EXEC-001_RUNTIME_RESULT_PERSISTENCE_CONTRACT.md` | UPDATE | define minimum persisted EXECUTION_TRACE identity and explicit boolean side-effect requirement | explicit-target, reread and non-promotion boundaries | PASS | PENDING |
-| P10-G-02 | `Memory/Execution/runtime_result_persistence_adapter.py` | UPDATE | reject incomplete identity/status or non-boolean side-effect before writing; preserve final_status on reread | existing record-type and unsafe-side-effect holds | PASS | PENDING |
-| P10-G-03 | `Memory/Execution/test_runtime_result_persistence_adapter.py` | UPDATE | cover missing identity and unknown side-effect with no file materialization | existing valid/unsafe/type cases | PASS | PENDING |
-| P10-G-04 | `Quality/Integration/test_connected_spine_trace_materialization.py` | UPDATE | assert final_status survives real Runtime→Memory persistence/reread | existing lineage checks | PASS | PENDING |
-| P10-G-05 | `Quality/Integrity/test_runtime_p10_memory_persistence_boundary.py` | CREATE | bind producer, persistence and evidence-loader minimums; prohibit silent defaults | no authority or canonical-memory promotion | PASS | PENDING |
-| P10-G-06 | `Repository/REP-011_PRIORITY10_RUNTIME_MEMORY_PERSISTENCE_ADDENDUM_2026-09-03_G.md` | CREATE | record failure, repair scope and holds | historical records unchanged | PASS | PENDING |
-| P10-G-07 | this Matrix | UPDATE IN MATERIAL CHANGE SET | bind pre-write/material evidence | scope and non-claims | PASS | PENDING |
+| P10-G-01 | `Memory/Execution/EXEC-001_RUNTIME_RESULT_PERSISTENCE_CONTRACT.md` | UPDATE | define minimum persisted EXECUTION_TRACE identity and explicit boolean side-effect requirement | explicit-target, reread and non-promotion boundaries | PASS | PASS |
+| P10-G-02 | `Memory/Execution/runtime_result_persistence_adapter.py` | UPDATE | reject incomplete identity/status or non-boolean side-effect before writing; preserve final_status on reread | existing record-type and unsafe-side-effect holds | PASS | PASS |
+| P10-G-03 | `Memory/Execution/test_runtime_result_persistence_adapter.py` | UPDATE | cover missing identity and unknown side-effect with no file materialization | existing valid/unsafe/type cases | PASS | PASS |
+| P10-G-04 | `Quality/Integration/test_connected_spine_trace_materialization.py` | UPDATE | assert final_status survives real Runtime→Memory persistence/reread | existing lineage checks | PASS | PASS |
+| P10-G-05 | `Quality/Integrity/test_runtime_p10_memory_persistence_boundary.py` | CREATE | bind producer, persistence and evidence-loader minimums; prohibit silent defaults | no authority or canonical-memory promotion | PASS | PASS |
+| P10-G-06 | `Repository/REP-011_PRIORITY10_RUNTIME_MEMORY_PERSISTENCE_ADDENDUM_2026-09-03_G.md` | CREATE | record failure, repair scope and holds | historical records unchanged | PASS | PASS |
+| P10-G-07 | this Matrix | UPDATE IN MATERIAL CHANGE SET | bind pre-write/material evidence | scope and non-claims | PASS | PASS |
 
 ## Non-claims
 
