@@ -29,6 +29,7 @@ def test_architecture_status_closes_only_exact_physical_inventory():
     assert "15 tracked files" in status
     assert "ARCHITECTURE_EXACT_PHYSICAL_INVENTORY = CLOSED_FOR_CURRENT_INSPECTED_TREE" in status
     assert "EXACT PHYSICAL INVENTORY != ARCHITECTURE DOMAIN CERTIFICATION" in status
-    assert "Layer boundary consistency — OPEN" in status
+    assert "Layer boundary consistency — PASS FOR CURRENT PRIMARY ARC SET" in status
+    assert "Dependency direction consistency — PASS FOR CURRENT PRIMARY ARC SET" in status
     assert "Architecture ↔ Runtime / Interface boundary — OPEN" in status
     assert "Architecture is **not globally certified**" in status
