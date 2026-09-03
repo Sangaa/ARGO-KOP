@@ -2,9 +2,10 @@
 
 Transaction ID: `MUT-2026-09-03-P10-RUNTIME-REL058-VALIDATION-C`
 Priority: `10 — Runtime`
-State: `MATERIAL CHANGE SET / CI PENDING`
+State: `CLOSED / VERIFIED / RESUME-SAFE`
 Entry HEAD: `cb9ffed1cf04d7d2661205afb53787f4ff852799`
 Pre-write HEAD: `bad28ada93a04512a6fccfcf1ed2d95443640faa`
+Material HEAD: `04ed7b38a46dd915f540d43480edeabf491d708f`
 Protocol: `PROJECT_BOOTSTRAP / CORE-003 / GOV-013 / GOV-014 / GOV-014A / REP-011 / REP-014 / REP-016`
 
 ## Prior-learning and evidence retrieval
@@ -38,3 +39,15 @@ This evidence supports the existing `RUN-013 → RUN-011 = VALIDATES` type only 
 
 Validation:
 `pre-write matrix → atomic registry/manifest/addendum/guard/matrix change set → read-back → targeted tests → exact-head four-family CI → close or HOLD`.
+
+## Verification
+
+- Local deterministic execution: three new integrity checks and three existing controlled-handoff tests passed; local `pytest` command was unavailable because that package is not installed in the execution image.
+- Exact-head Real Mutation Matrix Regression `33744979877` — SUCCESS.
+- Exact-head Full-Stack Repository Audit `33744979833` — SUCCESS.
+- Exact-head ARGO Runtime Prototype and Integration Tests `33744979832` — SUCCESS.
+- Exact-head M2 Multi-Channel Proposal Training `33744979835` — SUCCESS.
+- Registry v1.2.16 and the current manifest binding agree on the same material head.
+
+Closure:
+`P10 TRANSACTION C = CLOSED / VERIFIED / RESUME-SAFE`.
