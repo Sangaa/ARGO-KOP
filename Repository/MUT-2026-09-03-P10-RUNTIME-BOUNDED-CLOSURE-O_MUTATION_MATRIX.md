@@ -2,7 +2,7 @@
 
 Transaction ID: `MUT-2026-09-03-P10-RUNTIME-BOUNDED-CLOSURE-O`
 Priority: `10 — Runtime`
-State: `MATERIAL CANDIDATE / ATOMIC BOUNDED CLOSURE APPLIED / EXACT-HEAD CI PENDING`
+State: `CLOSED / VERIFIED / RESUME-SAFE`
 Entry HEAD: `868f0662766153a097c954e618e7e284807eca62`
 Pre-write HEAD: `3a0fbb5d3b5c31c523d62b4889a0d252d794ba2d`
 Protocol: `PROJECT_BOOTSTRAP / CORE-003 / GOV-013 / GOV-014 / GOV-014A / GOV-015 / GOV-016 / REP-011 / REP-012 / REP-013 / REP-014 / REP-016 / Transactions M-N`
@@ -63,4 +63,9 @@ Validation: `pre-write → atomic material → read-back → parent compare → 
 - Integration: `588 passed / 11 subtests passed`, with one pre-existing internal document-ID audit RuntimeWarning.
 - Runtime Prototype: `23 passed`; acceptance scenarios: `3 passed`.
 - `git diff --check`: PASS.
-- Exact-head four-family CI: PENDING. Commit title and local success do not close P10 until all four required workflow families pass on the same material HEAD.
+- Material HEAD: `28e7c252e54db65f7fed87a6aabb6c200eadad25`.
+- Full-Stack Repository Audit: PASS, run `33779773544`.
+- Runtime Prototype and Integration Tests: PASS, run `33779773571`.
+- M2 Multi-Channel Proposal Training: PASS, run `33779773549`.
+- Real Mutation Matrix Regression: PASS, run `33779773603`.
+- All four required workflow families passed on the same exact material HEAD. Transaction O and Priority 10 are `CLOSED / VERIFIED / RESUME-SAFE` within the bounded closure and non-claims above.

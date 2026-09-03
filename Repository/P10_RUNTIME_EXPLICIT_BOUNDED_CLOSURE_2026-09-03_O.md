@@ -1,10 +1,11 @@
 # Priority 10 — Runtime Explicit Bounded Closure — Transaction O
 
 Date: 2026-09-03
-State: `CLOSED_FOR_PHASE_1 / BOUNDED RUNTIME PARTITION CERTIFIED / GLOBAL HOLDS REMAIN / SUBJECT TO EXACT-HEAD VERIFICATION`
+State: `CLOSED_FOR_PHASE_1 / BOUNDED RUNTIME PARTITION CERTIFIED / GLOBAL HOLDS REMAIN / VERIFIED / RESUME-SAFE`
 Transaction: `MUT-2026-09-03-P10-RUNTIME-BOUNDED-CLOSURE-O`
 Entry HEAD: `868f0662766153a097c954e618e7e284807eca62`
 Pre-write HEAD: `d318daef65ca1d7d14224a1a7f66acefe151dd67`
+Verified material HEAD: `28e7c252e54db65f7fed87a6aabb6c200eadad25`
 
 ## Closure decision
 
@@ -34,3 +35,7 @@ Historical pre-closure wording and independent global, provider, production or d
 ## Queue boundary
 
 This decision does not start Priority 11 or any other successor. After exact closure-head verification, live `main` must be rediscovered and the first legal open priority recomputed from current closures, REP-016/addenda and governing hold/entry evidence.
+
+## Exact-head verification
+
+Material HEAD `28e7c252e54db65f7fed87a6aabb6c200eadad25` passed Full-Stack `33779773544`, Runtime `33779773571`, M2 `33779773549`, and Real Mutation Matrix `33779773603`.
