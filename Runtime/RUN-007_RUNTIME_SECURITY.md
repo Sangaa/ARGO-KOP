@@ -235,6 +235,7 @@ Every engineering action should remain:
 - `PROJECT_BOOTSTRAP.md`
 - `Core/CORE-003_CONSTITUTION.md`
 - `Governance/GOV-009_REPOSITORY_POLICY.md`
+- `Release/VERSION.md`
 
 ---
 
