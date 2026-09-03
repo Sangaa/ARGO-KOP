@@ -10,6 +10,7 @@ Initial Material HEAD: `5d94dfc26bf886b36d04ea75b92f60937707add0`
 First Status Repair HEAD: `a5c2ea19ff85de2decd94b0eb6b6e19728179d99`
 Authority-Baseline Repair HEAD: `d6ef08f5879606642db761e653e9101d67853235`
 Final Status Compatibility HEAD: `0c9797bb36e71ca76bd055ff3768e25f6fff006a`
+Final Exact-Head Validation HEAD: `c32b8de1a55798f82612f6b0a17a69ed0868005f`
 Protocol: `PROJECT_BOOTSTRAP / CORE-003 / GOV-013 / GOV-014 / GOV-014A / GOV-016 / ENG-006 / RUN-013 / RUN-015 / Runtime Execution contracts / REP-011 / REP-016`
 
 ## Independently verified tracked defects
@@ -54,6 +55,24 @@ Authority-baseline repair HEAD `d6ef08f5879606642db761e653e9101d67853235` restor
 Final status compatibility HEAD `0c9797bb36e71ca76bd055ff3768e25f6fff006a` adds those two phrases without removing or weakening any prior invariant. Because that status-only commit triggers only a subset of workflow path filters, this Matrix update intentionally creates one final exact head on which all four required workflow families can run.
 
 Tests were never weakened. No Services/provider adapter, credentials, Interfaces implementation, or unrelated Runtime files changed.
+
+## Final exact-head failure classification and repair authorization
+
+Runtime workflow run `33755053512`, failing job `100647374091`, is preserved as the final exact-head failure evidence for `c32b8de1a55798f82612f6b0a17a69ed0868005f`: `3 failed / 582 passed / 11 subtests passed`. The three failures are limited to two tracked integration consumers that still require the superseded pre-L rejection strings `EXECUTION_NOT_AUTHORIZED` and `SOURCE_TRACE_REQUIRED`.
+
+Direct source, unit-test, ENG-006, RUN-013 and Transaction-L review confirms that the current safety invariant is the stricter L boundary: authorization must be exact boolean `True`, and every execution identity must be a stable nonblank string. The source is semantically correct; the failing consumers preserve fail-closed behavior but pin obsolete diagnostic wording.
+
+Primary classification: `STALE_CONSUMER`.
+
+Authorized bounded repair:
+
+| Change ID | Target | Action | Expected change | KEEP requirements | Pre-write | Post-write |
+|---|---|---|---|---|:---:|:---:|
+| P10-L-09 | `Quality/Integration/test_authorization_to_execution_canonical_seam_certification.py` | UPDATE | require the current explicit-authorization rejection code | unauthorized execution remains blocked; exception type unchanged; no source/status mutation | PASS | PENDING |
+| P10-L-10 | `Quality/Integration/test_run010_eng006_handoff_contract.py` | UPDATE | require current explicit-authorization and stable-identity rejection codes | missing trace and unauthorized execution remain fail-closed; successful handoff assertions unchanged | PASS | PENDING |
+| P10-L-11 | this Matrix | UPDATE | bind repair/read-back/test/exact-head evidence | retain all prior failure evidence and non-claims | PASS | PENDING |
+
+This authorization does not permit another `Runtime/_FOLDER_STATUS.md` mutation, Runtime source relaxation, exception swallowing, provider claim or executable promotion. The repair must change diagnostic expectations only and then rerun the targeted tests plus all four exact-head workflow families.
 
 Validation:
 `pre-write → bounded hardening → immutable read-back → preserved CI failures → authority-baseline restoration → additive compatibility repair → exact-head four workflow families → classify Gate15 close/hold Resume-Safe`.
