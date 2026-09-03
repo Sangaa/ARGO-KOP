@@ -68,11 +68,15 @@ The active Runtime set was re-reviewed with emphasis on:
 12. Runtime ↔ Knowledge / Memory integration — BOUNDED VERIFIED FOR TRACKED PERSISTENCE, CORRECTION/REVIEW, AND NO-SILENT-PROMOTION SEAMS / BROADER GLOBAL-GRAPH HOLD
 13. Runtime ↔ Interfaces / external connectors — BOUNDED VERIFIED FOR PROVIDER-NEUTRAL HANDOFF AND REPORTED-STATUS PRESERVATION / LIVE PROVIDER AUTHENTICITY, AUTHORIZATION AND AVAILABILITY HOLD
 14. Runtime ↔ Repository control plane — BOUNDED VERIFIED FOR RUN-011..015 + REL-055..060 / BROADER CONTROL-PLANE HOLD
-15. Runtime ↔ Engine executable boundary — GATE-15 AUTHORIZATION HARDENING MATERIAL / EXACT-HEAD CI PENDING / EXECUTABLE-CANONICAL PROMOTION HOLD PRESERVED
+15. Runtime ↔ Engine cognitive-loop prototype seam — VERIFIED FOR PROTOTYPE, HANDOFF, LEARNING AND CI EVIDENCE / EXECUTABLE PROMOTION HOLD
+
+Transaction L material status: `GATE-15 AUTHORIZATION HARDENING MATERIAL / EXACT-HEAD CI PENDING`. This supplements the existing Gate-15 judgment; it does not replace or prematurely clear the `EXECUTABLE PROMOTION HOLD`.
 
 # Current Runtime Inventory Finding
 
-Current repository evidence directly locates `RUN-011` through `RUN-015`, `Runtime/Prototype/`, and a pre-existing `Runtime/Execution/` implementation/test surface. The execution surface is not new authority: it contains experimental/mock contracts, a side-effect-free executor, trace production and a bounded execution-recording entrypoint.
+Current repository evidence directly locates `RUN-011` through `RUN-015`, `Runtime/Prototype/`, and a pre-existing `Runtime/Execution/` implementation/test surface. These are now included in the Runtime evidence scope.
+
+`RUN-011..015` remain Candidate / Integrity Hold according to their own declarations. Their prototype evidence and successful CI evidence do not by themselves promote them to canonical executable Runtime authority.
 
 Priority-10 Transactions A–E reconcile the tracked RUN-011..015 inventory and bounded REL-055..060 cohort. Transaction G closes the tracked Runtime→Memory persistence seam. Transaction H closes the Runtime→Knowledge contradiction-review seam. Transaction J closes the provider-neutral Runtime connector handoff. Gates 12, 13 and 14 remain boundedly verified for their named tracked seams.
 
@@ -86,11 +90,11 @@ Current Transaction-L material proof remains deliberately side-effect-free. It d
 
 # Integrity Decision
 
-Runtime remains **validated at the folder-contract level** and Priority 10 remains OPEN. Gates 12, 13 and 14 remain boundedly verified. Gate 15 has a material authorization-boundary hardening change awaiting exact-head verification; executable/canonical promotion is not yet claimed.
+Runtime remains **validated at the folder-contract level** and Priority 10 remains OPEN. Gates 12, 13 and 14 remain boundedly verified. Gate 15 retains `EXECUTABLE PROMOTION HOLD`; Transaction L is a material authorization-boundary hardening change awaiting exact-head verification.
 
 # Next Construction Boundary
 
-Verify Transaction L on its exact material head. If green, recompute whether Gate 15 can be closed for the bounded side-effect-free executable boundary while production/external execution and candidate-to-canonical promotion remain independent holds. If current authority does not permit that separation, preserve Gate 15/P10 HOLD Resume-Safe.
+Verify Transaction L on its exact repair head. If green, recompute whether Gate 15 can be closed for the bounded side-effect-free executable boundary while production/external execution and candidate-to-canonical promotion remain independent holds. If current authority does not permit that separation, preserve Gate 15/P10 HOLD Resume-Safe.
 
 # Engineering Rule
 
