@@ -83,7 +83,7 @@ Priority-10 Transaction G closes the tracked Runtime→Memory explicit persisten
 
 Transaction J adds and verifies a provider-neutral Runtime connector handoff that validates stable request identity, explicit boolean authorization and payload structure before invoking an injected executor. It preserves connector-reported status without converting requests, malformed results or executor failures into success. Gate 13 is boundedly closed at the Runtime/interface seam without claiming live provider authenticity, credentials, availability or external side effects.
 
-Transaction L materially hardens the pre-existing `Runtime/Execution/` boundary without promoting it: execution authorization must now be exact boolean `True`, execution/task/session/source identities must be stable nonblank strings before trace handoff, and the side-effect-free mock executor blocks any `PLAN_READY / NOT_STARTED` request without a stable `authorization_id`. Successful mock execution remains `SIMULATED / SIMULATED_ONLY / side_effect=false`. Exact-head verification is still required before Transaction L or Gate 15 can be closed.
+Transaction L materially hardens the pre-existing `Runtime/Execution/` boundary without promoting it: execution authorization must now be exact boolean `True`, execution/task/session/source identities must be stable nonblank strings before trace handoff, and the side-effect-free mock executor blocks any `PLAN_READY / NOT_STARTED` request without a stable `authorization_id`. Successful mock execution remains `SIMULATED / SIMULATED_ONLY / side_effect=false`. `GATE-15 AUTHORIZATION HARDENING MATERIAL / EXACT-HEAD CI PENDING` remains a bounded material-evidence marker, not executable promotion.
 
 # Key Finding
 
@@ -101,7 +101,9 @@ This status does not invalidate the Runtime contracts. It prevents bounded local
 
 # Next Construction Boundary
 
-Verify Transaction L on its exact repair head. If its bounded authorization hardening passes, recompute Gate 15 from current authority without reopening Gates 12, 13 or 14. The next classification must distinguish side-effect-free executable-boundary verification from canonical/production executable promotion and production/provider authenticity.
+Proceed to the explicit Gate-15 executable-promotion authority/evidence boundary.
+
+Transaction L is the current bounded material repair inside that boundary. Verify its exact head, then recompute Gate 15 from current authority without reopening Gates 12, 13 or 14. The next classification must distinguish side-effect-free executable-boundary verification from canonical/production executable promotion and production/provider authenticity.
 
 # Engineering Rule
 
