@@ -49,6 +49,7 @@ def test_gate14_bounded_result_preserves_independent_runtime_holds():
     status = STATUS.read_text(encoding="utf-8")
     assert "14. Runtime ↔ Repository control plane — BOUNDED VERIFIED FOR RUN-011..015 + REL-055..060 / BROADER CONTROL-PLANE HOLD" in status
     assert "12. Runtime ↔ Knowledge / Memory integration — BOUNDED VERIFIED" in status
-    assert "13. Runtime ↔ Interfaces / external connectors — OPEN / IMPLEMENTATION VALIDATION REQUIRED" in status
+    assert "13. Runtime ↔ Interfaces / external connectors — BOUNDED VERIFIED FOR PROVIDER-NEUTRAL HANDOFF" in status
+    assert "LIVE PROVIDER AUTHENTICITY, AUTHORIZATION AND AVAILABILITY HOLD" in status
     assert "EXECUTABLE PROMOTION HOLD" in status
     assert "🟡 VALIDATED / CROSS-LAYER INTEGRATION HOLD" in status

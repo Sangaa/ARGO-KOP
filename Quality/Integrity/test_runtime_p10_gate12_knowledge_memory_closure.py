@@ -26,6 +26,7 @@ def test_runtime_learning_boundary_stops_before_knowledge_promotion():
 def test_folder_status_closes_only_bounded_gate12_and_preserves_independent_holds():
     status = RUNTIME_STATUS.read_text(encoding="utf-8")
     assert "Runtime ↔ Knowledge / Memory integration — BOUNDED VERIFIED" in status
-    assert "Runtime ↔ Interfaces / external connectors — OPEN / IMPLEMENTATION VALIDATION REQUIRED" in status
+    assert "Runtime ↔ Interfaces / external connectors — BOUNDED VERIFIED FOR PROVIDER-NEUTRAL HANDOFF" in status
+    assert "LIVE PROVIDER AUTHENTICITY, AUTHORIZATION AND AVAILABILITY HOLD" in status
     assert "EXECUTABLE PROMOTION HOLD" in status
     assert "production/provider authenticity" in status
