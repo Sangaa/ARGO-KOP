@@ -18,9 +18,10 @@ def test_architecture_status_and_readme_are_synchronized_to_bounded_closure():
     assert "The Architecture folder is `CLOSED_FOR_PHASE_1 / BOUNDED ARCHITECTURE PARTITION CERTIFIED / GLOBAL HOLDS REMAIN`." in readme
     assert "Status: Approved / Revalidated / CLOSED_FOR_PHASE_1" in readme
 
+    validation = status.split("# Current Validation Gate", 1)[1].split("\n---", 1)[0]
     for gate in range(1, 14):
-        assert f"{gate}. " in status
-        line = next(line for line in status.splitlines() if line.startswith(f"{gate}. "))
+        assert f"{gate}. " in validation
+        line = next(line for line in validation.splitlines() if line.startswith(f"{gate}. "))
         assert "PASS" in line
 
     assert "Architecture is **not globally certified**" in status

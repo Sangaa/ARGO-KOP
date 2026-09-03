@@ -32,7 +32,7 @@ def test_exact_architecture_inventory_and_authority_classification():
     assert actual == EXPECTED
     readme = (ARCH / "README.md").read_text(encoding="utf-8")
     legacy = (ARCH / "01-System-Overview.md").read_text(encoding="utf-8")
-    assert "Status: Approved / Integrity Hold" in readme
+    assert "Status: Approved / Revalidated / CLOSED_FOR_PHASE_1" in readme
     assert "Canonical: Yes" in readme
     assert "ARC-011` is the current authoritative architectural reference" in readme
     assert "Status: Foundation Build" in legacy
