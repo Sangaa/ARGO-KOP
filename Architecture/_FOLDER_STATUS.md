@@ -16,7 +16,7 @@ Status
 
 Version
 
-1.5.4
+1.5.5
 
 Canonical
 
@@ -32,11 +32,11 @@ Repository First / Evidence Based / Exact Git-Tree Enumeration / Bounded Consume
 
 Review Scope
 
-Exact Architecture inventory, known identity/path evidence, active Architecture semantic re-audit, bounded Priority-7 consumer alignment, and Priority-9 canonical-model plus layer/dependency consistency validation of the current primary ARC set and Architecture navigation/control surfaces
+Exact Architecture inventory, known identity/path evidence, active Architecture semantic re-audit, bounded Priority-7 consumer alignment, and Priority-9 canonical-model, layer/dependency, information-flow and evolution validation of the current primary ARC set and Architecture navigation/control surfaces
 
 Repository Baseline
 
-Current main branch repository state through Priority-9 Gate-8 closure plus bounded Gates-6/7 consistency review
+Current main branch repository state through Priority-9 Gates 6–8 closure plus bounded Gates-9/10 flow/evolution review
 
 ---
 
@@ -54,7 +54,7 @@ Identity / Path Alignment
 
 Architecture Consistency
 
-🟡 Re-audit remains open across canonical-path uniqueness, information-flow, evolution, stale-reference and cross-layer gates. Priority-9 bounded evidence now closes canonical-model alignment plus independent layer-boundary and dependency-direction consistency for the current primary ARC set and Architecture control surfaces only; this does not close the broader Architecture re-audit.
+🟡 Re-audit remains open across canonical-path uniqueness, stale-reference and cross-layer gates. Priority-9 bounded evidence now closes canonical-model, layer/dependency, information-flow and evolution alignment for the current primary Architecture scope only; this does not close the broader Architecture re-audit.
 
 Repository Alignment
 
@@ -62,7 +62,7 @@ Repository Alignment
 
 Cross-Reference Review
 
-🟡 Open. Priority-7 Transaction S/S-C1 and Priority-9 canonical/consistency work close bounded authority and primary-Architecture consistency drifts only. New evidence must still be checked for stale Governance, Repository, Knowledge, Memory, Runtime, AI and Interface references across the active Architecture set.
+🟡 Open. Priority-7 Transaction S/S-C1 and Priority-9 canonical/consistency/flow-evolution work close bounded current-Architecture drifts only. New evidence must still be checked for stale Governance, Repository, Knowledge, Memory, Runtime, AI and Interface references across the active Architecture set.
 
 ---
 
@@ -125,8 +125,8 @@ The following artifacts form the primary architecture review set:
 6. Layer boundary consistency — PASS FOR CURRENT PRIMARY ARC SET + ARC_MAP/README / BOUNDED PRIORITY-9 EVIDENCE
 7. Dependency direction consistency — PASS FOR CURRENT PRIMARY ARC SET + ARC_MAP/README / BOUNDED PRIORITY-9 EVIDENCE
 8. Canonical Architecture Model alignment — PASS FOR CURRENT PRIMARY ARC SET + ARC_MAP/README CONTROL SURFACES / BOUNDED PRIORITY-9 EVIDENCE
-9. Information Flow alignment — OPEN
-10. Evolution Model alignment — OPEN
+9. Information Flow alignment — PASS FOR CURRENT PRIMARY ARCHITECTURE FLOW MODEL / BOUNDED PRIORITY-9 EVIDENCE
+10. Evolution Model alignment — PASS FOR CURRENT ARCHITECTURE DECISION/EVOLUTION LIFECYCLE / BOUNDED PRIORITY-9 EVIDENCE
 11. Known stale references — OPEN / RE-AUDIT
 12. Architecture ↔ Knowledge / Memory boundary — OPEN
 13. Architecture ↔ Runtime / Interface boundary — OPEN
@@ -179,6 +179,31 @@ No inspected active primary Architecture artifact introduces a reverse dependenc
 
 ---
 
+# Bounded Priority-9 Information Flow / Evolution Alignment — Gates 9–10
+
+Current Architecture information-flow and evolution controls were compared as one bounded lifecycle boundary.
+
+Information Flow evidence:
+
+- `ARC-003` preserves the sequence `Input → Source Identification → Evidence Classification → Validation → Repository Integration → Knowledge / Memory → Reasoning → Decision → Output → Result Evaluation`;
+- unverified or unknown information is not promoted into verified knowledge by implication;
+- Repository remains canonical storage for persisted platform knowledge subject to higher authority;
+- conversation/runtime context may provide evidence but cannot silently override canonical state;
+- information movement does not create dependency, transfer ownership or override ARC-011 structural/dependency authority;
+- material architectural decisions remain traceable to evidence, authority and affected artifacts.
+
+Evolution evidence:
+
+- `ARC-009` requires evidence-backed, repository-verified decisions, explicit uncertainty, ripple/impact review, authorized repository update, validation and bounded HOLD when required evidence/scope is incomplete;
+- `ARC-010` preserves `Observation → Scope → Evidence Classification → Analysis → Ripple / Impact Review → Architecture Review → Decision → Authorized Repository Update → Re-read / Validation → Approval / Disposition → Release where applicable → Learning Capture`;
+- every material evolution requires a governed decision or approval path and must preserve what/why/evidence/affected artifacts/validation/unresolved constraints;
+- `ARC-010` explicitly does not override Constitution, Governance, Canonical Architecture Model, Repository or Release authority;
+- Runtime/external execution uncertainty and Memory/Learning promotion boundaries remain explicit rather than being converted into architectural success.
+
+This closes Gates 9 and 10 only for the current primary Architecture flow/evolution model. It does not certify downstream Knowledge/Memory consumers, Runtime/Interface integrations, stale-reference exhaustion, release completeness, or repository-wide graph integrity.
+
+---
+
 # Bounded Priority-7 Consumer Reconciliation — Transaction S / S-C1
 
 Direct current-content comparison identified `Architecture/README.md` as a stale canonical consumer of Core/Architecture authority after the 2026-09-01 CORE-000 reconciliation.
@@ -205,13 +230,13 @@ This remains a bounded consumer-content correction only. It does not register a 
 
 This status certifies only the evidence inspected so far. It does not certify Runtime, Core, AI, Services, Knowledge, Memory, Projects, Release or the entire repository.
 
-Gates 6–8 bounded closure does not certify the Architecture folder. Canonical-path uniqueness, information-flow/evolution, stale-reference and cross-layer gates remain open.
+Gates 6–10 bounded closure does not certify the Architecture folder. Canonical-path uniqueness, stale-reference and cross-layer gates remain open.
 
 ---
 
 # Required Next Action
 
-`Validate information-flow/evolution gates → validate canonical path uniqueness and remaining stale/cross-layer references → reconcile Repository registries where required → Architecture Re-Audit`
+`Validate canonical path uniqueness → validate stale references and Architecture↔Knowledge/Memory + Runtime/Interface boundaries → reconcile Repository registries where required → Architecture Re-Audit`
 
 No `100% CLEAN` repository claim is authorized from this document alone.
 
@@ -230,11 +255,14 @@ No `100% CLEAN` repository claim is authorized from this document alone.
 - `Repository/REP-002_REPOSITORY_MAP.md`
 - `Architecture/ARC_MAP.md`
 - `Architecture/ARC-001_PLATFORM_ARCHITECTURE.md`
+- `Architecture/ARC-003_INFORMATION_FLOW.md`
 - `Architecture/ARC-004_LAYER_MODEL.md`
 - `Architecture/ARC-005_ARCHITECTURE_RULES.md`
 - `Architecture/ARC-006_DEPENDENCY_MODEL.md`
 - `Architecture/ARC-007_INTEGRATION_MODEL.md`
 - `Architecture/ARC-008_REPOSITORY_LAYOUT.md`
+- `Architecture/ARC-009_ARCHITECTURE_DECISIONS.md`
+- `Architecture/ARC-010_EVOLUTION_MODEL.md`
 - `Architecture/ARC-011_CANONICAL_ARCHITECTURE_MODEL.md`
 - `Architecture/README.md`
 
@@ -249,6 +277,8 @@ Repository Reality > Previous Status Claims > Conversation Memory
 `BOUNDED CANONICAL ALIGNMENT != ARCHITECTURE CERTIFICATION`
 
 `BOUNDED PRIMARY-ARCHITECTURE CONSISTENCY != REPOSITORY-WIDE GRAPH CERTIFICATION`
+
+`BOUNDED FLOW/EVOLUTION ALIGNMENT != CROSS-LAYER CERTIFICATION`
 
 ---
 
