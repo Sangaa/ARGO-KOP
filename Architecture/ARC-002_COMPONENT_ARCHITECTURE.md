@@ -20,7 +20,7 @@ ARC-002
 
 Version
 
-1.2.0
+1.2.1
 
 Status
 
@@ -40,13 +40,15 @@ Latest Official Release
 
 Last Audit
 
-2026-08-08
+2026-09-03
 
 ---
 
 # Purpose
 
 Defines component responsibilities and ownership boundaries. Components are logical responsibility domains and MUST NOT be inferred solely from repository folders.
+
+This document is subordinate to the Constitution and applicable Governance. Its structural-boundary and dependency-direction interpretation is aligned with the current canonical Architecture Model in `Architecture/ARC-011_CANONICAL_ARCHITECTURE_MODEL.md`.
 
 # Component Model
 
@@ -107,7 +109,7 @@ Components communicate through documented interfaces and governed references. Un
 
 # Dependency Rule
 
-The component dependency direction MUST remain compatible with `ARC-004_LAYER_MODEL.md` and `ARC-006_DEPENDENCY_MODEL.md`.
+The component dependency direction MUST remain compatible with `ARC-004_LAYER_MODEL.md`, `ARC-006_DEPENDENCY_MODEL.md`, and the current canonical structural/dependency interpretation in `ARC-011_CANONICAL_ARCHITECTURE_MODEL.md`.
 
 Physical folder placement is not sufficient evidence of a component dependency.
 
@@ -120,6 +122,7 @@ Physical folder placement is not sufficient evidence of a component dependency.
 - `Architecture/ARC-006_DEPENDENCY_MODEL.md`
 - `Architecture/ARC-007_INTEGRATION_MODEL.md`
 - `Architecture/ARC-009_ARCHITECTURE_DECISIONS.md`
+- `Architecture/ARC-011_CANONICAL_ARCHITECTURE_MODEL.md`
 - `Core/CORE-003_CONSTITUTION.md`
 - `Governance/GOV-010_GOVERNANCE_MODEL.md`
 - `Repository/REP-001_MASTER_INDEX.md`
