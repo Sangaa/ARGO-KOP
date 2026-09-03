@@ -2,7 +2,7 @@
 
 Platform: ARGO KOP  
 Document ID: REP-014  
-Version: 1.2.18
+Version: 1.2.19
 Status: Active / Relationship Enumeration In Progress  
 Development Baseline: 3.2.1  
 Last Audit: 2026-09-03
@@ -139,6 +139,14 @@ The following are deliberately limited to relationships established during repos
 | REL-070 | CORE-KERNEL | RUN-009 | REFERENCES | **INTENTIONAL ONE-WAY / RECOVERY-HANDOFF-ALIGNED / NON-DEPENDENCY** |
 | REL-071 | CORE-003 | RUN-003 | GOVERNS | **CONSTITUTION-AUTHORITY / RUNTIME-CONFIGURATION-NON-OVERRIDE / NON-DEPENDENCY** |
 | REL-072 | RUN-003 | CORE-003 | REFERENCES | **CRITICAL-RUNTIME-CONFIGURATION / DIRECT-SOURCE-VALIDATED / NON-DEPENDENCY** |
+| REL-073 | INTF-010 | INTF-001 | IMPLEMENTS | **DIRECT-SOURCE-VALIDATED / CONTRACTUAL / NON-EXECUTABLE** |
+| REL-074 | INTF-010 | INTF-004 | IMPLEMENTS | **DIRECT-SOURCE-VALIDATED / CONTRACTUAL / NON-EXECUTABLE** |
+| REL-075 | INTF-010 | INTF-005 | IMPLEMENTS | **DIRECT-SOURCE-VALIDATED / CONTRACTUAL / NON-EXECUTABLE** |
+| REL-076 | INTF-010 | INTF-006 | IMPLEMENTS | **DIRECT-SOURCE-VALIDATED / CONTRACTUAL / ACTIVE-INTF-006 / NON-EXECUTABLE** |
+| REL-077 | INTF-010 | ARC-007 | IMPLEMENTS | **DIRECT-SOURCE-VALIDATED / CONTRACTUAL / NON-EXECUTABLE** |
+| REL-078 | INTF-010 | ARC-006 | IMPLEMENTS | **DIRECT-SOURCE-VALIDATED / CONTRACTUAL / NON-EXECUTABLE / NON-DEPENDENCY** |
+| REL-079 | INTF-010 | ENG-007 | IMPLEMENTS | **DIRECT-SOURCE-VALIDATED / CONTRACTUAL / NON-EXECUTABLE** |
+| REL-080 | INTF-010 | MEM-001 | IMPLEMENTS | **DIRECT-SOURCE-VALIDATED / CONTRACTUAL / NON-EXECUTABLE** |
 
 ## Current Review-Cycle Reconciliation — 2026-08-17
 
@@ -706,6 +714,42 @@ Disposition:
 `REL-060 = WORKFLOW-BOUND RUN-011 ACCEPTANCE VALIDATION / EXACT-HEAD-REVALIDATED / SCOPE-LIMITED`.
 
 This edge establishes no dependency, consumption, implementation, governance, production readiness or candidate authority promotion. RUN-015 remains `Candidate / Integrity Hold / CI Evidence Available`; Runtime Gate 15, Priority 10 and the broader graph remain open.
+
+## P11 INTF-010 Integration Relationship Registration — 2026-09-03
+
+Current Priority-11 review validates and registers one homogeneous bounded Interface integration cohort from the direct source statement in `Interfaces/INTF-010_INTEGRATIONS.md`:
+
+```text
+INTF-010 ──implements──> INTF-001
+INTF-010 ──implements──> INTF-004
+INTF-010 ──implements──> INTF-005
+INTF-010 ──implements──> INTF-006
+INTF-010 ──implements──> ARC-007
+INTF-010 ──implements──> ARC-006
+INTF-010 ──implements──> ENG-007
+INTF-010 ──implements──> MEM-001
+```
+
+Evidence basis:
+
+- `INTF-010` explicitly states that it implements the integration boundary described by all eight targets above;
+- current direct reads confirm the target artifacts exist in their current repository identities;
+- `INTF-006` is resolved specifically to active canonical `Interfaces/INTF-006_ENVIRONMENT_SENSING.md`, preserving the established distinction from legacy `INT-006`;
+- `ARC-006` explicitly warns that textual references do not themselves establish architectural dependency, so `REL-078` remains `IMPLEMENTS` and is not promoted to `DEPENDS_ON`;
+- no reverse relationship is inferred merely because an endpoint participates in the integration boundary.
+
+Disposition:
+
+`REL-073..REL-080 = DIRECT-SOURCE-VALIDATED / CONTRACTUAL / NON-EXECUTABLE` within the inspected P11 relationship scope.
+
+Boundary:
+
+- these rows register the documentary/contractual `IMPLEMENTS` semantics directly asserted by INTF-010; they do not establish executable connector behavior;
+- no `DEPENDS_ON`, `CONSUMES`, reverse edge, runtime reachability, production execution or authority transfer is inferred;
+- no provider authenticity, authenticated provider identity, credential validity, permission, remote read-back or external trust is claimed;
+- no endpoint status or authority is promoted by this registration;
+- P11 remains open for connector/implementation evidence and external-trust boundary assessment;
+- Priority 10 remains closed; Phase 1, Global Connected Baseline, the repository-wide graph and Global Integrity PASS remain open/unclaimed.
 
 ---
 
