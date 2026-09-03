@@ -29,7 +29,8 @@ def test_runtime_status_closes_gate15_boundedly_and_keeps_p10_open_on_exact_inve
     status = STATUS.read_text(encoding="utf-8")
     assert "🟡 VALIDATED / CROSS-LAYER INTEGRATION HOLD" in status
     assert "15. Runtime ↔ Engine cognitive-loop prototype seam — BOUNDED VERIFIED" in status
-    assert "Therefore Priority 10 is not closure-ready while exact Runtime physical inventory/allocation remains unreconciled." in status
-    assert "Proceed to exact Runtime physical inventory/allocation reconciliation" in status
+    assert "Exact Runtime physical inventory/allocation is materially reconciled by Transaction N subject to exact-head CI." in status
+    assert "Priority 10 remains OPEN pending a separate explicit bounded closure-readiness decision." in status
+    assert "After exact-head verification of Transaction N, perform one bounded Priority-10 closure-readiness reconciliation." in status
     assert "118` paths" in status
     assert "global Runtime certification remains intentionally capped" in status

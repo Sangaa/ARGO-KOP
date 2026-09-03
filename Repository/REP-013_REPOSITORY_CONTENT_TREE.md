@@ -2,10 +2,10 @@
 
 Platform: ARGO KOP  
 Document ID: REP-013  
-Version: 1.1.3  
+Version: 1.1.4
 Status: Active / Phase 1 Population In Progress  
 Development Baseline: 3.2.1  
-Last Audit: 2026-09-01
+Last Audit: 2026-09-03
 
 ## Purpose
 
@@ -499,6 +499,14 @@ Boundary:
 - REP-001 and REP-002 Core reconciliation remains open;
 - Core dependency/consumer, GOV-006 naming/path disposition and folder certification remain open;
 - no Priority-7, Phase-1, Connected-Baseline or global integrity closure is claimed.
+
+## P10 Transaction N — Exact Runtime Physical Inventory — 2026-09-03
+
+The earlier `### Runtime/` section remains the readable canonical/candidate navigation view, but its explicit non-exhaustive boundary is superseded for physical-inventory completeness by `REP-012_PRIORITY10_RUNTIME_EXACT_ALLOCATION_MANIFEST_2026-09-03_N.tsv`.
+
+Current exact Git-tracked Runtime inventory is `118` paths: top-level `17`, Context `4`, Decision `12`, Execution `41`, Integration `2`, Learning `17`, Prototype `25`. The canonical sorted `git ls-files Runtime` path-set SHA-256 is `a5db51a6d6cbf7dbf22bdb971fc0d2238d2bdef6627caadc4ee2b1933dad4438`.
+
+The deterministic P10-N integrity guard requires manifest equality with the current Git path set and fails on any added, missing, duplicate or unclassified Runtime path. Exact physical inventory does not imply semantic review, canonical authority, executable promotion, provider authenticity, Priority-10 closure or global completeness.
 
 ## Governing Rule
 

@@ -10,7 +10,7 @@ Folder
 Runtime
 
 Version
-1.5.4
+1.5.5
 
 Status
 🟡 VALIDATED / CROSS-LAYER INTEGRATION HOLD
@@ -87,6 +87,8 @@ Transaction L materially hardens the pre-existing `Runtime/Execution/` boundary 
 
 Transaction M re-counted the current Git-tracked Runtime surface: `118` paths = `17` top-level + Context `4` + Decision `12` + Execution `41` + Integration `2` + Learning `17` + Prototype `25`. REP-013 explicitly limits its Runtime representation to known audited members and says it is not exhaustive; REP-012 allocates only the earlier named candidate cohort. This is the remaining Runtime-specific material closure blocker.
 
+Transaction N reconciles that exact path set through a one-record-per-path REP-012 allocation manifest, REP-013 exact-inventory binding and deterministic drift guard. The canonical sorted-path digest is `a5db51a6d6cbf7dbf22bdb971fc0d2238d2bdef6627caadc4ee2b1933dad4438`; allocation role has `NONE_BY_ALLOCATION` authority effect. This removes the physical inventory/allocation blocker subject to exact-head CI, but does not itself close Priority 10.
+
 # Key Finding
 
 `RUN-004_CONTEXT_LOADING` and `RUN-005_RUNTIME_WORKFLOW` remain strong Runtime contracts. The reviewed `RUN-011..015` extend the Runtime evidence into a bounded cognitive-loop prototype and validation path, but they explicitly preserve the boundary between target contracts, prototype evidence and canonical executable runtime.
@@ -95,15 +97,15 @@ The tracked Runtime↔Knowledge/Memory seams are boundedly reconciled through pe
 
 # Integrity Decision
 
-Runtime remains **validated at the folder-contract level**, with Gates 12, 13, 14 and 15 boundedly verified for their named tracked seams. global Runtime certification remains intentionally capped at `CROSS-LAYER INTEGRATION HOLD` because exact Runtime physical inventory/allocation is not yet reconciled; live provider trust is also not inferred.
+Runtime remains **validated at the folder-contract level**, with Gates 12, 13, 14 and 15 boundedly verified for their named tracked seams. Exact Runtime physical inventory/allocation is materially reconciled by Transaction N subject to exact-head CI. global Runtime certification remains intentionally capped at `CROSS-LAYER INTEGRATION HOLD` pending a separate explicit bounded closure-readiness decision; live provider trust is also not inferred.
 
-`RUN-013` still defines controlled handoff as a safety checkpoint that must not return `EXECUTED`, and `RUN-015` explicitly states that prototype CI does not certify full Runtime or executable promotion. `EXECUTABLE PROMOTION HOLD` remains an independent non-blocking non-claim; Gate-15 bounded closure does not clear it. Therefore Priority 10 is not closure-ready while exact Runtime physical inventory/allocation remains unreconciled.
+`RUN-013` still defines controlled handoff as a safety checkpoint that must not return `EXECUTED`, and `RUN-015` explicitly states that prototype CI does not certify full Runtime or executable promotion. `EXECUTABLE PROMOTION HOLD` remains an independent non-blocking non-claim; Gate-15 bounded closure does not clear it. Priority 10 remains OPEN pending a separate explicit bounded closure-readiness decision.
 
 This status does not invalidate the Runtime contracts. It prevents bounded local/cross-layer validation from being mistaken for production/provider authenticity, executable promotion, repository-wide graph completion or global integrity proof.
 
 # Next Construction Boundary
 
-Proceed to exact Runtime physical inventory/allocation reconciliation without reopening Gates 12–15 absent contradictory evidence. Preserve source/contract/test roles, candidate/production promotion boundaries and provider authenticity as separate classifications rather than using inventory presence as authority.
+After exact-head verification of Transaction N, perform one bounded Priority-10 closure-readiness reconciliation. Do not reopen Gates 12–15 absent contradictory evidence, and do not convert allocation or implementation presence into canonical authority.
 
 # Engineering Rule
 

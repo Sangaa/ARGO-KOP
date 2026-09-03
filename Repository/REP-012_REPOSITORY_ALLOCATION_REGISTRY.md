@@ -2,13 +2,13 @@
 
 Platform: ARGO KOP
 Document ID: REP-012
-Version: 1.0.10
+Version: 1.0.11
 Status: Active Control / Integrity Hold / Phase 1 Population In Progress
 Category: Repository Control
 Canonical: Yes
 Priority: Critical
 Development Baseline: 3.2.1
-Last Audit Date: 2026-08-16
+Last Audit Date: 2026-09-03
 
 ---
 
@@ -670,6 +670,16 @@ This is not `CLOSED_FOR_PHASE_1` for the whole repository. It records that the a
 The historical `PARTIALLY_RECONCILED / INTEGRITY HOLD` statements above remain preserved as historical evidence; P353 is the current closure-synchronization disposition.
 
 No executable SRV-009 proof, global graph closure, exhaustive repository-wide identity cleanliness, controlled mutation harness closure, or final Boot PASS is claimed.
+
+## P10 Transaction N — Exact Runtime Allocation Reconciliation — 2026-09-03
+
+`REP-012_PRIORITY10_RUNTIME_EXACT_ALLOCATION_MANIFEST_2026-09-03_N.tsv` is the exact allocation addendum for the current Git-tracked Runtime partition. It contains one sorted allocation record for each of `118` paths and is bound to the canonical sorted-path SHA-256 `a5db51a6d6cbf7dbf22bdb971fc0d2238d2bdef6627caadc4ee2b1933dad4438`.
+
+Directory allocation: top-level `17`, Context `4`, Decision `12`, Execution `41`, Integration `2`, Learning `17`, Prototype `25`.
+
+Role allocation: canonical Runtime contract `10`, candidate Runtime contract `5`, supporting contract `24`, implementation `36`, test `36`, navigation `2`, status evidence `1`, evidence report `1`, schema `1`, test fixture `1`, test configuration `1`.
+
+Every manifest row is `ALLOCATED` to the Runtime domain with authority effect `NONE_BY_ALLOCATION`. This closes the exact physical allocation gap only; role classification does not certify semantic correctness, promote candidate contracts, grant executable authority, authenticate providers, or close Priority 10.
 
 ---
 
