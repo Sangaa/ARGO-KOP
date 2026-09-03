@@ -3,9 +3,10 @@
 Transaction ID: `MUT-2026-09-03-P10-RUNTIME-MEMORY-PERSISTENCE-G`
 Priority: `10 — Runtime`
 Gate: `12 — Runtime ↔ Knowledge / Memory`
-State: `MATERIAL CHANGE SET / CI PENDING`
+State: `CLOSED / VERIFIED / RESUME-SAFE`
 Entry HEAD: `efd88c25ebb43f6c560949cc9ece0b24841490bc`
 Pre-write HEAD: `c9d1cb848f9cbea546394c8be7ad903f8c1b1486`
+Material HEAD: `c455b4978bd3f0aed04ae71066646fc5da6a5f19`
 Protocol: `PROJECT_BOOTSTRAP / CORE-003 / GOV-013 / GOV-014 / GOV-014A / GOV-016 / REP-011 / REP-016`
 
 ## Preserved failure finding
@@ -40,3 +41,15 @@ Classification: `REAL TRACKED RUNTIME→MEMORY FAIL-CLOSED CORRECTNESS GAP`.
 
 Validation:
 `pre-write matrix → smallest contract/code/test/addendum/matrix repair → local read-back → exact-head four-family CI → close or HOLD`.
+
+## Verification
+
+- Local deterministic execution: 10 checks passed across adapter, connected-spine materialization and integrity boundary suites.
+- Exact-head Real Mutation Matrix Regression `33748813609` — SUCCESS.
+- Exact-head Full-Stack Repository Audit `33748813570` — SUCCESS.
+- Exact-head ARGO Runtime Prototype and Integration Tests `33748813567` — SUCCESS.
+- Exact-head M2 Multi-Channel Proposal Training `33748813581` — SUCCESS.
+- No stale consumer failure remains at the material head.
+
+Closure:
+`P10 TRANSACTION G = CLOSED / VERIFIED / RESUME-SAFE`.
