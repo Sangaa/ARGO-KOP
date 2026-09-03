@@ -2,9 +2,10 @@
 
 Transaction ID: `MUT-2026-09-03-P8-GOVERNANCE-EXPLICIT-CLOSURE-H`
 Priority: `8 — Governance`
-State: `PRE-WRITE / CLOSURE REVIEW COMPLETE / NOT YET APPLIED`
+State: `MATERIAL CANDIDATE / LOCAL READ-BACK PASS / EXACT-HEAD CI PENDING`
 Entry HEAD: `0cc15ecfa8c8580ada844d23b61c363f3245ea43`
-Pre-write Matrix HEAD: `THIS PRE-WRITE COMMIT`
+Pre-write Matrix HEAD: `f5c0f004ec1efeaff433d46fd12528f377012798`
+Material HEAD: `THIS MATERIAL COMMIT`
 Protocol: GOV-014 / `PROJECT_BOOTSTRAP / CORE-003 / GOV-013 / GOV-013A / GOV-014A / GOV-015 / GOV-016 / REP-011 / REP-012 + G / REP-013 + G / REP-014 / REP-016`
 
 ## Dedicated Priority-8 closure review
@@ -54,13 +55,13 @@ Current REP-011/012/013/014/015/016 evidence permits a folder/partition closure 
 
 | Change ID | Target | Action | Expected Content | Applied | Verified |
 |---|---|---|---|:---:|:---:|
-| P8-H-01 | `Governance/_FOLDER_STATUS.md` | UPDATE | record bounded `CLOSED_FOR_PHASE_1`, preserve deferred/global holds and non-claims | N | N |
-| P8-H-02 | `Repository/P8_GOVERNANCE_EXPLICIT_BOUNDED_CLOSURE_2026-09-03_H.md` | CREATE | record explicit closure decision and recovery/reopen rule | N | N |
-| P8-H-03 | `Repository/REP-011_PRIORITY8_GOVERNANCE_CLOSURE_ADDENDUM_2026-09-03_H.md` | CREATE | bind bounded current review/relationship dispositions | N | N |
-| P8-H-04 | `Repository/REP-013_PRIORITY8_GOVERNANCE_CLOSURE_ADDENDUM_2026-09-03_H.md` | CREATE | map REP-013 seven-part completion rule | N | N |
-| P8-H-05 | `Repository/REP-016_PRIORITY8_GOVERNANCE_CLOSURE_ADDENDUM_2026-09-03_H.md` | CREATE | supersede historical P8-open wording for current queue interpretation | N | N |
-| P8-H-06 | `Quality/Integration/test_governance_p8_status_sync.py` | CREATE | enforce closure state, deferred holds and anti-overclaim boundaries | N | N |
-| P8-H-07 | this Matrix | UPDATE | bind applied paths, read-back, failures and exact-head verification | N | N |
+| P8-H-01 | `Governance/_FOLDER_STATUS.md` | UPDATE | record bounded `CLOSED_FOR_PHASE_1`, preserve deferred/global holds and non-claims | Y | Y |
+| P8-H-02 | `Repository/P8_GOVERNANCE_EXPLICIT_BOUNDED_CLOSURE_2026-09-03_H.md` | CREATE | record explicit closure decision and recovery/reopen rule | Y | Y |
+| P8-H-03 | `Repository/REP-011_PRIORITY8_GOVERNANCE_CLOSURE_ADDENDUM_2026-09-03_H.md` | CREATE | bind bounded current review/relationship dispositions | Y | Y |
+| P8-H-04 | `Repository/REP-013_PRIORITY8_GOVERNANCE_CLOSURE_ADDENDUM_2026-09-03_H.md` | CREATE | map REP-013 seven-part completion rule | Y | Y |
+| P8-H-05 | `Repository/REP-016_PRIORITY8_GOVERNANCE_CLOSURE_ADDENDUM_2026-09-03_H.md` | CREATE | supersede historical P8-open wording for current queue interpretation | Y | Y |
+| P8-H-06 | `Quality/Integration/test_governance_p8_status_sync.py` | CREATE | enforce closure state, deferred holds and anti-overclaim boundaries | Y | Y |
+| P8-H-07 | this Matrix | UPDATE | bind applied paths, read-back, failures and exact-head verification | Y | Y |
 
 ## KEEP requirements
 
@@ -82,3 +83,21 @@ No candidate promotion, archive/delete action, relationship mutation, P9 executi
 ## Closure condition
 
 H closes only after immutable material read-back, exact-head required workflows, a documentation closure binding, final live-main rediscovery and queue recomputation. Until then Priority 8 remains open.
+
+## Material read-back / compare
+
+- Authorized H material paths: exactly `7`; observed paths: exactly `7`; Unexpected Changes = `0`.
+- Folder status read-back materializes bounded P8 closure and preserves explicit global/nonblocking boundaries.
+- REP-011/REP-013/REP-016 addenda and explicit decision agree on `CLOSED_FOR_PHASE_1 / GLOBAL PHASE 1 OPEN`.
+- REP-014/REL-011 source remains unchanged at `REFERENCES / Revalidation Required`.
+- No Governance source/candidate/compatibility artifact other than `_FOLDER_STATUS.md` changed.
+
+## Pre-material verification
+
+- new P8 status-sync regression: PASS by direct zero-argument invocation;
+- G exact inventory/allocation regression: PASS;
+- Governance candidate-semantic regression: PASS;
+- Mutation Matrix semantic validation: PASS;
+- `git diff --check`: PASS.
+
+Required exact-head workflows remain pending on the material candidate. Until all required runs and Runtime jobs pass, the closure decision is not operationally Resume-Safe.

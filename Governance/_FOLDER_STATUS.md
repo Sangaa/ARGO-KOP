@@ -2,11 +2,11 @@
 
 Platform: ARGO KOP (Knowledge Operating Platform)
 Folder: `Governance/`
-Status: `🟢 IDENTITY + REP-001/REP-002 INVENTORY SYNC VERIFIED / CURRENT CANDIDATE SEMANTIC DISPOSITION VERIFIED / CONTENT REVIEW HOLDS REMAIN`
-Version: `1.7.0`
+Status: `🟢 CLOSED_FOR_PHASE_1 / BOUNDED GOVERNANCE PARTITION CERTIFIED / GLOBAL HOLDS REMAIN`
+Version: `1.8.0`
 Canonical: `Yes — evidence/status record only`
-Last Audit: `2026-08-29`
-Review Method: `Repository First / GOV-006 Identity Classification / Controlled Migration / Semantic Content Review`
+Last Audit: `2026-09-03`
+Review Method: `Repository First / Exact Inventory + Allocation / Authority Classification / Bounded Content + Relationship Review / Explicit Closure`
 
 ## Purpose
 
@@ -138,7 +138,7 @@ Current per-path dispositions are recorded in:
 
 `GOVERNANCE PHYSICAL INVENTORY + ALLOCATION = RECONCILED FOR CURRENT 52-FILE SET / P8 CLOSURE REVIEW PENDING`.
 
-The existing `CONTENT REVIEW HOLDS REMAIN` headline is preserved until a separate explicit Priority-8 closure review decides which remaining holds are blocking, non-blocking, external, global, or Human-authority gated.
+The former aggregate `CONTENT REVIEW HOLDS REMAIN` state was resolved by the separate Priority-8 closure review into bounded classes. The phrase remains here as historical transition evidence, not as a current P8 blocker.
 
 ### Governance identity/inventory
 
@@ -152,15 +152,37 @@ This means the current content/status question has a bounded disposition. It doe
 
 ### Repository-wide relationship integrity
 
-`OPEN`.
+`OPEN / NON-BLOCKING FOR BOUNDED PRIORITY-8 CLOSURE`.
 
 Folder-level identity/index/candidate-semantic results do not close Connected Baseline globally or prove every Governance consumer/reference relationship repository-wide.
+
+### Candidate and historical disposition
+
+`DEFERRED / NON-BLOCKING`.
+
+Candidate promotion/rejection remains subject to its own evidence and authority gates. Legacy-thin and compatibility-path historical cleanup remains maintenance debt; no archival move or deletion is required for bounded current Governance use.
+
+### REL-011 / KNW-003
+
+`LOCAL NON-BLOCKING HOLD / PRESERVE REVALIDATION REQUIRED`.
+
+REL-011 is a documentary Models→Knowledge `REFERENCES` edge, not a Governance dependency. KNW-003 revalidation remains independently valid deferred Knowledge-domain work.
 
 ## Completion Result
 
 `GOVERNANCE IDENTITY + REP-001/REP-002 GOVERNANCE INVENTORY ALIGNMENT = VERIFIED / CLOSED FOR CURRENT MIGRATED SCOPE`.
 
 `CURRENT GOVERNANCE CANDIDATE SEMANTIC DISPOSITION = VERIFIED / CLOSED FOR CURRENT IDENTIFIED CANDIDATE SET / RETAIN NON-ACTIVE / PROMOTION GATES REMAIN`.
+
+`GOVERNANCE PHYSICAL INVENTORY + ALLOCATION = 52 / 52 RECONCILED`.
+
+`PRIORITY 8 GOVERNANCE = CLOSED_FOR_PHASE_1 / BOUNDED GOVERNANCE PARTITION CERTIFIED`.
+
+`PRIORITY 8 CLOSED_FOR_PHASE_1 != PHASE 1 CLOSED`.
+
+`GOVERNANCE CERTIFIED != REPOSITORY-WIDE GRAPH COMPLETE`.
+
+`BOUNDED INTEGRITY WORKFLOW PASS != GLOBAL INTEGRITY PASS`.
 
 ## Related Authority and Evidence
 
