@@ -2,7 +2,7 @@
 
 Transaction ID: `MUT-2026-09-03-P10-RUNTIME-EXACT-INVENTORY-ALLOCATION-N`
 Priority: `10 — Runtime`
-State: `MATERIAL CHANGE APPLIED / EXACT-HEAD CI PENDING`
+State: `CLOSED / VERIFIED / RESUME-SAFE`
 Entry HEAD: `d197a35c9ab7872235f57ceb80d710d699d51a3b`
 Protocol: `PROJECT_BOOTSTRAP / CORE-003 / GOV-013 / GOV-014 / GOV-014A / REP-011 / REP-012 / REP-013 / REP-016 / Transaction M`
 
@@ -62,4 +62,9 @@ Validation:
 - Integration: `585 passed / 11 subtests passed` with one pre-existing RuntimeWarning from the internal document-ID audit.
 - Runtime Prototype: `23 passed`; acceptance scenarios: `3 passed`.
 - `git diff --check`: PASS.
-- Exact-head four-family CI: PENDING; Transaction N remains `MATERIAL CHANGE APPLIED / EXACT-HEAD CI PENDING` until all four families pass on one material HEAD.
+- Material HEAD: `f2b9bc3248743e458d6e613b221e9871da997de1`.
+- Exact-head Full-Stack Repository Audit: PASS, run `33778525921`.
+- Exact-head Runtime Prototype and Integration Tests: PASS, run `33778526176`.
+- Exact-head M2 Multi-Channel Proposal Training: PASS, run `33778525910`.
+- Exact-head Real Mutation Matrix Regression: PASS, run `33778525915`.
+- Four-family exact-head result: PASS. Transaction N is `CLOSED / VERIFIED / RESUME-SAFE`; Priority 10 remains OPEN pending its separately governed closure decision.
