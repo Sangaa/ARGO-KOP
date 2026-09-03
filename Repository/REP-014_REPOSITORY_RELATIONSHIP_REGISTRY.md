@@ -2,7 +2,7 @@
 
 Platform: ARGO KOP  
 Document ID: REP-014  
-Version: 1.2.15
+Version: 1.2.16
 Status: Active / Relationship Enumeration In Progress  
 Development Baseline: 3.2.1  
 Last Audit: 2026-09-03
@@ -124,7 +124,7 @@ The following are deliberately limited to relationships established during repos
 | REL-055 | RUN-011 | ENG-013 | REFERENCES | Revalidated within current Runtime prototype scope |
 | REL-056 | ENG-014 | RUN-011 | REFERENCES | **RUNTIME VALIDATION CONTRACT / DIRECT-SOURCE-VALIDATED / NON-DEPENDENCY** |
 | REL-057 | RUN-012 | RUN-011 | VALIDATES | Revalidated within current Runtime test scope |
-| REL-058 | RUN-013 | RUN-011 | VALIDATES | Revalidated within current controlled-handoff scope |
+| REL-058 | RUN-013 | RUN-011 | VALIDATES | **CONTROLLED-HANDOFF TRACE GATE / EXECUTABLE-TESTED / SIDE-EFFECT-FREE / NON-AUTHORITY** |
 | REL-059 | RUN-014 | RUN-011 | VALIDATES | Revalidated within current learning-promotion test scope |
 | REL-060 | RUN-015 | RUN-011 | VALIDATES | Revalidated within current CI validation scope |
 | REL-061 | GOV-013A | GOV-013 | REFERENCES | **INTENTIONAL ONE-WAY / GOVERNANCE-REVALIDATED** |
@@ -655,6 +655,28 @@ Evidence basis:
 - REL-056 retains its stable registry ID and controlled `REFERENCES` type; REL-055 and REL-057..060 remain unchanged.
 
 The earlier P75 direction remains historical evidence and is superseded only for current REL-056 interpretation. This bounded repair does not certify Runtime Gate 15, Priority 10 or the repository-wide graph.
+
+## P10 REL-058 Controlled-Handoff Validation Reconciliation — 2026-09-03
+
+Current-source and executable revalidation retains the stable relationship:
+
+```text
+RUN-013 → RUN-011 = VALIDATES
+```
+
+Evidence basis:
+
+- RUN-013 directly names RUN-011 and defines the controlled-handoff safety checkpoint for a validated cognitive trace;
+- `Runtime/Prototype/CONTROLLED_HANDOFF.md` binds that checkpoint to `controlled_execution_gate.py`;
+- the gate evaluates the trace emitted by `cognitive_loop_harness.run` and holds incomplete, unvalidated, unauthorized or side-effecting proposals;
+- the paired prototype tests exercise authorized, unauthorized and incomplete trace outcomes;
+- the gate returns only handoff readiness or hold and never executes an action.
+
+Disposition:
+
+`REL-058 = CONTROLLED-HANDOFF TRACE VALIDATION / EXECUTABLE-TESTED / SIDE-EFFECT-FREE / NON-AUTHORITY`.
+
+The validation claim is limited to the RUN-011 trace at the RUN-013 controlled-handoff boundary. It establishes no production executor, dependency, implementation, consumption, governance or Runtime closure. RUN-013 remains `Candidate / Integrity Hold`; Runtime Gate 15, Priority 10 and the broader graph remain open.
 
 ---
 

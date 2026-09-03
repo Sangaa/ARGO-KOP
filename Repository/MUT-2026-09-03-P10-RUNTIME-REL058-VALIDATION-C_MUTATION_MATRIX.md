@@ -2,8 +2,9 @@
 
 Transaction ID: `MUT-2026-09-03-P10-RUNTIME-REL058-VALIDATION-C`
 Priority: `10 — Runtime`
-State: `PRE-WRITE / OPEN`
+State: `MATERIAL CHANGE SET / CI PENDING`
 Entry HEAD: `cb9ffed1cf04d7d2661205afb53787f4ff852799`
+Pre-write HEAD: `bad28ada93a04512a6fccfcf1ed2d95443640faa`
 Protocol: `PROJECT_BOOTSTRAP / CORE-003 / GOV-013 / GOV-014 / GOV-014A / REP-011 / REP-014 / REP-016`
 
 ## Prior-learning and evidence retrieval
@@ -21,11 +22,11 @@ This evidence supports the existing `RUN-013 → RUN-011 = VALIDATES` type only 
 
 | Change ID | Target | Action | Expected change | KEEP / preservation | Pre-write | Post-write |
 |---|---|---|---|---|:---:|:---:|
-| P10-C-01 | `Repository/REP-014_REPOSITORY_RELATIONSHIP_REGISTRY.md` | UPDATE | retain REL-058 direction/type; replace generic state with bounded executable-tested evidence; increment patch version | every other relationship row and incomplete-graph boundary | PASS | PENDING |
-| P10-C-02 | `Repository/REP-020_CURRENT_CONTROL_PLANE_BOUNDARY_MANIFEST.md` | UPDATE | synchronize the REP-014 version binding in the same material change set | every other manifest row/status/non-claim | PASS | PENDING |
-| P10-C-03 | `Repository/REP-011_PRIORITY10_RUNTIME_REL058_VALIDATION_ADDENDUM_2026-09-03_C.md` | CREATE | record current evidence, semantic limit and transaction result | historical REP-011 and prior deltas unchanged | PASS | PENDING |
-| P10-C-04 | `Quality/Integrity/test_runtime_p10_rel058_validation.py` | CREATE | enforce direct linkage, executable boundary behavior, exact row and no stronger edge | side-effect-free / non-executing invariant | PASS | PENDING |
-| P10-C-05 | this Matrix | UPDATE IN MATERIAL CHANGE SET | satisfy same-change-set enforcement and bind material evidence | all pre-write evidence and non-claims | PASS | PENDING |
+| P10-C-01 | `Repository/REP-014_REPOSITORY_RELATIONSHIP_REGISTRY.md` | UPDATE | retain REL-058 direction/type; replace generic state with bounded executable-tested evidence; increment patch version | every other relationship row and incomplete-graph boundary | PASS | PASS |
+| P10-C-02 | `Repository/REP-020_CURRENT_CONTROL_PLANE_BOUNDARY_MANIFEST.md` | UPDATE | synchronize the REP-014 version binding in the same material change set | every other manifest row/status/non-claim | PASS | PASS |
+| P10-C-03 | `Repository/REP-011_PRIORITY10_RUNTIME_REL058_VALIDATION_ADDENDUM_2026-09-03_C.md` | CREATE | record current evidence, semantic limit and transaction result | historical REP-011 and prior deltas unchanged | PASS | PASS |
+| P10-C-04 | `Quality/Integrity/test_runtime_p10_rel058_validation.py` | CREATE | enforce direct linkage, executable boundary behavior, exact row and no stronger edge | side-effect-free / non-executing invariant | PASS | PASS |
+| P10-C-05 | this Matrix | UPDATE IN MATERIAL CHANGE SET | satisfy same-change-set enforcement and bind material evidence | all pre-write evidence and non-claims | PASS | PASS |
 
 ## Non-claims
 
