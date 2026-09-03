@@ -2,18 +2,22 @@
 
 Transaction ID: `MUT-2026-09-03-P9-ARC003-ARC011-FLOW-ALIGNMENT-D`
 Priority: `9 — Architecture`
-State: `PRE-WRITE / TARGET MUTATION NOT YET APPLIED`
+State: `CLOSED / VERIFIED / RESUME-SAFE`
 Entry HEAD: `4440564036a48b2a4f825d4d1bed072d3a3d232e`
+Material HEAD: `c6a4deb14f5c7226b7a063e824400d96c7572cf6`
 Protocol: `GOV-013 / GOV-014 / GOV-014A / GOV-015 / GOV-016`
 
 | Target | Action | Expected change | KEEP / preservation | Pre-write | Post-write |
 |---|---|---|---|---|---|
-| `Architecture/ARC-003_INFORMATION_FLOW.md` | bounded canonical-boundary alignment | Bind information-flow interpretation to canonical ARC-011 structural/dependency boundaries; add ARC-011 Related Document; refresh audit/version minimally | Existing evidence gate, information states, lifecycle, source/repository authority, decision/traceability rules, Integrity Hold | PASS | PENDING |
+| `Architecture/ARC-003_INFORMATION_FLOW.md` | bounded canonical-boundary alignment | Bind information-flow interpretation to canonical ARC-011 structural/dependency boundaries; add ARC-011 Related Document; refresh audit/version minimally | Existing evidence gate, information states, lifecycle, source/repository authority, decision/traceability rules, Integrity Hold | PASS | PASS |
 
 Evidence boundary:
 - Architecture folder status keeps `Information Flow alignment` OPEN and identifies ARC-011 as canonical for structural boundaries and dependency direction.
-- ARC-003 already preserves Constitution/Governance/Repository authority but omits ARC-011 from its current reference/interpretation surface.
-- No flow semantics, lifecycle ordering, ownership, repository authority, Architecture partition closure, or Global Integrity status are promoted.
+- ARC-003 now explicitly binds information-flow interpretation to ARC-011 and states that cross-component information movement does not itself create dependency or transfer ownership.
+- Immutable read-back at material HEAD confirmed version `1.3.1`, audit `2026-09-03`, ARC-011 boundary language, and ARC-011 Related Documents entry.
+- Parent compare `725c1f26... → c6a4deb1...` changed only ARC-003: 7 additions / 2 deletions.
+- Exact material-head candidate CI: Full-Stack `33715983024` = SUCCESS; M2 `33715983029` = SUCCESS.
+- No flow semantics, Architecture partition closure, repository-wide graph closure, Global Connected Baseline closure, or Global Integrity PASS is claimed.
 
-Validation plan:
-`immutable target read-back → exact parent compare → exact-head required CI → close or preserve failure`.
+Disposition:
+`TRANSACTION D = CLOSED / VERIFIED / RESUME-SAFE`.
