@@ -3,10 +3,10 @@
 Date: 2026-09-03
 Status: `Current Evidence Manifest / Integrity Hold / Not Semantic Authority`  
 Manifest family: `REP-020 evidence surface`  
-Current queue checkpoint: `P10-O-RUNTIME-BOUNDED-CLOSURE`
-Verified source baseline: `main@d318daef65ca1d7d14224a1a7f66acefe151dd67`
+Current queue checkpoint: `P11-A-INTERFACES-EXACT-INVENTORY-ALLOCATION`
+Verified source baseline: `main@3c125fec32838d6d1f875360a044a82b3a9cdc7a`
 Recovery binding: `E-07B / SAME-CHANGE-SET REBIND / authorized at main@2271d130d7bb3583a695d0bd4e4bddac8e235818`  
-Current refresh binding: `P10-O / BOUNDED RUNTIME PARTITION CLOSURE / atomic same-change-set candidate from main@d318daef65ca1d7d14224a1a7f66acefe151dd67`
+Current refresh binding: `P11-A / INTERFACES EXACT INVENTORY-ALLOCATION / atomic same-change-set candidate from main@3c125fec32838d6d1f875360a044a82b3a9cdc7a`
 
 This is the stable **current** manifest consumed by the executable control-plane reconciliation gate.
 
@@ -17,8 +17,8 @@ Historical manifests such as `REP-020_SESSION_DELTA_2026-08-17_P339.md` remain i
 | Document ID | Path | Version | Status | Current Boundary |
 |---|---|---:|---|---|
 | REP-011 | Repository/REP-011_REVIEW_TRACEABILITY_LEDGER.md | 1.1.2 | Active / Integrity Hold | REVIEW EVIDENCE / INTEGRITY HOLD |
-| REP-012 | Repository/REP-012_REPOSITORY_ALLOCATION_REGISTRY.md | 1.0.11 | Active Control / Integrity Hold / Phase 1 Population In Progress | ALLOCATION / RECOVERY CONTROL |
-| REP-013 | Repository/REP-013_REPOSITORY_CONTENT_TREE.md | 1.1.4 | Active / Phase 1 Population In Progress | CURRENT INVENTORY / NOT CLOSURE |
+| REP-012 | Repository/REP-012_REPOSITORY_ALLOCATION_REGISTRY.md | 1.0.12 | Active Control / Integrity Hold / Phase 1 Population In Progress | ALLOCATION / RECOVERY CONTROL |
+| REP-013 | Repository/REP-013_REPOSITORY_CONTENT_TREE.md | 1.1.5 | Active / Phase 1 Population In Progress | CURRENT INVENTORY / NOT CLOSURE |
 | REP-014 | Repository/REP-014_REPOSITORY_RELATIONSHIP_REGISTRY.md | 1.2.18 | Active / Relationship Enumeration In Progress | CURRENT RELATIONSHIP EVIDENCE / BROADER GRAPH OPEN |
 | REP-015 | Repository/REP-015_CONTROL_PLANE_BOOTSTRAP_CHECKLIST.md | 1.0.7 | Active / Phase 1 Open / Integrity Hold | CURRENT BOOTSTRAP SCOPE |
 | REP-016 | Repository/REP-016_PHASE1_PARTITION_WORK_QUEUE.md | 1.3.0 | Active / Phase 1 Open / Integrity Hold | PRIORITY 1 CLOSED / PHASE 1 OPEN |

@@ -6,7 +6,7 @@
 
 Platform: ARGO KOP (Knowledge Operating Platform)
 Document ID: REP-001
-Version: 1.11.5
+Version: 1.11.6
 Status: Integrity Hold
 Category: Repository
 Canonical: Yes
@@ -173,7 +173,7 @@ The presence of `LIF-001` does not establish authority over platform, repository
 
 ## 9. Interfaces Layer
 
-The following interface artifacts were directly verified during the current audit:
+The following active interface artifacts are directly verified in the current index:
 
 - `Interfaces/INTF-001_INTERFACE_SPEC.md`
 - `Interfaces/INTF-004_API.md`
@@ -181,7 +181,7 @@ The following interface artifacts were directly verified during the current audi
 - `Interfaces/INTF-010_INTEGRATIONS.md`
 - `Interfaces/_FOLDER_STATUS.md`
 
-`INTF-006` remains `Proposed / Integrity Hold` pending cross-layer validation.
+The exact 12-path physical Interfaces inventory is bound by REP-002, REP-012, REP-013 and `Interfaces/_FOLDER_STATUS.md`; physical presence does not make an artifact an active REP-001 member. `INTF-006_ENVIRONMENT_SENSING` remains the active canonical `INTF-006` identity at `Proposed / Integrity Hold`; `INTF-006_WEB` is legacy noncanonical provenance with internal ID `INT-006` and is intentionally not active-indexed.
 
 `INTF-010` is `Validated / Integrity Hold` and establishes the provider-neutral connector/integration boundary. It is indexed here because it is a canonical domain artifact and its architecture explicitly requires active integration artifacts to be represented in repository inventories. Its validation does not certify every external connector implementation.
 

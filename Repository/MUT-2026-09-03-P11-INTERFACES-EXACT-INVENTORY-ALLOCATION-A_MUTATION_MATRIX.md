@@ -2,7 +2,7 @@
 
 Transaction ID: `MUT-2026-09-03-P11-INTERFACES-EXACT-INVENTORY-ALLOCATION-A`
 Priority: `11 — Interfaces`
-State: `PRE-WRITE / MATERIAL NOT YET APPLIED`
+State: `MATERIAL CHANGE APPLIED / EXACT-HEAD CI PENDING`
 Entry HEAD: `da948c89208878e47a095d51d9d018592ef49c27`
 Protocol: `PROJECT_BOOTSTRAP / CORE-003 / GOV-013 / GOV-014 / GOV-014A / GOV-015 / GOV-016 / REP-011 / REP-012 / REP-013 / REP-016`
 
@@ -18,7 +18,7 @@ The exact Git-tracked Interfaces tree has `12` paths and SHA-256 `81e052fe0ae6cf
 |---|---|---|---|
 | P11-A-01 | `Repository/REP-012_PRIORITY11_INTERFACES_EXACT_ALLOCATION_MANIFEST_2026-09-03_A.tsv` | CREATE | exactly one sorted allocation row per tracked Interfaces path; no authority promotion |
 | P11-A-02 | `Quality/Integrity/test_interfaces_p11_exact_inventory_allocation.py` | CREATE | fail on path/count/digest/allocation/control-surface drift |
-| P11-A-03 | `Repository/REP-001_MASTER_INDEX.md` | UPDATE | exact 12-path Interfaces index and bounded identity/authority notes; `1.11.5 → 1.11.6` |
+| P11-A-03 | `Repository/REP-001_MASTER_INDEX.md` | UPDATE | preserve verified active subset; point to exact physical surfaces and exclude legacy/unverified inventory from active membership; `1.11.5 → 1.11.6` |
 | P11-A-04 | `Repository/REP-002_REPOSITORY_MAP.md` | UPDATE | exact 12-path Interfaces map and bounded identity/authority notes; `1.7.6 → 1.7.7` |
 | P11-A-05 | `Repository/REP-012_REPOSITORY_ALLOCATION_REGISTRY.md` | UPDATE | bind exact Interfaces allocation manifest/count/digest; version increment |
 | P11-A-06 | `Repository/REP-013_REPOSITORY_CONTENT_TREE.md` | UPDATE | replace five-path partial Interfaces view with exact 12-path inventory; version increment |
@@ -38,3 +38,21 @@ The exact Git-tracked Interfaces tree has `12` paths and SHA-256 `81e052fe0ae6cf
 - Priority 10 remains closed; Phase 1, repository-wide graph, Global Connected Baseline and Global Integrity PASS remain open/unclaimed.
 
 Validation: `pre-write → exact manifest/control-surface material → immutable read-back → parent/path proof → deterministic local suites → four-family exact-head CI → close A or HOLD / RESUME-SAFE`.
+
+## Material read-back
+
+- Exact authorized path set: `13`; no path outside P11-A-01 through P11-A-13.
+- Git-tracked Interfaces inventory: `12`; sorted-path SHA-256 `81e052fe0ae6cf61f6a70b15acafa4cd07e5372ef168a1228790db314c8eaae9`.
+- Read-back preserves INTF-006 active-versus-legacy identity, all external-trust boundaries, Priority 10 closure and P11 OPEN state.
+- Targeted entry/inventory/control-plane tests: `10 passed`.
+- Integrity: `190 passed`.
+- Integration: `588 passed / 11 subtests passed`, with one pre-existing internal document-ID audit RuntimeWarning.
+- Runtime Prototype: `23 passed`; acceptance scenarios: `3 passed`.
+- `git diff --check`: PASS.
+- Exact-head four-family CI: PENDING.
+
+## Preserved pre-material control-plane failure
+
+The first full Integration run produced `1 failed / 587 passed / 11 subtests passed`: active-index expansion in the candidate caused the current filename-alignment guard to report `INTF-007/008/009` filenames against internal `INT-007/008/009` identities. The assertion remains a valid identity invariant; physical presence is not active authority.
+
+Primary classification: `CONTROL_PLANE / MANIFEST DRIFT`. The repair keeps exact physical inventory in REP-002/012/013/status, restores REP-001 to the directly verified active subset, explicitly excludes legacy/unverified physical members from active indexing, and updates the deterministic P11 test to enforce that separation. The identity guard is unchanged.

@@ -2,7 +2,7 @@
 
 Platform: ARGO KOP
 Document ID: REP-012
-Version: 1.0.11
+Version: 1.0.12
 Status: Active Control / Integrity Hold / Phase 1 Population In Progress
 Category: Repository Control
 Canonical: Yes
@@ -680,6 +680,14 @@ Directory allocation: top-level `17`, Context `4`, Decision `12`, Execution `41`
 Role allocation: canonical Runtime contract `10`, candidate Runtime contract `5`, supporting contract `24`, implementation `36`, test `36`, navigation `2`, status evidence `1`, evidence report `1`, schema `1`, test fixture `1`, test configuration `1`.
 
 Every manifest row is `ALLOCATED` to the Runtime domain with authority effect `NONE_BY_ALLOCATION`. This closes the exact physical allocation gap only; role classification does not certify semantic correctness, promote candidate contracts, grant executable authority, authenticate providers, or close Priority 10.
+
+## P11 Transaction A — Exact Interfaces Allocation — 2026-09-03
+
+`Repository/REP-012_PRIORITY11_INTERFACES_EXACT_ALLOCATION_MANIFEST_2026-09-03_A.tsv` contains one sorted allocation record for each of the exact `12` Git-tracked Interfaces paths. The sorted-path SHA-256 is `81e052fe0ae6cf61f6a70b15acafa4cd07e5372ef168a1228790db314c8eaae9`.
+
+Role counts are canonical interface contract `3`, unpromoted interface artifact `6`, candidate canonical interface contract `1`, legacy noncanonical provenance `1`, and status evidence `1`. Every row is `ALLOCATED` to Interfaces with authority effect `NONE_BY_ALLOCATION`.
+
+This allocation closes no semantic, relationship, connector, provider, permission, external-authenticity or production-execution gate. Priority 11 remains OPEN.
 
 ---
 

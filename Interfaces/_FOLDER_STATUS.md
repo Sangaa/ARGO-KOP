@@ -4,7 +4,7 @@
 
 Platform: ARGO KOP (Knowledge Operating Platform)
 Folder: Interfaces/
-Version: 1.2.1
+Version: 1.2.2
 Status: INTEGRITY HOLD / LOCAL INVENTORY VERIFIED / CROSS-LAYER AND EXTERNAL-TRUST VALIDATION OPEN
 Canonical: Yes
 Priority: Critical
@@ -41,6 +41,10 @@ Current exact Git-tree enumeration returned `truncated:false` with exactly **12 
 `INTERFACES_PHYSICAL_INVENTORY = CLOSED_FOR_CURRENT_EXACT_TREE`
 
 Physical inclusion records repository presence only. It does not promote every artifact to current canonical authority.
+
+Transaction P11-A synchronizes this exact 12-path tree into REP-001, REP-002 and REP-013 and binds one REP-012 allocation record per path. The canonical sorted-path SHA-256 is `81e052fe0ae6cf61f6a70b15acafa4cd07e5372ef168a1228790db314c8eaae9`; allocation authority effect is `NONE_BY_ALLOCATION`.
+
+`P11 / INTERFACES = IN_PROGRESS / EXACT INVENTORY-ALLOCATION RECONCILED / CROSS-LAYER AND EXTERNAL-TRUST VALIDATION OPEN`.
 
 # Audit Findings
 

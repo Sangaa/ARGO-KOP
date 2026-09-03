@@ -2,7 +2,7 @@
 
 Platform: ARGO KOP  
 Document ID: REP-013  
-Version: 1.1.4
+Version: 1.1.5
 Status: Active / Phase 1 Population In Progress  
 Development Baseline: 3.2.1  
 Last Audit: 2026-09-03
@@ -258,11 +258,20 @@ The current specification artifact declares the internal identity `SPEC-001-KNOW
 ```text
 Interfaces/
 ├── INTF-001_INTERFACE_SPEC.md
+├── INTF-002_GITHUB.md
+├── INTF-003_DATABASE.md
 ├── INTF-004_API.md
+├── INTF-005_LLM.md
 ├── INTF-006_ENVIRONMENT_SENSING.md
+├── INTF-006_WEB.md
+├── INTF-007_USER_INTERFACE.md
+├── INTF-008_CONNECTORS.md
+├── INTF-009_IMPORT_EXPORT.md
 ├── INTF-010_INTEGRATIONS.md
 └── _FOLDER_STATUS.md
 ```
+
+This is the exact current 12-path Git-tracked Interfaces inventory. Its sorted-path SHA-256 is `81e052fe0ae6cf61f6a70b15acafa4cd07e5372ef168a1228790db314c8eaae9`. Exact inventory records presence only and does not certify interface semantics, implementation, provider trust or Priority-11 closure.
 
 ### Governance/
 

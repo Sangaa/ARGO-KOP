@@ -2,7 +2,7 @@
 
 Platform: ARGO KOP (Knowledge Operating Platform)
 Document ID: REP-002
-Version: 1.7.6
+Version: 1.7.7
 Status: Integrity Hold
 Category: Repository
 Canonical: Yes
@@ -186,12 +186,19 @@ The Lifecycle domain is under re-audit and is limited to document-scoped lifecyc
 Path: `Interfaces/`
 
 - `Interfaces/INTF-001_INTERFACE_SPEC.md`
+- `Interfaces/INTF-002_GITHUB.md`
+- `Interfaces/INTF-003_DATABASE.md`
 - `Interfaces/INTF-004_API.md`
+- `Interfaces/INTF-005_LLM.md`
 - `Interfaces/INTF-006_ENVIRONMENT_SENSING.md`
+- `Interfaces/INTF-006_WEB.md`
+- `Interfaces/INTF-007_USER_INTERFACE.md`
+- `Interfaces/INTF-008_CONNECTORS.md`
+- `Interfaces/INTF-009_IMPORT_EXPORT.md`
 - `Interfaces/INTF-010_INTEGRATIONS.md`
 - `Interfaces/_FOLDER_STATUS.md`
 
-`INTF-006` remains Proposed / Integrity Hold pending cross-layer validation.
+`INTF-006_ENVIRONMENT_SENSING` is the active canonical `INTF-006` identity at Proposed / Integrity Hold. `INTF-006_WEB` is legacy noncanonical provenance with internal ID `INT-006`; physical mapping does not promote it or any other artifact.
 
 `INTF-010` is Validated / Integrity Hold and is the canonical provider-neutral integration and connector boundary. Its presence in the active map does not certify individual connector implementations.
 
