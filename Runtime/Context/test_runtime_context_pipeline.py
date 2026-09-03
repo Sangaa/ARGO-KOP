@@ -30,5 +30,22 @@ def test_runtime_pipeline_builds_context_and_retrieves():
 
 
 def test_runtime_pipeline_keeps_contradiction_governed():
-    result = evaluate_new_evidence(record(), ["contradictory-test"], contradiction=True)
+    original = record()
+    snapshot = dict(original)
+    result = evaluate_new_evidence(original, ["contradictory-test"], contradiction=True)
     assert result["status"] == "DEMOTION_REVIEW_REQUIRED"
+    assert original == snapshot
+
+
+def test_runtime_pipeline_holds_unsupported_review_inputs():
+    original = record()
+    snapshot = dict(original)
+    result = evaluate_new_evidence(original, [], contradiction=True)
+    assert result["status"] == "HOLD"
+    assert result["reason"] == "INVALID_EVIDENCE"
+    assert original == snapshot
+
+    result = evaluate_new_evidence(original, ["proof"], contradiction="true")
+    assert result["status"] == "HOLD"
+    assert result["reason"] == "INVALID_CONTRADICTION_SIGNAL"
+    assert original == snapshot
