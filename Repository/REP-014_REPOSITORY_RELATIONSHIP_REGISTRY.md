@@ -2,7 +2,7 @@
 
 Platform: ARGO KOP  
 Document ID: REP-014  
-Version: 1.2.17
+Version: 1.2.18
 Status: Active / Relationship Enumeration In Progress  
 Development Baseline: 3.2.1  
 Last Audit: 2026-09-03
@@ -126,7 +126,7 @@ The following are deliberately limited to relationships established during repos
 | REL-057 | RUN-012 | RUN-011 | VALIDATES | Revalidated within current Runtime test scope |
 | REL-058 | RUN-013 | RUN-011 | VALIDATES | **CONTROLLED-HANDOFF TRACE GATE / EXECUTABLE-TESTED / SIDE-EFFECT-FREE / NON-AUTHORITY** |
 | REL-059 | RUN-014 | RUN-011 | VALIDATES | **TRACE-TO-LEARNING-CANDIDATE / EXECUTABLE-TESTED / SEPARATE-PROMOTION-AUTHORITY** |
-| REL-060 | RUN-015 | RUN-011 | VALIDATES | Revalidated within current CI validation scope |
+| REL-060 | RUN-015 | RUN-011 | VALIDATES | **WORKFLOW-BOUND ACCEPTANCE / EXACT-HEAD-REVALIDATED / SCOPE-LIMITED** |
 | REL-061 | GOV-013A | GOV-013 | REFERENCES | **INTENTIONAL ONE-WAY / GOVERNANCE-REVALIDATED** |
 | REL-062 | CORE-KERNEL | RUN-001 | REFERENCES | **INTENTIONAL ONE-WAY / RUNTIME-CONTRACT-ALIGNED / NON-DEPENDENCY** |
 | REL-063 | CORE-009 | LIF-001 | REFERENCES | **DOCUMENT-LIFECYCLE-BOUNDARY / BIDIRECTIONAL-DOCUMENTARY / NON-DEPENDENCY** |
@@ -694,6 +694,18 @@ Disposition:
 `REL-059 = TRACE-TO-LEARNING-CANDIDATE VALIDATION / EXECUTABLE-TESTED / SEPARATE-PROMOTION-AUTHORITY`.
 
 `PROMOTION_ELIGIBLE` remains a candidate state, not knowledge mutation. No automatic promotion, canonical learning, dependency, implementation, consumption or governance edge is claimed. RUN-011 and RUN-014 remain `Candidate / Integrity Hold`; Runtime Gate 15, Priority 10 and the broader graph remain open.
+
+## P10 REL-060 Exact-Head CI Validation — 2026-09-03
+
+RUN-015 directly names RUN-011 and defines the repository-native CI path that tests its prototype implementation. Current workflow read-back proves that changes under `Runtime/Prototype/**` trigger the Runtime workflow, which installs pytest, runs the complete prototype suite and canonical acceptance scenarios, then independently executes integration and integrity jobs.
+
+Recent exact-head Runtime workflow successes include Transaction C closure `1cf7111b...` (`33745114111`), Transaction D corrective `864934fc...` (`33745855608`) and Transaction D closure `ef090fda...` (`33746001182`). Each result is evidence only for its tested head.
+
+Disposition:
+
+`REL-060 = WORKFLOW-BOUND RUN-011 ACCEPTANCE VALIDATION / EXACT-HEAD-REVALIDATED / SCOPE-LIMITED`.
+
+This edge establishes no dependency, consumption, implementation, governance, production readiness or candidate authority promotion. RUN-015 remains `Candidate / Integrity Hold / CI Evidence Available`; Runtime Gate 15, Priority 10 and the broader graph remain open.
 
 ---
 

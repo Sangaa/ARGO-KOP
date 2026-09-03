@@ -2,8 +2,9 @@
 
 Transaction ID: `MUT-2026-09-03-P10-RUNTIME-REL060-CI-VALIDATION-E`
 Priority: `10 — Runtime`
-State: `PRE-WRITE / OPEN`
+State: `MATERIAL CHANGE SET / CI PENDING`
 Entry HEAD: `ef090fdacd64b80ca239e156dffd5db210783d09`
+Pre-write HEAD: `9cca2291a5723c85537c54e1b2b32934d32c6c52`
 Protocol: `PROJECT_BOOTSTRAP / CORE-003 / GOV-013 / GOV-014 / GOV-014A / REP-011 / REP-014 / REP-016`
 
 ## Evidence retrieval
@@ -21,12 +22,12 @@ The type remains bounded validation, not authority, implementation, dependency o
 
 | Change ID | Target | Action | Expected change | KEEP / preservation | Pre-write | Post-write |
 |---|---|---|---|---|:---:|:---:|
-| P10-E-01 | `Runtime/RUN-015_RUNTIME_PROTOTYPE_CI_VALIDATION.md` | UPDATE | bind recent exact-head evidence and patch version while preserving scope limits | Candidate/HOLD status and historical runs | PASS | PENDING |
-| P10-E-02 | `Repository/REP-014_REPOSITORY_RELATIONSHIP_REGISTRY.md` | UPDATE | retain REL-060 direction/type with workflow-bound exact-head evidence; increment patch version | every other row and incomplete graph | PASS | PENDING |
-| P10-E-03 | `Repository/REP-020_CURRENT_CONTROL_PLANE_BOUNDARY_MANIFEST.md` | UPDATE | synchronize REP-014 version in same material change set | all other bindings and non-claims | PASS | PENDING |
-| P10-E-04 | `Quality/Integrity/test_runtime_p10_rel060_ci_validation.py` | CREATE | enforce workflow trigger/commands, direct relationship and scope limits | no authority or production promotion | PASS | PENDING |
-| P10-E-05 | `Repository/REP-011_PRIORITY10_RUNTIME_REL060_CI_ADDENDUM_2026-09-03_E.md` | CREATE | record current exact-head evidence and boundary | historical evidence unchanged | PASS | PENDING |
-| P10-E-06 | this Matrix | UPDATE IN MATERIAL CHANGE SET | bind material evidence and same-change-set enforcement | pre-write facts/non-claims | PASS | PENDING |
+| P10-E-01 | `Runtime/RUN-015_RUNTIME_PROTOTYPE_CI_VALIDATION.md` | UPDATE | bind recent exact-head evidence and patch version while preserving scope limits | Candidate/HOLD status and historical runs | PASS | PASS |
+| P10-E-02 | `Repository/REP-014_REPOSITORY_RELATIONSHIP_REGISTRY.md` | UPDATE | retain REL-060 direction/type with workflow-bound exact-head evidence; increment patch version | every other row and incomplete graph | PASS | PASS |
+| P10-E-03 | `Repository/REP-020_CURRENT_CONTROL_PLANE_BOUNDARY_MANIFEST.md` | UPDATE | synchronize REP-014 version in same material change set | all other bindings and non-claims | PASS | PASS |
+| P10-E-04 | `Quality/Integrity/test_runtime_p10_rel060_ci_validation.py` | CREATE | enforce workflow trigger/commands, direct relationship and scope limits | no authority or production promotion | PASS | PASS |
+| P10-E-05 | `Repository/REP-011_PRIORITY10_RUNTIME_REL060_CI_ADDENDUM_2026-09-03_E.md` | CREATE | record current exact-head evidence and boundary | historical evidence unchanged | PASS | PASS |
+| P10-E-06 | this Matrix | UPDATE IN MATERIAL CHANGE SET | bind material evidence and same-change-set enforcement | pre-write facts/non-claims | PASS | PASS |
 
 ## Non-claims
 

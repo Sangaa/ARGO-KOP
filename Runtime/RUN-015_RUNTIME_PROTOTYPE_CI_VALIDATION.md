@@ -2,7 +2,7 @@
 
 Platform: ARGO KOP
 Document ID: RUN-015
-Version: 1.0.1
+Version: 1.0.2
 Status: Candidate / Integrity Hold / CI Evidence Available
 Category: Runtime Verification
 Priority: High
@@ -47,6 +47,16 @@ For the Transaction-P closure predecessor used by this review:
 The preceding atomic RUN-007 recovery head also produced Runtime Prototype / Integration run `33721850938` — SUCCESS.
 
 These runs establish that real CI evidence is available for their tested repository heads. They do not pre-certify this document's later material change or any future head; each material change remains subject to its own exact-head validation.
+
+## Priority-10 Exact-Head Revalidation
+
+Later exact-head evidence confirms that the tracked workflow continues to execute the RUN-011 prototype boundary after the Priority-10 repairs:
+
+- Transaction C closure commit `1cf7111b5d5b53716f2d73ca412dfb46c2ce4492`: Runtime Prototype / Integration run `33745114111` — SUCCESS.
+- Transaction D corrective commit `864934fc729dfefabce33a0a2035a15446164517`: Runtime Prototype / Integration run `33745855608` — SUCCESS.
+- Transaction D closure commit `ef090fdacd64b80ca239e156dffd5db210783d09`: Runtime Prototype / Integration run `33746001182` — SUCCESS.
+
+The workflow at those heads triggered for the changed Runtime/Quality/Repository surfaces, installed pytest, ran the complete `Runtime/Prototype` suite and canonical acceptance scenarios, and separately ran integration and integrity jobs. These results validate only their exact tested heads and scopes.
 
 # Failure Handling
 
