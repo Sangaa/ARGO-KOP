@@ -2,14 +2,16 @@
 
 Transaction ID: `MUT-2026-09-03-P9-ARCHITECTURE-GATE11-STALE-REFERENCE-RECONCILIATION-N`
 Priority: `9 — Architecture`
-State: `PRE-WRITE / STATUS MUTATION NOT YET APPLIED`
+State: `CLOSED / VERIFIED / RESUME-SAFE`
 Entry HEAD: `2dee69963436f0a49d719cadcd0a99e6d1b7e02f`
+Pre-write HEAD: `5f5260c8269b3021a3d3dd2b0ce6a5ef185eee1a`
+Material HEAD: `1494cd85d5553a40bfc48a424ea2df8f8401d953`
 Target: `Architecture/_FOLDER_STATUS.md`
 Protocol: `GOV-013 / GOV-014 / GOV-014A / GOV-015 / GOV-016`
 
 | Gate / Target | Expected change | KEEP / preservation | Pre-write | Post-write |
 |---|---|---|---|---|
-| Gate 11 — Known stale references | `OPEN / RE-AUDIT` → bounded PASS for the current active Architecture reference set | Gates 12–13 remain OPEN; Architecture Integrity Hold; GOV-011 remains non-active; no repository-wide stale-reference exhaustion claim | PASS | PENDING |
+| Gate 11 — Known stale references | `OPEN / RE-AUDIT` → bounded PASS for the current active Architecture reference set | Gates 12–13 remain OPEN; Architecture Integrity Hold; GOV-011 remains non-active; no repository-wide stale-reference exhaustion claim | PASS | PASS |
 
 Evidence boundary:
 - Active Architecture authority/reference surfaces `ARC-001` through `ARC-011` were re-read at the exact entry HEAD.
@@ -21,11 +23,17 @@ Evidence boundary:
 - `REP-001` and `REP-002` remain canonical Repository control surfaces on Integrity Hold and do not themselves claim relationship/global certification.
 - No inspected current active Architecture reference requires a source-document mutation before bounded Gate-11 status closure.
 
+Validation:
+- Immutable material read-back: PASS; `Architecture/_FOLDER_STATUS.md` blob `7f6b0fb79480bd6a5d4d0cafe43f217d5f00efdb` at material HEAD.
+- Exact compare `5f5260c8… → 1494cd85…`: PASS; exactly one material target, `Architecture/_FOLDER_STATUS.md`, 29 additions / 8 deletions.
+- Material exact-head Full-Stack Repository Audit run `33720381923`: SUCCESS.
+- Material exact-head M2 Multi-Channel Proposal Training run `33720381903`: SUCCESS.
+
 Non-claims:
 - This is not repository-wide stale-reference exhaustion.
 - Historical/archive/support artifacts outside the active Architecture review set are not globally certified.
 - Cross-layer semantic conformance with Knowledge/Memory and Runtime/Interfaces remains separately open in Gates 12–13.
 - Transaction B / REL-073 remains a separate local Registry hold and is not resolved here.
 
-Validation plan:
-`immutable status read-back → exact parent compare → exact-head required CI → close or preserve failure`.
+Closure rule:
+Transaction N is closed only for bounded Gate-11 current active Architecture reference reconciliation. Architecture remains on Integrity Hold and Gates 12–13 remain open.
