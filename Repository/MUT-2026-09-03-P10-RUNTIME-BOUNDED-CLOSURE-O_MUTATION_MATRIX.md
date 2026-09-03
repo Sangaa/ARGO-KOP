@@ -20,7 +20,7 @@ No current Runtime-specific authority contradiction, identity/inventory drift, m
 | P10-O-02 | `Runtime/README.md` | UPDATE | synchronize handbook status; candidate/prototype artifacts remain unpromoted |
 | P10-O-03 | `Repository/REP-001_MASTER_INDEX.md` | UPDATE | replace current Runtime folder-hold wording with bounded-closure plus candidate-authority boundary; version bump only as required |
 | P10-O-04 | `Repository/REP-002_REPOSITORY_MAP.md` | UPDATE | same current Runtime state synchronization; preserve map authority limits; version bump only as required |
-| P10-O-05 | `Repository/REP-020_CURRENT_CONTROL_PLANE_BOUNDARY_MANIFEST.md` | UPDATE | synchronize only REP-001/002 versions and P10-O checkpoint metadata |
+| P10-O-05 | `Repository/REP-020_CURRENT_CONTROL_PLANE_BOUNDARY_MANIFEST.md` | UPDATE | bind P10-O checkpoint metadata; preserve its existing listed-artifact set and versions (REP-001/002 are not manifest rows) |
 | P10-O-06 | `Repository/P10_RUNTIME_EXPLICIT_BOUNDED_CLOSURE_2026-09-03_O.md` | CREATE | explicit closure basis, deferred scope, reopen conditions and non-claims |
 | P10-O-07 | `Repository/REP-011_PRIORITY10_RUNTIME_CLOSURE_ADDENDUM_2026-09-03_O.md` | CREATE | bind current Runtime review evidence to bounded closure |
 | P10-O-08 | `Repository/REP-012_PRIORITY10_RUNTIME_CLOSURE_ADDENDUM_2026-09-03_O.md` | CREATE | bind exact allocation without granting authority |
@@ -34,12 +34,16 @@ No current Runtime-specific authority contradiction, identity/inventory drift, m
 | P10-O-16 | `Quality/Integrity/test_control_plane_runtime_inventory_alignment.py` | UPDATE | preserve current inventory/authority boundary while recognizing bounded closure |
 | P10-O-17 | `Quality/Integration/test_runtime_p10_bounded_closure_sync.py` | CREATE | require synchronized closure surfaces, exact basis, gates, deferred scope and reopen rule |
 | P10-O-18 | this Matrix | UPDATE | immutable read-back, parent comparison, path proof, local tests and exact-head CI evidence |
+| P10-O-19 | `Quality/Integration/test_core_rep001_control_plane_reconciliation.py` | UPDATE | retain Core/index reconciliation invariants while accepting REP-001's governed P10-O version increment |
+| P10-O-20 | `Quality/Integration/test_core_rep002_control_plane_reconciliation.py` | UPDATE | retain Core/map reconciliation invariants while accepting REP-002's governed P10-O version increment |
 
 ## Consumer classification
 
 The six existing Integrity consumers protect valid Runtime safety invariants but also pin the superseded folder-level `CROSS-LAYER INTEGRATION HOLD` or explicit `P10 OPEN` transition state. After an explicit evidence-backed bounded closure, those literals are stale consumers. Their repair may change only the partition-state expectation; candidate/prototype non-promotion, provider authenticity, production execution, exact inventory, named gate scope and global holds must remain asserted.
 
 Primary classification for those literal transitions: `STALE_CONSUMER`.
+
+The first full Integration run of the local material candidate preserved two additional failures: the Core reconciliation consumers required exact REP-001 version `1.11.4` and REP-002 version `1.7.5`. Their Core content and Integrity-Hold invariants remain valid; only the exact version literals became stale because P10-O changes current Runtime wording in those canonical control surfaces and increments their versions to `1.11.5` and `1.7.6`. Primary classification: `STALE_CONSUMER`. P10-O-19/20 may update only those version expectations.
 
 ## Closure limits and reopen rule
 
