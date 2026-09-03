@@ -2,10 +2,11 @@
 
 Transaction ID: `MUT-2026-09-03-P8-GOVERNANCE-EXACT-INVENTORY-ALLOCATION-G`
 Priority: `8 — Governance`
-State: `MATERIAL CANDIDATE / LOCAL READ-BACK PASS / EXACT-HEAD CI PENDING`
+State: `CLOSED / MATERIAL HEAD 4-OF-4 GREEN / RESUME-SAFE IFF DOCUMENTATION HEAD PASSES`
 Entry HEAD: `68d1b497f37810a2373c73b777643d436dad633a`
 Pre-write Matrix HEAD: `d0fdf02b02744ab27b5b1fdc88a08892b21b2bc6`
-Material HEAD: `THIS MATERIAL COMMIT`
+Material HEAD: `0cc15ecfa8c8580ada844d23b61c363f3245ea43`
+Documentation closure HEAD: `THIS DOCUMENTATION COMMIT`
 Protocol: GOV-014 / `PROJECT_BOOTSTRAP / CORE-003 / GOV-013 / GOV-013A / GOV-013B / GOV-014A / GOV-015 / GOV-016 / REP-011 / REP-012 / REP-013 / REP-016`
 
 ## Legal-entry proof
@@ -95,4 +96,22 @@ No failed evidence is rewritten as success.
 - Mutation Matrix semantic validator: PASS;
 - `git diff --check`: PASS.
 
-Required exact-head workflows remain pending on the material commit. Until all four workflow families pass, this transaction is not closed.
+## Exact material-head workflow evidence
+
+Material HEAD `0cc15ecfa8c8580ada844d23b61c363f3245ea43`:
+
+- Full-Stack Repository Audit `33712200967` — SUCCESS;
+- ARGO Runtime Prototype and Integration Tests `33712200901` — SUCCESS;
+  - integrity-tests job `100513905897` — SUCCESS;
+  - integration-tests job `100513906055` — SUCCESS;
+  - prototype-tests job `100513906080` — SUCCESS;
+- Real Mutation Matrix Regression `33712200912` — SUCCESS;
+- M2 Multi-Channel Proposal Training `33712200942` — SUCCESS.
+
+Immutable GitHub read-back matched all eight prepared blob identities. Parent-to-material compare proved exactly one commit, eight paths and Unexpected Changes = `0`.
+
+## Closure
+
+Transaction G is functionally closed. This documentation binding and the next transaction's pre-write Matrix share `THIS DOCUMENTATION COMMIT`; G is operationally Resume-Safe iff the four required workflows also pass on that exact documentation HEAD.
+
+No separate material claim is created by the documentation-only binding.
