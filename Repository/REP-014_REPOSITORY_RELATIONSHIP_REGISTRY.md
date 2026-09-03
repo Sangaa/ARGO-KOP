@@ -2,7 +2,7 @@
 
 Platform: ARGO KOP  
 Document ID: REP-014  
-Version: 1.2.16
+Version: 1.2.17
 Status: Active / Relationship Enumeration In Progress  
 Development Baseline: 3.2.1  
 Last Audit: 2026-09-03
@@ -125,7 +125,7 @@ The following are deliberately limited to relationships established during repos
 | REL-056 | ENG-014 | RUN-011 | REFERENCES | **RUNTIME VALIDATION CONTRACT / DIRECT-SOURCE-VALIDATED / NON-DEPENDENCY** |
 | REL-057 | RUN-012 | RUN-011 | VALIDATES | Revalidated within current Runtime test scope |
 | REL-058 | RUN-013 | RUN-011 | VALIDATES | **CONTROLLED-HANDOFF TRACE GATE / EXECUTABLE-TESTED / SIDE-EFFECT-FREE / NON-AUTHORITY** |
-| REL-059 | RUN-014 | RUN-011 | VALIDATES | Revalidated within current learning-promotion test scope |
+| REL-059 | RUN-014 | RUN-011 | VALIDATES | **TRACE-TO-LEARNING-CANDIDATE / EXECUTABLE-TESTED / SEPARATE-PROMOTION-AUTHORITY** |
 | REL-060 | RUN-015 | RUN-011 | VALIDATES | Revalidated within current CI validation scope |
 | REL-061 | GOV-013A | GOV-013 | REFERENCES | **INTENTIONAL ONE-WAY / GOVERNANCE-REVALIDATED** |
 | REL-062 | CORE-KERNEL | RUN-001 | REFERENCES | **INTENTIONAL ONE-WAY / RUNTIME-CONTRACT-ALIGNED / NON-DEPENDENCY** |
@@ -677,6 +677,23 @@ Disposition:
 `REL-058 = CONTROLLED-HANDOFF TRACE VALIDATION / EXECUTABLE-TESTED / SIDE-EFFECT-FREE / NON-AUTHORITY`.
 
 The validation claim is limited to the RUN-011 trace at the RUN-013 controlled-handoff boundary. It establishes no production executor, dependency, implementation, consumption, governance or Runtime closure. RUN-013 remains `Candidate / Integrity Hold`; Runtime Gate 15, Priority 10 and the broader graph remain open.
+
+## P10 REL-059 Learning-Promotion Boundary Repair — 2026-09-03
+
+The current RUN-014 test contract directly names RUN-011, but prior executable tests created isolated candidate fixtures and did not consume a RUN-011 trace. The repair adds an explicit side-effect-free trace adapter and preserves the authority boundary:
+
+```text
+RUN-011 trace → explicit observed learning candidate → RUN-014 promotion gate
+action authorization ≠ learning-promotion authority
+```
+
+The adapter carries task/session identity, evidence and validation from the trace while requiring observed result, pattern, confidence, governing-conflict disposition and promotion authority explicitly. The gate now fails closed for blank identity/pattern values and governing conflict. Tests prove that an action-authorized trace remains held until distinct learning-promotion authority is supplied.
+
+Disposition:
+
+`REL-059 = TRACE-TO-LEARNING-CANDIDATE VALIDATION / EXECUTABLE-TESTED / SEPARATE-PROMOTION-AUTHORITY`.
+
+`PROMOTION_ELIGIBLE` remains a candidate state, not knowledge mutation. No automatic promotion, canonical learning, dependency, implementation, consumption or governance edge is claimed. RUN-011 and RUN-014 remain `Candidate / Integrity Hold`; Runtime Gate 15, Priority 10 and the broader graph remain open.
 
 ---
 

@@ -26,3 +26,20 @@ def test_incomplete_candidate_is_held():
     result = evaluate(item)
     assert result["status"] == "HOLD"
     assert result["reason"] == "CANDIDATE_INCOMPLETE"
+
+
+def test_governing_conflict_is_held():
+    item = candidate()
+    item["governing_conflict"] = True
+    result = evaluate(item)
+    assert result["status"] == "HOLD"
+    assert result["reason"] == "GOVERNING_CONFLICT"
+
+
+def test_blank_required_identity_is_incomplete():
+    item = candidate()
+    item["session_id"] = "  "
+    result = evaluate(item)
+    assert result["status"] == "HOLD"
+    assert result["reason"] == "CANDIDATE_INCOMPLETE"
+    assert result["invalid"] == ["session_id"]

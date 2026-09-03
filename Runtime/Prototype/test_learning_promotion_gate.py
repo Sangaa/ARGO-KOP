@@ -1,6 +1,7 @@
 """Acceptance tests for the learning promotion gate."""
 
-from learning_promotion_gate import evaluate
+from cognitive_loop_harness import run
+from learning_promotion_gate import candidate_from_trace, evaluate
 
 
 def candidate():
@@ -13,6 +14,7 @@ def candidate():
         "confidence": 0.95,
         "validation": "VALIDATED",
         "promotion_authority": True,
+        "governing_conflict": False,
     }
 
 
@@ -52,3 +54,32 @@ def test_unobserved_result_is_held():
     result = evaluate(item)
     assert result["status"] == "HOLD"
     assert result["reason"] == "RESULT_NOT_OBSERVED"
+
+
+def test_cognitive_trace_requires_separate_learning_authority():
+    trace = run(
+        {
+            "task_id": "LEARN-TRACE-001",
+            "session_id": "SESSION-TRACE",
+            "active_state": "outcome_observed",
+            "evidence": ["source:trace:001"],
+            "knowledge": ["rule:promotion-boundary"],
+            "requested_outcome": "prepare safe proposal",
+        },
+        human_approved=True,
+    )
+    item = candidate_from_trace(
+        trace,
+        observed_result="proposal accepted",
+        pattern="validated proposal structure",
+        confidence=0.95,
+        promotion_authority=False,
+        governing_conflict=False,
+    )
+
+    assert trace["authorization"]["status"] == "AUTHORIZED"
+    assert evaluate(item) == {"status": "HOLD", "reason": "PROMOTION_AUTHORITY_MISSING"}
+
+    item["promotion_authority"] = True
+    assert evaluate(item) == {"status": "PROMOTION_ELIGIBLE", "promote": True}
+    assert trace["result"] == {"executed": False, "external_side_effect": False}
