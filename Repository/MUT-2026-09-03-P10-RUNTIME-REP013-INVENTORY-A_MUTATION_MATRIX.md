@@ -2,10 +2,11 @@
 
 Transaction ID: `MUT-2026-09-03-P10-RUNTIME-REP013-INVENTORY-A`
 Priority: `10 — Runtime`
-State: `CORRECTIVE MATERIAL CANDIDATE / EXACT-HEAD CI PENDING / RESUME-SAFE`
+State: `CLOSED / VERIFIED / RESUME-SAFE`
 Entry HEAD: `337786f736b21f449acf1e879e5f83f3a67ed00d`
 Pre-write HEAD: `15b5b69588efb057fbf93cfc29e8df2cf96ad9a5`
 Initial Material HEAD: `1000364723f378111aeba3316bd164c8a65fc39f`
+Corrective Material HEAD: `b738e12216a493fe78eea58853b36ea83834a3bd`
 Protocol: `PROJECT_BOOTSTRAP / CORE-003 / GOV-013 / GOV-014 / GOV-014A / REP-011..016`
 
 ## Legal queue entry
@@ -35,11 +36,11 @@ REP-013 alone records five different, non-existent filenames for RUN-011..015. T
 
 | Change ID | Target | Action | Expected change | KEEP / preservation | Pre-write | Post-write |
 |---|---|---|---|---|:---:|:---:|
-| P10-A-01 | `Repository/REP-013_REPOSITORY_CONTENT_TREE.md` | UPDATE | replace only the five non-existent RUN-011..015 inventory filenames with the five exact tracked paths | all non-Runtime content; Runtime scope/non-promotion wording; document identity and ordering | PASS | CONTENT PASS / CI HOLD |
-| P10-A-02 | `Quality/Integrity/test_control_plane_runtime_inventory_alignment.py` | UPDATE | include REP-013 in current-path and stale-path assertions | current REP-001/REP-002 guards; physical-file guard; Runtime hold/non-promotion guards | PASS | CONTENT PASS / CI HOLD |
-| P10-A-C1-01 | this Matrix | UPDATE IN SAME CHANGE SET | preserve the initial failure and satisfy enforced same-change-set evidence | original queue/gap/scope evidence | PASS | PENDING |
-| P10-A-C1-02 | `Repository/REP-013_REPOSITORY_CONTENT_TREE.md` | UPDATE | add explicit current/stale candidate-path boundary without changing the five-file correction | all other REP-013 content and non-exhaustive/non-promotion boundaries | PASS | PENDING |
-| P10-A-C1-03 | `Quality/Integrity/test_control_plane_runtime_inventory_alignment.py` | UPDATE | name the expanded REP-001/002/013 coverage accurately | all assertions and failure strength | PASS | PENDING |
+| P10-A-01 | `Repository/REP-013_REPOSITORY_CONTENT_TREE.md` | UPDATE | replace only the five non-existent RUN-011..015 inventory filenames with the five exact tracked paths | all non-Runtime content; Runtime scope/non-promotion wording; document identity and ordering | PASS | PASS |
+| P10-A-02 | `Quality/Integrity/test_control_plane_runtime_inventory_alignment.py` | UPDATE | include REP-013 in current-path and stale-path assertions | current REP-001/REP-002 guards; physical-file guard; Runtime hold/non-promotion guards | PASS | PASS |
+| P10-A-C1-01 | this Matrix | UPDATE IN SAME CHANGE SET | preserve the initial failure and satisfy enforced same-change-set evidence | original queue/gap/scope evidence | PASS | PASS |
+| P10-A-C1-02 | `Repository/REP-013_REPOSITORY_CONTENT_TREE.md` | UPDATE | add explicit current/stale candidate-path boundary without changing the five-file correction | all other REP-013 content and non-exhaustive/non-promotion boundaries | PASS | PASS |
+| P10-A-C1-03 | `Quality/Integrity/test_control_plane_runtime_inventory_alignment.py` | UPDATE | name the expanded REP-001/002/013 coverage accurately | all assertions and failure strength | PASS | PASS |
 
 ## Non-claims
 
@@ -58,3 +59,15 @@ Validation:
 - The content/test repair itself remains valid; the failure is a transaction-packaging defect.
 - Current enforced repository learning is stronger than matrix-before-write alone: a protected target and its applicable Matrix must also be present in the same current change set.
 - Corrective packaging therefore changes this Matrix, REP-013 and its guard atomically. It does not revert the inventory correction, weaken enforcement or disguise the failed head.
+
+## Corrective material verification
+
+- Exact corrective compare changes only the three authorized paths: REP-013 evidence boundary, the existing guard's coverage name, and this Matrix.
+- Corrective exact-head Real Mutation Matrix Regression `33741948583` — SUCCESS.
+- Corrective exact-head Full-Stack Repository Audit `33741948406` — SUCCESS.
+- Corrective exact-head ARGO Runtime Prototype and Integration Tests `33741948369` — SUCCESS.
+- Corrective exact-head M2 Multi-Channel Proposal Training `33741948308` — SUCCESS.
+- REP-013 now agrees with the tracked Runtime candidate files and REP-001/REP-002, and CI enforces that three-surface agreement.
+
+Closure:
+`P10 TRANSACTION A = CLOSED / VERIFIED / RESUME-SAFE`.
