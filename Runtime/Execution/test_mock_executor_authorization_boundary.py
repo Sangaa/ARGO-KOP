@@ -17,6 +17,25 @@ def test_executor_rejects_invalid_execution_state():
     assert result["reason"] == "INVALID_EXECUTION_STATE"
 
 
+def test_executor_rejects_missing_authorization_identity():
+    result = execute({
+        "status": "PLAN_READY",
+        "execution_status": "NOT_STARTED",
+        "action": "SEND_DRAFT",
+        "target": "TEST_TARGET",
+    })
+    assert result == {"status": "BLOCKED", "reason": "AUTHORIZATION_REQUIRED"}
+
+
+def test_executor_rejects_blank_authorization_identity():
+    result = execute({
+        "status": "PLAN_READY",
+        "execution_status": "NOT_STARTED",
+        "authorization_id": "   ",
+    })
+    assert result == {"status": "BLOCKED", "reason": "AUTHORIZATION_REQUIRED"}
+
+
 def test_executor_is_side_effect_free_after_authorization():
     result = execute({
         "status": "PLAN_READY",

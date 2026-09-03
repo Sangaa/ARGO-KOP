@@ -47,6 +47,7 @@ The active Runtime set was re-reviewed with emphasis on:
 - `Runtime/RUN-014_LEARNING_PROMOTION_TEST.md`
 - `Runtime/RUN-015_RUNTIME_PROTOTYPE_CI_VALIDATION.md`
 - `Runtime/Prototype/`
+- `Runtime/Execution/`
 - Runtime folder status
 - Engine cognitive-loop integration boundaries
 - Repository relationship/control-plane boundaries
@@ -67,41 +68,29 @@ The active Runtime set was re-reviewed with emphasis on:
 12. Runtime ↔ Knowledge / Memory integration — BOUNDED VERIFIED FOR TRACKED PERSISTENCE, CORRECTION/REVIEW, AND NO-SILENT-PROMOTION SEAMS / BROADER GLOBAL-GRAPH HOLD
 13. Runtime ↔ Interfaces / external connectors — BOUNDED VERIFIED FOR PROVIDER-NEUTRAL HANDOFF AND REPORTED-STATUS PRESERVATION / LIVE PROVIDER AUTHENTICITY, AUTHORIZATION AND AVAILABILITY HOLD
 14. Runtime ↔ Repository control plane — BOUNDED VERIFIED FOR RUN-011..015 + REL-055..060 / BROADER CONTROL-PLANE HOLD
-15. Runtime ↔ Engine cognitive-loop prototype seam — VERIFIED FOR PROTOTYPE, HANDOFF, LEARNING AND CI EVIDENCE / EXECUTABLE PROMOTION HOLD
+15. Runtime ↔ Engine executable boundary — GATE-15 AUTHORIZATION HARDENING MATERIAL / EXACT-HEAD CI PENDING / EXECUTABLE-CANONICAL PROMOTION HOLD PRESERVED
 
 # Current Runtime Inventory Finding
 
-Current repository evidence directly locates `RUN-011` through `RUN-015` and the `Runtime/Prototype/` artifacts. These are now included in the Runtime folder evidence scope.
+Current repository evidence directly locates `RUN-011` through `RUN-015`, `Runtime/Prototype/`, and a pre-existing `Runtime/Execution/` implementation/test surface. The execution surface is not new authority: it contains experimental/mock contracts, a side-effect-free executor, trace production and a bounded execution-recording entrypoint.
 
-`RUN-011` and `RUN-012` define the cognitive-loop prototype target and acceptance matrix. `RUN-013` and `RUN-014` define controlled handoff and learning-promotion test boundaries. `RUN-015` defines CI validation for the runtime prototype.
+Priority-10 Transactions A–E reconcile the tracked RUN-011..015 inventory and bounded REL-055..060 cohort. Transaction G closes the tracked Runtime→Memory persistence seam. Transaction H closes the Runtime→Knowledge contradiction-review seam. Transaction J closes the provider-neutral Runtime connector handoff. Gates 12, 13 and 14 remain boundedly verified for their named tracked seams.
 
-These artifacts remain Candidate / Integrity Hold according to their own declarations. Their presence and successful prototype CI evidence do not promote them to canonical executable Runtime authority.
-
-Priority-10 Transactions A–E reconcile the tracked RUN-011..015 inventory and the bounded REL-055..060 cognitive-loop relationship cohort. REP-001, REP-002 and REP-013 agree on the five current contract paths; REP-012 maps them under Integrity Hold; REP-014 records the six relationships. This closes Gate 14 only for that named cohort, not for exhaustive Runtime/control-plane coverage.
-
-Priority-10 Transaction G closes the tracked Runtime→Memory explicit persistence seam: incomplete execution-trace identity/status or unknown side-effect state fails closed before test-target materialization, and valid traces preserve minimum identity through re-read. Transaction H closes the tracked Runtime→Knowledge contradiction-review seam: unsupported evidence, identity, source state or contradiction signal now returns `HOLD` before a demotion review can open. The current Runtime learning pipeline remains readiness-only and `RUN-014` preserves the no-silent-promotion invariant. Together these provide a bounded Gate-12 closure for the currently tracked Runtime↔Knowledge/Memory seams while preserving Gate 15 as the independent executable/canonical promotion hold.
-
-Transaction J adds and verifies a provider-neutral Runtime connector handoff that validates stable request identity, explicit boolean authorization and payload structure before invoking an injected executor. It preserves connector-reported status without converting requests, malformed results or executor failures into success. Gate 13 is boundedly closed at the Runtime/interface seam without claiming live provider authenticity, credentials, availability or external side effects.
+Transaction L verifies two Gate-15 authorization defects in the existing execution surface: truthy non-boolean authorization could cross the execution-entrypoint check, and the side-effect-free executor did not enforce the authorization identity required by its own handoff contract. The material repair now fails closed on both boundaries. Exact-head verification remains required before any Gate-15 closure classification.
 
 # Key Finding
 
-`RUN-004_CONTEXT_LOADING` and `RUN-005_RUNTIME_WORKFLOW` remain strong Runtime contracts. The reviewed `RUN-011..015` extend the Runtime evidence into a bounded cognitive-loop prototype and validation path, but they explicitly preserve the boundary between target contracts, prototype evidence and canonical executable runtime.
+`RUN-013` remains a safety checkpoint and must not return `EXECUTED`. The existence of a separate `Runtime/Execution/` surface does not change that invariant. The correct seam is post-handoff explicit authorization into a bounded executable surface, not expansion of controlled handoff into an execution engine.
 
-The tracked Runtime↔Knowledge/Memory seams are boundedly reconciled through persistence fail-closed behavior, Knowledge-owned correction/review validation, and the existing no-silent-promotion boundary. The provider-neutral Runtime↔Interface handoff is boundedly verified, while live provider authenticity/authorization/availability remain independent external-trust holds. The bounded RUN-011..015 inventory and REL-055..060 control-plane reconciliation remains closed for Gate 14.
+Current Transaction-L material proof remains deliberately side-effect-free. It does not authenticate providers, call external systems, authorize irreversible actions, or promote candidate contracts merely because tests exist.
 
 # Integrity Decision
 
-Runtime remains **validated at the folder-contract level**, with Gates 12, 13 and 14 boundedly verified for their named tracked seams and the cognitive-loop prototype evidence verified for its tested state. global Runtime certification remains intentionally capped at `CROSS-LAYER INTEGRATION HOLD` because Gate 15 retains executable promotion hold; live provider trust is also not inferred.
-
-`RUN-013` still defines controlled handoff as a safety checkpoint that must not return `EXECUTED`, and `RUN-015` explicitly states that prototype CI does not certify full Runtime or executable promotion. Therefore Priority 10 is not closure-ready on current authority.
-
-This status does not invalidate the Runtime contracts. It prevents bounded local/cross-layer validation from being mistaken for production/provider authenticity, executable promotion, repository-wide graph completion or global integrity proof.
+Runtime remains **validated at the folder-contract level** and Priority 10 remains OPEN. Gates 12, 13 and 14 remain boundedly verified. Gate 15 has a material authorization-boundary hardening change awaiting exact-head verification; executable/canonical promotion is not yet claimed.
 
 # Next Construction Boundary
 
-Proceed to the explicit Gate-15 executable-promotion authority/evidence boundary. Do not reopen Gates 12, 13 or 14 unless contradictory current evidence appears.
-
-The next transaction must determine the smallest governed path for executable/canonical promotion, or preserve a Resume-Safe HOLD if current authority/evidence does not permit promotion. It must not infer production readiness from prototype CI or provider-neutral handoff tests.
+Verify Transaction L on its exact material head. If green, recompute whether Gate 15 can be closed for the bounded side-effect-free executable boundary while production/external execution and candidate-to-canonical promotion remain independent holds. If current authority does not permit that separation, preserve Gate 15/P10 HOLD Resume-Safe.
 
 # Engineering Rule
 

@@ -1,8 +1,8 @@
 """Small governed execution entrypoint for the current connectivity baseline.
 
 This module does not grant authorization or perform arbitrary side effects. It
-provides the missing runtime handoff: an authorized execution request is
-recorded through the canonical execution-trace producer and returns the trace
+provides a bounded runtime handoff: an explicitly authorized execution record
+is written through the canonical execution-trace producer and returns the trace
 identifier needed by downstream outcome evaluation.
 """
 
@@ -13,6 +13,10 @@ from execution_trace_producer import record_execution_trace
 
 class ExecutionDenied(ValueError):
     """Raised when the execution request is not explicitly authorized."""
+
+
+def _stable_identity(value: object) -> bool:
+    return isinstance(value, str) and bool(value.strip())
 
 
 def execute(
@@ -27,10 +31,18 @@ def execute(
     stages: list[dict] | None = None,
 ) -> dict:
     """Record a governed execution and return its canonical trace handoff."""
-    if not authorized:
-        raise ExecutionDenied("EXECUTION_NOT_AUTHORIZED")
-    if not source_trace_id:
-        raise ValueError("SOURCE_TRACE_REQUIRED")
+    if authorized is not True:
+        raise ExecutionDenied("EXECUTION_NOT_EXPLICITLY_AUTHORIZED")
+
+    identities = {
+        "execution_id": execution_id,
+        "task_id": task_id,
+        "session_id": session_id,
+        "source_trace_id": source_trace_id,
+    }
+    invalid = [name for name, value in identities.items() if not _stable_identity(value)]
+    if invalid:
+        raise ValueError(f"EXECUTION_IDENTITY_REQUIRED: {','.join(invalid)}")
 
     result = record_execution_trace(
         trace_id=f"TR-{uuid4().hex[:12]}",

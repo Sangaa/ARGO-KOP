@@ -3,24 +3,25 @@
 Transaction ID: `MUT-2026-09-03-P10-GATE15-EXECUTION-AUTHORITY-L`
 Priority: `10 — Runtime`
 Gate: `15 — Runtime ↔ Engine executable boundary`
-State: `PRE-WRITE / OPEN`
+State: `MATERIAL CHANGE SET / CI PENDING`
 Entry HEAD: `16d2efca91d1f7507cc23474c23a284002684dd5`
+Pre-write HEAD: `78fb6a597b6492316ffeb449d749319ecfdc869b`
 Protocol: `PROJECT_BOOTSTRAP / CORE-003 / GOV-013 / GOV-014 / GOV-014A / GOV-016 / ENG-006 / RUN-013 / RUN-015 / Runtime Execution contracts / REP-011 / REP-016`
 
 ## Independently verified tracked defects
 
-1. `Runtime/Execution/execution_entrypoint.py` accepts authorization through Python truthiness (`if not authorized`) even though the interface declares `authorized: bool`. Truthy non-booleans can therefore cross the execution-recording boundary as if explicitly authorized.
-2. `Runtime/Execution/EXECUTION_ADAPTER_CONTRACT.md` and `EXECUTION_AUTHORIZATION_HANDOFF.md` require a valid `authorization_id`, but `Runtime/Execution/mock_executor.py` does not reject a `PLAN_READY / NOT_STARTED` plan whose authorization identity is absent.
+1. `Runtime/Execution/execution_entrypoint.py` accepted authorization through Python truthiness despite declaring `authorized: bool`; truthy non-booleans could cross as implicit authorization.
+2. Current execution contracts require a valid `authorization_id`, but `Runtime/Execution/mock_executor.py` did not reject a ready/not-started plan with missing authorization identity.
 
-Classification: `REAL TRACKED GATE-15 AUTHORIZATION BOUNDARY DEFECTS`.
+Classification: `REAL TRACKED GATE-15 AUTHORIZATION BOUNDARY DEFECTS / MATERIAL REPAIR APPLIED`.
 
 ## Required semantic boundary
 
 `INVALID AUTHORIZATION TYPE OR IDENTITY OR PLAN/EXECUTION STATE` → `FAIL CLOSED / BLOCKED / NO EXECUTION HANDOFF`.
 
-Preserve:
+Preserved:
 - RUN-013 controlled handoff remains `READY_FOR_CONTROLLED_HANDOFF`/`HOLD` only and never returns `EXECUTED`;
-- side-effect-free mock execution remains simulation only;
+- mock execution remains `SIMULATED / SIMULATED_ONLY / side_effect=false`;
 - no external API/email/production mutation or irreversible side effect is authorized;
 - provider authenticity and availability remain independent Gate-13/external-trust holds;
 - no candidate Runtime contract is promoted merely by passing local tests.
@@ -29,16 +30,16 @@ Preserve:
 
 | Change ID | Target | Action | Purpose | Pre-write | Post-write |
 |---|---|---|---|:---:|:---:|
-| P10-L-01 | `Runtime/Execution/execution_entrypoint.py` | UPDATE | require exact boolean authorization and stable execution/source identities before trace handoff | PASS | PENDING |
-| P10-L-02 | `Runtime/Execution/test_execution_entrypoint.py` | UPDATE | cover non-boolean authorization and identity rejection | PASS | PENDING |
-| P10-L-03 | `Runtime/Execution/mock_executor.py` | UPDATE | enforce authorization identity required by current contract | PASS | PENDING |
-| P10-L-04 | `Runtime/Execution/test_mock_executor_authorization_boundary.py` | UPDATE | prove missing authorization identity blocks simulation | PASS | PENDING |
-| P10-L-05 | `Runtime/_FOLDER_STATUS.md` | UPDATE | record Gate-15 material boundary without claiming production/external execution | PASS | PENDING |
-| P10-L-06 | `Quality/Integrity/test_runtime_p10_gate15_execution_authority.py` | CREATE | bind source semantics to RUN-013/015 independent holds | PASS | PENDING |
-| P10-L-07 | `Repository/REP-011_PRIORITY10_RUNTIME_GATE15_EXECUTION_AUTHORITY_ADDENDUM_2026-09-03_L.md` | CREATE | bounded evidence and non-claims | PASS | PENDING |
-| P10-L-08 | this Matrix | UPDATE | material/CI/closure evidence | PASS | PENDING |
+| P10-L-01 | `Runtime/Execution/execution_entrypoint.py` | UPDATE | exact boolean authorization + stable identities | PASS | PASS |
+| P10-L-02 | `Runtime/Execution/test_execution_entrypoint.py` | UPDATE | negative authorization/identity coverage | PASS | PASS |
+| P10-L-03 | `Runtime/Execution/mock_executor.py` | UPDATE | enforce authorization identity | PASS | PASS |
+| P10-L-04 | `Runtime/Execution/test_mock_executor_authorization_boundary.py` | UPDATE | missing/blank auth rejection | PASS | PASS |
+| P10-L-05 | `Runtime/_FOLDER_STATUS.md` | UPDATE | material state/non-claims | PASS | PASS |
+| P10-L-06 | `Quality/Integrity/test_runtime_p10_gate15_execution_authority.py` | CREATE | bind semantics and independent holds | PASS | PASS |
+| P10-L-07 | `Repository/REP-011_PRIORITY10_RUNTIME_GATE15_EXECUTION_AUTHORITY_ADDENDUM_2026-09-03_L.md` | CREATE | bounded evidence/non-claims | PASS | PASS |
+| P10-L-08 | this Matrix | UPDATE | material/CI/closure evidence | PASS | PASS |
 
-No Services/provider adapter, credentials, Interfaces implementation, or unrelated Runtime files are authorized by this transaction.
+No Services/provider adapter, credentials, Interfaces implementation, or unrelated Runtime files changed.
 
 Validation:
 `pre-write → bounded hardening → immutable read-back → targeted tests → exact-head four workflow families → classify Gate15 close/hold Resume-Safe`.
