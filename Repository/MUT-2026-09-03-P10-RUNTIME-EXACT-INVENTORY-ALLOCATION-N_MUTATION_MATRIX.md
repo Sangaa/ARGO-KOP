@@ -42,6 +42,18 @@ Additional authorized path:
 |---|---|---|---|---|:---:|:---:|
 | P10-N-08 | `Quality/Integrity/test_runtime_p10_closure_readiness.py` | UPDATE | require exact-inventory reconciliation plus separate P10 closure decision | Gate-15 bounded closure; P10 remains OPEN; global/provider non-claims | PASS | PENDING |
 
+## Preserved pre-material control-plane manifest failure
+
+After the stale closure consumer was repaired, workflow-equivalent Integration produced two failures (`2 failed / 583 passed / 11 subtests passed`) from one fail-closed control-plane mismatch: REP-012 candidate version `1.0.11` and REP-013 candidate version `1.1.4` were not yet reflected in `REP-020_CURRENT_CONTROL_PLANE_BOUNDARY_MANIFEST.md`.
+
+Primary classification: `CONTROL_PLANE / MANIFEST DRIFT`. The manifest guard remains valid and must be satisfied, not weakened.
+
+Additional authorized path:
+
+| Change ID | Target | Action | Expected change | KEEP requirements | Pre-write | Post-write |
+|---|---|---|---|---|:---:|:---:|
+| P10-N-09 | `Repository/REP-020_CURRENT_CONTROL_PLANE_BOUNDARY_MANIFEST.md` | UPDATE | synchronize REP-012 `1.0.11` and REP-013 `1.1.4` rows plus current checkpoint metadata | all statuses, roles, Phase-1/global holds and other rows | PASS | PENDING |
+
 ## Non-claims
 
 - Allocation records do not certify semantic correctness, canonical authority, executable promotion, provider authenticity or production readiness.
