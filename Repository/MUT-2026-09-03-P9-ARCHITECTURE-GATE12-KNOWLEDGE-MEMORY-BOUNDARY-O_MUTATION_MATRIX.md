@@ -2,18 +2,20 @@
 
 Transaction ID: `MUT-2026-09-03-P9-ARCHITECTURE-GATE12-KNOWLEDGE-MEMORY-BOUNDARY-O`
 Priority: `9 — Architecture`
-State: `PRE-WRITE / STATUS MUTATION NOT YET APPLIED`
+State: `CLOSED / VERIFIED / RESUME-SAFE`
 Entry HEAD: `818e331f18c6a1f71a073411ac9e5a9aab68ee28`
+Pre-write HEAD: `ff5770c46376668540e765895bc5c6bc37f7909d`
+Material HEAD: `fe046def13bc2265d43a8887dc45ec3ca1c693a7`
 Target: `Architecture/_FOLDER_STATUS.md`
 Protocol: `GOV-013 / GOV-014 / GOV-014A / GOV-015 / GOV-016`
 
 | Gate / Target | Expected change | KEEP / preservation | Pre-write | Post-write |
 |---|---|---|---|---|
-| Gate 12 — Architecture ↔ Knowledge / Memory boundary | `OPEN` → bounded PASS for the inspected Architecture↔Knowledge/Memory semantic boundary | Gate 13 remains OPEN; Architecture/Knowledge/Memory Integrity Holds remain; KNW-003 `Revalidation Required` remains; no Knowledge or Memory partition certification; no repository-wide relationship claim | PASS | PENDING |
+| Gate 12 — Architecture ↔ Knowledge / Memory boundary | `OPEN` → bounded PASS for the inspected Architecture↔Knowledge/Memory semantic boundary | Gate 13 remains OPEN; Architecture/Knowledge/Memory Integrity Holds remain; KNW-003 `Revalidation Required` remains; no Knowledge or Memory partition certification; no repository-wide relationship claim | PASS | PASS |
 
 ## Evidence boundary
 
-- Transaction N / Gate 11 closure HEAD `818e331f18c6a1f71a073411ac9e5a9aab68ee28` is live `main` and all four closure workflow families are SUCCESS: Full-Stack `33720465814`, Runtime/Integration `33720465827`, Real Mutation Matrix `33720465825`, M2 `33720465808`.
+- Transaction N / Gate 11 closure HEAD `818e331f18c6a1f71a073411ac9e5a9aab68ee28` is live predecessor evidence and all four closure workflow families are SUCCESS: Full-Stack `33720465814`, Runtime/Integration `33720465827`, Real Mutation Matrix `33720465825`, M2 `33720465808`.
 - `ARC-003` preserves information/evidence movement while explicitly stating that information flow does not transfer ownership, create dependency, or override ARC-011 structural/dependency authority.
 - `ARC-006` defines `Knowledge / Specifications / Standards → Memory` in canonical dependency direction, prohibits Memory rewriting Architecture without a governed decision, and requires learned experience promotion into canonical platform knowledge to pass governance and validation.
 - `ARC-007` preserves the same responsibility direction while explicitly allowing non-linear runtime interaction and learning feedback without authority transfer; runtime/experience capture is not silent repository authority.
@@ -30,18 +32,24 @@ The inspected contracts distinguish **information/learning feedback** from **arc
 
 No inspected source document requires a material correction before bounded Gate-12 status closure.
 
+## Material verification
+
+- Immutable read-back at material HEAD confirms `Architecture/_FOLDER_STATUS.md` version `1.5.8`, Gate 12 bounded PASS and Gate 13 OPEN; blob SHA `39959b45201751985e9da44caa196a40d19e7074`.
+- Exact compare `ff5770c46376668540e765895bc5c6bc37f7909d → fe046def13bc2265d43a8887dc45ec3ca1c693a7` changes exactly one target file: `Architecture/_FOLDER_STATUS.md` (`33 additions / 9 deletions`).
+- Material exact-head CI: Full-Stack `33721336514` — SUCCESS; M2 `33721336608` — SUCCESS.
+
 ## Out-of-scope observation
 
 The Memory top-level inventory contains both `MEM-008_GUIDED_DISCOVERY_LEARNING_METHOD.md` and `MEM-008_MEMORY_TRACEABILITY.md`. This is a Memory-domain identity observation, not evidence that the Architecture↔Knowledge/Memory semantic boundary is reversed. It is not promoted into Priority-9 scope without separate authority/evidence.
 
 ## Non-claims
 
-- Gate 12 PASS will not certify Knowledge or Memory partitions.
-- Gate 12 PASS will not clear `KNW-003 Revalidation Required`.
-- Gate 12 PASS will not validate every Knowledge↔Memory relationship or repository registry edge.
+- Gate 12 PASS does not certify Knowledge or Memory partitions.
+- Gate 12 PASS does not clear `KNW-003 Revalidation Required`.
+- Gate 12 PASS does not validate every Knowledge↔Memory relationship or repository registry edge.
 - Gate 13 Runtime / Interface remains OPEN.
 - Architecture remains on Integrity Hold until remaining Priority-9 gates and closure review are satisfied.
 - Transaction B / REL-073 remains a separate local Registry hold.
 
-Validation plan:
-`immutable status read-back → exact parent compare → exact-head required CI → close or preserve failure`.
+Closure state:
+`CLOSED / VERIFIED / RESUME-SAFE`, subject to exact closure-head workflow verification.
