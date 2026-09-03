@@ -16,7 +16,7 @@ ARC-005
 
 Version
 
-1.2.0
+1.2.1
 
 Status
 
@@ -36,13 +36,13 @@ Latest Official Release
 
 Last Audit
 
-2026-08-08
+2026-09-03
 
 ---
 
 # Purpose
 
-This document defines architectural control rules for the design, evolution and maintenance of ARGO KOP.
+This document defines architectural control rules for the design, evolution and maintenance of ARGO KOP. Its structural-boundary and dependency-direction interpretation is subordinate to the Constitution and applicable Governance and aligned with the current canonical Architecture Model in `Architecture/ARC-011_CANONICAL_ARCHITECTURE_MODEL.md`.
 
 These rules govern architectural relationships without pretending that every historical rule remains permanently correct. Existing rules remain reviewable when current evidence shows a simpler, safer or more accurate control.
 
@@ -74,7 +74,7 @@ Placement must be interpreted together with filename, internal identity, content
 
 ## Rule 5 — Dependency Direction
 
-Canonical architectural dependencies follow the active Architecture Model and must not introduce reverse dependencies without governed authorization.
+Canonical architectural dependencies follow the current canonical Architecture Model in `Architecture/ARC-011_CANONICAL_ARCHITECTURE_MODEL.md` and must not introduce reverse dependencies without governed authorization.
 
 A dependency is not valid merely because a path is named; its target, authority, relationship and affected consumers must be verified.
 
@@ -171,6 +171,7 @@ A previously reviewed architectural domain may be reopened when new repository e
 - `Architecture/ARC-002_COMPONENT_ARCHITECTURE.md`
 - `Architecture/ARC-004_LAYER_MODEL.md`
 - `Architecture/ARC-006_DEPENDENCY_MODEL.md`
+- `Architecture/ARC-011_CANONICAL_ARCHITECTURE_MODEL.md`
 - `Repository/REP-001_MASTER_INDEX.md`
 - `Repository/REP-002_REPOSITORY_MAP.md`
 
