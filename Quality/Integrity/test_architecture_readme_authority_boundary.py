@@ -72,9 +72,10 @@ def test_core_closure_does_not_promote_architecture_or_registry_relationships():
 
     assert "Architecture folder remains under `INTEGRITY HOLD`" in readme
     assert "INTEGRITY HOLD — RE-AUDIT IN PROGRESS / LOCAL INVENTORY VERIFIED" in status
-    assert "Canonical Architecture Model alignment — OPEN" in status
-    assert "BOUNDED CONSUMER ALIGNMENT PASS IN TRANSACTION S" in status
-    assert "BOUNDED CONSUMER ALIGNMENT != ARCHITECTURE CERTIFICATION" in status
+    assert "Canonical Architecture Model alignment — PASS FOR CURRENT PRIMARY ARC SET" in status
+    assert "Bounded Priority-7 Consumer Reconciliation — Transaction S / S-C1" in status
+    assert "BOUNDED CANONICAL ALIGNMENT != ARCHITECTURE CERTIFICATION" in status
+    assert "Architecture is **not globally certified**" in status
 
     forbidden_registry_markers = (
         "| ARCHITECTURE_README | CORE-000 |",
