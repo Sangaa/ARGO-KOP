@@ -2,24 +2,25 @@
 
 Transaction ID: `MUT-2026-09-03-P9-ARCHITECTURE-GATES9-10-FLOW-EVOLUTION-K`
 Priority: `9 — Architecture`
-State: `PRE-WRITE / STATUS MUTATION NOT YET APPLIED`
+State: `CLOSED / VERIFIED / RESUME-SAFE IFF THIS CLOSURE HEAD PASSES`
 Entry HEAD: `18117847be8dddf6c9a99744c9661efe2c1e6906`
+Pre-write Matrix HEAD: `85c69d4688ebd299e0633b3f0c152d91ebf82345`
+Material HEAD: `daba678d8a56f14f6fa810c3cf70a0ba1b9c0a6d`
 Target: `Architecture/_FOLDER_STATUS.md`
 Protocol: `GOV-013 / GOV-014 / GOV-014A / GOV-015 / GOV-016`
 
 | Gate | Expected change | KEEP / preservation | Pre-write | Post-write |
 |---|---|---|---|---|---|
-| Gate 9 — Information Flow alignment | OPEN → bounded PASS for current primary Architecture flow model | Gate 4,11,12,13 remain OPEN; cross-layer consumers not globally certified | PASS | PENDING |
-| Gate 10 — Evolution Model alignment | OPEN → bounded PASS for current Architecture decision/evolution lifecycle | No release/runtime/memory certification; Architecture HOLD/global non-certification retained | PASS | PENDING |
+| Gate 9 — Information Flow alignment | OPEN → bounded PASS for current primary Architecture flow model | Gate 4,11,12,13 remain OPEN; cross-layer consumers not globally certified | PASS | PASS |
+| Gate 10 — Evolution Model alignment | OPEN → bounded PASS for current Architecture decision/evolution lifecycle | No release/runtime/memory certification; Architecture HOLD/global non-certification retained | PASS | PASS |
 
-Evidence boundary:
-- `ARC-003` is subordinate to Constitution/Governance, explicitly compatible with ARC-011, and states information movement does not create dependency, transfer ownership, or override canonical structural/dependency boundaries.
-- ARC-003 canonical information flow preserves source identification, evidence classification, validation, repository integration, reasoning/decision, result evaluation, authority separation, traceability, and explicit `Unknown` handling.
-- `ARC-009` requires evidence-backed, repository-verified architectural decisions, explicit uncertainty, impact/ripple review, authorized repository update, validation, and bounded HOLD when scope/evidence is incomplete.
-- `ARC-010` preserves the same evidence → review → decision → authorized repository update → re-read/validation → disposition lifecycle; it requires traceable decision evidence for material evolution and explicitly does not override Constitution, Governance, Canonical Architecture Model, Repository, or Release authority.
-- ARC-009 and ARC-010 mutually reference one another and ARC-011; no competing evolution authority is declared.
-- No repository Quality/Integrity search hit requires Gate 9 or Gate 10 to remain OPEN, so no regression contract mutation is justified pre-write.
-- This closure does not establish canonical-path uniqueness, stale-reference exhaustion, Architecture↔Knowledge/Memory closure, Architecture↔Runtime/Interface closure, or repository-wide graph completeness.
+Verification:
+- Immutable material read-back: `_FOLDER_STATUS.md` blob `4bf9f1fb5a10375921011cf5587cc992a6e4f50b`.
+- Exact compare `85c69d46… → daba678d…`: one material commit, one target path, 39 additions / 9 deletions.
+- Material-head Full-Stack Repository Audit run `33717851193` = SUCCESS.
+- Material-head M2 run `33717851271` = SUCCESS.
+- Runtime / Real Mutation Matrix were not dispatched for the Architecture-status-only material change and no non-triggered success is claimed.
+- Gates 4,11,12,13 remain OPEN; Architecture remains INTEGRITY HOLD and not globally certified.
 
-Validation plan:
-`immutable status read-back → exact parent compare → exact-head required CI → close or preserve failure`.
+Disposition:
+`GATES 9–10 CLOSED / VERIFIED / CLOSURE-HEAD 4-FAMILY VERIFICATION REQUIRED`.
