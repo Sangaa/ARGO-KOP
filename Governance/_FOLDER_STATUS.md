@@ -138,6 +138,10 @@ Current per-path dispositions are recorded in:
 
 `GOVERNANCE PHYSICAL INVENTORY + ALLOCATION = RECONCILED FOR CURRENT 52-FILE SET / P8 CLOSURE REVIEW PENDING`.
 
+Retained stable identity/inventory milestone:
+
+`IDENTITY + REP-001/REP-002 INVENTORY SYNC VERIFIED`.
+
 The former aggregate `CONTENT REVIEW HOLDS REMAIN` state was resolved by the separate Priority-8 closure review into bounded classes. The phrase remains here as historical transition evidence, not as a current P8 blocker.
 
 ### Governance identity/inventory

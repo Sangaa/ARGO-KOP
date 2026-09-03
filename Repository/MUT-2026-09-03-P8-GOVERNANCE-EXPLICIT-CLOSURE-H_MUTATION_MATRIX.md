@@ -2,10 +2,11 @@
 
 Transaction ID: `MUT-2026-09-03-P8-GOVERNANCE-EXPLICIT-CLOSURE-H`
 Priority: `8 — Governance`
-State: `HARD HOLD / MATERIAL HEAD RUNTIME-INTEGRATION FAILED / H-C1 OPEN`
+State: `CORRECTIVE CANDIDATE / H-C1 LOCAL READ-BACK PASS / EXACT-HEAD CI PENDING`
 Entry HEAD: `0cc15ecfa8c8580ada844d23b61c363f3245ea43`
 Pre-write Matrix HEAD: `f5c0f004ec1efeaff433d46fd12528f377012798`
 Failed material HEAD: `dca489a5b3e4fdf3ad6b7b38eb730ad5650851ef`
+Corrective HEAD: `THIS H-C1 MATERIAL COMMIT`
 Protocol: GOV-014 / `PROJECT_BOOTSTRAP / CORE-003 / GOV-013 / GOV-013A / GOV-014A / GOV-015 / GOV-016 / REP-011 / REP-012 + G / REP-013 + G / REP-014 / REP-016`
 
 ## Dedicated Priority-8 closure review
@@ -116,4 +117,4 @@ Failure: `test_current_tree_governance_document_heading_identities_are_unique_af
 
 Classification: `STATUS MATERIALIZATION REGRESSION / STALE PRESENTATION TRANSITION, NOT STALE TEST`.
 
-The test is preserved unchanged. H remains HARD HOLD until isolated corrective transaction H-C1 restores the still-true stable milestone, immutable read-back succeeds and all required exact-head workflows pass.
+The test is preserved unchanged. Isolated corrective transaction H-C1 restores the still-true stable milestone. H remains unclosed until immutable exact-head read-back and all required workflows pass.
