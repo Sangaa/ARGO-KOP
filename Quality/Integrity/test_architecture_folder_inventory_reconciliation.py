@@ -31,5 +31,6 @@ def test_architecture_status_closes_only_exact_physical_inventory():
     assert "EXACT PHYSICAL INVENTORY != ARCHITECTURE DOMAIN CERTIFICATION" in status
     assert "Layer boundary consistency — PASS FOR CURRENT PRIMARY ARC SET" in status
     assert "Dependency direction consistency — PASS FOR CURRENT PRIMARY ARC SET" in status
-    assert "Architecture ↔ Runtime / Interface boundary — OPEN" in status
+    assert "Architecture ↔ Runtime / Interface boundary — PASS FOR INSPECTED RUNTIME / INTERFACE SEMANTIC CONTRACT BOUNDARY" in status
+    assert "BOUNDED ARCHITECTURE↔RUNTIME/INTERFACE ALIGNMENT != RUNTIME OR INTERFACE IMPLEMENTATION CERTIFICATION" in status
     assert "Architecture is **not globally certified**" in status
