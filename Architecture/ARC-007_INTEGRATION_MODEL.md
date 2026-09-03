@@ -8,18 +8,18 @@ Platform: ARGO KOP
 Knowledge Operating Platform
 
 Document ID: ARC-007
-Version: 1.3.1
+Version: 1.3.2
 Status: Validated / Integrity Hold
 Category: Architecture
 Development Baseline: 3.2.1
 Latest Official Release: 1.0.0
-Last Audit: 2026-08-13
+Last Audit: 2026-09-03
 
 ---
 
 # Purpose
 
-Defines how architectural components integrate while preserving ownership, dependency direction, governance, repository authority, security boundaries and traceability.
+Defines how architectural components integrate while preserving ownership, dependency direction, governance, repository authority, security boundaries and traceability. Its structural-boundary and dependency-direction interpretation is subordinate to the Constitution and applicable Governance and aligned with the current canonical Architecture Model in `Architecture/ARC-011_CANONICAL_ARCHITECTURE_MODEL.md`.
 
 # Integration Philosophy
 
@@ -31,7 +31,7 @@ An integration provides a capability or evidence path; it does not acquire platf
 
 Identity / Core → Governance → Architecture → Repository → Knowledge / Specifications / Standards → Memory → Cognition / Engine → Runtime / Services / AI → Projects
 
-This represents dependency and responsibility direction. It does not require every runtime interaction to be linear.
+This responsibility/dependency direction is governed by `Architecture/ARC-011_CANONICAL_ARCHITECTURE_MODEL.md` and expressed as the dependency contract in `Architecture/ARC-006_DEPENDENCY_MODEL.md`. It does not require every runtime interaction to be linear.
 
 # Integration Requirements
 
@@ -137,6 +137,7 @@ Failure blocks acceptance until corrected or explicitly dispositioned by the app
 - `Architecture/ARC-004_LAYER_MODEL.md`
 - `Architecture/ARC-006_DEPENDENCY_MODEL.md`
 - `Architecture/ARC-009_ARCHITECTURE_DECISIONS.md`
+- `Architecture/ARC-011_CANONICAL_ARCHITECTURE_MODEL.md`
 - `Core/CORE-003_CONSTITUTION.md`
 - `Governance/GOV-010_GOVERNANCE_MODEL.md`
 - `Repository/REP-001_MASTER_INDEX.md`
