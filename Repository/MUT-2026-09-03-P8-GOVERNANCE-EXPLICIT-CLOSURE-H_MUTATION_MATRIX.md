@@ -2,10 +2,10 @@
 
 Transaction ID: `MUT-2026-09-03-P8-GOVERNANCE-EXPLICIT-CLOSURE-H`
 Priority: `8 — Governance`
-State: `MATERIAL CANDIDATE / LOCAL READ-BACK PASS / EXACT-HEAD CI PENDING`
+State: `HARD HOLD / MATERIAL HEAD RUNTIME-INTEGRATION FAILED / H-C1 OPEN`
 Entry HEAD: `0cc15ecfa8c8580ada844d23b61c363f3245ea43`
 Pre-write Matrix HEAD: `f5c0f004ec1efeaff433d46fd12528f377012798`
-Material HEAD: `THIS MATERIAL COMMIT`
+Failed material HEAD: `dca489a5b3e4fdf3ad6b7b38eb730ad5650851ef`
 Protocol: GOV-014 / `PROJECT_BOOTSTRAP / CORE-003 / GOV-013 / GOV-013A / GOV-014A / GOV-015 / GOV-016 / REP-011 / REP-012 + G / REP-013 + G / REP-014 / REP-016`
 
 ## Dedicated Priority-8 closure review
@@ -100,4 +100,20 @@ H closes only after immutable material read-back, exact-head required workflows,
 - Mutation Matrix semantic validation: PASS;
 - `git diff --check`: PASS.
 
-Required exact-head workflows remain pending on the material candidate. Until all required runs and Runtime jobs pass, the closure decision is not operationally Resume-Safe.
+## Failed material-head evidence
+
+Failed material HEAD: `dca489a5b3e4fdf3ad6b7b38eb730ad5650851ef`.
+
+- Full-Stack Repository Audit `33712767984` — SUCCESS;
+- Real Mutation Matrix Regression `33712767987` — SUCCESS;
+- M2 Multi-Channel Proposal Training `33712767989` — SUCCESS;
+- ARGO Runtime Prototype and Integration Tests `33712767948` — FAILED;
+  - prototype-tests `100515576833` — SUCCESS;
+  - integrity-tests `100515576948` — SUCCESS;
+  - integration-tests `100515577102` — FAILED.
+
+Failure: `test_current_tree_governance_document_heading_identities_are_unique_after_migration` still requires the stable verified milestone phrase `IDENTITY + REP-001/REP-002 INVENTORY SYNC VERIFIED`. The closure-status rewrite removed the exact phrase even though the underlying milestone remained true.
+
+Classification: `STATUS MATERIALIZATION REGRESSION / STALE PRESENTATION TRANSITION, NOT STALE TEST`.
+
+The test is preserved unchanged. H remains HARD HOLD until isolated corrective transaction H-C1 restores the still-true stable milestone, immutable read-back succeeds and all required exact-head workflows pass.
