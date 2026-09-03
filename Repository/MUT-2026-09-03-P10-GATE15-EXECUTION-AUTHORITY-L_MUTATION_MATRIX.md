@@ -3,11 +3,13 @@
 Transaction ID: `MUT-2026-09-03-P10-GATE15-EXECUTION-AUTHORITY-L`
 Priority: `10 — Runtime`
 Gate: `15 — Runtime ↔ Engine executable boundary`
-State: `MATERIAL CHANGE SET / SECOND STATUS REPAIR PENDING CI`
+State: `MATERIAL CHANGE SET / FINAL EXACT-HEAD CI PENDING`
 Entry HEAD: `16d2efca91d1f7507cc23474c23a284002684dd5`
 Pre-write HEAD: `78fb6a597b6492316ffeb449d749319ecfdc869b`
 Initial Material HEAD: `5d94dfc26bf886b36d04ea75b92f60937707add0`
 First Status Repair HEAD: `a5c2ea19ff85de2decd94b0eb6b6e19728179d99`
+Authority-Baseline Repair HEAD: `d6ef08f5879606642db761e653e9101d67853235`
+Final Status Compatibility HEAD: `0c9797bb36e71ca76bd055ff3768e25f6fff006a`
 Protocol: `PROJECT_BOOTSTRAP / CORE-003 / GOV-013 / GOV-014 / GOV-014A / GOV-016 / ENG-006 / RUN-013 / RUN-015 / Runtime Execution contracts / REP-011 / REP-016`
 
 ## Independently verified tracked defects
@@ -36,7 +38,7 @@ Preserved:
 | P10-L-02 | `Runtime/Execution/test_execution_entrypoint.py` | UPDATE | negative authorization/identity coverage | PASS | PASS |
 | P10-L-03 | `Runtime/Execution/mock_executor.py` | UPDATE | enforce authorization identity | PASS | PASS |
 | P10-L-04 | `Runtime/Execution/test_mock_executor_authorization_boundary.py` | UPDATE | missing/blank auth rejection | PASS | PASS |
-| P10-L-05 | `Runtime/_FOLDER_STATUS.md` | UPDATE | add L evidence without replacing protected authority wording | PASS | SECOND REPAIR APPLIED |
+| P10-L-05 | `Runtime/_FOLDER_STATUS.md` | UPDATE | additive L evidence while preserving all protected authority wording | PASS | PASS |
 | P10-L-06 | `Quality/Integrity/test_runtime_p10_gate15_execution_authority.py` | CREATE | bind semantics and independent holds | PASS | PASS |
 | P10-L-07 | `Repository/REP-011_PRIORITY10_RUNTIME_GATE15_EXECUTION_AUTHORITY_ADDENDUM_2026-09-03_L.md` | CREATE | bounded evidence/non-claims | PASS | PASS |
 | P10-L-08 | this Matrix | UPDATE | material/CI/closure evidence | PASS | PASS |
@@ -45,11 +47,13 @@ Preserved:
 
 Initial material HEAD `5d94dfc26bf886b36d04ea75b92f60937707add0` produced Runtime integrity `178 passed / 6 failed`; prototype tests passed. All six failures were status-consumer regressions caused by replacing protected prior authority wording. No new execution semantic test failed.
 
-First status-repair HEAD `a5c2ea19ff85de2decd94b0eb6b6e19728179d99` improved the result to `179 passed / 5 failed` but still omitted five protected K-era phrases: `global Runtime certification`, `Therefore Priority 10 is not closure-ready on current authority.`, `production/provider authenticity`, and the exact global-certification cap wording. Again no execution semantic test failed.
+First status-repair HEAD `a5c2ea19ff85de2decd94b0eb6b6e19728179d99` improved the result to `179 passed / 5 failed` but still omitted five protected K-era phrases. Again no execution semantic test failed.
 
-The second correction uses the last exact known-green pre-L Runtime status (`16d2efca...`) verbatim as the authority baseline and adds only one Transaction-L material paragraph plus a bounded next pointer. This avoids assertion-chasing and preserves all prior invariants. Tests are not weakened.
+Authority-baseline repair HEAD `d6ef08f5879606642db761e653e9101d67853235` restored the last exact known-green pre-L status and reduced the result to `182 passed / 2 failed`. The remaining two failures were compatibility-only: the K-era Gate-15 next pointer and the exact L material marker. No execution semantic test failed.
 
-No Services/provider adapter, credentials, Interfaces implementation, or unrelated Runtime files changed.
+Final status compatibility HEAD `0c9797bb36e71ca76bd055ff3768e25f6fff006a` adds those two phrases without removing or weakening any prior invariant. Because that status-only commit triggers only a subset of workflow path filters, this Matrix update intentionally creates one final exact head on which all four required workflow families can run.
+
+Tests were never weakened. No Services/provider adapter, credentials, Interfaces implementation, or unrelated Runtime files changed.
 
 Validation:
-`pre-write → bounded hardening → immutable read-back → preserved CI failures → authority-baseline status restoration + additive L evidence → exact-head four workflow families → classify Gate15 close/hold Resume-Safe`.
+`pre-write → bounded hardening → immutable read-back → preserved CI failures → authority-baseline restoration → additive compatibility repair → exact-head four workflow families → classify Gate15 close/hold Resume-Safe`.
