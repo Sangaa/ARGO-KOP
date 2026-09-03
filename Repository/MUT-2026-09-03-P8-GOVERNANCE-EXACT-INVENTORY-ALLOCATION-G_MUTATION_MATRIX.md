@@ -2,8 +2,10 @@
 
 Transaction ID: `MUT-2026-09-03-P8-GOVERNANCE-EXACT-INVENTORY-ALLOCATION-G`
 Priority: `8 — Governance`
-State: `PRE-WRITE / NOT YET APPLIED`
+State: `MATERIAL CANDIDATE / LOCAL READ-BACK PASS / EXACT-HEAD CI PENDING`
 Entry HEAD: `68d1b497f37810a2373c73b777643d436dad633a`
+Pre-write Matrix HEAD: `d0fdf02b02744ab27b5b1fdc88a08892b21b2bc6`
+Material HEAD: `THIS MATERIAL COMMIT`
 Protocol: GOV-014 / `PROJECT_BOOTSTRAP / CORE-003 / GOV-013 / GOV-013A / GOV-013B / GOV-014A / GOV-015 / GOV-016 / REP-011 / REP-012 / REP-013 / REP-016`
 
 ## Legal-entry proof
@@ -35,14 +37,14 @@ This is a Priority-8 closure blocker because REP-013 requires reconciled physica
 
 | Change ID | Target | Action | Expected Content | Applied | Verified |
 |---|---|---|---|:---:|:---:|
-| P8-G-01 | `Repository/REP-001_MASTER_INDEX.md` | UPDATE | add GOV-014A to active Governance and GOV-013B to explicit non-active candidates | N | N |
-| P8-G-02 | `Repository/REP-002_REPOSITORY_MAP.md` | UPDATE | mirror the same authority-bounded Governance mapping | N | N |
-| P8-G-03 | `Repository/REP-013_REPOSITORY_CONTENT_TREE.md` | UPDATE | include GOV-013B/GOV-014A in known current-identity inventory without claiming exhaustive body completion | N | N |
-| P8-G-04 | `Repository/REP-012_PRIORITY8_GOVERNANCE_ALLOCATION_ADDENDUM_2026-09-03_G.md` | CREATE | allocate and classify all 52 current Governance files | N | N |
-| P8-G-05 | `Repository/REP-013_PRIORITY8_GOVERNANCE_INVENTORY_ADDENDUM_2026-09-03_G.md` | CREATE | bind exact 52-file physical inventory and bounded review dispositions to REP-013 | N | N |
-| P8-G-06 | `Governance/_FOLDER_STATUS.md` | UPDATE | record exact inventory/allocation readiness while retaining content/relationship/global non-claims | N | N |
-| P8-G-07 | `Quality/Integrity/test_governance_p8_inventory_allocation.py` | CREATE | enforce exact physical/allocation/classification coverage and authority boundaries | N | N |
-| P8-G-08 | this Matrix | UPDATE | bind applied scope, immutable read-back and verification outcome | N | N |
+| P8-G-01 | `Repository/REP-001_MASTER_INDEX.md` | UPDATE | add GOV-014A to active Governance and GOV-013B to explicit non-active candidates | Y | Y |
+| P8-G-02 | `Repository/REP-002_REPOSITORY_MAP.md` | UPDATE | mirror the same authority-bounded Governance mapping | Y | Y |
+| P8-G-03 | `Repository/REP-013_REPOSITORY_CONTENT_TREE.md` | UPDATE | include GOV-013B/GOV-014A in known current-identity inventory without claiming exhaustive body completion | Y | Y |
+| P8-G-04 | `Repository/REP-012_PRIORITY8_GOVERNANCE_ALLOCATION_ADDENDUM_2026-09-03_G.md` | CREATE | allocate and classify all 52 current Governance files | Y | Y |
+| P8-G-05 | `Repository/REP-013_PRIORITY8_GOVERNANCE_INVENTORY_ADDENDUM_2026-09-03_G.md` | CREATE | bind exact 52-file physical inventory and bounded review dispositions to REP-013 | Y | Y |
+| P8-G-06 | `Governance/_FOLDER_STATUS.md` | UPDATE | record exact inventory/allocation readiness while retaining content/relationship/global non-claims | Y | Y |
+| P8-G-07 | `Quality/Integrity/test_governance_p8_inventory_allocation.py` | CREATE | enforce exact physical/allocation/classification coverage and authority boundaries | Y | Y |
+| P8-G-08 | this Matrix | UPDATE | bind applied scope, immutable read-back and verification outcome | Y | Y |
 
 ## KEEP requirements
 
@@ -66,3 +68,31 @@ No candidate promotion, archival move, deletion, relationship invention, reposit
 ## Closure condition
 
 This transaction closes only when immutable read-back proves every authorized path and all required exact-head workflows pass. It establishes closure readiness prerequisites; a separate explicit Priority-8 closure review is still required.
+
+## Material read-back / compare
+
+- Authorized material paths: exactly `8`; observed paths: exactly `8`; Unexpected Changes = `0`.
+- Exact physical enumeration and allocation rows both equal 52 paths.
+- Classification totals read back as `17 + 8 + 3 + 10 + 14 = 52`.
+- REP-001/REP-002/REP-013 each materialize GOV-014A and GOV-013B in their bounded authority class.
+- Folder status preserves `CONTENT REVIEW HOLDS REMAIN` and records `P8 CLOSURE REVIEW PENDING`.
+- REL-011/KNW-003, candidate authority, global graph, Phase-1 and Global PASS boundaries remain unchanged.
+
+## Failed local attempts / recovery
+
+1. Local `python -m pytest` could not start because the session Python environment does not contain `pytest`. Classification: local execution-environment dependency unavailable; GitHub required workflows remain the authoritative execution surface.
+2. The first direct invocation exposed a new-test implementation defect: REP-013 stores tree members without the `Governance/` prefix. The test was corrected to compare REP-013 basenames while preserving full-path checks for REP-001/REP-002 and allocation evidence.
+3. A second direct aggregate invocation imported a fixture-dependent test without pytest fixtures. The fallback runner was constrained to zero-argument tests with the required `PYTHONPATH`.
+4. Python imports generated untracked `__pycache__` directories. They were classified as incidental local test side effects and removed before material packaging; no repository commit contains them.
+
+No failed evidence is rewritten as success.
+
+## Local verification
+
+- all four new Governance inventory/allocation regression functions: PASS;
+- zero-argument Governance candidate-semantic tests: PASS;
+- zero-argument current internal-ID audit tests: PASS;
+- Mutation Matrix semantic validator: PASS;
+- `git diff --check`: PASS.
+
+Required exact-head workflows remain pending on the material commit. Until all four workflow families pass, this transaction is not closed.

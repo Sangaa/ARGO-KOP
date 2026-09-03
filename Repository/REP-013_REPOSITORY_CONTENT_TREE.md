@@ -278,7 +278,9 @@ Governance/
 ├── GOV-012_DOMAIN_RECONSTRUCTION_STANDARD.md
 ├── GOV-013_HERMUZ_SESSION_BUILD_PROTOCOL.md
 ├── GOV-013A_HERMUZ_BOOTSTRAP_INTEGRITY_GATE.md
+├── GOV-013B_HERMUZ_TOOL_SURFACE_DECISION_BOUNDARY.md
 ├── GOV-014_CONTROLLED_DOCUMENT_MUTATION_PROTOCOL.md
+├── GOV-014A_HERMUZ_PREWRITE_MUTATION_MATRIX_GATE.md
 ├── GOV-015_EXECUTION_DOCUMENTATION_AND_KNOWLEDGE_TRANSFER.md
 ├── GOV-016_FAILURE_TO_LEARNING_PROTOCOL.md
 ├── GOV-018_EVIDENCE_REASONING_AND_CONFLICT_RESOLUTION.md
@@ -294,9 +296,9 @@ Governance/
 └── _FOLDER_STATUS.md
 ```
 
-`GOV-011`, `GOV-012`, `GOV-018`, and `GOV-023..026` remain non-active Proposed/Candidate artifacts; inventory presence does not promote them.
+`GOV-011`, `GOV-012`, `GOV-013B`, `GOV-018`, and `GOV-023..026` remain non-active Proposed/Candidate artifacts; inventory presence does not promote them.
 
-`GOV-013A`, `GOV-014`, `GOV-015`, `GOV-016`, `GOV-019`, `GOV-020`, `GOV-021`, `GOV-022`, and `GOV-027` retain their current authority/status only as established by their own metadata and current Governance evidence. The old colliding `GOV-013A`, `GOV-014`, `GOV-015`, `GOV-016`, and `GOV-017` compatibility paths are intentionally excluded from this known-mapped current-identity list because `_FOLDER_STATUS.md` classifies them as non-authoritative historical reconstruction records.
+`GOV-013A`, `GOV-014`, `GOV-014A`, `GOV-015`, `GOV-016`, `GOV-019`, `GOV-020`, `GOV-021`, `GOV-022`, and `GOV-027` retain their current authority/status only as established by their own metadata and current Governance evidence. The old colliding `GOV-013A`, `GOV-014`, `GOV-015`, `GOV-016`, and `GOV-017` compatibility paths are intentionally excluded from this known-mapped current-identity list because `_FOLDER_STATUS.md` classifies them as non-authoritative historical reconstruction records.
 
 This is a **known-mapped current-identity reconciliation**, not exhaustive Governance physical enumeration or Governance partition closure. Broader content-review and repository-wide relationship holds remain open.
 

@@ -125,6 +125,21 @@ The document version remains `1.7.0`: content synchronization did not establish 
 
 ## Current Holds
 
+## Priority-8 Exact Inventory / Allocation Readiness — 2026-09-03
+
+Fresh repository enumeration and the Transaction G allocation addendum establish exactly `52 / 52` current physical files under `Governance/`, including the nested `SELF_EVALUATION` support artifact.
+
+The control-plane mapping now includes `GOV-014A` as its existing Approved / Canonical Addendum authority and includes `GOV-013B` as an explicitly non-active candidate. This mapping is not promotion.
+
+Current per-path dispositions are recorded in:
+
+- `Repository/REP-012_PRIORITY8_GOVERNANCE_ALLOCATION_ADDENDUM_2026-09-03_G.md`;
+- `Repository/REP-013_PRIORITY8_GOVERNANCE_INVENTORY_ADDENDUM_2026-09-03_G.md`.
+
+`GOVERNANCE PHYSICAL INVENTORY + ALLOCATION = RECONCILED FOR CURRENT 52-FILE SET / P8 CLOSURE REVIEW PENDING`.
+
+The existing `CONTENT REVIEW HOLDS REMAIN` headline is preserved until a separate explicit Priority-8 closure review decides which remaining holds are blocking, non-blocking, external, global, or Human-authority gated.
+
 ### Governance identity/inventory
 
 `CLOSED FOR CURRENT MIGRATED SCOPE`.
