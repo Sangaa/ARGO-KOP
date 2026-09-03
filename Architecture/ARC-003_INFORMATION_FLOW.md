@@ -8,18 +8,20 @@ Platform: ARGO KOP
 Knowledge Operating Platform
 
 Document ID: ARC-003
-Version: 1.3.0
+Version: 1.3.1
 Status: Validated / Integrity Hold
 Category: Architecture
 Development Baseline: 3.2.1
 Latest Official Release: 1.0.0
-Last Audit: 2026-08-08
+Last Audit: 2026-09-03
 
 ---
 
 # Purpose
 
 Defines how information moves between platform components while preserving validation, ownership, traceability and authority.
+
+This document is subordinate to the Constitution and applicable Governance. Its information-flow interpretation must remain compatible with the current structural-boundary and dependency-direction authority in `Architecture/ARC-011_CANONICAL_ARCHITECTURE_MODEL.md`.
 
 # Evidence Gate
 
@@ -93,6 +95,8 @@ Where applicable, information flow records should preserve:
 
 Information flow does not change authority. Governance, Constitution, Architecture, Repository and Release authorities retain their defined ownership.
 
+Information movement across components does not create a dependency, transfer ownership, or override the canonical structural/dependency boundaries defined by ARC-011.
+
 # Related Documents
 
 - `Architecture/ARC_MAP.md`
@@ -101,6 +105,7 @@ Information flow does not change authority. Governance, Constitution, Architectu
 - `Architecture/ARC-004_LAYER_MODEL.md`
 - `Architecture/ARC-006_DEPENDENCY_MODEL.md`
 - `Architecture/ARC-007_INTEGRATION_MODEL.md`
+- `Architecture/ARC-011_CANONICAL_ARCHITECTURE_MODEL.md`
 - `Core/CORE-003_CONSTITUTION.md`
 - `Governance/GOV-005_REVIEW_STANDARD.md`
 - `Governance/GOV-009_REPOSITORY_POLICY.md`
