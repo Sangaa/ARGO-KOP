@@ -3,8 +3,9 @@
 Transaction ID: `MUT-2026-09-03-P10-GATE12-KNOWLEDGE-MEMORY-CLOSURE-I`
 Priority: `10 — Runtime`
 Gate: `12 — Runtime ↔ Knowledge / Memory`
-State: `PRE-WRITE / OPEN`
+State: `MATERIAL CHANGE SET / CI PENDING`
 Entry HEAD: `4ee32dfeef1af5d19adee465ab98d153e585be60`
+Pre-write HEAD: `7865d89ae5d8fedc4befec80ea6cc76e2e05075a`
 Protocol: `PROJECT_BOOTSTRAP / CORE-003 / GOV-013 / GOV-014 / GOV-014A / GOV-016 / REP-011 / REP-016`
 
 ## Closure basis
@@ -23,14 +24,14 @@ Classification: `GATE 12 BOUNDED CLOSURE CANDIDATE`.
 
 | Change ID | Target | Action | Expected change | KEEP / preservation | Pre-write | Post-write |
 |---|---|---|---|---|:---:|:---:|
-| P10-I-01 | `Runtime/_FOLDER_STATUS.md` | UPDATE | mark Gate 12 bounded verified and move next construction boundary to Gate 13 | Gate 14 result; Gate 15 hold; global holds | PASS | PENDING |
-| P10-I-02 | `Quality/Integrity/test_runtime_p10_gate12_knowledge_memory_closure.py` | CREATE | bind G/H closure evidence and Runtime learning no-promotion boundary | no claim of exhaustive global graph | PASS | PENDING |
-| P10-I-03 | `Repository/REP-011_PRIORITY10_RUNTIME_GATE12_CLOSURE_ADDENDUM_2026-09-03_I.md` | CREATE | record bounded closure basis and independent holds | historical addenda unchanged | PASS | PENDING |
-| P10-I-04 | this Matrix | UPDATE IN MATERIAL CHANGE SET | bind closure evidence and validation | scope/non-claims | PASS | PENDING |
+| P10-I-01 | `Runtime/_FOLDER_STATUS.md` | UPDATE | mark Gate 12 bounded verified and move next construction boundary to Gate 13 | Gate 14 result; Gate 15 hold; global holds | PASS | PASS |
+| P10-I-02 | `Quality/Integrity/test_runtime_p10_gate12_knowledge_memory_closure.py` | CREATE | bind G/H closure evidence and Runtime learning no-promotion boundary | no claim of exhaustive global graph | PASS | PASS |
+| P10-I-03 | `Repository/REP-011_PRIORITY10_RUNTIME_GATE12_CLOSURE_ADDENDUM_2026-09-03_I.md` | CREATE | record bounded closure basis and independent holds | historical addenda unchanged | PASS | PASS |
+| P10-I-04 | this Matrix | UPDATE IN MATERIAL CHANGE SET | bind closure evidence and validation | scope/non-claims | PASS | PASS |
 
 ## Non-claims
 
-- Gate 12 closure will be bounded to the currently tracked Runtime↔Knowledge/Memory seams; it is not repository-wide graph completion.
+- Gate 12 closure is bounded to the currently tracked Runtime↔Knowledge/Memory seams; it is not repository-wide graph completion.
 - It does not close Gate 13 or authorize external/provider execution.
 - It does not clear Gate 15 executable promotion hold.
 - Priority 10, Phase 1, Global Connected Baseline and Global Integrity remain OPEN/HOLD unless separately earned.
