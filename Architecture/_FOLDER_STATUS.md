@@ -12,11 +12,11 @@ Architecture
 
 Status
 
-🟡 INTEGRITY HOLD — RE-AUDIT IN PROGRESS / LOCAL INVENTORY VERIFIED
+🟢 CLOSED_FOR_PHASE_1 / BOUNDED ARCHITECTURE PARTITION CERTIFIED / GLOBAL HOLDS REMAIN
 
 Version
 
-1.5.9
+1.6.0
 
 Canonical
 
@@ -28,15 +28,15 @@ Last Audit
 
 Review Method
 
-Repository First / Evidence Based / Exact Git-Tree Enumeration / Bounded Consumer Reconciliation
+Repository First / Evidence Based / Exact Git-Tree Enumeration / Bounded Consumer Reconciliation / Repository Reconciliation / Explicit Bounded Closure
 
 Review Scope
 
-Exact Architecture inventory, known identity/path evidence, active Architecture semantic re-audit, bounded Priority-7 consumer alignment, and Priority-9 canonical-path, canonical-model, layer/dependency, information-flow, evolution, active-reference, Knowledge/Memory-boundary and Runtime/Interface-boundary validation of the current primary ARC set and Architecture navigation/control surfaces
+Exact Architecture inventory, known identity/path evidence, active Architecture semantic re-audit, bounded Priority-7 consumer alignment, Priority-9 canonical-path, canonical-model, layer/dependency, information-flow, evolution, active-reference, Knowledge/Memory-boundary and Runtime/Interface-boundary validation, Repository control-surface reconciliation, and explicit bounded Phase-1 Architecture disposition
 
 Repository Baseline
 
-Current main branch repository state through Priority-9 Gates 4 and 6–13 bounded closure
+Current main branch repository state through Priority-9 Gates 1–13 bounded PASS, Transaction S repository reconciliation, and Transaction T explicit bounded closure
 
 ---
 
@@ -54,15 +54,15 @@ Identity / Path Alignment
 
 Architecture Consistency
 
-🟡 Re-audit remains open across broader repository reconciliation and final Architecture disposition. Priority-9 bounded evidence now closes canonical-path uniqueness, canonical-model, layer/dependency, information-flow, evolution, current active-reference reconciliation, the inspected Knowledge/Memory semantic boundary and the inspected Runtime/Interface semantic contract boundary for the current primary Architecture scope only; this does not close the broader Architecture re-audit.
+🟢 Priority-9 bounded re-audit is complete for the current Architecture partition scope: canonical-path uniqueness, canonical-model authority, layer/dependency consistency, information-flow, evolution, current active-reference reconciliation, the inspected Knowledge/Memory semantic boundary and the inspected Runtime/Interface semantic contract boundary are all bounded PASS. No current Architecture-specific semantic blocker remains for Phase-1 partition closure.
 
 Repository Alignment
 
-🟡 REP-001 Architecture inventory is synchronized for the currently promoted set; REP-002 and relationship registries require consolidated reconciliation where evidence requires.
+🟢 Transaction S reconciles the current Architecture active index/map, exact 15-path allocation/inventory, review trace and material Architecture relationship disposition through evidence-bound REP-001/002/011/012/013/014 addenda. Base Repository registries and repository-wide control-plane completion remain independently open where their own status requires it.
 
 Cross-Reference Review
 
-🟡 Bounded active-reference reconciliation is complete for Gate 11; the inspected Architecture↔Knowledge/Memory semantic boundary is complete for Gate 12; and the inspected Architecture↔Runtime/Interface semantic contract boundary is complete for Gate 13. Priority-7 Transaction S/S-C1 and Priority-9 canonical/path/consistency/flow-evolution/reference/boundary work close known current-Architecture drifts within the inspected set only. Runtime/Interface implementation, provider and external-trust validation remains under the applicable downstream domain holds.
+🟢 Bounded active-reference reconciliation is complete for Gate 11; the inspected Architecture↔Knowledge/Memory semantic boundary is complete for Gate 12; and the inspected Architecture↔Runtime/Interface semantic contract boundary is complete for Gate 13. Priority-7 Transaction S/S-C1 and Priority-9 canonical/path/consistency/flow-evolution/reference/boundary work close known current-Architecture drifts within the inspected set. Runtime/Interface implementation, provider, AI and external-trust validation remain under applicable downstream domain holds.
 
 ---
 
@@ -133,7 +133,7 @@ The following artifacts form the primary architecture review set:
 
 AI remains included in the broader cross-reference review scope. Bounded Runtime/Interface Gate-13 closure does not certify AI consumers, providers, implementations or the repository-wide AI graph.
 
-Architecture is **not globally certified**. Any previous global cleanliness claim remains withdrawn until the expanded inventory and cross-layer relationships are revalidated.
+Architecture is **not globally certified**. Bounded Architecture partition closure does not establish repository-wide Architecture certification; previous global cleanliness claims remain withdrawn.
 
 ---
 
@@ -326,21 +326,44 @@ The first published S material candidate `c51ffc4efec9eaded777eeb4f97311386cc0a2
 
 S-C1 restores those compatibility contracts without altering S authority semantics and without modifying the tests that detected the regressions.
 
-This remains a bounded consumer-content correction only. It does not register a new REP-014 relationship and does not close the broader Architecture re-audit.
+That transaction remained a bounded consumer-content correction only. It did not register a new REP-014 relationship and did not by itself close the broader Architecture re-audit.
+
+---
+
+# Explicit Priority-9 Bounded Closure — Transaction T
+
+Transaction S reconciled the current Architecture Repository control surfaces without rewriting the large base registries: active index/map interpretation, exact 15-path allocation/inventory, review trace and material Architecture relationship disposition are now bound through current P9 addenda.
+
+Transaction T applies the explicit partition disposition supported by that reconciliation and the completed Validation Gates 1–13:
+
+`ARCHITECTURE = CLOSED_FOR_PHASE_1 / BOUNDED ARCHITECTURE PARTITION CERTIFIED / GLOBAL HOLDS REMAIN`.
+
+Deferred/non-blocking scope remains visible:
+
+- Transaction B / proposed REL-073 remains a local unpromoted registry-completeness hold;
+- repository-wide graph completion remains open;
+- Runtime, Interfaces, AI, Knowledge, Memory and other downstream partition holds remain independently controlling;
+- Global Connected Baseline remains open;
+- Phase 1 remains open;
+- Global Integrity PASS is not claimed.
+
+Reopen Priority 9 only on new Architecture-specific evidence: physical/allocation drift, active identity/authority collision, a material unreviewed Architecture source mutation, a contradiction affecting current Architecture authority/dependency interpretation, a material relationship misclassification affecting this closure, or invalidation of the exact-head verification evidence.
+
+Historical stale base wording, downstream holds or the local unpromoted REL-073 row alone do not reopen Priority 9.
 
 ---
 
 # Scope Boundary
 
-This status certifies only the evidence inspected so far. It does not certify Runtime, Core, AI, Services, Knowledge, Memory, Projects, Release or the entire repository.
+This status certifies the Architecture partition only for the stated Phase-1 bounded scope. It does not globally certify Runtime, Core, AI, Services, Knowledge, Memory, Projects, Release or the entire repository.
 
-Gates 4 and 6–13 bounded closure does not certify the Architecture folder. Repository registry/control-plane reconciliation and final Architecture re-audit disposition remain open.
+All current Validation Gates 1–13 plus Transaction S Repository reconciliation support bounded Architecture partition closure. They do not establish repository-wide graph completeness, downstream implementation certification, Phase-1 closure, Connected Baseline closure or Global PASS.
 
 ---
 
 # Required Next Action
 
-`Reconcile Repository registries where required → Architecture Re-Audit`
+`Priority 9 CLOSED_FOR_PHASE_1 → rediscover live main and recompute the first legal open queue priority before any Priority-10 mutation`
 
 No `100% CLEAN` repository claim is authorized from this document alone.
 
@@ -357,6 +380,9 @@ No `100% CLEAN` repository claim is authorized from this document alone.
 - `Governance/GOV-014A_HERMUZ_PREWRITE_MUTATION_MATRIX_GATE.md`
 - `Repository/REP-001_MASTER_INDEX.md`
 - `Repository/REP-002_REPOSITORY_MAP.md`
+- `Repository/P9_ARCHITECTURE_REPOSITORY_RECONCILIATION_2026-09-03_S.md`
+- `Repository/P9_ARCHITECTURE_EXPLICIT_BOUNDED_CLOSURE_2026-09-03_T.md`
+- `Repository/REP-016_PRIORITY9_ARCHITECTURE_CLOSURE_ADDENDUM_2026-09-03_T.md`
 - `Architecture/ARC_MAP.md`
 - `Architecture/ARC-001_PLATFORM_ARCHITECTURE.md`
 - `Architecture/ARC-003_INFORMATION_FLOW.md`
@@ -391,6 +417,8 @@ Repository Reality > Previous Status Claims > Conversation Memory
 `BOUNDED ARCHITECTURE↔KNOWLEDGE/MEMORY ALIGNMENT != KNOWLEDGE OR MEMORY PARTITION CERTIFICATION`
 
 `BOUNDED ARCHITECTURE↔RUNTIME/INTERFACE ALIGNMENT != RUNTIME OR INTERFACE IMPLEMENTATION CERTIFICATION`
+
+`BOUNDED ARCHITECTURE PARTITION CLOSURE != GLOBAL ARCHITECTURE CERTIFICATION`
 
 ---
 

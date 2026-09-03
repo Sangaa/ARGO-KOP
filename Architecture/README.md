@@ -8,14 +8,14 @@
 
 Platform: ARGO KOP (Knowledge Operating Platform)
 Document ID: ARCHITECTURE_README
-Version: 3.2.1
-Status: Approved / Integrity Hold
+Version: 3.2.2
+Status: Approved / Revalidated / CLOSED_FOR_PHASE_1
 Category: Architecture / Directory Handbook
 Canonical: Yes
 Priority: Absolute / Critical
 Development Baseline: 3.2.1
-Last Audit Date: 2026-09-01
-Review Type: Priority-7 Cross-Layer Consumer Authority Reconciliation
+Last Audit Date: 2026-09-03
+Review Type: Priority-9 Bounded Architecture Closure Synchronization
 
 ---
 
@@ -123,16 +123,15 @@ A textual link between this README, CORE-000, CORE-003 or ARC-011 does not by it
 
 ## 5. Integrity / Certification Boundary
 
-The Architecture folder remains under `INTEGRITY HOLD` while its active semantics, layer/dependency consistency, cross-layer references and consumer alignment are re-audited.
+The Architecture folder is `CLOSED_FOR_PHASE_1 / BOUNDED ARCHITECTURE PARTITION CERTIFIED / GLOBAL HOLDS REMAIN`.
 
-This README's current review establishes only its own bounded alignment with current CORE-000 / CORE-003 / ARC-011 authority semantics and the current Architecture folder inventory model.
+This bounded closure is supported by the exact 15-file inventory/allocation reconciliation, the current ARC-011 authority model, Priority-9 Validation Gates 1–13, current Repository reconciliation addenda, and exact-head verification evidence. It certifies only the Architecture partition for the stated Phase-1 scope.
 
 It does **not** establish:
 
-- Architecture folder certification;
-- Core folder certification;
-- all Architecture relationships as reconciled;
-- all downstream consumers as aligned;
+- global Architecture certification;
+- all repository relationships as reconciled;
+- all downstream consumers or implementations as certified;
 - repository-wide graph completion;
 - Phase-1 closure;
 - Connected Baseline closure;
@@ -155,6 +154,8 @@ The authoritative current domain state remains the evidence-backed `Architecture
 - `Governance/GOV-014A_HERMUZ_PREWRITE_MUTATION_MATRIX_GATE.md`
 - `Repository/REP-001_MASTER_INDEX.md`
 - `Repository/REP-002_REPOSITORY_MAP.md`
+- `Repository/P9_ARCHITECTURE_REPOSITORY_RECONCILIATION_2026-09-03_S.md`
+- `Repository/P9_ARCHITECTURE_EXPLICIT_BOUNDED_CLOSURE_2026-09-03_T.md`
 
 ---
 

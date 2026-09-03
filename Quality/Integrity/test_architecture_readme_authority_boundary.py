@@ -16,8 +16,8 @@ def test_architecture_readme_uses_current_authority_boundary():
     constitution = CORE003.read_text(encoding="utf-8")
     arc011 = ARC011.read_text(encoding="utf-8")
 
-    assert "Version: 3.2.1" in readme
-    assert "Status: Approved / Integrity Hold" in readme
+    assert "Version: 3.2.2" in readme
+    assert "Status: Approved / Revalidated / CLOSED_FOR_PHASE_1" in readme
     assert "Constitution / applicable Governance authority" in readme
     assert "Architecture/ARC-011_CANONICAL_ARCHITECTURE_MODEL.md" in readme
     assert "current authoritative architectural reference for structural boundaries and dependency direction" in readme
@@ -64,17 +64,18 @@ def test_architecture_readme_matches_current_primary_arc_review_set():
     assert "physical presence does not make its historical four-layer/five-component model current Architecture authority" in readme
 
 
-def test_core_closure_does_not_promote_architecture_or_registry_relationships():
+def test_core_and_architecture_bounded_closures_do_not_promote_registry_relationships():
     readme = README.read_text(encoding="utf-8")
     status = ARCH_STATUS.read_text(encoding="utf-8")
     registry = REP014.read_text(encoding="utf-8")
     core_status = CORE_STATUS.read_text(encoding="utf-8")
 
-    assert "Architecture folder remains under `INTEGRITY HOLD`" in readme
-    assert "INTEGRITY HOLD — RE-AUDIT IN PROGRESS / LOCAL INVENTORY VERIFIED" in status
+    assert "The Architecture folder is `CLOSED_FOR_PHASE_1 / BOUNDED ARCHITECTURE PARTITION CERTIFIED / GLOBAL HOLDS REMAIN`." in readme
+    assert "CLOSED_FOR_PHASE_1 / BOUNDED ARCHITECTURE PARTITION CERTIFIED / GLOBAL HOLDS REMAIN" in status
     assert "Canonical Architecture Model alignment — PASS FOR CURRENT PRIMARY ARC SET" in status
     assert "Bounded Priority-7 Consumer Reconciliation — Transaction S / S-C1" in status
     assert "BOUNDED CANONICAL ALIGNMENT != ARCHITECTURE CERTIFICATION" in status
+    assert "BOUNDED ARCHITECTURE PARTITION CLOSURE != GLOBAL ARCHITECTURE CERTIFICATION" in status
     assert "Architecture is **not globally certified**" in status
 
     forbidden_registry_markers = (
