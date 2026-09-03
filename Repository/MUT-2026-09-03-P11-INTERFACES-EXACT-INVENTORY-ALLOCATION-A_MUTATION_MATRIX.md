@@ -2,7 +2,7 @@
 
 Transaction ID: `MUT-2026-09-03-P11-INTERFACES-EXACT-INVENTORY-ALLOCATION-A`
 Priority: `11 — Interfaces`
-State: `MATERIAL CHANGE APPLIED / EXACT-HEAD CI PENDING`
+State: `CLOSED / VERIFIED / RESUME-SAFE`
 Entry HEAD: `da948c89208878e47a095d51d9d018592ef49c27`
 Protocol: `PROJECT_BOOTSTRAP / CORE-003 / GOV-013 / GOV-014 / GOV-014A / GOV-015 / GOV-016 / REP-011 / REP-012 / REP-013 / REP-016`
 
@@ -49,7 +49,12 @@ Validation: `pre-write → exact manifest/control-surface material → immutable
 - Integration: `588 passed / 11 subtests passed`, with one pre-existing internal document-ID audit RuntimeWarning.
 - Runtime Prototype: `23 passed`; acceptance scenarios: `3 passed`.
 - `git diff --check`: PASS.
-- Exact-head four-family CI: PENDING.
+- Material HEAD: `af209b732635544c12a8ee66cd512169b9c6bfff`.
+- Full-Stack Repository Audit: PASS, run `33780614716`.
+- Runtime Prototype and Integration Tests: PASS, run `33780614711`.
+- M2 Multi-Channel Proposal Training: PASS, run `33780614621`.
+- Real Mutation Matrix Regression: PASS, run `33780614638`.
+- Transaction A is `CLOSED / VERIFIED / RESUME-SAFE`; Priority 11 remains IN_PROGRESS on its cross-layer/external-trust validation scope.
 
 ## Preserved pre-material control-plane failure
 
