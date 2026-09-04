@@ -30,7 +30,7 @@ def test_list_workflow_runs_preserves_execution_filters(monkeypatch: pytest.Monk
 
     def fake_urlopen(request, timeout):
         requests.append(request)
-        return FakeResponse({"total_count": 1, "workflow_runs": [{"id": 123}]})
+        return FakeResponse({"total_count": 1, "workflow_runs": [{"id": 123, "head_sha": "abc"}]})
 
     monkeypatch.setattr("urllib.request.urlopen", fake_urlopen)
     connector = GitHubActionsRepositoryConnector(owner="Sangaa", repo="ARGO-KOP", token="test")
@@ -190,3 +190,31 @@ def test_list_workflow_run_jobs_rejects_boolean_provider_run_identity(monkeypatc
     connector = GitHubActionsRepositoryConnector(owner="Sangaa", repo="ARGO-KOP", token="test")
     with pytest.raises(ConnectorError, match="GITHUB_ACTIONS_RESPONSE_STRUCTURE_INVALID"):
         connector.list_workflow_run_jobs(123)
+
+
+def test_list_workflow_runs_binds_exact_head_sha_filter(monkeypatch: pytest.MonkeyPatch):
+    monkeypatch.setattr(
+        "urllib.request.urlopen",
+        lambda request, timeout: FakeResponse({"workflow_runs": [{"id": 1, "head_sha": "abc"}]}),
+    )
+    connector = GitHubActionsRepositoryConnector(owner="Sangaa", repo="ARGO-KOP", token="test")
+    assert connector.list_workflow_runs(head_sha="abc")["workflow_runs"][0]["head_sha"] == "abc"
+
+
+def test_list_workflow_runs_rejects_missing_or_mismatched_head_sha_when_filtered(monkeypatch: pytest.MonkeyPatch):
+    responses = [
+        FakeResponse({"workflow_runs": [{"id": 1}]}),
+        FakeResponse({"workflow_runs": [{"id": 1, "head_sha": "def"}]}),
+    ]
+    monkeypatch.setattr("urllib.request.urlopen", lambda request, timeout: responses.pop(0))
+    connector = GitHubActionsRepositoryConnector(owner="Sangaa", repo="ARGO-KOP", token="test")
+    with pytest.raises(ConnectorError, match="GITHUB_ACTIONS_RESPONSE_STRUCTURE_INVALID"):
+        connector.list_workflow_runs(head_sha="abc")
+    with pytest.raises(ConnectorError, match="GITHUB_ACTIONS_HEAD_SHA_FILTER_MISMATCH"):
+        connector.list_workflow_runs(head_sha="abc")
+
+
+def test_list_workflow_runs_does_not_require_head_sha_without_filter(monkeypatch: pytest.MonkeyPatch):
+    monkeypatch.setattr("urllib.request.urlopen", lambda request, timeout: FakeResponse({"workflow_runs": [{"id": 1}]}))
+    connector = GitHubActionsRepositoryConnector(owner="Sangaa", repo="ARGO-KOP", token="test")
+    assert connector.list_workflow_runs()["workflow_runs"][0]["id"] == 1

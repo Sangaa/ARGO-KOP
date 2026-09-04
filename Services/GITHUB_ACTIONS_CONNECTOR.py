@@ -106,6 +106,17 @@ class GitHubActionsRepositoryConnector(GitHubActionsConnector):
             "per_page": per_page,
         })
         self._require_object_list(result, "workflow_runs", "GET runs")
+        if head_sha is not None:
+            for run in result["workflow_runs"]:
+                returned_head_sha = run.get("head_sha")
+                if not isinstance(returned_head_sha, str) or not returned_head_sha:
+                    raise ConnectorError(
+                        "GITHUB_ACTIONS_RESPONSE_STRUCTURE_INVALID: GET runs.workflow_runs[].head_sha"
+                    )
+                if returned_head_sha != head_sha:
+                    raise ConnectorError(
+                        f"GITHUB_ACTIONS_HEAD_SHA_FILTER_MISMATCH: expected={head_sha} actual={returned_head_sha}"
+                    )
         return result
 
     def get_workflow_run(self, run_id: int) -> dict:
