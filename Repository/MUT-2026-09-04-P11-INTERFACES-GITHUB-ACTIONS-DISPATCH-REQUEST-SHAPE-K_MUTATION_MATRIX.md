@@ -2,8 +2,9 @@
 
 Transaction ID: `MUT-2026-09-04-P11-INTERFACES-GITHUB-ACTIONS-DISPATCH-REQUEST-SHAPE-K`
 Priority: `11 — Interfaces`
-State: `MATERIAL APPLIED / BOUNDED LOCAL SEMANTIC VERIFIED / EXACT-HEAD CI PENDING`
+State: `CLOSED / VERIFIED / RESUME-SAFE`
 Entry HEAD: `917151f2bda3384fde0e4341906c019b57d8f9c2`
+Material HEAD: `9da4ace08cd86f9d2664cc77f29124b82d403186`
 Protocol: GOV-014 / GOV-013 / INTF-010 / GITHUB_ACTIONS_CONNECTOR_INTERFACE
 
 ## Boundary
@@ -32,9 +33,9 @@ This transaction does not introduce a numeric range rule for integer workflow ID
 
 | Change ID | Target | Action | Expected Content | Applied | Verified |
 |---|---|---|---|---|---|
-| P11-K-01 | `Services/GITHUB_ACTIONS_CONNECTOR.py` | UPDATE | fail closed on invalid dispatch argument shapes before POST | Y | bounded semantic |
-| P11-K-02 | `Quality/Integration/test_github_actions_connector_dispatch_shape.py` | CREATE | regress invalid workflow identity, ref and inputs with zero transport | Y | exact-head CI pending |
-| P11-K-03 | this Matrix | CREATE | bind dispatch-input-only scope, evidence, KEEP constraints and closure | Y | Y |
+| P11-K-01 | `Services/GITHUB_ACTIONS_CONNECTOR.py` | UPDATE | fail closed on invalid dispatch argument shapes before POST | Y | Y |
+| P11-K-02 | `Quality/Integration/test_github_actions_connector_dispatch_shape.py` | CREATE | regress invalid workflow identity, ref and inputs with zero transport | Y | Y |
+| P11-K-03 | this Matrix | CREATE/CLOSE | bind dispatch-input-only scope, evidence, KEEP constraints and closure | Y | Y |
 
 ## Bounded local semantic evidence
 
@@ -43,6 +44,17 @@ An isolated validation harness exercised thirteen cases covering valid string/in
 Result: `13 / 13 expected outcomes`.
 
 Integer workflow-ID range semantics were deliberately kept outside this transaction because the interface establishes the type but does not establish a local numeric-range contract.
+
+## Exact material-head CI evidence
+
+Exact material HEAD: `9da4ace08cd86f9d2664cc77f29124b82d403186`.
+
+All four required workflow families completed `success`:
+
+- Real Mutation Matrix Regression — run `33880927262`;
+- M2 Multi-Channel Proposal Training — run `33880927266`;
+- Full-Stack Repository Audit — run `33880927280`;
+- ARGO Runtime Prototype and Integration Tests — run `33880927259`.
 
 ## KEEP Preservation
 
@@ -61,10 +73,10 @@ KEEP unchanged:
 
 No provider-authenticity, remote-delivery, workflow-completion or production-success claim is introduced.
 
-## Post-write and closure rules
+## Closure
 
-Apply connector + focused dispatch regression file + this Matrix atomically against exact entry HEAD. Immutable read-back all three paths and compare entry→material HEAD; no path outside this authorized set may change.
+Material scope remained exactly the authorized connector + focused dispatch regression + Matrix paths. Immutable read-back matched the committed blobs and exact material-head CI was green across all four required workflow families.
 
-All required exact-material-head workflow families must complete successfully before closure. Closure evidence must be captured separately; closure-head CI must itself be green before K can be used as a predecessor.
+This Matrix-only closure records evidence without altering material behavior. The closure HEAD must independently pass the same four required workflow families before this transaction is used as a predecessor.
 
-Unexpected Changes: `NONE AUTHORIZED`.
+Unexpected Changes: `NONE OBSERVED`.
