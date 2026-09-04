@@ -193,6 +193,11 @@ class GitHubActionsRepositoryConnector(GitHubActionsConnector):
         result = self._request("GET", f"runs/{run_id}/jobs", params={"per_page": 100})
         self._require_object_list(result, "jobs", f"GET runs/{run_id}/jobs")
         for job in result["jobs"]:
+            returned_job_id = job.get("id")
+            if type(returned_job_id) is not int or returned_job_id <= 0:
+                raise ConnectorError(
+                    f"GITHUB_ACTIONS_RESPONSE_STRUCTURE_INVALID: GET runs/{run_id}/jobs.jobs[].id"
+                )
             returned_run_id = job.get("run_id")
             if type(returned_run_id) is not int:
                 raise ConnectorError(
