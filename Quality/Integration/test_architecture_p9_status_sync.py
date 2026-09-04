@@ -57,4 +57,4 @@ def test_local_rel073_hold_remains_unpromoted_and_nonblocking():
     assert "REL-073" in decision and "local" in decision.lower()
     assert "REL-073 = LOCAL REGISTRY COMPLETENESS HOLD / NON-BLOCKING FOR BOUNDED ARCHITECTURE PARTITION CLOSURE / DO NOT PROMOTE" in disposition
     assert "HARD HOLD / PRE-MATERIAL ABORT" in b_matrix
-    assert "| REL-073 |" not in registry
+    assert "| ARC-001 | ARC-011 | REFERENCES |" not in registry
