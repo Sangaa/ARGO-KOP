@@ -12,7 +12,7 @@ from Services.REPOSITORY_CONNECTOR_INTERFACE import ConnectorError
 
 
 class FakeResponse:
-    def __init__(self, payload: dict):
+    def __init__(self, payload: object):
         self.payload = payload
 
     def __enter__(self):
@@ -22,6 +22,8 @@ class FakeResponse:
         return False
 
     def read(self):
+        if isinstance(self.payload, bytes):
+            return self.payload
         return json.dumps(self.payload).encode("utf-8")
 
 
@@ -33,7 +35,7 @@ def github_file(sha: str, content: str) -> dict:
     }
 
 
-def make_connector(monkeypatch: pytest.MonkeyPatch, responses: list[dict]) -> GitHubRepositoryConnector:
+def make_connector(monkeypatch: pytest.MonkeyPatch, responses: list[object]) -> GitHubRepositoryConnector:
     def fake_urlopen(request, timeout):
         if not responses:
             raise AssertionError("NO_FAKE_RESPONSE_AVAILABLE")
@@ -107,3 +109,46 @@ def test_environment_config_requires_credentials(monkeypatch: pytest.MonkeyPatch
         monkeypatch.delenv(key, raising=False)
     with pytest.raises(ConnectorError, match="CONFIGURATION_INCOMPLETE"):
         GitHubConnectorConfig.from_environment()
+
+
+def test_invalid_provider_json_fails_closed(monkeypatch: pytest.MonkeyPatch):
+    connector = make_connector(monkeypatch, [b"{not-json"])
+    with pytest.raises(ConnectorError, match="GITHUB_RESPONSE_JSON_INVALID"):
+        connector.read_current("Repository/test.md")
+
+
+def test_non_object_provider_payload_fails_closed(monkeypatch: pytest.MonkeyPatch):
+    connector = make_connector(monkeypatch, [[{"type": "file"}]])
+    with pytest.raises(ConnectorError, match="GITHUB_RESPONSE_STRUCTURE_INVALID"):
+        connector.read_current("Repository/test.md")
+
+
+def test_read_current_requires_provider_sha(monkeypatch: pytest.MonkeyPatch):
+    payload = github_file("sha-1", "hello")
+    payload.pop("sha")
+    connector = make_connector(monkeypatch, [payload])
+    with pytest.raises(ConnectorError, match="GITHUB_RESPONSE_STRUCTURE_INVALID"):
+        connector.read_current("Repository/test.md")
+
+
+def test_invalid_provider_base64_fails_closed(monkeypatch: pytest.MonkeyPatch):
+    connector = make_connector(monkeypatch, [{"type": "file", "sha": "sha-1", "content": "%%%not-base64%%%"}])
+    with pytest.raises(ConnectorError, match="GITHUB_CONTENT_DECODE_FAILED"):
+        connector.read_current("Repository/test.md")
+
+
+def test_create_requires_provider_commit_sha(monkeypatch: pytest.MonkeyPatch):
+    requests = []
+
+    def fake_urlopen(request, timeout):
+        requests.append(request)
+        if len(requests) == 1:
+            raise urllib.error.HTTPError(request.full_url, 404, "Not Found", {}, None)
+        return FakeResponse({"commit": {}})
+
+    monkeypatch.setattr("urllib.request.urlopen", fake_urlopen)
+    connector = GitHubRepositoryConnector(
+        GitHubConnectorConfig(owner="Sangaa", repo="ARGO-KOP", token="test-token"),
+    )
+    with pytest.raises(ConnectorError, match="GITHUB_RESPONSE_STRUCTURE_INVALID"):
+        connector.create_file("Repository/new.md", "new", "create")

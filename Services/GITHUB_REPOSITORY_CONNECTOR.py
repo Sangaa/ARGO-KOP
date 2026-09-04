@@ -6,6 +6,7 @@ from the runtime environment; no authority is inferred from technical access.
 from __future__ import annotations
 
 import base64
+import binascii
 import json
 import os
 import urllib.error
@@ -50,6 +51,34 @@ class GitHubRepositoryConnector(RepositoryConnector):
             url += "?ref=" + urllib.parse.quote(self._config.branch, safe="")
         return url
 
+    @staticmethod
+    def _decode_response(response: Any, context: str) -> dict[str, Any]:
+        try:
+            raw = response.read().decode("utf-8")
+        except UnicodeDecodeError as exc:
+            raise ConnectorError(f"GITHUB_RESPONSE_ENCODING_INVALID: {context}") from exc
+        try:
+            payload = json.loads(raw)
+        except json.JSONDecodeError as exc:
+            raise ConnectorError(f"GITHUB_RESPONSE_JSON_INVALID: {context}") from exc
+        if not isinstance(payload, dict):
+            raise ConnectorError(f"GITHUB_RESPONSE_STRUCTURE_INVALID: {context}")
+        return payload
+
+    @staticmethod
+    def _required_text(payload: dict[str, Any], key: str, context: str) -> str:
+        value = payload.get(key)
+        if not isinstance(value, str) or not value.strip():
+            raise ConnectorError(f"GITHUB_RESPONSE_STRUCTURE_INVALID: {context}.{key}")
+        return value
+
+    @classmethod
+    def _commit_sha(cls, payload: dict[str, Any], context: str) -> str:
+        commit = payload.get("commit")
+        if not isinstance(commit, dict):
+            raise ConnectorError(f"GITHUB_RESPONSE_STRUCTURE_INVALID: {context}.commit")
+        return cls._required_text(commit, "sha", f"{context}.commit")
+
     def _request(
         self,
         method: str,
@@ -70,7 +99,7 @@ class GitHubRepositoryConnector(RepositoryConnector):
 
         try:
             with urllib.request.urlopen(request, timeout=self._timeout) as response:
-                return json.loads(response.read().decode("utf-8"))
+                return self._decode_response(response, f"{method} {path}")
         except urllib.error.HTTPError as exc:
             body = ""
             if getattr(exc, "fp", None) is not None:
@@ -88,10 +117,12 @@ class GitHubRepositoryConnector(RepositoryConnector):
     def _decode_content(payload: dict[str, Any], path: str) -> str:
         if payload.get("type") != "file":
             raise ConnectorError(f"GITHUB_TARGET_NOT_FILE: {path}")
-        encoded = payload.get("content", "").replace("\n", "")
+        encoded = payload.get("content")
+        if not isinstance(encoded, str):
+            raise ConnectorError(f"GITHUB_CONTENT_MISSING_OR_INVALID: {path}")
         try:
-            return base64.b64decode(encoded).decode("utf-8")
-        except (ValueError, UnicodeDecodeError) as exc:
+            return base64.b64decode(encoded.replace("\n", ""), validate=True).decode("utf-8")
+        except (binascii.Error, ValueError, UnicodeDecodeError) as exc:
             raise ConnectorError(f"GITHUB_CONTENT_DECODE_FAILED: {path}") from exc
 
     def read_current(self, path: str) -> ConnectorFile | None:
@@ -99,7 +130,8 @@ class GitHubRepositoryConnector(RepositoryConnector):
             payload = self._request("GET", path, None, include_ref=True)
         except FileNotFoundError:
             return None
-        return ConnectorFile(path=path, sha=str(payload["sha"]), content=self._decode_content(payload, path))
+        sha = self._required_text(payload, "sha", f"GET {path}")
+        return ConnectorFile(path=path, sha=sha, content=self._decode_content(payload, path))
 
     def create_file(self, path: str, content: str, commit_message: str) -> str:
         if self.read_current(path) is not None:
@@ -110,7 +142,7 @@ class GitHubRepositoryConnector(RepositoryConnector):
             "branch": self._config.branch,
         }
         result = self._request("PUT", path, payload)
-        return str(result["commit"]["sha"])
+        return self._commit_sha(result, f"PUT {path}")
 
     def update_file(self, path: str, content: str, commit_message: str, current_sha: str) -> str:
         current = self.read_current(path)
@@ -125,7 +157,7 @@ class GitHubRepositoryConnector(RepositoryConnector):
             "branch": self._config.branch,
         }
         result = self._request("PUT", path, payload)
-        return str(result["commit"]["sha"])
+        return self._commit_sha(result, f"PUT {path}")
 
     def read_back(self, path: str) -> ConnectorFile:
         current = self.read_current(path)
