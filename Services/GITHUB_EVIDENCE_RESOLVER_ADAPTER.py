@@ -156,8 +156,8 @@ class GitHubEvidenceResolverAdapter:
     def _decode_json_value(payload: dict[str, Any], reference: GitHubArtifactReference) -> tuple[Any, str]:
         if not isinstance(payload, dict) or payload.get("type") != "file":
             raise EvidenceResolverAdapterError("GITHUB_EVIDENCE_TARGET_NOT_FILE")
-        blob_sha = str(payload.get("sha", ""))
-        if not blob_sha:
+        blob_sha = payload.get("sha")
+        if not isinstance(blob_sha, str) or not blob_sha.strip():
             raise EvidenceResolverAdapterError("GITHUB_EVIDENCE_BLOB_SHA_MISSING")
         encoded = payload.get("content")
         if not isinstance(encoded, str):
