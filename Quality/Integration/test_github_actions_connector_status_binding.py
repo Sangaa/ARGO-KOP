@@ -15,7 +15,7 @@ def test_status_filter_accepts_conclusion_match(monkeypatch: pytest.MonkeyPatch)
     monkeypatch.setattr(
         connector,
         "_request",
-        lambda *args, **kwargs: {"workflow_runs": [{"status": "completed", "conclusion": "success"}]},
+        lambda *args, **kwargs: {"workflow_runs": [{"id": 1, "status": "completed", "conclusion": "success"}]},
     )
 
     result = connector.list_workflow_runs(status="success")
@@ -28,7 +28,7 @@ def test_status_filter_accepts_runtime_status_match(monkeypatch: pytest.MonkeyPa
     monkeypatch.setattr(
         connector,
         "_request",
-        lambda *args, **kwargs: {"workflow_runs": [{"status": "in_progress", "conclusion": None}]},
+        lambda *args, **kwargs: {"workflow_runs": [{"id": 1, "status": "in_progress", "conclusion": None}]},
     )
 
     result = connector.list_workflow_runs(status="in_progress")
@@ -41,7 +41,7 @@ def test_status_filter_rejects_unrepresented_requested_value(monkeypatch: pytest
     monkeypatch.setattr(
         connector,
         "_request",
-        lambda *args, **kwargs: {"workflow_runs": [{"status": "completed", "conclusion": "failure"}]},
+        lambda *args, **kwargs: {"workflow_runs": [{"id": 1, "status": "completed", "conclusion": "failure"}]},
     )
 
     with pytest.raises(ConnectorError, match="GITHUB_ACTIONS_STATUS_FILTER_MISMATCH"):
@@ -53,7 +53,7 @@ def test_status_filter_rejects_missing_semantic_representation(monkeypatch: pyte
     monkeypatch.setattr(
         connector,
         "_request",
-        lambda *args, **kwargs: {"workflow_runs": [{}]},
+        lambda *args, **kwargs: {"workflow_runs": [{"id": 1}]},
     )
 
     with pytest.raises(ConnectorError, match="GITHUB_ACTIONS_STATUS_FILTER_MISMATCH"):
@@ -62,6 +62,6 @@ def test_status_filter_rejects_missing_semantic_representation(monkeypatch: pyte
 
 def test_no_status_filter_adds_no_status_or_conclusion_requirement(monkeypatch: pytest.MonkeyPatch):
     connector = _connector()
-    monkeypatch.setattr(connector, "_request", lambda *args, **kwargs: {"workflow_runs": [{}]})
+    monkeypatch.setattr(connector, "_request", lambda *args, **kwargs: {"workflow_runs": [{"id": 1}]})
 
-    assert connector.list_workflow_runs() == {"workflow_runs": [{}]}
+    assert connector.list_workflow_runs() == {"workflow_runs": [{"id": 1}]}

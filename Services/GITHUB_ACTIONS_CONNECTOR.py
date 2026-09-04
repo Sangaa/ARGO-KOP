@@ -114,6 +114,12 @@ class GitHubActionsRepositoryConnector(GitHubActionsConnector):
             "per_page": per_page,
         })
         self._require_object_list(result, "workflow_runs", "GET runs")
+        for run in result["workflow_runs"]:
+            returned_run_id = run.get("id")
+            if type(returned_run_id) is not int or returned_run_id <= 0:
+                raise ConnectorError(
+                    "GITHUB_ACTIONS_RESPONSE_STRUCTURE_INVALID: GET runs.workflow_runs[].id"
+                )
         if head_sha is not None:
             for run in result["workflow_runs"]:
                 returned_head_sha = run.get("head_sha")

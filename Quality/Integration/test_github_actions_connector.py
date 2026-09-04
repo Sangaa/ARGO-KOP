@@ -227,10 +227,10 @@ def test_list_workflow_runs_does_not_require_head_sha_without_filter(monkeypatch
 
 def test_list_workflow_runs_rejects_missing_or_mismatched_direct_filter_fields(monkeypatch: pytest.MonkeyPatch):
     responses = [
-        FakeResponse({"workflow_runs": [{"event": "push"}]}),
-        FakeResponse({"workflow_runs": [{"head_branch": "dev", "event": "push"}]}),
-        FakeResponse({"workflow_runs": [{"head_branch": "main"}]}),
-        FakeResponse({"workflow_runs": [{"head_branch": "main", "event": "pull_request"}]}),
+        FakeResponse({"workflow_runs": [{"id": 1, "event": "push"}]}),
+        FakeResponse({"workflow_runs": [{"id": 1, "head_branch": "dev", "event": "push"}]}),
+        FakeResponse({"workflow_runs": [{"id": 1, "head_branch": "main"}]}),
+        FakeResponse({"workflow_runs": [{"id": 1, "head_branch": "main", "event": "pull_request"}]}),
     ]
     monkeypatch.setattr("urllib.request.urlopen", lambda request, timeout: responses.pop(0))
     connector = GitHubActionsRepositoryConnector(owner="Sangaa", repo="ARGO-KOP", token="test")
