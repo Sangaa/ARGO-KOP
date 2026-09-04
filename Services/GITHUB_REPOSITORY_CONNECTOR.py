@@ -26,6 +26,11 @@ class GitHubConnectorConfig:
     branch: str = "main"
     api_base: str = "https://api.github.com"
 
+    def __post_init__(self) -> None:
+        for value in (self.owner, self.repo, self.token, self.branch, self.api_base):
+            if not isinstance(value, str) or not value.strip():
+                raise ConnectorError("GITHUB_CONNECTOR_CONFIGURATION_INCOMPLETE")
+
     @classmethod
     def from_environment(cls) -> "GitHubConnectorConfig":
         owner = os.environ.get("ARGO_GITHUB_OWNER", "").strip()
