@@ -96,7 +96,15 @@ class GitHubActionsRepositoryConnector(GitHubActionsConnector):
     def list_workflow_runs(self, *, branch: str | None = None, event: str | None = None,
                            head_sha: str | None = None, status: str | None = None,
                            per_page: int = 10) -> dict:
-        if not 1 <= per_page <= 100:
+        for value, reason in (
+            (branch, "GITHUB_ACTIONS_INVALID_BRANCH"),
+            (event, "GITHUB_ACTIONS_INVALID_EVENT"),
+            (head_sha, "GITHUB_ACTIONS_INVALID_HEAD_SHA"),
+            (status, "GITHUB_ACTIONS_INVALID_STATUS"),
+        ):
+            if value is not None and not isinstance(value, str):
+                raise ConnectorError(reason)
+        if type(per_page) is not int or not 1 <= per_page <= 100:
             raise ConnectorError("GITHUB_ACTIONS_INVALID_PER_PAGE")
         result = self._request("GET", "runs", params={
             "branch": branch,
