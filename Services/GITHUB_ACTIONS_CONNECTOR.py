@@ -225,7 +225,13 @@ class GitHubActionsRepositoryConnector(GitHubActionsConnector):
         request.add_header("User-Agent", "ARGO-KOP-Governed-Actions-Connector")
         try:
             with urllib.request.urlopen(request, timeout=self._timeout) as response:
-                return response.read().decode("utf-8", errors="replace")
+                raw_logs = response.read()
+                try:
+                    return raw_logs.decode("utf-8")
+                except UnicodeDecodeError as exc:
+                    raise ConnectorError(
+                        f"GITHUB_ACTIONS_RESPONSE_ENCODING_INVALID: GET jobs/{job_id}/logs"
+                    ) from exc
         except urllib.error.HTTPError as exc:
             body = ""
             if getattr(exc, "fp", None) is not None:
