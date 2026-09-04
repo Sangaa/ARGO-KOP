@@ -127,3 +127,33 @@ def test_boolean_execution_identity_is_rejected_before_transport(monkeypatch: py
     with pytest.raises(ConnectorError, match="GITHUB_ACTIONS_INVALID_JOB_ID"):
         connector.get_workflow_job_logs(True)
     assert calls == []
+
+
+def test_list_workflow_runs_accepts_empty_collection(monkeypatch: pytest.MonkeyPatch):
+    monkeypatch.setattr("urllib.request.urlopen", lambda request, timeout: FakeResponse({"total_count": 0, "workflow_runs": []}))
+    connector = GitHubActionsRepositoryConnector(owner="Sangaa", repo="ARGO-KOP", token="test")
+    assert connector.list_workflow_runs()["workflow_runs"] == []
+
+
+def test_list_workflow_runs_rejects_invalid_collection_shape(monkeypatch: pytest.MonkeyPatch):
+    responses = [FakeResponse({"total_count": 0}), FakeResponse({"workflow_runs": {}}), FakeResponse({"workflow_runs": [123]})]
+    monkeypatch.setattr("urllib.request.urlopen", lambda request, timeout: responses.pop(0))
+    connector = GitHubActionsRepositoryConnector(owner="Sangaa", repo="ARGO-KOP", token="test")
+    for _ in range(3):
+        with pytest.raises(ConnectorError, match="GITHUB_ACTIONS_RESPONSE_STRUCTURE_INVALID"):
+            connector.list_workflow_runs()
+
+
+def test_list_workflow_run_jobs_accepts_empty_collection(monkeypatch: pytest.MonkeyPatch):
+    monkeypatch.setattr("urllib.request.urlopen", lambda request, timeout: FakeResponse({"total_count": 0, "jobs": []}))
+    connector = GitHubActionsRepositoryConnector(owner="Sangaa", repo="ARGO-KOP", token="test")
+    assert connector.list_workflow_run_jobs(123)["jobs"] == []
+
+
+def test_list_workflow_run_jobs_rejects_invalid_collection_shape(monkeypatch: pytest.MonkeyPatch):
+    responses = [FakeResponse({"total_count": 0}), FakeResponse({"jobs": {}}), FakeResponse({"jobs": [123]})]
+    monkeypatch.setattr("urllib.request.urlopen", lambda request, timeout: responses.pop(0))
+    connector = GitHubActionsRepositoryConnector(owner="Sangaa", repo="ARGO-KOP", token="test")
+    for _ in range(3):
+        with pytest.raises(ConnectorError, match="GITHUB_ACTIONS_RESPONSE_STRUCTURE_INVALID"):
+            connector.list_workflow_run_jobs(123)

@@ -61,6 +61,14 @@ class GitHubActionsRepositoryConnector(GitHubActionsConnector):
             raise ConnectorError(f"GITHUB_ACTIONS_RESPONSE_STRUCTURE_INVALID: {context}")
         return payload
 
+    @staticmethod
+    def _require_object_list(payload: dict[str, Any], key: str, context: str) -> None:
+        value = payload.get(key)
+        if not isinstance(value, list):
+            raise ConnectorError(f"GITHUB_ACTIONS_RESPONSE_STRUCTURE_INVALID: {context}.{key}")
+        if any(not isinstance(item, dict) for item in value):
+            raise ConnectorError(f"GITHUB_ACTIONS_RESPONSE_STRUCTURE_INVALID: {context}.{key}[]")
+
     def _request(self, method: str, path: str, *, params: dict[str, Any] | None = None,
                  payload: dict[str, Any] | None = None, allow_empty: bool = False) -> dict[str, Any]:
         data = None if payload is None else json.dumps(payload).encode("utf-8")
@@ -90,13 +98,15 @@ class GitHubActionsRepositoryConnector(GitHubActionsConnector):
                            per_page: int = 10) -> dict:
         if not 1 <= per_page <= 100:
             raise ConnectorError("GITHUB_ACTIONS_INVALID_PER_PAGE")
-        return self._request("GET", "runs", params={
+        result = self._request("GET", "runs", params={
             "branch": branch,
             "event": event,
             "head_sha": head_sha,
             "status": status,
             "per_page": per_page,
         })
+        self._require_object_list(result, "workflow_runs", "GET runs")
+        return result
 
     def get_workflow_run(self, run_id: int) -> dict:
         if type(run_id) is not int or run_id <= 0:
@@ -124,7 +134,9 @@ class GitHubActionsRepositoryConnector(GitHubActionsConnector):
     def list_workflow_run_jobs(self, run_id: int) -> dict:
         if type(run_id) is not int or run_id <= 0:
             raise ConnectorError("GITHUB_ACTIONS_INVALID_RUN_ID")
-        return self._request("GET", f"runs/{run_id}/jobs", params={"per_page": 100})
+        result = self._request("GET", f"runs/{run_id}/jobs", params={"per_page": 100})
+        self._require_object_list(result, "jobs", f"GET runs/{run_id}/jobs")
+        return result
 
     def get_workflow_job_logs(self, job_id: int) -> str:
         if type(job_id) is not int or job_id <= 0:
