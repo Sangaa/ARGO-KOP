@@ -117,6 +117,27 @@ class GitHubActionsRepositoryConnector(GitHubActionsConnector):
                     raise ConnectorError(
                         f"GITHUB_ACTIONS_HEAD_SHA_FILTER_MISMATCH: expected={head_sha} actual={returned_head_sha}"
                     )
+        for run in result["workflow_runs"]:
+            if branch is not None:
+                returned_branch = run.get("head_branch")
+                if not isinstance(returned_branch, str) or not returned_branch:
+                    raise ConnectorError(
+                        "GITHUB_ACTIONS_RESPONSE_STRUCTURE_INVALID: GET runs.workflow_runs[].head_branch"
+                    )
+                if returned_branch != branch:
+                    raise ConnectorError(
+                        f"GITHUB_ACTIONS_BRANCH_FILTER_MISMATCH: expected={branch} actual={returned_branch}"
+                    )
+            if event is not None:
+                returned_event = run.get("event")
+                if not isinstance(returned_event, str) or not returned_event:
+                    raise ConnectorError(
+                        "GITHUB_ACTIONS_RESPONSE_STRUCTURE_INVALID: GET runs.workflow_runs[].event"
+                    )
+                if returned_event != event:
+                    raise ConnectorError(
+                        f"GITHUB_ACTIONS_EVENT_FILTER_MISMATCH: expected={event} actual={returned_event}"
+                    )
         return result
 
     def get_workflow_run(self, run_id: int) -> dict:

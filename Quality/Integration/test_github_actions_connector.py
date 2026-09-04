@@ -30,12 +30,17 @@ def test_list_workflow_runs_preserves_execution_filters(monkeypatch: pytest.Monk
 
     def fake_urlopen(request, timeout):
         requests.append(request)
-        return FakeResponse({"total_count": 1, "workflow_runs": [{"id": 123, "head_sha": "abc"}]})
+        return FakeResponse({
+            "total_count": 1,
+            "workflow_runs": [{"id": 123, "head_sha": "abc", "head_branch": "main", "event": "push"}],
+        })
 
     monkeypatch.setattr("urllib.request.urlopen", fake_urlopen)
     connector = GitHubActionsRepositoryConnector(owner="Sangaa", repo="ARGO-KOP", token="test")
     result = connector.list_workflow_runs(branch="main", event="push", head_sha="abc", status="completed")
     assert result["workflow_runs"][0]["id"] == 123
+    assert result["workflow_runs"][0]["head_branch"] == "main"
+    assert result["workflow_runs"][0]["event"] == "push"
     assert "branch=main" in requests[0].full_url
     assert "event=push" in requests[0].full_url
     assert "head_sha=abc" in requests[0].full_url
@@ -218,3 +223,28 @@ def test_list_workflow_runs_does_not_require_head_sha_without_filter(monkeypatch
     monkeypatch.setattr("urllib.request.urlopen", lambda request, timeout: FakeResponse({"workflow_runs": [{"id": 1}]}))
     connector = GitHubActionsRepositoryConnector(owner="Sangaa", repo="ARGO-KOP", token="test")
     assert connector.list_workflow_runs()["workflow_runs"][0]["id"] == 1
+
+
+def test_list_workflow_runs_rejects_missing_or_mismatched_direct_filter_fields(monkeypatch: pytest.MonkeyPatch):
+    responses = [
+        FakeResponse({"workflow_runs": [{"event": "push"}]}),
+        FakeResponse({"workflow_runs": [{"head_branch": "dev", "event": "push"}]}),
+        FakeResponse({"workflow_runs": [{"head_branch": "main"}]}),
+        FakeResponse({"workflow_runs": [{"head_branch": "main", "event": "pull_request"}]}),
+    ]
+    monkeypatch.setattr("urllib.request.urlopen", lambda request, timeout: responses.pop(0))
+    connector = GitHubActionsRepositoryConnector(owner="Sangaa", repo="ARGO-KOP", token="test")
+    with pytest.raises(ConnectorError, match="GITHUB_ACTIONS_RESPONSE_STRUCTURE_INVALID"):
+        connector.list_workflow_runs(branch="main", event="push")
+    with pytest.raises(ConnectorError, match="GITHUB_ACTIONS_BRANCH_FILTER_MISMATCH"):
+        connector.list_workflow_runs(branch="main", event="push")
+    with pytest.raises(ConnectorError, match="GITHUB_ACTIONS_RESPONSE_STRUCTURE_INVALID"):
+        connector.list_workflow_runs(branch="main", event="push")
+    with pytest.raises(ConnectorError, match="GITHUB_ACTIONS_EVENT_FILTER_MISMATCH"):
+        connector.list_workflow_runs(branch="main", event="push")
+
+
+def test_list_workflow_runs_direct_filters_accept_empty_collection(monkeypatch: pytest.MonkeyPatch):
+    monkeypatch.setattr("urllib.request.urlopen", lambda request, timeout: FakeResponse({"workflow_runs": []}))
+    connector = GitHubActionsRepositoryConnector(owner="Sangaa", repo="ARGO-KOP", token="test")
+    assert connector.list_workflow_runs(branch="main", event="push")["workflow_runs"] == []
