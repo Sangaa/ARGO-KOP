@@ -21,6 +21,9 @@ class GitHubActionsRepositoryConnector(GitHubActionsConnector):
 
     def __init__(self, *, owner: str, repo: str, token: str,
                  api_base: str = "https://api.github.com", timeout: float = 20.0) -> None:
+        for value in (owner, repo, token, api_base):
+            if not isinstance(value, str) or not value.strip():
+                raise ConnectorError("GITHUB_ACTIONS_CONNECTOR_CONFIGURATION_INCOMPLETE")
         self._owner = owner
         self._repo = repo
         self._token = token
