@@ -123,8 +123,8 @@ Smallest governed source repair: refresh only the current REP-020 manifest row f
 | ID | Target | Action | Required result |
 |---|---|---|---|
 | P11-B-01 | `Repository/REP-014_REPOSITORY_RELATIONSHIP_REGISTRY.md` | NO CHANGE / IMMUTABLE MATERIAL | retain `1.2.19`; REL-073..080 and blob `39c4aa4fccdc7ff391b0812735ec3c2356113165` |
-| P11-B-02 | this Matrix | UPDATE | preserve prior failure evidence; bind closure proof |
-| P11-B-03 | `Repository/REP-011_PRIORITY11_INTERFACES_RELATIONSHIP_REGISTRATION_ADDENDUM_2026-09-03_B.md` | UPDATE | bind exact-head closure proof without relationship/priority promotion |
+| P11-B-02 | this Matrix | UPDATE | preserve prior failure evidence; bind closure proof and evidence-preservation correction |
+| P11-B-03 | `Repository/REP-011_PRIORITY11_INTERFACES_RELATIONSHIP_REGISTRATION_ADDENDUM_2026-09-03_B.md` | UPDATE | restore preserved detail and bind exact-head closure proof without relationship/priority promotion |
 | P11-B-04 | `Quality/Integration/test_architecture_p9_repository_reconciliation.py` | ALREADY REPAIRED / NO CHANGE | retain first semantic prohibited-relationship guard |
 | P11-B-05 | `Quality/Integration/test_architecture_p9_status_sync.py` | ALREADY REPAIRED / NO CHANGE | retain second semantic prohibited-relationship guard |
 | P11-B-06 | `Repository/REP-020_CURRENT_CONTROL_PLANE_BOUNDARY_MANIFEST.md` | RECONCILED / NO CHANGE IN CLOSURE SET | current REP-014 version is `1.2.19`; historical manifests untouched |
@@ -143,6 +143,10 @@ All four required workflow families completed `SUCCESS` on exact HEAD `43376b576
 - Real Mutation Matrix Regression — run `33866164105` — `SUCCESS`.
 
 Transaction-B material, semantic guards, control-plane current evidence, atomicity gate and exact-head executable validation are therefore jointly satisfied. Closure changes only the transaction evidence state; it does not promote Priority 11 or any documentary relationship to implementation proof.
+
+## Evidence-preservation corrective binding
+
+The first closure-binding commit `5f635c395fbde09cd8d0c755460578055c445bdd` changed only this Matrix and the Transaction-B REP-011 addendum, but compare evidence showed the addendum unnecessarily compressed preserved historical detail. Before accepting closure CI, this corrective binding restores that detailed evidence and appends closure proof only. This is a documentation-preservation correction; no relationship material, executable guard, current manifest row, Interface source, or trust claim changes.
 
 ## Explicit semantic and trust boundaries
 
