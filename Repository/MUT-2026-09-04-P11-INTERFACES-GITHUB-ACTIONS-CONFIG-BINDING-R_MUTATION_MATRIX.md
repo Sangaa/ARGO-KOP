@@ -4,7 +4,7 @@ Transaction ID: `MUT-2026-09-04-P11-INTERFACES-GITHUB-ACTIONS-CONFIG-BINDING-R`
 
 Priority: `11 — Interfaces`
 
-Protocol: governed bounded mutation; protected implementation + focused semantic test + mutation record are co-committed, followed by exact-head CI and Matrix-only closure.
+Protocol: governed bounded mutation; protected implementation + focused semantic test + mutation record were co-committed, material exact-head CI was required, and closure is Matrix-only with an independent closure-head CI cycle.
 
 ## Semantic contract
 
@@ -16,9 +16,9 @@ This transaction does **not** impose token format, repository-name syntax, URL r
 
 | Change ID | Target | Action | Expected Content | Applied | Verified |
 | --- | --- | --- | --- | --- | --- |
-| R-001 | `Services/GITHUB_ACTIONS_CONNECTOR.py` | MODIFY | Validate direct `owner`, `repo`, `token`, and `api_base` inputs as exact nonblank strings using the existing Actions incomplete-configuration failure family. | YES | PENDING EXACT-HEAD CI |
-| R-002 | `Quality/Integration/test_github_actions_connector_config_binding.py` | CREATE | Prove direct construction rejects missing/blank/non-text boundary values and preserves valid explicit routing values. | YES | PENDING EXACT-HEAD CI |
-| R-003 | This Matrix | CREATE / KEEP | Record scope, exclusions, read-back discipline, and unexpected-change handling. | YES | PENDING CLOSURE |
+| R-001 | `Services/GITHUB_ACTIONS_CONNECTOR.py` | MODIFY | Validate direct `owner`, `repo`, `token`, and `api_base` inputs as exact nonblank strings using the existing Actions incomplete-configuration failure family. | YES | YES |
+| R-002 | `Quality/Integration/test_github_actions_connector_config_binding.py` | CREATE | Prove direct construction rejects missing/blank/non-text boundary values and preserves valid explicit routing values. | YES | YES |
+| R-003 | This Matrix | CREATE / KEEP | Record scope, exclusions, read-back discipline, and unexpected-change handling. | YES | YES |
 
 ## KEEP / exclusions
 
@@ -28,14 +28,26 @@ This transaction does **not** impose token format, repository-name syntax, URL r
 - KEEP token/repository/API endpoint format and connectivity claims outside scope beyond exact nonblank text.
 - Do not infer Actions authority or workflow completion from syntactically valid configuration.
 
-## Post-write / read-back protocol
+## Post-write / read-back evidence
 
-After material commit, immutable read-back must confirm the exact source, focused test, and Matrix at the material SHA. Entry-to-material comparison must contain only those three authorized paths. Exact-head CI must then succeed for Full-Stack Repository Audit, ARGO Runtime Prototype and Integration Tests, M2 Multi-Channel Proposal Training, and Real Mutation Matrix Regression before closure.
+Entry HEAD: `80499a07a3631ec9fbe28d2058d98bbe36d2766e`.
+
+Material HEAD: `b96f21b76f175bf9fcd81165c89d1bb6ed1a7ae5`.
+
+Entry-to-material comparison contained exactly the three authorized paths: the protected Actions connector source, the focused configuration-binding test, and this Matrix. Immutable material read-back confirmed the direct-construction guard and focused semantic test.
+
+Material exact-head CI succeeded independently for all required workflow families:
+- Full-Stack Repository Audit — run `33911358159` — `completed / success`
+- ARGO Runtime Prototype and Integration Tests — run `33911358266` — `completed / success`
+- M2 Multi-Channel Proposal Training — run `33911358197` — `completed / success`
+- Real Mutation Matrix Regression — run `33911358322` — `completed / success`
+
+Closure mutation is restricted to this Matrix. Closure validity additionally requires a fresh four-family exact-head CI cycle on the resulting closure SHA; that evidence is verified externally because writing it into the same commit would create another SHA.
 
 ## Unexpected Changes
 
-Any path outside the three authorized targets, any non-fast-forward baseline movement, or any semantic/CI failure stops closure and requires diagnosis rather than weakening the boundary invariant.
+No unexpected material path changes were observed. Any closure path outside this Matrix, any non-fast-forward baseline movement, or any closure-head CI failure invalidates closure until diagnosed.
 
-## Material state
+## State
 
-`MATERIAL PENDING`
+`CLOSED / VERIFIED MATERIAL / CLOSURE EXACT-HEAD CI REQUIRED`
