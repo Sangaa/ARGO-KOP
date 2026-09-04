@@ -157,3 +157,36 @@ def test_list_workflow_run_jobs_rejects_invalid_collection_shape(monkeypatch: py
     for _ in range(3):
         with pytest.raises(ConnectorError, match="GITHUB_ACTIONS_RESPONSE_STRUCTURE_INVALID"):
             connector.list_workflow_run_jobs(123)
+
+
+def test_list_workflow_run_jobs_requires_matching_run_lineage(monkeypatch: pytest.MonkeyPatch):
+    monkeypatch.setattr(
+        "urllib.request.urlopen",
+        lambda request, timeout: FakeResponse({"total_count": 1, "jobs": [{"id": 9, "run_id": 123}]}),
+    )
+    connector = GitHubActionsRepositoryConnector(owner="Sangaa", repo="ARGO-KOP", token="test")
+    result = connector.list_workflow_run_jobs(123)
+    assert result["jobs"][0]["run_id"] == 123
+
+
+def test_list_workflow_run_jobs_rejects_missing_or_mismatched_run_lineage(monkeypatch: pytest.MonkeyPatch):
+    responses = [
+        FakeResponse({"jobs": [{"id": 9}]}),
+        FakeResponse({"jobs": [{"id": 9, "run_id": 124}]}),
+    ]
+    monkeypatch.setattr("urllib.request.urlopen", lambda request, timeout: responses.pop(0))
+    connector = GitHubActionsRepositoryConnector(owner="Sangaa", repo="ARGO-KOP", token="test")
+    with pytest.raises(ConnectorError, match="GITHUB_ACTIONS_RESPONSE_STRUCTURE_INVALID"):
+        connector.list_workflow_run_jobs(123)
+    with pytest.raises(ConnectorError, match="GITHUB_ACTIONS_JOB_RUN_IDENTITY_MISMATCH"):
+        connector.list_workflow_run_jobs(123)
+
+
+def test_list_workflow_run_jobs_rejects_boolean_provider_run_identity(monkeypatch: pytest.MonkeyPatch):
+    monkeypatch.setattr(
+        "urllib.request.urlopen",
+        lambda request, timeout: FakeResponse({"jobs": [{"id": 9, "run_id": True}]}),
+    )
+    connector = GitHubActionsRepositoryConnector(owner="Sangaa", repo="ARGO-KOP", token="test")
+    with pytest.raises(ConnectorError, match="GITHUB_ACTIONS_RESPONSE_STRUCTURE_INVALID"):
+        connector.list_workflow_run_jobs(123)

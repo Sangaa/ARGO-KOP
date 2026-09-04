@@ -136,6 +136,16 @@ class GitHubActionsRepositoryConnector(GitHubActionsConnector):
             raise ConnectorError("GITHUB_ACTIONS_INVALID_RUN_ID")
         result = self._request("GET", f"runs/{run_id}/jobs", params={"per_page": 100})
         self._require_object_list(result, "jobs", f"GET runs/{run_id}/jobs")
+        for job in result["jobs"]:
+            returned_run_id = job.get("run_id")
+            if type(returned_run_id) is not int:
+                raise ConnectorError(
+                    f"GITHUB_ACTIONS_RESPONSE_STRUCTURE_INVALID: GET runs/{run_id}/jobs.jobs[].run_id"
+                )
+            if returned_run_id != run_id:
+                raise ConnectorError(
+                    f"GITHUB_ACTIONS_JOB_RUN_IDENTITY_MISMATCH: expected={run_id} actual={returned_run_id}"
+                )
         return result
 
     def get_workflow_job_logs(self, job_id: int) -> str:
