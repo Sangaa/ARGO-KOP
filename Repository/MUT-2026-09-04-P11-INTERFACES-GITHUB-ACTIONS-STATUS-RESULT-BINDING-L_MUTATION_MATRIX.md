@@ -2,18 +2,19 @@
 
 Transaction ID: `MUT-2026-09-04-P11-INTERFACES-GITHUB-ACTIONS-STATUS-RESULT-BINDING-L`
 Priority: `11 — Interfaces`
-State: `CORRECTIVE MATERIAL PREPARED / EXACT-HEAD CI PENDING`
+State: `CLOSED / VERIFIED / RESUME-SAFE`
 Entry HEAD: `cfee8422a819ec8e94f4ee7eba240568f1c5969e`
 Initial Material HEAD: `8a942c1c6cfcc4674d289a2e3125e9f0565da05a`
+Corrective Material HEAD: `72a979912cc462ddd74c5f31c027055e30617eb2`
 Protocol: GOV-014 / GOV-013 / INTF-010 / GITHUB_ACTIONS_CONNECTOR_INTERFACE
 
 ## Boundary
 
-Transaction K is `CLOSED / VERIFIED / RESUME-SAFE`. This transaction addresses only semantic result binding for the existing `status` filter of `list_workflow_runs(...)` and the bounded repair of one historical integration fixture exposed by that stronger invariant.
+Transaction K is `CLOSED / VERIFIED / RESUME-SAFE`. This transaction addressed only semantic result binding for the existing `status` filter of `list_workflow_runs(...)` and the bounded repair of one historical integration fixture exposed by that stronger invariant.
 
 GitHub's authoritative REST contract states that the `status` query parameter returns workflow runs with the check-run `status` OR `conclusion` specified by the caller. Therefore equality against `run.status` alone would be a false transfer from branch/event binding.
 
-This transaction does not introduce a hardcoded local enum, does not alter request-shape validation, does not change branch/event/head_sha guards, and does not claim provider authentication or production execution.
+This transaction introduced no hardcoded local enum, did not alter request-shape validation, did not change branch/event/head_sha guards, and makes no provider authentication or production execution claim.
 
 ## Required invariants
 
@@ -31,10 +32,10 @@ This transaction does not introduce a hardcoded local enum, does not alter reque
 
 | Change ID | Target | Action | Expected Content | Applied | Verified |
 |---|---|---|---|---|---|
-| P11-L-01 | `Services/GITHUB_ACTIONS_CONNECTOR.py` | UPDATE | bind requested status to returned status-or-conclusion semantics | Y | initial material read-back verified; exact-head CI revalidation pending |
-| P11-L-02 | `Quality/Integration/test_github_actions_connector_status_binding.py` | CREATE | regress conclusion match, runtime-status match, mismatch, missing representation and unfiltered behavior | Y | initial material read-back verified; exact-head CI revalidation pending |
+| P11-L-01 | `Services/GITHUB_ACTIONS_CONNECTOR.py` | UPDATE | bind requested status to returned status-or-conclusion semantics | Y | Y |
+| P11-L-02 | `Quality/Integration/test_github_actions_connector_status_binding.py` | CREATE | regress conclusion match, runtime-status match, mismatch, missing representation and unfiltered behavior | Y | Y |
 | P11-L-03 | this Matrix | CREATE/UPDATE | bind status-only scope, provider semantics, corrective evidence, KEEP constraints and closure | Y | Y |
-| P11-L-04 | `Quality/Integration/test_github_actions_connector.py` | UPDATE | repair historical execution-filter fixture so its nonempty provider result represents requested `status=completed` | Y | exact-head CI pending |
+| P11-L-04 | `Quality/Integration/test_github_actions_connector.py` | UPDATE | repair historical execution-filter fixture so its nonempty provider result represents requested `status=completed` | Y | Y |
 
 ## Initial material evidence
 
@@ -47,19 +48,31 @@ Exact-initial-material-head CI produced three successful required workflow famil
 - Real Mutation Matrix Regression: SUCCESS;
 - ARGO Runtime Prototype and Integration Tests: FAILURE, run `33884086071`, job `101059520087`, step `Run integration quality suite`.
 
-L therefore remained OPEN and no closure commit was allowed.
+L therefore remained OPEN and no premature closure commit was written.
 
-## Corrective diagnosis
+## Corrective diagnosis and repair
 
-Exact-head inspection of `Quality/Integration/test_github_actions_connector.py` established a bounded stale-fixture collision. `test_list_workflow_runs_preserves_execution_filters` calls:
+Exact-head inspection of `Quality/Integration/test_github_actions_connector.py` established a bounded stale-fixture collision. `test_list_workflow_runs_preserves_execution_filters` requested `status="completed"` while its nonempty fake provider run represented `head_sha`, `head_branch`, and `event` but represented neither `status` nor `conclusion`.
 
-`list_workflow_runs(branch="main", event="push", head_sha="abc", status="completed")`
+Under the provider-correct L invariant, that fixture must fail closed. The failure therefore demonstrated that the stronger semantic guard exposed obsolete synthetic test data; it did not justify weakening production semantics.
 
-while its nonempty fake provider run represented `head_sha`, `head_branch`, and `event` but represented neither `status` nor `conclusion`.
+Corrective commit `72a979912cc462ddd74c5f31c027055e30617eb2` changed only:
 
-Under the newly explicit and provider-correct L invariant, that fixture must fail closed. The failure is therefore evidence that the strengthened invariant exposed historical test data which was no longer semantically sufficient; it is not evidence that the invariant should be weakened.
+- `Quality/Integration/test_github_actions_connector.py` — added returned `status="completed"` to the historical filtered fake run;
+- this Matrix — preserved the failure, diagnosis, bounded repair and revalidation requirement.
 
-Corrective action is bounded to the fixture: add returned `status="completed"`. No connector implementation change is authorized by this repair.
+Compare `8a942c1c6cfcc4674d289a2e3125e9f0565da05a` → `72a979912cc462ddd74c5f31c027055e30617eb2` showed exactly those two authorized paths. Immutable read-back confirmed the repaired fixture and Matrix. No connector implementation change occurred in the corrective commit.
+
+## Exact corrective-material-head CI
+
+All four required workflow families completed successfully on exact corrective material HEAD `72a979912cc462ddd74c5f31c027055e30617eb2`:
+
+- ARGO Runtime Prototype and Integration Tests — run `33901525066` — SUCCESS;
+- Full-Stack Repository Audit — run `33901525086` — SUCCESS;
+- M2 Multi-Channel Proposal Training — run `33901525043` — SUCCESS;
+- Real Mutation Matrix Regression — run `33901525203` — SUCCESS.
+
+This 4/4 result validates the corrective material but remains distinct from closure-head validation.
 
 ## Evidence
 
@@ -94,10 +107,10 @@ KEEP unchanged:
 
 No provider-authenticity, remote-delivery, workflow-completion or production-success claim is introduced.
 
-## Post-write and closure rules
+## Closure rule
 
-Corrective material must be applied atomically against exact initial material HEAD `8a942c1c6cfcc4674d289a2e3125e9f0565da05a` with only the historical integration fixture and this Matrix changed. Immutable read-back both paths and compare initial-material→corrective-material HEAD; no path outside this corrective set may change.
+This commit is Matrix-only closure evidence. Transaction L is materially complete and may remain `CLOSED / VERIFIED / RESUME-SAFE` only if all four required workflow families independently complete successfully on this exact closure HEAD.
 
-All four required exact-corrective-material-head workflow families must complete successfully before closure. Closure evidence must be Matrix-only and closure-head CI must independently be green before L can be used as predecessor.
+If closure-head CI is not 4/4 successful, this state is automatically non-authoritative until the contradictory evidence is resolved.
 
 Unexpected Changes: `NONE AUTHORIZED`.
