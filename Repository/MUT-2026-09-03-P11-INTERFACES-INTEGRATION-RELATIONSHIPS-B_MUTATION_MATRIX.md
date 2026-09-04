@@ -2,7 +2,7 @@
 
 Transaction ID: `MUT-2026-09-03-P11-INTERFACES-INTEGRATION-RELATIONSHIPS-B`
 Priority: `11 — Interfaces`
-State: `SECOND STALE HISTORICAL CONSUMER REPAIR / EXACT-HEAD CI PENDING`
+State: `CONTROL-PLANE VERSION RECONCILIATION / EXACT-HEAD CI PENDING`
 Entry HEAD: `62d39ed6ea423f820c224e73a9ada554c473b9ef`
 Pre-write HEAD: `0c7c4d10aa91b28b0b3899251a8eb905b6189a32`
 Initial material HEAD: `b9313ce19f99ffe389f576c25356ae7f501a04f2`
@@ -99,17 +99,36 @@ Second semantic repair:
 
 The repair preserves the same durable safety invariant, remains ID-independent, and does not mutate REP-014.
 
+## Control-plane version drift — exact-head post-second-repair diagnosis
+
+Exact post-second-repair Runtime/Integration run `33851006941`, job `100953540301`, completed with `2 failed, 586 passed, 1 warning, 11 subtests passed`. The reconciliation gate reports the concrete mismatch:
+
+`Repository/REP-014_REPOSITORY_RELATIONSHIP_REGISTRY.md: Version='1.2.19'; manifest='1.2.18'`.
+
+Source-level inspection shows both `test_control_plane_reconciliation_gate.py::test_current_control_plane_boundary_is_consistent` and `test_control_plane_current_manifest.py::test_current_control_plane_manifest_matches_current_repository` consume the same `control_plane_reconciliation_gate.evaluate()` result. The gate intentionally fails closed on current-manifest identity/version/status drift.
+
+Causal proof is direct: pre-write REP-014 at `0c7c4d10aa91b28b0b3899251a8eb905b6189a32` was version `1.2.18`; material commit `b9313ce19f99ffe389f576c25356ae7f501a04f2` changed exactly one path, REP-014, to version `1.2.19`; the current REP-020 manifest remained at `1.2.18`. The manifest's own Refresh rule requires current-manifest reconciliation whenever a listed artifact materially changes identity, version, or status, and explicitly says mismatch is not permission to downgrade the artifact.
+
+Classification: `CONTROL-PLANE CURRENT-MANIFEST VERSION SYNCHRONIZATION DEFECT`.
+
+Safety invariant:
+
+`Every artifact listed in REP-020_CURRENT_CONTROL_PLANE_BOUNDARY_MANIFEST must match the listed current identity/version/status; material artifact authority is not downgraded to satisfy a stale manifest.`
+
+Smallest governed source repair: refresh only the current REP-020 manifest row for REP-014 from `1.2.18` to `1.2.19`, rebind its current checkpoint/evidence metadata to this recovery, preserve all historical manifests, preserve REP-014 blob `39c4aa4fccdc7ff391b0812735ec3c2356113165`, and do not weaken either executable control-plane test.
+
 ## Authorized material set
 
 | ID | Target | Action | Required result |
 |---|---|---|---|
 | P11-B-01 | `Repository/REP-014_REPOSITORY_RELATIONSHIP_REGISTRY.md` | NO CHANGE / IMMUTABLE MATERIAL | retain `1.2.19`; REL-073..080 and blob `39c4aa4fccdc7ff391b0812735ec3c2356113165` |
-| P11-B-02 | this Matrix | UPDATE | bind exact Runtime failures, both stale-consumer classifications, semantic invariant and corrective atomic scope |
-| P11-B-03 | `Repository/REP-011_PRIORITY11_INTERFACES_RELATIONSHIP_REGISTRATION_ADDENDUM_2026-09-03_B.md` | UPDATE | bind causal evidence and second repair without relationship/priority promotion |
-| P11-B-04 | `Quality/Integration/test_architecture_p9_repository_reconciliation.py` | ALREADY REPAIRED / NO CHANGE IN SECOND SET | retain first semantic prohibited-relationship guard |
-| P11-B-05 | `Quality/Integration/test_architecture_p9_status_sync.py` | UPDATE | replace only historical-ID lexical guard with semantic prohibited-relationship guard |
+| P11-B-02 | this Matrix | UPDATE | preserve prior failure evidence; add current-manifest drift classification, invariant and recovery binding |
+| P11-B-03 | `Repository/REP-011_PRIORITY11_INTERFACES_RELATIONSHIP_REGISTRATION_ADDENDUM_2026-09-03_B.md` | UPDATE | bind exact post-second-repair failure and manifest recovery without relationship/priority promotion |
+| P11-B-04 | `Quality/Integration/test_architecture_p9_repository_reconciliation.py` | ALREADY REPAIRED / NO CHANGE | retain first semantic prohibited-relationship guard |
+| P11-B-05 | `Quality/Integration/test_architecture_p9_status_sync.py` | ALREADY REPAIRED / NO CHANGE | retain second semantic prohibited-relationship guard |
+| P11-B-06 | `Repository/REP-020_CURRENT_CONTROL_PLANE_BOUNDARY_MANIFEST.md` | UPDATE CURRENT EVIDENCE SURFACE | reconcile only current REP-014 version `1.2.18 → 1.2.19` plus bounded current recovery/checkpoint metadata; historical manifests untouched |
 
-No Interface source artifact, implementation, provider configuration or credential mutation is authorized by Transaction B. The integration-test mutations are explicitly authorized only to preserve the already-governed P9 non-promotion invariant against stale historical identifier assumptions.
+No Interface source artifact, implementation, provider configuration or credential mutation is authorized by Transaction B. The integration-test mutations remain limited to preserving the already-governed P9 non-promotion invariant; the current repair changes the stale current evidence surface, not the tests or REP-014 material.
 
 ## Explicit semantic and trust boundaries
 
@@ -122,4 +141,4 @@ No Interface source artifact, implementation, provider configuration or credenti
 - P11 remains open after Transaction B for connector/implementation evidence and external-trust boundary assessment.
 - Priority 10 remains closed; Phase 1, Global Connected Baseline, repository-wide graph and Global Integrity PASS remain open/unclaimed.
 
-Validation: `atomic Matrix + REP-011 evidence + semantic guards → immutable read-back → parent/path proof → exact-head Full-Stack + Mutation Matrix + M2 + Runtime/Integration → close B only at 4/4 GREEN, otherwise HOLD / RESUME-SAFE`.
+Validation: `atomic Matrix + REP-011 evidence + current REP-020 manifest refresh → immutable read-back → parent/path proof → exact-head Full-Stack + Mutation Matrix + M2 + Runtime/Integration → close B only at 4/4 GREEN, otherwise HOLD / RESUME-SAFE`.

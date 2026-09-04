@@ -3,7 +3,7 @@
 Date: 2026-09-03
 Priority: `11 — Interfaces`
 Transaction: `MUT-2026-09-03-P11-INTERFACES-INTEGRATION-RELATIONSHIPS-B`
-State: `SECOND STALE HISTORICAL CONSUMER REPAIR / EXACT-HEAD CI PENDING`
+State: `CONTROL-PLANE VERSION RECONCILIATION / EXACT-HEAD CI PENDING`
 
 ## Material checkpoint
 
@@ -73,6 +73,24 @@ This changes only how the already-governed P9 safety invariant is enforced. It d
 
 The second repair is bound to one corrective change set containing the status-sync test mutation, this REP-011 evidence update and the Transaction-B Matrix update. `REP-014` remains immutable.
 
+## Post-second-repair control-plane diagnosis
+
+Exact Runtime/Integration run `33851006941` at the post-second-repair line completed with `2 failed, 586 passed, 1 warning, 11 subtests passed`. The executable control-plane report identifies a current evidence mismatch:
+
+`REP-014 Version='1.2.19'; manifest='1.2.18'`.
+
+Current source proves `test_control_plane_reconciliation_gate.py` and `test_control_plane_current_manifest.py` both consume the same fail-closed `control_plane_reconciliation_gate.evaluate()` boundary. The gate requires every listed current artifact to match its current manifest identity/version/status.
+
+The mismatch is source-side, not an obsolete assertion. At pre-write HEAD `0c7c4d10aa91b28b0b3899251a8eb905b6189a32`, REP-014 was `1.2.18`. Material commit `b9313ce19f99ffe389f576c25356ae7f501a04f2` changed exactly one path and legally raised REP-014 to `1.2.19`, while the current REP-020 manifest remained `1.2.18`. REP-020's own Refresh rule requires the current manifest to be refreshed after identity/version/status mutation and forbids treating mismatch as permission to downgrade the artifact.
+
+Classification: `CONTROL-PLANE CURRENT-MANIFEST VERSION SYNCHRONIZATION DEFECT`.
+
+Governed invariant:
+
+`CURRENT MANIFEST VERSION == CURRENT LISTED ARTIFACT VERSION; STALE CURRENT EVIDENCE MUST BE REBOUND, NOT USED TO DOWNGRADE VALID MATERIAL.`
+
+Authorized recovery is therefore bounded to the current REP-020 evidence surface plus this evidence addendum and the Transaction-B Matrix in one atomic change set. REP-014 and both executable tests remain unchanged. Historical manifests remain immutable.
+
 Exact-head CI must reach all four required workflow families GREEN before Transaction B can close.
 
 ## Boundaries
@@ -80,7 +98,7 @@ Exact-head CI must reach all four required workflow families GREEN before Transa
 - REL-073..REL-080 remain contractual/documentary and non-executable.
 - The deferred P9 `ARC-001 → ARC-011 = REFERENCES` relationship remains absent and unpromoted.
 - Both test repairs change only how that existing P9 semantic invariant is enforced; neither weakens or removes the invariant.
-- This addendum does not create, reverse, strengthen or promote any relationship.
+- The current-manifest repair changes current evidence only; it does not create, reverse, strengthen or promote any relationship.
 - It does not establish provider authenticity, credentials, permission, remote read-back, production execution or external trust.
 - It does not reopen Transaction A, Priority 9, or Priority 10.
 - Priority 11 remains `IN_PROGRESS` pending Transaction-B exact-head verification and subsequent connector/implementation/external-trust assessment.
