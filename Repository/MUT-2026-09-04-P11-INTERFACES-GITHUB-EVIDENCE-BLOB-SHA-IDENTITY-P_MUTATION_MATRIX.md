@@ -28,9 +28,9 @@ This transaction deliberately does NOT impose a 40-hex/full-Git-object format on
 
 | Change ID | Target | Action | Expected Content | Applied | Verified |
 |---|---|---|---|---|---|
-| P-001 | `Services/GITHUB_EVIDENCE_RESOLVER_ADAPTER.py` | MODIFY | Validate returned blob identity as an exact non-blank string before provenance recording; remove coercive `str(...)` synthesis | YES | PENDING |
-| P-002 | `Quality/Integration/test_github_evidence_resolver_blob_identity.py` | ADD | Focused tests for exact string preservation and rejection of missing, blank, boolean, numeric, and container identities | YES | PENDING |
-| P-003 | This Matrix | ADD / KEEP | Record bounded contract, authorized paths, evidence, validation and closure state | YES | PENDING |
+| P-001 | `Services/GITHUB_EVIDENCE_RESOLVER_ADAPTER.py` | MODIFY | Validate returned blob identity as an exact non-blank string before provenance recording; remove coercive `str(...)` synthesis | YES | YES |
+| P-002 | `Quality/Integration/test_github_evidence_resolver_blob_identity.py` | ADD | Focused tests for exact string preservation and rejection of missing, blank, boolean, numeric, and container identities | YES | YES |
+| P-003 | This Matrix | ADD / KEEP | Record bounded contract, authorized paths, evidence, validation and closure state | YES | YES |
 
 ## Semantic boundaries
 
@@ -50,19 +50,19 @@ The learning remains transaction-scoped; no separate Governance/Learning file is
 
 ## POST-WRITE / READ-BACK
 
-- Exact authorized-path compare: PENDING
-- Immutable source read-back: PENDING
-- Immutable focused-test read-back: PENDING
-- Immutable Matrix read-back: PENDING
+- Exact authorized-path compare: PASS — exactly 3 authorized paths; no unexpected path.
+- Immutable source read-back at material HEAD: PASS.
+- Immutable focused-test read-back at material HEAD: PASS.
+- Immutable Matrix read-back at material HEAD: PASS.
 
 ## TESTS / EXACT-HEAD CI
 
-Material HEAD: PENDING
+Material HEAD: `be4bc79772e01fa4f4490ff46cdb44896c6860cf`
 
-- Full-Stack Repository Audit: PENDING
-- ARGO Runtime Prototype and Integration Tests: PENDING
-- M2 Multi-Channel Proposal Training: PENDING
-- Real Mutation Matrix Regression: PENDING
+- Full-Stack Repository Audit: `33909218366` — SUCCESS
+- ARGO Runtime Prototype and Integration Tests: `33909218316` — SUCCESS
+- M2 Multi-Channel Proposal Training: `33909218299` — SUCCESS
+- Real Mutation Matrix Regression: `33909218324` — SUCCESS
 
 Closure HEAD: PENDING
 
@@ -73,8 +73,8 @@ Closure HEAD: PENDING
 
 ## Unexpected Changes
 
-NONE OBSERVED AT MATERIAL CONSTRUCTION TIME. Exact compare remains mandatory before transaction validity may advance.
+NONE. Entry→material compare contained only the three authorized paths.
 
 ## State
 
-`MATERIAL CONSTRUCTED / COMMIT PENDING`
+`MATERIAL VERIFIED / CLOSURE COMMIT PENDING`
