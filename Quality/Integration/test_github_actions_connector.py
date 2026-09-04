@@ -97,3 +97,33 @@ def test_actions_empty_observation_response_fails_closed(monkeypatch: pytest.Mon
     connector = GitHubActionsRepositoryConnector(owner="Sangaa", repo="ARGO-KOP", token="test")
     with pytest.raises(ConnectorError, match="GITHUB_ACTIONS_EMPTY_RESPONSE"):
         connector.get_workflow_run(123)
+
+
+def test_get_workflow_run_requires_matching_provider_identity(monkeypatch: pytest.MonkeyPatch):
+    monkeypatch.setattr("urllib.request.urlopen", lambda request, timeout: FakeResponse({"id": 123, "status": "completed"}))
+    connector = GitHubActionsRepositoryConnector(owner="Sangaa", repo="ARGO-KOP", token="test")
+    result = connector.get_workflow_run(123)
+    assert result["id"] == 123
+
+
+def test_get_workflow_run_rejects_missing_or_mismatched_provider_identity(monkeypatch: pytest.MonkeyPatch):
+    responses = [FakeResponse({"status": "completed"}), FakeResponse({"id": 124, "status": "completed"})]
+    monkeypatch.setattr("urllib.request.urlopen", lambda request, timeout: responses.pop(0))
+    connector = GitHubActionsRepositoryConnector(owner="Sangaa", repo="ARGO-KOP", token="test")
+    with pytest.raises(ConnectorError, match="GITHUB_ACTIONS_RESPONSE_STRUCTURE_INVALID"):
+        connector.get_workflow_run(123)
+    with pytest.raises(ConnectorError, match="GITHUB_ACTIONS_RUN_IDENTITY_MISMATCH"):
+        connector.get_workflow_run(123)
+
+
+def test_boolean_execution_identity_is_rejected_before_transport(monkeypatch: pytest.MonkeyPatch):
+    calls = []
+    monkeypatch.setattr("urllib.request.urlopen", lambda request, timeout: calls.append(request))
+    connector = GitHubActionsRepositoryConnector(owner="Sangaa", repo="ARGO-KOP", token="test")
+    with pytest.raises(ConnectorError, match="GITHUB_ACTIONS_INVALID_RUN_ID"):
+        connector.get_workflow_run(True)
+    with pytest.raises(ConnectorError, match="GITHUB_ACTIONS_INVALID_RUN_ID"):
+        connector.list_workflow_run_jobs(True)
+    with pytest.raises(ConnectorError, match="GITHUB_ACTIONS_INVALID_JOB_ID"):
+        connector.get_workflow_job_logs(True)
+    assert calls == []

@@ -99,9 +99,17 @@ class GitHubActionsRepositoryConnector(GitHubActionsConnector):
         })
 
     def get_workflow_run(self, run_id: int) -> dict:
-        if run_id <= 0:
+        if type(run_id) is not int or run_id <= 0:
             raise ConnectorError("GITHUB_ACTIONS_INVALID_RUN_ID")
-        return self._request("GET", f"runs/{run_id}")
+        result = self._request("GET", f"runs/{run_id}")
+        returned_id = result.get("id")
+        if type(returned_id) is not int:
+            raise ConnectorError(f"GITHUB_ACTIONS_RESPONSE_STRUCTURE_INVALID: GET runs/{run_id}.id")
+        if returned_id != run_id:
+            raise ConnectorError(
+                f"GITHUB_ACTIONS_RUN_IDENTITY_MISMATCH: expected={run_id} actual={returned_id}"
+            )
+        return result
 
     def dispatch_workflow(self, workflow_id: str | int, *, ref: str,
                           inputs: dict[str, str] | None = None) -> bool:
@@ -114,12 +122,12 @@ class GitHubActionsRepositoryConnector(GitHubActionsConnector):
         return True
 
     def list_workflow_run_jobs(self, run_id: int) -> dict:
-        if run_id <= 0:
+        if type(run_id) is not int or run_id <= 0:
             raise ConnectorError("GITHUB_ACTIONS_INVALID_RUN_ID")
         return self._request("GET", f"runs/{run_id}/jobs", params={"per_page": 100})
 
     def get_workflow_job_logs(self, job_id: int) -> str:
-        if job_id <= 0:
+        if type(job_id) is not int or job_id <= 0:
             raise ConnectorError("GITHUB_ACTIONS_INVALID_JOB_ID")
         request = urllib.request.Request(self._url(f"jobs/{job_id}/logs"), method="GET")
         request.add_header("Accept", "application/vnd.github+json")
