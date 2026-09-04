@@ -58,7 +58,8 @@ def test_relationship_hold_is_preserved_as_local_nonblocking_debt():
     assert "| REL-069 | ARC-011 | CORE-003 | REFERENCES |" in base
     assert "HARD HOLD / PRE-MATERIAL ABORT" in b
     assert "REL-073 = LOCAL REGISTRY COMPLETENESS HOLD / NON-BLOCKING FOR BOUNDED ARCHITECTURE PARTITION CLOSURE / DO NOT PROMOTE" in disp
-    assert "| REL-073 |" not in base
+    # Preserve the P9 semantic hold independent of later canonical relationship-ID allocation.
+    assert "| ARC-001 | ARC-011 | REFERENCES |" not in base
 
 
 def test_reconciliation_does_not_overclaim_global_closure():

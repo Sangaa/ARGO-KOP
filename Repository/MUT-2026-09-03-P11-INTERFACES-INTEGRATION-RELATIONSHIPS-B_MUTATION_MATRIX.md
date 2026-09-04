@@ -2,15 +2,18 @@
 
 Transaction ID: `MUT-2026-09-03-P11-INTERFACES-INTEGRATION-RELATIONSHIPS-B`
 Priority: `11 — Interfaces`
-State: `CORRECTIVE CONTROL BINDING / EXACT-HEAD CI PENDING`
+State: `CORRECTIVE SEMANTIC-GUARD REPAIR / EXACT-HEAD CI PENDING`
 Entry HEAD: `62d39ed6ea423f820c224e73a9ada554c473b9ef`
 Pre-write HEAD: `0c7c4d10aa91b28b0b3899251a8eb905b6189a32`
 Initial material HEAD: `b9313ce19f99ffe389f576c25356ae7f501a04f2`
+Corrective control-binding HEAD: `78420d9102d1216a9c5005951d92e2e4f5f0cbda`
 Protocol: `PROJECT_BOOTSTRAP / CORE-003 / GOV-013 / GOV-014 / GOV-014A / GOV-015 / GOV-016 / REP-011 / REP-012 / REP-013 / REP-014 / REP-016`
 
 ## Legal entry and material gap
 
-Transaction A is `CLOSED / VERIFIED / RESUME-SAFE`; the exact Interfaces inventory is not reopened. Entry `REP-014 v1.2.18` ended at `REL-072` and contained no `INTF-*` relationship rows. `Interfaces/INTF-010_INTEGRATIONS.md` directly states that it implements the integration boundary described by `INTF-001`, `INTF-004`, `INTF-005`, `INTF-006`, `ARC-007`, `ARC-006`, `ENG-007`, and `MEM-001`. Current source reads confirmed those targets and resolved `INTF-006` to active canonical `Interfaces/INTF-006_ENVIRONMENT_SENSING.md`, not legacy `INT-006`.
+Transaction A is `CLOSED / VERIFIED / RESUME-SAFE`; the exact Interfaces inventory is not reopened. Entry `REP-014 v1.2.18` ended at material row `REL-072` and contained no `INTF-*` relationship rows. `Interfaces/INTF-010_INTEGRATIONS.md` directly states that it implements the integration boundary described by `INTF-001`, `INTF-004`, `INTF-005`, `INTF-006`, `ARC-007`, `ARC-006`, `ENG-007`, and `MEM-001`. Current source reads confirmed those targets and resolved `INTF-006` to active canonical `Interfaces/INTF-006_ENVIRONMENT_SENSING.md`, not legacy `INT-006`.
+
+The Priority-9 relationship disposition records a historical proposed `REL-073: ARC-001 → ARC-011 = REFERENCES`, but explicitly states `BASE REGISTRY UNCHANGED`, `No row is added`, and `DO NOT PROMOTE`. Therefore that historical proposal is a non-material candidate label, not a material REP-014 registry row. The P9 safety invariant is the continued absence of the prohibited `ARC-001 → ARC-011 = REFERENCES` row while its hold remains active; the invariant is not the permanent absence of the lexical token `REL-073` from REP-014.
 
 This is one homogeneous P11 relationship cohort: one explicit source statement, one controlled relationship type, one direction, one evidence class and one failure boundary.
 
@@ -34,7 +37,7 @@ This is one homogeneous P11 relationship cohort: one explicit source statement, 
 - Immutable read-back: `REP-014` blob `39c4aa4fccdc7ff391b0812735ec3c2356113165` contains all eight intended rows.
 - Parent→head compare `0c7c4d10... → b9313ce1...`: exactly one changed path, `Repository/REP-014_REPOSITORY_RELATIONSHIP_REGISTRY.md`; 45 additions / 1 deletion; no unrelated path.
 
-## Preserved CI failure and classification
+## Preserved atomicity failure and classification
 
 Initial material exact-head Full-Stack run `33787517479` failed only at `Enforce Mutation Matrix on current change set` after all preceding gates passed. The gate reported:
 
@@ -42,21 +45,53 @@ Initial material exact-head Full-Stack run `33787517479` failed only at `Enforce
 
 Classification: `TRANSACTION ATOMICITY / CONTROL-PLANE FAILURE`.
 
-This is not relationship-semantic failure and does not invalidate the immutable material read-back. The test is retained unchanged. Root cause: the pre-write Matrix was committed at `0c7c4d10...`, while the subsequent protected material commit `b9313ce1...` did not include a Matrix path in that same push delta.
+This failure was repaired by the corrective control-binding commit `78420d9102d1216a9c5005951d92e2e4f5f0cbda`, which placed this Matrix and the protected REP-011 evidence addendum in the same protected change set. Exact-head Full-Stack, Mutation Matrix and M2 are GREEN at that checkpoint.
+
+## Exact-head Runtime/Integration failure diagnosis
+
+The remaining Transaction-B failure is causally bounded to the REP-014 material addition:
+
+- pre-material HEAD `0c7c4d10aa91b28b0b3899251a8eb905b6189a32`: Runtime/Integration run `33787279598` = `SUCCESS`;
+- initial material HEAD `b9313ce19f99ffe389f576c25356ae7f501a04f2`: Runtime/Integration run `33787517604` = `FAILURE`;
+- current corrective-binding HEAD `78420d9102d1216a9c5005951d92e2e4f5f0cbda`: Runtime/Integration run `33787939828` = `FAILURE`, isolated to job/check `100757176133`, step `Run integration quality suite`, command `python -m pytest -q Quality/Integration`.
+
+The tracked failing consumer is `Quality/Integration/test_architecture_p9_repository_reconciliation.py`. Its P9 debt test preserved the correct P9 disposition text but used the historical lexical guard:
+
+`assert "| REL-073 |" not in base`
+
+That guard became stale when P11 legally materialized a different relationship under the next available material registry ID `REL-073`. The P9 disposition itself proves the historical ARC-001→ARC-011 proposal was never added to REP-014 and remains `DO NOT PROMOTE`; current REP-014 likewise contains no `ARC-001 → ARC-011 = REFERENCES` row.
+
+Classification: `LEXICAL / HISTORICAL STRING GUARD`.
+
+Semantic invariant to preserve and strengthen:
+
+`P9 ARC-001 → ARC-011 = REFERENCES MUST remain absent from material REP-014 while the P9 local hold remains active.`
+
+The correct executable guard is therefore relationship-semantic rather than historical-ID lexical:
+
+`assert "| ARC-001 | ARC-011 | REFERENCES |" not in base`
+
+This is stronger than the old check because it rejects the prohibited P9 relationship regardless of whichever registry ID a future mutation might attempt to assign it, while permitting unrelated later canonical relationships to use material IDs normally.
 
 ## Smallest governed repair
 
-The corrective change set MUST contain this Matrix together with one protected REP-011 evidence/control addendum that binds the initial material HEAD and the tracked CI failure. This makes the Matrix visible in the same protected change set without weakening the gate, rewriting the already-correct relationship rows, or inventing a semantic mutation.
+The corrective change set MUST contain this Matrix together with:
+
+1. `Repository/REP-011_PRIORITY11_INTERFACES_RELATIONSHIP_REGISTRATION_ADDENDUM_2026-09-03_B.md` updated with the exact-head Runtime causal evidence and semantic-guard repair; and
+2. `Quality/Integration/test_architecture_p9_repository_reconciliation.py` updated only from the stale lexical `REL-073` absence guard to the semantic `ARC-001 → ARC-011 = REFERENCES` absence guard.
+
+No REP-014 material rewrite is required. No safety invariant is weakened; the P9 hold becomes ID-independent and therefore stronger.
 
 ## Authorized material set
 
 | ID | Target | Action | Required result |
 |---|---|---|---|
-| P11-B-01 | `Repository/REP-014_REPOSITORY_RELATIONSHIP_REGISTRY.md` | UPDATE / COMPLETE | `1.2.18 → 1.2.19`; REL-073..080 only; immutable material preserved |
-| P11-B-02 | this Matrix | UPDATE | preserve material/failure evidence; participate in corrective atomic protected change set; later bind exact-head CI and closure |
-| P11-B-03 | `Repository/REP-011_PRIORITY11_INTERFACES_RELATIONSHIP_REGISTRATION_ADDENDUM_2026-09-03_B.md` | CREATE | evidence-bound P11 Transaction-B material/failure/control checkpoint; no relationship or priority promotion |
+| P11-B-01 | `Repository/REP-014_REPOSITORY_RELATIONSHIP_REGISTRY.md` | NO CHANGE / IMMUTABLE MATERIAL | retain `1.2.19`; REL-073..080 and blob `39c4aa4fccdc7ff391b0812735ec3c2356113165` |
+| P11-B-02 | this Matrix | UPDATE | bind exact Runtime failure, classification, semantic invariant and corrective atomic scope |
+| P11-B-03 | `Repository/REP-011_PRIORITY11_INTERFACES_RELATIONSHIP_REGISTRATION_ADDENDUM_2026-09-03_B.md` | UPDATE | bind causal evidence and repair without relationship/priority promotion |
+| P11-B-04 | `Quality/Integration/test_architecture_p9_repository_reconciliation.py` | UPDATE | replace only historical-ID lexical guard with semantic prohibited-relationship guard |
 
-No Interface source artifact, implementation, test, provider configuration or credential mutation is authorized by Transaction B.
+No Interface source artifact, implementation, provider configuration or credential mutation is authorized by Transaction B. The single integration-test mutation above is explicitly authorized only to preserve the already-governed P9 non-promotion invariant against a stale historical identifier assumption.
 
 ## Explicit semantic and trust boundaries
 
@@ -65,7 +100,8 @@ No Interface source artifact, implementation, test, provider configuration or cr
 - Local documentary proof does not establish provider authenticity, authenticated provider identity, credentials, permission, remote read-back or production execution.
 - No endpoint status or authority is promoted.
 - Legacy `INT-006` remains distinct and is not targeted.
+- P9 remains closed for its bounded partition; the deferred ARC-001→ARC-011 registry row remains unpromoted and is not reopened by this repair.
 - P11 remains open after Transaction B for connector/implementation evidence and external-trust boundary assessment.
 - Priority 10 remains closed; Phase 1, Global Connected Baseline, repository-wide graph and Global Integrity PASS remain open/unclaimed.
 
-Validation: `corrective atomic Matrix + protected evidence binding → immutable read-back → parent/path proof → exact-head CI → close B or HOLD / RESUME-SAFE`.
+Validation: `atomic Matrix + REP-011 evidence + semantic guard → immutable read-back → parent/path proof → exact-head Full-Stack + Mutation Matrix + M2 + Runtime/Integration → close B only at 4/4 GREEN, otherwise HOLD / RESUME-SAFE`.
