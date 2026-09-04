@@ -76,3 +76,24 @@ def test_actions_http_failure_is_explicit(monkeypatch: pytest.MonkeyPatch):
     connector = GitHubActionsRepositoryConnector(owner="Sangaa", repo="ARGO-KOP", token="test")
     with pytest.raises(ConnectorError, match="GITHUB_ACTIONS_HTTP_403"):
         connector.list_workflow_runs()
+
+
+def test_actions_invalid_provider_json_fails_closed(monkeypatch: pytest.MonkeyPatch):
+    monkeypatch.setattr("urllib.request.urlopen", lambda request, timeout: FakeResponse(b"{not-json"))
+    connector = GitHubActionsRepositoryConnector(owner="Sangaa", repo="ARGO-KOP", token="test")
+    with pytest.raises(ConnectorError, match="GITHUB_ACTIONS_RESPONSE_JSON_INVALID"):
+        connector.list_workflow_runs()
+
+
+def test_actions_non_object_provider_payload_fails_closed(monkeypatch: pytest.MonkeyPatch):
+    monkeypatch.setattr("urllib.request.urlopen", lambda request, timeout: FakeResponse([{"id": 123}]))
+    connector = GitHubActionsRepositoryConnector(owner="Sangaa", repo="ARGO-KOP", token="test")
+    with pytest.raises(ConnectorError, match="GITHUB_ACTIONS_RESPONSE_STRUCTURE_INVALID"):
+        connector.list_workflow_runs()
+
+
+def test_actions_empty_observation_response_fails_closed(monkeypatch: pytest.MonkeyPatch):
+    monkeypatch.setattr("urllib.request.urlopen", lambda request, timeout: FakeResponse(b""))
+    connector = GitHubActionsRepositoryConnector(owner="Sangaa", repo="ARGO-KOP", token="test")
+    with pytest.raises(ConnectorError, match="GITHUB_ACTIONS_EMPTY_RESPONSE"):
+        connector.get_workflow_run(123)

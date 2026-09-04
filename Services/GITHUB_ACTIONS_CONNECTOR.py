@@ -42,8 +42,27 @@ class GitHubActionsRepositoryConnector(GitHubActionsConnector):
             url += "?" + urllib.parse.urlencode({k: v for k, v in params.items() if v is not None})
         return url
 
+    @staticmethod
+    def _decode_response(response: Any, context: str, *, allow_empty: bool) -> dict[str, Any]:
+        raw = response.read()
+        if not raw:
+            if allow_empty:
+                return {}
+            raise ConnectorError(f"GITHUB_ACTIONS_EMPTY_RESPONSE: {context}")
+        try:
+            text = raw.decode("utf-8")
+        except UnicodeDecodeError as exc:
+            raise ConnectorError(f"GITHUB_ACTIONS_RESPONSE_ENCODING_INVALID: {context}") from exc
+        try:
+            payload = json.loads(text)
+        except json.JSONDecodeError as exc:
+            raise ConnectorError(f"GITHUB_ACTIONS_RESPONSE_JSON_INVALID: {context}") from exc
+        if not isinstance(payload, dict):
+            raise ConnectorError(f"GITHUB_ACTIONS_RESPONSE_STRUCTURE_INVALID: {context}")
+        return payload
+
     def _request(self, method: str, path: str, *, params: dict[str, Any] | None = None,
-                 payload: dict[str, Any] | None = None) -> Any:
+                 payload: dict[str, Any] | None = None, allow_empty: bool = False) -> dict[str, Any]:
         data = None if payload is None else json.dumps(payload).encode("utf-8")
         request = urllib.request.Request(self._url(path, params), data=data, method=method)
         request.add_header("Accept", "application/vnd.github+json")
@@ -54,10 +73,7 @@ class GitHubActionsRepositoryConnector(GitHubActionsConnector):
             request.add_header("Content-Type", "application/json")
         try:
             with urllib.request.urlopen(request, timeout=self._timeout) as response:
-                raw = response.read()
-                if not raw:
-                    return {}
-                return json.loads(raw.decode("utf-8"))
+                return self._decode_response(response, f"{method} {path}", allow_empty=allow_empty)
         except urllib.error.HTTPError as exc:
             body = ""
             if getattr(exc, "fp", None) is not None:
@@ -94,7 +110,7 @@ class GitHubActionsRepositoryConnector(GitHubActionsConnector):
         if isinstance(workflow_id, str) and not workflow_id.strip():
             raise ConnectorError("GITHUB_ACTIONS_INVALID_WORKFLOW_ID")
         self._request("POST", f"workflows/{workflow_id}/dispatches",
-                      payload={"ref": ref, "inputs": inputs or {}})
+                      payload={"ref": ref, "inputs": inputs or {}}, allow_empty=True)
         return True
 
     def list_workflow_run_jobs(self, run_id: int) -> dict:
