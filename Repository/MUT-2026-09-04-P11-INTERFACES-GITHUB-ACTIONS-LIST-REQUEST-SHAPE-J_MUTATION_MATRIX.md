@@ -2,19 +2,20 @@
 
 Transaction ID: `MUT-2026-09-04-P11-INTERFACES-GITHUB-ACTIONS-LIST-REQUEST-SHAPE-J`
 Priority: `11 — Interfaces`
-State: `MATERIAL APPLIED / BOUNDED LOCAL SEMANTIC VERIFIED / EXACT-HEAD CI PENDING`
+State: `CLOSED / VERIFIED / RESUME-SAFE`
 Entry HEAD: `e3096afca868baca8bcd90e6fd59e64eac2ff82e`
+Material HEAD: `1debf9fd362b72a814e8a8970c9bfff726acd5d7`
 Protocol: GOV-014 / GOV-013 / INTF-010 / GITHUB_ACTIONS_CONNECTOR_INTERFACE
 
 ## Boundary
 
-Transaction I is `CLOSED / VERIFIED / RESUME-SAFE`. This transaction addresses only typed caller-input validation for `list_workflow_runs(...)` before provider transport.
+Transaction I is `CLOSED / VERIFIED / RESUME-SAFE`. This transaction addressed only typed caller-input validation for `list_workflow_runs(...)` before provider transport.
 
-The provider-neutral interface declares optional `branch`, `event`, `head_sha`, and `status` filters as strings and `per_page` as an integer. Before this transaction, non-string filter values were URL-encoded and sent to the provider, while `per_page=True` and floating-point values could pass Python's numeric comparison and string values could escape as a raw `TypeError` rather than an explicit connector failure.
+The provider-neutral interface declares optional `branch`, `event`, `head_sha`, and `status` filters as strings and `per_page` as an integer. Before this transaction, non-string filter values could be URL-encoded and sent to the provider, while boolean/floating `per_page` values could pass numeric comparison and string values could escape as raw `TypeError`.
 
-This transaction does not assign new semantics to empty strings, does not bind `status` results, does not change branch/event/exact-head response checks, does not alter dispatch behavior, and does not authenticate GitHub.
+No new semantics were assigned to empty strings or to provider `status` results.
 
-## Required invariants
+## Required invariants now enforced
 
 `OPTIONAL FILTER PROVIDED -> VALUE IS str BEFORE TRANSPORT`.
 
@@ -28,9 +29,9 @@ This transaction does not assign new semantics to empty strings, does not bind `
 
 | Change ID | Target | Action | Expected Content | Applied | Verified |
 |---|---|---|---|---|---|
-| P11-J-01 | `Services/GITHUB_ACTIONS_CONNECTOR.py` | UPDATE | reject non-string optional filters and non-real-int/out-of-range `per_page` before transport | Y | bounded semantic |
-| P11-J-02 | `Quality/Integration/test_github_actions_connector_request_shape.py` | CREATE | regress invalid filter types and invalid `per_page` values with zero transport calls | Y | exact-head CI pending |
-| P11-J-03 | this Matrix | CREATE | bind typed-list-input-only scope, evidence, KEEP constraints and closure | Y | Y |
+| P11-J-01 | `Services/GITHUB_ACTIONS_CONNECTOR.py` | UPDATE | reject invalid filter types and invalid `per_page` before transport | Y | Y |
+| P11-J-02 | `Quality/Integration/test_github_actions_connector_request_shape.py` | CREATE | regress caller-shape failures with zero transport calls | Y | Y |
+| P11-J-03 | this Matrix | CREATE/FINALIZE | bind typed-list-input-only scope, evidence, KEEP constraints and closure | Y | Y |
 
 ## Bounded local semantic evidence
 
@@ -38,7 +39,28 @@ An isolated validation harness exercised eleven cases: two valid calls; four non
 
 Result: `11 / 11 expected outcomes`.
 
-This validates the bounded guard semantics only. Full repository regression truth remains immutable read-back and exact-head CI.
+## Immutable material read-back
+
+Material HEAD: `1debf9fd362b72a814e8a8970c9bfff726acd5d7`.
+
+Observed material blobs:
+
+- `Services/GITHUB_ACTIONS_CONNECTOR.py` → `b96ede24b13e0be7416c324b780d95a8904148cd`;
+- `Quality/Integration/test_github_actions_connector_request_shape.py` → `e16734cf55c82f53410ec287f587bb2cd137d3e4`;
+- this Matrix → `8e4f1188f91b6405a602ebad9dcaadc3defc2d20` before closure finalization.
+
+Entry→material compare: one commit ahead, zero behind, exactly the three authorized paths. No unexpected path changed.
+
+## Exact material-head CI evidence
+
+All required workflow families completed successfully on exact material HEAD `1debf9fd362b72a814e8a8970c9bfff726acd5d7`:
+
+- Real Mutation Matrix Regression — run `33880567127` — `completed / success`;
+- M2 Multi-Channel Proposal Training — run `33880567117` — `completed / success`;
+- ARGO Runtime Prototype and Integration Tests — run `33880567106` — `completed / success`;
+- Full-Stack Repository Audit — run `33880567174` — `completed / success`.
+
+These CI results verify repository material at the exact commit. They do not prove ARGO connector provider authentication, remote delivery initiated by that connector, or production success.
 
 ## KEEP Preservation
 
@@ -55,12 +77,12 @@ KEEP unchanged:
 - Runtime consumers;
 - Interface documentary contracts and relationship registries.
 
-No provider-authenticity, remote-delivery, workflow-completion or production-success claim is introduced.
+## Closure
 
-## Post-write and closure rules
+Material validity, transaction validity and closure validity were evaluated separately. Material read-back matches intended blobs, entry→material scope is exact, and all required exact-material-head workflow families are green.
 
-Apply connector + focused regression file + this Matrix atomically against exact entry HEAD. Immutable read-back all three paths and compare entry→material HEAD; no path outside this authorized set may change.
+This finalization commit changes only this Matrix. Its exact closure-head workflow runs must remain green before J is used as the next live predecessor.
 
-All required exact-material-head workflow families must complete successfully before closure. Closure evidence must be captured separately; closure-head CI must itself be green before J can be used as a predecessor.
+Unexpected Changes: `NONE`.
 
-Unexpected Changes: `NONE AUTHORIZED`.
+Transaction J: `CLOSED / VERIFIED / RESUME-SAFE`, subject to exact closure-head CI confirmation before subsequent mutation.
