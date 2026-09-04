@@ -2,8 +2,9 @@
 
 Transaction ID: `MUT-2026-09-04-P11-INTERFACES-GITHUB-ACTIONS-JOB-IDENTITY-M`
 Priority: `11 — Interfaces`
-State: `MATERIAL PREPARED / EXACT-HEAD CI PENDING`
+State: `CLOSED / VERIFIED / RESUME-SAFE`
 Entry HEAD: `bbd228d9f8dfc06e985521955ff529a98a49eb90`
+Material HEAD: `193ac1e9e385931ca7cc0dbe4f8b7283961e1316`
 Protocol: GOV-014 / GOV-013 / INTF-010 / GITHUB_ACTIONS_CONNECTOR_INTERFACE
 
 ## Boundary
@@ -30,9 +31,9 @@ No uniqueness claim is introduced. No provider-authenticity or log-integrity cla
 
 | Change ID | Target | Action | Expected Content | Applied | Verified |
 |---|---|---|---|---|---|
-| P11-M-01 | `Services/GITHUB_ACTIONS_CONNECTOR.py` | UPDATE | validate every returned nonempty `jobs[].id` as exact positive int before preserving existing run-lineage validation | Y | exact-head CI pending |
-| P11-M-02 | `Quality/Integration/test_github_actions_connector_job_identity.py` | CREATE | regress positive identity, missing/bool/zero/negative/non-int rejection, lineage preservation and empty collection | Y | exact-head CI pending |
-| P11-M-03 | this Matrix | CREATE | bind M scope, provider evidence, KEEP constraints and closure protocol | Y | Y |
+| P11-M-01 | `Services/GITHUB_ACTIONS_CONNECTOR.py` | UPDATE | validate every returned nonempty `jobs[].id` as exact positive int before preserving existing run-lineage validation | Y | Y |
+| P11-M-02 | `Quality/Integration/test_github_actions_connector_job_identity.py` | CREATE | regress positive identity, missing/bool/zero/negative/non-int rejection, lineage preservation and empty collection | Y | Y |
+| P11-M-03 | this Matrix | CREATE/UPDATE | bind M scope, provider evidence, KEEP constraints, material evidence and closure | Y | Y |
 
 ## Provider and consumer evidence
 
@@ -48,6 +49,27 @@ For each returned job object, validate `type(job.get("id")) is int` and `id > 0`
 
 This is shape/identity validation only. It does not assert uniqueness, ownership beyond the already separately checked `run_id`, authenticity of GitHub as provider, or successful log retrieval.
 
+## Material evidence
+
+Material commit `193ac1e9e385931ca7cc0dbe4f8b7283961e1316` was created from exact entry HEAD `bbd228d9f8dfc06e985521955ff529a98a49eb90` and changed exactly three authorized paths:
+
+- `Services/GITHUB_ACTIONS_CONNECTOR.py` — five-line positive exact-int job identity guard;
+- `Quality/Integration/test_github_actions_connector_job_identity.py` — focused regression;
+- this Matrix.
+
+Entry→material compare showed no unexpected path. Immutable read-back confirmed the connector guard, focused regression, and Matrix.
+
+## Exact material-head CI
+
+All four required workflow families completed successfully on exact material HEAD `193ac1e9e385931ca7cc0dbe4f8b7283961e1316`:
+
+- ARGO Runtime Prototype and Integration Tests — run `33901946846` — SUCCESS;
+- Full-Stack Repository Audit — run `33901946811` — SUCCESS;
+- M2 Multi-Channel Proposal Training — run `33901946920` — SUCCESS;
+- Real Mutation Matrix Regression — run `33901946860` — SUCCESS.
+
+Material validity remains distinct from closure validity; this commit therefore records Matrix-only closure evidence and requires independent exact-closure-head validation.
+
 ## KEEP Preservation
 
 KEEP unchanged:
@@ -61,10 +83,10 @@ KEEP unchanged:
 - provider credentials/configuration/authentication;
 - Runtime consumers and Interface documentary contracts.
 
-## Post-write and closure rules
+## Closure rule
 
-Material must be applied atomically against exact entry HEAD `bbd228d9f8dfc06e985521955ff529a98a49eb90` with only the connector, focused M regression, and this Matrix changed. Because `Services/` is protected material, the Matrix is co-committed.
+This commit must change only this Matrix. M may remain `CLOSED / VERIFIED / RESUME-SAFE` only if all four required workflow families independently complete successfully on the exact closure HEAD.
 
-After write: compare entry→material, immutable read-back all three paths, and require all four exact-material-head workflow families to complete successfully. Closure must then be Matrix-only and must independently achieve the same four-family exact-head success before M can become a legal predecessor.
+If closure-head CI is not 4/4 successful, this state is automatically non-authoritative until contradictory evidence is resolved.
 
 Unexpected Changes: `NONE AUTHORIZED`.
