@@ -2,8 +2,9 @@
 
 Transaction ID: `MUT-2026-09-04-P11-INTERFACES-GITHUB-ACTIONS-WORKFLOW-RUN-IDENTITY-N`
 Priority: `11 — Interfaces`
-State: `MATERIAL / EXACT-HEAD CI PENDING`
+State: `CLOSED / VERIFIED / RESUME-SAFE`
 Entry HEAD: `8f09d9f3822337416d48de0570676d0d25bf4992`
+Material HEAD: `d53b7d0971491e681472df03d0c6453456c52b07`
 Protocol: GOV-014 / GOV-013 / INTF-010 / GITHUB_ACTIONS_CONNECTOR_INTERFACE
 
 ## Boundary
@@ -30,15 +31,28 @@ No uniqueness claim is introduced.
 
 | Change ID | Target | Action | Expected Content | Applied | Verified |
 |---|---|---|---|---|---|
-| P11-N-01 | `Services/GITHUB_ACTIONS_CONNECTOR.py` | UPDATE | validate every returned nonempty `workflow_runs[].id` as exact positive int before existing filter guards | Y | PENDING |
-| P11-N-02 | `Quality/Integration/test_github_actions_connector_run_identity.py` | CREATE | regress valid identity, invalid/missing/bool/zero/negative/non-int rejection, filter preservation, empty collection | Y | PENDING |
-| P11-N-03 | `Quality/Integration/test_github_actions_connector_status_binding.py` | UPDATE | normalize legacy status fixtures with valid run identity while preserving status-specific assertions | Y | PENDING |
-| P11-N-04 | `Quality/Integration/test_github_actions_connector.py` | UPDATE | normalize legacy direct-filter fixtures with valid run identity while preserving branch/event-specific assertions | Y | PENDING |
-| P11-N-05 | this Matrix | CREATE/UPDATE | bind N scope, predecessor evidence, fixture-repair rationale, KEEP constraints and exact-head closure rules | Y | PENDING |
+| P11-N-01 | `Services/GITHUB_ACTIONS_CONNECTOR.py` | UPDATE | validate every returned nonempty `workflow_runs[].id` as exact positive int before existing filter guards | Y | Y |
+| P11-N-02 | `Quality/Integration/test_github_actions_connector_run_identity.py` | CREATE | regress valid identity, invalid/missing/bool/zero/negative/non-int rejection, filter preservation, empty collection | Y | Y |
+| P11-N-03 | `Quality/Integration/test_github_actions_connector_status_binding.py` | UPDATE | normalize legacy status fixtures with valid run identity while preserving status-specific assertions | Y | Y |
+| P11-N-04 | `Quality/Integration/test_github_actions_connector.py` | UPDATE | normalize legacy direct-filter fixtures with valid run identity while preserving branch/event-specific assertions | Y | Y |
+| P11-N-05 | this Matrix | CREATE/UPDATE | bind N scope, evidence, KEEP constraints and closure | Y | Y |
 
 ## Fixture normalization rule
 
-The stronger identity invariant makes historical synthetic fixtures incomplete where their intended seam is status/branch/event semantics rather than identity. Those fixtures are repaired at the stable contractual representation by adding only a valid positive integer `id`. Production identity semantics are not weakened to preserve obsolete synthetic data.
+The stronger identity invariant makes historical synthetic fixtures incomplete where their intended seam is status/branch/event semantics rather than identity. Those fixtures were repaired at the stable contractual representation by adding only a valid positive integer `id`. Production identity semantics were not weakened to preserve obsolete synthetic data.
+
+## Material evidence
+
+Material commit `d53b7d0971491e681472df03d0c6453456c52b07` was created from exact entry HEAD and changed exactly five authorized paths: connector, focused identity regression, two historical fixture files, and this Matrix. Entry→material compare found no unexpected path. Immutable read-back confirmed the run-identity guard before existing filter guards.
+
+## Exact material-head CI
+
+All four required workflow families completed successfully on exact material HEAD `d53b7d0971491e681472df03d0c6453456c52b07`:
+
+- ARGO Runtime Prototype and Integration Tests — run `33905427792` — SUCCESS;
+- Full-Stack Repository Audit — run `33905427793` — SUCCESS;
+- M2 Multi-Channel Proposal Training — run `33905427816` — SUCCESS;
+- Real Mutation Matrix Regression — run `33905427800` — SUCCESS.
 
 ## KEEP Preservation
 
@@ -51,8 +65,8 @@ KEEP unchanged:
 - request-shape guards, dispatch semantics, collection-shape validation, and empty-list acceptance;
 - provider authentication/configuration and log transport behavior.
 
-## Material rule
+## Closure rule
 
-After `workflow_runs` collection shape validation, each nonempty returned run must satisfy `type(id) is int` and `id > 0` before any filter-specific semantics are evaluated. Invalid provider identity raises `GITHUB_ACTIONS_RESPONSE_STRUCTURE_INVALID: GET runs.workflow_runs[].id`.
+This commit changes only this Matrix. N remains `CLOSED / VERIFIED / RESUME-SAFE` only if all four required workflow families independently complete successfully on the exact closure HEAD. If closure-head CI is not 4/4 successful, this state is automatically non-authoritative until contradictory evidence is resolved.
 
 Unexpected Changes: `NONE AUTHORIZED`.
