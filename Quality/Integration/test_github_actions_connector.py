@@ -32,7 +32,7 @@ def test_list_workflow_runs_preserves_execution_filters(monkeypatch: pytest.Monk
         requests.append(request)
         return FakeResponse({
             "total_count": 1,
-            "workflow_runs": [{"id": 123, "head_sha": "abc", "head_branch": "main", "event": "push"}],
+            "workflow_runs": [{"id": 123, "head_sha": "abc", "head_branch": "main", "event": "push", "status": "completed"}],
         })
 
     monkeypatch.setattr("urllib.request.urlopen", fake_urlopen)
