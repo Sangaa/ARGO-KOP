@@ -146,6 +146,15 @@ class GitHubActionsRepositoryConnector(GitHubActionsConnector):
                     raise ConnectorError(
                         f"GITHUB_ACTIONS_EVENT_FILTER_MISMATCH: expected={event} actual={returned_event}"
                     )
+            if status is not None:
+                returned_status = run.get("status")
+                returned_conclusion = run.get("conclusion")
+                if status != returned_status and status != returned_conclusion:
+                    raise ConnectorError(
+                        "GITHUB_ACTIONS_STATUS_FILTER_MISMATCH: "
+                        f"expected={status} actual_status={returned_status} "
+                        f"actual_conclusion={returned_conclusion}"
+                    )
         return result
 
     def get_workflow_run(self, run_id: int) -> dict:
