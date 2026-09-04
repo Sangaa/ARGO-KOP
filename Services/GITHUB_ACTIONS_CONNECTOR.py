@@ -163,10 +163,17 @@ class GitHubActionsRepositoryConnector(GitHubActionsConnector):
 
     def dispatch_workflow(self, workflow_id: str | int, *, ref: str,
                           inputs: dict[str, str] | None = None) -> bool:
-        if not ref.strip():
-            raise ConnectorError("GITHUB_ACTIONS_INVALID_REF")
+        if not isinstance(workflow_id, str) and type(workflow_id) is not int:
+            raise ConnectorError("GITHUB_ACTIONS_INVALID_WORKFLOW_ID")
         if isinstance(workflow_id, str) and not workflow_id.strip():
             raise ConnectorError("GITHUB_ACTIONS_INVALID_WORKFLOW_ID")
+        if not isinstance(ref, str) or not ref.strip():
+            raise ConnectorError("GITHUB_ACTIONS_INVALID_REF")
+        if inputs is not None:
+            if not isinstance(inputs, dict):
+                raise ConnectorError("GITHUB_ACTIONS_INVALID_INPUTS")
+            if any(not isinstance(key, str) or not isinstance(value, str) for key, value in inputs.items()):
+                raise ConnectorError("GITHUB_ACTIONS_INVALID_INPUTS")
         self._request("POST", f"workflows/{workflow_id}/dispatches",
                       payload={"ref": ref, "inputs": inputs or {}}, allow_empty=True)
         return True
