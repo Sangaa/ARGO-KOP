@@ -2,7 +2,7 @@
 
 Parent Transaction: `MUT-2026-09-05-P12-MODELS-RELATIONSHIP-CONTENT-B`
 Priority: `12 — Models`
-State: `OPEN / UNIT-11 FINAL CORRECTIVE REPAIR APPLIED / EXACT-HEAD FOUR-FAMILY CI PENDING`
+State: `OPEN / UNIT-11 EXACT REPRESENTATION REPAIR APPLIED / EXACT-HEAD FOUR-FAMILY CI PENDING`
 
 Material Unit-11 Matrix head: `f7e74beda97e548cb48f1aaa562a4bee76e034d1`
 First guard-repair head: `a85043d5377aa915088721b4c04e400827dc2575`
@@ -10,47 +10,29 @@ First Corrective-Matrix head: `a87996e4fa250d7f9c5dba3c24dfe0d033559668`
 First historical-status-marker repair head: `25db8f6c9a5fdc0117949df51dc73c08c2ee1c3b`
 Second Corrective-Matrix head: `7471fe1a10580c1a3c2c87888af9fda47181a281`
 Second historical-status-marker repair head: `2ff33d165e5efe44ba1ec16e3c09f3b86bce4b56`
+Third Corrective-Matrix head: `971eab24f6faeba1b1f13a2eb061f7b5b0d4892a`
+Exact case-sensitive registry-open representation repair head: `e085b12f3a0ba5a1c5a8e327c543b59f972cb9b3`
 
-## Failure chain
+## Corrective chain
 
-### 1. New Unit-11 guard representation defect
+Unit 11 introduced a valid Models↔Memory authority boundary but its broad `_FOLDER_STATUS.md` synchronization disturbed stable contract representations protected by pre-existing integrity guards.
 
-The first Unit-11 Runtime integrity failure exposed a newly introduced test literal that omitted Markdown code ticks around `MEM-001` while the source representation was correct.
+The corrective sequence established three distinct classes rather than weakening tests:
 
-Classification:
+1. a **new Unit-11 guard literal defect** omitted Markdown code ticks around `MEM-001`; the test was repaired because the source representation was correct;
+2. the Unit-11 status rewrite dropped the still-valid Unit-4 marker `numeric restoration disposition resolved / no blind recreation`; the status marker was restored;
+3. the same rewrite dropped the still-valid marker `relationship registry synchronization remains open`; restoring the sentence initially used an uppercase `Relationship`, while the existing guard protects the exact case-sensitive stable representation beginning with lowercase `relationship`. The exact representation was therefore restored without changing meaning.
 
-`NEW GUARD REPRESENTATION DEFECT / SOURCE SEMANTICS VALID / NO UNIT-11 SOURCE ROLLBACK`.
-
-The guard was repaired without changing authority semantics.
-
-### 2. First stable Unit-4 status invariant lost during Unit-11 status synchronization
-
-On corrective head `a87996e4fa250d7f9c5dba3c24dfe0d033559668`, Runtime/Integration run `33975808383` failed only in repository integrity. Decoded logs established `239 passed / 1 failed` and identified the missing stable marker:
-
-`numeric restoration disposition resolved / no blind recreation`.
-
-The marker was restored at `25db8f6c9a5fdc0117949df51dc73c08c2ee1c3b` without weakening or changing the underlying historical disposition.
-
-### 3. Second stable Unit-4 status invariant lost during the same rewrite
-
-On corrective head `7471fe1a10580c1a3c2c87888af9fda47181a281`, Runtime/Integration run `33976155176` again failed only in repository integrity. Decoded logs again established `239 passed / 1 failed`. The first marker now passed; the remaining assertion identified the second dropped stable status marker:
-
-`relationship registry synchronization remains open`.
-
-That marker was restored at `2ff33d165e5efe44ba1ec16e3c09f3b86bce4b56`.
-
-Classification:
-
-`VALID UNIT-4 STATUS INVARIANTS LOST DURING UNIT-11 STATUS REWRITE / CURRENT MODELS↔MEMORY AUTHORITY SPLIT VALID / RESTORE STABLE MARKERS, DO NOT WEAKEN GUARD`.
+Decoded Runtime integrity logs on the successive corrective heads consistently showed `239 passed / 1 failed`, allowing each defect to be isolated without speculative rollback.
 
 ## Current semantic state preserved
-
-None of the corrective repairs roll back Unit 11:
 
 - `MOD-004` remains v1.2.4 and owns the memory-object semantic schema contract;
 - `MEM-001` remains the Memory-domain scope/promotion model and was not mutated;
 - `MOD-004 → MEM-001 = REFERENCES / AUTHORITY-BOUNDARY / NON-DEPENDENCY` remains the bounded current candidate;
 - no reverse relationship is manufactured;
+- historical numeric-restoration disposition remains resolved without blind recreation;
+- relationship registry synchronization remains open;
 - Models and Priority 12 remain open / Integrity Hold.
 
 ## Learning reinforced
@@ -59,12 +41,12 @@ None of the corrective repairs roll back Unit 11:
 
 `STATUS REWRITE != PERMISSION TO DROP A STILL-VALID STABLE INVARIANT`.
 
-`A GUARD MAY PROTECT MULTIPLE STABLE REPRESENTATIONS; PASSING THE FIRST ASSERTION DOES NOT AUTHORIZE DROPPING THE NEXT.`
+`SEMANTIC EQUIVALENCE DOES NOT OVERRIDE AN EXACT REPRESENTATION WHEN THAT REPRESENTATION ITSELF IS PART OF THE STABLE CONTRACT.`
 
-When a status artifact is rewritten substantially, the safe procedure is to preserve all still-valid contract markers or intentionally disposition each one before exact-head promotion.
+A status rewrite must preserve every still-valid stable marker or explicitly disposition it before promotion. Case, identifiers and exact strings are not cosmetic where existing guards intentionally bind them as contractual representations.
 
-## Final exact-head gate
+## Exact-head gate
 
-This updated Corrective Matrix is the final trigger surface for Unit 11. SUCCESS is required from all four workflow families on the exact same resulting SHA before Unit 12 begins.
+This updated Corrective Matrix is the exact-head trigger surface for the complete Unit-11 corrective state. SUCCESS is required from M2, Real Mutation Matrix, Full-Stack and Runtime/Integration on the same resulting SHA before Unit 12 begins.
 
 No Models/Priority-12 closure is implied by Unit-11 success.
