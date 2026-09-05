@@ -35,5 +35,5 @@ def test_knw010_rep010_reference_uses_current_physical_identity() -> None:
     assert "Version: 1.1.2" in text
     assert "`Repository/REP-010_RELEASE_BASELINE.md`" in related
     assert "Repository/REP-010_REPOSITORY_MAINTENANCE.md" not in related
-    assert "stale reference `Repository/REP-010_REPOSITORY_MAINTENANCE.md`" in text
+    assert "stale physical reference `Repository/REP-010_REPOSITORY_MAINTENANCE.md`" in text
     assert "known title/path coherence gap remains a separate repository concern" in text
