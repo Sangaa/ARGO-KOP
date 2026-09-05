@@ -75,6 +75,8 @@ Current bounded conclusions recorded in `Models/README.md` are:
 
 This resolves the **numeric-restoration question** only. It does not certify every historical concept or consumer. Historical provenance remains preserved, and a future distinct model may still be designed if a real semantic responsibility/consumer gap is independently proven.
 
+No missing artifact is to be recreated merely to complete a numeric sequence.
+
 `MISSING HISTORICAL FILE != MISSING CURRENT CONCEPT`.
 
 ---
