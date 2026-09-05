@@ -1,0 +1,11 @@
+source	artifact_version	development_baseline	official_release_authority	classification	authority_effect
+Models/MOD-001_KNOWLEDGE_MODEL.md	1.1.3	3.2.1	Release/VERSION.md -> 1.0.0	COMPATIBLE_DIMENSIONS	NONE
+Models/MOD-002_ENTITY_MODEL.md	1.2.1	3.2.1	Release/VERSION.md -> 1.0.0	COMPATIBLE_DIMENSIONS	NONE
+Models/MOD-003_DOCUMENT_MODEL.md	1.2.1	3.2.1	Release/VERSION.md -> 1.0.0	COMPATIBLE_DIMENSIONS	NONE
+Models/MOD-004_MEMORY_MODEL.md	1.2.4	3.2.1	Release/VERSION.md -> 1.0.0	COMPATIBLE_DIMENSIONS	NONE
+Models/MOD-011_KNOWLEDGE_SOURCE_MODEL.md	1.1.3	3.2.1	Release/VERSION.md -> 1.0.0	COMPATIBLE_DIMENSIONS	NONE
+Models/README.md	1.3.1	3.2.1	Release/VERSION.md -> 1.0.0	DOMAIN_NAVIGATION_COMPATIBLE	NONE
+Models/_FOLDER_STATUS.md	1.3.6	3.2.1	Release/VERSION.md -> 1.0.0	STATUS_COMPATIBLE	NONE
+
+INVARIANT	ARTIFACT_VERSION != DEVELOPMENT_BASELINE != OFFICIAL_RELEASE			BOUNDARY	NO_PROMOTION
+DISPOSITION	Historical MOD-009_VERSION_MODEL remains DO_NOT_RECREATE absent a distinct Models-owned semantic responsibility; Release/VERSION.md owns official release/development-baseline distinction.			NO_GAP_PROVEN	NO_NEW_MODEL
