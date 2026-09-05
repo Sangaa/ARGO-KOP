@@ -16,14 +16,17 @@ def _paths():
 def test_rep013_addendum_binds_exact_p13_knowledge_set() -> None:
     paths = _paths()
     assert len(paths) == 50
+    assert len(set(paths)) == 50
     payload = "".join(f"{p}\n" for p in sorted(paths)).encode()
     assert hashlib.sha256(payload).hexdigest() == DIGEST
     add = ADD.read_text(encoding="utf-8")
     assert "Tracked leaf count: `50`" in add
     assert DIGEST in add
+    assert "MUT-2026-09-05-P13-KNOWLEDGE-EXACT-INVENTORY-ALLOCATION-A_INVENTORY.tsv" in add
+    # The exact machine-readable path set is the bound TSV; the Markdown tree is
+    # a human-readable projection, so nested paths appear as tree components.
     for path in paths:
-        rel = path.removeprefix("Knowledge/")
-        assert rel in add
+        assert Path(path).name in add, path
 
 
 def test_addendum_is_nonpromoting_and_rep013_fold_remains_open() -> None:

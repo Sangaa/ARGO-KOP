@@ -6,7 +6,7 @@ KNW006 = ROOT / "Knowledge" / "KNW-006_KNOWLEDGE_QUALITY.md"
 
 def test_knw006_authority_is_scope_bounded_not_repository_absolute() -> None:
     text = KNW006.read_text(encoding="utf-8")
-    assert "Version: 1.1.1" in text
+    assert "Version: 1.1.2" in text
     assert "Status: Integrity Hold / Revalidated" in text
     assert "Repository always prevails" not in text
     assert "Repository location or repository approval alone does not make every knowledge item platform-wide canonical authority." in text

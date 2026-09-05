@@ -1,4 +1,5 @@
 from pathlib import Path
+import re
 
 ROOT = Path(__file__).resolve().parents[2]
 PLAN = ROOT / "Repository" / "REP-014_PRIORITY13_KNOWLEDGE_CROSS_LAYER_ALLOCATION_PLAN_2026-09-05_C.tsv"
@@ -39,6 +40,13 @@ def _rows():
     return rows
 
 
+def _declares_identity(text: str, target: str) -> bool:
+    if f"Document ID: {target}" in text or f"Document ID\n{target}" in text or f"Document ID\r\n{target}" in text:
+        return True
+    first_h1 = next((line.strip() for line in text.splitlines() if line.startswith("# ")), "")
+    return first_h1 == f"# {target}"
+
+
 def test_cross_layer_plan_has_exact_vacant_contiguous_cohort() -> None:
     rows = _rows()
     assert len(rows) == 39
@@ -59,7 +67,7 @@ def test_every_candidate_is_directly_declared_and_target_exists() -> None:
         target_file = ROOT / target_path
         assert target_file.is_file(), (rel_id, target_path)
         target_text = target_file.read_text(encoding="utf-8")
-        assert f"Document ID: {target}" in target_text or f"Document ID\n{target}" in target_text or f"Document ID\r\n{target}" in target_text, (rel_id, target)
+        assert _declares_identity(target_text, target), (rel_id, target)
 
 
 def test_stronger_or_existing_seams_are_not_duplicated() -> None:

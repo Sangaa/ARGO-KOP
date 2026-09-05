@@ -17,7 +17,7 @@ def test_models_status_queue_and_manifest_bind_same_bounded_closure() -> None:
     assert f"Status: {BOUNDED}" in status
     assert f"| 12 | Models | {BOUNDED} | MOD-001/002/003/004/011 | Model authority + REP-011/014 |" in queue
     assert "Version: 1.3.2" in queue
-    assert "| REP-016 | Repository/REP-016_PHASE1_PARTITION_WORK_QUEUE.md | 1.3.2 | Active / Phase 1 Open / Integrity Hold | P11 + P12 BOUNDED PARTITIONS CLOSED / PHASE 1 OPEN |" in manifest
+    assert "| REP-016 | Repository/REP-016_PHASE1_PARTITION_WORK_QUEUE.md | 1.3.2 | Active / Phase 1 Open / Integrity Hold | P11 + P12 BOUNDED PARTITIONS CLOSED / P13 KNOWLEDGE OPEN / PHASE 1 OPEN |" in manifest
     assert "Priority 12 Models: `CLOSED_FOR_PHASE_1 / BOUNDED MODELS PARTITION CERTIFIED / DOWNSTREAM AND GLOBAL HOLDS REMAIN`" in manifest
 
 
@@ -48,7 +48,9 @@ def test_queue_history_preservation_markers_survive_closure_binding() -> None:
         assert marker in queue
 
 
-def test_closure_does_not_start_knowledge_priority() -> None:
+def test_later_priority_progress_does_not_reopen_models() -> None:
     queue = QUEUE.read_text(encoding="utf-8")
+    manifest = MANIFEST.read_text(encoding="utf-8")
     assert "| 13 | Knowledge | INVENTORYING | KNW-002/003/004/008/009 | Knowledge authority + REP-011/014 |" in queue
-    assert "Only then may live `main` be rediscovered and the first legal open priority recomputed" in queue
+    assert "Priority 13 Knowledge: `OPEN" in manifest
+    assert f"Priority 12 Models: `{BOUNDED}`" in manifest

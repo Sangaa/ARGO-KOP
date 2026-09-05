@@ -6,7 +6,7 @@ KNW010 = ROOT / "Knowledge" / "KNW-010_KNOWLEDGE_MAINTENANCE.md"
 
 def test_knw010_approved_knowledge_is_reviewable_not_immutable() -> None:
     text = KNW010.read_text(encoding="utf-8")
-    assert "Version: 1.1.1" in text
+    assert "Version: 1.1.2" in text
     assert "Status: Integrity Hold / Revalidated" in text
     assert "Delete Approved Knowledge" not in text
     assert "Approved or canonical knowledge is not permanently immune to revision or removal." in text
