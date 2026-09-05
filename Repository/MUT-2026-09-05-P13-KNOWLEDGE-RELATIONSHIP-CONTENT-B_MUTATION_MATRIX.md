@@ -3,7 +3,7 @@
 Transaction: `MUT-2026-09-05-P13-KNOWLEDGE-RELATIONSHIP-CONTENT-B`
 Priority: `13 — Knowledge`
 Entry HEAD: `0beaff41db190cecc757f0d169a5d7174c1578d2`
-State: `OPEN / UNITS 1-9 VERIFIED / UNIT 10 CROSS-LAYER BRIDGE PREPARED / CANONICAL REP-014 FOLD PENDING`
+State: `OPEN / UNITS 1-10 VERIFIED / UNIT 11 CONTROL-PLANE RECONCILIATION PLAN PREPARED`
 
 ## Governing invariants
 
@@ -16,6 +16,8 @@ State: `OPEN / UNITS 1-9 VERIFIED / UNIT 10 CROSS-LAYER BRIDGE PREPARED / CANONI
 `STRONGER VERIFIED EDGE > WEAKER DUPLICATE DOCUMENTARY EDGE`
 
 `BRIDGE EVIDENCE != CANONICAL REGISTRATION`
+
+`PHYSICAL INVENTORY != ACTIVE INDEX ADMISSION`
 
 `MATERIAL VALIDITY != TRANSACTION VALIDITY != CLOSURE VALIDITY`
 
@@ -32,76 +34,73 @@ State: `OPEN / UNITS 1-9 VERIFIED / UNIT 10 CROSS-LAYER BRIDGE PREPARED / CANONI
 | 7 | canonical internal Knowledge documentary graph + REP-020 manifest rebind | `005a0483d9db73da273032901c19d255138d2ab3` | `4/4 SUCCESS` |
 | 8 | KNW-004/006/010 identity-migration residue repair | `2dbea92fc500b33e00ba3b7de18291400a220bd5` | `4/4 SUCCESS` |
 | 9 | REL-168..206 cross-layer allocation-plan validation | `bb27b15deca2d268e067805e315250e3838a840b` | `4/4 SUCCESS` |
+| 10 | verified cross-layer relationship bridge / canonical REP-014 fold explicitly pending | `b25e3b29239c356bd42c879787e4874bb82df7ec` | `4/4 SUCCESS` |
 
-## Unit 9 verified result
+## Unit 10 bounded result
 
-Direct current `Related Documents` review plus target identity reads established exactly 39 missing documentary candidates after excluding five already-represented stronger/equivalent seams:
+The verified REL-168..206 cohort is preserved in:
 
-- `KNW-002 → MOD-011 = CONSUMES` (`REL-010`)
-- `KNW-003 → MOD-011 = REFERENCES` (`REL-110`)
-- `KNW-004 → MOD-001 = REFERENCES` (`REL-081`)
-- `KNW-004 → MOD-011 = REFERENCES` (`REL-111`)
-- `KNW-009 → MOD-011 = CONSUMES` (`REL-014`)
+`Repository/REP-014_PRIORITY13_KNOWLEDGE_CROSS_LAYER_REGISTRATION_BRIDGE_2026-09-05_D.md`
 
-Unit 9 proved:
+This is intentionally a temporary auditable bridge under the established P73 precedent because the current GitHub mutation surface exposes whole-file replacement but not safe patch-in-place for the long REP-014 artifact.
 
-- exactly 39 unique source-target-type rows;
-- contiguous vacant IDs `REL-168..REL-206`;
-- every row is `REFERENCES`;
-- every source directly names the exact current target path;
-- every target path exists and matches the planned Document ID;
-- no stronger existing seam is duplicated;
-- no endpoint maturity/status promotion or reverse edge inference.
+The bridge does **not** alter REP-014 v1.2.21, does not rebind REP-020, and does not claim canonical relationship synchronization. The Unit-10 executable guard enforces that distinction.
 
-## Unit 10 — cross-layer registration bridge
+## Control-plane reconciliation finding
 
-The available GitHub mutation surface currently supports whole-file replacement for existing text files but does not provide safe patch-in-place mutation. REP-014 is a long historical registry with prior content-preservation regressions; therefore Unit 10 must not risk rebuilding it from truncated retrieval.
+Priority-12 Models precedent establishes that exact allocation is not fully synchronized merely by keeping an independent exact-inventory TSV. Models exact allocation updated REP-002, REP-012 and REP-013 and bound a path-level allocation manifest.
 
-Repository precedent `REP-020_RELATIONSHIP_ADDENDUM_2026-08-15_P73.md` explicitly allows a temporary auditable relationship addendum while canonical REP-014 synchronization remains pending.
+Priority-13 Transaction A correctly established the exact current Knowledge tree but intentionally stopped after status + immutable inventory evidence. Current re-read therefore finds four different states:
+
+1. `REP-013 v1.1.6` — its `### Knowledge/` content tree remains an old five-file subset and lacks the exact 50-leaf digest.
+2. `REP-002 v1.7.8` — no exact Priority-13 Knowledge physical-map binding exists.
+3. `REP-012 v1.0.13` — the canonical allocation registry does not yet bind Transaction-A's exact 50-leaf inventory/digest.
+4. `REP-001 v1.7.8` — KNW-001..010 active admission remains intentionally held under the historical P2 authority-aware classification; this is a separate semantic admission decision, not a physical-inventory defect.
+
+Exact Priority-13 physical truth remains:
+
+- tracked leaves: `50`;
+- sorted-path SHA-256: `8ef530bc3b91a11e68e01df02e6d7bb29de4ee7824eada45c0b2928e03f85dc7`;
+- evidence: `Repository/MUT-2026-09-05-P13-KNOWLEDGE-EXACT-INVENTORY-ALLOCATION-A_INVENTORY.tsv`;
+- canonical Knowledge artifact set remains only `KNW-001..010` as declared by `Knowledge/README.md`; support/evidence/executable/test leaves receive no authority from mapping.
+
+## Unit 11 — control-plane reconciliation-plan validation
 
 Authorized exactly three paths:
 
-1. `Repository/REP-014_PRIORITY13_KNOWLEDGE_CROSS_LAYER_REGISTRATION_BRIDGE_2026-09-05_D.md`
-2. `Quality/Integrity/test_knowledge_p13_cross_layer_registration_bridge.py`
+1. `Repository/P13_KNOWLEDGE_CONTROL_PLANE_RECONCILIATION_PLAN_2026-09-05_E.tsv`
+2. `Quality/Integrity/test_knowledge_p13_control_plane_reconciliation_plan.py`
 3. this Matrix.
 
-Unit-10 bridge contract:
+Unit-11 validation contract:
 
-- preserve exactly the already-verified REL-168..206 allocation and source/target identities;
-- classify all 39 entries as documentary `REFERENCES` only;
-- explicitly state that the bridge is subordinate to REP-014 and is not canonical registration;
-- preserve REP-014 at current v1.2.21 and keep REL-168..206 absent from canonical registry until a safe full-preservation fold is possible;
-- keep the current REP-020 manifest bound to REP-014 v1.2.21; no false rebind occurs in Unit 10;
-- executable guard must fail if the bridge is interpreted as canonical registration, if any stronger relationship type appears, or if REP-014 silently contains only a partial subset;
-- no source artifact mutation and no active-index admission in Unit 10.
+- prove Transaction-A TSV still contains exactly 50 unique paths and recomputes the recorded digest;
+- prove Knowledge status still binds the same count/digest;
+- prove REP-013 is currently stale in the specific old-subset way and is not silently treated as synchronized;
+- prove REP-002 has no current exact P13 Knowledge digest/map binding;
+- prove REP-012 has no canonical binding to the P13 Transaction-A inventory/digest;
+- preserve REP-001 active-admission hold as a separate decision;
+- prohibit any inference that physical mapping/allocation closes Priority 13 or promotes support leaves.
 
-Expected Unit-10 change-set: `1 commit / exactly 3 files`.
-
-## Current control-plane debts discovered during P13
-
-Independent from relationship semantics:
-
-- `REP-013` still shows an old five-file Knowledge subset and does not represent the exact 50-leaf physical inventory established by Transaction A;
-- `REP-002` does not yet contain an exact reconciled Knowledge physical section;
-- `REP-012` has the generic allocation registry and P13 exact-allocation evidence exists separately; whether the canonical REP-012 body needs mutation remains to be determined from current allocation semantics;
-- historical P2 classification intentionally kept KNW-001..010 out of REP-001 active canonical admission while Knowledge remained domain-hold;
-- support leaves under `Knowledge/Learning`, `Knowledge/Programming`, and `Knowledge/Mathematics` are physical/support artifacts and must not be promoted merely by inventory reconciliation.
+Expected Unit-11 change-set: `1 commit / exactly 3 files`.
 
 ## Remaining connected chain
 
-1. Apply Unit 10 bridge and exact-head 4/4.
-2. Continue exact Knowledge control-plane reconciliation: determine the smallest safe canonical/addendum updates for REP-013, REP-002 and REP-012 without semantic promotion.
-3. Re-read `Knowledge/_FOLDER_STATUS.md` and historical P2 active-index hold after inventory/control-plane reconciliation; only then decide whether KNW-001..010 are eligible for REP-001 active admission.
-4. Safely fold REL-168..206 into full REP-014 when a complete content-preserving mutation surface is available; same-change-set rebind the current REP-020 manifest and exact-head validate 4/4.
-5. Reconcile REP-016/current manifest only when the material state justifies a new P13 queue/status boundary.
-6. Transaction-B closure remains separate: last material head 4/4 → Matrix-only closure → closure-head 4/4.
-7. Priority-13 partition closure remains a bounded later decision and does not imply Phase-1 or Global Integrity closure.
+1. Validate Unit 11 exact-head 4/4.
+2. Build the smallest content-preserving synchronization units for REP-013, REP-002 and REP-012. If safe canonical whole-file mutation is unavailable, use explicit temporary addenda/bridges and keep canonical synchronization OPEN rather than abbreviating historical files.
+3. Re-read `Knowledge/_FOLDER_STATUS.md` after those units and replace obsolete “work not started” language with exact remaining blockers only.
+4. Re-evaluate historical P2 `DECLARED-CANONICAL-BUT-DOMAIN-HOLD` disposition for KNW-001..010 only after relationship/content/control-plane blockers are materially resolved; REP-001 admission remains separate from mapping.
+5. Safely fold REL-168..206 into full REP-014; same-change-set rebind current REP-020 manifest; exact-head 4/4.
+6. Reconcile REP-016/current manifest only when the material state justifies a new P13 boundary.
+7. Transaction-B closure remains separate: last material head 4/4 → Matrix-only closure → closure-head 4/4.
+8. Priority-13 partition closure remains bounded and does not imply Phase-1 or Global Integrity closure.
 
 ## Explicit non-claims
 
 - no Priority-13 closure;
 - no Knowledge active-index admission yet;
-- no canonical REP-014 registration from Unit 10 bridge alone;
+- no canonical REP-014 cross-layer registration from the bridge alone;
+- no canonical REP-002/012/013 synchronization from Unit 11 planning alone;
 - no dependency/consumer/governance semantics from Related Documents;
 - no automatic support-leaf promotion;
 - no Phase-1 or Global Integrity closure.
