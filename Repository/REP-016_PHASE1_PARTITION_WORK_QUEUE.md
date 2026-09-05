@@ -2,10 +2,10 @@
 
 Platform: ARGO KOP  
 Document ID: REP-016  
-Version: 1.3.0  
+Version: 1.3.1  
 Status: Active / Phase 1 Open / Integrity Hold  
 Development Baseline: 3.2.1  
-Last Audit: 2026-08-30
+Last Audit: 2026-09-05
 
 ## Purpose
 
@@ -31,8 +31,8 @@ No promotion to a later ring is allowed until predecessor exit evidence, affecte
 | 8 | Governance | INVENTORYING / BOUNDED SEMANTIC REPAIRS IN PROGRESS | Governance/_FOLDER_STATUS.md + REP-013 | Governance authority + REP-011 |
 | 9 | Architecture | RELATIONSHIP_VALIDATION | ARC_MAP + ARC-001..011 | Architecture authority + REP-011/014 |
 | 10 | Runtime | RELATIONSHIP_VALIDATION | Runtime/_FOLDER_STATUS.md + REP-013 | Runtime authority + REP-011/014 |
-| 11 | Interfaces | RELATIONSHIP_VALIDATION | INTF-001/004/006/010 | Interface authority + REP-011/014 |
-| 12 | Models | RELATIONSHIP_VALIDATION | MOD-001/002/003/004/011 | Model authority + REP-011/014 |
+| 11 | Interfaces | CLOSED_FOR_PHASE_1 / BOUNDED INTERFACES PARTITION CERTIFIED / GLOBAL AND PROVIDER HOLDS REMAIN | INTF-001/004/006/010 | Interface authority + REP-011/014 |
+| 12 | Models | EXACT_INVENTORY_ALLOCATED / RELATIONSHIP_VALIDATION OPEN / INTEGRITY HOLD | MOD-001/002/003/004/011 | Model authority + REP-011/014 |
 | 13 | Knowledge | INVENTORYING | KNW-002/003/004/008/009 | Knowledge authority + REP-011/014 |
 | 14 | Engine | RELATIONSHIP_VALIDATION | ENG-002/004/006/007 | Engine authority + REP-011/014 |
 | 15 | Services | INVENTORYING | SRV catalog + exact file enumeration | Service authority + REP-011/014 |
@@ -228,7 +228,7 @@ The previous queue checkpoint `P261` was retained as historical checkpoint evide
 
 Current evidence established:
 
-- `REP-014` was reconciled through P278, with `REL-005` and `REL-009` both explicitly `REVALIDATION REQUIRED`.
+- `REP-014` was reconciled through P278, with `REL-005` and `REL-009` both explicitly `REVALIDATION_REQUIRED`.
 - `REP-020` recorded the P278 evidence boundary and remained provisional/non-authoritative.
 - `ENG-006 → SRV-009` executable proof remained open.
 - The current control plane remained `PARTIALLY RECONCILED / INTEGRITY HOLD`.
@@ -375,6 +375,17 @@ Disposition:
 This is an evidence-binding result only. It does **not** change the Priority-1 current state, does not promote Priority 2, does not set `CLOSED_FOR_PHASE_1`, and does not claim Global PASS.
 
 The remaining current control-plane evidence surface is `REP-020`; after it is reconciled to the same checkpoint, an explicit Priority-1 Closure Review can be performed.
+
+## Current Checkpoint — 2026-09-05 Priority-11 Closure / Priority-12 Entry Sync
+
+Verified current evidence supersedes the stale Priority-11/12 queue rows for operational interpretation while preserving all historical checkpoints above.
+
+- Priority 11 Interfaces is `CLOSED_FOR_PHASE_1 / BOUNDED INTERFACES PARTITION CERTIFIED / GLOBAL AND PROVIDER HOLDS REMAIN`, with Transaction S `CLOSED / VERIFIED / RESUME-SAFE` on exact closure HEAD `15d94d97e848060aafabe7faa3c369f852b62c35` after all four required workflow families passed on that exact SHA.
+- Priority 12 Models is OPEN. Transaction A has reconciled the exact seven-path top-level Models inventory, physical map, path-level allocation manifest, REP-012 allocation binding, REP-013 content-tree representation and Models status boundary.
+- The exact Models sorted-path SHA-256 is `cf8274ea93cabcb0e55e47b55b00050c1dab98c888582b3b4c2a858c36621498`; every manifest row is `ALLOCATED` with authority effect `NONE_BY_ALLOCATION`.
+- This queue synchronization does not close Priority 12, certify Models relationships, reconstruct missing historical model identities, promote MOD-011 maturity, start Priority 13, or alter provider/global holds.
+
+Next legal Priority-12 work after Transaction-A closure is evidence-driven relationship/content reconciliation under the existing Models Integrity Hold; numbering alone does not authorize Priority 13.
 
 ---
 

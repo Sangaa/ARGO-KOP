@@ -4,13 +4,14 @@ Transaction ID: `MUT-2026-09-05-P12-MODELS-EXACT-INVENTORY-ALLOCATION-A`
 
 Priority: `12 — Models`
 
-State: `PARTIAL MATERIAL APPLIED / REP-002+012+013 SYNC COMPLETE / REP-016 SYNC PENDING`
+State: `MATERIAL COMPLETE / EXACT-HEAD CI PENDING`
 
 Entry HEAD: `15d94d97e848060aafabe7faa3c369f852b62c35`
 Pre-write Matrix HEAD: `109b58043517aeb6c14d204bfe61cee41066c415`
 Material Unit 1 HEAD: `bec6f61072607e77aab753fe2eace5eb027df491`
 Material Unit 2 HEAD: `1b98df1cbb1f57a681924827191bf72bc05b955a`
 Material Unit 3 HEAD: `adc2c6d6808cd33bed5b4a2adb59eb094136e964`
+Material Unit 4 HEAD: `b20330bb55ff85da6fed69604c90b3909a29e89a`
 
 ## Entry authority
 
@@ -33,58 +34,50 @@ Sorted-path SHA-256:
 
 `PHYSICAL ALLOCATION != SEMANTIC PROMOTION != RELATIONSHIP VALIDATION != PARTITION CLOSURE`.
 
-## Authorized material set and progress
+## Authorized material set and completion
 
-| Change ID | Target | Action | Current state |
+| Change ID | Target | Action | Final material state |
 | --- | --- | --- | --- |
-| P12-A-01 | `Repository/REP-002_REPOSITORY_MAP.md` | UPDATE | APPLIED IN MATERIAL UNIT 2 |
-| P12-A-02 | `Repository/REP-012_REPOSITORY_ALLOCATION_REGISTRY.md` | UPDATE | APPLIED IN MATERIAL UNIT 3 |
-| P12-A-03 | `Repository/REP-012_PRIORITY12_MODELS_EXACT_ALLOCATION_MANIFEST_2026-09-05_A.tsv` | CREATE | APPLIED IN MATERIAL UNIT 1 |
-| P12-A-04 | `Repository/REP-013_REPOSITORY_CONTENT_TREE.md` | UPDATE | APPLIED IN MATERIAL UNIT 4 |
-| P12-A-05 | `Repository/REP-016_PHASE1_PARTITION_WORK_QUEUE.md` | UPDATE | SYNC PENDING |
-| P12-A-06 | `Models/_FOLDER_STATUS.md` | UPDATE | APPLIED IN MATERIAL UNIT 1 |
-| P12-A-07 | `Quality/Integrity/test_models_p12_exact_inventory_allocation.py` | CREATE | APPLIED IN MATERIAL UNIT 1 |
+| P12-A-01 | `Repository/REP-002_REPOSITORY_MAP.md` | UPDATE | APPLIED / VERIFIED BY COMPARE |
+| P12-A-02 | `Repository/REP-012_REPOSITORY_ALLOCATION_REGISTRY.md` | UPDATE | APPLIED / VERIFIED BY COMPARE |
+| P12-A-03 | `Repository/REP-012_PRIORITY12_MODELS_EXACT_ALLOCATION_MANIFEST_2026-09-05_A.tsv` | CREATE | APPLIED / READ-BACK VERIFIED |
+| P12-A-04 | `Repository/REP-013_REPOSITORY_CONTENT_TREE.md` | UPDATE | APPLIED / VERIFIED BY COMPARE |
+| P12-A-05 | `Repository/REP-016_PHASE1_PARTITION_WORK_QUEUE.md` | UPDATE | APPLIED IN MATERIAL UNIT 5 |
+| P12-A-06 | `Models/_FOLDER_STATUS.md` | UPDATE | APPLIED / READ-BACK VERIFIED |
+| P12-A-07 | `Quality/Integrity/test_models_p12_exact_inventory_allocation.py` | CREATE | APPLIED / EXECUTABLE GUARD PRESENT |
 | P12-A-08 | this Matrix | UPDATE | SAME-CHANGE-SET BINDING ON EACH PROTECTED UNIT |
 
 No other path is authorized.
 
-## Material Unit 1 evidence
+## Material evidence
 
-Material Unit 1 established the exact manifest, Models status inventory/digest/open boundary, executable integrity guard and this Matrix in the same changed-file set.
+Material Unit 1 established the exact seven-row manifest, Models status exact inventory/digest/open boundary, executable integrity guard and Matrix binding. Exact-head regression evidence on `bec6f61072607e77aab753fe2eace5eb027df491` was green across Full-Stack `33949936759`, Runtime `33949936748`, M2 `33949936765`, and Real Mutation Matrix `33949936764`.
 
-Exact-head regression evidence on `bec6f61072607e77aab753fe2eace5eb027df491`:
+Material Unit 2 synchronized REP-002 to the exact seven-path Models physical map, including README as domain-container/navigation evidence, without semantic promotion. Candidate compare showed only REP-002 plus this Matrix changed.
 
-- Full-Stack Repository Audit — SUCCESS; run `33949936759`.
-- ARGO Runtime Prototype and Integration Tests — SUCCESS; run `33949936748`.
-- M2 Multi-Channel Proposal Training — SUCCESS; run `33949936765`.
-- Real Mutation Matrix Regression — SUCCESS; run `33949936764`.
+Material Unit 3 appended the exact seven-row Models allocation binding to REP-012 while preserving all historical registry content. Candidate compare showed only REP-012 plus this Matrix changed.
 
-These successes are regression evidence only; Transaction A remains open because control-plane synchronization is incomplete.
+Material Unit 4 synchronized the REP-013 Models section from the stale partial three-path representation to the exact seven-path inventory with digest/manifest binding. Candidate compare showed only REP-013 plus this Matrix changed; REP-013 itself changed by 22 lines, with historical content preserved.
 
-## Material Unit 2 evidence
+Material Unit 5 synchronizes REP-016 queue freshness only: Priority 11 records its verified bounded closure; Priority 12 records exact inventory/allocation reconciliation as complete while relationship validation and Models partition closure remain OPEN. This does not auto-promote downstream priorities.
 
-REP-002 was completely retrieved before replacement. It now maps the exact seven-path Models tree, including README as domain-container/navigation evidence, binds digest `cf8274ea93cabcb0e55e47b55b00050c1dab98c888582b3b4c2a858c36621498`, and preserves the no-promotion/no-closure boundary. The Unit-2 candidate compare showed only REP-002 plus this Matrix changed.
+## Deliberate non-change
 
-## Material Unit 3 evidence
+REP-001 remains unchanged because it already represents the five active model artifacts plus `_FOLDER_STATUS.md`; physical README presence does not grant active model semantic authority.
 
-REP-012 was completely retrieved before replacement. Its historical sections were preserved and an append-only P12 Transaction-A section binds the exact seven-row manifest, digest and `NONE_BY_ALLOCATION` semantics without promoting authority or closing Models.
-
-## Material Unit 4 — REP-013 exact content-tree synchronization
-
-REP-013 was fetched from its exact current blob before replacement. The Models section is synchronized from its former partial three-path representation to the exact seven top-level tracked paths, with digest and manifest binding. The update changes physical inventory representation only; it does not promote model authority, validate relationships or close Priority 12.
-
-## Remaining control-plane drift
-
-- REP-016 verified P11-closure / P12-entry queue synchronization — pending.
-
-REP-001 remains deliberately unchanged because physical README/status evidence is not a reason to manufacture active semantic authority.
+REP-014 remains unchanged because Transaction A registers no new semantic relationship and physical allocation alone must not manufacture relationship authority.
 
 ## Non-claims
 
-Transaction A and Priority 12 remain open. No Models relationship closure, missing historical model reconstruction, MOD-011 maturity promotion, Runtime execution claim, provider authenticity, external trust anchor, Global Connected Baseline, Global Integrity, HORUS promotion or Governance/learning promotion is claimed.
+Transaction A does not close Priority 12 or Models. It does not certify Models ↔ Knowledge/Memory/Runtime/Services/Interfaces/AI/Repository/Release relationships; reconstruct missing historical MOD identities; promote MOD-011 beyond Proposed / Future-Ready; establish Runtime consumer execution; establish provider authenticity, external trust anchors, Global Connected Baseline or Global Integrity; or promote HORUS/Governance/learning material.
 
-## Next gate
+## Exact-head validation gate
 
-1. Commit/read-back/compare Material Unit 4.
-2. Retrieve complete REP-016 before replacement and synchronize verified P11 closure + P12 exact-inventory entry state with this Matrix in the same change set.
-3. Only after REP-016 synchronization may the complete Transaction-A material HEAD enter closure-grade exact-head CI.
+The complete material HEAD must pass all four workflow families on the exact same SHA:
+
+1. Full-Stack Repository Audit
+2. ARGO Runtime Prototype and Integration Tests
+3. M2 Multi-Channel Proposal Training
+4. Real Mutation Matrix Regression
+
+If any family fails, Transaction A remains open and the failure must be classified before repair. If all four succeed and no new contradictory Models-specific evidence appears, a Matrix-only final closure commit may set Transaction A to `CLOSED / VERIFIED / RESUME-SAFE`; that final closure SHA must itself pass all four workflow families before closure is declared.
