@@ -44,7 +44,17 @@ def test_status_marks_numeric_restoration_resolved_without_partition_promotion()
     assert "numeric restoration disposition resolved / no blind recreation" in text.lower()
     assert "Priority 12 remains **OPEN**" in text
     assert "Models remains **INTEGRITY HOLD / STAGED RECONSTRUCTION**" in text
-    assert "relationship registry synchronization remains open" in text
+    assert "Canonical relationship registry synchronization complete / REP-014 v1.2.20" in text
+    assert "relationship registry synchronization remains open" not in text
+    assert "MATERIAL RECONCILIATION COMPLETE != TRANSACTION CLOSED != PRIORITY CLOSED" in text
+
+
+def test_status_allows_closure_review_without_claiming_closure() -> None:
+    text = STATUS.read_text(encoding="utf-8")
+    assert "MATERIAL RECONCILIATION COMPLETE / CLOSURE REVIEW PENDING" in text
+    assert "No unresolved Models-specific material gap is currently established" in text
+    assert "Transaction-B bounded closure-readiness review" in text
+    assert "CLOSED_FOR_PHASE_1" not in text
 
 
 def test_future_model_requires_current_semantic_gap_not_historical_number() -> None:
