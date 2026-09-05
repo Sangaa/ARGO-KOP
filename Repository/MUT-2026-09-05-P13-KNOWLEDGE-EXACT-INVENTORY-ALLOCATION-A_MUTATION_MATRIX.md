@@ -3,7 +3,7 @@
 Transaction: `MUT-2026-09-05-P13-KNOWLEDGE-EXACT-INVENTORY-ALLOCATION-A`
 Priority: `13 — Knowledge`
 Entry HEAD: `f4638a9842f17b55d9734223228c54f72e5e3e57`
-State: `OPEN / MATERIAL UNIT 1 PREPARED / EXACT-HEAD VALIDATION PENDING`
+State: `CLOSED / VERIFIED / RESUME-SAFE`
 
 ## Objective
 
@@ -43,16 +43,30 @@ No KNW semantic artifact, Learning implementation, REP-014 relationship registry
 - `Programming/*`: physically present subdomain/support surface; allocation confers no canonical status.
 - README/status: domain control documentation, not proof of downstream relationship validity.
 
-## Validation gate
+## Validation result
 
-After applying Unit 1:
+Material HEAD: `f61c80420e28765fb2d6b84e2dde98c098864a31`
 
-1. compare entry HEAD → material HEAD and prove one commit / exactly four authorized files;
-2. re-read all four paths from exact material HEAD;
-3. run exact-head four-family CI;
-4. classify any failure before further mutation;
-5. only after 4/4 SUCCESS may Transaction A closure be considered;
-6. closure, if justified, must be Matrix-only followed by closure-head 4/4.
+Entry → material compare:
+
+`1 commit / exactly 4 authorized files / no side mutation`
+
+Exact-head workflow families on the material HEAD:
+
+- `M2 Multi-Channel Proposal Training` — SUCCESS — run `33980269533`
+- `Real Mutation Matrix Regression` — SUCCESS — run `33980269019`
+- `ARGO Runtime Prototype and Integration Tests` — SUCCESS
+- `Full-Stack Repository Audit` — SUCCESS
+
+The exact inventory guard verifies 50 tracked leaves and digest `8ef530bc3b91a11e68e01df02e6d7bb29de4ee7824eada45c0b2928e03f85dc7` while preserving the non-promotion boundary.
+
+## Closure decision
+
+Transaction A is closed because its bounded objective is complete and exact-head validation is green.
+
+Closure is Matrix-only. No Knowledge source/content file, support implementation, relationship registry, queue, manifest or other control-plane file is changed by the closure commit.
+
+Priority 13 remains OPEN. The legal resume point is identity/authority/content/dependency/consumer/relationship reconciliation under a separate transaction.
 
 ## Explicit non-claims
 
@@ -66,6 +80,10 @@ This transaction does not claim:
 - Knowledge ↔ MOD-011 validity;
 - Phase 1 closure;
 - Global Integrity PASS.
+
+## Closure-head gate
+
+This Matrix-only closure commit must itself receive exact-head four-family validation before the transaction is treated as resume-safe in subsequent construction.
 
 ---
 
