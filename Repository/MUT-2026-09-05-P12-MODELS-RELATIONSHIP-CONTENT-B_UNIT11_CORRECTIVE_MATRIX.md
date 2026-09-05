@@ -2,69 +2,69 @@
 
 Parent Transaction: `MUT-2026-09-05-P12-MODELS-RELATIONSHIP-CONTENT-B`
 Priority: `12 — Models`
-State: `OPEN / UNIT-11 SECOND CORRECTIVE REPAIR APPLIED / EXACT-HEAD FOUR-FAMILY CI PENDING`
+State: `OPEN / UNIT-11 FINAL CORRECTIVE REPAIR APPLIED / EXACT-HEAD FOUR-FAMILY CI PENDING`
 
 Material Unit-11 Matrix head: `f7e74beda97e548cb48f1aaa562a4bee76e034d1`
 First guard-repair head: `a85043d5377aa915088721b4c04e400827dc2575`
 First Corrective-Matrix head: `a87996e4fa250d7f9c5dba3c24dfe0d033559668`
-Historical-disposition status-marker repair head: `25db8f6c9a5fdc0117949df51dc73c08c2ee1c3b`
+First historical-status-marker repair head: `25db8f6c9a5fdc0117949df51dc73c08c2ee1c3b`
+Second Corrective-Matrix head: `7471fe1a10580c1a3c2c87888af9fda47181a281`
+Second historical-status-marker repair head: `2ff33d165e5efe44ba1ec16e3c09f3b86bce4b56`
 
-## Failure classification — first corrective issue
+## Failure chain
 
-Unit-11 material head produced:
+### 1. New Unit-11 guard representation defect
 
-- Real Mutation Matrix — SUCCESS (`33975709022`)
-- M2 — SUCCESS (`33975709058`)
-- Full-Stack — SUCCESS (`33975709015`)
-- Runtime/Integration — FAILURE (`33975708939`)
-
-Runtime prototype and integration jobs were successful; only repository integrity failed.
-
-The newly introduced Unit-11 guard searched for `MEM-001 MUST NOT be treated as a duplicate` while the valid current source representation contained the identifier in Markdown code ticks: `` `MEM-001` MUST NOT be treated as a duplicate ``.
+The first Unit-11 Runtime integrity failure exposed a newly introduced test literal that omitted Markdown code ticks around `MEM-001` while the source representation was correct.
 
 Classification:
 
 `NEW GUARD REPRESENTATION DEFECT / SOURCE SEMANTICS VALID / NO UNIT-11 SOURCE ROLLBACK`.
 
-The guard was corrected without changing source semantics.
+The guard was repaired without changing authority semantics.
 
-## Failure classification — second exact-head issue
+### 2. First stable Unit-4 status invariant lost during Unit-11 status synchronization
 
-The first Corrective-Matrix head `a87996e4fa250d7f9c5dba3c24dfe0d033559668` restored four-family triggering, but Runtime/Integration run `33975808383` still failed only in repository integrity.
+On corrective head `a87996e4fa250d7f9c5dba3c24dfe0d033559668`, Runtime/Integration run `33975808383` failed only in repository integrity. Decoded logs established `239 passed / 1 failed` and identified the missing stable marker:
 
-Decoded exact job logs established:
+`numeric restoration disposition resolved / no blind recreation`.
 
-- `239 passed`;
-- `1 failed`;
-- sole failure: `test_models_p12_historical_disposition.py::test_status_marks_numeric_restoration_resolved_without_partition_promotion`;
-- required stable marker: `numeric restoration disposition resolved / no blind recreation`.
+The marker was restored at `25db8f6c9a5fdc0117949df51dc73c08c2ee1c3b` without weakening or changing the underlying historical disposition.
 
-The marker had been dropped when `_FOLDER_STATUS.md` was synchronized for Unit 11, even though the underlying Unit-4 historical disposition remained valid and the stronger permanent sentence `No missing artifact is to be recreated merely to complete a numeric sequence.` was preserved.
+### 3. Second stable Unit-4 status invariant lost during the same rewrite
+
+On corrective head `7471fe1a10580c1a3c2c87888af9fda47181a281`, Runtime/Integration run `33976155176` again failed only in repository integrity. Decoded logs again established `239 passed / 1 failed`. The first marker now passed; the remaining assertion identified the second dropped stable status marker:
+
+`relationship registry synchronization remains open`.
+
+That marker was restored at `2ff33d165e5efe44ba1ec16e3c09f3b86bce4b56`.
 
 Classification:
 
-`VALID UNIT-4 STATUS INVARIANT LOST DURING UNIT-11 STATUS REWRITE / CURRENT AUTHORITY SPLIT VALID / RESTORE MARKER, DO NOT WEAKEN GUARD`.
+`VALID UNIT-4 STATUS INVARIANTS LOST DURING UNIT-11 STATUS REWRITE / CURRENT MODELS↔MEMORY AUTHORITY SPLIT VALID / RESTORE STABLE MARKERS, DO NOT WEAKEN GUARD`.
 
-The status repair at `25db8f6c9a5fdc0117949df51dc73c08c2ee1c3b` restored exactly:
+## Current semantic state preserved
 
-`Numeric restoration disposition resolved / no blind recreation.`
+None of the corrective repairs roll back Unit 11:
 
-No Unit-11 semantic source, evidence row, Memory-domain artifact, historical disposition or partition maturity was rolled back.
+- `MOD-004` remains v1.2.4 and owns the memory-object semantic schema contract;
+- `MEM-001` remains the Memory-domain scope/promotion model and was not mutated;
+- `MOD-004 → MEM-001 = REFERENCES / AUTHORITY-BOUNDARY / NON-DEPENDENCY` remains the bounded current candidate;
+- no reverse relationship is manufactured;
+- Models and Priority 12 remain open / Integrity Hold.
 
-## Trigger-family requirement
-
-This updated Corrective Matrix is the exact-head trigger surface for the final Unit-11 corrective state. SUCCESS is required from all four families on the same resulting SHA.
-
-## Invariants reinforced
+## Learning reinforced
 
 `VALID SEMANTIC BOUNDARY != BUGGY TEST LITERAL`.
 
 `STATUS REWRITE != PERMISSION TO DROP A STILL-VALID STABLE INVARIANT`.
 
-A historical guard may be stale in one transaction and valid in another; disposition depends on whether the protected representation remains part of the stable contract.
+`A GUARD MAY PROTECT MULTIPLE STABLE REPRESENTATIONS; PASSING THE FIRST ASSERTION DOES NOT AUTHORIZE DROPPING THE NEXT.`
 
-## Next gate
+When a status artifact is rewritten substantially, the safe procedure is to preserve all still-valid contract markers or intentionally disposition each one before exact-head promotion.
 
-1. exact-head SUCCESS for M2, Real Mutation Matrix, Full-Stack and Runtime/Integration on the head containing this updated Corrective Matrix;
-2. only then begin Unit 12 active-model authority overlap reconciliation;
-3. no Priority-12 or Models closure is implied by Unit-11 success.
+## Final exact-head gate
+
+This updated Corrective Matrix is the final trigger surface for Unit 11. SUCCESS is required from all four workflow families on the exact same resulting SHA before Unit 12 begins.
+
+No Models/Priority-12 closure is implied by Unit-11 success.
