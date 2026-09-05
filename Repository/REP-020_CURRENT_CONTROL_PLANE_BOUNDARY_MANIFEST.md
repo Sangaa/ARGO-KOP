@@ -3,10 +3,10 @@
 Date: 2026-09-05
 Status: `Current Evidence Manifest / Integrity Hold / Not Semantic Authority`  
 Manifest family: `REP-020 evidence surface`  
-Current queue checkpoint: `P12 MODELS / BOUNDED CLOSURE-STATE BINDING`
-Verified source baseline: `main@0b1cbb3ef612f2ad2967b90cc61cbc754c36be43`
+Current queue checkpoint: `P13 KNOWLEDGE / INTERNAL RELATIONSHIP REGISTRATION IN PROGRESS`
+Verified source baseline: `main@cb61f90ef856af682dbd85360b0a337f13b3bdb7`
 Recovery binding: `E-07B / SAME-CHANGE-SET REBIND / authorized at main@2271d130d7bb3583a695d0bd4e4bddac8e235818`  
-Current refresh binding: `P12 / MODELS CLOSED_FOR_PHASE_1 BOUNDED CLOSURE-STATE / REP-016 1.3.2 SAME-CHANGE-SET REBIND FROM VERIFIED PRECLOSURE HEAD main@0b1cbb3ef612f2ad2967b90cc61cbc754c36be43`
+Current refresh binding: `P13 / REP-014 1.2.21 INTERNAL KNOWLEDGE RELATIONSHIP REGISTRATION / SAME-CHANGE-SET REBIND FROM VERIFIED UNIT-6 HEAD main@cb61f90ef856af682dbd85360b0a337f13b3bdb7`
 
 This is the stable **current** manifest consumed by the executable control-plane reconciliation gate.
 
@@ -19,9 +19,9 @@ Historical manifests such as `REP-020_SESSION_DELTA_2026-08-17_P339.md` remain i
 | REP-011 | Repository/REP-011_REVIEW_TRACEABILITY_LEDGER.md | 1.1.2 | Active / Integrity Hold | REVIEW EVIDENCE / INTEGRITY HOLD |
 | REP-012 | Repository/REP-012_REPOSITORY_ALLOCATION_REGISTRY.md | 1.0.13 | Active Control / Integrity Hold / Phase 1 Population In Progress | ALLOCATION / RECOVERY CONTROL |
 | REP-013 | Repository/REP-013_REPOSITORY_CONTENT_TREE.md | 1.1.6 | Active / Phase 1 Population In Progress | CURRENT INVENTORY / NOT CLOSURE |
-| REP-014 | Repository/REP-014_REPOSITORY_RELATIONSHIP_REGISTRY.md | 1.2.20 | Active / Relationship Enumeration In Progress | CURRENT RELATIONSHIP EVIDENCE / BROADER GRAPH OPEN |
+| REP-014 | Repository/REP-014_REPOSITORY_RELATIONSHIP_REGISTRY.md | 1.2.21 | Active / Relationship Enumeration In Progress | CURRENT RELATIONSHIP EVIDENCE / BROADER GRAPH OPEN |
 | REP-015 | Repository/REP-015_CONTROL_PLANE_BOOTSTRAP_CHECKLIST.md | 1.0.7 | Active / Phase 1 Open / Integrity Hold | CURRENT BOOTSTRAP SCOPE |
-| REP-016 | Repository/REP-016_PHASE1_PARTITION_WORK_QUEUE.md | 1.3.2 | Active / Phase 1 Open / Integrity Hold | P11 + P12 BOUNDED PARTITIONS CLOSED / PHASE 1 OPEN |
+| REP-016 | Repository/REP-016_PHASE1_PARTITION_WORK_QUEUE.md | 1.3.2 | Active / Phase 1 Open / Integrity Hold | P11 + P12 BOUNDED PARTITIONS CLOSED / P13 KNOWLEDGE OPEN / PHASE 1 OPEN |
 | REP-020 | Repository/REP-020_DEPENDENCY_CONSUMER_IMPACT_MATRIX.md | 0.2.3 | Provisional / Phase-1 Seed / Not Authority | CURRENT IMPACT EVIDENCE / NOT CLOSURE AUTHORITY |
 
 ## Current closure boundary
@@ -29,6 +29,7 @@ Historical manifests such as `REP-020_SESSION_DELTA_2026-08-17_P339.md` remain i
 - Priority 1 Repository Control Plane reconciliation: `CLOSED / BOUNDED INSPECTED SCOPE`.
 - Priority 11 Interfaces: `CLOSED_FOR_PHASE_1 / BOUNDED INTERFACES PARTITION CERTIFIED / GLOBAL AND PROVIDER HOLDS REMAIN`.
 - Priority 12 Models: `CLOSED_FOR_PHASE_1 / BOUNDED MODELS PARTITION CERTIFIED / DOWNSTREAM AND GLOBAL HOLDS REMAIN`.
+- Priority 13 Knowledge: `OPEN / CONTENT REPAIRS VERIFIED / INTERNAL RELATIONSHIP REGISTRATION IN PROGRESS / CROSS-LAYER + CONTROL-PLANE RECONCILIATION OPEN`.
 - Phase 1 repository work: `OPEN`.
 - Repository-wide identity/content/relationship reconciliation: `OPEN`.
 - Broader Connected-Baseline / graph validation: `OPEN`.
