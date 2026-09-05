@@ -43,6 +43,8 @@ def test_rel012_stable_id_is_reference_not_dependency_in_current_contract() -> N
     assert row["source_path"] == "Models/MOD-011_KNOWLEDGE_SOURCE_MODEL.md"
     assert row["target_path"] == "Knowledge/KNW-004_KNOWLEDGE_LIFECYCLE.md"
     assert row["controlled_type"] == "REFERENCES"
+    # The evidence surface records the pre-registration action boundary and is
+    # preserved as provenance even after the later canonical write executes it.
     assert row["registry_action"] == "CORRECT_EXISTING_STABLE_ID_PENDING_SAFE_REGISTRY_WRITE"
 
     mod011 = (ROOT / row["source_path"]).read_text(encoding="utf-8")
@@ -65,7 +67,8 @@ def test_reverse_references_are_direct_and_not_manufactured_for_symmetry() -> No
         assert "Models/MOD-011_KNOWLEDGE_SOURCE_MODEL.md" in source
 
 
-def test_registry_is_not_silently_treated_as_already_corrected() -> None:
+def test_rel012_canonical_registry_matches_the_verified_current_contract() -> None:
     registry = REGISTRY.read_text(encoding="utf-8")
-    assert "| REL-012 | MOD-011 | KNW-004 | DEPENDS_ON |" in registry
-    assert "| REL-012 | MOD-011 | KNW-004 | REFERENCES |" not in registry
+    assert "| REL-012 | MOD-011 | KNW-004 | REFERENCES |" in registry
+    assert "| REL-012 | MOD-011 | KNW-004 | DEPENDS_ON |" not in registry
+    assert "STABLE-ID TYPE CORRECTION" in registry
