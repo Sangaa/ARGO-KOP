@@ -8,13 +8,13 @@ Platform: ARGO KOP
 Knowledge Operating Platform
 
 Document ID: MOD-004
-Version: 1.2.2
+Version: 1.2.3
 Status: Approved / Revalidation Required
 Category: Models
 Canonical: Yes
 Priority: Critical
 Development Baseline: 3.2.1
-Last Audit: 2026-08-14
+Last Audit: 2026-09-05
 
 ---
 
@@ -240,23 +240,51 @@ Material changes to memory structure or promotion rules require review of:
 
 After mutation, the changed model and affected consumers must be re-read and revalidated.
 
-# Dependencies
+# Semantic Dependencies
+
+The Memory Model depends semantically on the current model contracts that define identity, document structure and source/provenance semantics:
 
 - `Models/MOD-002_ENTITY_MODEL.md`
 - `Models/MOD-003_DOCUMENT_MODEL.md`
 - `Models/MOD-011_KNOWLEDGE_SOURCE_MODEL.md`
+
+These dependencies describe semantic model composition only. They do not transfer authority, create runtime execution reachability or imply that every related consumer is itself a dependency of this model.
+
+# Related Authority and Evolution References
+
+The following Architecture artifacts are authority/evolution references used when material Memory Model changes are proposed or reviewed:
+
 - `Architecture/ARC-009_ARCHITECTURE_DECISIONS.md`
 - `Architecture/ARC-010_EVOLUTION_MODEL.md`
+
+They are not promoted to `DEPENDS_ON` merely because they govern or describe decision/evolution review.
+
+# Downstream Consumers / Revalidation Targets
+
+The following artifacts are downstream mechanisms whose compatibility must be re-read when Memory Model semantics change materially:
+
 - `Runtime/RUN-004_CONTEXT_LOADING.md`
 - `Runtime/RUN-008_RUNTIME_STATE.md`
 - `Runtime/RUN-009_RECOVERY.md`
 - `Engine/ENG-007_LEARNING_ENGINE.md`
+
+These are consumer/ripple-review targets, not Memory Model dependencies. Runtime and Engine behavior may consume or operationalize approved Memory semantics, but the canonical model does not depend upward on those implementation/execution mechanisms.
+
+`SEMANTIC DEPENDENCY != RELATED AUTHORITY != DOWNSTREAM CONSUMER != REVALIDATION TARGET`.
 
 # Reconstruction Reference
 
 `Governance/GOV-012_DOMAIN_RECONSTRUCTION_STANDARD.md` is a proposed process reference for staged domain reconstruction. It is not an active Governance dependency of this model and does not override ratified Governance, Architecture, Model or Repository authority.
 
 Where reconstruction work affects the Memory Model, the proposed process may be used as guidance while the applicable active authorities remain controlling.
+
+# 2026-09-05 Dependency-Boundary Reconciliation
+
+Priority-12 relationship/content review identified that the previous undifferentiated `Dependencies` list mixed three different semantic classes: model composition, architecture/evolution review references and downstream Runtime/Engine revalidation targets.
+
+Current Architecture authority requires dependency direction to follow stable architectural boundaries and forbids physical folder placement or textual reference alone from establishing dependency authority. This revision therefore preserves every previously named artifact while classifying each at the stable contractual representation supported by current content.
+
+This change does not promote MOD-004 beyond `Approved / Revalidation Required`, does not certify any downstream consumer implementation, does not create executable proof and does not close Models or Priority 12.
 
 ---
 
