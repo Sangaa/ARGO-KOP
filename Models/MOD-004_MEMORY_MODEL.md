@@ -8,7 +8,7 @@ Platform: ARGO KOP
 Knowledge Operating Platform
 
 Document ID: MOD-004
-Version: 1.2.3
+Version: 1.2.4
 Status: Approved / Revalidation Required
 Category: Models
 Canonical: Yes
@@ -20,7 +20,11 @@ Last Audit: 2026-09-05
 
 # Purpose
 
-This document defines the canonical semantic Memory Model of ARGO KOP.
+This document defines the canonical **semantic object/schema contract** for memory objects referenced across ARGO KOP.
+
+It standardizes memory-object structure, identity-facing fields, provenance, scope and implementation-independent semantic constraints. It does **not** own the Memory domain's operational taxonomy, platform/user/project/session domain separation, promotion policy or Memory-layer lifecycle authority.
+
+Those Memory-domain responsibilities are defined by `Memory/MEM-001_MEMORY_MODEL.md` and the applicable `MEM-*` authority set.
 
 Memory preserves continuity and learning context. Memory does not replace repository reality, canonical authority or current verified state.
 
@@ -34,7 +38,7 @@ The Memory Model shall:
 - support knowledge evolution;
 - preserve provenance and scope;
 - remain implementation independent;
-- separate platform memory from user/project learning memory.
+- separate platform memory from user/project learning memory without redefining Memory-domain ownership or promotion authority.
 
 # Memory Philosophy
 
@@ -70,6 +74,8 @@ Relationships
 
 Dependencies
 
+Lifecycle
+
 Version
 
 Status
@@ -99,6 +105,8 @@ Historical Memory
 Reference Memory
 
 User / Consumer Learning Memory
+
+These categories are semantic object classifications used by this schema. They do not supersede the Memory-domain taxonomy or promotion model governed by `MEM-001` and related `MEM-*` artifacts.
 
 # Memory Scope
 
@@ -159,9 +167,33 @@ At minimum distinguish:
 
 External model output remains source evidence unless promoted through the applicable authority process.
 
+## Models ↔ Memory Domain Authority Separation
+
+`MOD-004` owns the implementation-independent **semantic schema of memory objects** inside the Models domain.
+
+`Memory/MEM-001_MEMORY_MODEL.md` owns the **Memory-domain model** for platform/user/project/deployment/session memory separation and the governed promotion boundary among those domains.
+
+Therefore:
+
+- `MOD-004` MUST NOT redefine Memory-domain ownership, promotion authority or the operational `MEM-*` lifecycle;
+- `MEM-001` MUST NOT be treated as a duplicate merely because both artifacts use the human-readable title `MEMORY MODEL`;
+- the two identities remain distinct and complementary only while their responsibility boundary remains explicit;
+- title similarity, canonical flags and physical folder placement do not create shared or competing authority;
+- material changes that cross this boundary require both artifacts to be re-read before promotion.
+
+Current controlled relationship from this source is:
+
+`MOD-004 → MEM-001 = REFERENCES / AUTHORITY-BOUNDARY REFERENCE / NON-DEPENDENCY`.
+
+No reverse `MEM-001 → MOD-004` relationship is inferred without direct Memory-domain source evidence.
+
+`SEMANTIC SCHEMA AUTHORITY != MEMORY-DOMAIN OWNERSHIP != PROMOTION AUTHORITY`.
+
 # User / Platform Memory Separation
 
 ARGO KOP platform knowledge and engineering rules are distinct from learning accumulated while serving a specific user, project or consumer.
+
+This schema preserves the fields and scope distinctions needed to represent that boundary. The Memory domain owns the operational domain-separation and promotion rules that apply those semantics.
 
 User/project learning may inform future analysis and improvement, but must not silently modify canonical platform rules.
 
@@ -203,6 +235,8 @@ Updated or Superseded
 
 Archived / Retained according to scope
 
+This is the semantic object lifecycle represented by the schema. Operational Memory-domain lifecycle and promotion authority remain governed by the applicable `MEM-*` artifacts.
+
 # Validation
 
 Every canonical memory object shall validate, as applicable:
@@ -229,14 +263,17 @@ Retention / Security Constraints
 
 # Revalidation and Promotion Rule
 
-Material changes to memory structure or promotion rules require review of:
+Material changes to memory-object structure or semantics require review of:
 
+- `Memory/MEM-001_MEMORY_MODEL.md` and affected Memory-domain lifecycle/governance artifacts;
 - Knowledge Model and Knowledge Source Model;
 - Decision records;
 - Repository and project memory structures;
 - learning/session handoff mechanisms;
 - Runtime context loading;
 - Security and retention boundaries.
+
+Changes to Memory-domain promotion policy remain owned by the applicable Memory/Governance authority and are not granted by this Models artifact.
 
 After mutation, the changed model and affected consumers must be re-read and revalidated.
 
@@ -249,6 +286,14 @@ The Memory Model depends semantically on the current model contracts that define
 - `Models/MOD-011_KNOWLEDGE_SOURCE_MODEL.md`
 
 These dependencies describe semantic model composition only. They do not transfer authority, create runtime execution reachability or imply that every related consumer is itself a dependency of this model.
+
+# Related Memory-Domain Authority
+
+The following current Memory-domain authority is referenced to preserve the Models ↔ Memory ownership boundary:
+
+- `Memory/MEM-001_MEMORY_MODEL.md`
+
+This is an authority-boundary `REFERENCES` relationship, not a `DEPENDS_ON` promotion and not a transfer of canonical ownership.
 
 # Related Authority and Evolution References
 
@@ -284,7 +329,13 @@ Priority-12 relationship/content review identified that the previous undifferent
 
 Current Architecture authority requires dependency direction to follow stable architectural boundaries and forbids physical folder placement or textual reference alone from establishing dependency authority. This revision therefore preserves every previously named artifact while classifying each at the stable contractual representation supported by current content.
 
-This change does not promote MOD-004 beyond `Approved / Revalidation Required`, does not certify any downstream consumer implementation, does not create executable proof and does not close Models or Priority 12.
+# 2026-09-05 Models ↔ Memory Authority Reconciliation
+
+Priority-12 active-model overlap review found that `MOD-004` and `MEM-001` both used the unqualified title `MEMORY MODEL` and both declared canonical status, while their actual content represented different responsibilities. Without an explicit authority boundary, title similarity could be misread as duplicate canonical authority.
+
+This revision resolves that ambiguity at the source: `MOD-004` is the semantic memory-object/schema contract; `MEM-001` is the Memory-domain ownership/scope/promotion model. No Memory-domain artifact is mutated or maturity-promoted by this Models-side repair.
+
+This change does not promote MOD-004 beyond `Approved / Revalidation Required`, does not certify MEM-001 or the Memory partition, does not create executable proof and does not close Models or Priority 12.
 
 ---
 
