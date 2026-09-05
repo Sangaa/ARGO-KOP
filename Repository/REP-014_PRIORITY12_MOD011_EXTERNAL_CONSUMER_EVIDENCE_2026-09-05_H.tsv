@@ -1,0 +1,12 @@
+source	target	candidate_type	disposition	evidence_basis	registration_state
+MOD-011	ENG-007	REFERENCES	DIRECT_SOURCE_REFERENCE	MOD-011 Related Documents directly lists ENG-007	REGISTRATION_CANDIDATE
+ENG-007	MOD-011	REFERENCES	DIRECT_SOURCE_REFERENCE	ENG-007 Related Engines and Authorities directly lists MOD-011	REGISTRATION_CANDIDATE
+MOD-011	AI-006	REFERENCES	DIRECT_SOURCE_REFERENCE	MOD-011 Related Documents directly lists AI-006	REGISTRATION_CANDIDATE_ENDPOINT_HOLD
+AI-006	MOD-011	CONSUMES	EXPLICIT_SEMANTIC_CONSUMPTION	AI-006 states that it consumes MOD-011 source identity/provenance/evidence-state semantics	REGISTRATION_CANDIDATE_ENDPOINT_HOLD
+MOD-011	AI-007	REFERENCES	DIRECT_SOURCE_REFERENCE	MOD-011 Related Documents directly lists AI-007	REGISTRATION_CANDIDATE_ENDPOINT_HOLD
+AI-007	MOD-011	DEPENDS_ON	QUALIFIED_SEMANTIC_DEPENDENCY	AI-007 requires external source claims and evidence-state handling to remain aligned with MOD-011 semantics	REGISTRATION_CANDIDATE_ENDPOINT_HOLD
+AI-008	MOD-011	DEPENDS_ON	QUALIFIED_SEMANTIC_DEPENDENCY	AI-008 requires external source claims to remain distinguishable according to MOD-011 and directly lists MOD-011	REGISTRATION_CANDIDATE_ENDPOINT_HOLD
+MOD-011	GOV-011	REFERENCES	PROPOSED_GOVERNANCE_FORMAT_REFERENCE	MOD-011 requires external feedback to use GOV-011 format but GOV-011 is Proposed / Integrity Hold / Canonical No; no active dependency promotion	REGISTRATION_CANDIDATE_TARGET_HOLD
+MOD-011	SESSION_LEARNING_HANDOFF_TEMPLATE	REFERENCES	DIRECT_SOURCE_REFERENCE	MOD-011 Related Documents directly lists the session-learning handoff template; template does not reverse-name MOD-011	REGISTRATION_CANDIDATE
+SESSION_LEARNING_HANDOFF_TEMPLATE	MOD-011	NONE	NO_REVERSE_EDGE_PROVEN	Current template contains no direct MOD-011 declaration	DO_NOT_REGISTER
+GOV-011	MOD-011	NONE	NO_REVERSE_EDGE_PROVEN	Current GOV-011 Related Documents and body do not directly name MOD-011	DO_NOT_REGISTER
