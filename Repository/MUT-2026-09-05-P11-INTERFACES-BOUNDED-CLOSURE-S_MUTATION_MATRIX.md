@@ -4,11 +4,12 @@ Transaction ID: `MUT-2026-09-05-P11-INTERFACES-BOUNDED-CLOSURE-S`
 
 Priority: `11 — Interfaces`
 
-State: `PRE-WRITE / MATERIAL NOT YET APPLIED`
+State: `MATERIAL CANDIDATE / ATOMIC BOUNDED CLOSURE APPLIED / EXACT-HEAD CI PENDING`
 
 Entry HEAD: `03b65d4ccbb0527da2f3fcbd8f0f050b23d0c774`
+Pre-write HEAD: `7be16957dd75881c946164bfe0530a004faca939`
 
-Protocol: governed bounded closure; current live main + exact-head R closure evidence + exact Interfaces inventory/allocation + Transactions B..R are the decision basis. This transaction is closure-only and must not create a new Interfaces hardening micro-transaction.
+Protocol: governed bounded closure; current live main + exact-head R closure evidence + exact Interfaces inventory/allocation + Transactions B..R are the decision basis. This transaction is closure-only and does not create a new Interfaces hardening micro-transaction.
 
 ## Closure-readiness decision
 
@@ -20,13 +21,13 @@ Transaction R closure HEAD `03b65d4ccbb0527da2f3fcbd8f0f050b23d0c774` is accepte
 
 ## Authorized material set
 
-| Change ID | Target | Action | Expected content |
-| --- | --- | --- | --- |
-| P11-S-01 | `Interfaces/_FOLDER_STATUS.md` | UPDATE | declare bounded P11 closure, preserve authority/provider/global non-claims and exact inventory basis |
-| P11-S-02 | `Repository/P11_INTERFACES_EXPLICIT_BOUNDED_CLOSURE_2026-09-05_S.md` | CREATE | record closure decision, deferred/non-blocking scope, reopen conditions and successor boundary |
-| P11-S-03 | `Repository/REP-011_PRIORITY11_INTERFACES_CLOSURE_ADDENDUM_2026-09-05_S.md` | CREATE | bind review/traceability closure evidence without Governance or learning promotion |
-| P11-S-04 | `Quality/Integration/test_priority11_interfaces_bounded_closure.py` | CREATE | fail on closure/non-claim/inventory/reopen-boundary drift |
-| P11-S-05 | this Matrix | UPDATE | material/read-back/CI/closure evidence only |
+| Change ID | Target | Action | Applied | Verified |
+| --- | --- | --- | --- | --- |
+| P11-S-01 | `Interfaces/_FOLDER_STATUS.md` | UPDATE bounded P11 closure and non-claims | YES | READ-BACK / CI PENDING |
+| P11-S-02 | `Repository/P11_INTERFACES_EXPLICIT_BOUNDED_CLOSURE_2026-09-05_S.md` | CREATE closure decision/reopen boundary | YES | READ-BACK / CI PENDING |
+| P11-S-03 | `Repository/REP-011_PRIORITY11_INTERFACES_CLOSURE_ADDENDUM_2026-09-05_S.md` | CREATE bounded review traceability | YES | READ-BACK / CI PENDING |
+| P11-S-04 | `Quality/Integration/test_priority11_interfaces_bounded_closure.py` | CREATE closure/non-claim drift guard | YES | CI PENDING |
+| P11-S-05 | this Matrix | UPDATE material/read-back/CI/closure evidence | YES | CLOSURE PENDING |
 
 No other path is authorized.
 
@@ -42,6 +43,8 @@ No other path is authorized.
 
 Priority 11 reopens only on new Interfaces-specific contradictory evidence: exact inventory/allocation drift; active identity/authority collision; material unreviewed Interfaces source mutation affecting the bounded contract; contradiction in verified P11 relationship/executable seams; required bounded consumer/implementation defect; or invalidation of exact-head verification. Independent provider/global/downstream holds, deferred documentation, optional hardening or historical stale status wording alone do not reopen it.
 
-## Validation path
+## Post-write protocol
 
-`pre-write Matrix → verify main did not race → atomic authorized material → immutable read-back → entry/material path compare → deterministic closure guard → four-family exact-head CI → close S or HOLD / RESUME-SAFE`.
+After the atomic material commit, immutable read-back must confirm this exact five-path authorized set and the bounded closure/non-claim semantics. Entry-to-material comparison must show the pre-write Matrix plus exactly the four closure material paths, with no implementation/hardening expansion. Exact-head CI must then succeed for Full-Stack Repository Audit, ARGO Runtime Prototype and Integration Tests, M2 Multi-Channel Proposal Training, and Real Mutation Matrix Regression before Matrix-only closure.
+
+`MATERIAL CANDIDATE != EXACT-HEAD VERIFIED CLOSURE`.
