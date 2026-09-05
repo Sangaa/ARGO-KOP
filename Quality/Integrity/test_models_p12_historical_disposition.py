@@ -42,8 +42,8 @@ def test_readme_records_current_non_recreation_dispositions() -> None:
 def test_status_marks_numeric_restoration_resolved_without_partition_promotion() -> None:
     text = STATUS.read_text(encoding="utf-8")
     assert "numeric restoration disposition resolved / no blind recreation" in text.lower()
-    assert "Priority 12 remains" not in text or "Priority 12 remains" in text
-    assert "INTEGRITY HOLD / STAGED RECONSTRUCTION" in text
+    assert "Priority 12 remains **OPEN**" in text
+    assert "Models remains **INTEGRITY HOLD / STAGED RECONSTRUCTION**" in text
     assert "relationship registry synchronization remains open" in text
 
 
