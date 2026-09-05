@@ -1,0 +1,10 @@
+source	target	current_source_evidence	semantic_type	disposition	registry_action
+SPEC-001-KNOWLEDGE-ORGANIZATION	MOD-001	Specification places applicable canonical Models above itself; MOD-001 is the applicable canonical knowledge-object schema and explicitly names this Specification	DEPENDS_ON	PRESERVE_BOUNDED	KEEP_REL-001
+MOD-001	SPEC-001-KNOWLEDGE-ORGANIZATION	MOD-001 explicitly names Specifications/01-Knowledge-Organization.md as active operational guidance that does not override model authority	REFERENCES	DIRECT_SOURCE_CANDIDATE	REGISTER_NEW_IF_ID_AVAILABLE
+SPEC-001-KNOWLEDGE-ORGANIZATION	MOD-002	Specification names only generic applicable canonical Models; no entity-model-specific target declaration	NO_EDGE	DO_NOT_REGISTER	NONE
+SPEC-001-KNOWLEDGE-ORGANIZATION	MOD-003	Specification names only generic applicable canonical Models; no document-model-specific target declaration	NO_EDGE	DO_NOT_REGISTER	NONE
+SPEC-001-KNOWLEDGE-ORGANIZATION	MOD-004	Specification names only generic applicable canonical Models; no memory-model-specific target declaration	NO_EDGE	DO_NOT_REGISTER	NONE
+SPEC-001-KNOWLEDGE-ORGANIZATION	MOD-011	Specification names only generic applicable canonical Models; no knowledge-source-model-specific target declaration	NO_EDGE	DO_NOT_REGISTER	NONE
+
+INVARIANT	GENERIC_AUTHORITY_CLASS != CONCRETE_RELATIONSHIP_TARGET				
+INVARIANT	REVERSE_DIRECTION_REQUIRES_ITS_OWN_SOURCE_EVIDENCE				
