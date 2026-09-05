@@ -8,11 +8,11 @@
 
 Platform: ARGO KOP (Knowledge Operating Platform)  
 Document ID: KNW-004  
-Version: 1.3.1  
+Version: 1.3.2  
 Status: Integrity Hold / Revalidated  
 Category: Knowledge  
 Canonical: Yes  
-Last Audit: 2026-08-09  
+Last Audit: 2026-09-05  
 
 ---
 
@@ -170,14 +170,15 @@ It interacts with:
 
 - `CORE-009` — platform evolution lifecycle.
 - `REP-006` — repository artifact lifecycle.
-- `GOV-005` — document artifact lifecycle.
+- `Lifecycle/LIF-001_DOCUMENT_LIFECYCLE.md` — document artifact lifecycle.
+- `Governance/GOV-005_REVIEW_STANDARD.md` — mandatory evidence-based review authority applied when lifecycle changes require review.
 - `Memory/MEM-001_MEMORY_MODEL.md` — memory domains.
 - `Memory/MEM-004_MEMORY_LIFECYCLE.md` — memory lifecycle.
 - `Memory/MEM-005_MEMORY_GOVERNANCE.md` — memory ownership and authority.
 - `Memory/MEM-009_MEMORY_EVOLUTION.md` — memory learning and promotion.
 - `Models/MOD-011_KNOWLEDGE_SOURCE_MODEL.md` — source identity, provenance and evidence semantics.
 
-These lifecycles are complementary.
+These lifecycles and review controls are complementary.
 
 A knowledge object can be in a knowledge lifecycle stage while the file representing it has a separate document lifecycle state, the repository is in another lifecycle stage, and its source experience remains in a user/project memory domain.
 
@@ -245,7 +246,12 @@ This lifecycle is itself reviewable. If a rule is shown to be incorrect, contrad
 - `Repository/REP-006_REPOSITORY_LIFECYCLE.md`
 - `Repository/REP-009_REPOSITORY_TRACEABILITY.md`
 - `Lifecycle/LIF-001_DOCUMENT_LIFECYCLE.md`
+- `Governance/GOV-005_REVIEW_STANDARD.md`
 - `Core/CORE-003_CONSTITUTION.md`
+
+# Revalidation Note — 2026-09-05
+
+Priority-13 review corrected a historical lifecycle identity residue: `GOV-005` is the current Review Standard, while document-artifact lifecycle authority is `Lifecycle/LIF-001_DOCUMENT_LIFECYCLE.md`. The correction changes identity/path semantics only and does not merge review authority with lifecycle authority or promote this artifact beyond Integrity Hold.
 
 # Guiding Statement
 

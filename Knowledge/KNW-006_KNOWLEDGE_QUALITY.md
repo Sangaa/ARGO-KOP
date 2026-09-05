@@ -8,7 +8,7 @@
 
 Platform: ARGO KOP  
 Document ID: KNW-006  
-Version: 1.1.1  
+Version: 1.1.2  
 Status: Integrity Hold / Revalidated  
 Category: Knowledge  
 Canonical: Yes  
@@ -269,8 +269,12 @@ Scope and Ownership Boundaries
 - `Knowledge/KNW-009_KNOWLEDGE_EVOLUTION.md`
 - `Repository/REP-003_REPOSITORY_STANDARDS.md`
 - `Repository/REP-009_REPOSITORY_TRACEABILITY.md`
-- `Governance/GOV-006_REVIEW_STANDARD.md`
+- `Governance/GOV-005_REVIEW_STANDARD.md`
 - `Core/CORE-003_CONSTITUTION.md`
+
+# Revalidation Note — 2026-09-05
+
+Priority-13 review corrected the stale `Governance/GOV-006_REVIEW_STANDARD.md` path. Current repository identity establishes `Governance/GOV-005_REVIEW_STANDARD.md` as the Review Standard, while `GOV-006` is the Naming Convention Standard. This is an identity/path repair only and creates no new governance authority or dependency semantics.
 
 ---
 

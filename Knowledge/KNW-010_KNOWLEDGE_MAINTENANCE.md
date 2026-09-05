@@ -8,7 +8,7 @@
 
 Platform: ARGO KOP  
 Document ID: KNW-010  
-Version: 1.1.1  
+Version: 1.1.2  
 Status: Integrity Hold / Revalidated  
 Category: Knowledge  
 Canonical: Yes  
@@ -304,8 +304,12 @@ Structural knowledge changes, broad reclassification or baseline redesign requir
 - `Knowledge/KNW-007_KNOWLEDGE_BASELINE.md`
 - `Knowledge/KNW-008_KNOWLEDGE_TRACEABILITY.md`
 - `Knowledge/KNW-009_KNOWLEDGE_EVOLUTION.md`
-- `Repository/REP-010_REPOSITORY_MAINTENANCE.md`
+- `Repository/REP-010_RELEASE_BASELINE.md`
 - `Core/CORE-003_CONSTITUTION.md`
+
+# Revalidation Note — 2026-09-05
+
+Priority-13 review corrected the stale physical reference `Repository/REP-010_REPOSITORY_MAINTENANCE.md` to the current canonical path `Repository/REP-010_RELEASE_BASELINE.md`. Current REP-010 still identifies internally as `REP-010` and titles its content `REPOSITORY MAINTENANCE`; the known title/path coherence gap remains a separate repository concern and is not reinterpreted or repaired here.
 
 ---
 
