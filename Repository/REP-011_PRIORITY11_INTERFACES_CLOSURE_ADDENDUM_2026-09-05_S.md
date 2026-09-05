@@ -7,6 +7,8 @@ Transaction: `MUT-2026-09-05-P11-INTERFACES-BOUNDED-CLOSURE-S`
 Entry HEAD: `03b65d4ccbb0527da2f3fcbd8f0f050b23d0c774`
 Pre-write HEAD: `7be16957dd75881c946164bfe0530a004faca939`
 
+`BOUNDED INTERFACES PARTITION` is the stable bounded-closure marker synchronized across Transaction-S closure surfaces.
+
 ## Readiness result
 
 The exact Interfaces inventory/allocation established by Transaction A remains the bounded physical basis: `12` tracked paths, sorted-path SHA-256 `81e052fe0ae6cf61f6a70b15acafa4cd07e5372ef168a1228790db314c8eaae9`, authority effect `NONE_BY_ALLOCATION`.

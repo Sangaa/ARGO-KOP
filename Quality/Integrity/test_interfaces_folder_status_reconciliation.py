@@ -24,9 +24,11 @@ def test_interfaces_status_matches_current_inventory_and_identity_boundary():
         assert item in status
 
     assert "12 tracked files" in status
-    assert "INTEGRITY HOLD / LOCAL INVENTORY VERIFIED / CROSS-LAYER AND EXTERNAL-TRUST VALIDATION OPEN" in status
+    assert "CLOSED_FOR_PHASE_1 / BOUNDED INTERFACES PARTITION CERTIFIED / GLOBAL AND PROVIDER HOLDS REMAIN" in status
     assert "INTF006_FILENAME_DUPLICATION != ACTIVE_AUTHORITY_COLLISION" in status
     assert "INTF-006_WEB = LEGACY NONCANONICAL PROVENANCE / INTERNAL ID INT-006" in status
     assert "INTERFACE CONTRACT != CONNECTOR IMPLEMENTATION" in status
     assert "TECHNICAL ACCESS != AUTHORIZATION" in status
     assert "EXTERNAL DATA != CANONICAL TRUTH" in status
+    assert "provider authenticity" in status
+    assert "Global Connected Baseline" in status

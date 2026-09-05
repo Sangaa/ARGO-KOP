@@ -49,7 +49,7 @@ def test_allocations_are_complete_and_non_authoritative():
     assert {row["authority_effect"] for row in manifest} == {"NONE_BY_ALLOCATION"}
 
 
-def test_current_control_surfaces_bind_all_paths_and_keep_p11_open():
+def test_current_control_surfaces_bind_all_paths_and_current_p11_boundary():
     paths = tracked_paths()
     for surface in (REP002, REP013, STATUS):
         text = surface.read_text(encoding="utf-8")
@@ -65,5 +65,8 @@ def test_current_control_surfaces_bind_all_paths_and_keep_p11_open():
         assert DIGEST in text
         assert "12" in text
     assert MANIFEST.name in REP012.read_text(encoding="utf-8")
-    assert "P11 / INTERFACES = IN_PROGRESS" in STATUS.read_text(encoding="utf-8")
-    assert "provider authenticity" in STATUS.read_text(encoding="utf-8")
+    status = STATUS.read_text(encoding="utf-8")
+    assert "P11 / INTERFACES = CLOSED_FOR_PHASE_1 / BOUNDED INTERFACES PARTITION CERTIFIED / GLOBAL AND PROVIDER HOLDS REMAIN" in status
+    assert "provider authenticity" in status
+    assert "Global Connected Baseline" in status
+    assert "This closure does not start a successor priority." in status

@@ -85,6 +85,8 @@ No rename, archive, deletion or migration is authorized by this closure.
 
 Priority-11 material validation does not authenticate, select or certify a concrete provider and does not transform a reported connector result into canonical truth.
 
+The provider authentication capability and trust-anchor acquisition boundary remains independently open; bounded Interfaces closure does not claim that either has been established for a concrete provider.
+
 This bounded closure therefore does not claim:
 
 - provider authenticity, credential validity, permission or live availability;
