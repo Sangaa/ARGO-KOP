@@ -4,18 +4,16 @@ Transaction ID: `MUT-2026-09-05-P12-MODELS-RELATIONSHIP-CONTENT-B`
 
 Priority: `12 — Models`
 
-State: `OPEN / UNIT-3 EXACT-HEAD VERIFIED / UNIT-4 CORRECTED / EXACT-HEAD CI PENDING`
+State: `OPEN / UNIT-4 EXACT-HEAD VERIFIED / MATERIAL UNIT 5 APPLIED / EXACT-HEAD CI PENDING`
 
 Entry HEAD: `69af54f26b8799815d049772ebec655c250df9fc`
 Material Unit 1 HEAD: `3f80ce66e3d559000efe5a2a5d8cdadf63817d3c`
 Corrective Unit 2 HEAD: `cdb9207c5bf231e4545d5209a4477390d844137a`
 Material Unit 3 final HEAD: `853024239bb3452ca64bc13487d017a95fedfac8`
-Material Unit 4 sequence:
-- historical semantic disposition: `aa6e3d33cca03510566ac9449150659dbb22ae18`
-- folder-status synchronization: `8c8b1c33cb3a667f92ee8e1a12a0698a14218fe3`
-- executable historical-disposition guard: `b50175d2db0f40e753433c91ca5c5ae97c11fbf0`
-- first Matrix binding / failed exact-head: `3217bc96a600d240369af220e55110f18d4749b2`
-- stable-invariant repair: `670902b7bf50962a0453e98f29fe3bd9d1427629`
+Material Unit 4 final HEAD: `d0e4b45ac1714b076ef97751b0d52e73ef63e162`
+Material Unit 5 sequence:
+- MOD-001 consumer evidence: `b30e7017ba9e933de90985bc5fd025dabc931189`
+- executable consumer guard: `c3ddac2f0a75bda4e46e7a05203daf4b44c76548`
 
 ## Entry authority
 
@@ -35,7 +33,11 @@ Corollaries established during Transaction B:
 - `SEMANTIC DEPENDENCY != RELATED AUTHORITY != DOWNSTREAM CONSUMER != REVALIDATION TARGET`;
 - `MISSING HISTORICAL FILE != MISSING CURRENT CONCEPT`;
 - `HISTORICAL IDENTIFIER != CURRENT AUTHORITY`;
+- `DISCOVERY ARROW != RELATIONSHIP DIRECTION != CONTROLLED TYPE`;
+- `INDEX MEMBERSHIP != SEMANTIC RELATIONSHIP`;
+- `PHYSICAL MAPPING != SEMANTIC RELATIONSHIP`;
 - a current `Related Documents` declaration supports bounded `REFERENCES`, not automatic dependency;
+- a downstream artifact whose required output semantics explicitly comply with or adhere to a higher semantic contract may be a qualified semantic dependency when current Architecture direction permits it;
 - an explicit dependency declaration must still satisfy current architecture direction/qualification;
 - a reconstruction/process reference explicitly declared non-dependent must not be promoted to `DEPENDS_ON`;
 - reverse edges are not manufactured for symmetry;
@@ -104,8 +106,6 @@ Current strongest direct-source correction candidate is:
 
 `REL-002 stable ID: SRV-004 → MOD-001 = DEPENDS_ON`.
 
-A fail-closed guard was briefly introduced after Unit-3 verification to require this canonical correction, then removed immediately when the available GitHub write surface was confirmed to provide full-file replacement only for the long REP-014 registry. The guard was not retained because leaving main intentionally red while a safe full-content-preserving canonical write remained unresolved would violate the repository's own preservation discipline.
-
 REL-002 remains:
 
 `SEMANTIC CORRECTION VERIFIED / CANONICAL FULL-CONTENT WRITE PENDING`.
@@ -114,7 +114,7 @@ No new REL identifier is authorized as a substitute for the stable ID.
 
 ## Material Unit 4 — Historical declaration semantic disposition
 
-Earlier P57/P58 source-first audits established that historical `MOD-005..MOD-010` files were not current active Models artifacts and that blind numeric reconstruction risked duplicate or conflicting authority. Unit 4 converts that mature evidence into current Models-domain content without creating historical files.
+Earlier P57/P58 source-first audits established that historical `MOD-005..MOD-010` files were not current active Models artifacts and that blind numeric reconstruction risked duplicate or conflicting authority. Unit 4 converted that mature evidence into current Models-domain content without creating historical files.
 
 ### Unit-4 dispositions
 
@@ -128,61 +128,53 @@ Earlier P57/P58 source-first audits established that historical `MOD-005..MOD-01
 | `MOD-009_VERSION_MODEL.md` | would risk collision with Release/version authority; `NO RECREATE` |
 | `MOD-010_MODEL_REFERENCE.md` | navigation/reference responsibility covered by Models container plus repository index/map/relationship controls; `NO RECREATE` |
 
-This resolves the numeric-restoration question, not every historical consumer or concept. Historical provenance remains preserved. A future model remains possible only if a distinct current semantic responsibility, owner, authority boundary and material consumer need are independently demonstrated.
+The first Unit-4 Matrix head failed only a still-valid stable sentence guard. The status wording was repaired without weakening the guard or rolling back current dispositions.
 
-### Unit-4 initial exact-head failure and repair
+Exact-head final Unit-4 HEAD `d0e4b45ac1714b076ef97751b0d52e73ef63e162` passed all four required workflow families:
 
-The first Unit-4 Matrix head `3217bc96a600d240369af220e55110f18d4749b2` produced:
+- Real Mutation Matrix Regression — `33973834280` — SUCCESS;
+- M2 Multi-Channel Proposal Training — `33973834019` — SUCCESS;
+- Full-Stack Repository Audit — `33973834021` — SUCCESS;
+- ARGO Runtime Prototype and Integration Tests — `33973834052` — SUCCESS.
 
-- Real Mutation Matrix Regression — `33973717132` — SUCCESS;
-- M2 Multi-Channel Proposal Training — `33973717117` — SUCCESS;
-- Full-Stack Repository Audit — `33973717084` — SUCCESS;
-- ARGO Runtime Prototype and Integration Tests — `33973717091` — FAILURE.
+Therefore Material Unit 4 is `VERIFIED` within its bounded semantic-disposition scope.
 
-Runtime workflow decomposition proved prototype-tests and integration-tests both succeeded. Only `integrity-tests` failed. The repository suite result was `203 passed, 1 failed`.
+## Material Unit 5 — MOD-001 current consumer reconciliation
 
-The sole failure was:
+Historical P58 arrows were used only to discover candidate consumers. Current endpoint text and Architecture authority determine direction/type.
 
-`test_models_folder_status_does_not_invent_missing_numeric_sequence`
+Unit 5 creates:
 
-which requires the exact stable sentence:
+- `Repository/REP-014_PRIORITY12_MOD001_CONSUMER_EVIDENCE_2026-09-05_C.tsv`;
+- `Quality/Integrity/test_models_p12_mod001_consumers.py`;
+- this Matrix binding.
 
-`No missing artifact is to be recreated merely to complete a numeric sequence.`
+### Unit-5 current-source dispositions
 
-The Unit-4 content had preserved and strengthened the same semantics but removed that exact sentence. Unlike the stale Unit-1 guard, this assertion still protects a valid invariant and is not contradicted by current repository truth.
+| Candidate | Current direct-source disposition | Registry action |
+|---|---|---|
+| `SRV-004 → MOD-001` | `DEPENDS_ON`; SRV-004 explicitly declares Models/MOD-001 dependency and direct related document | correct stable `REL-002` when safe full-content registry write is available |
+| `SRV-010 ↔ MOD-001` | no direct SRV-010 semantic dependency/consumer contract; only navigation describing SRV-004's inspected relationship | `DO_NOT_REGISTER` |
+| `KNW-004 → MOD-001` | `REFERENCES`; KNW-004 directly lists MOD-001 under Related Documents | registration candidate |
+| `INT-001 → MOD-001` | `DEPENDS_ON`; Intelligence synthesis output is required to comply with MOD-001 semantics, and current architecture permits downstream Cognition/Engine-class semantics to depend on Knowledge | registration candidate |
+| `INT-002 → MOD-001` | `DEPENDS_ON`; pattern-extraction outputs are required to adhere to MOD-001 semantics, with the same downstream architectural direction | registration candidate |
+| `REP-001 ↔ MOD-001` | index membership records inventory only and explicitly does not certify relationships | `DO_NOT_REGISTER` |
+| `REP-002 ↔ MOD-001` | physical mapping records presence only | `DO_NOT_REGISTER` |
 
-Classification:
+### Architectural qualification
 
-`VALID STABLE SEMANTIC GUARD / WORDING REGRESSION IN STATUS / CONTENT REPAIR REQUIRED`.
+`ARC-004` explicitly states that repository folders are physical storage locations and must not automatically be interpreted as architectural layers. It preserves Knowledge / Specifications / Standards above Cognition / Engine in dependency direction. Therefore the Intelligence folder name itself grants no layer status; the dependency qualification is based on the artifacts' own role and their explicit semantic compliance/adherence to MOD-001 plus the current allowed downstream direction.
 
-Corrective action at `670902b7bf50962a0453e98f29fe3bd9d1427629` restored that exact invariant alongside the stronger current semantic-disposition rules. No historical artifact was recreated and no Unit-4 disposition was rolled back.
-
-### Unit-4 material set
-
-- `Models/README.md` — v1.3.2; current semantic dispositions and reconstruction rule;
-- `Models/_FOLDER_STATUS.md` — v1.3.4; marks numeric restoration disposition resolved while preserving P12/Models hold and the stable no-numeric-recreation invariant;
-- `Quality/Integrity/test_models_p12_historical_disposition.py` — prevents silent historical file recreation and binds non-promotion/semantic-gap rules;
-- this Matrix — evidence binding and exact-head gate.
-
-## Consumer review observations begun under Unit-4 read-only window
-
-No consumer mutation was performed while Unit-4 exact-head was unresolved.
-
-Current direct reads establish:
-
-- `SRV-010` describes SRV-004 as associated with MOD-001 in inspected scope but does not directly establish an `SRV-010 ↔ MOD-001` dependency/consumer edge; no registry relationship should be manufactured from that navigation statement alone.
-- `KNW-004` directly lists `Models/MOD-001_KNOWLEDGE_MODEL.md` under Related Documents; this supports a bounded candidate `KNW-004 → MOD-001 = REFERENCES`, subject to duplicate/current-registry checks after Unit-4 exact-head passes.
-
-Historical P58 direction arrows are treated as discovery/matrix evidence only; current source text controls relationship direction/type.
+Unit 5 does not claim executable consumption, implementation, validation execution, authority transfer or reverse edges.
 
 ## Non-claims
 
-Transaction B does not yet close Priority 12 or Models. Unit 4 does not register new `REL-*` IDs, does not mutate REP-014, does not promote model maturity, does not prove Runtime executable consumption, does not certify all model consumers and does not claim Phase-1, Global Connected Baseline or Global Integrity closure.
+Transaction B does not yet close Priority 12 or Models. Unit 5 does not mutate REP-014, does not allocate new `REL-*` IDs, does not promote model or Intelligence maturity, does not certify all MOD-001 consumers, and does not claim Phase-1, Global Connected Baseline or Global Integrity closure.
 
 ## Next gate
 
-1. exact-head four-family CI for this corrected Unit-4 Matrix head;
-2. if green, mark Unit 4 verified;
-3. continue current-source MOD-001 consumer reconciliation (`KNW-004`, repository/index consumers, Intelligence/Interfaces candidates) without trusting historical arrow direction;
-4. complete safe full-content-preserving REL-002 correction and eligible REP-014 registration when canonical registry preservation is guaranteed;
-5. reconcile remaining MOD-002/003/004/011 consumer cohorts and status/queue surfaces before any P12 partition-closure decision.
+1. exact-head four-family CI for this Unit-5 Matrix head;
+2. if green, mark Unit 5 verified;
+3. continue current-source consumer reconciliation for MOD-002 / MOD-003 / MOD-004 / MOD-011, prioritizing direct consumers and existing registry rows that may carry historical direction/type drift;
+4. maintain REL-002 and new registration candidates as pending until REP-014 can be changed with guaranteed full-content preservation;
+5. reconcile Models status/REP-016 after consumer cohorts before any P12 partition-closure decision.
