@@ -35,6 +35,6 @@ def test_shared_title_does_not_recreate_duplicate_authority():
     mem = MEM001.read_text(encoding="utf-8")
     assert "# MEMORY MODEL" in mod
     assert "# MEMORY MODEL" in mem
-    assert "MEM-001 MUST NOT be treated as a duplicate" in mod
+    assert "`MEM-001` MUST NOT be treated as a duplicate" in mod
     evidence = EVIDENCE.read_text(encoding="utf-8")
     assert "NO_DUPLICATE_AUTHORITY" in evidence
