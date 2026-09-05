@@ -4,10 +4,15 @@ Transaction ID: `MUT-2026-09-05-P12-MODELS-RELATIONSHIP-CONTENT-B`
 
 Priority: `12 — Models`
 
-State: `OPEN / UNIT-1 FAILURE CLASSIFIED / CORRECTIVE UNIT 2 APPLIED / EXACT-HEAD CI PENDING`
+State: `OPEN / UNIT-2 EXACT-HEAD VERIFIED / MATERIAL UNIT 3 APPLIED / EXACT-HEAD CI PENDING`
 
 Entry HEAD: `69af54f26b8799815d049772ebec655c250df9fc`
 Material Unit 1 HEAD: `3f80ce66e3d559000efe5a2a5d8cdadf63817d3c`
+Corrective Unit 2 HEAD: `cdb9207c5bf231e4545d5209a4477390d844137a`
+Material Unit 3 sequence:
+- source correction: `44061df91c2d42bca9022c132fdc9570e6ebc73b`
+- evidence classification: `8c57d0fd9e3e68618623b1ebabf879686d660733`
+- executable guard: `ef1d48e4118dd364466669c49e4862a691023816`
 
 ## Entry authority
 
@@ -24,10 +29,12 @@ Corollaries established during Transaction B:
 - `DIRECT SOURCE DECLARATION != ARCHITECTURALLY QUALIFIED DEPENDENCY`;
 - `TARGET EXISTS != DEPENDENCY VALID`;
 - `HISTORICAL TEST STRING != CURRENT CONTRACT`;
+- `SEMANTIC DEPENDENCY != RELATED AUTHORITY != DOWNSTREAM CONSUMER != REVALIDATION TARGET`;
 - a current `Related Documents` declaration supports bounded `REFERENCES`, not automatic dependency;
-- a current explicit `Dependencies` declaration remains a source claim until dependency direction, ownership, necessity and architecture compatibility are qualified;
+- an explicit dependency declaration must still satisfy current architecture direction/qualification;
 - a reconstruction/process reference explicitly declared non-dependent must not be promoted to `DEPENDS_ON`;
-- reverse edges are not manufactured for symmetry.
+- reverse edges are not manufactured for symmetry;
+- physical folder placement never defines architectural layer authority by itself.
 
 ## Material Unit 1
 
@@ -48,44 +55,73 @@ The sole failure was `test_p12_models_status_preserves_open_relationship_boundar
 
 `STALE HISTORICAL GUARD / CURRENT STATUS CORRECT / NO TRANSACTION-A REOPEN`.
 
-Unit 1 is not promoted to verified merely because the failure is classified. A corrected exact head must pass all required workflow families.
+## Corrective Material Unit 2
 
-## Corrective Material Unit 2 authorized set
+Unit 2 replaced the stale A-open assertion with the current A-closed/P12-relationship-open contract, separated direct-source evidence from authority qualification, and prevented premature registration of unqualified dependency claims.
 
-| Change ID | Target | Action | Purpose |
-|---|---|---|---|
-| P12-B-C02-01 | `Quality/Integrity/test_models_p12_exact_inventory_allocation.py` | UPDATE | replace stale Transaction-A-open string assertion with current verified A-closed / P12-relationship-open contract |
-| P12-B-C02-02 | `Repository/REP-014_PRIORITY12_MODELS_RELATIONSHIP_EVIDENCE_2026-09-05_B.tsv` | UPDATE | separate direct source/target verification from authority qualification and registry eligibility |
-| P12-B-C02-03 | `Quality/Integrity/test_models_p12_relationship_evidence.py` | UPDATE | fail closed against premature dependency promotion; bind ARC-006 direction/qualification rules |
-| P12-B-C02-04 | this Matrix | UPDATE | preserve Unit-1 failure classification and authorize corrective Unit 2 |
+Exact-head `cdb9207c5bf231e4545d5209a4477390d844137a` passed all four required workflow families:
 
-No model source document and no REP-014 canonical registry row is mutated in Corrective Unit 2.
+- M2 Multi-Channel Proposal Training — `33973136658` — SUCCESS;
+- Real Mutation Matrix Regression — `33973136624` — SUCCESS;
+- Full-Stack Repository Audit — `33973136630` — SUCCESS;
+- ARGO Runtime Prototype and Integration Tests — `33973136687` — SUCCESS.
 
-## Relationship evidence disposition after Unit 2
+Therefore Corrective Unit 2 is `VERIFIED` within its bounded scope.
 
-The 18 direct-source rows remain evidence, but they are no longer treated homogeneously:
+## Material Unit 3 — Memory Model dependency-boundary reconciliation
 
-- nine internal `Related Documents` rows are bounded documentary `REFERENCES` registration candidates;
-- all nine `MOD-004` `Dependencies` declarations are held from REP-014 registration pending architectural dependency qualification;
-- specifically, `MOD-004 → RUN-004/RUN-008/RUN-009/ENG-007` require both dependency-direction and qualification review under current ARC-006;
-- `Models` is a repository domain/grouping rather than an independently established architectural layer, so folder location alone is not used to accept or reject a dependency claim.
+Direct content review found that `MOD-004` used one undifferentiated `Dependencies` list for three materially different classes:
 
-This preserves the current source text while preventing source wording from being mistaken for validated graph authority.
+1. semantic model-composition dependencies;
+2. Architecture decision/evolution review references;
+3. downstream Runtime/Engine compatibility and revalidation targets.
 
-## Additional content finding — REL-002
+Current `ARC-011` defines architectural boundaries independently of repository folders, while `ARC-006` requires qualified dependency direction and states that textual reference alone does not establish architectural dependency.
 
-Current REP-014 records `REL-002 = MOD-001 → SRV-004 / CONSUMES`. Current direct `SRV-004` content instead explicitly declares `Models / MOD-001 Knowledge Domain Model` under its Dependencies and also names `Models/MOD-001_KNOWLEDGE_MODEL.md` under Related Documents.
+Unit 3 therefore corrects the source contract rather than encoding the ambiguity into REP-014.
 
-Therefore REL-002 is now a bounded correction candidate requiring stable-ID direction/type reconciliation before new Models relationship rows are appended to REP-014. No REL-002 mutation is authorized in Unit 2.
+### Unit-3 material sequence
+
+| Change | Target | Result |
+|---|---|---|
+| P12-B-U3-01 | `Models/MOD-004_MEMORY_MODEL.md` | version 1.2.3; split semantic dependencies, related authority/evolution references, and downstream revalidation targets |
+| P12-B-U3-02 | `Repository/REP-014_PRIORITY12_MODELS_RELATIONSHIP_EVIDENCE_2026-09-05_B.tsv` | reclassified the same 18 evidence rows against corrected source semantics |
+| P12-B-U3-03 | `Quality/Integrity/test_models_p12_relationship_evidence.py` | executable guard prevents Runtime/Engine ripple targets from returning to `DEPENDS_ON` and binds three semantic-model dependencies |
+| P12-B-U3-04 | this Matrix | bind Unit-3 evidence and exact-head gate |
+
+### Current evidence disposition
+
+The 18-row evidence surface now contains:
+
+- 9 bounded `Related Documents → REFERENCES` registration candidates;
+- 3 `MOD-004` semantic-model `DEPENDS_ON` registration candidates (`MOD-002`, `MOD-003`, `MOD-011`);
+- 2 Architecture review/evolution `REFERENCES` registration candidates (`ARC-009`, `ARC-010`);
+- 4 Runtime/Engine ripple/revalidation targets classified `NONE / DO_NOT_REGISTER` (`RUN-004`, `RUN-008`, `RUN-009`, `ENG-007`).
+
+No reverse relationship is inferred from those four ripple targets. A future direct consumer-side review may establish a consumer/affected relationship in its own direction and controlled type, but this Unit does not manufacture it.
+
+## Open stable-ID correction — REL-002
+
+Current REP-014 still records:
+
+`REL-002 = MOD-001 → SRV-004 / CONSUMES`.
+
+Current direct `SRV-004` content states that the Knowledge Service depends on `Models / MOD-001 Knowledge Domain Model` and directly references `Models/MOD-001_KNOWLEDGE_MODEL.md`. Current `MOD-001` identifies SRV-004 as an inspected knowledge-service relationship but does not establish that MOD-001 consumes SRV-004.
+
+Accordingly, the current strongest direct-source representation is a correction candidate:
+
+`REL-002 stable ID: SRV-004 → MOD-001 = DEPENDS_ON`
+
+This correction remains uncommitted until Unit-3 exact-head CI passes and the canonical REP-014 full-content preservation boundary is satisfied.
 
 ## Non-claims
 
-This unit does not register new canonical `REL-*` IDs, does not modify REP-014, does not promote any model maturity/status, does not delete unresolved source dependency declarations, does not resolve historical missing MOD-005..010 declarations, does not prove Runtime executable consumption, and does not close Priority 12, Models, Phase 1, Global Connected Baseline or Global Integrity.
+Transaction B does not yet close Priority 12 or Models. Unit 3 does not register new `REL-*` IDs, does not mutate REP-014, does not promote model maturity, does not resolve historical MOD-005..010 declarations, does not prove Runtime executable consumption, and does not claim Phase-1, Global Connected Baseline or Global Integrity closure.
 
 ## Next gate
 
-1. exact-head four-family CI for Corrective Unit 2;
-2. re-read evidence/status/Matrix;
-3. reconcile REL-002 against current MOD-001 and SRV-004 direct sources plus historical provenance;
-4. qualify or disposition held MOD-004 dependency claims through current Architecture authority;
-5. only then register supported new relationships into REP-014.
+1. exact-head four-family CI for the Unit-3 Matrix head;
+2. if green, reconcile stable `REL-002` without creating a replacement ID;
+3. register only the 14 currently eligible relationship candidates after duplicate/type checks and safe REP-014 content-preserving mutation;
+4. re-read Models status, relationship evidence and cross-layer consumers;
+5. continue historical missing-declaration/content overlap review before any P12 partition-closure decision.
