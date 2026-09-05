@@ -1,0 +1,41 @@
+source	target_or_claim	classification	current_disposition	evidence
+KNW-002	MOD-011	CONSUMES	EXISTING_REL-010_RETAIN	Classification explicitly consumes MOD-011 source/evidence semantics without redefining authority
+KNW-003	MOD-011	REFERENCES	EXISTING_REL-110_RETAIN	Related Documents direct documentary reference; no dependency promotion
+KNW-004	MOD-001	REFERENCES	EXISTING_REL-081_RETAIN	Related Documents direct documentary reference
+KNW-004	MOD-011	REFERENCES	EXISTING_REL-111_RETAIN	Related Documents/cross-lifecycle source boundary; no automatic dependency
+KNW-009	MOD-011	CONSUMES	EXISTING_REL-014_RETAIN	Knowledge evolution explicitly consumes MOD-011 source/provenance semantics
+KNW-001	KNW-002	REFERENCES	CANDIDATE_DIRECT_SOURCE	Related Documents
+KNW-001	KNW-004	REFERENCES	CANDIDATE_DIRECT_SOURCE	Related Documents
+KNW-001	KNW-005	REFERENCES	CANDIDATE_DIRECT_SOURCE	Related Documents
+KNW-001	KNW-009	REFERENCES	CANDIDATE_DIRECT_SOURCE	Related Documents
+KNW-001	MEM-001	REFERENCES	CANDIDATE_TARGET_REVALIDATION	Related Documents; Memory boundary must not imply authority transfer
+KNW-001	MEM-004	REFERENCES	CANDIDATE_TARGET_REVALIDATION	Related Documents
+KNW-001	MEM-005	REFERENCES	CANDIDATE_TARGET_REVALIDATION	Related Documents
+KNW-001	MEM-009	REFERENCES	CANDIDATE_TARGET_REVALIDATION	Related Documents
+KNW-001	ENG-007	REFERENCES	CANDIDATE_TARGET_REVALIDATION	Related Documents; executable consumer relation not inferred
+KNW-002	KNW-001	REFERENCES	CANDIDATE_DIRECT_SOURCE	Related Documents
+KNW-002	KNW-004	REFERENCES	CANDIDATE_DIRECT_SOURCE	Related Documents
+KNW-002	KNW-005	REFERENCES	CANDIDATE_DIRECT_SOURCE	Related Documents
+KNW-002	KNW-009	REFERENCES	CANDIDATE_DIRECT_SOURCE	Related Documents
+KNW-002	MEM-001	REFERENCES	CANDIDATE_TARGET_REVALIDATION	Related Documents
+KNW-002	MEM-005	REFERENCES	CANDIDATE_TARGET_REVALIDATION	Related Documents
+KNW-002	ENG-007	REFERENCES	CANDIDATE_TARGET_REVALIDATION	Related Documents; no executable semantics inferred
+KNW-002	REP-001	REFERENCES	CANDIDATE_TARGET_REVALIDATION	Related Documents; no authority transfer
+KNW-003	KNW-001	REFERENCES	CANDIDATE_DIRECT_SOURCE	Related Documents
+KNW-003	KNW-002	REFERENCES	CANDIDATE_DIRECT_SOURCE	Related Documents
+KNW-003	REP-009	REFERENCES	CANDIDATE_TARGET_REVALIDATION	Related Documents
+KNW-003	ARC-003	REFERENCES	CANDIDATE_TARGET_REVALIDATION	Related Documents
+KNW-003	CORE-003	REFERENCES	CANDIDATE_TARGET_REVALIDATION	Related Documents; subordinate documentary reference only
+KNW-004	KNW-001	REFERENCES	CANDIDATE_DIRECT_SOURCE	Related Documents
+KNW-004	KNW-002	REFERENCES	CANDIDATE_DIRECT_SOURCE	Related Documents
+KNW-004	KNW-003	REFERENCES	CANDIDATE_DIRECT_SOURCE	Related Documents
+KNW-004	KNW-005	REFERENCES	CANDIDATE_DIRECT_SOURCE	Related Documents
+KNW-004	KNW-009	REFERENCES	CANDIDATE_DIRECT_SOURCE	Related Documents
+KNW-004	REP-006	REFERENCES	CANDIDATE_TARGET_REVALIDATION	Related Documents/cross-lifecycle boundary
+KNW-004	REP-009	REFERENCES	CANDIDATE_TARGET_REVALIDATION	Related Documents
+KNW-004	LIF-001	REFERENCES	CANDIDATE_TARGET_REVALIDATION	Related Documents; lifecycle authorities remain separate
+KNW-004	CORE-003	REFERENCES	CANDIDATE_TARGET_REVALIDATION	Related Documents; subordinate documentary reference
+KNW-006	Repository always prevails	CONTENT_CONTRADICTION	REPAIR_REQUIRED	Conflicts with scoped ownership/authority rules in KNW-001/002/005/009
+KNW-007	approved repository knowledge is baseline/authoritative	CONTENT_CONTRADICTION	REPAIR_REQUIRED	Conflates repository location/approval with scoped canonical platform authority
+KNW-008	complete history + historical knowledge shall never be deleted	CONTENT_CONTRADICTION	REPAIR_REQUIRED	Conflicts with proportional retention and governed deletion rule in KNW-009
+KNW-010	maintenance shall never Delete Approved Knowledge	CONTENT_CONTRADICTION	REPAIR_REQUIRED	Absolute deletion prohibition conflicts with KNW-009 governed retention/deletion semantics
