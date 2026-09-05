@@ -38,6 +38,8 @@ def test_models_folder_inventory_does_not_reassign_verified_ids():
     status = (MODELS / "_FOLDER_STATUS.md").read_text(encoding="utf-8")
     for document_id in VERIFIED:
         assert document_id in status, f"Models inventory no longer references {document_id}"
-    # The folder status is a status/evidence record, not a completion certificate.
+    # Bounded partition closure is not consolidated domain-canonical promotion.
     assert "Canonical: Pending consolidated validation" in status
-    assert "INTEGRITY HOLD / STAGED RECONSTRUCTION" in status
+    assert "CLOSED_FOR_PHASE_1 / BOUNDED MODELS PARTITION CERTIFIED / DOWNSTREAM AND GLOBAL HOLDS REMAIN" in status
+    assert "does **not** promote the maturity/status of individual model artifacts" in status
+    assert "GLOBAL INTEGRITY PASS" in status

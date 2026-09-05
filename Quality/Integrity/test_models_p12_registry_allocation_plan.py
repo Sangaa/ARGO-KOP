@@ -61,13 +61,16 @@ def test_no_edge_ripple_dispositions_remain_absent_from_registry() -> None:
         assert not (source == "MOD-004" and target in forbidden_targets)
 
 
-def test_registry_and_current_manifest_are_same_change_set_bound() -> None:
+def test_registry_and_current_manifest_remain_bound_after_closure_state_refresh() -> None:
     registry = REGISTRY.read_text(encoding="utf-8")
     manifest = MANIFEST.read_text(encoding="utf-8")
     assert "Version: 1.2.20" in registry
     assert "Last Audit: 2026-09-05" in registry
     assert "| REP-014 | Repository/REP-014_REPOSITORY_RELATIONSHIP_REGISTRY.md | 1.2.20 | Active / Relationship Enumeration In Progress | CURRENT RELATIONSHIP EVIDENCE / BROADER GRAPH OPEN |" in manifest
-    assert "P12-B-MODELS-RELATIONSHIP-CONTENT / CANONICAL REP-014 SYNCHRONIZATION" in manifest
+    assert "Current queue checkpoint: `P12 MODELS / BOUNDED CLOSURE-STATE BINDING`" in manifest
+    assert "P12 / MODELS CLOSED_FOR_PHASE_1 BOUNDED CLOSURE-STATE / REP-016 1.3.2 SAME-CHANGE-SET REBIND" in manifest
+    assert "P11 + P12 BOUNDED PARTITIONS CLOSED / PHASE 1 OPEN" in manifest
+    assert "Phase 1 repository work: `OPEN`" in manifest
 
 
 def test_historical_registry_sections_are_preserved() -> None:

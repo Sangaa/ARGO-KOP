@@ -28,7 +28,9 @@ def test_memory_knowledge_source_relationship_is_explicit_on_both_sides():
     assert "`Models/MOD-004_MEMORY_MODEL.md`" in source
 
 
-def test_models_domain_status_remains_unpromoted():
+def test_models_domain_status_remains_unpromoted_beyond_bounded_partition_closure():
     status = _text("Models/_FOLDER_STATUS.md")
-    assert "INTEGRITY HOLD / STAGED RECONSTRUCTION" in status
     assert "Canonical: Pending consolidated validation" in status
+    assert "CLOSED_FOR_PHASE_1 / BOUNDED MODELS PARTITION CERTIFIED / DOWNSTREAM AND GLOBAL HOLDS REMAIN" in status
+    assert "does **not** promote the maturity/status of individual model artifacts" in status
+    assert "BOUNDED MODELS PARTITION CLOSURE != DOWNSTREAM PARTITION CERTIFICATION != GLOBAL CONNECTED BASELINE != GLOBAL INTEGRITY PASS" in status
