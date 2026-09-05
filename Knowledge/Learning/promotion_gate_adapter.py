@@ -1,8 +1,11 @@
-"""Adapter between governed learning evidence and the prototype promotion gate."""
+"""Map governed learning evidence into a promotion-gate candidate.
+
+This Knowledge-owned adapter constructs data only. Promotion-gate evaluation is
+owned by Runtime and must be invoked by an integration/runtime consumer rather
+than imported upward into the Knowledge layer.
+"""
 
 from typing import Any, Dict
-
-from Runtime.Prototype.learning_promotion_gate import evaluate
 
 
 def build_candidate(
@@ -11,7 +14,7 @@ def build_candidate(
     authority: bool = False,
     governing_conflict: bool = False,
 ) -> Dict[str, Any]:
-    """Map an evidence package into the minimal promotion-gate candidate."""
+    """Map an evidence package into the minimal Runtime promotion candidate."""
     return {
         "task_id": evidence["task_id"],
         "session_id": evidence["session_id"],
@@ -23,18 +26,3 @@ def build_candidate(
         "promotion_authority": authority,
         "governing_conflict": governing_conflict,
     }
-
-
-def evaluate_evidence(
-    evidence: Dict[str, Any],
-    *,
-    authority: bool = False,
-    governing_conflict: bool = False,
-) -> Dict[str, Any]:
-    return evaluate(
-        build_candidate(
-            evidence,
-            authority=authority,
-            governing_conflict=governing_conflict,
-        )
-    )
