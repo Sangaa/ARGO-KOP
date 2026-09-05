@@ -2,13 +2,13 @@
 
 Platform: ARGO KOP
 Document ID: REP-012
-Version: 1.0.12
+Version: 1.0.13
 Status: Active Control / Integrity Hold / Phase 1 Population In Progress
 Category: Repository Control
 Canonical: Yes
 Priority: Critical
 Development Baseline: 3.2.1
-Last Audit Date: 2026-09-03
+Last Audit Date: 2026-09-05
 
 ---
 
@@ -688,6 +688,16 @@ Every manifest row is `ALLOCATED` to the Runtime domain with authority effect `N
 Role counts are canonical interface contract `3`, unpromoted interface artifact `6`, candidate canonical interface contract `1`, legacy noncanonical provenance `1`, and status evidence `1`. Every row is `ALLOCATED` to Interfaces with authority effect `NONE_BY_ALLOCATION`.
 
 This allocation closes no semantic, relationship, connector, provider, permission, external-authenticity or production-execution gate. Priority 11 remains OPEN.
+
+## P12 Transaction A — Exact Models Allocation — 2026-09-05
+
+`Repository/REP-012_PRIORITY12_MODELS_EXACT_ALLOCATION_MANIFEST_2026-09-05_A.tsv` contains one sorted allocation record for each of the exact `7` Git-tracked top-level Models paths. The sorted-path SHA-256 is `cf8274ea93cabcb0e55e47b55b00050c1dab98c888582b3b4c2a858c36621498`.
+
+Artifact allocation classes are existing model authority unchanged `5`, domain-container evidence `1`, and status evidence `1`. Every row is `ALLOCATED` to Models with authority effect `NONE_BY_ALLOCATION`.
+
+Allocation records physical path/domain assignment only. It does not promote MOD-011 beyond `Proposed / Future-Ready`, convert README/status evidence into model semantic authority, certify Models relationships/consumers, reconstruct missing historical MOD identifiers, or close Priority 12.
+
+`PHYSICAL ALLOCATION != SEMANTIC PROMOTION != RELATIONSHIP VALIDATION != MODELS CLOSURE`.
 
 ---
 
