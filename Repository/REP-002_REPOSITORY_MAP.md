@@ -2,12 +2,12 @@
 
 Platform: ARGO KOP (Knowledge Operating Platform)
 Document ID: REP-002
-Version: 1.7.7
+Version: 1.7.8
 Status: Integrity Hold
 Category: Repository
 Canonical: Yes
 Priority: Critical
-Last Audit Date: Sep 3, 2026
+Last Audit Date: Sep 5, 2026
 Development Baseline: 3.2.1
 
 ---
@@ -211,11 +211,18 @@ Path: `Models/`
 - `Models/MOD-003_DOCUMENT_MODEL.md`
 - `Models/MOD-004_MEMORY_MODEL.md`
 - `Models/MOD-011_KNOWLEDGE_SOURCE_MODEL.md`
+- `Models/README.md`
 - `Models/_FOLDER_STATUS.md`
+
+This is the exact current seven-path top-level Models inventory established by Priority-12 Transaction A. Its sorted-path SHA-256 is `cf8274ea93cabcb0e55e47b55b00050c1dab98c888582b3b4c2a858c36621498`.
+
+Physical mapping records presence only. `Models/README.md` is domain-container/navigation evidence; mapping it here does not add it to active semantic authority. The five MOD artifacts retain only the authority and maturity declared by their own current metadata, and `_FOLDER_STATUS.md` remains status evidence.
 
 `MOD-001` was reconciled from current-main evidence after independent ID-oriented search and direct authoritative-path verification. It is mapped here because it declares `Canonical: Yes`, is readable on current main, and is directly verified by `Models/_FOLDER_STATUS.md`.
 
 Declared model artifacts not directly located remain unresolved and are not promoted to active authority.
+
+`EXACT PHYSICAL INVENTORY != SEMANTIC PROMOTION != RELATIONSHIP VALIDATION != MODELS CLOSURE`.
 
 ## 11. Plugins Layer
 
