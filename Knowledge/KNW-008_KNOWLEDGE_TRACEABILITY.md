@@ -6,33 +6,13 @@
 
 ---
 
-Platform
-
-ARGO KOP
-
-Knowledge Operating Platform
-
----
-
-Document ID
-
-KNW-008
-
-Version
-
-1.1.0
-
-Status
-
-Approved
-
-Category
-
-Knowledge
-
-Canonical
-
-Yes
+Platform: ARGO KOP  
+Document ID: KNW-008  
+Version: 1.1.1  
+Status: Integrity Hold / Revalidated  
+Category: Knowledge  
+Canonical: Yes  
+Last Audit: 2026-09-05  
 
 ---
 
@@ -40,7 +20,7 @@ Yes
 
 This document defines the traceability model for knowledge throughout ARGO KOP.
 
-Knowledge Traceability ensures that every knowledge object can be tracked from its origin through validation, evolution and operational use.
+Knowledge Traceability ensures that governed knowledge can be traced from material origin and evidence through validation, evolution, operational use and final disposition at a level appropriate to its scope and risk.
 
 ---
 
@@ -48,27 +28,30 @@ Knowledge Traceability ensures that every knowledge object can be tracked from i
 
 Knowledge Traceability shall:
 
-- Preserve knowledge origin.
+- Preserve material knowledge origin and provenance.
 - Support repository integrity.
 - Enable impact analysis.
 - Improve engineering reviews.
-- Maintain historical continuity.
+- Maintain sufficient historical continuity.
+- Avoid confusing retention with authority or immutability.
 
 ---
 
 # Traceability Philosophy
 
-Knowledge without traceability is information.
+Knowledge without adequate traceability is difficult to validate or safely reuse.
 
-Knowledge with traceability becomes organizational intelligence.
+Traceability increases confidence by making evidence, ownership, decisions and material changes reviewable.
 
-Every knowledge object shall preserve its complete history.
+Every governed knowledge object shall preserve sufficient traceability for its declared scope, authority, risk and applicable retention obligations.
+
+Traceability does not require unlimited retention of every intermediate representation, and retention does not make historical knowledge current authority.
 
 ---
 
 # Traceability Chain
 
-Source
+Source / Provenance
 
 ↓
 
@@ -76,11 +59,15 @@ Evidence
 
 ↓
 
+Scope / Ownership
+
+↓
+
 Validation
 
 ↓
 
-Repository Integration
+Repository or Domain Integration
 
 ↓
 
@@ -92,11 +79,11 @@ Operational Usage
 
 ↓
 
-Revision
+Material Revision / Decision
 
 ↓
 
-Archive
+Archive, Supersession or Other Governed Disposition
 
 ---
 
@@ -114,39 +101,47 @@ Projects
 
 Operational Experience
 
+User / Deployment Experience
+
 Approved Decisions
 
-Validated External Sources
+Validated or Qualified External Sources
+
+AI model outputs or connected sources remain evidence/candidates until applicable validation and authority establish a stronger state.
 
 ---
 
 # Mandatory Traceability
 
-Every knowledge object shall identify:
+Every governed knowledge object shall identify, as applicable:
 
 Knowledge Identifier
 
-Owner
+Owner / Owning Scope
 
-Source
+Source / Provenance
 
-Evidence
+Evidence State
 
-Repository Location
+Repository or Domain Location
 
 Version
 
-Approval Status
+Approval / Authority State
 
 Related Knowledge
 
-Related Documents
+Material Relationships / Dependencies
+
+Material Review or Change History
+
+The required depth of traceability shall be proportional to the item's authority, impact, volatility, legal/security obligations and reuse risk.
 
 ---
 
 # Repository Traceability
 
-Knowledge shall remain connected to:
+Platform knowledge shall remain connected, where applicable, to:
 
 Repository Documents
 
@@ -154,15 +149,19 @@ Architecture
 
 Governance
 
-Repository Policies
+Repository Policies / Control Authority
 
 Approved Decisions
+
+Evidence and provenance records
+
+A path or citation is not itself proof of a stronger dependency or authority relationship.
 
 ---
 
 # Decision Traceability
 
-Knowledge derived from decisions shall preserve:
+Knowledge materially derived from decisions shall preserve, as applicable:
 
 Decision Identifier
 
@@ -172,9 +171,9 @@ Evidence
 
 Affected Knowledge
 
-Approval
+Applicable Approval / Authority
 
-Revision History
+Material Revision History
 
 ---
 
@@ -184,49 +183,47 @@ Knowledge relationships shall remain:
 
 Documented
 
-Versioned
+Version-aware where material
 
 Repository Verified
 
-Traceable
+Traceable to evidence
 
 Governance Compliant
+
+Relationship type and direction shall be supported rather than inferred from co-location or reciprocal citation.
 
 ---
 
 # Review Traceability
 
-Knowledge reviews shall record:
+Material knowledge reviews shall record, as applicable:
 
-Reviewer
+Reviewer or validating authority
 
 Review Date
 
-Repository Version
+Repository / Artifact Version or Checkpoint
 
 Validation Result
 
 Required Actions
 
-Approval Status
+Approval / Authority State
 
 ---
 
-# Historical Traceability
+# Historical Traceability and Retention
 
-Historical knowledge shall preserve:
+Superseded or historical knowledge shall preserve enough provenance and material change history to explain what changed, why it changed and which evidence/authority controlled the disposition when that history remains materially required.
 
-Original Version
+Retention is governed and proportional. Archive, repository history, evidence records or another governed mechanism may satisfy traceability depending on legal, security, operational and knowledge-integrity requirements.
 
-Revision History
+Destructive deletion is not automatically prohibited. Removal may occur under applicable authority when retention requirements are satisfied and the removal does not break required provenance, legal/security obligations or material impact traceability.
 
-Migration History
+Deletion, archival or cleanup shall never be used to erase contradictory evidence, conceal a material failure, or make a superseded interpretation appear never to have existed when that history is required to understand the current state.
 
-Repository References
-
-Archive Location
-
-Historical knowledge shall never be deleted.
+Historical knowledge does not replace current authoritative knowledge merely because it is retained.
 
 ---
 
@@ -244,29 +241,30 @@ Reasoning
 
 Knowledge Evolution
 
-Historical Context
+Historical Context where materially required
+
+Scope / Ownership
+
+Evidence / Provenance
 
 ---
 
 # Related Documents
 
-KNW-001_KNOWLEDGE_MODEL
-
-KNW-003_KNOWLEDGE_RELATIONSHIPS
-
-KNW-004_KNOWLEDGE_LIFECYCLE
-
-REP-009_REPOSITORY_TRACEABILITY
-
-ARC-003_INFORMATION_FLOW
-
-CORE-003_CONSTITUTION
+- `Knowledge/KNW-001_KNOWLEDGE_MODEL.md`
+- `Knowledge/KNW-003_KNOWLEDGE_RELATIONSHIPS.md`
+- `Knowledge/KNW-004_KNOWLEDGE_LIFECYCLE.md`
+- `Knowledge/KNW-005_KNOWLEDGE_GOVERNANCE.md`
+- `Knowledge/KNW-009_KNOWLEDGE_EVOLUTION.md`
+- `Repository/REP-009_REPOSITORY_TRACEABILITY.md`
+- `Architecture/ARC-003_INFORMATION_FLOW.md`
+- `Core/CORE-003_CONSTITUTION.md`
 
 ---
 
 # Guiding Statement
 
-Knowledge can only be trusted when every fact can be traced back to its verified origin.
+Knowledge is trustworthy when material claims, evidence, scope, ownership and change decisions remain traceable enough to be independently reviewed without turning history into immutable authority.
 
 ---
 

@@ -3,7 +3,7 @@
 Transaction: `MUT-2026-09-05-P13-KNOWLEDGE-RELATIONSHIP-CONTENT-B`
 Priority: `13 — Knowledge`
 Entry HEAD: `0beaff41db190cecc757f0d169a5d7174c1578d2`
-State: `OPEN / UNITS 1-2 VERIFIED / UNIT 3 KNW-007 BASELINE-SCOPE REPAIR PREPARED`
+State: `OPEN / UNITS 1-3 VERIFIED / UNIT 4 KNW-008 TRACEABILITY-RETENTION REPAIR PREPARED`
 
 ## Entry condition
 
@@ -44,9 +44,9 @@ Disposition: repaired in Unit 2 by binding authority to governed scope/ownership
 
 ### KNW-007
 
-The entry wording treats approved repository knowledge broadly as the baseline/authoritative body.
+Entry contradiction: approved repository knowledge broadly treated as baseline/authoritative body.
 
-Conflict: current scope model requires a distinction between platform canonical knowledge and contextual repository-held knowledge. Repository storage/approval does not itself make every item platform baseline authority.
+Disposition: repaired in Unit 3 by restricting baseline membership to governed canonical `PLATFORM` knowledge and preserving contextual scopes outside the baseline absent explicit promotion.
 
 ### KNW-008
 
@@ -90,13 +90,7 @@ Unit-2 compare: `1 commit / exactly 3 authorized files`.
 
 Exact-head four-family result: `4/4 SUCCESS`.
 
-Repair result:
-
-- obsolete repository-absolute authority removed;
-- authority now scope/ownership/evidence/publication bounded;
-- higher Core/Governance/Architecture/Repository-control authority preserved;
-- user/project/deployment attribution and non-silent-overwrite preserved;
-- KNW-006 remains `Integrity Hold / Revalidated` at `1.1.1`.
+Repair result: repository-absolute authority removed; authority now scope/ownership/evidence/publication bounded; higher authority and contextual attribution preserved; KNW-006 remains `Integrity Hold / Revalidated` at `1.1.1`.
 
 ## Unit 3 — KNW-007 baseline-scope repair
 
@@ -106,23 +100,39 @@ Authorized exactly three paths:
 2. `Quality/Integrity/test_knowledge_p13_knw007_baseline_scope.py`
 3. `Repository/MUT-2026-09-05-P13-KNOWLEDGE-RELATIONSHIP-CONTENT-B_MUTATION_MATRIX.md`
 
+Applied HEAD: `40e5a1207145aed441eaddbf2ec8af702b8f6c42`
+
+Unit-3 compare: `1 commit / exactly 3 authorized files`.
+
+Exact-head four-family result: `4/4 SUCCESS`.
+
+Repair result: baseline is governed canonical `PLATFORM` knowledge; repository location/approval is insufficient by itself; contextual knowledge remains outside platform baseline absent explicit promotion; KNW-007 remains `Integrity Hold / Revalidated` at `1.1.1`.
+
+## Unit 4 — KNW-008 traceability / retention repair
+
+Authorized exactly three paths:
+
+1. `Knowledge/KNW-008_KNOWLEDGE_TRACEABILITY.md`
+2. `Quality/Integrity/test_knowledge_p13_knw008_retention_scope.py`
+3. `Repository/MUT-2026-09-05-P13-KNOWLEDGE-RELATIONSHIP-CONTENT-B_MUTATION_MATRIX.md`
+
 Repair contract:
 
-- define the baseline as governed canonical `PLATFORM` knowledge, not all approved repository knowledge;
-- make repository location/approval/local validation insufficient by itself for baseline membership;
-- preserve user/project/deployment attribution until explicit governed promotion/reclassification;
-- keep Knowledge baseline subordinate to higher authority contracts;
-- make project knowledge a possible evidence/candidate source rather than automatic platform baseline content;
-- retain KNW-007 under `Integrity Hold / Revalidated` and bump only `1.1.0 → 1.1.1` for the semantic correction.
+- replace unlimited `complete history` requirement with sufficient material traceability proportional to scope/authority/risk/obligation;
+- remove absolute `Historical knowledge shall never be deleted` rule;
+- align retention with KNW-009: governed and proportional, destructive deletion not automatically prohibited;
+- forbid cleanup/deletion from erasing contradictory evidence, concealing failure, or breaking required provenance;
+- keep retained history from becoming current authority merely by retention;
+- retain KNW-008 under `Integrity Hold / Revalidated`, bumping only `1.1.0 → 1.1.1`.
 
-No REP-014/016/020 mutation is authorized by Unit 3.
+No REP-014/016/020 mutation is authorized by Unit 4.
 
 ## Planned material sequence
 
 1. Evidence Unit 1 — COMPLETE / 4/4.
 2. KNW-006 authority repair — COMPLETE / 4/4.
-3. KNW-007 baseline-scope repair — exact-head validation pending.
-4. Repair KNW-008 traceability/retention absolutes → exact-head 4/4.
+3. KNW-007 baseline-scope repair — COMPLETE / 4/4.
+4. KNW-008 traceability/retention repair — exact-head validation pending.
 5. Repair KNW-010 maintenance/deletion absolute → exact-head 4/4.
 6. Re-read all KNW-001..010 after repairs and evaluate remaining identity/content drift.
 7. Validate candidate relationship targets/consumer semantics.
@@ -133,7 +143,7 @@ No REP-014/016/020 mutation is authorized by Unit 3.
 ## Non-claims
 
 - no Priority-13 closure;
-- no automatic status promotion for KNW-006/007/008/010;
+- no automatic status promotion for repaired KNW artifacts;
 - no relationship insertion from Related Documents alone;
 - no promotion of Learning/Programming/Mathematics support leaves;
 - no Knowledge ↔ Memory or Knowledge ↔ Engine executable certification;
