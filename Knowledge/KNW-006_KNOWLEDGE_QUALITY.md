@@ -6,41 +6,21 @@
 
 ---
 
-Platform
-
-ARGO KOP
-
-Knowledge Operating Platform
-
----
-
-Document ID
-
-KNW-006
-
-Version
-
-1.1.0
-
-Status
-
-Approved
-
-Category
-
-Knowledge
-
-Canonical
-
-Yes
+Platform: ARGO KOP  
+Document ID: KNW-006  
+Version: 1.1.1  
+Status: Integrity Hold / Revalidated  
+Category: Knowledge  
+Canonical: Yes  
+Last Audit: 2026-09-05  
 
 ---
 
 # Purpose
 
-This document defines the quality model used to evaluate every knowledge asset stored within ARGO KOP.
+This document defines the quality model used to evaluate knowledge assets within ARGO KOP.
 
-Knowledge Quality ensures that repository knowledge remains reliable, reusable and suitable for long-term organizational intelligence.
+Knowledge Quality helps repository knowledge remain reliable, reusable and suitable for long-term organizational intelligence while preserving scope, ownership, provenance and authority boundaries.
 
 ---
 
@@ -53,6 +33,7 @@ Knowledge Quality shall:
 - Increase reasoning quality.
 - Support governance.
 - Preserve long-term maintainability.
+- Preserve declared scope, ownership and authority boundaries.
 
 ---
 
@@ -62,7 +43,9 @@ Knowledge quality is measured.
 
 It is never assumed.
 
-Every knowledge object shall satisfy measurable quality criteria before becoming authoritative.
+Every governed knowledge object shall satisfy quality criteria appropriate to its declared scope and intended authority before it is treated as authoritative for that scope.
+
+Quality does not itself create canonical authority.
 
 ---
 
@@ -90,11 +73,13 @@ Authority
 
 Timeliness
 
+Scope / Ownership Fit
+
 ---
 
 # Accuracy
 
-Knowledge shall represent verified reality.
+Knowledge shall represent verified or explicitly qualified reality within its declared scope.
 
 Unsupported assumptions shall never be classified as authoritative knowledge.
 
@@ -110,7 +95,7 @@ Incomplete knowledge shall be clearly identified.
 
 # Consistency
 
-Knowledge shall not contradict:
+Knowledge shall not contradict applicable higher or peer authority, including as relevant:
 
 Core
 
@@ -118,9 +103,13 @@ Governance
 
 Architecture
 
-Repository
+Repository control authority
 
 Approved Decisions
+
+Existing canonical knowledge within the same governed scope
+
+A local user/project/deployment knowledge item is not inconsistent merely because it differs from platform knowledge when the difference is attributable to its declared context and does not claim broader authority.
 
 ---
 
@@ -140,25 +129,25 @@ Readable
 
 # Relevance
 
-Knowledge shall remain aligned with platform objectives.
+Knowledge shall remain aligned with its declared purpose and scope.
 
-Obsolete knowledge shall be reviewed.
+Obsolete or superseded knowledge shall be reviewed.
 
 ---
 
 # Traceability
 
-Every knowledge object shall preserve:
+Every governed knowledge object shall preserve, as applicable:
 
-Source
+Source / Provenance
 
-Owner
+Owner / Owning Scope
 
 Version
 
 Relationships
 
-Approval History
+Approval or Review History
 
 ---
 
@@ -172,13 +161,13 @@ Update
 
 Extend
 
-Archive
+Archive or otherwise disposition under applicable retention authority
 
 ---
 
 # Reusability
 
-Knowledge shall be reusable across:
+Knowledge may be reusable across:
 
 Projects
 
@@ -190,29 +179,43 @@ Documentation
 
 Engineering Activities
 
+Reuse does not automatically broaden the item's authority or promote its scope.
+
 ---
 
 # Authority
 
-Repository-approved knowledge is authoritative.
+Authority is determined by the applicable governed authority, declared scope, ownership, evidence state and publication/promotion state.
 
-Conversation context is temporary.
+Repository location or repository approval alone does not make every knowledge item platform-wide canonical authority.
 
-Repository always prevails.
+Canonical platform knowledge governs within its declared platform scope subject to higher Core, Governance, Architecture and Repository control authority. User-, project- and deployment-owned knowledge remains attributable to its originating scope unless explicitly promoted through the applicable governance process.
+
+Conversation context and working reasoning may produce evidence or candidates, but they do not directly replace governed canonical knowledge.
+
+The platform shall not silently overwrite contextual knowledge merely because a platform artifact is newer or stored in the repository.
 
 ---
 
 # Timeliness
 
-Knowledge shall be periodically reviewed.
+Knowledge shall be periodically reviewed at a cadence appropriate to its risk, volatility and use.
 
-Outdated knowledge shall be revised or archived.
+Outdated knowledge shall be revised, superseded, reclassified or archived/dispositioned under applicable authority.
+
+---
+
+# Scope / Ownership Fit
+
+Quality review shall verify that the knowledge object's declared domain, owner and intended consumers match the evidence and authority actually established.
+
+A technically correct item can still be low-quality for a proposed platform-canonical use if its evidence is local, context-specific or insufficiently generalizable.
 
 ---
 
 # Quality Review
 
-Knowledge Quality Reviews shall verify:
+Knowledge Quality Reviews shall verify, as applicable:
 
 Accuracy
 
@@ -224,11 +227,17 @@ Relationships
 
 Traceability
 
+Scope and Ownership
+
+Evidence / Provenance
+
 Repository Alignment
 
 Architecture Alignment
 
 Governance Compliance
+
+Authority and Promotion State
 
 ---
 
@@ -248,31 +257,26 @@ Decision Making
 
 Future Evolution
 
+Scope and Ownership Boundaries
+
 ---
 
 # Related Documents
 
-KNW-001_KNOWLEDGE_MODEL
-
-KNW-004_KNOWLEDGE_LIFECYCLE
-
-KNW-005_KNOWLEDGE_GOVERNANCE
-
-REP-003_REPOSITORY_STANDARDS
-
-REP-009_REPOSITORY_TRACEABILITY
-
-GOV-006_REVIEW_STANDARD
-
-CORE-003_CONSTITUTION
+- `Knowledge/KNW-001_KNOWLEDGE_MODEL.md`
+- `Knowledge/KNW-004_KNOWLEDGE_LIFECYCLE.md`
+- `Knowledge/KNW-005_KNOWLEDGE_GOVERNANCE.md`
+- `Knowledge/KNW-009_KNOWLEDGE_EVOLUTION.md`
+- `Repository/REP-003_REPOSITORY_STANDARDS.md`
+- `Repository/REP-009_REPOSITORY_TRACEABILITY.md`
+- `Governance/GOV-006_REVIEW_STANDARD.md`
+- `Core/CORE-003_CONSTITUTION.md`
 
 ---
 
 # Guiding Statement
 
-High-quality knowledge produces reliable reasoning.
-
-Reliable reasoning produces better decisions.
+High-quality knowledge supports reliable reasoning only when evidence, scope, ownership and authority remain explicit.
 
 ---
 

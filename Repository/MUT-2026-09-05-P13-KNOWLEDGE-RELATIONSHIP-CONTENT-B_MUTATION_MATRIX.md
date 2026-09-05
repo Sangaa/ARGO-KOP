@@ -3,7 +3,7 @@
 Transaction: `MUT-2026-09-05-P13-KNOWLEDGE-RELATIONSHIP-CONTENT-B`
 Priority: `13 — Knowledge`
 Entry HEAD: `0beaff41db190cecc757f0d169a5d7174c1578d2`
-State: `OPEN / EVIDENCE UNIT 1 PREPARED / SOURCE REPAIRS PENDING`
+State: `OPEN / UNIT 1 VERIFIED / UNIT 2 KNW-006 AUTHORITY REPAIR PREPARED`
 
 ## Entry condition
 
@@ -38,7 +38,7 @@ No duplicate/reverse relationship is authorized merely to increase graph density
 
 ### KNW-006
 
-Absolute statement: `Repository always prevails.`
+Absolute statement at entry: `Repository always prevails.`
 
 Conflict: current KNW-001/002/005/009 distinguish repository location, declared scope, ownership, evidence and canonical authority. Repository presence or a transient repository representation does not automatically override user/project/deployment ownership or higher authority layers.
 
@@ -60,20 +60,46 @@ Absolute maintenance rule: `Delete Approved Knowledge` is never allowed.
 
 Conflict: KNW-009 makes authority/evidence reviewable and allows governed removal with appropriate historical/provenance protection.
 
-## Unit 1 authorization
+## Unit 1 — evidence/control baseline
 
-Exactly three new evidence/control paths are authorized:
+Authorized exactly three new paths:
 
 1. `Repository/MUT-2026-09-05-P13-KNOWLEDGE-RELATIONSHIP-CONTENT-B_EVIDENCE.tsv`
 2. `Quality/Integrity/test_knowledge_p13_relationship_content_evidence.py`
 3. `Repository/MUT-2026-09-05-P13-KNOWLEDGE-RELATIONSHIP-CONTENT-B_MUTATION_MATRIX.md`
 
-Unit 1 changes no Knowledge source artifact and no relationship registry row. Its purpose is to make the discovered contradictions and candidate relationships executable review evidence before repairs.
+Applied HEAD: `b72b9537e4e52d844cfa7e8a95ef8392f756a386`
+
+Entry → Unit-1 compare: `1 commit / exactly 3 authorized files / no Knowledge source mutation`.
+
+Exact-head four-family result: `4/4 SUCCESS`.
+
+The Unit-1 TSV is retained as an immutable discovery snapshot. Later repairs do not rewrite the fact that the contradiction existed at the entry checkpoint.
+
+## Unit 2 — KNW-006 scoped authority repair
+
+Authorized exactly three paths:
+
+1. `Knowledge/KNW-006_KNOWLEDGE_QUALITY.md`
+2. `Quality/Integrity/test_knowledge_p13_knw006_authority_scope.py`
+3. `Repository/MUT-2026-09-05-P13-KNOWLEDGE-RELATIONSHIP-CONTENT-B_MUTATION_MATRIX.md`
+
+Repair contract:
+
+- remove the absolute `Repository always prevails` rule;
+- bind knowledge authority to applicable governed authority, declared scope, ownership, evidence and promotion/publication state;
+- preserve higher Core/Governance/Architecture/Repository control authority;
+- preserve user/project/deployment attribution and non-silent-overwrite rules;
+- state explicitly that quality does not itself create canonical authority;
+- retain KNW-006 under `Integrity Hold / Revalidated` rather than promoting it because its wording was repaired;
+- bump KNW-006 only from `1.1.0` to `1.1.1` as a semantic correction.
+
+Unit 2 does not alter REP-014, REP-016, REP-020 or any other KNW artifact.
 
 ## Planned material sequence
 
-1. Evidence Unit 1 → exact-head 4/4.
-2. Repair KNW-006 scoped authority wording → exact-head 4/4.
+1. Evidence Unit 1 — COMPLETE / 4/4.
+2. Repair KNW-006 scoped authority wording — Unit 2 exact-head validation pending.
 3. Repair KNW-007 baseline scope/authority wording → exact-head 4/4.
 4. Repair KNW-008 traceability/retention absolutes → exact-head 4/4.
 5. Repair KNW-010 maintenance/deletion absolute → exact-head 4/4.
