@@ -1,4 +1,4 @@
-from promotion_gate_adapter import evaluate_evidence
+from promotion_gate_adapter import build_candidate
 
 
 def evidence():
@@ -13,18 +13,22 @@ def evidence():
     }
 
 
-def test_candidate_holds_without_authority():
-    result = evaluate_evidence(evidence())
-    assert result["status"] == "HOLD"
-    assert result["reason"] == "PROMOTION_AUTHORITY_MISSING"
+def test_candidate_mapping_defaults_to_no_promotion_authority():
+    candidate = build_candidate(evidence())
+    assert candidate["promotion_authority"] is False
+    assert candidate["governing_conflict"] is False
+    assert candidate["task_id"] == "SYN-001"
+    assert candidate["validation"] == "VALIDATED"
 
 
-def test_candidate_becomes_promotion_eligible_with_authority():
-    result = evaluate_evidence(evidence(), authority=True)
-    assert result["status"] == "PROMOTION_ELIGIBLE"
-    assert result["promote"] is True
+def test_candidate_mapping_preserves_explicit_authority():
+    candidate = build_candidate(evidence(), authority=True)
+    assert candidate["promotion_authority"] is True
+    assert candidate["confidence"] == 0.9
+    assert candidate["observed_result"] == {"add(2, 3)": 5}
 
 
-def test_governing_conflict_remains_held_with_authority():
-    result = evaluate_evidence(evidence(), authority=True, governing_conflict=True)
-    assert result == {"status": "HOLD", "reason": "GOVERNING_CONFLICT"}
+def test_candidate_mapping_preserves_governing_conflict():
+    candidate = build_candidate(evidence(), authority=True, governing_conflict=True)
+    assert candidate["promotion_authority"] is True
+    assert candidate["governing_conflict"] is True
