@@ -26,7 +26,7 @@ def test_allocation_manifest_is_exact_transform_of_transaction_a_inventory() -> 
     man = _manifest_rows()
     assert len(inv) == len(man) == 50
     assert len({r[0] for r in man}) == 50
-    expected = [(path, role, "ALLOCATED", "NONE_BY_ALLOCATION", "P13_TRANSACTION_A_EXACT_INVENTORY") for path, role, _ in inv]
+    expected = [[path, role, "ALLOCATED", "NONE_BY_ALLOCATION", "P13_TRANSACTION_A_EXACT_INVENTORY"] for path, role, _ in inv]
     assert man == expected
     payload = "".join(f"{r[0]}\n" for r in sorted(man)).encode()
     assert hashlib.sha256(payload).hexdigest() == DIGEST
