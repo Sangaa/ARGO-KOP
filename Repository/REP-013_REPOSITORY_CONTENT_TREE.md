@@ -2,10 +2,10 @@
 
 Platform: ARGO KOP  
 Document ID: REP-013  
-Version: 1.1.5
+Version: 1.1.6
 Status: Active / Phase 1 Population In Progress  
 Development Baseline: 3.2.1  
-Last Audit: 2026-09-03
+Last Audit: 2026-09-05
 
 ## Purpose
 
@@ -108,12 +108,18 @@ The control-plane set `REP-011` through `REP-016` is now explicitly present in t
 
 ```text
 Models/
-├── README.md
 ├── MOD-001_KNOWLEDGE_MODEL.md
-└── MOD-011_KNOWLEDGE_SOURCE_MODEL.md
+├── MOD-002_ENTITY_MODEL.md
+├── MOD-003_DOCUMENT_MODEL.md
+├── MOD-004_MEMORY_MODEL.md
+├── MOD-011_KNOWLEDGE_SOURCE_MODEL.md
+├── README.md
+└── _FOLDER_STATUS.md
 ```
 
-This is a **partial evidence inventory**, not a claim that these are the only files in `Models/`.
+This is the exact current seven-path Git-tracked top-level `Models/` inventory established by Priority-12 Transaction A. Its canonical sorted-path SHA-256 is `cf8274ea93cabcb0e55e47b55b00050c1dab98c888582b3b4c2a858c36621498` and its path-level allocation addendum is `Repository/REP-012_PRIORITY12_MODELS_EXACT_ALLOCATION_MANIFEST_2026-09-05_A.tsv`.
+
+Exact physical inventory and allocation record presence do not promote semantic authority, validate Models relationships, reconstruct missing historical model declarations, or close Priority 12.
 
 ### Knowledge/
 
@@ -516,6 +522,12 @@ The earlier `### Runtime/` section remains the readable canonical/candidate navi
 Current exact Git-tracked Runtime inventory is `118` paths: top-level `17`, Context `4`, Decision `12`, Execution `41`, Integration `2`, Learning `17`, Prototype `25`. The canonical sorted `git ls-files Runtime` path-set SHA-256 is `a5db51a6d6cbf7dbf22bdb971fc0d2238d2bdef6627caadc4ee2b1933dad4438`.
 
 The deterministic P10-N integrity guard requires manifest equality with the current Git path set and fails on any added, missing, duplicate or unclassified Runtime path. Exact physical inventory does not imply semantic review, canonical authority, executable promotion, provider authenticity, Priority-10 closure or global completeness.
+
+## P12 Transaction A — Exact Models Physical Inventory — 2026-09-05
+
+The `### Models/` section is synchronized to the exact current seven-path top-level tracked Models inventory. The sorted-path SHA-256 is `cf8274ea93cabcb0e55e47b55b00050c1dab98c888582b3b4c2a858c36621498`, with path-level allocation evidence in `Repository/REP-012_PRIORITY12_MODELS_EXACT_ALLOCATION_MANIFEST_2026-09-05_A.tsv`.
+
+This synchronization replaces only the older partial Models representation. It does not promote `README.md` or `_FOLDER_STATUS.md` to model authority, change the declared authority/maturity of MOD-001/002/003/004/011, certify Models relationships, reconstruct missing historical MOD identities, or close Priority 12.
 
 ## Governing Rule
 

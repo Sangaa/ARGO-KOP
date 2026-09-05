@@ -4,12 +4,13 @@ Transaction ID: `MUT-2026-09-05-P12-MODELS-EXACT-INVENTORY-ALLOCATION-A`
 
 Priority: `12 — Models`
 
-State: `PARTIAL MATERIAL APPLIED / REP-002+012 SYNC COMPLETE / REP-013+016 SYNC PENDING`
+State: `PARTIAL MATERIAL APPLIED / REP-002+012+013 SYNC COMPLETE / REP-016 SYNC PENDING`
 
 Entry HEAD: `15d94d97e848060aafabe7faa3c369f852b62c35`
 Pre-write Matrix HEAD: `109b58043517aeb6c14d204bfe61cee41066c415`
 Material Unit 1 HEAD: `bec6f61072607e77aab753fe2eace5eb027df491`
 Material Unit 2 HEAD: `1b98df1cbb1f57a681924827191bf72bc05b955a`
+Material Unit 3 HEAD: `adc2c6d6808cd33bed5b4a2adb59eb094136e964`
 
 ## Entry authority
 
@@ -39,7 +40,7 @@ Sorted-path SHA-256:
 | P12-A-01 | `Repository/REP-002_REPOSITORY_MAP.md` | UPDATE | APPLIED IN MATERIAL UNIT 2 |
 | P12-A-02 | `Repository/REP-012_REPOSITORY_ALLOCATION_REGISTRY.md` | UPDATE | APPLIED IN MATERIAL UNIT 3 |
 | P12-A-03 | `Repository/REP-012_PRIORITY12_MODELS_EXACT_ALLOCATION_MANIFEST_2026-09-05_A.tsv` | CREATE | APPLIED IN MATERIAL UNIT 1 |
-| P12-A-04 | `Repository/REP-013_REPOSITORY_CONTENT_TREE.md` | UPDATE | SYNC PENDING |
+| P12-A-04 | `Repository/REP-013_REPOSITORY_CONTENT_TREE.md` | UPDATE | APPLIED IN MATERIAL UNIT 4 |
 | P12-A-05 | `Repository/REP-016_PHASE1_PARTITION_WORK_QUEUE.md` | UPDATE | SYNC PENDING |
 | P12-A-06 | `Models/_FOLDER_STATUS.md` | UPDATE | APPLIED IN MATERIAL UNIT 1 |
 | P12-A-07 | `Quality/Integrity/test_models_p12_exact_inventory_allocation.py` | CREATE | APPLIED IN MATERIAL UNIT 1 |
@@ -64,20 +65,17 @@ These successes are regression evidence only; Transaction A remains open because
 
 REP-002 was completely retrieved before replacement. It now maps the exact seven-path Models tree, including README as domain-container/navigation evidence, binds digest `cf8274ea93cabcb0e55e47b55b00050c1dab98c888582b3b4c2a858c36621498`, and preserves the no-promotion/no-closure boundary. The Unit-2 candidate compare showed only REP-002 plus this Matrix changed.
 
-## Material Unit 3 — REP-012 allocation binding
+## Material Unit 3 evidence
 
-REP-012 was completely retrieved in bounded ranges from Unit-2 HEAD before replacement. Prior historical sections remain preserved. A current append-only P12 Transaction-A section binds:
+REP-012 was completely retrieved before replacement. Its historical sections were preserved and an append-only P12 Transaction-A section binds the exact seven-row manifest, digest and `NONE_BY_ALLOCATION` semantics without promoting authority or closing Models.
 
-- exact manifest `Repository/REP-012_PRIORITY12_MODELS_EXACT_ALLOCATION_MANIFEST_2026-09-05_A.tsv`;
-- exact path count `7`;
-- digest `cf8274ea93cabcb0e55e47b55b00050c1dab98c888582b3b4c2a858c36621498`;
-- allocation effect `NONE_BY_ALLOCATION`;
-- no semantic promotion, relationship certification, missing-history reconstruction or P12 closure.
+## Material Unit 4 — REP-013 exact content-tree synchronization
+
+REP-013 was fetched from its exact current blob before replacement. The Models section is synchronized from its former partial three-path representation to the exact seven top-level tracked paths, with digest and manifest binding. The update changes physical inventory representation only; it does not promote model authority, validate relationships or close Priority 12.
 
 ## Remaining control-plane drift
 
-- REP-013 exact content-tree synchronization — pending.
-- REP-016 P11-closure/P12-entry queue synchronization — pending.
+- REP-016 verified P11-closure / P12-entry queue synchronization — pending.
 
 REP-001 remains deliberately unchanged because physical README/status evidence is not a reason to manufacture active semantic authority.
 
@@ -87,7 +85,6 @@ Transaction A and Priority 12 remain open. No Models relationship closure, missi
 
 ## Next gate
 
-1. Commit/read-back/compare Material Unit 3.
-2. Retrieve complete REP-013 before replacement and synchronize exact seven-path Models physical inventory with this Matrix in the same change set.
-3. Retrieve complete REP-016 and synchronize verified P11 closure + P12 exact-inventory entry state with this Matrix in the same change set.
-4. Only after both remaining surfaces are synchronized may the complete Transaction-A material HEAD enter closure-grade exact-head CI.
+1. Commit/read-back/compare Material Unit 4.
+2. Retrieve complete REP-016 before replacement and synchronize verified P11 closure + P12 exact-inventory entry state with this Matrix in the same change set.
+3. Only after REP-016 synchronization may the complete Transaction-A material HEAD enter closure-grade exact-head CI.
