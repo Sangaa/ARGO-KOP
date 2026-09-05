@@ -5,7 +5,7 @@
 Platform: ARGO KOP
 Knowledge Operating Platform
 Folder: Models
-Version: 1.3.5
+Version: 1.3.6
 Status: INTEGRITY HOLD / STAGED RECONSTRUCTION / TRANSACTION-A CLOSED / RELATIONSHIP-CONTENT RECONCILIATION ACTIVE
 Canonical: Pending consolidated validation
 Priority: Critical
@@ -47,7 +47,7 @@ All seven physical paths are recorded with allocation authority effect `NONE_BY_
 
 The Models domain contains directly verified semantic model artifacts:
 
-- `MOD-001_KNOWLEDGE_MODEL.md` — `Canonical: Yes`; current state `Integrity Hold / Relationship-Revalidated`.
+- `MOD-001_KNOWLEDGE_MODEL.md` — `Canonical: Yes`; current state `Integrity Hold / Relationship-Revalidated`; Models↔Knowledge authority boundary reconciled at v1.1.3.
 - `MOD-002_ENTITY_MODEL.md` — `Canonical: Yes`; current state `Approved / Revalidation Required`.
 - `MOD-003_DOCUMENT_MODEL.md` — `Canonical: Yes`; current state `Approved / Revalidation Required`.
 - `MOD-004_MEMORY_MODEL.md` — `Canonical: Yes`; current state `Approved / Revalidation Required`; dependency boundary and Models↔Memory authority boundary reconciled at v1.2.4.
@@ -114,13 +114,14 @@ Active transaction:
 
 Transaction B starts from current model text rather than historical relationship strings.
 
-Current semantic distinctions established through Units 1–11 are:
+Current semantic distinctions established through Units 1–12 are:
 
 - `Related Documents` → bounded `REFERENCES` candidate unless a stronger current source contract is independently established;
 - `MOD-004` semantic model composition (`MOD-002`, `MOD-003`, `MOD-011`) → qualified `DEPENDS_ON` candidates;
 - `MOD-004` Architecture decision/evolution artifacts (`ARC-009`, `ARC-010`) → `REFERENCES`, not dependencies;
 - `MOD-004` Runtime/Engine artifacts (`RUN-004`, `RUN-008`, `RUN-009`, `ENG-007`) → downstream ripple/revalidation targets with no current relationship registered from that classification;
 - `MOD-004 → MEM-001 = REFERENCES` is an explicit Models↔Memory authority-boundary candidate; `MOD-004` owns the memory-object semantic schema while `MEM-001` owns Memory-domain scope/promotion semantics;
+- `MOD-001 → KNW-001 = REFERENCES` is an explicit Models↔Knowledge authority-boundary candidate; `MOD-001` owns knowledge-object/schema semantics while `KNW-001` owns Knowledge-domain scope/lifecycle/promotion semantics;
 - `MOD-001` current consumers were classified from endpoint evidence; `SRV-004 → MOD-001 = DEPENDS_ON` is the verified stable-ID correction for stale `REL-002`;
 - `MOD-002` and `MOD-003` broad consumer classes were not converted into edges without concrete endpoints;
 - `MOD-011` Knowledge and external AI/Engine/Governance consumers/references were classified while endpoint maturity was kept separate from relationship semantics;
@@ -136,7 +137,8 @@ Primary bounded evidence surfaces include:
 - the Unit-7/Unit-8 MOD-002/MOD-003 evidence surfaces;
 - `Repository/REP-014_PRIORITY12_MOD004_RIPPLE_EVIDENCE_2026-09-05_G.tsv`;
 - `Repository/REP-014_PRIORITY12_MOD011_EXTERNAL_CONSUMER_EVIDENCE_2026-09-05_H.tsv`;
-- `Repository/REP-014_PRIORITY12_MOD004_MEM001_AUTHORITY_EVIDENCE_2026-09-05_I.tsv`.
+- `Repository/REP-014_PRIORITY12_MOD004_MEM001_AUTHORITY_EVIDENCE_2026-09-05_I.tsv`;
+- `Repository/REP-014_PRIORITY12_MOD001_KNW001_AUTHORITY_EVIDENCE_2026-09-05_J.tsv`.
 
 These evidence surfaces do **not** themselves register canonical REP-014 relationship IDs.
 
@@ -146,6 +148,13 @@ Unit-10 exact-head `22ea9d9f701c57f49e4cca4f4bb93d2834f1785c` passed all four re
 - Real Mutation Matrix Regression — `33975440831` — SUCCESS;
 - Full-Stack Repository Audit — `33975440840` — SUCCESS;
 - ARGO Runtime Prototype and Integration Tests — `33975440823` — SUCCESS.
+
+Unit-12 exact-head `2f5b91058af537d8a1cb6c3ffd950aab539d702d` also passed all four required workflow families:
+
+- M2 Multi-Channel Proposal Training — `33976499663` — SUCCESS;
+- Real Mutation Matrix Regression — `33976499622` — SUCCESS;
+- Full-Stack Repository Audit — `33976499553` — SUCCESS;
+- ARGO Runtime Prototype and Integration Tests — `33976499447` — SUCCESS.
 
 Current canonical-registry correction findings remain:
 
@@ -179,6 +188,24 @@ This resolves the identified MOD-004↔MEM-001 duplicate-authority ambiguity on 
 
 ---
 
+# Models ↔ Knowledge Authority Boundary
+
+Priority-12 active-overlap review also identified that `MOD-001` defined a canonical knowledge schema while `KNW-001` defined a canonical Knowledge-domain model, without an explicit ownership boundary in the Models source.
+
+`MOD-001` v1.1.3 now makes the boundary explicit:
+
+- `MOD-001` = implementation-independent semantic schema for knowledge objects;
+- `KNW-001` = Knowledge-domain scope/state/lifecycle/ownership/promotion authority;
+- canonical flags and knowledge-model terminology do not create duplicate authority;
+- `MOD-001 → KNW-001 = REFERENCES / AUTHORITY-BOUNDARY / NON-DEPENDENCY`;
+- no reverse edge is inferred because current `KNW-001` does not name MOD-001.
+
+The remaining active Models set was also scanned for a comparable primary-authority twin. No direct canonical twin was found for `MOD-002` Entity Model, `MOD-003` Document Model or `MOD-011` Knowledge Source Model in the inspected current repository scope. That negative result prevents unnecessary source mutation; it is bounded evidence, not repository-wide uniqueness certification.
+
+`SEMANTIC KNOWLEDGE SCHEMA AUTHORITY != KNOWLEDGE-DOMAIN OWNERSHIP != LIFECYCLE/PROMOTION AUTHORITY`.
+
+---
+
 # Reconstruction Decision
 
 The Models domain is not being restored as a historical sequence.
@@ -203,7 +230,7 @@ Before Models can leave Integrity Hold, the remaining bounded checks are:
 6. Models ↔ Services and Interfaces — **REL-002 correction plus MOD-001 concrete consumers classified; canonical registry synchronization remains**.
 7. Models ↔ Repository indexes — **physical allocation closed; canonical relationship-registry synchronization remains open**.
 8. Historical missing declarations ↔ equivalent current concepts — **resolved / no blind recreation**.
-9. Duplicate/overlapping semantic definitions — **historical MOD-005..010 overlap risk classified; critical MOD-004↔MEM-001 duplicate-authority ambiguity resolved; remaining active-model responsibility-set review pending**.
+9. Duplicate/overlapping semantic definitions — **critical MOD-004↔MEM-001 and MOD-001↔KNW-001 authority ambiguities resolved on the Models side; no comparable primary-authority twin found for MOD-002/MOD-003/MOD-011 in inspected current scope**.
 10. Version and release authority — **historical MOD-009 collision risk classified; current Models↔Release compatibility check pending**.
 11. Specifications ↔ Model authority and consumers — **REL-001 exists; current concrete Specifications consumer scan pending**.
 
@@ -211,7 +238,6 @@ relationship registry synchronization remains open.
 
 Current blocking set for Transaction-B material completeness is therefore narrowed to:
 
-- remaining active-model responsibility/overlap review;
 - Models↔Release compatibility;
 - concrete Specifications↔Models reconciliation;
 - safe canonical REP-014 stable-ID corrections/new registrations;
@@ -228,6 +254,7 @@ Current blocking set for Transaction-B material completeness is therefore narrow
 - `SEMANTIC DEPENDENCY != RELATED AUTHORITY != DOWNSTREAM CONSUMER != REVALIDATION TARGET`.
 - `RELATIONSHIP SEMANTICS != ENDPOINT MATURITY != REGISTRY PROMOTION`.
 - `SEMANTIC SCHEMA AUTHORITY != MEMORY-DOMAIN OWNERSHIP != PROMOTION AUTHORITY`.
+- `SEMANTIC KNOWLEDGE SCHEMA AUTHORITY != KNOWLEDGE-DOMAIN OWNERSHIP != LIFECYCLE/PROMOTION AUTHORITY`.
 - Missing evidence remains missing until verified or deliberately resolved.
 - Missing historical filenames do not force reconstruction when current semantic coverage is sufficient.
 - Historical drafts must not be promoted solely because they are old or previously referenced.
@@ -241,7 +268,7 @@ Current blocking set for Transaction-B material completeness is therefore narrow
 
 # Next Audit Boundary
 
-**remaining active-model responsibility overlap → Models↔Release compatibility → concrete Specifications↔Models consumers → safe REP-014 stable-ID/relationship registration → final Models status/queue reconciliation → Transaction-B/Priority-12 closure review**
+**Models↔Release compatibility → concrete Specifications↔Models consumers → safe REP-014 stable-ID/relationship registration → final Models status/queue reconciliation → Transaction-B/Priority-12 closure review**
 
 ---
 
