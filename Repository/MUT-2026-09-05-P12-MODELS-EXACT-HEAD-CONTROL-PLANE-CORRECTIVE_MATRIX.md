@@ -1,12 +1,13 @@
-# Priority 12 — Models Transaction-A Exact-Head Control-Plane Corrective A
+# Priority 12 — Models Transaction-A Exact-Head Control-Plane Corrective Matrix
 
-Transaction ID: `MUT-2026-09-05-P12-MODELS-EXACT-HEAD-CONTROL-PLANE-CORRECTIVE-A`
+Transaction ID: `MUT-2026-09-05-P12-MODELS-EXACT-HEAD-CONTROL-PLANE-CORRECTIVE`
 
 Priority: `12 — Models`
 
 State: `CORRECTIVE MATERIAL APPLIED / EXACT-HEAD CI PENDING`
 
 Failure entry HEAD: `3fefe4fcb8db810b8ab15518deb81323ffb8d396`
+Corrective material HEAD: `d70fd6d72139e4a5c2cbbd109480e4a6063bcb0d`
 
 ## Failure classification
 
@@ -27,7 +28,7 @@ The failure is a stale control-plane consumer/binding defect, not contradictory 
 |---|---|---|---|
 | P12-CA-01 | `Repository/REP-020_CURRENT_CONTROL_PLANE_BOUNDARY_MANIFEST.md` | UPDATE | refresh current version bindings to REP-012 1.0.13, REP-013 1.1.6, REP-016 1.3.1; preserve non-authority/Integrity-Hold semantics |
 | P12-CA-02 | `Quality/Integration/test_core_rep002_control_plane_reconciliation.py` | UPDATE | synchronize stale REP-002 expected version from 1.7.7 to intentional current 1.7.8 while retaining bounded-state assertions |
-| P12-CA-03 | this record | CREATE | classify failure and bind corrective scope |
+| P12-CA-03 | this corrective Matrix | CREATE / trigger-family normalization | classify failure, bind corrective scope, and ensure Real Mutation Matrix workflow trigger coverage |
 
 No Transaction-A material artifact is downgraded or semantically promoted. No relationship authority is manufactured. No Priority-12 closure is claimed.
 
