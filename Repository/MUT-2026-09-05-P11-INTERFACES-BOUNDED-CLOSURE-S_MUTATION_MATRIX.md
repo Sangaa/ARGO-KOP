@@ -4,11 +4,13 @@ Transaction ID: `MUT-2026-09-05-P11-INTERFACES-BOUNDED-CLOSURE-S`
 
 Priority: `11 — Interfaces`
 
-State: `EXACT-HEAD CONTRADICTORY EVIDENCE / CLOSURE-CONSUMER REBINDING REQUIRED / REPAIR AUTHORIZED`
+State: `REPAIR APPLIED / SAME-COMMIT PREFLIGHT BINDING REQUIRED / EXACT-HEAD REVALIDATION PENDING`
 
 Entry HEAD: `03b65d4ccbb0527da2f3fcbd8f0f050b23d0c774`
 Pre-write HEAD: `7be16957dd75881c946164bfe0530a004faca939`
 Material HEAD: `f7d1aa7ba85829a9bae9dae8a2c29d9d4fb6c95f`
+Matrix amendment HEAD: `b484b037c36df743f77cf6fe8d2356a0515a6eb2`
+First repair HEAD: `6d133d1fb9e23d1ca0db647b0230dcb94aab56c6`
 
 Protocol: governed bounded closure; current live main + exact-head R closure evidence + exact Interfaces inventory/allocation + Transactions B..R are the decision basis. This transaction is closure-only and does not create a new Interfaces hardening micro-transaction.
 
@@ -26,17 +28,17 @@ Transaction R closure HEAD `03b65d4ccbb0527da2f3fcbd8f0f050b23d0c774` is accepte
 
 | Change ID | Target | Action | Applied | Verified |
 | --- | --- | --- | --- | --- |
-| P11-S-01 | `Interfaces/_FOLDER_STATUS.md` | UPDATE bounded P11 closure and non-claims | YES | READ-BACK / REPAIR REQUIRED |
+| P11-S-01 | `Interfaces/_FOLDER_STATUS.md` | UPDATE bounded P11 closure, non-claims and repair evidence binding | YES | READ-BACK / EXACT-HEAD REVALIDATION PENDING |
 | P11-S-02 | `Repository/P11_INTERFACES_EXPLICIT_BOUNDED_CLOSURE_2026-09-05_S.md` | CREATE closure decision/reopen boundary | YES | READ-BACK / CI CONTRADICTION RECORDED |
-| P11-S-03 | `Repository/REP-011_PRIORITY11_INTERFACES_CLOSURE_ADDENDUM_2026-09-05_S.md` | CREATE bounded review traceability | YES | READ-BACK / REPAIR REQUIRED |
-| P11-S-04 | `Quality/Integration/test_priority11_interfaces_bounded_closure.py` | CREATE closure/non-claim drift guard | YES | VALID WITNESS / DO NOT WEAKEN |
-| P11-S-05 | this Matrix | UPDATE material/read-back/CI/closure evidence | YES | AMENDMENT APPLIED / CLOSURE PENDING |
-| P11-S-R01 | `Quality/Integrity/test_interfaces_folder_status_reconciliation.py` | UPDATE stale live-status consumer to current bounded closure semantics | NO | REPAIR AUTHORIZED |
-| P11-S-R02 | `Quality/Integrity/test_interfaces_p11_exact_inventory_allocation.py` | UPDATE stale P11 lifecycle assertion while preserving exact inventory/allocation invariants | NO | REPAIR AUTHORIZED |
+| P11-S-03 | `Repository/REP-011_PRIORITY11_INTERFACES_CLOSURE_ADDENDUM_2026-09-05_S.md` | CREATE/UPDATE bounded review traceability and repair evidence binding | YES | READ-BACK / EXACT-HEAD REVALIDATION PENDING |
+| P11-S-04 | `Quality/Integration/test_priority11_interfaces_bounded_closure.py` | CREATE closure/non-claim drift guard | YES | VALID WITNESS / UNMODIFIED |
+| P11-S-05 | this Matrix | UPDATE material/read-back/CI/repair/closure evidence | YES | CURRENT PREFLIGHT CO-BINDING |
+| P11-S-R01 | `Quality/Integrity/test_interfaces_folder_status_reconciliation.py` | UPDATE stale live-status consumer to current bounded closure semantics | YES | RUNTIME EXACT-HEAD PASS / FULL-STACK MATERIAL STEP NOT REACHED |
+| P11-S-R02 | `Quality/Integrity/test_interfaces_p11_exact_inventory_allocation.py` | UPDATE stale P11 lifecycle assertion while preserving exact inventory/allocation invariants | YES | RUNTIME EXACT-HEAD PASS / FULL-STACK MATERIAL STEP NOT REACHED |
 
-No path outside this table is authorized. The two R-paths are a forward consumer rebinding inside Transaction S, not a new transaction or implementation-scope expansion.
+No path outside this table is authorized. The R-paths and protected-surface evidence rebinding are forward repairs inside Transaction S, not a new transaction or implementation-scope expansion.
 
-## Exact-head contradictory evidence — material HEAD
+## Exact-head contradictory evidence — original material HEAD
 
 The required four-family exact-head validation on material HEAD `f7d1aa7ba85829a9bae9dae8a2c29d9d4fb6c95f` produced three successful workflow families and one failed family:
 
@@ -49,33 +51,47 @@ The required four-family exact-head validation on material HEAD `f7d1aa7ba85829a
 
 Therefore material validity, transaction validity and closure validity remain distinct. Transaction S is not closed.
 
-## Failure classification and repair binding
+## Failure classification and semantic repair
 
-### Integration closure contract
+`Quality/Integration/test_priority11_interfaces_bounded_closure.py` is a valid Transaction-S witness. It requires the stable marker `BOUNDED INTERFACES PARTITION` on each synchronized closure surface. The guard remains unmodified; REP-011 and this Matrix were synchronized to that contractual marker.
 
-`Quality/Integration/test_priority11_interfaces_bounded_closure.py` is a valid Transaction-S witness. It requires the stable marker `BOUNDED INTERFACES PARTITION` on each synchronized closure surface. The material status and explicit closure carry that marker, while REP-011 and the original Matrix wording used semantically related prose without the exact contractual marker.
+`Quality/Integrity/test_interfaces_folder_status_reconciliation.py` had a superseded live HOLD string and was rebound to current bounded closure semantics while retaining inventory/identity and provider/global boundaries.
 
-Repair rule: preserve the integration guard; synchronize `Repository/REP-011_PRIORITY11_INTERFACES_CLOSURE_ADDENDUM_2026-09-05_S.md` and this Matrix to the stable marker. No Integration test edit is authorized.
+`Quality/Integrity/test_interfaces_p11_exact_inventory_allocation.py` retained exact tree, digest, allocation and authority-effect invariants while replacing only the stale `P11 / INTERFACES = IN_PROGRESS` lifecycle assertion with bounded closure and no-successor/provider/global boundaries.
 
-### Integrity closure-consumer drift
+`Quality/Integrity/test_runtime_p10_gate13_connector_handoff.py` remains unmodified. Its stable phrase `provider authentication capability and trust-anchor acquisition` was restored in `Interfaces/_FOLDER_STATUS.md` as an independently open provider/trust boundary.
 
-`Quality/Integrity/test_interfaces_folder_status_reconciliation.py` still asserts the superseded live status string `INTEGRITY HOLD / LOCAL INVENTORY VERIFIED / CROSS-LAYER AND EXTERNAL-TRUST VALIDATION OPEN` against the mutable current `Interfaces/_FOLDER_STATUS.md`. The inventory and identity assertions remain valid; the stale lifecycle assertion must be rebound to the current bounded closure contract.
+## First repair exact-head evidence
 
-`Quality/Integrity/test_interfaces_p11_exact_inventory_allocation.py` correctly preserves exact tree, digest, allocation and authority-effect invariants, but its live-status test still requires `P11 / INTERFACES = IN_PROGRESS`. That lifecycle assertion is stale after Transaction-S bounded closure material and must be rebound without weakening the exact inventory/allocation guards, provider non-claims or successor-priority boundary.
+First repair HEAD `6d133d1fb9e23d1ca0db647b0230dcb94aab56c6` produced:
 
-### Stable downstream P10 witness
+- ARGO Runtime Prototype and Integration Tests — SUCCESS; run `33949447968`.
+- M2 Multi-Channel Proposal Training — SUCCESS; run `33949448005`.
+- Full-Stack Repository Audit — FAILURE; run `33949447975`, job `101261329458`.
 
-`Quality/Integrity/test_runtime_p10_gate13_connector_handoff.py` is valid and remains unmodified. It requires the stable contractual phrase `provider authentication capability and trust-anchor acquisition` from `Interfaces/_FOLDER_STATUS.md`. Transaction-S material dropped that exact phrase while retaining related provider/trust language.
+The Full-Stack failure occurred at `Enforce Mutation Matrix on current change set` before repository-wide audit execution. Exact log evidence was `changed_files=4`, `protected_changes=2`, `mutation_matrices=0`, with `Interfaces/_FOLDER_STATUS.md` and `Repository/REP-011_PRIORITY11_INTERFACES_CLOSURE_ADDENDUM_2026-09-05_S.md` identified as protected. The Matrix authorization existed at parent HEAD `b484b037c36df743f77cf6fe8d2356a0515a6eb2`, but the executable preflight evaluates Matrix presence in the same commit delta.
 
-Repair rule: restore the stable phrase in `Interfaces/_FOLDER_STATUS.md`; do not weaken or edit the P10 guard.
+This is a transaction/control-binding failure, not contradictory Interfaces material evidence. The material repair is preserved forward; no rewind is permitted.
+
+`PARENT MATRIX AUTHORITY != SAME-COMMIT MATRIX PRESENCE`.
+
+## Current same-commit binding repair
+
+This commit is authorized to co-change exactly these protected/control surfaces:
+
+- `Interfaces/_FOLDER_STATUS.md` — evidence note only; no closure/provider/global semantic expansion.
+- `Repository/REP-011_PRIORITY11_INTERFACES_CLOSURE_ADDENDUM_2026-09-05_S.md` — repair/preflight evidence note only.
+- this Matrix — control/evidence binding.
+
+The two Integrity guards and the valid P10/Integration witnesses remain unchanged in this binding commit.
 
 ## Repair constraints
 
 1. No rewind and no new transaction.
 2. No implementation-scope expansion.
-3. Restore `provider authentication capability and trust-anchor acquisition` in `Interfaces/_FOLDER_STATUS.md` within the deferred/provider non-claim boundary.
-4. Add the stable `BOUNDED INTERFACES PARTITION` marker to REP-011; this Matrix already carries it in this amendment.
-5. Rebind only the two explicitly authorized stale Integrity consumers to current semantic closure while preserving their still-valid invariants.
+3. Preserve `provider authentication capability and trust-anchor acquisition` in `Interfaces/_FOLDER_STATUS.md` within the deferred/provider non-claim boundary.
+4. Preserve the stable `BOUNDED INTERFACES PARTITION` marker across closure surfaces.
+5. Preserve the two semantically rebound Integrity consumers and all still-valid inventory/allocation invariants.
 6. Do not edit `Quality/Integration/test_priority11_interfaces_bounded_closure.py` or `Quality/Integrity/test_runtime_p10_gate13_connector_handoff.py`.
 7. No HORUS documentation, learning or Governance promotion.
 8. Provider authenticity, credentials, permissions, live availability, production proof, external trust anchor, external-evidence admission, Global Connected Baseline and Global Integrity remain unclaimed.
@@ -93,10 +109,10 @@ Repair rule: restore the stable phrase in `Interfaces/_FOLDER_STATUS.md`; do not
 
 Priority 11 reopens only on new Interfaces-specific contradictory evidence: exact inventory/allocation drift; active identity/authority collision; material unreviewed Interfaces source mutation affecting the bounded contract; contradiction in verified P11 relationship/executable seams; required bounded consumer/implementation defect; or invalidation of exact-head verification. Independent provider/global/downstream holds, deferred documentation, optional hardening or historical stale status wording alone do not reopen it.
 
-## Post-repair protocol
+## Post-binding protocol
 
-After the authorized repair commit, immutable read-back and parent-to-HEAD comparison must confirm only the Matrix and authorized repair/material paths changed. Exact-head CI must then succeed for Full-Stack Repository Audit, ARGO Runtime Prototype and Integration Tests, M2 Multi-Channel Proposal Training, and Real Mutation Matrix Regression.
+Immutable read-back and parent-to-HEAD comparison must confirm exactly the two protected evidence surfaces plus this Matrix changed. Exact-head CI must then succeed for Full-Stack Repository Audit, ARGO Runtime Prototype and Integration Tests, M2 Multi-Channel Proposal Training, and Real Mutation Matrix Regression.
 
-If and only if all four families succeed on the repaired exact HEAD, a Matrix-only final closure commit may set `CLOSED / VERIFIED / RESUME-SAFE`. Because that final Matrix commit creates a new HEAD, all four workflow families must succeed again on that final closure HEAD before Transaction S or bounded Priority 11 is declared closed.
+If and only if all four families succeed on the bound repair exact HEAD, a Matrix-only final closure commit may set `CLOSED / VERIFIED / RESUME-SAFE`. Because that final Matrix commit creates a new HEAD, all four workflow families must succeed again on that final closure HEAD before Transaction S or bounded Priority 11 is declared closed.
 
 `MATERIAL CANDIDATE != EXACT-HEAD VERIFIED CLOSURE`.

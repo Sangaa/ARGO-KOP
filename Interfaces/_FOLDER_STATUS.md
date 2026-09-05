@@ -126,6 +126,8 @@ Deferred / independently open and non-blocking for this bounded closure:
 - optional hardening not tied to a current material failure;
 - Phase 1 overall closure, repository-wide graph, Global Connected Baseline and Global Integrity.
 
+Transaction-S repair HEAD `6d133d1fb9e23d1ca0db647b0230dcb94aab56c6` restored the bounded semantic contracts and passed Runtime exact-head validation, but Full-Stack rejected that commit at Mutation Matrix preflight because protected status/REP-011 changes and their Matrix authority were split across adjacent commits. This follow-up evidence binding co-records the protected closure surfaces with the Transaction-S Matrix and does not expand the bounded Interfaces claim.
+
 ---
 
 # Reopen Conditions
@@ -146,6 +148,7 @@ Independent provider/global/downstream holds, deferred documentation, optional h
 6. `BOUNDED INTERFACES CLOSURE != GLOBAL REPOSITORY INTEGRITY`.
 7. Historical identity residue must remain distinguishable from current active authority.
 8. `DOCUMENT STRUCTURE WITH ACTIVE CONSUMERS = CONTRACT SURFACE`; consumer-impact checks are required before reshaping it.
+9. `PARENT MATRIX AUTHORITY != SAME-COMMIT MATRIX PRESENCE`; protected-change preflight must be satisfied at the commit boundary it evaluates.
 
 ---
 

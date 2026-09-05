@@ -17,6 +17,12 @@ Transactions B through R consumed the material P11 chain across relationship sem
 
 A bounded remaining-material-gap reassessment found no high-value Interfaces-specific material blocker. Provider proof, provider/live authentication and trust anchors, external evidence admission/global evidence work, documentation/legacy disposition and optional hardening remain independently deferred and do not reopen the bounded partition absent new contradictory Interfaces evidence.
 
+## Repair evidence binding
+
+Transaction-S repair HEAD `6d133d1fb9e23d1ca0db647b0230dcb94aab56c6` restored the stable closure marker, provider trust-boundary phrase, and current closure-consumer semantics. ARGO Runtime Prototype and Integration Tests run `33949447968` succeeded on that exact HEAD, and M2 Multi-Channel Proposal Training run `33949448005` succeeded. Full-Stack Repository Audit run `33949447975` failed only at `Enforce Mutation Matrix on current change set`: the commit contained two protected changes and zero Matrix files because the authorization Matrix was its parent commit.
+
+The current follow-up co-binds this protected REP-011/status evidence with the same Transaction-S Matrix. It is a forward control repair, not a new implementation transaction and not a provider/global authority promotion.
+
 ## Boundary
 
 This addendum records bounded review/traceability only. It does not promote provider claims, external evidence, legacy artifacts, HORUS findings, learning material or Governance authority. It does not claim Phase-1 overall closure, repository-wide graph completion, Global Connected Baseline or Global Integrity PASS.
