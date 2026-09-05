@@ -2,10 +2,10 @@
 
 Platform: ARGO KOP  
 Document ID: REP-014  
-Version: 1.2.19
+Version: 1.2.20
 Status: Active / Relationship Enumeration In Progress  
 Development Baseline: 3.2.1  
-Last Audit: 2026-09-03
+Last Audit: 2026-09-05
 
 ---
 
@@ -68,7 +68,7 @@ The following are deliberately limited to relationships established during repos
 | ID | Source | Target | Type | State |
 |---|---|---|---|---|
 | REL-001 | SPEC-001-KNOWLEDGE-ORGANIZATION | MOD-001 | DEPENDS_ON | Revalidated within inspected authority scope |
-| REL-002 | MOD-001 | SRV-004 | CONSUMES | Revalidated within inspected scope |
+| REL-002 | SRV-004 | MOD-001 | DEPENDS_ON | **P12 DIRECT-SOURCE-REVALIDATED / STABLE-ID CORRECTION / BOUNDED** |
 | REL-003 | SRV-005 | ENG-004 | CONSUMES | Revalidated within inspected scope |
 | REL-004 | ENG-006 | ENG-002 | CONSUMES | Revalidated within inspected scope |
 | REL-005 | ENG-006 | SRV-009 | IMPLEMENTS | **BIDIRECTIONAL / EXECUTABLE-VERIFIED / GOVERNED / ISOLATED E2E** |
@@ -78,7 +78,7 @@ The following are deliberately limited to relationships established during repos
 | REL-009 | RUN-010 | SRV-009 | CONSUMES | **INTENTIONAL ONE-WAY / ISOLATED EXECUTION-OBSERVED / GOVERNED / NON-UNIVERSAL** |
 | REL-010 | KNW-002 | MOD-011 | CONSUMES | Revalidated within inspected scope |
 | REL-011 | MOD-011 | KNW-003 | REFERENCES | Revalidation Required |
-| REL-012 | MOD-011 | KNW-004 | DEPENDS_ON | Revalidated within inspected scope |
+| REL-012 | MOD-011 | KNW-004 | REFERENCES | **P12 DIRECT-SOURCE-REVALIDATED / STABLE-ID TYPE CORRECTION / BOUNDED** |
 | REL-013 | MOD-011 | KNW-008 | REFERENCES | Revalidated within inspected scope |
 | REL-014 | KNW-009 | MOD-011 | CONSUMES | Revalidated within inspected scope |
 | REL-015 | REP-011 | REP-012 | DEPENDS_ON | Verified |
@@ -147,6 +147,49 @@ The following are deliberately limited to relationships established during repos
 | REL-078 | INTF-010 | ARC-006 | IMPLEMENTS | **DIRECT-SOURCE-VALIDATED / CONTRACTUAL / NON-EXECUTABLE / NON-DEPENDENCY** |
 | REL-079 | INTF-010 | ENG-007 | IMPLEMENTS | **DIRECT-SOURCE-VALIDATED / CONTRACTUAL / NON-EXECUTABLE** |
 | REL-080 | INTF-010 | MEM-001 | IMPLEMENTS | **DIRECT-SOURCE-VALIDATED / CONTRACTUAL / NON-EXECUTABLE** |
+| REL-081 | KNW-004 | MOD-001 | REFERENCES | **P12 DIRECT-SOURCE-REVALIDATED / DOCUMENTARY / NON-DEPENDENCY** |
+| REL-082 | INT-001 | MOD-001 | DEPENDS_ON | **P12 DIRECT-SOURCE-REVALIDATED / SEMANTIC DEPENDENCY / BOUNDED** |
+| REL-083 | INT-002 | MOD-001 | DEPENDS_ON | **P12 DIRECT-SOURCE-REVALIDATED / SEMANTIC DEPENDENCY / BOUNDED** |
+| REL-084 | MOD-002 | MOD-003 | REFERENCES | **P12 DIRECT-SOURCE-REVALIDATED / DOCUMENTARY / NON-DEPENDENCY** |
+| REL-085 | MOD-002 | MOD-004 | REFERENCES | **P12 DIRECT-SOURCE-REVALIDATED / DOCUMENTARY / NON-DEPENDENCY** |
+| REL-086 | MOD-002 | MOD-011 | REFERENCES | **P12 DIRECT-SOURCE-REVALIDATED / DOCUMENTARY / NON-DEPENDENCY** |
+| REL-087 | MOD-002 | ARC-002 | REFERENCES | **P12 DIRECT-SOURCE-REVALIDATED / ARCHITECTURE REFERENCE / NON-OWNERSHIP** |
+| REL-088 | MOD-002 | ARC-006 | REFERENCES | **P12 DIRECT-SOURCE-REVALIDATED / ARCHITECTURE REFERENCE / NON-DEPENDENCY** |
+| REL-089 | MOD-002 | ARC-009 | REFERENCES | **P12 DIRECT-SOURCE-REVALIDATED / ARCHITECTURE REVIEW REFERENCE** |
+| REL-090 | MOD-002 | ARC-010 | REFERENCES | **P12 DIRECT-SOURCE-REVALIDATED / ARCHITECTURE REVIEW REFERENCE** |
+| REL-091 | MOD-002 | GOV-004 | REFERENCES | **P12 DIRECT-SOURCE-REVALIDATED / GOVERNANCE METADATA REFERENCE** |
+| REL-092 | MOD-002 | GOV-012 | REFERENCES | **P12 DIRECT-SOURCE-REVALIDATED / RECONSTRUCTION REFERENCE / NON-DEPENDENCY** |
+| REL-093 | MOD-003 | MOD-002 | REFERENCES | **P12 DIRECT-SOURCE-REVALIDATED / DOCUMENTARY / NON-DEPENDENCY** |
+| REL-094 | MOD-003 | MOD-004 | REFERENCES | **P12 DIRECT-SOURCE-REVALIDATED / DOCUMENTARY / NON-DEPENDENCY** |
+| REL-095 | MOD-003 | MOD-011 | REFERENCES | **P12 DIRECT-SOURCE-REVALIDATED / DOCUMENTARY / NON-DEPENDENCY** |
+| REL-096 | MOD-003 | GOV-004 | REFERENCES | **P12 DIRECT-SOURCE-REVALIDATED / GOVERNANCE METADATA REFERENCE** |
+| REL-097 | MOD-003 | GOV-012 | REFERENCES | **P12 DIRECT-SOURCE-REVALIDATED / RECONSTRUCTION REFERENCE / NON-DEPENDENCY** |
+| REL-098 | MOD-003 | REP-001 | REFERENCES | **P12 DIRECT-SOURCE-REVALIDATED / REPOSITORY REFERENCE / NON-AUTHORITY** |
+| REL-099 | MOD-003 | REP-002 | REFERENCES | **P12 DIRECT-SOURCE-REVALIDATED / REPOSITORY REFERENCE / NON-AUTHORITY** |
+| REL-100 | MOD-003 | ARC-009 | REFERENCES | **P12 DIRECT-SOURCE-REVALIDATED / ARCHITECTURE REVIEW REFERENCE** |
+| REL-101 | MOD-003 | ARC-010 | REFERENCES | **P12 DIRECT-SOURCE-REVALIDATED / ARCHITECTURE REVIEW REFERENCE** |
+| REL-102 | MOD-004 | MOD-002 | DEPENDS_ON | **P12 DIRECT-SOURCE-REVALIDATED / MODEL COMPOSITION / BOUNDED** |
+| REL-103 | MOD-004 | MOD-003 | DEPENDS_ON | **P12 DIRECT-SOURCE-REVALIDATED / MODEL COMPOSITION / BOUNDED** |
+| REL-104 | MOD-004 | MOD-011 | DEPENDS_ON | **P12 DIRECT-SOURCE-REVALIDATED / MODEL COMPOSITION / BOUNDED** |
+| REL-105 | MOD-004 | ARC-009 | REFERENCES | **P12 DIRECT-SOURCE-REVALIDATED / ARCHITECTURE REVIEW / NON-DEPENDENCY** |
+| REL-106 | MOD-004 | ARC-010 | REFERENCES | **P12 DIRECT-SOURCE-REVALIDATED / ARCHITECTURE REVIEW / NON-DEPENDENCY** |
+| REL-107 | MOD-011 | MOD-002 | REFERENCES | **P12 DIRECT-SOURCE-REVALIDATED / DOCUMENTARY / NON-DEPENDENCY** |
+| REL-108 | MOD-011 | MOD-003 | REFERENCES | **P12 DIRECT-SOURCE-REVALIDATED / DOCUMENTARY / NON-DEPENDENCY** |
+| REL-109 | MOD-011 | MOD-004 | REFERENCES | **P12 DIRECT-SOURCE-REVALIDATED / DOCUMENTARY / NON-DEPENDENCY** |
+| REL-110 | KNW-003 | MOD-011 | REFERENCES | **P12 DIRECT-SOURCE-REVALIDATED / DOCUMENTARY / NON-DEPENDENCY** |
+| REL-111 | KNW-004 | MOD-011 | REFERENCES | **P12 DIRECT-SOURCE-REVALIDATED / DOCUMENTARY / NON-DEPENDENCY** |
+| REL-112 | MOD-011 | ENG-007 | REFERENCES | **P12 DIRECT-SOURCE-REVALIDATED / DOCUMENTARY / NON-DEPENDENCY** |
+| REL-113 | ENG-007 | MOD-011 | REFERENCES | **P12 DIRECT-SOURCE-REVALIDATED / DOCUMENTARY / NON-DEPENDENCY** |
+| REL-114 | MOD-011 | AI-006 | REFERENCES | **P12 DIRECT-SOURCE-CLASSIFIED / ENDPOINT HOLD / NON-PROMOTING** |
+| REL-115 | AI-006 | MOD-011 | CONSUMES | **P12 DIRECT-SOURCE-CLASSIFIED / ENDPOINT HOLD / SEMANTIC CONSUMPTION** |
+| REL-116 | MOD-011 | AI-007 | REFERENCES | **P12 DIRECT-SOURCE-CLASSIFIED / ENDPOINT HOLD / NON-PROMOTING** |
+| REL-117 | AI-007 | MOD-011 | DEPENDS_ON | **P12 DIRECT-SOURCE-CLASSIFIED / ENDPOINT HOLD / QUALIFIED SEMANTIC DEPENDENCY** |
+| REL-118 | AI-008 | MOD-011 | DEPENDS_ON | **P12 DIRECT-SOURCE-CLASSIFIED / ENDPOINT HOLD / QUALIFIED SEMANTIC DEPENDENCY** |
+| REL-119 | MOD-011 | GOV-011 | REFERENCES | **P12 DIRECT-SOURCE-CLASSIFIED / TARGET HOLD / NON-PROMOTING** |
+| REL-120 | MOD-011 | Memory/Engineering_Journal/SESSION_LEARNING_HANDOFF_TEMPLATE.md | REFERENCES | **P12 DIRECT-SOURCE-REVALIDATED / DOCUMENTARY / NON-DEPENDENCY** |
+| REL-121 | MOD-004 | MEM-001 | REFERENCES | **P12 AUTHORITY-BOUNDARY / DIRECT-SOURCE-REVALIDATED / NON-DEPENDENCY** |
+| REL-122 | MOD-001 | KNW-001 | REFERENCES | **P12 AUTHORITY-BOUNDARY / DIRECT-SOURCE-REVALIDATED / NON-DEPENDENCY** |
+| REL-123 | MOD-001 | SPEC-001-KNOWLEDGE-ORGANIZATION | REFERENCES | **P12 DIRECT-SOURCE-REVALIDATED / OPERATIONAL GUIDANCE / NON-DEPENDENCY** |
 
 ## Current Review-Cycle Reconciliation — 2026-08-17
 
@@ -750,6 +793,39 @@ Boundary:
 - no endpoint status or authority is promoted by this registration;
 - P11 remains open for connector/implementation evidence and external-trust boundary assessment;
 - Priority 10 remains closed; Phase 1, Global Connected Baseline, the repository-wide graph and Global Integrity PASS remain open/unclaimed.
+
+## P12 Models Relationship/Content Canonical Registry Reconciliation — 2026-09-05
+
+Priority-12 Transaction B reconciles the Models relationship/content graph from current source semantics and registers only relationships that survived direct source/target, identity, authority and controlled-type review.
+
+Stable-ID repairs:
+
+```text
+REL-002: SRV-004 → MOD-001 = DEPENDS_ON
+REL-012: MOD-011 → KNW-004 = REFERENCES
+```
+
+`REL-002` corrects the historical reverse/consumption interpretation because current `SRV-004` explicitly declares MOD-001 under Dependencies while current MOD-001 does not declare consumption of SRV-004. `REL-012` preserves its stable direction but corrects the controlled type because current MOD-011 names KNW-004 under Related Documents and does not establish dependency semantics.
+
+New bounded cohort:
+
+`REL-081..REL-123` are allocated exactly by `Repository/REP-014_PRIORITY12_REGISTRY_ALLOCATION_PLAN_2026-09-05_M.tsv` from evidence surfaces B..L.
+
+Semantic boundaries preserved by this registration:
+
+- `Related Documents` registrations remain `REFERENCES` unless a stronger direct contract was independently proven;
+- MOD-004 model composition to MOD-002/MOD-003/MOD-011 is `DEPENDS_ON`, while ARC-009/ARC-010 remain review references;
+- MOD-004 Runtime/Engine quartet RUN-004/RUN-008/RUN-009/ENG-007 remains `NO_EDGE / RIPPLE_ONLY` and is deliberately absent from the registry;
+- generic consumer or generic authority classes do not manufacture concrete target relationships;
+- reverse relationships are registered only where the reverse source independently supplies evidence;
+- MOD-004→MEM-001 and MOD-001→KNW-001 are authority-boundary `REFERENCES`, not duplicate-authority or dependency claims;
+- MOD-001→SPEC-001 is a separate operational-guidance reference and does not alter bounded REL-001 dependency semantics in the opposite direction;
+- AI-006/007/008 and GOV-011 endpoint/target holds remain visible in relationship state and do not promote those endpoints;
+- relationship registration does not transfer authority, certify endpoints, close Models, or certify the repository-wide graph.
+
+Evidence authority remains the current source artifacts plus the Priority-12 evidence surfaces and executable guards. Historical relationship strings are superseded only for the stable IDs explicitly corrected above; historical provenance remains preserved.
+
+`RELATIONSHIP SEMANTICS != ENDPOINT MATURITY != REGISTRY PROMOTION != PARTITION CLOSURE`.
 
 ---
 
