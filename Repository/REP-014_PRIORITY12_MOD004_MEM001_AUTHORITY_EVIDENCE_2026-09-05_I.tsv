@@ -1,0 +1,4 @@
+source	target	candidate_type	disposition	evidence_basis	registry_action
+MOD-004	MEM-001	REFERENCES	AUTHORITY_BOUNDARY_REFERENCE	MOD-004 v1.2.4 explicitly defines itself as memory-object semantic schema and identifies MEM-001 as Memory-domain ownership/scope/promotion authority	REGISTRATION_CANDIDATE
+MEM-001	MOD-004	NONE	NO_REVERSE_EDGE_PROVEN	Current MEM-001 directly defines Memory-domain separation and promotion but does not name MOD-004	DO_NOT_REGISTER
+MOD-004	MEM-001	NONE	NO_DUPLICATE_AUTHORITY	Same human-readable title and Canonical Yes do not establish duplicate authority after explicit schema-vs-domain boundary reconciliation	NO_DUPLICATE_DECISION
