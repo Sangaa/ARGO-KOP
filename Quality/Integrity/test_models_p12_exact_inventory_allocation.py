@@ -63,5 +63,6 @@ def test_p12_models_status_preserves_open_relationship_boundary():
     assert "Priority 12 remains **OPEN**" in status
     assert "INTEGRITY HOLD / STAGED RECONSTRUCTION" in status
     assert "MOD-011" in status and "Proposed / Future-Ready" in status
-    assert "REP-002, REP-012, REP-013 and REP-016 remains part of the same open transaction" in status
+    assert "Transaction A is `CLOSED / VERIFIED / RESUME-SAFE`" in status
+    assert "relationship/content graph" in status
     assert "EXACT PHYSICAL INVENTORY != ACTIVE SEMANTIC AUTHORITY" in status
