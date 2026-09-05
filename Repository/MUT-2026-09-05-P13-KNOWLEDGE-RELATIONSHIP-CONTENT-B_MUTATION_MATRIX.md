@@ -3,7 +3,7 @@
 Transaction: `MUT-2026-09-05-P13-KNOWLEDGE-RELATIONSHIP-CONTENT-B`
 Priority: `13 — Knowledge`
 Entry HEAD: `0beaff41db190cecc757f0d169a5d7174c1578d2`
-State: `OPEN / UNIT 1 VERIFIED / UNIT 2 KNW-006 AUTHORITY REPAIR PREPARED`
+State: `OPEN / UNITS 1-2 VERIFIED / UNIT 3 KNW-007 BASELINE-SCOPE REPAIR PREPARED`
 
 ## Entry condition
 
@@ -38,13 +38,13 @@ No duplicate/reverse relationship is authorized merely to increase graph density
 
 ### KNW-006
 
-Absolute statement at entry: `Repository always prevails.`
+Entry contradiction: `Repository always prevails.`
 
-Conflict: current KNW-001/002/005/009 distinguish repository location, declared scope, ownership, evidence and canonical authority. Repository presence or a transient repository representation does not automatically override user/project/deployment ownership or higher authority layers.
+Disposition: repaired in Unit 2 by binding authority to governed scope/ownership/evidence/publication state while retaining higher authority and contextual attribution.
 
 ### KNW-007
 
-The old baseline wording treats approved repository knowledge broadly as the baseline/authoritative body.
+The entry wording treats approved repository knowledge broadly as the baseline/authoritative body.
 
 Conflict: current scope model requires a distinction between platform canonical knowledge and contextual repository-held knowledge. Repository storage/approval does not itself make every item platform baseline authority.
 
@@ -84,23 +84,44 @@ Authorized exactly three paths:
 2. `Quality/Integrity/test_knowledge_p13_knw006_authority_scope.py`
 3. `Repository/MUT-2026-09-05-P13-KNOWLEDGE-RELATIONSHIP-CONTENT-B_MUTATION_MATRIX.md`
 
+Applied HEAD: `eef346f8f80d7e135e920df2f7c0f234830b5373`
+
+Unit-2 compare: `1 commit / exactly 3 authorized files`.
+
+Exact-head four-family result: `4/4 SUCCESS`.
+
+Repair result:
+
+- obsolete repository-absolute authority removed;
+- authority now scope/ownership/evidence/publication bounded;
+- higher Core/Governance/Architecture/Repository-control authority preserved;
+- user/project/deployment attribution and non-silent-overwrite preserved;
+- KNW-006 remains `Integrity Hold / Revalidated` at `1.1.1`.
+
+## Unit 3 — KNW-007 baseline-scope repair
+
+Authorized exactly three paths:
+
+1. `Knowledge/KNW-007_KNOWLEDGE_BASELINE.md`
+2. `Quality/Integrity/test_knowledge_p13_knw007_baseline_scope.py`
+3. `Repository/MUT-2026-09-05-P13-KNOWLEDGE-RELATIONSHIP-CONTENT-B_MUTATION_MATRIX.md`
+
 Repair contract:
 
-- remove the absolute `Repository always prevails` rule;
-- bind knowledge authority to applicable governed authority, declared scope, ownership, evidence and promotion/publication state;
-- preserve higher Core/Governance/Architecture/Repository control authority;
-- preserve user/project/deployment attribution and non-silent-overwrite rules;
-- state explicitly that quality does not itself create canonical authority;
-- retain KNW-006 under `Integrity Hold / Revalidated` rather than promoting it because its wording was repaired;
-- bump KNW-006 only from `1.1.0` to `1.1.1` as a semantic correction.
+- define the baseline as governed canonical `PLATFORM` knowledge, not all approved repository knowledge;
+- make repository location/approval/local validation insufficient by itself for baseline membership;
+- preserve user/project/deployment attribution until explicit governed promotion/reclassification;
+- keep Knowledge baseline subordinate to higher authority contracts;
+- make project knowledge a possible evidence/candidate source rather than automatic platform baseline content;
+- retain KNW-007 under `Integrity Hold / Revalidated` and bump only `1.1.0 → 1.1.1` for the semantic correction.
 
-Unit 2 does not alter REP-014, REP-016, REP-020 or any other KNW artifact.
+No REP-014/016/020 mutation is authorized by Unit 3.
 
 ## Planned material sequence
 
 1. Evidence Unit 1 — COMPLETE / 4/4.
-2. Repair KNW-006 scoped authority wording — Unit 2 exact-head validation pending.
-3. Repair KNW-007 baseline scope/authority wording → exact-head 4/4.
+2. KNW-006 authority repair — COMPLETE / 4/4.
+3. KNW-007 baseline-scope repair — exact-head validation pending.
 4. Repair KNW-008 traceability/retention absolutes → exact-head 4/4.
 5. Repair KNW-010 maintenance/deletion absolute → exact-head 4/4.
 6. Re-read all KNW-001..010 after repairs and evaluate remaining identity/content drift.

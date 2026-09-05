@@ -6,41 +6,21 @@
 
 ---
 
-Platform
-
-ARGO KOP
-
-Knowledge Operating Platform
-
----
-
-Document ID
-
-KNW-007
-
-Version
-
-1.1.0
-
-Status
-
-Approved
-
-Category
-
-Knowledge
-
-Canonical
-
-Yes
+Platform: ARGO KOP  
+Document ID: KNW-007  
+Version: 1.1.1  
+Status: Integrity Hold / Revalidated  
+Category: Knowledge  
+Canonical: Yes  
+Last Audit: 2026-09-05  
 
 ---
 
 # Purpose
 
-This document defines the official Knowledge Baseline of ARGO KOP.
+This document defines the governed **platform Knowledge Baseline** of ARGO KOP.
 
-The Knowledge Baseline represents the current approved body of organizational knowledge upon which reasoning, memory and future platform evolution are built.
+The Knowledge Baseline represents the current body of knowledge explicitly accepted as canonical for ARGO's platform scope. It does not absorb user-, project- or deployment-owned knowledge merely because that knowledge is useful, validated locally or stored in the repository.
 
 ---
 
@@ -48,49 +28,60 @@ The Knowledge Baseline represents the current approved body of organizational kn
 
 The Knowledge Baseline shall:
 
-- Define authoritative knowledge.
-- Prevent uncontrolled knowledge drift.
+- Define the current canonical platform-knowledge starting point.
+- Prevent uncontrolled platform-knowledge drift.
 - Support repository reviews.
-- Preserve reasoning consistency.
+- Preserve reasoning consistency within the applicable platform scope.
 - Enable controlled knowledge evolution.
+- Preserve contextual knowledge outside the platform baseline until explicit promotion is authorized.
 
 ---
 
 # Knowledge Baseline
 
-The approved repository knowledge is the current baseline.
+The platform Knowledge Baseline consists of governed knowledge explicitly accepted for canonical `PLATFORM` scope under applicable authority.
 
-Only validated repository knowledge belongs to the baseline.
+Repository storage, document approval or local validation alone does not make a knowledge item part of the platform Knowledge Baseline.
 
 Conversation context never becomes baseline automatically.
+
+User-, project- and deployment-owned knowledge remains attributable to its originating scope unless explicitly promoted or reclassified through the governed knowledge lifecycle.
 
 ---
 
 # Baseline Components
 
-Architecture Knowledge
+Canonical platform knowledge may address subject areas including:
 
-Governance Knowledge
+Architecture
 
-Repository Knowledge
+Governance
 
-Business Knowledge
+Repository
 
-Operational Knowledge
+Platform
 
-Project Knowledge
+Business
 
-Reference Knowledge
+Operational
 
-Historical Knowledge
+Technical
+
+Reference
+
+Historical
 
 Approved Decisions
+
+Subject category does not determine baseline membership. Baseline membership requires the applicable platform scope, evidence, authority and publication/promotion state.
+
+Project knowledge may contribute evidence or promotion candidates but does not enter the platform baseline solely because it is repository-held.
 
 ---
 
 # Baseline Authority
 
-Knowledge authority follows:
+Knowledge authority remains subordinate to applicable higher authority and follows the governed layer/contract in force, including as relevant:
 
 Core
 
@@ -104,35 +95,43 @@ Architecture
 
 ↓
 
-Repository
+Repository control authority
 
 ↓
 
-Knowledge
+Canonical Knowledge within its declared scope
 
-Repository knowledge is authoritative.
+The Knowledge Baseline is a governed starting point for platform reasoning; it is not an independent authority above Core, Governance, Architecture or Repository control contracts.
+
+Repository location is a storage/control fact and does not by itself create platform-wide semantic authority.
 
 ---
 
 # Baseline Rules
 
-Every engineering activity shall begin from the approved Knowledge Baseline.
+Platform engineering activity that relies on canonical ARGO knowledge shall begin from the current governed platform Knowledge Baseline together with any higher applicable authority.
 
-Every knowledge review shall compare against the current baseline.
+Knowledge reviews shall compare platform-canonical claims against the current baseline while preserving separately scoped user/project/deployment evidence.
 
-Baseline integrity shall always be preserved.
+Baseline integrity shall be preserved through traceable, authorized change rather than by treating prior baseline content as immutable.
 
 ---
 
 # Baseline Validation
 
-Knowledge Baseline verification includes:
+Knowledge Baseline verification includes, as applicable:
 
 Knowledge Classification
+
+Declared Platform Scope
 
 Knowledge Relationships
 
 Knowledge Ownership
+
+Source / Provenance
+
+Evidence State
 
 Repository Alignment
 
@@ -142,13 +141,19 @@ Governance Compliance
 
 Version Consistency
 
+Promotion / Publication Authority
+
 ---
 
 # Baseline Evolution
 
-Knowledge Baseline changes only after:
+The platform Knowledge Baseline changes only after applicable:
 
 Evidence
+
+↓
+
+Scope / Ownership Check
 
 ↓
 
@@ -160,31 +165,39 @@ Validation
 
 ↓
 
-Repository Approval
+Impact / Contradiction Review
 
 ↓
 
-Baseline Update
+Applicable Authority Approval
 
 ↓
 
-Release
+Baseline Update / Publication
+
+↓
+
+Post-change Validation
+
+A change may remain local, become a shared candidate, be rejected, or be promoted to platform scope. Repository write access is not baseline authority.
 
 ---
 
 # Repository Integrity
 
-Knowledge Baseline preserves:
+Knowledge Baseline controls preserve:
 
 Consistency
 
-Authority
+Authority Boundaries
+
+Scope / Ownership
 
 Traceability
 
 Relationships
 
-Historical Continuity
+Historical Continuity where materially required
 
 Repository Alignment
 
@@ -192,23 +205,20 @@ Repository Alignment
 
 # Related Documents
 
-KNW-001_KNOWLEDGE_MODEL
-
-KNW-004_KNOWLEDGE_LIFECYCLE
-
-KNW-005_KNOWLEDGE_GOVERNANCE
-
-REP-008_REPOSITORY_BASELINE
-
-REP-009_REPOSITORY_TRACEABILITY
-
-CORE-003_CONSTITUTION
+- `Knowledge/KNW-001_KNOWLEDGE_MODEL.md`
+- `Knowledge/KNW-002_KNOWLEDGE_CLASSIFICATION.md`
+- `Knowledge/KNW-004_KNOWLEDGE_LIFECYCLE.md`
+- `Knowledge/KNW-005_KNOWLEDGE_GOVERNANCE.md`
+- `Knowledge/KNW-009_KNOWLEDGE_EVOLUTION.md`
+- `Repository/REP-008_REPOSITORY_BASELINE.md`
+- `Repository/REP-009_REPOSITORY_TRACEABILITY.md`
+- `Core/CORE-003_CONSTITUTION.md`
 
 ---
 
 # Guiding Statement
 
-Reliable reasoning always begins from a reliable Knowledge Baseline.
+Reliable platform reasoning begins from a governed canonical platform Knowledge Baseline, while contextual knowledge remains attributable to its own scope until explicit promotion is justified and authorized.
 
 ---
 
