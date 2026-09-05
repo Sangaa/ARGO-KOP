@@ -1,0 +1,9 @@
+candidate_source	candidate_target	candidate_type	current_disposition	evidence_basis	registry_action
+MOD-004	RUN-004	NONE	RIPPLE_ONLY	MOD-004 current source classifies RUN-004 as downstream compatibility/revalidation target; RUN-004 current source does not name MOD-004	DO_NOT_REGISTER
+MOD-004	RUN-008	NONE	RIPPLE_ONLY	MOD-004 current source classifies RUN-008 as downstream compatibility/revalidation target; RUN-008 current source does not name MOD-004	DO_NOT_REGISTER
+MOD-004	RUN-009	NONE	RIPPLE_ONLY	MOD-004 current source classifies RUN-009 as downstream compatibility/revalidation target; RUN-009 current source does not name MOD-004	DO_NOT_REGISTER
+MOD-004	ENG-007	NONE	RIPPLE_ONLY	MOD-004 current source classifies ENG-007 as downstream compatibility/revalidation target; ENG-007 current source names MEM-* and MOD-011 but not MOD-004	DO_NOT_REGISTER
+RUN-004	MOD-004	NONE	NO_REVERSE_EDGE_PROVEN	RUN-004 current source contains no direct MOD-004 or Memory Model dependency/consumer declaration	DO_NOT_REGISTER
+RUN-008	MOD-004	NONE	NO_REVERSE_EDGE_PROVEN	RUN-008 current source contains no direct MOD-004 or Memory Model dependency/consumer declaration	DO_NOT_REGISTER
+RUN-009	MOD-004	NONE	NO_REVERSE_EDGE_PROVEN	RUN-009 current source contains no direct MOD-004 or Memory Model dependency/consumer declaration	DO_NOT_REGISTER
+ENG-007	MOD-004	NONE	NO_REVERSE_EDGE_PROVEN	ENG-007 current source defines learning/memory-domain boundaries but does not name MOD-004	DO_NOT_REGISTER
