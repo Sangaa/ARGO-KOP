@@ -6,68 +6,83 @@ Folder
 Knowledge
 
 Status
-🟡 INTEGRITY HOLD
+🟡 INTEGRITY HOLD / PRIORITY-13 EXACT INVENTORY VERIFIED
 
 Version
-1.3.0
+1.3.1
 
 Last Review
-2026-08-11
+2026-09-05
 
 Review Method
-Repository First
+Repository First / Exact Tree Allocation
 
 Repository Baseline
-Current main branch repository state
+`main@f4638a9842f17b55d9734223228c54f72e5e3e57`
 
 ---
 
 # Review Summary
 
 Inventory
-🟢 Verified for reviewed scope
+🟢 Exact physical inventory verified for the current Priority-13 entry head
+
+Exact tracked leaf count
+`50`
+
+Sorted-path SHA-256
+`8ef530bc3b91a11e68e01df02e6d7bb29de4ee7824eada45c0b2928e03f85dc7`
+
+Exact inventory evidence
+`Repository/MUT-2026-09-05-P13-KNOWLEDGE-EXACT-INVENTORY-ALLOCATION-A_INVENTORY.tsv`
 
 Knowledge Model Review
-🟢 Completed for reviewed artifacts
+🟡 Prior reviewed-artifact evidence retained; current Priority-13 content reconciliation remains open
 
 Knowledge Governance Review
-🟢 Completed for reviewed artifacts
+🟡 Prior reviewed-artifact evidence retained; current Priority-13 authority reconciliation remains open
 
 Knowledge README
-🟢 Rebuilt and re-read
+🟢 Current README re-read at the Priority-13 entry head
 
 Repository Alignment
-🟡 Cross-layer synchronization pending
+🟡 Exact physical allocation complete; relationship/content/control-plane reconciliation remains open
 
 Canonical Validation
-🟡 Pending consolidated repository-wide validation
+🟡 Pending consolidated validation
 
 Folder Approval
-HOLD — approval remains limited until synchronization and relationship validation are complete
+HOLD — exact physical allocation does not close Priority 13 or promote supporting surfaces to canonical Knowledge authority
 
 ---
 
-# Files Reviewed
+# Exact Physical Allocation
 
-- `README.md`
-- `KNW-001_KNOWLEDGE_MODEL.md`
-- `KNW-002_KNOWLEDGE_CLASSIFICATION.md`
-- `KNW-003_KNOWLEDGE_RELATIONSHIPS.md`
-- `KNW-004_KNOWLEDGE_LIFECYCLE.md`
-- `KNW-005_KNOWLEDGE_GOVERNANCE.md`
-- `KNW-006_KNOWLEDGE_QUALITY.md`
-- `KNW-007_KNOWLEDGE_BASELINE.md`
-- `KNW-008_KNOWLEDGE_TRACEABILITY.md`
-- `KNW-009_KNOWLEDGE_EVOLUTION.md`
-- `KNW-010_KNOWLEDGE_MAINTENANCE.md`
+The current `Knowledge/` tree contains exactly 50 tracked leaf files at the Priority-13 entry head:
+
+- 10 `KNW-001..010` semantic artifacts;
+- `README.md` and `_FOLDER_STATUS.md`;
+- 32 files under `Knowledge/Learning/`;
+- 1 file under `Knowledge/Mathematics/`;
+- 5 files under `Knowledge/Programming/`.
+
+The complete path set and per-path physical-role classification are recorded in the Transaction-A inventory TSV. The digest is over the lexicographically sorted repository-relative leaf paths, each terminated by `\n`.
+
+## Canonical Artifact Boundary
+
+The current `Knowledge/README.md` names exactly `KNW-001..KNW-010` as the Knowledge domain's canonical artifacts.
+
+Physical allocation of `Learning/`, `Mathematics/`, `Programming/`, README, status, tests, executable helpers, evidence records, schemas or fixtures does **not** make those leaves canonical Knowledge artifacts and does not transfer authority.
+
+`PHYSICAL ALLOCATION != CANONICAL PROMOTION != RELATIONSHIP VALIDATION != PARTITION CLOSURE`
 
 ## Source Boundary Reviewed
 
-`Models/MOD-011_KNOWLEDGE_SOURCE_MODEL.md` is the source/provenance boundary referenced by the Knowledge domain.
+`Models/MOD-011_KNOWLEDGE_SOURCE_MODEL.md` remains the source/provenance boundary referenced by the Knowledge domain. Priority-12 closure does not automatically validate all Knowledge-side relationships to that model.
 
 ## Knowledge-to-Memory Boundary
 
-Knowledge consumes validated experience from Memory while preserving scope, provenance and authority. Project Memory Build-01 explicitly defines the controlled path from project observation to reusable knowledge candidate.
+Knowledge consumes validated experience from Memory only under applicable evidence, scope, provenance and authority controls. The existence of Learning implementation/support files does not by itself prove a Knowledge ↔ Memory or Knowledge ↔ Engine relationship.
 
 ---
 
@@ -83,23 +98,28 @@ Knowledge consumes validated experience from Memory while preserving scope, prov
 8. A validated knowledge item does not automatically become platform canonical knowledge.
 9. Memory and Knowledge are complementary layers; neither silently replaces the other.
 10. Project-local lessons require broader evidence before promotion to platform knowledge.
+11. A tracked file under `Knowledge/` is not automatically a canonical Knowledge artifact.
+12. Exact inventory allocation proves physical presence only; identity, authority, content, dependencies, consumers and relationships require separate validation.
 
-# Current Construction Result
+# Priority-13 Construction State
 
-The Knowledge domain now has an aligned top-level README describing its semantic role, source boundary, scope model, relationship to Memory, and future learning role. Existing KNW artifacts remain the detailed semantic contracts.
+Transaction A establishes the exact current physical allocation only.
 
-# Outstanding Work
+Priority 13 remains OPEN for:
 
-- Reconcile all Knowledge references with current Repository and Architecture authority.
-- Validate Knowledge ↔ Memory relationships.
-- Validate Knowledge ↔ Learning Engine relationships.
-- Validate Knowledge ↔ Source Model relationships.
-- Perform final cross-reference synchronization after the repository-wide audit.
-- Eventually add executable validation for identifiers, references and relationship integrity.
+- identity and authority verification across `KNW-001..010`;
+- content review against current semantic contracts;
+- Knowledge ↔ Memory relationship validation;
+- Knowledge ↔ Learning/Engine relationship validation;
+- Knowledge ↔ MOD-011 source/provenance relationship validation;
+- dependency and consumer validation for executable Learning surfaces;
+- REP-014 relationship reconciliation;
+- Repository index/map/status synchronization where current evidence authorizes it;
+- bounded closure review after exact-head validation.
 
 # Next Direction
 
-Do not expand Knowledge documentation indefinitely. Move construction to the next underbuilt platform domain while periodically validating the Knowledge/Memory/Learning boundaries.
+Continue the Priority-13 execution contract from exact allocation into identity, authority, content, dependency, consumer and relationship reconciliation. Do not promote supporting files or close the partition from path presence alone.
 
 ---
 
