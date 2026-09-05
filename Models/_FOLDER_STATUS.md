@@ -207,6 +207,8 @@ Before Models can leave Integrity Hold, the remaining bounded checks are:
 10. Version and release authority — **historical MOD-009 collision risk classified; current Models↔Release compatibility check pending**.
 11. Specifications ↔ Model authority and consumers — **REL-001 exists; current concrete Specifications consumer scan pending**.
 
+Relationship registry synchronization remains open.
+
 Current blocking set for Transaction-B material completeness is therefore narrowed to:
 
 - remaining active-model responsibility/overlap review;
