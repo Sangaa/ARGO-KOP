@@ -4,16 +4,17 @@ Transaction ID: `MUT-2026-09-05-P12-MODELS-RELATIONSHIP-CONTENT-B`
 
 Priority: `12 — Models`
 
-State: `OPEN / UNIT-4 EXACT-HEAD VERIFIED / MATERIAL UNIT 5 APPLIED / EXACT-HEAD CI PENDING`
+State: `OPEN / UNIT-5 EXACT-HEAD VERIFIED / MATERIAL UNIT 6 APPLIED / EXACT-HEAD CI PENDING`
 
 Entry HEAD: `69af54f26b8799815d049772ebec655c250df9fc`
 Material Unit 1 HEAD: `3f80ce66e3d559000efe5a2a5d8cdadf63817d3c`
 Corrective Unit 2 HEAD: `cdb9207c5bf231e4545d5209a4477390d844137a`
 Material Unit 3 final HEAD: `853024239bb3452ca64bc13487d017a95fedfac8`
 Material Unit 4 final HEAD: `d0e4b45ac1714b076ef97751b0d52e73ef63e162`
-Material Unit 5 sequence:
-- MOD-001 consumer evidence: `b30e7017ba9e933de90985bc5fd025dabc931189`
-- executable consumer guard: `c3ddac2f0a75bda4e46e7a05203daf4b44c76548`
+Material Unit 5 final HEAD: `9c736567801a18955a2ddff2c5deae3938d83b20`
+Material Unit 6 sequence:
+- MOD-011 relationship evidence: `3d545e5e8b099a5e9d0afca8e3eddab0bb681da4`
+- executable MOD-011 guard: `9d82d97eb63ef2c2d778a87529ca0d890c325e14`
 
 ## Entry authority
 
@@ -36,6 +37,7 @@ Corollaries established during Transaction B:
 - `DISCOVERY ARROW != RELATIONSHIP DIRECTION != CONTROLLED TYPE`;
 - `INDEX MEMBERSHIP != SEMANTIC RELATIONSHIP`;
 - `PHYSICAL MAPPING != SEMANTIC RELATIONSHIP`;
+- `HISTORICAL GROUPED PLAUSIBILITY != CURRENT CONTROLLED TYPE`;
 - a current `Related Documents` declaration supports bounded `REFERENCES`, not automatic dependency;
 - a downstream artifact whose required output semantics explicitly comply with or adhere to a higher semantic contract may be a qualified semantic dependency when current Architecture direction permits it;
 - an explicit dependency declaration must still satisfy current architecture direction/qualification;
@@ -143,7 +145,7 @@ Therefore Material Unit 4 is `VERIFIED` within its bounded semantic-disposition 
 
 Historical P58 arrows were used only to discover candidate consumers. Current endpoint text and Architecture authority determine direction/type.
 
-Unit 5 creates:
+Unit 5 created:
 
 - `Repository/REP-014_PRIORITY12_MOD001_CONSUMER_EVIDENCE_2026-09-05_C.tsv`;
 - `Quality/Integrity/test_models_p12_mod001_consumers.py`;
@@ -161,20 +163,51 @@ Unit 5 creates:
 | `REP-001 ↔ MOD-001` | index membership records inventory only and explicitly does not certify relationships | `DO_NOT_REGISTER` |
 | `REP-002 ↔ MOD-001` | physical mapping records presence only | `DO_NOT_REGISTER` |
 
-### Architectural qualification
+Exact-head Unit-5 HEAD `9c736567801a18955a2ddff2c5deae3938d83b20` passed all four required workflow families:
 
-`ARC-004` explicitly states that repository folders are physical storage locations and must not automatically be interpreted as architectural layers. It preserves Knowledge / Specifications / Standards above Cognition / Engine in dependency direction. Therefore the Intelligence folder name itself grants no layer status; the dependency qualification is based on the artifacts' own role and their explicit semantic compliance/adherence to MOD-001 plus the current allowed downstream direction.
+- M2 Multi-Channel Proposal Training — `33974010878` — SUCCESS;
+- Real Mutation Matrix Regression — `33974010896` — SUCCESS;
+- Full-Stack Repository Audit — `33974010873` — SUCCESS;
+- ARGO Runtime Prototype and Integration Tests — `33974010903` — SUCCESS.
 
-Unit 5 does not claim executable consumption, implementation, validation execution, authority transfer or reverse edges.
+Therefore Material Unit 5 is `VERIFIED` within its bounded MOD-001 consumer scope.
+
+## Material Unit 6 — MOD-011 existing relationship reconciliation
+
+Current REP-014 records `REL-010..014`. Historical EJR-409 shows those five rows were once grouped as plausible `DEPENDS_ON` relationships and intentionally left unpromoted because endpoint authority was not yet sufficient. Later repairs corrected four rows, but `REL-012` retained the historical dependency type.
+
+Unit 6 creates:
+
+- `Repository/REP-014_PRIORITY12_MOD011_RELATIONSHIP_EVIDENCE_2026-09-05_D.tsv`;
+- `Quality/Integrity/test_models_p12_mod011_relationships.py`;
+- this Matrix binding.
+
+### Unit-6 current dispositions
+
+| Stable/current relationship | Disposition |
+|---|---|
+| `REL-010 KNW-002 → MOD-011 = CONSUMES` | retain; KNW-002 explicitly states Classification consumes MOD-011 source/evidence semantics |
+| `REL-011 MOD-011 → KNW-003 = REFERENCES` | retain; MOD-011 lists KNW-003 under Related Documents |
+| `KNW-003 → MOD-011 = REFERENCES` | new registration candidate; KNW-003 directly lists MOD-011 under Related Documents |
+| `REL-012 MOD-011 → KNW-004` | stable ID retained but type correction verified: `DEPENDS_ON → REFERENCES`; current MOD-011 evidence is Related Documents/review boundary, not a required dependency contract |
+| `KNW-004 → MOD-011 = REFERENCES` | new registration candidate; KNW-004 directly lists MOD-011 and describes source/provenance interaction |
+| `REL-013 MOD-011 → KNW-008 = REFERENCES` | retain; direct MOD-011 Related Documents evidence supports the existing one-way reference |
+| `REL-014 KNW-009 → MOD-011 = CONSUMES` | retain; KNW-009 explicitly states Knowledge evolution consumes MOD-011 semantics |
+
+Unit 6 intentionally guards that REP-014 is **not yet corrected** for REL-012, preventing evidence readiness from being misreported as canonical registry mutation.
+
+`REL-012 = SEMANTIC TYPE CORRECTION VERIFIED / CANONICAL FULL-CONTENT WRITE PENDING`.
+
+No replacement stable ID is authorized.
 
 ## Non-claims
 
-Transaction B does not yet close Priority 12 or Models. Unit 5 does not mutate REP-014, does not allocate new `REL-*` IDs, does not promote model or Intelligence maturity, does not certify all MOD-001 consumers, and does not claim Phase-1, Global Connected Baseline or Global Integrity closure.
+Transaction B does not yet close Priority 12 or Models. Unit 6 does not mutate REP-014, does not allocate final `REL-*` IDs to new candidates, does not promote MOD-011 beyond its current maturity, does not certify all Knowledge consumers and does not claim Phase-1, Global Connected Baseline or Global Integrity closure.
 
 ## Next gate
 
-1. exact-head four-family CI for this Unit-5 Matrix head;
-2. if green, mark Unit 5 verified;
-3. continue current-source consumer reconciliation for MOD-002 / MOD-003 / MOD-004 / MOD-011, prioritizing direct consumers and existing registry rows that may carry historical direction/type drift;
-4. maintain REL-002 and new registration candidates as pending until REP-014 can be changed with guaranteed full-content preservation;
+1. exact-head four-family CI for this Unit-6 Matrix head;
+2. if green, mark Unit 6 verified;
+3. continue current-source consumer reconciliation for MOD-002 / MOD-003 / MOD-004 and additional MOD-011 consumers outside the already reconciled Knowledge cohort;
+4. keep REL-002, REL-012 and new registration candidates pending until REP-014 can be changed with guaranteed full-content preservation;
 5. reconcile Models status/REP-016 after consumer cohorts before any P12 partition-closure decision.
