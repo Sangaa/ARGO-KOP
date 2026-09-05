@@ -4,7 +4,7 @@ Transaction ID: `MUT-2026-09-05-P12-MODELS-RELATIONSHIP-CONTENT-B`
 
 Priority: `12 — Models`
 
-State: `OPEN / UNIT-5 EXACT-HEAD VERIFIED / MATERIAL UNIT 6 APPLIED / EXACT-HEAD CI PENDING`
+State: `CLOSED / VERIFIED / RESUME-SAFE`
 
 Entry HEAD: `69af54f26b8799815d049772ebec655c250df9fc`
 Material Unit 1 HEAD: `3f80ce66e3d559000efe5a2a5d8cdadf63817d3c`
@@ -211,3 +211,92 @@ Transaction B does not yet close Priority 12 or Models. Unit 6 does not mutate R
 3. continue current-source consumer reconciliation for MOD-002 / MOD-003 / MOD-004 and additional MOD-011 consumers outside the already reconciled Knowledge cohort;
 4. keep REL-002, REL-012 and new registration candidates pending until REP-014 can be changed with guaranteed full-content preservation;
 5. reconcile Models status/REP-016 after consumer cohorts before any P12 partition-closure decision.
+
+## Current Closure Supersession — 2026-09-05
+
+The `Non-claims` and `Next gate` sections immediately above remain preserved as historical Unit-6 state. They are superseded for **current operational interpretation only** by the verified continuation chain below.
+
+### Continuation after Unit 6
+
+Subsequent bounded Units 7–12 completed current-source review of MOD-002/MOD-003 consumer/reference cohorts, MOD-004 ripple semantics, MOD-011 external consumers, Models↔Memory authority separation, Models↔Knowledge authority separation, and the remaining active-model responsibility-set/twin checks. Unit-12 exact-head `2f5b91058af537d8a1cb6c3ffd950aab539d702d` passed all four required workflow families.
+
+Unit 13 reconciled Models↔Release authority/version semantics and established the executable invariant that artifact version, development baseline and official release are distinct contractual dimensions. Exact-head `6308f9307703b5ae7d68b2df7260f31aa922b054` passed all four required workflow families.
+
+Unit 14 reconciled Specifications↔Models semantics. It retained bounded `REL-001`, rejected generic class wording as insufficient to manufacture concrete edges, and established the independently evidenced `MOD-001 → SPEC-001-KNOWLEDGE-ORGANIZATION = REFERENCES` candidate. Exact-head `7b205935d5ab440c8fe2e305eb989608c77b796d` passed all four required workflow families.
+
+Unit 15 allocated the canonical registration cohort without collision. Exact-head `a43edc42ac75fdaf6d3b80000736fa16325efb15` passed all four required workflow families.
+
+Unit 16 performed the full-content-preserving canonical REP-014 synchronization:
+
+- `REL-002 = SRV-004 → MOD-001 / DEPENDS_ON`;
+- `REL-012 = MOD-011 → KNW-004 / REFERENCES`;
+- new bounded cohort `REL-081..REL-123`;
+- same-change-set REP-020 rebinding;
+- no unsupported MOD-004 Runtime/Engine ripple edge.
+
+The first Unit-16 head exposed one stale pre-registration REL-012 guard. Corrective exact-head `1017ab05bad7352e374624efc04bc913d8cda769` repaired only the obsolete guard representation and passed all four required workflow families:
+
+- M2 — `33977724829` — SUCCESS;
+- Real Mutation Matrix — `33977724850` — SUCCESS;
+- Full-Stack — `33977724918` — SUCCESS;
+- Runtime/Integration — `33977724831` — SUCCESS.
+
+Unit 17 synchronized the Models closure-readiness status without claiming closure. Its first head exposed one stale Transaction-A-era wording guard; corrective exact-head `0b1cbb3ef612f2ad2967b90cc61cbc754c36be43` repaired that representation and passed all four required workflow families:
+
+- M2 — `33978515977` — SUCCESS;
+- Real Mutation Matrix — `33978515969` — SUCCESS;
+- Full-Stack — `33978515966` — SUCCESS;
+- Runtime/Integration — `33978515952` — SUCCESS.
+
+Unit 18 bound the explicit bounded Models partition closure into `Models/_FOLDER_STATUS.md`, REP-016 v1.3.2 and the current REP-020 manifest in one protected change set while preserving individual model maturity, Phase-1 OPEN, downstream/global holds and full REP-016 history. Its first closure-state head exposed three preclosure representation guards; corrective exact-head `eeb8ee8e551c003f53a90be5a636c518990d3c05` changed guards only and passed all four required workflow families:
+
+- M2 Multi-Channel Proposal Training — `33979131932` — SUCCESS;
+- Real Mutation Matrix Regression — `33979131940` — SUCCESS;
+- Full-Stack Repository Audit — `33979131956` — SUCCESS;
+- ARGO Runtime Prototype and Integration Tests — `33979131929` — SUCCESS.
+
+### Material and closure decision
+
+Current authoritative state at the verified Unit-18 corrective head is:
+
+`P12 / MODELS = CLOSED_FOR_PHASE_1 / BOUNDED MODELS PARTITION CERTIFIED / DOWNSTREAM AND GLOBAL HOLDS REMAIN`.
+
+Transaction-B material scope is complete within the inspected Priority-12 boundary:
+
+- exact Models inventory/allocation remains bound to Transaction A and unchanged;
+- historical missing declarations are dispositioned without blind recreation;
+- model content/authority overlaps are reconciled where material ambiguity was proven;
+- dependencies, consumers, references and ripple-only targets are classified by current source semantics;
+- Models↔Memory and Models↔Knowledge authority boundaries are explicit;
+- Models↔Release and Specifications↔Models are reconciled;
+- REP-014 v1.2.20 contains the stable-ID repairs and bounded P12 relationship cohort;
+- Models status, REP-016 and REP-020 bind the bounded partition closure while preserving all broader holds;
+- no remaining Models-specific material gap is established by the inspected evidence.
+
+Therefore Transaction B is closed by this Matrix-only commit as:
+
+`CLOSED / VERIFIED / RESUME-SAFE`.
+
+### Closure-head rule
+
+This Matrix-only commit must change **this file and no other repository path**. Its exact resulting HEAD must then pass the same four required workflow families before the closure claim is operationally accepted for continuation.
+
+Until that exact closure-head validation completes:
+
+`MATERIAL VALIDITY = VERIFIED`
+
+`BOUNDED PARTITION STATE = VERIFIED`
+
+`TRANSACTION CLOSURE RECORD = WRITTEN`
+
+`CLOSURE-HEAD VALIDITY = PENDING`
+
+No successor priority is started by the Matrix edit itself.
+
+After exact closure-head 4/4 succeeds, live `main` must be rediscovered and the first legal open priority recomputed from current REP-016 evidence.
+
+`BOUNDED PARTITION CLOSURE != PHASE-1 CLOSURE != GLOBAL CONNECTED BASELINE != GLOBAL INTEGRITY PASS`.
+
+---
+
+End of Transaction-B Matrix
