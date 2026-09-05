@@ -5,13 +5,13 @@
 Platform: ARGO KOP
 Knowledge Operating Platform
 Folder: Models
-Version: 1.3.2
-Status: INTEGRITY HOLD / STAGED RECONSTRUCTION / PRIORITY-12 EXACT INVENTORY VERIFIED
+Version: 1.3.3
+Status: INTEGRITY HOLD / STAGED RECONSTRUCTION / TRANSACTION-A CLOSED / RELATIONSHIP-CONTENT RECONCILIATION ACTIVE
 Canonical: Pending consolidated validation
 Priority: Critical
 Development Baseline: 3.2.1
 Last Audit: 2026-09-05
-Review Method: Repository First / Exact Git-Tree Enumeration / Evidence Based
+Review Method: Repository First / Exact Git-Tree Enumeration / Direct Source Semantics / Evidence Based
 
 ---
 
@@ -61,25 +61,49 @@ Historical declarations for other model identifiers remain unresolved where thei
 
 ---
 
-# Priority-12 Transaction A Boundary
+# Priority-12 Transaction A Closure
 
 Transaction:
 
 `MUT-2026-09-05-P12-MODELS-EXACT-INVENTORY-ALLOCATION-A`
 
-Transaction A has established the exact physical Models tree and a non-authoritative path-level allocation manifest. Synchronization of REP-002, REP-012, REP-013 and REP-016 remains part of the same open transaction and is not represented as complete by this status.
+Transaction A is `CLOSED / VERIFIED / RESUME-SAFE`.
 
-Priority 12 remains **OPEN**. Models remains **INTEGRITY HOLD / STAGED RECONSTRUCTION**.
+It established the exact physical Models tree, non-authoritative allocation manifest and synchronized REP-002, REP-012, REP-013 and REP-016. Its Matrix-only closure HEAD is:
 
-This transaction does not:
+`69af54f26b8799815d049772ebec655c250df9fc`
 
-- close Priority 12 or Models;
-- certify Models ↔ Knowledge/Memory/Runtime/Services/Interfaces/AI/Repository/Release relationships;
-- reconstruct missing historical MOD-005..010 declarations;
-- promote MOD-011 beyond Proposed / Future-Ready;
-- resolve duplicate/overlapping semantic definitions;
-- establish Runtime consumer execution;
-- establish provider authenticity, external trust anchors, Global Connected Baseline or Global Integrity.
+That closure HEAD passed the four required workflow families on the exact same SHA:
+
+- M2 Multi-Channel Proposal Training — `33972661116` — SUCCESS.
+- Real Mutation Matrix Regression — `33972661125` — SUCCESS.
+- Full-Stack Repository Audit — `33972661156` — SUCCESS.
+- ARGO Runtime Prototype and Integration Tests — `33972661140` — SUCCESS.
+
+Priority 12 remains **OPEN**. Models remains **INTEGRITY HOLD / STAGED RECONSTRUCTION** because Transaction A intentionally did not validate the Models relationship/content graph.
+
+---
+
+# Priority-12 Transaction B Entry
+
+Active transaction:
+
+`MUT-2026-09-05-P12-MODELS-RELATIONSHIP-CONTENT-B`
+
+Transaction B starts from the current model text rather than historical relationship strings.
+
+The first bounded direct-source cohort distinguishes:
+
+- `Related Documents` → candidate controlled type `REFERENCES` unless a stronger current source contract is independently established;
+- explicit `Dependencies` → candidate controlled type `DEPENDS_ON` after target identity/current-path verification;
+- reconstruction references explicitly marked non-dependencies are not promoted to dependencies;
+- physical co-location, numeric MOD sequence and reverse-edge symmetry do not manufacture relationships.
+
+Current bounded evidence is recorded in:
+
+`Repository/REP-014_PRIORITY12_MODELS_RELATIONSHIP_EVIDENCE_2026-09-05_B.tsv`
+
+This evidence surface does **not** itself register canonical REP-014 relationship IDs. Registry synchronization remains a later Transaction-B material unit after direct-source/target validation and duplicate/type checks.
 
 ---
 
@@ -115,6 +139,8 @@ Before Models can leave Integrity Hold, validate:
 
 - Status files are evidence records, not completion certificates.
 - A referenced path must be located, read and authority-checked before acceptance.
+- `Related Documents` is not silently upgraded to dependency semantics.
+- An explicit `Dependencies` list is still bounded by target identity and authority verification.
 - Missing evidence remains missing until verified or deliberately resolved.
 - Historical drafts must not be promoted solely because they are old or previously referenced.
 - External model output is evidence, not canonical authority.
@@ -126,7 +152,7 @@ Before Models can leave Integrity Hold, validate:
 
 # Next Audit Boundary
 
-**Models → Knowledge → Memory → Runtime → Services → Interfaces → AI → Repository → Release → Global Cross-Layer Validation**
+**Models direct semantics → REP-014 registration → Knowledge → Memory → Runtime → Services → Interfaces → AI → Repository → Release → Global Cross-Layer Validation**
 
 ---
 
