@@ -3,10 +3,10 @@
 Date: 2026-09-05
 Status: `Current Evidence Manifest / Integrity Hold / Not Semantic Authority`  
 Manifest family: `REP-020 evidence surface`  
-Current queue checkpoint: `P12-B-MODELS-RELATIONSHIP-CONTENT / CANONICAL REP-014 SYNCHRONIZATION`
-Verified source baseline: `main@a43edc42ac75fdaf6d3b80000736fa16325efb15`
+Current queue checkpoint: `P12 MODELS / BOUNDED CLOSURE-STATE BINDING`
+Verified source baseline: `main@0b1cbb3ef612f2ad2967b90cc61cbc754c36be43`
 Recovery binding: `E-07B / SAME-CHANGE-SET REBIND / authorized at main@2271d130d7bb3583a695d0bd4e4bddac8e235818`  
-Current refresh binding: `P12-B / REP-014 1.2.20 CANONICAL RELATIONSHIP SYNCHRONIZATION / same-change-set manifest rebind from verified Unit-15 allocation head main@a43edc42ac75fdaf6d3b80000736fa16325efb15`
+Current refresh binding: `P12 / MODELS CLOSED_FOR_PHASE_1 BOUNDED CLOSURE-STATE / REP-016 1.3.2 SAME-CHANGE-SET REBIND FROM VERIFIED PRECLOSURE HEAD main@0b1cbb3ef612f2ad2967b90cc61cbc754c36be43`
 
 This is the stable **current** manifest consumed by the executable control-plane reconciliation gate.
 
@@ -21,12 +21,14 @@ Historical manifests such as `REP-020_SESSION_DELTA_2026-08-17_P339.md` remain i
 | REP-013 | Repository/REP-013_REPOSITORY_CONTENT_TREE.md | 1.1.6 | Active / Phase 1 Population In Progress | CURRENT INVENTORY / NOT CLOSURE |
 | REP-014 | Repository/REP-014_REPOSITORY_RELATIONSHIP_REGISTRY.md | 1.2.20 | Active / Relationship Enumeration In Progress | CURRENT RELATIONSHIP EVIDENCE / BROADER GRAPH OPEN |
 | REP-015 | Repository/REP-015_CONTROL_PLANE_BOOTSTRAP_CHECKLIST.md | 1.0.7 | Active / Phase 1 Open / Integrity Hold | CURRENT BOOTSTRAP SCOPE |
-| REP-016 | Repository/REP-016_PHASE1_PARTITION_WORK_QUEUE.md | 1.3.1 | Active / Phase 1 Open / Integrity Hold | PRIORITY 1 CLOSED / PHASE 1 OPEN |
+| REP-016 | Repository/REP-016_PHASE1_PARTITION_WORK_QUEUE.md | 1.3.2 | Active / Phase 1 Open / Integrity Hold | P11 + P12 BOUNDED PARTITIONS CLOSED / PHASE 1 OPEN |
 | REP-020 | Repository/REP-020_DEPENDENCY_CONSUMER_IMPACT_MATRIX.md | 0.2.3 | Provisional / Phase-1 Seed / Not Authority | CURRENT IMPACT EVIDENCE / NOT CLOSURE AUTHORITY |
 
 ## Current closure boundary
 
 - Priority 1 Repository Control Plane reconciliation: `CLOSED / BOUNDED INSPECTED SCOPE`.
+- Priority 11 Interfaces: `CLOSED_FOR_PHASE_1 / BOUNDED INTERFACES PARTITION CERTIFIED / GLOBAL AND PROVIDER HOLDS REMAIN`.
+- Priority 12 Models: `CLOSED_FOR_PHASE_1 / BOUNDED MODELS PARTITION CERTIFIED / DOWNSTREAM AND GLOBAL HOLDS REMAIN`.
 - Phase 1 repository work: `OPEN`.
 - Repository-wide identity/content/relationship reconciliation: `OPEN`.
 - Broader Connected-Baseline / graph validation: `OPEN`.
@@ -44,6 +46,7 @@ Historical manifests such as `REP-020_SESSION_DELTA_2026-08-17_P339.md` remain i
 6. Current closure semantics must preserve `Phase 1 Open`, `Integrity Hold`, and `Global PASS NOT CLAIMED` boundaries.
 7. Changing this manifest does not itself close an open workstream.
 8. A failed same-change-set Matrix binding is preserved as failure evidence; recovery requires a new exact-change-set binding rather than retroactive promotion.
+9. Bounded partition closure does not transfer semantic authority to this manifest or certify downstream/global partitions.
 
 ## Refresh rule
 

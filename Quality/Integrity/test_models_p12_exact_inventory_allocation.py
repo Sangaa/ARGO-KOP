@@ -55,16 +55,14 @@ def test_p12_models_allocation_is_non_authoritative():
     assert classes["Models/_FOLDER_STATUS.md"] == "STATUS_EVIDENCE"
 
 
-def test_p12_models_status_preserves_current_preclosure_boundary():
+def test_p12_models_status_preserves_bounded_closure_inventory_boundary():
     status = STATUS.read_text(encoding="utf-8")
     assert "7 tracked top-level files" in status
     assert DIGEST in status
     assert "NONE_BY_ALLOCATION" in status
-    assert "Priority 12 remains **OPEN**" in status
-    assert "INTEGRITY HOLD / STAGED RECONSTRUCTION" in status
+    assert "CLOSED_FOR_PHASE_1 / BOUNDED MODELS PARTITION CERTIFIED / DOWNSTREAM AND GLOBAL HOLDS REMAIN" in status
     assert "MOD-011" in status and "Proposed / Future-Ready" in status
     assert "Transaction A is `CLOSED / VERIFIED / RESUME-SAFE`" in status
-    assert "MATERIAL RECONCILIATION COMPLETE / CLOSURE REVIEW PENDING" in status
     assert "Canonical relationship registry synchronization complete / REP-014 v1.2.20" in status
-    assert "CLOSED_FOR_PHASE_1" not in status
     assert "EXACT PHYSICAL INVENTORY != ACTIVE SEMANTIC AUTHORITY" in status
+    assert "BOUNDED MODELS PARTITION CLOSURE != DOWNSTREAM PARTITION CERTIFICATION != GLOBAL CONNECTED BASELINE != GLOBAL INTEGRITY PASS" in status

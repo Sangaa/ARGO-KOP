@@ -5,8 +5,8 @@
 Platform: ARGO KOP
 Knowledge Operating Platform
 Folder: Models
-Version: 1.3.7
-Status: INTEGRITY HOLD / STAGED RECONSTRUCTION / MATERIAL RECONCILIATION COMPLETE / CLOSURE REVIEW PENDING
+Version: 1.3.8
+Status: CLOSED_FOR_PHASE_1 / BOUNDED MODELS PARTITION CERTIFIED / DOWNSTREAM AND GLOBAL HOLDS REMAIN
 Canonical: Pending consolidated validation
 Priority: Critical
 Development Baseline: 3.2.1
@@ -53,17 +53,17 @@ The Models domain contains directly verified semantic model artifacts:
 - `MOD-004_MEMORY_MODEL.md` — `Canonical: Yes`; current state `Approved / Revalidation Required`; dependency boundary and Models↔Memory authority boundary reconciled at v1.2.4.
 - `MOD-011_KNOWLEDGE_SOURCE_MODEL.md` — `Canonical: Yes`; current state `Proposed / Future-Ready / Revalidated`.
 
-`README.md` is domain-container/navigation evidence. This status file is status evidence. Neither is promoted to model semantic authority by physical allocation.
+`README.md` is domain-container/navigation evidence. This status file is status evidence. Neither is promoted to model semantic authority by physical allocation or partition closure.
 
-The Priority-12 Models-specific material chain has completed exact inventory/allocation, historical semantic disposition, current authority/content review, consumer/dependency classification, Models↔Memory and Models↔Knowledge authority separation, Models↔Release compatibility, Specifications↔Models reconciliation and canonical REP-014 synchronization. Remaining work is closure review and closure-state binding, not an unperformed Models relationship-registration step.
+The Priority-12 Models-specific material chain completed exact inventory/allocation, historical semantic disposition, current authority/content review, consumer/dependency classification, Models↔Memory and Models↔Knowledge authority separation, Models↔Release compatibility, Specifications↔Models reconciliation and canonical REP-014 synchronization. Unit-17 closure-readiness and its corrective head established no remaining Models-specific material gap in the inspected scope and passed all four required workflow families.
 
-Presence in the folder, exact inventory reconciliation, relationship registration, or successful bounded CI does not by itself establish repository-wide canonical integrity.
+Presence in the folder, exact inventory reconciliation, relationship registration, bounded partition closure, or successful bounded CI does not by itself establish repository-wide canonical integrity.
 
 ---
 
 # Historical Declaration Semantic Disposition
 
-Priority-12 content review has now dispositioned the historical missing-model declarations semantically rather than leaving them open merely because historical filenames are absent.
+Priority-12 content review has dispositioned the historical missing-model declarations semantically rather than recreating files merely because historical filenames are absent.
 
 Numeric restoration disposition resolved / no blind recreation.
 
@@ -77,7 +77,7 @@ Current bounded conclusions recorded in `Models/README.md` are:
 - `MOD-009_VERSION_MODEL.md` — would risk collision with Release/version authority; no recreate;
 - `MOD-010_MODEL_REFERENCE.md` — navigation/reference responsibility is already covered by Models container plus repository index/map/relationship controls.
 
-This resolves the **numeric-restoration question** only. It does not certify every historical concept or consumer. Historical provenance remains preserved, and a future distinct model may still be designed if a real semantic responsibility/consumer gap is independently proven.
+This resolves the **numeric-restoration question** only. It does not certify every historical concept or consumer. Historical provenance remains preserved, and a future distinct model may still be designed if a real semantic responsibility, owner, authority boundary and consumer need is independently proven.
 
 No missing artifact is to be recreated merely to complete a numeric sequence.
 
@@ -104,19 +104,19 @@ That closure HEAD passed the four required workflow families on the exact same S
 - Full-Stack Repository Audit — `33972661156` — SUCCESS.
 - ARGO Runtime Prototype and Integration Tests — `33972661140` — SUCCESS.
 
-Priority 12 remains **OPEN**. Models remains **INTEGRITY HOLD / STAGED RECONSTRUCTION** pending the explicit bounded closure decision for the completed Transaction-B material chain.
+Transaction A closed physical inventory/allocation only and did not manufacture semantic closure. Transaction B subsequently completed the relationship/content work required for the bounded Models partition decision below.
 
 ---
 
-# Priority-12 Transaction B Current State
+# Priority-12 Transaction B Material State
 
-Active transaction:
+Transaction:
 
 `MUT-2026-09-05-P12-MODELS-RELATIONSHIP-CONTENT-B`
 
 Transaction B starts from current model text rather than historical relationship strings.
 
-Current semantic distinctions established through Units 1–16 are:
+Current semantic distinctions established through Units 1–17 are:
 
 - `Related Documents` → bounded `REFERENCES` unless a stronger current source contract is independently established;
 - `MOD-004` semantic model composition (`MOD-002`, `MOD-003`, `MOD-011`) → qualified `DEPENDS_ON`;
@@ -146,7 +146,7 @@ Primary bounded evidence surfaces include:
 - `Repository/REP-014_PRIORITY12_SPEC_MODELS_RELATIONSHIP_EVIDENCE_2026-09-05_L.tsv`;
 - `Repository/REP-014_PRIORITY12_REGISTRY_ALLOCATION_PLAN_2026-09-05_M.tsv`.
 
-The evidence surfaces remain historical/bounded evidence records. Canonical relationship state is now bound in `REP-014` v1.2.20.
+The evidence surfaces remain historical/bounded evidence records. Canonical relationship state is bound in `REP-014` v1.2.20.
 
 Unit-12 exact-head `2f5b91058af537d8a1cb6c3ffd950aab539d702d` passed all four required workflow families.
 
@@ -163,6 +163,8 @@ Unit-16 canonical registry mutation was applied at `1081d06d6852bcbfa32936ea689d
 - Full-Stack Repository Audit — `33977724918` — SUCCESS;
 - ARGO Runtime Prototype and Integration Tests — `33977724831` — SUCCESS.
 
+Unit-17 closure-readiness status synchronization first exposed one stale Transaction-A-era wording guard. Corrective head `0b1cbb3ef612f2ad2967b90cc61cbc754c36be43` preserved the stable inventory/allocation/preclosure invariants while replacing that obsolete wording assertion and passed all four required workflow families, including Runtime run `33978515952` and Full-Stack run `33978515966`.
+
 Canonical relationship registry synchronization complete / REP-014 v1.2.20.
 
 `RELATIONSHIP REGISTRATION != ENDPOINT PROMOTION != AUTHORITY TRANSFER != PARTITION CLOSURE`.
@@ -173,7 +175,7 @@ Canonical relationship registry synchronization complete / REP-014 v1.2.20.
 
 Priority-12 active-overlap review identified a material ambiguity: `MOD-004` and `MEM-001` both used the human-readable title `MEMORY MODEL` and both carried canonical status, while their content actually represented different responsibility domains.
 
-`MOD-004` v1.2.4 now makes the boundary explicit:
+`MOD-004` v1.2.4 makes the boundary explicit:
 
 - `MOD-004` = implementation-independent semantic schema for memory objects;
 - `MEM-001` = Memory-domain ownership/scope/promotion model;
@@ -189,9 +191,9 @@ This resolves the identified MOD-004↔MEM-001 duplicate-authority ambiguity on 
 
 # Models ↔ Knowledge Authority Boundary
 
-Priority-12 active-overlap review also identified that `MOD-001` defined a canonical knowledge schema while `KNW-001` defined a canonical Knowledge-domain model, without an explicit ownership boundary in the Models source.
+Priority-12 active-overlap review identified that `MOD-001` defined a canonical knowledge schema while `KNW-001` defined a canonical Knowledge-domain model, without an explicit ownership boundary in the Models source.
 
-`MOD-001` v1.1.3 now makes the boundary explicit:
+`MOD-001` v1.1.3 makes the boundary explicit:
 
 - `MOD-001` = implementation-independent semantic schema for knowledge objects;
 - `KNW-001` = Knowledge-domain scope/state/lifecycle/ownership/promotion authority;
@@ -207,9 +209,9 @@ The remaining active Models set was also scanned for a comparable primary-author
 
 # Reconstruction Decision
 
-The Models domain is not being restored as a historical sequence.
+The Models domain is not restored as a historical numeric sequence.
 
-It is being reconstructed according to the current ARGO architecture and repository evidence.
+It is reconstructed according to current ARGO architecture and repository evidence.
 
 Historical material may be used as source evidence, but it is not automatically canonical.
 
@@ -219,7 +221,7 @@ A future artifact is created only when current evidence proves a distinct semant
 
 # Required Reconciliation
 
-Priority-12 bounded material reconciliation now has the following disposition:
+Priority-12 bounded material reconciliation has the following final disposition:
 
 1. Entity ↔ Document identity semantics — **reconciled and registered in REP-014 v1.2.20**.
 2. Memory ↔ Knowledge provenance/lifecycle — **model composition and MOD-004↔MEM-001 authority boundary reconciled; no Memory-partition certification claimed**.
@@ -233,15 +235,59 @@ Priority-12 bounded material reconciliation now has the following disposition:
 10. Version and release authority — **reconciled; artifact version, development baseline and official release remain distinct; MOD-009 not recreated**.
 11. Specifications ↔ Model authority and consumers — **reconciled; bounded REL-001 retained, independent MOD-001→SPEC-001 reference registered, generic model-class wording did not manufacture concrete edges**.
 
-No unresolved Models-specific material gap is currently established by the inspected Priority-12 evidence. The next legal action is bounded closure review, not further relationship manufacturing.
+No unresolved Models-specific material gap is established by the inspected Priority-12 evidence.
 
-External/downstream holds remain independently open and non-promoting, including AI endpoint maturity, Memory/Knowledge downstream partition validation, Phase-1 overall closure, the repository-wide graph, Global Connected Baseline and Global Integrity.
+---
+
+# Priority-12 Bounded Closure Decision
+
+`P12 / MODELS = CLOSED_FOR_PHASE_1 / BOUNDED MODELS PARTITION CERTIFIED / DOWNSTREAM AND GLOBAL HOLDS REMAIN`.
+
+This closure decision is limited to the Models partition and the evidence chain inspected under Transactions A and B. It closes the Priority-12 Models-specific Phase-1 reconciliation scope because:
+
+- the exact seven-path physical inventory and non-authoritative allocation are verified;
+- active/historical identity and numeric-restoration questions are dispositioned without blind recreation;
+- current model authority/content boundaries were reviewed and repaired where necessary;
+- concrete dependencies, consumers, documentary references and ripple-only targets were classified under controlled semantics;
+- Models↔Memory and Models↔Knowledge overlapping-authority seams are explicit;
+- Models↔Release and Specifications↔Models seams are reconciled;
+- canonical REP-014 stable-ID corrections and the bounded new relationship cohort are synchronized at v1.2.20;
+- closure-readiness exact-head verification found no remaining Models-specific material gap after stale-guard repairs.
+
+This bounded closure does **not** promote the maturity/status of individual model artifacts. MOD-001, MOD-002, MOD-003, MOD-004 and MOD-011 retain their current source-declared maturity states.
+
+Deferred / independently open and non-blocking for this bounded Models closure:
+
+- AI endpoint maturity and provider/external trust;
+- Knowledge, Memory, Runtime, Engine, Services, Interfaces or other downstream partition certification beyond already independently closed partitions;
+- repository-wide identity/content/relationship reconciliation;
+- Phase 1 overall closure;
+- broader graph / Global Connected Baseline;
+- Global Integrity or `BOOTED / INTEGRITY PASS`.
+
+`BOUNDED MODELS PARTITION CLOSURE != DOWNSTREAM PARTITION CERTIFICATION != GLOBAL CONNECTED BASELINE != GLOBAL INTEGRITY PASS`.
+
+---
+
+# Reopen Conditions
+
+Priority 12 reopens only if new Models-specific evidence establishes one or more of the following within the bounded closure scope:
+
+- exact Models inventory/allocation drift;
+- active model identity or authority collision;
+- a material current Models source mutation affecting the verified contracts;
+- contradiction in registered Priority-12 relationship direction/type/evidence;
+- a newly proven distinct semantic responsibility currently missing from Models;
+- a material consumer/dependency defect that invalidates the verified Models boundary;
+- invalid exact-head closure evidence.
+
+Independent downstream/global holds, later work in Knowledge/Memory/Runtime/Engine/Services, optional hardening, or historical filenames alone do not reopen Priority 12.
 
 ---
 
 # Integrity Rules
 
-- Status files are evidence records, not completion certificates.
+- Status files are evidence records, not universal completion certificates.
 - A referenced path must be located, read and authority-checked before acceptance.
 - `Related Documents` is not silently upgraded to dependency semantics.
 - An explicit dependency declaration is still bounded by current Architecture direction/qualification.
@@ -249,21 +295,25 @@ External/downstream holds remain independently open and non-promoting, including
 - `RELATIONSHIP SEMANTICS != ENDPOINT MATURITY != REGISTRY PROMOTION`.
 - `SEMANTIC SCHEMA AUTHORITY != MEMORY-DOMAIN OWNERSHIP != PROMOTION AUTHORITY`.
 - `SEMANTIC KNOWLEDGE SCHEMA AUTHORITY != KNOWLEDGE-DOMAIN OWNERSHIP != LIFECYCLE/PROMOTION AUTHORITY`.
-- Missing evidence remains missing until verified or deliberately resolved.
 - Missing historical filenames do not force reconstruction when current semantic coverage is sufficient.
-- Historical drafts must not be promoted solely because they are old or previously referenced.
 - External model output is evidence, not canonical authority.
 - Material model changes require downstream review and post-change re-read.
 - User/project learning memory must remain separate from platform canonical model authority.
 - Development baseline follows the authoritative `Release/VERSION.md` until formally changed through the applicable authority path.
 - Long canonical registries must never be shortened merely to apply a local semantic correction; full-content preservation is mandatory.
-- `MATERIAL RECONCILIATION COMPLETE != TRANSACTION CLOSED != PRIORITY CLOSED`.
+- `PARTITION CLOSURE != TRANSACTION CLOSURE != PHASE-1 CLOSURE != GLOBAL CLOSURE`.
+
+---
+
+# Queue Boundary
+
+This bounded Models closure does not itself start Priority 13. After the closure-state exact head is verified, Transaction B must be closed by a Matrix-only commit and that closure head must pass all four required workflow families. Only then may live `main` be rediscovered and the first legal open priority recomputed from current repository evidence.
 
 ---
 
 # Next Audit Boundary
 
-**Transaction-B bounded closure-readiness review → if supported, bind Models/REP-016 closure state without promoting external holds → exact-head validation → Matrix-only Transaction-B closure → closure-head validation**
+**closure-state exact-head validation → Matrix-only Transaction-B closure → closure-head validation → rediscover live queue / recompute next legal priority**
 
 ---
 

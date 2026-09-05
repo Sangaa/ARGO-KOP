@@ -39,22 +39,25 @@ def test_readme_records_current_non_recreation_dispositions() -> None:
     assert "HISTORICAL IDENTIFIER != CURRENT AUTHORITY" in text
 
 
-def test_status_marks_numeric_restoration_resolved_without_partition_promotion() -> None:
+def test_status_marks_numeric_restoration_resolved_with_bounded_partition_closure() -> None:
     text = STATUS.read_text(encoding="utf-8")
     assert "numeric restoration disposition resolved / no blind recreation" in text.lower()
-    assert "Priority 12 remains **OPEN**" in text
-    assert "Models remains **INTEGRITY HOLD / STAGED RECONSTRUCTION**" in text
+    assert "CLOSED_FOR_PHASE_1 / BOUNDED MODELS PARTITION CERTIFIED / DOWNSTREAM AND GLOBAL HOLDS REMAIN" in text
     assert "Canonical relationship registry synchronization complete / REP-014 v1.2.20" in text
     assert "relationship registry synchronization remains open" not in text
-    assert "MATERIAL RECONCILIATION COMPLETE != TRANSACTION CLOSED != PRIORITY CLOSED" in text
+    assert "BOUNDED MODELS PARTITION CLOSURE != DOWNSTREAM PARTITION CERTIFICATION != GLOBAL CONNECTED BASELINE != GLOBAL INTEGRITY PASS" in text
 
 
-def test_status_allows_closure_review_without_claiming_closure() -> None:
+def test_bounded_closure_does_not_promote_individual_models_or_global_state() -> None:
     text = STATUS.read_text(encoding="utf-8")
-    assert "MATERIAL RECONCILIATION COMPLETE / CLOSURE REVIEW PENDING" in text
-    assert "No unresolved Models-specific material gap is currently established" in text
-    assert "Transaction-B bounded closure-readiness review" in text
-    assert "CLOSED_FOR_PHASE_1" not in text
+    assert "MOD-001_KNOWLEDGE_MODEL.md" in text and "Integrity Hold / Relationship-Revalidated" in text
+    assert "MOD-002_ENTITY_MODEL.md" in text and "Approved / Revalidation Required" in text
+    assert "MOD-003_DOCUMENT_MODEL.md" in text and "Approved / Revalidation Required" in text
+    assert "MOD-004_MEMORY_MODEL.md" in text and "Approved / Revalidation Required" in text
+    assert "MOD-011_KNOWLEDGE_SOURCE_MODEL.md" in text and "Proposed / Future-Ready / Revalidated" in text
+    assert "Phase 1 overall closure" in text
+    assert "Global Integrity" in text
+    assert "PARTITION CLOSURE != TRANSACTION CLOSURE != PHASE-1 CLOSURE != GLOBAL CLOSURE" in text
 
 
 def test_future_model_requires_current_semantic_gap_not_historical_number() -> None:

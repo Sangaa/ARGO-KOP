@@ -2,7 +2,7 @@
 
 Platform: ARGO KOP  
 Document ID: REP-016  
-Version: 1.3.1  
+Version: 1.3.2  
 Status: Active / Phase 1 Open / Integrity Hold  
 Development Baseline: 3.2.1  
 Last Audit: 2026-09-05
@@ -32,7 +32,7 @@ No promotion to a later ring is allowed until predecessor exit evidence, affecte
 | 9 | Architecture | RELATIONSHIP_VALIDATION | ARC_MAP + ARC-001..011 | Architecture authority + REP-011/014 |
 | 10 | Runtime | RELATIONSHIP_VALIDATION | Runtime/_FOLDER_STATUS.md + REP-013 | Runtime authority + REP-011/014 |
 | 11 | Interfaces | CLOSED_FOR_PHASE_1 / BOUNDED INTERFACES PARTITION CERTIFIED / GLOBAL AND PROVIDER HOLDS REMAIN | INTF-001/004/006/010 | Interface authority + REP-011/014 |
-| 12 | Models | EXACT_INVENTORY_ALLOCATED / RELATIONSHIP_VALIDATION OPEN / INTEGRITY HOLD | MOD-001/002/003/004/011 | Model authority + REP-011/014 |
+| 12 | Models | CLOSED_FOR_PHASE_1 / BOUNDED MODELS PARTITION CERTIFIED / DOWNSTREAM AND GLOBAL HOLDS REMAIN | MOD-001/002/003/004/011 | Model authority + REP-011/014 |
 | 13 | Knowledge | INVENTORYING | KNW-002/003/004/008/009 | Knowledge authority + REP-011/014 |
 | 14 | Engine | RELATIONSHIP_VALIDATION | ENG-002/004/006/007 | Engine authority + REP-011/014 |
 | 15 | Services | INVENTORYING | SRV catalog + exact file enumeration | Service authority + REP-011/014 |
@@ -386,6 +386,32 @@ Verified current evidence supersedes the stale Priority-11/12 queue rows for ope
 - This queue synchronization does not close Priority 12, certify Models relationships, reconstruct missing historical model identities, promote MOD-011 maturity, start Priority 13, or alter provider/global holds.
 
 Next legal Priority-12 work after Transaction-A closure is evidence-driven relationship/content reconciliation under the existing Models Integrity Hold; numbering alone does not authorize Priority 13.
+
+## Current Checkpoint — 2026-09-05 Priority-12 Models Closure-State Binding
+
+This checkpoint supersedes the preceding Priority-12 entry checkpoint for current operational interpretation only. Historical text remains preserved as evidence of the earlier state.
+
+Entry evidence:
+
+- Transaction A remains `CLOSED / VERIFIED / RESUME-SAFE` for exact inventory/allocation.
+- Transaction B Units 1–16 completed current relationship/content reconciliation, bounded consumer/dependency classification, authority-boundary repairs, Models↔Release compatibility, Specifications↔Models review and canonical REP-014 v1.2.20 synchronization.
+- Unit-17 closure-readiness and its corrective head `0b1cbb3ef612f2ad2967b90cc61cbc754c36be43` found no remaining Models-specific material gap in the inspected scope and passed all four required workflow families.
+- Exact Models physical inventory remains seven tracked top-level paths with sorted-path SHA-256 `cf8274ea93cabcb0e55e47b55b00050c1dab98c888582b3b4c2a858c36621498` and allocation authority effect `NONE_BY_ALLOCATION`.
+
+Explicit bounded decision:
+
+`PRIORITY 12 / MODELS = CLOSED_FOR_PHASE_1 / BOUNDED MODELS PARTITION CERTIFIED / DOWNSTREAM AND GLOBAL HOLDS REMAIN`.
+
+Closure scope:
+
+- closes Priority-12 Models-specific Phase-1 inventory, semantic-content, authority-boundary, consumer/dependency and relationship-registration work within the inspected evidence scope;
+- preserves individual artifact maturity/status declarations without promotion;
+- preserves AI endpoint maturity, downstream partition validation, repository-wide graph/identity reconciliation, Phase 1 overall, Global Connected Baseline and Global Integrity as independently open/held;
+- does not start Priority 13 merely by changing the queue row.
+
+The closure-state binding itself requires exact-head validation. After that succeeds, Transaction B must be closed by a Matrix-only commit and the resulting closure head must pass all four required workflow families. Only then may live `main` be rediscovered and the first legal open priority recomputed.
+
+`BOUNDED PARTITION CLOSURE != TRANSACTION CLOSURE != PHASE-1 CLOSURE != GLOBAL CLOSURE`.
 
 ---
 
