@@ -3,7 +3,7 @@
 Transaction: `MUT-2026-09-05-P13-KNOWLEDGE-RELATIONSHIP-CONTENT-B`
 Priority: `13 — Knowledge`
 Entry HEAD: `0beaff41db190cecc757f0d169a5d7174c1578d2`
-State: `OPEN / UNITS 1-7 VERIFIED / UNIT 8 KNOWLEDGE IDENTITY-MIGRATION RESIDUE REPAIR PREPARED`
+State: `OPEN / UNITS 1-8 VERIFIED / UNIT 9 CROSS-LAYER ALLOCATION PLAN PREPARED`
 
 ## Governing invariants
 
@@ -12,6 +12,8 @@ State: `OPEN / UNITS 1-7 VERIFIED / UNIT 8 KNOWLEDGE IDENTITY-MIGRATION RESIDUE 
 `RELATED DOCUMENTS != AUTOMATIC CONSUMPTION OR GOVERNANCE`
 
 `CURRENT PHYSICAL IDENTITY > STALE HISTORICAL PATH`
+
+`STRONGER VERIFIED EDGE > WEAKER DUPLICATE DOCUMENTARY EDGE`
 
 `MATERIAL VALIDITY != TRANSACTION VALIDITY != CLOSURE VALIDITY`
 
@@ -24,58 +26,67 @@ State: `OPEN / UNITS 1-7 VERIFIED / UNIT 8 KNOWLEDGE IDENTITY-MIGRATION RESIDUE 
 | 3 | KNW-007 baseline-scope repair | `40e5a1207145aed441eaddbf2ec8af702b8f6c42` | `4/4 SUCCESS` |
 | 4 | KNW-008 traceability/retention repair | `1a1a59c50d55cca97824bd129fd41e11b652b1b2` | `4/4 SUCCESS` |
 | 5 | KNW-010 maintenance/disposition repair | `eeb663ce44d58803c8caa8efbbce33fc00ef849b` | `4/4 SUCCESS` |
-| 6 | REL-124..167 allocation-plan validation | `cb61f90ef856af682dbd85360b0a337f13b3bdb7` | `4/4 SUCCESS` |
-| 7 | canonical internal Knowledge documentary graph + REP-020 current-manifest rebind | `005a0483d9db73da273032901c19d255138d2ab3` | `4/4 SUCCESS` |
+| 6 | REL-124..167 internal allocation-plan validation | `cb61f90ef856af682dbd85360b0a337f13b3bdb7` | `4/4 SUCCESS` |
+| 7 | canonical internal Knowledge documentary graph + REP-020 manifest rebind | `005a0483d9db73da273032901c19d255138d2ab3` | `4/4 SUCCESS` |
+| 8 | KNW-004/006/010 identity-migration residue repair | `2dbea92fc500b33e00ba3b7de18291400a220bd5` | `4/4 SUCCESS` |
 
-Unit 7 compare: `1 commit / exactly 4 authorized files`; REP-014 advanced `1.2.20 → 1.2.21`, registered exactly REL-124..167, and retained the broader graph/closure hold.
+Unit 8 corrected three stale source identities before graph registration:
 
-## Cross-layer scan finding after Unit 7
+- KNW-004 now distinguishes `LIF-001` document lifecycle from `GOV-005` review authority;
+- KNW-006 uses current `GOV-005_REVIEW_STANDARD` instead of stale GOV-006 Review path;
+- KNW-010 uses current REP-010 physical path `REP-010_RELEASE_BASELINE.md` while preserving the separate REP-010 title/path coherence gap.
 
-A direct current-source scan found a homogeneous identity-migration residue class before any new cross-layer registry insertion:
+## Cross-layer candidate classification
 
-1. `KNW-004` still described `GOV-005` as document-artifact lifecycle authority even though current `GOV-005` is the Review Standard and the document lifecycle identity is `Lifecycle/LIF-001_DOCUMENT_LIFECYCLE.md`.
-2. `KNW-006` still referenced retired/non-current `Governance/GOV-006_REVIEW_STANDARD.md`; current Review Standard is `Governance/GOV-005_REVIEW_STANDARD.md`, while GOV-006 is the Naming Convention Standard.
-3. `KNW-010` still referenced historical physical path `Repository/REP-010_REPOSITORY_MAINTENANCE.md`; current REP-010 physical identity is `Repository/REP-010_RELEASE_BASELINE.md`. Current REP-010 still has internal Document ID `REP-010` and content title `REPOSITORY MAINTENANCE`; the known title/path coherence gap remains a separate repository concern.
+Direct current `Related Documents` review plus target identity reads establish 39 missing documentary candidates after excluding five already-represented stronger/equivalent seams.
 
-This residue must be repaired before relationship registration so the graph does not canonize stale identities.
+Excluded existing seams:
 
-## Unit 8 — Knowledge identity-migration residue repair
+- `KNW-002 → MOD-011 = CONSUMES` (`REL-010`)
+- `KNW-003 → MOD-011 = REFERENCES` (`REL-110`)
+- `KNW-004 → MOD-001 = REFERENCES` (`REL-081`)
+- `KNW-004 → MOD-011 = REFERENCES` (`REL-111`)
+- `KNW-009 → MOD-011 = CONSUMES` (`REL-014`)
 
-Authorized exactly five paths:
+The remaining unique targets were directly identity-checked across Memory, Engine, Repository, Architecture, Lifecycle, Governance and Core. Endpoint maturity varies and several remain Integrity Hold/Revalidation Required; therefore target existence/identity supports documentary registration only, not endpoint certification.
 
-1. `Knowledge/KNW-004_KNOWLEDGE_LIFECYCLE.md`
-2. `Knowledge/KNW-006_KNOWLEDGE_QUALITY.md`
-3. `Knowledge/KNW-010_KNOWLEDGE_MAINTENANCE.md`
-4. `Quality/Integrity/test_knowledge_p13_identity_migration_residue.py`
-5. this Matrix.
+## Unit 9 — cross-layer allocation-plan validation
 
-Repair contract:
+Authorized exactly three paths:
 
-- KNW-004 `1.3.1 → 1.3.2`: identify `LIF-001` as document-artifact lifecycle; identify GOV-005 only as review authority; do not merge lifecycle and review authority.
-- KNW-006 `1.1.1 → 1.1.2`: replace stale GOV-006 Review Standard path with current GOV-005 Review Standard path; no stronger relationship semantics implied.
-- KNW-010 `1.1.1 → 1.1.2`: replace stale REP-010 physical filename with current `REP-010_RELEASE_BASELINE.md`; preserve REP-010's known title/path coherence gap as separate and unresolved.
-- preserve all three artifacts at `Integrity Hold / Revalidated`; no maturity promotion.
-- executable guard must fail if any of the three stale identity strings reappears.
-- no REP-014 mutation in Unit 8; relationship registration waits for source identity repair plus exact-head validation.
+1. `Repository/REP-014_PRIORITY13_KNOWLEDGE_CROSS_LAYER_ALLOCATION_PLAN_2026-09-05_C.tsv`
+2. `Quality/Integrity/test_knowledge_p13_cross_layer_allocation_plan.py`
+3. this Matrix.
 
-Expected Unit-8 change-set: `1 commit / exactly 5 files`.
+Allocation contract:
+
+- reserve exactly contiguous vacant IDs `REL-168..REL-206`;
+- exactly 39 unique source-target-type rows;
+- every row type = `REFERENCES`;
+- every row source must directly contain the exact current target path in its Related Documents declaration;
+- every target path must exist and its internal Document ID must match the planned target identity;
+- the five stronger/equivalent existing seams above must be absent from the plan;
+- REP-014 remains unchanged in Unit 9; vacancy must be proven before registration;
+- no endpoint maturity/status promotion and no reverse edge inference.
+
+Expected Unit-9 change-set: `1 commit / exactly 3 files`.
 
 ## Remaining connected chain
 
-1. Validate Unit 8 exact-head 4/4.
-2. Re-run cross-layer candidate classification against repaired source identities and current REP-014; preserve stronger existing edges such as KNW-002→MOD-011 and KNW-009→MOD-011 instead of adding weaker duplicate REFERENCES.
-3. Create validation-first allocation plan for only missing cross-layer edges that survive direct target/authority review.
-4. Register bounded cross-layer cohort with REP-014 version bump + same-change-set current-manifest rebind.
-5. Reconcile exact 50-leaf Knowledge physical inventory into REP-013/REP-002 and allocation evidence as required, without promoting support leaves.
-6. Re-evaluate historical Knowledge active-index hold only after relationship/content/control-plane reconciliation actually resolves its conditions.
-7. Closure remains separate and requires exact-head 4/4, Matrix-only closure, then closure-head 4/4.
+1. Validate Unit 9 exact-head 4/4.
+2. Register REL-168..206 in REP-014 only from the verified plan; bump REP-014 one patch version and same-change-set rebind the current REP-020 boundary manifest; convert the plan guard to exact post-registration assertions.
+3. Reconcile exact 50-leaf Knowledge physical inventory into REP-013 and REP-002; determine whether REP-012 needs direct versioned mutation or whether the existing P13 allocation manifest already satisfies allocation evidence.
+4. Re-read Knowledge/_FOLDER_STATUS and historical P2 active-index hold; update REP-001 only if current material evidence actually resolves domain-level admission conditions.
+5. Reconcile REP-016/current manifest only when the material state justifies a new P13 boundary.
+6. Transaction-B closure remains separate: last material head 4/4 → Matrix-only closure → closure-head 4/4.
+7. Priority-13 partition closure remains a later bounded decision requiring downstream/consumer and active-index admission review.
 
 ## Explicit non-claims
 
 - no Priority-13 closure;
 - no Knowledge active-index admission yet;
-- no automatic promotion of Learning/Programming/Mathematics support leaves;
-- no graph edge from a stale or merely historical path;
+- no dependency/consumer/governance semantics from Related Documents;
+- no automatic support-leaf promotion;
 - no Phase-1 or Global Integrity closure.
 
 ---
