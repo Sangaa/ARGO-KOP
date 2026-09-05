@@ -1,6 +1,7 @@
-"""Boundary test: readiness evidence remains separate from promotion authority."""
+"""Boundary test: Knowledge candidate mapping remains separate from Runtime promotion authority."""
 
-from Knowledge.Learning.promotion_gate_adapter import evaluate_evidence
+from Knowledge.Learning.promotion_gate_adapter import build_candidate
+from Runtime.Prototype.learning_promotion_gate import evaluate
 
 
 def _evidence():
@@ -15,8 +16,13 @@ def _evidence():
     }
 
 
+def _evaluate(*, authority: bool):
+    candidate = build_candidate(_evidence(), authority=authority)
+    return evaluate(candidate)
+
+
 def test_readiness_evidence_cannot_promote_without_explicit_authority():
-    result = evaluate_evidence(_evidence(), authority=False)
+    result = _evaluate(authority=False)
 
     assert result == {
         "status": "HOLD",
@@ -24,8 +30,8 @@ def test_readiness_evidence_cannot_promote_without_explicit_authority():
     }
 
 
-def test_promotion_gate_accepts_only_explicit_authority():
-    result = evaluate_evidence(_evidence(), authority=True)
+def test_runtime_promotion_gate_accepts_only_explicit_authority():
+    result = _evaluate(authority=True)
 
     assert result["status"] == "PROMOTION_ELIGIBLE"
     assert result["promote"] is True
